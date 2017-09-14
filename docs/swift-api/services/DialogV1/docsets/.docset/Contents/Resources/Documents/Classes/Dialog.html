@@ -77,7 +77,7 @@
             <a href="../Typealiases.html">Typealiases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a>
+                <a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a>
               </li>
             </ul>
           </li>
@@ -104,9 +104,9 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC8DialogV16Dialog10serviceURLSS"></a>
+                    <a name="/s:8DialogV10A0C10serviceURLSSv"></a>
                     <a name="//apple_ref/swift/Property/serviceURL" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC8DialogV16Dialog10serviceURLSS">serviceURL</a>
+                    <a class="token" href="#/s:8DialogV10A0C10serviceURLSSv">serviceURL</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -131,9 +131,9 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC8DialogV16Dialog14defaultHeadersGVs10DictionarySSSS_"></a>
+                    <a name="/s:8DialogV10A0C14defaultHeaderss10DictionaryVyS2SGv"></a>
                     <a name="//apple_ref/swift/Property/defaultHeaders" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC8DialogV16Dialog14defaultHeadersGVs10DictionarySSSS_">defaultHeaders</a>
+                    <a class="token" href="#/s:8DialogV10A0C14defaultHeaderss10DictionaryVyS2SGv">defaultHeaders</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -158,9 +158,9 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16DialogcFT8usernameSS8passwordSS_S0_"></a>
+                    <a name="/s:8DialogV10A0CACSS8username_SS8passwordtcfc"></a>
                     <a name="//apple_ref/swift/Method/init(username:password:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16DialogcFT8usernameSS8passwordSS_S0_">init(username:password:)</a>
+                    <a class="token" href="#/s:8DialogV10A0CACSS8username_SS8passwordtcfc">init(username:password:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -192,7 +192,6 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
                               <td>
                                 <div>
                                   <p>The username used to authenticate with the service.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -205,7 +204,6 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
                               <td>
                                 <div>
                                   <p>The password used to authenticate with the service.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -229,9 +227,9 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog10getDialogsFT7failureGSqFPs5Error_T__7successFGSaVS_11DialogModel_T__T_"></a>
+                    <a name="/s:8DialogV10A0C10getDialogsyys5Error_pcSg7failure_ySayAA0A5ModelVGc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getDialogs(failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog10getDialogsFT7failureGSqFPs5Error_T__7successFGSaVS_11DialogModel_T__T_">getDialogs(failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C10getDialogsyys5Error_pcSg7failure_ySayAA0A5ModelVGc7successtF">getDialogs(failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -265,7 +263,6 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -278,7 +275,6 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
                               <td>
                                 <div>
                                   <p>A function executed with the list of dialog applications.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -291,9 +287,9 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog12createDialogFT8withNameSS8fromFileV10Foundation3URL7failureGSqFPs5Error_T__7successFSST__T_"></a>
+                    <a name="/s:8DialogV10A0C06createA0ySS8withName_10Foundation3URLV8fromFileys5Error_pcSg7failureySSc7successtF"></a>
                     <a name="//apple_ref/swift/Method/createDialog(withName:fromFile:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog12createDialogFT8withNameSS8fromFileV10Foundation3URL7failureGSqFPs5Error_T__7successFSST__T_">createDialog(withName:fromFile:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C06createA0ySS8withName_10Foundation3URLV8fromFileys5Error_pcSg7failureySSc7successtF">createDialog(withName:fromFile:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -305,10 +301,13 @@ interface (API). These conversations are commonly referred to as dialogs.</p>
 service instance. The returned dialog application identifier can be used
 for subsequent calls to the API.</p>
 
-<p>The file content type is determined by the file extension:
-   - .mct for encrypted dialog account file
-   - .json for Watson dialog document JSON format
-   - .xml for Watson dialog document XML format</p>
+<p>The file content type is determined by the file extension:</p>
+
+<ul>
+<li>.mct for encrypted dialog account file</li>
+<li>.json for Watson dialog document JSON format</li>
+<li><p>.xml for Watson dialog document XML format</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -319,7 +318,7 @@ for subsequent calls to the API.</p>
         <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
         <span class="n">fromFile</span> <span class="nv">fileURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -336,7 +335,6 @@ for subsequent calls to the API.</p>
                               <td>
                                 <div>
                                   <p>The desired name of the dialog application instance.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -348,8 +346,9 @@ for subsequent calls to the API.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The URL to a file that will be uploaded and used to create the dialog application. Must contain an extension of .mct for encrypted dialog account file, .json for Watson dialog document JSON format, or .xml for Watson dialog document XML format.</p>
-
+                                  <p>The URL to a file that will be uploaded and used to create the dialog
+application. Must contain an extension of .mct for encrypted dialog account file, .json
+for Watson dialog document JSON format, or .xml for Watson dialog document XML format.</p>
                                 </div>
                               </td>
                             </tr>
@@ -362,7 +361,6 @@ for subsequent calls to the API.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -374,8 +372,8 @@ for subsequent calls to the API.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the identifier of the newly created dialog application.</p>
-
+                                  <p>A function executed with the identifier of the newly created dialog
+application.</p>
                                 </div>
                               </td>
                             </tr>
@@ -388,9 +386,9 @@ for subsequent calls to the API.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog12deleteDialogFT6withIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="/s:8DialogV10A0C06deleteA0ySS6withID_ys5Error_pcSg7failureyycSg7successtF"></a>
                     <a name="//apple_ref/swift/Method/deleteDialog(withID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog12deleteDialogFT6withIDSS7failureGSqFPs5Error_T__7successGSqFT_T___T_">deleteDialog(withID:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C06deleteA0ySS6withID_ys5Error_pcSg7failureyycSg7successtF">deleteDialog(withID:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -407,7 +405,7 @@ permanently removes all associated data.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteDialog</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">,</span>
+        <span class="n">withID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
@@ -426,7 +424,6 @@ permanently removes all associated data.</p>
                               <td>
                                 <div>
                                   <p>The dialog application identifier.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -439,7 +436,6 @@ permanently removes all associated data.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -451,8 +447,8 @@ permanently removes all associated data.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed after the dialog application has been successfully deleted.</p>
-
+                                  <p>A function executed after the dialog application
+has been successfully deleted.</p>
                                 </div>
                               </td>
                             </tr>
@@ -465,9 +461,9 @@ permanently removes all associated data.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog13getDialogFileFT12fromDialogIDSS8inFormatGSqOS_6Format_7failureGSqFPs5Error_T__7successFV10Foundation3URLT__T_"></a>
+                    <a name="/s:8DialogV10A0C03getA4FileySS04fromA2ID_AA6FormatOSg02inG0ys5Error_pcSg7failurey10Foundation3URLVc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getDialogFile(fromDialogID:inFormat:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog13getDialogFileFT12fromDialogIDSS8inFormatGSqOS_6Format_7failureGSqFPs5Error_T__7successFV10Foundation3URLT__T_">getDialogFile(fromDialogID:inFormat:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C03getA4FileySS04fromA2ID_AA6FormatOSg02inG0ys5Error_pcSg7failurey10Foundation3URLVc7successtF">getDialogFile(fromDialogID:inFormat:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -483,7 +479,7 @@ permanently removes all associated data.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getDialogFile</span><span class="p">(</span>
-        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">,</span>
+        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">,</span>
         <span class="n">inFormat</span> <span class="nv">format</span><span class="p">:</span> <span class="kt"><a href="../Enums/Format.html">Format</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -503,7 +499,6 @@ permanently removes all associated data.</p>
                               <td>
                                 <div>
                                   <p>The dialog application identifier.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -515,8 +510,9 @@ permanently removes all associated data.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired format of the dialog file. The format can be either OctetStream (.mct file), Watson dialog document JSON format (.json file), or Watson dialog document XML format (.xml file).</p>
-
+                                  <p>The desired format of the dialog file. The format can be either
+OctetStream (.mct file), Watson dialog document JSON format (.json file), or Watson
+dialog document XML format (.xml file).</p>
                                 </div>
                               </td>
                             </tr>
@@ -529,7 +525,6 @@ permanently removes all associated data.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -542,7 +537,6 @@ permanently removes all associated data.</p>
                               <td>
                                 <div>
                                   <p>A function executed with the URL of the downloaded dialog file.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -555,9 +549,9 @@ permanently removes all associated data.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog12updateDialogFT6withIDSS8fromFileV10Foundation3URL7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="/s:8DialogV10A0C06updateA0ySS6withID_10Foundation3URLV8fromFileys5Error_pcSg7failureyycSg7successtF"></a>
                     <a name="//apple_ref/swift/Method/updateDialog(withID:fromFile:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog12updateDialogFT6withIDSS8fromFileV10Foundation3URL7failureGSqFPs5Error_T__7successGSqFT_T___T_">updateDialog(withID:fromFile:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C06updateA0ySS6withID_10Foundation3URLV8fromFileys5Error_pcSg7failureyycSg7successtF">updateDialog(withID:fromFile:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -567,10 +561,13 @@ permanently removes all associated data.</p>
                       <div class="abstract">
                         <p>Update an existing dialog application by uploading a dialog file.</p>
 
-<p>The file content type is determined by the file extension:
-   - .mct for encrypted Dialog account file
-   - .json for Watson Dialog document JSON format
-   - .xml for Watson Dialog document XML format</p>
+<p>The file content type is determined by the file extension:</p>
+
+<ul>
+<li>.mct for encrypted Dialog account file</li>
+<li>.json for Watson Dialog document JSON format</li>
+<li><p>.xml for Watson Dialog document XML format</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -578,7 +575,7 @@ permanently removes all associated data.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateDialog</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">,</span>
+        <span class="n">withID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">,</span>
         <span class="n">fromFile</span> <span class="nv">fileURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
@@ -598,7 +595,6 @@ permanently removes all associated data.</p>
                               <td>
                                 <div>
                                   <p>The dialog application identifier.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -610,8 +606,10 @@ permanently removes all associated data.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The URL to a file that will be uploaded and used to define the dialog application’s operation. Must contain an extension of .mct for encrypted Dialog account file, .json for Watson Dialog document JSON format, or .xml for Watson Dialog document XML format.</p>
-
+                                  <p>The URL to a file that will be uploaded and used to define
+the dialog application&rsquo;s operation. Must contain an extension of .mct for
+encrypted Dialog account file, .json for Watson Dialog document JSON format,
+or .xml for Watson Dialog document XML format.</p>
                                 </div>
                               </td>
                             </tr>
@@ -624,7 +622,6 @@ permanently removes all associated data.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -636,8 +633,8 @@ permanently removes all associated data.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed after the dialog file has been successfully uploaded.</p>
-
+                                  <p>A function executed after the dialog file has been 
+successfully uploaded.</p>
                                 </div>
                               </td>
                             </tr>
@@ -650,9 +647,9 @@ permanently removes all associated data.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog10getContentFT12fromDialogIDSS7failureGSqFPs5Error_T__7successFGSaVS_4Node_T__T_"></a>
+                    <a name="/s:8DialogV10A0C10getContentySS04fromA2ID_ys5Error_pcSg7failureySayAA4NodeVGc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getContent(fromDialogID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog10getContentFT12fromDialogIDSS7failureGSqFPs5Error_T__7successFGSaVS_4Node_T__T_">getContent(fromDialogID:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C10getContentySS04fromA2ID_ys5Error_pcSg7failureySayAA4NodeVGc7successtF">getContent(fromDialogID:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -671,7 +668,7 @@ pair or just a single node.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getContent</span><span class="p">(</span>
-        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">,</span>
+        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Node.html">Node</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -690,7 +687,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>The dialog application identifier.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -703,7 +699,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -715,8 +710,7 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the dialog application’s nodes.</p>
-
+                                  <p>A function executed with the dialog application&rsquo;s nodes.</p>
                                 </div>
                               </td>
                             </tr>
@@ -729,9 +723,9 @@ pair or just a single node.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog13updateContentFT12fromDialogIDSS8forNodesGSaVS_4Node_7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="/s:8DialogV10A0C13updateContentySS04fromA2ID_SayAA4NodeVG8forNodesys5Error_pcSg7failureyycSg7successtF"></a>
                     <a name="//apple_ref/swift/Method/updateContent(fromDialogID:forNodes:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog13updateContentFT12fromDialogIDSS8forNodesGSaVS_4Node_7failureGSqFPs5Error_T__7successGSqFT_T___T_">updateContent(fromDialogID:forNodes:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C13updateContentySS04fromA2ID_SayAA4NodeVG8forNodesys5Error_pcSg7failureyycSg7successtF">updateContent(fromDialogID:forNodes:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -747,7 +741,7 @@ pair or just a single node.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateContent</span><span class="p">(</span>
-        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">,</span>
+        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">,</span>
         <span class="n">forNodes</span> <span class="nv">nodes</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Node.html">Node</a></span><span class="p">],</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
@@ -767,7 +761,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>The dialog application identifier.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -780,7 +773,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>The specified nodes with updated content.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -793,7 +785,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -806,7 +797,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A function executed after the specified nodes have been updated.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -830,9 +820,9 @@ pair or just a single node.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog22getConversationHistoryFT12fromDialogIDSS4fromV10Foundation4Date2toS2_6offsetGSqSi_5limitGSqSi_7failureGSqFPs5Error_T__7successFGSaVS_12Conversation_T__T_"></a>
+                    <a name="/s:8DialogV10A0C22getConversationHistoryySS04fromA2ID_10Foundation4DateV0F0AH2toSiSg6offsetAK5limitys5Error_pcSg7failureySayAA0D0VGc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getConversationHistory(fromDialogID:from:to:offset:limit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog22getConversationHistoryFT12fromDialogIDSS4fromV10Foundation4Date2toS2_6offsetGSqSi_5limitGSqSi_7failureGSqFPs5Error_T__7successFGSaVS_12Conversation_T__T_">getConversationHistory(fromDialogID:from:to:offset:limit:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C22getConversationHistoryySS04fromA2ID_10Foundation4DateV0F0AH2toSiSg6offsetAK5limitys5Error_pcSg7failureySayAA0D0VGc7successtF">getConversationHistory(fromDialogID:from:to:offset:limit:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -848,7 +838,7 @@ pair or just a single node.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getConversationHistory</span><span class="p">(</span>
-        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">,</span>
+        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">,</span>
         <span class="n">from</span> <span class="nv">dateFrom</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span>
         <span class="n">to</span> <span class="nv">dateTo</span><span class="p">:</span> <span class="kt">Date</span><span class="p">,</span>
         <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -871,7 +861,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>The dialog application identifier.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -883,8 +872,8 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The start date of the desired conversation history. The timezone should match that of the Dialog application.</p>
-
+                                  <p>The start date of the desired conversation history. The
+timezone should match that of the Dialog application.</p>
                                 </div>
                               </td>
                             </tr>
@@ -896,8 +885,8 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The end date of the desired conversation history. The timezone should match that of the Dialog application.</p>
-
+                                  <p>The end date of the desired conversation history. The
+timezone should match that of the Dialog application.</p>
                                 </div>
                               </td>
                             </tr>
@@ -910,7 +899,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>The offset starting point in the returned history (default: 0).</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -923,7 +911,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>The maximum number of conversations to retrieve (default: 10,000).</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -936,7 +923,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -949,7 +935,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A function executed with the retrieved conversation history.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -962,9 +947,9 @@ pair or just a single node.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog8converseFT12withDialogIDSS18withConversationIDGSqSi_8clientIDGSqSi_5inputGSqSS_7failureGSqFPs5Error_T__7successFVS_20ConversationResponseT__T_"></a>
+                    <a name="/s:8DialogV10A0C8converseySS04withA2ID_SiSg0d12ConversationE0AF06clientE0SSSg5inputys5Error_pcSg7failureyAA0F8ResponseVc7successtF"></a>
                     <a name="//apple_ref/swift/Method/converse(withDialogID:withConversationID:clientID:input:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog8converseFT12withDialogIDSS18withConversationIDGSqSi_8clientIDGSqSi_5inputGSqSS_7failureGSqFPs5Error_T__7successFVS_20ConversationResponseT__T_">converse(withDialogID:withConversationID:clientID:input:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C8converseySS04withA2ID_SiSg0d12ConversationE0AF06clientE0SSSg5inputys5Error_pcSg7failureyAA0F8ResponseVc7successtF">converse(withDialogID:withConversationID:clientID:input:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -980,7 +965,7 @@ pair or just a single node.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">converse</span><span class="p">(</span>
-        <span class="n">withDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">,</span>
+        <span class="n">withDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">,</span>
         <span class="n">withConversationID</span> <span class="nv">conversationID</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">clientID</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">input</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1002,7 +987,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>The dialog application identifier.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1014,8 +998,8 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The conversation identifier. If not specified, then a new conversation will be started.</p>
-
+                                  <p>The conversation identifier. If not specified, then a
+new conversation will be started.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1027,8 +1011,8 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A client identifier generated by the dialog service. If not specified, then a new client identifier will be issued.</p>
-
+                                  <p>A client identifier generated by the dialog service. If not
+specified, then a new client identifier will be issued.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1040,8 +1024,8 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The user input message to send for processing. This parameter is optional when starting a new conversation.</p>
-
+                                  <p>The user input message to send for processing. This parameter
+is optional when starting a new conversation.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1054,7 +1038,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1066,8 +1049,7 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the dialog application’s response.</p>
-
+                                  <p>A function executed with the dialog application&rsquo;s response.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1091,9 +1073,9 @@ pair or just a single node.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog10getProfileFT12fromDialogIDSS12withClientIDSi5namesGSqGSaSS__7failureGSqFPs5Error_T__7successFVS_7ProfileT__T_"></a>
+                    <a name="/s:8DialogV10A0C10getProfileySS04fromA2ID_Si010withClientF0SaySSGSg5namesys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getProfile(fromDialogID:withClientID:names:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog10getProfileFT12fromDialogIDSS12withClientIDSi5namesGSqGSaSS__7failureGSqFPs5Error_T__7successFVS_7ProfileT__T_">getProfile(fromDialogID:withClientID:names:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C10getProfileySS04fromA2ID_Si010withClientF0SaySSGSg5namesys5Error_pcSg7failureyAA0D0Vc7successtF">getProfile(fromDialogID:withClientID:names:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1109,7 +1091,7 @@ pair or just a single node.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getProfile</span><span class="p">(</span>
-        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">,</span>
+        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">,</span>
         <span class="n">withClientID</span> <span class="nv">clientID</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span>
         <span class="nv">names</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1130,7 +1112,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>The dialog application identifier.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1143,7 +1124,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A client identifier that was generated by the dialog service.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1155,8 +1135,8 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The names of the profile variables to retrieve. If nil, then all profile variables will be retrieved.</p>
-
+                                  <p>The names of the profile variables to retrieve. If nil, then all
+profile variables will be retrieved.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1169,7 +1149,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1182,7 +1161,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A function executed with the retrieved profile variables.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1195,9 +1173,9 @@ pair or just a single node.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC8DialogV16Dialog13updateProfileFT12fromDialogIDSS12withClientIDGSqSi_10parametersGVs10DictionarySSSS_7failureGSqFPs5Error_T__7successGSqFT_T___T_"></a>
+                    <a name="/s:8DialogV10A0C13updateProfileySS04fromA2ID_SiSg010withClientF0s10DictionaryVyS2SG10parametersys5Error_pcSg7failureyycSg7successtF"></a>
                     <a name="//apple_ref/swift/Method/updateProfile(fromDialogID:withClientID:parameters:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC8DialogV16Dialog13updateProfileFT12fromDialogIDSS12withClientIDGSqSi_10parametersGVs10DictionarySSSS_7failureGSqFPs5Error_T__7successGSqFT_T___T_">updateProfile(fromDialogID:withClientID:parameters:failure:success:)</a>
+                    <a class="token" href="#/s:8DialogV10A0C13updateProfileySS04fromA2ID_SiSg010withClientF0s10DictionaryVyS2SG10parametersys5Error_pcSg7failureyycSg7successtF">updateProfile(fromDialogID:withClientID:parameters:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1213,7 +1191,7 @@ pair or just a single node.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateProfile</span><span class="p">(</span>
-        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV18DialogID">DialogID</a></span><span class="p">,</span>
+        <span class="n">fromDialogID</span> <span class="nv">dialogID</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:8DialogV10A2IDa">DialogID</a></span><span class="p">,</span>
         <span class="n">withClientID</span> <span class="nv">clientID</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">parameters</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">],</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1234,7 +1212,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>The dialog application identifier.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1246,8 +1223,8 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A client identifier that was generated by the dialog service. If not specified, then a new client identifier will be issued.</p>
-
+                                  <p>A client identifier that was generated by the dialog service.
+If not specified, then a new client identifier will be issued.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1259,8 +1236,8 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A dictionary of profile variables. The profile variables must already be explicitly defined in the dialog application.</p>
-
+                                  <p>A dictionary of profile variables. The profile variables
+must already be explicitly defined in the dialog application.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1273,7 +1250,6 @@ pair or just a single node.</p>
                               <td>
                                 <div>
                                   <p>A function executed if an error occurs.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -1285,8 +1261,7 @@ pair or just a single node.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed after the client’s profile has been updated.</p>
-
+                                  <p>A function executed after the client&rsquo;s profile has been updated.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1301,8 +1276,8 @@ pair or just a single node.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-05-01)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-09-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

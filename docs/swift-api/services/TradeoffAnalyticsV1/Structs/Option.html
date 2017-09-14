@@ -118,9 +118,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV19TradeoffAnalyticsV16Option3keySS"></a>
+                    <a name="/s:19TradeoffAnalyticsV16OptionV3keySSv"></a>
                     <a name="//apple_ref/swift/Property/key" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Option3keySS">key</a>
+                    <a class="token" href="#/s:19TradeoffAnalyticsV16OptionV3keySSv">key</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -145,9 +145,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV19TradeoffAnalyticsV16Option6valuesGVs10DictionarySSOS_11OptionValue_"></a>
+                    <a name="/s:19TradeoffAnalyticsV16OptionV6valuess10DictionaryVySSAA0D5ValueOGv"></a>
                     <a name="//apple_ref/swift/Property/values" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Option6valuesGVs10DictionarySSOS_11OptionValue_">values</a>
+                    <a class="token" href="#/s:19TradeoffAnalyticsV16OptionV6valuess10DictionaryVySSAA0D5ValueOGv">values</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -176,9 +176,9 @@ from the resolution. Example: <code>[&quot;Name&quot;: .Text(&quot;BRZ&quot;), &
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV19TradeoffAnalyticsV16Option4nameGSqSS_"></a>
+                    <a name="/s:19TradeoffAnalyticsV16OptionV4nameSSSgv"></a>
                     <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Option4nameGSqSS_">name</a>
+                    <a class="token" href="#/s:19TradeoffAnalyticsV16OptionV4nameSSSgv">name</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -204,9 +204,9 @@ problem definition.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV19TradeoffAnalyticsV16Option15descriptionHTMLGSqSS_"></a>
+                    <a name="/s:19TradeoffAnalyticsV16OptionV15descriptionHTMLSSSgv"></a>
                     <a name="//apple_ref/swift/Property/descriptionHTML" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Option15descriptionHTMLGSqSS_">descriptionHTML</a>
+                    <a class="token" href="#/s:19TradeoffAnalyticsV16OptionV15descriptionHTMLSSSgv">descriptionHTML</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -232,9 +232,9 @@ problem definition.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vV19TradeoffAnalyticsV16Option7appDataGSqP__"></a>
+                    <a name="/s:19TradeoffAnalyticsV16OptionV7appDataypSgv"></a>
                     <a name="//apple_ref/swift/Property/appData" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vV19TradeoffAnalyticsV16Option7appDataGSqP__">appData</a>
+                    <a class="token" href="#/s:19TradeoffAnalyticsV16OptionV7appDataypSgv">appData</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -261,9 +261,9 @@ problem definition.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FV19TradeoffAnalyticsV16OptioncFT3keySS6valuesGVs10DictionarySSOS_11OptionValue_4nameGSqSS_15descriptionHTMLGSqSS_7appDataGSqP___S0_"></a>
+                    <a name="/s:19TradeoffAnalyticsV16OptionVACSS3key_s10DictionaryVySSAA0D5ValueOG6valuesSSSg4nameAK15descriptionHTMLypSg7appDatatcfc"></a>
                     <a name="//apple_ref/swift/Method/init(key:values:name:descriptionHTML:appData:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV19TradeoffAnalyticsV16OptioncFT3keySS6valuesGVs10DictionarySSOS_11OptionValue_4nameGSqSS_15descriptionHTMLGSqSS_7appDataGSqP___S0_">init(key:values:name:descriptionHTML:appData:)</a>
+                    <a class="token" href="#/s:19TradeoffAnalyticsV16OptionVACSS3key_s10DictionaryVySSAA0D5ValueOG6valuesSSSg4nameAK15descriptionHTMLypSg7appDatatcfc">init(key:values:name:descriptionHTML:appData:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -301,7 +301,6 @@ the data).</p>
                               <td>
                                 <div>
                                   <p>An identifier for the option that is unique among all options for the problem.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -313,8 +312,11 @@ the data).</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Option-specific values for the columns (objectives) defined for the problem. Specify a dictionary of column keys to option values. Value requirements vary by column type; a value must be of the type defined for its column. An option that fails to specify a value for a column for which <code>isObjective</code> is <code>true</code> is marked as <code>incomplete</code> and is excluded from the resolution. Example: <code>[&quot;Name&quot;: .Text(&quot;BRZ&quot;), &quot;Price&quot;: .NumericInt(27395)]</code></p>
-
+                                  <p>Option-specific values for the columns (objectives) defined for the problem.
+   Specify a dictionary of column keys to option values. Value requirements vary by column
+   type; a value must be of the type defined for its column. An option that fails to
+   specify a value for a column for which <code>isObjective</code> is <code>true</code> is marked as <code>incomplete</code>
+   and is excluded from the resolution. Example: <code>[&quot;Name&quot;: .Text(&quot;BRZ&quot;), &quot;Price&quot;: .NumericInt(27395)]</code></p>
                                 </div>
                               </td>
                             </tr>
@@ -326,8 +328,8 @@ the data).</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The name of the option. Used only by the Tradeoff Analytics widget; not part of the problem definition.</p>
-
+                                  <p>The name of the option. Used only by the Tradeoff Analytics widget; not part
+   of the problem definition.</p>
                                 </div>
                               </td>
                             </tr>
@@ -339,8 +341,8 @@ the data).</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A description in HTML format. Used only by the Tradeoff Analytics widget; not part of the problem definition.</p>
-
+                                  <p>A description in HTML format. Used only by the Tradeoff Analytics
+   widget; not part of the problem definition.</p>
                                 </div>
                               </td>
                             </tr>
@@ -352,8 +354,9 @@ the data).</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Application-specific data available to the hosting application; the service carries but does not use the data. Used only by the Tradeoff Analytics widget; not part of the problem definition.</p>
-
+                                  <p>Application-specific data available to the hosting application; the
+   service carries but does not use the data. Used only by the Tradeoff Analytics widget;
+   not part of the problem definition.</p>
                                 </div>
                               </td>
                             </tr>
@@ -363,7 +366,6 @@ the data).</p>
                       <div>
                         <h4>Return Value</h4>
                         <p>An <code>Option</code> for a decision problem.</p>
-
                       </div>
                     </section>
                   </div>
@@ -371,9 +373,9 @@ the data).</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FV19TradeoffAnalyticsV16Option12toJSONObjectFT_P_"></a>
+                    <a name="/s:19TradeoffAnalyticsV16OptionV12toJSONObjectypyF"></a>
                     <a name="//apple_ref/swift/Method/toJSONObject()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV19TradeoffAnalyticsV16Option12toJSONObjectFT_P_">toJSONObject()</a>
+                    <a class="token" href="#/s:19TradeoffAnalyticsV16OptionV12toJSONObjectypyF">toJSONObject()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -398,9 +400,9 @@ the data).</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FV19TradeoffAnalyticsV16OptioncFzT4jsonV7RestKit4JSON_S0_"></a>
+                    <a name="/s:19TradeoffAnalyticsV16OptionVAC7RestKit4JSONV4json_tKcfc"></a>
                     <a name="//apple_ref/swift/Method/init(json:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FV19TradeoffAnalyticsV16OptioncFzT4jsonV7RestKit4JSON_S0_">init(json:)</a>
+                    <a class="token" href="#/s:19TradeoffAnalyticsV16OptionVAC7RestKit4JSONV4json_tKcfc">init(json:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -427,8 +429,8 @@ the data).</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-05-01)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-09-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

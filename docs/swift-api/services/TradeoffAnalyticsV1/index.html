@@ -102,14 +102,14 @@
         <section>
           <section class="section">
             
-            <a href='#watson-developer-cloud-swift-sdk' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='watson-developer-cloud-swift-sdk'>Watson Developer Cloud Swift SDK</h1>
+            <h1 id='watson-developer-cloud-swift-sdk' class='heading'>Watson Developer Cloud Swift SDK</h1>
 
 <p><a href="https://travis-ci.org/watson-developer-cloud/swift-sdk"><img src="https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master" alt="Build Status"></a>
 <img src="https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat" alt="">
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
 <a href="http://watson-developer-cloud.github.io/swift-sdk"><img src="https://img.shields.io/badge/Documentation-API-blue.svg" alt="Documentation"></a>
 <a href="https://cla-assistant.io/watson-developer-cloud/swift-sdk"><img src="https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk" alt="CLA assistant"></a></p>
-<a href='#overview' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='overview'>Overview</h2>
+<h2 id='overview' class='heading'>Overview</h2>
 
 <p>The Watson Developer Cloud Swift SDK makes it easy for mobile developers to build Watson-powered applications. With the Swift SDK you can leverage the power of Watson&rsquo;s advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.</p>
 
@@ -121,8 +121,8 @@
 <li>Review a <a href="#sample-applications">Sample Application</a></li>
 <li>Browse the <a href="http://watson-developer-cloud.github.io/swift-sdk/">Documentation</a></li>
 </ul>
-<a href='#contents' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contents'>Contents</h2>
-<a href='#general' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='general'>General</h3>
+<h2 id='contents' class='heading'>Contents</h2>
+<h3 id='general' class='heading'>General</h3>
 
 <ul>
 <li><a href="#requirements">Requirements</a></li>
@@ -131,13 +131,12 @@
 <li><a href="#custom-service-urls">Custom Service URLs</a></li>
 <li><a href="#custom-headers">Custom Headers</a></li>
 <li><a href="#sample-applications">Sample Applications</a></li>
-<li><a href="#xcode-7-compatibility">Xcode 7 Compatibility</a></li>
 <li><a href="#objective-c-compatibility">Objective-C Compatibility</a></li>
 <li><a href="#linux-compatibility">Linux Compatibility</a></li>
 <li><a href="#contributing">Contributing</a></li>
 <li><a href="#license">License</a></li>
 </ul>
-<a href='#services' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='services'>Services</h3>
+<h3 id='services' class='heading'>Services</h3>
 
 <ul>
 <li><a href="#alchemydata-news">AlchemyData News</a></li>
@@ -156,15 +155,15 @@
 <li><a href="#tradeoff-analytics">Tradeoff Analytics</a></li>
 <li><a href="#visual-recognition">Visual Recognition</a></li>
 </ul>
-<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+<h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
 <li>iOS 8.0+</li>
 <li>Xcode 8.0+</li>
 <li>Swift 3.0+</li>
 </ul>
-<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
-<a href='#dependency-management' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='dependency-management'>Dependency Management</h3>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='dependency-management' class='heading'>Dependency Management</h3>
 
 <p>We recommend using <a href="https://github.com/Carthage/Carthage">Carthage</a> to manage dependencies and build the Swift SDK for your application.</p>
 
@@ -188,28 +187,17 @@
 </code></pre>
 
 <p>Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired.</p>
-<a href='#app-transport-security' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='app-transport-security'>App Transport Security</h3>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
 
-<p>App Transport Security was introduced with iOS 9 to enforce secure Internet connections. To securely connect to IBM Watson services, please add the following exception to your application&rsquo;s <code>Info.plist</code> file.</p>
-<pre class="highlight xml"><code><span class="nt">&lt;key&gt;</span>NSAppTransportSecurity<span class="nt">&lt;/key&gt;</span>
-<span class="nt">&lt;dict&gt;</span>
-    <span class="nt">&lt;key&gt;</span>NSExceptionDomains<span class="nt">&lt;/key&gt;</span>
-    <span class="nt">&lt;dict&gt;</span>
-        <span class="nt">&lt;key&gt;</span>watsonplatform.net<span class="nt">&lt;/key&gt;</span>
-        <span class="nt">&lt;dict&gt;</span>
-            <span class="nt">&lt;key&gt;</span>NSTemporaryExceptionRequiresForwardSecrecy<span class="nt">&lt;/key&gt;</span>
-            <span class="nt">&lt;false/&gt;</span>
-            <span class="nt">&lt;key&gt;</span>NSIncludesSubdomains<span class="nt">&lt;/key&gt;</span>
-            <span class="nt">&lt;true/&gt;</span>
-            <span class="nt">&lt;key&gt;</span>NSTemporaryExceptionAllowsInsecureHTTPLoads<span class="nt">&lt;/key&gt;</span>
-            <span class="nt">&lt;true/&gt;</span>
-            <span class="nt">&lt;key&gt;</span>NSTemporaryExceptionMinimumTLSVersion<span class="nt">&lt;/key&gt;</span>
-            <span class="nt">&lt;string&gt;</span>TLSv1.0<span class="nt">&lt;/string&gt;</span>
-        <span class="nt">&lt;/dict&gt;</span>
-    <span class="nt">&lt;/dict&gt;</span>
-<span class="nt">&lt;/dict&gt;</span>
+<p>To include the Watson SDK to your projects, add the following to your <code>Package.swift</code> file:</p>
+<pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span>
+             <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">]</span>
 </code></pre>
-<a href='#service-instances' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='service-instances'>Service Instances</h2>
+
+<p>To build the project, run <code>swift build</code> from the command line.</p>
+<h2 id='service-instances' class='heading'>Service Instances</h2>
 
 <p><a href="https://www.ibm.com/watson/developercloud/">IBM Watson Developer Cloud</a> offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the <a href="https://www.ibm.com/watson/developercloud/services-catalog.html">services catalog</a>. Services are instantiated using the <a href="http://www.ibm.com/cloud-computing/bluemix/">IBM Bluemix</a> cloud platform.</p>
 
@@ -238,8 +226,8 @@
 
 <p>Note that service credentials are different from your Bluemix username and password.</p>
 
-<p>See <a href="https://www.ibm.com/watson/developercloud/doc/common/index.html">Getting Started</a> for more information on getting started with the Watson Developer Cloud and Bluemix.</p>
-<a href='#custom-service-urls' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='custom-service-urls'>Custom Service URLs</h2>
+<p>See <a href="https://console.bluemix.net/docs/services/watson/index.html">Getting Started</a> for more information on getting started with the Watson Developer Cloud and Bluemix.</p>
+<h2 id='custom-service-urls' class='heading'>Custom Service URLs</h2>
 
 <p>In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.</p>
 
@@ -247,7 +235,7 @@
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dialog</span> <span class="o">=</span> <span class="kt">Dialog</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">)</span>
 <span class="n">dialog</span><span class="o">.</span><span class="n">serviceURL</span> <span class="o">=</span> <span class="s">"your-custom-service-url"</span>
 </code></pre>
-<a href='#custom-headers' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='custom-headers'>Custom Headers</h2>
+<h2 id='custom-headers' class='heading'>Custom Headers</h2>
 
 <p>There are different headers that can be sent to the Watson services. For example, Watson services log requests and their results for the purpose of improving the services, but you can include the <code>X-Watson-Learning-Opt-Out</code> header to opt out of this.</p>
 
@@ -255,46 +243,33 @@
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">naturalLanguageClassifier</span> <span class="o">=</span> <span class="kt">NaturalLanguageClassifier</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
 <span class="n">naturalLanguageClassifier</span><span class="o">.</span><span class="n">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="s">"X-Watson-Learning-Opt-Out"</span><span class="p">:</span> <span class="s">"true"</span><span class="p">]</span>
 </code></pre>
-<a href='#sample-applications' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='sample-applications'>Sample Applications</h2>
+<h2 id='sample-applications' class='heading'>Sample Applications</h2>
 
 <ul>
+<li><a href="https://github.com/watson-developer-cloud/simple-chat-swift">Simple Chat (Swift)</a></li>
 <li><a href="https://github.com/watson-developer-cloud/simple-chat-objective-c">Simple Chat (Objective-C)</a></li>
 <li><a href="https://github.com/watson-developer-cloud/speech-to-text-swift">Speech to Text</a></li>
 <li><a href="https://github.com/watson-developer-cloud/text-to-speech-swift">Text to Speech</a></li>
 <li><a href="https://github.com/IBM-MIL/CognitiveConcierge">Cognitive Concierge</a></li>
 </ul>
-<a href='#xcode-7-compatibility' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='xcode-7-compatibility'>Xcode 7 Compatibility</h2>
-
-<p>Unfortunately, the version of Swift used to develop the SDK is not backwards compatible with Xcode 7. We are not committed to maintaining Xcode 7 support but may occasionally publish a v0.7.x release with critical bug fixes.</p>
-
-<p>To continue using the Swift SDK with Xcode 7, we recommend following the v0.7.x release branch with the following change to your Cartfile:</p>
-
-<p><code>github &quot;watson-developer-cloud/swift-sdk&quot; ~&gt; 0.7.0</code></p>
-<a href='#objective-c-compatibility' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='objective-c-compatibility'>Objective-C Compatibility</h2>
+<h2 id='objective-c-compatibility' class='heading'>Objective-C Compatibility</h2>
 
 <p>Please see <a href="docs/objective-c.md">this tutorial</a> for more information about consuming the Watson Developer Cloud Swift SDK in an Objective-C application.</p>
-<a href='#linux-compatibility' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='linux-compatibility'>Linux Compatibility</h2>
+<h2 id='linux-compatibility' class='heading'>Linux Compatibility</h2>
 
 <p>The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.</p>
 
-<p>To include the Watson SDK to your Linux projects, add the following to your <code>Package.swift</code> file:</p>
-<pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span>
-             <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
-<span class="p">]</span>
-</code></pre>
-
-<p>To build the project, run <code>swift build</code> from the command line.</p>
-<a href='#contributing' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contributing'>Contributing</h2>
+<p>To include the Watson SDK to your Linux projects, please follow the <a href="#swift-package-manager">Swift Package Manager instructions.</a></p>
+<h2 id='contributing' class='heading'>Contributing</h2>
 
 <p>We would love any and all help! If you would like to contribute, please read our <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a> documentation with information on getting started.</p>
-<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+<h2 id='license' class='heading'>License</h2>
 
 <p>This library is licensed under Apache 2.0. Full license text is
 available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE">LICENSE</a>.</p>
 
-<p>This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools. </p>
-<a href='#alchemydata-news' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='alchemydata-news'>AlchemyData News</h2>
+<p>This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.</p>
+<h2 id='alchemydata-news' class='heading'>AlchemyData News</h2>
 
 <p>AlchemyData News provides news and blog content enriched with natural language processing to allow for highly targeted search and trend analysis. Now you can query the world&rsquo;s news sources and blogs like a database.</p>
 
@@ -326,7 +301,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><a href="http://docs.alchemyapi.com/">IBM AlchemyData News - Documentation</a></li>
 <li><a href="http://querybuilder.alchemyapi.com/builder">IBM AlchemyData News - Demo</a></li>
 </ul>
-<a href='#alchemylanguage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='alchemylanguage'>AlchemyLanguage</h2>
+<h2 id='alchemylanguage' class='heading'>AlchemyLanguage</h2>
 
 <p>AlchemyLanguage is a collection of text analysis functions that derive semantic information from your content. You can input text, HTML, or a public URL and leverage sophisticated natural language processing techniques to get a quick high-level understanding of your content and obtain detailed insights such as directional sentiment from entity to object.</p>
 
@@ -371,7 +346,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><a href="http://www.ibm.com/watson/developercloud/doc/alchemylanguage/">IBM AlchemyLanguage - Documentation</a></li>
 <li><a href="https://alchemy-language-demo.mybluemix.net/">IBM AlchemyLanguage - Demo</a></li>
 </ul>
-<a href='#conversation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='conversation'>Conversation</h2>
+<h2 id='conversation' class='heading'>Conversation</h2>
 
 <p>With the IBM Watson Conversation service you can create cognitive agents&ndash;virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.</p>
 
@@ -418,10 +393,10 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Conversation service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/conversation.html">IBM Watson Conversation - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/conversation/overview.shtml">IBM Watson Conversation - Documentation</a></li>
+<li><a href="https://www.ibm.com/watson/services/conversation/">IBM Watson Conversation - Service Page</a></li>
+<li><a href="https://console.bluemix.net/docs/services/conversation/index.html">IBM Watson Conversation - Documentation</a></li>
 </ul>
-<a href='#discovery' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='discovery'>Discovery</h2>
+<h2 id='discovery' class='heading'>Discovery</h2>
 
 <p>The IBM Discovery Service allows for rapid automated ingestion and feature enrichment of unstructured data. Enrichments of documents ingested include concepts, relationship extraction and sentiment analysis through Natural Language Processing. With the IBM Discovery service you can take advantage of IBM Watson algorithms to take your unstructured data, enrich it, and query it to return the information you need from it.</p>
 
@@ -446,8 +421,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nv">withName</span><span class="p">:</span> <span class="n">environmentName</span><span class="p">,</span>
     <span class="nv">withSize</span><span class="p">:</span> <span class="o">.</span><span class="n">zero</span><span class="p">,</span>
     <span class="nv">withDescription</span><span class="p">:</span> <span class="n">testDescription</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> 
-<span class="p">{</span>   
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
+<span class="p">{</span>
     <span class="n">environment</span> <span class="k">in</span>
     <span class="k">self</span><span class="o">.</span><span class="n">environmentID</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">environmentID</span>
 <span class="p">}</span>
@@ -456,7 +431,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="n">bool</span> <span class="n">environmentReady</span> <span class="o">=</span> <span class="kc">false</span>
 <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">environmentReady</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">discovery</span><span class="o">.</span><span class="nf">getEnvironment</span><span class="p">(</span><span class="nv">withName</span><span class="p">:</span> <span class="n">environmentName</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-    <span class="p">{</span> 
+    <span class="p">{</span>
         <span class="n">environment</span> <span class="k">in</span>
         <span class="k">if</span> <span class="n">environment</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s">"active"</span> <span class="p">{</span>
          <span class="k">self</span><span class="o">.</span><span class="n">environmentReady</span> <span class="o">=</span> <span class="kc">true</span>
@@ -474,7 +449,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nv">withDescription</span><span class="p">:</span> <span class="n">collectionDescription</span><span class="p">,</span>
     <span class="nv">withConfigurationID</span><span class="p">:</span> <span class="n">configurationID</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-<span class="p">{</span>   
+<span class="p">{</span>
     <span class="n">collection</span> <span class="k">in</span>
     <span class="k">self</span><span class="o">.</span><span class="n">collectionID</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">collectionID</span>
 <span class="p">}</span>
@@ -485,7 +460,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="n">discovery</span><span class="o">.</span><span class="nf">listCollectionDetails</span><span class="p">(</span>
     <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
     <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> 
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">collection</span> <span class="k">in</span>
     <span class="k">if</span> <span class="n">collection</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="kt">CollectionStatus</span><span class="o">.</span><span class="n">active</span> <span class="p">{</span>
@@ -502,7 +477,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
     <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
     <span class="nv">file</span><span class="p">:</span> <span class="n">file</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> 
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">document</span> <span class="k">in</span>
     <span class="kt">NSLog</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
@@ -526,8 +501,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nv">withQuery</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
     <span class="nv">withAggregation</span><span class="p">:</span> <span class="n">aggregation</span><span class="p">,</span>
     <span class="nv">return</span><span class="p">:</span> <span class="n">returnHierarchies</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> 
-<span class="p">{</span> 
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
+<span class="p">{</span>
     <span class="n">queryResponse</span> <span class="k">in</span>
     <span class="k">if</span> <span class="k">let</span> <span class="nv">results</span> <span class="o">=</span> <span class="n">queryResponse</span><span class="o">.</span><span class="n">results</span> <span class="p">{</span>
         <span class="k">for</span> <span class="n">result</span> <span class="k">in</span> <span class="n">results</span> <span class="p">{</span>
@@ -541,16 +516,16 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="p">}</span>
 </code></pre>
 
-<p>The following links provide more information about the IBM Discovery service: </p>
+<p>The following links provide more information about the IBM Discovery service:</p>
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/discovery.html">IBM Discovery - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/discovery/">IBM Discovery - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/discovery/index.html">IBM Discovery - Documentation</a></li>
 <li><a href="https://www.ibm.com/watson/developercloud/discovery/api/v1/">IBM Discovery - API Reference</a></li>
 <li><a href="https://watson-api-explorer.mybluemix.net/apis/discovery-v1">IBM Discovery - API Explorer</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/discovery/query-reference.shtml#parameters">IBM Discovery - Query Building</a></li>
+<li><a href="https://console.bluemix.net/docs/services/discovery/query-reference.html#query-building">IBM Discovery - Query Building</a></li>
 </ul>
-<a href='#document-conversion' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='document-conversion'>Document Conversion</h2>
+<h2 id='document-conversion' class='heading'>Document Conversion</h2>
 
 <p>The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.</p>
 
@@ -582,14 +557,14 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/document-conversion.html">IBM Watson Document Conversion - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/document-conversion/">IBM Watson Document Conversion - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/document-conversion/index.html">IBM Watson Document Conversion - Documentation</a></li>
 <li><a href="https://document-conversion-demo.mybluemix.net/">IBM Watson Document Conversion - Demo</a></li>
 </ul>
-<a href='#language-translator' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='language-translator'>Language Translator</h2>
+<h2 id='language-translator' class='heading'>Language Translator</h2>
 
 <p>The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.</p>
 
-<p>Note that the Language Translator service was formerly known as Language Translation. It is recommended to <a href="http://www.ibm.com/watson/developercloud/doc/language-translator/migrating.shtml">migrate</a> to Language Translator, however, existing Language Translation service instances are currently supported by the <code>LanguageTranslatorV2</code> framework. To use a legacy Language Translation service, set the <code>serviceURL</code> property before executing the first API call to the service.</p>
+<p>Note that the Language Translator service was formerly known as Language Translation. It is recommended to <a href="https://console.bluemix.net/docs/services/language-translator/migrating.html">migrate</a> to Language Translator, however, existing Language Translation service instances are currently supported by the <code>LanguageTranslatorV2</code> framework. To use a legacy Language Translation service, set the <code>serviceURL</code> property before executing the first API call to the service.</p>
 
 <p>The following example demonstrates how to use the Language Translator service:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">LanguageTranslatorV2</span>
@@ -612,10 +587,10 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/language-translator.html">IBM Watson Language Translator - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/language-translator/">IBM Watson Language Translator - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/language-translator/index.html">IBM Watson Language Translator - Documentation</a></li>
 <li><a href="https://language-translator-demo.mybluemix.net/">IBM Watson Language Translator - Demo</a></li>
 </ul>
-<a href='#natural-language-classifier' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='natural-language-classifier'>Natural Language Classifier</h2>
+<h2 id='natural-language-classifier' class='heading'>Natural Language Classifier</h2>
 
 <p>The IBM Watson Natural Language Classifier service enables developers without a background in machine learning or statistical algorithms to create natural language interfaces for their applications. The service interprets the intent behind text and returns a corresponding classification with associated confidence levels. The return value can then be used to trigger a corresponding action, such as redirecting the request or answering a question.</p>
 
@@ -639,10 +614,10 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/nl-classifier.html">IBM Watson Natural Language Classifier - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/natural-language-classifier/index.html">IBM Watson Natural Language Classifier - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/natural-language-classifier/natural-language-classifier-overview.html">IBM Watson Natural Language Classifier - Documentation</a></li>
 <li><a href="https://natural-language-classifier-demo.mybluemix.net/">IBM Watson Natural Language Classifier - Demo</a></li>
 </ul>
-<a href='#natural-language-understanding' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='natural-language-understanding'>Natural Language Understanding</h2>
+<h2 id='natural-language-understanding' class='heading'>Natural Language Understanding</h2>
 
 <p>The IBM Natural Language Understanding service explores various features of text content. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.</p>
 
@@ -675,12 +650,12 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">naturalLanguageUnderstanding</span><span class="o">.</span><span class="nf">analyzeContent</span><span class="p">(</span><span class="nv">withParameters</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">results</span> <span class="k">in</span> 
+    <span class="n">results</span> <span class="k">in</span>
     <span class="nf">print</span> <span class="p">(</span><span class="n">results</span><span class="p">)</span>
 <span class="p">}</span>
 
 </code></pre>
-<a href='#500-errors' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='500-errors'>500 errors</h4>
+<h4 id='500-errors' class='heading'>500 errors</h4>
 
 <p>Note that <strong>you are required to include at least one feature in your request.</strong> You will receive a 500 error if you do not include any features in your request.</p>
 
@@ -688,10 +663,10 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/natural-language-understanding.html">IBM Watson Natural Language Understanding - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/natural-language-understanding/">IBM Watson Natural Language Understanding - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/natural-language-understanding/index.html">IBM Watson Natural Language Understanding - Documentation</a></li>
 <li><a href="http://natural-language-understanding-demo.mybluemix.net">IBM Watson Natural Language Understanding - Demo</a></li>
 </ul>
-<a href='#personality-insights' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='personality-insights'>Personality Insights</h2>
+<h2 id='personality-insights' class='heading'>Personality Insights</h2>
 
 <p>The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.</p>
 
@@ -706,7 +681,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-input-text"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">personalityInsights</span><span class="o">.</span><span class="nf">getProfile</span><span class="p">(</span><span class="nv">fromText</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">profile</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>                      
+    <span class="nf">print</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -714,10 +689,10 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/personality-insights.html">IBM Watson Personality Insights - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/personality-insights">IBM Watson Personality Insights - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/personality-insights/index.html">IBM Watson Personality Insights - Documentation</a></li>
 <li><a href="https://personality-insights-livedemo.mybluemix.net">IBM Watson Personality Insights - Demo</a></li>
 </ul>
-<a href='#retrieve-and-rank' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='retrieve-and-rank'>Retrieve and Rank</h2>
+<h2 id='retrieve-and-rank' class='heading'>Retrieve and Rank</h2>
 
 <p>The IBM Watson Retrieve and Rank service combines Apache Solr and a machine learning algorithm, two information retrieval components, into a single service in order to provide users with the most relevant search information.</p>
 
@@ -830,46 +805,45 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/retrieve-rank.html">IBM Watson Retrieve and Rank - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/retrieve-rank/">IBM Watson Retrieve and Rank - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/retrieve-and-rank/index.html">IBM Watson Retrieve and Rank - Documentation</a></li>
 <li><a href="http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/#/">IBM Watson Retrieve and Rank - Demo</a></li>
 </ul>
-<a href='#speech-to-text' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='speech-to-text'>Speech to Text</h2>
+<h2 id='speech-to-text' class='heading'>Speech to Text</h2>
 
 <p>The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.</p>
 
 <p>The <code>SpeechToText</code> class is the SDK&rsquo;s primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the <code>SpeechToTextSession</code> class that exposes more control over the WebSockets session.</p>
-<a href='#recognition-request-settings' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='recognition-request-settings'>Recognition Request Settings</h4>
+<h4 id='recognition-request-settings' class='heading'>Recognition Request Settings</h4>
 
-<p>The <code>RecognitionSettings</code> class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when <a href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml#WSstart">initating a request</a>.</p>
+<p>The <code>RecognitionSettings</code> class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart">initating a request</a>.</p>
 
-<p>The following example demonstrates how to define a recognition request that transcribes Opus-formatted audio data with interim results until the stream terminates:</p>
+<p>The following example demonstrates how to define a recognition request that transcribes WAV audio data with interim results:</p>
 <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="n">wav</span><span class="p">)</span>
 <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="n">settings</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="kc">true</span>
 </code></pre>
 
-<p>See the <a href="http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html">class documentation</a> or <a href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/details.shtml">service documentation</a> for more information about the available settings.</p>
-<a href='#microphone-audio-and-compression' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='microphone-audio-and-compression'>Microphone Audio and Compression</h4>
+<p>See the <a href="http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html">class documentation</a> or <a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">service documentation</a> for more information about the available settings.</p>
+<h4 id='microphone-audio-and-compression' class='heading'>Microphone Audio and Compression</h4>
 
 <p>The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as <code>recognizeMicrophone(settings:model:customizationID:learningOptOut:compress:failure:success)</code> and <code>stopRecognizeMicrophone()</code> or <code>startMicrophone(compress:)</code> and <code>stopMicrophone()</code>).</p>
 
-<p>Knowing when to stop the microphone depends upon the recognition request&rsquo;s <code>continuous</code> setting:</p>
+<p>There are two different ways that your app can determine when to stop the microphone:</p>
 
 <ul>
-<li><p>If <code>false</code>, then the service ends the recognition request at the first end-of-speech incident (denoted by a half-second of non-speech or when the stream terminates). This will coincide with a <code>final</code> transcription result. So the <code>success</code> or <code>onResults</code> callback should be configured to stop the microphone when a final transcription result is received.</p></li>
-<li><p>If <code>true</code>, then the microphone will typically be stopped by user-feedback. For example, your application may have a button to start/stop the request, or you may stream the microphone for the duration of a long press on a UI element.</p></li>
+<li><p>User Interaction: Your app could rely on user input to stop the microphone. For example, you could use a button to start/stop transcribing, or you could require users to press-and-hold a button to start/stop transcribing.</p></li>
+<li><p>Final Result: Each transcription result has a <code>final</code> property that is <code>true</code> when the audio stream is complete or a timeout has occurred. By watching for the <code>final</code> property, your app can stop the microphone after determining when the user has finished speaking.</p></li>
 </ul>
 
-<p>To reduce latency and bandwidth, the microphone audio is compressed to Opus format by default. To disable compression, set the <code>compress</code> parameter to <code>false</code>.</p>
+<p>To reduce latency and bandwidth, the microphone audio is compressed to OggOpus format by default. To disable compression, set the <code>compress</code> parameter to <code>false</code>.</p>
 
 <p>It&rsquo;s important to specify the correct audio format for recognition requests that use the microphone:</p>
-<pre class="highlight swift"><code><span class="c1">// compressed microphone audio uses the Opus format</span>
-<span class="k">let</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="n">opus</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="c1">// compressed microphone audio uses the OggOpus format</span>
+<span class="k">let</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="n">oggOpus</span><span class="p">)</span>
 
 <span class="c1">// uncompressed microphone audio uses a 16-bit mono PCM format at 16 kHz</span>
 <span class="k">let</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="nf">l16</span><span class="p">(</span><span class="nv">rate</span><span class="p">:</span> <span class="mi">16000</span><span class="p">,</span> <span class="nv">channels</span><span class="p">:</span> <span class="mi">1</span><span class="p">))</span>
 </code></pre>
-<a href='#transcribe-recorded-audio' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='transcribe-recorded-audio'>Transcribe Recorded Audio</h4>
+<h4 id='transcribe-recorded-audio' class='heading'>Transcribe Recorded Audio</h4>
 
 <p>The following example demonstrates how to use the Speech to Text service to transcribe a WAV audio file.</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
@@ -887,7 +861,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">bestTranscript</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
-<a href='#transcribe-microphone-audio' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='transcribe-microphone-audio'>Transcribe Microphone Audio</h4>
+<h4 id='transcribe-microphone-audio' class='heading'>Transcribe Microphone Audio</h4>
 
 <p>Audio can be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service to transcribe microphone audio:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
@@ -897,8 +871,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
 
 <span class="kd">func</span> <span class="nf">startStreaming</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="n">opus</span><span class="p">)</span>
-    <span class="n">settings</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="n">oggOpus</span><span class="p">)</span>
     <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
     <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">speechToText</span><span class="o">.</span><span class="nf">recognizeMicrophone</span><span class="p">(</span><span class="nv">settings</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">results</span> <span class="k">in</span>
@@ -910,9 +883,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="n">speechToText</span><span class="o">.</span><span class="nf">stopRecognizeMicrophone</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
-<a href='#session-management-and-advanced-features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='session-management-and-advanced-features'>Session Management and Advanced Features</h4>
+<h4 id='session-management-and-advanced-features' class='heading'>Session Management and Advanced Features</h4>
 
-<p>Advanced users may want more customizability than provided by the <code>SpeechToText</code> class. The <code>SpeechToTextSession</code> class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The <code>SpeechToTextSession</code> class also allows users more control over the AVAudioSession shared instance. Before using <code>SpeechToTextSession</code>, it&rsquo;s helpful to be familiar with the <a href="https://www.ibm.com/watson/developercloud/doc/speech-to-text/websockets.shtml">Speech to Text WebSocket interface</a>.</p>
+<p>Advanced users may want more customizability than provided by the <code>SpeechToText</code> class. The <code>SpeechToTextSession</code> class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The <code>SpeechToTextSession</code> class also allows users more control over the AVAudioSession shared instance. Before using <code>SpeechToTextSession</code>, it&rsquo;s helpful to be familiar with the <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html">Speech to Text WebSocket interface</a>.</p>
 
 <p>The following steps describe how to execute a recognition request with <code>SpeechToTextSession</code>:</p>
 
@@ -920,7 +893,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li>Connect: Invoke <code>connect()</code> to connect to the service.</li>
 <li>Start Recognition Request: Invoke <code>startRequest(settings:)</code> to start a recognition request.</li>
 <li>Send Audio: Invoke <code>recognize(audio:)</code> or <code>startMicrophone(compress:)</code>/<code>stopMicrophone()</code> to send audio to the service.</li>
-<li>Stop Recognition Request: Invoke <code>stopRequest()</code> to end the recognition request. The service will automatically stop the request if the <code>continuous</code> setting is not set to <code>true</code>. If the recognition request is already stopped, then sending a stop message will have no effect.</li>
+<li>Stop Recognition Request: Invoke <code>stopRequest()</code> to end the recognition request. If the recognition request is already stopped, then sending a stop message will have no effect.</li>
 <li>Disconnect: Invoke <code>disconnect()</code> to wait for any remaining results to be received and then disconnect from the service.</li>
 </ol>
 
@@ -930,7 +903,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><code>onConnect</code>: Invoked when the session connects to the Speech to Text service.</li>
-<li><code>onMicrophoneData</code>: Invoked with microphone audio when a recording audio queue buffer has been filled. If microphone audio is being compressed, then the audio data is in Opus format. If uncompressed, then the audio data is in 16-bit PCM format at 16 kHz.</li>
+<li><code>onMicrophoneData</code>: Invoked with microphone audio when a recording audio queue buffer has been filled. If microphone audio is being compressed, then the audio data is in OggOpus format. If uncompressed, then the audio data is in 16-bit PCM format at 16 kHz.</li>
 <li><code>onPowerData</code>: Invoked every 0.025s when recording with the average dB power of the microphone.</li>
 <li><code>onResults</code>: Invoked when transcription results are received for a recognition request.</li>
 <li><code>onError</code>: Invoked when an error or warning occurs.</li>
@@ -962,9 +935,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="n">speechToTextSession</span><span class="o">.</span><span class="n">onResults</span> <span class="o">=</span> <span class="p">{</span> <span class="n">results</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">bestTranscript</span><span class="p">)</span> <span class="p">}</span>
 
     <span class="c1">// define recognition request settings</span>
-    <span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="n">opus</span><span class="p">)</span>
+    <span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="n">oggOpus</span><span class="p">)</span>
     <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="n">settings</span><span class="o">.</span><span class="n">continuous</span> <span class="o">=</span> <span class="kc">true</span>
 
     <span class="c1">// start streaming microphone audio for transcription</span>
     <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">connect</span><span class="p">()</span>
@@ -978,9 +950,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">disconnect</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
-<a href='#customization' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='customization'>Customization</h4>
+<h4 id='customization' class='heading'>Customization</h4>
 
-<p>Customize the language model interface to include and tailor domain-specific data and terminology. Improve the accuracy of speech recognition for domains within health care, law, medicine, information technology, and so on. </p>
+<p>Customize the language model interface to include and tailor domain-specific data and terminology. Improve the accuracy of speech recognition for domains within health care, law, medicine, information technology, and so on.</p>
 
 <p>The following example demonstrates an example of how to customize the language model:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
@@ -1010,7 +982,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> <span class="p">{</span> <span class="n">corpus</span> <span class="k">in</span>
 
     <span class="nf">print</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="c1">// Check that the corpus is finished processing </span>
+    <span class="c1">// Check that the corpus is finished processing</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">"finished processing: </span><span class="se">\(</span><span class="n">corpus</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="o">.</span><span class="n">analyzed</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">totalWords</span><span class="p">)</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">outOfVocabularyWords</span><span class="p">)</span>
@@ -1042,7 +1014,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="p">}</span>
 
 <span class="k">guard</span> <span class="k">let</span> <span class="nv">customizationStatus</span> <span class="o">=</span> <span class="n">customizationStatus</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">throw</span> <span class="n">error</span> 
+    <span class="k">throw</span> <span class="n">error</span>
 <span class="p">}</span>
 
 <span class="c1">// Check the customization status</span>
@@ -1071,39 +1043,38 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="k">let</span> <span class="nv">customWord2</span> <span class="o">=</span> <span class="kt">NewWord</span><span class="p">(</span><span class="nv">word</span><span class="p">:</span> <span class="s">"IEEE"</span><span class="p">,</span> <span class="nv">soundsLike</span><span class="p">:</span> <span class="p">[</span><span class="s">"i triple e"</span><span class="p">])</span>
 
     <span class="n">speechToText</span><span class="o">.</span><span class="nf">addWords</span><span class="p">(</span>
-        <span class="nv">customizationID</span><span class="p">:</span> <span class="n">trainedCustomizationID</span><span class="p">,</span> 
-        <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="n">customWord1</span><span class="p">,</span> <span class="n">customWord2</span><span class="p">],</span> 
+        <span class="nv">customizationID</span><span class="p">:</span> <span class="n">trainedCustomizationID</span><span class="p">,</span>
+        <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="n">customWord1</span><span class="p">,</span> <span class="n">customWord2</span><span class="p">],</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span> <span class="p">{</span>
         <span class="nf">print</span><span class="p">(</span><span class="s">"added words to corpus"</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<a href='#important-notes' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='important-notes'>Important notes</h4>
+<h4 id='important-notes' class='heading'>Important notes</h4>
 <div class="aside aside-since">
     <p class="aside-title">Since</p>
-    <p>Since v0.11.0, if you use <code>SpeechToTextSession</code>, you&rsquo;ll need to manage the setup for the <code>AVAudioSession</code> shared instance. Without the code below, you won&rsquo;t receive data from the Speech To Text service properly. This isn&rsquo;t necessary if you use the <code>SpeechToText</code> class.
-<code>swift
-do {
-let session = AVAudioSession.sharedInstance()
-try session.setActive(true)
-try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .defaultToSpeaker])
-} catch {
-// handle errors
-}
-</code></p>
+    <p>Since v0.11.0, if you use <code>SpeechToTextSession</code>, you&rsquo;ll need to manage the setup for the <code>AVAudioSession</code> shared instance. Without the code below, you won&rsquo;t receive data from the Speech To Text service properly. This isn&rsquo;t necessary if you use the <code>SpeechToText</code> class.</p>
+<pre class="highlight swift"><code><span class="k">do</span> <span class="p">{</span>
+<span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">AVAudioSession</span><span class="o">.</span><span class="nf">sharedInstance</span><span class="p">()</span>
+<span class="k">try</span> <span class="n">session</span><span class="o">.</span><span class="nf">setActive</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">session</span><span class="o">.</span><span class="nf">setCategory</span><span class="p">(</span><span class="kt">AVAudioSessionCategoryPlayAndRecord</span><span class="p">,</span> <span class="nv">with</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">mixWithOthers</span><span class="p">,</span> <span class="o">.</span><span class="n">defaultToSpeaker</span><span class="p">])</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
+<span class="c1">// handle errors</span>
+<span class="p">}</span>
+</code></pre>
 
 </div>
 <li><p>As of iOS 10, if you access the device&rsquo;s microphone, you&rsquo;ll be required to include the <code>NSMicrophoneUsageDescription</code> key in your <code>Info.plist</code> file, or the app will exit. Find more information about this <a href="https://forums.developer.apple.com/thread/61521">here</a>.</p></li>
-<a href='#additional-information' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='additional-information'>Additional Information</h4>
+<h4 id='additional-information' class='heading'>Additional Information</h4>
 
 <p>The following links provide more information about the IBM Speech to Text service:</p>
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/speech-to-text.html">IBM Watson Speech to Text - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/speech-to-text/">IBM Watson Speech to Text - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">IBM Watson Speech to Text - Documentation</a></li>
 <li><a href="https://speech-to-text-demo.mybluemix.net/">IBM Watson Speech to Text - Demo</a></li>
 </ul>
-<a href='#text-to-speech' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='text-to-speech'>Text to Speech</h2>
+<h2 id='text-to-speech' class='heading'>Text to Speech</h2>
 
 <p>The IBM Watson Text to Speech service synthesizes natural-sounding speech from input text in a variety of languages and voices that speak with appropriate cadence and intonation.</p>
 
@@ -1129,7 +1100,7 @@ try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthe
 <span class="c1">// property or otherwise keep it in-scope beyond the completion handler.</span>
 </code></pre>
 
-<p>The Text to Speech service supports a number of <a href="http://www.ibm.com/watson/developercloud/doc/text-to-speech/using.shtml#voices">voices</a> for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:</p>
+<p>The Text to Speech service supports a number of <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#voices">voices</a> for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">TextToSpeechV1</span>
 
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
@@ -1149,15 +1120,22 @@ try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthe
 <span class="c1">// if it falls out-of-scope. Therefore, it's important to declare it as a</span>
 <span class="c1">// property or otherwise keep it in-scope beyond the completion handler.</span>
 </code></pre>
+<h4 id='important-notes' class='heading'>Important notes</h4>
+
+<ul>
+<li>Prior to v0.15.2, users could already request Opus as the return type. Opus files are much smaller than WAV files, so this would save bandwidth. However, Opus isn&rsquo;t playable by the iOS platform.</li>
+<li>In v0.15.2, we have added functionality to decode Opus files and convert them to WAV files.</li>
+<li>Currently, this is being done automatically when Opus files are requested. In a future release, we will allow users more control over when the decoding process occurs.</li>
+</ul>
 
 <p>The following links provide more information about the IBM Text To Speech service:</p>
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/text-to-speech.html">IBM Watson Text To Speech - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/text-to-speech/">IBM Watson Text To Speech - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/text-to-speech/index.html">IBM Watson Text To Speech - Documentation</a></li>
 <li><a href="https://text-to-speech-demo.mybluemix.net/">IBM Watson Text To Speech - Demo</a></li>
 </ul>
-<a href='#tone-analyzer' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='tone-analyzer'>Tone Analyzer</h2>
+<h2 id='tone-analyzer' class='heading'>Tone Analyzer</h2>
 
 <p>The IBM Watson Tone Analyzer service can be used to discover, understand, and revise the language tones in text. The service uses linguistic analysis to detect three types of tones from written text: emotions, social tendencies, and writing style.</p>
 
@@ -1182,10 +1160,10 @@ try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthe
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/tone-analyzer.html">IBM Watson Tone Analyzer - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/tone-analyzer/">IBM Watson Tone Analyzer - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/tone-analyzer/index.html">IBM Watson Tone Analyzer - Documentation</a></li>
 <li><a href="https://tone-analyzer-demo.mybluemix.net/">IBM Watson Tone Analyzer - Demo</a></li>
 </ul>
-<a href='#tradeoff-analytics' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='tradeoff-analytics'>Tradeoff Analytics</h2>
+<h2 id='tradeoff-analytics' class='heading'>Tradeoff Analytics</h2>
 
 <p>The IBM Watson Tradeoff Analytics service helps people make better choices when faced with multiple, often conflicting, goals and alternatives. By using mathematical filtering techniques to identify the best candidate options based on different criteria, the service can help users explore the tradeoffs between options to make complex decisions. The service combines smart visualization and analytical recommendations for easy and intuitive exploration of tradeoffs.</p>
 
@@ -1260,10 +1238,10 @@ try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthe
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/tradeoff-analytics.html">IBM Watson Tradeoff Analytics - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/tradeoff-analytics/">IBM Watson Tradeoff Analytics - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/tradeoff-analytics/index.html">IBM Watson Tradeoff Analytics - Documentation</a></li>
 <li><a href="https://tradeoff-analytics-demo.mybluemix.net/">IBM Watson Tradeoff Analytics - Demo</a></li>
 </ul>
-<a href='#visual-recognition' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='visual-recognition'>Visual Recognition</h2>
+<h2 id='visual-recognition' class='heading'>Visual Recognition</h2>
 
 <p>The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, faces, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.</p>
 
@@ -1287,15 +1265,15 @@ try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthe
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/visual-recognition.html">IBM Watson Visual Recognition - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/visual-recognition/">IBM Watson Visual Recognition - Documentation</a></li>
+<li><a href="https://console.bluemix.net/docs/services/visual-recognition/index.html">IBM Watson Visual Recognition - Documentation</a></li>
 <li><a href="http://visual-recognition-demo.mybluemix.net/">IBM Watson Visual Recognition - Demo</a></li>
 </ul>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-05-01)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.5</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-09-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

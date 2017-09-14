@@ -1,6 +1,18 @@
 Change Log
 ==========
 
+## Version 0.17.0
+_2017-09-14_
+
+This release includes the following changes:
+
+- Update Conversation to support 2017-05-26 release
+- Update Speech to Text to support 2017-07-14 release
+- Fix a bug to enable building with Xcode 9
+- Other minor bug fixes and documentation updates
+
+Please note that the `continuous` recognition setting was removed in the 2017-05-22 release of the Watson Speech to Text service. For advice on stopping the microphone, please see [this section](https://github.com/watson-developer-cloud/swift-sdk#microphone-audio-and-compression) of the readme.
+
 ## Version 0.15.1
 _2017-05-1_
 

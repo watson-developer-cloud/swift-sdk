@@ -37,8 +37,8 @@ public struct Output: JSONEncodable, JSONDecodable {
     public init(json: JSON) throws {
         self.json = try json.getDictionaryObject()
         logMessages = try json.decodedArray(at: "log_messages", type: LogMessage.self)
-        text = try json.decodedArray(at: "text", type: Swift.String)
-        nodesVisited = try json.decodedArray(at: "nodes_visited", type: Swift.String)
+        text = try json.decodedArray(at: "text", type: Swift.String.self)
+        nodesVisited = try json.decodedArray(at: "nodes_visited", type: Swift.String.self)
     }
 
     /// Used internally to serialize an `Output` model to JSON.

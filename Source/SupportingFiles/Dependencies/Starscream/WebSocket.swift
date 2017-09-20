@@ -119,7 +119,7 @@ internal class WebSocket : NSObject, StreamDelegate {
 
     // MARK: - Block based API.
 
-    internal var onConnect: ((Void) -> Void)?
+    internal var onConnect: (() -> Void)?
     internal var onDisconnect: ((NSError?) -> Void)?
     internal var onText: ((String) -> Void)?
     internal var onData: ((Data) -> Void)?

@@ -104,6 +104,11 @@ class ConversationTests: XCTestCase {
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
+    
+    /** Fail false positives. */
+    func failWithResult() {
+        XCTFail("Negative test returned a result.")
+    }
 
     /** Wait for expectations. */
     func waitForExpectations(timeout: TimeInterval = 5.0) {
@@ -233,7 +238,7 @@ class ConversationTests: XCTestCase {
                 let intent1 = intents![i]
                 let intent2 = response.intents[i]
                 XCTAssertEqual(intent1.intent, intent2.intent)
-                XCTAssertEqualWithAccuracy(intent1.confidence, intent2.confidence, accuracy: 10E-5)
+                XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
             
             // verify entities are equal
@@ -300,7 +305,7 @@ class ConversationTests: XCTestCase {
                 let intent1 = intents![i]
                 let intent2 = response.intents[i]
                 XCTAssertEqual(intent1.intent, intent2.intent)
-                XCTAssertEqualWithAccuracy(intent1.confidence, intent2.confidence, accuracy: 10E-5)
+                XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
             
             // verify entities are equal
@@ -1104,7 +1109,7 @@ class ConversationTests: XCTestCase {
         let descriptionTwo = "Delete the entity"
         let expectationTwo = self.expectation(description: descriptionTwo)
 
-        conversation.deleteEntity(workspaceID: workspaceID, entity: entity.entity) {_ in
+        conversation.deleteEntity(workspaceID: workspaceID, entity: entity.entity) {
             expectationTwo.fulfill()
         }
         waitForExpectations()
@@ -1144,7 +1149,7 @@ class ConversationTests: XCTestCase {
         let descriptionFour = "Delete the entity"
         let expectationFour = self.expectation(description: descriptionFour)
 
-        conversation.deleteEntity(workspaceID: workspaceID, entity: updatedEntityName, failure: failWithError) {_ in
+        conversation.deleteEntity(workspaceID: workspaceID, entity: updatedEntityName, failure: failWithError) {
             expectationFour.fulfill()
         }
         waitForExpectations()
@@ -1222,7 +1227,7 @@ class ConversationTests: XCTestCase {
         let descriptionThree = "Delete the updated value"
         let expectationThree = self.expectation(description: descriptionThree)
 
-        conversation.deleteValue(workspaceID: workspaceID, entity: entityName, value: updatedValueName, failure: failWithError) {_ in
+        conversation.deleteValue(workspaceID: workspaceID, entity: entityName, value: updatedValueName, failure: failWithError) {
             expectationThree.fulfill()
         }
         waitForExpectations()

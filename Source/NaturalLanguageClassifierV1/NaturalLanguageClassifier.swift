@@ -219,7 +219,7 @@ public class NaturalLanguageClassifier {
     public func deleteClassifier(
         withID classifierId: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct REST request
         let request = RestRequest(

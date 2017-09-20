@@ -179,7 +179,7 @@ public class RetrieveAndRank {
     public func deleteSolrCluster(
         withID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct REST request
         let request = RestRequest(
@@ -278,7 +278,7 @@ public class RetrieveAndRank {
         withName configName: String,
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct REST request
         let request = RestRequest(
@@ -396,7 +396,7 @@ public class RetrieveAndRank {
         toSolrClusterID solrClusterID: String,
         zipFile: URL,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct body
         guard let body = try? Data(contentsOf: zipFile) else {
@@ -442,7 +442,7 @@ public class RetrieveAndRank {
         forSolrClusterID solrClusterID: String,
         withConfigurationName configName: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -485,7 +485,7 @@ public class RetrieveAndRank {
         withName name: String,
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -574,7 +574,7 @@ public class RetrieveAndRank {
         contentFile: URL,
         contentType: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct REST body
         guard let body = try? Data(contentsOf: contentFile) else {
@@ -872,7 +872,7 @@ public class RetrieveAndRank {
     public func deleteRanker(
         withID rankerID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil) {
+        success: (() -> Void)? = nil) {
         
         // construct REST request
         let request = RestRequest(

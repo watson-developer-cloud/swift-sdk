@@ -41,7 +41,7 @@ public struct Entity: JSONEncodable, JSONDecodable {
     public init(json: JSON) throws {
         self.json = try json.getDictionaryObject()
         entity = try json.getString(at: "entity")
-        let indices = try json.decodedArray(at: "location", type: Swift.Int)
+        let indices = try json.decodedArray(at: "location", type: Swift.Int.self)
         startIndex = indices[0]
         endIndex = indices[1]
         value = try json.getString(at: "value")

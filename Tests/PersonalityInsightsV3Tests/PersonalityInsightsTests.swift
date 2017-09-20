@@ -56,10 +56,10 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     /** Load external files to test. Fails if unable to locate file. */
-    func load(forResource resource: String, ofType type: String) -> String? {
+    func load(forResource resource: String, ofType ext: String) -> String? {
         let bundle = Bundle(for: type(of: self))
-        guard let file = bundle.path(forResource: resource, ofType: type) else {
-            XCTFail("Unable to locate \(resource).\(type) file.")
+        guard let file = bundle.path(forResource: resource, ofType: ext) else {
+            XCTFail("Unable to locate \(resource).\(ext) file.")
             return nil
         }
         return try? String(contentsOfFile: file)
@@ -79,6 +79,11 @@ class PersonalityInsightsTests: XCTestCase {
 
     /** Fail false positives. */
     func failWithResult<T>(result: T) {
+        XCTFail("Negative test returned a result.")
+    }
+    
+    /** Fail false positives. */
+    func failWithResult() {
         XCTFail("Negative test returned a result.")
     }
 

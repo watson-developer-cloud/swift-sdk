@@ -185,7 +185,7 @@ public class Dialog {
     public func deleteDialog(
         withID dialogID: DialogID,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct REST request
         let request = RestRequest(
@@ -321,7 +321,7 @@ public class Dialog {
         withID dialogID: DialogID,
         fromFile fileURL: URL,
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -400,7 +400,7 @@ public class Dialog {
         fromDialogID dialogID: DialogID,
         forNodes nodes: [Node],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // serialize nodes to JSON
         let json = JSON(dictionary: ["items": nodes.map { $0.toJSONObject() }])
@@ -613,7 +613,7 @@ public class Dialog {
         withClientID clientID: Int? = nil,
         parameters: [String: String],
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         // serialize the profile to JSON
         let profile = Profile(clientID: clientID, parameters: parameters)

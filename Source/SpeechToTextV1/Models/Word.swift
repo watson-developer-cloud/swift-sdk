@@ -44,10 +44,10 @@ public struct Word: JSONDecodable {
     /// Used internally to initialize a `Word` model from JSON.
     public init(json: JSON) throws {
         word = try json.getString(at: "word")
-        soundsLike = try json.decodedArray(at: "sounds_like", type: Swift.String)
+        soundsLike = try json.decodedArray(at: "sounds_like", type: Swift.String.self)
         displayAs = try json.getString(at: "display_as")
         count = try json.getInt(at: "count")
-        source = try json.decodedArray(at: "source", type: Swift.String)
+        source = try json.decodedArray(at: "source", type: Swift.String.self)
         error = try? json.decodedArray(at: "error", type: WordError.self)
     }
 }

@@ -50,7 +50,7 @@ public class RestToken {
      */
     public func refreshToken(
         failure: ((Error) -> Void)? = nil,
-        success: ((Void) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
         let request = RestRequest(
             method: "GET",

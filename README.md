@@ -27,6 +27,7 @@ There are many resources to help you build your first cognitive application with
 * [Custom Service URLs](#custom-service-urls)
 * [Custom Headers](#custom-headers)
 * [Sample Applications](#sample-applications)
+* [Synchronous Execution](#synchronous-execution)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Linux Compatibility](#linux-compatibility)
 * [Contributing](#contributing)
@@ -156,6 +157,20 @@ naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 * [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
 * [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
 * [Cognitive Concierge](https://github.com/IBM-MIL/CognitiveConcierge)
+
+## Synchronous Execution
+
+By default, the SDK executes all networking operations asynchonously. If your application requires synchronous execution, you can use a `DispatchGroup`. For example:
+
+```swift
+let dispatchGroup = DispatchGroup()
+dispatchGroup.enter()
+conversation.message(withWorkspace: workspaceID) { response in
+    print(response.output.text)
+    dispatchGroup.leave()
+}
+dispatchGroup.wait(timeout: .distantFuture)
+```
 
 ## Objective-C Compatibility
 

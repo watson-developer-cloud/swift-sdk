@@ -77,6 +77,9 @@
 		12F8005C1DF71BA1006851D6 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005B1DF71BA1006851D6 /* Discovery.swift */; };
 		12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */; };
 		12F800631DF770BC006851D6 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F800621DF770BC006851D6 /* Environment.swift */; };
+		682D306C1F7D3C5E005562F9 /* CodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D306A1F7D3C46005562F9 /* CodableExtensionsTests.swift */; };
+		682D306D1F7D3C5E005562F9 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D306B1F7D3C46005562F9 /* TestModel.swift */; };
+		682D306E1F7D3C5E005562F9 /* TestModelOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D30691F7D3C46005562F9 /* TestModelOptional.swift */; };
 		682D30701F7D3C6F005562F9 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682D306F1F7D3C6F005562F9 /* CodableExtensions.swift */; };
 		7A10AA1E1DC254E200BCCEE2 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		7A10AA1F1DC2613F00BCCEE2 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSON.swift */; };
@@ -781,6 +784,9 @@
 		12F8005B1DF71BA1006851D6 /* Discovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
 		12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryTests.swift; sourceTree = "<group>"; };
 		12F800621DF770BC006851D6 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		682D30691F7D3C46005562F9 /* TestModelOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModelOptional.swift; sourceTree = "<group>"; };
+		682D306A1F7D3C46005562F9 /* CodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensionsTests.swift; sourceTree = "<group>"; };
+		682D306B1F7D3C46005562F9 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		682D306F1F7D3C6F005562F9 /* CodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
@@ -1666,6 +1672,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		682D30681F7D3BFD005562F9 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				682D306A1F7D3C46005562F9 /* CodableExtensionsTests.swift */,
+				682D306B1F7D3C46005562F9 /* TestModel.swift */,
+				682D30691F7D3C46005562F9 /* TestModelOptional.swift */,
+			);
+			name = Tests;
+			path = ../../Tests/RestKitTests;
+			sourceTree = "<group>";
+		};
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
@@ -1784,12 +1801,13 @@
 		7A61174E1CB5988B009A4DA1 /* RestKit */ = {
 			isa = PBXGroup;
 			children = (
-				7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */,
-				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
-				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
 				682D306F1F7D3C6F005562F9 /* CodableExtensions.swift */,
 				7AEBE4361DBEAA130089188C /* JSON.swift */,
 				7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */,
+				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
+				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
+				7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */,
+				682D30681F7D3BFD005562F9 /* Tests */,
 			);
 			name = RestKit;
 			path = Source/RestKit;
@@ -4150,6 +4168,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				682D306C1F7D3C5E005562F9 /* CodableExtensionsTests.swift in Sources */,
+				682D306D1F7D3C5E005562F9 /* TestModel.swift in Sources */,
+				682D306E1F7D3C5E005562F9 /* TestModelOptional.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

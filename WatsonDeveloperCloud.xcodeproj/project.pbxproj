@@ -77,6 +77,7 @@
 		12F8005C1DF71BA1006851D6 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005B1DF71BA1006851D6 /* Discovery.swift */; };
 		12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */; };
 		12F800631DF770BC006851D6 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F800621DF770BC006851D6 /* Environment.swift */; };
+		681BA1B71F7DCD57006633A3 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B61F7DCD56006633A3 /* Compression.swift */; };
 		7A10AA1E1DC254E200BCCEE2 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		7A10AA1F1DC2613F00BCCEE2 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSON.swift */; };
 		7A1B0F291D82645100783EA3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1B0F281D82645100783EA3 /* Model.swift */; };
@@ -780,6 +781,9 @@
 		12F8005B1DF71BA1006851D6 /* Discovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
 		12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryTests.swift; sourceTree = "<group>"; };
 		12F800621DF770BC006851D6 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		681BA1B21F7DB347006633A3 /* include.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = include.h; sourceTree = "<group>"; };
+		681BA1B31F7DB347006633A3 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		681BA1B61F7DCD56006633A3 /* Compression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compression.swift; sourceTree = "<group>"; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
@@ -1664,6 +1668,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		681BA1B11F7DB32D006633A3 /* zlib */ = {
+			isa = PBXGroup;
+			children = (
+				681BA1B21F7DB347006633A3 /* include.h */,
+				681BA1B31F7DB347006633A3 /* module.modulemap */,
+			);
+			name = zlib;
+			path = Source/SupportingFiles/Dependencies/Starscream/zlib;
+			sourceTree = SOURCE_ROOT;
+		};
 		7A0F95A91C23288E004C01C0 = {
 			isa = PBXGroup;
 			children = (
@@ -2226,8 +2240,10 @@
 		7AAEE5D61DCCCFC50056A346 /* Starscream */ = {
 			isa = PBXGroup;
 			children = (
+				681BA1B61F7DCD56006633A3 /* Compression.swift */,
 				7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */,
 				7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */,
+				681BA1B11F7DB32D006633A3 /* zlib */,
 			);
 			name = Starscream;
 			path = Source/SupportingFiles/Dependencies/Starscream;
@@ -4214,6 +4230,7 @@
 				7AAAF46C1CEE9FB300B74848 /* RecognitionState.swift in Sources */,
 				7A9EC80A1D79B75100507725 /* SpeechToTextEncoder.swift in Sources */,
 				7AAAF46F1CEE9FB300B74848 /* WordTimestamp.swift in Sources */,
+				681BA1B71F7DCD57006633A3 /* Compression.swift in Sources */,
 				7AAEE5DA1DCCCFC50056A346 /* WebSocket.swift in Sources */,
 				7AAAF4691CEE9FB300B74848 /* SpeechRecognitionResult.swift in Sources */,
 				7AAAF46D1CEE9FB300B74848 /* RecognitionStop.swift in Sources */,
@@ -5482,7 +5499,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_INCLUDE_PATHS = $SRCROOT/Source/SupportingFiles/Dependencies/Starscream/zlib;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -5508,7 +5525,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_INCLUDE_PATHS = $SRCROOT/Source/SupportingFiles/Dependencies/Starscream/zlib;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

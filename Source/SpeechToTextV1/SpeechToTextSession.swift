@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 import AVFoundation
 
 /**
@@ -79,15 +80,20 @@ public class SpeechToTextSession {
     public var onDisconnect: (() -> Void)?
     
     private lazy var socket: SpeechToTextSocket = {
+        let url = SpeechToTextSocket.buildURL(
+            url: websocketsURL,
+            model: model,
+            customizationID: customizationID,
+            learningOptOut: learningOptOut
+        )!
+        let restToken = RestToken(
+            tokenURL: tokenURL + "?url=" + serviceURL,
+            username: username,
+            password: password
+        )
         var socket = SpeechToTextSocket(
-            username: self.username,
-            password: self.password,
-            model: self.model,
-            customizationID: self.customizationID,
-            learningOptOut: self.learningOptOut,
-            serviceURL: self.serviceURL,
-            tokenURL: self.tokenURL,
-            websocketsURL: self.websocketsURL,
+            url: url,
+            restToken: restToken,
             defaultHeaders: self.defaultHeaders
         )
         socket.onDisconnect = { [weak self] in

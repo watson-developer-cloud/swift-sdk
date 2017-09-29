@@ -323,11 +323,3 @@ public enum Credentials {
     case apiKey
     case basicAuthentication(username: String, password: String)
 }
-
-public enum RestError: Error {
-    case noData
-    case serializationError
-    case encodingError
-    case fileManagerError
-    case invalidFile
-}

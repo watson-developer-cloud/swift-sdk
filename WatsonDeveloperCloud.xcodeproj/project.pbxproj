@@ -77,6 +77,7 @@
 		12F8005C1DF71BA1006851D6 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005B1DF71BA1006851D6 /* Discovery.swift */; };
 		12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */; };
 		12F800631DF770BC006851D6 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F800621DF770BC006851D6 /* Environment.swift */; };
+		681BA1B51F7DCB1E006633A3 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
 		681BA1B71F7DCD57006633A3 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B61F7DCD56006633A3 /* Compression.swift */; };
 		7A10AA1E1DC254E200BCCEE2 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		7A10AA1F1DC2613F00BCCEE2 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSON.swift */; };
@@ -783,6 +784,7 @@
 		12F800621DF770BC006851D6 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		681BA1B21F7DB347006633A3 /* include.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = include.h; sourceTree = "<group>"; };
 		681BA1B31F7DB347006633A3 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		681BA1B41F7DCB1E006633A3 /* RestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestError.swift; sourceTree = "<group>"; };
 		681BA1B61F7DCD56006633A3 /* Compression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compression.swift; sourceTree = "<group>"; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
@@ -1796,11 +1798,12 @@
 		7A61174E1CB5988B009A4DA1 /* RestKit */ = {
 			isa = PBXGroup;
 			children = (
-				7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */,
-				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
-				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
 				7AEBE4361DBEAA130089188C /* JSON.swift */,
 				7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */,
+				681BA1B41F7DCB1E006633A3 /* RestError.swift */,
+				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
+				7AAA9A3D1CEE3059002C9564 /* RestToken.swift */,
+				7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */,
 			);
 			name = RestKit;
 			path = Source/RestKit;
@@ -4150,6 +4153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				681BA1B51F7DCB1E006633A3 /* RestError.swift in Sources */,
 				7AAAF3BA1CEE9A2400B74848 /* RestUtilities.swift in Sources */,
 				7AAAF3BB1CEE9A2400B74848 /* RestRequest.swift in Sources */,
 				7A10AA1E1DC254E200BCCEE2 /* RestToken.swift in Sources */,

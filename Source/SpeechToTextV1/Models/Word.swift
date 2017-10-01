@@ -60,7 +60,7 @@ public struct NewWord: JSONEncodable {
     
     /// An array of pronunciations for the custom word. You can specify a maximum of five sounds-like 
     /// pronunciations for each word. For pronunciation rules, refer to the following link:
-    /// http://www.ibm.com/watson/developercloud/doc/speech-to-text/custom.shtml#soundsLike
+    /// https://console.bluemix.net/docs/services/speech-to-text/custom.html#addWords
     public let soundsLike: [String]?
     
     /// The spelling of the custom word that the service uses to display the word in a transcript.

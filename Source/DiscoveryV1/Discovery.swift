@@ -1170,7 +1170,7 @@ public class Discovery {
     
     /** 
      Query the documents in your collection. See the documentation for reference on how to build
-     a query string. https://www.ibm.com/watson/developercloud/doc/discovery/using.shtml.
+     a query string. https://console.bluemix.net/docs/services/discovery/using.html.
      
      - parameter environmentID: The unique identifier of the environment the collection is in.
      - parameter collectionID: The unique identifier of the collection to add a document to.

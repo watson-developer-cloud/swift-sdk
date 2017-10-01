@@ -91,7 +91,7 @@ public class DocumentConversion {
      - parameter withConfigurationFile: A configuration file that identifies the output type and
         optionally includes information to define tags and structure in the converted output.
         For more information about the configuration file, refer to the documentation:
-        http://www.ibm.com/watson/developercloud/doc/document-conversion/customizing.shtml
+        https://console.bluemix.net/docs/services/document-conversion/customizing.html
      - parameter fileType: Explicit type of the file you are converting, if the service cannot
         detect or you don't want the service to auto detect the file type.
      - parameter failure:  A function executed if the call fails
@@ -159,7 +159,7 @@ public class DocumentConversion {
      Write service config parameters to a temporary JSON file that can be uploaded. This creates the
      most basic configuration file possible. For information on creating your own, with greater
      functionality, see: 
-     http://www.ibm.com/watson/developercloud/doc/document-conversion/customizing.shtml
+     https://console.bluemix.net/docs/services/document-conversion/customizing.html
      
      - parameter type: The return type of the service you wish to recieve.
      

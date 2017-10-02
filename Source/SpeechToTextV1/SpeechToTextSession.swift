@@ -117,7 +117,7 @@ public class SpeechToTextSession {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter model: The language and sample rate of the audio. For supported models, visit
-        https://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#models.
+        https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
      - parameter customizationID: The GUID of a custom language model that is to be used with the
         request. The base language model of the specified custom language model must match the
         model specified with the `model` parameter. By default, no custom model is used.

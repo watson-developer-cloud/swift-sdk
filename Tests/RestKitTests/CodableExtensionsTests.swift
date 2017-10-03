@@ -15,468 +15,476 @@
  **/
 
 import XCTest
-@testable import RestKit
+import RestKit
 
 class CodableExtensionsTests: XCTestCase {
-    
+
+    // Note: When encoding a JSON object to a string, Mac and Linux produce different key orderings.
+    // This is valid, since there is no required order for the keys in a Swift Dictionary or JSON object.
+    // However, the different key orderings make it difficult to compare the strings for equality.
+    // Instead of directly comparing strings for equality, we have chosen to sort the strings and
+    // ensure that they contain the same characters.
+
     static var allTests = [
-        ("testEncodeNull", testEncodeNull),
-        ("testEncodeBool", testEncodeBool),
-        ("testEncodeInt", testEncodeInt),
-        ("testEncodeDouble", testEncodeDouble),
-        ("testEncodeString", testEncodeString),
-        ("testEncodeArray", testEncodeArray),
-        ("testEncodeTopLevelArray", testEncodeTopLevelArray),
-        ("testEncodeNestedArrays", testEncodeNestedArrays),
-        ("testEncodeArrayOfObjects", testEncodeArrayOfObjects),
-        ("testEncodeObject", testEncodeObject),
-        ("testEncodeEmptyObject", testEncodeEmptyObject),
-        ("testEncodeNested", testEncodeNested),
-        ("testEncodeDeeplyNested", testEncodeDeeplyNested),
-        ("testEncodeMetadataModel", testEncodeMetadataModel),
-        ("testEncodeDynamicModel", testEncodeDynamicModel),
-        ("testEncodeOptionalModel", testEncodeOptionalModel),
-        ("testEncodeOptionalModelEmpty", testEncodeOptionalModelEmpty),
-        ("testEncodeOptionalModelNil", testEncodeOptionalModelNil),
         ("testEncodeNil", testEncodeNil),
-        ("testDecodeNull", testDecodeNull),
-        ("testDecodeBool", testDecodeBool),
-        ("testDecodeInt", testDecodeInt),
-        ("testDecodeDouble", testDecodeDouble),
-        ("testDecodeString", testDecodeString),
-        ("testDecodeArray", testDecodeArray),
-        ("testDecodeTopLevelArray", testDecodeTopLevelArray),
-        ("testDecodeNestedArray", testDecodeNestedArrays),
-        ("testDecodeArrayOfObjects", testDecodeArrayOfObjects),
-        ("testDecodeObject", testDecodeObject),
-        ("testDecodeEmptyObject", testDecodeEmptyObject),
-        ("testDecodeNested", testDecodeNested),
-        ("testDecodeDeeplyNested", testDecodeDeeplyNested),
-        ("testDecodeMetadataModel", testDecodeMetadataModel),
-        ("testDecodeDynamicModel", testDecodeDynamicModel),
-        ("testDecodeOptionalModel", testDecodeOptionalModel),
-        ("testDecodeOptionalModelEmpty", testDecodeOptionalModelEmpty),
-        ("testDecodeOptionalModelNil", testDecodeOptionalModelNil)
+        ("testEncodeMetadata", testEncodeMetadata),
+        ("testEncodeCustom", testEncodeCustom),
+        ("testEncodeAdditionalProperties", testEncodeAdditionalProperties),
+        ("testEncodeOptional", testEncodeOptional),
+        ("testEncodeOptionalEmpty", testEncodeOptionalEmpty),
+        ("testEncodeOptionalNil", testEncodeOptionalNil),
+        ("testDecodeMetadata", testDecodeMetadata),
+        ("testDecodeCustom", testDecodeCustom),
+        ("testDecodeAdditionalProperties", testDecodeAdditionalProperties),
+        ("testDecodeOptional", testDecodeOptional),
+        ("testDecodeOptionalEmpty", testDecodeOptionalEmpty),
+        ("testDecodeOptionalNil", testDecodeOptionalNil)
     ]
-    
-    func testEncodeNull() {
-        let object: [String: Any] = ["key": NSNull()]
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{\"key\":null}")
-    }
-    
-    func testEncodeBool() {
-        let object: [String: Any] = ["key": true]
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{\"key\":true}")
-    }
-    
-    func testEncodeInt() {
-        let object: [String: Any] = ["key": 1]
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{\"key\":1}")
-    }
-    
-    func testEncodeDouble() {
-        let object: [String: Any] = ["key": 0.5]
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{\"key\":0.5}")
-    }
-    
-    func testEncodeString() {
-        let object: [String: Any] = ["key": "this is a string"]
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{\"key\":\"this is a string\"}")
-    }
-    
-    func testEncodeArray() {
-        let object: [String: Any] = ["key": [NSNull(), true, 1, 0.5, "this is a string"]]
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{\"key\":[null,true,1,0.5,\"this is a string\"]}")
-    }
-    
-    func testEncodeTopLevelArray() {
-        let array: [Any] = [NSNull(), true, 1, 0.5, "this is a string"]
-        let data = try! JSONEncoder().encode(array)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "[null,true,1,0.5,\"this is a string\"]")
-    }
-    
-    func testEncodeNestedArrays() {
-        let array: [Any] = [[1, 2, 3], [4, 5, 6]]
-        let data = try! JSONEncoder().encode(array)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "[[1,2,3],[4,5,6]]")
-    }
-    
-    func testEncodeArrayOfObjects() {
-        let array: [Any] = [["x": 1], ["y": 2], ["z": 3]]
-        let data = try! JSONEncoder().encode(array)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "[{\"x\":1},{\"y\":2},{\"z\":3}]")
+
+    func testEncodeNil() {
+        let model: ServiceModelOptional? = nil
+        let encoder = JSONEncoder()
+        let data = try! encoder.encodeIfPresent(model)
+        let json = String(data: data, encoding: .utf8)!
+        let expected = ""
+        XCTAssertEqual(json.sorted(), expected.sorted())
     }
 
-    func testEncodeObject() {
-        let object: [String: Any] = ["key": ["null": NSNull(), "bool": true, "int": 1, "double": 0.5, "string": "this is a string"]]
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{\"key\":{\"bool\":true,\"double\":0.5,\"string\":\"this is a string\",\"int\":1,\"null\":null}}")
-    }
-    
-    func testEncodeEmptyObject() {
-        let object = [String: Any]()
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{}")
-    }
-
-    func testEncodeNested() {
-        let object: [String: Any] = ["key": ["array": [1, 2, 3], "object": ["x": 1, "y": 2, "z": 3]]]
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{\"key\":{\"array\":[1,2,3],\"object\":{\"y\":2,\"x\":1,\"z\":3}}}")
-    }
-    
-    func testEncodeDeeplyNested() {
-        let object: [String: Any] = ["key1": ["key2": ["key3": ["key4": [1, 2, 3]]]]]
-        let data = try! JSONEncoder().encode(object)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{\"key1\":{\"key2\":{\"key3\":{\"key4\":[1,2,3]}}}}")
-    }
-    
-    func testEncodeMetadataModel() {
-        let metadata: [String: Any] = ["null": NSNull(), "bool": true, "int": 1, "double": 0.5, "string": "this is a string"]
-        let model = TestModel(name: "name", metadata: metadata, additionalProperties: [:])
+    func testEncodeMetadata() {
+        let metadata: [String: JSONValue] = [
+            "null": .null,
+            "bool": .boolean(true),
+            "int": .int(1),
+            "double": .double(0.5),
+            "string": .string("this is a string"),
+            "array": .array([.int(1), .int(2), .int(3)]),
+            "object": .object(["x": .int(1)])
+        ]
+        let model = ServiceModel(name: "name", metadata: metadata, additionalProperties: [:])
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try! encoder.encode(model)
-        let json = String(data: data, encoding: .utf8)
+        let json = String(data: data, encoding: .utf8)!
         let expected = """
             {
-              \"name\" : \"name\",
-              \"metadata\" : {
-                \"bool\" : true,
-                \"double\" : 0.5,
-                \"string\" : \"this is a string\",
-                \"int\" : 1,
-                \"null\" : null
+              "name" : "name",
+              "metadata" : {
+                "null" : null,
+                "bool" : true,
+                "int" : 1,
+                "double" : 0.5,
+                "string" : "this is a string",
+                "array" : [
+                  1,
+                  2,
+                  3
+                ],
+                "object" : {
+                  "x" : 1
+                }
               }
             }
             """
-        XCTAssertEqual(json, expected)
+        XCTAssertEqual(json.sorted(), expected.sorted())
     }
-    
-    func testEncodeDynamicModel() {
-        let additionalProperties: [String: Any] = ["null": NSNull(), "bool": true, "int": 1, "double": 0.5, "string": "this is a string"]
-        let model = TestModel(name: "name", metadata: [:], additionalProperties: additionalProperties)
+
+    func testEncodeCustom() {
+        let custom = CustomModel(
+            null: nil, // JSONEncoder strips this null value from the resulting JSON
+            boolean: true,
+            int: 1,
+            double: 0.5,
+            string: "this is a string",
+            array: [1, 2, 3],
+            object: ["x": 1]
+        )
+        let metadata = ["custom": try! JSONValue(from: custom)]
+        let model = ServiceModel(name: "name", metadata: metadata, additionalProperties: [:])
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try! encoder.encode(model)
-        let json = String(data: data, encoding: .utf8)
+        let json = String(data: data, encoding: .utf8)!
         let expected = """
             {
-              \"double\" : 0.5,
-              \"int\" : 1,
-              \"string\" : \"this is a string\",
-              \"null\" : null,
-              \"bool\" : true,
-              \"metadata\" : {
+              "name" : "name",
+              "metadata" : {
+                "custom" : {
+                  "boolean" : true,
+                  "int" : 1,
+                  "double" : 0.5,
+                  "string" : "this is a string",
+                  "array" : [
+                    1,
+                    2,
+                    3
+                  ],
+                  "object" : {
+                    "x" : 1
+                  }
+                }
+              }
+            }
+            """
+        XCTAssertEqual(json.sorted(), expected.sorted())
+    }
+    
+    func testEncodeAdditionalProperties() {
+        let additionalProperties: [String: JSONValue] = [
+            "null": .null,
+            "bool": .boolean(true),
+            "int": .int(1),
+            "double": .double(0.5),
+            "string": .string("this is a string"),
+            "array": .array([.int(1), .int(2), .int(3)]),
+            "object": .object(["x": .int(1)])
+        ]
+        let model = ServiceModel(name: "name", metadata: [:], additionalProperties: additionalProperties)
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try! encoder.encode(model)
+        let json = String(data: data, encoding: .utf8)!
+        let expected = """
+            {
+              "name" : "name",
+              "metadata" : {
 
               },
-              \"name\" : \"name\"
+              "null" : null,
+              "bool" : true,
+              "int" : 1,
+              "double" : 0.5,
+              "string" : "this is a string",
+              "array" : [
+                1,
+                2,
+                3
+              ],
+              "object" : {
+                "x" : 1
+              }
             }
             """
-        XCTAssertEqual(json, expected)
+        XCTAssertEqual(json.sorted(), expected.sorted())
     }
     
-    func testEncodeOptionalModel() {
-        let metadata: [String: Any] = ["null": NSNull(), "bool": true, "int": 1, "double": 0.5, "string": "this is a string"]
-        let additionalProperties: [String: Any] = ["null": NSNull(), "bool": true, "int": 1, "double": 0.5, "string": "this is a string"]
-        let model = TestModelOptional(name: "name", metadata: metadata, additionalProperties: additionalProperties)
+    func testEncodeOptional() {
+        let metadata: [String: JSONValue] = [
+            "null": .null,
+            "bool": .boolean(true),
+            "int": .int(1),
+            "double": .double(0.5),
+            "string": .string("this is a string"),
+            "array": .array([.int(1), .int(2), .int(3)]),
+            "object": .object(["x": .int(1)])
+        ]
+        let additionalProperties: [String: JSONValue] = [
+            "null": .null,
+            "bool": .boolean(true),
+            "int": .int(1),
+            "double": .double(0.5),
+            "string": .string("this is a string"),
+            "array": .array([.int(1), .int(2), .int(3)]),
+            "object": .object(["x": .int(1)])
+        ]
+        let model = ServiceModelOptional(name: "name", metadata: metadata, additionalProperties: additionalProperties)
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try! encoder.encode(model)
-        let json = String(data: data, encoding: .utf8)
+        let json = String(data: data, encoding: .utf8)!
         let expected = """
             {
-              \"double\" : 0.5,
-              \"int\" : 1,
-              \"string\" : \"this is a string\",
-              \"null\" : null,
-              \"bool\" : true,
-              \"metadata\" : {
-                \"bool\" : true,
-                \"double\" : 0.5,
-                \"string\" : \"this is a string\",
-                \"int\" : 1,
-                \"null\" : null
+              "name" : "name",
+              "metadata" : {
+                "null" : null,
+                "bool" : true,
+                "int" : 1,
+                "double" : 0.5,
+                "string" : "this is a string",
+                "array" : [
+                  1,
+                  2,
+                  3
+                ],
+                "object" : {
+                  "x" : 1
+                }
               },
-              \"name\" : \"name\"
+              "null" : null,
+              "bool" : true,
+              "int" : 1,
+              "double" : 0.5,
+              "string" : "this is a string",
+              "array" : [
+                1,
+                2,
+                3
+              ],
+              "object" : {
+                "x" : 1
+              }
             }
             """
-        XCTAssertEqual(json, expected)
+        XCTAssertEqual(json.sorted(), expected.sorted())
     }
     
-    func testEncodeOptionalModelEmpty() {
-        let model = TestModelOptional(name: "", metadata: [:], additionalProperties: [:])
+    func testEncodeOptionalEmpty() {
+        let model = ServiceModelOptional(name: "", metadata: nil, additionalProperties: [:])
         let encoder = JSONEncoder()
         let data = try! encoder.encode(model)
-        let json = String(data: data, encoding: .utf8)
+        let json = String(data: data, encoding: .utf8)!
         let expected = "{\"name\":\"\"}"
-        XCTAssertEqual(json, expected)
+        XCTAssertEqual(json.sorted(), expected.sorted())
     }
     
-    func testEncodeOptionalModelNil() {
-        let model = TestModelOptional(name: nil, metadata: nil, additionalProperties: nil)
+    func testEncodeOptionalNil() {
+        let model = ServiceModelOptional(name: nil, metadata: nil, additionalProperties: nil)
         let encoder = JSONEncoder()
         let data = try! encoder.encode(model)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "{}")
-    }
-    
-    func testEncodeNil() {
-        let model: TestModelOptional? = nil
-        let encoder = JSONEncoder()
-        let data = try! encoder.encode(model)
-        let json = String(data: data, encoding: .utf8)
-        XCTAssertEqual(json, "")
-    }
-    
-    func testDecodeNull() {
-        let json = "{ \"key\": null }"
-        let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: Any].self, from: data)
-        XCTAssertTrue(object["key"] is NSNull)
+        let json = String(data: data, encoding: .utf8)!
+        let expected = "{}"
+        XCTAssertEqual(json.sorted(), expected.sorted())
     }
 
-    func testDecodeBool() {
-        let json = "{ \"key\": true }"
-        let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: Any].self, from: data)
-        XCTAssertEqual(object["key"] as? Bool, true)
-    }
-
-    func testDecodeInt() {
-        let json = "{ \"key\": 1 }"
-        let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: Any].self, from: data)
-        XCTAssertEqual(object["key"] as? Int, 1)
-    }
-
-    func testDecodeDouble() {
-        let json = "{ \"key\": 0.5 }"
-        let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: Any].self, from: data)
-        XCTAssertEqual(object["key"] as? Double, 0.5)
-    }
-
-    func testDecodeString() {
-        let json = "{ \"key\": \"this is a string\" }"
-        let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: Any].self, from: data)
-        XCTAssertEqual(object["key"] as? String, "this is a string")
-    }
-
-    func testDecodeArray() {
-        let json = "{ \"key\": [null, true, 1, 0.5, \"this is a string\"] }"
-        let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: Any].self, from: data)
-        let array = object["key"] as! [Any]
-        XCTAssertEqual(array.count, 5)
-        XCTAssertTrue(array[0] is NSNull)
-        XCTAssertEqual(array[1] as? Bool, true)
-        XCTAssertEqual(array[2] as? Int, 1)
-        XCTAssertEqual(array[3] as? Double, 0.5)
-        XCTAssertEqual(array[4] as? String, "this is a string")
-    }
-    
-    func testDecodeTopLevelArray() {
-        let json = "[ null, true, 1, 0.5, \"this is a string\" ]"
-        let data = json.data(using: .utf8)!
-        let array = try! JSONDecoder().decode([Any].self, from: data)
-        XCTAssertEqual(array.count, 5)
-        XCTAssertTrue(array[0] is NSNull)
-        XCTAssertEqual(array[1] as? Bool, true)
-        XCTAssertEqual(array[2] as? Int, 1)
-        XCTAssertEqual(array[3] as? Double, 0.5)
-        XCTAssertEqual(array[4] as? String, "this is a string")
-    }
-    
-    func testDecodeNestedArrays() {
-        let json = "[[1, 2, 3], [4, 5, 6]]"
-        let data = json.data(using: .utf8)!
-        let array = try! JSONDecoder().decode([Any].self, from: data)
-        let subarray1 = array[0] as! [Int]
-        let subarray2 = array[1] as! [Int]
-        XCTAssertEqual(subarray1[0], 1)
-        XCTAssertEqual(subarray1[1], 2)
-        XCTAssertEqual(subarray1[2], 3)
-        XCTAssertEqual(subarray2[0], 4)
-        XCTAssertEqual(subarray2[1], 5)
-        XCTAssertEqual(subarray2[2], 6)
-    }
-    
-    func testDecodeArrayOfObjects() {
-        let json = "[{ \"x\": 1 }, { \"y\": 2}, { \"z\": 3 }]"
-        let data = json.data(using: .utf8)!
-        let array = try! JSONDecoder().decode([Any].self, from: data)
-        let object1 = array[0] as! [String: Int]
-        let object2 = array[1] as! [String: Int]
-        XCTAssertEqual(object1["x"], 1)
-        XCTAssertEqual(object2["y"], 2)
-    }
-
-    func testDecodeObject() {
-        let json = "{ \"key\": { \"null\": null, \"bool\": true, \"int\": 1, \"double\": 0.5, \"string\": \"this is a string\" }}"
-        let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: Any].self, from: data)
-        let subobject = object["key"] as! [String: Any]
-        XCTAssertTrue(subobject["null"] is NSNull)
-        XCTAssertEqual(subobject["bool"] as? Bool, true)
-        XCTAssertEqual(subobject["int"] as? Int, 1)
-        XCTAssertEqual(subobject["double"] as? Double, 0.5)
-        XCTAssertEqual(subobject["string"] as? String, "this is a string")
-    }
-    
-    func testDecodeEmptyObject() {
-        let json = "{ }"
-        let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: Any].self, from: data)
-        XCTAssertEqual(object.count, 0)
-    }
-
-    func testDecodeNested() {
-        let json = "{ \"key\": { \"array\": [1, 2, 3], \"object\": { \"x\": 1, \"y\": 2, \"z\": 3 }}}"
-        let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: Any].self, from: data)
-        let subobject = object["key"] as! [String: Any]
-        let array = subobject["array"] as! [Any]
-        let subsubobject = subobject["object"] as! [String: Any]
-        XCTAssertEqual(array[0] as? Int, 1)
-        XCTAssertEqual(array[1] as? Int, 2)
-        XCTAssertEqual(array[2] as? Int, 3)
-        XCTAssertEqual(subsubobject["x"] as? Int, 1)
-        XCTAssertEqual(subsubobject["y"] as? Int, 2)
-        XCTAssertEqual(subsubobject["z"] as? Int, 3)
-    }
-    
-    func testDecodeDeeplyNested() {
-        let json = "{ \"key1\": { \"key2\": { \"key3\": { \"key4\": [1,2,3] }}}}"
-        let data = json.data(using: .utf8)!
-        let object1 = try! JSONDecoder().decode([String: Any].self, from: data)
-        let object2 = object1["key1"] as! [String: Any]
-        let object3 = object2["key2"] as! [String: Any]
-        let object4 = object3["key3"] as! [String: Any]
-        let array = object4["key4"] as! [Int]
-        XCTAssertEqual(array[0], 1)
-        XCTAssertEqual(array[1], 2)
-        XCTAssertEqual(array[2], 3)
-    }
-    
-    func testDecodeMetadataModel() {
+    func testDecodeMetadata() {
         let json = """
             {
-              \"name\" : \"name\",
-              \"metadata\" : {
-                \"null\" : null,
-                \"bool\" : true,
-                \"int\" : 1,
-                \"double\" : 0.5,
-                \"string\" : \"this is a string\"
+              "name" : "name",
+              "metadata" : {
+                "null" : null,
+                "bool" : true,
+                "int" : 1,
+                "double" : 0.5,
+                "string" : "this is a string",
+                "array" : [1, 2, 3],
+                "object" : {"x" : 1}
               }
             }
             """
         let data = json.data(using: .utf8)!
-        let model = try! JSONDecoder().decode(TestModel.self, from: data)
+        let model = try! JSONDecoder().decode(ServiceModel.self, from: data)
         XCTAssertEqual(model.name, "name")
-        XCTAssertTrue(model.metadata["null"] is NSNull)
-        XCTAssertEqual(model.metadata["bool"] as? Bool, true)
-        XCTAssertEqual(model.metadata["int"] as? Int, 1)
-        XCTAssertEqual(model.metadata["double"] as? Double, 0.5)
-        XCTAssertEqual(model.metadata["string"] as? String, "this is a string")
+        XCTAssertEqual(model.metadata["null"], .null)
+        XCTAssertEqual(model.metadata["bool"], .boolean(true))
+        XCTAssertEqual(model.metadata["int"], .int(1))
+        XCTAssertEqual(model.metadata["double"], .double(0.5))
+        XCTAssertEqual(model.metadata["string"], .string("this is a string"))
+        XCTAssertEqual(model.metadata["array"], .array([.int(1), .int(2), .int(3)]))
+        XCTAssertEqual(model.metadata["object"], .object(["x": .int(1)]))
         XCTAssertEqual(model.additionalProperties.count, 0)
     }
-    
-    func testDecodeDynamicModel() {
+
+    func testDecodeCustom() {
         let json = """
             {
-              \"name\" : \"name\",
-              \"metadata\" : { },
-              \"null\" : null,
-              \"bool\" : true,
-              \"int\" : 1,
-              \"double\" : 0.5,
-              \"string\" : \"this is a string\"
+              "name" : "name",
+              "metadata" : {
+                "custom" : {
+                  "null": null,
+                  "boolean" : true,
+                  "int" : 1,
+                  "double" : 0.5,
+                  "string" : "this is a string",
+                  "array" : [
+                    1,
+                    2,
+                    3
+                  ],
+                  "object" : {
+                    "x" : 1
+                  }
+                }
+              }
             }
             """
         let data = json.data(using: .utf8)!
-        let model = try! JSONDecoder().decode(TestModel.self, from: data)
+        let model = try! JSONDecoder().decode(ServiceModel.self, from: data)
+        let custom = try! model.metadata["custom"]!.toValue(CustomModel.self)
+        XCTAssertEqual(model.name, "name")
+        XCTAssertEqual(custom.null, nil)
+        XCTAssertEqual(custom.boolean, true)
+        XCTAssertEqual(custom.int, 1)
+        XCTAssertEqual(custom.double, 0.5)
+        XCTAssertEqual(custom.string, "this is a string")
+        XCTAssertEqual(custom.array, [1, 2, 3])
+        XCTAssertEqual(custom.object, ["x": 1])
+        XCTAssertEqual(model.additionalProperties.count, 0)
+    }
+
+    func testDecodeAdditionalProperties() {
+        let json = """
+            {
+              "name" : "name",
+              "metadata" : { },
+              "null" : null,
+              "bool" : true,
+              "int" : 1,
+              "double" : 0.5,
+              "string" : "this is a string",
+              "array" : [1, 2, 3],
+              "object" : { "x" : 1 }
+            }
+            """
+        let data = json.data(using: .utf8)!
+        let model = try! JSONDecoder().decode(ServiceModel.self, from: data)
         XCTAssertEqual(model.name, "name")
         XCTAssertEqual(model.metadata.count, 0)
-        XCTAssertTrue(model.additionalProperties["null"] is NSNull)
-        XCTAssertEqual(model.additionalProperties["bool"] as? Bool, true)
-        XCTAssertEqual(model.additionalProperties["int"] as? Int, 1)
-        XCTAssertEqual(model.additionalProperties["double"] as? Double, 0.5)
-        XCTAssertEqual(model.additionalProperties["string"] as? String, "this is a string")
+        XCTAssertEqual(model.additionalProperties["null"], .null)
+        XCTAssertEqual(model.additionalProperties["bool"], .boolean(true))
+        XCTAssertEqual(model.additionalProperties["int"], .int(1))
+        XCTAssertEqual(model.additionalProperties["double"], .double(0.5))
+        XCTAssertEqual(model.additionalProperties["string"], .string("this is a string"))
+        XCTAssertEqual(model.additionalProperties["array"], .array([.int(1), .int(2), .int(3)]))
+        XCTAssertEqual(model.additionalProperties["object"], .object(["x": .int(1)]))
     }
-    
-    func testDecodeOptionalModel() {
+
+    func testDecodeOptional() {
         let json = """
             {
-              \"name\" : \"name\",
-              \"metadata\" : {
-                \"null\" : null,
-                \"bool\" : true,
-                \"int\" : 1,
-                \"double\" : 0.5,
-                \"string\" : \"this is a string\"
+              "name" : "name",
+              "metadata" : {
+                "null" : null,
+                "bool" : true,
+                "int" : 1,
+                "double" : 0.5,
+                "string" : "this is a string",
+                "array" : [1, 2, 3],
+                "object" : {"x" : 1}
               },
-              \"null\" : null,
-              \"bool\" : true,
-              \"int\" : 1,
-              \"double\" : 0.5,
-              \"string\" : \"this is a string\"
+              "null" : null,
+              "bool" : true,
+              "int" : 1,
+              "double" : 0.5,
+              "string" : "this is a string",
+              "array" : [1, 2, 3],
+              "object" : { "x" : 1 }
             }
             """
         let data = json.data(using: .utf8)!
-        let model = try! JSONDecoder().decode(TestModelOptional.self, from: data)
+        let model = try! JSONDecoder().decode(ServiceModelOptional.self, from: data)
         let metadata = model.metadata!
         let additionalProperties = model.additionalProperties!
         XCTAssertEqual(model.name!, "name")
-        XCTAssertTrue(metadata["null"] is NSNull)
-        XCTAssertEqual(metadata["bool"] as? Bool, true)
-        XCTAssertEqual(metadata["int"] as? Int, 1)
-        XCTAssertEqual(metadata["double"] as? Double, 0.5)
-        XCTAssertEqual(metadata["string"] as? String, "this is a string")
-        XCTAssertTrue(additionalProperties["null"] is NSNull)
-        XCTAssertEqual(additionalProperties["bool"] as? Bool, true)
-        XCTAssertEqual(additionalProperties["int"] as? Int, 1)
-        XCTAssertEqual(additionalProperties["double"] as? Double, 0.5)
-        XCTAssertEqual(additionalProperties["string"] as? String, "this is a string")
+        XCTAssertEqual(metadata["null"], .null)
+        XCTAssertEqual(metadata["bool"], .boolean(true))
+        XCTAssertEqual(metadata["int"], .int(1))
+        XCTAssertEqual(metadata["double"], .double(0.5))
+        XCTAssertEqual(metadata["string"], .string("this is a string"))
+        XCTAssertEqual(metadata["array"], .array([.int(1), .int(2), .int(3)]))
+        XCTAssertEqual(metadata["object"], .object(["x": .int(1)]))
+        XCTAssertEqual(additionalProperties["null"], .null)
+        XCTAssertEqual(additionalProperties["bool"], .boolean(true))
+        XCTAssertEqual(additionalProperties["int"], .int(1))
+        XCTAssertEqual(additionalProperties["double"], .double(0.5))
+        XCTAssertEqual(additionalProperties["string"], .string("this is a string"))
+        XCTAssertEqual(additionalProperties["array"], .array([.int(1), .int(2), .int(3)]))
+        XCTAssertEqual(additionalProperties["object"], .object(["x": .int(1)]))
     }
-    
-    func testDecodeOptionalModelEmpty() {
+
+    func testDecodeOptionalEmpty() {
         let json = "{\"name\":\"\"}"
         let data = json.data(using: .utf8)!
-        let model = try! JSONDecoder().decode(TestModelOptional.self, from: data)
+        let model = try! JSONDecoder().decode(ServiceModelOptional.self, from: data)
         XCTAssertEqual(model.name, "")
         XCTAssertNil(model.metadata)
         XCTAssertNil(model.additionalProperties)
     }
-    
-    func testDecodeOptionalModelNil() {
+
+    func testDecodeOptionalNil() {
         let json = "{ }"
         let data = json.data(using: .utf8)!
-        let model = try! JSONDecoder().decode(TestModelOptional.self, from: data)
+        let model = try! JSONDecoder().decode(ServiceModelOptional.self, from: data)
         XCTAssertNil(model.name)
         XCTAssertNil(model.metadata)
         XCTAssertNil(model.additionalProperties)
     }
 }
 
+//===----------------------------------------------------------------------===//
+// ServiceModel
+//===----------------------------------------------------------------------===//
+
+private struct ServiceModel: Codable {
+    let name: String
+    let metadata: [String: JSONValue]
+    let additionalProperties: [String: JSONValue]
+
+    init(name: String, metadata: [String: JSONValue], additionalProperties: [String: JSONValue]) {
+        self.name = name
+        self.metadata = metadata
+        self.additionalProperties = additionalProperties
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case metadata = "metadata"
+        static let allValues = [name, metadata]
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        metadata = try container.decode([String: JSONValue].self, forKey: .metadata)
+        additionalProperties = try dynamic.decode([String: JSONValue].self, excluding: CodingKeys.allValues)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        var dynamic = encoder.container(keyedBy: DynamicKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(metadata, forKey: .metadata)
+        try dynamic.encode(additionalProperties)
+    }
+}
+
+//===----------------------------------------------------------------------===//
+// ServiceModelOptional
+//===----------------------------------------------------------------------===//
+
+private struct ServiceModelOptional: Codable {
+    let name: String?
+    let metadata: [String: JSONValue]?
+    let additionalProperties: [String: JSONValue]?
+
+    init(name: String?, metadata: [String: JSONValue]?, additionalProperties: [String: JSONValue]?) {
+        self.name = name
+        self.metadata = metadata
+        self.additionalProperties = additionalProperties
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case metadata = "metadata"
+        static let allValues = [name, metadata]
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+        metadata = try container.decodeIfPresent([String: JSONValue].self, forKey: .metadata)
+        additionalProperties = try dynamic.decodeIfPresent([String: JSONValue].self, excluding: CodingKeys.allValues)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        var dynamic = encoder.container(keyedBy: DynamicKeys.self)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try dynamic.encodeIfPresent(additionalProperties)
+    }
+}
+
+//===----------------------------------------------------------------------===//
+// CustomModel
+//===----------------------------------------------------------------------===//
+
+private struct CustomModel: Codable {
+    let null: String?
+    let boolean: Bool
+    let int: Int
+    let double: Double
+    let string: String
+    let array: [Int]
+    let object: [String: Int]
+}

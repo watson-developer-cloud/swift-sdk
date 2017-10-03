@@ -22,7 +22,7 @@ import RestKit
  use a default value provided by the Watson Speech to Text service.
  
  For more information about the Speech to Text service parameters, visit:
- http://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml
+ https://console.bluemix.net/docs/services/speech-to-text/input.html
  */
 public struct RecognitionSettings: JSONEncodable {
 
@@ -31,7 +31,7 @@ public struct RecognitionSettings: JSONEncodable {
 
     /// The format of the audio data. Endianness is automatically detected by the Speech to Text
     /// service. For more information aboutthe supported formats, visit:
-    /// http://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#formats
+    /// https://console.bluemix.net/docs/services/speech-to-text/input.html#formats
     public var contentType: AudioMediaType
 
     /// The number of seconds after which the connection is to time out due to inactivity.
@@ -89,7 +89,7 @@ public struct RecognitionSettings: JSONEncodable {
 
      - parameter contentType: The format of the audio data. Endianness is automatically detected
         by the Speech to Text service. For more information about the supported formats, visit:
-        http://www.ibm.com/watson/developercloud/doc/speech-to-text/input.shtml#formats
+        https://console.bluemix.net/docs/services/speech-to-text/input.html#formats
      
      - returns: An initialized `RecognitionSettings` object with the given `contentType`.
         Configure additional parameters for the recognition request by directly modifying

@@ -54,8 +54,8 @@ There are many resources to help you build your first cognitive application with
 ## Requirements
 
 - iOS 8.0+
-- Xcode 8.0+
-- Swift 3.0+
+- Xcode 9.0+
+- Swift 3.2+ or Swift 4.0+
 
 ## Installation
 

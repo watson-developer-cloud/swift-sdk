@@ -20,7 +20,7 @@ public struct RestRequest {
 
     public static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
-        let sdkVersion = "0.17.0"
+        let sdkVersion = "0.18.0"
         
         let operatingSystem: String = {
             #if os(iOS)
@@ -358,12 +358,4 @@ public enum Result<T> {
 public enum Credentials {
     case apiKey
     case basicAuthentication(username: String, password: String)
-}
-
-public enum RestError: Error {
-    case noData
-    case serializationError
-    case encodingError
-    case fileManagerError
-    case invalidFile
 }

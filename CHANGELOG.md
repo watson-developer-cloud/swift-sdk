@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.18.0
+_2017-10-01_
+
+This release updates the SDK to use Swift 4.
+
 ## Version 0.17.0
 _2017-09-14_
 

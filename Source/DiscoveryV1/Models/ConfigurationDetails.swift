@@ -237,7 +237,7 @@ public struct Normalization: JSONDecodable {
     
     /// Can be one of the following: copy, move, merge, remove, or remove_nulls. For more 
     /// information, please refer to the documentation page here:
-    /// http://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
+    /// https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
     public let operation: NormalizationOperation
     
     /// The field that contains the original information.
@@ -261,7 +261,7 @@ public struct Normalization: JSONDecodable {
      
      - parameter operation: Can be one of the following: copy, move, merge, remove, or remove_nulls. 
             For more information, please refer to the documentation page here:
-            http://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
+            https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
      - parameter sourceField: The field that contains the original information.
      - parameter destinationField: The field that information is written to.
      */
@@ -291,7 +291,7 @@ public struct Normalization: JSONDecodable {
 
 /**
  The different JSON normalization operations. Visit the documentation page for more information:
- http://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
+ https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
  */
 public enum NormalizationOperation: String {
     

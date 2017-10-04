@@ -22,8 +22,9 @@ class CodableExtensionsTests: XCTestCase {
     // Note: When encoding a JSON object to a string, Mac and Linux produce different key orderings.
     // This is valid, since there is no required order for the keys in a Swift Dictionary or JSON object.
     // However, the different key orderings make it difficult to compare the strings for equality.
-    // Instead of directly comparing strings for equality, we have chosen to sort the strings and
-    // ensure that they contain the same characters.
+    // The `prettyPrinted` option also uses varying amounts of whitespace on Mac and Linux.
+    // Instead of directly comparing strings for equality, we strip all whitespace then sort the
+    // resulting strings, to ensure that they contain the same characters.
 
     static var allTests = [
         ("testEncodeNil", testEncodeNil),
@@ -85,7 +86,10 @@ class CodableExtensionsTests: XCTestCase {
               }
             }
             """
-        XCTAssertEqual(json.sorted(), expected.sorted())
+        XCTAssertEqual(
+            json.components(separatedBy: .whitespacesAndNewlines).joined().sorted(),
+            expected.components(separatedBy: .whitespacesAndNewlines).joined().sorted()
+        )
     }
 
     func testEncodeCustom() {
@@ -125,7 +129,10 @@ class CodableExtensionsTests: XCTestCase {
               }
             }
             """
-        XCTAssertEqual(json.sorted(), expected.sorted())
+        XCTAssertEqual(
+            json.components(separatedBy: .whitespacesAndNewlines).joined().sorted(),
+            expected.components(separatedBy: .whitespacesAndNewlines).joined().sorted()
+        )
     }
     
     func testEncodeAdditionalProperties() {
@@ -164,7 +171,10 @@ class CodableExtensionsTests: XCTestCase {
               }
             }
             """
-        XCTAssertEqual(json.sorted(), expected.sorted())
+        XCTAssertEqual(
+            json.components(separatedBy: .whitespacesAndNewlines).joined().sorted(),
+            expected.components(separatedBy: .whitespacesAndNewlines).joined().sorted()
+        )
     }
     
     func testEncodeOptional() {
@@ -224,7 +234,10 @@ class CodableExtensionsTests: XCTestCase {
               }
             }
             """
-        XCTAssertEqual(json.sorted(), expected.sorted())
+        XCTAssertEqual(
+            json.components(separatedBy: .whitespacesAndNewlines).joined().sorted(),
+            expected.components(separatedBy: .whitespacesAndNewlines).joined().sorted()
+        )
     }
     
     func testEncodeOptionalEmpty() {

@@ -192,6 +192,7 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
+        print( "hello world! -- about to classify\n" )
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))

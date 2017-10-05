@@ -202,9 +202,26 @@ public class VisualRecognition {
         
         // setup request
         let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
+            // define coreml callback
             print( "Hit callback." )
-            print( request )
-            print( error )
+            guard let results = request.results else {
+                print( "Unable to classify image.\n\(error!.localizedDescription)" )
+                return
+            }
+            // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
+            let classifications = results as! [VNClassificationObservation]
+            
+            if classifications.isEmpty {
+                print( "Nothing recognized." )
+            } else {
+                // Display top classifications ranked by confidence in the UI.
+                let topClassifications = classifications.prefix(2)
+                let scores = topClassifications.map { classification in
+                    // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
+                    return String(format: "  (%.4f) %@", classification.confidence, classification.identifier)
+                }
+                print( scores )
+            }
             
             // hit standard VR service
             self.classify(imageFile: image, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)

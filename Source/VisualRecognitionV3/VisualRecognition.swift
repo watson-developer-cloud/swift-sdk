@@ -216,10 +216,42 @@ public class VisualRecognition {
             } else {
                 // Display top classifications ranked by confidence in the UI.
                 let topClassifications = classifications.prefix(2)
-                let scores = topClassifications.map { classification in
-                    // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
-                    return String(format: "  (%.4f) %@", classification.confidence, classification.identifier)
+                
+                // convert results to sdk vision models
+                var scores = [[String: Any]]()
+                for c in topClassifications {
+                    let temp: [String: Any] = [
+                        "class" : c.identifier,
+                        "score" : c.confidence
+                    ]
+                    scores.append( temp )
                 }
+                
+                let bodyClassifier: [String: Any] = [
+                    "name": "coreml",
+                    "classifier_id": "",
+                    "classes" : scores
+                ]
+                
+                let bodyIm: [String: Any] = [
+                    "source_url" : "",
+                    "resolved_url" : "",
+                    "image": "",
+                    "error": "",
+                    "classifiers": [bodyClassifier]
+                ]
+                
+                let body: [String: Any] = [
+                    "images" : [bodyIm],
+                    "warning" :[]
+                ]
+                do{
+                    let converted = try ClassifiedImages( json: JSON(dictionary: body))
+                    success( converted )
+                }catch{
+                    print( error )
+                }
+                
                 print( scores )
             }
             

@@ -16,6 +16,8 @@
 
 import Foundation
 import RestKit
+import Vision
+import CoreML
 
 /**
  The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images,
@@ -169,6 +171,67 @@ public class VisualRecognition {
     }
     
     /**
+     Classify an image with CoreML, given a passed model. On failure or low confidence, fallback to Watson VR cloud service
+     
+     - parameter imageFile: The image file (.jpg or .png)
+     - parameter model: CoreML model
+     - parameter localThreshold: minimum local score to return results immediately
+     - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
+     - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
+     built-in classifier.
+     - parameter threshold: The minimum score a class must have to be displayed in the response.
+     - parameter language: The language of the output class names. Can be "en" (English), "es"
+     (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
+     are omitted.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
+    @available(iOS 11.0, *)
+    public func classify(
+        imageFile image: URL,
+        model: VNCoreMLModel,
+        localThreshold: Double? = nil,
+        owners: [String]? = nil,
+        classifierIDs: [String]? = nil,
+        threshold: Double? = nil,
+        language: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifiedImages) -> Void)
+    {
+        print ( "trying local classification on CoreML...\n" )
+        
+        // setup request
+        let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
+            print( "Hit callback." )
+            print( request )
+            print( error )
+            
+            // hit standard VR service
+            self.classify(imageFile: image, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
+        })
+        request.imageCropAndScaleOption = .scaleFill // This seems wrong, but yields results in line with vision demo
+
+        // prepare image for CoreML
+        // let orientation = CGImagePropertyOrientation(image.imageOrientation)
+        guard let ciImage = CIImage(contentsOf: image) else { fatalError("Unable to create \(CIImage.self) from \(image).") }
+        
+        // do request with handler
+        DispatchQueue.global(qos: .userInitiated).async {
+            let handler = VNImageRequestHandler(ciImage: ciImage)
+            do {
+                try handler.perform([request])
+            } catch {
+                /*
+                 This handler catches general image processing errors. The `classificationRequest`'s
+                 completion handler `processClassifications(_:error:)` catches errors specific
+                 to processing that request.
+                 */
+                print("Failed to perform classification.\n\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    /**
      Upload and classify an image or multiple images in a compressed (.zip) file.
      
      - parameter imageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
@@ -192,7 +255,9 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
-        print( "hello world! -- about to classify\n" )
+        print( "hello world! -- about to classify...\n" )
+        
+        print( "hitting WatsonVR endpoint...\n" )
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))

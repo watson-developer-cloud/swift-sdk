@@ -26,6 +26,7 @@ class JSONValueTests: XCTestCase {
     // ensure that they contain the same characters.
 
     static var allTests = [
+        ("testEquality", testEquality),
         ("testEncodeNull", testEncodeNull),
         ("testEncodeBool", testEncodeBool),
         ("testEncodeInt", testEncodeInt),
@@ -53,6 +54,39 @@ class JSONValueTests: XCTestCase {
         ("testDecodeNested", testDecodeNested),
         ("testDecodeDeeplyNested", testDecodeDeeplyNested),
     ]
+
+    func testEquality() {
+        // equal values
+        XCTAssertEqual(JSONValue.null, JSONValue.null)
+        XCTAssertEqual(JSONValue.boolean(true), JSONValue.boolean(true))
+        XCTAssertEqual(JSONValue.string("hello"), JSONValue.string("hello"))
+        XCTAssertEqual(JSONValue.int(1), JSONValue.int(1))
+        XCTAssertEqual(JSONValue.double(0.5), JSONValue.double(0.5))
+        XCTAssertEqual(JSONValue.array([JSONValue.int(1), JSONValue.int(2)]),
+                       JSONValue.array([JSONValue.int(1), JSONValue.int(2)]))
+        XCTAssertEqual(JSONValue.object(["x": JSONValue.int(1), "y": JSONValue.int(2)]),
+                       JSONValue.object(["y": JSONValue.int(2), "x": JSONValue.int(1)]))
+
+        // unequal values
+        XCTAssertNotEqual(JSONValue.boolean(true), JSONValue.boolean(false))
+        XCTAssertNotEqual(JSONValue.string("hello"), JSONValue.string("world"))
+        XCTAssertNotEqual(JSONValue.int(1), JSONValue.int(2))
+        XCTAssertNotEqual(JSONValue.double(3.14), JSONValue.double(2.72))
+        XCTAssertNotEqual(JSONValue.double(3.14), JSONValue.double(2.72))
+        XCTAssertNotEqual(JSONValue.array([JSONValue.int(1), JSONValue.int(2)]),
+                          JSONValue.array([JSONValue.int(2), JSONValue.int(1)]))
+        XCTAssertNotEqual(JSONValue.object(["x": JSONValue.int(1), "y": JSONValue.int(2)]),
+                          JSONValue.object(["x": JSONValue.int(2), "y": JSONValue.int(1)]))
+
+        // unequal types
+        XCTAssertNotEqual(JSONValue.null, JSONValue.boolean(true))
+        XCTAssertNotEqual(JSONValue.boolean(true), JSONValue.string("true"))
+        XCTAssertNotEqual(JSONValue.string("true"), JSONValue.int(1))
+        XCTAssertNotEqual(JSONValue.int(1), JSONValue.double(1.0))
+        XCTAssertNotEqual(JSONValue.double(1.0), JSONValue.array([JSONValue.double(1.0)]))
+        XCTAssertNotEqual(JSONValue.array([JSONValue.double(1.0)]),
+                          JSONValue.object(["x": JSONValue.double(1.0)]))
+    }
 
     func testEncodeNull() {
         let object: [String: JSONValue] = ["key": .null]

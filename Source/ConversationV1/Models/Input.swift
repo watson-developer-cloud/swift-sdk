@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An input object that includes the input text. */
 public struct Input: JSONEncodable, JSONDecodable {

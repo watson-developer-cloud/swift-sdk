@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A custom configuration for the environment. */
 public struct ConfigurationDetails: JSONDecodable, JSONEncodable {

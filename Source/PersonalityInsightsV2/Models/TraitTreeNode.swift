@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Detailed results for a specific characteristic of the input text. */
 public struct TraitTreeNode: JSONDecodable {

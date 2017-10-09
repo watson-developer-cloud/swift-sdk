@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**  A tagged concept extracted from a document. */
 public struct Concept: JSONDecodable {

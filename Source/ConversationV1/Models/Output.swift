@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An output object that includes the response to the user, the nodes that were hit, and messages from the log. */
 public struct Output: JSONEncodable, JSONDecodable {

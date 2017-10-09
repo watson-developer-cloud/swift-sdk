@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The results the search engine Blekko returns. */
 public struct BlekkoResult: JSONDecodable {

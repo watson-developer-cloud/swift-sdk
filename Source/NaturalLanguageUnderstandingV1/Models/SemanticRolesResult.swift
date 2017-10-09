@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The object containing the actions and the objects the actions act upon. */
 public struct SemanticRolesResult: JSONDecodable {

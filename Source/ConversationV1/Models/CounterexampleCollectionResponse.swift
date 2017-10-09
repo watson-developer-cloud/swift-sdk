@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CounterexampleCollectionResponse. */
 public struct CounterexampleCollectionResponse: JSONDecodable, JSONEncodable {

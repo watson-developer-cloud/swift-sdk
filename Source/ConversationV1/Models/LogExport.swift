@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** LogExport. */
 public struct LogExport: JSONDecodable {

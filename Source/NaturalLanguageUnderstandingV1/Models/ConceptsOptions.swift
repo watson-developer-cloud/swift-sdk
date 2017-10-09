@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Whether or not to analyze content for general concepts that are referenced or alluded to. */
 public struct ConceptsOptions: JSONEncodable {

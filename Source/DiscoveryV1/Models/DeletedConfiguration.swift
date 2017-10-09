@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An object with information about the deleted configuration. */
 public struct DeletedConfiguration: JSONDecodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Details about an environment. */
 public struct Environment: JSONDecodable {

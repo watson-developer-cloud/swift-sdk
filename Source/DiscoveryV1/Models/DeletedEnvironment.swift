@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An object with information about the deleted environment. */
 public struct DeletedEnvironment: JSONDecodable {

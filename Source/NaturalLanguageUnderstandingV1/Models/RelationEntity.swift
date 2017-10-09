@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The entities extracted from a sentence in a given document. */
 public struct RelationEntity: JSONDecodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A collection for storing documents. */
 public struct Collection: JSONDecodable {

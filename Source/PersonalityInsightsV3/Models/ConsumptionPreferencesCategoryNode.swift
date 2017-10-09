@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Detailed results for each category of consumption preferences. */
 public struct ConsumptionPreferencesCategoryNode: JSONDecodable {

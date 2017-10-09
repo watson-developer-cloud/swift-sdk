@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Detailed results of content distribution over every weekday and hour of
     each day. */

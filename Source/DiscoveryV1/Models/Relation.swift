@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Extracted relationships between the subject, action and object parts of a sentence. */
 public struct Relation: JSONDecodable {

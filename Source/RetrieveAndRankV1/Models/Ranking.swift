@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Search results returned by the Retrieve and Rank service, ordered by their ranking. */
 public struct Ranking: JSONDecodable {

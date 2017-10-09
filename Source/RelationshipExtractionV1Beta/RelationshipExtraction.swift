@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The Watson Relationship Extraction service is able to parse sentences into their various components 

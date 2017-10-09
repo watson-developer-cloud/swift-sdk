@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A classifer supported by the Natural Language Classifier service. */
 public struct ClassifierModel: JSONDecodable {

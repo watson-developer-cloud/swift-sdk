@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /// Publication date found within the document.
 public struct PublicationDate: JSONDecodable {

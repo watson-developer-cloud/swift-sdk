@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The relations between entities found in the content. */
 public struct RelationsResult: JSONDecodable {

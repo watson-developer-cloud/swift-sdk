@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A class associated with a Visual Recognition classifier. */
 public struct PositiveExample {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** IntentCollectionResponse. */
 public struct IntentCollectionResponse: JSONDecodable, JSONEncodable {

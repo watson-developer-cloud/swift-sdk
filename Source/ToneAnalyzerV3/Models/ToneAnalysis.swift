@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** The results of performing tone analysis on a document. */
 public struct ToneAnalysis: JSONDecodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A notice produced by the ingestion process. */
 public struct Notice: JSONDecodable {

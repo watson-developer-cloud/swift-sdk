@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /// A DialogID uniquely identifies a dialog application.
 public typealias DialogID = String

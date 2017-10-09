@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** 
   Extracted topic categories. Can be up to five levels deeps. For example:

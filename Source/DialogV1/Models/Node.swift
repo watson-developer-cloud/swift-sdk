@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** A dialog node. */
 public struct Node: JSONEncodable, JSONDecodable {

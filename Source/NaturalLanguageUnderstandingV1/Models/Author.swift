@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The author of the analyzed content. */
 public struct Author: JSONDecodable {

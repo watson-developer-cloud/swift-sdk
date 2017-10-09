@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** UpdateIntent. */
 public struct UpdateIntent: JSONDecodable, JSONEncodable {

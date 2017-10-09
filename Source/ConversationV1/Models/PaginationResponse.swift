@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The pagination data for the returned objects. */
 public struct PaginationResponse: JSONDecodable, JSONEncodable {

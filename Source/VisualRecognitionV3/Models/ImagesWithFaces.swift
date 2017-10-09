@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The results of detecting faces in one or more images. */
 public struct ImagesWithFaces: JSONDecodable {

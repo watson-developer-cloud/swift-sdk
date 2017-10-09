@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An object containing information about a corpus. */
 public struct Corpus: JSONDecodable {

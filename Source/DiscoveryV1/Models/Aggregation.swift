@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An aggregation produced by the Discovery service to analyze the input provided. */
 public struct Aggregation: JSONDecodable {

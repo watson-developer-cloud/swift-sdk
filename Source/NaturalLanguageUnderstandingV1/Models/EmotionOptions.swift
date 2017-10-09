@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Whether or not to return emotion analysis of the content. */
 public struct EmotionOptions: JSONEncodable {

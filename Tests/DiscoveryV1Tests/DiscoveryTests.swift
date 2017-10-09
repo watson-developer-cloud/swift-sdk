@@ -16,7 +16,6 @@
 
 import XCTest
 import Foundation
-import RestKit
 import DiscoveryV1
 
 class DiscoveryTests: XCTestCase {

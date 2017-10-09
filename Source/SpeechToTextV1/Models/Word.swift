@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A custom word that has been added to a custom language model. */
 public struct Word: JSONDecodable {

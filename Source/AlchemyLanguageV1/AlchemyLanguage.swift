@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The AlchemyLanguage API utilizes sophisticated natural language processing techniques to provide

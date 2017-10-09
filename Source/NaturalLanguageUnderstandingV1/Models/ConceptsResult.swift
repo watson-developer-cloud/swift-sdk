@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The general concepts referenced or alluded to in the specified content. */
 public struct ConceptsResult: JSONDecodable {

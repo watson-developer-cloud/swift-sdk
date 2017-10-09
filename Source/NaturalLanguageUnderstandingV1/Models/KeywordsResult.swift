@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The most important keywords in the content, organized by relevance. */
 public struct KeywordsResult: JSONDecodable {

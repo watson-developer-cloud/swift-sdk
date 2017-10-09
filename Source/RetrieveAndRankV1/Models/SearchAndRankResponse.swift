@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The response received when searching a specific query within the Solr cluster and collection,
  returned in ranked order. */

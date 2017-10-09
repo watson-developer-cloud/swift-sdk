@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** UpdateCounterexample. */
 public struct UpdateCounterexample: JSONDecodable, JSONEncodable {

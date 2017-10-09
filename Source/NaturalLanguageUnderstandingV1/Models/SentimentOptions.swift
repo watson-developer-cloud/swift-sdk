@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An options specifying if sentiment of detected entities, keywords, or phrases should be returned. */
 public struct SentimentOptions: JSONEncodable {

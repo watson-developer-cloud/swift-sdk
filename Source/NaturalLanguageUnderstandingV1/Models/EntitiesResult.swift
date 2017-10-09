@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The important people, places, geopolitical entities and other types of entities in your content. */
 public struct EntitiesResult: JSONDecodable {

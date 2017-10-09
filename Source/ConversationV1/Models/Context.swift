@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The context, or state, associated with a message. */
 public struct Context: JSONEncodable, JSONDecodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Response object for **Emotions** related requests */
 public struct DocumentEmotion: JSONDecodable {

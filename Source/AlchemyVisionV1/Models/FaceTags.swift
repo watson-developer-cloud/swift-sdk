@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A set of faces identified in an image by the Alchemy Vision service. */
 public struct FaceTags: JSONDecodable {

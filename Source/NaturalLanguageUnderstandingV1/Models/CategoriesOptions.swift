@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An option specifying if the analyzed content should be categorized into a hierarchical 5-level taxonomy. */
 public struct CategoriesOptions: JSONEncodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An identified language. */
 public struct IdentifiedLanguage: JSONDecodable {

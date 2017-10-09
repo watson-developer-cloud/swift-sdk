@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 internal class SpeechToTextSocket: WebSocketDelegate {
     

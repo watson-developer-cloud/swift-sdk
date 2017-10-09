@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Information for how keywords are determined. */
 public struct KnowledgeGraph: JSONDecodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Value. */
 public struct Value: JSONDecodable, JSONEncodable {

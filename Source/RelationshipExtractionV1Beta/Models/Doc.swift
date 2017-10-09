@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An analysis of the input text, produced by the Relationship Extraction service. */
 public struct Document: JSONDecodable {

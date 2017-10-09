@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Important topics extracted from a document by the Discovery service.*/
 

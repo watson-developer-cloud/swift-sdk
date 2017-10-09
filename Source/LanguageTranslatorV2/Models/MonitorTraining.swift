@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The training status of a translation model. */
 public struct MonitorTraining: JSONDecodable {

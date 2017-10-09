@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The attitude, opinion or feeling toward something, such as a person, organization,

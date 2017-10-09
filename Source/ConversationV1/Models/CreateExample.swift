@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CreateExample. */
 public struct CreateExample: JSONDecodable, JSONEncodable {

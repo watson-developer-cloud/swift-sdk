@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A collection of images to search. */
 public struct Collection: JSONDecodable {

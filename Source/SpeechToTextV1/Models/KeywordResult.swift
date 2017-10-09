@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A keyword identified by Speech to Text. */
 public struct KeywordResult: JSONDecodable {

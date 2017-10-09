@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The sentiment of the content. */
 public struct SentimentResult: JSONDecodable {

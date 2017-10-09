@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An array of entities. */
 public struct EntityCollection: JSONDecodable, JSONEncodable {

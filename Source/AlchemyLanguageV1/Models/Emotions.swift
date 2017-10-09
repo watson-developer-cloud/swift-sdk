@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RestKit
 
 /**
  Emotions and their prevalence extracted from a document

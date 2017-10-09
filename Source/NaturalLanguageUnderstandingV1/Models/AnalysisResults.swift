@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An object containing the results returned by the NLU service. */
 public struct AnalysisResults: JSONDecodable {

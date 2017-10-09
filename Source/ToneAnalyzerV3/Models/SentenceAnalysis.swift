@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The result of analyzing a sentence within a document. */
 public struct SentenceAnalysis: JSONDecodable {

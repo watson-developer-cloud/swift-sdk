@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The hierarchical 5-level taxonomy the content is categorized into. */
 public struct CategoriesResult: JSONDecodable {

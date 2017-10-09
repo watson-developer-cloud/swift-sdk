@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images,

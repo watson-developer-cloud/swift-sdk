@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Discovery service uses data analysis combined with cognitive intuition to take your

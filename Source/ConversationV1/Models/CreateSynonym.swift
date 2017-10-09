@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CreateSynonym. */
 public struct CreateSynonym: JSONDecodable, JSONEncodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A hierarchy of categories for a given object in the Alchemy Knowledge Graph. */
 public struct KnowledgeGraph: JSONDecodable {

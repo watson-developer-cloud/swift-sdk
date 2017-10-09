@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The result of translating an input text from a source language to a target language. */
 public struct TranslateResponse: JSONDecodable {

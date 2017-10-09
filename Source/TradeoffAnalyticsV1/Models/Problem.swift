@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /// A decision problem.
 public struct Problem: JSONEncodable, JSONDecodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A result produced by the Discovery service to analyze the input provided. */
 public struct EnrichedTitle: JSONDecodable {

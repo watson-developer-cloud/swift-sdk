@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** The tone analysis for a particular tone category (e.g. social, emotion, or writing). */
 public struct ToneCategory: JSONDecodable {

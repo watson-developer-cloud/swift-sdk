@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A custom language model. */
 public struct Customization: JSONDecodable {

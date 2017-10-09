@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** A dialog associated with a particular service instance. */
 public struct DialogModel: JSONDecodable {

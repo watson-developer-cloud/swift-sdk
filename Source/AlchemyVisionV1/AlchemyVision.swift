@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  AlchemyVision is an API that can analyze an image and return the objects, people, and text

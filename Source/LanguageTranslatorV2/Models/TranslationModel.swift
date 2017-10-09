@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A translation model that can be used to translate between a source and target language. */
 public struct TranslationModel: JSONDecodable {

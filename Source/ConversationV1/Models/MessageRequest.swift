@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A request formatted for the Conversation service. */
 public struct MessageRequest: JSONDecodable, JSONEncodable {

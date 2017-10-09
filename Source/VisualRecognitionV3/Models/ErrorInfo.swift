@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Information about an error that occurred during classification. */
 public struct ErrorInfo: JSONDecodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The settings associated with a Speech to Text recognition request. Any `nil` parameters will

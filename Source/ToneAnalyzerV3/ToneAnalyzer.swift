@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Tone Analyzer service uses linguistic analysis to detect emotional tones,

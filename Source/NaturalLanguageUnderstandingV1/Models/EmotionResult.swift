@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The detected anger, disgust, fear, joy, or sadness that is conveyed 
     by the content. Emotion information can be returned for detected entities, 

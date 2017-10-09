@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An object containing information about speaker label object. */
 public struct SpeakerLabel: JSONDecodable {

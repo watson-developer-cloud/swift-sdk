@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Provides every individual preference for a category. */
 public struct ConsumptionPreferencesNode: JSONDecodable {

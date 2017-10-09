@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A response produced by the Discovery service to analyze the input provided. */
 public struct QueryResponse: JSONDecodable {

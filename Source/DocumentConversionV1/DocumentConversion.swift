@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson™ Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ 

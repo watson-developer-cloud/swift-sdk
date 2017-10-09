@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /// A resolution to a decision problem.
 public struct Resolution: JSONDecodable {

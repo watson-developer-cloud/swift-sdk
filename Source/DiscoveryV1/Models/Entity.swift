@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A named entity (a person, company, organization, etc) extracted from a document. */
 public struct Entity: JSONDecodable {

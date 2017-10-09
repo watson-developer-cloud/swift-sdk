@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** A dialog profile. */
 public struct Profile: JSONEncodable, JSONDecodable {

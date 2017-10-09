@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Analysis features and options. */
 public struct Features: JSONEncodable {

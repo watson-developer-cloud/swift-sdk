@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  AlchemyData News provides news and blog content enriched with natural language processing to allow

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The Watson Language Translator service provides domain-specific translation utilizing

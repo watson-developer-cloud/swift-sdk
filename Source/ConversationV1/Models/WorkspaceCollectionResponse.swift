@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** WorkspaceCollectionResponse. */
 public struct WorkspaceCollectionResponse: JSONDecodable, JSONEncodable {

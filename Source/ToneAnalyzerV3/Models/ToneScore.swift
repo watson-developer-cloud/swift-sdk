@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The score of a particular tone. */
 public struct ToneScore: JSONDecodable {

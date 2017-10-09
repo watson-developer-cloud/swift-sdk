@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The Authors, Publication Date, and Title of the document. Supports URL
     and HTML input types. */

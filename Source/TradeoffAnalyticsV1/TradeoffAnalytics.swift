@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Tradeoff Analytics service helps people make better choices when faces with a

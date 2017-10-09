@@ -228,6 +228,14 @@
 		68BC28FB1F8C350A0042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		68BC28FC1F8C350A0042810E /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		68BC28FD1F8C350A0042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
+		68BC28FE1F8C38700042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
+		68BC28FF1F8C38700042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSON.swift */; };
+		68BC29001F8C38700042810E /* JSONValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSONValue.swift */; };
+		68BC29011F8C38700042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
+		68BC29021F8C38700042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
+		68BC29031F8C38700042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
+		68BC29041F8C38700042810E /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
+		68BC29051F8C38700042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
 		7A1B0F291D82645100783EA3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1B0F281D82645100783EA3 /* Model.swift */; };
 		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */; };
@@ -4278,8 +4286,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68BC29011F8C38700042810E /* MultipartFormData.swift in Sources */,
 				68B213EF1F84298B0052DC00 /* CodableExtensionsTests.swift in Sources */,
 				68B213F01F84298B0052DC00 /* JSONValueTests.swift in Sources */,
+				68BC29031F8C38700042810E /* RestRequest.swift in Sources */,
+				68BC28FE1F8C38700042810E /* CodableExtensions.swift in Sources */,
+				68BC29041F8C38700042810E /* RestToken.swift in Sources */,
+				68BC28FF1F8C38700042810E /* JSON.swift in Sources */,
+				68BC29021F8C38700042810E /* RestError.swift in Sources */,
+				68BC29051F8C38700042810E /* RestUtilities.swift in Sources */,
+				68BC29001F8C38700042810E /* JSONValue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

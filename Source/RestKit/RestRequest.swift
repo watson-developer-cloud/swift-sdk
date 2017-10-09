@@ -113,18 +113,18 @@ public struct RestRequest {
     public func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
         response() { data, response, error in
             if let error = error {
-                let result = Result<Data>.failure(error)
+                let result = RestResult<Data>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
             guard let data = data else {
-                let result = Result<Data>.failure(RestError.noData)
+                let result = RestResult<Data>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
-            let result = Result.success(data)
+            let result = RestResult.success(data)
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
@@ -138,7 +138,7 @@ public struct RestRequest {
         response() { data, response, error in
 
             if let error = error ?? responseToError?(response,data) {
-                let result = Result<T>.failure(error)
+                let result = RestResult<T>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -146,14 +146,14 @@ public struct RestRequest {
 
             // ensure data is not nil
             guard let data = data else {
-                let result = Result<T>.failure(RestError.noData)
+                let result = RestResult<T>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
 
             // parse json object
-            let result: Result<T>
+            let result: RestResult<T>
             do {
                 let json = try JSON(data: data)
                 let object: T
@@ -188,7 +188,7 @@ public struct RestRequest {
         response() { data, response, error in
             
             if let error = error ?? responseToError?(response,data) {
-                let result = Result<T>.failure(error)
+                let result = RestResult<T>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -196,14 +196,14 @@ public struct RestRequest {
             
             // ensure data is not nil
             guard let data = data else {
-                let result = Result<T>.failure(RestError.noData)
+                let result = RestResult<T>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
             
             // parse json object
-            let result: Result<T>
+            let result: RestResult<T>
             do {
                 let object = try JSONDecoder().decode(T.self, from: data)
                 result = .success(object)
@@ -225,7 +225,7 @@ public struct RestRequest {
         response() { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
-                let result = Result<[T]>.failure(error)
+                let result = RestResult<[T]>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -233,14 +233,14 @@ public struct RestRequest {
 
             // ensure data is not nil
             guard let data = data else {
-                let result = Result<[T]>.failure(RestError.noData)
+                let result = RestResult<[T]>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
 
             // parse json object
-            let result: Result<[T]>
+            let result: RestResult<[T]>
             do {
                 let json = try JSON(data: data)
                 var array: [JSON]
@@ -276,7 +276,7 @@ public struct RestRequest {
         response() { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
-                let result = Result<String>.failure(error)
+                let result = RestResult<String>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -284,7 +284,7 @@ public struct RestRequest {
 
             // ensure data is not nil
             guard let data = data else {
-                let result = Result<String>.failure(RestError.noData)
+                let result = RestResult<String>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
@@ -292,14 +292,14 @@ public struct RestRequest {
 
             // parse data as a string
             guard let string = String(data: data, encoding: .utf8) else {
-                let result = Result<String>.failure(RestError.serializationError)
+                let result = RestResult<String>.failure(RestError.serializationError)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
             
             // execute callback
-            let result = Result.success(string)
+            let result = RestResult.success(string)
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
@@ -312,14 +312,14 @@ public struct RestRequest {
         response() { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
-                let result = Result<Void>.failure(error)
+                let result = RestResult<Void>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
 
             // execute callback
-            let result = Result<Void>.success(())
+            let result = RestResult<Void>.success(())
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
@@ -347,10 +347,10 @@ public struct RestResponse<T> {
     public let request: URLRequest?
     public let response: HTTPURLResponse?
     public let data: Data?
-    public let result: Result<T>
+    public let result: RestResult<T>
 }
 
-public enum Result<T> {
+public enum RestResult<T> {
     case success(T)
     case failure(Error)
 }

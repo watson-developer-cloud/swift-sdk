@@ -209,7 +209,11 @@ public class VisualRecognition {
                 return
             }
             // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
-            let classifications = results as! [VNClassificationObservation]
+            var classifications = results as! [VNClassificationObservation]
+            
+            if let thresh = localThreshold {
+                classifications = classifications.filter({ $0.confidence > Float(thresh) })
+            }
             
             if classifications.isEmpty {
                 print( "Nothing recognized." )
@@ -222,7 +226,7 @@ public class VisualRecognition {
                 for c in topClassifications {
                     let temp: [String: Any] = [
                         "class" : c.identifier,
-                        "score" : c.confidence
+                        "score" : Double( c.confidence )
                     ]
                     scores.append( temp )
                 }
@@ -245,14 +249,15 @@ public class VisualRecognition {
                     "images" : [bodyIm],
                     "warning" :[]
                 ]
-                do{
-                    let converted = try ClassifiedImages( json: JSON(dictionary: body))
+                do {
+                    let converted = try ClassifiedImages( json: JSON(dictionary: body) )
                     success( converted )
-                }catch{
+                    return
+                } catch {
                     print( error )
                 }
                 
-                print( scores )
+                print( body )
             }
             
             // hit standard VR service

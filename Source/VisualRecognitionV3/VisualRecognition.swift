@@ -270,19 +270,18 @@ public class VisualRecognition {
         guard let ciImage = CIImage(contentsOf: image) else { fatalError("Unable to create \(CIImage.self) from \(image).") }
         
         // do request with handler
-        DispatchQueue.global(qos: .userInitiated).async {
-            let handler = VNImageRequestHandler(ciImage: ciImage)
-            do {
-                try handler.perform([request])
-            } catch {
-                /*
-                 This handler catches general image processing errors. The `classificationRequest`'s
-                 completion handler `processClassifications(_:error:)` catches errors specific
-                 to processing that request.
-                 */
-                print("Failed to perform classification.\n\(error.localizedDescription)")
-            }
+        let handler = VNImageRequestHandler(ciImage: ciImage)
+        do {
+            try handler.perform([request])
+        } catch {
+            /*
+             This handler catches general image processing errors. The `classificationRequest`'s
+             completion handler `processClassifications(_:error:)` catches errors specific
+             to processing that request.
+             */
+            print("Failed to perform classification.\n\(error.localizedDescription)")
         }
+
     }
     
     /**

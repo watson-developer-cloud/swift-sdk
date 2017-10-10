@@ -66,7 +66,7 @@ public struct Concept: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a `Concept` object.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         website = try? json.getString(at: "website")
         knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
         freebase = try? json.getString(at: "freebase")

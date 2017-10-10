@@ -45,7 +45,7 @@ public struct ExampleResponse: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `ExampleResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")
         text = try json.getString(at: "text")

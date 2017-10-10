@@ -36,7 +36,7 @@ public struct Keyword: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a Keyword object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
         relevance = try? json.getDouble(at: "relevance")
         sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)

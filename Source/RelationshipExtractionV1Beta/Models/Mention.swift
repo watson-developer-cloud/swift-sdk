@@ -69,7 +69,7 @@ public struct Mention: JSONDecodable {
     public let text: String
     
     /// Used internally to initialize a `Mention` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         mentionID = try json.getString(at: "mid")
         begin = try json.getInt(at: "begin")
         end = try json.getInt(at: "end")
@@ -84,12 +84,12 @@ public struct Mention: JSONDecodable {
         text = try json.getString(at: "text")
         
         guard let mentionType = MentionType(rawValue: try json.getString(at: "mtype")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: MentionType.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: MentionType.self)
         }
         type = mentionType
         
         guard let mClass = MentionClass(rawValue: try json.getString(at: "class")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: MentionClass.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: MentionClass.self)
         }
         mentionClass = mClass
     }

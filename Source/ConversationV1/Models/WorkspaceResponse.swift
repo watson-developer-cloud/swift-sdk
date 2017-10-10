@@ -65,7 +65,7 @@ public struct WorkspaceResponse: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `WorkspaceResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try json.getString(at: "name")
         language = try json.getString(at: "language")
         created = try json.getString(at: "created")

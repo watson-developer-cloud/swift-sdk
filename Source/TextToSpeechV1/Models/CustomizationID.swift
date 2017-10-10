@@ -23,7 +23,7 @@ public struct CustomizationID: JSONDecodable {
     public let customizationID: String
     
     /// Used internally to initialize a `CustomizationID` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         customizationID = try json.getString(at: "customization_id")
     }
 }

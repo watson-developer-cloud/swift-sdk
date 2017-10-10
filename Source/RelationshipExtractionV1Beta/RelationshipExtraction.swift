@@ -72,7 +72,7 @@ public class RelationshipExtraction {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             let userInfo = [NSLocalizedFailureReasonErrorKey: message]

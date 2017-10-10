@@ -40,7 +40,7 @@ public struct ExampleCollectionResponse: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `ExampleCollectionResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         examples = try json.decodedArray(at: "examples", type: ExampleResponse.self)
         pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
     }

@@ -26,7 +26,7 @@ public struct CategoriesResult: JSONDecodable {
     public let score: Double?
 
     /// Used internally to initialize a `CategoriesResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         label = try? json.getString(at: "label")
         score = try? json.getDouble(at: "score")
     }

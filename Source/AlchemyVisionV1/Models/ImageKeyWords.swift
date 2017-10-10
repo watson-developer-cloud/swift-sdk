@@ -32,10 +32,10 @@ public struct ImageKeywords: JSONDecodable {
     public let imageKeywords: [ImageKeyword]
 
     /// Used internally to initialize an `ImageKeywords` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: ImageKeywords.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: ImageKeywords.self)
         }
         
         url = try json.getString(at: "url")
@@ -57,7 +57,7 @@ public struct ImageKeyword: JSONDecodable {
     public let knowledgeGraph: KnowledgeGraph?
 
     /// Used internally to initialize an `ImageKeyword` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try json.getString(at: "text")
         score = try Double(json.getString(at: "score"))!
         knowledgeGraph = try? json.decode(at: "knowledgeGraph")

@@ -76,7 +76,7 @@ public class Dialog {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             let userInfo = [NSLocalizedFailureReasonErrorKey: message]
@@ -402,7 +402,7 @@ public class Dialog {
         success: (() -> Void)? = nil)
     {
         // serialize nodes to JSON
-        let json = JSON(dictionary: ["items": nodes.map { $0.toJSONObject() }])
+        let json = JSONWrapper(dictionary: ["items": nodes.map { $0.toJSONObject() }])
         guard let body = try? json.serialize() else {
             let failureReason = "Nodes could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]

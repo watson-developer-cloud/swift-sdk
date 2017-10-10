@@ -29,7 +29,7 @@ public struct KeywordsResult: JSONDecodable {
     public let sentiment: KeywordSentiment?
 
     /// Used internally to initialize a `KeywordsResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         relevance = try? json.getDouble(at: "relevance")
         text = try? json.getString(at: "text")
         sentiment = try? json.decode(at: "sentiment", type: KeywordSentiment.self)
@@ -42,7 +42,7 @@ public struct KeywordsResult: JSONDecodable {
         public let score: Double?
         
         /// Used internally to initialize an `EntitySentiment` model from JSON.
-        public init(json: JSON) throws {
+        public init(json: JSONWrapper) throws {
             score = try? json.getDouble(at: "score")
         }
     }

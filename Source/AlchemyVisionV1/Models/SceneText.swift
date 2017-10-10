@@ -35,10 +35,10 @@ public struct SceneText: JSONDecodable {
     public let sceneTextLines: [SceneTextLine]
 
     /// Used internally to initialize a `SceneText` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: SceneText.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: SceneText.self)
         }
         
         url = try? json.getString(at: "url")
@@ -64,7 +64,7 @@ public struct SceneTextLine: JSONDecodable {
     public let words: [Word]
 
     /// Used internally to initialize a `SceneTextLine` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         confidence = try json.getDouble(at: "confidence")
         region = try json.decode(at: "region")
         text = try json.getString(at: "text")
@@ -88,7 +88,7 @@ public struct Region: JSONDecodable {
     public let y: Int
 
     /// Used internally to initialize a `Region` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         height = try json.getInt(at: "height")
         width = try json.getInt(at: "width")
         x = try json.getInt(at: "x")
@@ -109,7 +109,7 @@ public struct Word: JSONDecodable {
     public let text: String
 
     /// Used internally to initialize a `Word` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         confidence = try json.getDouble(at: "confidence")
         region = try json.decode(at: "region")
         text = try json.getString(at: "text")

@@ -42,7 +42,7 @@ public struct Profile: JSONDecodable {
     public let processedLanguage: String
 
     /// Used internally to initialize a `Profile` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         tree = try json.decode(at: "tree")
         id = try json.getString(at: "id")
         source = try json.getString(at: "source")

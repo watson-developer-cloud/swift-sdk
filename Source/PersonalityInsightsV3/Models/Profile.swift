@@ -51,7 +51,7 @@ public struct Profile: JSONDecodable {
     public let wordCountMessage: String?
     
     /// Used internally to initialize a `Profile` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         wordCount = try json.getInt(at: "word_count")
         processedLanguage = try json.getString(at: "processed_language")
         personality = try json.decodedArray(at: "personality", type: TraitTreeNode.self)

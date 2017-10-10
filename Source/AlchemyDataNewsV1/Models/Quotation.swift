@@ -30,7 +30,7 @@ public struct Quotation: JSONDecodable {
     public let quotation: String?
     
     /// Used internally to initialize a Quotation object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         quotation = try? json.getString(at: "quotation")
     }
 }

@@ -32,7 +32,7 @@ public struct QueryResponse: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a `QueryResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         matchingResults = try? json.getInt(at: "matching_results")
         results = try? json.decodedArray(at: "results", type: Result.self)
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)

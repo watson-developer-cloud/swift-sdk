@@ -29,7 +29,7 @@ public struct Feed: JSONDecodable {
     public let feed: String?
     
     /// Used internally to initialize a Feed object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         feed = try? json.getString(at: "feed")
     }
 }

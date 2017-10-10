@@ -30,7 +30,7 @@ public struct ConsumptionPreferencesCategoryNode: JSONDecodable {
     public let consumptionPreferences: [ConsumptionPreferencesNode]
     
     /// Used internally to initialize a `ConsumptionPreferencesCategoryNode` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         consumptionPreferenceCategoryId = try json.getString(at: "consumption_preference_category_id")
         name = try json.getString(at: "name")
         consumptionPreferences = try json.decodedArray(at: "consumption_preferences")

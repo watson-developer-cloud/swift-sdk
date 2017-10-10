@@ -29,7 +29,7 @@ public struct ToneCategory: JSONDecodable {
     public let tones: [ToneScore]
     
     /// Used internally to initialize a `ToneCategory` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try json.getString(at: "category_name")
         categoryID = try json.getString(at: "category_id")
         tones = try json.decodedArray(at: "tones", type: ToneScore.self)

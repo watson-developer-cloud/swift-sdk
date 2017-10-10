@@ -33,10 +33,10 @@ public struct DocumentTitle: JSONDecodable {
     public let title: String?
     
     /// Used internally to initialize a DocumentTitle object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: DocumentTitle.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: DocumentTitle.self)
         }
         
         url = try? json.getString(at: "url")

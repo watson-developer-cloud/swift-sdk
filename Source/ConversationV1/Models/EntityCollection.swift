@@ -40,7 +40,7 @@ public struct EntityCollection: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `EntityCollection` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         entities = try json.decodedArray(at: "entities", type: EntityExport.self)
         pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
     }

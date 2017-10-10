@@ -41,7 +41,7 @@ public struct Collection: JSONDecodable {
     public let capacity: String
     
     /// Used internally to initialize a 'Collection' model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         collectionID = try json.getString(at: "collection_id")
         name = try json.getString(at: "name")
         created = try json.getString(at: "created")

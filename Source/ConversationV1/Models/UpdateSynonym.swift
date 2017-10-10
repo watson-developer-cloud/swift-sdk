@@ -35,7 +35,7 @@ public struct UpdateSynonym: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `UpdateSynonym` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         synonym = try? json.getString(at: "synonym")
     }
 

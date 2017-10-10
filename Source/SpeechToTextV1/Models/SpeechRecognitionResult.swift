@@ -35,7 +35,7 @@ public struct SpeechRecognitionResult: JSONDecodable {
     public let wordAlternatives: [WordAlternativeResults]?
 
     /// Used internally to initialize a `SpeechRecognitionResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         final = try json.getBool(at: "final")
         alternatives = try json.decodedArray(at: "alternatives", type: SpeechRecognitionAlternative.self)
         keywordResults = try? json.getDictionary(at: "keywords_result").map {

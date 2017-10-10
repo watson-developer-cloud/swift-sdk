@@ -40,7 +40,7 @@ public struct LogCollection: JSONDecodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `LogCollection` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         logs = try json.decodedArray(at: "logs", type: LogExport.self)
         pagination = try json.decode(at: "pagination", type: LogPagination.self)
     }

@@ -35,7 +35,7 @@ public struct SpeakerLabel: JSONDecodable {
     public let final: Bool
     
     /// Used internally to initialize a `SpeakerLabel` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         fromTime = try json.getDouble(at: "from")
         toTime = try json.getDouble(at: "to")
         confidence = try json.getDouble(at: "confidence")

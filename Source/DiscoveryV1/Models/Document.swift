@@ -46,13 +46,13 @@ public struct Document: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a `Document` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         documentID = try json.getString(at: "document_id")
         configurationID = try? json.getString(at: "configuration_id")
         created = try? json.getString(at: "created")
         updated = try? json.getString(at: "updated")
         guard let documentStatus = DocumentStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: DocumentStatus.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: DocumentStatus.self)
         }
         status = documentStatus
         statusDescription = try? json.getString(at: "status_description")

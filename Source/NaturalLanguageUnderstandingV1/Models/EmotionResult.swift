@@ -28,7 +28,7 @@ public struct EmotionResult: JSONDecodable {
     public let targets: [TargetedEmotionResults]?
 
     /// Used internally to initialize an `EmotionResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         document = try? json.decode(at: "document", type: DocumentEmotionResults.self)
         targets = try? json.decodedArray(at: "targets", type: TargetedEmotionResults.self)
     }
@@ -41,7 +41,7 @@ public struct DocumentEmotionResults: JSONDecodable {
     public let emotion: EmotionScores?
     
     /// Used internally to initialize a 'DocumentEmotionResults' model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         emotion = try? json.decode(at: "emotion", type: EmotionScores.self)
     }
 }
@@ -65,7 +65,7 @@ public struct EmotionScores: JSONDecodable {
     public let sadness: Double?
     
     /// Used internally to intialize a 'DocumentEmotionResults' model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         anger = try? json.getDouble(at: "anger")
         disgust = try? json.getDouble(at: "disgust")
         fear = try? json.getDouble(at: "fear")
@@ -84,7 +84,7 @@ public struct TargetedEmotionResults: JSONDecodable {
     public let emotion: EmotionScores?
     
     /// Used internally to initialize a `TargetedEmotionResults` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         emotion = try? json.decode(at: "emotion", type: EmotionScores.self)
     }

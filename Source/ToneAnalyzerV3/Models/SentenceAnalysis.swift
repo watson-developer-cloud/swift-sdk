@@ -37,7 +37,7 @@ public struct SentenceAnalysis: JSONDecodable {
     public let toneCategories: [ToneCategory]
     
     /// Used internally to initialize a `SentenceAnalysis` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         sentenceID = try json.getInt(at: "sentence_id")
         inputFrom = try json.getInt(at: "input_from")
         inputTo = try json.getInt(at: "input_to")

@@ -37,7 +37,7 @@ public struct Sentiment: JSONDecodable {
     public let type: String?
     
     /// Used internally to initialize a Sentiment object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         if let mixString = try? json.getString(at: "mixed") {
             mixed = Int(mixString)
         } else {

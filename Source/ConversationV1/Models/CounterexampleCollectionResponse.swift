@@ -40,7 +40,7 @@ public struct CounterexampleCollectionResponse: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `CounterexampleCollectionResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         counterexamples = try json.decodedArray(at: "counterexamples", type: ExampleResponse.self)
         pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
     }

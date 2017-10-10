@@ -23,7 +23,7 @@ public struct KnowledgeGraph: JSONDecodable {
     public let typeHierarchy: String
 
     /// Used internally to initialize a `KnowledgeGraph` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         typeHierarchy = try json.getString(at: "typeHierarchy")
     }
 }

@@ -37,7 +37,7 @@ public struct BehaviorNode: JSONDecodable {
     public let percentage: Double
     
     /// Used internally to initialize a `BehaviorNode` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         traitID = try json.getString(at: "trait_id")
         name = try json.getString(at: "name")
         category = try json.getString(at: "category")

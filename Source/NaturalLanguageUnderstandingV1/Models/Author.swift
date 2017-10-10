@@ -23,7 +23,7 @@ public struct Author: JSONDecodable {
     public let name: String?
 
     /// Used internally to initialize a `Author` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try? json.getString(at: "name")
     }
 }

@@ -40,7 +40,7 @@ public struct IntentCollectionResponse: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `IntentCollectionResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         intents = try json.decodedArray(at: "intents", type: IntentExportResponse.self)
         pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
     }

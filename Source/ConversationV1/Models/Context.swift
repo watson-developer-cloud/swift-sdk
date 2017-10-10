@@ -29,7 +29,7 @@ public struct Context: JSONEncodable, JSONDecodable {
     public let system: System
 
     /// Used internally to initialize a `Context` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         self.json = try json.getDictionaryObject()
         conversationID = try json.getString(at: "conversation_id")
         system = try json.decode(at: "system", type: System.self)
@@ -62,7 +62,7 @@ public struct System: JSONEncodable, JSONDecodable {
     public let dialogRequestCounter: Int
 
     /// Used internally to initialize a `System` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         self.json = try json.getDictionaryObject()
         //dialogStack = try? json.getArray(at: "dialog_stack").map { try $0.getString(at: "dialog_node") }
         dialogStack = []

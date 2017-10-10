@@ -40,7 +40,7 @@ public struct SynonymCollection: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `SynonymCollection` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         synonyms = try json.decodedArray(at: "synonyms", type: Synonym.self)
         pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
     }

@@ -30,7 +30,7 @@ public struct PublicationDate: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a PublicationDate object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         confident = try? json.getString(at: "confident")
         date = try? json.getString(at: "date")
         self.json = try json.getDictionaryObject()

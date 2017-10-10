@@ -26,7 +26,7 @@ public struct RelationEntity: JSONDecodable {
     public let type: String?
 
     /// Used internally to initialize a `RelationEntity` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         type = try? json.getString(at: "type")
     }

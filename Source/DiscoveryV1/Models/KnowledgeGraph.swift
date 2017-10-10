@@ -25,7 +25,7 @@ public struct KnowledgeGraph: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a KnowledgeGraph object
-    public init (json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         typeHierarchy = try? json.getString(at: "typeHierarchy")
         self.json = try json.getDictionaryObject()
     }

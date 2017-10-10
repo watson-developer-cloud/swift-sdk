@@ -37,7 +37,7 @@ public struct Configuration: JSONDecodable {
     public let description: String?
     
     /// Used internally to initialize a `Configuration` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         configurationID = try? json.getString(at: "configuration_id")
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")

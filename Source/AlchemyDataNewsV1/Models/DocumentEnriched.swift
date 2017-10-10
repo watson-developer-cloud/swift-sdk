@@ -29,7 +29,7 @@ public struct DocumentEnriched: JSONDecodable {
     public let url: DocumentUrl?
     
     /// used internally to define a DocumentEnriched object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         url = try? json.decode(at: "url", type: DocumentUrl.self)
     }
     

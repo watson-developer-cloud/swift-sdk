@@ -43,7 +43,7 @@ public struct Entity: JSONDecodable {
     public let type: String?
     
     /// Used internally to initialize an Entity object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         if let countString = try? json.getString(at: "count") {
             count = Int(countString)
         } else {

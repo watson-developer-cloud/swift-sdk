@@ -32,7 +32,7 @@ public struct SemanticRolesResult: JSONDecodable {
     public let object: SemanticRolesObject?
 
     /// Used internally to initialize a `SemanticRolesResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         sentence = try? json.getString(at: "sentence")
         subject = try? json.decode(at: "subject", type: SemanticRolesSubject.self)
         action = try? json.decode(at: "action", type: SemanticRolesAction.self)
@@ -53,7 +53,7 @@ public struct SemanticRolesSubject: JSONDecodable {
     public let keywords: [SemanticRolesKeyword]?
     
     /// Used internally to initialize a `SemanticRolesSubject` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         entities = try? json.decodedArray(at: "entities", type: SemanticRolesEntity.self)
         keywords = try? json.decodedArray(at: "keywords", type: SemanticRolesKeyword.self)
@@ -69,7 +69,7 @@ public struct SemanticRolesSubject: JSONDecodable {
         public let text: String?
         
         /// Used internally to initialize a `SemanticRolesEntity` model from JSON.
-        public init(json: JSON) throws {
+        public init(json: JSONWrapper) throws {
             type = try? json.getString(at: "type")
             text = try? json.getString(at: "text")
         }
@@ -89,7 +89,7 @@ public struct SemanticRolesAction: JSONDecodable {
     public let verb: SemanticRolesVerb?
     
     /// Used internally to initialize a `SemanticRolesAction` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         normalized = try? json.getString(at: "normalized")
         verb = try? json.decode(at: "verb", type: SemanticRolesVerb.self)
@@ -105,7 +105,7 @@ public struct SemanticRolesAction: JSONDecodable {
         public let tense: String?
         
         /// Used internally to initialize a `SemanticRolesVerb` model from JSON.
-        public init(json: JSON) throws {
+        public init(json: JSONWrapper) throws {
             text = try? json.getString(at: "text")
             tense = try? json.getString(at: "tense")
         }
@@ -122,7 +122,7 @@ public struct SemanticRolesObject: JSONDecodable {
     public let keywords: [SemanticRolesKeyword]?
     
     /// Used internally to initialize a `SemanticRolesObject` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         keywords = try? json.decodedArray(at: "keywords", type: SemanticRolesKeyword.self)
     }
@@ -135,7 +135,7 @@ public struct SemanticRolesKeyword: JSONDecodable {
     public let text: String?
     
     /// Used internally to initialize a `SemanticRolesKeyword` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
     }
 }

@@ -70,7 +70,7 @@ public class DocumentConversion {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             var userInfo = [NSLocalizedFailureReasonErrorKey: message]
@@ -177,7 +177,7 @@ public class DocumentConversion {
         
         // save JSON dictionary to file
         do {
-            let data = try JSON(dictionary: json).serialize()
+            let data = try JSONWrapper(dictionary: json).serialize()
             try data.write(to: fileURL, options: .atomic)
         } catch {
             let message = "Unable to create config file"

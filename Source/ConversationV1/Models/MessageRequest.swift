@@ -94,7 +94,7 @@ public struct MessageRequest: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `MessageRequest` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         input = try? json.decode(at: "input", type: Input.self)
         alternateIntents = try? json.getBool(at: "alternate_intents")
         context = try? json.decode(at: "context", type: Context.self)

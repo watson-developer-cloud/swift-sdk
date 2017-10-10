@@ -67,7 +67,7 @@ public struct TraitTreeNode: JSONDecodable {
     public let children: [TraitTreeNode]?
 
     /// Used internally to initialize a `TraitTreeNode` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         id = try json.getString(at: "id")
         name = try json.getString(at: "name")
         category = try? json.getString(at: "category")

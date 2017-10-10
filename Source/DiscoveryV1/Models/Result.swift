@@ -95,7 +95,7 @@ public struct Result: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a `Result` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         documentID = try? json.getString(at: "id")
         score = try? json.getDouble(at: "score")
         status = try? json.getString(at: "status")

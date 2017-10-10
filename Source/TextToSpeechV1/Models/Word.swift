@@ -32,7 +32,7 @@ public struct Word: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `Word` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         word = try json.getString(at: "word")
         translation = try json.getString(at: "translation")
     }

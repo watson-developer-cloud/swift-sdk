@@ -60,7 +60,7 @@ public struct EntityResponse: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `EntityResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         entity = try json.getString(at: "entity")
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")

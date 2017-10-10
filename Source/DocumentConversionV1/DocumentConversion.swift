@@ -149,7 +149,7 @@ public class DocumentConversion {
      - retuns: A ConversationReponse object populated with the input's data
      */
     public func deserializeAnswerUnits(string: String) throws -> ConversationResponse {
-        let json = try JSON(string: string)
+        let json = try JSONWrapper(string: string)
         let answerUnits = try ConversationResponse(json: json)
         return answerUnits
     }

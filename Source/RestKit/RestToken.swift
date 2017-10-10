@@ -96,7 +96,7 @@ internal class RestToken {
         // update error description, if available
         if let data = data {
             do {
-                let json = try JSON(data: data)
+                let json = try JSONWrapper(data: data)
                 let description = try json.getString(at: "description")
                 userInfo[NSLocalizedDescriptionKey] = description
             } catch { /* no need to catch -- falls back to default description */ }

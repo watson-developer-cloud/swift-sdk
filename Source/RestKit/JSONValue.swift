@@ -42,12 +42,12 @@ public enum JSONValue: Equatable, Codable {
     }
 
     /// Decode a JSON object value from the keyed container.
-    public init(from container: KeyedDecodingContainer<DynamicKeys>) throws {
+    private init(from container: KeyedDecodingContainer<DynamicKeys>) throws {
         try self.init(from: container, excluding: [])
     }
 
     /// Decode a JSON object value from the keyed container, excluding the given keys.
-    public init(from container: KeyedDecodingContainer<DynamicKeys>, excluding keys: [CodingKey]) throws {
+    internal init(from container: KeyedDecodingContainer<DynamicKeys>, excluding keys: [CodingKey]) throws {
         var object = [String: JSONValue]()
         let excludedKeys = keys.map() { $0.stringValue }
         let includedKeys = container.allKeys.filter() { !excludedKeys.contains($0.stringValue) }
@@ -60,7 +60,7 @@ public enum JSONValue: Equatable, Codable {
     }
 
     /// Decode a JSON array value from the unkeyed container.
-    public init(from container: inout UnkeyedDecodingContainer) throws {
+    private init(from container: inout UnkeyedDecodingContainer) throws {
         var array = [JSONValue]()
         while !container.isAtEnd {
             array.append(try container.decode(JSONValue.self))
@@ -69,7 +69,7 @@ public enum JSONValue: Equatable, Codable {
     }
 
     /// Decode a JSON value from the single value container.
-    public init(from container: SingleValueDecodingContainer) throws {
+    private init(from container: SingleValueDecodingContainer) throws {
         if container.decodeNil() { self = .null }
         else if let boolean = try? container.decode(Bool.self) { self = .boolean(boolean) }
         else if let string = try? container.decode(String.self) { self = .string(string) }

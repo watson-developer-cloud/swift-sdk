@@ -18,30 +18,30 @@ import Foundation
 
 // MARK: JSON Paths
 
-public protocol JSONPathType {
+internal protocol JSONPathType {
     func value(in dictionary: [String: Any]) throws -> JSON
     func value(in array: [Any]) throws -> JSON
 }
 
 extension String: JSONPathType {
-    public func value(in dictionary: [String: Any]) throws -> JSON {
+    internal func value(in dictionary: [String: Any]) throws -> JSON {
         guard let json = dictionary[self] else {
             throw JSON.Error.keyNotFound(key: self)
         }
         return JSON(json: json)
     }
     
-    public func value(in array: [Any]) throws -> JSON {
+    internal func value(in array: [Any]) throws -> JSON {
         throw JSON.Error.unexpectedSubscript(type: String.self)
     }
 }
 
 extension Int: JSONPathType {
-    public func value(in dictionary: [String: Any]) throws -> JSON {
+    internal func value(in dictionary: [String: Any]) throws -> JSON {
         throw JSON.Error.unexpectedSubscript(type: Int.self)
     }
     
-    public func value(in array: [Any]) throws -> JSON {
+    internal func value(in array: [Any]) throws -> JSON {
         let json = array[self]
         return JSON(json: json)
     }
@@ -49,37 +49,37 @@ extension Int: JSONPathType {
 
 // MARK: - JSON
 
-public struct JSON {
+internal struct JSON {
     fileprivate let json: Any
     
-    public init(json: Any) {
+    internal init(json: Any) {
         self.json = json
     }
     
-    public init(string: String) throws {
+    internal init(string: String) throws {
         guard let data = string.data(using: .utf8) else {
             throw Error.encodingError
         }
         json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
     
-    public init(data: Data) throws {
+    internal init(data: Data) throws {
         json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
     
-    public init(dictionary: [String: Any]) {
+    internal init(dictionary: [String: Any]) {
         json = dictionary
     }
     
-    public init(array: [Any]) {
+    internal init(array: [Any]) {
         json = array
     }
     
-    public func serialize() throws -> Data {
+    internal func serialize() throws -> Data {
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
     
-    public func serializeString() throws -> String {
+    internal func serializeString() throws -> String {
         let data = try serialize()
         guard let string = String(data: data, encoding: .utf8) else {
             throw Error.stringSerializationError
@@ -105,27 +105,27 @@ public struct JSON {
         return value
     }
 
-    public func decode<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> Decoded {
+    internal func decode<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> Decoded {
         return try Decoded(json: value(at: path))
     }
     
-    public func getDouble(at path: JSONPathType...) throws -> Double {
+    internal func getDouble(at path: JSONPathType...) throws -> Double {
         return try Double(json: value(at: path))
     }
     
-    public func getInt(at path: JSONPathType...) throws -> Int {
+    internal func getInt(at path: JSONPathType...) throws -> Int {
         return try Int(json: value(at: path))
     }
     
-    public func getString(at path: JSONPathType...) throws -> String {
+    internal func getString(at path: JSONPathType...) throws -> String {
         return try String(json: value(at: path))
     }
     
-    public func getBool(at path: JSONPathType...) throws -> Bool {
+    internal func getBool(at path: JSONPathType...) throws -> Bool {
         return try Bool(json: value(at: path))
     }
     
-    public func getArray(at path: JSONPathType...) throws -> [JSON] {
+    internal func getArray(at path: JSONPathType...) throws -> [JSON] {
         let json = try value(at: path)
         guard let array = json.json as? [Any] else {
             throw Error.valueNotConvertible(value: json, to: [JSON].self)
@@ -133,7 +133,7 @@ public struct JSON {
         return array.map { JSON(json: $0) }
     }
     
-    public func decodedArray<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [Decoded] {
+    internal func decodedArray<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [Decoded] {
         let json = try value(at: path)
         guard let array = json.json as? [Any] else {
             throw Error.valueNotConvertible(value: json, to: [Decoded].self)
@@ -141,7 +141,7 @@ public struct JSON {
         return try array.map { try Decoded(json: JSON(json: $0)) }
     }
     
-    public func decodedDictionary<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [String: Decoded] {
+    internal func decodedDictionary<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [String: Decoded] {
         let json = try value(at: path)
         guard let dictionary = json.json as? [String: Any] else {
             throw Error.valueNotConvertible(value: json, to: [String: Decoded].self)
@@ -153,11 +153,11 @@ public struct JSON {
         return decoded
     }
     
-    public func getJSON(at path: JSONPathType...) throws -> Any {
+    internal func getJSON(at path: JSONPathType...) throws -> Any {
         return try value(at: path).json
     }
     
-    public func getDictionary(at path: JSONPathType...) throws -> [String: JSON] {
+    internal func getDictionary(at path: JSONPathType...) throws -> [String: JSON] {
         let json = try value(at: path)
         guard let dictionary = json.json as? [String: Any] else {
             throw Error.valueNotConvertible(value: json, to: [String: JSON].self)
@@ -165,7 +165,7 @@ public struct JSON {
         return dictionary.map { JSON(json: $0) }
     }
     
-    public func getDictionaryObject(at path: JSONPathType...) throws -> [String: Any] {
+    internal func getDictionaryObject(at path: JSONPathType...) throws -> [String: Any] {
         let json = try value(at: path)
         guard let dictionary = json.json as? [String: Any] else {
             throw Error.valueNotConvertible(value: json, to: [String: JSON].self)
@@ -177,7 +177,7 @@ public struct JSON {
 // MARK: - JSON Errors
 
 extension JSON {
-    public enum Error: Swift.Error {
+    internal enum Error: Swift.Error {
         case indexOutOfBounds(index: Int)
         case keyNotFound(key: String)
         case unexpectedSubscript(type: JSONPathType.Type)
@@ -189,23 +189,23 @@ extension JSON {
 
 // MARK: - JSON Protocols
 
-public protocol JSONDecodable {
+internal protocol JSONDecodable {
     init(json: JSON) throws
 }
 
-public protocol JSONEncodable {
+internal protocol JSONEncodable {
     func toJSON() -> JSON
     func toJSONObject() -> Any
 }
 
 extension JSONEncodable {
-    public func toJSON() -> JSON {
+    internal func toJSON() -> JSON {
         return JSON(json: self.toJSONObject())
     }
 }
 
 extension Double: JSONDecodable {
-    public init(json: JSON) throws {
+    internal init(json: JSON) throws {
         let any = json.json
         if let double = any as? Double {
             self = double
@@ -220,7 +220,7 @@ extension Double: JSONDecodable {
 }
 
 extension Int: JSONDecodable {
-    public init(json: JSON) throws {
+    internal init(json: JSON) throws {
         let any = json.json
         if let int = any as? Int {
             self = int
@@ -235,7 +235,7 @@ extension Int: JSONDecodable {
 }
 
 extension Bool: JSONDecodable {
-    public init(json: JSON) throws {
+    internal init(json: JSON) throws {
         let any = json.json
         if let bool = any as? Bool {
             self = bool
@@ -246,7 +246,7 @@ extension Bool: JSONDecodable {
 }
 
 extension String: JSONDecodable {
-    public init(json: JSON) throws {
+    internal init(json: JSON) throws {
         let any = json.json
         if let string = any as? String {
             self = string

@@ -16,9 +16,9 @@
 
 import Foundation
 
-public struct RestRequest {
+internal struct RestRequest {
 
-    public static let userAgent: String = {
+    internal static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
         let sdkVersion = "0.18.0"
         
@@ -49,7 +49,7 @@ public struct RestRequest {
     private let request: URLRequest
     private let session = URLSession(configuration: URLSessionConfiguration.default)
     
-    public init(
+    internal init(
         method: String,
         url: String,
         credentials: Credentials,
@@ -103,14 +103,14 @@ public struct RestRequest {
         self.request = request
     }
     
-    public func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+    internal func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         let task = session.dataTask(with: request) { (data, response, error) in
             completionHandler(data, response as? HTTPURLResponse, error)
         }
         task.resume()
     }
     
-    public func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
+    internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
         response() { data, response, error in
             if let error = error {
                 let result = RestResult<Data>.failure(error)
@@ -130,7 +130,7 @@ public struct RestRequest {
         }
     }
 
-    public func responseObject<T: JSONDecodable>(
+    internal func responseObject<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
@@ -181,7 +181,7 @@ public struct RestRequest {
         }
     }
     
-    public func responseObject<T: Decodable>(
+    internal func responseObject<T: Decodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
@@ -217,7 +217,7 @@ public struct RestRequest {
         }
     }
 
-    public func responseArray<T: JSONDecodable>(
+    internal func responseArray<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
@@ -269,7 +269,7 @@ public struct RestRequest {
         }
     }
 
-    public func responseString(
+    internal func responseString(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<String>) -> Void)
     {
@@ -305,7 +305,7 @@ public struct RestRequest {
         }
     }
 
-    public func responseVoid(
+    internal func responseVoid(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<Void>) -> Void)
     {
@@ -325,7 +325,7 @@ public struct RestRequest {
         }
     }
 
-    public func download(to destination: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
+    internal func download(to destination: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
         let task = session.downloadTask(with: request) { (source, response, error) in
             guard let source = source else {
                 completionHandler(nil, RestError.invalidFile)
@@ -343,19 +343,19 @@ public struct RestRequest {
     }
 }
 
-public struct RestResponse<T> {
-    public let request: URLRequest?
-    public let response: HTTPURLResponse?
-    public let data: Data?
-    public let result: RestResult<T>
+internal struct RestResponse<T> {
+    internal let request: URLRequest?
+    internal let response: HTTPURLResponse?
+    internal let data: Data?
+    internal let result: RestResult<T>
 }
 
-public enum RestResult<T> {
+internal enum RestResult<T> {
     case success(T)
     case failure(Error)
 }
 
-public enum Credentials {
+internal enum Credentials {
     case apiKey
     case basicAuthentication(username: String, password: String)
 }

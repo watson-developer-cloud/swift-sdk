@@ -16,46 +16,46 @@
 
 import Foundation
 
-/** ValueCollection. */
-public struct ValueCollection {
+/** CounterexampleCollection. */
+public struct CounterexampleCollection {
 
-    /// An array of entity values.
-    public let values: [ValueExport]
+    /// An array of objects describing the examples marked as irrelevant input.
+    public let counterexamples: [Counterexample]
 
     /// An object defining the pagination data for the returned objects.
     public let pagination: Pagination
 
     /**
-     Initialize a `ValueCollection` with member variables.
+     Initialize a `CounterexampleCollection` with member variables.
 
-     - parameter values: An array of entity values.
+     - parameter counterexamples: An array of objects describing the examples marked as irrelevant input.
      - parameter pagination: An object defining the pagination data for the returned objects.
 
-     - returns: An initialized `ValueCollection`.
+     - returns: An initialized `CounterexampleCollection`.
     */
-    public init(values: [ValueExport], pagination: Pagination) {
-        self.values = values
+    public init(counterexamples: [Counterexample], pagination: Pagination) {
+        self.counterexamples = counterexamples
         self.pagination = pagination
     }
 }
 
-extension ValueCollection: Codable {
+extension CounterexampleCollection: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case values = "values"
+        case counterexamples = "counterexamples"
         case pagination = "pagination"
-        static let allValues = [values, pagination]
+        static let allValues = [counterexamples, pagination]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        values = try container.decode([ValueExport].self, forKey: .values)
+        counterexamples = try container.decode([Counterexample].self, forKey: .counterexamples)
         pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(values, forKey: .values)
+        try container.encode(counterexamples, forKey: .counterexamples)
         try container.encode(pagination, forKey: .pagination)
     }
 

@@ -17,13 +17,13 @@
 import Foundation
 
 /** UpdateValue. */
-public struct UpdateValue: JSONDecodable, JSONEncodable {
+public struct UpdateValue {
 
     /// The text of the entity value.
     public let value: String?
 
     /// Any metadata related to the entity value.
-    public let metadata: [String: Any]?
+    public let metadata: [String: JSON]?
 
     /// An array of synonyms for the entity value.
     public let synonyms: [String]?
@@ -37,29 +37,34 @@ public struct UpdateValue: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `UpdateValue`.
     */
-    public init(value: String? = nil, metadata: [String: Any]? = nil, synonyms: [String]? = nil) {
+    public init(value: String? = nil, metadata: [String: JSON]? = nil, synonyms: [String]? = nil) {
         self.value = value
         self.metadata = metadata
         self.synonyms = synonyms
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `UpdateValue` model from JSON.
-    public init(json: JSONWrapper) throws {
-        value = try? json.getString(at: "value")
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        synonyms = try? json.decodedArray(at: "synonyms", type: String.self)
+extension UpdateValue: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case value = "value"
+        case metadata = "metadata"
+        case synonyms = "synonyms"
+        static let allValues = [value, metadata, synonyms]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `UpdateValue` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let value = value { json["value"] = value }
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let synonyms = synonyms {
-            json["synonyms"] = synonyms.map { $0 }
-        }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        value = try container.decodeIfPresent(String.self, forKey: .value)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        synonyms = try container.decodeIfPresent([String].self, forKey: .synonyms)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(value, forKey: .value)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(synonyms, forKey: .synonyms)
+    }
+
 }

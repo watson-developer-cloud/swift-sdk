@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateExample. */
-public struct UpdateExample: JSONDecodable, JSONEncodable {
+public struct UpdateExample {
 
     /// The text of the user input example.
     public let text: String?
@@ -32,18 +32,23 @@ public struct UpdateExample: JSONDecodable, JSONEncodable {
     public init(text: String? = nil) {
         self.text = text
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `UpdateExample` model from JSON.
-    public init(json: JSONWrapper) throws {
-        text = try? json.getString(at: "text")
+extension UpdateExample: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+        static let allValues = [text]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `UpdateExample` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let text = text { json["text"] = text }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.decodeIfPresent(String.self, forKey: .text)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(text, forKey: .text)
+    }
+
 }

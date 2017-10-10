@@ -16,10 +16,10 @@
 
 import Foundation
 
-/** CreateDialogNode. */
-public struct CreateDialogNode {
+/** UpdateDialogNode. */
+public struct UpdateDialogNode {
 
-    /// How the dialog node is processed.
+    /// How the node is processed.
     public enum NodeType: String {
         case standard = "standard"
         case eventHandler = "event_handler"
@@ -67,13 +67,10 @@ public struct CreateDialogNode {
     /// The next step to execute following this dialog node.
     public let nextStep: DialogNodeNextStep?
 
-    /// The actions for the dialog node.
-    public let actions: [DialogNodeAction]?
-
     /// The alias used to identify the dialog node.
     public let title: String?
 
-    /// How the dialog node is processed.
+    /// How the node is processed.
     public let nodeType: String?
 
     /// How an `event_handler` node is processed.
@@ -82,8 +79,11 @@ public struct CreateDialogNode {
     /// The location in the dialog context where output is stored.
     public let variable: String?
 
+    /// The actions for the dialog node.
+    public let actions: [DialogNodeAction]?
+
     /**
-     Initialize a `CreateDialogNode` with member variables.
+     Initialize a `UpdateDialogNode` with member variables.
 
      - parameter dialogNode: The dialog node ID.
      - parameter description: The description of the dialog node.
@@ -94,15 +94,15 @@ public struct CreateDialogNode {
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
-     - parameter actions: The actions for the dialog node.
      - parameter title: The alias used to identify the dialog node.
-     - parameter nodeType: How the dialog node is processed.
+     - parameter nodeType: How the node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
+     - parameter actions: The actions for the dialog node.
 
-     - returns: An initialized `CreateDialogNode`.
+     - returns: An initialized `UpdateDialogNode`.
     */
-    public init(dialogNode: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, actions: [DialogNodeAction]? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil) {
+    public init(dialogNode: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, actions: [DialogNodeAction]? = nil) {
         self.dialogNode = dialogNode
         self.description = description
         self.conditions = conditions
@@ -112,15 +112,15 @@ public struct CreateDialogNode {
         self.context = context
         self.metadata = metadata
         self.nextStep = nextStep
-        self.actions = actions
         self.title = title
         self.nodeType = nodeType
         self.eventName = eventName
         self.variable = variable
+        self.actions = actions
     }
 }
 
-extension CreateDialogNode: Codable {
+extension UpdateDialogNode: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case dialogNode = "dialog_node"
@@ -132,12 +132,12 @@ extension CreateDialogNode: Codable {
         case context = "context"
         case metadata = "metadata"
         case nextStep = "next_step"
-        case actions = "actions"
         case title = "title"
         case nodeType = "type"
         case eventName = "event_name"
         case variable = "variable"
-        static let allValues = [dialogNode, description, conditions, parent, previousSibling, output, context, metadata, nextStep, actions, title, nodeType, eventName, variable]
+        case actions = "actions"
+        static let allValues = [dialogNode, description, conditions, parent, previousSibling, output, context, metadata, nextStep, title, nodeType, eventName, variable, actions]
     }
 
     public init(from decoder: Decoder) throws {
@@ -151,11 +151,11 @@ extension CreateDialogNode: Codable {
         context = try container.decodeIfPresent([String: JSON].self, forKey: .context)
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
         nextStep = try container.decodeIfPresent(DialogNodeNextStep.self, forKey: .nextStep)
-        actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
         title = try container.decodeIfPresent(String.self, forKey: .title)
         nodeType = try container.decodeIfPresent(String.self, forKey: .nodeType)
         eventName = try container.decodeIfPresent(String.self, forKey: .eventName)
         variable = try container.decodeIfPresent(String.self, forKey: .variable)
+        actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -169,11 +169,11 @@ extension CreateDialogNode: Codable {
         try container.encodeIfPresent(context, forKey: .context)
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encodeIfPresent(nextStep, forKey: .nextStep)
-        try container.encodeIfPresent(actions, forKey: .actions)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(nodeType, forKey: .nodeType)
         try container.encodeIfPresent(eventName, forKey: .eventName)
         try container.encodeIfPresent(variable, forKey: .variable)
+        try container.encodeIfPresent(actions, forKey: .actions)
     }
 
 }

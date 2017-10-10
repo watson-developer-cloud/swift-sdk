@@ -16,46 +16,46 @@
 
 import Foundation
 
-/** ValueCollection. */
-public struct ValueCollection {
+/** ExampleCollection. */
+public struct ExampleCollection {
 
-    /// An array of entity values.
-    public let values: [ValueExport]
+    /// An array of Example objects describing the examples defined for the intent.
+    public let examples: [Example]
 
     /// An object defining the pagination data for the returned objects.
     public let pagination: Pagination
 
     /**
-     Initialize a `ValueCollection` with member variables.
+     Initialize a `ExampleCollection` with member variables.
 
-     - parameter values: An array of entity values.
+     - parameter examples: An array of Example objects describing the examples defined for the intent.
      - parameter pagination: An object defining the pagination data for the returned objects.
 
-     - returns: An initialized `ValueCollection`.
+     - returns: An initialized `ExampleCollection`.
     */
-    public init(values: [ValueExport], pagination: Pagination) {
-        self.values = values
+    public init(examples: [Example], pagination: Pagination) {
+        self.examples = examples
         self.pagination = pagination
     }
 }
 
-extension ValueCollection: Codable {
+extension ExampleCollection: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case values = "values"
+        case examples = "examples"
         case pagination = "pagination"
-        static let allValues = [values, pagination]
+        static let allValues = [examples, pagination]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        values = try container.decode([ValueExport].self, forKey: .values)
+        examples = try container.decode([Example].self, forKey: .examples)
         pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(values, forKey: .values)
+        try container.encode(examples, forKey: .examples)
         try container.encode(pagination, forKey: .pagination)
     }
 

@@ -17,7 +17,7 @@
 import Foundation
 
 /** LogExport. */
-public struct LogExport: JSONDecodable {
+public struct LogExport {
 
     /// A request formatted for the Conversation service.
     public let request: MessageRequest
@@ -52,14 +52,35 @@ public struct LogExport: JSONDecodable {
         self.requestTimestamp = requestTimestamp
         self.responseTimestamp = responseTimestamp
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `LogExport` model from JSON.
-    public init(json: JSONWrapper) throws {
-        request = try json.decode(at: "request", type: MessageRequest.self)
-        response = try json.decode(at: "response", type: MessageResponse.self)
-        logID = try json.getString(at: "log_id")
-        requestTimestamp = try json.getString(at: "request_timestamp")
-        responseTimestamp = try json.getString(at: "response_timestamp")
+extension LogExport: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case request = "request"
+        case response = "response"
+        case logID = "log_id"
+        case requestTimestamp = "request_timestamp"
+        case responseTimestamp = "response_timestamp"
+        static let allValues = [request, response, logID, requestTimestamp, responseTimestamp]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        request = try container.decode(MessageRequest.self, forKey: .request)
+        response = try container.decode(MessageResponse.self, forKey: .response)
+        logID = try container.decode(String.self, forKey: .logID)
+        requestTimestamp = try container.decode(String.self, forKey: .requestTimestamp)
+        responseTimestamp = try container.decode(String.self, forKey: .responseTimestamp)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(request, forKey: .request)
+        try container.encode(response, forKey: .response)
+        try container.encode(logID, forKey: .logID)
+        try container.encode(requestTimestamp, forKey: .requestTimestamp)
+        try container.encode(responseTimestamp, forKey: .responseTimestamp)
+    }
+
 }

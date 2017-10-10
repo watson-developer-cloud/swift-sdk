@@ -16,53 +16,53 @@
 
 import Foundation
 
-/** Synonym. */
-public struct Synonym {
+/** Example. */
+public struct Example {
 
-    /// The text of the synonym.
-    public let synonymText: String
+    /// The text of the example.
+    public let text: String
 
-    /// The timestamp for creation of the synonym.
+    /// The timestamp for creation of the example.
     public let created: String
 
-    /// The timestamp for the most recent update to the synonym.
+    /// The timestamp for the last update to the example.
     public let updated: String
 
     /**
-     Initialize a `Synonym` with member variables.
+     Initialize a `Example` with member variables.
 
-     - parameter synonymText: The text of the synonym.
-     - parameter created: The timestamp for creation of the synonym.
-     - parameter updated: The timestamp for the most recent update to the synonym.
+     - parameter text: The text of the example.
+     - parameter created: The timestamp for creation of the example.
+     - parameter updated: The timestamp for the last update to the example.
 
-     - returns: An initialized `Synonym`.
+     - returns: An initialized `Example`.
     */
-    public init(synonymText: String, created: String, updated: String) {
-        self.synonymText = synonymText
+    public init(text: String, created: String, updated: String) {
+        self.text = text
         self.created = created
         self.updated = updated
     }
 }
 
-extension Synonym: Codable {
+extension Example: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case synonymText = "synonym"
+        case text = "text"
         case created = "created"
         case updated = "updated"
-        static let allValues = [synonymText, created, updated]
+        static let allValues = [text, created, updated]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        synonymText = try container.decode(String.self, forKey: .synonymText)
+        text = try container.decode(String.self, forKey: .text)
         created = try container.decode(String.self, forKey: .created)
         updated = try container.decode(String.self, forKey: .updated)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(synonymText, forKey: .synonymText)
+        try container.encode(text, forKey: .text)
         try container.encode(created, forKey: .created)
         try container.encode(updated, forKey: .updated)
     }

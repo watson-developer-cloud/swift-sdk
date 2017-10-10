@@ -16,39 +16,39 @@
 
 import Foundation
 
-/** UpdateSynonym. */
-public struct UpdateSynonym {
+/** An object defining the user input. */
+public struct InputData {
 
-    /// The text of the synonym.
-    public let synonym: String?
+    /// The text of the user input.
+    public let text: String
 
     /**
-     Initialize a `UpdateSynonym` with member variables.
+     Initialize a `InputData` with member variables.
 
-     - parameter synonym: The text of the synonym.
+     - parameter text: The text of the user input.
 
-     - returns: An initialized `UpdateSynonym`.
+     - returns: An initialized `InputData`.
     */
-    public init(synonym: String? = nil) {
-        self.synonym = synonym
+    public init(text: String) {
+        self.text = text
     }
 }
 
-extension UpdateSynonym: Codable {
+extension InputData: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case synonym = "synonym"
-        static let allValues = [synonym]
+        case text = "text"
+        static let allValues = [text]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        synonym = try container.decodeIfPresent(String.self, forKey: .synonym)
+        text = try container.decode(String.self, forKey: .text)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(synonym, forKey: .synonym)
+        try container.encode(text, forKey: .text)
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016,2017
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,9 @@
 
 import Foundation
 
-/// A Workspace is a container for all the artifacts that define the behavior of your service.
-public typealias WorkspaceID = String
-
 /**
- With the IBM Watson Conversation service you can create cognitive agents–virtual agents that
- combine machine learning, natural language understanding, and integrated dialog scripting tools
- to provide outstanding customer engagements.
+   The IBM Watson Conversation service combines machine learning, natural language understanding, and
+  integrated dialog tools to create conversation flows between your apps and your users.
  */
 public class Conversation {
 
@@ -76,31 +72,285 @@ public class Conversation {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error")
-            let userInfo = [NSLocalizedDescriptionKey: message]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return nil
         }
     }
 
     /**
-     Send a message to the Conversation service. To start a new conversation set the `request`
-     parameter to `nil`.
+     Create workspace.
 
-     - parameter withWorkspace: The unique identifier of the workspace to use.
-     - parameter request: The message requst to send to the server.
+     Create a workspace based on component objects. You must provide workspace components defining the content of the new workspace.
+
+     - parameter properties: Valid data defining the content of the new workspace.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the conversation service's response.
-     */
+     - parameter success: A function executed with the successful result.
+    */
+    public func createWorkspace(
+        properties: CreateWorkspace? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Workspace) -> Void)
+    {
+        // construct body
+        guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v1/workspaces",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Workspace>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete workspace.
+
+     Delete a workspace from the service instance.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func deleteWorkspace(
+        workspaceID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Get information about a workspace.
+
+     Get information about a workspace, optionally including all workspace content.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func getWorkspace(
+        workspaceID: String,
+        export: Bool? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (WorkspaceExport) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let export = export {
+            let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<WorkspaceExport>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List workspaces.
+
+     List the workspaces associated with a Conversation service instance.
+
+     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
+     - parameter includeCount: Whether to include information about the number of records returned.
+     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
+     - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listWorkspaces(
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (WorkspaceCollection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let pageLimit = pageLimit {
+            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
+            queryParameters.append(queryParameter)
+        }
+        if let cursor = cursor {
+            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/workspaces",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<WorkspaceCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Update workspace.
+
+     Update an existing workspace with new or modified data. You must provide component objects defining the content of the updated workspace.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter properties: Valid data defining the new workspace content. Any elements included in the new data will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new data.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func updateWorkspace(
+        workspaceID: String,
+        properties: UpdateWorkspace? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Workspace) -> Void)
+    {
+        // construct body
+        guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Workspace>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Get a response to a user's input.
+
+     - parameter workspaceID: Unique identifier of the workspace.
+     - parameter request: The user's input, with optional intents, entities, and other properties from the response.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
     public func message(
-        withWorkspace workspaceID: WorkspaceID,
+        workspaceID: String,
         request: MessageRequest? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (MessageResponse) -> Void)
     {
         // construct body
-        guard let body = try? request?.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encodeIfPresent(request) else {
             failure?(RestError.serializationError)
             return
         }
@@ -137,24 +387,28 @@ public class Conversation {
     }
 
     /**
-     Create counterexample.
+     Create intent.
 
-     Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
+     Create a new intent.
 
      - parameter workspaceID: The workspace ID.
-     - parameter text: The text of a user input example.
+     - parameter intent: The name of the intent.
+     - parameter description: The description of the intent.
+     - parameter examples: An array of user input examples.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func createCounterexample(
+    public func createIntent(
         workspaceID: String,
-        text: String,
+        intent: String,
+        description: String? = nil,
+        examples: [CreateExample]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
+        success: @escaping (Intent) -> Void)
     {
         // construct body
-        let createCounterexampleRequest = CreateExample(text: text)
-        guard let body = try? createCounterexampleRequest.toJSON().serialize() else {
+        let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
+        guard let body = try? JSONEncoder().encode(createIntentRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -164,7 +418,7 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/counterexamples"
+        let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -182,27 +436,27 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<Intent>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
     /**
-     Delete counterexample.
+     Delete intent.
 
-     Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
+     Delete an intent from a workspace.
 
      - parameter workspaceID: The workspace ID.
-     - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
+     - parameter intent: The intent name (for example, `pizza_order`).
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func deleteCounterexample(
+    public func deleteIntent(
         workspaceID: String,
-        text: String,
+        intent: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
@@ -211,7 +465,7 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
+        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -230,35 +484,41 @@ public class Conversation {
         // execute REST request
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
-                switch response.result {
-                case .success(): success()
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
     /**
-     Get counterexample.
+     Get intent.
 
-     Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+     Get information about an intent, optionally including all intent content.
 
      - parameter workspaceID: The workspace ID.
-     - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
+     - parameter intent: The intent name (for example, `pizza_order`).
+     - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func getCounterexample(
+    public func getIntent(
         workspaceID: String,
-        text: String,
+        intent: String,
+        export: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
+        success: @escaping (IntentExport) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let export = export {
+            let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
+        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -276,20 +536,21 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<IntentExport>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
     /**
-     List counterexamples.
+     List intents.
 
-     List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
+     List the intents for a workspace.
 
      - parameter workspaceID: The workspace ID.
+     - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
@@ -297,14 +558,304 @@ public class Conversation {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func listCounterexamples(
+    public func listIntents(
         workspaceID: String,
+        export: Bool? = nil,
         pageLimit: Int? = nil,
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (CounterexampleCollectionResponse) -> Void)
+        success: @escaping (IntentCollection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let export = export {
+            let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let pageLimit = pageLimit {
+            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
+            queryParameters.append(queryParameter)
+        }
+        if let cursor = cursor {
+            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/intents"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<IntentCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Update intent.
+
+     Update an existing intent with new or modified data. You must provide data defining the content of the updated intent.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter intent: The intent name (for example, `pizza_order`).
+     - parameter newIntent: The name of the intent.
+     - parameter newDescription: The description of the intent.
+     - parameter newExamples: An array of user input examples for the intent.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func updateIntent(
+        workspaceID: String,
+        intent: String,
+        newIntent: String? = nil,
+        newDescription: String? = nil,
+        newExamples: [CreateExample]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Intent) -> Void)
+    {
+        // construct body
+        let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
+        guard let body = try? JSONEncoder().encode(updateIntentRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Intent>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Create user input example.
+
+     Add a new user input example to an intent.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter intent: The intent name (for example, `pizza_order`).
+     - parameter text: The text of a user input example.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func createExample(
+        workspaceID: String,
+        intent: String,
+        text: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Example) -> Void)
+    {
+        // construct body
+        let createExampleRequest = CreateExample(text: text)
+        guard let body = try? JSONEncoder().encode(createExampleRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Example>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete user input example.
+
+     Delete a user input example from an intent.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter intent: The intent name (for example, `pizza_order`).
+     - parameter text: The text of the user input example.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func deleteExample(
+        workspaceID: String,
+        intent: String,
+        text: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Get user input example.
+
+     Get information about a user input example.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter intent: The intent name (for example, `pizza_order`).
+     - parameter text: The text of the user input example.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func getExample(
+        workspaceID: String,
+        intent: String,
+        text: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Example) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Example>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List user input examples.
+
+     List the user input examples for an intent.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter intent: The intent name (for example, `pizza_order`).
+     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
+     - parameter includeCount: Whether to include information about the number of records returned.
+     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
+     - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listExamples(
+        workspaceID: String,
+        intent: String,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ExampleCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -327,7 +878,7 @@ public class Conversation {
         }
 
         // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/counterexamples"
+        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -345,35 +896,37 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<CounterexampleCollectionResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<ExampleCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
     /**
-     Update counterexample.
+     Update user input example.
 
-     Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+     Update the text of a user input example.
 
      - parameter workspaceID: The workspace ID.
-     - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
-     - parameter newText: The text of the example to be marked as irrelevant input.
+     - parameter intent: The intent name (for example, `pizza_order`).
+     - parameter text: The text of the user input example.
+     - parameter newText: The text of the user input example.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func updateCounterexample(
+    public func updateExample(
         workspaceID: String,
+        intent: String,
         text: String,
         newText: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
+        success: @escaping (Example) -> Void)
     {
         // construct body
-        let updateCounterexampleRequest = UpdateCounterexample(text: newText)
-        guard let body = try? updateCounterexampleRequest.toJSON().serialize() else {
+        let updateExampleRequest = UpdateExample(text: newText)
+        guard let body = try? JSONEncoder().encode(updateExampleRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -383,7 +936,7 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
+        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -401,11 +954,11 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<Example>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -415,18 +968,18 @@ public class Conversation {
      Create a new entity.
 
      - parameter workspaceID: The workspace ID.
-     - parameter body: A CreateEntity object defining the content of the new entity.
+     - parameter properties: A CreateEntity object defining the content of the new entity.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func createEntity(
         workspaceID: String,
-        body: CreateEntity,
+        properties: CreateEntity,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (EntityResponse) -> Void)
+        success: @escaping (Entity) -> Void)
     {
         // construct body
-        guard let body = try? body.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -454,11 +1007,11 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<EntityResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<Entity>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -502,10 +1055,10 @@ public class Conversation {
         // execute REST request
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
-                switch response.result {
-                case .success(): success()
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -555,10 +1108,10 @@ public class Conversation {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<EntityExport>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -630,10 +1183,10 @@ public class Conversation {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<EntityCollection>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -644,19 +1197,19 @@ public class Conversation {
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
-     - parameter body: An UpdateEntity object defining the updated content of the entity.
+     - parameter properties: An UpdateEntity object defining the updated content of the entity.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func updateEntity(
         workspaceID: String,
         entity: String,
-        body: UpdateEntity,
+        properties: UpdateEntity,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (EntityResponse) -> Void)
+        success: @escaping (Entity) -> Void)
     {
         // construct body
-        guard let body = try? body.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -684,947 +1237,11 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<EntityResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Create user input example.
-
-     Add a new user input example to an intent.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter intent: The intent name (for example, `pizza_order`).
-     - parameter text: The text of a user input example.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func createExample(
-        workspaceID: String,
-        intent: String,
-        text: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
-    {
-        // construct body
-        let createExampleRequest = CreateExample(text: text)
-        guard let body = try? createExampleRequest.toJSON().serialize() else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Delete user input example.
-
-     Delete a user input example from an intent.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter intent: The intent name (for example, `pizza_order`).
-     - parameter text: The text of the user input example.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func deleteExample(
-        workspaceID: String,
-        intent: String,
-        text: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
-                switch response.result {
-                case .success(): success()
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Get user input example.
-
-     Get information about a user input example.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter intent: The intent name (for example, `pizza_order`).
-     - parameter text: The text of the user input example.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func getExample(
-        workspaceID: String,
-        intent: String,
-        text: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     List user input examples.
-
-     List the user input examples for an intent.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter intent: The intent name (for example, `pizza_order`).
-     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
-     - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
-     - parameter cursor: A token identifying the last value from the previous page of results.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func listExamples(
-        workspaceID: String,
-        intent: String,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleCollectionResponse) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let pageLimit = pageLimit {
-            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
-            queryParameters.append(queryParameter)
-        }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort)
-            queryParameters.append(queryParameter)
-        }
-        if let cursor = cursor {
-            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleCollectionResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Update user input example.
-
-     Update the text of a user input example.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter intent: The intent name (for example, `pizza_order`).
-     - parameter text: The text of the user input example.
-     - parameter newText: The text of the user input example.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func updateExample(
-        workspaceID: String,
-        intent: String,
-        text: String,
-        newText: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleResponse) -> Void)
-    {
-        // construct body
-        let updateExampleRequest = UpdateExample(text: newText)
-        guard let body = try? updateExampleRequest.toJSON().serialize() else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ExampleResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Create intent.
-
-     Create a new intent.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter intent: The name of the intent.
-     - parameter description: The description of the intent.
-     - parameter examples: An array of user input examples.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func createIntent(
-        workspaceID: String,
-        intent: String,
-        description: String? = nil,
-        examples: [CreateExample]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentResponse) -> Void)
-    {
-        // construct body
-        let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
-        guard let body = try? createIntentRequest.toJSON().serialize() else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Delete intent.
-
-     Delete an intent from a workspace.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter intent: The intent name (for example, `pizza_order`).
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func deleteIntent(
-        workspaceID: String,
-        intent: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
-                switch response.result {
-                case .success(): success()
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Get intent.
-
-     Get information about an intent, optionally including all intent content.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter intent: The intent name (for example, `pizza_order`).
-     - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func getIntent(
-        workspaceID: String,
-        intent: String,
-        export: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentExportResponse) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let export = export {
-            let queryParameter = URLQueryItem(name: "export", value: "\(export)")
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentExportResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     List intents.
-
-     List the intents for a workspace.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
-     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
-     - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
-     - parameter cursor: A token identifying the last value from the previous page of results.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func listIntents(
-        workspaceID: String,
-        export: Bool? = nil,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentCollectionResponse) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let export = export {
-            let queryParameter = URLQueryItem(name: "export", value: "\(export)")
-            queryParameters.append(queryParameter)
-        }
-        if let pageLimit = pageLimit {
-            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
-            queryParameters.append(queryParameter)
-        }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort)
-            queryParameters.append(queryParameter)
-        }
-        if let cursor = cursor {
-            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentCollectionResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Update intent.
-
-     Update an existing intent with new or modified data. You must provide data defining the content of the updated intent.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter intent: The intent name (for example, `pizza_order`).
-     - parameter newIntent: The name of the intent.
-     - parameter newDescription: The description of the intent.
-     - parameter newExamples: An array of user input examples for the intent.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func updateIntent(
-        workspaceID: String,
-        intent: String,
-        newIntent: String? = nil,
-        newDescription: String? = nil,
-        newExamples: [CreateExample]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentResponse) -> Void)
-    {
-        // construct body
-        let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
-        guard let body = try? updateIntentRequest.toJSON().serialize() else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IntentResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     List log events.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
-     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter.
-     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
-     - parameter cursor: A token identifying the last value from the previous page of results.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func listLogs(
-        workspaceID: String,
-        sort: String? = nil,
-        filter: String? = nil,
-        pageLimit: Int? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LogCollection) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort)
-            queryParameters.append(queryParameter)
-        }
-        if let filter = filter {
-            let queryParameter = URLQueryItem(name: "filter", value: filter)
-            queryParameters.append(queryParameter)
-        }
-        if let pageLimit = pageLimit {
-            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
-            queryParameters.append(queryParameter)
-        }
-        if let cursor = cursor {
-            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/logs"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<LogCollection>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Add entity value synonym.
-
-     Add a new synonym to an entity value.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter entity: The name of the entity.
-     - parameter value: The text of the entity value.
-     - parameter synonym: The text of the synonym.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func createSynonym(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        synonym: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Synonym) -> Void)
-    {
-        // construct body
-        let createSynonymRequest = CreateSynonym(synonym: synonym)
-        guard let body = try? createSynonymRequest.toJSON().serialize() else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Synonym>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Delete entity value synonym.
-
-     Delete a synonym for an entity value.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter entity: The name of the entity.
-     - parameter value: The text of the entity value.
-     - parameter synonym: The text of the synonym.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func deleteSynonym(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        synonym: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
-                switch response.result {
-                case .success(): success()
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Get entity value synonym.
-
-     Get information about a synonym for an entity value.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter entity: The name of the entity.
-     - parameter value: The text of the entity value.
-     - parameter synonym: The text of the synonym.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func getSynonym(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        synonym: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Synonym) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Synonym>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     List entity value synonyms.
-
-     List the synonyms for an entity value.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter entity: The name of the entity.
-     - parameter value: The text of the entity value.
-     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
-     - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
-     - parameter cursor: A token identifying the last value from the previous page of results.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func listSynonyms(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SynonymCollection) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let pageLimit = pageLimit {
-            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
-            queryParameters.append(queryParameter)
-        }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort)
-            queryParameters.append(queryParameter)
-        }
-        if let cursor = cursor {
-            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<SynonymCollection>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
-        }
-    }
-
-    /**
-     Update entity value synonym.
-
-     Update the information about a synonym for an entity value.
-
-     - parameter workspaceID: The workspace ID.
-     - parameter entity: The name of the entity.
-     - parameter value: The text of the entity value.
-     - parameter synonym: The text of the synonym.
-     - parameter newSynonym: The text of the synonym.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func updateSynonym(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        synonym: String,
-        newSynonym: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Synonym) -> Void)
-    {
-        // construct body
-        let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
-        guard let body = try? updateSynonymRequest.toJSON().serialize() else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Synonym>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<Entity>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -1645,14 +1262,14 @@ public class Conversation {
         workspaceID: String,
         entity: String,
         value: String,
-        metadata: [String: Any]? = nil,
+        metadata: [String: JSON]? = nil,
         synonyms: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
         // construct body
         let createValueRequest = CreateValue(value: value, metadata: metadata, synonyms: synonyms)
-        guard let body = try? createValueRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(createValueRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1681,10 +1298,10 @@ public class Conversation {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Value>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -1730,10 +1347,10 @@ public class Conversation {
         // execute REST request
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
-                switch response.result {
-                case .success(): success()
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -1785,10 +1402,10 @@ public class Conversation {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ValueExport>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -1862,10 +1479,10 @@ public class Conversation {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ValueCollection>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
@@ -1888,14 +1505,14 @@ public class Conversation {
         entity: String,
         value: String,
         newValue: String? = nil,
-        newMetadata: [String: Any]? = nil,
+        newMetadata: [String: JSON]? = nil,
         newSynonyms: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
         // construct body
         let updateValueRequest = UpdateValue(value: newValue, metadata: newMetadata, synonyms: newSynonyms)
-        guard let body = try? updateValueRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(updateValueRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1924,29 +1541,36 @@ public class Conversation {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Value>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
     /**
-     Create workspace.
+     Add entity value synonym.
 
-     Create a workspace based on component objects. You must provide workspace components defining the content of the new workspace.
+     Add a new synonym to an entity value.
 
-     - parameter body: Valid data defining the content of the new workspace.
+     - parameter workspaceID: The workspace ID.
+     - parameter entity: The name of the entity.
+     - parameter value: The text of the entity value.
+     - parameter synonym: The text of the synonym.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func createWorkspace(
-        body: CreateWorkspace? = nil,
+    public func createSynonym(
+        workspaceID: String,
+        entity: String,
+        value: String,
+        synonym: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceResponse) -> Void)
+        success: @escaping (Synonym) -> Void)
     {
         // construct body
-        guard let body = try? body?.toJSON().serialize() else {
+        let createSynonymRequest = CreateSynonym(synonym: synonym)
+        guard let body = try? JSONEncoder().encode(createSynonymRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1956,9 +1580,14 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/workspaces",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -1969,25 +1598,31 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<Synonym>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
     /**
-     Delete workspace.
+     Delete entity value synonym.
 
-     Delete a workspace from the service instance.
+     Delete a synonym for an entity value.
 
      - parameter workspaceID: The workspace ID.
+     - parameter entity: The name of the entity.
+     - parameter value: The text of the entity value.
+     - parameter synonym: The text of the synonym.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func deleteWorkspace(
+    public func deleteSynonym(
         workspaceID: String,
+        entity: String,
+        value: String,
+        synonym: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
@@ -1996,7 +1631,7 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)"
+        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -2015,39 +1650,39 @@ public class Conversation {
         // execute REST request
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
-                switch response.result {
-                case .success(): success()
-                case .failure(let error): failure?(error)
-                }
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
     /**
-     Get information about a workspace.
+     Get entity value synonym.
 
-     Get information about a workspace, optionally including all workspace content.
+     Get information about a synonym for an entity value.
 
      - parameter workspaceID: The workspace ID.
-     - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     - parameter entity: The name of the entity.
+     - parameter value: The text of the entity value.
+     - parameter synonym: The text of the synonym.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func getWorkspace(
+    public func getSynonym(
         workspaceID: String,
-        export: Bool? = nil,
+        entity: String,
+        value: String,
+        synonym: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceExportResponse) -> Void)
+        success: @escaping (Synonym) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let export = export {
-            let queryParameter = URLQueryItem(name: "export", value: "\(export)")
-            queryParameters.append(queryParameter)
-        }
 
         // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)"
+        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -2065,19 +1700,22 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceExportResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<Synonym>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
     /**
-     List workspaces.
+     List entity value synonyms.
 
-     List the workspaces associated with a Conversation service instance.
+     List the synonyms for an entity value.
 
+     - parameter workspaceID: The workspace ID.
+     - parameter entity: The name of the entity.
+     - parameter value: The text of the entity value.
      - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
@@ -2085,13 +1723,16 @@ public class Conversation {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func listWorkspaces(
+    public func listSynonyms(
+        workspaceID: String,
+        entity: String,
+        value: String,
         pageLimit: Int? = nil,
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceCollectionResponse) -> Void)
+        success: @escaping (SynonymCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2114,9 +1755,14 @@ public class Conversation {
         }
 
         // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/workspaces",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -2127,32 +1773,39 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceCollectionResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<SynonymCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 
     /**
-     Update workspace.
+     Update entity value synonym.
 
-     Update an existing workspace with new or modified data. You must provide component objects defining the content of the updated workspace.
+     Update the information about a synonym for an entity value.
 
      - parameter workspaceID: The workspace ID.
-     - parameter body: Valid data defining the new workspace content. Any elements included in the new data will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new data.
+     - parameter entity: The name of the entity.
+     - parameter value: The text of the entity value.
+     - parameter synonym: The text of the synonym.
+     - parameter newSynonym: The text of the synonym.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
-    public func updateWorkspace(
+    public func updateSynonym(
         workspaceID: String,
-        body: UpdateWorkspace? = nil,
+        entity: String,
+        value: String,
+        synonym: String,
+        newSynonym: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceResponse) -> Void)
+        success: @escaping (Synonym) -> Void)
     {
         // construct body
-        guard let body = try? body?.toJSON().serialize() else {
+        let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
+        guard let body = try? JSONEncoder().encode(updateSynonymRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -2162,7 +1815,7 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)"
+        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -2180,11 +1833,622 @@ public class Conversation {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<WorkspaceResponse>) in
-                switch response.result {
-                case .success(let retval): success(retval)
-                case .failure(let error): failure?(error)
-                }
+            (response: RestResponse<Synonym>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Create dialog node.
+
+     Create a dialog node.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter properties: A CreateDialogNode object defining the content of the new dialog node.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func createDialogNode(
+        workspaceID: String,
+        properties: CreateDialogNode,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DialogNode) -> Void)
+    {
+        // construct body
+        guard let body = try? JSONEncoder().encode(properties) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DialogNode>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete dialog node.
+
+     Delete a dialog node from the workspace.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter dialogNode: The dialog node ID (for example, `get_order`).
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func deleteDialogNode(
+        workspaceID: String,
+        dialogNode: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Get dialog node.
+
+     Get information about a dialog node.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter dialogNode: The dialog node ID (for example, `get_order`).
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func getDialogNode(
+        workspaceID: String,
+        dialogNode: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DialogNode) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DialogNode>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List dialog nodes.
+
+     List the dialog nodes in the workspace.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
+     - parameter includeCount: Whether to include information about the number of records returned.
+     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
+     - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listDialogNodes(
+        workspaceID: String,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DialogNodeCollection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let pageLimit = pageLimit {
+            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
+            queryParameters.append(queryParameter)
+        }
+        if let cursor = cursor {
+            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DialogNodeCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Update dialog node.
+
+     Update information for a dialog node.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter dialogNode: The dialog node ID (for example, `get_order`).
+     - parameter properties: An UpdateDialogNode object defining the new contents of the dialog node.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func updateDialogNode(
+        workspaceID: String,
+        dialogNode: String,
+        properties: UpdateDialogNode,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DialogNode) -> Void)
+    {
+        // construct body
+        guard let body = try? JSONEncoder().encode(properties) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DialogNode>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List log events.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
+     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
+     - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listLogs(
+        workspaceID: String,
+        sort: String? = nil,
+        filter: String? = nil,
+        pageLimit: Int? = nil,
+        cursor: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (LogCollection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
+            queryParameters.append(queryParameter)
+        }
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let pageLimit = pageLimit {
+            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let cursor = cursor {
+            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/logs"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<LogCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Create counterexample.
+
+     Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter text: The text of a user input marked as irrelevant input.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func createCounterexample(
+        workspaceID: String,
+        text: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Counterexample) -> Void)
+    {
+        // construct body
+        let createCounterexampleRequest = CreateCounterexample(text: text)
+        guard let body = try? JSONEncoder().encode(createCounterexampleRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/counterexamples"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Counterexample>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete counterexample.
+
+     Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func deleteCounterexample(
+        workspaceID: String,
+        text: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Get counterexample.
+
+     Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func getCounterexample(
+        workspaceID: String,
+        text: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Counterexample) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Counterexample>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List counterexamples.
+
+     List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
+     - parameter includeCount: Whether to include information about the number of records returned.
+     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
+     - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listCounterexamples(
+        workspaceID: String,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CounterexampleCollection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let pageLimit = pageLimit {
+            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
+            queryParameters.append(queryParameter)
+        }
+        if let cursor = cursor {
+            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/counterexamples"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<CounterexampleCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Update counterexample.
+
+     Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+
+     - parameter workspaceID: The workspace ID.
+     - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
+     - parameter newText: The text of the example to be marked as irrelevant input.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func updateCounterexample(
+        workspaceID: String,
+        text: String,
+        newText: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Counterexample) -> Void)
+    {
+        // construct body
+        let updateCounterexampleRequest = UpdateCounterexample(text: newText)
+        guard let body = try? JSONEncoder().encode(updateCounterexampleRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Counterexample>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
         }
     }
 

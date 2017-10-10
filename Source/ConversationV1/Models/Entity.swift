@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,38 +16,79 @@
 
 import Foundation
 
-/** A term from the request that was identified as an entity. */
-public struct Entity: JSONEncodable, JSONDecodable {
+/** Entity. */
+public struct Entity {
 
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
+    /// The name of the entity.
+    public let entityName: String
 
-    /// The recognized entity from a term in the input.
-    public let entity: String
+    /// The timestamp for creation of the entity.
+    public let created: String
 
-    /// The zero-based character offset that indicates
-    /// where the entity value begins in the input text.
-    public let startIndex: Int
+    /// The timestamp for the last update to the entity.
+    public let updated: String
 
-    /// The zero-based character offset that indicates
-    /// where the entity value ends in the input text.
-    public let endIndex: Int
+    /// The description of the entity.
+    public let description: String?
 
-    /// The term in the input text that was recognized.
-    public let value: String
+    /// Any metadata related to the entity.
+    public let metadata: [String: JSON]?
 
-    /// Used internally to initialize an `Entity` model from JSON.
-    public init(json: JSONWrapper) throws {
-        self.json = try json.getDictionaryObject()
-        entity = try json.getString(at: "entity")
-        let indices = try json.decodedArray(at: "location", type: Swift.Int.self)
-        startIndex = indices[0]
-        endIndex = indices[1]
-        value = try json.getString(at: "value")
+    /// Whether fuzzy matching is used for the entity.
+    public let fuzzyMatch: Bool?
+
+    /**
+     Initialize a `Entity` with member variables.
+
+     - parameter entityName: The name of the entity.
+     - parameter created: The timestamp for creation of the entity.
+     - parameter updated: The timestamp for the last update to the entity.
+     - parameter description: The description of the entity.
+     - parameter metadata: Any metadata related to the entity.
+     - parameter fuzzyMatch: Whether fuzzy matching is used for the entity.
+
+     - returns: An initialized `Entity`.
+    */
+    public init(entityName: String, created: String, updated: String, description: String? = nil, metadata: [String: JSON]? = nil, fuzzyMatch: Bool? = nil) {
+        self.entityName = entityName
+        self.created = created
+        self.updated = updated
+        self.description = description
+        self.metadata = metadata
+        self.fuzzyMatch = fuzzyMatch
+    }
+}
+
+extension Entity: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case entityName = "entity"
+        case created = "created"
+        case updated = "updated"
+        case description = "description"
+        case metadata = "metadata"
+        case fuzzyMatch = "fuzzy_match"
+        static let allValues = [entityName, created, updated, description, metadata, fuzzyMatch]
     }
 
-    /// Used internally to serialize an `Entity` model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        entityName = try container.decode(String.self, forKey: .entityName)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        fuzzyMatch = try container.decodeIfPresent(Bool.self, forKey: .fuzzyMatch)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(entityName, forKey: .entityName)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(fuzzyMatch, forKey: .fuzzyMatch)
+    }
+
 }

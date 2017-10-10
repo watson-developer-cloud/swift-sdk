@@ -17,13 +17,13 @@
 import Foundation
 
 /** ValueExport. */
-public struct ValueExport: JSONDecodable, JSONEncodable {
+public struct ValueExport {
 
     /// The text of the entity value.
-    public let value: String
+    public let entityValue: String
 
     /// Any metadata related to the entity value.
-    public let metadata: [String: Any]?
+    public let metadata: [String: JSON]?
 
     /// The timestamp for creation of the entity value.
     public let created: String
@@ -37,7 +37,7 @@ public struct ValueExport: JSONDecodable, JSONEncodable {
     /**
      Initialize a `ValueExport` with member variables.
 
-     - parameter value: The text of the entity value.
+     - parameter entityValue: The text of the entity value.
      - parameter created: The timestamp for creation of the entity value.
      - parameter updated: The timestamp for the last update to the entity value.
      - parameter metadata: Any metadata related to the entity value.
@@ -45,35 +45,42 @@ public struct ValueExport: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `ValueExport`.
     */
-    public init(value: String, created: String, updated: String, metadata: [String: Any]? = nil, synonyms: [String]? = nil) {
-        self.value = value
+    public init(entityValue: String, created: String, updated: String, metadata: [String: JSON]? = nil, synonyms: [String]? = nil) {
+        self.entityValue = entityValue
         self.created = created
         self.updated = updated
         self.metadata = metadata
         self.synonyms = synonyms
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `ValueExport` model from JSON.
-    public init(json: JSONWrapper) throws {
-        value = try json.getString(at: "value")
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
-        synonyms = try? json.decodedArray(at: "synonyms", type: String.self)
+extension ValueExport: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case entityValue = "value"
+        case metadata = "metadata"
+        case created = "created"
+        case updated = "updated"
+        case synonyms = "synonyms"
+        static let allValues = [entityValue, metadata, created, updated, synonyms]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `ValueExport` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["value"] = value
-        json["created"] = created
-        json["updated"] = updated
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let synonyms = synonyms {
-            json["synonyms"] = synonyms.map { $0 }
-        }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        entityValue = try container.decode(String.self, forKey: .entityValue)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
+        synonyms = try container.decodeIfPresent([String].self, forKey: .synonyms)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(entityValue, forKey: .entityValue)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(synonyms, forKey: .synonyms)
+    }
+
 }

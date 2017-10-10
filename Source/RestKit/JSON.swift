@@ -17,14 +17,14 @@
 import Foundation
 
 /// A JSON value (one of string, number, object, array, true, false, or null).
-public enum JSONValue: Equatable, Codable {
+public enum JSON: Equatable, Codable {
     case null                        /// A null value.
     case boolean(Bool)               /// A boolean value.
     case string(String)              /// A string value.
     case int(Int)                    /// A number value, represented as an integer.
     case double(Double)              /// A number value, represented as a double.
-    case array([JSONValue])          /// An array value.
-    case object([String: JSONValue]) /// An object value.
+    case array([JSON])          /// An array value.
+    case object([String: JSON]) /// An object value.
 
     /// Decode a JSON value.
     public init(from decoder: Decoder) throws {
@@ -48,12 +48,12 @@ public enum JSONValue: Equatable, Codable {
 
     /// Decode a JSON object value from the keyed container, excluding the given keys.
     internal init(from container: KeyedDecodingContainer<DynamicKeys>, excluding keys: [CodingKey]) throws {
-        var object = [String: JSONValue]()
+        var object = [String: JSON]()
         let excludedKeys = keys.map() { $0.stringValue }
         let includedKeys = container.allKeys.filter() { !excludedKeys.contains($0.stringValue) }
         for codingKey in includedKeys {
             let key = codingKey.stringValue
-            let value = try container.decode(JSONValue.self, forKey: codingKey)
+            let value = try container.decode(JSON.self, forKey: codingKey)
             object[key] = value
         }
         self = .object(object)
@@ -61,9 +61,9 @@ public enum JSONValue: Equatable, Codable {
 
     /// Decode a JSON array value from the unkeyed container.
     private init(from container: inout UnkeyedDecodingContainer) throws {
-        var array = [JSONValue]()
+        var array = [JSON]()
         while !container.isAtEnd {
-            array.append(try container.decode(JSONValue.self))
+            array.append(try container.decode(JSON.self))
         }
         self = .array(array)
     }
@@ -87,7 +87,7 @@ public enum JSONValue: Equatable, Codable {
         let encoder = JSONEncoder()
         let decoder = JSONDecoder()
         let data = try encoder.encode(value)
-        self = try decoder.decode(JSONValue.self, from: data)
+        self = try decoder.decode(JSON.self, from: data)
     }
 
     /// Convert this JSON value to a decodable type.
@@ -133,7 +133,7 @@ public enum JSONValue: Equatable, Codable {
     }
 
     /// Compare two JSON values for equality.
-    public static func == (lhs: JSONValue, rhs: JSONValue) -> Bool {
+    public static func == (lhs: JSON, rhs: JSON) -> Bool {
         switch (lhs, rhs) {
         case (.null, null): return true
         case (.boolean(let x), .boolean(let y)): return x == y

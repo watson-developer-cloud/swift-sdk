@@ -37,7 +37,7 @@ internal extension JSONEncoder {
 internal extension KeyedEncodingContainer where Key == DynamicKeys {
 
     /// Encode additional properties.
-    internal mutating func encode(_ additionalProperties: [String: JSONValue]) throws {
+    internal mutating func encode(_ additionalProperties: [String: JSON]) throws {
         try additionalProperties.forEach() { key, value in
             guard let codingKey = DynamicKeys(stringValue: key) else {
                 let description = "Cannot construct CodingKey for \(key)"
@@ -49,7 +49,7 @@ internal extension KeyedEncodingContainer where Key == DynamicKeys {
     }
 
     /// Encode additional properties if they are not nil.
-    internal mutating func encodeIfPresent(_ additionalProperties: [String: JSONValue]?) throws {
+    internal mutating func encodeIfPresent(_ additionalProperties: [String: JSON]?) throws {
         guard let additionalProperties = additionalProperties else { return }
         try encode(additionalProperties)
     }
@@ -63,8 +63,8 @@ internal extension KeyedEncodingContainer where Key == DynamicKeys {
 internal extension KeyedDecodingContainer where Key == DynamicKeys {
 
     /// Decode additional properties.
-    internal func decode(_ type: [String: JSONValue].Type, excluding keys: [CodingKey]) throws -> [String: JSONValue] {
-        let value = try JSONValue(from: self, excluding: keys)
+    internal func decode(_ type: [String: JSON].Type, excluding keys: [CodingKey]) throws -> [String: JSON] {
+        let value = try JSON(from: self, excluding: keys)
         guard case let .object(object) = value else {
             let description = "Expected to decode a JSONValue.object but found \(value) instead."
             let context = DecodingError.Context(codingPath: self.codingPath, debugDescription: description)
@@ -74,8 +74,8 @@ internal extension KeyedDecodingContainer where Key == DynamicKeys {
     }
 
     /// Decode additional properties, if present.
-    internal func decodeIfPresent(_ type: [String: JSONValue].Type, excluding keys: [CodingKey]) throws -> [String: JSONValue]? {
-        let additionalProperties = try decode([String: JSONValue].self, excluding: keys)
+    internal func decodeIfPresent(_ type: [String: JSON].Type, excluding keys: [CodingKey]) throws -> [String: JSON]? {
+        let additionalProperties = try decode([String: JSON].self, excluding: keys)
         guard additionalProperties.count > 0 else { return nil }
         return additionalProperties
     }

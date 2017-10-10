@@ -49,7 +49,9 @@ extension Int: JSONPathType {
 
 // MARK: - JSON
 
-internal struct JSON {
+/// Used internally to serialize and deserialize JSON.
+/// Will soon be removed in favor of Swift 4's `Codable` protocol.
+public struct JSON {
     fileprivate let json: Any
     
     internal init(json: Any) {

@@ -114,7 +114,12 @@ public class NaturalLanguageUnderstanding {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            return NSError(domain: domain, code: code, userInfo: nil)
+            let message = try json.getString(at: "error")
+            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            if let description = try? json.getString(at: "description") {
+                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
+            }
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }

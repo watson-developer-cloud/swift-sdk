@@ -20,7 +20,7 @@ import Foundation
 public struct Example {
 
     /// The text of the example.
-    public let text: String
+    public let exampleText: String
 
     /// The timestamp for creation of the example.
     public let created: String
@@ -31,14 +31,14 @@ public struct Example {
     /**
      Initialize a `Example` with member variables.
 
-     - parameter text: The text of the example.
+     - parameter exampleText: The text of the example.
      - parameter created: The timestamp for creation of the example.
      - parameter updated: The timestamp for the last update to the example.
 
      - returns: An initialized `Example`.
     */
-    public init(text: String, created: String, updated: String) {
-        self.text = text
+    public init(exampleText: String, created: String, updated: String) {
+        self.exampleText = exampleText
         self.created = created
         self.updated = updated
     }
@@ -47,22 +47,22 @@ public struct Example {
 extension Example: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
+        case exampleText = "text"
         case created = "created"
         case updated = "updated"
-        static let allValues = [text, created, updated]
+        static let allValues = [exampleText, created, updated]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decode(String.self, forKey: .text)
+        exampleText = try container.decode(String.self, forKey: .exampleText)
         created = try container.decode(String.self, forKey: .created)
         updated = try container.decode(String.self, forKey: .updated)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(text, forKey: .text)
+        try container.encode(exampleText, forKey: .exampleText)
         try container.encode(created, forKey: .created)
         try container.encode(updated, forKey: .updated)
     }

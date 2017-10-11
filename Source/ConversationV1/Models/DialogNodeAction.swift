@@ -37,6 +37,9 @@ public struct DialogNodeAction {
     /// The location in the dialog context where the result of the action is stored.
     public let resultVariable: String
 
+    /// The name of the context variable that the client application will use to pass in credentials for the action.
+    public let credentials: String?
+
     /**
      Initialize a `DialogNodeAction` with member variables.
 
@@ -44,14 +47,16 @@ public struct DialogNodeAction {
      - parameter resultVariable: The location in the dialog context where the result of the action is stored.
      - parameter actionType: The type of action to invoke.
      - parameter parameters: A map of key/value pairs to be provided to the action.
+     - parameter credentials: The name of the context variable that the client application will use to pass in credentials for the action.
 
      - returns: An initialized `DialogNodeAction`.
     */
-    public init(name: String, resultVariable: String, actionType: String? = nil, parameters: [String: JSON]? = nil) {
+    public init(name: String, resultVariable: String, actionType: String? = nil, parameters: [String: JSON]? = nil, credentials: String? = nil) {
         self.name = name
         self.resultVariable = resultVariable
         self.actionType = actionType
         self.parameters = parameters
+        self.credentials = credentials
     }
 }
 
@@ -62,7 +67,8 @@ extension DialogNodeAction: Codable {
         case actionType = "type"
         case parameters = "parameters"
         case resultVariable = "result_variable"
-        static let allValues = [name, actionType, parameters, resultVariable]
+        case credentials = "credentials"
+        static let allValues = [name, actionType, parameters, resultVariable, credentials]
     }
 
     public init(from decoder: Decoder) throws {
@@ -71,6 +77,7 @@ extension DialogNodeAction: Codable {
         actionType = try container.decodeIfPresent(String.self, forKey: .actionType)
         parameters = try container.decodeIfPresent([String: JSON].self, forKey: .parameters)
         resultVariable = try container.decode(String.self, forKey: .resultVariable)
+        credentials = try container.decodeIfPresent(String.self, forKey: .credentials)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -79,6 +86,7 @@ extension DialogNodeAction: Codable {
         try container.encodeIfPresent(actionType, forKey: .actionType)
         try container.encodeIfPresent(parameters, forKey: .parameters)
         try container.encode(resultVariable, forKey: .resultVariable)
+        try container.encodeIfPresent(credentials, forKey: .credentials)
     }
 
 }

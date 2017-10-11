@@ -1254,24 +1254,19 @@ public class Conversation {
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
-     - parameter value: The text of the entity value.
-     - parameter metadata: Any metadata related to the entity value.
-     - parameter synonyms: An array of synonyms for the entity value.
+     - parameter properties: A CreateValue object defining the content of the new value for the entity.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func createValue(
         workspaceID: String,
         entity: String,
-        value: String,
-        metadata: [String: JSON]? = nil,
-        synonyms: [String]? = nil,
+        properties: CreateValue,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
         // construct body
-        let createValueRequest = CreateValue(value: value, metadata: metadata, synonyms: synonyms)
-        guard let body = try? JSONEncoder().encode(createValueRequest) else {
+        guard let body = try? JSONEncoder().encode(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1496,9 +1491,7 @@ public class Conversation {
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
-     - parameter newValue: The text of the entity value.
-     - parameter newMetadata: Any metadata related to the entity value.
-     - parameter newSynonyms: An array of synonyms for the entity value.
+     - parameter properties: An UpdateValue object defining the new content for value for the entity.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
@@ -1506,15 +1499,12 @@ public class Conversation {
         workspaceID: String,
         entity: String,
         value: String,
-        newValue: String? = nil,
-        newMetadata: [String: JSON]? = nil,
-        newSynonyms: [String]? = nil,
+        properties: UpdateValue,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
         // construct body
-        let updateValueRequest = UpdateValue(value: newValue, metadata: newMetadata, synonyms: newSynonyms)
-        guard let body = try? JSONEncoder().encode(updateValueRequest) else {
+        guard let body = try? JSONEncoder().encode(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -2115,7 +2105,71 @@ public class Conversation {
     }
 
     /**
-     List log events.
+     List log events in all workspaces.
+
+     List log events in all workspaces in the service instance.
+
+     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
+     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or `request.context.metadata.deployment`. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
+     - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listAllLogs(
+        sort: String? = nil,
+        filter: String? = nil,
+        pageLimit: Int? = nil,
+        cursor: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (LogCollection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
+            queryParameters.append(queryParameter)
+        }
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let pageLimit = pageLimit {
+            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let cursor = cursor {
+            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/logs",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<LogCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List log events in a workspace.
+
+     List log events in a specific workspace.
 
      - parameter workspaceID: The workspace ID.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.

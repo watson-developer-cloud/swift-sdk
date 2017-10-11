@@ -19,8 +19,14 @@ import Foundation
 /** ValueExport. */
 public struct ValueExport {
 
+    /// Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+    public enum ValueType: String {
+        case synonyms = "synonyms"
+        case patterns = "patterns"
+    }
+
     /// The text of the entity value.
-    public let entityValue: String
+    public let valueText: String
 
     /// Any metadata related to the entity value.
     public let metadata: [String: JSON]?
@@ -34,53 +40,69 @@ public struct ValueExport {
     /// An array of synonyms.
     public let synonyms: [String]?
 
+    /// An array of patterns for the entity value. A pattern is specified as a regular expression.
+    public let patterns: [String]?
+
+    /// Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+    public let valueType: String
+
     /**
      Initialize a `ValueExport` with member variables.
 
-     - parameter entityValue: The text of the entity value.
+     - parameter valueText: The text of the entity value.
      - parameter created: The timestamp for creation of the entity value.
      - parameter updated: The timestamp for the last update to the entity value.
+     - parameter valueType: Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      - parameter metadata: Any metadata related to the entity value.
      - parameter synonyms: An array of synonyms.
+     - parameter patterns: An array of patterns for the entity value. A pattern is specified as a regular expression.
 
      - returns: An initialized `ValueExport`.
     */
-    public init(entityValue: String, created: String, updated: String, metadata: [String: JSON]? = nil, synonyms: [String]? = nil) {
-        self.entityValue = entityValue
+    public init(valueText: String, created: String, updated: String, valueType: String, metadata: [String: JSON]? = nil, synonyms: [String]? = nil, patterns: [String]? = nil) {
+        self.valueText = valueText
         self.created = created
         self.updated = updated
+        self.valueType = valueType
         self.metadata = metadata
         self.synonyms = synonyms
+        self.patterns = patterns
     }
 }
 
 extension ValueExport: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case entityValue = "value"
+        case valueText = "value"
         case metadata = "metadata"
         case created = "created"
         case updated = "updated"
         case synonyms = "synonyms"
-        static let allValues = [entityValue, metadata, created, updated, synonyms]
+        case patterns = "patterns"
+        case valueType = "type"
+        static let allValues = [valueText, metadata, created, updated, synonyms, patterns, valueType]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        entityValue = try container.decode(String.self, forKey: .entityValue)
+        valueText = try container.decode(String.self, forKey: .valueText)
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
         created = try container.decode(String.self, forKey: .created)
         updated = try container.decode(String.self, forKey: .updated)
         synonyms = try container.decodeIfPresent([String].self, forKey: .synonyms)
+        patterns = try container.decodeIfPresent([String].self, forKey: .patterns)
+        valueType = try container.decode(String.self, forKey: .valueType)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(entityValue, forKey: .entityValue)
+        try container.encode(valueText, forKey: .valueText)
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encode(created, forKey: .created)
         try container.encode(updated, forKey: .updated)
         try container.encodeIfPresent(synonyms, forKey: .synonyms)
+        try container.encodeIfPresent(patterns, forKey: .patterns)
+        try container.encode(valueType, forKey: .valueType)
     }
 
 }

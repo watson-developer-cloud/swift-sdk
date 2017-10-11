@@ -468,7 +468,7 @@ class ConversationTests: XCTestCase {
                 for example in intent.examples! {
                     XCTAssertNotNil(example.created)
                     XCTAssertNotNil(example.updated)
-                    XCTAssertEqual(example.text, intentExample.text)
+                    XCTAssertEqual(example.exampleText, intentExample.text)
                 }
             }
 
@@ -644,7 +644,7 @@ class ConversationTests: XCTestCase {
                 for example in intent.examples! {
                     XCTAssertNotNil(example.created)
                     XCTAssertNotNil(example.updated)
-                    XCTAssertNotNil(example.text)
+                    XCTAssertNotNil(example.exampleText)
                 }
             }
             XCTAssertNotNil(intents.pagination.refreshUrl)
@@ -694,7 +694,7 @@ class ConversationTests: XCTestCase {
             for example in intent.examples! {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
-                XCTAssertNotNil(example.text)
+                XCTAssertNotNil(example.exampleText)
             }
             expectation.fulfill()
         }
@@ -752,7 +752,7 @@ class ConversationTests: XCTestCase {
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
-                XCTAssertNotNil(example.text)
+                XCTAssertNotNil(example.exampleText)
             }
             XCTAssertNotNil(examples.pagination.refreshUrl)
             XCTAssertNil(examples.pagination.total)
@@ -770,7 +770,7 @@ class ConversationTests: XCTestCase {
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
-                XCTAssertNotNil(example.text)
+                XCTAssertNotNil(example.exampleText)
             }
             XCTAssertNotNil(examples.pagination.refreshUrl)
             XCTAssertNotNil(examples.pagination.total)
@@ -790,7 +790,7 @@ class ConversationTests: XCTestCase {
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
-                XCTAssertNotNil(example.text)
+                XCTAssertNotNil(example.exampleText)
             }
             XCTAssertNotNil(examples.pagination.refreshUrl)
             XCTAssertNotNil(examples.pagination.nextUrl)
@@ -809,7 +809,7 @@ class ConversationTests: XCTestCase {
         conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
             XCTAssertNotNil(example.created)
             XCTAssertNotNil(example.updated)
-            XCTAssertEqual(example.text, newExample)
+            XCTAssertEqual(example.exampleText, newExample)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -831,7 +831,7 @@ class ConversationTests: XCTestCase {
         conversation.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, failure: failWithError) { example in
             XCTAssertNotNil(example.created)
             XCTAssertNotNil(example.updated)
-            XCTAssertEqual(example.text, exampleText)
+            XCTAssertEqual(example.exampleText, exampleText)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -845,7 +845,7 @@ class ConversationTests: XCTestCase {
         conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
             XCTAssertNotNil(example.created)
             XCTAssertNotNil(example.updated)
-            XCTAssertEqual(example.text, newExample)
+            XCTAssertEqual(example.exampleText, newExample)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -857,7 +857,7 @@ class ConversationTests: XCTestCase {
         conversation.updateExample(workspaceID: workspaceID, intent: "weather", text: newExample, newText: updatedText, failure: failWithError) { example in
             XCTAssertNotNil(example.created)
             XCTAssertNotNil(example.updated)
-            XCTAssertEqual(example.text, updatedText)
+            XCTAssertEqual(example.exampleText, updatedText)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -1178,7 +1178,7 @@ class ConversationTests: XCTestCase {
 
         conversation.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
             for value in valueCollection.values {
-                XCTAssertNotNil(value.entityValue)
+                XCTAssertNotNil(value.valueText)
                 XCTAssertNotNil(value.created)
                 XCTAssertNotNil(value.updated)
             }
@@ -1196,9 +1196,9 @@ class ConversationTests: XCTestCase {
 
         let entityName = "appliance"
         let valueName = "swift-sdk-test-value" + UUID().uuidString
-
-        conversation.createValue(workspaceID: workspaceID, entity: entityName, value: valueName, failure: failWithError) { value in
-            XCTAssertEqual(value.entityValue, valueName)
+        let value = CreateValue(value: valueName)
+        conversation.createValue(workspaceID: workspaceID, entity: entityName, properties: value, failure: failWithError) { value in
+            XCTAssertEqual(value.valueText, valueName)
             XCTAssertNotNil(value.created)
             XCTAssertNotNil(value.updated)
             expectation.fulfill()
@@ -1209,10 +1209,9 @@ class ConversationTests: XCTestCase {
         let expectationTwo = self.expectation(description: descriptionTwo)
 
         let updatedValueName = "up-" + valueName
-
-        let newMetadata: [String: JSON] = ["oldname": .string(valueName)]
-        conversation.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, newValue: updatedValueName, newMetadata: newMetadata, failure: failWithError) { value in
-            XCTAssertEqual(value.entityValue, updatedValueName)
+        let updatedValue = UpdateValue(value: updatedValueName, metadata: ["oldname": .string(valueName)])
+        conversation.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, properties: updatedValue, failure: failWithError) { value in
+            XCTAssertEqual(value.valueText, updatedValueName)
             XCTAssertNotNil(value.created)
             XCTAssertNotNil(value.updated)
             XCTAssertNotNil(value.metadata)
@@ -1238,8 +1237,8 @@ class ConversationTests: XCTestCase {
         conversation.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
             XCTAssert(valueCollection.values.count > 0)
             let value = valueCollection.values[0]
-            self.conversation.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.entityValue, export: true, failure: self.failWithError) { valueExport in
-                XCTAssertEqual(valueExport.entityValue, value.entityValue)
+            self.conversation.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.valueText, export: true, failure: self.failWithError) { valueExport in
+                XCTAssertEqual(valueExport.valueText, value.valueText)
                 XCTAssertNotNil(valueExport.created)
                 XCTAssertNotNil(valueExport.updated)
                 expectation.fulfill()

@@ -34,6 +34,12 @@ public struct LogExport {
     /// The timestamp for the system response to the message.
     public let responseTimestamp: String
 
+    /// The workspace ID.
+    public let workspaceID: String
+
+    /// The language of the workspace where the message request was made.
+    public let language: String
+
     /**
      Initialize a `LogExport` with member variables.
 
@@ -42,15 +48,19 @@ public struct LogExport {
      - parameter logID: A unique identifier for the logged message.
      - parameter requestTimestamp: The timestamp for receipt of the message.
      - parameter responseTimestamp: The timestamp for the system response to the message.
+     - parameter workspaceID: The workspace ID.
+     - parameter language: The language of the workspace where the message request was made.
 
      - returns: An initialized `LogExport`.
     */
-    public init(request: MessageRequest, response: MessageResponse, logID: String, requestTimestamp: String, responseTimestamp: String) {
+    public init(request: MessageRequest, response: MessageResponse, logID: String, requestTimestamp: String, responseTimestamp: String, workspaceID: String, language: String) {
         self.request = request
         self.response = response
         self.logID = logID
         self.requestTimestamp = requestTimestamp
         self.responseTimestamp = responseTimestamp
+        self.workspaceID = workspaceID
+        self.language = language
     }
 }
 
@@ -62,7 +72,9 @@ extension LogExport: Codable {
         case logID = "log_id"
         case requestTimestamp = "request_timestamp"
         case responseTimestamp = "response_timestamp"
-        static let allValues = [request, response, logID, requestTimestamp, responseTimestamp]
+        case workspaceID = "workspace_id"
+        case language = "language"
+        static let allValues = [request, response, logID, requestTimestamp, responseTimestamp, workspaceID, language]
     }
 
     public init(from decoder: Decoder) throws {
@@ -72,6 +84,8 @@ extension LogExport: Codable {
         logID = try container.decode(String.self, forKey: .logID)
         requestTimestamp = try container.decode(String.self, forKey: .requestTimestamp)
         responseTimestamp = try container.decode(String.self, forKey: .responseTimestamp)
+        workspaceID = try container.decode(String.self, forKey: .workspaceID)
+        language = try container.decode(String.self, forKey: .language)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -81,6 +95,8 @@ extension LogExport: Codable {
         try container.encode(logID, forKey: .logID)
         try container.encode(requestTimestamp, forKey: .requestTimestamp)
         try container.encode(responseTimestamp, forKey: .responseTimestamp)
+        try container.encode(workspaceID, forKey: .workspaceID)
+        try container.encode(language, forKey: .language)
     }
 
 }

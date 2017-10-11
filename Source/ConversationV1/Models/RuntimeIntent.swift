@@ -16,54 +16,54 @@
 
 import Foundation
 
-/** Context information for the message. Include the context from the previous response to maintain state for the conversation. */
-public struct Context {
+/** An intent identified in the user input. */
+public struct RuntimeIntent {
 
-    /// The unique identifier of the conversation.
-    public var conversationID: String
+    /// The name of the recognized intent.
+    public var intent: String
 
-    /// For internal use only.
-    public var system: SystemResponse
+    /// A decimal percentage that represents Watson's confidence in the intent.
+    public var confidence: Double
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
     /**
-     Initialize a `Context` with member variables.
+     Initialize a `RuntimeIntent` with member variables.
 
-     - parameter conversationID: The unique identifier of the conversation.
-     - parameter system: For internal use only.
+     - parameter intent: The name of the recognized intent.
+     - parameter confidence: A decimal percentage that represents Watson's confidence in the intent.
 
-     - returns: An initialized `Context`.
+     - returns: An initialized `RuntimeIntent`.
     */
-    public init(conversationID: String, system: SystemResponse, additionalProperties: [String: JSON] = [:]) {
-        self.conversationID = conversationID
-        self.system = system
+    public init(intent: String, confidence: Double, additionalProperties: [String: JSON] = [:]) {
+        self.intent = intent
+        self.confidence = confidence
         self.additionalProperties = additionalProperties
     }
 }
 
-extension Context: Codable {
+extension RuntimeIntent: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case conversationID = "conversation_id"
-        case system = "system"
-        static let allValues = [conversationID, system]
+        case intent = "intent"
+        case confidence = "confidence"
+        static let allValues = [intent, confidence]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
-        conversationID = try container.decode(String.self, forKey: .conversationID)
-        system = try container.decode(SystemResponse.self, forKey: .system)
+        intent = try container.decode(String.self, forKey: .intent)
+        confidence = try container.decode(Double.self, forKey: .confidence)
         additionalProperties = try dynamic.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         var dynamic = encoder.container(keyedBy: DynamicKeys.self)
-        try container.encode(conversationID, forKey: .conversationID)
-        try container.encode(system, forKey: .system)
+        try container.encode(intent, forKey: .intent)
+        try container.encode(confidence, forKey: .confidence)
         try dynamic.encodeIfPresent(additionalProperties)
     }
 

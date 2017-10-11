@@ -16,54 +16,61 @@
 
 import Foundation
 
-/** Context information for the message. Include the context from the previous response to maintain state for the conversation. */
-public struct Context {
+/** Log message details. */
+public struct LogMessage {
 
-    /// The unique identifier of the conversation.
-    public var conversationID: String
+    /// The severity of the message.
+    public enum Level: String {
+        case info = "info"
+        case error = "error"
+        case warn = "warn"
+    }
 
-    /// For internal use only.
-    public var system: SystemResponse
+    /// The severity of the message.
+    public var level: String
+
+    /// The text of the message.
+    public var msg: String
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
     /**
-     Initialize a `Context` with member variables.
+     Initialize a `LogMessage` with member variables.
 
-     - parameter conversationID: The unique identifier of the conversation.
-     - parameter system: For internal use only.
+     - parameter level: The severity of the message.
+     - parameter msg: The text of the message.
 
-     - returns: An initialized `Context`.
+     - returns: An initialized `LogMessage`.
     */
-    public init(conversationID: String, system: SystemResponse, additionalProperties: [String: JSON] = [:]) {
-        self.conversationID = conversationID
-        self.system = system
+    public init(level: String, msg: String, additionalProperties: [String: JSON] = [:]) {
+        self.level = level
+        self.msg = msg
         self.additionalProperties = additionalProperties
     }
 }
 
-extension Context: Codable {
+extension LogMessage: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case conversationID = "conversation_id"
-        case system = "system"
-        static let allValues = [conversationID, system]
+        case level = "level"
+        case msg = "msg"
+        static let allValues = [level, msg]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
-        conversationID = try container.decode(String.self, forKey: .conversationID)
-        system = try container.decode(SystemResponse.self, forKey: .system)
+        level = try container.decode(String.self, forKey: .level)
+        msg = try container.decode(String.self, forKey: .msg)
         additionalProperties = try dynamic.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         var dynamic = encoder.container(keyedBy: DynamicKeys.self)
-        try container.encode(conversationID, forKey: .conversationID)
-        try container.encode(system, forKey: .system)
+        try container.encode(level, forKey: .level)
+        try container.encode(msg, forKey: .msg)
         try dynamic.encodeIfPresent(additionalProperties)
     }
 

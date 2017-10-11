@@ -16,47 +16,46 @@
 
 import Foundation
 
-/** The entities extracted from a sentence in a given document. */
-public struct RelationEntity {
+/** SemanticRolesObject. */
+public struct SemanticRolesObject {
 
-    /// Text that corresponds to the entity.
+    /// Object text.
     public var text: String?
 
-    /// Entity type.
-    public var type: String?
+    public var keywords: [SemanticRolesKeyword]?
 
     /**
-     Initialize a `RelationEntity` with member variables.
+     Initialize a `SemanticRolesObject` with member variables.
 
-     - parameter text: Text that corresponds to the entity.
-     - parameter type: Entity type.
+     - parameter text: Object text.
+     - parameter keywords: 
 
-     - returns: An initialized `RelationEntity`.
+     - returns: An initialized `SemanticRolesObject`.
     */
-    public init(text: String? = nil, type: String? = nil) {
+    public init(text: String? = nil, keywords: [SemanticRolesKeyword]? = nil) {
         self.text = text
-        self.type = type
+        self.keywords = keywords
     }
 }
 
-extension RelationEntity: Codable {
+extension SemanticRolesObject: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case text = "text"
-        case type = "type"
-        static let allValues = [text, type]
+        case keywords = "keywords"
+        static let allValues = [text, keywords]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         text = try container.decodeIfPresent(String.self, forKey: .text)
-        type = try container.decodeIfPresent(String.self, forKey: .type)
+        keywords = try container.decodeIfPresent([SemanticRolesKeyword].self, forKey: .keywords)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(keywords, forKey: .keywords)
     }
 
 }

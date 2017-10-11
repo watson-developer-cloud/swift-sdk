@@ -16,47 +16,39 @@
 
 import Foundation
 
-/** The entities extracted from a sentence in a given document. */
-public struct RelationEntity {
+/** An object containing the emotion results of a document. */
+public struct DocumentEmotionResults {
 
-    /// Text that corresponds to the entity.
-    public var text: String?
-
-    /// Entity type.
-    public var type: String?
+    /// An object containing the emotion results for the document.
+    public var emotion: EmotionScores?
 
     /**
-     Initialize a `RelationEntity` with member variables.
+     Initialize a `DocumentEmotionResults` with member variables.
 
-     - parameter text: Text that corresponds to the entity.
-     - parameter type: Entity type.
+     - parameter emotion: An object containing the emotion results for the document.
 
-     - returns: An initialized `RelationEntity`.
+     - returns: An initialized `DocumentEmotionResults`.
     */
-    public init(text: String? = nil, type: String? = nil) {
-        self.text = text
-        self.type = type
+    public init(emotion: EmotionScores? = nil) {
+        self.emotion = emotion
     }
 }
 
-extension RelationEntity: Codable {
+extension DocumentEmotionResults: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case type = "type"
-        static let allValues = [text, type]
+        case emotion = "emotion"
+        static let allValues = [emotion]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        type = try container.decodeIfPresent(String.self, forKey: .type)
+        emotion = try container.decodeIfPresent(EmotionScores.self, forKey: .emotion)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(emotion, forKey: .emotion)
     }
 
 }

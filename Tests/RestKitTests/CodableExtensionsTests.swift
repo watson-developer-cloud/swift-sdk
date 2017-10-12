@@ -51,7 +51,7 @@ class CodableExtensionsTests: XCTestCase {
     }
 
     func testEncodeMetadata() {
-        let metadata: [String: JSONValue] = [
+        let metadata: [String: JSON] = [
             "null": .null,
             "bool": .boolean(true),
             "int": .int(1),
@@ -101,7 +101,7 @@ class CodableExtensionsTests: XCTestCase {
             array: [1, 2, 3],
             object: ["x": 1]
         )
-        let metadata = ["custom": try! JSONValue(from: custom)]
+        let metadata = ["custom": try! JSON(from: custom)]
         let model = ServiceModel(name: "name", metadata: metadata, additionalProperties: [:])
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -135,7 +135,7 @@ class CodableExtensionsTests: XCTestCase {
     }
     
     func testEncodeAdditionalProperties() {
-        let additionalProperties: [String: JSONValue] = [
+        let additionalProperties: [String: JSON] = [
             "null": .null,
             "bool": .boolean(true),
             "int": .int(1),
@@ -177,7 +177,7 @@ class CodableExtensionsTests: XCTestCase {
     }
     
     func testEncodeOptional() {
-        let metadata: [String: JSONValue] = [
+        let metadata: [String: JSON] = [
             "null": .null,
             "bool": .boolean(true),
             "int": .int(1),
@@ -186,7 +186,7 @@ class CodableExtensionsTests: XCTestCase {
             "array": .array([.int(1), .int(2), .int(3)]),
             "object": .object(["x": .int(1)])
         ]
-        let additionalProperties: [String: JSONValue] = [
+        let additionalProperties: [String: JSON] = [
             "null": .null,
             "bool": .boolean(true),
             "int": .int(1),
@@ -417,10 +417,10 @@ class CodableExtensionsTests: XCTestCase {
 
 private struct ServiceModel: Codable {
     let name: String
-    let metadata: [String: JSONValue]
-    let additionalProperties: [String: JSONValue]
+    let metadata: [String: JSON]
+    let additionalProperties: [String: JSON]
 
-    init(name: String, metadata: [String: JSONValue], additionalProperties: [String: JSONValue]) {
+    init(name: String, metadata: [String: JSON], additionalProperties: [String: JSON]) {
         self.name = name
         self.metadata = metadata
         self.additionalProperties = additionalProperties
@@ -436,8 +436,8 @@ private struct ServiceModel: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
         name = try container.decode(String.self, forKey: .name)
-        metadata = try container.decode([String: JSONValue].self, forKey: .metadata)
-        additionalProperties = try dynamic.decode([String: JSONValue].self, excluding: CodingKeys.allValues)
+        metadata = try container.decode([String: JSON].self, forKey: .metadata)
+        additionalProperties = try dynamic.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -455,10 +455,10 @@ private struct ServiceModel: Codable {
 
 private struct ServiceModelOptional: Codable {
     let name: String?
-    let metadata: [String: JSONValue]?
-    let additionalProperties: [String: JSONValue]?
+    let metadata: [String: JSON]?
+    let additionalProperties: [String: JSON]?
 
-    init(name: String?, metadata: [String: JSONValue]?, additionalProperties: [String: JSONValue]?) {
+    init(name: String?, metadata: [String: JSON]?, additionalProperties: [String: JSON]?) {
         self.name = name
         self.metadata = metadata
         self.additionalProperties = additionalProperties
@@ -474,8 +474,8 @@ private struct ServiceModelOptional: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
         name = try container.decodeIfPresent(String.self, forKey: .name)
-        metadata = try container.decodeIfPresent([String: JSONValue].self, forKey: .metadata)
-        additionalProperties = try dynamic.decodeIfPresent([String: JSONValue].self, excluding: CodingKeys.allValues)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        additionalProperties = try dynamic.decodeIfPresent([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     func encode(to encoder: Encoder) throws {

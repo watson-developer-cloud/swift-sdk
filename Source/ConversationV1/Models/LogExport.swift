@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** LogExport. */
 public struct LogExport: JSONDecodable {
@@ -56,7 +55,7 @@ public struct LogExport: JSONDecodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `LogExport` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         request = try json.decode(at: "request", type: MessageRequest.self)
         response = try json.decode(at: "response", type: MessageResponse.self)
         logID = try json.getString(at: "log_id")

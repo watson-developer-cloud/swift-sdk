@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A wrapper object that contains results from a Speech to Text recognition request. */
 internal struct SpeechRecognitionEvent: JSONDecodable {
@@ -36,7 +35,7 @@ internal struct SpeechRecognitionEvent: JSONDecodable {
     internal let speakerLabels: [SpeakerLabel]?
 
     /// Used internally to initialize a `SpeechRecognitionEvent` model from JSON.
-    internal init(json: JSON) throws {
+    internal init(json: JSONWrapper) throws {
         resultIndex = try json.getInt(at: "result_index")
         results = try json.decodedArray(at: "results", type: SpeechRecognitionResult.self)
         speakerLabels = try? json.decodedArray(at: "speaker_labels", type: SpeakerLabel.self)

@@ -16,9 +16,9 @@
 
 import Foundation
 
-public extension Dictionary {
+internal extension Dictionary {
     
-    public func map<OutValue>(transform: (Value) throws -> OutValue) rethrows -> [Key: OutValue] {
+    internal func map<OutValue>(transform: (Value) throws -> OutValue) rethrows -> [Key: OutValue] {
         var dictionary = [Key: OutValue]()
         for (k, v) in self {
             dictionary[k] = try transform(v)

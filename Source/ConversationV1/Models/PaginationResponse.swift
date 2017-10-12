@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The pagination data for the returned objects. */
 public struct PaginationResponse: JSONDecodable, JSONEncodable {
@@ -51,7 +50,7 @@ public struct PaginationResponse: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `PaginationResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         refreshUrl = try json.getString(at: "refresh_url")
         nextUrl = try? json.getString(at: "next_url")
         total = try? json.getInt(at: "total")

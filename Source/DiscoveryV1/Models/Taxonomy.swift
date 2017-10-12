@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** 
   Extracted topic categories. Can be up to five levels deeps. For example:
@@ -37,7 +36,7 @@ public struct Taxonomy: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a Taxonomy object from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         confident = try? json.getString(at: "confident")
         label = try? json.getString(at: "label")
         score = try? json.getString(at: "score")

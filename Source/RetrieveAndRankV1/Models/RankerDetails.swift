@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A model containing information about a specific ranker. */
 public struct RankerDetails: JSONDecodable {
@@ -39,7 +38,7 @@ public struct RankerDetails: JSONDecodable {
     public let statusDescription: String
     
     /// Used internally to initialize a `RankerDetails` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         rankerID = try json.getString(at: "ranker_id")
         url = try json.getString(at: "url")
         name = try json.getString(at: "name")
@@ -47,7 +46,7 @@ public struct RankerDetails: JSONDecodable {
         statusDescription = try json.getString(at: "status_description")
         
         guard let rankerStatus = RankerStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: RankerStatus.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: RankerStatus.self)
         }
         status = rankerStatus
     }

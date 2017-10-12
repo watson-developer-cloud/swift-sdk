@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CreateDialogNode. */
 public struct CreateDialogNode: JSONDecodable, JSONEncodable {
@@ -36,7 +35,7 @@ public struct CreateDialogNode: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `CreateDialogNode` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         dialogNode = try json.getString(at: "dialog_node")
     }
 

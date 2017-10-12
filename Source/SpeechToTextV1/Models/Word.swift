@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A custom word that has been added to a custom language model. */
 public struct Word: JSONDecodable {
@@ -42,7 +41,7 @@ public struct Word: JSONDecodable {
     public let error: [WordError]?
     
     /// Used internally to initialize a `Word` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         word = try json.getString(at: "word")
         soundsLike = try json.decodedArray(at: "sounds_like", type: Swift.String.self)
         displayAs = try json.getString(at: "display_as")
@@ -114,7 +113,7 @@ public struct WordError: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to intialize a `WordError` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         self.json = try json.getDictionaryObject()
     }
 }

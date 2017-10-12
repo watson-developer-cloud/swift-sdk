@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The score of a particular tone. */
 public struct ToneScore: JSONDecodable {
@@ -31,7 +30,7 @@ public struct ToneScore: JSONDecodable {
     public let score: Double
     
     /// Used internally to initialize a `ToneScore` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         id = try json.getString(at: "tone_id")
         name = try json.getString(at: "tone_name")
         score = try json.getDouble(at: "score")

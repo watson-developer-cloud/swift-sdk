@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An entity object contains information about a specific entity in the input text. An entity is a 
  person, location, or event that is referred to by one or more mentions. */
@@ -47,7 +46,7 @@ public struct Entity: JSONDecodable {
     public let mentions: [ReferencingMentions]
     
     /// Used internally to initialize an `Entity` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         entityID = try json.getString(at: "eid")
         type = try json.getString(at: "type")
         generic = try json.getBool(at: "generic")
@@ -56,12 +55,12 @@ public struct Entity: JSONDecodable {
         mentions = try json.decodedArray(at: "mentref", type: ReferencingMentions.self)
         
         guard let eClass = EntityClass(rawValue: try json.getString(at: "class")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: EntityClass.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: EntityClass.self)
         }
         entityClass = eClass
         
         guard let entityLevel = EntityLevel(rawValue: try json.getString(at: "level")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: EntityLevel.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: EntityLevel.self)
         }
         level = entityLevel
     }
@@ -77,7 +76,7 @@ public struct ReferencingMentions: JSONDecodable {
     public let text: String
     
     /// Used internally to initialize a `ReferencingMentions` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         mentionID = try json.getString(at: "mid")
         text = try json.getString(at: "text")
     }

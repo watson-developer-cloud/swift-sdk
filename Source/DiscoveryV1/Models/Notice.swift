@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A notice produced by the ingestion process. */
 public struct Notice: JSONDecodable {
@@ -43,12 +42,12 @@ public struct Notice: JSONDecodable {
     public let details: [String : Any]
     
     /// Used internally to initialize a `Notice` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         noticeID = try json.getString(at: "notice_id")
         created = try json.getString(at: "created")
         documentID = try json.getString(at: "document_id")
         guard let noticeSeverity = NoticeSeverity(rawValue: try json.getString(at: "severity")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: NoticeSeverity.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: NoticeSeverity.self)
         }
         severity = noticeSeverity
         step = try json.getString(at: "step")

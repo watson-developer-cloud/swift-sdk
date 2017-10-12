@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An analysis of the input text, produced by the Relationship Extraction service. */
 public struct Document: JSONDecodable {
@@ -39,7 +38,7 @@ public struct Document: JSONDecodable {
     public let relations: Relations
     
     /// Used internally to initialize a `Document` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         id = try json.getString(at: "id")
         text = try json.getString(at: "text")
         sentences = try json.decodedArray(at: "sents", "sent", type: Sentence.self)

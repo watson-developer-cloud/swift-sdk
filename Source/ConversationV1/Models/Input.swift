@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An input object that includes the input text. */
 public struct Input: JSONEncodable, JSONDecodable {
@@ -37,7 +36,7 @@ public struct Input: JSONEncodable, JSONDecodable {
     }
 
     /// Used internally to initialize an `Input` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         self.json = try json.getDictionaryObject()
         text = try json.getString(at: "text")
     }

@@ -15,7 +15,6 @@
  **/
 
 import XCTest
-import RestKit
 
 class JSONValueTests: XCTestCase {
 

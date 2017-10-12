@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Natural Language Understanding service enables developers to programmatically
@@ -73,7 +72,7 @@ public class NaturalLanguageUnderstanding {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             var userInfo = [NSLocalizedFailureReasonErrorKey: message]

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Tone Analyzer service uses linguistic analysis to detect emotional tones,
@@ -72,7 +71,7 @@ public class ToneAnalyzer {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             var userInfo = [NSLocalizedFailureReasonErrorKey: message]
@@ -108,7 +107,7 @@ public class ToneAnalyzer {
         success: @escaping (ToneAnalysis) -> Void)
     {
         // construct body
-        guard let body = try? JSON(dictionary: ["text": text]).serialize() else {
+        guard let body = try? JSONWrapper(dictionary: ["text": text]).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)

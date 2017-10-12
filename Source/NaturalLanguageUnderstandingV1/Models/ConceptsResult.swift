@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The general concepts referenced or alluded to in the specified content. */
 public struct ConceptsResult: JSONDecodable {
@@ -30,7 +29,7 @@ public struct ConceptsResult: JSONDecodable {
     public let dbpediaResource: String?
 
     /// Used internally to initialize a `ConceptsResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try? json.getString(at: "text")
         relevance = try? json.getDouble(at: "relevance")
         dbpediaResource = try? json.getString(at: "dbpedia_resource")

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -30,7 +29,7 @@ public struct DocumentSource: JSONDecodable {
     public let enriched: DocumentEnriched?
     
     /// used internally to initialize a DocumentSource object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         enriched = try? json.decode(at: "enriched", type: DocumentEnriched.self)
     }
     

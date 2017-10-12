@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An output object that includes the response to the user, the nodes that were hit, and messages from the log. */
 public struct Output: JSONEncodable, JSONDecodable {
@@ -34,7 +33,7 @@ public struct Output: JSONEncodable, JSONDecodable {
     public let nodesVisited: [String]
 
     /// Used internally to initialize an `Output` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         self.json = try json.getDictionaryObject()
         logMessages = try json.decodedArray(at: "log_messages", type: LogMessage.self)
         text = try json.decodedArray(at: "text", type: Swift.String.self)
@@ -60,7 +59,7 @@ public struct LogMessage: JSONEncodable, JSONDecodable {
     public let message: String?
 
     /// Used internally to initialize a `LogMessage` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         self.json = try json.getDictionaryObject()
         level = try? json.getString(at: "level")
         message = try? json.getString(at: "msg")

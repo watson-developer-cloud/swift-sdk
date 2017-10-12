@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CreateEntity. */
 public struct CreateEntity: JSONDecodable, JSONEncodable {
@@ -56,7 +55,7 @@ public struct CreateEntity: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `CreateEntity` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         entity = try json.getString(at: "entity")
         description = try? json.getString(at: "description")
         metadata = try? json.getDictionaryObject(at: "metadata")

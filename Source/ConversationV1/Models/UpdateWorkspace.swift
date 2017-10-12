@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** UpdateWorkspace. */
 public struct UpdateWorkspace: JSONDecodable, JSONEncodable {
@@ -71,7 +70,7 @@ public struct UpdateWorkspace: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `UpdateWorkspace` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try? json.getString(at: "name")
         description = try? json.getString(at: "description")
         language = try? json.getString(at: "language")

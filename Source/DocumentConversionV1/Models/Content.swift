@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -33,7 +32,7 @@ public struct Content: JSONDecodable {
     public let text: String?
     
     /** used internally to initialize Content objects */
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         mediaType = try? json.getString(at: "media_type")
         text = try? json.getString(at: "text")
     }

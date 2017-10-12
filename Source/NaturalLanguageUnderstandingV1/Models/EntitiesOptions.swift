@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Whether or not to return important people, places, geopolitical, and other entities detected
  in the analyzed content. */

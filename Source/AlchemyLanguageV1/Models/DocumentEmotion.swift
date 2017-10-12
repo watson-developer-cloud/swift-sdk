@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Response object for **Emotions** related requests */
 public struct DocumentEmotion: JSONDecodable {
@@ -33,10 +32,10 @@ public struct DocumentEmotion: JSONDecodable {
     public let docEmotions: Emotions?
     
     /// used internally to initialize a DocumentEmotion object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: DocumentEmotion.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: DocumentEmotion.self)
         }
         
         url = try? json.getString(at: "url")

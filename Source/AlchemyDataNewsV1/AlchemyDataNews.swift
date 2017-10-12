@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  AlchemyData News provides news and blog content enriched with natural language processing to allow
@@ -67,7 +66,7 @@ public class AlchemyDataNews {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = 400
             let status = try json.getString(at: "status")
             let statusInfo = try json.getString(at: "statusInfo")

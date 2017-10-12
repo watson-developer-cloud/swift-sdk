@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An object with information about the deleted configuration. */
 public struct DeletedConfiguration: JSONDecodable {
@@ -31,7 +30,7 @@ public struct DeletedConfiguration: JSONDecodable {
     public let noticeMessages: [NoticeMessage]?
     
     /// Used internally to initialize a `DeletedConfiguration` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         configurationID = try json.getString(at: "configuration_id")
         status = try json.getString(at: "status")
         noticeMessages = try? json.decodedArray(at: "notices")
@@ -54,7 +53,7 @@ public struct NoticeMessage: JSONDecodable {
     public let description: String
     
     /// Used internally to initialize a `NoticeMessage` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         noticeID = try json.getString(at: "notice_id")
         created = try json.getString(at: "created")
         severity = try json.getString(at: "severity")

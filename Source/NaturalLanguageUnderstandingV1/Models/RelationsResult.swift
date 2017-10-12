@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The relations between entities found in the content. */
 public struct RelationsResult: JSONDecodable {
@@ -33,7 +32,7 @@ public struct RelationsResult: JSONDecodable {
     public let arguments: [RelationArgument]?
 
     /// Used internally to initialize a `RelationsResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         score = try? json.getDouble(at: "score")
         sentence = try? json.getString(at: "sentence")
         type = try? json.getString(at: "type")
@@ -51,7 +50,7 @@ public struct RelationArgument: JSONDecodable {
     public let text: String?
     
     /// Used internally to initialize a `RelationArgument` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         entities = try? json.decodedArray(at: "entities", type: RelationEntity.self)
         text = try? json.getString(at: "text")
     }

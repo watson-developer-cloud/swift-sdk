@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CreateExample. */
 public struct CreateExample: JSONDecodable, JSONEncodable {
@@ -36,7 +35,7 @@ public struct CreateExample: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `CreateExample` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try json.getString(at: "text")
     }
 

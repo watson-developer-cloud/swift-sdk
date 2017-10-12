@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -76,7 +75,7 @@ public struct DocumentUrl: JSONDecodable {
     public let text: String?
     
     /// used internally to initialize a DocumentUrl object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         title = try? json.getString(at: "title")
         url = try? json.getString(at: "url")
         author = try? json.getString(at: "author")

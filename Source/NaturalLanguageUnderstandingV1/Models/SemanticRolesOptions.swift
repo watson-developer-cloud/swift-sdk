@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An option specifying whether or not to identify the subjects, actions, and verbs in the 
  analyzed content. */

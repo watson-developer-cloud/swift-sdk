@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images,
@@ -70,7 +69,7 @@ public class VisualRecognition {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             var code = response?.statusCode ?? 400
             let userInfo: [String: String]
             if let status = try? json.getString(at: "status") {
@@ -214,7 +213,7 @@ public class VisualRecognition {
         if let threshold = threshold {
             parameters["threshold"] = threshold
         }
-        guard let json = try? JSON(dictionary: parameters).serialize() else {
+        guard let json = try? JSONWrapper(dictionary: parameters).serialize() else {
             failure?(RestError.encodingError)
             return
         }
@@ -1188,7 +1187,7 @@ public class VisualRecognition {
         let fileURL = directoryURL.appendingPathComponent(fileName)!
         
         // save JSON dictionary to file
-        let data = try JSON(dictionary: json).serialize()
+        let data = try JSONWrapper(dictionary: json).serialize()
         try data.write(to: fileURL, options: .atomic)
         
         return fileURL

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 
 /**
@@ -41,10 +40,10 @@ public struct PublicationResponse: JSONDecodable {
     public let publicationDate: PublicationDate?
     
     /// Used internally to initialize a PublicationResponse object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: PublicationResponse.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: PublicationResponse.self)
         }
         
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {

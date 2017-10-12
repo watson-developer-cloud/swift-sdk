@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An option indicating whether or not to include the author, publication date, and title of 
  the HTML or URL content. */

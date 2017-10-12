@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A custom voice model supported by the Text to Speech service. */
 public struct CustomizationWords: JSONDecodable {
@@ -47,7 +46,7 @@ public struct CustomizationWords: JSONDecodable {
     public let words: [Word]
     
     /// Used internally to initialize a `CustomizationWords` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         customizationID = try json.getString(at: "customization_id")
         name = try json.getString(at: "name")
         language = try json.getString(at: "language")

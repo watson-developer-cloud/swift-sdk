@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** WorkspaceCollectionResponse. */
 public struct WorkspaceCollectionResponse: JSONDecodable, JSONEncodable {
@@ -41,7 +40,7 @@ public struct WorkspaceCollectionResponse: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `WorkspaceCollectionResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         workspaces = try json.decodedArray(at: "workspaces", type: WorkspaceResponse.self)
         pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
     }

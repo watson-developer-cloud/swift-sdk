@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An object containing the results returned by the NLU service. */
 public struct AnalysisResults: JSONDecodable {
@@ -60,7 +59,7 @@ public struct AnalysisResults: JSONDecodable {
     public let sentiment: SentimentResult?
     
     /// Used internally to initialize a `AnalysisResults` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         language = try? json.getString(at: "language")
         analyzedText = try? json.getString(at: "analyzed_text")
         retrievedUrl = try? json.getString(at: "retrieved_url")
@@ -84,7 +83,7 @@ public struct Usage: JSONDecodable {
     public let features: Int
     
     /// Used internally to initialize a 'Usage' model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         features = try json.getInt(at: "features")
     }
 }

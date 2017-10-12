@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Provides every individual preference for a category. */
 public struct ConsumptionPreferencesNode: JSONDecodable {
@@ -33,7 +32,7 @@ public struct ConsumptionPreferencesNode: JSONDecodable {
     public let score: Double
     
     /// Used internally to initialize a `ConsumptionPreferencesNode` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         consumptionPreferenceId = try json.getString(at: "consumption_preference_id")
         name = try json.getString(at: "name")
         score = try json.getDouble(at: "score")

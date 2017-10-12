@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** ValueCollection. */
 public struct ValueCollection: JSONDecodable, JSONEncodable {
@@ -41,7 +40,7 @@ public struct ValueCollection: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `ValueCollection` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         values = try json.decodedArray(at: "values", type: ValueExport.self)
         pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
     }

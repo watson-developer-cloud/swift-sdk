@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Natural Language Classifier service enables developers without a background in
@@ -71,7 +70,7 @@ public class NaturalLanguageClassifier {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             let description = try json.getString(at: "description")
@@ -179,7 +178,7 @@ public class NaturalLanguageClassifier {
         success: @escaping (Classification) -> Void) {
         
         // construct query parameters
-        let json = JSON(dictionary: ["text": text])
+        let json = JSONWrapper(dictionary: ["text": text])
         guard let body = try? json.serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]

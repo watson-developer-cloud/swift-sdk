@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An object with information about the deleted environment. */
 public struct DeletedEnvironment: JSONDecodable {
@@ -28,7 +27,7 @@ public struct DeletedEnvironment: JSONDecodable {
     public let status: String
     
     /// Used internally to initialize a `DeletedEnvironment` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         environmentID = try json.getString(at: "environment_id")
         status = try json.getString(at: "status")
     }

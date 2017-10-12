@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The results from classifying one or more images. */
 public struct ClassifiedImages: JSONDecodable {
@@ -27,7 +26,7 @@ public struct ClassifiedImages: JSONDecodable {
     public let warnings: [WarningInfo]?
     
     /// Used internally to initialize a `ClassifiedImages` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         images = try json.decodedArray(at: "images", type: ClassifiedImage.self)
         warnings = try? json.decodedArray(at: "warnings", type: WarningInfo.self)
     }
@@ -54,7 +53,7 @@ public struct ClassifiedImage: JSONDecodable {
     public let classifiers: [ClassifierResults]
     
     /// Used internally to initialize a `ClassifiedImage` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         sourceURL = try? json.getString(at: "source_url")
         resolvedURL = try? json.getString(at: "resolved_url")
         image = try? json.getString(at: "image")
@@ -76,7 +75,7 @@ public struct ClassifierResults: JSONDecodable {
     public let classes: [Classification]
     
     /// Used internally to initialize a `ClassifierResults` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try json.getString(at: "name")
         classifierID = try json.getString(at: "classifier_id")
         classes = try json.decodedArray(at: "classes", type: Classification.self)
@@ -96,7 +95,7 @@ public struct Classification: JSONDecodable {
     public let typeHierarchy: String?
     
     /// Used internally to initialize a `Classification` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         classification = try json.getString(at: "class")
         score = try json.getDouble(at: "score")
         typeHierarchy = try? json.getString(at: "type_hierarchy")

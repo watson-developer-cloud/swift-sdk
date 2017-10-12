@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An option specifying if the relationships found between entities in the analyzed content should 
  be returned. */

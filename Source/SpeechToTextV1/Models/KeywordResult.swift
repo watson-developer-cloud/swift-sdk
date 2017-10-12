@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A keyword identified by Speech to Text. */
 public struct KeywordResult: JSONDecodable {
@@ -34,7 +33,7 @@ public struct KeywordResult: JSONDecodable {
     public let confidence: Double
 
     /// Used internally to initialize a `KeywordResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         normalizedText = try json.getString(at: "normalized_text")
         startTime = try json.getDouble(at: "start_time")
         endTime = try json.getDouble(at: "end_time")

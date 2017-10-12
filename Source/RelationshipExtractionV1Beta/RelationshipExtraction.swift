@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The Watson Relationship Extraction service is able to parse sentences into their various components 
@@ -73,7 +72,7 @@ public class RelationshipExtraction {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             let userInfo = [NSLocalizedFailureReasonErrorKey: message]

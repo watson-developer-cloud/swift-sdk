@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The pagination data for the returned objects. */
 public struct LogPagination: JSONDecodable, JSONEncodable {
@@ -41,7 +40,7 @@ public struct LogPagination: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `LogPagination` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         nextUrl = try? json.getString(at: "next_url")
         matched = try? json.getInt(at: "matched")
     }

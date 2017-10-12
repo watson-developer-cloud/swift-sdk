@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An aggregation produced by the Discovery service to analyze the input provided. */
 public struct Aggregation: JSONDecodable {
@@ -48,7 +47,7 @@ public struct Aggregation: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize an `Aggregation` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         type = try? json.getString(at: "type")
         field = try? json.getString(at: "field")
         results = try? json.decodedArray(at: "results", type: AggregationResult.self)
@@ -82,7 +81,7 @@ public struct AggregationResult: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialze an 'AggregationResult' model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         key = try? json.getString(at: "key")
         matchingResults = try? json.getInt(at: "matching_results")
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)

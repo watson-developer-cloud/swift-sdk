@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CreateIntent. */
 public struct CreateIntent: JSONDecodable, JSONEncodable {
@@ -46,7 +45,7 @@ public struct CreateIntent: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `CreateIntent` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         intent = try json.getString(at: "intent")
         description = try? json.getString(at: "description")
         examples = try? json.decodedArray(at: "examples", type: CreateExample.self)

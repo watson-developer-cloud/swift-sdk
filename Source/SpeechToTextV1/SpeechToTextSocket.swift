@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 internal class SpeechToTextSocket: WebSocketDelegate {
     
@@ -229,7 +228,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     }
     
     internal func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-        guard let json = try? JSON(string: text) else {
+        guard let json = try? JSONWrapper(string: text) else {
             return
         }
         if let state = try? json.decode(type: RecognitionState.self) {

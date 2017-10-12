@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A response from the Conversation service. */
 public struct MessageResponse: JSONDecodable {
@@ -48,7 +47,7 @@ public struct MessageResponse: JSONDecodable {
     public let output: Output
 
     /// Used internally to initialize a `MessageResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         self.json = try json.getDictionaryObject()
         input = try? json.decode(at: "input")
         alternateIntents = try? json.getBool(at: "alternate_intents")

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -43,10 +42,10 @@ public struct Taxonomies: JSONDecodable {
     public let taxonomy: [Taxonomy]?
     
     /// Used internally to initialize a Taxonomies object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Taxonomies.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: Taxonomies.self)
         }
         
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {

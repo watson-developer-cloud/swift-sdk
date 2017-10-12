@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CreateSynonym. */
 public struct CreateSynonym: JSONDecodable, JSONEncodable {
@@ -36,7 +35,7 @@ public struct CreateSynonym: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `CreateSynonym` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         synonym = try json.getString(at: "synonym")
     }
 

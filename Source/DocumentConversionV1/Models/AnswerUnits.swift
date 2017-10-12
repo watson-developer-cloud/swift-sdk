@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -46,7 +45,7 @@ public struct AnswerUnits: JSONDecodable {
     public let content: [Content]?
     
     /** used internally to initialize AnswerUnits objects */
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         id = try? json.getString(at: "id")
         type = try? json.getString(at: "type")
         parentId = try? json.getString(at: "parent_id")

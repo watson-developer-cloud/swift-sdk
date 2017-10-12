@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Word alternatives produced by Speech to Text. */
 public struct WordAlternativeResults: JSONDecodable {
@@ -32,7 +31,7 @@ public struct WordAlternativeResults: JSONDecodable {
     public let alternatives: [WordAlternativeResult]
 
     /// Used internally to initialize an `WordAlternativeResults` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         startTime = try json.getDouble(at: "start_time")
         endTime = try json.getDouble(at: "end_time")
         alternatives = try json.decodedArray(at: "alternatives", type: WordAlternativeResult.self)

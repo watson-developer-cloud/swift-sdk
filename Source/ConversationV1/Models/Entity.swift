@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A term from the request that was identified as an entity. */
 public struct Entity: JSONEncodable, JSONDecodable {
@@ -38,7 +37,7 @@ public struct Entity: JSONEncodable, JSONDecodable {
     public let value: String
 
     /// Used internally to initialize an `Entity` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         self.json = try json.getDictionaryObject()
         entity = try json.getString(at: "entity")
         let indices = try json.decodedArray(at: "location", type: Swift.Int.self)

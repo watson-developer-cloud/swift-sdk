@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The hierarchical 5-level taxonomy the content is categorized into. */
 public struct CategoriesResult: JSONDecodable {
@@ -27,7 +26,7 @@ public struct CategoriesResult: JSONDecodable {
     public let score: Double?
 
     /// Used internally to initialize a `CategoriesResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         label = try? json.getString(at: "label")
         score = try? json.getDouble(at: "score")
     }

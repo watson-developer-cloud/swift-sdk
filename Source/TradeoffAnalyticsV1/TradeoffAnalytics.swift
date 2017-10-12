@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Tradeoff Analytics service helps people make better choices when faces with a
@@ -69,7 +68,7 @@ public class TradeoffAnalytics {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             var userInfo = [NSLocalizedFailureReasonErrorKey: message]

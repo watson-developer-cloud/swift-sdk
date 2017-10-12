@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The important people, places, geopolitical entities and other types of entities in your content. */
 public struct EntitiesResult: JSONDecodable {
@@ -36,7 +35,7 @@ public struct EntitiesResult: JSONDecodable {
     public let sentiment: EntitySentiment?
 
     /// Used internally to initialize an `EntitiesResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         type = try? json.getString(at: "type")
         relevance = try? json.getDouble(at: "relevance")
         count = try? json.getInt(at: "count")
@@ -51,7 +50,7 @@ public struct EntitiesResult: JSONDecodable {
         public let score: Double?
         
         /// Used internally to initialize an `EntitySentiment` model from JSON.
-        public init(json: JSON) throws {
+        public init(json: JSONWrapper) throws {
             score = try? json.getDouble(at: "score")
         }
     }

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** IntentExportResponse. */
 public struct IntentExportResponse: JSONDecodable, JSONEncodable {
@@ -56,7 +55,7 @@ public struct IntentExportResponse: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `IntentExportResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         intent = try json.getString(at: "intent")
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")

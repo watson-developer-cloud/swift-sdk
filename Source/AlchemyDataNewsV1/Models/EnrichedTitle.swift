@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -45,7 +44,7 @@ public struct EnrichedTitle: JSONDecodable {
     public let concepts: [Concept]?
     
     /// used internally to initialize an EnrichedTitle object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         entities = try? json.decodedArray(at: "entities", type: Entity.self)
         relations = try? json.decodedArray(at: "relations", type: SAORelation.self)
         taxonomy = try? json.decodedArray(at: "taxonomy", type: Taxonomy.self)

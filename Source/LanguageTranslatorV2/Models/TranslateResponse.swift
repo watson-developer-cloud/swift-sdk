@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The result of translating an input text from a source language to a target language. */
 public struct TranslateResponse: JSONDecodable {
@@ -30,7 +29,7 @@ public struct TranslateResponse: JSONDecodable {
     public let translations: [Translation]
 
     /// Used internally to initialize a `TranslateResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         wordCount = try json.getInt(at: "word_count")
         characterCount = try json.getInt(at: "character_count")
         translations = try json.decodedArray(at: "translations", type: Translation.self)
@@ -44,7 +43,7 @@ public struct Translation: JSONDecodable {
     public let translation: String
 
     /// Used internally to initialize a `Translation` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         translation = try json.getString(at: "translation")
     }
 }

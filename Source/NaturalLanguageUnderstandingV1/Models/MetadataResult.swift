@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The Authors, Publication Date, and Title of the document. Supports URL
     and HTML input types. */
@@ -31,7 +30,7 @@ public struct MetadataResult: JSONDecodable {
     public let title: String?
 
     /// Used internally to initialize a `MetadataResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         authors = try? json.decodedArray(at: "authors", type: Author.self)
         publicationDate = try? json.getString(at: "publication_date")
         title = try? json.getString(at: "title")

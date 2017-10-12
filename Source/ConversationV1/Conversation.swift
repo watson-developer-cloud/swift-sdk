@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /// A Workspace is a container for all the artifacts that define the behavior of your service.
 public typealias WorkspaceID = String
@@ -75,7 +74,7 @@ public class Conversation {
         }
 
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             let userInfo = [NSLocalizedDescriptionKey: message]

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Value. */
 public struct Value: JSONDecodable, JSONEncodable {
@@ -51,7 +50,7 @@ public struct Value: JSONDecodable, JSONEncodable {
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `Value` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         value = try json.getString(at: "value")
         metadata = try? json.getDictionaryObject(at: "metadata")
         created = try json.getString(at: "created")

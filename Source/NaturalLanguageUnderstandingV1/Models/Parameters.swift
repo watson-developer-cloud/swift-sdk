@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** JSON object containing request parameters */
 public struct Parameters: JSONEncodable {

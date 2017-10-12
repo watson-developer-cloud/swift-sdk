@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -37,10 +36,10 @@ public struct DocumentText: JSONDecodable {
     public let text: String?
     
     /// Used internally to initialize a DocumentText object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: DocumentText.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: DocumentText.self)
         }
         
         url = try? json.getString(at: "url")

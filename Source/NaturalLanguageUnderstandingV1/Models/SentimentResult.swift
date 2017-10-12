@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The sentiment of the content. */
 public struct SentimentResult: JSONDecodable {
@@ -27,7 +26,7 @@ public struct SentimentResult: JSONDecodable {
     public let targets: [TargetedSentimentResults]?
 
     /// Used internally to initialize a `SentimentResult` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         document = try? json.decode(at: "document", type: DocumentSentimentResults.self)
         targets = try? json.decodedArray(at: "targets", type: TargetedSentimentResults.self)
     }
@@ -40,7 +39,7 @@ public struct DocumentSentimentResults: JSONDecodable {
     public let score: Double?
     
     /// Used internally to initialize a `DocumentSentimentResults` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         score = try? json.getDouble(at: "score")
     }
 }
@@ -55,7 +54,7 @@ public struct TargetedSentimentResults: JSONDecodable {
     public let score: Double?
     
     /// Used internally to initialize a `TargetedSentimentResults` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         score = try? json.getDouble(at: "score")
     }

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** A dialog conversation. */
 public struct Conversation: JSONDecodable {
@@ -36,7 +35,7 @@ public struct Conversation: JSONDecodable {
     public let profile: [String: String]
 
     /// Used internally to initialize a `Conversation` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         hitNodes = try json.decodedArray(at: "hit_nodes", type: HitNode.self)
         conversationID = try json.getInt(at: "conversation_id")
         clientID = try json.getInt(at: "client_id")
@@ -69,7 +68,7 @@ public struct HitNode: JSONDecodable {
     public let nodeID: Int
 
     /// Used internally to initialize a `HitNode` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         details = try json.getString(at: "details")
         label = try json.getString(at: "label")
         type = try json.getString(at: "type")
@@ -90,7 +89,7 @@ public struct Message: JSONDecodable {
     public let fromClient: String
 
     /// Used internally to initialize a `Message` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try json.getString(at: "text")
         dateTime = try json.getString(at: "date_time")
         fromClient = try json.getString(at: "from_client")

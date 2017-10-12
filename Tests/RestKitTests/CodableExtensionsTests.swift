@@ -33,6 +33,7 @@ class CodableExtensionsTests: XCTestCase {
         ("testEncodeOptional", testEncodeOptional),
         ("testEncodeOptionalEmpty", testEncodeOptionalEmpty),
         ("testEncodeOptionalNil", testEncodeOptionalNil),
+        ("testDecodeSimpleModel", testDecodeSimpleModel),
         ("testDecodeMetadata", testDecodeMetadata),
         ("testDecodeCustom", testDecodeCustom),
         ("testDecodeAdditionalProperties", testDecodeAdditionalProperties),
@@ -257,6 +258,18 @@ class CodableExtensionsTests: XCTestCase {
         XCTAssertEqual(json.sorted(), expected.sorted())
     }
 
+    func testDecodeSimpleModel() {
+        let json = """
+            {
+                "name": "name",
+                "newField": "newField"
+            }
+            """
+        let data = json.data(using: .utf8)!
+        let model = try! JSONDecoder().decode(SimpleModel.self, from: data)
+        XCTAssertEqual(model.name, "name")
+    }
+
     func testDecodeMetadata() {
         let json = """
             {
@@ -408,6 +421,18 @@ class CodableExtensionsTests: XCTestCase {
         XCTAssertNil(model.name)
         XCTAssertNil(model.metadata)
         XCTAssertNil(model.additionalProperties)
+    }
+}
+
+//===----------------------------------------------------------------------===//
+// SimpleModel
+//===----------------------------------------------------------------------===//
+
+private struct SimpleModel: Codable {
+    let name: String
+
+    init(name: String) {
+        self.name = name
     }
 }
 

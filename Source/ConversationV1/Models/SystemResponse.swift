@@ -35,13 +35,13 @@ public struct SystemResponse {
 extension SystemResponse: Codable {
     
     public init(from decoder: Decoder) throws {
-        let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamic.decode([String: JSON].self, excluding: [CodingKey]())
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
+        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
     }
 
     public func encode(to encoder: Encoder) throws {
-        var dynamic = encoder.container(keyedBy: DynamicKeys.self)
-        try dynamic.encodeIfPresent(additionalProperties)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

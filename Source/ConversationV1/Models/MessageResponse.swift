@@ -77,26 +77,26 @@ extension MessageResponse: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         input = try container.decodeIfPresent(MessageInput.self, forKey: .input)
         intents = try container.decode([RuntimeIntent].self, forKey: .intents)
         entities = try container.decode([RuntimeEntity].self, forKey: .entities)
         alternateIntents = try container.decodeIfPresent(Bool.self, forKey: .alternateIntents)
         context = try container.decode(Context.self, forKey: .context)
         output = try container.decode(OutputData.self, forKey: .output)
-        additionalProperties = try dynamic.decode([String: JSON].self, excluding: CodingKeys.allValues)
+        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        var dynamic = encoder.container(keyedBy: DynamicKeys.self)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try container.encodeIfPresent(input, forKey: .input)
         try container.encode(intents, forKey: .intents)
         try container.encode(entities, forKey: .entities)
         try container.encodeIfPresent(alternateIntents, forKey: .alternateIntents)
         try container.encode(context, forKey: .context)
         try container.encode(output, forKey: .output)
-        try dynamic.encodeIfPresent(additionalProperties)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

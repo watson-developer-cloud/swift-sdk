@@ -53,18 +53,18 @@ extension Context: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         conversationID = try container.decode(String.self, forKey: .conversationID)
         system = try container.decode(SystemResponse.self, forKey: .system)
-        additionalProperties = try dynamic.decode([String: JSON].self, excluding: CodingKeys.allValues)
+        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        var dynamic = encoder.container(keyedBy: DynamicKeys.self)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try container.encode(conversationID, forKey: .conversationID)
         try container.encode(system, forKey: .system)
-        try dynamic.encodeIfPresent(additionalProperties)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

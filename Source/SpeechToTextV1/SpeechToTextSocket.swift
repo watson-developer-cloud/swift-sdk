@@ -178,9 +178,9 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
     }
     
-    private func onResultsMessage(wrapper: SpeechRecognitionEvent) {
+    private func onResultsMessage(event: SpeechRecognitionEvent) {
         state = .Transcribing
-        results.addResults(wrapper: wrapper)
+        results.addResults(event: event)
         onResults?(results)
     }
     
@@ -234,8 +234,8 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         if let state = try? json.decode(type: RecognitionState.self) {
             onStateMessage(state: state)
         }
-        if let results = try? json.decode(type: SpeechRecognitionEvent.self) {
-            onResultsMessage(wrapper: results)
+        if let event = try? json.decode(type: SpeechRecognitionEvent.self) {
+            onResultsMessage(event: event)
         }
         if let error = try? json.getString(at: "error") {
             onErrorMessage(error: error)

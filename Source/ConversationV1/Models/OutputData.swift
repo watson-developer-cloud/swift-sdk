@@ -59,19 +59,19 @@ extension OutputData: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         logMessages = try container.decode([LogMessage].self, forKey: .logMessages)
         text = try container.decode([String].self, forKey: .text)
         nodesVisited = try container.decodeIfPresent([String].self, forKey: .nodesVisited)
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try container.encode(logMessages, forKey: .logMessages)
         try container.encode(text, forKey: .text)
         try container.encodeIfPresent(nodesVisited, forKey: .nodesVisited)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 

@@ -60,17 +60,17 @@ extension LogMessage: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         level = try container.decode(String.self, forKey: .level)
         msg = try container.decode(String.self, forKey: .msg)
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try container.encode(level, forKey: .level)
         try container.encode(msg, forKey: .msg)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 

@@ -71,23 +71,23 @@ extension RuntimeEntity: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         entity = try container.decode(String.self, forKey: .entity)
         location = try container.decode([Int].self, forKey: .location)
         value = try container.decode(String.self, forKey: .value)
         confidence = try container.decodeIfPresent(Double.self, forKey: .confidence)
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try container.encode(entity, forKey: .entity)
         try container.encode(location, forKey: .location)
         try container.encode(value, forKey: .value)
         try container.encodeIfPresent(confidence, forKey: .confidence)
         try container.encodeIfPresent(metadata, forKey: .metadata)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 

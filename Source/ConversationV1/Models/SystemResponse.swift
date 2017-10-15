@@ -33,7 +33,7 @@ public struct SystemResponse {
 }
 
 extension SystemResponse: Codable {
-    
+
     public init(from decoder: Decoder) throws {
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())

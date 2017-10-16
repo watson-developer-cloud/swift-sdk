@@ -2105,68 +2105,6 @@ public class Conversation {
     }
 
     /**
-     List log events in all workspaces.
-
-     List log events in all workspaces in the service instance.
-
-     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
-     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or `request.context.metadata.deployment`. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
-     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
-     - parameter cursor: A token identifying the last value from the previous page of results.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-    */
-    public func listAllLogs(
-        sort: String? = nil,
-        filter: String? = nil,
-        pageLimit: Int? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LogCollection) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort)
-            queryParameters.append(queryParameter)
-        }
-        if let filter = filter {
-            let queryParameter = URLQueryItem(name: "filter", value: filter)
-            queryParameters.append(queryParameter)
-        }
-        if let pageLimit = pageLimit {
-            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
-            queryParameters.append(queryParameter)
-        }
-        if let cursor = cursor {
-            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/logs",
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<LogCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
      List log events in a workspace.
 
      List log events in a specific workspace.

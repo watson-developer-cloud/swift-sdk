@@ -16,39 +16,32 @@
 
 import Foundation
 
-/** CreateExample. */
-public struct CreateExample {
+/** For internal use only. */
+public struct SystemResponse {
 
-    /// The text of a user input example.
-    public var text: String
+    /// Additional properties associated with this model.
+    public var additionalProperties: [String: JSON]
 
     /**
-     Initialize a `CreateExample` with member variables.
+     Initialize a `SystemResponse`.
 
-     - parameter text: The text of a user input example.
-
-     - returns: An initialized `CreateExample`.
+     - returns: An initialized `SystemResponse`.
     */
-    public init(text: String) {
-        self.text = text
+    public init(additionalProperties: [String: JSON] = [:]) {
+        self.additionalProperties = additionalProperties
     }
 }
 
-extension CreateExample: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        static let allValues = [text]
-    }
+extension SystemResponse: Codable {
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decode(String.self, forKey: .text)
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
+        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(text, forKey: .text)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

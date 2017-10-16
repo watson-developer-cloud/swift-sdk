@@ -16,46 +16,46 @@
 
 import Foundation
 
-/** An array of entities. */
-public struct EntityCollection {
+/** IntentCollection. */
+public struct IntentCollection {
 
-    /// An array of entities.
-    public var entities: [EntityExport]
+    /// An array of intents.
+    public var intents: [IntentExport]
 
     /// An object defining the pagination data for the returned objects.
     public var pagination: Pagination
 
     /**
-     Initialize a `EntityCollection` with member variables.
+     Initialize a `IntentCollection` with member variables.
 
-     - parameter entities: An array of entities.
+     - parameter intents: An array of intents.
      - parameter pagination: An object defining the pagination data for the returned objects.
 
-     - returns: An initialized `EntityCollection`.
+     - returns: An initialized `IntentCollection`.
     */
-    public init(entities: [EntityExport], pagination: Pagination) {
-        self.entities = entities
+    public init(intents: [IntentExport], pagination: Pagination) {
+        self.intents = intents
         self.pagination = pagination
     }
 }
 
-extension EntityCollection: Codable {
+extension IntentCollection: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case entities = "entities"
+        case intents = "intents"
         case pagination = "pagination"
-        static let allValues = [entities, pagination]
+        static let allValues = [intents, pagination]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        entities = try container.decode([EntityExport].self, forKey: .entities)
+        intents = try container.decode([IntentExport].self, forKey: .intents)
         pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(entities, forKey: .entities)
+        try container.encode(intents, forKey: .intents)
         try container.encode(pagination, forKey: .pagination)
     }
 

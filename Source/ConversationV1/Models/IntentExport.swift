@@ -16,8 +16,8 @@
 
 import Foundation
 
-/** Intent. */
-public struct Intent {
+/** IntentExport. */
+public struct IntentExport {
 
     /// The name of the intent.
     public var intentName: String
@@ -31,32 +31,38 @@ public struct Intent {
     /// The description of the intent.
     public var description: String?
 
+    /// An array of user input examples.
+    public var examples: [Example]?
+
     /**
-     Initialize a `Intent` with member variables.
+     Initialize a `IntentExport` with member variables.
 
      - parameter intentName: The name of the intent.
      - parameter created: The timestamp for creation of the intent.
      - parameter updated: The timestamp for the last update to the intent.
      - parameter description: The description of the intent.
+     - parameter examples: An array of user input examples.
 
-     - returns: An initialized `Intent`.
+     - returns: An initialized `IntentExport`.
     */
-    public init(intentName: String, created: String, updated: String, description: String? = nil) {
+    public init(intentName: String, created: String, updated: String, description: String? = nil, examples: [Example]? = nil) {
         self.intentName = intentName
         self.created = created
         self.updated = updated
         self.description = description
+        self.examples = examples
     }
 }
 
-extension Intent: Codable {
+extension IntentExport: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case intentName = "intent"
         case created = "created"
         case updated = "updated"
         case description = "description"
-        static let allValues = [intentName, created, updated, description]
+        case examples = "examples"
+        static let allValues = [intentName, created, updated, description, examples]
     }
 
     public init(from decoder: Decoder) throws {
@@ -65,6 +71,7 @@ extension Intent: Codable {
         created = try container.decode(String.self, forKey: .created)
         updated = try container.decode(String.self, forKey: .updated)
         description = try container.decodeIfPresent(String.self, forKey: .description)
+        examples = try container.decodeIfPresent([Example].self, forKey: .examples)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -73,6 +80,7 @@ extension Intent: Codable {
         try container.encode(created, forKey: .created)
         try container.encode(updated, forKey: .updated)
         try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(examples, forKey: .examples)
     }
 
 }

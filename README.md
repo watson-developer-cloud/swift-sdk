@@ -312,8 +312,9 @@ Context variables are get/set using the `var additionalProperties: [String: JSON
 // get the `pizza_size` context variable
 conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
-    guard case let .string(size) = response.context.additionalProperties["pizza_size"]! else { return }
-    print(size)
+    if case let .string(size) = response.context.additionalProperties["pizza_size"]! {
+        print(size)
+    }
 }
 
 // set the `pizza_size` context variable

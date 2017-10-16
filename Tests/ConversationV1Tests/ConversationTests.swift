@@ -426,10 +426,10 @@ class ConversationTests: XCTestCase {
         let workspaceIntent = CreateIntent(intent: "Intent1", description: "description of Intent1", examples: [intentExample])
         let entityValue = CreateValue(value: "Entity1Value", metadata: workspaceMetadata, synonyms: ["Synonym1", "Synonym2"])
         let workspaceEntity = CreateEntity(entity: "Entity1", description: "description of Entity1", values: [entityValue])
-        // let workspaceDialogNode = CreateDialogNode(dialogNode: "DialogNode1", description: "description of DialogNode1")
+        let workspaceDialogNode = CreateDialogNode(dialogNode: "DialogNode1", description: "description of DialogNode1")
         let workspaceCounterexample = CreateCounterexample(text: "This is a counterexample")
 
-        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent], entities: [workspaceEntity], dialogNodes: nil, counterexamples: [workspaceCounterexample],metadata: workspaceMetadata)
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent], entities: [workspaceEntity], dialogNodes: [workspaceDialogNode], counterexamples: [workspaceCounterexample],metadata: workspaceMetadata)
         conversation.createWorkspace(properties: createWorkspaceBody, failure: failWithError) { workspace in
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
@@ -1375,6 +1375,127 @@ class ConversationTests: XCTestCase {
 
         conversation.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: updatedSynonym, failure: failWithError) {
             expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    // MARK: - Dialog Nodes
+
+    func testListAllDialogNodes() {
+        let description = "List all dialog nodes"
+        let expectation = self.expectation(description: description)
+
+        conversation.listDialogNodes(workspaceID: workspaceID, failure: failWithError) { nodes in
+            for node in nodes.dialogNodes {
+                XCTAssertNotNil(node.dialogNodeID)
+            }
+            XCTAssertGreaterThan(nodes.dialogNodes.count, 0)
+            XCTAssertNotNil(nodes.pagination.refreshUrl)
+            XCTAssertNil(nodes.pagination.nextUrl)
+            XCTAssertNil(nodes.pagination.total)
+            XCTAssertNil(nodes.pagination.matched)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testCreateAndDeleteDialogNode() {
+        let description1 = "Create a dialog node."
+        let expectation1 = self.expectation(description: description1)
+
+        let dialogNode = CreateDialogNode(
+            dialogNode: "YesYouCan",
+            description: "Reply affirmatively",
+            conditions: "#order_pizza",
+            parent: nil,
+            previousSibling: nil,
+            output: [
+                "text": .object([
+                    "selection_policy": .string("random"),
+                    "values": .array([.string("Yes you can!"), .string("Of course!")])
+                ])
+            ],
+            context: nil,
+            metadata: ["swift-sdk-test": .boolean(true)],
+            nextStep: nil,
+            actions: nil,
+            title: nil,
+            nodeType: nil,
+            eventName: nil,
+            variable: nil)
+
+        conversation.createDialogNode(workspaceID: workspaceID, properties: dialogNode, failure: failWithError) {
+            node in
+            XCTAssertEqual(dialogNode.dialogNode, node.dialogNodeID)
+            XCTAssertEqual(dialogNode.description, node.description)
+            XCTAssertEqual(dialogNode.conditions, node.conditions)
+            XCTAssertNil(node.parent)
+            XCTAssertNil(node.previousSibling)
+            XCTAssertEqual(dialogNode.output!, node.output!)
+            XCTAssertNil(node.context)
+            XCTAssertEqual(dialogNode.metadata!, node.metadata!)
+            XCTAssertNil(node.nextStep)
+            XCTAssertNil(node.actions)
+            XCTAssertNil(node.title)
+            XCTAssertNil(node.nodeType)
+            XCTAssertNil(node.eventName)
+            XCTAssertNil(node.variable)
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+
+        let description2 = "Delete a dialog node"
+        let expectation2 = self.expectation(description: description2)
+
+        conversation.deleteDialogNode(workspaceID: workspaceID, dialogNode: dialogNode.dialogNode, failure: failWithError) {
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testCreateUpdateAndDeleteDialogNode() {
+        let description1 = "Create a dialog node."
+        let expectation1 = self.expectation(description: description1)
+        let dialogNode = CreateDialogNode(dialogNode: "test-node")
+        conversation.createDialogNode(workspaceID: workspaceID, properties: dialogNode, failure: failWithError) {
+            node in
+            XCTAssertEqual(dialogNode.dialogNode, node.dialogNodeID)
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+
+        let description2 = "Update a dialog node."
+        let expectation2 = self.expectation(description: description2)
+        let updatedNode = UpdateDialogNode(dialogNode: "test-node-updated")
+        conversation.updateDialogNode(workspaceID: workspaceID, dialogNode: "test-node", properties: updatedNode, failure: failWithError) {
+            node in
+            XCTAssertEqual(updatedNode.dialogNode, node.dialogNodeID)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+
+        let description3 = "Delete a dialog node."
+        let expectation3 = self.expectation(description: description3)
+        conversation.deleteDialogNode(workspaceID: workspaceID, dialogNode: updatedNode.dialogNode, failure: failWithError) {
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testGetDialogNode() {
+        let description = "Get details of a specific dialog node."
+        let expectation = self.expectation(description: description)
+        conversation.listDialogNodes(workspaceID: workspaceID, failure: failWithError) { nodes in
+            XCTAssertGreaterThan(nodes.dialogNodes.count, 0)
+            let dialogNode = nodes.dialogNodes.first!
+            self.conversation.getDialogNode(
+                workspaceID: self.workspaceID,
+                dialogNode: dialogNode.dialogNodeID,
+                failure: self.failWithError) {
+                    node in
+                    XCTAssertEqual(dialogNode.dialogNodeID, node.dialogNodeID)
+                    expectation.fulfill()
+                }
         }
         waitForExpectations()
     }

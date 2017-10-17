@@ -24,7 +24,6 @@ class VisualRecognitionTests: XCTestCase {
     private let classifierName = "swift-sdk-unit-test-cars-trucks"
     private let collectionName = "swift-sdk-unit-test-faces"
     private var classifierID: String?
-    private var collectionID: String?
     private var imageFaceID: String?
     private let timeout: TimeInterval = 10.0
     private let timeoutLong: TimeInterval = 45.0
@@ -51,20 +50,9 @@ class VisualRecognitionTests: XCTestCase {
             ("testDetectFacesByURL", testDetectFacesByURL),
             ("testDetectFacesByImage1", testDetectFacesByImage1),
             ("testDetectFacesByImage2", testDetectFacesByImage2),
-            ("testGetCollections", testGetCollections),
-            ("testRetrieveCollectionDetails", testRetrieveCollectionDetails),
-            ("testAddDeleteImageToCollection", testAddDeleteImageToCollection),
-            ("testAddDeleteImageWithMetadataToCollection", testAddDeleteImageWithMetadataToCollection),
-            ("testCreateDeleteCollection", testCreateDeleteCollection),
-            ("testListImagesInCollection", testListImagesInCollection),
-            ("testAddDeleteMetadataToImageInCollection", testAddDeleteMetadataToImageInCollection),
-            ("testAddListMetadataForImageInCollection", testAddListMetadataForImageInCollection),
-            ("testSimilarImages", testSimilarImages),
-            ("testSimilarImagesWithInvalidFile", testSimilarImagesWithInvalidFile),
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
-            ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL),
-            ("testAddZipToCollection", testAddZipToCollection)
+            ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL)
         ]
     }
     
@@ -93,7 +81,6 @@ class VisualRecognitionTests: XCTestCase {
         instantiateVisualRecognition()
         loadImageFiles()
         lookupClassifier()
-        lookupCollection()
     }
     
     /** Instantiate Visual Recognition. */
@@ -171,33 +158,6 @@ class VisualRecognitionTests: XCTestCase {
         }
     }
     
-    /** Look up (or create) the collection. */
-    func lookupCollection() {
-        let description = "Look up (or create) the collection."
-        let expectation = self.expectation(description: description)
-        
-        let failure = { (error: Error) in
-            XCTFail("Failed to locate the collection.")
-        }
-        
-        visualRecognition.getCollections(failure: failure) { collections in
-            for collection in collections {
-                if collection.name == self.collectionName {
-                    XCTAssert(collection.status == "available", "Wait for collection to be made.")
-                    self.collectionID = collection.collectionID
-                    expectation.fulfill()
-                    return
-                }
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-        
-        if (collectionID == nil) {
-            createCollectionWithFaceImages()
-        }
-    }
-    
     /** Train a classifier for the test suite. */
     func trainClassifier() {
         let description = "Train a classifier for the test suite."
@@ -216,43 +176,6 @@ class VisualRecognitionTests: XCTestCase {
         waitForExpectations()
         
         XCTFail("Training a classifier for the test suite. Try again in 10 seconds.")
-    }
-    
-    /** Create a collection for the test suite. */
-    func createCollectionWithFaceImages() {
-        let description = "Create a collection for the test suite."
-        let expectation = self.expectation(description: description)
-        
-        let failure = { (error: Error) in XCTFail("Could not create a collection for test suite.") }
-        visualRecognition.createCollection(
-            withName: collectionName,
-            failure: failure) { collection in
-                self.collectionID = collection.collectionID
-                expectation.fulfill()
-        }
-        waitForExpectations()
-        
-        let description2 = "Add first image to collection."
-        let expectation2 = self.expectation(description: description2)
-        let failure2 = { (error: Error) in XCTFail("Could not add face1.jpg to collection.") }
-        
-        guard let collection = collectionID else {
-            return
-        }
-        visualRecognition.addImageToCollection(withID: collection, imageFile: face1, failure: failure2) { images in
-            self.imageFaceID = images.collectionImages[0].imageID
-            expectation2.fulfill()
-        }
-        waitForExpectations()
-        
-        let description3 = "Add second image to collection."
-        let expectation3 = self.expectation(description: description3)
-        let failure3 = { (error: Error) in XCTFail("Could not add sign.jpg to collection.") }
-        
-        visualRecognition.addImageToCollection(withID: collection, imageFile: sign, failure: failure3) { images in
-            expectation3.fulfill()
-        }
-        waitForExpectations()
     }
     
     /** Load file used when adding metadata to an image. */
@@ -1342,358 +1265,7 @@ class VisualRecognitionTests: XCTestCase {
         waitForExpectations()
     }
     
-    /** List all collections. */
-    func testGetCollections() {
-        let description = "List all collections."
-        let expectation = self.expectation(description: description)
-        
-        visualRecognition.getCollections(failure: failWithError) { collections in
-            for collection in collections {
-                if collection.name == self.collectionName {
-                    XCTAssertEqual(collection.collectionID, self.collectionID)
-                    XCTAssertEqual(collection.name, self.collectionName)
-                    XCTAssertNotNil(collection.images)
-                    XCTAssertEqual(collection.status, "available")
-                    XCTAssertEqual(collection.capacity, "1000000")
-                }
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** Retrieve test collection details. */
-    func testRetrieveCollectionDetails() {
-        let description = "Retrieve test collection."
-        let expectation = self.expectation(description: description)
-
-        visualRecognition.retrieveCollectionDetails(
-            withID: collectionID!,
-            failure: failWithError) { collection in
-                
-                XCTAssertEqual(collection.collectionID, self.collectionID)
-                XCTAssertEqual(collection.name, self.collectionName)
-                XCTAssertNotNil(collection.images)
-                XCTAssertEqual(collection.status, "available")
-                XCTAssertEqual(collection.capacity, "1000000")
-                
-                expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Add images to collection. */
-    func testAddDeleteImageToCollection() {
-        let description = "Add image to test collection."
-        let expectation = self.expectation(description: description)
-
-        var imageID: String?
-        let imageFile = "obama.jpg"
-        
-        visualRecognition.addImageToCollection(
-            withID: collectionID!,
-            imageFile: obama,
-            failure: failWithError) { collectionImages in
-                
-                XCTAssertEqual(1, collectionImages.imagesProcessed)
-                for image in collectionImages.collectionImages {
-                    if image.imageFile == imageFile {
-                        imageID = image.imageID
-                        expectation.fulfill()
-                        return
-                    }
-                }
-                XCTFail("Image was not successfully added to the collection.")
-        }
-        waitForExpectations()
-        
-        guard let imageIDToDelete = imageID else {
-            XCTFail("Image failed to be added to collection.")
-            return
-        }
-        
-        let description2 = "Delete the image added."
-        let expectation2 = self.expectation(description: description2)
-        visualRecognition.deleteImageFromCollection(withID: collectionID!, imageID: imageIDToDelete, failure: failWithError) {
-            expectation2.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** Add image with metadata to collection. */
-    func testAddDeleteImageWithMetadataToCollection() {
-        let description = "Add image to test collection."
-        let expectation = self.expectation(description: description)
-        
-        var imageID: String?
-        let imageFile = "obama.jpg"
-        
-        guard let imageMetadataURL = loadMetadataFile(withName: "metadata", withExtension: "txt") else {
-            XCTFail("Failed to load image metadata file.")
-            return
-        }
-        
-        visualRecognition.addImageToCollection(
-            withID: collectionID!,
-            imageFile: obama,
-            metadata: imageMetadataURL,
-            failure: failWithError) { collectionImages in
-                
-                XCTAssertEqual(1, collectionImages.imagesProcessed)
-                for image in collectionImages.collectionImages {
-                    if image.imageFile == imageFile {
-                        imageID = image.imageID
-                        XCTAssertNotNil(image.metadata)
-                        expectation.fulfill()
-                        return
-                    }
-                }
-                XCTFail("Image was not successfully added to the collection.")
-        }
-        waitForExpectations()
-        
-        guard let imageIDToDelete = imageID else {
-            XCTFail("Image failed to be added to collection.")
-            return
-        }
-        
-        let description2 = "Delete the image added."
-        let expectation2 = self.expectation(description: description2)
-        visualRecognition.deleteImageFromCollection(withID: collectionID!, imageID: imageIDToDelete, failure: failWithError) {
-            expectation2.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    // Uncomment when .PNG bug is fixed. Currently this test fails at the XCTAssertEqual
-    // callback is nil
-//    /** Add images to collection. */
-//    func testAddDeletePNGImageToCollection() {
-//        let description = "Add image to test collection."
-//        let expectation = self.expectation(description: description)
-//        
-//        let imageFile = "car.png"
-//        
-//        visualRecognition.addImageToCollection(
-//            collectionID: collectionID!,
-//            imageFile: car,
-//            failure: failWithError) { collectionImages in
-//                
-//                XCTAssertEqual(1, collectionImages.imagesProcessed)
-//                guard let images = collectionImages.collectionImages else {
-//                    return
-//                }
-//                for image in images {
-//                    if image.imageFile == imageFile {
-//                        expectation.fulfill()
-//                        return
-//                    }
-//                }
-//                XCTFail("Image was not successfully added to the collection.")
-//        }
-//        waitForExpectations()
-//    }
-    
-    /** List images in a collection. */
-    func testCreateDeleteCollection() {
-        let description = "Create a collection."
-        let expectation = self.expectation(description: description)
-        
-        let name = "swift-sdk-unit-test-2"
-        var collectionID: String?
-        
-        visualRecognition.createCollection(withName: name, failure: failWithError) { collection in
-            XCTAssertEqual(collection.name, name)
-            collectionID = collection.collectionID
-            expectation.fulfill()
-        }
-        waitForExpectations()
-        
-        let description2 = "Delete collection."
-        let expectation2 = self.expectation(description: description2)
-        
-        guard let collection = collectionID else {
-            return
-        }
-        visualRecognition.deleteCollection(withID: collection) {
-            expectation2.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** List images in the test collection. */
-    func testListImagesInCollection() {
-        let description = "List images in collection."
-        let expectation = self.expectation(description: description)
-        let failure = { (error: Error) in XCTFail("Could not list images in collection.") }
-        let imageFile = "sign.jpg"
-        
-        visualRecognition.getImagesInCollection(withID: collectionID!, failure: failure) { images in
-            XCTAssertEqual(2, images.count)
-            for image in images {
-                if image.imageFile == imageFile {
-                    expectation.fulfill()
-                    return
-                }
-            }
-            XCTFail("Could not list images in collection.")
-        }
-        waitForExpectations()
-    }
-    
-    /** Add and delete metadata to the test image in test's colleciton. */
-    func testAddDeleteMetadataToImageInCollection() {
-        let description = "Find image ID in collection."
-        let expectation = self.expectation(description: description)
-        
-        guard let metadata = loadMetadataFile(withName: "metadata", withExtension: "txt") else {
-            XCTFail("Failed to load metadata file.")
-            return
-        }
-        
-        var imageID: String?
-        
-        // Grab image ID.
-        visualRecognition.getImagesInCollection(withID: collectionID!, failure: failWithError) { images in
-            imageID = images[0].imageID
-            expectation.fulfill()
-        }
-        waitForExpectations()
-        
-        let description1 = "Add metadata to image in collection."
-        let expectation1 = self.expectation(description: description1)
-        
-        guard let image = imageID else {
-            XCTFail("failed to grab image ID.")
-            return
-        }
-        
-        visualRecognition.updateImageMetadata(
-            forImageID: image,
-            inCollectionID: collectionID!,
-            metadata: metadata,
-            failure: failWithError) { metadata in
-                
-                // Check metadata is returned
-                guard let metadata = metadata.metadata else {
-                    XCTFail("No metadata found")
-                    return
-                }
-                guard let name = metadata["name"] as? String,
-                    let description = metadata["description"] as? String
-                    else { return }
-                XCTAssertEqual(name, "obama")
-                XCTAssertEqual(description, "for unit tests")
-                expectation1.fulfill()
-        }
-        waitForExpectations()
-        
-        let description2 = "Delete metadata to image in collection."
-        let expectation2 = self.expectation(description: description2)
-        
-        visualRecognition.deleteImageMetadata(
-            forImageID: image,
-            inCollectionID: collectionID!,
-            failure: failWithError) {
-                expectation2.fulfill()
-        }
-        waitForExpectations()
-    }
-    
-    /** Add and list metadata for an image in the test collection. */
-    func testAddListMetadataForImageInCollection () {
-        let description = "Find image ID in collection."
-        let expectation = self.expectation(description: description)
-        
-        guard let metadata = loadMetadataFile(withName: "metadata", withExtension: "txt") else {
-            XCTFail("Failed to load metadata file.")
-            return
-        }
-        
-        var imageID: String?
-        
-        // Grab image ID.
-        visualRecognition.getImagesInCollection(withID: collectionID!, failure: failWithError) { images in
-            imageID = images[0].imageID
-            expectation.fulfill()
-        }
-        waitForExpectations()
-        
-        let description1 = "Add metadata to image in collection."
-        let expectation1 = self.expectation(description: description1)
-        
-        guard let image = imageID else {
-            XCTFail("failed to grab image ID.")
-            return
-        }
-        
-        visualRecognition.updateImageMetadata(
-            forImageID: image,
-            inCollectionID: collectionID!,
-            metadata: metadata,
-            failure: failWithError) { metadata in
-                expectation1.fulfill()
-        }
-        waitForExpectations()
-        
-        let description2 = "List metadata of the image within the collection."
-        let expectation2 = self.expectation(description: description2)
-        visualRecognition.listImageMetadata(forImageID: image, inCollectionID: collectionID!, failure: failWithError) { metadata in
-            guard let metadata = metadata.metadata else {
-                XCTFail("No metadata found")
-                return
-            }
-            guard let name = metadata["name"] as? String,
-                let description = metadata["description"] as? String
-                else { return }
-            XCTAssertEqual(name, "obama")
-            XCTAssertEqual(description, "for unit tests")
-            expectation2.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Find similar images using the default classifier and all default parameters. */
-    func testSimilarImages() {
-        let description = "Find images similar to an uploaded image using the default classifier."
-        let expectation = self.expectation(description: description)
-        
-        let imageFile = "obama.jpg"
-        
-        visualRecognition.findSimilarImages(
-            toImageFile: obama,
-            inCollectionID: collectionID!,
-            failure: failWithError) { similarImages in
-                XCTAssertEqual(imageFile, similarImages.imageFile)
-                XCTAssertNotEqual(0, similarImages.similarImages.count)
-                XCTAssertEqual(1, similarImages.imagesProcessed)
-                for image in similarImages.similarImages {
-                    XCTAssertNotNil(image.score)
-                }
-                expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-    
     // MARK: - Negative Tests
-    
-    /** Test error message for finding similar images to an invalid file type. */
-    func testSimilarImagesWithInvalidFile() {
-        let description = "Find images similar to an invalid image using the default classifier."
-        let expectation = self.expectation(description: description)
-        
-        let failure = { (error: Error) in
-            XCTAssertEqual("Invalid image file", error.localizedDescription)
-            expectation.fulfill()
-        }
-        
-        visualRecognition.findSimilarImages(
-            toImageFile: examplesCars,
-            inCollectionID: collectionID!,
-            failure: failure,
-            success: failWithResult)
-        waitForExpectations()
-    }
     
     /** Test creating a classifier with a single image for positive examples. */
     func testCreateClassifierWithInvalidPositiveExamples() {
@@ -1739,19 +1311,6 @@ class VisualRecognitionTests: XCTestCase {
         
         let invalidImageURL = "invalid-image-url"
         visualRecognition.detectFaces(inImage: invalidImageURL, failure: failure, success: failWithResult)
-        waitForExpectations()
-    }
-    
-    /** Test add zip file to a collection. */
-    func testAddZipToCollection() {
-        let description = "Add a zip file to the test collection."
-        let expectation = self.expectation(description: description)
-        
-        let failure = { (error: Error) in
-            expectation.fulfill()
-        }
-        
-        visualRecognition.addImageToCollection(withID: collectionID!, imageFile: examplesCars, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

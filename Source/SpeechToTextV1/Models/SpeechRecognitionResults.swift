@@ -37,23 +37,37 @@ public struct SpeechRecognitionResults {
     public var speakerLabels = [SpeakerLabel]()
     
     /// Add the updates specified by a `SpeechRecognitionEvent`.
-    mutating internal func addResults(wrapper: SpeechRecognitionEvent) {
-        var resultsIndex = wrapper.resultIndex
-        var wrapperIndex = 0
-        while resultsIndex < results.count && wrapperIndex < wrapper.results.count {
-            results[resultsIndex] = wrapper.results[wrapperIndex]
+    mutating internal func addResults(event: SpeechRecognitionEvent) {
+        if let index = event.resultIndex, let updates = event.results {
+            addResults(index: index, updates: updates)
+        }
+        if let speakerLabels = event.speakerLabels {
+            addResults(speakerLabels: speakerLabels)
+        }
+    }
+
+    mutating internal func addResults(index: Int, updates: [SpeechRecognitionResult]) {
+        var resultsIndex = index // lowest index in self.results that has changed
+        var updates = updates // changes to merge into self.results
+        var updatesIndex = 0 // the change that is being merged
+
+        // update existing recognition results that have changed
+        while resultsIndex < results.count && updatesIndex < updates.count {
+            results[resultsIndex] = updates[updatesIndex]
             resultsIndex += 1
-            wrapperIndex += 1
+            updatesIndex += 1
         }
-        while wrapperIndex < wrapper.results.count {
-            results.append(wrapper.results[wrapperIndex])
-            wrapperIndex += 1
+
+        // append new recognition results
+        while updatesIndex < updates.count {
+            results.append(updates[updatesIndex])
+            updatesIndex += 1
         }
-        // If we have parsed some speakerLabel objects, then store them here
-        if (wrapper.speakerLabels != nil) {
-            for speakerLabel in wrapper.speakerLabels! {
-                speakerLabels.append(speakerLabel)
-            }
+    }
+
+    mutating internal func addResults(speakerLabels: [SpeakerLabel]) {
+        for speakerLabel in speakerLabels {
+            self.speakerLabels.append(speakerLabel)
         }
     }
 }

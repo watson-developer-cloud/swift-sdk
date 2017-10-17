@@ -16,46 +16,46 @@
 
 import Foundation
 
-/** An array of entities. */
-public struct EntityCollection {
+/** WorkspaceCollection. */
+public struct WorkspaceCollection {
 
-    /// An array of entities.
-    public var entities: [EntityExport]
+    /// An array of workspaces.
+    public var workspaces: [Workspace]
 
     /// An object defining the pagination data for the returned objects.
     public var pagination: Pagination
 
     /**
-     Initialize a `EntityCollection` with member variables.
+     Initialize a `WorkspaceCollection` with member variables.
 
-     - parameter entities: An array of entities.
+     - parameter workspaces: An array of workspaces.
      - parameter pagination: An object defining the pagination data for the returned objects.
 
-     - returns: An initialized `EntityCollection`.
+     - returns: An initialized `WorkspaceCollection`.
     */
-    public init(entities: [EntityExport], pagination: Pagination) {
-        self.entities = entities
+    public init(workspaces: [Workspace], pagination: Pagination) {
+        self.workspaces = workspaces
         self.pagination = pagination
     }
 }
 
-extension EntityCollection: Codable {
+extension WorkspaceCollection: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case entities = "entities"
+        case workspaces = "workspaces"
         case pagination = "pagination"
-        static let allValues = [entities, pagination]
+        static let allValues = [workspaces, pagination]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        entities = try container.decode([EntityExport].self, forKey: .entities)
+        workspaces = try container.decode([Workspace].self, forKey: .workspaces)
         pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(entities, forKey: .entities)
+        try container.encode(workspaces, forKey: .workspaces)
         try container.encode(pagination, forKey: .pagination)
     }
 

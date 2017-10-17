@@ -33,6 +33,7 @@ class CodableExtensionsTests: XCTestCase {
         ("testEncodeOptional", testEncodeOptional),
         ("testEncodeOptionalEmpty", testEncodeOptionalEmpty),
         ("testEncodeOptionalNil", testEncodeOptionalNil),
+        ("testDecodeSimpleModel", testDecodeSimpleModel),
         ("testDecodeMetadata", testDecodeMetadata),
         ("testDecodeCustom", testDecodeCustom),
         ("testDecodeAdditionalProperties", testDecodeAdditionalProperties),
@@ -51,7 +52,7 @@ class CodableExtensionsTests: XCTestCase {
     }
 
     func testEncodeMetadata() {
-        let metadata: [String: JSONValue] = [
+        let metadata: [String: JSON] = [
             "null": .null,
             "bool": .boolean(true),
             "int": .int(1),
@@ -101,7 +102,7 @@ class CodableExtensionsTests: XCTestCase {
             array: [1, 2, 3],
             object: ["x": 1]
         )
-        let metadata = ["custom": try! JSONValue(from: custom)]
+        let metadata = ["custom": try! JSON(from: custom)]
         let model = ServiceModel(name: "name", metadata: metadata, additionalProperties: [:])
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -135,7 +136,7 @@ class CodableExtensionsTests: XCTestCase {
     }
     
     func testEncodeAdditionalProperties() {
-        let additionalProperties: [String: JSONValue] = [
+        let additionalProperties: [String: JSON] = [
             "null": .null,
             "bool": .boolean(true),
             "int": .int(1),
@@ -177,7 +178,7 @@ class CodableExtensionsTests: XCTestCase {
     }
     
     func testEncodeOptional() {
-        let metadata: [String: JSONValue] = [
+        let metadata: [String: JSON] = [
             "null": .null,
             "bool": .boolean(true),
             "int": .int(1),
@@ -186,7 +187,7 @@ class CodableExtensionsTests: XCTestCase {
             "array": .array([.int(1), .int(2), .int(3)]),
             "object": .object(["x": .int(1)])
         ]
-        let additionalProperties: [String: JSONValue] = [
+        let additionalProperties: [String: JSON] = [
             "null": .null,
             "bool": .boolean(true),
             "int": .int(1),
@@ -249,12 +250,24 @@ class CodableExtensionsTests: XCTestCase {
     }
     
     func testEncodeOptionalNil() {
-        let model = ServiceModelOptional(name: nil, metadata: nil, additionalProperties: nil)
+        let model = ServiceModelOptional(name: nil, metadata: nil, additionalProperties: [:])
         let encoder = JSONEncoder()
         let data = try! encoder.encode(model)
         let json = String(data: data, encoding: .utf8)!
         let expected = "{}"
         XCTAssertEqual(json.sorted(), expected.sorted())
+    }
+
+    func testDecodeSimpleModel() {
+        let json = """
+            {
+                "name": "name",
+                "newField": "newField"
+            }
+            """
+        let data = json.data(using: .utf8)!
+        let model = try! JSONDecoder().decode(SimpleModel.self, from: data)
+        XCTAssertEqual(model.name, "name")
     }
 
     func testDecodeMetadata() {
@@ -374,7 +387,7 @@ class CodableExtensionsTests: XCTestCase {
         let data = json.data(using: .utf8)!
         let model = try! JSONDecoder().decode(ServiceModelOptional.self, from: data)
         let metadata = model.metadata!
-        let additionalProperties = model.additionalProperties!
+        let additionalProperties = model.additionalProperties
         XCTAssertEqual(model.name!, "name")
         XCTAssertEqual(metadata["null"], .null)
         XCTAssertEqual(metadata["bool"], .boolean(true))
@@ -398,7 +411,7 @@ class CodableExtensionsTests: XCTestCase {
         let model = try! JSONDecoder().decode(ServiceModelOptional.self, from: data)
         XCTAssertEqual(model.name, "")
         XCTAssertNil(model.metadata)
-        XCTAssertNil(model.additionalProperties)
+        XCTAssertTrue(model.additionalProperties.isEmpty)
     }
 
     func testDecodeOptionalNil() {
@@ -407,7 +420,19 @@ class CodableExtensionsTests: XCTestCase {
         let model = try! JSONDecoder().decode(ServiceModelOptional.self, from: data)
         XCTAssertNil(model.name)
         XCTAssertNil(model.metadata)
-        XCTAssertNil(model.additionalProperties)
+        XCTAssertTrue(model.additionalProperties.isEmpty)
+    }
+}
+
+//===----------------------------------------------------------------------===//
+// SimpleModel
+//===----------------------------------------------------------------------===//
+
+private struct SimpleModel: Codable {
+    let name: String
+
+    init(name: String) {
+        self.name = name
     }
 }
 
@@ -417,10 +442,10 @@ class CodableExtensionsTests: XCTestCase {
 
 private struct ServiceModel: Codable {
     let name: String
-    let metadata: [String: JSONValue]
-    let additionalProperties: [String: JSONValue]
+    let metadata: [String: JSON]
+    let additionalProperties: [String: JSON]
 
-    init(name: String, metadata: [String: JSONValue], additionalProperties: [String: JSONValue]) {
+    init(name: String, metadata: [String: JSON], additionalProperties: [String: JSON]) {
         self.name = name
         self.metadata = metadata
         self.additionalProperties = additionalProperties
@@ -436,8 +461,8 @@ private struct ServiceModel: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
         name = try container.decode(String.self, forKey: .name)
-        metadata = try container.decode([String: JSONValue].self, forKey: .metadata)
-        additionalProperties = try dynamic.decode([String: JSONValue].self, excluding: CodingKeys.allValues)
+        metadata = try container.decode([String: JSON].self, forKey: .metadata)
+        additionalProperties = try dynamic.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -455,10 +480,10 @@ private struct ServiceModel: Codable {
 
 private struct ServiceModelOptional: Codable {
     let name: String?
-    let metadata: [String: JSONValue]?
-    let additionalProperties: [String: JSONValue]?
+    let metadata: [String: JSON]?
+    let additionalProperties: [String: JSON]
 
-    init(name: String?, metadata: [String: JSONValue]?, additionalProperties: [String: JSONValue]?) {
+    init(name: String?, metadata: [String: JSON]?, additionalProperties: [String: JSON]) {
         self.name = name
         self.metadata = metadata
         self.additionalProperties = additionalProperties
@@ -474,8 +499,8 @@ private struct ServiceModelOptional: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
         name = try container.decodeIfPresent(String.self, forKey: .name)
-        metadata = try container.decodeIfPresent([String: JSONValue].self, forKey: .metadata)
-        additionalProperties = try dynamic.decodeIfPresent([String: JSONValue].self, excluding: CodingKeys.allValues)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        additionalProperties = try dynamic.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -483,7 +508,7 @@ private struct ServiceModelOptional: Codable {
         var dynamic = encoder.container(keyedBy: DynamicKeys.self)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(metadata, forKey: .metadata)
-        try dynamic.encodeIfPresent(additionalProperties)
+        try dynamic.encode(additionalProperties)
     }
 }
 

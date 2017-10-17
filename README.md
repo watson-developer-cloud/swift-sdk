@@ -282,7 +282,8 @@ let conversation = Conversation(username: username, password: password, version:
 let workspaceID = "your-workspace-id-here"
 let failure = { (error: Error) in print(error) }
 var context: Context? // save context to continue conversation
-conversation.message(withWorkspace: workspaceID, failure: failure) { response in
+conversation.message(workspaceID: workspaceID, failure: failure) {
+    response in
     print(response.output.text)
     context = response.context
 }
@@ -291,27 +292,51 @@ conversation.message(withWorkspace: workspaceID, failure: failure) { response in
 The following example shows how to continue an existing conversation with the Conversation service:
 
 ```swift
-let text = "Turn on the radio."
+let input = InputData(text: "Turn on the radio.")
+let request = MessageRequest(input: input, context: context)
 let failure = { (error: Error) in print(error) }
-let request = MessageRequest(text: text, context: context)
-conversation.message(withWorkspace: workspaceID, request: request, failure: failure) {
+conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     print(response.output.text)
     context = response.context
 }
 ```
 
-The Conversation service allows users to define custom variables and values in their application's payload. For example, a Conversation workspace that guides users through a pizza order might include a user-defined variable for pizza toppings: `"pizza_toppings": ["ketchup", "ham", "onion"]`.
+#### Context Variables
 
-Unfortunately, the Swift SDK does not have advance knowledge of the user-defined variables so it cannot conveniently parse them as properties or model classes. Instead, users of the SDK can manually parse user-defined variables. All models in the `Conversation` framework include a `json: [String: Any]` property to allow users to access the underlying JSON payload and manually parse user-defined variables.
+The Conversation service allows users to define custom context variables in their application's payload. For example, a Conversation workspace that guides users through a pizza order might include a context variable for pizza size: `"pizza_size": "large"`.
 
-The following example shows how to extract a user-defined `pizza_toppings` variable from the `context` of a Conversation response:
+Context variables are get/set using the `var additionalProperties: [String: JSON]` property of a `Context` model. The following example shows how to get and set a user-defined `pizza_size` variable:
 
 ```swift
-conversation.message(withWorkspace: workspaceID, request: request, failure: failure) {
+// get the `pizza_size` context variable
+conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
-    let pizzaToppings = response.context.json["pizza_toppings"] as! [String]
-    print(pizzaToppings) // ["ketchup", "ham", "onion"]
+    if case let .string(size) = response.context.additionalProperties["pizza_size"]! {
+        print(size)
+    }
+}
+
+// set the `pizza_size` context variable
+conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+    response in
+    var context = response.context // `var` makes the context mutable
+    context?.additionalProperties["pizza_size"] = .string("large")
+}
+```
+
+For reference, the `JSON` type is defined as:
+
+```swift
+/// A JSON value (one of string, number, object, array, true, false, or null).
+public enum JSON: Equatable, Codable {
+    case null
+    case boolean(Bool)
+    case string(String)
+    case int(Int)
+    case double(Double)
+    case array([JSON])
+    case object([String: JSON])
 }
 ```
 

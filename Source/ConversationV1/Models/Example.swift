@@ -16,63 +16,55 @@
 
 import Foundation
 
-/** Intent. */
-public struct Intent {
+/** Example. */
+public struct Example {
 
-    /// The name of the intent.
-    public var intentName: String
+    /// The text of the example.
+    public var exampleText: String
 
-    /// The timestamp for creation of the intent.
+    /// The timestamp for creation of the example.
     public var created: String
 
-    /// The timestamp for the last update to the intent.
+    /// The timestamp for the last update to the example.
     public var updated: String
 
-    /// The description of the intent.
-    public var description: String?
-
     /**
-     Initialize a `Intent` with member variables.
+     Initialize a `Example` with member variables.
 
-     - parameter intentName: The name of the intent.
-     - parameter created: The timestamp for creation of the intent.
-     - parameter updated: The timestamp for the last update to the intent.
-     - parameter description: The description of the intent.
+     - parameter exampleText: The text of the example.
+     - parameter created: The timestamp for creation of the example.
+     - parameter updated: The timestamp for the last update to the example.
 
-     - returns: An initialized `Intent`.
+     - returns: An initialized `Example`.
     */
-    public init(intentName: String, created: String, updated: String, description: String? = nil) {
-        self.intentName = intentName
+    public init(exampleText: String, created: String, updated: String) {
+        self.exampleText = exampleText
         self.created = created
         self.updated = updated
-        self.description = description
     }
 }
 
-extension Intent: Codable {
+extension Example: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case intentName = "intent"
+        case exampleText = "text"
         case created = "created"
         case updated = "updated"
-        case description = "description"
-        static let allValues = [intentName, created, updated, description]
+        static let allValues = [exampleText, created, updated]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        intentName = try container.decode(String.self, forKey: .intentName)
+        exampleText = try container.decode(String.self, forKey: .exampleText)
         created = try container.decode(String.self, forKey: .created)
         updated = try container.decode(String.self, forKey: .updated)
-        description = try container.decodeIfPresent(String.self, forKey: .description)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(intentName, forKey: .intentName)
+        try container.encode(exampleText, forKey: .exampleText)
         try container.encode(created, forKey: .created)
         try container.encode(updated, forKey: .updated)
-        try container.encodeIfPresent(description, forKey: .description)
     }
 
 }

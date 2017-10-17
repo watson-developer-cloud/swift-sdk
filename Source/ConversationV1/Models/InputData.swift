@@ -16,25 +16,25 @@
 
 import Foundation
 
-/** UpdateCounterexample. */
-public struct UpdateCounterexample {
+/** An object defining the user input. */
+public struct InputData {
 
-    /// The text of the example to be marked as irrelevant input.
-    public var text: String?
+    /// The text of the user input.
+    public var text: String
 
     /**
-     Initialize a `UpdateCounterexample` with member variables.
+     Initialize a `InputData` with member variables.
 
-     - parameter text: The text of the example to be marked as irrelevant input.
+     - parameter text: The text of the user input.
 
-     - returns: An initialized `UpdateCounterexample`.
+     - returns: An initialized `InputData`.
     */
-    public init(text: String? = nil) {
+    public init(text: String) {
         self.text = text
     }
 }
 
-extension UpdateCounterexample: Codable {
+extension InputData: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case text = "text"
@@ -43,12 +43,12 @@ extension UpdateCounterexample: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
+        text = try container.decode(String.self, forKey: .text)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
+        try container.encode(text, forKey: .text)
     }
 
 }

@@ -16,25 +16,25 @@
 
 import Foundation
 
-/** UpdateCounterexample. */
-public struct UpdateCounterexample {
+/** An input object that includes the input text. */
+public struct MessageInput {
 
-    /// The text of the example to be marked as irrelevant input.
+    /// The user's input.
     public var text: String?
 
     /**
-     Initialize a `UpdateCounterexample` with member variables.
+     Initialize a `MessageInput` with member variables.
 
-     - parameter text: The text of the example to be marked as irrelevant input.
+     - parameter text: The user's input.
 
-     - returns: An initialized `UpdateCounterexample`.
+     - returns: An initialized `MessageInput`.
     */
     public init(text: String? = nil) {
         self.text = text
     }
 }
 
-extension UpdateCounterexample: Codable {
+extension MessageInput: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case text = "text"

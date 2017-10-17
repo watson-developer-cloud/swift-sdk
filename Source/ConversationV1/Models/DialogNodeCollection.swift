@@ -16,46 +16,45 @@
 
 import Foundation
 
-/** An array of entities. */
-public struct EntityCollection {
+/** DialogNodeCollection. */
+public struct DialogNodeCollection {
 
-    /// An array of entities.
-    public var entities: [EntityExport]
+    public var dialogNodes: [DialogNode]
 
     /// An object defining the pagination data for the returned objects.
     public var pagination: Pagination
 
     /**
-     Initialize a `EntityCollection` with member variables.
+     Initialize a `DialogNodeCollection` with member variables.
 
-     - parameter entities: An array of entities.
+     - parameter dialogNodes: 
      - parameter pagination: An object defining the pagination data for the returned objects.
 
-     - returns: An initialized `EntityCollection`.
+     - returns: An initialized `DialogNodeCollection`.
     */
-    public init(entities: [EntityExport], pagination: Pagination) {
-        self.entities = entities
+    public init(dialogNodes: [DialogNode], pagination: Pagination) {
+        self.dialogNodes = dialogNodes
         self.pagination = pagination
     }
 }
 
-extension EntityCollection: Codable {
+extension DialogNodeCollection: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case entities = "entities"
+        case dialogNodes = "dialog_nodes"
         case pagination = "pagination"
-        static let allValues = [entities, pagination]
+        static let allValues = [dialogNodes, pagination]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        entities = try container.decode([EntityExport].self, forKey: .entities)
+        dialogNodes = try container.decode([DialogNode].self, forKey: .dialogNodes)
         pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(entities, forKey: .entities)
+        try container.encode(dialogNodes, forKey: .dialogNodes)
         try container.encode(pagination, forKey: .pagination)
     }
 

@@ -73,13 +73,6 @@ internal extension KeyedDecodingContainer where Key == DynamicKeys {
         return object
     }
 
-    /// Decode additional properties, if present.
-    internal func decodeIfPresent(_ type: [String: JSON].Type, excluding keys: [CodingKey]) throws -> [String: JSON]? {
-        let additionalProperties = try decode([String: JSON].self, excluding: keys)
-        guard additionalProperties.count > 0 else { return nil }
-        return additionalProperties
-    }
-
 }
 
 //===----------------------------------------------------------------------===//

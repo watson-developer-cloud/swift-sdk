@@ -471,7 +471,6 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let expectation = self.expectation(description: description)
         naturalLanguageUnderstanding.listModels(failure: failWithError) { results in
             XCTAssertNotNil(results.models)
-            XCTAssertGreaterThan(results.models!.count, 0)
             expectation.fulfill()
         }
         waitForExpectations()

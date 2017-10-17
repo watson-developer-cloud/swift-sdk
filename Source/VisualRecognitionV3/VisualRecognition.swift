@@ -629,6 +629,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the newly created collection.
     */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func createCollection (
         withName name: String,
         failure: ((Error) -> Void)? = nil,
@@ -676,6 +677,7 @@ public class VisualRecognition {
     - parameter failure: A function executed if an error occurs.
     - parameter success: A function executed with the list of classifiers.
     */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func getCollections(
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Collection]) -> Void)
@@ -712,6 +714,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the collection retrieved.
      */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func retrieveCollectionDetails(
         withID collectionID: String,
         failure: ((Error) -> Void)? = nil,
@@ -748,6 +751,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the collection has been successfully deleted.
     */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func deleteCollection(
         withID collectionID: String,
         failure: ((Error) -> Void)? = nil,
@@ -798,6 +802,7 @@ public class VisualRecognition {
      - parameter success: A function executed with information about the image added to the
         collection.
      */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func addImageToCollection(
         withID collectionID: String,
         imageFile image: URL,
@@ -851,6 +856,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of images in the collection.
      */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func getImagesInCollection(
         withID collectionID: String,
         failure: ((Error) -> Void)? = nil,
@@ -888,6 +894,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the image's details.
      */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func listImageDetailsInCollection(
         withID collectionID: String,
         imageID: String,
@@ -926,6 +933,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed when the image is deleted successfully.
     */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func deleteImageFromCollection(
         withID collectionID: String,
         imageID: String,
@@ -968,6 +976,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed when the image metadata is deleted successfully.
     */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func deleteImageMetadata(
         forImageID imageID: String,
         inCollectionID collectionID: String,
@@ -1010,6 +1019,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed when the image metadata is listed successfully.
      */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func listImageMetadata(
         forImageID imageID: String,
         inCollectionID collectionID: String,
@@ -1050,6 +1060,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed when the image metadata is updated successfully.
     */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func updateImageMetadata(
         forImageID imageID: String,
         inCollectionID collectionID: String,
@@ -1103,6 +1114,7 @@ public class VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of similar images.
     */
+    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
     public func findSimilarImages(
         toImageFile image: URL,
         inCollectionID collectionID: String,

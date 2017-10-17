@@ -362,6 +362,7 @@ public class VisualRecognition {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifiedImages>) in
+            print(response)
             switch response.result {
             case .success(let classifiedImages): success(classifiedImages)
             case .failure(let error): failure?(error)

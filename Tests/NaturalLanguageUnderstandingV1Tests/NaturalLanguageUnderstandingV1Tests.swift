@@ -48,7 +48,10 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testAnalyzeTextForSemanticRoles", testAnalyzeTextForSemanticRoles),
             ("testAnalyzeTextForSentiment", testAnalyzeTextForSentiment),
             ("testAnalyzeTextForSentimentWithoutTargets", testAnalyzeTextForSentimentWithoutTargets),
-            ("testAnalyzeTextForCategories", testAnalyzeTextForCategories)
+            ("testAnalyzeTextForCategories", testAnalyzeTextForCategories),
+            ("testCustomModel", testCustomModel),
+            ("testDeleteModel", testDeleteModel),
+            ("testListModels", testListModels)
         ]
     }
     
@@ -375,11 +378,9 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text and verify sentiment returned."
         let expectation = self.expectation(description: description)
         let features = Features(sentiment: SentimentOptions(document: true, targets: ["Elliot Turner", "traction"]))
-
         let param = Parameters(features: features, text: text, returnAnalyzedText: true)
         naturalLanguageUnderstanding.analyze(parameters: param, failure: failWithError) {
             results in
-
             XCTAssertEqual(results.analyzedText, self.text)
             XCTAssertEqual(results.language, "en")
             XCTAssertNotNil(results.sentiment)
@@ -434,6 +435,45 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         waitForExpectations()
     }
 
-    // MARK: - Negative tests
+    func testCustomModel() {
+        let description = "Test a custom model."
+        let expectation = self.expectation(description: description)
+        let entities = EntitiesOptions(model: "en-news")
+        let relations = RelationsOptions(model: "en-news")
+        let features = Features(entities: entities, relations: relations)
+        let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
+        naturalLanguageUnderstanding.analyze(parameters: parameters, failure: failWithError) {
+            results in
+            XCTAssertEqual(results.analyzedText, self.text)
+            XCTAssertEqual(results.language, "en")
+            XCTAssertNotNil(results.entities)
+            XCTAssert(results.entities!.map({$0.type!}).contains("Person"))
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
 
+    func testDeleteModel() {
+        let description = "Delete an invalid model."
+        let expectation = self.expectation(description: description)
+        let failure = { (error: Error) in
+            XCTAssert(error.localizedDescription.contains("invalid model_id"))
+            expectation.fulfill()
+        }
+        naturalLanguageUnderstanding.deleteModel(modelID: "invalid_model_id", failure: failure) {
+            XCTFail("Operation should not succeed.")
+        }
+        waitForExpectations()
+    }
+
+    func testListModels() {
+        let description = "List available models from Watson Knowledge Studio."
+        let expectation = self.expectation(description: description)
+        naturalLanguageUnderstanding.listModels(failure: failWithError) { results in
+            XCTAssertNotNil(results.models)
+            XCTAssertGreaterThan(results.models!.count, 0)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
 }

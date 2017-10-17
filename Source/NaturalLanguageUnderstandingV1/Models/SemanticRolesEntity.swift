@@ -16,47 +16,47 @@
 
 import Foundation
 
-/** The entities extracted from a sentence in a given document. */
-public struct RelationEntity {
-
-    /// Text that corresponds to the entity.
-    public var text: String?
+/** SemanticRolesEntity. */
+public struct SemanticRolesEntity {
 
     /// Entity type.
     public var type: String?
 
+    /// The entity text.
+    public var text: String?
+
     /**
-     Initialize a `RelationEntity` with member variables.
+     Initialize a `SemanticRolesEntity` with member variables.
 
-     - parameter text: Text that corresponds to the entity.
      - parameter type: Entity type.
+     - parameter text: The entity text.
 
-     - returns: An initialized `RelationEntity`.
+     - returns: An initialized `SemanticRolesEntity`.
     */
-    public init(text: String? = nil, type: String? = nil) {
-        self.text = text
+    public init(type: String? = nil, text: String? = nil) {
         self.type = type
+        self.text = text
     }
 }
 
-extension RelationEntity: Codable {
+extension SemanticRolesEntity: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
         case type = "type"
-        static let allValues = [text, type]
+        case text = "text"
+        static let allValues = [type, text]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
         type = try container.decodeIfPresent(String.self, forKey: .type)
+        text = try container.decodeIfPresent(String.self, forKey: .text)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
         try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(text, forKey: .text)
     }
 
 }

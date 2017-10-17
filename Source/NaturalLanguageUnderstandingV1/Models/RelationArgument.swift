@@ -16,47 +16,46 @@
 
 import Foundation
 
-/** The entities extracted from a sentence in a given document. */
-public struct RelationEntity {
+/** RelationArgument. */
+public struct RelationArgument {
 
-    /// Text that corresponds to the entity.
+    public var entities: [RelationEntity]?
+
+    /// Text that corresponds to the argument.
     public var text: String?
 
-    /// Entity type.
-    public var type: String?
-
     /**
-     Initialize a `RelationEntity` with member variables.
+     Initialize a `RelationArgument` with member variables.
 
-     - parameter text: Text that corresponds to the entity.
-     - parameter type: Entity type.
+     - parameter entities: 
+     - parameter text: Text that corresponds to the argument.
 
-     - returns: An initialized `RelationEntity`.
+     - returns: An initialized `RelationArgument`.
     */
-    public init(text: String? = nil, type: String? = nil) {
+    public init(entities: [RelationEntity]? = nil, text: String? = nil) {
+        self.entities = entities
         self.text = text
-        self.type = type
     }
 }
 
-extension RelationEntity: Codable {
+extension RelationArgument: Codable {
 
     private enum CodingKeys: String, CodingKey {
+        case entities = "entities"
         case text = "text"
-        case type = "type"
-        static let allValues = [text, type]
+        static let allValues = [entities, text]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        entities = try container.decodeIfPresent([RelationEntity].self, forKey: .entities)
         text = try container.decodeIfPresent(String.self, forKey: .text)
-        type = try container.decodeIfPresent(String.self, forKey: .type)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(entities, forKey: .entities)
         try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(type, forKey: .type)
     }
 
 }

@@ -16,47 +16,54 @@
 
 import Foundation
 
-/** The entities extracted from a sentence in a given document. */
-public struct RelationEntity {
+/** SemanticRolesAction. */
+public struct SemanticRolesAction {
 
-    /// Text that corresponds to the entity.
+    /// Analyzed text that corresponds to the action.
     public var text: String?
 
-    /// Entity type.
-    public var type: String?
+    /// normalized version of the action.
+    public var normalized: String?
+
+    public var verb: SemanticRolesVerb?
 
     /**
-     Initialize a `RelationEntity` with member variables.
+     Initialize a `SemanticRolesAction` with member variables.
 
-     - parameter text: Text that corresponds to the entity.
-     - parameter type: Entity type.
+     - parameter text: Analyzed text that corresponds to the action.
+     - parameter normalized: normalized version of the action.
+     - parameter verb: 
 
-     - returns: An initialized `RelationEntity`.
+     - returns: An initialized `SemanticRolesAction`.
     */
-    public init(text: String? = nil, type: String? = nil) {
+    public init(text: String? = nil, normalized: String? = nil, verb: SemanticRolesVerb? = nil) {
         self.text = text
-        self.type = type
+        self.normalized = normalized
+        self.verb = verb
     }
 }
 
-extension RelationEntity: Codable {
+extension SemanticRolesAction: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case text = "text"
-        case type = "type"
-        static let allValues = [text, type]
+        case normalized = "normalized"
+        case verb = "verb"
+        static let allValues = [text, normalized, verb]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         text = try container.decodeIfPresent(String.self, forKey: .text)
-        type = try container.decodeIfPresent(String.self, forKey: .type)
+        normalized = try container.decodeIfPresent(String.self, forKey: .normalized)
+        verb = try container.decodeIfPresent(SemanticRolesVerb.self, forKey: .verb)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(normalized, forKey: .normalized)
+        try container.encodeIfPresent(verb, forKey: .verb)
     }
 
 }

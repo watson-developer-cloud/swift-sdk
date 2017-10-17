@@ -16,55 +16,55 @@
 
 import Foundation
 
-/** The general concepts referenced or alluded to in the specified content. */
-public struct ConceptsResult {
+/** Disambiguation information for the entity. */
+public struct DisambiguationResult {
 
-    /// Name of the concept.
-    public var text: String?
-
-    /// Relevance score between 0 and 1. Higher scores indicate greater relevance.
-    public var relevance: Double?
+    /// Common entity name.
+    public var name: String?
 
     /// Link to the corresponding DBpedia resource.
     public var dbpediaResource: String?
 
+    /// Entity subtype information.
+    public var subtype: [String]?
+
     /**
-     Initialize a `ConceptsResult` with member variables.
+     Initialize a `DisambiguationResult` with member variables.
 
-     - parameter text: Name of the concept.
-     - parameter relevance: Relevance score between 0 and 1. Higher scores indicate greater relevance.
+     - parameter name: Common entity name.
      - parameter dbpediaResource: Link to the corresponding DBpedia resource.
+     - parameter subtype: Entity subtype information.
 
-     - returns: An initialized `ConceptsResult`.
+     - returns: An initialized `DisambiguationResult`.
     */
-    public init(text: String? = nil, relevance: Double? = nil, dbpediaResource: String? = nil) {
-        self.text = text
-        self.relevance = relevance
+    public init(name: String? = nil, dbpediaResource: String? = nil, subtype: [String]? = nil) {
+        self.name = name
         self.dbpediaResource = dbpediaResource
+        self.subtype = subtype
     }
 }
 
-extension ConceptsResult: Codable {
+extension DisambiguationResult: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case relevance = "relevance"
+        case name = "name"
         case dbpediaResource = "dbpedia_resource"
-        static let allValues = [text, relevance, dbpediaResource]
+        case subtype = "subtype"
+        static let allValues = [name, dbpediaResource, subtype]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        relevance = try container.decodeIfPresent(Double.self, forKey: .relevance)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
         dbpediaResource = try container.decodeIfPresent(String.self, forKey: .dbpediaResource)
+        subtype = try container.decodeIfPresent([String].self, forKey: .subtype)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(relevance, forKey: .relevance)
+        try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(dbpediaResource, forKey: .dbpediaResource)
+        try container.encodeIfPresent(subtype, forKey: .subtype)
     }
 
 }

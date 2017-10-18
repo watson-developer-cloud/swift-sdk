@@ -198,12 +198,11 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
-        print ( "trying local classification on CoreML...\n" )
+        print ( "trying local classification on CoreML..." )
         
         // setup request
         let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
             // define coreml callback
-            print( "Hit callback." )
             guard let results = request.results else {
                 print( "Unable to classify image.\n\(error!.localizedDescription)" )
                 return
@@ -219,7 +218,7 @@ public class VisualRecognition {
                 print( "Nothing recognized." )
             } else {
                 // Display top classifications ranked by confidence in the UI.
-                let topClassifications = classifications.prefix(2)
+                let topClassifications = classifications.prefix(20)
                 
                 // convert results to sdk vision models
                 var scores = [[String: Any]]()
@@ -256,8 +255,6 @@ public class VisualRecognition {
                 } catch {
                     print( error )
                 }
-                
-                print( body )
             }
             
             // hit standard VR service
@@ -308,9 +305,7 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
-        print( "hello world! -- about to classify...\n" )
-        
-        print( "hitting WatsonVR endpoint...\n" )
+        print( "hitting WatsonVR endpoint..." )
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
@@ -362,10 +357,11 @@ public class VisualRecognition {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifiedImages>) in
-            print(response)
             switch response.result {
             case .success(let classifiedImages): success(classifiedImages)
-            case .failure(let error): failure?(error)
+            case .failure(let error):
+                print(response)
+                failure?(error)
             }
         }
     }

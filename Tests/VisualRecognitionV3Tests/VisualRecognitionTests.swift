@@ -274,6 +274,11 @@ class VisualRecognitionTests: XCTestCase {
             XCTFail("The created classifier could not be retrieved from the service.")
         }
         waitForExpectations()
+
+        // allow zip files to propagate through object storage, so that
+        // they will be deleted when the service deletes the classifier
+        // (otherwise they remain and dramatically slow down the tests)
+        sleep(15) // wait 15 seconds
         
         let description3 = "Delete the custom classifier."
         let expectation3 = expectation(description: description3)
@@ -323,7 +328,12 @@ class VisualRecognitionTests: XCTestCase {
             XCTFail("The created classifier could not be retrieved from the service.")
         }
         waitForExpectations()
-        
+
+        // allow zip files to propagate through object storage, so that
+        // they will be deleted when the service deletes the classifier
+        // (otherwise they remain and dramatically slow down the tests)
+        sleep(15) // wait 15 seconds
+
         let description3 = "Delete the custom classifier."
         let expectation3 = expectation(description: description3)
 
@@ -391,9 +401,14 @@ class VisualRecognitionTests: XCTestCase {
             waitForExpectations()
             
             if tries > 5 {
+                // allow zip files to propagate through object storage, so that
+                // they will be deleted when the service deletes the classifier
+                // (otherwise they remain and dramatically slow down the tests)
+                sleep(15) // wait 15 seconds
+
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
-                
+
                 visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
                     expectation.fulfill()
                 }
@@ -435,9 +450,14 @@ class VisualRecognitionTests: XCTestCase {
             waitForExpectations()
             
             if tries > 5 {
+                // allow zip files to propagate through object storage, so that
+                // they will be deleted when the service deletes the classifier
+                // (otherwise they remain and dramatically slow down the tests)
+                sleep(15) // wait 15 seconds
+
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
-                
+
                 visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
                     expectation.fulfill()
                 }
@@ -448,10 +468,15 @@ class VisualRecognitionTests: XCTestCase {
             
             sleep(5)
         }
-        
+
+        // allow zip files to propagate through object storage, so that
+        // they will be deleted when the service deletes the classifier
+        // (otherwise they remain and dramatically slow down the tests)
+        sleep(15) // wait 15 seconds
+
         let description4 = "Delete the custom classifier."
         let expectation4 = expectation(description: description4)
-        
+
         visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
             expectation4.fulfill()
         }
@@ -502,9 +527,14 @@ class VisualRecognitionTests: XCTestCase {
             waitForExpectations()
             
             if tries > 5 {
+                // allow zip files to propagate through object storage, so that
+                // they will be deleted when the service deletes the classifier
+                // (otherwise they remain and dramatically slow down the tests)
+                sleep(15) // wait 15 seconds
+
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
-                
+
                 visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
                     expectation.fulfill()
                 }
@@ -545,9 +575,14 @@ class VisualRecognitionTests: XCTestCase {
             waitForExpectations()
             
             if tries > 5 {
+                // allow zip files to propagate through object storage, so that
+                // they will be deleted when the service deletes the classifier
+                // (otherwise they remain and dramatically slow down the tests)
+                sleep(15) // wait 15 seconds
+
                 let description = "Delete the new classifier."
                 let expectation = self.expectation(description: description)
-                
+
                 visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
                     expectation.fulfill()
                 }
@@ -558,7 +593,12 @@ class VisualRecognitionTests: XCTestCase {
             
             sleep(5)
         }
-        
+
+        // allow zip files to propagate through object storage, so that
+        // they will be deleted when the service deletes the classifier
+        // (otherwise they remain and dramatically slow down the tests)
+        sleep(15) // wait 15 seconds
+
         let description4 = "Delete the custom classifier."
         let expectation4 = expectation(description: description4)
         

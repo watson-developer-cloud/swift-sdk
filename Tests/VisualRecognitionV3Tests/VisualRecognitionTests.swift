@@ -1122,14 +1122,14 @@ class VisualRecognitionTests: XCTestCase {
                 for classifier in image.classifiers {
                     var containsCarClass = false
                     var classifierScore: Double?
-                    // verify the image's default classifier
                     if classifier.name == "default" {
+                        // verify the image's default classifier
                         XCTAssertEqual(classifier.classifierID, "default")
                         XCTAssertEqual(classifier.name, "default")
-                        
                         XCTAssertGreaterThan(classifier.classes.count, 0)
                         for c in classifier.classes {
-                            if c.classification == "car" || c.classification == "vehicle" {
+                            let classes = ["car", "vehicle", "sedan", "Parking Garage (Indoor)"]
+                            if classes.contains(c.classification) {
                                 containsCarClass = true
                                 classifierScore = c.score
                             }

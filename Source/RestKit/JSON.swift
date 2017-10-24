@@ -18,13 +18,27 @@ import Foundation
 
 /// A JSON value (one of string, number, object, array, true, false, or null).
 public enum JSON: Equatable, Codable {
-    case null                        /// A null value.
-    case boolean(Bool)               /// A boolean value.
-    case string(String)              /// A string value.
-    case int(Int)                    /// A number value, represented as an integer.
-    case double(Double)              /// A number value, represented as a double.
-    case array([JSON])          /// An array value.
-    case object([String: JSON]) /// An object value.
+
+    /// A null value.
+    case null
+
+    /// A boolean value.
+    case boolean(Bool)
+
+    /// A string value.
+    case string(String)
+
+    /// A number value, represented as an integer.
+    case int(Int)
+
+    /// A number value, represented as a double.
+    case double(Double)
+
+    /// An array value.
+    case array([JSON])
+
+    /// An object value.
+    case object([String: JSON])
 
     /// Decode a JSON value.
     public init(from decoder: Decoder) throws {

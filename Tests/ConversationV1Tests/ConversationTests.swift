@@ -1419,7 +1419,7 @@ class ConversationTests: XCTestCase {
             metadata: ["swift-sdk-test": .boolean(true)],
             nextStep: nil,
             actions: nil,
-            title: nil,
+            title: "YesYouCan",
             nodeType: nil,
             eventName: nil,
             variable: nil)
@@ -1436,7 +1436,7 @@ class ConversationTests: XCTestCase {
             XCTAssertEqual(dialogNode.metadata!, node.metadata!)
             XCTAssertNil(node.nextStep)
             XCTAssertNil(node.actions)
-            XCTAssertNil(node.title)
+            XCTAssertEqual(dialogNode.title!, node.title!)
             XCTAssertNil(node.nodeType)
             XCTAssertNil(node.eventName)
             XCTAssertNil(node.variable)

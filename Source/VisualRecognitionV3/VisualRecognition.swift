@@ -188,7 +188,7 @@ public class VisualRecognition {
      */
     @available(iOS 11.0, *)
     public func classify(
-        imageFile image: URL,
+        image: NSData,
         model: VNCoreMLModel,
         localThreshold: Double? = nil,
         owners: [String]? = nil,
@@ -257,17 +257,23 @@ public class VisualRecognition {
                 }
             }
             
+            // write to temp file
+            print("Writing image to temporary file...")
+            let tempImagePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("temp.jpeg")
+            do {
+                try image.write( to: tempImagePath, options: .atomic)
+            } catch {
+                print("Failed to write temporary file to disk.\n\(error)")
+                return
+            }
+            
             // hit standard VR service
-            self.classify(imageFile: image, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
+            self.classify(imageFile: tempImagePath, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
         })
         request.imageCropAndScaleOption = .scaleFill // This seems wrong, but yields results in line with vision demo
-
-        // prepare image for CoreML
-        // let orientation = CGImagePropertyOrientation(image.imageOrientation)
-        guard let ciImage = CIImage(contentsOf: image) else { fatalError("Unable to create \(CIImage.self) from \(image).") }
         
         // do request with handler
-        let handler = VNImageRequestHandler(ciImage: ciImage)
+        let handler = VNImageRequestHandler(data: image as Data)
         do {
             try handler.perform([request])
         } catch {

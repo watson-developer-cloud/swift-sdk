@@ -165,7 +165,7 @@ By default, the SDK executes all networking operations asynchonously. If your ap
 ```swift
 let dispatchGroup = DispatchGroup()
 dispatchGroup.enter()
-conversation.message(workspace: workspaceID) { response in
+conversation.message(workspaceID: workspaceID) { response in
     print(response.output.text)
     dispatchGroup.leave()
 }

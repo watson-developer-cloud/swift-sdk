@@ -272,19 +272,20 @@ public class VisualRecognition {
         })
         request.imageCropAndScaleOption = .scaleFill // This seems wrong, but yields results in line with vision demo
         
-        // do request with handler
-        let handler = VNImageRequestHandler(data: image as Data)
-        do {
-            try handler.perform([request])
-        } catch {
-            /*
-             This handler catches general image processing errors. The `classificationRequest`'s
-             completion handler `processClassifications(_:error:)` catches errors specific
-             to processing that request.
-             */
-            print("Failed to perform classification.\n\(error.localizedDescription)")
+        // do request with handler in background
+        DispatchQueue.global(qos: .userInitiated).async {
+            let handler = VNImageRequestHandler(data: image as Data)
+            do {
+                try handler.perform([request])
+            } catch {
+                /*
+                 This handler catches general image processing errors. The `classificationRequest`'s
+                 completion handler `processClassifications(_:error:)` catches errors specific
+                 to processing that request.
+                 */
+                print("Failed to perform classification.\n\(error.localizedDescription)")
+            }
         }
-
     }
     
     /**

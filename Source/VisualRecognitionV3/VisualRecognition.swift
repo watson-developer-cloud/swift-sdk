@@ -427,7 +427,7 @@ public class VisualRecognition {
         
         // construct body
         let multipartFormData = MultipartFormData()
-        multipartFormData.append(image as Data, withName: "image_file")
+        multipartFormData.append(image as Data, withName: "images")
 //        multipartFormData.append(image, withName: "image_file", mimeType: "application/octet-stream")
         multipartFormData.append(json, withName: "parameters", mimeType: "application/octet-stream", fileName: "parameters.json")
         guard let body = try? multipartFormData.toData() else {

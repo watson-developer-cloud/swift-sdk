@@ -292,14 +292,14 @@ public class VisualRecognition {
      Upload and classify an image or multiple images in a compressed (.zip) file.
      
      - parameter imageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
-        total number of images is limited to 20, with a max .zip size of 5 MB.
+     total number of images is limited to 20, with a max .zip size of 5 MB.
      - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
-        built-in classifier.
+     built-in classifier.
      - parameter threshold: The minimum score a class must have to be displayed in the response.
      - parameter language: The language of the output class names. Can be "en" (English), "es"
-        (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
-        are omitted.
+     (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
+     are omitted.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the image classifications.
      */
@@ -343,6 +343,92 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(image, withName: "image_file", mimeType: "application/octet-stream")
+        multipartFormData.append(json, withName: "parameters", mimeType: "application/octet-stream", fileName: "parameters.json")
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct REST request
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + "/v3/classify",
+            credentials: .apiKey,
+            headerParameters: headerParameters,
+            acceptType: "application/json",
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+        
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ClassifiedImages>) in
+            switch response.result {
+            case .success(let classifiedImages): success(classifiedImages)
+            case .failure(let error):
+                print(response)
+                failure?(error)
+            }
+        }
+    }
+    
+    /**
+     Upload and classify an image or multiple images in a compressed (.zip) file.
+     
+     - parameter imageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
+        total number of images is limited to 20, with a max .zip size of 5 MB.
+     - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
+     - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
+        built-in classifier.
+     - parameter threshold: The minimum score a class must have to be displayed in the response.
+     - parameter language: The language of the output class names. Can be "en" (English), "es"
+        (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
+        are omitted.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
+    public func classify(
+        image: NSData,
+        owners: [String]? = nil,
+        classifierIDs: [String]? = nil,
+        threshold: Double? = nil,
+        language: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifiedImages) -> Void)
+    {
+        print( "hitting WatsonVR endpoint..." )
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let language = language {
+            headerParameters["Accept-Language"] = language
+        }
+        
+        // construct visual recognition parameters
+        var parameters = [String: Any]()
+        if let owners = owners {
+            parameters["owners"] = owners
+        }
+        if let classifierIDs = classifierIDs {
+            parameters["classifier_ids"] = classifierIDs
+        }
+        if let threshold = threshold {
+            parameters["threshold"] = threshold
+        }
+        guard let json = try? JSON(dictionary: parameters).serialize() else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(image as Data, withName: "image_file")
+//        multipartFormData.append(image, withName: "image_file", mimeType: "application/octet-stream")
         multipartFormData.append(json, withName: "parameters", mimeType: "application/octet-stream", fileName: "parameters.json")
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)

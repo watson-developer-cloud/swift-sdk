@@ -322,6 +322,12 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
+        // short-circuit coreml if local thresh is 1.0
+        if localThreshold == 1.0 {
+            self.classify(image: image, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
+            return
+        }
+        
         print ( "trying local classification on CoreML..." )
         
         // setup request
@@ -381,7 +387,7 @@ public class VisualRecognition {
                 }
             }
             
-            // hit standard VR service
+            // hit standard VR service as fallback
             self.classify(image: image, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
             
         })

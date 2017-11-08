@@ -51,7 +51,7 @@ public class VisualRecognitionCoreMLModel {
         }
     }
     
-    public func getLatest() {
+    public func getLatest(completionHandler: (() -> Void)? = nil) {
 
         guard let requestUrl = URL(string: self.urlString) else { return }
         let request = URLRequest(url:requestUrl)
@@ -66,6 +66,9 @@ public class VisualRecognitionCoreMLModel {
                 
             } else if let error = error {
                 print(error)
+            }
+            if (completionHandler != nil) {
+                completionHandler?()
             }
         }
         task.resume()

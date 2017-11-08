@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		039B3F661FB368B600A7B5DE /* VisualRecognitionCoreML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039B3F651FB3660700A7B5DE /* VisualRecognitionCoreML.swift */; };
 		120092691DFF0EF900107C0A /* DeletedConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120092671DFF0EF500107C0A /* DeletedConfiguration.swift */; };
 		1200926B1E005A7300107C0A /* ConfigurationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1200926A1E005A7300107C0A /* ConfigurationDetails.swift */; };
 		1200926D1E01947500107C0A /* DeletedEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1200926C1E01947500107C0A /* DeletedEnvironment.swift */; };
@@ -717,6 +718,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		039B3F651FB3660700A7B5DE /* VisualRecognitionCoreML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionCoreML.swift; sourceTree = "<group>"; };
 		120092671DFF0EF500107C0A /* DeletedConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedConfiguration.swift; sourceTree = "<group>"; };
 		1200926A1E005A7300107C0A /* ConfigurationDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationDetails.swift; sourceTree = "<group>"; };
 		1200926C1E01947500107C0A /* DeletedEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedEnvironment.swift; sourceTree = "<group>"; };
@@ -2146,6 +2148,7 @@
 			isa = PBXGroup;
 			children = (
 				7AAA9A5A1CEE6089002C9564 /* VisualRecognition.swift */,
+				039B3F651FB3660700A7B5DE /* VisualRecognitionCoreML.swift */,
 				7AAA9A471CEE6089002C9564 /* Models */,
 				7AAA9A4F1CEE6089002C9564 /* Tests */,
 			);
@@ -4182,6 +4185,7 @@
 				CE5DA8421DEC961400736D31 /* CollectionImages.swift in Sources */,
 				7AAAF3E41CEE9A5300B74848 /* ClassifiedImages.swift in Sources */,
 				7AAAF3DA1CEE9A4700B74848 /* VisualRecognition.swift in Sources */,
+				039B3F661FB368B600A7B5DE /* VisualRecognitionCoreML.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

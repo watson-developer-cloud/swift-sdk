@@ -270,7 +270,7 @@ public class VisualRecognition {
      - parameter success: A function executed with the image classifications.
      */
     public func classify(
-        image: NSData,
+        image: Data,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         threshold: Double? = nil,

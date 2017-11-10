@@ -119,7 +119,7 @@ extension VisualRecognition {
      - parameter success: A function executed with the image classifications.
      */
     public func classify(
-        image: NSData,
+        image: Data,
         model: VNCoreMLModel,
         localThreshold: Double? = nil,
         owners: [String]? = nil,
@@ -202,7 +202,7 @@ extension VisualRecognition {
         
         // do request with handler in background
         DispatchQueue.global(qos: .userInitiated).async {
-            let handler = VNImageRequestHandler(data: image as Data)
+            let handler = VNImageRequestHandler(data: image)
             do {
                 try handler.perform([request])
             } catch {

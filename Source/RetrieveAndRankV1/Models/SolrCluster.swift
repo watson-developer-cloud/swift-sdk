@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A model containing information about a specific Solr cluster. */
 public struct SolrCluster: JSONDecodable {
@@ -33,13 +32,13 @@ public struct SolrCluster: JSONDecodable {
     public let solrClusterStatus: SolrClusterStatus
     
     /// Used internally to initialize a `SolrCluster` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         solrClusterID = try json.getString(at: "solr_cluster_id")
         solrClusterName = try json.getString(at: "cluster_name")
         solrClusterSize = try Int(json.getString(at: "cluster_size"))
         
         guard let status = SolrClusterStatus(rawValue: try json.getString(at: "solr_cluster_status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: SolrCluster.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: SolrCluster.self)
         }
         solrClusterStatus = status
     }

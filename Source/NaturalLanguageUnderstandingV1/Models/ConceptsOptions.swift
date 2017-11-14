@@ -15,35 +15,40 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Whether or not to analyze content for general concepts that are referenced or alluded to. */
-public struct ConceptsOptions: JSONEncodable {
-    
+public struct ConceptsOptions {
+
     /// Maximum number of concepts to return.
-    public let limit: Int?
-    
-    /// Set this to false to hide Linked Data information in the response.
-    public let linkedData: Bool?
-    
+    public var limit: Int?
+
     /**
-    Initialize a `ConceptsOptions` with all member variables.
+     Initialize a `ConceptsOptions` with member variables.
 
      - parameter limit: Maximum number of concepts to return.
-     - parameter linkedData: Set this to false to hide Linked Data information in the response.
 
-    - returns: An initialized `ConceptsOptions`.
+     - returns: An initialized `ConceptsOptions`.
     */
-    public init(limit: Int? = nil, linkedData: Bool? = nil) {
+    public init(limit: Int? = nil) {
         self.limit = limit
-        self.linkedData = linkedData
     }
-    
-    /// Used internally to serialize a `ConceptsOptions` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let limit = limit { json["limit"] = limit }
-        if let linkedData = linkedData { json["linked_data"] = linkedData }
-        return json
+}
+
+extension ConceptsOptions: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case limit = "limit"
+        static let allValues = [limit]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        limit = try container.decodeIfPresent(Int.self, forKey: .limit)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(limit, forKey: .limit)
+    }
+
 }

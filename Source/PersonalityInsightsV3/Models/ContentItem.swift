@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An input model for content to be analyzed by Personality Insights. */
 public struct ContentItem: JSONEncodable {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,64 +15,56 @@
  **/
 
 import Foundation
-import RestKit
 
-/** The context, or state, associated with a message. */
-public struct Context: JSONEncodable, JSONDecodable {
-
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
+/** Context information for the message. Include the context from the previous response to maintain state for the conversation. */
+public struct Context {
 
     /// The unique identifier of the conversation.
-    public let conversationID: String
+    public var conversationID: String
 
-    /// A system object that includes information about the dialog.
-    public let system: System
+    /// For internal use only.
+    public var system: SystemResponse
 
-    /// Used internally to initialize a `Context` model from JSON.
-    public init(json: JSON) throws {
-        self.json = try json.getDictionaryObject()
-        conversationID = try json.getString(at: "conversation_id")
-        system = try json.decode(at: "system", type: System.self)
-    }
+    /// Additional properties associated with this model.
+    public var additionalProperties: [String: JSON]
 
-    /// Used internally to serialize a `Context` model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    /**
+     Initialize a `Context` with member variables.
+
+     - parameter conversationID: The unique identifier of the conversation.
+     - parameter system: For internal use only.
+
+     - returns: An initialized `Context`.
+    */
+    public init(conversationID: String, system: SystemResponse, additionalProperties: [String: JSON] = [:]) {
+        self.conversationID = conversationID
+        self.system = system
+        self.additionalProperties = additionalProperties
     }
 }
 
-/** A system object that includes information about the dialog. */
-public struct System: JSONEncodable, JSONDecodable {
+extension Context: Codable {
 
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
-
-    /// An array of dialog node ids that are in focus in the conversation. If no node is in the
-    /// list, the conversation restarts at the root with the next request. If multiple dialog nodes
-    /// are in the list, several dialogs are in progress, and the last ID in the list is active.
-    /// When the active dialog ends, it is removed from the stack and the previous one becomes
-    /// active.
-    public let dialogStack: [String]
-
-    /// The number of cycles of user input and response in this conversation.
-    public let dialogTurnCounter: Int
-
-    /// The number of inputs in this conversation. This counter might be higher than the
-    /// `dialogTurnCounter` when multiple inputs are needed before a response can be returned.
-    public let dialogRequestCounter: Int
-
-    /// Used internally to initialize a `System` model from JSON.
-    public init(json: JSON) throws {
-        self.json = try json.getDictionaryObject()
-        //dialogStack = try? json.getArray(at: "dialog_stack").map { try $0.getString(at: "dialog_node") }
-        dialogStack = []
-        dialogTurnCounter = try json.getInt(at: "dialog_turn_counter")
-        dialogRequestCounter = try json.getInt(at: "dialog_request_counter")
+    private enum CodingKeys: String, CodingKey {
+        case conversationID = "conversation_id"
+        case system = "system"
+        static let allValues = [conversationID, system]
     }
 
-    /// Used internally to serialize a `System` model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        conversationID = try container.decode(String.self, forKey: .conversationID)
+        system = try container.decode(SystemResponse.self, forKey: .system)
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
+        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(conversationID, forKey: .conversationID)
+        try container.encode(system, forKey: .system)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
+    }
+
 }

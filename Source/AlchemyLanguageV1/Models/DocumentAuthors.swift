@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -34,10 +33,10 @@ public struct DocumentAuthors: JSONDecodable {
     public let authors: Authors
     
     /// Used internally to initialize a DocumentAuthors object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: DocumentAuthors.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: DocumentAuthors.self)
         }
         
         url = try json.getString(at: "url")

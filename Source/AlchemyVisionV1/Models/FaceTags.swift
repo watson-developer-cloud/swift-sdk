@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A set of faces identified in an image by the Alchemy Vision service. */
 public struct FaceTags: JSONDecodable {
@@ -33,10 +32,10 @@ public struct FaceTags: JSONDecodable {
     public let imageFaces: [ImageFace]
 
     /// Used internally to initialize a `FaceTags` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: FaceTags.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: FaceTags.self)
         }
         
         url = try? json.getString(at: "url")
@@ -70,7 +69,7 @@ public struct ImageFace: JSONDecodable {
     public let identity: Identity?
 
     /// Used internally to initialize an `ImageFace` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         positionX = try Int(json.getString(at: "positionX"))!
         positionY = try Int(json.getString(at: "positionY"))!
         width = try Int(json.getString(at: "width"))!
@@ -91,7 +90,7 @@ public struct Gender: JSONDecodable {
     public let score: Double
 
     /// Used internally to initialize a `Gender` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         gender = try json.getString(at: "gender")
         score = try Double(json.getString(at: "score"))!
     }
@@ -107,7 +106,7 @@ public struct Age: JSONDecodable {
     public let score: Double
 
     /// Used internally to initialize an `Age` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         ageRange = try json.getString(at: "ageRange")
         score = try Double(json.getString(at: "score"))!
     }
@@ -129,7 +128,7 @@ public struct Identity: JSONDecodable {
     public let knowledgeGraph: KnowledgeGraph?
 
     /// Used internally to initialize an `Identity` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try json.getString(at: "name")
         score = try Double(json.getString(at: "score"))!
         disambiguated = try json.decode(at: "disambiguated")
@@ -169,7 +168,7 @@ public struct Disambiguated: JSONDecodable {
     public let crunchbase: String?
 
     /// Used internally to initialize a `Disambiguated` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try json.getString(at: "name")
         subType = try? json.decodedArray(at: "subType", type: String.self)
         website = try? json.getString(at: "website")

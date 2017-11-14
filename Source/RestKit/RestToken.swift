@@ -20,11 +20,11 @@ import Foundation
  A `RestToken` object retrieves, stores, and refreshes an authentication token. The token is
  retrieved at a particular URL using basic authentication credentials (i.e. username and password).
  */
-public class RestToken {
+internal class RestToken {
     
-    public var token: String?
-    public var isRefreshing = false
-    public var retries = 0
+    internal var token: String?
+    internal var isRefreshing = false
+    internal var retries = 0
     
     private var tokenURL: String
     private var credentials: Credentials
@@ -37,7 +37,7 @@ public class RestToken {
      - parameter username:   The username credential used to obtain a token.
      - parameter password:   The password credential used to obtain a token.
      */
-    public init(tokenURL: String, username: String, password: String) {
+    internal init(tokenURL: String, username: String, password: String) {
         self.tokenURL = tokenURL
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
@@ -48,7 +48,7 @@ public class RestToken {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after a new token is retrieved.
      */
-    public func refreshToken(
+    internal func refreshToken(
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil)
     {
@@ -96,7 +96,7 @@ public class RestToken {
         // update error description, if available
         if let data = data {
             do {
-                let json = try JSON(data: data)
+                let json = try JSONWrapper(data: data)
                 let description = try json.getString(at: "description")
                 userInfo[NSLocalizedDescriptionKey] = description
             } catch { /* no need to catch -- falls back to default description */ }

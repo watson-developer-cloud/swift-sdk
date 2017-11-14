@@ -15,16 +15,15 @@
  **/
 
 import Foundation
-import RestKit
 
 /** SynonymCollection. */
-public struct SynonymCollection: JSONDecodable, JSONEncodable {
+public struct SynonymCollection {
 
     /// An array of synonyms.
-    public let synonyms: [Synonym]
+    public var synonyms: [Synonym]
 
     /// An object defining the pagination data for the returned objects.
-    public let pagination: PaginationResponse
+    public var pagination: Pagination
 
     /**
      Initialize a `SynonymCollection` with member variables.
@@ -34,24 +33,30 @@ public struct SynonymCollection: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `SynonymCollection`.
     */
-    public init(synonyms: [Synonym], pagination: PaginationResponse) {
+    public init(synonyms: [Synonym], pagination: Pagination) {
         self.synonyms = synonyms
         self.pagination = pagination
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `SynonymCollection` model from JSON.
-    public init(json: JSON) throws {
-        synonyms = try json.decodedArray(at: "synonyms", type: Synonym.self)
-        pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
+extension SynonymCollection: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case synonyms = "synonyms"
+        case pagination = "pagination"
+        static let allValues = [synonyms, pagination]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `SynonymCollection` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["synonyms"] = synonyms.map { $0.toJSONObject() }
-        json["pagination"] = pagination.toJSONObject()
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        synonyms = try container.decode([Synonym].self, forKey: .synonyms)
+        pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(synonyms, forKey: .synonyms)
+        try container.encode(pagination, forKey: .pagination)
+    }
+
 }

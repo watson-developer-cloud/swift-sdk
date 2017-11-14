@@ -15,16 +15,15 @@
  **/
 
 import Foundation
-import RestKit
 
 /** LogCollection. */
-public struct LogCollection: JSONDecodable {
+public struct LogCollection {
 
     /// An array of log events.
-    public let logs: [LogExport]
+    public var logs: [LogExport]
 
     /// An object defining the pagination data for the returned objects.
-    public let pagination: LogPagination
+    public var pagination: LogPagination
 
     /**
      Initialize a `LogCollection` with member variables.
@@ -38,11 +37,26 @@ public struct LogCollection: JSONDecodable {
         self.logs = logs
         self.pagination = pagination
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `LogCollection` model from JSON.
-    public init(json: JSON) throws {
-        logs = try json.decodedArray(at: "logs", type: LogExport.self)
-        pagination = try json.decode(at: "pagination", type: LogPagination.self)
+extension LogCollection: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case logs = "logs"
+        case pagination = "pagination"
+        static let allValues = [logs, pagination]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        logs = try container.decode([LogExport].self, forKey: .logs)
+        pagination = try container.decode(LogPagination.self, forKey: .pagination)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(logs, forKey: .logs)
+        try container.encode(pagination, forKey: .pagination)
+    }
+
 }

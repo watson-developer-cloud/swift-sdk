@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The results of detecting faces in one or more images. */
 public struct ImagesWithFaces: JSONDecodable {
@@ -30,7 +29,7 @@ public struct ImagesWithFaces: JSONDecodable {
     public let warnings: [WarningInfo]?
     
     /// Used internally to initialize an `ImagesWithFaces` model from JSON.
-    public init(json: JSON) throws  {
+    public init(json: JSONWrapper) throws  {
         imagesProcessed = try json.getInt(at: "images_processed")
         images = try json.decodedArray(at: "images", type: ImageWithFaces.self)
         warnings = try? json.decodedArray(at: "warnings", type: WarningInfo.self)
@@ -58,7 +57,7 @@ public struct ImageWithFaces: JSONDecodable {
     public let faces: [Face]
     
     /// Used internally to initialize an `ImageWithFaces` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         sourceURL = try? json.getString(at: "source_url")
         resolvedURL = try? json.getString(at: "resolved_url")
         image = try? json.getString(at: "image")
@@ -83,7 +82,7 @@ public struct Face: JSONDecodable {
     public let identity: Identity?
     
     /// Used internally to initialize a `Face` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         age = try json.decode(at: "age")
         gender = try json.decode(at: "gender")
         location = try json.decode(at: "face_location")
@@ -105,7 +104,7 @@ public struct Age: JSONDecodable {
     public let score: Double
     
     /// Used internally to initialize an `Age` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         min = try? json.getInt(at: "min")
         max = try? json.getInt(at: "max")
         score = try json.getDouble(at: "score")
@@ -123,7 +122,7 @@ public struct Gender: JSONDecodable {
     public let score: Double
     
     /// Used internally to initialize a `Gender` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         gender = try json.getString(at: "gender")
         score = try json.getDouble(at: "score")
     }
@@ -145,7 +144,7 @@ public struct FaceLocation: JSONDecodable {
     public let top: Int
     
     /// Used internally to initialize a `FaceLocation` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         width = try json.getInt(at: "width")
         height = try json.getInt(at: "height")
         left = try json.getInt(at: "left")
@@ -166,7 +165,7 @@ public struct Identity: JSONDecodable {
     public let typeHierarchy: String?
     
     /// Used internally to initialize an `Identity` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try json.getString(at: "name")
         score = try json.getDouble(at: "score")
         typeHierarchy = try? json.getString(at: "type_hierarchy")

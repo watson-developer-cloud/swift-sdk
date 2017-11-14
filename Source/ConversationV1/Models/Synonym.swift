@@ -15,50 +15,56 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Synonym. */
-public struct Synonym: JSONDecodable, JSONEncodable {
+public struct Synonym {
 
     /// The text of the synonym.
-    public let synonym: String
+    public var synonymText: String
 
     /// The timestamp for creation of the synonym.
-    public let created: String
+    public var created: String
 
     /// The timestamp for the most recent update to the synonym.
-    public let updated: String
+    public var updated: String
 
     /**
      Initialize a `Synonym` with member variables.
 
-     - parameter synonym: The text of the synonym.
+     - parameter synonymText: The text of the synonym.
      - parameter created: The timestamp for creation of the synonym.
      - parameter updated: The timestamp for the most recent update to the synonym.
 
      - returns: An initialized `Synonym`.
     */
-    public init(synonym: String, created: String, updated: String) {
-        self.synonym = synonym
+    public init(synonymText: String, created: String, updated: String) {
+        self.synonymText = synonymText
         self.created = created
         self.updated = updated
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `Synonym` model from JSON.
-    public init(json: JSON) throws {
-        synonym = try json.getString(at: "synonym")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
+extension Synonym: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case synonymText = "synonym"
+        case created = "created"
+        case updated = "updated"
+        static let allValues = [synonymText, created, updated]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `Synonym` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["synonym"] = synonym
-        json["created"] = created
-        json["updated"] = updated
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        synonymText = try container.decode(String.self, forKey: .synonymText)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(synonymText, forKey: .synonymText)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+    }
+
 }

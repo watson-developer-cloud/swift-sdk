@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A result produced by the Discovery service to analyze the input provided. */
 public struct EnrichedTitle: JSONDecodable {
@@ -50,7 +49,7 @@ public struct EnrichedTitle: JSONDecodable {
     public let json: [String: Any]
 
     /// Used internally to initialize an `EnrichedTitle` object from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         status = try? json.getString(at: "status")
         documentSentiment = try? json.decode(at: "docSentiment", type: Sentiment.self)
         taxonomy = try? json.decodedArray(at: "taxonomy", type: Taxonomy.self)

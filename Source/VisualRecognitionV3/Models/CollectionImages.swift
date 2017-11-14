@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A collection of images. */
 public struct CollectionImages: JSONDecodable {
@@ -27,7 +26,7 @@ public struct CollectionImages: JSONDecodable {
     public let imagesProcessed: Int
     
     /// Used internally to initialize a `CollectionImages` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         collectionImages = try json.decodedArray(at: "images", type: CollectionImage.self)
         imagesProcessed = try json.getInt(at: "images_processed")
     }
@@ -52,7 +51,7 @@ public struct CollectionImage: JSONDecodable {
     public let score: Double?
     
     /// Used internally to initialize a 'CollectionImage' model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         imageID = try json.getString(at: "image_id")
         created = try json.getString(at: "created")
         imageFile = try json.getString(at: "image_file")
@@ -68,7 +67,7 @@ public struct Metadata: JSONDecodable {
     public let metadata: [String: Any]?
     
     /// Used internally to intialize a 'Metadata' model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         self.metadata = try? json.getDictionaryObject()
     }
     
@@ -91,7 +90,7 @@ public struct SimilarImages: JSONDecodable {
     public let imagesProcessed: Int
     
     /// Used internally to initialize a `CollectionImages` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         imageFile = try json.getString(at: "image_file")
         similarImages = try json.decodedArray(at: "similar_images", type: CollectionImage.self)
         imagesProcessed = try json.getInt(at: "images_processed")

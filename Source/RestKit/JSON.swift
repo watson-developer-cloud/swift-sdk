@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2016-2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,248 +16,147 @@
 
 import Foundation
 
-// MARK: JSON Paths
+/// A JSON value (one of string, number, object, array, true, false, or null).
+public enum JSON: Equatable, Codable {
 
-public protocol JSONPathType {
-    func value(in dictionary: [String: Any]) throws -> JSON
-    func value(in array: [Any]) throws -> JSON
-}
+    /// A null value.
+    case null
 
-extension String: JSONPathType {
-    public func value(in dictionary: [String: Any]) throws -> JSON {
-        guard let json = dictionary[self] else {
-            throw JSON.Error.keyNotFound(key: self)
-        }
-        return JSON(json: json)
-    }
-    
-    public func value(in array: [Any]) throws -> JSON {
-        throw JSON.Error.unexpectedSubscript(type: String.self)
-    }
-}
+    /// A boolean value.
+    case boolean(Bool)
 
-extension Int: JSONPathType {
-    public func value(in dictionary: [String: Any]) throws -> JSON {
-        throw JSON.Error.unexpectedSubscript(type: Int.self)
-    }
-    
-    public func value(in array: [Any]) throws -> JSON {
-        let json = array[self]
-        return JSON(json: json)
-    }
-}
+    /// A string value.
+    case string(String)
 
-// MARK: - JSON
+    /// A number value, represented as an integer.
+    case int(Int)
 
-public struct JSON {
-    fileprivate let json: Any
-    
-    public init(json: Any) {
-        self.json = json
-    }
-    
-    public init(string: String) throws {
-        guard let data = string.data(using: .utf8) else {
-            throw Error.encodingError
-        }
-        json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-    }
-    
-    public init(data: Data) throws {
-        json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-    }
-    
-    public init(dictionary: [String: Any]) {
-        json = dictionary
-    }
-    
-    public init(array: [Any]) {
-        json = array
-    }
-    
-    public func serialize() throws -> Data {
-        return try JSONSerialization.data(withJSONObject: json, options: [])
-    }
-    
-    public func serializeString() throws -> String {
-        let data = try serialize()
-        guard let string = String(data: data, encoding: .utf8) else {
-            throw Error.stringSerializationError
-        }
-        return string
-    }
-    
-    private func value(at path: JSONPathType) throws -> JSON {
-        if let dictionary = json as? [String: Any] {
-            return try path.value(in: dictionary)
-        }
-        if let array = json as? [Any] {
-            return try path.value(in: array)
-        }
-        throw Error.unexpectedSubscript(type: type(of: path))
-    }
-    
-    private func value(at path: [JSONPathType]) throws -> JSON {
-        var value = self
-        for fragment in path {
-            value = try value.value(at: fragment)
-        }
-        return value
-    }
+    /// A number value, represented as a double.
+    case double(Double)
 
-    public func decode<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> Decoded {
-        return try Decoded(json: value(at: path))
-    }
-    
-    public func getDouble(at path: JSONPathType...) throws -> Double {
-        return try Double(json: value(at: path))
-    }
-    
-    public func getInt(at path: JSONPathType...) throws -> Int {
-        return try Int(json: value(at: path))
-    }
-    
-    public func getString(at path: JSONPathType...) throws -> String {
-        return try String(json: value(at: path))
-    }
-    
-    public func getBool(at path: JSONPathType...) throws -> Bool {
-        return try Bool(json: value(at: path))
-    }
-    
-    public func getArray(at path: JSONPathType...) throws -> [JSON] {
-        let json = try value(at: path)
-        guard let array = json.json as? [Any] else {
-            throw Error.valueNotConvertible(value: json, to: [JSON].self)
-        }
-        return array.map { JSON(json: $0) }
-    }
-    
-    public func decodedArray<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [Decoded] {
-        let json = try value(at: path)
-        guard let array = json.json as? [Any] else {
-            throw Error.valueNotConvertible(value: json, to: [Decoded].self)
-        }
-        return try array.map { try Decoded(json: JSON(json: $0)) }
-    }
-    
-    public func decodedDictionary<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [String: Decoded] {
-        let json = try value(at: path)
-        guard let dictionary = json.json as? [String: Any] else {
-            throw Error.valueNotConvertible(value: json, to: [String: Decoded].self)
-        }
-        var decoded = [String: Decoded](minimumCapacity: dictionary.count)
-        for (key, value) in dictionary {
-            decoded[key] = try Decoded(json: JSON(json: value))
-        }
-        return decoded
-    }
-    
-    public func getJSON(at path: JSONPathType...) throws -> Any {
-        return try value(at: path).json
-    }
-    
-    public func getDictionary(at path: JSONPathType...) throws -> [String: JSON] {
-        let json = try value(at: path)
-        guard let dictionary = json.json as? [String: Any] else {
-            throw Error.valueNotConvertible(value: json, to: [String: JSON].self)
-        }
-        return dictionary.map { JSON(json: $0) }
-    }
-    
-    public func getDictionaryObject(at path: JSONPathType...) throws -> [String: Any] {
-        let json = try value(at: path)
-        guard let dictionary = json.json as? [String: Any] else {
-            throw Error.valueNotConvertible(value: json, to: [String: JSON].self)
-        }
-        return dictionary
-    }
-}
+    /// An array value.
+    case array([JSON])
 
-// MARK: - JSON Errors
+    /// An object value.
+    case object([String: JSON])
 
-extension JSON {
-    public enum Error: Swift.Error {
-        case indexOutOfBounds(index: Int)
-        case keyNotFound(key: String)
-        case unexpectedSubscript(type: JSONPathType.Type)
-        case valueNotConvertible(value: JSON, to: Any.Type)
-        case encodingError
-        case stringSerializationError
-    }
-}
-
-// MARK: - JSON Protocols
-
-public protocol JSONDecodable {
-    init(json: JSON) throws
-}
-
-public protocol JSONEncodable {
-    func toJSON() -> JSON
-    func toJSONObject() -> Any
-}
-
-extension JSONEncodable {
-    public func toJSON() -> JSON {
-        return JSON(json: self.toJSONObject())
-    }
-}
-
-extension Double: JSONDecodable {
-    public init(json: JSON) throws {
-        let any = json.json
-        if let double = any as? Double {
-            self = double
-        } else if let int = any as? Int {
-            self = Double(int)
-        } else if let string = any as? String, let double = Double(string) {
-            self = double
+    /// Decode a JSON value.
+    public init(from decoder: Decoder) throws {
+        if let container = try? decoder.container(keyedBy: DynamicKeys.self) {
+            try self.init(from: container)
+        } else if var container = try? decoder.unkeyedContainer() {
+            try self.init(from: &container)
+        } else if let container = try? decoder.singleValueContainer() {
+            try self.init(from: container)
         } else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Double.self)
+            let description = "Failed to construct a container view into this decoder."
+            let context = DecodingError.Context(codingPath: decoder.codingPath, debugDescription: description)
+            throw DecodingError.dataCorrupted(context)
         }
     }
-}
 
-extension Int: JSONDecodable {
-    public init(json: JSON) throws {
-        let any = json.json
-        if let int = any as? Int {
-            self = int
-        } else if let double = any as? Double, double <= Double(Int.max) {
-            self = Int(double)
-        } else if let string = any as? String, let int = Int(string) {
-            self = int
-        } else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Int.self)
+    /// Decode a JSON object value from the keyed container.
+    private init(from container: KeyedDecodingContainer<DynamicKeys>) throws {
+        try self.init(from: container, excluding: [])
+    }
+
+    /// Decode a JSON object value from the keyed container, excluding the given keys.
+    internal init(from container: KeyedDecodingContainer<DynamicKeys>, excluding keys: [CodingKey]) throws {
+        var object = [String: JSON]()
+        let excludedKeys = keys.map() { $0.stringValue }
+        let includedKeys = container.allKeys.filter() { !excludedKeys.contains($0.stringValue) }
+        for codingKey in includedKeys {
+            let key = codingKey.stringValue
+            let value = try container.decode(JSON.self, forKey: codingKey)
+            object[key] = value
+        }
+        self = .object(object)
+    }
+
+    /// Decode a JSON array value from the unkeyed container.
+    private init(from container: inout UnkeyedDecodingContainer) throws {
+        var array = [JSON]()
+        while !container.isAtEnd {
+            array.append(try container.decode(JSON.self))
+        }
+        self = .array(array)
+    }
+
+    /// Decode a JSON value from the single value container.
+    private init(from container: SingleValueDecodingContainer) throws {
+        if container.decodeNil() { self = .null }
+        else if let boolean = try? container.decode(Bool.self) { self = .boolean(boolean) }
+        else if let string = try? container.decode(String.self) { self = .string(string) }
+        else if let int = try? container.decode(Int.self) { self = .int(int) }
+        else if let double = try? container.decode(Double.self) { self = .double(double) }
+        else {
+            let description = "Failed to decode a JSON value from the given single value container."
+            let context = DecodingError.Context(codingPath: container.codingPath, debugDescription: description)
+            throw DecodingError.dataCorrupted(context)
         }
     }
-}
 
-extension Bool: JSONDecodable {
-    public init(json: JSON) throws {
-        let any = json.json
-        if let bool = any as? Bool {
-            self = bool
-        } else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Bool.self)
+    /// Initialize a JSON value from an encodable type.
+    public init<T: Encodable>(from value: T) throws {
+        let encoder = JSONEncoder()
+        let decoder = JSONDecoder()
+        let data = try encoder.encode(value)
+        self = try decoder.decode(JSON.self, from: data)
+    }
+
+    /// Convert this JSON value to a decodable type.
+    public func toValue<T: Decodable>(_ type: T.Type) throws -> T {
+        let encoder = JSONEncoder()
+        let decoder = JSONDecoder()
+        let data = try encoder.encode(self)
+        return try decoder.decode(T.self, from: data)
+    }
+
+    /// Encode a JSON value.
+    public func encode(to encoder: Encoder) throws {
+        switch self {
+        case .null:
+            var container = encoder.singleValueContainer()
+            try container.encodeNil()
+        case .boolean(let boolean):
+            var container = encoder.singleValueContainer()
+            try container.encode(boolean)
+        case .string(let string):
+            var container = encoder.singleValueContainer()
+            try container.encode(string)
+        case .int(let int):
+            var container = encoder.singleValueContainer()
+            try container.encode(int)
+        case .double(let double):
+            var container = encoder.singleValueContainer()
+            try container.encode(double)
+        case .array(let array):
+            var container = encoder.unkeyedContainer()
+            try array.forEach() { try container.encode($0) }
+        case .object(let object):
+            var container = encoder.container(keyedBy: DynamicKeys.self)
+            try object.forEach() { key, value in
+                guard let codingKey = DynamicKeys(stringValue: key) else {
+                    let description = "Cannot construct CodingKey for \(key)"
+                    let context = EncodingError.Context(codingPath: encoder.codingPath, debugDescription: description)
+                    throw EncodingError.invalidValue(key, context)
+                }
+                try container.encode(value, forKey: codingKey)
+            }
         }
     }
-}
 
-extension String: JSONDecodable {
-    public init(json: JSON) throws {
-        let any = json.json
-        if let string = any as? String {
-            self = string
-        } else if let int = any as? Int {
-            self = String(int)
-        } else if let bool = any as? Bool {
-            self = String(bool)
-        } else if let double = any as? Double {
-            self = String(double)
-        } else {
-            throw JSON.Error.valueNotConvertible(value: json, to: String.self)
+    /// Compare two JSON values for equality.
+    public static func == (lhs: JSON, rhs: JSON) -> Bool {
+        switch (lhs, rhs) {
+        case (.null, null): return true
+        case (.boolean(let x), .boolean(let y)): return x == y
+        case (.string(let x), .string(let y)): return x == y
+        case (.int(let x), .int(let y)): return x == y
+        case (.double(let x), .double(let y)): return x == y
+        case (.array(let x), .array(let y)): return x == y
+        case (.object(let x), .object(let y)): return x == y
+        default: return false
         }
     }
 }

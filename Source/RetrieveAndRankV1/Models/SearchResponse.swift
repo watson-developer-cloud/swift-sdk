@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The response received when searching a specific query within the Solr cluster and collection. */
 public struct SearchResponse: JSONDecodable {
@@ -27,7 +26,7 @@ public struct SearchResponse: JSONDecodable {
     public let body: SearchResponseBody
     
     /// Used internally to initialize a `SearchResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         header = try json.decode(at: "responseHeader", type: SearchResponseHeader.self)
         body = try json.decode(at: "response", type: SearchResponseBody.self)
     }
@@ -46,7 +45,7 @@ public struct SearchResponseHeader: JSONDecodable {
     public let params: RequestParameters
     
     /// Used internally to initialize a `SearchResponseHeader` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         status = try json.getInt(at: "status")
         qTime = try json.getInt(at: "QTime")
         params = try json.decode(at: "params", type: RequestParameters.self)
@@ -66,7 +65,7 @@ public struct RequestParameters: JSONDecodable {
     public let writerType: String
     
     /// Used internally to initialize a `RequestParameters` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         query = try json.getString(at: "q")
         returnFields = try json.getString(at: "fl")
         writerType = try json.getString(at: "wt")
@@ -90,7 +89,7 @@ public struct SearchResponseBody: JSONDecodable {
     public let documents: [Document]
     
     /// Used internally to initialize a `SearchResponseBody` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         numFound = try json.getInt(at: "numFound")
         start = try json.getInt(at: "start")
         

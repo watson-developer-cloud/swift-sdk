@@ -17,9 +17,9 @@
 import Foundation
 
 
-public class MultipartFormData {
+internal class MultipartFormData {
     
-    public var contentType: String { return "multipart/form-data; boundary=\(boundary)" }
+    internal var contentType: String { return "multipart/form-data; boundary=\(boundary)" }
     // add contentLength?
     
     private let boundary: String
@@ -40,23 +40,23 @@ public class MultipartFormData {
         return boundary.data(using: .utf8, allowLossyConversion: false)!
     }
     
-    public init() {
+    internal init() {
         self.boundary = "watson-apis.boundary.bd0b4c6e3b9c2126"
     }
     
-    public func append(_ data: Data, withName: String, mimeType: String? = nil, fileName: String? = nil) {
+    internal func append(_ data: Data, withName: String, mimeType: String? = nil, fileName: String? = nil) {
         let bodyPart = BodyPart(key: withName, data: data, mimeType: mimeType, fileName: fileName)
         bodyParts.append(bodyPart)
     }
     
-    public func append(_ fileURL: URL, withName: String, mimeType: String? = nil) {
+    internal func append(_ fileURL: URL, withName: String, mimeType: String? = nil) {
         if let data = try? Data.init(contentsOf: fileURL) {
             let bodyPart = BodyPart(key: withName, data: data, mimeType: mimeType, fileName: fileURL.lastPathComponent)
             bodyParts.append(bodyPart)
         }
     }
     
-    public func toData() throws -> Data {
+    internal func toData() throws -> Data {
         var data = Data()
         for (index, bodyPart) in bodyParts.enumerated() {
             let bodyBoundary: Data
@@ -78,14 +78,14 @@ public class MultipartFormData {
     }
 }
 
-public struct BodyPart {
+internal struct BodyPart {
     
     private(set) var key: String
     private(set) var data: Data
     private(set) var mimeType: String?
     private(set) var fileName: String?
     
-    public init?(key: String, value: Any) {
+    internal init?(key: String, value: Any) {
         let string = String(describing: value)
         guard let data = string.data(using: .utf8) else {
             return nil
@@ -95,7 +95,7 @@ public struct BodyPart {
         self.data = data
     }
     
-    public init(key: String, data: Data, mimeType: String? = nil, fileName: String? = nil) {
+    internal init(key: String, data: Data, mimeType: String? = nil, fileName: String? = nil) {
         self.key = key
         self.data = data
         self.mimeType = mimeType
@@ -114,7 +114,7 @@ public struct BodyPart {
         return header
     }
     
-    public func content() throws -> Data {
+    internal func content() throws -> Data {
         var result = Data()
         let headerString = header
         guard let header = headerString.data(using: .utf8) else {

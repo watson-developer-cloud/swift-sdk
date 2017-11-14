@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An object containing information about a corpus. */
 public struct Corpus: JSONDecodable {
@@ -37,12 +36,12 @@ public struct Corpus: JSONDecodable {
     public let error: String?
     
     /// Used internally to initialize a `Corpus` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try json.getString(at: "name")
         totalWords = try json.getInt(at: "total_words")
         outOfVocabularyWords = try json.getInt(at: "out_of_vocabulary_words")
         guard let corpusStatus = CorpusStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: CorpusStatus.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: CorpusStatus.self)
         }
         status = corpusStatus
         error = try? json.getString(at: "error")

@@ -15,32 +15,40 @@
  **/
 
 import Foundation
-import RestKit
 
-/** An option specifying if the relationships found between entities in the analyzed content should 
- be returned. */
-public struct RelationsOptions: JSONEncodable {
-    
-    /// Enter a custom model ID to override the default `en-news` model. Use `es-news` for Spanish
-    /// news, and `ar-news` for Arabic news.
-    public let model: String?
+/** An option specifying if the relationships found between entities in the analyzed content should be returned. */
+public struct RelationsOptions {
+
+    /// Enter a custom model ID to override the default model.
+    public var model: String?
 
     /**
-    Initialize a `RelationsOptions` with all member variables.
+     Initialize a `RelationsOptions` with member variables.
 
-     - parameter model: Enter a custom model ID to override the default `en-news` model. Use 
-        `es-news` for Spanish news, and `ar-news` for Arabic news.
-    
+     - parameter model: Enter a custom model ID to override the default model.
+
      - returns: An initialized `RelationsOptions`.
     */
     public init(model: String? = nil) {
         self.model = model
     }
+}
 
-    /// Used internally to serialize a `RelationsOptions` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let model = model { json["model"] = model }
-        return json
+extension RelationsOptions: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case model = "model"
+        static let allValues = [model]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        model = try container.decodeIfPresent(String.self, forKey: .model)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(model, forKey: .model)
+    }
+
 }

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The Watson Personality Insights service uses linguistic analytics to extract a spectrum
@@ -68,7 +67,7 @@ public class PersonalityInsights {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             var userInfo = [NSLocalizedFailureReasonErrorKey: message]
@@ -182,7 +181,7 @@ public class PersonalityInsights {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Profile) -> Void)
     {
-        let json = JSON(dictionary: ["contentItems": contentItems.map { $0.toJSONObject() }])
+        let json = JSONWrapper(dictionary: ["contentItems": contentItems.map { $0.toJSONObject() }])
         guard let content = try? json.serialize() else {
             let failureReason = "Content items could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]

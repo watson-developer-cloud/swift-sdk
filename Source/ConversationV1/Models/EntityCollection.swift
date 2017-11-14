@@ -15,16 +15,15 @@
  **/
 
 import Foundation
-import RestKit
 
 /** An array of entities. */
-public struct EntityCollection: JSONDecodable, JSONEncodable {
+public struct EntityCollection {
 
     /// An array of entities.
-    public let entities: [EntityExport]
+    public var entities: [EntityExport]
 
     /// An object defining the pagination data for the returned objects.
-    public let pagination: PaginationResponse
+    public var pagination: Pagination
 
     /**
      Initialize a `EntityCollection` with member variables.
@@ -34,24 +33,30 @@ public struct EntityCollection: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `EntityCollection`.
     */
-    public init(entities: [EntityExport], pagination: PaginationResponse) {
+    public init(entities: [EntityExport], pagination: Pagination) {
         self.entities = entities
         self.pagination = pagination
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `EntityCollection` model from JSON.
-    public init(json: JSON) throws {
-        entities = try json.decodedArray(at: "entities", type: EntityExport.self)
-        pagination = try json.decode(at: "pagination", type: PaginationResponse.self)
+extension EntityCollection: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case entities = "entities"
+        case pagination = "pagination"
+        static let allValues = [entities, pagination]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `EntityCollection` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["entities"] = entities.map { $0.toJSONObject() }
-        json["pagination"] = pagination.toJSONObject()
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        entities = try container.decode([EntityExport].self, forKey: .entities)
+        pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(entities, forKey: .entities)
+        try container.encode(pagination, forKey: .pagination)
+    }
+
 }

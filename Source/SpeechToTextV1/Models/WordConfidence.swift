@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The confidence of a word in a Speech to Text transcription. */
 public struct WordConfidence: JSONDecodable {
@@ -27,7 +26,7 @@ public struct WordConfidence: JSONDecodable {
     public let confidence: Double
 
     /// Used internally to initialize a `WordConfidence` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let array = try json.getArray()
         word = try array[Index.word.rawValue].getString()
         confidence = try array[Index.confidence.rawValue].getDouble()

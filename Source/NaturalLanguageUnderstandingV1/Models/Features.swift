@@ -15,70 +15,53 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Analysis features and options. */
-public struct Features: JSONEncodable {
-    
+public struct Features {
+
     /// Whether or not to return the concepts that are mentioned in the analyzed text.
-    public let concepts: ConceptsOptions?
-    
+    public var concepts: ConceptsOptions?
+
     /// Whether or not to extract the emotions implied in the analyzed text.
-    public let emotion: EmotionOptions?
-    
+    public var emotion: EmotionOptions?
+
     /// Whether or not to extract detected entity objects from the analyzed text.
-    public let entities: EntitiesOptions?
-    
+    public var entities: EntitiesOptions?
+
     /// Whether or not to return the keywords in the analyzed text.
-    public let keywords: KeywordsOptions?
-    
-    /// Whether or not the author, publication date, and title of the analyzed text should be returned.
-    /// This parameter is only available for URL and HTML input.
-    public let metadata: MetadataOptions?
-    
+    public var keywords: KeywordsOptions?
+
+    /// Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is only available for URL and HTML input.
+    public var metadata: MetadataOptions?
+
     /// Whether or not to return the relationships between detected entities in the analyzed text.
-    public let relations: RelationsOptions?
-    
+    public var relations: RelationsOptions?
+
     /// Whether or not to return the subject-action-object relations from the analyzed text.
-    public let semanticRoles: SemanticRolesOptions?
-    
+    public var semanticRoles: SemanticRolesOptions?
+
     /// Whether or not to return the overall sentiment of the analyzed text.
-    public let sentiment: SentimentOptions?
-    
-    /// Wether or not to return the high level category the content is categorized as (i.e. news, art).
-    public let categories: CategoriesOptions?
+    public var sentiment: SentimentOptions?
+
+    /// Whether or not to return the high level category the content is categorized as (i.e. news, art).
+    public var categories: CategoriesOptions?
 
     /**
-    Initialize a `Features` object. You must include at least one feature.
+     Initialize a `Features` with member variables.
 
-     - parameter concepts: Whether or not to return the concepts that are mentioned in the analyzed 
-        text.
+     - parameter concepts: Whether or not to return the concepts that are mentioned in the analyzed text.
      - parameter emotion: Whether or not to extract the emotions implied in the analyzed text.
      - parameter entities: Whether or not to extract detected entity objects from the analyzed text.
      - parameter keywords: Whether or not to return the keywords in the analyzed text.
-     - parameter metadata: Whether or not the author, publication date, and title of the analyzed text 
-        should be returned. This is only available for URL and HTML input.
-     - parameter relations: Whether or not to return the relationships between detected entities in the 
-        analyzed text.
-     - parameter semanticRoles: Whether or not to return the subject-action-object relations from the 
-        analyzed text.
+     - parameter metadata: Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is only available for URL and HTML input.
+     - parameter relations: Whether or not to return the relationships between detected entities in the analyzed text.
+     - parameter semanticRoles: Whether or not to return the subject-action-object relations from the analyzed text.
      - parameter sentiment: Whether or not to return the overall sentiment of the analyzed text.
-     - parameter categories: Whether or not to return the high level category the content is categorized 
-        as (i.e. news, art).
+     - parameter categories: Whether or not to return the high level category the content is categorized as (i.e. news, art).
 
-    - returns: An initialized `Features`.
+     - returns: An initialized `Features`.
     */
-    public init(
-        concepts: ConceptsOptions? = nil,
-        emotion: EmotionOptions? = nil,
-        entities: EntitiesOptions? = nil,
-        keywords: KeywordsOptions? = nil,
-        metadata: MetadataOptions? = nil,
-        relations: RelationsOptions? = nil,
-        semanticRoles: SemanticRolesOptions? = nil,
-        sentiment: SentimentOptions? = nil,
-        categories: CategoriesOptions? = nil)
-    {
+    public init(concepts: ConceptsOptions? = nil, emotion: EmotionOptions? = nil, entities: EntitiesOptions? = nil, keywords: KeywordsOptions? = nil, metadata: MetadataOptions? = nil, relations: RelationsOptions? = nil, semanticRoles: SemanticRolesOptions? = nil, sentiment: SentimentOptions? = nil, categories: CategoriesOptions? = nil) {
         self.concepts = concepts
         self.emotion = emotion
         self.entities = entities
@@ -89,19 +72,47 @@ public struct Features: JSONEncodable {
         self.sentiment = sentiment
         self.categories = categories
     }
+}
 
-    /// Used internally to serialize a `Features` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let concepts = concepts { json["concepts"] = concepts.toJSONObject() }
-        if let emotion = emotion { json["emotion"] = emotion.toJSONObject() }
-        if let entities = entities { json["entities"] = entities.toJSONObject() }
-        if let keywords = keywords { json["keywords"] = keywords.toJSONObject() }
-        if let metadata = metadata { json["metadata"] = metadata.toJSONObject() }
-        if let relations = relations { json["relations"] = relations.toJSONObject() }
-        if let semanticRoles = semanticRoles { json["semantic_roles"] = semanticRoles.toJSONObject() }
-        if let sentiment = sentiment { json["sentiment"] = sentiment.toJSONObject() }
-        if let categories = categories { json["categories"] = categories.toJSONObject() }
-        return json
+extension Features: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case concepts = "concepts"
+        case emotion = "emotion"
+        case entities = "entities"
+        case keywords = "keywords"
+        case metadata = "metadata"
+        case relations = "relations"
+        case semanticRoles = "semantic_roles"
+        case sentiment = "sentiment"
+        case categories = "categories"
+        static let allValues = [concepts, emotion, entities, keywords, metadata, relations, semanticRoles, sentiment, categories]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        concepts = try container.decodeIfPresent(ConceptsOptions.self, forKey: .concepts)
+        emotion = try container.decodeIfPresent(EmotionOptions.self, forKey: .emotion)
+        entities = try container.decodeIfPresent(EntitiesOptions.self, forKey: .entities)
+        keywords = try container.decodeIfPresent(KeywordsOptions.self, forKey: .keywords)
+        metadata = try container.decodeIfPresent(MetadataOptions.self, forKey: .metadata)
+        relations = try container.decodeIfPresent(RelationsOptions.self, forKey: .relations)
+        semanticRoles = try container.decodeIfPresent(SemanticRolesOptions.self, forKey: .semanticRoles)
+        sentiment = try container.decodeIfPresent(SentimentOptions.self, forKey: .sentiment)
+        categories = try container.decodeIfPresent(CategoriesOptions.self, forKey: .categories)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(concepts, forKey: .concepts)
+        try container.encodeIfPresent(emotion, forKey: .emotion)
+        try container.encodeIfPresent(entities, forKey: .entities)
+        try container.encodeIfPresent(keywords, forKey: .keywords)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(relations, forKey: .relations)
+        try container.encodeIfPresent(semanticRoles, forKey: .semanticRoles)
+        try container.encodeIfPresent(sentiment, forKey: .sentiment)
+        try container.encodeIfPresent(categories, forKey: .categories)
+    }
+
 }

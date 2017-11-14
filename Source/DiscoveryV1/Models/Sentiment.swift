@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The attitude, opinion or feeling toward something, such as a person, organization,
@@ -36,7 +35,7 @@ public struct Sentiment: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a Sentiment object from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         mixed = try? json.getString(at: "mixed")
         score = try? json.getString(at: "score")
         type = try? json.getString(at: "type")

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2017
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,64 @@
  **/
 
 import Foundation
-import RestKit
 
-/** A term from the request that was identified as an intent. */
-public struct Intent: JSONEncodable, JSONDecodable {
+/** Intent. */
+public struct Intent {
 
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
+    /// The name of the intent.
+    public var intentName: String
 
-    /// The name of the recognized intent.
-    public let intent: String
+    /// The timestamp for creation of the intent.
+    public var created: String
 
-    /// A decimal percentage that represents the confidence that Watson has in this intent.
-    public let confidence: Double
+    /// The timestamp for the last update to the intent.
+    public var updated: String
 
-    /// Used internally to initialize an `Intent` model from JSON.
-    public init(json: JSON) throws {
-        self.json = try json.getDictionaryObject()
-        intent = try json.getString(at: "intent")
-        confidence = try json.getDouble(at: "confidence")
+    /// The description of the intent.
+    public var description: String?
+
+    /**
+     Initialize a `Intent` with member variables.
+
+     - parameter intentName: The name of the intent.
+     - parameter created: The timestamp for creation of the intent.
+     - parameter updated: The timestamp for the last update to the intent.
+     - parameter description: The description of the intent.
+
+     - returns: An initialized `Intent`.
+    */
+    public init(intentName: String, created: String, updated: String, description: String? = nil) {
+        self.intentName = intentName
+        self.created = created
+        self.updated = updated
+        self.description = description
+    }
+}
+
+extension Intent: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case intentName = "intent"
+        case created = "created"
+        case updated = "updated"
+        case description = "description"
+        static let allValues = [intentName, created, updated, description]
     }
 
-    /// Used internally to serialize an `Intent` model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        intentName = try container.decode(String.self, forKey: .intentName)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(intentName, forKey: .intentName)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(description, forKey: .description)
+    }
+
 }

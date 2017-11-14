@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The response received when searching a specific query within the Solr cluster and collection,
  returned in ranked order. */
@@ -28,7 +27,7 @@ public struct SearchAndRankResponse: JSONDecodable {
     public let body: SearchAndRankResponseBody
     
     /// Used internally to initialize a `SearchAndRankResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         header = try json.decode(at: "responseHeader", type: SearchAndRankResponseHeader.self)
         body = try json.decode(at: "response", type: SearchAndRankResponseBody.self)
     }
@@ -45,7 +44,7 @@ public struct SearchAndRankResponseHeader: JSONDecodable {
     public let qTime: Int
     
     /// Used internally to initialize a `SearchAndRankResponseHeader` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         status = try json.getInt(at: "status")
         qTime = try json.getInt(at: "QTime")
     }
@@ -68,7 +67,7 @@ public struct SearchAndRankResponseBody: JSONDecodable {
     public let documents: [Document]
     
     /// Used internally to initialize a `SearchAndRankResponseBody` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         numFound = try json.getInt(at: "numFound")
         start = try json.getInt(at: "start")
         maxScore = try json.getDouble(at: "maxScore")

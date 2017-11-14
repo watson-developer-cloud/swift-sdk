@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /// A decision problem.
 public struct Problem: JSONEncodable, JSONDecodable {
@@ -57,7 +56,7 @@ public struct Problem: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `Problem` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         columns = try json.decodedArray(at: "columns", type: Column.self)
         options = try json.decodedArray(at: "options", type: Option.self)
         subject = try json.getString(at: "subject")
@@ -246,7 +245,7 @@ public struct Column: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `Column` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         key = try json.getString(at: "key")
         if let typeString = try? json.getString(at: "type") {
             type = ColumnType(rawValue: typeString)
@@ -312,7 +311,7 @@ public enum OptionValue: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize an `OptionValue` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         if let int = try? json.getInt() {
             self = .int(int)
         } else if let double = try? json.getDouble() {
@@ -323,7 +322,7 @@ public enum OptionValue: JSONEncodable, JSONDecodable {
             self = .string(string)
         } else {
             self = .string("Error: JSON could not be converted to `OptionValue`.")
-            throw JSON.Error.valueNotConvertible(value: json, to: OptionValue.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: OptionValue.self)
         }
     }
 }
@@ -378,7 +377,7 @@ public enum Range: JSONEncodable, JSONDecodable {
     }
     
     /// Used internally to initialize a `Range` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         // try to parse as `Range.DateRange`
         if let low = try? json.getString(at: "low"), let high = try? json.getString(at: "high") {
             let lowDate = Range.dateFormatter.date(from: low)
@@ -401,7 +400,7 @@ public enum Range: JSONEncodable, JSONDecodable {
             return
         }
         
-        throw JSON.Error.valueNotConvertible(value: json, to: Range.self)
+        throw JSONWrapper.Error.valueNotConvertible(value: json, to: Range.self)
     }
 }
 
@@ -483,7 +482,7 @@ public struct Option: JSONEncodable, JSONDecodable {
     }
 
     /// Used internally to initialize an `Option` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         key = try json.getString(at: "key")
         values = try json.getDictionary(at: "values").map {
             json in try json.decode()

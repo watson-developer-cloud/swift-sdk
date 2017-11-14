@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A language that can be identified by the Language Translator service. */
 public struct IdentifiableLanguage: JSONDecodable {
@@ -27,7 +26,7 @@ public struct IdentifiableLanguage: JSONDecodable {
     public let name: String
 
     /// Used internally to initialize an `IdentifiableLanguage` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         language = try json.getString(at: "language")
         name = try json.getString(at: "name")
     }

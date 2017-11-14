@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The Text to Speech service provides an API that uses IBM's speech-synthesis capabilities to
@@ -69,7 +68,7 @@ public class TextToSpeech {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             var userInfo = [NSLocalizedFailureReasonErrorKey: message]
@@ -363,7 +362,7 @@ public class TextToSpeech {
             dict["description"] = description
         }
         
-        guard let body = try? JSON(dictionary: dict).serialize() else {
+        guard let body = try? JSONWrapper(dictionary: dict).serialize() else {
             let failureReason = "Custom voice model metadata could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -681,7 +680,7 @@ public class TextToSpeech {
         
         // construct the body
         let dict = ["translation": translation]
-        guard let body = try? JSON(dictionary: dict).serialize() else {
+        guard let body = try? JSONWrapper(dictionary: dict).serialize() else {
             let failureReason = "Translation request could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)

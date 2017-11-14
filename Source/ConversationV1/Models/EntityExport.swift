@@ -15,36 +15,35 @@
  **/
 
 import Foundation
-import RestKit
 
 /** EntityExport. */
-public struct EntityExport: JSONDecodable, JSONEncodable {
+public struct EntityExport {
 
     /// The name of the entity.
-    public let entity: String
+    public var entityName: String
 
     /// The timestamp for creation of the entity.
-    public let created: String
+    public var created: String
 
     /// The timestamp for the last update to the entity.
-    public let updated: String
+    public var updated: String
 
     /// The description of the entity.
-    public let description: String?
+    public var description: String?
 
     /// Any metadata related to the entity.
-    public let metadata: [String: Any]?
+    public var metadata: [String: JSON]?
 
     /// Whether fuzzy matching is used for the entity.
-    public let fuzzyMatch: Bool?
+    public var fuzzyMatch: Bool?
 
     /// An array of entity values.
-    public let values: [ValueExport]?
+    public var values: [ValueExport]?
 
     /**
      Initialize a `EntityExport` with member variables.
 
-     - parameter entity: The name of the entity.
+     - parameter entityName: The name of the entity.
      - parameter created: The timestamp for creation of the entity.
      - parameter updated: The timestamp for the last update to the entity.
      - parameter description: The description of the entity.
@@ -54,8 +53,8 @@ public struct EntityExport: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `EntityExport`.
     */
-    public init(entity: String, created: String, updated: String, description: String? = nil, metadata: [String: Any]? = nil, fuzzyMatch: Bool? = nil, values: [ValueExport]? = nil) {
-        self.entity = entity
+    public init(entityName: String, created: String, updated: String, description: String? = nil, metadata: [String: JSON]? = nil, fuzzyMatch: Bool? = nil, values: [ValueExport]? = nil) {
+        self.entityName = entityName
         self.created = created
         self.updated = updated
         self.description = description
@@ -63,32 +62,41 @@ public struct EntityExport: JSONDecodable, JSONEncodable {
         self.fuzzyMatch = fuzzyMatch
         self.values = values
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `EntityExport` model from JSON.
-    public init(json: JSON) throws {
-        entity = try json.getString(at: "entity")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
-        description = try? json.getString(at: "description")
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        fuzzyMatch = try? json.getBool(at: "fuzzy_match")
-        values = try? json.decodedArray(at: "values", type: ValueExport.self)
+extension EntityExport: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case entityName = "entity"
+        case created = "created"
+        case updated = "updated"
+        case description = "description"
+        case metadata = "metadata"
+        case fuzzyMatch = "fuzzy_match"
+        case values = "values"
+        static let allValues = [entityName, created, updated, description, metadata, fuzzyMatch, values]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `EntityExport` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["entity"] = entity
-        json["created"] = created
-        json["updated"] = updated
-        if let description = description { json["description"] = description }
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let fuzzyMatch = fuzzyMatch { json["fuzzy_match"] = fuzzyMatch }
-        if let values = values {
-            json["values"] = values.map { $0.toJSONObject() }
-        }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        entityName = try container.decode(String.self, forKey: .entityName)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        fuzzyMatch = try container.decodeIfPresent(Bool.self, forKey: .fuzzyMatch)
+        values = try container.decodeIfPresent([ValueExport].self, forKey: .values)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(entityName, forKey: .entityName)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(fuzzyMatch, forKey: .fuzzyMatch)
+        try container.encodeIfPresent(values, forKey: .values)
+    }
+
 }

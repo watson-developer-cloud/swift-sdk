@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -34,7 +33,7 @@ public struct ImageKeyword: JSONDecodable {
     public let score: Double?
     
     /// Used internally to initialize an ImageKeyword object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         if let scoreString = try? json.getString(at: "score") {
             score = Double(scoreString)

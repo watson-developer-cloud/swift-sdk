@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A named entity (a person, company, organization, etc) extracted from a document. */
 public struct Entity: JSONDecodable {
@@ -45,7 +44,7 @@ public struct Entity: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize an `Entity` object from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         count = try? json.getInt(at: "count")
         disambiguated = try? json.decode(at: "disambiguated", type: DisambiguatedLinks.self)
         knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)

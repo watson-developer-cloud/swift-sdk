@@ -1,6 +1,21 @@
 Change Log
 ==========
 
+## Version 0.19.0
+_2017-10-24_
+
+This release includes the following changes:
+- Update Conversation to support 2017-05-26 release with Codable models
+- Update Natural Language Understanding to support 2017-02-27 release with Codable models
+- Update Visual Recognition to deprecate similarity search operations
+- Update Speech to Text to fix a bug with interim speaker labels
+- Remove RestKit target (files are now included directly in each service's target)
+- Update Package.swift for swift-tools-version:4.0
+- Update Starscream dependency
+- Update libopus dependency to v1.1.3
+- Add extensions to support [String: Any] metadata with Codable models
+- Add extensions to support additional properties with Codable models
+
 ## Version 0.18.0
 _2017-10-01_
 

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -34,10 +33,10 @@ public struct Microformats: JSONDecodable {
     public let microformats: [Microformat]?
     
     /// Used internally to initialize a Microformats object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Microformats.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: Microformats.self)
         }
         
         url = try? json.getString(at: "url")

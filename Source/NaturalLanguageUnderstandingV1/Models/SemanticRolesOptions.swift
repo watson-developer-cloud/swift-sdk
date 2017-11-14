@@ -15,60 +15,56 @@
  **/
 
 import Foundation
-import RestKit
 
-/** An option specifying whether or not to identify the subjects, actions, and verbs in the 
- analyzed content. */
-public struct SemanticRolesOptions: JSONEncodable {
-    
+/** An option specifying whether or not to identify the subjects, actions, and verbs in the analyzed content. */
+public struct SemanticRolesOptions {
+
     /// Maximum number of semantic_roles results to return.
-    public let limit: Int?
-    
+    public var limit: Int?
+
     /// Set this to true to return keyword information for subjects and objects.
-    public let keywords: Bool?
-    
+    public var keywords: Bool?
+
     /// Set this to true to return entity information for subjects and objects.
-    public let entities: Bool?
-    
-    /// Set this to true to only return results in which the subjects and objects contain entities.
-    public let requireEntities: Bool?
-    
-    /// Set this to false to hide entity disambiguation information in the response.
-    public let disambiguate: Bool?
+    public var entities: Bool?
 
     /**
-    Initialize a `SemanticRolesOptions` with all member variables.
+     Initialize a `SemanticRolesOptions` with member variables.
 
      - parameter limit: Maximum number of semantic_roles results to return.
      - parameter keywords: Set this to true to return keyword information for subjects and objects.
      - parameter entities: Set this to true to return entity information for subjects and objects.
-     - parameter requireEntities: Set this to true to only return results in which the subjects and objects contain entities.
-     - parameter disambiguate: Set this to false to hide entity disambiguation information in the response.
 
-    - returns: An initialized `SemanticRolesOptions`.
+     - returns: An initialized `SemanticRolesOptions`.
     */
-    public init(
-        limit: Int? = nil,
-        keywords: Bool? = nil,
-        entities: Bool? = nil,
-        requireEntities: Bool? = nil,
-        disambiguate: Bool? = nil)
-    {
+    public init(limit: Int? = nil, keywords: Bool? = nil, entities: Bool? = nil) {
         self.limit = limit
         self.keywords = keywords
         self.entities = entities
-        self.requireEntities = requireEntities
-        self.disambiguate = disambiguate
+    }
+}
+
+extension SemanticRolesOptions: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case limit = "limit"
+        case keywords = "keywords"
+        case entities = "entities"
+        static let allValues = [limit, keywords, entities]
     }
 
-    /// Used internally to serialize a `SemanticRolesOptions` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let limit = limit { json["limit"] = limit }
-        if let keywords = keywords { json["keywords"] = keywords }
-        if let entities = entities { json["entities"] = entities }
-        if let requireEntities = requireEntities { json["require_entities"] = requireEntities }
-        if let disambiguate = disambiguate { json["disambiguate"] = disambiguate }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        limit = try container.decodeIfPresent(Int.self, forKey: .limit)
+        keywords = try container.decodeIfPresent(Bool.self, forKey: .keywords)
+        entities = try container.decodeIfPresent(Bool.self, forKey: .entities)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(limit, forKey: .limit)
+        try container.encodeIfPresent(keywords, forKey: .keywords)
+        try container.encodeIfPresent(entities, forKey: .entities)
+    }
+
 }

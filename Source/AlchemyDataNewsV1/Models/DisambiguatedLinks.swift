@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -106,7 +105,7 @@ public struct DisambiguatedLinks: JSONDecodable {
     public let yago: String?
     
     /// Used internally to initialize a DisambiguatedLinks object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
         census = try? json.getString(at: "census")

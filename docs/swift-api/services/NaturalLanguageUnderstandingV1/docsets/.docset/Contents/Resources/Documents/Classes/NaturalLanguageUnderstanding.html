@@ -37,6 +37,17 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RestError.html">RestError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Structs.html">Structs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -56,6 +67,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ConceptsResult.html">ConceptsResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DisambiguationResult.html">DisambiguationResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DocumentEmotionResults.html">DocumentEmotionResults</a>
@@ -79,10 +93,13 @@
                 <a href="../Structs/EntitiesResult.html">EntitiesResult</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/EntitiesResult/EntitySentiment.html">– EntitySentiment</a>
+                <a href="../Structs/FeatureSentimentResults.html">FeatureSentimentResults</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Features.html">Features</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:30NaturalLanguageUnderstandingV111JSONWrapperV">JSONWrapper</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/KeywordsOptions.html">KeywordsOptions</a>
@@ -91,13 +108,16 @@
                 <a href="../Structs/KeywordsResult.html">KeywordsResult</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/KeywordsResult/KeywordSentiment.html">– KeywordSentiment</a>
+                <a href="../Structs/ListModelsResults.html">ListModelsResults</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MetadataOptions.html">MetadataOptions</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MetadataResult.html">MetadataResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Parameters.html">Parameters</a>
@@ -118,7 +138,7 @@
                 <a href="../Structs/SemanticRolesAction.html">SemanticRolesAction</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/SemanticRolesAction/SemanticRolesVerb.html">– SemanticRolesVerb</a>
+                <a href="../Structs/SemanticRolesEntity.html">SemanticRolesEntity</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SemanticRolesKeyword.html">SemanticRolesKeyword</a>
@@ -136,7 +156,7 @@
                 <a href="../Structs/SemanticRolesSubject.html">SemanticRolesSubject</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/SemanticRolesSubject/SemanticRolesEntity.html">– SemanticRolesEntity</a>
+                <a href="../Structs/SemanticRolesVerb.html">SemanticRolesVerb</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SentimentOptions.html">SentimentOptions</a>
@@ -167,11 +187,50 @@
 
                 </div>
               </div>
-            <p>The IBM Watson Natural Language Understanding service enables developers to programmatically
-explore various features of text content at scale. Provide text, raw HTML, or a public URL and
-the service will give you results for the features requested. Features to request for includes
-the ability to pull Concepts, Entities, Keywords, Categories, Sentiment, Emotion, Relations,
-Semantic Roles and Metadata from the content given.</p>
+            <p>Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and
+IBM Watson Natural Language Understanding will give you results for the features you request. The
+service cleans HTML content before analysis by default, so the results can ignore most
+advertisements and other unwanted content.</p>
+<h3 id='concepts' class='heading'>Concepts</h3>
+
+<p>Identify general concepts that are referenced or alluded to in your content. Concepts that are
+detected typically have an associated link to a DBpedia resource.</p>
+<h3 id='entities' class='heading'>Entities</h3>
+
+<p>Detect important people, places, geopolitical entities and other types of entities in your
+content. Entity detection recognizes consecutive coreferences of each entity. For example,
+analysis of the following text would count <q>Barack Obama</q> and <q>He</q> as the same entity:</p>
+
+<p><q>Barack Obama was the 44th President of the United States. He took office in January 2009.</q></p>
+<h3 id='keywords' class='heading'>Keywords</h3>
+
+<p>Determine the most important keywords in your content. Keyword phrases are organized by relevance
+in the results.</p>
+<h3 id='categories' class='heading'>Categories</h3>
+
+<p>Categorize your content into a hierarchical 5-level taxonomy. For example, <q>Leonardo DiCaprio won
+an Oscar</q> returns <q>/art and entertainment/movies and tv/movies</q> as the most confident
+classification.</p>
+<h3 id='sentiment' class='heading'>Sentiment</h3>
+
+<p>Determine whether your content conveys postive or negative sentiment. Sentiment information can be
+returned for detected entities, keywords, or user-specified target phrases found in the text.</p>
+<h3 id='emotion' class='heading'>Emotion</h3>
+
+<p>Detect anger, disgust, fear, joy, or sadness that is conveyed by your content. Emotion information
+can be returned for detected entities, keywords, or user-specified target phrases found in the
+text.</p>
+<h3 id='relations' class='heading'>Relations</h3>
+
+<p>Recognize when two entities are related, and identify the type of relation.  For example, you can
+identify an <q>awardedTo</q> relation between an award and its recipient.</p>
+<h3 id='semantic-roles' class='heading'>Semantic Roles</h3>
+
+<p>Parse sentences into subject-action-object form, and identify entities and keywords that are
+subjects or objects of an action.</p>
+<h3 id='metadata' class='heading'>Metadata</h3>
+
+<p>Get author information, publication date, and the title of your text/HTML content.</p>
 
           </section>
           <section class="section task-group-section">
@@ -283,6 +342,19 @@ Semantic Roles and Metadata from the content given.</p>
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>version</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The release date of the version of the API to use. Specify the date
+in <q>YYYY-MM-DD</q> format.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -292,9 +364,9 @@ Semantic Roles and Metadata from the content given.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C14analyzeContentyAA10ParametersV04withG0_ys5Error_pcSg7failureyAA15AnalysisResultsVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/analyzeContent(withParameters:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C14analyzeContentyAA10ParametersV04withG0_ys5Error_pcSg7failureyAA15AnalysisResultsVc7successtF">analyzeContent(withParameters:failure:success:)</a>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C7analyzeyAA10ParametersV10parameters_ys5Error_pcSg7failureyAA15AnalysisResultsVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/analyze(parameters:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C7analyzeyAA10ParametersV10parameters_ys5Error_pcSg7failureyAA15AnalysisResultsVc7successtF">analyze(parameters:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -302,15 +374,17 @@ Semantic Roles and Metadata from the content given.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Analyze text, HTML, or a public webpage with one or more text analysis features.</p>
+                        <p>Analyze text, HTML, or a public webpage.</p>
+
+<p>Analyzes text, HTML, or a public webpage with one or more text analysis features.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">analyzeContent</span><span class="p">(</span>
-        <span class="n">withParameters</span> <span class="nv">parameters</span><span class="p">:</span> <span class="kt"><a href="../Structs/Parameters.html">Parameters</a></span><span class="p">,</span>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">analyze</span><span class="p">(</span>
+        <span class="nv">parameters</span><span class="p">:</span> <span class="kt"><a href="../Structs/Parameters.html">Parameters</a></span><span class="p">,</span>
         <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
         <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/AnalysisResults.html">AnalysisResults</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -328,8 +402,7 @@ Semantic Roles and Metadata from the content given.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A <code>Parameters</code> object containing the content to be analyzed, as well as 
-the specific features to analyze the content for.</p>
+                                  <p>An object containing request parameters. The <code>features</code> object and one of the <code>text</code>, <code>html</code>, or <code>url</code> attributes are required.</p>
                                 </div>
                               </td>
                             </tr>
@@ -353,7 +426,144 @@ the specific features to analyze the content for.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the results from the text analysis.</p>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C11deleteModelySS7modelID_ys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteModel(modelID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C11deleteModelySS7modelID_ys5Error_pcSg7failureyyc7successtF">deleteModel(modelID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete model.</p>
+
+<p>Deletes a custom model.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteModel</span><span class="p">(</span>
+        <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>modelID of the model to delete.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C10listModelsyys5Error_pcSg7failure_yAA04ListF7ResultsVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listModels(failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C10listModelsyys5Error_pcSg7failure_yAA04ListF7ResultsVc7successtF">listModels(failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List models.</p>
+
+<p>Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that you have created and linked to your Natural Language Understanding service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listModels</span><span class="p">(</span>
+        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ListModelsResults.html">ListModelsResults</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -368,7 +578,7 @@ the specific features to analyze the content for.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-01)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

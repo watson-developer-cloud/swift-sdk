@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Details about an environment. */
 public struct Environment: JSONDecodable {
@@ -42,7 +41,7 @@ public struct Environment: JSONDecodable {
     public let indexCapacity: IndexCapacity?
     
     /// Used internally to initialize an `Environment` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         environmentID = try json.getString(at: "environment_id")
         name = try json.getString(at: "name")
         description = try json.getString(at: "description")
@@ -63,7 +62,7 @@ public struct IndexCapacity: JSONDecodable {
     public let memoryUsage: MemoryUsage
     
     /// Used internally to initialize an `IndexCapacity` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         diskUsage = try json.decode(at: "disk_usage")
         memoryUsage = try json.decode(at: "memory_usage")
     }
@@ -88,7 +87,7 @@ public struct DiskUsage: JSONDecodable {
     public let percentUsed: Double
     
     /// Used internally to initialize a `DiskUsage` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         usedBytes = try json.getInt(at: "used_bytes")
         totalBytes = try json.getInt(at: "total_bytes")
         used = try json.getString(at: "used")
@@ -116,7 +115,7 @@ public struct MemoryUsage: JSONDecodable {
     public let percentUsed: Double
     
     /// Used internally to initialize a `MemoryUsage` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         usedBytes = try json.getInt(at: "used_bytes")
         totalBytes = try json.getInt(at: "total_bytes")
         used = try json.getString(at: "used")

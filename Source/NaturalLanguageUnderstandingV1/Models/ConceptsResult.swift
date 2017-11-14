@@ -15,24 +15,56 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The general concepts referenced or alluded to in the specified content. */
-public struct ConceptsResult: JSONDecodable {
-    
-    /// Name of the concept.
-    public let name: String?
-    
-    /// Relevance score between 0 and 1. Higher scores indicate greater relevance.
-    public let relevance: Double?
-    
-    /// Link to the corresponding DBpedia resource.
-    public let dbpediaResource: String?
+public struct ConceptsResult {
 
-    /// Used internally to initialize a `ConceptsResult` model from JSON.
-    public init(json: JSON) throws {
-        name = try? json.getString(at: "text")
-        relevance = try? json.getDouble(at: "relevance")
-        dbpediaResource = try? json.getString(at: "dbpedia_resource")
+    /// Name of the concept.
+    public var text: String?
+
+    /// Relevance score between 0 and 1. Higher scores indicate greater relevance.
+    public var relevance: Double?
+
+    /// Link to the corresponding DBpedia resource.
+    public var dbpediaResource: String?
+
+    /**
+     Initialize a `ConceptsResult` with member variables.
+
+     - parameter text: Name of the concept.
+     - parameter relevance: Relevance score between 0 and 1. Higher scores indicate greater relevance.
+     - parameter dbpediaResource: Link to the corresponding DBpedia resource.
+
+     - returns: An initialized `ConceptsResult`.
+    */
+    public init(text: String? = nil, relevance: Double? = nil, dbpediaResource: String? = nil) {
+        self.text = text
+        self.relevance = relevance
+        self.dbpediaResource = dbpediaResource
     }
+}
+
+extension ConceptsResult: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+        case relevance = "relevance"
+        case dbpediaResource = "dbpedia_resource"
+        static let allValues = [text, relevance, dbpediaResource]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.decodeIfPresent(String.self, forKey: .text)
+        relevance = try container.decodeIfPresent(Double.self, forKey: .relevance)
+        dbpediaResource = try container.decodeIfPresent(String.self, forKey: .dbpediaResource)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(text, forKey: .text)
+        try container.encodeIfPresent(relevance, forKey: .relevance)
+        try container.encodeIfPresent(dbpediaResource, forKey: .dbpediaResource)
+    }
+
 }

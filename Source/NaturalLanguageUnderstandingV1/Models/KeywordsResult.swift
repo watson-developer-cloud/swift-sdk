@@ -15,36 +15,64 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The most important keywords in the content, organized by relevance. */
-public struct KeywordsResult: JSONDecodable {
-    
-    /// Relevance score from 0 to 1. Higher values indicate greater relevance.
-    public let relevance: Double?
-    
-    /// The text of the keyword.
-    public let text: String?
-    
-    /// The sentiment value of the keyword.
-    public let sentiment: KeywordSentiment?
+public struct KeywordsResult {
 
-    /// Used internally to initialize a `KeywordsResult` model from JSON.
-    public init(json: JSON) throws {
-        relevance = try? json.getDouble(at: "relevance")
-        text = try? json.getString(at: "text")
-        sentiment = try? json.decode(at: "sentiment", type: KeywordSentiment.self)
+    /// Relevance score from 0 to 1. Higher values indicate greater relevance.
+    public var relevance: Double?
+
+    /// The keyword text.
+    public var text: String?
+
+    /// Emotion analysis results for the keyword, enabled with the "emotion" option.
+    public var emotion: EmotionScores?
+
+    /// Sentiment analysis results for the keyword, enabled with the "sentiment" option.
+    public var sentiment: FeatureSentimentResults?
+
+    /**
+     Initialize a `KeywordsResult` with member variables.
+
+     - parameter relevance: Relevance score from 0 to 1. Higher values indicate greater relevance.
+     - parameter text: The keyword text.
+     - parameter emotion: Emotion analysis results for the keyword, enabled with the "emotion" option.
+     - parameter sentiment: Sentiment analysis results for the keyword, enabled with the "sentiment" option.
+
+     - returns: An initialized `KeywordsResult`.
+    */
+    public init(relevance: Double? = nil, text: String? = nil, emotion: EmotionScores? = nil, sentiment: FeatureSentimentResults? = nil) {
+        self.relevance = relevance
+        self.text = text
+        self.emotion = emotion
+        self.sentiment = sentiment
     }
-    
-    /** The sentiment of the entity. */
-    public struct KeywordSentiment: JSONDecodable {
-        
-        /// The sentiment value of the found entity within the text from 0 to 1.
-        public let score: Double?
-        
-        /// Used internally to initialize an `EntitySentiment` model from JSON.
-        public init(json: JSON) throws {
-            score = try? json.getDouble(at: "score")
-        }
+}
+
+extension KeywordsResult: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case relevance = "relevance"
+        case text = "text"
+        case emotion = "emotion"
+        case sentiment = "sentiment"
+        static let allValues = [relevance, text, emotion, sentiment]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        relevance = try container.decodeIfPresent(Double.self, forKey: .relevance)
+        text = try container.decodeIfPresent(String.self, forKey: .text)
+        emotion = try container.decodeIfPresent(EmotionScores.self, forKey: .emotion)
+        sentiment = try container.decodeIfPresent(FeatureSentimentResults.self, forKey: .sentiment)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(relevance, forKey: .relevance)
+        try container.encodeIfPresent(text, forKey: .text)
+        try container.encodeIfPresent(emotion, forKey: .emotion)
+        try container.encodeIfPresent(sentiment, forKey: .sentiment)
+    }
+
 }

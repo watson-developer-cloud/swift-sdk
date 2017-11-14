@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -52,10 +51,10 @@ public struct Language: JSONDecodable {
     public let wikipedia: String?
     
     /// Used internally to initialize a Language object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Language.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: Language.self)
         }
         
         language = try? json.getString(at: "language")

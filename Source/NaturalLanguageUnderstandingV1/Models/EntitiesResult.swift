@@ -15,44 +15,88 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The important people, places, geopolitical entities and other types of entities in your content. */
-public struct EntitiesResult: JSONDecodable {
-    
-    /// The type of entity found in the content.
-    public let type: String?
-    
-    /// Relevance score from 0 to 1. Higher values indicate greater relevance
-    public let relevance: Double?
-    
-    /// The number of times the entity was mentioned in the text.
-    public let count: Int?
-    
-    /// The name of the entity
-    public let text: String?
-    
-    /// The sentiment of the entity.
-    public let sentiment: EntitySentiment?
+public struct EntitiesResult {
 
-    /// Used internally to initialize an `EntitiesResult` model from JSON.
-    public init(json: JSON) throws {
-        type = try? json.getString(at: "type")
-        relevance = try? json.getDouble(at: "relevance")
-        count = try? json.getInt(at: "count")
-        text = try? json.getString(at: "text")
-        sentiment = try? json.decode(at: "sentiment", type: EntitySentiment.self)
+    /// Entity type.
+    public var type: String?
+
+    /// Relevance score from 0 to 1. Higher values indicate greater relevance.
+    public var relevance: Double?
+
+    /// How many times the entity was mentioned in the text.
+    public var count: Int?
+
+    /// The name of the entity.
+    public var text: String?
+
+    /// Emotion analysis results for the entity, enabled with the "emotion" option.
+    public var emotion: EmotionScores?
+
+    /// Sentiment analysis results for the entity, enabled with the "sentiment" option.
+    public var sentiment: FeatureSentimentResults?
+
+    /// Disambiguation information for the entity.
+    public var disambiguation: DisambiguationResult?
+
+    /**
+     Initialize a `EntitiesResult` with member variables.
+
+     - parameter type: Entity type.
+     - parameter relevance: Relevance score from 0 to 1. Higher values indicate greater relevance.
+     - parameter count: How many times the entity was mentioned in the text.
+     - parameter text: The name of the entity.
+     - parameter emotion: Emotion analysis results for the entity, enabled with the "emotion" option.
+     - parameter sentiment: Sentiment analysis results for the entity, enabled with the "sentiment" option.
+     - parameter disambiguation: Disambiguation information for the entity.
+
+     - returns: An initialized `EntitiesResult`.
+    */
+    public init(type: String? = nil, relevance: Double? = nil, count: Int? = nil, text: String? = nil, emotion: EmotionScores? = nil, sentiment: FeatureSentimentResults? = nil, disambiguation: DisambiguationResult? = nil) {
+        self.type = type
+        self.relevance = relevance
+        self.count = count
+        self.text = text
+        self.emotion = emotion
+        self.sentiment = sentiment
+        self.disambiguation = disambiguation
     }
-    
-    /** The sentiment of the entity. */
-    public struct EntitySentiment: JSONDecodable {
-        
-        /// The sentiment value of the found entity within the text from 0 to 1.
-        public let score: Double?
-        
-        /// Used internally to initialize an `EntitySentiment` model from JSON.
-        public init(json: JSON) throws {
-            score = try? json.getDouble(at: "score")
-        }
+}
+
+extension EntitiesResult: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case type = "type"
+        case relevance = "relevance"
+        case count = "count"
+        case text = "text"
+        case emotion = "emotion"
+        case sentiment = "sentiment"
+        case disambiguation = "disambiguation"
+        static let allValues = [type, relevance, count, text, emotion, sentiment, disambiguation]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        type = try container.decodeIfPresent(String.self, forKey: .type)
+        relevance = try container.decodeIfPresent(Double.self, forKey: .relevance)
+        count = try container.decodeIfPresent(Int.self, forKey: .count)
+        text = try container.decodeIfPresent(String.self, forKey: .text)
+        emotion = try container.decodeIfPresent(EmotionScores.self, forKey: .emotion)
+        sentiment = try container.decodeIfPresent(FeatureSentimentResults.self, forKey: .sentiment)
+        disambiguation = try container.decodeIfPresent(DisambiguationResult.self, forKey: .disambiguation)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(relevance, forKey: .relevance)
+        try container.encodeIfPresent(count, forKey: .count)
+        try container.encodeIfPresent(text, forKey: .text)
+        try container.encodeIfPresent(emotion, forKey: .emotion)
+        try container.encodeIfPresent(sentiment, forKey: .sentiment)
+        try container.encodeIfPresent(disambiguation, forKey: .disambiguation)
+    }
+
 }

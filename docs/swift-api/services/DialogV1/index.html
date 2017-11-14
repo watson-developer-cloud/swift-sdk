@@ -41,6 +41,12 @@
               <li class="nav-group-task">
                 <a href="Enums/Format.html">Format</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Enums/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RestError.html">RestError</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -57,6 +63,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/HitNode.html">HitNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:8DialogV111JSONWrapperV">JSONWrapper</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Message.html">Message</a>
@@ -357,32 +366,54 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="k">let</span> <span class="nv">workspaceID</span> <span class="o">=</span> <span class="s">"your-workspace-id-here"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">var</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">Context</span><span class="p">?</span> <span class="c1">// save context to continue conversation</span>
-<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">withWorkspace</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">response</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
     <span class="n">context</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span>
 <span class="p">}</span>
 </code></pre>
 
 <p>The following example shows how to continue an existing conversation with the Conversation service:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"Turn on the radio."</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">input</span> <span class="o">=</span> <span class="kt">InputData</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="s">"Turn on the radio."</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">MessageRequest</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">context</span><span class="p">:</span> <span class="n">context</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">MessageRequest</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">context</span><span class="p">:</span> <span class="n">context</span><span class="p">)</span>
-<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">withWorkspace</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">response</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
     <span class="n">context</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span>
 <span class="p">}</span>
 </code></pre>
+<h4 id='context-variables' class='heading'>Context Variables</h4>
 
-<p>The Conversation service allows users to define custom variables and values in their application&rsquo;s payload. For example, a Conversation workspace that guides users through a pizza order might include a user-defined variable for pizza toppings: <code>&quot;pizza_toppings&quot;: [&quot;ketchup&quot;, &quot;ham&quot;, &quot;onion&quot;]</code>.</p>
+<p>The Conversation service allows users to define custom context variables in their application&rsquo;s payload. For example, a Conversation workspace that guides users through a pizza order might include a context variable for pizza size: <code>&quot;pizza_size&quot;: &quot;large&quot;</code>.</p>
 
-<p>Unfortunately, the Swift SDK does not have advance knowledge of the user-defined variables so it cannot conveniently parse them as properties or model classes. Instead, users of the SDK can manually parse user-defined variables. All models in the <code>Conversation</code> framework include a <code>json: [String: Any]</code> property to allow users to access the underlying JSON payload and manually parse user-defined variables.</p>
-
-<p>The following example shows how to extract a user-defined <code>pizza_toppings</code> variable from the <code>context</code> of a Conversation response:</p>
-<pre class="highlight swift"><code><span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">withWorkspace</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+<p>Context variables are get/set using the <code>var additionalProperties: [String: JSON]</code> property of a <code>Context</code> model. The following example shows how to get and set a user-defined <code>pizza_size</code> variable:</p>
+<pre class="highlight swift"><code><span class="c1">// get the `pizza_size` context variable</span>
+<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">response</span> <span class="k">in</span>
-    <span class="k">let</span> <span class="nv">pizzaToppings</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s">"pizza_toppings"</span><span class="p">]</span> <span class="k">as!</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">pizzaToppings</span><span class="p">)</span> <span class="c1">// ["ketchup", "ham", "onion"]</span>
+    <span class="k">if</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">additionalProperties</span><span class="p">[</span><span class="s">"pizza_size"</span><span class="p">]</span><span class="o">!</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// set the `pizza_size` context variable</span>
+<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">response</span> <span class="k">in</span>
+    <span class="k">var</span> <span class="nv">context</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span> <span class="c1">// `var` makes the context mutable</span>
+    <span class="n">context</span><span class="p">?</span><span class="o">.</span><span class="n">additionalProperties</span><span class="p">[</span><span class="s">"pizza_size"</span><span class="p">]</span> <span class="o">=</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="s">"large"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>For reference, the <code>JSON</code> type is defined as:</p>
+<pre class="highlight swift"><code><span class="c1">/// A JSON value (one of string, number, object, array, true, false, or null).</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">JSON</span><span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Codable</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">null</span>
+    <span class="k">case</span> <span class="nf">boolean</span><span class="p">(</span><span class="kt">Bool</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">string</span><span class="p">(</span><span class="kt">String</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">int</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">double</span><span class="p">(</span><span class="kt">Double</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">array</span><span class="p">([</span><span class="kt">JSON</span><span class="p">])</span>
+    <span class="k">case</span> <span class="nf">object</span><span class="p">([</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">])</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -1268,7 +1299,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-01)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

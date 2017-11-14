@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /// A decision problem and its resolution.
 public struct Dilemma: JSONDecodable {
@@ -27,7 +26,7 @@ public struct Dilemma: JSONDecodable {
     public let resolution: Resolution
     
     /// Used internally to initialize a `Dilemma` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         problem = try json.decode(at: "problem")
         resolution = try json.decode(at: "resolution")
     }

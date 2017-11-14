@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** A request to translate input text from a source language to a target language. */
 internal struct TranslateRequest: JSONEncodable {

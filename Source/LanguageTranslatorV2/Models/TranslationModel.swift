@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A translation model that can be used to translate between a source and target language. */
 public struct TranslationModel: JSONDecodable {
@@ -60,7 +59,7 @@ public struct TranslationModel: JSONDecodable {
     public let status: TrainingStatus
 
     /// Used internally to initialize a `TranslationModel` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         modelID = try json.getString(at: "model_id")
         name = try json.getString(at: "name")
         source = try json.getString(at: "source")
@@ -72,7 +71,7 @@ public struct TranslationModel: JSONDecodable {
         owner = try json.getString(at: "owner")
 
         guard let status = TrainingStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: TrainingStatus.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: TrainingStatus.self)
         }
         self.status = status
     }

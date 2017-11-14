@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -42,7 +41,7 @@ public struct ConversationResponse: JSONDecodable {
     public let answerUnits: [AnswerUnits]?
     
     /** used inernally to initialize ConversationResponse objects */
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         sourceDocId = try? json.getString(at: "source_document_id")
         timestamp = try? json.getString(at: "timestamp")
         detectedMediaType = try? json.getString(at: "media_type_detected")

@@ -15,76 +15,136 @@
  **/
 
 import Foundation
-import RestKit
 
-/** An object containing the results returned by the NLU service. */
-public struct AnalysisResults: JSONDecodable {
-    
+/** Results of the analysis, organized by feature. */
+public struct AnalysisResults {
+
     /// Language used to analyze the text.
-    public let language: String?
-    
+    public var language: String?
+
     /// Text that was used in the analysis.
-    public let analyzedText: String?
-    
+    public var analyzedText: String?
+
     /// URL that was used to retrieve HTML content.
-    public let retrievedUrl: String?
-    
-    /// The number of features used in the API call.
-    public let usage: Usage?
-    
+    public var retrievedUrl: String?
+
+    /// API usage information for the request.
+    public var usage: Usage?
+
     /// The general concepts referenced or alluded to in the specified content.
-    public let concepts: [ConceptsResult]?
-    
+    public var concepts: [ConceptsResult]?
+
     /// The important entities in the specified content.
-    public let entities: [EntitiesResult]?
-    
+    public var entities: [EntitiesResult]?
+
     /// The important keywords in content organized by relevance.
-    public let keywords: [KeywordsResult]?
-    
+    public var keywords: [KeywordsResult]?
+
     /// The hierarchical 5-level taxonomy the content is categorized into.
-    public let categories: [CategoriesResult]?
-    
+    public var categories: [CategoriesResult]?
+
     /// The anger, disgust, fear, joy, or sadness conveyed by the content.
-    public let emotion: EmotionResult?
-    
+    public var emotion: EmotionResult?
+
     /// The metadata holds author information, publication date and the title of the text/HTML content.
-    public let metadata: MetadataResult?
-    
+    public var metadata: MetadataResult?
+
     /// The relationships between entities in the content.
-    public let relations: [RelationsResult]?
-    
+    public var relations: [RelationsResult]?
+
     /// The subjects of actions and the objects the actions act upon.
-    public let semanticRoles: [SemanticRolesResult]?
-    
+    public var semanticRoles: [SemanticRolesResult]?
+
     /// The sentiment of the content.
-    public let sentiment: SentimentResult?
-    
-    /// Used internally to initialize a `AnalysisResults` model from JSON.
-    public init(json: JSON) throws {
-        language = try? json.getString(at: "language")
-        analyzedText = try? json.getString(at: "analyzed_text")
-        retrievedUrl = try? json.getString(at: "retrieved_url")
-        usage = try? json.decode(at: "usage", type: Usage.self)
-        concepts = try? json.decodedArray(at: "concepts", type: ConceptsResult.self)
-        entities = try? json.decodedArray(at: "entities", type: EntitiesResult.self)
-        keywords = try? json.decodedArray(at: "keywords", type: KeywordsResult.self)
-        categories = try? json.decodedArray(at: "categories", type: CategoriesResult.self)
-        emotion = try? json.decode(at: "emotion", type: EmotionResult.self)
-        metadata = try? json.decode(at: "metadata", type: MetadataResult.self)
-        relations = try? json.decodedArray(at: "relations", type: RelationsResult.self)
-        semanticRoles = try? json.decodedArray(at: "semantic_roles", type: SemanticRolesResult.self)
-        sentiment = try? json.decode(at: "sentiment", type: SentimentResult.self)
+    public var sentiment: SentimentResult?
+
+    /**
+     Initialize a `AnalysisResults` with member variables.
+
+     - parameter concepts: The general concepts referenced or alluded to in the specified content.
+     - parameter entities: The important entities in the specified content.
+     - parameter keywords: The important keywords in content organized by relevance.
+     - parameter categories: The hierarchical 5-level taxonomy the content is categorized into.
+     - parameter emotion: The anger, disgust, fear, joy, or sadness conveyed by the content.
+     - parameter metadata: The metadata holds author information, publication date and the title of the text/HTML content.
+     - parameter relations: The relationships between entities in the content.
+     - parameter semanticRoles: The subjects of actions and the objects the actions act upon.
+     - parameter sentiment: The sentiment of the content.
+     - parameter language: Language used to analyze the text.
+     - parameter analyzedText: Text that was used in the analysis.
+     - parameter retrievedUrl: URL that was used to retrieve HTML content.
+     - parameter usage: API usage information for the request.
+
+     - returns: An initialized `AnalysisResults`.
+    */
+    public init(concepts: [ConceptsResult]? = nil, entities: [EntitiesResult]? = nil, keywords: [KeywordsResult]? = nil, categories: [CategoriesResult]? = nil, emotion: EmotionResult? = nil, metadata: MetadataResult? = nil, relations: [RelationsResult]? = nil, semanticRoles: [SemanticRolesResult]? = nil, sentiment: SentimentResult? = nil, language: String? = nil, analyzedText: String? = nil, retrievedUrl: String? = nil, usage: Usage? = nil) {
+        self.concepts = concepts
+        self.entities = entities
+        self.keywords = keywords
+        self.categories = categories
+        self.emotion = emotion
+        self.metadata = metadata
+        self.relations = relations
+        self.semanticRoles = semanticRoles
+        self.sentiment = sentiment
+        self.language = language
+        self.analyzedText = analyzedText
+        self.retrievedUrl = retrievedUrl
+        self.usage = usage
     }
 }
 
-/** An object containing how many features used. */
-public struct Usage: JSONDecodable {
-    
-    /// The number of features used in the API call.
-    public let features: Int
-    
-    /// Used internally to initialize a 'Usage' model from JSON.
-    public init(json: JSON) throws {
-        features = try json.getInt(at: "features")
+extension AnalysisResults: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case language = "language"
+        case analyzedText = "analyzed_text"
+        case retrievedUrl = "retrieved_url"
+        case usage = "usage"
+        case concepts = "concepts"
+        case entities = "entities"
+        case keywords = "keywords"
+        case categories = "categories"
+        case emotion = "emotion"
+        case metadata = "metadata"
+        case relations = "relations"
+        case semanticRoles = "semantic_roles"
+        case sentiment = "sentiment"
+        static let allValues = [language, analyzedText, retrievedUrl, usage, concepts, entities, keywords, categories, emotion, metadata, relations, semanticRoles, sentiment]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        language = try container.decodeIfPresent(String.self, forKey: .language)
+        analyzedText = try container.decodeIfPresent(String.self, forKey: .analyzedText)
+        retrievedUrl = try container.decodeIfPresent(String.self, forKey: .retrievedUrl)
+        usage = try container.decodeIfPresent(Usage.self, forKey: .usage)
+        concepts = try container.decodeIfPresent([ConceptsResult].self, forKey: .concepts)
+        entities = try container.decodeIfPresent([EntitiesResult].self, forKey: .entities)
+        keywords = try container.decodeIfPresent([KeywordsResult].self, forKey: .keywords)
+        categories = try container.decodeIfPresent([CategoriesResult].self, forKey: .categories)
+        emotion = try container.decodeIfPresent(EmotionResult.self, forKey: .emotion)
+        metadata = try container.decodeIfPresent(MetadataResult.self, forKey: .metadata)
+        relations = try container.decodeIfPresent([RelationsResult].self, forKey: .relations)
+        semanticRoles = try container.decodeIfPresent([SemanticRolesResult].self, forKey: .semanticRoles)
+        sentiment = try container.decodeIfPresent(SentimentResult.self, forKey: .sentiment)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(language, forKey: .language)
+        try container.encodeIfPresent(analyzedText, forKey: .analyzedText)
+        try container.encodeIfPresent(retrievedUrl, forKey: .retrievedUrl)
+        try container.encodeIfPresent(usage, forKey: .usage)
+        try container.encodeIfPresent(concepts, forKey: .concepts)
+        try container.encodeIfPresent(entities, forKey: .entities)
+        try container.encodeIfPresent(keywords, forKey: .keywords)
+        try container.encodeIfPresent(categories, forKey: .categories)
+        try container.encodeIfPresent(emotion, forKey: .emotion)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(relations, forKey: .relations)
+        try container.encodeIfPresent(semanticRoles, forKey: .semanticRoles)
+        try container.encodeIfPresent(sentiment, forKey: .sentiment)
+    }
+
 }

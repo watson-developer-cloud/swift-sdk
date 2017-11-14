@@ -15,48 +15,48 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The sentiment of the content. */
-public struct SentimentResult: JSONDecodable {
-    
+public struct SentimentResult {
+
     /// The document level sentiment.
-    public let document: DocumentSentimentResults?
-    
+    public var document: DocumentSentimentResults?
+
     /// The targeted sentiment to analyze.
-    public let targets: [TargetedSentimentResults]?
+    public var targets: [TargetedSentimentResults]?
 
-    /// Used internally to initialize a `SentimentResult` model from JSON.
-    public init(json: JSON) throws {
-        document = try? json.decode(at: "document", type: DocumentSentimentResults.self)
-        targets = try? json.decodedArray(at: "targets", type: TargetedSentimentResults.self)
+    /**
+     Initialize a `SentimentResult` with member variables.
+
+     - parameter document: The document level sentiment.
+     - parameter targets: The targeted sentiment to analyze.
+
+     - returns: An initialized `SentimentResult`.
+    */
+    public init(document: DocumentSentimentResults? = nil, targets: [TargetedSentimentResults]? = nil) {
+        self.document = document
+        self.targets = targets
     }
 }
 
-/** The sentiment results of the document. */
-public struct DocumentSentimentResults: JSONDecodable {
-    
-    /// Sentiment score from -1 (negative) to 1 (positive).
-    public let score: Double?
-    
-    /// Used internally to initialize a `DocumentSentimentResults` model from JSON.
-    public init(json: JSON) throws {
-        score = try? json.getDouble(at: "score")
-    }
-}
+extension SentimentResult: Codable {
 
-/** The targeted sentiment results of the document. */
-public struct TargetedSentimentResults: JSONDecodable {
-    
-    /// Targeted text.
-    public let text: String?
-    
-    /// Sentiment score from -1 (negative) to 1 (positive).
-    public let score: Double?
-    
-    /// Used internally to initialize a `TargetedSentimentResults` model from JSON.
-    public init(json: JSON) throws {
-        text = try? json.getString(at: "text")
-        score = try? json.getDouble(at: "score")
+    private enum CodingKeys: String, CodingKey {
+        case document = "document"
+        case targets = "targets"
+        static let allValues = [document, targets]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        document = try container.decodeIfPresent(DocumentSentimentResults.self, forKey: .document)
+        targets = try container.decodeIfPresent([TargetedSentimentResults].self, forKey: .targets)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(document, forKey: .document)
+        try container.encodeIfPresent(targets, forKey: .targets)
+    }
+
 }

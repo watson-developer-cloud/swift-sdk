@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A collection for storing documents. */
 public struct Collection: JSONDecodable {
@@ -53,7 +52,7 @@ public struct Collection: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a `Collection` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         collectionID = try? json.getString(at: "collection_id")
         name = try json.getString(at: "name")
         description = try? json.getString(at: "description")
@@ -61,7 +60,7 @@ public struct Collection: JSONDecodable {
         updated = try json.getString(at: "updated")
         
         guard let collectionStatus = CollectionStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: CollectionStatus.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: CollectionStatus.self)
         }
         status = collectionStatus
         configurationID = try json.getString(at: "configuration_id")
@@ -92,7 +91,7 @@ public struct DocumentCounts: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a 'DocumentCounts' model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         available = try? json.getInt(at: "available")
         processing = try? json.getInt(at: "processing")
         failed = try? json.getInt(at: "failed")
@@ -118,7 +117,7 @@ public struct Field: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a 'Field' model from JSON.
-    public init (json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         field = try json.getString(at: "field")
         type = try json.getString(at: "type")
         self.json = try json.getDictionaryObject()
@@ -138,10 +137,10 @@ public struct DeletedCollection: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a 'DeletedCollection' model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         collectionID = try json.getString(at: "collection_id")
         guard let collectionStatus = CollectionStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: CollectionStatus.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: CollectionStatus.self)
         }
         status = collectionStatus
         self.json = try json.getDictionaryObject()

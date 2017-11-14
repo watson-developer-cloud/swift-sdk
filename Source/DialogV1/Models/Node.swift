@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** A dialog node. */
 public struct Node: JSONEncodable, JSONDecodable {
@@ -38,7 +37,7 @@ public struct Node: JSONEncodable, JSONDecodable {
     }
 
     /// Used internally to initialize a `FaceTags` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         content = try json.getString(at: "content")
         node = try json.getString(at: "node")
     }

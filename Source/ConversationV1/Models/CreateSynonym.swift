@@ -15,13 +15,12 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CreateSynonym. */
-public struct CreateSynonym: JSONDecodable, JSONEncodable {
+public struct CreateSynonym {
 
     /// The text of the synonym.
-    public let synonym: String
+    public var synonym: String
 
     /**
      Initialize a `CreateSynonym` with member variables.
@@ -33,18 +32,23 @@ public struct CreateSynonym: JSONDecodable, JSONEncodable {
     public init(synonym: String) {
         self.synonym = synonym
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `CreateSynonym` model from JSON.
-    public init(json: JSON) throws {
-        synonym = try json.getString(at: "synonym")
+extension CreateSynonym: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case synonym = "synonym"
+        static let allValues = [synonym]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `CreateSynonym` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["synonym"] = synonym
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        synonym = try container.decode(String.self, forKey: .synonym)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(synonym, forKey: .synonym)
+    }
+
 }

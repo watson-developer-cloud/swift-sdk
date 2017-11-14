@@ -15,14 +15,13 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A wrapper object that contains results from a Speech to Text recognition request. */
 internal struct SpeechRecognitionEvent: JSONDecodable {
 
     /// Index indicating change point in the results array.
     /// (See description of `results` array for more information.)
-    internal let resultIndex: Int
+    internal let resultIndex: Int?
 
     /// The results array consists of 0 or more final results, followed by 0 or 1 interim
     /// result. The final results are guaranteed not to change, while the interim result may
@@ -30,15 +29,19 @@ internal struct SpeechRecognitionEvent: JSONDecodable {
     /// periodically sends "updates" to the result list, with the `resultIndex` set to the
     /// lowest index in the array that has changed. `resultIndex` always points to the slot
     /// just after the most recent final result.
-    internal let results: [SpeechRecognitionResult]
+    internal let results: [SpeechRecognitionResult]?
     
-    /// The speakerLabels variable will contain an optional array of SpeakerLabel objects
+    /// An array that identifies which words were spoken by which speakers in a multi-person exchange.
+    /// Returned in the response only if the `speakerLabels` recognition setting is `true`.
     internal let speakerLabels: [SpeakerLabel]?
 
     /// Used internally to initialize a `SpeechRecognitionEvent` model from JSON.
-    internal init(json: JSON) throws {
-        resultIndex = try json.getInt(at: "result_index")
-        results = try json.decodedArray(at: "results", type: SpeechRecognitionResult.self)
+    internal init(json: JSONWrapper) throws {
+        resultIndex = try? json.getInt(at: "result_index")
+        results = try? json.decodedArray(at: "results", type: SpeechRecognitionResult.self)
         speakerLabels = try? json.decodedArray(at: "speaker_labels", type: SpeakerLabel.self)
+        if (resultIndex == nil && results == nil && speakerLabels == nil) {
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: SpeechRecognitionEvent.self)
+        }
     }
 }

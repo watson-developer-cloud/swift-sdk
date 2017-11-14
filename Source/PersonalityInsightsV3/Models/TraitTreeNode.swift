@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Detailed results for a specific characteristic of the input text. */
 public struct TraitTreeNode: JSONDecodable {
@@ -53,7 +52,7 @@ public struct TraitTreeNode: JSONDecodable {
     public let children: [TraitTreeNode]?
 
     /// Used internally to initialize a `TraitTreeNode` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         traitID  = try json.getString(at: "trait_id")
         name = try json.getString(at: "name")
         category = try json.getString(at: "category")

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** The results of performing tone analysis on a document. */
 public struct ToneAnalysis: JSONDecodable {
@@ -28,7 +27,7 @@ public struct ToneAnalysis: JSONDecodable {
     public let sentencesTones: [SentenceAnalysis]?
     
     /// Used internally to initialize a `ToneAnalysis` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         documentTone = try json.decodedArray(at: "document_tone", "tone_categories", type: ToneCategory.self)
         sentencesTones = try? json.decodedArray(at: "sentences_tone", type: SentenceAnalysis.self)
         

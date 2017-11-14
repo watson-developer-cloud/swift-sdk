@@ -16,11 +16,11 @@
 
 import Foundation
 
-public struct RestRequest {
+internal struct RestRequest {
 
-    public static let userAgent: String = {
+    internal static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
-        let sdkVersion = "0.18.0"
+        let sdkVersion = "0.19.0"
         
         let operatingSystem: String = {
             #if os(iOS)
@@ -49,7 +49,7 @@ public struct RestRequest {
     private let request: URLRequest
     private let session = URLSession(configuration: URLSessionConfiguration.default)
     
-    public init(
+    internal init(
         method: String,
         url: String,
         credentials: Credentials,
@@ -103,34 +103,34 @@ public struct RestRequest {
         self.request = request
     }
     
-    public func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+    internal func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         let task = session.dataTask(with: request) { (data, response, error) in
             completionHandler(data, response as? HTTPURLResponse, error)
         }
         task.resume()
     }
     
-    public func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
+    internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
         response() { data, response, error in
             if let error = error {
-                let result = Result<Data>.failure(error)
+                let result = RestResult<Data>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
             guard let data = data else {
-                let result = Result<Data>.failure(RestError.noData)
+                let result = RestResult<Data>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
-            let result = Result.success(data)
+            let result = RestResult.success(data)
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
 
-    public func responseObject<T: JSONDecodable>(
+    internal func responseObject<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
@@ -138,7 +138,7 @@ public struct RestRequest {
         response() { data, response, error in
 
             if let error = error ?? responseToError?(response,data) {
-                let result = Result<T>.failure(error)
+                let result = RestResult<T>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -146,16 +146,16 @@ public struct RestRequest {
 
             // ensure data is not nil
             guard let data = data else {
-                let result = Result<T>.failure(RestError.noData)
+                let result = RestResult<T>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
 
             // parse json object
-            let result: Result<T>
+            let result: RestResult<T>
             do {
-                let json = try JSON(data: data)
+                let json = try JSONWrapper(data: data)
                 let object: T
                 if let path = path {
                     switch path.count {
@@ -165,7 +165,7 @@ public struct RestRequest {
                     case 3: object = try json.decode(at: path[0], path[1], path[2])
                     case 4: object = try json.decode(at: path[0], path[1], path[2], path[3])
                     case 5: object = try json.decode(at: path[0], path[1], path[2], path[3], path[4])
-                    default: throw JSON.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
+                    default: throw JSONWrapper.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
                     }
                 } else {
                     object = try json.decode()
@@ -180,8 +180,44 @@ public struct RestRequest {
             completionHandler(dataResponse)
         }
     }
+    
+    internal func responseObject<T: Decodable>(
+        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (RestResponse<T>) -> Void)
+    {
+        response() { data, response, error in
+            
+            if let error = error ?? responseToError?(response,data) {
+                let result = RestResult<T>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // ensure data is not nil
+            guard let data = data else {
+                let result = RestResult<T>.failure(RestError.noData)
+                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // parse json object
+            let result: RestResult<T>
+            do {
+                let object = try JSONDecoder().decode(T.self, from: data)
+                result = .success(object)
+            } catch {
+                result = .failure(error)
+            }
+            
+            // execute callback
+            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            completionHandler(dataResponse)
+        }
+    }
 
-    public func responseArray<T: JSONDecodable>(
+    internal func responseArray<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
@@ -189,7 +225,7 @@ public struct RestRequest {
         response() { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
-                let result = Result<[T]>.failure(error)
+                let result = RestResult<[T]>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -197,17 +233,17 @@ public struct RestRequest {
 
             // ensure data is not nil
             guard let data = data else {
-                let result = Result<[T]>.failure(RestError.noData)
+                let result = RestResult<[T]>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
 
             // parse json object
-            let result: Result<[T]>
+            let result: RestResult<[T]>
             do {
-                let json = try JSON(data: data)
-                var array: [JSON]
+                let json = try JSONWrapper(data: data)
+                var array: [JSONWrapper]
                 if let path = path {
                     switch path.count {
                     case 0: array = try json.getArray()
@@ -216,7 +252,7 @@ public struct RestRequest {
                     case 3: array = try json.getArray(at: path[0], path[1], path[2])
                     case 4: array = try json.getArray(at: path[0], path[1], path[2], path[3])
                     case 5: array = try json.getArray(at: path[0], path[1], path[2], path[3], path[4])
-                    default: throw JSON.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
+                    default: throw JSONWrapper.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
                     }
                 } else {
                     array = try json.getArray()
@@ -233,14 +269,14 @@ public struct RestRequest {
         }
     }
 
-    public func responseString(
+    internal func responseString(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<String>) -> Void)
     {
         response() { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
-                let result = Result<String>.failure(error)
+                let result = RestResult<String>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -248,7 +284,7 @@ public struct RestRequest {
 
             // ensure data is not nil
             guard let data = data else {
-                let result = Result<String>.failure(RestError.noData)
+                let result = RestResult<String>.failure(RestError.noData)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
@@ -256,40 +292,40 @@ public struct RestRequest {
 
             // parse data as a string
             guard let string = String(data: data, encoding: .utf8) else {
-                let result = Result<String>.failure(RestError.serializationError)
+                let result = RestResult<String>.failure(RestError.serializationError)
                 let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
             
             // execute callback
-            let result = Result.success(string)
+            let result = RestResult.success(string)
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
 
-    public func responseVoid(
+    internal func responseVoid(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<Void>) -> Void)
     {
         response() { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
-                let result = Result<Void>.failure(error)
+                let result = RestResult<Void>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
 
             // execute callback
-            let result = Result<Void>.success(())
+            let result = RestResult<Void>.success(())
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
 
-    public func download(to destination: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
+    internal func download(to destination: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
         let task = session.downloadTask(with: request) { (source, response, error) in
             guard let source = source else {
                 completionHandler(nil, RestError.invalidFile)
@@ -307,19 +343,19 @@ public struct RestRequest {
     }
 }
 
-public struct RestResponse<T> {
-    public let request: URLRequest?
-    public let response: HTTPURLResponse?
-    public let data: Data?
-    public let result: Result<T>
+internal struct RestResponse<T> {
+    internal let request: URLRequest?
+    internal let response: HTTPURLResponse?
+    internal let data: Data?
+    internal let result: RestResult<T>
 }
 
-public enum Result<T> {
+internal enum RestResult<T> {
     case success(T)
     case failure(Error)
 }
 
-public enum Credentials {
+internal enum Credentials {
     case apiKey
     case basicAuthentication(username: String, password: String)
 }

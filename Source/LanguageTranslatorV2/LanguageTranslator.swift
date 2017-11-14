@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The Watson Language Translator service provides domain-specific translation utilizing
@@ -68,7 +67,7 @@ public class LanguageTranslator {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let userInfo: [String: String]
             if let message = try? json.getString(at: "error_message") {

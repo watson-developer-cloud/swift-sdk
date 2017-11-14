@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Extracted relationships between the subject, action and object parts of a sentence. */
 public struct Relation: JSONDecodable {
@@ -39,7 +38,7 @@ public struct Relation: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a Relation object from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         action = try? json.decode(at: "action", type: Action.self)
         object = try? json.decode(at: "object", type: RelationObject.self)
         entities = try? json.decodedArray(at: "entities", type: Entity.self)
@@ -70,7 +69,7 @@ public struct Action: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize an Action object from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         verb = try? json.decode(at: "verb", type: Verb.self)
         lemmatized = try? json.getString(at: "lemmatized")
@@ -92,7 +91,7 @@ public struct Action: JSONDecodable {
         public let tense: String?
         
         /// Used internally to initalize a Verb object.
-        public init(json: JSON) throws {
+        public init(json: JSONWrapper) throws {
             text = try? json.getString(at: "text")
             tense = try? json.getString(at: "tense")
         }
@@ -121,7 +120,7 @@ public struct RelationObject: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a RelationObject object from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
         text = try? json.getString(at: "text")
         sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
@@ -146,7 +145,7 @@ public struct RelationObject: JSONDecodable {
         public let knowledgeGraph: KnowledgeGraph?
         
         /// Used internally to initialize a Keyword object.
-        public init(json: JSON) throws {
+        public init(json: JSONWrapper) throws {
             text = try? json.getString(at: "text")
             knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)
         }
@@ -171,7 +170,7 @@ public struct Subject: JSONDecodable {
     public let json: [String: Any]
     
     /// Used internally to initialize a Subject object from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
         text = try? json.getString(at: "text")
         sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)

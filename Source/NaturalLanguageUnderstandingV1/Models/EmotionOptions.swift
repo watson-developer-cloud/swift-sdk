@@ -15,37 +15,48 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Whether or not to return emotion analysis of the content. */
-public struct EmotionOptions: JSONEncodable {
-    
+public struct EmotionOptions {
+
     /// Set this to false to hide document-level emotion results.
-    public let document: Bool?
-    
+    public var document: Bool?
+
     /// Emotion results will be returned for each target string that is found in the document.
-    public let targets: [String]?
-    
+    public var targets: [String]?
+
     /**
-    Initialize a `EmotionOptions` with all member variables.
+     Initialize a `EmotionOptions` with member variables.
 
      - parameter document: Set this to false to hide document-level emotion results.
      - parameter targets: Emotion results will be returned for each target string that is found in the document.
 
-    - returns: An initialized `EmotionOptions`.
+     - returns: An initialized `EmotionOptions`.
     */
     public init(document: Bool? = nil, targets: [String]? = nil) {
         self.document = document
         self.targets = targets
     }
+}
 
-    /// Used internally to serialize a `EmotionOptions` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let document = document { json["document"] = document }
-        if let targets = targets {
-            json["targets"] = targets
-        }
-        return json
+extension EmotionOptions: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case document = "document"
+        case targets = "targets"
+        static let allValues = [document, targets]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        document = try container.decodeIfPresent(Bool.self, forKey: .document)
+        targets = try container.decodeIfPresent([String].self, forKey: .targets)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(document, forKey: .document)
+        try container.encodeIfPresent(targets, forKey: .targets)
+    }
+
 }

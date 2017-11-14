@@ -15,16 +15,15 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The pagination data for the returned objects. */
-public struct LogPagination: JSONDecodable, JSONEncodable {
+public struct LogPagination {
 
     /// The URL that will return the next page of results.
-    public let nextUrl: String?
+    public var nextUrl: String?
 
     /// Reserved for future use.
-    public let matched: Int?
+    public var matched: Int?
 
     /**
      Initialize a `LogPagination` with member variables.
@@ -38,20 +37,26 @@ public struct LogPagination: JSONDecodable, JSONEncodable {
         self.nextUrl = nextUrl
         self.matched = matched
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `LogPagination` model from JSON.
-    public init(json: JSON) throws {
-        nextUrl = try? json.getString(at: "next_url")
-        matched = try? json.getInt(at: "matched")
+extension LogPagination: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case nextUrl = "next_url"
+        case matched = "matched"
+        static let allValues = [nextUrl, matched]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `LogPagination` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let nextUrl = nextUrl { json["next_url"] = nextUrl }
-        if let matched = matched { json["matched"] = matched }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        nextUrl = try container.decodeIfPresent(String.self, forKey: .nextUrl)
+        matched = try container.decodeIfPresent(Int.self, forKey: .matched)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(nextUrl, forKey: .nextUrl)
+        try container.encodeIfPresent(matched, forKey: .matched)
+    }
+
 }

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DialogNodeCollection Struct Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/DialogNodeCollection" class="dashAnchor"></a>
+    <a title="DialogNodeCollection Struct Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        DialogNodeCollection Struct Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Conversation.html">Conversation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RestError.html">RestError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Context.html">Context</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Counterexample.html">Counterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CounterexampleCollection.html">CounterexampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateCounterexample.html">CreateCounterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode.html">CreateDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateEntity.html">CreateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateExample.html">CreateExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateIntent.html">CreateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateSynonym.html">CreateSynonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateValue.html">CreateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateValue/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateWorkspace.html">CreateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode.html">DialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeAction.html">DialogNodeAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeAction/ActionType.html">– ActionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeCollection.html">DialogNodeCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeNextStep/Behavior.html">– Behavior</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeNextStep/Selector.html">– Selector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Entity.html">Entity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EntityCollection.html">EntityCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EntityExport.html">EntityExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Example.html">Example</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ExampleCollection.html">ExampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/InputData.html">InputData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Intent.html">Intent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntentCollection.html">IntentCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntentExport.html">IntentExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:14ConversationV111JSONWrapperV">JSONWrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogExport.html">LogExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessage.html">LogMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessage/Level.html">– Level</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogPagination.html">LogPagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageInput.html">MessageInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageRequest.html">MessageRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageResponse.html">MessageResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OutputData.html">OutputData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Pagination.html">Pagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeEntity.html">RuntimeEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeIntent.html">RuntimeIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Synonym.html">Synonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SynonymCollection.html">SynonymCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SystemResponse.html">SystemResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateCounterexample.html">UpdateCounterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode.html">UpdateDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateEntity.html">UpdateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateExample.html">UpdateExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateIntent.html">UpdateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateSynonym.html">UpdateSynonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateValue.html">UpdateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateValue/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateWorkspace.html">UpdateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Value.html">Value</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Value/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ValueCollection.html">ValueCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ValueExport.html">ValueExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ValueExport/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Workspace.html">Workspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceCollection.html">WorkspaceCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceExport.html">WorkspaceExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceExport/Status.html">– Status</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>DialogNodeCollection</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeCollection</span></code></pre>
+
+                </div>
+              </div>
+            <p>DialogNodeCollection.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ConversationV120DialogNodeCollectionV11dialogNodesSayAA0cD0VGv"></a>
+                    <a name="//apple_ref/swift/Property/dialogNodes" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV120DialogNodeCollectionV11dialogNodesSayAA0cD0VGv">dialogNodes</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ConversationV120DialogNodeCollectionV10paginationAA10PaginationVv"></a>
+                    <a name="//apple_ref/swift/Property/pagination" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV120DialogNodeCollectionV10paginationAA10PaginationVv">pagination</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object defining the pagination data for the returned objects.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">pagination</span><span class="p">:</span> <span class="kt"><a href="../Structs/Pagination.html">Pagination</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ConversationV120DialogNodeCollectionVACSayAA0cD0VG11dialogNodes_AA10PaginationV10paginationtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(dialogNodes:pagination:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV120DialogNodeCollectionVACSayAA0cD0VG11dialogNodes_AA10PaginationV10paginationtcfc">init(dialogNodes:pagination:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a <code>DialogNodeCollection</code> with member variables.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">dialogNodes</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNode.html">DialogNode</a></span><span class="p">],</span> <span class="nv">pagination</span><span class="p">:</span> <span class="kt"><a href="../Structs/Pagination.html">Pagination</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dialogNodes</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pagination</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An object defining the pagination data for the returned objects.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>DialogNodeCollection</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9DecodablePxs7Decoder_p4from_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9DecodablePxs7Decoder_p4from_tKcfc">init(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>decoder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9EncodableP6encodeys7Encoder_p2to_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9EncodableP6encodeys7Encoder_p2to_tKF">encode(to:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>encoder</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-24)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Contains the analysis of an input sentence. Produced by the Relationship Extraction service. */
 public struct Sentence: JSONDecodable {
@@ -49,7 +48,7 @@ public struct Sentence: JSONDecodable {
     public let tokens: [Token]
     
     /// Used internally to initialize a `Sentence` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         sentenceID = try json.getInt(at: "sid")
         begin = try json.getInt(at: "begin")
         end = try json.getInt(at: "end")
@@ -78,7 +77,7 @@ public struct Token: JSONDecodable {
     public let tokenID: Int
     
     /// Used internally to initialize a `Token` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         begin = try json.getInt(at: "begin")
         end = try json.getInt(at: "end")
         text = try json.getString(at: "text")

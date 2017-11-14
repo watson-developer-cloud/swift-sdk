@@ -15,52 +15,78 @@
  **/
 
 import Foundation
-import RestKit
 
 /** UpdateValue. */
-public struct UpdateValue: JSONDecodable, JSONEncodable {
+public struct UpdateValue {
+
+    /// Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+    public enum ValueType: String {
+        case synonyms = "synonyms"
+        case patterns = "patterns"
+    }
 
     /// The text of the entity value.
-    public let value: String?
+    public var value: String?
 
     /// Any metadata related to the entity value.
-    public let metadata: [String: Any]?
+    public var metadata: [String: JSON]?
+
+    /// Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+    public var valueType: String?
 
     /// An array of synonyms for the entity value.
-    public let synonyms: [String]?
+    public var synonyms: [String]?
+
+    /// An array of patterns for the entity value. A pattern is specified as a regular expression.
+    public var patterns: [String]?
 
     /**
      Initialize a `UpdateValue` with member variables.
 
      - parameter value: The text of the entity value.
      - parameter metadata: Any metadata related to the entity value.
+     - parameter valueType: Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      - parameter synonyms: An array of synonyms for the entity value.
+     - parameter patterns: An array of patterns for the entity value. A pattern is specified as a regular expression.
 
      - returns: An initialized `UpdateValue`.
     */
-    public init(value: String? = nil, metadata: [String: Any]? = nil, synonyms: [String]? = nil) {
+    public init(value: String? = nil, metadata: [String: JSON]? = nil, valueType: String? = nil, synonyms: [String]? = nil, patterns: [String]? = nil) {
         self.value = value
         self.metadata = metadata
+        self.valueType = valueType
         self.synonyms = synonyms
+        self.patterns = patterns
+    }
+}
+
+extension UpdateValue: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case value = "value"
+        case metadata = "metadata"
+        case valueType = "type"
+        case synonyms = "synonyms"
+        case patterns = "patterns"
+        static let allValues = [value, metadata, valueType, synonyms, patterns]
     }
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `UpdateValue` model from JSON.
-    public init(json: JSON) throws {
-        value = try? json.getString(at: "value")
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        synonyms = try? json.decodedArray(at: "synonyms", type: String.self)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        value = try container.decodeIfPresent(String.self, forKey: .value)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        valueType = try container.decodeIfPresent(String.self, forKey: .valueType)
+        synonyms = try container.decodeIfPresent([String].self, forKey: .synonyms)
+        patterns = try container.decodeIfPresent([String].self, forKey: .patterns)
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `UpdateValue` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let value = value { json["value"] = value }
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let synonyms = synonyms {
-            json["synonyms"] = synonyms.map { $0 }
-        }
-        return json
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(value, forKey: .value)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(valueType, forKey: .valueType)
+        try container.encodeIfPresent(synonyms, forKey: .synonyms)
+        try container.encodeIfPresent(patterns, forKey: .patterns)
     }
+
 }

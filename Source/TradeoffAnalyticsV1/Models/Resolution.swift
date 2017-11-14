@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /// A resolution to a decision problem.
 public struct Resolution: JSONDecodable {
@@ -28,7 +27,7 @@ public struct Resolution: JSONDecodable {
     public let solutions: [Solution]
     
     /// Used internally to initialize a `Resolution` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         map = try? json.decode(at: "map")
         solutions = try json.decodedArray(at: "solutions", type: Solution.self)
     }
@@ -48,7 +47,7 @@ public struct Map: JSONDecodable {
     public let nodes: [MapNode]
     
     /// Used internally to initialize a `Map` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         anchors = try json.decodedArray(at: "anchors", type: Anchor.self)
         nodes = try json.decodedArray(at: "nodes", type: MapNode.self)
     }
@@ -64,7 +63,7 @@ public struct Anchor: JSONDecodable {
     public let position: MapNodeCoordinates
     
     /// Used internally to initialize an `Anchor` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try json.getString(at: "name")
         position = try json.decode(at: "position")
     }
@@ -80,7 +79,7 @@ public struct MapNode: JSONDecodable {
     public let solutionRefs: [String]
     
     /// Used internally to initialize a `MapNode` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         coordinates = try json.decode(at: "coordinates")
         solutionRefs = try json.decodedArray(at: "solution_refs", type: String.self)
     }
@@ -96,7 +95,7 @@ public struct MapNodeCoordinates: JSONDecodable {
     public let y: Double
     
     /// Used internally to initialize a `MapNodeCoordinates` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         x = try json.getDouble(at: "x")
         y = try json.getDouble(at: "y")
     }
@@ -123,14 +122,14 @@ public struct Solution: JSONDecodable {
     public let statusCause: StatusCause?
     
     /// Used internally to initialize a `Solution` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         shadowMe = try? json.decodedArray(at: "shadow_me", type: String.self)
         shadows = try? json.decodedArray(at: "shadows", type: String.self)
         solutionRef = try json.getString(at: "solution_ref")
         statusCause = try? json.decode(at: "status_cause")
         
         guard let status = SolutionStatus(rawValue: try json.decode(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Solution.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: Solution.self)
         }
         self.status = status
     }
@@ -170,9 +169,9 @@ public struct StatusCause: JSONDecodable {
     public let tokens: [String]
     
     /// Used internally to initialize a `StatusCause` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         guard let errorCode = TradeoffAnalyticsError(rawValue: try json.getString(at: "error_code")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: StatusCause.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: StatusCause.self)
         }
         self.errorCode = errorCode
         message = try json.getString(at: "message")

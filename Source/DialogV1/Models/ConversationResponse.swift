@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
     
 /** A dialog conversation response. */
 public struct ConversationResponse: JSONDecodable {
@@ -36,7 +35,7 @@ public struct ConversationResponse: JSONDecodable {
     public let clientID: Int
 
     /// Used internally to initialize a `ConversationResponse` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         response = try json.decodedArray(at: "response")
         input = try json.getString(at: "input")
         conversationID = try json.getInt(at: "conversation_id")

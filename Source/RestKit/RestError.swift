@@ -16,6 +16,7 @@
 
 import Foundation
 
+/// An error from processing a network request or response.
 public enum RestError: Error {
 
     /// No data was returned from the server.

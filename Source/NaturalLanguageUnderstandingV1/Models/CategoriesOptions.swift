@@ -15,25 +15,33 @@
  **/
 
 import Foundation
-import RestKit
 
-/** An option specifying if the analyzed content should be categorized into a hierarchical 5-level taxonomy. */
-public struct CategoriesOptions: JSONEncodable {
-    
-    /// The JSON object to internally serialize the model to JSON.
-    public let json: [String: Any]?
-    
+/** The hierarchical 5-level taxonomy the content is categorized into. */
+public struct CategoriesOptions {
+
+    /// Additional properties associated with this model.
+    public var additionalProperties: [String: JSON]
+
     /**
-     Initialize a `CategoriesOptions` with all member variables.
-     
+     Initialize a `CategoriesOptions`.
+
      - returns: An initialized `CategoriesOptions`.
-     */
-    public init() {
-        json = [String: Any]()
+    */
+    public init(additionalProperties: [String: JSON] = [:]) {
+        self.additionalProperties = additionalProperties
     }
-    
-    /// Used internally to serialize a `CategoriesOptions` model to JSON.
-    public func toJSONObject() -> Any {
-        return json ?? [String: Any]()
+}
+
+extension CategoriesOptions: Codable {
+
+    public init(from decoder: Decoder) throws {
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
+        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
+    }
+
 }

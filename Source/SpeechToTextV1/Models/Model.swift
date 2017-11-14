@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A model supported by the Speech to Text service. */
 public struct Model: JSONDecodable {
@@ -40,7 +39,7 @@ public struct Model: JSONDecodable {
     public let description: String
     
     /// Used internally to initialize a `Model` from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         name = try json.getString(at: "name")
         rate = try json.getInt(at: "rate")
         language = try json.getString(at: "language")
@@ -57,7 +56,7 @@ public struct SupportedFeatures: JSONDecodable {
     public let customLanguageModel: Bool
     
     /// Used internally to initialize a `SupportedFeatures` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         customLanguageModel = try json.getBool(at: "custom_language_model")
     }
 }

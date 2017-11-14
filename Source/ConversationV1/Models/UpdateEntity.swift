@@ -15,25 +15,24 @@
  **/
 
 import Foundation
-import RestKit
 
 /** UpdateEntity. */
-public struct UpdateEntity: JSONDecodable, JSONEncodable {
+public struct UpdateEntity {
 
     /// The name of the entity.
-    public let entity: String?
+    public var entity: String?
 
     /// The description of the entity.
-    public let description: String?
+    public var description: String?
 
     /// Any metadata related to the entity.
-    public let metadata: [String: Any]?
+    public var metadata: [String: JSON]?
 
     /// Whether to use fuzzy matching for the entity.
-    public let fuzzyMatch: Bool?
+    public var fuzzyMatch: Bool?
 
     /// An array of entity values.
-    public let values: [CreateValue]?
+    public var values: [CreateValue]?
 
     /**
      Initialize a `UpdateEntity` with member variables.
@@ -46,35 +45,42 @@ public struct UpdateEntity: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `UpdateEntity`.
     */
-    public init(entity: String? = nil, description: String? = nil, metadata: [String: Any]? = nil, fuzzyMatch: Bool? = nil, values: [CreateValue]? = nil) {
+    public init(entity: String? = nil, description: String? = nil, metadata: [String: JSON]? = nil, fuzzyMatch: Bool? = nil, values: [CreateValue]? = nil) {
         self.entity = entity
         self.description = description
         self.metadata = metadata
         self.fuzzyMatch = fuzzyMatch
         self.values = values
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `UpdateEntity` model from JSON.
-    public init(json: JSON) throws {
-        entity = try? json.getString(at: "entity")
-        description = try? json.getString(at: "description")
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        fuzzyMatch = try? json.getBool(at: "fuzzy_match")
-        values = try? json.decodedArray(at: "values", type: CreateValue.self)
+extension UpdateEntity: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case entity = "entity"
+        case description = "description"
+        case metadata = "metadata"
+        case fuzzyMatch = "fuzzy_match"
+        case values = "values"
+        static let allValues = [entity, description, metadata, fuzzyMatch, values]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `UpdateEntity` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let entity = entity { json["entity"] = entity }
-        if let description = description { json["description"] = description }
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let fuzzyMatch = fuzzyMatch { json["fuzzy_match"] = fuzzyMatch }
-        if let values = values {
-            json["values"] = values.map { $0.toJSONObject() }
-        }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        entity = try container.decodeIfPresent(String.self, forKey: .entity)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        fuzzyMatch = try container.decodeIfPresent(Bool.self, forKey: .fuzzyMatch)
+        values = try container.decodeIfPresent([CreateValue].self, forKey: .values)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(entity, forKey: .entity)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(fuzzyMatch, forKey: .fuzzyMatch)
+        try container.encodeIfPresent(values, forKey: .values)
+    }
+
 }

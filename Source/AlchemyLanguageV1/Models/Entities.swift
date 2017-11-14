@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -43,10 +42,10 @@ public struct Entities: JSONDecodable {
     public let entitites: [Entity]?
     
     /// Used internally to initialize an Entities object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: Entities.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: Entities.self)
         }
         
         language = try? json.getString(at: "language")

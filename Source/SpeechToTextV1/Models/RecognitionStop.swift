@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Signals the end of an audio transmission to Speech to Text. */
 internal struct RecognitionStop: JSONEncodable {

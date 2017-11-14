@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A transcription alternative produced by Speech to Text. */
 public struct SpeechRecognitionAlternative: JSONDecodable {
@@ -35,7 +34,7 @@ public struct SpeechRecognitionAlternative: JSONDecodable {
     public let wordConfidence: [WordConfidence]?
 
     /// Used internally to initialize a `SpeechRecognitionAlternative` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         transcript = try json.getString(at: "transcript")
         confidence = try? json.getDouble(at: "confidence")
         timestamps = try? json.decodedArray(at: "timestamps", type: WordTimestamp.self)

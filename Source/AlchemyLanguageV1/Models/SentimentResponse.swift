@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -43,10 +42,10 @@ public struct SentimentResponse: JSONDecodable {
     public let docSentiment: Sentiment?
     
     /// Used internally to initialize a SentimentResponse object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: SentimentResponse.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: SentimentResponse.self)
         }
         
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {

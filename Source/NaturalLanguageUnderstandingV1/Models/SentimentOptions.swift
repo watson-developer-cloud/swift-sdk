@@ -15,37 +15,48 @@
  **/
 
 import Foundation
-import RestKit
 
-/** An options specifying if sentiment of detected entities, keywords, or phrases should be returned. */
-public struct SentimentOptions: JSONEncodable {
-    
+/** An option specifying if sentiment of detected entities, keywords, or phrases should be returned. */
+public struct SentimentOptions {
+
     /// Set this to false to hide document-level sentiment results.
-    public let document: Bool?
-    
+    public var document: Bool?
+
     /// Sentiment results will be returned for each target string that is found in the document.
-    public let targets: [String]?
+    public var targets: [String]?
 
     /**
-    Initialize a `SentimentOptions` with all member variables.
+     Initialize a `SentimentOptions` with member variables.
 
      - parameter document: Set this to false to hide document-level sentiment results.
      - parameter targets: Sentiment results will be returned for each target string that is found in the document.
 
-    - returns: An initialized `SentimentOptions`.
+     - returns: An initialized `SentimentOptions`.
     */
     public init(document: Bool? = nil, targets: [String]? = nil) {
         self.document = document
         self.targets = targets
     }
+}
 
-    /// Used internally to serialize a `SentimentOptions` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let document = document { json["document"] = document }
-        if let targets = targets {
-            json["targets"] = targets
-        }
-        return json
+extension SentimentOptions: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case document = "document"
+        case targets = "targets"
+        static let allValues = [document, targets]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        document = try container.decodeIfPresent(Bool.self, forKey: .document)
+        targets = try container.decodeIfPresent([String].self, forKey: .targets)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(document, forKey: .document)
+        try container.encodeIfPresent(targets, forKey: .targets)
+    }
+
 }

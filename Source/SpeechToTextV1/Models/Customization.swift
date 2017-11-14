@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A custom language model. */
 public struct Customization: JSONDecodable {
@@ -59,7 +58,7 @@ public struct Customization: JSONDecodable {
     public let warnings: String?
     
     /// Used internally to initialize a `Customization` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         customizationID = try json.getString(at: "customization_id")
         created = try json.getString(at: "created")
         language = try json.getString(at: "language")
@@ -69,7 +68,7 @@ public struct Customization: JSONDecodable {
         description = try json.getString(at: "description")
         baseModelName = try json.getString(at: "base_model_name")
         guard let customizationStatus = CustomizationStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: CustomizationStatus.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: CustomizationStatus.self)
         }
         status = customizationStatus
         progress = try json.getInt(at: "progress")

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The primary image link detected on a webpage by the Alchemy Vision service. */
 public struct ImageLink: JSONDecodable {
@@ -30,10 +29,10 @@ public struct ImageLink: JSONDecodable {
     public let image: String
 
     /// Used internally to initialize an `ImageLink` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: ImageLink.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: ImageLink.self)
         }
         
         url = try json.getString(at: "url")

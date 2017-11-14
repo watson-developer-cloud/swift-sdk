@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The IBM Watson Retrieve and Rank service combines two information retrieval components into a 
@@ -68,7 +67,7 @@ public class RetrieveAndRank {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let userInfo: [String: String]
             if let message = try? json.getString(at: "msg") {
@@ -140,7 +139,7 @@ public class RetrieveAndRank {
             json["cluster_size"] = String(size)
         }
         
-        guard let body = try? JSON(dictionary: json).serialize() else {
+        guard let body = try? JSONWrapper(dictionary: json).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
@@ -773,7 +772,7 @@ public class RetrieveAndRank {
         if let name = name {
             json["name"] = name
         }
-        guard let trainingMetadata = try? JSON(dictionary: json).serialize() else {
+        guard let trainingMetadata = try? JSONWrapper(dictionary: json).serialize() else {
             let failureReason = "Ranker metadata could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)

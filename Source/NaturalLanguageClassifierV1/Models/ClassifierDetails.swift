@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A classifer supported by the Natural Language Classifier service. */
 public struct ClassifierDetails: JSONDecodable {
@@ -42,7 +41,7 @@ public struct ClassifierDetails: JSONDecodable {
     public let statusDescription: String
     
     /// Used internally to initialize a `ClassifierDetails` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         classifierId = try json.getString(at: "classifier_id")
         name = try? json.getString(at: "name")
         language = try json.getString(at: "language")
@@ -51,7 +50,7 @@ public struct ClassifierDetails: JSONDecodable {
         statusDescription = try json.getString(at: "status_description")
         
         guard let classifierStatus = ClassifierStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: ClassifierStatus.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: ClassifierStatus.self)
         }
         status = classifierStatus
     }

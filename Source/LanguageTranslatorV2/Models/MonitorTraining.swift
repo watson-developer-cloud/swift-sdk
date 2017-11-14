@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The training status of a translation model. */
 public struct MonitorTraining: JSONDecodable {
@@ -27,9 +26,9 @@ public struct MonitorTraining: JSONDecodable {
     public let baseModelID: String
 
     /// Used internally to initialize a `MonitorTraining` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         guard let status = TrainingStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSON.Error.valueNotConvertible(value: json, to: TrainingStatus.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: TrainingStatus.self)
         }
         self.status = status
         self.baseModelID = try json.getString(at: "base_model_id")

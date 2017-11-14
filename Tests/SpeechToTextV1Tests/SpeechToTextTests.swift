@@ -946,6 +946,7 @@ class SpeechToTextTests: XCTestCase {
     {
         let description = "Transcribe an audio file."
         let expectation = self.expectation(description: description)
+        var expectationFulfilled = false
         
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
@@ -963,10 +964,13 @@ class SpeechToTextTests: XCTestCase {
             settings.timestamps = true
             settings.filterProfanity = false
             settings.speakerLabels = true
-            
+
             speechToText.recognize(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true, failure: failWithError) { results in
-                self.validateSTTSpeakerLabels(speakerLabels: results.speakerLabels)
-                expectation.fulfill()
+                if !expectationFulfilled && results.speakerLabels.count > 0 {
+                    self.validateSTTSpeakerLabels(speakerLabels: results.speakerLabels)
+                    expectationFulfilled = true
+                    expectation.fulfill()
+                }
             }
             waitForExpectations()
         } catch {
@@ -1133,6 +1137,7 @@ class SpeechToTextTests: XCTestCase {
     }
     
     func validateSTTSpeakerLabels(speakerLabels: [SpeakerLabel]) {
+        XCTAssertGreaterThan(speakerLabels.count, 0)
         for speakerLabel in speakerLabels {
             validateSTTSpeakerLabel(speakerLabel: speakerLabel)
         }

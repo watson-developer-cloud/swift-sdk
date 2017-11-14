@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 import AVFoundation
 
 /**
@@ -87,7 +86,7 @@ public class SpeechToText {
         }
         
         do {
-            let json = try JSON(data: data)
+            let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             var userInfo = [NSLocalizedFailureReasonErrorKey: message]
@@ -420,7 +419,7 @@ public class SpeechToText {
         if let description = description {
             jsonData["description"] = description
         }
-        guard let body = try? JSON(dictionary: jsonData).serialize() else {
+        guard let body = try? JSONWrapper(dictionary: jsonData).serialize() else {
             failure?(RestError.serializationError)
             return
         }
@@ -874,7 +873,7 @@ public class SpeechToText {
         // construct body
         var jsonData = [String: Any]()
         jsonData["words"] = words.map { word in word.toJSONObject() }
-        guard let body = try? JSON(dictionary: jsonData).serialize() else {
+        guard let body = try? JSONWrapper(dictionary: jsonData).serialize() else {
             failure?(RestError.serializationError)
             return
         }

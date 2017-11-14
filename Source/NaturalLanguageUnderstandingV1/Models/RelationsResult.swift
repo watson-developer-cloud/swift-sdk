@@ -15,44 +15,64 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The relations between entities found in the content. */
-public struct RelationsResult: JSONDecodable {
-    
-    /// Confidence score for the relation. Higher values indicate greater confidence.
-    public let score: Double?
-    
-    /// The sentence that contains the relation.
-    public let sentence: String?
-    
-    /// The type of the relation.
-    public let type: String?
-   
-    /// The extracted relation objects from the text.
-    public let arguments: [RelationArgument]?
+public struct RelationsResult {
 
-    /// Used internally to initialize a `RelationsResult` model from JSON.
-    public init(json: JSON) throws {
-        score = try? json.getDouble(at: "score")
-        sentence = try? json.getString(at: "sentence")
-        type = try? json.getString(at: "type")
-        arguments = try? json.decodedArray(at: "arguments", type: RelationArgument.self)
+    /// Confidence score for the relation. Higher values indicate greater confidence.
+    public var score: Double?
+
+    /// The sentence that contains the relation.
+    public var sentence: String?
+
+    /// The type of the relation.
+    public var type: String?
+
+    /// The extracted relation objects from the text.
+    public var arguments: [RelationArgument]?
+
+    /**
+     Initialize a `RelationsResult` with member variables.
+
+     - parameter score: Confidence score for the relation. Higher values indicate greater confidence.
+     - parameter sentence: The sentence that contains the relation.
+     - parameter type: The type of the relation.
+     - parameter arguments: The extracted relation objects from the text.
+
+     - returns: An initialized `RelationsResult`.
+    */
+    public init(score: Double? = nil, sentence: String? = nil, type: String? = nil, arguments: [RelationArgument]? = nil) {
+        self.score = score
+        self.sentence = sentence
+        self.type = type
+        self.arguments = arguments
     }
 }
 
-/** The extracted relation in the content.. */
-public struct RelationArgument: JSONDecodable {
-    
-    /// The relationship of the entity pulled from a sentence.
-    public let entities: [RelationEntity]?
-    
-    /// Text that corresponds to the argument
-    public let text: String?
-    
-    /// Used internally to initialize a `RelationArgument` model from JSON.
-    public init(json: JSON) throws {
-        entities = try? json.decodedArray(at: "entities", type: RelationEntity.self)
-        text = try? json.getString(at: "text")
+extension RelationsResult: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case score = "score"
+        case sentence = "sentence"
+        case type = "type"
+        case arguments = "arguments"
+        static let allValues = [score, sentence, type, arguments]
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        score = try container.decodeIfPresent(Double.self, forKey: .score)
+        sentence = try container.decodeIfPresent(String.self, forKey: .sentence)
+        type = try container.decodeIfPresent(String.self, forKey: .type)
+        arguments = try container.decodeIfPresent([RelationArgument].self, forKey: .arguments)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(score, forKey: .score)
+        try container.encodeIfPresent(sentence, forKey: .sentence)
+        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(arguments, forKey: .arguments)
+    }
+
 }

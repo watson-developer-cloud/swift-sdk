@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -33,10 +32,10 @@ public struct NewsResponse: JSONDecodable {
     public let result: NewsResult?
     
     /// Used internally to initialize a NewsResponse object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
-            throw JSON.Error.valueNotConvertible(value: json, to: NewsResponse.self)
+            throw JSONWrapper.Error.valueNotConvertible(value: json, to: NewsResponse.self)
         }
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         result = try? json.decode(at: "result", type: NewsResult.self)

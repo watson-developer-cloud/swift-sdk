@@ -15,48 +15,64 @@
  **/
 
 import Foundation
-import RestKit
 
-/** Whether or not to return important people, places, geopolitical, and other entities detected
- in the analyzed content. */
-public struct EntitiesOptions: JSONEncodable {
-    
+/** Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed content. */
+public struct EntitiesOptions {
+
     /// Maximum number of entities to return.
-    public let limit: Int?
-    
+    public var limit: Int?
+
     /// Enter a custom model ID to override the standard entity detection model.
-    public let model: String?
-    
-    /// Set this to false to hide entity disambiguation information in the response.
-    public let disambiguation: Bool?
-    
+    public var model: String?
+
     /// Set this to true to return sentiment information for detected entities.
-    public let sentiment: Bool?
-    
+    public var sentiment: Bool?
+
+    /// Set this to true to analyze emotion for detected keywords.
+    public var emotion: Bool?
+
     /**
-    Initialize a `EntitiesOptions` with all member variables.
+     Initialize a `EntitiesOptions` with member variables.
 
      - parameter limit: Maximum number of entities to return.
      - parameter model: Enter a custom model ID to override the standard entity detection model.
-     - parameter disambiguation: Set this to false to hide entity disambiguation information in the response.
      - parameter sentiment: Set this to true to return sentiment information for detected entities.
+     - parameter emotion: Set this to true to analyze emotion for detected keywords.
 
-    - returns: An initialized `EntitiesOptions`.
+     - returns: An initialized `EntitiesOptions`.
     */
-    public init(limit: Int? = nil, model: String? = nil, disambiguation: Bool? = nil, sentiment: Bool? = nil) {
+    public init(limit: Int? = nil, model: String? = nil, sentiment: Bool? = nil, emotion: Bool? = nil) {
         self.limit = limit
         self.model = model
-        self.disambiguation = disambiguation
         self.sentiment = sentiment
+        self.emotion = emotion
+    }
+}
+
+extension EntitiesOptions: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case limit = "limit"
+        case model = "model"
+        case sentiment = "sentiment"
+        case emotion = "emotion"
+        static let allValues = [limit, model, sentiment, emotion]
     }
 
-    /// Used internally to serialize a `EntitiesOptions` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let limit = limit { json["limit"] = limit }
-        if let model = model { json["model"] = model }
-        if let disambiguation = disambiguation { json["disambiguation"] = disambiguation }
-        if let sentiment = sentiment { json["sentiment"] = sentiment }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        limit = try container.decodeIfPresent(Int.self, forKey: .limit)
+        model = try container.decodeIfPresent(String.self, forKey: .model)
+        sentiment = try container.decodeIfPresent(Bool.self, forKey: .sentiment)
+        emotion = try container.decodeIfPresent(Bool.self, forKey: .emotion)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(limit, forKey: .limit)
+        try container.encodeIfPresent(model, forKey: .model)
+        try container.encodeIfPresent(sentiment, forKey: .sentiment)
+        try container.encodeIfPresent(emotion, forKey: .emotion)
+    }
+
 }

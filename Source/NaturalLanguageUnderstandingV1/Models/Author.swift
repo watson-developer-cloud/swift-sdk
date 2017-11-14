@@ -15,16 +15,40 @@
  **/
 
 import Foundation
-import RestKit
 
 /** The author of the analyzed content. */
-public struct Author: JSONDecodable {
-    
-    /// Name of the author.
-    public let name: String?
+public struct Author {
 
-    /// Used internally to initialize a `Author` model from JSON.
-    public init(json: JSON) throws {
-        name = try? json.getString(at: "name")
+    /// Name of the author.
+    public var name: String?
+
+    /**
+     Initialize a `Author` with member variables.
+
+     - parameter name: Name of the author.
+
+     - returns: An initialized `Author`.
+    */
+    public init(name: String? = nil) {
+        self.name = name
     }
+}
+
+extension Author: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case name = "name"
+        static let allValues = [name]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(name, forKey: .name)
+    }
+
 }

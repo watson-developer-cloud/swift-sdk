@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -110,7 +109,7 @@ public struct Concept: JSONDecodable {
     public let crunchbase: String?
     
     /// Used internally to initialize a Concept object
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         if let relevanceString = try? json.getString(at: "relevance") {
             relevance = Double(relevanceString)

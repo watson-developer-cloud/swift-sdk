@@ -15,19 +15,30 @@
  **/
 
 import Foundation
-import RestKit
 
 /** CreateValue. */
-public struct CreateValue: JSONDecodable, JSONEncodable {
+public struct CreateValue {
+
+    /// Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+    public enum ValueType: String {
+        case synonyms = "synonyms"
+        case patterns = "patterns"
+    }
 
     /// The text of the entity value.
-    public let value: String
+    public var value: String
 
     /// Any metadata related to the entity value.
-    public let metadata: [String: Any]?
+    public var metadata: [String: JSON]?
 
     /// An array of synonyms for the entity value.
-    public let synonyms: [String]?
+    public var synonyms: [String]?
+
+    /// An array of patterns for the entity value. A pattern is specified as a regular expression.
+    public var patterns: [String]?
+
+    /// Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+    public var valueType: String?
 
     /**
      Initialize a `CreateValue` with member variables.
@@ -35,32 +46,47 @@ public struct CreateValue: JSONDecodable, JSONEncodable {
      - parameter value: The text of the entity value.
      - parameter metadata: Any metadata related to the entity value.
      - parameter synonyms: An array of synonyms for the entity value.
+     - parameter patterns: An array of patterns for the entity value. A pattern is specified as a regular expression.
+     - parameter valueType: Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
 
      - returns: An initialized `CreateValue`.
     */
-    public init(value: String, metadata: [String: Any]? = nil, synonyms: [String]? = nil) {
+    public init(value: String, metadata: [String: JSON]? = nil, synonyms: [String]? = nil, patterns: [String]? = nil, valueType: String? = nil) {
         self.value = value
         self.metadata = metadata
         self.synonyms = synonyms
+        self.patterns = patterns
+        self.valueType = valueType
+    }
+}
+
+extension CreateValue: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case value = "value"
+        case metadata = "metadata"
+        case synonyms = "synonyms"
+        case patterns = "patterns"
+        case valueType = "type"
+        static let allValues = [value, metadata, synonyms, patterns, valueType]
     }
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `CreateValue` model from JSON.
-    public init(json: JSON) throws {
-        value = try json.getString(at: "value")
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        synonyms = try? json.decodedArray(at: "synonyms", type: String.self)
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        value = try container.decode(String.self, forKey: .value)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        synonyms = try container.decodeIfPresent([String].self, forKey: .synonyms)
+        patterns = try container.decodeIfPresent([String].self, forKey: .patterns)
+        valueType = try container.decodeIfPresent(String.self, forKey: .valueType)
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `CreateValue` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["value"] = value
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let synonyms = synonyms {
-            json["synonyms"] = synonyms.map { $0 }
-        }
-        return json
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(value, forKey: .value)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(synonyms, forKey: .synonyms)
+        try container.encodeIfPresent(patterns, forKey: .patterns)
+        try container.encodeIfPresent(valueType, forKey: .valueType)
     }
+
 }

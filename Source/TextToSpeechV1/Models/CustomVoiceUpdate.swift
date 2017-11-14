@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A custom voice model used by the Text to Speech service. */
 public struct CustomVoiceUpdate: JSONEncodable {

@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** A custom configuration for the environment. */
 public struct TestConfigurationDetails: JSONDecodable {
@@ -36,7 +35,7 @@ public struct TestConfigurationDetails: JSONDecodable {
     public let notices: [Notice]?
 
     /// Used internally to initialize a `TestConfigurationDetails` model from JSON.
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         status = try? json.getString(at: "status")
         enrichedFieldUnits = try? json.getInt(at: "enriched_field_units")
         originalMediaType = try? json.getString(at: "original_media_type")
@@ -54,7 +53,7 @@ public struct TestConfigurationDetails: JSONDecodable {
         public let snapshot: [String: Any]
         
         /// Used internally to initialize a 'Snapshot' model from JSON.
-        public init(json: JSON) throws {
+        public init(json: JSONWrapper) throws {
             step = try? json.getString(at: "step")
             self.snapshot = try json.getDictionaryObject(at: "snapshot")
         }

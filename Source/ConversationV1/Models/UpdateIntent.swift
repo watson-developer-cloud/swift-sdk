@@ -15,19 +15,18 @@
  **/
 
 import Foundation
-import RestKit
 
 /** UpdateIntent. */
-public struct UpdateIntent: JSONDecodable, JSONEncodable {
+public struct UpdateIntent {
 
     /// The name of the intent.
-    public let intent: String?
+    public var intent: String?
 
     /// The description of the intent.
-    public let description: String?
+    public var description: String?
 
     /// An array of user input examples for the intent.
-    public let examples: [CreateExample]?
+    public var examples: [CreateExample]?
 
     /**
      Initialize a `UpdateIntent` with member variables.
@@ -43,24 +42,29 @@ public struct UpdateIntent: JSONDecodable, JSONEncodable {
         self.description = description
         self.examples = examples
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `UpdateIntent` model from JSON.
-    public init(json: JSON) throws {
-        intent = try? json.getString(at: "intent")
-        description = try? json.getString(at: "description")
-        examples = try? json.decodedArray(at: "examples", type: CreateExample.self)
+extension UpdateIntent: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case intent = "intent"
+        case description = "description"
+        case examples = "examples"
+        static let allValues = [intent, description, examples]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `UpdateIntent` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let intent = intent { json["intent"] = intent }
-        if let description = description { json["description"] = description }
-        if let examples = examples {
-            json["examples"] = examples.map { $0.toJSONObject() }
-        }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        intent = try container.decodeIfPresent(String.self, forKey: .intent)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        examples = try container.decodeIfPresent([CreateExample].self, forKey: .examples)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(intent, forKey: .intent)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(examples, forKey: .examples)
+    }
+
 }

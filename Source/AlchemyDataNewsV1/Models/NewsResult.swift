@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  
@@ -40,7 +39,7 @@ public struct NewsResult: JSONDecodable {
     public let slices: [Int]?
     
     /// used internally to initialize NewsResult objects
-    public init(json: JSON) throws {
+    public init(json: JSONWrapper) throws {
         docs = try? json.decodedArray(at: "docs", type: Document.self)
         next = try? json.getString(at: "next")
         count = try? json.getInt(at: "count")

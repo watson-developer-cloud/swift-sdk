@@ -17,7 +17,6 @@
 import Foundation
 import CoreML
 import Vision
-import RestKit
 
 
 // Model abstraction class
@@ -185,8 +184,9 @@ extension VisualRecognition {
                     "images" : [bodyIm],
                     "warning" :[]
                 ]
+                
                 do {
-                    let converted = try ClassifiedImages( json: JSON(dictionary: body) )
+                    let converted = try ClassifiedImages( json: JSONWrapper(dictionary: body) )
                     success( converted )
                     return
                 } catch {

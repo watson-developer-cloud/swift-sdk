@@ -28,8 +28,6 @@ public class VisualRecognitionCoreMLModel {
     var modelPath: URL
     
     // TODO: want this to rely on url and classifier properties in vr service class
-    let key = TempKeys.API_KEY
-    let cid = TempKeys.CLASSIFIER_ID
     let baseUrl = "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/"
     let modelFileName = "watson_vision_model.mlmodel"
     
@@ -54,12 +52,12 @@ public class VisualRecognitionCoreMLModel {
         }
     }
     
-    public func getLatest(completionHandler: (() -> Void)? = nil) {
-        let urlString = self.baseUrl + cid + "/model"
+    public func getLatest(classifierID: String, apiKey: String, completionHandler: (() -> Void)? = nil) {
+        let urlString = self.baseUrl + classifierID + "/model"
         
         guard let requestUrl = URL(string: urlString) else { return }
         var request = URLRequest(url:requestUrl)
-        request.setValue(key, forHTTPHeaderField: "X-API-Key")
+        request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
         
         let task = URLSession.shared.dataTask(with: request) {
             (data, response, error) in

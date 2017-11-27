@@ -386,12 +386,12 @@ public class VisualRecognition {
     /**
      Retrieve a list of custom classifiers.
  
-     - parameter core_ml_enabled: Filter by CoreML enalbed classifiers.
+     - parameter coreMLEnabled: Filter by CoreML enabled classifiers.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of classifiers.
      */
     public func getClassifiers(
-        core_ml_enabled: Bool = false,
+        coreMLEnabled: Bool = false,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Classifier]) -> Void)
     {
@@ -399,7 +399,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "core_ml_enalbed", value: core_ml_enabled))
+        queryParameters.append(URLQueryItem(name: "core_ml_enabled", value: coreMLEnabled))
         queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
         
         // construct REST request

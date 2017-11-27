@@ -456,8 +456,8 @@ public class VisualRecognition {
         let positiveAndNegative = (positiveExamples.count >= 1 && negativeExamples != nil)
         guard twoOrMoreClasses || positiveAndNegative else {
             let failureReason = "You must supply at least two compressed (.zip) files of images, " +
-                "either two positive example files or one positive and one " +
-            "negative example file."
+                                "either two positive example files or one positive and one " +
+                                "negative example file."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)

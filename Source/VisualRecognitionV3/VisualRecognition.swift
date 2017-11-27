@@ -439,7 +439,7 @@ public class VisualRecognition {
         Must contain a minimum of 10 images.
      - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
         subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
-     - parameter core_ml_enabled: Enables the processing of the classifier as a local CoreML model.
+     - parameter coreMLEnabled: Enables the processing of the classifier as a local CoreML model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the created classifier.
      */
@@ -447,7 +447,7 @@ public class VisualRecognition {
         withName name: String,
         positiveExamples: [PositiveExample],
         negativeExamples: URL? = nil,
-        core_ml_enabled: Bool = true,
+        coreMLEnabled: Bool = true,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -468,7 +468,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "core_ml_enabled", value: core_ml_enabled))
+        queryParameters.append(URLQueryItem(name: "core_ml_enabled", value: coreMLEnabled))
         
         // encode name as data
         guard let name = name.data(using: .utf8) else {

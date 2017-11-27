@@ -432,13 +432,14 @@ public class VisualRecognition {
      trained classifier, but does define what the new classifier is not. Negative example files
      should contain images that do not depict the subject of any of the positive examples. You can
      only specify one negative example file in a single call.
- 
+     
      - parameter withName: The name of the new classifier.
      - parameter positiveExamples: An array of positive examples, each with a name and a compressed
-        (.zip) file of images that depict the visual subject for a class within the new classifier.
-        Must contain a minimum of 10 images.
+     (.zip) file of images that depict the visual subject for a class within the new classifier.
+     Must contain a minimum of 10 images.
      - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
-        subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
+     subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
+     - parameter core_ml_enabled: Enables the processing of the classifier as a local CoreML model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the created classifier.
      */
@@ -446,6 +447,7 @@ public class VisualRecognition {
         withName name: String,
         positiveExamples: [PositiveExample],
         negativeExamples: URL? = nil,
+        core_ml_enabled: Bool = true,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -454,8 +456,8 @@ public class VisualRecognition {
         let positiveAndNegative = (positiveExamples.count >= 1 && negativeExamples != nil)
         guard twoOrMoreClasses || positiveAndNegative else {
             let failureReason = "You must supply at least two compressed (.zip) files of images, " +
-                                "either two positive example files or one positive and one " +
-                                "negative example file."
+                "either two positive example files or one positive and one " +
+            "negative example file."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -466,6 +468,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "core_ml_enabled", value: core_ml_enabled))
         
         // encode name as data
         guard let name = name.data(using: .utf8) else {

@@ -435,10 +435,10 @@ public class VisualRecognition {
      
      - parameter withName: The name of the new classifier.
      - parameter positiveExamples: An array of positive examples, each with a name and a compressed
-     (.zip) file of images that depict the visual subject for a class within the new classifier.
-     Must contain a minimum of 10 images.
+        (.zip) file of images that depict the visual subject for a class within the new classifier.
+        Must contain a minimum of 10 images.
      - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
-     subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
+        subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
      - parameter core_ml_enabled: Enables the processing of the classifier as a local CoreML model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the created classifier.

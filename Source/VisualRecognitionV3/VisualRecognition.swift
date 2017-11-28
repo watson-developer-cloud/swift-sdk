@@ -391,7 +391,7 @@ public class VisualRecognition {
      - parameter success: A function executed with the list of classifiers.
      */
     public func getClassifiers(
-        coreMLEnabled: Bool = false,
+        coreMLEnabled: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Classifier]) -> Void)
     {
@@ -399,7 +399,10 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "core_ml_enabled", value: coreMLEnabled))
+        if let coreMLEnabled = coreMLEnabled {
+            let queryParameter = URLQueryItem(name: "core_ml_enabled", value: "\(coreMLEnabled)")
+            queryParameters.append(queryParameter)
+        }
         queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
         
         // construct REST request

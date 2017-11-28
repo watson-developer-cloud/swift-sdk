@@ -1246,4 +1246,78 @@ public class VisualRecognition {
         
         return fileURL
     }
+
+    func downloadClassifier(
+        classifierId: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (URL) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/classifiers/\(classifierId)",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+
+        // locate downloads directory
+        let fileManager = FileManager.default
+        let directories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
+        guard let downloads = directories.first else {
+            let failureReason = "Cannot locate documents directory."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        // construct unique filename
+        var filename = classifierId + ".mlmodel"
+        var isUnique = false
+        var duplicates = 0
+        while !isUnique {
+            let filePath = downloads.appendingPathComponent(filename).path
+            if fileManager.fileExists(atPath: filePath) {
+                duplicates += 1
+                filename = classifierId + "-\(duplicates)" + ".mlmodel"
+            } else {
+                isUnique = true
+            }
+        }
+
+        // specify download destination
+        let destinationURL = downloads.appendingPathComponent(filename)
+
+        // execute REST request
+        request.download(to: destinationURL) { response, error in
+            guard error == nil else {
+                failure?(error!)
+                return
+            }
+
+            guard let statusCode = response?.statusCode else {
+                let failureReason = "Did not receive response."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
+            if statusCode != 200 {
+                let failureReason = "Status code was not acceptable: \(statusCode)."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
+            success(destinationURL)
+        }
+    }
 }

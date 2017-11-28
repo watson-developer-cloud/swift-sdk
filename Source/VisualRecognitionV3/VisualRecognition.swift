@@ -468,7 +468,10 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "core_ml_enabled", value: coreMLEnabled))
+        if let coreMLEnabled = coreMLEnabled {
+            let queryParameter = URLQueryItem(name: "core_ml_enabled", value: "\(coreMLEnabled)")
+            queryParameters.append(queryParameter)
+        }
         
         // encode name as data
         guard let name = name.data(using: .utf8) else {

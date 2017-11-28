@@ -605,7 +605,7 @@ public class VisualRecognition {
         withID classifierID: String,
         positiveExamples: [PositiveExample]? = nil,
         negativeExamples: URL? = nil,
-        coreMLEnabled: Bool = false,
+        coreMLEnabled: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {

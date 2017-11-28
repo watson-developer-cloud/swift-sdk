@@ -1260,7 +1260,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v3/classifiers/\(classifierId)",
+            url: serviceURL + "/v3/classifiers/\(classifierId)/core_ml_model",
             credentials: .apiKey,
             headerParameters: defaultHeaders,
             queryItems: queryParameters

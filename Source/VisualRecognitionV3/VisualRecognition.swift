@@ -1265,6 +1265,13 @@ public class VisualRecognition {
         return fileURL
     }
 
+    /**
+     Downloads a CoreML model to the local file system.
+
+     - parameter classifierId: The classifierId of the requested model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the URL of the downloaded CoreML model.
+     */
     func downloadClassifier(
         classifierId: String,
         failure: ((Error) -> Void)? = nil,

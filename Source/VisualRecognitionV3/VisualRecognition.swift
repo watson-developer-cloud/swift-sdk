@@ -432,7 +432,7 @@ public class VisualRecognition {
      trained classifier, but does define what the new classifier is not. Negative example files
      should contain images that do not depict the subject of any of the positive examples. You can
      only specify one negative example file in a single call.
-
+ 
      - parameter withName: The name of the new classifier.
      - parameter positiveExamples: An array of positive examples, each with a name and a compressed
         (.zip) file of images that depict the visual subject for a class within the new classifier.

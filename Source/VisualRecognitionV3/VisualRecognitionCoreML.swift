@@ -124,7 +124,6 @@ extension VisualRecognition {
     public func classify(
         image: Data,
         model: VNCoreMLModel,
-        localThreshold: Double? = nil,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         threshold: Double? = nil,
@@ -132,14 +131,6 @@ extension VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
-        // short-circuit coreml if local thresh is 1.0
-        if localThreshold == 1.0 {
-            self.classify(image: image, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
-            return
-        }
-        
-        print ( "trying local classification on CoreML..." )
-        
         // setup request
         let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
             // define coreml callback
@@ -147,59 +138,47 @@ extension VisualRecognition {
                 print( "Unable to classify image.\n\(error!.localizedDescription)" )
                 return
             }
-            // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
+            
             var classifications = results as! [VNClassificationObservation]
+            classifications = classifications.filter({ $0.confidence > 0.01}) // filter out very low confidence
             
-            if let thresh = localThreshold {
-                classifications = classifications.filter({ $0.confidence > Float(thresh) })
+            // convert results to sdk vision models
+            var scores = [[String: Any]]()
+            for c in classifications {
+                let temp: [String: Any] = [
+                    "class" : c.identifier,
+                    "score" : Double( c.confidence )
+                ]
+                scores.append( temp )
             }
             
-            if classifications.isEmpty {
-                print( "Nothing recognized." )
-            } else {
-                // Display top classifications ranked by confidence in the UI.
-                let topClassifications = classifications.prefix(20)
-                
-                // convert results to sdk vision models
-                var scores = [[String: Any]]()
-                for c in topClassifications {
-                    let temp: [String: Any] = [
-                        "class" : c.identifier,
-                        "score" : Double( c.confidence )
-                    ]
-                    scores.append( temp )
-                }
-                
-                let bodyClassifier: [String: Any] = [
-                    "name": "coreml",
-                    "classifier_id": "",
-                    "classes" : scores
-                ]
-                
-                let bodyIm: [String: Any] = [
-                    "source_url" : "",
-                    "resolved_url" : "",
-                    "image": "",
-                    "error": "",
-                    "classifiers": [bodyClassifier]
-                ]
-                
-                let body: [String: Any] = [
-                    "images" : [bodyIm],
-                    "warning" :[]
-                ]
-                
-                do {
-                    let converted = try ClassifiedImages( json: JSONWrapper(dictionary: body) )
-                    success( converted )
-                    return
-                } catch {
-                    print( error )
-                }
-            }
+            let bodyClassifier: [String: Any] = [
+                "name": "coreml",
+                "classifier_id": "",
+                "classes" : scores
+            ]
             
-            // hit standard VR service as fallback
-            self.classify(image: image, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
+            let bodyIm: [String: Any] = [
+                "source_url" : "",
+                "resolved_url" : "",
+                "image": "",
+                "error": "",
+                "classifiers": [bodyClassifier]
+            ]
+            
+            let body: [String: Any] = [
+                "images" : [bodyIm],
+                "warning" :[]
+            ]
+            
+            do {
+                let converted = try ClassifiedImages( json: JSONWrapper(dictionary: body) )
+                success( converted )
+                return
+            } catch {
+                failure?( error )
+                return
+            }
             
         })
         request.imageCropAndScaleOption = .scaleFill // This seems wrong, but yields results in line with vision demo

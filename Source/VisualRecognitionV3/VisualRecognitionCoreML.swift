@@ -130,9 +130,12 @@ extension VisualRecognition {
         let urlString = baseUrl + classifierID + "/model"
         let modelFileName = classifierID + ".mlmodelc"
         let tempFileName = "temp_" + UUID().uuidString + ".mlmodel"
-        let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let tempPath = documentUrl.appendingPathComponent(tempFileName)
-        let modelPath = documentUrl.appendingPathComponent(modelFileName)
+        guard let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            print("Could not get application support directory")
+            return
+        }
+        let tempPath = appSupportDir.appendingPathComponent(tempFileName)
+        let modelPath = appSupportDir.appendingPathComponent(modelFileName)
 
         // setup request
         guard let requestUrl = URL(string: urlString) else { return }
@@ -183,15 +186,21 @@ extension VisualRecognition {
      - parameter success: A function executed with the image classifications. (Needed?)
      */
     public func getCoreMLModelLocally(classifierID: String) -> VNCoreMLModel? {
+        // form expected path to model
         let modelFileName = classifierID + ".mlmodelc"
-        let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let modelPath = documentUrl.appendingPathComponent(modelFileName)
-
+        guard let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            print("Could not get application support directory")
+            return nil
+        }
+        let modelPath = appSupportDir.appendingPathComponent(modelFileName)
+        
+        // check if available
         if !FileManager.default.fileExists(atPath: modelPath.path) {
             print("No model available for classifier: " + classifierID)
             return nil
         }
         
+        // load and cast to vision model
         guard let model = try? MLModel(contentsOf: modelPath) else {
             print("Could not create CoreML Model")
             return nil

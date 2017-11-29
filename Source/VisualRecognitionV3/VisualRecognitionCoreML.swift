@@ -19,89 +19,6 @@ import CoreML
 import Vision
 
 
-// Model abstraction class
-@available(iOS 11.0, *)
-public class VisualRecognitionCoreMLModel {
-    
-    var documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    public var model: VNCoreMLModel
-    var modelPath: URL
-    
-    // TODO: want this to rely on url and classifier properties in vr service class
-    let baseUrl = "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/"
-    let modelFileName = "watson_vision_model.mlmodel"
-    
-    
-    public init(model: VNCoreMLModel) {
-        self.model = model
-        self.modelPath = self.documentUrl.appendingPathComponent( self.modelFileName )
-    }
-    
-    private func compileModel(with newModelAddress: URL) {
-        if let compiledAddress = try? MLModel.compileModel(at: newModelAddress) {
-            self.replaceFile(at: self.modelPath, withFileAt: compiledAddress)
-            do {
-                let newModel = try MLModel(contentsOf: self.modelPath)
-                self.model = try VNCoreMLModel(for: newModel)
-                print("model swapped")
-            } catch let error {
-                print(error)
-            }
-        } else {
-            print("Error compiling new model")
-        }
-    }
-    
-    public func getLatest(classifierID: String, apiKey: String, completionHandler: (() -> Void)? = nil) {
-        let urlString = self.baseUrl + classifierID + "/model"
-        
-        guard let requestUrl = URL(string: urlString) else { return }
-        var request = URLRequest(url:requestUrl)
-        request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
-        
-        let task = URLSession.shared.dataTask(with: request) {
-            (data, response, error) in
-            if error == nil,let usableData = data {
-                self.modelPath = self.documentUrl.appendingPathComponent( self.modelFileName )
-                self.deleteFile(atPath: self.modelPath)
-                let saveSuccess = FileManager.default.createFile(atPath: self.modelPath.path, contents: usableData, attributes: nil)
-                print("Model file was saved: \(saveSuccess)")
-                self.compileModel(with: self.modelPath)
-                
-            } else if let error = error {
-                print(error)
-            }
-            if (completionHandler != nil) {
-                completionHandler?()
-            }
-        }
-        task.resume()
-    }
-    
-    // Helper functions for storing newest mlmodel file
-    private func replaceFile(at path: URL, withFileAt otherPath: URL) {
-        do {
-            deleteFile(atPath: path)
-            try FileManager.default.copyItem(at: otherPath, to: path)
-        }
-        catch let error {
-            print(error)
-        }
-    }
-    
-    private func deleteFile(atPath path: URL) {
-        print("Trying to remove item at: " + path.absoluteString)
-        do {
-            try FileManager.default.removeItem(at: path)
-            print("File removed")
-        }
-        catch let error {
-            print("Failed to remove item")
-            print(error)
-        }
-    }
-}
-
 @available(iOS 11.0, *)
 extension VisualRecognition {
     
@@ -199,4 +116,93 @@ extension VisualRecognition {
         }
     }
     
+    /**
+     Update the local CoreML model by pulling down the latest available version from the IBM cloud.
+     
+     - parameter classifierID: The classifier id to update
+     - parameter apiKey: TEMPORARY param needed to access solution kit server
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
+    public func updateCoreMLModelLocally(classifierID: String, apiKey: String, completionHandler: (() -> Void)? = nil) {
+        // setup urls and filepaths
+        let baseUrl = "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/"
+        let urlString = baseUrl + classifierID + "/model"
+        let modelFileName = classifierID + ".mlmodelc"
+        let tempFileName = "temp_" + UUID().uuidString + ".mlmodel"
+        let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let tempPath = documentUrl.appendingPathComponent(tempFileName)
+        let modelPath = documentUrl.appendingPathComponent(modelFileName)
+
+        // setup request
+        guard let requestUrl = URL(string: urlString) else { return }
+        var request = URLRequest(url:requestUrl)
+        request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            if let error = error {
+                print(error)
+                // TODO hit failure callback
+                return
+            }
+            
+            guard let usableData = data  else {
+                print("No usable data in response")
+                return
+            }
+            
+            // store model spec to temp location
+            try? FileManager.default.removeItem(at: tempPath)
+            let saveSuccess = FileManager.default.createFile(atPath: tempPath.path, contents: usableData, attributes: nil)
+            print("New model spec was saved to file: \(saveSuccess)")
+            
+            // compile spec and write to final location
+            guard let compiledPath = try? MLModel.compileModel(at: tempPath) else {
+                print("Error compiling new model")
+                return
+            }
+            try? FileManager.default.removeItem(at: modelPath)
+            try? FileManager.default.copyItem(at: compiledPath, to: modelPath)
+            print("new Model compiled for classifier: " + classifierID)
+            
+            // cleanup
+            try? FileManager.default.removeItem(at: tempPath)
+            
+            completionHandler?()
+        }
+        task.resume()
+    }
+    
+    /**
+     Access the local CoreML model if available in filesystem.
+     
+     - parameter classifierID: The classifier id to update
+     - parameter failure: A function executed if an error occurs. (Needed?)
+     - parameter success: A function executed with the image classifications. (Needed?)
+     */
+    public func getCoreMLModelLocally(classifierID: String) -> VNCoreMLModel? {
+        let modelFileName = classifierID + ".mlmodelc"
+        let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let modelPath = documentUrl.appendingPathComponent(modelFileName)
+
+        if !FileManager.default.fileExists(atPath: modelPath.path) {
+            print("No model available for classifier: " + classifierID)
+            return nil
+        }
+        
+        guard let model = try? MLModel(contentsOf: modelPath) else {
+            print("Could not create CoreML Model")
+            return nil
+        }
+        
+        guard let vrModel = try? VNCoreMLModel(for: model) else {
+            print("Could not convert MLModel to VNCoreMLModel")
+            return nil
+        }
+     
+        return vrModel
+    }
+
 }

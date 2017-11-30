@@ -182,7 +182,7 @@ extension VisualRecognition {
             return
         }
         let tempPath = appSupportDir.appendingPathComponent(tempFileName)
-        let modelPath = appSupportDir.appendingPathComponent(modelFileName)
+        var modelPath = appSupportDir.appendingPathComponent(modelFileName)
 
         // setup request
         guard let requestUrl = URL(string: urlString) else { return }
@@ -215,6 +215,12 @@ extension VisualRecognition {
             }
             try? FileManager.default.removeItem(at: modelPath)
             try? FileManager.default.copyItem(at: compiledPath, to: modelPath)
+            
+            // exclude from backup
+            var resourceVals = URLResourceValues()
+            resourceVals.isExcludedFromBackup = true
+            try? modelPath.setResourceValues(resourceVals)
+            
             print("new Model compiled for classifier: " + classifierID)
             
             // cleanup

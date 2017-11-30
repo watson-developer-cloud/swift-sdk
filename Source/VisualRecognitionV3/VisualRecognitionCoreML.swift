@@ -92,10 +92,20 @@ extension VisualRecognition {
                     scores.append(tempScore)
                 }
                 
+                // get metadata
+                var name = ""
+                var cid = ""
+                if let meta = model.modelDescription.metadata[MLModelMetadataKey.creatorDefinedKey]  {
+                    if let metaDict = meta as? [String: String] {
+                        name = metaDict["name"] ?? ""
+                        cid = metaDict["classifier_id"] ?? ""
+                    }
+                }
+                
                 // form classifier model
                 let tempClassifier: [String: Any] = [
-                    "name": "coreml",
-                    "classifier_id": "",
+                    "name": name,
+                    "classifier_id": cid,
                     "classes" : scores
                 ]
                 allResults.append(tempClassifier)

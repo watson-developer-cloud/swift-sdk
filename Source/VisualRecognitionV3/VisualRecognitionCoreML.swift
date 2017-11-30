@@ -124,7 +124,12 @@ extension VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the image classifications.
      */
-    public func updateCoreMLModelLocally(classifierID: String, apiKey: String, completionHandler: (() -> Void)? = nil) {
+    public func updateCoreMLModelLocally(
+        classifierID: String,
+        apiKey: String,
+        failure: ((Error) -> Void)? = nil,
+        success: (() -> Void)? = nil)
+    {
         // setup urls and filepaths
         let baseUrl = "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/"
         let urlString = baseUrl + classifierID + "/model"
@@ -147,7 +152,7 @@ extension VisualRecognition {
             
             if let error = error {
                 print(error)
-                // TODO hit failure callback
+                failure?(error)
                 return
             }
             
@@ -173,7 +178,7 @@ extension VisualRecognition {
             // cleanup
             try? FileManager.default.removeItem(at: tempPath)
             
-            completionHandler?()
+            success?()
         }
         task.resume()
     }
@@ -185,7 +190,10 @@ extension VisualRecognition {
      - parameter failure: A function executed if an error occurs. (Needed?)
      - parameter success: A function executed with the image classifications. (Needed?)
      */
-    public func getCoreMLModelLocally(classifierID: String) -> VNCoreMLModel? {
+    public func getCoreMLModelLocally(
+        classifierID: String)
+        -> VNCoreMLModel?
+    {
         // form expected path to model
         let modelFileName = classifierID + ".mlmodelc"
         guard let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {

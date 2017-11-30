@@ -95,11 +95,9 @@ extension VisualRecognition {
                 // get metadata
                 var name = ""
                 var cid = ""
-                if let meta = model.modelDescription.metadata[MLModelMetadataKey.creatorDefinedKey]  {
-                    if let metaDict = meta as? [String: String] {
-                        name = metaDict["name"] ?? ""
-                        cid = metaDict["classifier_id"] ?? ""
-                    }
+                if let meta = model.modelDescription.metadata[MLModelMetadataKey.creatorDefinedKey], let metaDict = meta as? [String: String] {
+                    name = metaDict["name"] ?? ""
+                    cid = metaDict["classifier_id"] ?? ""
                 }
                 
                 // form classifier model

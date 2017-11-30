@@ -48,44 +48,42 @@ extension VisualRecognition {
         // handle multiple local classifiers
         var allResults: [[String: Any]] = []
         var allRequests: [VNCoreMLRequest] = []
-        var allModels: [VNCoreMLModel] = []
-        var activeRequests = 0
+        let dispatchGroup = DispatchGroup()
         
         // default classifier if not specified
         let classifierIDs = classifierIDs ?? ["default"]
         
-        // get models if available
+        // setup requests for each classifier id
         for cid in classifierIDs {
+            
             // get model if available
-            guard let modelTemp = getCoreMLModelLocally(classifierID: cid) else {
+            guard let model = getCoreMLModelLocally(classifierID: cid) else {
                 continue
             }
-            allModels.append( modelTemp )
-        }
-        
-        // setup requests
-        for m in allModels {
+            
+            dispatchGroup.enter()
             
             // define classifier specific request and callback
-            let req = VNCoreMLRequest(model: m, completionHandler: { (request, error) in
-                activeRequests -= 1
+            let req = VNCoreMLRequest(model: model, completionHandler: {
+                (request, error) in
                 
                 // get coreml results
                 guard let res = request.results else {
                     print( "Unable to classify image.\n\(error!.localizedDescription)" )
+                    dispatchGroup.leave()
                     return
                 }
-                let classifications = res as! [VNClassificationObservation]
-                let classificationsFiltered = classifications.filter({$0.confidence > 0.01}) // filter out very low confidence
+                var classifications = res as! [VNClassificationObservation]
+                classifications = classifications.filter({$0.confidence > 0.01}) // filter out very low confidence
                 
                 // parse scores to form class models
                 var scores = [[String: Any]]()
-                for c in classificationsFiltered {
+                for c in classifications {
                     let tempScore: [String: Any] = [
                         "class" : c.identifier,
                         "score" : Double( c.confidence )
                     ]
-                    scores.append( tempScore )
+                    scores.append(tempScore)
                 }
                 
                 // form classifier model
@@ -94,37 +92,9 @@ extension VisualRecognition {
                     "classifier_id": "",
                     "classes" : scores
                 ]
-                allResults.append( tempClassifier )
+                allResults.append(tempClassifier)
                 
-                // wait until all classifiers have returned
-                if activeRequests > 0 {
-                    return
-                }
-                
-                // form image model
-                let bodyIm: [String: Any] = [
-                    "source_url" : "",
-                    "resolved_url" : "",
-                    "image": "",
-                    "error": "",
-                    "classifiers": allResults
-                ]
-                
-                // form overall results model
-                let body: [String: Any] = [
-                    "images": [bodyIm],
-                    "warning": []
-                ]
-                
-                // convert results to sdk vision models
-                do {
-                    let converted = try ClassifiedImages( json: JSONWrapper(dictionary: body) )
-                    success( converted )
-                    return
-                } catch {
-                    failure?( error )
-                    return
-                }
+                dispatchGroup.leave()
             })
             
             req.imageCropAndScaleOption = .scaleFill // This seems wrong, but yields results in line with vision demo
@@ -132,22 +102,46 @@ extension VisualRecognition {
             allRequests.append(req)
         }
 
-        activeRequests = allRequests.count
-        
-        // do request with handler in background
-        DispatchQueue.global(qos: .userInitiated).async {
-            let handler = VNImageRequestHandler(data: image)
-            do {
-                try handler.perform(allRequests)
-            } catch {
-                /*
-                 This handler catches general image processing errors. The `classificationRequest`'s
-                 completion handler `processClassifications(_:error:)` catches errors specific
-                 to processing that request.
-                 */
-                print("Failed to perform classification.\n\(error.localizedDescription)")
+        // do requests with handler in background
+        for req in allRequests {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let handler = VNImageRequestHandler(data: image)
+                do {
+                    try handler.perform([req])
+                } catch {
+                    print("Failed to perform classification.\n\(error.localizedDescription)")
+                }
             }
         }
+
+        // wait until all classifiers have returned
+        dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+            
+            // form image model
+            let bodyIm: [String: Any] = [
+                "source_url" : "",
+                "resolved_url" : "",
+                "image": "",
+                "error": "",
+                "classifiers": allResults
+            ]
+            
+            // form overall results model
+            let body: [String: Any] = [
+                "images": [bodyIm],
+                "warning": []
+            ]
+            
+            // convert results to sdk vision models
+            do {
+                let converted = try ClassifiedImages( json: JSONWrapper(dictionary: body) )
+                success( converted )
+                return
+            } catch {
+                failure?( error )
+                return
+            }
+        })
     }
     
     /**
@@ -252,7 +246,7 @@ extension VisualRecognition {
             print("Could not convert MLModel to VNCoreMLModel")
             return nil
         }
-        
+
         return vrModel
     }
 

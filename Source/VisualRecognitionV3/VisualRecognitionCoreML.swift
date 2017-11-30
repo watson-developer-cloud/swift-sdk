@@ -215,5 +215,109 @@ extension VisualRecognition {
             }
         }
     }
-    
+
+    /**
+     Downloads a CoreML model to the local file system.
+
+     - parameter classifierId: The classifierId of the requested model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the URL of the downloaded CoreML model.
+     */
+    func downloadClassifier(
+        classifierId: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (URL) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/classifiers/\(classifierId)/core_ml_model",
+            credentials: .apiKey,   // check this
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+
+        // locate downloads directory
+        let fileManager = FileManager.default
+        let downloadDirectories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
+        guard let downloads = downloadDirectories.first else {
+            let failureReason = "Cannot locate downloads directory."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        // locate application support directory
+        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)  // Double check domain
+        guard let applicationSupport = applicationSupportDirectories.first else {
+            let failureReason = "Cannot locate application support directory."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        // specify file destinations
+        let sourceModelURL = downloads.appendingPathComponent(classifierId + ".mlmodel")
+        var compiledModelURL = applicationSupport.appendingPathComponent(classifierId + ".mlmodelc")
+
+        // exclude from backup
+        // TODO: ensure this doesn't fail if the file doesn't exist yet
+        var urlResourceValues = URLResourceValues()
+        urlResourceValues.isExcludedFromBackup = true
+        do {
+            try compiledModelURL.setResourceValues(urlResourceValues)
+        } catch {
+            let failureReason = "Could not exclude compiled model from backup."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+        }
+
+        // execute REST request
+        request.download(to: sourceModelURL) { response, error in
+            guard error == nil else {
+                failure?(error!)
+                return
+            }
+
+            guard let statusCode = response?.statusCode else {
+                let failureReason = "Did not receive response."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
+            if statusCode != 200 {
+                let failureReason = "Status code was not acceptable: \(statusCode)."
+                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
+            // compile spec and write to final location
+            guard let compiledModelTemporaryURL = try? MLModel.compileModel(at: sourceModelURL) else {
+                print("Error compiling new model")
+                return
+            }
+
+            // move compiled model to application support
+            try? fileManager.removeItem(at: compiledModelURL)
+            try? fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
+            try? fileManager.removeItem(at: compiledModelTemporaryURL)
+
+            // delete the downloaded model source
+            try? fileManager.removeItem(at: sourceModelURL)
+
+            success(compiledModelURL)
+        }
+    }
 }

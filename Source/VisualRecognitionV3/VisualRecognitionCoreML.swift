@@ -61,10 +61,16 @@ extension VisualRecognition {
                 continue
             }
             
+            // cast to vision model
+            guard let vrModel = try? VNCoreMLModel(for: model) else {
+                print("Could not convert MLModel to VNCoreMLModel")
+                continue
+            }
+
             dispatchGroup.enter()
             
             // define classifier specific request and callback
-            let req = VNCoreMLRequest(model: model, completionHandler: {
+            let req = VNCoreMLRequest(model: vrModel, completionHandler: {
                 (request, error) in
                 
                 // get coreml results
@@ -220,7 +226,7 @@ extension VisualRecognition {
      */
     public func getCoreMLModelLocally(
         classifierID: String)
-        -> VNCoreMLModel?
+        -> MLModel?
     {
         // form expected path to model
         let modelFileName = classifierID + ".mlmodelc"
@@ -236,18 +242,13 @@ extension VisualRecognition {
             return nil
         }
         
-        // load and cast to vision model
+        // load and return
         guard let model = try? MLModel(contentsOf: modelPath) else {
             print("Could not create CoreML Model")
             return nil
         }
         
-        guard let vrModel = try? VNCoreMLModel(for: model) else {
-            print("Could not convert MLModel to VNCoreMLModel")
-            return nil
-        }
-
-        return vrModel
+        return model
     }
 
 }

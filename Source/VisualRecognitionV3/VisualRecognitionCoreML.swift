@@ -26,8 +26,6 @@ extension VisualRecognition {
      Classify an image with CoreML, given a passed model. On failure or low confidence, fallback to Watson VR cloud service
      
      - parameter image: The image as NSData
-     - parameter model: CoreML model
-     - parameter localThreshold: minimum local score to return results immediately
      - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
      built-in classifier.
@@ -38,9 +36,8 @@ extension VisualRecognition {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the image classifications.
      */
-    public func classify(
+    public func classifyLocally(
         image: Data,
-        model: VNCoreMLModel,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         threshold: Double? = nil,
@@ -48,63 +45,100 @@ extension VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
-        // setup request
-        let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
-            // define coreml callback
-            guard let results = request.results else {
-                print( "Unable to classify image.\n\(error!.localizedDescription)" )
-                return
+        // handle multiple local classifiers
+        var allResults: [[String: Any]] = []
+        var allRequests: [VNCoreMLRequest] = []
+        var allModels: [VNCoreMLModel] = []
+        var activeRequests = 0
+        
+        // default classifier if not specified
+        let classifierIDs = classifierIDs ?? ["default"]
+        
+        // get models if available
+        for cid in classifierIDs {
+            // get model if available
+            guard let modelTemp = getCoreMLModelLocally(classifierID: cid) else {
+                continue
             }
+            allModels.append( modelTemp )
+        }
+        
+        // setup requests
+        for m in allModels {
             
-            var classifications = results as! [VNClassificationObservation]
-            classifications = classifications.filter({ $0.confidence > 0.01}) // filter out very low confidence
-            
-            // convert results to sdk vision models
-            var scores = [[String: Any]]()
-            for c in classifications {
-                let temp: [String: Any] = [
-                    "class" : c.identifier,
-                    "score" : Double( c.confidence )
+            // define classifier specific request and callback
+            let req = VNCoreMLRequest(model: m, completionHandler: { (request, error) in
+                activeRequests -= 1
+                
+                // get coreml results
+                guard let res = request.results else {
+                    print( "Unable to classify image.\n\(error!.localizedDescription)" )
+                    return
+                }
+                let classifications = res as! [VNClassificationObservation]
+                let classificationsFiltered = classifications.filter({$0.confidence > 0.01}) // filter out very low confidence
+                
+                // parse scores to form class models
+                var scores = [[String: Any]]()
+                for c in classificationsFiltered {
+                    let tempScore: [String: Any] = [
+                        "class" : c.identifier,
+                        "score" : Double( c.confidence )
+                    ]
+                    scores.append( tempScore )
+                }
+                
+                // form classifier model
+                let tempClassifier: [String: Any] = [
+                    "name": "coreml",
+                    "classifier_id": "",
+                    "classes" : scores
                 ]
-                scores.append( temp )
-            }
+                allResults.append( tempClassifier )
+                
+                // wait until all classifiers have returned
+                if activeRequests > 0 {
+                    return
+                }
+                
+                // form image model
+                let bodyIm: [String: Any] = [
+                    "source_url" : "",
+                    "resolved_url" : "",
+                    "image": "",
+                    "error": "",
+                    "classifiers": allResults
+                ]
+                
+                // form overall results model
+                let body: [String: Any] = [
+                    "images": [bodyIm],
+                    "warning": []
+                ]
+                
+                // convert results to sdk vision models
+                do {
+                    let converted = try ClassifiedImages( json: JSONWrapper(dictionary: body) )
+                    success( converted )
+                    return
+                } catch {
+                    failure?( error )
+                    return
+                }
+            })
             
-            let bodyClassifier: [String: Any] = [
-                "name": "coreml",
-                "classifier_id": "",
-                "classes" : scores
-            ]
+            req.imageCropAndScaleOption = .scaleFill // This seems wrong, but yields results in line with vision demo
             
-            let bodyIm: [String: Any] = [
-                "source_url" : "",
-                "resolved_url" : "",
-                "image": "",
-                "error": "",
-                "classifiers": [bodyClassifier]
-            ]
-            
-            let body: [String: Any] = [
-                "images" : [bodyIm],
-                "warning" :[]
-            ]
-            
-            do {
-                let converted = try ClassifiedImages( json: JSONWrapper(dictionary: body) )
-                success( converted )
-                return
-            } catch {
-                failure?( error )
-                return
-            }
-            
-        })
-        request.imageCropAndScaleOption = .scaleFill // This seems wrong, but yields results in line with vision demo
+            allRequests.append(req)
+        }
+
+        activeRequests = allRequests.count
         
         // do request with handler in background
         DispatchQueue.global(qos: .userInitiated).async {
             let handler = VNImageRequestHandler(data: image)
             do {
-                try handler.perform([request])
+                try handler.perform(allRequests)
             } catch {
                 /*
                  This handler catches general image processing errors. The `classificationRequest`'s
@@ -218,7 +252,7 @@ extension VisualRecognition {
             print("Could not convert MLModel to VNCoreMLModel")
             return nil
         }
-     
+        
         return vrModel
     }
 

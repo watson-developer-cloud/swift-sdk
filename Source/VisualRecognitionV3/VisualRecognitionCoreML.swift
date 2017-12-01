@@ -304,7 +304,9 @@ extension VisualRecognition {
 
             // move compiled model and clean up files
             do {
-                try fileManager.removeItem(at: compiledModelURL)
+                if fileManager.fileExists(atPath: compiledModelURL.absoluteString) {
+                    try fileManager.removeItem(at: compiledModelURL)
+                }
                 try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
                 try fileManager.removeItem(at: compiledModelTemporaryURL)
                 try fileManager.removeItem(at: sourceModelURL)
@@ -313,6 +315,7 @@ extension VisualRecognition {
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
+                return
             }
 
             // exclude compiled model from device backups

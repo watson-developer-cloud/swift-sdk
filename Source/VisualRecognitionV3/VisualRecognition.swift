@@ -29,9 +29,9 @@ public class VisualRecognition {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let apiKey: String
-    private let version: String
-    private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
+    internal let apiKey: String
+    internal let version: String
+    internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     
     /**
      Create a `VisualRecognition` object.

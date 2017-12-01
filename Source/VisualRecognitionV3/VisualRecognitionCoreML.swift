@@ -215,5 +215,122 @@ extension VisualRecognition {
             }
         }
     }
-    
+
+    /**
+     Downloads a CoreML model to the local file system.
+
+     - parameter classifierId: The classifierId of the requested model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the URL of the compiled CoreML model.
+     */
+    func downloadClassifier(
+        classifierId: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (URL) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/classifiers/\(classifierId)/core_ml_model",
+            credentials: .apiKey,
+            headerParameters: defaultHeaders,
+            queryItems: queryParameters
+        )
+
+        // locate downloads directory
+        let fileManager = FileManager.default
+        let downloadDirectories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
+        guard let downloads = downloadDirectories.first else {
+            let description = "Cannot locate downloads directory."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        // locate application support directory
+        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        guard let applicationSupport = applicationSupportDirectories.first else {
+            let description = "Cannot locate application support directory."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        // specify file destinations
+        let sourceModelURL = downloads.appendingPathComponent(classifierId + ".mlmodel")
+        var compiledModelURL = applicationSupport.appendingPathComponent(classifierId + ".mlmodelc")
+
+        // execute REST request
+        request.download(to: sourceModelURL) { response, error in
+            guard error == nil else {
+                failure?(error!)
+                return
+            }
+
+            guard let statusCode = response?.statusCode else {
+                let description = "Did not receive response."
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
+            guard (200..<300).contains(statusCode) else {
+                let description = "Status code was not acceptable: \(statusCode)."
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
+            // compile model from source
+            let compiledModelTemporaryURL: URL
+            do {
+                compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
+            } catch {
+                let description = "Could not compile Core ML model from source: \(error)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
+            // move compiled model and clean up files
+            do {
+                if fileManager.fileExists(atPath: compiledModelURL.absoluteString) {
+                    try fileManager.removeItem(at: compiledModelURL)
+                }
+                try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
+                try fileManager.removeItem(at: compiledModelTemporaryURL)
+                try fileManager.removeItem(at: sourceModelURL)
+            } catch {
+                let description = "Failed to move compiled model and clean up files: \(error)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
+            // exclude compiled model from device backups
+            var urlResourceValues = URLResourceValues()
+            urlResourceValues.isExcludedFromBackup = true
+            do {
+                try compiledModelURL.setResourceValues(urlResourceValues)
+            } catch {
+                let description = "Could not exclude compiled model from backup: \(error)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+            }
+
+            success(compiledModelURL)
+        }
+    }
 }

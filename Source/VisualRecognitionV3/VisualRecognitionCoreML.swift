@@ -253,8 +253,19 @@ extension VisualRecognition {
             return
         }
 
-        // specify the source model destination
+        // locate application support directory
+        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        guard let applicationSupport = applicationSupportDirectories.first else {
+            let failureReason = "Cannot locate application support directory."
+            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        // specify file destinations
         let sourceModelURL = downloads.appendingPathComponent(classifierId + ".mlmodel")
+        var compiledModelURL = applicationSupport.appendingPathComponent(classifierId + ".mlmodelc")
 
         // execute REST request
         request.download(to: sourceModelURL) { response, error in
@@ -320,19 +331,6 @@ extension VisualRecognition {
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
             }
-
-            // locate application support directory
-            let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-            guard let applicationSupport = applicationSupportDirectories.first else {
-                let failureReason = "Cannot locate application support directory."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
-            }
-
-            // specify the compiled model destination
-            var compiledModelURL = applicationSupport.appendingPathComponent(classifierId + ".mlmodelc")
 
             // exclude from backup
             var urlResourceValues = URLResourceValues()

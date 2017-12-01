@@ -302,53 +302,26 @@ extension VisualRecognition {
                 return
             }
 
-            // remove old model
+            // move compiled model and clean up files
             do {
                 try fileManager.removeItem(at: compiledModelURL)
-            } catch {
-                let failureReason = "Could not remove compiled model: \(error)"
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-            }
-
-            // copy compiled model to application support
-            do {
                 try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
-            } catch {
-                let failureReason = "Could not copy temporary compiled model to application support: \(error)"
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-            }
-
-            // remove temporary compiled model
-            do {
                 try fileManager.removeItem(at: compiledModelTemporaryURL)
+                try fileManager.removeItem(at: sourceModelURL)
             } catch {
-                let failureReason = "Could not remove temporary compiled model: \(error)"
+                let failureReason = "Failed to move compiled model and clean up files: \(error)"
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
             }
 
-            // exclude from backup
+            // exclude compiled model from device backups
             var urlResourceValues = URLResourceValues()
             urlResourceValues.isExcludedFromBackup = true
             do {
                 try compiledModelURL.setResourceValues(urlResourceValues)
             } catch {
                 let failureReason = "Could not exclude compiled model from backup: \(error)"
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-            }
-
-            // delete the downloaded model source
-            do {
-                try fileManager.removeItem(at: sourceModelURL)
-            } catch {
-                let failureReason = "Could not remove source model: \(error)"
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)

@@ -246,8 +246,8 @@ extension VisualRecognition {
         let fileManager = FileManager.default
         let downloadDirectories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
         guard let downloads = downloadDirectories.first else {
-            let failureReason = "Cannot locate downloads directory."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let description = "Cannot locate downloads directory."
+            let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -256,8 +256,8 @@ extension VisualRecognition {
         // locate application support directory
         let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         guard let applicationSupport = applicationSupportDirectories.first else {
-            let failureReason = "Cannot locate application support directory."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let description = "Cannot locate application support directory."
+            let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -275,16 +275,16 @@ extension VisualRecognition {
             }
 
             guard let statusCode = response?.statusCode else {
-                let failureReason = "Did not receive response."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let description = "Did not receive response."
+                let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
                 return
             }
 
             guard (200..<300).contains(statusCode) else {
-                let failureReason = "Status code was not acceptable: \(statusCode)."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let description = "Status code was not acceptable: \(statusCode)."
+                let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
                 failure?(error)
                 return
@@ -295,8 +295,8 @@ extension VisualRecognition {
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
             } catch {
-                let failureReason = "Could not compile Core ML model from source: \(error)"
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let description = "Could not compile Core ML model from source: \(error)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
                 return
@@ -309,8 +309,8 @@ extension VisualRecognition {
                 try fileManager.removeItem(at: compiledModelTemporaryURL)
                 try fileManager.removeItem(at: sourceModelURL)
             } catch {
-                let failureReason = "Failed to move compiled model and clean up files: \(error)"
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let description = "Failed to move compiled model and clean up files: \(error)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
             }
@@ -321,8 +321,8 @@ extension VisualRecognition {
             do {
                 try compiledModelURL.setResourceValues(urlResourceValues)
             } catch {
-                let failureReason = "Could not exclude compiled model from backup: \(error)"
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let description = "Could not exclude compiled model from backup: \(error)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
             }

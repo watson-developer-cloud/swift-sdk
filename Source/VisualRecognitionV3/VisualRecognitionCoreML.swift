@@ -36,7 +36,7 @@ extension VisualRecognition {
      - parameter success: A function executed with the image classifications.
      */
     public func classifyLocally(
-        image: Data,
+        image: UIImage,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         threshold: Double? = nil,
@@ -50,6 +50,14 @@ extension VisualRecognition {
         let dispatchGroup = DispatchGroup()
         
         // default classifier if not specified
+        // convert UIImage to Data
+        guard let image = UIImagePNGRepresentation(image) else {
+            let description = "Failed to convert image from UIImage to Data."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
         let classifierIDs = classifierIDs ?? ["default"]
         
         // setup requests for each classifier id

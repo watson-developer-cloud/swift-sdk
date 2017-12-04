@@ -164,73 +164,56 @@ extension VisualRecognition {
      Update the local CoreML model by pulling down the latest available version from the IBM cloud.
      
      - parameter classifierID: The classifier id to update
-     - parameter apiKey: TEMPORARY param needed to access solution kit server
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the image classifications.
      */
     public func updateCoreMLModelLocally(
         classifierID: String,
-        apiKey: String,
         failure: ((Error) -> Void)? = nil,
-        success: (() -> Void)? = nil)
+        success: @escaping (URL) -> Void)
     {
-        // setup urls and filepaths
-        let baseUrl = "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/"
-        let urlString = baseUrl + classifierID + "/model"
-        let modelFileName = classifierID + ".mlmodelc"
-        let tempFileName = "temp_" + UUID().uuidString + ".mlmodel"
-        guard let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
-            print("Could not get application support directory")
+        // setup date formatter '2017-12-04T19:44:27.419Z'
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+
+        // get local model details
+        let coreMLModel = getCoreMLModelLocally(classifierID: classifierID)
+        let updatedMlModelMetadataKey = MLModelMetadataKey(rawValue: "updated")
+        guard let coreMLModelUpdated = coreMLModel?.modelDescription.metadata[updatedMlModelMetadataKey] else {
+            let description = "Could not retrieve updated from the local CoreML model."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
             return
         }
-        let tempPath = appSupportDir.appendingPathComponent(tempFileName)
-        var modelPath = appSupportDir.appendingPathComponent(modelFileName)
+        // get updated date for local model
+        guard let coreMLModelUpdatedDate = dateFormatter.date(from: coreMLModelUpdated as! String) else {
+            let description = "Could not CoreML model updated to date."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
 
-        // setup request
-        guard let requestUrl = URL(string: urlString) else { return }
-        var request = URLRequest(url:requestUrl)
-        request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
-        
-        let task = URLSession.shared.dataTask(with: request) {
-            (data, response, error) in
-            
-            if let error = error {
-                print(error)
+        // get classifier details
+        getClassifier(withID: classifierID, failure: failure, success: { classifier in
+            // get updated date for classifier
+            guard let classifierUpdateDate = dateFormatter.date(from: classifier.updated) else {
+                let description = "Could not convert classifier updated to Date."
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
                 return
             }
-            
-            guard let usableData = data  else {
-                print("No usable data in response")
-                return
+
+            // compare local model updated date with classifier updated date
+            if coreMLModelUpdatedDate < classifierUpdateDate {
+                // download the most recent classifier
+                self.downloadClassifier(classifierId: classifierID, failure: failure, success: { url in
+                    success(url)
+                })
             }
-            
-            // store model spec to temp location
-            try? FileManager.default.removeItem(at: tempPath)
-            let saveSuccess = FileManager.default.createFile(atPath: tempPath.path, contents: usableData, attributes: nil)
-            print("New model spec was saved to file: \(saveSuccess)")
-            
-            // compile spec and write to final location
-            guard let compiledPath = try? MLModel.compileModel(at: tempPath) else {
-                print("Error compiling new model")
-                return
-            }
-            try? FileManager.default.removeItem(at: modelPath)
-            try? FileManager.default.copyItem(at: compiledPath, to: modelPath)
-            
-            // exclude from backup
-            var resourceVals = URLResourceValues()
-            resourceVals.isExcludedFromBackup = true
-            try? modelPath.setResourceValues(resourceVals)
-            
-            print("new Model compiled for classifier: " + classifierID)
-            
-            // cleanup
-            try? FileManager.default.removeItem(at: tempPath)
-            
-            success?()
-        }
-        task.resume()
+        })
     }
     
     /**

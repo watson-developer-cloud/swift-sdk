@@ -58,7 +58,7 @@ extension VisualRecognition {
 
         // construct each classification request
         var requests = [VNCoreMLRequest]()
-        var results = [MLModel: [VNClassificationObservation]]()
+        var results = [(MLModel, [VNClassificationObservation])]()
         let dispatchGroup = DispatchGroup()
         for classifierId in classifierIDs {
             dispatchGroup.enter()
@@ -101,7 +101,7 @@ extension VisualRecognition {
                     failure?(error)
                     return
                 }
-                results[model] = observations
+                results.append((model, observations))
                 dispatchGroup.leave()
             }
 
@@ -141,7 +141,7 @@ extension VisualRecognition {
     }
 
     /// Convert results from Core ML classification requests into a `ClassifiedImages` model.
-    private func convert(results: [MLModel: [VNClassificationObservation]]) throws -> ClassifiedImages {
+    private func convert(results: [(MLModel, [VNClassificationObservation])]) throws -> ClassifiedImages {
         var classifiers = [[String: Any]]()
         for (model, observations) in results {
             let observations = observations.filter() { $0.confidence > 0.01 }

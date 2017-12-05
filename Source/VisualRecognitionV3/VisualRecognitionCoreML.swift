@@ -18,109 +18,25 @@ import Foundation
 import CoreML
 import Vision
 
-
-// Model abstraction class
-@available(iOS 11.0, *)
-public class VisualRecognitionCoreMLModel {
-    
-    var documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    public var model: VNCoreMLModel
-    var modelPath: URL
-    
-    // TODO: want this to rely on url and classifier properties in vr service class
-    let urlString = "http://localhost:5000/api/v1.0/classifiers/demo/model"
-    let modelFileName = "watson_vision_model.mlmodel"
-    
-    public init(model: VNCoreMLModel) {
-        self.model = model
-        self.modelPath = self.documentUrl.appendingPathComponent( self.modelFileName )
-    }
-    
-    private func compileModel(with newModelAddress: URL) {
-        if let compiledAddress = try? MLModel.compileModel(at: newModelAddress) {
-            self.replaceFile(at: self.modelPath, withFileAt: compiledAddress)
-            do {
-                let newModel = try MLModel(contentsOf: self.modelPath)
-                self.model = try VNCoreMLModel(for: newModel)
-                print("model swapped")
-            } catch let error {
-                print(error)
-            }
-        } else {
-            print("Error compiling new model")
-        }
-    }
-    
-    public func getLatest(completionHandler: (() -> Void)? = nil) {
-
-        guard let requestUrl = URL(string: self.urlString) else { return }
-        let request = URLRequest(url:requestUrl)
-        let task = URLSession.shared.dataTask(with: request) {
-            (data, response, error) in
-            if error == nil,let usableData = data {
-                self.modelPath = self.documentUrl.appendingPathComponent( self.modelFileName )
-                self.deleteFile(atPath: self.modelPath)
-                let saveSuccess = FileManager.default.createFile(atPath: self.modelPath.path, contents: usableData, attributes: nil)
-                print("Model file was saved: \(saveSuccess)")
-                self.compileModel(with: self.modelPath)
-                
-            } else if let error = error {
-                print(error)
-            }
-            if (completionHandler != nil) {
-                completionHandler?()
-            }
-        }
-        task.resume()
-    }
-    
-    // Helper functions for storing newest mlmodel file
-    private func replaceFile(at path: URL, withFileAt otherPath: URL) {
-        do {
-            deleteFile(atPath: path)
-            try FileManager.default.copyItem(at: otherPath, to: path)
-        }
-        catch let error {
-            print(error)
-        }
-    }
-    
-    private func deleteFile(atPath path: URL) {
-        print("Trying to remove item at: " + path.absoluteString)
-        do {
-            try FileManager.default.removeItem(at: path)
-            print("File removed")
-        }
-        catch let error {
-            print("Failed to remove item")
-            print(error)
-        }
-    }
-}
-
-@available(iOS 11.0, *)
+@available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
 extension VisualRecognition {
     
     /**
-     Classify an image with CoreML, given a passed model. On failure or low confidence, fallback to Watson VR cloud service
+     Classify an image using a local Core ML model.
      
-     - parameter image: The image as NSData
-     - parameter model: CoreML model
-     - parameter localThreshold: minimum local score to return results immediately
+     - parameter image: The image to classify.
      - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
-     built-in classifier.
+       built-in classifier.
      - parameter threshold: The minimum score a class must have to be displayed in the response.
      - parameter language: The language of the output class names. Can be "en" (English), "es"
-     (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
-     are omitted.
+       (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
+       are omitted.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the image classifications.
      */
-    public func classify(
-        image: Data,
-        model: VNCoreMLModel,
-        localThreshold: Double? = nil,
+    public func classifyLocally(
+        image: UIImage,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         threshold: Double? = nil,
@@ -128,92 +44,224 @@ extension VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
-        // short-circuit coreml if local thresh is 1.0
-        if localThreshold == 1.0 {
-            self.classify(image: image, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
+        // convert UIImage to Data
+        guard let image = UIImagePNGRepresentation(image) else {
+            let description = "Failed to convert image from UIImage to Data."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
             return
         }
-        
-        print ( "trying local classification on CoreML..." )
-        
-        // setup request
-        let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
-            // define coreml callback
-            guard let results = request.results else {
-                print( "Unable to classify image.\n\(error!.localizedDescription)" )
-                return
+
+        // use default classifier if none specified
+        let classifierIDs = classifierIDs ?? ["default"]
+
+        // construct each classification request
+        var requests = [VNCoreMLRequest]()
+        var results = [(MLModel, [VNClassificationObservation])]()
+        let dispatchGroup = DispatchGroup()
+        for classifierId in classifierIDs {
+            dispatchGroup.enter()
+
+            // get classifier model
+            guard let model = getCoreMLModelLocally(classifierID: classifierId) else {
+                dispatchGroup.leave()
+                let description = "Failed to get the Core ML model for classifier \(classifierId)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                continue
             }
-            // The `results` will always be `VNClassificationObservation`s, as specified by the Core ML model in this project.
-            var classifications = results as! [VNClassificationObservation]
             
-            if let thresh = localThreshold {
-                classifications = classifications.filter({ $0.confidence > Float(thresh) })
+            // convert MLModel to VNCoreMLModel
+            guard let classifier = try? VNCoreMLModel(for: model) else {
+                dispatchGroup.leave()
+                let description = "Could not convert MLModel to VNCoreMLModel for classifier \(classifierId)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                continue
             }
             
-            if classifications.isEmpty {
-                print( "Nothing recognized." )
-            } else {
-                // Display top classifications ranked by confidence in the UI.
-                let topClassifications = classifications.prefix(20)
-                
-                // convert results to sdk vision models
-                var scores = [[String: Any]]()
-                for c in topClassifications {
-                    let temp: [String: Any] = [
-                        "class" : c.identifier,
-                        "score" : Double( c.confidence )
-                    ]
-                    scores.append( temp )
-                }
-                
-                let bodyClassifier: [String: Any] = [
-                    "name": "coreml",
-                    "classifier_id": "",
-                    "classes" : scores
-                ]
-                
-                let bodyIm: [String: Any] = [
-                    "source_url" : "",
-                    "resolved_url" : "",
-                    "image": "",
-                    "error": "",
-                    "classifiers": [bodyClassifier]
-                ]
-                
-                let body: [String: Any] = [
-                    "images" : [bodyIm],
-                    "warning" :[]
-                ]
-                
-                do {
-                    let converted = try ClassifiedImages( json: JSONWrapper(dictionary: body) )
-                    success( converted )
+            // construct classification request
+            let request = VNCoreMLRequest(model: classifier) { request, error in
+                guard error == nil else {
+                    dispatchGroup.leave()
+                    let description = "Classifier \(classifierId) failed with error: \(error!)"
+                    let userInfo = [NSLocalizedDescriptionKey: description]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
                     return
-                } catch {
-                    print( error )
                 }
+                guard let observations = request.results as? [VNClassificationObservation] else {
+                    dispatchGroup.leave()
+                    let description = "Failed to parse results for classifier \(classifierId)"
+                    let userInfo = [NSLocalizedDescriptionKey: description]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+                results.append((model, observations))
+                dispatchGroup.leave()
             }
-            
-            // hit standard VR service as fallback
-            self.classify(image: image, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
-            
-        })
-        request.imageCropAndScaleOption = .scaleFill // This seems wrong, but yields results in line with vision demo
-        
-        // do request with handler in background
-        DispatchQueue.global(qos: .userInitiated).async {
-            let handler = VNImageRequestHandler(data: image)
-            do {
-                try handler.perform([request])
-            } catch {
-                /*
-                 This handler catches general image processing errors. The `classificationRequest`'s
-                 completion handler `processClassifications(_:error:)` catches errors specific
-                 to processing that request.
-                 */
-                print("Failed to perform classification.\n\(error.localizedDescription)")
+
+            // scale image (this seems wrong but yields results in line with vision demo)
+            request.imageCropAndScaleOption = .scaleFill
+
+            requests.append(request)
+        }
+
+        // execute each classification request
+        requests.forEach() { request in
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    let requestHandler = VNImageRequestHandler(data: image)
+                    try requestHandler.perform([request])
+                } catch {
+                    let description = "Failed to process classification request: \(error)"
+                    let userInfo = [NSLocalizedDescriptionKey: description]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
             }
         }
+
+        // return results after all classification requests have executed
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            guard let classifiedImages = try? self.convert(results: results) else {
+                let description = "Failed to represent results as JSON."
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+            success(classifiedImages)
+        }
+    }
+
+    /// Convert results from Core ML classification requests into a `ClassifiedImages` model.
+    private func convert(results: [(MLModel, [VNClassificationObservation])]) throws -> ClassifiedImages {
+        var classifiers = [[String: Any]]()
+        for (model, observations) in results {
+            let observations = observations.filter() { $0.confidence > 0.01 }
+            let description = model.modelDescription
+            let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
+            let classifierResults: [String: Any] = [
+                "name": metadata["name"] ?? "",
+                "classifier_id": metadata["classifier_id"] ?? "",
+                "classes": observations.map() { ["class": $0.identifier, "score": Double($0.confidence)] }
+            ]
+            classifiers.append(classifierResults)
+        }
+
+        let classifiedImage: [String: Any] = ["classifiers": classifiers]
+        let classifiedImages: [String: Any] = ["images": [classifiedImage]]
+        return try ClassifiedImages(json: JSONWrapper(dictionary: classifiedImages))
+    }
+    
+    /**
+     Update the local CoreML model by pulling down the latest available version from the IBM cloud.
+     
+     - parameter classifierID: The classifier id to update
+     - parameter apiKey: TEMPORARY param needed to access solution kit server
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
+    public func updateCoreMLModelLocally(
+        classifierID: String,
+        apiKey: String,
+        failure: ((Error) -> Void)? = nil,
+        success: (() -> Void)? = nil)
+    {
+        // setup urls and filepaths
+        let baseUrl = "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/"
+        let urlString = baseUrl + classifierID + "/model"
+        let modelFileName = classifierID + ".mlmodelc"
+        let tempFileName = "temp_" + UUID().uuidString + ".mlmodel"
+        guard let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            print("Could not get application support directory")
+            return
+        }
+        let tempPath = appSupportDir.appendingPathComponent(tempFileName)
+        var modelPath = appSupportDir.appendingPathComponent(modelFileName)
+
+        // setup request
+        guard let requestUrl = URL(string: urlString) else { return }
+        var request = URLRequest(url:requestUrl)
+        request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
+        
+        let task = URLSession.shared.dataTask(with: request) {
+            (data, response, error) in
+            
+            if let error = error {
+                print(error)
+                failure?(error)
+                return
+            }
+            
+            guard let usableData = data  else {
+                print("No usable data in response")
+                return
+            }
+            
+            // store model spec to temp location
+            try? FileManager.default.removeItem(at: tempPath)
+            let saveSuccess = FileManager.default.createFile(atPath: tempPath.path, contents: usableData, attributes: nil)
+            print("New model spec was saved to file: \(saveSuccess)")
+            
+            // compile spec and write to final location
+            guard let compiledPath = try? MLModel.compileModel(at: tempPath) else {
+                print("Error compiling new model")
+                return
+            }
+            try? FileManager.default.removeItem(at: modelPath)
+            try? FileManager.default.copyItem(at: compiledPath, to: modelPath)
+            
+            // exclude from backup
+            var resourceVals = URLResourceValues()
+            resourceVals.isExcludedFromBackup = true
+            try? modelPath.setResourceValues(resourceVals)
+            
+            print("new Model compiled for classifier: " + classifierID)
+            
+            // cleanup
+            try? FileManager.default.removeItem(at: tempPath)
+            
+            success?()
+        }
+        task.resume()
+    }
+    
+    /**
+     Retrieve a Core ML model that was downloaded to the local filesystem.
+     
+     - parameter classifierID: The classifier ID of the model to retrieve.
+     - returns: The Core ML model of the given classifier, or `nil` if the model has not yet been downloaded.
+     */
+    public func getCoreMLModelLocally(classifierID: String) -> MLModel? {
+
+        // locate application support directory
+        let fileManager = FileManager.default
+        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        guard let applicationSupport = applicationSupportDirectories.first else {
+            return nil
+        }
+
+        // construct model file path
+        let modelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
+
+        // ensure the model file exists
+        guard fileManager.fileExists(atPath: modelURL.path) else {
+            return nil
+        }
+        
+        // load model file from disk
+        guard let model = try? MLModel(contentsOf: modelURL) else {
+            return nil
+        }
+        
+        return model
     }
 
     /**

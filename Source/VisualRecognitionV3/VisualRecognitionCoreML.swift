@@ -252,7 +252,7 @@ extension VisualRecognition {
         let modelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
 
         // ensure the model file exists
-        guard fileManager.fileExists(atPath: modelURL.absoluteString) else {
+        guard fileManager.fileExists(atPath: modelURL.path) else {
             return nil
         }
         

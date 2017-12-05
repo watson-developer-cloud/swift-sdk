@@ -150,13 +150,13 @@ extension VisualRecognition {
             let classifierResults: [String: Any] = [
                 "name": metadata["name"] ?? "",
                 "classifier_id": metadata["classifier_id"] ?? "",
-                "classes": observations.map() { ["classification": $0.identifier, "score": Double($0.confidence)] }
+                "classes": observations.map() { ["class": $0.identifier, "score": Double($0.confidence)] }
             ]
             classifiers.append(classifierResults)
         }
 
-        let classifiedImage = ["classifiers": classifiers]
-        let classifiedImages = ["images": [classifiedImage]]
+        let classifiedImage: [String: Any] = ["classifiers": classifiers]
+        let classifiedImages: [String: Any] = ["images": [classifiedImage]]
         return try ClassifiedImages(json: JSONWrapper(dictionary: classifiedImages))
     }
     

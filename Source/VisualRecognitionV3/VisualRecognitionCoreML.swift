@@ -64,7 +64,7 @@ extension VisualRecognition {
             dispatchGroup.enter()
 
             // get classifier model
-            guard let model = getCoreMLModelLocally(classifierID: classifierId) else {
+            guard let modelURL = getCoreMLModelLocally(classifierID: classifierId) else {
                 dispatchGroup.leave()
                 let description = "Failed to get the Core ML model for classifier \(classifierId)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
@@ -72,7 +72,15 @@ extension VisualRecognition {
                 failure?(error)
                 continue
             }
-            
+
+            guard let model = try? MLModel(contentsOf: modelURL) else {
+                let description = "Could not create local CoreML model."
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
             // convert MLModel to VNCoreMLModel
             guard let classifier = try? VNCoreMLModel(for: model) else {
                 dispatchGroup.leave()
@@ -177,18 +185,34 @@ extension VisualRecognition {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
 
         // get local model details
-        let coreMLModel = getCoreMLModelLocally(classifierID: classifierID)
-        let updatedMlModelMetadataKey = MLModelMetadataKey(rawValue: "updated")
-        guard let coreMLModelUpdated = coreMLModel?.modelDescription.metadata[updatedMlModelMetadataKey] else {
-            let description = "Could not retrieve updated from the local CoreML model."
+        guard let modelURL = getCoreMLModelLocally(classifierID: classifierID) else {
+            // model does not exist, download the CoreML model
+            self.downloadClassifier(classifierId: classifierID, failure: failure, success: success)
+            return
+        }
+
+        // load model file from disk
+        guard let coreMLModel = try? MLModel(contentsOf: modelURL) else {
+            let description = "Could not create local CoreML model."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        let description = coreMLModel.modelDescription
+        let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
+
+        guard let updated = metadata["updated"] else {
+            let description = "Could not retrieve updated field from the local CoreML model."
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
         // get updated date for local model
-        guard let coreMLModelUpdatedDate = dateFormatter.date(from: coreMLModelUpdated as! String) else {
-            let description = "Could not CoreML model updated to date."
+        guard let coreMLModelUpdatedDate = dateFormatter.date(from: updated) else {
+            let description = "Could not parse CoreML model's updated date."
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -196,10 +220,10 @@ extension VisualRecognition {
         }
 
         // get classifier details
-        getClassifier(withID: classifierID, failure: failure, success: { classifier in
+        getClassifier(withID: classifierID, failure: failure) { classifier in
             // get updated date for classifier
             guard let classifierUpdateDate = dateFormatter.date(from: classifier.updated) else {
-                let description = "Could not convert classifier updated to Date."
+                let description = "Could not parse classifier's updated date."
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -209,11 +233,11 @@ extension VisualRecognition {
             // compare local model updated date with classifier updated date
             if coreMLModelUpdatedDate < classifierUpdateDate {
                 // download the most recent classifier
-                self.downloadClassifier(classifierId: classifierID, failure: failure, success: { url in
-                    success(url)
-                })
+                self.downloadClassifier(classifierId: classifierID, failure: failure, success: success)
+            } else {
+                success(modelURL);
             }
-        })
+        }
     }
     
     /**
@@ -222,7 +246,7 @@ extension VisualRecognition {
      - parameter classifierID: The classifier ID of the model to retrieve.
      - returns: The Core ML model of the given classifier, or `nil` if the model has not yet been downloaded.
      */
-    public func getCoreMLModelLocally(classifierID: String) -> MLModel? {
+    public func getCoreMLModelLocally(classifierID: String) -> URL? {
 
         // locate application support directory
         let fileManager = FileManager.default
@@ -238,13 +262,8 @@ extension VisualRecognition {
         guard fileManager.fileExists(atPath: modelURL.path) else {
             return nil
         }
-        
-        // load model file from disk
-        guard let model = try? MLModel(contentsOf: modelURL) else {
-            return nil
-        }
-        
-        return model
+
+        return modelURL
     }
 
     /**

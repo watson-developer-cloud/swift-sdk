@@ -250,9 +250,7 @@ extension VisualRecognition {
     public func getCoreMLModelLocally(classifierID: String) -> URL? {
 
         // locate application support directory
-        let fileManager = FileManager.default
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
+        guard let applicationSupport = try? getApplicationSupportDirectory() else {
             return nil
         }
 
@@ -260,7 +258,7 @@ extension VisualRecognition {
         let modelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
 
         // ensure the model file exists
-        guard fileManager.fileExists(atPath: modelURL.path) else {
+        guard FileManager.default.fileExists(atPath: modelURL.path) else {
             return nil
         }
 
@@ -305,11 +303,10 @@ extension VisualRecognition {
         }
 
         // locate application support directory
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            let description = "Cannot locate application support directory."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+        let applicationSupport: URL
+        do {
+            applicationSupport = try getApplicationSupportDirectory()
+        } catch {
             failure?(error)
             return
         }
@@ -385,62 +382,46 @@ extension VisualRecognition {
         }
     }
 
-    /// List the CoreML models available in the file system.
-    func listCoreMLModels() throws -> [URL]
-    {
+    /// List the CoreML models usable for classification.
+    func listCoreMLModels() throws -> [String: URL] {
+        var coreMLModels = [String: URL]()
+
         // locate application support directory
-        let fileManager = FileManager.default
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            let description: String = "Could not get application support directory."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            throw error
+        let applicationSupport = try getApplicationSupportDirectory()
+
+        // locate compiled CoreML models the user added into their app
+        if let bundleCoreMLModels = Bundle.main.urls(forResourcesWithExtension: "mlmodelc", subdirectory: nil) {
+            for url in bundleCoreMLModels {
+                let path = url.path
+                let classifierId = String(path.split(separator: ".")[0])
+                coreMLModels[classifierId] = url
+            }
         }
 
         // find all CoreML model paths
-        let filePaths = try fileManager.contentsOfDirectory(atPath: applicationSupport.path)  // See if this returns full path
+        let filePaths = try FileManager.default.contentsOfDirectory(atPath: applicationSupport.path)  // See if this returns full path
         let coreMLModelFilePaths = filePaths.filter{$0.contains(".mlmodelc")}
 
         // convert to URLs
-        var coreMLModelURLs = [URL]()
         for coreMLModelFilePath in coreMLModelFilePaths {
-            coreMLModelURLs.append(URL(string: coreMLModelFilePath)!)
+            let classifierId = String(coreMLModelFilePath.split(separator: ".")[0])
+            let url = URL(string: coreMLModelFilePath)!
+            coreMLModels[classifierId] = url
         }
 
-        return coreMLModelURLs
+        return coreMLModels
     }
 
     /// Deletes a CoreML model from the file system.
-    func deleteCoreMLModel(
-        classifierId: String) throws
-    {
-        // Locate application support directory
-        let fileManager = FileManager.default
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            let description: String = "Could not get application support directory."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            throw error
-        }
-
-        // Find all CoreML model paths
-        let filePaths = try fileManager.contentsOfDirectory(atPath: applicationSupport.path)  // See if this returns full path
-        let coreMLModelFilePaths = filePaths.filter{$0.contains(".mlmodelc")}
-
-        // Delete specified CoreML model
-        for coreMLModelFilePath in coreMLModelFilePaths {
-            if coreMLModelFilePath.contains(classifierId)
-            {
-                do {
-                    try fileManager.removeItem(at: URL(string: coreMLModelFilePath)!)
-                } catch {
-                    let description = "Could not delete specified CoreML model: \(error)"
-                    let userInfo = [NSLocalizedDescriptionKey: description]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    throw error
-                }
+    func deleteCoreMLModel(classifierId: String) throws {
+        if let url = getCoreMLModelLocally(classifierID: classifierId) {
+            do {
+                try FileManager.default.removeItem(at: url)
+            } catch {
+                let description = "Could not delete specified CoreML model: \(error)"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                throw error
             }
         }
     }
@@ -460,4 +441,6 @@ extension VisualRecognition {
 
         return applicationSupport
     }
+
+
 }

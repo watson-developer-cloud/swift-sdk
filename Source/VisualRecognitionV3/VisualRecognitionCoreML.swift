@@ -181,8 +181,9 @@ extension VisualRecognition {
         success: @escaping (URL) -> Void)
     {
         // setup date formatter '2017-12-04T19:44:27.419Z'
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        let dateFormatter = ISO8601DateFormatter()
 
         // get local model details
         guard let modelURL = getCoreMLModelLocally(classifierID: classifierID) else {
@@ -382,5 +383,28 @@ extension VisualRecognition {
 
             success(compiledModelURL)
         }
+    }
+
+    /// List the CoreML models available in the file system.
+    func listCoreMLModels() throws -> [URL]
+    {
+        // locate application support directory
+        let fileManager = FileManager.default
+        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        guard let applicationSupport = applicationSupportDirectories.first else {
+            return
+        }
+
+        // find all CoreML model paths
+        let filePaths = try fileManager.contentsOfDirectory(atPath: applicationSupport.path)  // See if this returns full path
+        let coreMLModelFilePaths = filePaths.filter{$0.contains(".mlmodelc")}
+
+        // convert to URLs
+        var coreMLModelURLs = [URL]()
+        for coreMLModelFilePath in coreMLModelFilePaths {
+            coreMLModelURLs.append(URL(string: coreMLModelFilePath)!)
+        }
+
+        return coreMLModelURLs
     }
 }

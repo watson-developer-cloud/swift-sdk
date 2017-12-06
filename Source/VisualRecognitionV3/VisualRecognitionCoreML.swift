@@ -392,7 +392,10 @@ extension VisualRecognition {
         let fileManager = FileManager.default
         let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         guard let applicationSupport = applicationSupportDirectories.first else {
-            return
+            let description: String = "Could not get application support directory."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            throw error
         }
 
         // find all CoreML model paths
@@ -406,5 +409,55 @@ extension VisualRecognition {
         }
 
         return coreMLModelURLs
+    }
+
+    /// Deletes a CoreML model from the file system.
+    func deleteCoreMLModel(
+        classifierId: String) throws
+    {
+        // Locate application support directory
+        let fileManager = FileManager.default
+        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        guard let applicationSupport = applicationSupportDirectories.first else {
+            let description: String = "Could not get application support directory."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            throw error
+        }
+
+        // Find all CoreML model paths
+        let filePaths = try fileManager.contentsOfDirectory(atPath: applicationSupport.path)  // See if this returns full path
+        let coreMLModelFilePaths = filePaths.filter{$0.contains(".mlmodelc")}
+
+        // Delete specified CoreML model
+        for coreMLModelFilePath in coreMLModelFilePaths {
+            if coreMLModelFilePath.contains(classifierId)
+            {
+                do {
+                    try fileManager.removeItem(at: URL(string: coreMLModelFilePath)!)
+                } catch {
+                    let description = "Could not delete specified CoreML model: \(error)"
+                    let userInfo = [NSLocalizedDescriptionKey: description]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    throw error
+                }
+            }
+        }
+    }
+
+    /// Gets the application support directory.
+    func getApplicationSupportDirectory() throws -> URL
+    {
+        // Locate application support directory
+        let fileManager = FileManager.default
+        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        guard let applicationSupport = applicationSupportDirectories.first else {
+            let description: String = "Could not get application support directory."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            throw error
+        }
+
+        return applicationSupport
     }
 }

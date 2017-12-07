@@ -427,7 +427,7 @@ extension VisualRecognition {
         // TODO: remove test server url and headers before release
         let request = RestRequest(
             method: "GET",
-            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierId)/model", // serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model"
+            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)/model", // serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model"
             credentials: .apiKey,
             headerParameters: headerParameters, // defaultHeaders,
             queryItems: queryParameters

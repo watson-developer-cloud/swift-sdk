@@ -418,12 +418,18 @@ extension VisualRecognition {
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
+        // construct header parameters for test server
+        // TODO: remove before release
+        var headerParameters = defaultHeaders
+        headerParameters["X-API-Key"] = apiKey
+
         // construct REST request
+        // TODO: remove test server url and headers before release
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model",
+            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierId)/model", // serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model"
             credentials: .apiKey,
-            headerParameters: defaultHeaders,
+            headerParameters: headerParameters, // defaultHeaders,
             queryItems: queryParameters
         )
 

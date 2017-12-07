@@ -52,13 +52,13 @@ extension VisualRecognition {
      - parameter policy: The policy to use when retrieving the Core ML model. Depending on the lookup policy, one or
        more network requests may be made to the Visual Recognition service.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the path to a local Core ML model.
+     - parameter success: A function executed with the local Core ML model.
      */
     public func getCoreMLModel(
         classifierID: String,
         policy: LookupPolicy,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (URL) -> Void)
+        success: ((MLModel) -> Void)? = nil)
     {
         switch policy {
         case .onlyLocal: getCoreMLModelOnlyLocal(classifierID: classifierID, failure: failure, success: success)
@@ -70,17 +70,16 @@ extension VisualRecognition {
     /**
      List the Core ML models stored in the local filesystem.
 
-     - returns: A dictionary that associates a classifier ID with the location of its compiled Core ML model on disk.
+     - returns: A list of classifier IDs with local Core ML models that are available for classification.
      */
-    public func listCoreMLModels() throws -> [String: URL] {
-        var models = [String: URL]()
+    public func listCoreMLModels() throws -> [String] {
+        var models = Set<String>()
 
         // search for models in the main bundle
         if let modelURLs = Bundle.main.urls(forResourcesWithExtension: "mlmodelc", subdirectory: nil) {
             for modelURL in modelURLs {
-                let path = modelURL.path
-                let classifierID = String(path.split(separator: ".")[0])
-                models[classifierID] = modelURL
+                let classifierID = String(modelURL.path.split(separator: ".")[0])
+                models.insert(classifierID)
             }
         }
 
@@ -99,12 +98,10 @@ extension VisualRecognition {
         let modelPaths = allContents.filter() { $0.contains(".mlmodelc") }
         for modelPath in modelPaths {
             let classifierID = String(modelPath.split(separator: ".")[0])
-            if let modelURL = URL(string: modelPath) {
-                models[classifierID] = modelURL
-            }
+            models.insert(classifierID)
         }
 
-        return models
+        return Array(models)
     }
 
     /**
@@ -160,21 +157,13 @@ extension VisualRecognition {
             dispatchGroup.enter()
 
             // get classifier model
-            guard let modelURL = try? locateModelOnDisk(classifierID: classifierID) else {
+            guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
                 dispatchGroup.leave()
                 let description = "Failed to get the Core ML model for classifier \(classifierID)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
                 continue
-            }
-
-            guard let model = try? MLModel(contentsOf: modelURL) else {
-                let description = "Could not create local CoreML model."
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
             }
 
             // convert MLModel to VNCoreMLModel
@@ -251,16 +240,16 @@ extension VisualRecognition {
 
      - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the path to a local Core ML model.
+     - parameter success: A function executed with the local Core ML model.
      */
     private func getCoreMLModelOnlyLocal(
         classifierID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (URL) -> Void)
+        success: ((MLModel) -> Void)? = nil)
     {
         do {
-            let modelURL = try locateModelOnDisk(classifierID: classifierID)
-            success(modelURL)
+            let modelURL = try loadModelFromDisk(classifierID: classifierID)
+            success?(modelURL)
         } catch {
             failure?(error)
         }
@@ -271,16 +260,16 @@ extension VisualRecognition {
 
      - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the path to a local Core ML model.
+     - parameter success: A function executed with the local Core ML model.
      */
     private func getCoreMLModelPreferLocal(
         classifierID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (URL) -> Void)
+        success: ((MLModel) -> Void)? = nil)
     {
         do {
-            let modelURL = try locateModelOnDisk(classifierID: classifierID)
-            success(modelURL)
+            let modelURL = try loadModelFromDisk(classifierID: classifierID)
+            success?(modelURL)
         } catch {
             downloadClassifier(classifierID: classifierID, failure: failure, success: success)
         }
@@ -291,28 +280,19 @@ extension VisualRecognition {
 
      - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the path to a local Core ML model.
+     - parameter success: A function executed with the local Core ML model.
      */
     private func getCoreMLModelPreferRemote(
         classifierID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (URL) -> Void)
+        success: ((MLModel) -> Void)? = nil)
     {
         // setup date formatter '2017-12-04T19:44:27.419Z'
         let dateFormatter = ISO8601DateFormatter()
 
         // locate model on disk
-        guard let modelURL = try? locateModelOnDisk(classifierID: classifierID) else {
+        guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
             downloadClassifier(classifierID: classifierID, failure: failure, success: success)
-            return
-        }
-
-        // initialize model from disk
-        guard let model = try? MLModel(contentsOf: modelURL) else {
-            let description = "Failed to initialize the local Core ML model."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
             return
         }
 
@@ -341,7 +321,7 @@ extension VisualRecognition {
             if classifierDate > modelDate {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             } else {
-                success(modelURL);
+                success?(model);
             }
         }
     }
@@ -381,6 +361,15 @@ extension VisualRecognition {
         throw error
     }
 
+    /**
+     Load a Core ML model from disk. The model must be named "[classifier-id].mlmodelc" and reside in the
+     application support directory or main bundle.
+     */
+    private func loadModelFromDisk(classifierID: String) throws -> MLModel {
+        let modelURL = try locateModelOnDisk(classifierID: classifierID)
+        return try MLModel(contentsOf: modelURL)
+    }
+
     /// Convert results from Core ML classification requests into a `ClassifiedImages` model.
     private func convert(results: [(MLModel, [VNClassificationObservation])]) throws -> ClassifiedImages {
         var classifiers = [[String: Any]]()
@@ -406,12 +395,12 @@ extension VisualRecognition {
 
      - parameter classifierID: The classifierID of the requested model.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the URL of the compiled CoreML model.
+     - parameter success: A function executed with the local Core ML model.
      */
     private func downloadClassifier(
         classifierID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (URL) -> Void)
+        success: ((MLModel) -> Void)? = nil)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -521,7 +510,16 @@ extension VisualRecognition {
                 failure?(error)
             }
 
-            success(compiledModelURL)
+            // load model from disk
+            guard let model = try? MLModel(contentsOf: compiledModelURL) else {
+                let description = "Failed to load model from disk."
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
+                return
+            }
+
+            success?(model)
         }
     }
 }

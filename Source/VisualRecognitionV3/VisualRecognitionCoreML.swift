@@ -300,10 +300,7 @@ extension VisualRecognition {
         let description = model.modelDescription
         let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
         guard let updated = metadata["updated"], let modelDate = dateFormatter.date(from: updated) else {
-            let description = "Failed to parse the local Core ML model's date."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             return
         }
 

@@ -410,7 +410,7 @@ extension VisualRecognition {
         // construct header parameters for test server
         // TODO: remove before release
         var headerParameters = defaultHeaders
-        headerParameters["X-API-Key"] = apiKey
+        headerParameters["X-API-Key"] = apiKeyTestServer
 
         // construct REST request
         // TODO: remove test server url and headers before release

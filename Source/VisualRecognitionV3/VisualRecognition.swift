@@ -30,6 +30,7 @@ public class VisualRecognition {
     public var defaultHeaders = [String: String]()
     
     internal let apiKey: String
+    internal let apiKeyTestServer: String // TODO: remove before release
     internal let version: String
     internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     
@@ -40,9 +41,10 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date in
         "YYYY-MM-DD" format.
      */
-    public init(apiKey: String, version: String) {
+    public init(apiKey: String, version: String, apiKeyTestServer: String) {
         self.apiKey = apiKey
         self.version = version
+        self.apiKeyTestServer = apiKeyTestServer
     }
     
     /**
@@ -584,7 +586,7 @@ public class VisualRecognition {
         // set headers with api key for test server
         // TODO: remove these headers before release
         var headers = defaultHeaders
-        headers["X-API-Key"] = apiKey
+        headers["X-API-Key"] = apiKeyTestServer
 
         // construct REST request
         // TODO: reset values from test server before release

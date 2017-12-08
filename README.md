@@ -1248,3 +1248,29 @@ The following links provide more information about the IBM Watson Visual Recogni
 * [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/watson/developercloud/visual-recognition.html)
 * [IBM Watson Visual Recognition - Documentation](https://console.bluemix.net/docs/services/visual-recognition/index.html)
 * [IBM Watson Visual Recognition - Demo](http://visual-recognition-demo.mybluemix.net/)
+
+### Using Core ML
+The Watson Swift SDK supports offline image classification using Apple Core ML. Classifiers must be trained or updated with the `coreMLEnabled` flag set to true and once the classifier's `coreMLStatus` is `ready` it is available to download and use for offline classification.
+
+The following example demonstrates how to download a classifier's Core ML model and use it offline:
+```swift
+let classifierID = "[your-classifier-id]"
+let failure = { (error: Error) in print(error) }
+visualRecognition.getCoreMLModel(
+    classifierID: classifierID, 
+    policy: LookupPolicy.preferRemote, 
+    failure: failure) {
+        _ in
+        visualRecognition.classify(..., failure: failure) { classifiedImages in
+            print(classifiedImages)
+        }
+    }
+```
+
+The following example demonstrates how to list the Core ML models that are stored in the filesystem and available for offline use:
+```swift
+let failure = { (error: Error) in print(error) }
+visualRecognition.listCoreMLModels(failure: failure) { classifiers in
+    print(classifiers)
+}
+```

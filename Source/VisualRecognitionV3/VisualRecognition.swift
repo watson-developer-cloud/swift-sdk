@@ -590,7 +590,7 @@ public class VisualRecognition {
         // TODO: reset values from test server before release
         let request = RestRequest(
             method: "GET",
-            url: "solution-kit-dev.mybluemix.net/api/v1.0/classifiers/demo", // serviceURL + "/v3/classifiers/\(classifierID)",
+            url: "solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)", // serviceURL + "/v3/classifiers/\(classifierID)",
             credentials: .apiKey,
             headerParameters: headers, // defaultHeaders,
             queryItems: queryParameters

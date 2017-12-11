@@ -37,7 +37,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Enums.html">Enums</a>
+            <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Enums/CollectionStatus.html">CollectionStatus</a>
@@ -63,7 +63,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structs</a>
+            <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/Action.html">Action</a>
@@ -366,9 +366,9 @@ unstructured data and enrich it so you can query it for the information you need
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEnvironments</span> <span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -442,11 +442,11 @@ available disk space, and 1GB RAM.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createEnvironment</span><span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withSize</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../Enums/EnvironmentSize.html">EnvironmentSize</a></span><span class="p">,</span>
-        <span class="n">withDescription</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withSize</span> <span class="nv">size</span><span class="p">:</span> <span class="kt"><a href="../Enums/EnvironmentSize.html">EnvironmentSize</a></span><span class="p">,</span>
+    <span class="n">withDescription</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -541,9 +541,9 @@ available disk space, and 1GB RAM.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteEnvironment</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeletedEnvironment.html">DeletedEnvironment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeletedEnvironment.html">DeletedEnvironment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -614,9 +614,9 @@ available disk space, and 1GB RAM.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEnvironment</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -687,11 +687,11 @@ available disk space, and 1GB RAM.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateEnvironment</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -797,10 +797,10 @@ available disk space, and 1GB RAM.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getConfigurations</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping([Configuration])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping([Configuration])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -883,10 +883,10 @@ available disk space, and 1GB RAM.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createConfiguration</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/ConfigurationDetails.html">ConfigurationDetails</a></span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(ConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/ConfigurationDetails.html">ConfigurationDetails</a></span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(ConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -971,10 +971,10 @@ unique within the current environment. All other properties are optional.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteConfiguration</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(DeletedConfiguration)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(DeletedConfiguration)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1057,10 +1057,10 @@ unique within the current environment. All other properties are optional.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getConfiguration</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(ConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(ConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1143,11 +1143,11 @@ unique within the current environment. All other properties are optional.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateConfiguration</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/ConfigurationDetails.html">ConfigurationDetails</a></span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(ConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/ConfigurationDetails.html">ConfigurationDetails</a></span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(ConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1255,13 +1255,13 @@ processed. The document is not added to the index. </p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">testConfigurationInEnvironment</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withConfiguration</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(TestConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withConfiguration</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(TestConfigurationDetails)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1402,10 +1402,10 @@ are rejected. Must provide either a file or a metadata.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCollections</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping([Collection])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping([Collection])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1488,12 +1488,12 @@ are rejected. Must provide either a file or a metadata.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCollection</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withDescription</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Collection)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withDescription</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Collection)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1602,10 +1602,10 @@ to find the default value.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCollection</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeletedCollection.html">DeletedCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeletedCollection.html">DeletedCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1638,10 +1638,10 @@ to find the default value.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCollectionDetails</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Collection)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Collection)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1675,13 +1675,13 @@ the updated information.</li>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateCollection</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Collection)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Collection)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1715,10 +1715,10 @@ the updated information.</li>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCollectionFields</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping([Field])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping([Field])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1764,15 +1764,15 @@ metadata or file must be specified.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addDocumentToCollection</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">fileMimeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">configuration</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fileMimeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">configuration</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1807,11 +1807,11 @@ to &lsquo;deleted&rsquo;.</li>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteDocumentFromCollection</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withDocumentID</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withDocumentID</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1889,11 +1889,11 @@ the actual document content, use the Query method.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listDocumentDetails</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withDocumentID</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withDocumentID</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1927,16 +1927,16 @@ overrides.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateDocumentInCollection</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withDocumentID</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">fileMimeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">configuration</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withDocumentID</span> <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withConfigurationID</span> <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fileMimeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">configuration</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(Document)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2096,15 +2096,15 @@ document ID, metadata and the content of the document.</li>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">queryDocumentsInCollection</span><span class="p">(</span>
-        <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withFilter</span> <span class="nv">filter</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="n">withQuery</span> <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="n">withAggregation</span> <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="k">return</span> <span class="nv">returnQuery</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(QueryResponse)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withEnvironmentID</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withFilter</span> <span class="nv">filter</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">withQuery</span> <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">withAggregation</span> <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="k">return</span> <span class="nv">returnQuery</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping(QueryResponse)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2116,8 +2116,8 @@ document ID, metadata and the content of the document.</li>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-12-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

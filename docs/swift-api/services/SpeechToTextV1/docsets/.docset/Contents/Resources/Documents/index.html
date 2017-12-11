@@ -39,7 +39,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Enums.html">Enums</a>
+            <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Enums/AudioMediaType.html">AudioMediaType</a>
@@ -71,7 +71,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Structs.html">Structs</a>
+            <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Structs/Corpus.html">Corpus</a>
@@ -294,7 +294,7 @@
 <p>By default, the SDK executes all networking operations asynchonously. If your application requires synchronous execution, you can use a <code>DispatchGroup</code>. For example:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dispatchGroup</span> <span class="o">=</span> <span class="kt">DispatchGroup</span><span class="p">()</span>
 <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">enter</span><span class="p">()</span>
-<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">withWorkspace</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
     <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">leave</span><span class="p">()</span>
 <span class="p">}</span>
@@ -447,7 +447,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="p">}</span>
 </code></pre>
 
-<p>For reference, the <code>JSON</code> type is defined as:</p>
+<p>For reference, the <code><a href="Enums/JSON.html">JSON</a></code> type is defined as:</p>
 <pre class="highlight swift"><code><span class="c1">/// A JSON value (one of string, number, object, array, true, false, or null).</span>
 <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">JSON</span><span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Codable</span> <span class="p">{</span>
     <span class="k">case</span> <span class="n">null</span>
@@ -882,10 +882,10 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <p>The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.</p>
 
-<p>The <code>SpeechToText</code> class is the SDK&rsquo;s primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the <code>SpeechToTextSession</code> class that exposes more control over the WebSockets session.</p>
+<p>The <code><a href="Classes/SpeechToText.html">SpeechToText</a></code> class is the SDK&rsquo;s primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> class that exposes more control over the WebSockets session.</p>
 <h4 id='recognition-request-settings' class='heading'>Recognition Request Settings</h4>
 
-<p>The <code>RecognitionSettings</code> class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart">initating a request</a>.</p>
+<p>The <code><a href="Structs/RecognitionSettings.html">RecognitionSettings</a></code> class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart">initating a request</a>.</p>
 
 <p>The following example demonstrates how to define a recognition request that transcribes WAV audio data with interim results:</p>
 <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="o">.</span><span class="n">wav</span><span class="p">)</span>
@@ -955,9 +955,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 </code></pre>
 <h4 id='session-management-and-advanced-features' class='heading'>Session Management and Advanced Features</h4>
 
-<p>Advanced users may want more customizability than provided by the <code>SpeechToText</code> class. The <code>SpeechToTextSession</code> class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The <code>SpeechToTextSession</code> class also allows users more control over the AVAudioSession shared instance. Before using <code>SpeechToTextSession</code>, it&rsquo;s helpful to be familiar with the <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html">Speech to Text WebSocket interface</a>.</p>
+<p>Advanced users may want more customizability than provided by the <code><a href="Classes/SpeechToText.html">SpeechToText</a></code> class. The <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> class also allows users more control over the AVAudioSession shared instance. Before using <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code>, it&rsquo;s helpful to be familiar with the <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html">Speech to Text WebSocket interface</a>.</p>
 
-<p>The following steps describe how to execute a recognition request with <code>SpeechToTextSession</code>:</p>
+<p>The following steps describe how to execute a recognition request with <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code>:</p>
 
 <ol>
 <li>Connect: Invoke <code>connect()</code> to connect to the service.</li>
@@ -967,9 +967,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li>Disconnect: Invoke <code>disconnect()</code> to wait for any remaining results to be received and then disconnect from the service.</li>
 </ol>
 
-<p>All text and data messages sent by <code>SpeechToTextSession</code> are queued, with the exception of <code>connect()</code> which immediately connects to the server. The queue ensures that the messages are sent in-order and also buffers messages while waiting for a connection to be established. This behavior is generally transparent.</p>
+<p>All text and data messages sent by <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> are queued, with the exception of <code>connect()</code> which immediately connects to the server. The queue ensures that the messages are sent in-order and also buffers messages while waiting for a connection to be established. This behavior is generally transparent.</p>
 
-<p>A <code>SpeechToTextSession</code> also provides several (optional) callbacks. The callbacks can be used to learn about the state of the session or access microphone data.</p>
+<p>A <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> also provides several (optional) callbacks. The callbacks can be used to learn about the state of the session or access microphone data.</p>
 
 <ul>
 <li><code>onConnect</code>: Invoked when the session connects to the Speech to Text service.</li>
@@ -980,7 +980,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><code>onDisconnect</code>: Invoked when the session disconnects from the Speech to Text service.</li>
 </ul>
 
-<p>The following example demonstrates how to use <code>SpeechToTextSession</code> to transcribe microphone audio:</p>
+<p>The following example demonstrates how to use <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> to transcribe microphone audio:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
 
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
@@ -1123,7 +1123,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <h4 id='important-notes' class='heading'>Important notes</h4>
 <div class="aside aside-since">
     <p class="aside-title">Since</p>
-    <p>Since v0.11.0, if you use <code>SpeechToTextSession</code>, you&rsquo;ll need to manage the setup for the <code>AVAudioSession</code> shared instance. Without the code below, you won&rsquo;t receive data from the Speech To Text service properly. This isn&rsquo;t necessary if you use the <code>SpeechToText</code> class.</p>
+    <p>Since v0.11.0, if you use <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code>, you&rsquo;ll need to manage the setup for the <code>AVAudioSession</code> shared instance. Without the code below, you won&rsquo;t receive data from the Speech To Text service properly. This isn&rsquo;t necessary if you use the <code><a href="Classes/SpeechToText.html">SpeechToText</a></code> class.</p>
 <pre class="highlight swift"><code><span class="k">do</span> <span class="p">{</span>
 <span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">AVAudioSession</span><span class="o">.</span><span class="nf">sharedInstance</span><span class="p">()</span>
 <span class="k">try</span> <span class="n">session</span><span class="o">.</span><span class="nf">setActive</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
@@ -1342,8 +1342,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-12-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

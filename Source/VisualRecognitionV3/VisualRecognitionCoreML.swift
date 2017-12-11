@@ -21,8 +21,8 @@ import Vision
 @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
 extension VisualRecognition {
 
-    // MARK: - Public API
-
+    // MARK: - Core ML
+    
     /// The lookup policy to use when retrieving a Core ML model. Depending on the lookup policy,
     /// one or more network requests may be made to the Visual Recognition service.
     public enum LookupPolicy {

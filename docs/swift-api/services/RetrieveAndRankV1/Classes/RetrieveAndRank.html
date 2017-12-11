@@ -37,7 +37,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Enums.html">Enums</a>
+            <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Enums/JSON.html">JSON</a>
@@ -54,7 +54,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structs</a>
+            <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs.html#/s:17RetrieveAndRankV111JSONWrapperV">JSONWrapper</a>
@@ -98,7 +98,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Typealiases.html">Typealiases</a>
+            <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:17RetrieveAndRankV18Documenta">Document</a>
@@ -269,8 +269,8 @@ provide users with more relevant search results by automatically re-ranking them
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrClusters</span><span class="p">(</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/SolrCluster.html">SolrCluster</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/SolrCluster.html">SolrCluster</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -298,7 +298,7 @@ provide users with more relevant search results by automatically re-ranking them
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with an array of <code>SolrCluster</code> objects.</p>
+                                  <p>A function executed with an array of <code><a href="../Structs/SolrCluster.html">SolrCluster</a></code> objects.</p>
                                 </div>
                               </td>
                             </tr>
@@ -330,10 +330,10 @@ and can&rsquo;t be used until the status becomes <q>Ready</q>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createSolrCluster</span><span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">size</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SolrCluster.html">SolrCluster</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">size</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SolrCluster.html">SolrCluster</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -386,7 +386,7 @@ and can&rsquo;t be used until the status becomes <q>Ready</q>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with a <code>SolrCluster</code> object.</p>
+                                  <p>A function executed with a <code><a href="../Structs/SolrCluster.html">SolrCluster</a></code> object.</p>
                                 </div>
                               </td>
                             </tr>
@@ -417,9 +417,9 @@ and can&rsquo;t be used until the status becomes <q>Ready</q>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSolrCluster</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="n">withID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -490,9 +490,9 @@ and can&rsquo;t be used until the status becomes <q>Ready</q>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrCluster</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SolrCluster.html">SolrCluster</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SolrCluster.html">SolrCluster</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -532,7 +532,7 @@ and can&rsquo;t be used until the status becomes <q>Ready</q>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with a <code>SolrCluster</code> object.</p>
+                                  <p>A function executed with a <code><a href="../Structs/SolrCluster.html">SolrCluster</a></code> object.</p>
                                 </div>
                               </td>
                             </tr>
@@ -563,9 +563,9 @@ and can&rsquo;t be used until the status becomes <q>Ready</q>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrConfigurations</span><span class="p">(</span>
-        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -637,10 +637,10 @@ and can&rsquo;t be used until the status becomes <q>Ready</q>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSolrConfiguration</span><span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -723,10 +723,10 @@ and can&rsquo;t be used until the status becomes <q>Ready</q>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrConfiguration</span><span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -812,11 +812,11 @@ the writer type in your solrconfig.xml file to be <q>json</q>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">uploadSolrConfiguration</span><span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">toSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">zipFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">toSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">zipFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -911,11 +911,11 @@ the writer type in your solrconfig.xml file to be <q>json</q>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createSolrCollection</span><span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">forSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">withConfigurationName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">forSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withConfigurationName</span> <span class="nv">configName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1010,10 +1010,10 @@ the writer type in your solrconfig.xml file to be <q>json</q>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSolrCollection</span><span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1099,9 +1099,9 @@ configuration solrconfig.xml file.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSolrCollections</span><span class="p">(</span>
-        <span class="n">forSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">forSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">String</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1175,12 +1175,12 @@ how to structure the content files, refer to this link:
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateSolrCollection</span><span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">collectionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">inSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">contentFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-        <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">collectionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">inSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1292,13 +1292,13 @@ configuration solrconfig.xml file.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">search</span><span class="p">(</span>
-        <span class="n">withCollectionName</span> <span class="nv">collectionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">numberOfDocuments</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SearchResponse.html">SearchResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withCollectionName</span> <span class="nv">collectionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">numberOfDocuments</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SearchResponse.html">SearchResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1391,7 +1391,7 @@ configuration solrconfig.xml file.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with a <code>SearchResponse</code> object.</p>
+                                  <p>A function executed with a <code><a href="../Structs/SearchResponse.html">SearchResponse</a></code> object.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1425,14 +1425,14 @@ configuration solrconfig.xml file.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">searchAndRank</span><span class="p">(</span>
-        <span class="n">withCollectionName</span> <span class="nv">collectionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">numberOfDocuments</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SearchAndRankResponse.html">SearchAndRankResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withCollectionName</span> <span class="nv">collectionName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">fromSolrClusterID</span> <span class="nv">solrClusterID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">numberOfDocuments</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SearchAndRankResponse.html">SearchAndRankResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1537,7 +1537,7 @@ configuration solrconfig.xml file.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with a <code>SearchAndRankResponse</code> object.</p>
+                                  <p>A function executed with a <code><a href="../Structs/SearchAndRankResponse.html">SearchAndRankResponse</a></code> object.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1579,8 +1579,8 @@ configuration solrconfig.xml file.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getRankers</span><span class="p">(</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Ranker.html">Ranker</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Ranker.html">Ranker</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1608,7 +1608,7 @@ configuration solrconfig.xml file.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with an array of <code>Ranker</code> objects.</p>
+                                  <p>A function executed with an array of <code><a href="../Structs/Ranker.html">Ranker</a></code> objects.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1640,10 +1640,10 @@ the ranker is ready. You need to wait until the status is <code>Available</code>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createRanker</span><span class="p">(</span>
-        <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="n">fromFile</span> <span class="nv">trainingDataFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/RankerDetails.html">RankerDetails</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">fromFile</span> <span class="nv">trainingDataFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/RankerDetails.html">RankerDetails</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1695,7 +1695,7 @@ the ranker is ready. You need to wait until the status is <code>Available</code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with a <code>Ranker</code> object.</p>
+                                  <p>A function executed with a <code><a href="../Structs/Ranker.html">Ranker</a></code> object.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1727,11 +1727,11 @@ number of answers requested, listed in order from descending ranked score.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">rankResults</span><span class="p">(</span>
-        <span class="n">fromFile</span> <span class="nv">resultsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-        <span class="n">withRankerID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">numberOfDocuments</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Ranking.html">Ranking</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">fromFile</span> <span class="nv">resultsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">withRankerID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">numberOfDocuments</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Ranking.html">Ranking</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1797,7 +1797,7 @@ number of answers requested, listed in order from descending ranked score.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with a <code>Ranking</code> object.</p>
+                                  <p>A function executed with a <code><a href="../Structs/Ranking.html">Ranking</a></code> object.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1828,9 +1828,9 @@ number of answers requested, listed in order from descending ranked score.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteRanker</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="n">withID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1901,9 +1901,9 @@ number of answers requested, listed in order from descending ranked score.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getRanker</span><span class="p">(</span>
-        <span class="n">withID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/RankerDetails.html">RankerDetails</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="n">withID</span> <span class="nv">rankerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/RankerDetails.html">RankerDetails</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1943,7 +1943,7 @@ number of answers requested, listed in order from descending ranked score.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with a <code>RankerDetails</code> object.</p>
+                                  <p>A function executed with a <code><a href="../Structs/RankerDetails.html">RankerDetails</a></code> object.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1958,8 +1958,8 @@ number of answers requested, listed in order from descending ranked score.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-12-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

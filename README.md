@@ -1243,12 +1243,6 @@ visualRecognition.classify(image: url, failure: failure) { classifiedImages in
 }
 ```
 
-The following links provide more information about the IBM Watson Visual Recognition service:
-
-* [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/watson/developercloud/visual-recognition.html)
-* [IBM Watson Visual Recognition - Documentation](https://console.bluemix.net/docs/services/visual-recognition/index.html)
-* [IBM Watson Visual Recognition - Demo](http://visual-recognition-demo.mybluemix.net/)
-
 ### Using Core ML
 The Watson Swift SDK supports offline image classification using Apple Core ML. Classifiers must be trained or updated with the `coreMLEnabled` flag set to true and once the classifier's `coreMLStatus` is `ready` it is available to download and use for offline classification.
 
@@ -1274,3 +1268,9 @@ visualRecognition.listCoreMLModels(failure: failure) { classifiers in
     print(classifiers)
 }
 ```
+
+The following links provide more information about the IBM Watson Visual Recognition service:
+
+* [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/watson/developercloud/visual-recognition.html)
+* [IBM Watson Visual Recognition - Documentation](https://console.bluemix.net/docs/services/visual-recognition/index.html)
+* [IBM Watson Visual Recognition - Demo](http://visual-recognition-demo.mybluemix.net/)

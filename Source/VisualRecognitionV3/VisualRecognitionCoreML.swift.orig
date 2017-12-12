@@ -21,7 +21,33 @@ import Vision
 @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
 extension VisualRecognition {
 
+<<<<<<< HEAD
+    // MARK: - Core ML
+    
+    /// The lookup policy to use when retrieving a Core ML model. Depending on the lookup policy,
+    /// one or more network requests may be made to the Visual Recognition service.
+    public enum LookupPolicy {
+
+        /// Search the local filesystem for a Core ML model. If the model is not found, then the lookup will fail.
+        /// No network requests will be made to the Visual Recognition service.
+        case onlyLocal
+
+        /// Search the local filesystem for a Core ML model. If the model is not found, then download it from the
+        /// Visual Recognition service. If the model is already available on the local filesystem, then no
+        /// network request will be made to the Visual Recognition service.
+        case preferLocal
+
+        /// Download the latest Core ML model from the Visual Recognition service, unless it is already available
+        /// in the local filesystem. A network request will be made to the Visual Recognition service to check
+        /// the latest version of the model. If the local model is out-of-date or not available, then the
+        /// latest version of the model will be downloaded from the service.
+        case preferRemote
+
+        // TODO: add automatic after adding support for determining the _access_ date of a classifier
+    }
+=======
     // MARK: - Public API
+>>>>>>> get-coreml-model
 
     /**
      Retrieve a Core ML model from the local filesystem.

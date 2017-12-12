@@ -248,7 +248,7 @@ extension VisualRecognition {
 
         // return results after all classification requests have executed
         dispatchGroup.notify(queue: DispatchQueue.main) {
-            guard let classifiedImages = try? self.convert(results: results) else {
+            guard let classifiedImages = try? self.convert(results: results, threshold: threshold) else {
                 let description = "Failed to represent results as JSON."
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -306,10 +306,16 @@ extension VisualRecognition {
     }
 
     /// Convert results from Core ML classification requests into a `ClassifiedImages` model.
-    private func convert(results: [(MLModel, [VNClassificationObservation])]) throws -> ClassifiedImages {
+    private func convert(
+        results: [(MLModel, [VNClassificationObservation])],
+        threshold: Double? = nil)
+        throws -> ClassifiedImages
+    {
         var classifiers = [[String: Any]]()
-        for (model, observations) in results {
-            let observations = observations.filter() { $0.confidence > 0.01 }
+        for (model, var observations) in results {
+            if let threshold = threshold {
+                observations = observations.filter() { $0.confidence > Float(threshold) }
+            }
             let description = model.modelDescription
             let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
             let classifierResults: [String: Any] = [

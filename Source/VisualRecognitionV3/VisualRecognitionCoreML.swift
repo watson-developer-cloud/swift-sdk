@@ -163,6 +163,7 @@ extension VisualRecognition {
             return
         }
 
+        // ensure a classifier id was provided
         guard !classifierIDs.isEmpty else {
             let description = "Please provide at least one classifierID."
             let userInfo = [NSLocalizedDescriptionKey: description]
@@ -226,6 +227,7 @@ extension VisualRecognition {
             requests.append(request)
         }
 
+        // fail if no requests were constructed
         guard !requests.isEmpty else {
             return
         }

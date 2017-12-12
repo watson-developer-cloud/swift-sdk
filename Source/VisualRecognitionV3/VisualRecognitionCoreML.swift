@@ -23,47 +23,70 @@ extension VisualRecognition {
 
     // MARK: - Public API
 
-    /// The lookup policy to use when retrieving a Core ML model. Depending on the lookup policy,
-    /// one or more network requests may be made to the Visual Recognition service.
-    public enum LookupPolicy {
-
-        /// Search the local filesystem for a Core ML model. If the model is not found, then the lookup will fail.
-        /// No network requests will be made to the Visual Recognition service.
-        case onlyLocal
-
-        /// Search the local filesystem for a Core ML model. If the model is not found, then download it from the
-        /// Visual Recognition service. If the model is already available on the local filesystem, then no
-        /// network request will be made to the Visual Recognition service.
-        case preferLocal
-
-        /// Download the latest Core ML model from the Visual Recognition service, unless it is already available
-        /// in the local filesystem. A network request will be made to the Visual Recognition service to check
-        /// the latest version of the model. If the local model is out-of-date or not available, then the
-        /// latest version of the model will be downloaded from the service.
-        case preferRemote
-
-        // TODO: add automatic after adding support for determining the _access_ date of a classifier
-    }
-
     /**
-     Retrieve a Core ML model for the given classifier.
+     Retrieve a Core ML model from the local filesystem.
 
      - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
-     - parameter policy: The policy to use when retrieving the Core ML model. Depending on the lookup policy, one or
-       more network requests may be made to the Visual Recognition service.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the local Core ML model.
      */
-    public func getCoreMLModel(
+    public func getLocalModel(
         classifierID: String,
-        policy: LookupPolicy,
         failure: ((Error) -> Void)? = nil,
         success: ((MLModel) -> Void)? = nil)
     {
-        switch policy {
-        case .onlyLocal: getCoreMLModelOnlyLocal(classifierID: classifierID, failure: failure, success: success)
-        case .preferLocal: getCoreMLModelPreferLocal(classifierID: classifierID, failure: failure, success: success)
-        case .preferRemote: getCoreMLModelPreferRemote(classifierID: classifierID, failure: failure, success: success)
+        do {
+            let modelURL = try loadModelFromDisk(classifierID: classifierID)
+            success?(modelURL)
+        } catch {
+            failure?(error)
+        }
+    }
+
+    /**
+     Download the latest Core ML model to the local filesystem, unless the latest version
+     is already available locally. The classifier must have a `coreMLStatus` of `ready`
+     in order to download the latest model.
+
+     - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed after the local model has been updated.
+     */
+    public func updateLocalModel(
+        classifierID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: (() -> Void)? = nil)
+    {
+        // setup date formatter '2017-12-04T19:44:27.419Z'
+        let dateFormatter = ISO8601DateFormatter()
+
+        // locate model on disk
+        guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
+            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+            return
+        }
+
+        // parse model's `updated` date
+        let description = model.modelDescription
+        let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
+        guard let updated = metadata["updated"], let modelDate = dateFormatter.date(from: updated) else {
+            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+            return
+        }
+
+        // parse classifier's `updated` date
+        getClassifier(withID: classifierID, failure: failure) { classifier in
+            guard let classifierDate = dateFormatter.date(from: classifier.updated) else {
+                self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+                return
+            }
+
+            // download the latest model if a newer version is available
+            if classifierDate > modelDate && classifier.coreMLStatus == "ready" {
+                self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+            } else {
+                success?();
+            }
         }
     }
 
@@ -72,7 +95,7 @@ extension VisualRecognition {
 
      - returns: A list of classifier IDs with local Core ML models that are available for classification.
      */
-    public func listCoreMLModels() throws -> [String] {
+    public func listLocalModels() throws -> [String] {
         var models = Set<String>()
 
         // search for models in the main bundle
@@ -109,31 +132,25 @@ extension VisualRecognition {
 
      - parameter classifierID: The ID of the classifier whose Core ML model shall be deleted.
      */
-    public func deleteCoreMLModel(classifierID: String) throws {
+    public func deleteLocalModel(classifierID: String) throws {
         let modelURL = try locateModelOnDisk(classifierID: classifierID)
         try FileManager.default.removeItem(at: modelURL)
     }
 
     /**
-     Classify an image using a local Core ML model.
+     Classify an image using a Core ML model from the local filesystem.
      
      - parameter image: The image to classify.
-     - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
        built-in classifier.
      - parameter threshold: The minimum score a class must have to be displayed in the response.
-     - parameter language: The language of the output class names. Can be "en" (English), "es"
-       (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
-       are omitted.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the image classifications.
      */
-    public func classifyCoreML(
+    public func classifyWithLocalModel(
         image: UIImage,
-        owners: [String]? = nil,
-        classifierIDs: [String]? = nil,
+        classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        language: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
@@ -146,8 +163,13 @@ extension VisualRecognition {
             return
         }
 
-        // use default classifier if none specified
-        let classifierIDs = classifierIDs ?? ["default"]
+        guard !classifierIDs.isEmpty else {
+            let description = "Please provide at least one classifierID."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
 
         // construct each classification request
         var requests = [VNCoreMLRequest]()
@@ -204,6 +226,10 @@ extension VisualRecognition {
             requests.append(request)
         }
 
+        guard !requests.isEmpty else {
+            return
+        }
+
         // execute each classification request
         requests.forEach() { request in
             DispatchQueue.global(qos: .userInitiated).async {
@@ -234,94 +260,6 @@ extension VisualRecognition {
     }
 
     // MARK: - Private Helper Functions
-
-    /**
-     Retrieve a Core ML model for the given classifier, using the `onlyLocal` lookup policy.
-
-     - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the local Core ML model.
-     */
-    private func getCoreMLModelOnlyLocal(
-        classifierID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: ((MLModel) -> Void)? = nil)
-    {
-        do {
-            let modelURL = try loadModelFromDisk(classifierID: classifierID)
-            success?(modelURL)
-        } catch {
-            failure?(error)
-        }
-    }
-
-    /**
-     Retrieve a Core ML model for the given classifier, using the `preferLocal` lookup policy.
-
-     - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the local Core ML model.
-     */
-    private func getCoreMLModelPreferLocal(
-        classifierID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: ((MLModel) -> Void)? = nil)
-    {
-        do {
-            let modelURL = try loadModelFromDisk(classifierID: classifierID)
-            success?(modelURL)
-        } catch {
-            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
-        }
-    }
-
-    /**
-     Retrieve a Core ML model for the given classifier, using the `preferRemote` lookup policy.
-
-     - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the local Core ML model.
-     */
-    private func getCoreMLModelPreferRemote(
-        classifierID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: ((MLModel) -> Void)? = nil)
-    {
-        // setup date formatter '2017-12-04T19:44:27.419Z'
-        let dateFormatter = ISO8601DateFormatter()
-
-        // locate model on disk
-        guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
-            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
-            return
-        }
-
-        // parse model's `updated` date
-        let description = model.modelDescription
-        let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
-        guard let updated = metadata["updated"], let modelDate = dateFormatter.date(from: updated) else {
-            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
-            return
-        }
-
-        // parse classifier's `updated` date
-        getClassifier(withID: classifierID, failure: failure) { classifier in
-            guard let classifierDate = dateFormatter.date(from: classifier.updated) else {
-                let description = "Failed to parse the classifier's date."
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
-            }
-
-            // download the latest model if a newer version is available
-            if classifierDate > modelDate && classifier.coreMLStatus == "ready" {
-                self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
-            } else {
-                success?(model);
-            }
-        }
-    }
 
     /**
      Locate a Core ML model on disk. The model must be named "[classifier-id].mlmodelc" and reside in the
@@ -388,7 +326,7 @@ extension VisualRecognition {
     }
 
     /**
-     Download a CoreML model to the local file system.
+     Download a CoreML model to the local filesystem.
 
      - parameter classifierID: The classifierID of the requested model.
      - parameter failure: A function executed if an error occurs.
@@ -397,26 +335,26 @@ extension VisualRecognition {
     private func downloadClassifier(
         classifierID: String,
         failure: ((Error) -> Void)? = nil,
-        success: ((MLModel) -> Void)? = nil)
+        success: (() -> Void)? = nil)
     {
+        // TODO: revert networking from test server to public service
+        // url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model"
+
         // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
+        // var queryParameters = [URLQueryItem]()
+        // queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        // queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct header parameters for test server
-        // TODO: remove before release
         var headerParameters = defaultHeaders
         headerParameters["X-API-Key"] = apiKeyTestServer
 
         // construct REST request
-        // TODO: remove test server url and headers before release
         let request = RestRequest(
             method: "GET",
-            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)/model", // serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model"
+            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)/model",
             credentials: .apiKey,
-            headerParameters: headerParameters, // defaultHeaders,
-            queryItems: queryParameters
+            headerParameters: headerParameters
         )
 
         // locate downloads directory
@@ -446,6 +384,8 @@ extension VisualRecognition {
 
         // execute REST request
         request.download(to: sourceModelURL) { response, error in
+            defer { try? fileManager.removeItem(at: sourceModelURL) }
+
             guard error == nil else {
                 failure?(error!)
                 return
@@ -471,6 +411,7 @@ extension VisualRecognition {
             let compiledModelTemporaryURL: URL
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
+                defer { try? fileManager.removeItem(at: compiledModelTemporaryURL) }
             } catch {
                 let description = "Could not compile Core ML model from source: \(error)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
@@ -479,16 +420,14 @@ extension VisualRecognition {
                 return
             }
 
-            // move compiled model and clean up files
+            // move compiled model
             do {
-                if fileManager.fileExists(atPath: compiledModelURL.absoluteString) {
+                if fileManager.fileExists(atPath: compiledModelURL.path) {
                     try fileManager.removeItem(at: compiledModelURL)
                 }
                 try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
-                try fileManager.removeItem(at: compiledModelTemporaryURL)
-                try fileManager.removeItem(at: sourceModelURL)
             } catch {
-                let description = "Failed to move compiled model and clean up files: \(error)"
+                let description = "Failed to move compiled model: \(error)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -507,16 +446,7 @@ extension VisualRecognition {
                 failure?(error)
             }
 
-            // load model from disk
-            guard let model = try? MLModel(contentsOf: compiledModelURL) else {
-                let description = "Failed to load model from disk."
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                return
-            }
-
-            success?(model)
+            success?()
         }
     }
 }

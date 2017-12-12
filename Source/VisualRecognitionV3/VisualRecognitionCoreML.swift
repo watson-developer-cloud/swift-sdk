@@ -201,7 +201,10 @@ extension VisualRecognition {
             }
             
             guard let usableData = data  else {
-                print("No usable data in response")
+                let description = "No usable data in response"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
                 return
             }
             
@@ -212,7 +215,10 @@ extension VisualRecognition {
             
             // compile spec and write to final location
             guard let compiledPath = try? MLModel.compileModel(at: tempPath) else {
-                print("Error compiling new model")
+                let description = "Error compiling new model"
+                let userInfo = [NSLocalizedDescriptionKey: description]
+                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                failure?(error)
                 return
             }
             try? FileManager.default.removeItem(at: modelPath)

@@ -58,7 +58,8 @@ extension VisualRecognition {
         success: (() -> Void)? = nil)
     {
         // setup date formatter '2017-12-04T19:44:27.419Z'
-        let dateFormatter = ISO8601DateFormatter()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 
         // locate model on disk
         guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
@@ -163,6 +164,7 @@ extension VisualRecognition {
             return
         }
 
+        // ensure a classifier id was provided
         guard !classifierIDs.isEmpty else {
             let description = "Please provide at least one classifierID."
             let userInfo = [NSLocalizedDescriptionKey: description]
@@ -226,6 +228,7 @@ extension VisualRecognition {
             requests.append(request)
         }
 
+        // fail if no requests were constructed
         guard !requests.isEmpty else {
             return
         }
@@ -247,8 +250,8 @@ extension VisualRecognition {
         }
 
         // return results after all classification requests have executed
-        dispatchGroup.notify(queue: DispatchQueue.main) {
-            guard let classifiedImages = try? self.convert(results: results) else {
+        dispatchGroup.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
+            guard let classifiedImages = try? self.convert(results: results, threshold: threshold) else {
                 let description = "Failed to represent results as JSON."
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -306,10 +309,16 @@ extension VisualRecognition {
     }
 
     /// Convert results from Core ML classification requests into a `ClassifiedImages` model.
-    private func convert(results: [(MLModel, [VNClassificationObservation])]) throws -> ClassifiedImages {
+    private func convert(
+        results: [(MLModel, [VNClassificationObservation])],
+        threshold: Double? = nil)
+        throws -> ClassifiedImages
+    {
         var classifiers = [[String: Any]]()
-        for (model, observations) in results {
-            let observations = observations.filter() { $0.confidence > 0.01 }
+        for (model, var observations) in results {
+            if let threshold = threshold {
+                observations = observations.filter() { $0.confidence > Float(threshold) }
+            }
             let description = model.modelDescription
             let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
             let classifierResults: [String: Any] = [
@@ -359,9 +368,16 @@ extension VisualRecognition {
 
         // locate downloads directory
         let fileManager = FileManager.default
-        let downloadDirectories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
-        guard let downloads = downloadDirectories.first else {
-            let description = "Cannot locate downloads directory."
+        let downloads: URL
+        do {
+            downloads = try fileManager.url(
+                for: .downloadsDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+        } catch {
+            let description = "Failed to locate downloads directory: \(error.localizedDescription)"
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -379,7 +395,7 @@ extension VisualRecognition {
         }
 
         // specify file destinations
-        let sourceModelURL = downloads.appendingPathComponent(classifierID + ".mlmodel")
+        let sourceModelURL = downloads.appendingPathComponent(classifierID + ".mlmodel", isDirectory: false)
         var compiledModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
 
         // execute REST request
@@ -411,14 +427,14 @@ extension VisualRecognition {
             let compiledModelTemporaryURL: URL
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
-                defer { try? fileManager.removeItem(at: compiledModelTemporaryURL) }
             } catch {
-                let description = "Could not compile Core ML model from source: \(error)"
+                let description = "Could not compile Core ML model from source: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
                 return
             }
+            defer { try? fileManager.removeItem(at: compiledModelTemporaryURL) }
 
             // move compiled model
             do {

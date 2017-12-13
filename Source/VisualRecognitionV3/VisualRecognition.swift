@@ -30,6 +30,7 @@ public class VisualRecognition {
     public var defaultHeaders = [String: String]()
     
     internal let apiKey: String
+    internal let apiKeyTestServer: String // TODO: remove before release
     internal let version: String
     internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     
@@ -40,9 +41,10 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date in
         "YYYY-MM-DD" format.
      */
-    public init(apiKey: String, version: String) {
+    public init(apiKey: String, version: String, apiKeyTestServer: String) {
         self.apiKey = apiKey
         self.version = version
+        self.apiKeyTestServer = apiKeyTestServer
     }
     
     /**
@@ -576,18 +578,24 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
+        // TODO: revert networking from test server to public service
+        // url: serviceURL + "/v3/classifiers/\(classifierID)"
+
         // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+        // var queryParameters = [URLQueryItem]()
+        // queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        // queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // set headers with api key for test server
+        var headers = defaultHeaders
+        headers["X-API-Key"] = apiKeyTestServer
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v3/classifiers/\(classifierID)",
+            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)",
             credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            headerParameters: headers
         )
         
         // execute REST request

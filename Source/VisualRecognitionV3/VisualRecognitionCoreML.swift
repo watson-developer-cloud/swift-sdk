@@ -58,7 +58,8 @@ extension VisualRecognition {
         success: (() -> Void)? = nil)
     {
         // setup date formatter '2017-12-04T19:44:27.419Z'
-        let dateFormatter = ISO8601DateFormatter()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 
         // locate model on disk
         guard let model = try? loadModelFromDisk(classifierID: classifierID) else {

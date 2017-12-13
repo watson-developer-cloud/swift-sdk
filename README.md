@@ -1244,28 +1244,27 @@ visualRecognition.classify(image: url, failure: failure) { classifiedImages in
 ```
 
 ### Using Core ML
+
 The Watson Swift SDK supports offline image classification using Apple Core ML. Classifiers must be trained or updated with the `coreMLEnabled` flag set to true. Once the classifier's `coreMLStatus` is `ready` it is available to download and use for offline classification. 
 
 The following example demonstrates how to download a classifier's Core ML model and use it offline:
+
 ```swift
-let classifierID = ["your-classifier-id"]
+let classifierID = "your-classifier-id"
 let failure = { (error: Error) in print(error) }
-visualRecognition.updateLocalModel(
-    classifierID: classifierID,
-    failure: failure) {
-        _ in
-        visualRecognition.classify(..., failure: failure) { classifiedImages in
-            print(classifiedImages)
-        }
+let image = UIImage(named: "your-image-filename")
+visualRecognition.updateLocalModel(classifierID: classifierID, failure: failure) {
+    visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], failure: failure) {
+        classifiedImages in print(classifiedImages)
     }
+}
 ```
 
 The following example demonstrates how to list the Core ML models that are stored in the filesystem and available for offline use:
+
 ```swift
-let failure = { (error: Error) in print(error) }
-visualRecognition.listCoreMLModels(failure: failure) { classifiers in
-    print(classifiers)
-}
+let localModels = try! visualRecognition.listLocalModels()
+print(localModels)
 ```
 
 The following links provide more information about the IBM Watson Visual Recognition service:

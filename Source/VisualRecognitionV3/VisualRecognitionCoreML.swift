@@ -367,9 +367,16 @@ extension VisualRecognition {
 
         // locate downloads directory
         let fileManager = FileManager.default
-        let downloadDirectories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
-        guard let downloads = downloadDirectories.first else {
-            let description = "Cannot locate downloads directory."
+        let downloads: URL
+        do {
+            downloads = try fileManager.url(
+                for: .downloadsDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+        } catch {
+            let description = "Failed to locate downloads directory: \(error.localizedDescription)"
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -387,7 +394,7 @@ extension VisualRecognition {
         }
 
         // specify file destinations
-        let sourceModelURL = downloads.appendingPathComponent(classifierID + ".mlmodel")
+        let sourceModelURL = downloads.appendingPathComponent(classifierID + ".mlmodel", isDirectory: false)
         var compiledModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
 
         // execute REST request
@@ -420,7 +427,7 @@ extension VisualRecognition {
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
             } catch {
-                let description = "Could not compile Core ML model from source: \(error)"
+                let description = "Could not compile Core ML model from source: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)

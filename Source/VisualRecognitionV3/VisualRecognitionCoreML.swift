@@ -419,7 +419,6 @@ extension VisualRecognition {
             let compiledModelTemporaryURL: URL
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
-                defer { try? fileManager.removeItem(at: compiledModelTemporaryURL) }
             } catch {
                 let description = "Could not compile Core ML model from source: \(error)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
@@ -427,6 +426,7 @@ extension VisualRecognition {
                 failure?(error)
                 return
             }
+            defer { try? fileManager.removeItem(at: compiledModelTemporaryURL) }
 
             // move compiled model
             do {

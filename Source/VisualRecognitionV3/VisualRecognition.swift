@@ -30,7 +30,7 @@ public class VisualRecognition {
     public var defaultHeaders = [String: String]()
     
     internal let apiKey: String
-    internal let apiKeyTestServer: String // TODO: remove before release
+    internal let apiKeyTestServer: String
     internal let version: String
     internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     
@@ -44,7 +44,7 @@ public class VisualRecognition {
     public init(apiKey: String, version: String, apiKeyTestServer: String) {
         self.apiKey = apiKey
         self.version = version
-        self.apiKeyTestServer = apiKeyTestServer
+        self.apiKeyTestServer = apiKeyTestServer  // TODO: remove before release
     }
     
     /**

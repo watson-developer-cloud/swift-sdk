@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Column Struct Reference</title>
+    <title>Column Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -11,7 +11,7 @@
   </head>
   <body>
     <a name="//apple_ref/swift/Struct/Column" class="dashAnchor"></a>
-    <a title="Column Struct Reference"></a>
+    <a title="Column Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a></p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Column Struct Reference
+        Column Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -37,7 +37,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Enums.html">Enums</a>
+            <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Enums/ColumnType.html">ColumnType</a>
@@ -66,7 +66,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structs</a>
+            <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/Anchor.html">Anchor</a>
@@ -498,18 +498,18 @@ of the problem definition.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
-        <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-        <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ColumnType.html">ColumnType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">goal</span><span class="p">:</span> <span class="kt"><a href="../Enums/Goal.html">Goal</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">isObjective</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">range</span><span class="p">:</span> <span class="kt"><a href="../Enums/Range.html">Range</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">preference</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">significantGain</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">significantLoss</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">insignificantLoss</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">fullName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="nv">key</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ColumnType.html">ColumnType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">goal</span><span class="p">:</span> <span class="kt"><a href="../Enums/Goal.html">Goal</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">isObjective</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">range</span><span class="p">:</span> <span class="kt"><a href="../Enums/Range.html">Range</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">preference</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">significantGain</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">significantLoss</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">insignificantLoss</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fullName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -539,7 +539,7 @@ of the problem definition.</p>
                                 <div>
                                   <p>An indication of whether a column is specified as a <code>Numeric</code> value, a
    <code>Categorical</code> value, a <code>DateTime</code>, or as <code>Text</code>. Specify a list of valid values for a
-   <code>Categorical</code> column by using the <code>range</code> property. For <code>DateAndTime</code> columns, options
+   <code>Categorical</code> column by using the <code><a href="../Structs/Column.html#/s:19TradeoffAnalyticsV16ColumnV5rangeAA5RangeOSgv">range</a></code> property. For <code>DateAndTime</code> columns, options
    must specify values in full ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>). By default,
    the type is <code>Text</code>.</p>
                                 </div>
@@ -555,7 +555,7 @@ of the problem definition.</p>
                                 <div>
                                   <p>The direction of the column. The direction can be minimized (e.g. price of a
    car) or maximized (e.g. safety of a car). Meaningful only for columns for which
-   <code>isObjective</code> is <code>true</code>. By default, the goal is <code>Maximize</code>.</p>
+   <code><a href="../Structs/Column.html#/s:19TradeoffAnalyticsV16ColumnV11isObjectiveSbSgv">isObjective</a></code> is <code>true</code>. By default, the goal is <code>Maximize</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -585,7 +585,7 @@ of the problem definition.</p>
                                   <p>The range of valid values for the column. Any option whose value is outside
    of the specified range is marked as <code>incomplete</code> and is excluded from the resolution.
    By default, the range is calculated from the minimum and maximum values provided in the
-   data set for the column. See the <code>Range</code> model for examples of specifying ranges.</p>
+   data set for the column. See the <code><a href="../Enums/Range.html">Range</a></code> model for examples of specifying ranges.</p>
                                 </div>
                               </td>
                             </tr>
@@ -615,7 +615,7 @@ of the problem definition.</p>
                                 <div>
                                   <p>A significant gain for the column in the range of 0 to 1. The
    value is a proportion of the complete range for the column. The field is relevant only
-   for columns whose <code>isObjective</code> property is <code>true</code>.</p>
+   for columns whose <code><a href="../Structs/Column.html#/s:19TradeoffAnalyticsV16ColumnV11isObjectiveSbSgv">isObjective</a></code> property is <code>true</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -629,7 +629,7 @@ of the problem definition.</p>
                                 <div>
                                   <p>A significant loss for the column in the range of 0 to 1. The
    value is a proportion of the complete range for the column. The field is relevant only
-   for columns whose <code>isObjective</code> property is <code>true</code>.</p>
+   for columns whose <code><a href="../Structs/Column.html#/s:19TradeoffAnalyticsV16ColumnV11isObjectiveSbSgv">isObjective</a></code> property is <code>true</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -643,7 +643,7 @@ of the problem definition.</p>
                                 <div>
                                   <p>An insignificant loss for the column in the range of 0 to 1.
    The value is a proportion of the complete range for the column. The field is relevant
-   only for columns whose <code>isObjective</code> property is <code>true</code>.</p>
+   only for columns whose <code><a href="../Structs/Column.html#/s:19TradeoffAnalyticsV16ColumnV11isObjectiveSbSgv">isObjective</a></code> property is <code>true</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -761,8 +761,8 @@ of the problem definition.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-12-13)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

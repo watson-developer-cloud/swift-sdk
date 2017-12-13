@@ -281,7 +281,7 @@ extension VisualRecognition {
         }
 
         // search for model in application support directory
-        let downloadedModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
+        let downloadedModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc", isDirectory: false)
         if fileManager.fileExists(atPath: downloadedModelURL.path) {
             return downloadedModelURL
         }
@@ -403,7 +403,7 @@ extension VisualRecognition {
 
         // specify file destinations
         let sourceModelURL = downloads.appendingPathComponent(classifierID + ".mlmodel", isDirectory: false)
-        var compiledModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
+        var compiledModelURL = appSupport.appendingPathComponent(classifierID + ".mlmodelc", isDirectory: false)
 
         // execute REST request
         request.download(to: sourceModelURL) { response, error in

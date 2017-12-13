@@ -20,27 +20,138 @@ import Vision
 
 @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
 extension VisualRecognition {
-    
+
+    // MARK: - Public API
+
     /**
-     Classify an image using a local Core ML model.
+     Retrieve a Core ML model from the local filesystem.
+
+     - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the local Core ML model.
+     */
+    public func getLocalModel(
+        classifierID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: ((MLModel) -> Void)? = nil)
+    {
+        do {
+            let modelURL = try loadModelFromDisk(classifierID: classifierID)
+            success?(modelURL)
+        } catch {
+            failure?(error)
+        }
+    }
+
+    /**
+     Download the latest Core ML model to the local filesystem, unless the latest version
+     is already available locally. The classifier must have a `coreMLStatus` of `ready`
+     in order to download the latest model.
+
+     - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed after the local model has been updated.
+     */
+    public func updateLocalModel(
+        classifierID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: (() -> Void)? = nil)
+    {
+        // setup date formatter '2017-12-04T19:44:27.419Z'
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+
+        // locate model on disk
+        guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
+            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+            return
+        }
+
+        // parse model's `updated` date
+        let description = model.modelDescription
+        let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
+        guard let updated = metadata["updated"], let modelDate = dateFormatter.date(from: updated) else {
+            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+            return
+        }
+
+        // parse classifier's `updated` date
+        getClassifier(withID: classifierID, failure: failure) { classifier in
+            guard let classifierDate = dateFormatter.date(from: classifier.updated) else {
+                self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+                return
+            }
+
+            // download the latest model if a newer version is available
+            if classifierDate > modelDate && classifier.coreMLStatus == "ready" {
+                self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+            } else {
+                success?();
+            }
+        }
+    }
+
+    /**
+     List the Core ML models stored in the local filesystem.
+
+     - returns: A list of classifier IDs with local Core ML models that are available for classification.
+     */
+    public func listLocalModels() throws -> [String] {
+        var models = Set<String>()
+
+        // search for models in the main bundle
+        if let modelURLs = Bundle.main.urls(forResourcesWithExtension: "mlmodelc", subdirectory: nil) {
+            for modelURL in modelURLs {
+                let classifierID = String(modelURL.path.split(separator: ".")[0])
+                models.insert(classifierID)
+            }
+        }
+
+        // locate application support directory
+        let fileManager = FileManager.default
+        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        guard let applicationSupport = applicationSupportDirectories.first else {
+            let description = "Failed to locate the application support directory."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            throw error
+        }
+
+        // search for models in the application support directory
+        let allContents = try fileManager.contentsOfDirectory(atPath: applicationSupport.path)
+        let modelPaths = allContents.filter() { $0.contains(".mlmodelc") }
+        for modelPath in modelPaths {
+            let classifierID = String(modelPath.split(separator: ".")[0])
+            models.insert(classifierID)
+        }
+
+        return Array(models)
+    }
+
+    /**
+     Delete a Core ML model from the local filesystem.
+
+     - parameter classifierID: The ID of the classifier whose Core ML model shall be deleted.
+     */
+    public func deleteLocalModel(classifierID: String) throws {
+        let modelURL = try locateModelOnDisk(classifierID: classifierID)
+        try FileManager.default.removeItem(at: modelURL)
+    }
+
+    /**
+     Classify an image using a Core ML model from the local filesystem.
      
      - parameter image: The image to classify.
-     - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
        built-in classifier.
      - parameter threshold: The minimum score a class must have to be displayed in the response.
-     - parameter language: The language of the output class names. Can be "en" (English), "es"
-       (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
-       are omitted.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the image classifications.
      */
-    public func classifyLocally(
+    public func classifyWithLocalModel(
         image: UIImage,
-        owners: [String]? = nil,
-        classifierIDs: [String]? = nil,
+        classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        language: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
@@ -53,30 +164,36 @@ extension VisualRecognition {
             return
         }
 
-        // use default classifier if none specified
-        let classifierIDs = classifierIDs ?? ["default"]
+        // ensure a classifier id was provided
+        guard !classifierIDs.isEmpty else {
+            let description = "Please provide at least one classifierID."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
 
         // construct each classification request
         var requests = [VNCoreMLRequest]()
         var results = [(MLModel, [VNClassificationObservation])]()
         let dispatchGroup = DispatchGroup()
-        for classifierId in classifierIDs {
+        for classifierID in classifierIDs {
             dispatchGroup.enter()
 
             // get classifier model
-            guard let model = getCoreMLModelLocally(classifierID: classifierId) else {
+            guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
                 dispatchGroup.leave()
-                let description = "Failed to get the Core ML model for classifier \(classifierId)"
+                let description = "Failed to get the Core ML model for classifier \(classifierID)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
                 continue
             }
-            
+
             // convert MLModel to VNCoreMLModel
             guard let classifier = try? VNCoreMLModel(for: model) else {
                 dispatchGroup.leave()
-                let description = "Could not convert MLModel to VNCoreMLModel for classifier \(classifierId)"
+                let description = "Could not convert MLModel to VNCoreMLModel for classifier \(classifierID)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -87,7 +204,7 @@ extension VisualRecognition {
             let request = VNCoreMLRequest(model: classifier) { request, error in
                 guard error == nil else {
                     dispatchGroup.leave()
-                    let description = "Classifier \(classifierId) failed with error: \(error!)"
+                    let description = "Classifier \(classifierID) failed with error: \(error!)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                     failure?(error)
@@ -95,7 +212,7 @@ extension VisualRecognition {
                 }
                 guard let observations = request.results as? [VNClassificationObservation] else {
                     dispatchGroup.leave()
-                    let description = "Failed to parse results for classifier \(classifierId)"
+                    let description = "Failed to parse results for classifier \(classifierID)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                     failure?(error)
@@ -109,6 +226,11 @@ extension VisualRecognition {
             request.imageCropAndScaleOption = .scaleFill
 
             requests.append(request)
+        }
+
+        // fail if no requests were constructed
+        guard !requests.isEmpty else {
+            return
         }
 
         // execute each classification request
@@ -128,8 +250,8 @@ extension VisualRecognition {
         }
 
         // return results after all classification requests have executed
-        dispatchGroup.notify(queue: DispatchQueue.main) {
-            guard let classifiedImages = try? self.convert(results: results) else {
+        dispatchGroup.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
+            guard let classifiedImages = try? self.convert(results: results, threshold: threshold) else {
                 let description = "Failed to represent results as JSON."
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -140,11 +262,63 @@ extension VisualRecognition {
         }
     }
 
+    // MARK: - Private Helper Functions
+
+    /**
+     Locate a Core ML model on disk. The model must be named "[classifier-id].mlmodelc" and reside in the
+     application support directory or main bundle.
+     */
+    private func locateModelOnDisk(classifierID: String) throws -> URL {
+
+        // locate application support directory
+        let fileManager = FileManager.default
+        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        guard let applicationSupport = applicationSupportDirectories.first else {
+            let description = "Failed to locate application support directory."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            throw error
+        }
+
+        // search for model in application support directory
+        let downloadedModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
+        if fileManager.fileExists(atPath: downloadedModelURL.path) {
+            return downloadedModelURL
+        }
+
+        // search for model in main bundle
+        let bundledModelURL = Bundle.main.url(forResource: classifierID, withExtension: ".mlmodelc")
+        if let bundledModelURL = bundledModelURL {
+            return bundledModelURL
+        }
+
+        // model not found -> throw an error
+        let description = "Failed to locate a Core ML model on disk for classifier \(classifierID)."
+        let userInfo = [NSLocalizedDescriptionKey: description]
+        let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+        throw error
+    }
+
+    /**
+     Load a Core ML model from disk. The model must be named "[classifier-id].mlmodelc" and reside in the
+     application support directory or main bundle.
+     */
+    private func loadModelFromDisk(classifierID: String) throws -> MLModel {
+        let modelURL = try locateModelOnDisk(classifierID: classifierID)
+        return try MLModel(contentsOf: modelURL)
+    }
+
     /// Convert results from Core ML classification requests into a `ClassifiedImages` model.
-    private func convert(results: [(MLModel, [VNClassificationObservation])]) throws -> ClassifiedImages {
+    private func convert(
+        results: [(MLModel, [VNClassificationObservation])],
+        threshold: Double? = nil)
+        throws -> ClassifiedImages
+    {
         var classifiers = [[String: Any]]()
-        for (model, observations) in results {
-            let observations = observations.filter() { $0.confidence > 0.01 }
+        for (model, var observations) in results {
+            if let threshold = threshold {
+                observations = observations.filter() { $0.confidence > Float(threshold) }
+            }
             let description = model.modelDescription
             let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
             let classifierResults: [String: Any] = [
@@ -159,142 +333,51 @@ extension VisualRecognition {
         let classifiedImages: [String: Any] = ["images": [classifiedImage]]
         return try ClassifiedImages(json: JSONWrapper(dictionary: classifiedImages))
     }
-    
+
     /**
-     Update the local CoreML model by pulling down the latest available version from the IBM cloud.
-     
-     - parameter classifierID: The classifier id to update
-     - parameter apiKey: TEMPORARY param needed to access solution kit server
+     Download a CoreML model to the local filesystem.
+
+     - parameter classifierID: The classifierID of the requested model.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the image classifications.
+     - parameter success: A function executed with the local Core ML model.
      */
-    public func updateCoreMLModelLocally(
+    private func downloadClassifier(
         classifierID: String,
-        apiKey: String,
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil)
     {
-        // setup urls and filepaths
-        let baseUrl = "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/"
-        let urlString = baseUrl + classifierID + "/model"
-        let modelFileName = classifierID + ".mlmodelc"
-        let tempFileName = "temp_" + UUID().uuidString + ".mlmodel"
-        guard let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
-            print("Could not get application support directory")
-            return
-        }
-        let tempPath = appSupportDir.appendingPathComponent(tempFileName)
-        var modelPath = appSupportDir.appendingPathComponent(modelFileName)
+        // TODO: revert networking from test server to public service
+        // url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model"
 
-        // setup request
-        guard let requestUrl = URL(string: urlString) else { return }
-        var request = URLRequest(url:requestUrl)
-        request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
-        
-        let task = URLSession.shared.dataTask(with: request) {
-            (data, response, error) in
-            
-            if let error = error {
-                print(error)
-                failure?(error)
-                return
-            }
-            
-            guard let usableData = data  else {
-                print("No usable data in response")
-                return
-            }
-            
-            // store model spec to temp location
-            try? FileManager.default.removeItem(at: tempPath)
-            let saveSuccess = FileManager.default.createFile(atPath: tempPath.path, contents: usableData, attributes: nil)
-            print("New model spec was saved to file: \(saveSuccess)")
-            
-            // compile spec and write to final location
-            guard let compiledPath = try? MLModel.compileModel(at: tempPath) else {
-                print("Error compiling new model")
-                return
-            }
-            try? FileManager.default.removeItem(at: modelPath)
-            try? FileManager.default.copyItem(at: compiledPath, to: modelPath)
-            
-            // exclude from backup
-            var resourceVals = URLResourceValues()
-            resourceVals.isExcludedFromBackup = true
-            try? modelPath.setResourceValues(resourceVals)
-            
-            print("new Model compiled for classifier: " + classifierID)
-            
-            // cleanup
-            try? FileManager.default.removeItem(at: tempPath)
-            
-            success?()
-        }
-        task.resume()
-    }
-    
-    /**
-     Retrieve a Core ML model that was downloaded to the local filesystem.
-     
-     - parameter classifierID: The classifier ID of the model to retrieve.
-     - returns: The Core ML model of the given classifier, or `nil` if the model has not yet been downloaded.
-     */
-    public func getCoreMLModelLocally(classifierID: String) -> MLModel? {
-
-        // locate application support directory
-        let fileManager = FileManager.default
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            return nil
-        }
-
-        // construct model file path
-        let modelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
-
-        // ensure the model file exists
-        guard fileManager.fileExists(atPath: modelURL.path) else {
-            return nil
-        }
-        
-        // load model file from disk
-        guard let model = try? MLModel(contentsOf: modelURL) else {
-            return nil
-        }
-        
-        return model
-    }
-
-    /**
-     Downloads a CoreML model to the local file system.
-
-     - parameter classifierId: The classifierId of the requested model.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the URL of the compiled CoreML model.
-     */
-    func downloadClassifier(
-        classifierId: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (URL) -> Void)
-    {
         // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
+        // var queryParameters = [URLQueryItem]()
+        // queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        // queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct header parameters for test server
+        var headerParameters = defaultHeaders
+        headerParameters["X-API-Key"] = apiKeyTestServer
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v3/classifiers/\(classifierId)/core_ml_model",
+            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)/model",
             credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            headerParameters: headerParameters
         )
 
         // locate downloads directory
         let fileManager = FileManager.default
-        let downloadDirectories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
-        guard let downloads = downloadDirectories.first else {
-            let description = "Cannot locate downloads directory."
+        let downloads: URL
+        do {
+            downloads = try fileManager.url(
+                for: .downloadsDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+        } catch {
+            let description = "Failed to locate downloads directory: \(error.localizedDescription)"
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -304,7 +387,7 @@ extension VisualRecognition {
         // locate application support directory
         let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         guard let applicationSupport = applicationSupportDirectories.first else {
-            let description = "Cannot locate application support directory."
+            let description = "Failed to locate application support directory."
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -312,11 +395,13 @@ extension VisualRecognition {
         }
 
         // specify file destinations
-        let sourceModelURL = downloads.appendingPathComponent(classifierId + ".mlmodel")
-        var compiledModelURL = applicationSupport.appendingPathComponent(classifierId + ".mlmodelc")
+        let sourceModelURL = downloads.appendingPathComponent(classifierID + ".mlmodel", isDirectory: false)
+        var compiledModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
 
         // execute REST request
         request.download(to: sourceModelURL) { response, error in
+            defer { try? fileManager.removeItem(at: sourceModelURL) }
+
             guard error == nil else {
                 failure?(error!)
                 return
@@ -343,23 +428,22 @@ extension VisualRecognition {
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
             } catch {
-                let description = "Could not compile Core ML model from source: \(error)"
+                let description = "Could not compile Core ML model from source: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
                 return
             }
+            defer { try? fileManager.removeItem(at: compiledModelTemporaryURL) }
 
-            // move compiled model and clean up files
+            // move compiled model
             do {
-                if fileManager.fileExists(atPath: compiledModelURL.absoluteString) {
+                if fileManager.fileExists(atPath: compiledModelURL.path) {
                     try fileManager.removeItem(at: compiledModelURL)
                 }
                 try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
-                try fileManager.removeItem(at: compiledModelTemporaryURL)
-                try fileManager.removeItem(at: sourceModelURL)
             } catch {
-                let description = "Failed to move compiled model and clean up files: \(error)"
+                let description = "Failed to move compiled model: \(error)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -378,7 +462,7 @@ extension VisualRecognition {
                 failure?(error)
             }
 
-            success(compiledModelURL)
+            success?()
         }
     }
 }

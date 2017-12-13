@@ -1306,6 +1306,25 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
     <span class="nf">print</span><span class="p">(</span><span class="n">classifiedImages</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
+<h3 id='using-core-ml' class='heading'>Using Core ML</h3>
+
+<p>The Watson Swift SDK supports offline image classification using Apple Core ML. Classifiers must be trained or updated with the <code>coreMLEnabled</code> flag set to true. Once the classifier&rsquo;s <code>coreMLStatus</code> is <code>ready</code> then a Core ML model is available to download and use for offline classification. </p>
+
+<p>The following example demonstrates how to download a classifier&rsquo;s Core ML model and use it offline:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">classifierID</span> <span class="o">=</span> <span class="s">"your-classifier-id"</span>
+<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"your-image-filename"</span><span class="p">)</span>
+<span class="n">visualRecognition</span><span class="o">.</span><span class="nf">updateLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="n">classifierID</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">visualRecognition</span><span class="o">.</span><span class="nf">classifyWithLocalModel</span><span class="p">(</span><span class="nv">image</span><span class="p">:</span> <span class="n">image</span><span class="p">,</span> <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="n">classifierID</span><span class="p">],</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">classifiedImages</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">classifiedImages</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>The following example demonstrates how to list the Core ML models that are stored in the filesystem and available for offline use:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">localModels</span> <span class="o">=</span> <span class="k">try!</span> <span class="n">visualRecognition</span><span class="o">.</span><span class="nf">listLocalModels</span><span class="p">()</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">localModels</span><span class="p">)</span>
+</code></pre>
 
 <p>The following links provide more information about the IBM Watson Visual Recognition service:</p>
 

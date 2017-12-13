@@ -27,20 +27,10 @@ extension VisualRecognition {
      Retrieve a Core ML model from the local filesystem.
 
      - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the local Core ML model.
+     - returns: A Core ML model loaded from the local filesystem.
      */
-    public func getLocalModel(
-        classifierID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: ((MLModel) -> Void)? = nil)
-    {
-        do {
-            let modelURL = try loadModelFromDisk(classifierID: classifierID)
-            success?(modelURL)
-        } catch {
-            failure?(error)
-        }
+    public func getLocalModel(classifierID: String) throws -> MLModel {
+        return try loadModelFromDisk(classifierID: classifierID)
     }
 
     /**

@@ -281,7 +281,7 @@ extension VisualRecognition {
         }
 
         // search for model in application support directory
-        let downloadedModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
+        let downloadedModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc", isDirectory: false)
         if fileManager.fileExists(atPath: downloadedModelURL.path) {
             return downloadedModelURL
         }
@@ -385,9 +385,16 @@ extension VisualRecognition {
         }
 
         // locate application support directory
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            let description = "Failed to locate application support directory."
+        let appSupport: URL
+        do {
+            appSupport = try fileManager.url(
+                for: .applicationSupportDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+        } catch {
+            let description = "Failed to locate application support directory: \(error.localizedDescription)"
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -396,7 +403,7 @@ extension VisualRecognition {
 
         // specify file destinations
         let sourceModelURL = downloads.appendingPathComponent(classifierID + ".mlmodel", isDirectory: false)
-        var compiledModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc")
+        var compiledModelURL = appSupport.appendingPathComponent(classifierID + ".mlmodelc", isDirectory: false)
 
         // execute REST request
         request.download(to: sourceModelURL) { response, error in
@@ -439,9 +446,10 @@ extension VisualRecognition {
             // move compiled model
             do {
                 if fileManager.fileExists(atPath: compiledModelURL.path) {
-                    try fileManager.removeItem(at: compiledModelURL)
+                    _ = try fileManager.replaceItemAt(compiledModelURL, withItemAt: compiledModelTemporaryURL)
+                } else {
+                    try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
                 }
-                try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
             } catch {
                 let description = "Failed to move compiled model: \(error)"
                 let userInfo = [NSLocalizedDescriptionKey: description]

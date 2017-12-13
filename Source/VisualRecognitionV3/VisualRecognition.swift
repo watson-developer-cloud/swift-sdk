@@ -593,7 +593,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: "solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)", // serviceURL + "/v3/classifiers/\(classifierID)",
+            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)",
             credentials: .apiKey,
             headerParameters: headers
         )

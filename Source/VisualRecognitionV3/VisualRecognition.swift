@@ -578,24 +578,24 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
+        // TODO: revert networking from test server to public service
+        // url: serviceURL + "/v3/classifiers/\(classifierID)"
+
         // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
+        // var queryParameters = [URLQueryItem]()
+        // queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        // queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // set headers with api key for test server
-        // TODO: remove these headers before release
         var headers = defaultHeaders
         headers["X-API-Key"] = apiKeyTestServer
 
         // construct REST request
-        // TODO: reset values from test server before release
         let request = RestRequest(
             method: "GET",
             url: "solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)", // serviceURL + "/v3/classifiers/\(classifierID)",
             credentials: .apiKey,
-            headerParameters: headers, // defaultHeaders,
-            queryItems: queryParameters
+            headerParameters: headers
         )
         
         // execute REST request

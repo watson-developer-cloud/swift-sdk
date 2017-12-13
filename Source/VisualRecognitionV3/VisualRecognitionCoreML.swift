@@ -233,15 +233,19 @@ extension VisualRecognition {
         }
 
         // execute each classification request
-        do {
-            let requestHandler = VNImageRequestHandler(data: image)
-            try requestHandler.perform(requests)
-        } catch {
-            let description = "Failed to process classification requests: \(error)"
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
-            return
+        requests.forEach() { request in
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    let requestHandler = VNImageRequestHandler(data: image)
+                    try requestHandler.perform([request])
+                } catch {
+                    let description = "Failed to process classification request: \(error)"
+                    let userInfo = [NSLocalizedDescriptionKey: description]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+            }
         }
 
         // return results after all classification requests have executed

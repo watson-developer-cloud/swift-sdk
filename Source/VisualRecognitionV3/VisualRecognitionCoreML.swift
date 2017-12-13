@@ -446,9 +446,10 @@ extension VisualRecognition {
             // move compiled model
             do {
                 if fileManager.fileExists(atPath: compiledModelURL.path) {
-                    try fileManager.removeItem(at: compiledModelURL)
+                    _ = try fileManager.replaceItemAt(compiledModelURL, withItemAt: compiledModelTemporaryURL)
+                } else {
+                    try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
                 }
-                try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
             } catch {
                 let description = "Failed to move compiled model: \(error)"
                 let userInfo = [NSLocalizedDescriptionKey: description]

@@ -385,9 +385,16 @@ extension VisualRecognition {
         }
 
         // locate application support directory
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            let description = "Failed to locate application support directory."
+        let appSupport: URL
+        do {
+            appSupport = try fileManager.url(
+                for: .applicationSupportDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true
+            )
+        } catch {
+            let description = "Failed to locate application support directory: \(error.localizedDescription)"
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)

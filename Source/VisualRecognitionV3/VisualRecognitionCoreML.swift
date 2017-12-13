@@ -249,7 +249,7 @@ extension VisualRecognition {
         }
 
         // return results after all classification requests have executed
-        dispatchGroup.notify(queue: DispatchQueue.main) {
+        dispatchGroup.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
             guard let classifiedImages = try? self.convert(results: results, threshold: threshold) else {
                 let description = "Failed to represent results as JSON."
                 let userInfo = [NSLocalizedDescriptionKey: description]

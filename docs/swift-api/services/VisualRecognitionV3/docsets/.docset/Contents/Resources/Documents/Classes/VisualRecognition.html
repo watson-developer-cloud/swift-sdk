@@ -2257,9 +2257,9 @@ a max of 100 results.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C13getLocalModelySS12classifierID_ys5Error_pcSg7failureySo7MLModelCcSg7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getLocalModel(classifierID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getLocalModelySS12classifierID_ys5Error_pcSg7failureySo7MLModelCcSg7successtF">getLocalModel(classifierID:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C13getLocalModelSo7MLModelCSS12classifierID_tKF"></a>
+                    <a name="//apple_ref/swift/Method/getLocalModel(classifierID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getLocalModelSo7MLModelCSS12classifierID_tKF">getLocalModel(classifierID:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2274,10 +2274,7 @@ a max of 100 results.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getLocalModel</span><span class="p">(</span>
-    <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="p">((</span><span class="kt">MLModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">MLModel</span></code></pre>
 
                         </div>
                       </div>
@@ -2297,32 +2294,12 @@ a max of 100 results.</p>
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the local Core ML model.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Core ML model loaded from the local filesystem.</p>
                       </div>
                     </section>
                   </div>

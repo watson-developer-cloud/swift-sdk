@@ -97,22 +97,15 @@ extension VisualRecognition {
             }
         }
 
-        // locate application support directory
-        let fileManager = FileManager.default
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            let description = "Failed to locate the application support directory."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            throw error
-        }
-
         // search for models in the application support directory
-        let allContents = try fileManager.contentsOfDirectory(atPath: applicationSupport.path)
-        let modelPaths = allContents.filter() { $0.contains(".mlmodelc") }
-        for modelPath in modelPaths {
-            let classifierID = String(modelPath.split(separator: ".")[0])
-            models.insert(classifierID)
+        let fileManager = FileManager.default
+        if let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+            let allContents = try fileManager.contentsOfDirectory(atPath: appSupport.path)
+            let modelPaths = allContents.filter() { $0.contains(".mlmodelc") }
+            for modelPath in modelPaths {
+                let classifierID = String(modelPath.split(separator: ".")[0])
+                models.insert(classifierID)
+            }
         }
 
         return Array(models)
@@ -260,20 +253,13 @@ extension VisualRecognition {
      */
     private func locateModelOnDisk(classifierID: String) throws -> URL {
 
-        // locate application support directory
-        let fileManager = FileManager.default
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            let description = "Failed to locate application support directory."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            throw error
-        }
-
         // search for model in application support directory
-        let downloadedModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc", isDirectory: false)
-        if fileManager.fileExists(atPath: downloadedModelURL.path) {
-            return downloadedModelURL
+        let fileManager = FileManager.default
+        if let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+            let modelURL = appSupport.appendingPathComponent(classifierID + ".mlmodelc", isDirectory: false)
+            if fileManager.fileExists(atPath: modelURL.path) {
+                return modelURL
+            }
         }
 
         // search for model in main bundle

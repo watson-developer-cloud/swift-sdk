@@ -164,9 +164,11 @@ extension VisualRecognition {
             dispatchGroup.enter()
 
             // get classifier model
-            guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
+            let model: MLModel
+            do { model = try loadModelFromDisk(classifierID: classifierID) }
+            catch {
                 dispatchGroup.leave()
-                let description = "Failed to get the Core ML model for classifier \(classifierID)"
+                let description = "Failed to load model for classifier \(classifierID): \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -174,9 +176,11 @@ extension VisualRecognition {
             }
 
             // convert MLModel to VNCoreMLModel
-            guard let classifier = try? VNCoreMLModel(for: model) else {
+            let classifier: VNCoreMLModel
+            do { classifier = try VNCoreMLModel(for: model) }
+            catch {
                 dispatchGroup.leave()
-                let description = "Could not convert MLModel to VNCoreMLModel for classifier \(classifierID)"
+                let description = "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -233,8 +237,10 @@ extension VisualRecognition {
 
         // return results after all classification requests have executed
         dispatchGroup.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
-            guard let classifiedImages = try? self.convert(results: results, threshold: threshold) else {
-                let description = "Failed to represent results as JSON."
+            let classifiedImages: ClassifiedImages
+            do { classifiedImages = try self.convert(results: results, threshold: threshold) }
+            catch {
+                let description = "Failed to represent results as JSON: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)

@@ -223,7 +223,7 @@ extension VisualRecognition {
                     let requestHandler = VNImageRequestHandler(data: image)
                     try requestHandler.perform([request])
                 } catch {
-                    let description = "Failed to process classification request: \(error)"
+                    let description = "Failed to process classification request: \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                     failure?(error)
@@ -426,7 +426,7 @@ extension VisualRecognition {
                     try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
                 }
             } catch {
-                let description = "Failed to move compiled model: \(error)"
+                let description = "Failed to move compiled model: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -439,7 +439,7 @@ extension VisualRecognition {
             do {
                 try compiledModelURL.setResourceValues(urlResourceValues)
             } catch {
-                let description = "Could not exclude compiled model from backup: \(error)"
+                let description = "Could not exclude compiled model from backup: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)

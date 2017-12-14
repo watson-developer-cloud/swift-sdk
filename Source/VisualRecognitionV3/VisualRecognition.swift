@@ -388,7 +388,7 @@ public class VisualRecognition {
     /**
      Retrieve a list of custom classifiers.
  
-     - parameter coreMLEnabled: Filter by CoreML enabled classifiers.
+     - parameter coreMLEnabled: Filter by Core ML enabled classifiers.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of classifiers.
      */
@@ -401,11 +401,11 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
         if let coreMLEnabled = coreMLEnabled {
             let queryParameter = URLQueryItem(name: "core_ml_enabled", value: "\(coreMLEnabled)")
             queryParameters.append(queryParameter)
         }
-        queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
         
         // construct REST request
         let request = RestRequest(
@@ -447,7 +447,7 @@ public class VisualRecognition {
         Must contain a minimum of 10 images.
      - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
         subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
-     - parameter coreMLEnabled: Enables the processing of the classifier as a local CoreML model.
+     - parameter coreMLEnabled: Enable Core ML support for this classifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the created classifier.
      */
@@ -617,7 +617,7 @@ public class VisualRecognition {
         Must contain a minimum of 10 images.
      - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
         subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
-     - parameter coreMLEnabled: Enables the processing of the classifier as a local CoreML model.
+     - parameter coreMLEnabled: Enable Core ML support for this classifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the created classifier.
      */

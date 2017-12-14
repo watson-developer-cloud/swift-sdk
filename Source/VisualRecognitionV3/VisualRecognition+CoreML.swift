@@ -51,7 +51,7 @@ extension VisualRecognition {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 
-        // locate model on disk
+        // load model from disk
         guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
             downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             return
@@ -97,22 +97,15 @@ extension VisualRecognition {
             }
         }
 
-        // locate application support directory
-        let fileManager = FileManager.default
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            let description = "Failed to locate the application support directory."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            throw error
-        }
-
         // search for models in the application support directory
-        let allContents = try fileManager.contentsOfDirectory(atPath: applicationSupport.path)
-        let modelPaths = allContents.filter() { $0.contains(".mlmodelc") }
-        for modelPath in modelPaths {
-            let classifierID = String(modelPath.split(separator: ".")[0])
-            models.insert(classifierID)
+        let fileManager = FileManager.default
+        if let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+            let allContents = try fileManager.contentsOfDirectory(atPath: appSupport.path)
+            let modelPaths = allContents.filter() { $0.contains(".mlmodelc") }
+            for modelPath in modelPaths {
+                let classifierID = String(modelPath.split(separator: ".")[0])
+                models.insert(classifierID)
+            }
         }
 
         return Array(models)
@@ -171,9 +164,11 @@ extension VisualRecognition {
             dispatchGroup.enter()
 
             // get classifier model
-            guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
+            let model: MLModel
+            do { model = try loadModelFromDisk(classifierID: classifierID) }
+            catch {
                 dispatchGroup.leave()
-                let description = "Failed to get the Core ML model for classifier \(classifierID)"
+                let description = "Failed to load model for classifier \(classifierID): \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -181,9 +176,11 @@ extension VisualRecognition {
             }
 
             // convert MLModel to VNCoreMLModel
-            guard let classifier = try? VNCoreMLModel(for: model) else {
+            let classifier: VNCoreMLModel
+            do { classifier = try VNCoreMLModel(for: model) }
+            catch {
                 dispatchGroup.leave()
-                let description = "Could not convert MLModel to VNCoreMLModel for classifier \(classifierID)"
+                let description = "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -212,25 +209,24 @@ extension VisualRecognition {
                 dispatchGroup.leave()
             }
 
-            // scale image (this seems wrong but yields results in line with vision demo)
-            request.imageCropAndScaleOption = .scaleFill
-
+            request.imageCropAndScaleOption = .scaleFill // yields results in line with vision demo
             requests.append(request)
         }
 
         // fail if no requests were constructed
         guard !requests.isEmpty else {
-            return
+            return // errors already passed to user
         }
 
         // execute each classification request
+        // (note: using `forEach` because `perform(requests)` caused unexpected behavior)
         requests.forEach() { request in
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
                     let requestHandler = VNImageRequestHandler(data: image)
                     try requestHandler.perform([request])
                 } catch {
-                    let description = "Failed to process classification request: \(error)"
+                    let description = "Failed to process classification request: \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                     failure?(error)
@@ -241,8 +237,10 @@ extension VisualRecognition {
 
         // return results after all classification requests have executed
         dispatchGroup.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
-            guard let classifiedImages = try? self.convert(results: results, threshold: threshold) else {
-                let description = "Failed to represent results as JSON."
+            let classifiedImages: ClassifiedImages
+            do { classifiedImages = try self.convert(results: results, threshold: threshold) }
+            catch {
+                let description = "Failed to represent results as JSON: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -260,26 +258,18 @@ extension VisualRecognition {
      */
     private func locateModelOnDisk(classifierID: String) throws -> URL {
 
-        // locate application support directory
-        let fileManager = FileManager.default
-        let applicationSupportDirectories = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        guard let applicationSupport = applicationSupportDirectories.first else {
-            let description = "Failed to locate application support directory."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            throw error
-        }
-
         // search for model in application support directory
-        let downloadedModelURL = applicationSupport.appendingPathComponent(classifierID + ".mlmodelc", isDirectory: false)
-        if fileManager.fileExists(atPath: downloadedModelURL.path) {
-            return downloadedModelURL
+        let fileManager = FileManager.default
+        if let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+            let modelURL = appSupport.appendingPathComponent(classifierID + ".mlmodelc", isDirectory: false)
+            if fileManager.fileExists(atPath: modelURL.path) {
+                return modelURL
+            }
         }
 
         // search for model in main bundle
-        let bundledModelURL = Bundle.main.url(forResource: classifierID, withExtension: ".mlmodelc")
-        if let bundledModelURL = bundledModelURL {
-            return bundledModelURL
+        if let modelURL = Bundle.main.url(forResource: classifierID, withExtension: ".mlmodelc") {
+            return modelURL
         }
 
         // model not found -> throw an error
@@ -325,11 +315,12 @@ extension VisualRecognition {
     }
 
     /**
-     Download a CoreML model to the local filesystem.
+     Download a Core ML model to the local filesystem. The model is compiled and moved to the application support
+     directory with a filename of `[classifier-id].mlmodelc`.
 
-     - parameter classifierID: The classifierID of the requested model.
+     - parameter classifierID: The classifierID of the model to download.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the local Core ML model.
+     - parameter success: A function executed after the Core ML model has been downloaded and compiled.
      */
     private func downloadClassifier(
         classifierID: String,
@@ -441,7 +432,7 @@ extension VisualRecognition {
                     try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
                 }
             } catch {
-                let description = "Failed to move compiled model: \(error)"
+                let description = "Failed to move compiled model: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
@@ -454,7 +445,7 @@ extension VisualRecognition {
             do {
                 try compiledModelURL.setResourceValues(urlResourceValues)
             } catch {
-                let description = "Could not exclude compiled model from backup: \(error)"
+                let description = "Could not exclude compiled model from backup: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)

@@ -263,9 +263,8 @@ extension VisualRecognition {
         }
 
         // search for model in main bundle
-        let bundledModelURL = Bundle.main.url(forResource: classifierID, withExtension: ".mlmodelc")
-        if let bundledModelURL = bundledModelURL {
-            return bundledModelURL
+        if let modelURL = Bundle.main.url(forResource: classifierID, withExtension: ".mlmodelc") {
+            return modelURL
         }
 
         // model not found -> throw an error

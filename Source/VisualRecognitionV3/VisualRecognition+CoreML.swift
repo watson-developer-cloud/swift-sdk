@@ -51,7 +51,7 @@ extension VisualRecognition {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 
-        // locate model on disk
+        // load model from disk
         guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
             downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             return
@@ -205,18 +205,17 @@ extension VisualRecognition {
                 dispatchGroup.leave()
             }
 
-            // scale image (this seems wrong but yields results in line with vision demo)
-            request.imageCropAndScaleOption = .scaleFill
-
+            request.imageCropAndScaleOption = .scaleFill // yields results in line with vision demo
             requests.append(request)
         }
 
         // fail if no requests were constructed
         guard !requests.isEmpty else {
-            return
+            return // errors already passed to user
         }
 
         // execute each classification request
+        // (note: using `forEach` because `perform(requests)` caused unexpected behavior)
         requests.forEach() { request in
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
@@ -310,11 +309,12 @@ extension VisualRecognition {
     }
 
     /**
-     Download a CoreML model to the local filesystem.
+     Download a Core ML model to the local filesystem. The model is compiled and moved to the application support
+     directory with a filename of `[classifier-id].mlmodelc`.
 
-     - parameter classifierID: The classifierID of the requested model.
+     - parameter classifierID: The classifierID of the model to download.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the local Core ML model.
+     - parameter success: A function executed after the Core ML model has been downloaded and compiled.
      */
     private func downloadClassifier(
         classifierID: String,

@@ -156,72 +156,65 @@ extension VisualRecognition {
             return
         }
 
-        // construct each classification request
-        var requests = [VNCoreMLRequest]()
+        // construct and execute each classification request
         var results = [(MLModel, [VNClassificationObservation])]()
         let dispatchGroup = DispatchGroup()
         for classifierID in classifierIDs {
             dispatchGroup.enter()
 
-            // get classifier model
-            let model: MLModel
-            do { model = try loadModelFromDisk(classifierID: classifierID) }
-            catch {
-                dispatchGroup.leave()
-                let description = "Failed to load model for classifier \(classifierID): \(error.localizedDescription)"
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                continue
-            }
-
-            // convert MLModel to VNCoreMLModel
-            let classifier: VNCoreMLModel
-            do { classifier = try VNCoreMLModel(for: model) }
-            catch {
-                dispatchGroup.leave()
-                let description = "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)"
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
-                continue
-            }
-            
-            // construct classification request
-            let request = VNCoreMLRequest(model: classifier) { request, error in
-                guard error == nil else {
-                    dispatchGroup.leave()
-                    let description = "Classifier \(classifierID) failed with error: \(error!)"
-                    let userInfo = [NSLocalizedDescriptionKey: description]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
-                guard let observations = request.results as? [VNClassificationObservation] else {
-                    dispatchGroup.leave()
-                    let description = "Failed to parse results for classifier \(classifierID)"
-                    let userInfo = [NSLocalizedDescriptionKey: description]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
-                    return
-                }
-                results.append((model, observations))
-                dispatchGroup.leave()
-            }
-
-            request.imageCropAndScaleOption = .scaleFill // yields results in line with vision demo
-            requests.append(request)
-        }
-
-        // fail if no requests were constructed
-        guard !requests.isEmpty else {
-            return // errors already passed to user
-        }
-
-        // execute each classification request
-        // (note: using `forEach` because `perform(requests)` caused unexpected behavior)
-        requests.forEach() { request in
+            // run classification request in background to avoid blocking
             DispatchQueue.global(qos: .userInitiated).async {
+
+                // get classifier model
+                let model: MLModel
+                do { model = try self.loadModelFromDisk(classifierID: classifierID) }
+                catch {
+                    dispatchGroup.leave()
+                    let description = "Failed to load model for classifier \(classifierID): \(error.localizedDescription)"
+                    let userInfo = [NSLocalizedDescriptionKey: description]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+
+                // convert MLModel to VNCoreMLModel
+                let classifier: VNCoreMLModel
+                do { classifier = try VNCoreMLModel(for: model) }
+                catch {
+                    dispatchGroup.leave()
+                    let description = "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)"
+                    let userInfo = [NSLocalizedDescriptionKey: description]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    failure?(error)
+                    return
+                }
+
+                // construct classification request
+                let request = VNCoreMLRequest(model: classifier) { request, error in
+                    guard error == nil else {
+                        dispatchGroup.leave()
+                        let description = "Classifier \(classifierID) failed with error: \(error!)"
+                        let userInfo = [NSLocalizedDescriptionKey: description]
+                        let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                        failure?(error)
+                        return
+                    }
+                    guard let observations = request.results as? [VNClassificationObservation] else {
+                        dispatchGroup.leave()
+                        let description = "Failed to parse results for classifier \(classifierID)"
+                        let userInfo = [NSLocalizedDescriptionKey: description]
+                        let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                        failure?(error)
+                        return
+                    }
+                    results.append((model, observations))
+                    dispatchGroup.leave()
+                }
+
+                // scale image (yields results in line with vision demo)
+                request.imageCropAndScaleOption = .scaleFill
+
+                // execute classification request
                 do {
                     let requestHandler = VNImageRequestHandler(data: image)
                     try requestHandler.perform([request])
@@ -237,6 +230,7 @@ extension VisualRecognition {
 
         // return results after all classification requests have executed
         dispatchGroup.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
+            guard !results.isEmpty else { return }
             let classifiedImages: ClassifiedImages
             do { classifiedImages = try self.convert(results: results, threshold: threshold) }
             catch {

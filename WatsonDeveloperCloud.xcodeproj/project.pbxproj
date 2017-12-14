@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		039B3F661FB368B600A7B5DE /* VisualRecognitionCoreML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039B3F651FB3660700A7B5DE /* VisualRecognitionCoreML.swift */; };
+		039B3F661FB368B600A7B5DE /* VisualRecognition+CoreML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039B3F651FB3660700A7B5DE /* VisualRecognition+CoreML.swift */; };
 		120092691DFF0EF900107C0A /* DeletedConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120092671DFF0EF500107C0A /* DeletedConfiguration.swift */; };
 		1200926B1E005A7300107C0A /* ConfigurationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1200926A1E005A7300107C0A /* ConfigurationDetails.swift */; };
 		1200926D1E01947500107C0A /* DeletedEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1200926C1E01947500107C0A /* DeletedEnvironment.swift */; };
@@ -72,47 +72,6 @@
 		12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */; };
 		12F800631DF770BC006851D6 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F800621DF770BC006851D6 /* Environment.swift */; };
 		681BA1B71F7DCD57006633A3 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B61F7DCD56006633A3 /* Compression.swift */; };
-		68AC590D1F8DCA0000012CCB /* NaturalLanguageUnderstanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58E91F8DC9ED00012CCB /* NaturalLanguageUnderstanding.swift */; };
-		68AC59131F8DCA0C00012CCB /* AnalysisResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59041F8DC9FC00012CCB /* AnalysisResults.swift */; };
-		68AC59141F8DCA0C00012CCB /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59051F8DC9FD00012CCB /* Author.swift */; };
-		68AC59151F8DCA0C00012CCB /* CategoriesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F11F8DC9F900012CCB /* CategoriesOptions.swift */; };
-		68AC59161F8DCA0C00012CCB /* CategoriesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FF1F8DC9FB00012CCB /* CategoriesResult.swift */; };
-		68AC59171F8DCA0C00012CCB /* ConceptsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590E1F8DCA0000012CCB /* ConceptsOptions.swift */; };
-		68AC59181F8DCA0C00012CCB /* ConceptsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FB1F8DC9FA00012CCB /* ConceptsResult.swift */; };
-		68AC59191F8DCA0C00012CCB /* DisambiguationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FC1F8DC9FA00012CCB /* DisambiguationResult.swift */; };
-		68AC591A1F8DCA0C00012CCB /* DocumentEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EF1F8DC9F900012CCB /* DocumentEmotionResults.swift */; };
-		68AC591B1F8DCA0C00012CCB /* DocumentSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F01F8DC9F900012CCB /* DocumentSentimentResults.swift */; };
-		68AC591C1F8DCA0C00012CCB /* EmotionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F41F8DC9FA00012CCB /* EmotionOptions.swift */; };
-		68AC591D1F8DCA0C00012CCB /* EmotionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F51F8DC9FA00012CCB /* EmotionResult.swift */; };
-		68AC591E1F8DCA0C00012CCB /* EmotionScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59031F8DC9FC00012CCB /* EmotionScores.swift */; };
-		68AC591F1F8DCA0C00012CCB /* EntitiesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590C1F8DCA0000012CCB /* EntitiesOptions.swift */; };
-		68AC59201F8DCA0C00012CCB /* EntitiesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FA1F8DC9FA00012CCB /* EntitiesResult.swift */; };
-		68AC59211F8DCA0C00012CCB /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EC1F8DC9F900012CCB /* Features.swift */; };
-		68AC59221F8DCA0C00012CCB /* FeatureSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59061F8DC9FE00012CCB /* FeatureSentimentResults.swift */; };
-		68AC59231F8DCA0C00012CCB /* KeywordsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EA1F8DC9F800012CCB /* KeywordsOptions.swift */; };
-		68AC59241F8DCA0C00012CCB /* KeywordsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F21F8DC9F900012CCB /* KeywordsResult.swift */; };
-		68AC59251F8DCA0C00012CCB /* ListModelsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F91F8DC9FA00012CCB /* ListModelsResults.swift */; };
-		68AC59261F8DCA0C00012CCB /* MetadataOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590F1F8DCA0100012CCB /* MetadataOptions.swift */; };
-		68AC59271F8DCA0C00012CCB /* MetadataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59071F8DC9FE00012CCB /* MetadataResult.swift */; };
-		68AC59281F8DCA0C00012CCB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F61F8DC9FA00012CCB /* Model.swift */; };
-		68AC59291F8DCA0C00012CCB /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F31F8DC9FA00012CCB /* Parameters.swift */; };
-		68AC592A1F8DCA0C00012CCB /* RelationArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FE1F8DC9FB00012CCB /* RelationArgument.swift */; };
-		68AC592B1F8DCA0C00012CCB /* RelationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EE1F8DC9F900012CCB /* RelationEntity.swift */; };
-		68AC592C1F8DCA0C00012CCB /* RelationsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F71F8DC9FA00012CCB /* RelationsOptions.swift */; };
-		68AC592D1F8DCA0C00012CCB /* RelationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59081F8DC9FF00012CCB /* RelationsResult.swift */; };
-		68AC592E1F8DCA0C00012CCB /* SemanticRolesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58ED1F8DC9F900012CCB /* SemanticRolesAction.swift */; };
-		68AC592F1F8DCA0C00012CCB /* SemanticRolesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59101F8DCA0100012CCB /* SemanticRolesEntity.swift */; };
-		68AC59301F8DCA0C00012CCB /* SemanticRolesKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590A1F8DC9FF00012CCB /* SemanticRolesKeyword.swift */; };
-		68AC59311F8DCA0C00012CCB /* SemanticRolesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EB1F8DC9F900012CCB /* SemanticRolesObject.swift */; };
-		68AC59321F8DCA0C00012CCB /* SemanticRolesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59121F8DCA0200012CCB /* SemanticRolesOptions.swift */; };
-		68AC59331F8DCA0C00012CCB /* SemanticRolesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59011F8DC9FB00012CCB /* SemanticRolesResult.swift */; };
-		68AC59341F8DCA0C00012CCB /* SemanticRolesSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59091F8DC9FF00012CCB /* SemanticRolesSubject.swift */; };
-		68AC59351F8DCA0C00012CCB /* SemanticRolesVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F81F8DC9FA00012CCB /* SemanticRolesVerb.swift */; };
-		68AC59361F8DCA0C00012CCB /* SentimentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59021F8DC9FC00012CCB /* SentimentOptions.swift */; };
-		68AC59371F8DCA0C00012CCB /* SentimentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590B1F8DC9FF00012CCB /* SentimentResult.swift */; };
-		68AC59381F8DCA0C00012CCB /* TargetedEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */; };
-		68AC59391F8DCA0C00012CCB /* TargetedSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59001F8DC9FB00012CCB /* TargetedSentimentResults.swift */; };
-		68AC593A1F8DCA0C00012CCB /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FD1F8DC9FB00012CCB /* Usage.swift */; };
 		6823CEBF1F8EA0F200A388EC /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE8A1F8EA0A100A388EC /* Conversation.swift */; };
 		6823CEC01F8EA0F700A388EC /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEAE1F8EA0B000A388EC /* Context.swift */; };
 		6823CEC11F8EA0F700A388EC /* Counterexample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEBA1F8EA0B200A388EC /* Counterexample.swift */; };
@@ -166,6 +125,47 @@
 		6823CEF11F8EA0F700A388EC /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9C1F8EA0AD00A388EC /* Workspace.swift */; };
 		6823CEF21F8EA0F700A388EC /* WorkspaceCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEAD1F8EA0B000A388EC /* WorkspaceCollection.swift */; };
 		6823CEF31F8EA0F700A388EC /* WorkspaceExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9A1F8EA0AC00A388EC /* WorkspaceExport.swift */; };
+		68AC590D1F8DCA0000012CCB /* NaturalLanguageUnderstanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58E91F8DC9ED00012CCB /* NaturalLanguageUnderstanding.swift */; };
+		68AC59131F8DCA0C00012CCB /* AnalysisResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59041F8DC9FC00012CCB /* AnalysisResults.swift */; };
+		68AC59141F8DCA0C00012CCB /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59051F8DC9FD00012CCB /* Author.swift */; };
+		68AC59151F8DCA0C00012CCB /* CategoriesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F11F8DC9F900012CCB /* CategoriesOptions.swift */; };
+		68AC59161F8DCA0C00012CCB /* CategoriesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FF1F8DC9FB00012CCB /* CategoriesResult.swift */; };
+		68AC59171F8DCA0C00012CCB /* ConceptsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590E1F8DCA0000012CCB /* ConceptsOptions.swift */; };
+		68AC59181F8DCA0C00012CCB /* ConceptsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FB1F8DC9FA00012CCB /* ConceptsResult.swift */; };
+		68AC59191F8DCA0C00012CCB /* DisambiguationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FC1F8DC9FA00012CCB /* DisambiguationResult.swift */; };
+		68AC591A1F8DCA0C00012CCB /* DocumentEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EF1F8DC9F900012CCB /* DocumentEmotionResults.swift */; };
+		68AC591B1F8DCA0C00012CCB /* DocumentSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F01F8DC9F900012CCB /* DocumentSentimentResults.swift */; };
+		68AC591C1F8DCA0C00012CCB /* EmotionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F41F8DC9FA00012CCB /* EmotionOptions.swift */; };
+		68AC591D1F8DCA0C00012CCB /* EmotionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F51F8DC9FA00012CCB /* EmotionResult.swift */; };
+		68AC591E1F8DCA0C00012CCB /* EmotionScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59031F8DC9FC00012CCB /* EmotionScores.swift */; };
+		68AC591F1F8DCA0C00012CCB /* EntitiesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590C1F8DCA0000012CCB /* EntitiesOptions.swift */; };
+		68AC59201F8DCA0C00012CCB /* EntitiesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FA1F8DC9FA00012CCB /* EntitiesResult.swift */; };
+		68AC59211F8DCA0C00012CCB /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EC1F8DC9F900012CCB /* Features.swift */; };
+		68AC59221F8DCA0C00012CCB /* FeatureSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59061F8DC9FE00012CCB /* FeatureSentimentResults.swift */; };
+		68AC59231F8DCA0C00012CCB /* KeywordsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EA1F8DC9F800012CCB /* KeywordsOptions.swift */; };
+		68AC59241F8DCA0C00012CCB /* KeywordsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F21F8DC9F900012CCB /* KeywordsResult.swift */; };
+		68AC59251F8DCA0C00012CCB /* ListModelsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F91F8DC9FA00012CCB /* ListModelsResults.swift */; };
+		68AC59261F8DCA0C00012CCB /* MetadataOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590F1F8DCA0100012CCB /* MetadataOptions.swift */; };
+		68AC59271F8DCA0C00012CCB /* MetadataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59071F8DC9FE00012CCB /* MetadataResult.swift */; };
+		68AC59281F8DCA0C00012CCB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F61F8DC9FA00012CCB /* Model.swift */; };
+		68AC59291F8DCA0C00012CCB /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F31F8DC9FA00012CCB /* Parameters.swift */; };
+		68AC592A1F8DCA0C00012CCB /* RelationArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FE1F8DC9FB00012CCB /* RelationArgument.swift */; };
+		68AC592B1F8DCA0C00012CCB /* RelationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EE1F8DC9F900012CCB /* RelationEntity.swift */; };
+		68AC592C1F8DCA0C00012CCB /* RelationsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F71F8DC9FA00012CCB /* RelationsOptions.swift */; };
+		68AC592D1F8DCA0C00012CCB /* RelationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59081F8DC9FF00012CCB /* RelationsResult.swift */; };
+		68AC592E1F8DCA0C00012CCB /* SemanticRolesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58ED1F8DC9F900012CCB /* SemanticRolesAction.swift */; };
+		68AC592F1F8DCA0C00012CCB /* SemanticRolesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59101F8DCA0100012CCB /* SemanticRolesEntity.swift */; };
+		68AC59301F8DCA0C00012CCB /* SemanticRolesKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590A1F8DC9FF00012CCB /* SemanticRolesKeyword.swift */; };
+		68AC59311F8DCA0C00012CCB /* SemanticRolesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EB1F8DC9F900012CCB /* SemanticRolesObject.swift */; };
+		68AC59321F8DCA0C00012CCB /* SemanticRolesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59121F8DCA0200012CCB /* SemanticRolesOptions.swift */; };
+		68AC59331F8DCA0C00012CCB /* SemanticRolesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59011F8DC9FB00012CCB /* SemanticRolesResult.swift */; };
+		68AC59341F8DCA0C00012CCB /* SemanticRolesSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59091F8DC9FF00012CCB /* SemanticRolesSubject.swift */; };
+		68AC59351F8DCA0C00012CCB /* SemanticRolesVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F81F8DC9FA00012CCB /* SemanticRolesVerb.swift */; };
+		68AC59361F8DCA0C00012CCB /* SentimentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59021F8DC9FC00012CCB /* SentimentOptions.swift */; };
+		68AC59371F8DCA0C00012CCB /* SentimentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590B1F8DC9FF00012CCB /* SentimentResult.swift */; };
+		68AC59381F8DCA0C00012CCB /* TargetedEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */; };
+		68AC59391F8DCA0C00012CCB /* TargetedSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59001F8DC9FB00012CCB /* TargetedSentimentResults.swift */; };
+		68AC593A1F8DCA0C00012CCB /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FD1F8DC9FB00012CCB /* Usage.swift */; };
 		68B213EF1F84298B0052DC00 /* CodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */; };
 		68B213F01F84298B0052DC00 /* JSONValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213EE1F8429890052DC00 /* JSONValueTests.swift */; };
 		68BC28661F8C34FE0042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
@@ -328,6 +328,7 @@
 		68BC29031F8C38700042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		68BC29041F8C38700042810E /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		68BC29051F8C38700042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
+		68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */; };
 		7A1B0F291D82645100783EA3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1B0F281D82645100783EA3 /* Model.swift */; };
 		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */; };
@@ -873,7 +874,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		039B3F651FB3660700A7B5DE /* VisualRecognitionCoreML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionCoreML.swift; sourceTree = "<group>"; };
+		039B3F651FB3660700A7B5DE /* VisualRecognition+CoreML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VisualRecognition+CoreML.swift"; sourceTree = "<group>"; };
 		120092671DFF0EF500107C0A /* DeletedConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedConfiguration.swift; sourceTree = "<group>"; };
 		1200926A1E005A7300107C0A /* ConfigurationDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationDetails.swift; sourceTree = "<group>"; };
 		1200926C1E01947500107C0A /* DeletedEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedEnvironment.swift; sourceTree = "<group>"; };
@@ -940,47 +941,6 @@
 		681BA1B31F7DB347006633A3 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		681BA1B41F7DCB1E006633A3 /* RestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestError.swift; sourceTree = "<group>"; };
 		681BA1B61F7DCD56006633A3 /* Compression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compression.swift; sourceTree = "<group>"; };
-		68AC58E91F8DC9ED00012CCB /* NaturalLanguageUnderstanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalLanguageUnderstanding.swift; sourceTree = "<group>"; };
-		68AC58EA1F8DC9F800012CCB /* KeywordsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsOptions.swift; sourceTree = "<group>"; };
-		68AC58EB1F8DC9F900012CCB /* SemanticRolesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesObject.swift; sourceTree = "<group>"; };
-		68AC58EC1F8DC9F900012CCB /* Features.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
-		68AC58ED1F8DC9F900012CCB /* SemanticRolesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesAction.swift; sourceTree = "<group>"; };
-		68AC58EE1F8DC9F900012CCB /* RelationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationEntity.swift; sourceTree = "<group>"; };
-		68AC58EF1F8DC9F900012CCB /* DocumentEmotionResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEmotionResults.swift; sourceTree = "<group>"; };
-		68AC58F01F8DC9F900012CCB /* DocumentSentimentResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSentimentResults.swift; sourceTree = "<group>"; };
-		68AC58F11F8DC9F900012CCB /* CategoriesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesOptions.swift; sourceTree = "<group>"; };
-		68AC58F21F8DC9F900012CCB /* KeywordsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsResult.swift; sourceTree = "<group>"; };
-		68AC58F31F8DC9FA00012CCB /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
-		68AC58F41F8DC9FA00012CCB /* EmotionOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionOptions.swift; sourceTree = "<group>"; };
-		68AC58F51F8DC9FA00012CCB /* EmotionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionResult.swift; sourceTree = "<group>"; };
-		68AC58F61F8DC9FA00012CCB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		68AC58F71F8DC9FA00012CCB /* RelationsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationsOptions.swift; sourceTree = "<group>"; };
-		68AC58F81F8DC9FA00012CCB /* SemanticRolesVerb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesVerb.swift; sourceTree = "<group>"; };
-		68AC58F91F8DC9FA00012CCB /* ListModelsResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModelsResults.swift; sourceTree = "<group>"; };
-		68AC58FA1F8DC9FA00012CCB /* EntitiesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesResult.swift; sourceTree = "<group>"; };
-		68AC58FB1F8DC9FA00012CCB /* ConceptsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptsResult.swift; sourceTree = "<group>"; };
-		68AC58FC1F8DC9FA00012CCB /* DisambiguationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisambiguationResult.swift; sourceTree = "<group>"; };
-		68AC58FD1F8DC9FB00012CCB /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
-		68AC58FE1F8DC9FB00012CCB /* RelationArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationArgument.swift; sourceTree = "<group>"; };
-		68AC58FF1F8DC9FB00012CCB /* CategoriesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResult.swift; sourceTree = "<group>"; };
-		68AC59001F8DC9FB00012CCB /* TargetedSentimentResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetedSentimentResults.swift; sourceTree = "<group>"; };
-		68AC59011F8DC9FB00012CCB /* SemanticRolesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesResult.swift; sourceTree = "<group>"; };
-		68AC59021F8DC9FC00012CCB /* SentimentOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentOptions.swift; sourceTree = "<group>"; };
-		68AC59031F8DC9FC00012CCB /* EmotionScores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionScores.swift; sourceTree = "<group>"; };
-		68AC59041F8DC9FC00012CCB /* AnalysisResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisResults.swift; sourceTree = "<group>"; };
-		68AC59051F8DC9FD00012CCB /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
-		68AC59061F8DC9FE00012CCB /* FeatureSentimentResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureSentimentResults.swift; sourceTree = "<group>"; };
-		68AC59071F8DC9FE00012CCB /* MetadataResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataResult.swift; sourceTree = "<group>"; };
-		68AC59081F8DC9FF00012CCB /* RelationsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationsResult.swift; sourceTree = "<group>"; };
-		68AC59091F8DC9FF00012CCB /* SemanticRolesSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesSubject.swift; sourceTree = "<group>"; };
-		68AC590A1F8DC9FF00012CCB /* SemanticRolesKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesKeyword.swift; sourceTree = "<group>"; };
-		68AC590B1F8DC9FF00012CCB /* SentimentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentResult.swift; sourceTree = "<group>"; };
-		68AC590C1F8DCA0000012CCB /* EntitiesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesOptions.swift; sourceTree = "<group>"; };
-		68AC590E1F8DCA0000012CCB /* ConceptsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptsOptions.swift; sourceTree = "<group>"; };
-		68AC590F1F8DCA0100012CCB /* MetadataOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataOptions.swift; sourceTree = "<group>"; };
-		68AC59101F8DCA0100012CCB /* SemanticRolesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesEntity.swift; sourceTree = "<group>"; };
-		68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetedEmotionResults.swift; sourceTree = "<group>"; };
-		68AC59121F8DCA0200012CCB /* SemanticRolesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesOptions.swift; sourceTree = "<group>"; };
 		6823CE8A1F8EA0A100A388EC /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		6823CE8B1F8EA0AB00A388EC /* RuntimeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeEntity.swift; sourceTree = "<group>"; };
 		6823CE8C1F8EA0AB00A388EC /* ValueCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueCollection.swift; sourceTree = "<group>"; };
@@ -1034,10 +994,52 @@
 		6823CEBC1F8EA0B200A388EC /* DialogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogNode.swift; sourceTree = "<group>"; };
 		6823CEBD1F8EA0B300A388EC /* CounterexampleCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterexampleCollection.swift; sourceTree = "<group>"; };
 		6823CEBE1F8EA0B300A388EC /* CreateDialogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDialogNode.swift; sourceTree = "<group>"; };
+		68AC58E91F8DC9ED00012CCB /* NaturalLanguageUnderstanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalLanguageUnderstanding.swift; sourceTree = "<group>"; };
+		68AC58EA1F8DC9F800012CCB /* KeywordsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsOptions.swift; sourceTree = "<group>"; };
+		68AC58EB1F8DC9F900012CCB /* SemanticRolesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesObject.swift; sourceTree = "<group>"; };
+		68AC58EC1F8DC9F900012CCB /* Features.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
+		68AC58ED1F8DC9F900012CCB /* SemanticRolesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesAction.swift; sourceTree = "<group>"; };
+		68AC58EE1F8DC9F900012CCB /* RelationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationEntity.swift; sourceTree = "<group>"; };
+		68AC58EF1F8DC9F900012CCB /* DocumentEmotionResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEmotionResults.swift; sourceTree = "<group>"; };
+		68AC58F01F8DC9F900012CCB /* DocumentSentimentResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSentimentResults.swift; sourceTree = "<group>"; };
+		68AC58F11F8DC9F900012CCB /* CategoriesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesOptions.swift; sourceTree = "<group>"; };
+		68AC58F21F8DC9F900012CCB /* KeywordsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsResult.swift; sourceTree = "<group>"; };
+		68AC58F31F8DC9FA00012CCB /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
+		68AC58F41F8DC9FA00012CCB /* EmotionOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionOptions.swift; sourceTree = "<group>"; };
+		68AC58F51F8DC9FA00012CCB /* EmotionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionResult.swift; sourceTree = "<group>"; };
+		68AC58F61F8DC9FA00012CCB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		68AC58F71F8DC9FA00012CCB /* RelationsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationsOptions.swift; sourceTree = "<group>"; };
+		68AC58F81F8DC9FA00012CCB /* SemanticRolesVerb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesVerb.swift; sourceTree = "<group>"; };
+		68AC58F91F8DC9FA00012CCB /* ListModelsResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModelsResults.swift; sourceTree = "<group>"; };
+		68AC58FA1F8DC9FA00012CCB /* EntitiesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesResult.swift; sourceTree = "<group>"; };
+		68AC58FB1F8DC9FA00012CCB /* ConceptsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptsResult.swift; sourceTree = "<group>"; };
+		68AC58FC1F8DC9FA00012CCB /* DisambiguationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisambiguationResult.swift; sourceTree = "<group>"; };
+		68AC58FD1F8DC9FB00012CCB /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
+		68AC58FE1F8DC9FB00012CCB /* RelationArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationArgument.swift; sourceTree = "<group>"; };
+		68AC58FF1F8DC9FB00012CCB /* CategoriesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResult.swift; sourceTree = "<group>"; };
+		68AC59001F8DC9FB00012CCB /* TargetedSentimentResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetedSentimentResults.swift; sourceTree = "<group>"; };
+		68AC59011F8DC9FB00012CCB /* SemanticRolesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesResult.swift; sourceTree = "<group>"; };
+		68AC59021F8DC9FC00012CCB /* SentimentOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentOptions.swift; sourceTree = "<group>"; };
+		68AC59031F8DC9FC00012CCB /* EmotionScores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionScores.swift; sourceTree = "<group>"; };
+		68AC59041F8DC9FC00012CCB /* AnalysisResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisResults.swift; sourceTree = "<group>"; };
+		68AC59051F8DC9FD00012CCB /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		68AC59061F8DC9FE00012CCB /* FeatureSentimentResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureSentimentResults.swift; sourceTree = "<group>"; };
+		68AC59071F8DC9FE00012CCB /* MetadataResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataResult.swift; sourceTree = "<group>"; };
+		68AC59081F8DC9FF00012CCB /* RelationsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationsResult.swift; sourceTree = "<group>"; };
+		68AC59091F8DC9FF00012CCB /* SemanticRolesSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesSubject.swift; sourceTree = "<group>"; };
+		68AC590A1F8DC9FF00012CCB /* SemanticRolesKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesKeyword.swift; sourceTree = "<group>"; };
+		68AC590B1F8DC9FF00012CCB /* SentimentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentResult.swift; sourceTree = "<group>"; };
+		68AC590C1F8DCA0000012CCB /* EntitiesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesOptions.swift; sourceTree = "<group>"; };
+		68AC590E1F8DCA0000012CCB /* ConceptsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptsOptions.swift; sourceTree = "<group>"; };
+		68AC590F1F8DCA0100012CCB /* MetadataOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataOptions.swift; sourceTree = "<group>"; };
+		68AC59101F8DCA0100012CCB /* SemanticRolesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesEntity.swift; sourceTree = "<group>"; };
+		68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetedEmotionResults.swift; sourceTree = "<group>"; };
+		68AC59121F8DCA0200012CCB /* SemanticRolesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesOptions.swift; sourceTree = "<group>"; };
 		68B213E71F84296D0052DC00 /* CodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
 		68B213E81F84296D0052DC00 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensionsTests.swift; sourceTree = "<group>"; };
 		68B213EE1F8429890052DC00 /* JSONValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValueTests.swift; sourceTree = "<group>"; };
+		68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VisualRecognition+CoreMLTests.swift"; path = "Tests/VisualRecognitionV3Tests/VisualRecognition+CoreMLTests.swift"; sourceTree = SOURCE_ROOT; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
@@ -2335,7 +2337,7 @@
 			isa = PBXGroup;
 			children = (
 				7AAA9A5A1CEE6089002C9564 /* VisualRecognition.swift */,
-				039B3F651FB3660700A7B5DE /* VisualRecognitionCoreML.swift */,
+				039B3F651FB3660700A7B5DE /* VisualRecognition+CoreML.swift */,
 				7AAA9A471CEE6089002C9564 /* Models */,
 				7AAA9A4F1CEE6089002C9564 /* Tests */,
 			);
@@ -2364,6 +2366,7 @@
 				7AAD66471DCA5D730010481E /* Classes */,
 				7AAD664B1DCA5D730010481E /* Images */,
 				7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */,
+				68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */,
 				CE6B98DB1DF22638004CD6B5 /* metadata.txt */,
 			);
 			path = Tests;
@@ -4421,7 +4424,7 @@
 				68BC28FD1F8C350A0042810E /* RestUtilities.swift in Sources */,
 				68BC28FA1F8C350A0042810E /* RestError.swift in Sources */,
 				7AAAF3DA1CEE9A4700B74848 /* VisualRecognition.swift in Sources */,
-				039B3F661FB368B600A7B5DE /* VisualRecognitionCoreML.swift in Sources */,
+				039B3F661FB368B600A7B5DE /* VisualRecognition+CoreML.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4430,6 +4433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A6C7B4D1D8C960300CD97FA /* Credentials.swift in Sources */,
+				68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */,
 				7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

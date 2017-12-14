@@ -29,9 +29,10 @@ public class VisualRecognition {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
     
-    private let apiKey: String
-    private let version: String
-    private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
+    internal let apiKey: String
+    internal let apiKeyTestServer: String
+    internal let version: String
+    internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     
     /**
      Create a `VisualRecognition` object.
@@ -40,9 +41,10 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date in
         "YYYY-MM-DD" format.
      */
-    public init(apiKey: String, version: String) {
+    public init(apiKey: String, version: String, apiKeyTestServer: String) {
         self.apiKey = apiKey
         self.version = version
+        self.apiKeyTestServer = apiKeyTestServer  // TODO: remove before release
     }
     
     /**
@@ -386,10 +388,12 @@ public class VisualRecognition {
     /**
      Retrieve a list of custom classifiers.
  
+     - parameter coreMLEnabled: Filter by Core ML enabled classifiers.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of classifiers.
      */
     public func getClassifiers(
+        coreMLEnabled: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Classifier]) -> Void)
     {
@@ -398,6 +402,10 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
+        if let coreMLEnabled = coreMLEnabled {
+            let queryParameter = URLQueryItem(name: "core_ml_enabled", value: "\(coreMLEnabled)")
+            queryParameters.append(queryParameter)
+        }
         
         // construct REST request
         let request = RestRequest(
@@ -439,6 +447,7 @@ public class VisualRecognition {
         Must contain a minimum of 10 images.
      - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
         subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
+     - parameter coreMLEnabled: Enable Core ML support for this classifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the created classifier.
      */
@@ -446,6 +455,7 @@ public class VisualRecognition {
         withName name: String,
         positiveExamples: [PositiveExample],
         negativeExamples: URL? = nil,
+        coreMLEnabled: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -466,6 +476,10 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let coreMLEnabled = coreMLEnabled {
+            let queryParameter = URLQueryItem(name: "core_ml_enabled", value: "\(coreMLEnabled)")
+            queryParameters.append(queryParameter)
+        }
         
         // encode name as data
         guard let name = name.data(using: .utf8) else {
@@ -564,18 +578,24 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
+        // TODO: revert networking from test server to public service
+        // url: serviceURL + "/v3/classifiers/\(classifierID)"
+
         // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+        // var queryParameters = [URLQueryItem]()
+        // queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        // queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // set headers with api key for test server
+        var headers = defaultHeaders
+        headers["X-API-Key"] = apiKeyTestServer
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v3/classifiers/\(classifierID)",
+            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)",
             credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            headerParameters: headers
         )
         
         // execute REST request
@@ -597,6 +617,7 @@ public class VisualRecognition {
         Must contain a minimum of 10 images.
      - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
         subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
+     - parameter coreMLEnabled: Enable Core ML support for this classifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the created classifier.
      */
@@ -604,6 +625,7 @@ public class VisualRecognition {
         withID classifierID: String,
         positiveExamples: [PositiveExample]? = nil,
         negativeExamples: URL? = nil,
+        coreMLEnabled: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -621,6 +643,10 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let coreMLEnabled = coreMLEnabled {
+            let queryParameter = URLQueryItem(name: "core_ml_enabled", value: "\(coreMLEnabled)")
+            queryParameters.append(queryParameter)
+        }
         
         // construct body
         let multipartFormData = MultipartFormData()

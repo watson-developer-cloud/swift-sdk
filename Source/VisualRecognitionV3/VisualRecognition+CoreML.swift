@@ -219,6 +219,7 @@ extension VisualRecognition {
                     let requestHandler = VNImageRequestHandler(data: image)
                     try requestHandler.perform([request])
                 } catch {
+                    dispatchGroup.leave()
                     let description = "Failed to process classification request: \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)

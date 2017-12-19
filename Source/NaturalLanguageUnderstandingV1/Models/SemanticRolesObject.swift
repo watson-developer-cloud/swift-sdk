@@ -28,7 +28,7 @@ public struct SemanticRolesObject {
      Initialize a `SemanticRolesObject` with member variables.
 
      - parameter text: Object text.
-     - parameter keywords: 
+     - parameter keywords:
 
      - returns: An initialized `SemanticRolesObject`.
     */

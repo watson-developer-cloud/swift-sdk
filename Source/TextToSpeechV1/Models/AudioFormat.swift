@@ -18,16 +18,16 @@ import Foundation
 
 /** Audio formats supported by the Text to Speech service. */
 public enum AudioFormat: String {
-    
+
     /// Opus audio format
     case opus = "audio/ogg;codecs=opus"
-    
+
     /// WAV audio format
     case wav = "audio/wav"
-    
+
     /// FLAC audio format
     case flac = "audio/flac"
-    
+
     /// L16 audio format
     case l16 = "audio/l16"
 }

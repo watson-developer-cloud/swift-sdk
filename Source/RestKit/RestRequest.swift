@@ -21,7 +21,7 @@ internal struct RestRequest {
     internal static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
         let sdkVersion = "0.19.0"
-        
+
         let operatingSystem: String = {
             #if os(iOS)
                 return "iOS"
@@ -37,18 +37,18 @@ internal struct RestRequest {
                 return "Unknown"
             #endif
         }()
-        
+
         let operatingSystemVersion: String = {
             let os = ProcessInfo.processInfo.operatingSystemVersion
             return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
         }()
-        
+
         return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
     }()
 
     private let request: URLRequest
     private let session = URLSession(configuration: URLSessionConfiguration.default)
-    
+
     internal init(
         method: String,
         url: String,
@@ -72,10 +72,10 @@ internal struct RestRequest {
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = method
         request.httpBody = messageBody
-        
+
         // set the request's user agent
         request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
-        
+
         // set the request's authentication credentials
         switch credentials {
         case .apiKey: break
@@ -84,32 +84,32 @@ internal struct RestRequest {
             let authString = authData.base64EncodedString()
             request.setValue("Basic \(authString)", forHTTPHeaderField: "Authorization")
         }
-        
+
         // set the request's header parameters
         for (key, value) in headerParameters {
             request.setValue(value, forHTTPHeaderField: key)
         }
-        
+
         // set the request's accept type
         if let acceptType = acceptType {
             request.setValue(acceptType, forHTTPHeaderField: "Accept")
         }
-        
+
         // set the request's content type
         if let contentType = contentType {
             request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
-        
+
         self.request = request
     }
-    
+
     internal func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         let task = session.dataTask(with: request) { (data, response, error) in
             completionHandler(data, response as? HTTPURLResponse, error)
         }
         task.resume()
     }
-    
+
     internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
         response() { data, response, error in
             if let error = error {
@@ -174,26 +174,26 @@ internal struct RestRequest {
             } catch {
                 result = .failure(error)
             }
-            
+
             // execute callback
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
-    
+
     internal func responseObject<T: Decodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
         response() { data, response, error in
-            
+
             if let error = error ?? responseToError?(response,data) {
                 let result = RestResult<T>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
-            
+
             // ensure data is not nil
             guard let data = data else {
                 let result = RestResult<T>.failure(RestError.noData)
@@ -201,7 +201,7 @@ internal struct RestRequest {
                 completionHandler(dataResponse)
                 return
             }
-            
+
             // parse json object
             let result: RestResult<T>
             do {
@@ -210,7 +210,7 @@ internal struct RestRequest {
             } catch {
                 result = .failure(error)
             }
-            
+
             // execute callback
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
@@ -262,7 +262,7 @@ internal struct RestRequest {
             } catch {
                 result = .failure(error)
             }
-            
+
             // execute callback
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
@@ -297,7 +297,7 @@ internal struct RestRequest {
                 completionHandler(dataResponse)
                 return
             }
-            
+
             // execute callback
             let result = RestResult.success(string)
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)

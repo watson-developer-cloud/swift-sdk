@@ -19,7 +19,7 @@ import Foundation
 /**
  The settings associated with a Speech to Text recognition request. Any `nil` parameters will
  use a default value provided by the Watson Speech to Text service.
- 
+
  For more information about the Speech to Text service parameters, visit:
  https://console.bluemix.net/docs/services/speech-to-text/input.html
  */
@@ -72,16 +72,16 @@ public struct RecognitionSettings: JSONEncodable {
     /// If `true`, then profanity will be censored from the service's output, obscuring each
     /// occurrence with a set of asterisks. The default is `true`.
     public var filterProfanity: Bool?
-    
-    /// Indicates whether dates, times, series of digits and numbers, phone numbers, currency values, 
-    /// and Internet addresses are to be converted into more readable, conventional representations 
-    /// in the final transcript of a recognition request. If true, smart formatting is performed; 
+
+    /// Indicates whether dates, times, series of digits and numbers, phone numbers, currency values,
+    /// and Internet addresses are to be converted into more readable, conventional representations
+    /// in the final transcript of a recognition request. If true, smart formatting is performed;
     /// if false (the default), no formatting is performed. Applies to US English transcription only.
     public var smartFormatting: Bool?
-    
+
     /// If `true`, then speaker labels will be returned for each timestamp.  The default is `false`.
     public var speakerLabels: Bool?
-    
+
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
@@ -89,7 +89,7 @@ public struct RecognitionSettings: JSONEncodable {
      - parameter contentType: The format of the audio data. Endianness is automatically detected
         by the Speech to Text service. For more information about the supported formats, visit:
         https://console.bluemix.net/docs/services/speech-to-text/input.html#formats
-     
+
      - returns: An initialized `RecognitionSettings` object with the given `contentType`.
         Configure additional parameters for the recognition request by directly modifying
         the returned object's properties.
@@ -145,46 +145,46 @@ public struct RecognitionSettings: JSONEncodable {
  Audio formats supported by the Watson Speech to Text service.
  */
 public enum AudioMediaType {
-    
+
     /// FLAC audio format
     case flac
-    
+
     /// MP3 audio format
     case mp3
-    
+
     /// MPEG audio format
     case mpeg
-    
+
     /// L16 audio format with a rate and channels
     case l16(rate: Int, channels: Int)
-    
+
     /// WAV audio format
     case wav
-    
+
     /// Ogg audio format
     case ogg
-    
+
     /// Ogg audio format with Opus codec
     case oggOpus
-    
+
     /// Ogg audio format with Opus codec
     case opus // note: for backwards-compatibility before oggOpus and webmOpus
-    
+
     /// Ogg audio format with Vorbis codec
     case oggVorbis
-    
+
     /// WebM audio format
     case webm
-    
+
     /// WebM audio format with Opus codec
     case webmOpus
-    
+
     /// WebM audio format with Vorbis codec
     case webmVorbis
-    
+
     /// mu-law audio format
     case muLaw
-    
+
     /// Basic audio format
     case basic
 

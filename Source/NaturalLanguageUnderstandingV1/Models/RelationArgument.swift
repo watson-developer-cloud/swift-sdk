@@ -27,7 +27,7 @@ public struct RelationArgument {
     /**
      Initialize a `RelationArgument` with member variables.
 
-     - parameter entities: 
+     - parameter entities:
      - parameter text: Text that corresponds to the argument.
 
      - returns: An initialized `RelationArgument`.

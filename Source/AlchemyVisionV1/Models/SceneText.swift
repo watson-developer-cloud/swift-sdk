@@ -40,7 +40,7 @@ public struct SceneText: JSONDecodable {
         guard status == "OK" else {
             throw JSONWrapper.Error.valueNotConvertible(value: json, to: SceneText.self)
         }
-        
+
         url = try? json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         sceneText = try json.getString(at: "sceneText")

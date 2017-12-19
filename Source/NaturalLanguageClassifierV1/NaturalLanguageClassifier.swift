@@ -24,43 +24,43 @@ import Foundation
  a corresponding action, such as redirecting the request or answering a question.
  */
 public class NaturalLanguageClassifier {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/natural-language-classifier/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1"
-    
+
     /**
      Create a `NaturalLanguageClassifier` object.
-     
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
         credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the response or data represents an error returned by the Natural Language Classifier
      service, then return NSError with information about the error that occured. Otherwise,
      return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -68,7 +68,7 @@ public class NaturalLanguageClassifier {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -83,10 +83,10 @@ public class NaturalLanguageClassifier {
             return nil
         }
     }
-    
+
     /**
      Retrieves the list of classifiers for the service instance.
-     
+
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
        The array is empty if no classifiers are available.
@@ -94,7 +94,7 @@ public class NaturalLanguageClassifier {
     public func getClassifiers(
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([ClassifierModel]) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -103,7 +103,7 @@ public class NaturalLanguageClassifier {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["classifiers"]) {
             (response: RestResponse<[ClassifierModel]>) in
@@ -113,15 +113,15 @@ public class NaturalLanguageClassifier {
                 }
         }
     }
-    
+
     /**
-     Sends data to create and train a classifier. When the operation is successful, the status of 
-     the classifier is set to "Training". The status must be "Available" before you can use the 
+     Sends data to create and train a classifier. When the operation is successful, the status of
+     the classifier is set to "Training". The status must be "Available" before you can use the
      classifier.
-     
-     - parameter trainingMetadata: A file that contains, in JSON form, the user-supplied name for 
+
+     - parameter trainingMetadata: A file that contains, in JSON form, the user-supplied name for
        the classifier and the language of the training data.
-     - parameter trainingData: The set of questions and their "keys" used to adapt a system to a 
+     - parameter trainingData: The set of questions and their "keys" used to adapt a system to a
        domain (the ground truth).
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
@@ -131,7 +131,7 @@ public class NaturalLanguageClassifier {
         andTrainingFile trainingData: URL,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierDetails) -> Void) {
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(trainingMetadata, withName: "training_metadata")
@@ -140,7 +140,7 @@ public class NaturalLanguageClassifier {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -151,7 +151,7 @@ public class NaturalLanguageClassifier {
             contentType: multipartFormData.contentType,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifierDetails>) in
@@ -165,7 +165,7 @@ public class NaturalLanguageClassifier {
     /**
      Uses the provided classifier to assign labels to the input text. The status of the classifier
      must be "Available" before you can classify calls.
-     
+
      - parameter text: Phrase to classify
      - parameter classifierId: Classifier ID to use
      - parameter failure: A function executed if an error occurs.
@@ -176,7 +176,7 @@ public class NaturalLanguageClassifier {
         withClassifierID classifierId: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classification) -> Void) {
-        
+
         // construct query parameters
         let json = JSONWrapper(dictionary: ["text": text])
         guard let body = try? json.serialize() else {
@@ -186,7 +186,7 @@ public class NaturalLanguageClassifier {
             failure?(error)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -197,7 +197,7 @@ public class NaturalLanguageClassifier {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classification>) in
@@ -207,10 +207,10 @@ public class NaturalLanguageClassifier {
                 }
             }
     }
-    
+
     /**
      Deletes the classifier with the classifierId.
-     
+
      - parameter classifierId: The classifer ID used to delete the classifier
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
@@ -219,7 +219,7 @@ public class NaturalLanguageClassifier {
         withID classifierId: String,
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -228,7 +228,7 @@ public class NaturalLanguageClassifier {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -245,7 +245,7 @@ public class NaturalLanguageClassifier {
 
     /**
      Provides detailed information about the classifier with the user-specified classifierId.
-     
+
      - parameter classifierId: The classifer ID used to retrieve the classifier
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of available standard and custom models.
@@ -254,7 +254,7 @@ public class NaturalLanguageClassifier {
         withID classifierId: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierDetails) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -263,7 +263,7 @@ public class NaturalLanguageClassifier {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifierDetails>) in

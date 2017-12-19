@@ -15,22 +15,22 @@
  **/
 
 import Foundation
-    
+
 /** A dialog conversation. */
 public struct Conversation: JSONDecodable {
 
     /// The nodes that were executed by the conversation.
     public let hitNodes: [HitNode]
-    
+
     /// The conversation identifier.
     public let conversationID: Int
-    
+
     /// The client identifier.
     public let clientID: Int
-    
+
     /// The messages exchanged during the conversation.
     public let messages: [Message]
-    
+
     /// The profile variables associated with the conversation.
     public let profile: [String: String]
 
@@ -54,16 +54,16 @@ public struct Conversation: JSONDecodable {
 
 /** A dialog hit node. */
 public struct HitNode: JSONDecodable {
-    
+
     /// The details of the node.
     public let details: String
-    
+
     /// The label of the node.
     public let label: String
-    
+
     /// The type of the node.
     public let type: String
-    
+
     /// The node identifier.
     public let nodeID: Int
 
@@ -78,13 +78,13 @@ public struct HitNode: JSONDecodable {
 
 /** A dialog message. */
 public struct Message: JSONDecodable {
-    
+
     /// The text of the message.
     public let text: String
-    
+
     /// The date and time of the message.
     public let dateTime: String
-    
+
     /// The client that prompted the message to be sent.
     public let fromClient: String
 
@@ -93,5 +93,5 @@ public struct Message: JSONDecodable {
         text = try json.getString(at: "text")
         dateTime = try json.getString(at: "date_time")
         fromClient = try json.getString(at: "from_client")
-    } 
+    }
 }

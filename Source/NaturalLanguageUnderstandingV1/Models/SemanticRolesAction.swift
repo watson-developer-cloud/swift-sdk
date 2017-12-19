@@ -32,7 +32,7 @@ public struct SemanticRolesAction {
 
      - parameter text: Analyzed text that corresponds to the action.
      - parameter normalized: normalized version of the action.
-     - parameter verb: 
+     - parameter verb:
 
      - returns: An initialized `SemanticRolesAction`.
     */

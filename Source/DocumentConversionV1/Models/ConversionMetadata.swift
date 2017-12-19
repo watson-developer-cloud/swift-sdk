@@ -17,24 +17,24 @@
 import Foundation
 
 /**
- 
+
  **ConversionMetadata**
- 
+
  Metadata extracted from converted document
- 
+
  */
 public struct ConversionMetadata: JSONDecodable {
-    
+
     /** Key of the extracted metadata */
     public let name: String
-    
+
     /** Value of the extracted metadata */
     public let content: String
-    
+
     /** used interally to initialize ConversationMetadata objects */
     public init(json: JSONWrapper) throws {
         name = try json.getString(at: "name")
         content = try json.getString(at: "content")
     }
-    
+
 }

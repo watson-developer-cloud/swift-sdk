@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-    
+
 /** An input model for content to be analyzed by Personality Insights. */
 public struct ContentItem: JSONEncodable {
 

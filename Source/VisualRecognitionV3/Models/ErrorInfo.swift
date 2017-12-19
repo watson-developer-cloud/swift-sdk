@@ -18,13 +18,13 @@ import Foundation
 
 /** Information about an error that occurred during classification. */
 public struct ErrorInfo: JSONDecodable {
-    
+
     /// A codified error string (e.g. "input_error").
     public let errorID: String
-    
+
     /// A human-readable error string (e.g. "Ignoring image with no valid data").
     public let description: String
-    
+
     /// Used internally to initialize an `ErrorInfo` model from JSON.
     public init(json: JSONWrapper) throws {
         errorID = try json.getString(at: "error_id")

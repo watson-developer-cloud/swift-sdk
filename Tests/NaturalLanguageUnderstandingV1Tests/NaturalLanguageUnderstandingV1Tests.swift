@@ -19,19 +19,19 @@ import Foundation
 import NaturalLanguageUnderstandingV1
 
 class NaturalLanguageUnderstandingTests: XCTestCase {
-    
+
     private var naturalLanguageUnderstanding: NaturalLanguageUnderstanding!
     private let timeout: TimeInterval = 5.0
     private let text = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
     private let url = "http://www.politico.com/story/2016/07/dnc-2016-obama-prepared-remarks-226345"
     private var html: String!
-    
+
     override func setUp() {
         super.setUp()
         instantiateNaturalLanguageUnderstanding()
         loadHTML()
     }
-    
+
     static var allTests : [(String, (NaturalLanguageUnderstandingTests) -> () throws -> Void)] {
         return [
             ("testAnalyzeHTML", testAnalyzeHTML),
@@ -54,7 +54,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testListModels", testListModels)
         ]
     }
-    
+
     /** Instantiate Natural Language Understanding instance. */
     func instantiateNaturalLanguageUnderstanding() {
         let username = Credentials.NaturalLanguageUnderstandingUsername
@@ -79,26 +79,26 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
-    
+
     /** Fail false positives. */
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Wait for expectations. */
     func waitForExpectations() {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     // MARK: - Positive tests
-    
+
     /** Default test for HTML input. */
     func testAnalyzeHTML() {
         let description = "Analyze HTML."

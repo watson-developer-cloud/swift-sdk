@@ -30,7 +30,7 @@ extension String: JSONPathType {
         }
         return JSONWrapper(json: json)
     }
-    
+
     internal func value(in array: [Any]) throws -> JSONWrapper {
         throw JSONWrapper.Error.unexpectedSubscript(type: String.self)
     }
@@ -40,7 +40,7 @@ extension Int: JSONPathType {
     internal func value(in dictionary: [String: Any]) throws -> JSONWrapper {
         throw JSONWrapper.Error.unexpectedSubscript(type: Int.self)
     }
-    
+
     internal func value(in array: [Any]) throws -> JSONWrapper {
         let json = array[self]
         return JSONWrapper(json: json)
@@ -53,34 +53,34 @@ extension Int: JSONPathType {
 /// Will soon be removed in favor of Swift 4's `Codable` protocol.
 public struct JSONWrapper {
     fileprivate let json: Any
-    
+
     internal init(json: Any) {
         self.json = json
     }
-    
+
     internal init(string: String) throws {
         guard let data = string.data(using: .utf8) else {
             throw Error.encodingError
         }
         json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
-    
+
     internal init(data: Data) throws {
         json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
     }
-    
+
     internal init(dictionary: [String: Any]) {
         json = dictionary
     }
-    
+
     internal init(array: [Any]) {
         json = array
     }
-    
+
     internal func serialize() throws -> Data {
         return try JSONSerialization.data(withJSONObject: json, options: [])
     }
-    
+
     internal func serializeString() throws -> String {
         let data = try serialize()
         guard let string = String(data: data, encoding: .utf8) else {
@@ -88,7 +88,7 @@ public struct JSONWrapper {
         }
         return string
     }
-    
+
     private func value(at path: JSONPathType) throws -> JSONWrapper {
         if let dictionary = json as? [String: Any] {
             return try path.value(in: dictionary)
@@ -98,7 +98,7 @@ public struct JSONWrapper {
         }
         throw Error.unexpectedSubscript(type: type(of: path))
     }
-    
+
     private func value(at path: [JSONPathType]) throws -> JSONWrapper {
         var value = self
         for fragment in path {
@@ -110,23 +110,23 @@ public struct JSONWrapper {
     internal func decode<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> Decoded {
         return try Decoded(json: value(at: path))
     }
-    
+
     internal func getDouble(at path: JSONPathType...) throws -> Double {
         return try Double(json: value(at: path))
     }
-    
+
     internal func getInt(at path: JSONPathType...) throws -> Int {
         return try Int(json: value(at: path))
     }
-    
+
     internal func getString(at path: JSONPathType...) throws -> String {
         return try String(json: value(at: path))
     }
-    
+
     internal func getBool(at path: JSONPathType...) throws -> Bool {
         return try Bool(json: value(at: path))
     }
-    
+
     internal func getArray(at path: JSONPathType...) throws -> [JSONWrapper] {
         let json = try value(at: path)
         guard let array = json.json as? [Any] else {
@@ -134,7 +134,7 @@ public struct JSONWrapper {
         }
         return array.map { JSONWrapper(json: $0) }
     }
-    
+
     internal func decodedArray<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [Decoded] {
         let json = try value(at: path)
         guard let array = json.json as? [Any] else {
@@ -142,7 +142,7 @@ public struct JSONWrapper {
         }
         return try array.map { try Decoded(json: JSONWrapper(json: $0)) }
     }
-    
+
     internal func decodedDictionary<Decoded: JSONDecodable>(at path: JSONPathType..., type: Decoded.Type = Decoded.self) throws -> [String: Decoded] {
         let json = try value(at: path)
         guard let dictionary = json.json as? [String: Any] else {
@@ -154,11 +154,11 @@ public struct JSONWrapper {
         }
         return decoded
     }
-    
+
     internal func getJSON(at path: JSONPathType...) throws -> Any {
         return try value(at: path).json
     }
-    
+
     internal func getDictionary(at path: JSONPathType...) throws -> [String: JSONWrapper] {
         let json = try value(at: path)
         guard let dictionary = json.json as? [String: Any] else {
@@ -166,7 +166,7 @@ public struct JSONWrapper {
         }
         return dictionary.map { JSONWrapper(json: $0) }
     }
-    
+
     internal func getDictionaryObject(at path: JSONPathType...) throws -> [String: Any] {
         let json = try value(at: path)
         guard let dictionary = json.json as? [String: Any] else {

@@ -17,26 +17,26 @@
 import Foundation
 
 /**
- The IBM Watson™ Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ 
- document. The input document is transformed into normalized HTML, plain text, or a set of 
+ The IBM Watson™ Document Conversion Service converts a single HTML, PDF, or Microsoft Word™
+ document. The input document is transformed into normalized HTML, plain text, or a set of
  JSON-formatted Answer units that can be used with other Watson services, like the
  Watson Retrieve and Rank Service.
  */
 public class DocumentConversion {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/document-conversion/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.DocumentConversionV1"
-    
+
     /**
      Create a `DocumentConversion` object.
-     
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
@@ -44,23 +44,23 @@ public class DocumentConversion {
         credentials = .basicAuthentication(username: username, password: password)
         self.version = version
     }
-    
+
     /**
      If the response or data represents an error returned by the Document Conversion service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -68,7 +68,7 @@ public class DocumentConversion {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -82,10 +82,10 @@ public class DocumentConversion {
             return nil
         }
     }
-    
+
     /**
      Convert a document to answer units, HTML, or text.
-     
+
      - parameter document: The document to convert.
      - parameter withConfigurationFile: A configuration file that identifies the output type and
         optionally includes information to define tags and structure in the converted output.
@@ -114,11 +114,11 @@ public class DocumentConversion {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -129,7 +129,7 @@ public class DocumentConversion {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseString(responseToError: responseToError) { response in
             switch response.result {
@@ -143,9 +143,9 @@ public class DocumentConversion {
      Deserializes a response string to a ConversationResponse object. Only works with AnswerUnits
      as that's the only response type from the service that returns a JSON object. The other two
      options return plain text
-     
+
      - parameter string: the String to attempt to convert to a ConversationResponse object
-     
+
      - retuns: A ConversationReponse object populated with the input's data
      */
     public func deserializeAnswerUnits(string: String) throws -> ConversationResponse {
@@ -153,28 +153,28 @@ public class DocumentConversion {
         let answerUnits = try ConversationResponse(json: json)
         return answerUnits
     }
-    
+
     /**
      Write service config parameters to a temporary JSON file that can be uploaded. This creates the
      most basic configuration file possible. For information on creating your own, with greater
-     functionality, see: 
+     functionality, see:
      https://console.bluemix.net/docs/services/document-conversion/customizing.html
-     
+
      - parameter type: The return type of the service you wish to recieve.
-     
+
      - returns: The URL of a JSON file that includes the given parameters.
      */
     public func writeConfig(type: ReturnType) throws -> URL {
         // construct JSON dictionary
         var json = [String: Any]()
         json["conversion_target"] = type.rawValue
-        
+
         // create a globally unique file name in a temporary directory
         let suffix = "DocumentConversionConfiguration.json"
         let fileName = "\(UUID().uuidString)_\(suffix)"
         let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         let fileURL = directoryURL.appendingPathComponent(fileName)!
-        
+
         // save JSON dictionary to file
         do {
             let data = try JSONWrapper(dictionary: json).serialize()
@@ -184,23 +184,23 @@ public class DocumentConversion {
             let userInfo = [NSLocalizedFailureReasonErrorKey: message]
             throw NSError(domain: domain, code: 0, userInfo: userInfo)
         }
-        
+
         return fileURL
     }
-    
+
 }
 
 /**
  Enum for supported return types from the DocumentConversion service
  */
 public enum ReturnType: String {
-    
+
     /// Constant for AnswerUnits
     case answerUnits = "ANSWER_UNITS"
-    
+
     /// Constant for HTML
     case html = "NORMALIZED_HTML"
-    
+
     /// Constant for Text
     case text = "NORMALIZED_TEXT"
 }

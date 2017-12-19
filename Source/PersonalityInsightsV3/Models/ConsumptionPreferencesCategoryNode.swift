@@ -18,17 +18,17 @@ import Foundation
 
 /** Detailed results for each category of consumption preferences. */
 public struct ConsumptionPreferencesCategoryNode: JSONDecodable {
-    
+
     /// The globally unique id of a consumption preferences category.
     public let consumptionPreferenceCategoryId: String
-    
+
     /// The user-displayable name of the category.
     public let name: String
-    
+
     /// Array of consumption preferences node objects that contains results
     /// for individual preferences of the category inferred from the input text.
     public let consumptionPreferences: [ConsumptionPreferencesNode]
-    
+
     /// Used internally to initialize a `ConsumptionPreferencesCategoryNode` model from JSON.
     public init(json: JSONWrapper) throws {
         consumptionPreferenceCategoryId = try json.getString(at: "consumption_preference_category_id")

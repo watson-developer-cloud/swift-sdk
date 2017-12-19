@@ -20,7 +20,7 @@ import Foundation
  Enum for determining if a query parameter should be included in the request
  */
 public enum QueryParam: Int {
-    
+
     /// Constants for if a query parameter should be included in the request
     case excluded = 0, included
 }

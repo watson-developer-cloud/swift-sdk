@@ -18,19 +18,19 @@ import Foundation
 
 /** Provides every individual preference for a category. */
 public struct ConsumptionPreferencesNode: JSONDecodable {
-    
+
     /// The globally unique id of the consumption preference.
     public let consumptionPreferenceId: String
-    
+
     /// The user-displayable name of the consumption preference.
     public let name: String
-    
+
     /// The score indicating the author's likelihood of preferring
     /// the item. For example, if the score is 0.0, preference is
     /// unlikely; if the score is 0.5, preference is neutral; if the score
     /// is 1.0, the author would likely prefer the item.
     public let score: Double
-    
+
     /// Used internally to initialize a `ConsumptionPreferencesNode` model from JSON.
     public init(json: JSONWrapper) throws {
         consumptionPreferenceId = try json.getString(at: "consumption_preference_id")

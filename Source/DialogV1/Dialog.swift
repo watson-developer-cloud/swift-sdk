@@ -26,13 +26,13 @@ public typealias DialogID = String
  */
 @available(*, deprecated, message: "The IBM Watson™ Dialog service will be deprecated on August 15, 2016. The service will be retired on September 8, 2016, after which no new instances of the service can be created, though existing instances of the service will continue to function until August 9, 2017. Users of the Dialog service should migrate their applications to use the IBM Watson™ Conversation service. See the migration documentation to learn how to migrate your dialogs to the Conversation service.")
 public class Dialog {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/dialog/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.DialogV1"
     private static let dateFormatter: DateFormatter = {
@@ -43,30 +43,30 @@ public class Dialog {
 
     /**
      Create a `Dialog` object.
-     
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
         self.credentials = .basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the response or data represents an error returned by the Dialog service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -74,7 +74,7 @@ public class Dialog {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -90,7 +90,7 @@ public class Dialog {
 
     /**
      List the dialog applications associated with this service instance.
-     
+
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of dialog applications.
      */
@@ -150,7 +150,7 @@ public class Dialog {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -175,7 +175,7 @@ public class Dialog {
     /**
      Delete a dialog application associated with this service instance. This
      permanently removes all associated data.
-    
+
      - parameter dialogID: The dialog application identifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the dialog application
@@ -211,7 +211,7 @@ public class Dialog {
 
     /**
      Download the dialog file associated with the given dialog application.
-     
+
      - parameter dialogID: The dialog application identifier.
      - parameter format: The desired format of the dialog file. The format can be either
         OctetStream (.mct file), Watson dialog document JSON format (.json file), or Watson
@@ -233,7 +233,7 @@ public class Dialog {
             headerParameters: defaultHeaders,
             acceptType: format?.rawValue
         )
-        
+
         // determine file extension
         var filetype = ".mct"
         if let format = format {
@@ -243,7 +243,7 @@ public class Dialog {
             case .wdsXML: filetype = ".xml"
             }
         }
-        
+
         // locate downloads directory
         let fileManager = FileManager.default
         let directories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
@@ -254,7 +254,7 @@ public class Dialog {
             failure?(error)
             return
         }
-        
+
         // construct unique filename
         var filename = "dialog-" + dialogID + filetype
         var isUnique = false
@@ -268,7 +268,7 @@ public class Dialog {
                 isUnique = true
             }
         }
-        
+
         // specify download destination
         let destination = downloads.appendingPathComponent(filename)
 
@@ -278,7 +278,7 @@ public class Dialog {
                 failure?(error!)
                 return
             }
-            
+
             guard let statusCode = response?.statusCode else {
                 let failureReason = "Did not receive response."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -286,7 +286,7 @@ public class Dialog {
                 failure?(error)
                 return
             }
-            
+
             if statusCode != 200 {
                 let failureReason = "Status code was not acceptable: \(statusCode)."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -294,7 +294,7 @@ public class Dialog {
                 failure?(error)
                 return
             }
-            
+
             success(destination)
         }
     }
@@ -313,7 +313,7 @@ public class Dialog {
         encrypted Dialog account file, .json for Watson Dialog document JSON format,
         or .xml for Watson Dialog document XML format.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed after the dialog file has been 
+     - parameter success: A function executed after the dialog file has been
         successfully uploaded.
      */
     public func updateDialog(
@@ -329,7 +329,7 @@ public class Dialog {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -437,10 +437,10 @@ public class Dialog {
     }
 
     // MARK: -  Conversation Operations
-    
+
     /**
      Retrieve conversation session history for a specified date range.
-     
+
      - parameter dialogID: The dialog application identifier.
      - parameter dateFrom: The start date of the desired conversation history. The
         timezone should match that of the Dialog application.
@@ -497,7 +497,7 @@ public class Dialog {
 
     /**
      Start a new conversation or obtain a response for a submitted input message.
-    
+
      - parameter dialogID: The dialog application identifier.
      - parameter conversationID: The conversation identifier. If not specified, then a
         new conversation will be started.
@@ -552,7 +552,7 @@ public class Dialog {
 
     /**
      Retrieve the values for a client's profile variables.
-    
+
      - parameter dialogID: The dialog application identifier.
      - parameter clientID: A client identifier that was generated by the dialog service.
      - parameter names: The names of the profile variables to retrieve. If nil, then all
@@ -598,7 +598,7 @@ public class Dialog {
 
     /**
      Set the values for a client's profile variables.
-    
+
      - parameter dialogID: The dialog application identifier.
      - parameter clientID: A client identifier that was generated by the dialog service.
         If not specified, then a new client identifier will be issued.

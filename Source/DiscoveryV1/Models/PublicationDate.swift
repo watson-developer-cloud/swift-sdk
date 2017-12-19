@@ -18,24 +18,24 @@ import Foundation
 
 /// Publication date found within the document.
 public struct PublicationDate: JSONDecodable {
-    
+
     /// Confidence level of the detection of the publication date.
     public let confident: String?
-    
+
     /// Detected publication date in the format yyyy-MM-dd'T'HH:mm
     /// :ss.SSS'Z'.
     public let date: String?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a PublicationDate object
     public init(json: JSONWrapper) throws {
         confident = try? json.getString(at: "confident")
         date = try? json.getString(at: "date")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize an 'PublicationDate' model to JSON.
     public func toJSONObject() -> Any {
         return json

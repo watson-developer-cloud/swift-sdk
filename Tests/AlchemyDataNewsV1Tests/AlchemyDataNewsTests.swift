@@ -18,10 +18,10 @@ import Foundation
 import AlchemyDataNewsV1
 
 class AlchemyDataNewsTests: XCTestCase {
-    
+
     private var alchemyDataNews: AlchemyDataNews!
     private let timeout: TimeInterval = 5.0
-    
+
     static var allTests : [(String, (AlchemyDataNewsTests) -> () throws -> Void)] {
         return [
             ("testGetNews", testGetNews),
@@ -43,30 +43,30 @@ class AlchemyDataNewsTests: XCTestCase {
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
-    
+
     /** Fail false positives. */
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Wait for expectations. */
     func waitForExpectations() {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     // Positive Unit Tests
-    
+
     func testGetNews() {
         let description = "Get the volume of articles within a timeframe"
         let expectation = self.expectation(description: description)
-        
+
         alchemyDataNews.getNews(from: "now-1d", to: "now", failure: failWithError) { news in
             XCTAssertNotNil(news, "Response should not be nil")
             XCTAssertNotNil(news.result!.count, "Count should not be nil")
@@ -74,15 +74,15 @@ class AlchemyDataNewsTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testGetNewsWithQuery() {
         let description = "Get articles with IBM in the title and assorted values"
         let expectation = self.expectation(description: description)
-        
+
         var queryDict = [String: String]()
         queryDict["q.enriched.url.title"] = "O[IBM^Apple]"
         queryDict["return"] = "enriched.url.title,enriched.url.entities.entity.text,enriched.url.entities.entity.type"
-        
+
         alchemyDataNews.getNews(from: "now-1d", to: "now", query: queryDict, failure: failWithError) { news in
             XCTAssertNotNil(news, "Response should not be nil")
             XCTAssertNil(news.result?.count, "Count should not return")
@@ -94,51 +94,51 @@ class AlchemyDataNewsTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     // Negative Unit Tests
-    
+
     func testGetNewsWithInvalidQuery() {
         let description = "Use an invalid return key"
         let expectation = self.expectation(description: description)
-        
+
         var queryDict = [String: String]()
         queryDict["q.enriched.url.apple"] = "O[IBM^Apple]"
         queryDict["return"] = "enriched.url.title"
-        
+
         let failure = { (error: Error) in
             expectation.fulfill()
         }
-        
+
         alchemyDataNews.getNews(from: "now-1d", to: "now", query: queryDict, failure: failure, success: failWithResult)
         waitForExpectations()
     }
-    
+
     func testGetNewsWithInvalidReturnQuery() {
         let description = "Use an invalid return key"
         let expectation = self.expectation(description: description)
-        
+
         var queryDict = [String: String]()
         queryDict["q.enriched.url.title"] = "O[IBM^Apple]"
         queryDict["return"] = "enriched.url.hotdog"
-        
+
         let failure = { (error: Error) in
             expectation.fulfill()
         }
-        
+
         alchemyDataNews.getNews(from: "now-1d", to: "now", query: queryDict, failure: failure, success: failWithResult)
         waitForExpectations()
     }
-    
+
     func testGetNewsInvalidTimeframe() {
         let description = "Get the volume of articles within a timeframe"
         let expectation = self.expectation(description: description)
-        
+
         let failure = { (error: Error) in
             expectation.fulfill()
         }
-        
+
         alchemyDataNews.getNews(from: "now", to: "now-1d", failure: failure, success: failWithResult)
         waitForExpectations()
     }
-    
+
 }

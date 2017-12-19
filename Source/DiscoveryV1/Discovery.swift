@@ -24,20 +24,20 @@ public class Discovery {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/discovery/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.DiscoveryV1"
     private let version: String
     private let unreservedCharacters = CharacterSet(charactersIn:
         "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~(),:.&=")
     private let encodingError = "Failed to percent encode HTML document"
-    
+
     /**
      Create a `Discovery` object.
-     
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
@@ -47,23 +47,23 @@ public class Discovery {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
         self.version = version
     }
-    
+
     /**
      If the response or data represents an error returned by the Discovery service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -71,7 +71,7 @@ public class Discovery {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -92,12 +92,12 @@ public class Discovery {
             return nil
         }
     }
-    
+
     // MARK: - Environments
-    
+
     /**
      Get all existing environments for this Discovery instance.
-     
+
      - parameter name: Show only the environment with the given name.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a list of all environments associated with this service instance.
@@ -113,7 +113,7 @@ public class Discovery {
             queryParameters.append(URLQueryItem(name: "name", value: name))
         }
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -123,7 +123,7 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["environments"]) {
             (response: RestResponse<[Environment]>) in
@@ -133,13 +133,13 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Create an environment for this service instance.
-     
+
      For the experimental release, the size of the environment is fixed at 2GB
      available disk space, and 1GB RAM.
-     
+
      - parameter name: The name of the new environment.
      - parameter size: The size of the environment.
      - parameter description: The description of the new environment.
@@ -156,7 +156,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct body
         var jsonData = [String: Any]()
         jsonData["name"] = name
@@ -168,7 +168,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -180,7 +180,7 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
@@ -190,10 +190,10 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Delete the environment with the given environment ID.
-     
+
      - parameter environmentID: The name of the new environment.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with details of the newly deleted environment.
@@ -206,7 +206,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -215,7 +215,7 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DeletedEnvironment>) in
@@ -225,10 +225,10 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Retrieve information about an environment.
-     
+
      - parameter environmentID: The ID of the environment to retrieve information about.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the requested environment.
@@ -241,7 +241,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -250,7 +250,7 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
@@ -260,10 +260,10 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Update an environment.
-     
+
      - parameter environmentID: The ID of the environment to retrieve information about.
      - parameter name: The updated name of the environment.
      - parameter description: The updated description of the environment.
@@ -280,7 +280,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct body
         var jsonData = [String: Any]()
         jsonData["name"] = name
@@ -291,7 +291,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -303,7 +303,7 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
@@ -313,12 +313,12 @@ public class Discovery {
             }
         }
     }
-    
+
     // MARK: - Configurations
 
     /**
-     List existing configurations for the service instance. 
-    
+     List existing configurations for the service instance.
+
      - parameter environmentID: The ID of your environment.
      - parameter name: Show only the configuration with the given name.
      - parameter failure: A function executed if an error occurs.
@@ -336,7 +336,7 @@ public class Discovery {
             queryParameters.append(URLQueryItem(name: "name", value: name))
         }
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -346,7 +346,7 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["configurations"]) {
             (response: RestResponse<[Configuration]>) in
@@ -356,10 +356,10 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Create a new configuration for this service instance.
-     
+
      - parameter environmentID: The ID of your environment.
      - parameter configuration:  JSON object that allows you to customize how your content is
         ingested and what enrichments are added to your data. `name` is required and must be
@@ -376,13 +376,13 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct body
         guard let body = try? configuration.toJSON().serialize() else {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -394,7 +394,7 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ConfigurationDetails>) in
@@ -404,10 +404,10 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Delete the specified configuration.
-     
+
      - parameter environmentID: The ID of your environment.
      - parameter configurationID: The ID of your configuration.
      - parameter failure: A function executed if an error occurs.
@@ -422,7 +422,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -431,7 +431,7 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DeletedConfiguration>) in
@@ -441,10 +441,10 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Get details of a specific configuration.
-     
+
      - parameter environmentID: The ID of your environment.
      - parameter configurationID: The ID of your configuration.
      - parameter failure: A function executed if an error occurs.
@@ -459,7 +459,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -468,7 +468,7 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ConfigurationDetails>) in
@@ -478,10 +478,10 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Replaces the configuration that was at the given path before.
-     
+
      - parameter environmentID: The ID of the environment in which the configuration is located.
      - parameter configurationID: The ID of the configuration you want to replace.
      - parameter configuration: A JSON object with the new configuration details.
@@ -498,13 +498,13 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct body
         guard let body = try? configuration.toJSON().serialize() else {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -516,7 +516,7 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ConfigurationDetails>) in
@@ -526,14 +526,14 @@ public class Discovery {
             }
         }
     }
-    
+
     // MARK: - Test Configuration on Document
 
     /**
      Run a sample document against your configuration or the default configuration
      to return diagnostic information to help you understand how the document was
-     processed. The document is not added to the index. 
- 
+     processed. The document is not added to the index.
+
      - parameter environmentID: The ID of the environment in which the configuration is located.
      - parameter configuration: The configuration to use to process the document. If
         this parameter is provided, the provided configuration of the environment will bee
@@ -546,8 +546,8 @@ public class Discovery {
      - parameter file: The content of the document to ingest and test the configuration on.
         The maximum supported file size is 50 MB. Files larger than 50 MB will be rejected.
         Must provide either a file or a metadata.
-     - parameter metadata: If you're using the Data Crawler to upload your documents, you 
-        can test a document against the type of metadata that the Data Crawler might send. 
+     - parameter metadata: If you're using the Data Crawler to upload your documents, you
+        can test a document against the type of metadata that the Data Crawler might send.
         The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB
         are rejected. Must provide either a file or a metadata.
      - parameter failure: A function executed if an error occurs.
@@ -568,7 +568,7 @@ public class Discovery {
         if let configurationID = configurationID {
             queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
@@ -592,7 +592,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -604,7 +604,7 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<TestConfigurationDetails>) in
@@ -614,9 +614,9 @@ public class Discovery {
             }
         }
     }
-    
+
     // MARK: - Collections
-    
+
     /**
      Get all existing collections.
 
@@ -637,7 +637,7 @@ public class Discovery {
             queryParameters.append(URLQueryItem(name: "name", value: name))
         }
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -647,7 +647,7 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["collections"]) {
             (response: RestResponse<[Collection]>) in
@@ -657,10 +657,10 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Create a new collection for storing documents.
-     
+
      - parameter environmentID: The unique ID of the environment to create a collection in.
      - parameter name: The name of the new collection.
      - parameter description: The description of the configuration.
@@ -681,7 +681,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct json from parameters
         var bodyData = [String: Any]()
         bodyData["name"] = name
@@ -695,7 +695,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -707,7 +707,7 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: json
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
@@ -717,10 +717,10 @@ public class Discovery {
             }
         }
     }
-    
-    /** 
+
+    /**
      Delete a collection in the environment the collection is located in.
-     
+
      - parameter environmentID: The ID of the environment the collection is in.
      - parameter collectionID: The ID of the collection to delete.
      - parameter failure: A function executed if an error occurs.
@@ -735,7 +735,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -744,7 +744,7 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DeletedCollection>) in
@@ -754,10 +754,10 @@ public class Discovery {
             }
         }
     }
- 
-    /** 
+
+    /**
      Retrieve the information of a specified collection.
-     
+
      - paramater environmentID: The ID of the environment the collection is in.
      - paramater collectionID: The ID of the collection to retrieve details of.
      - parameter failure: A function executed if an error occurs.
@@ -772,7 +772,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -781,7 +781,7 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
@@ -791,10 +791,10 @@ public class Discovery {
             }
         }
     }
-    
-    /** 
+
+    /**
      Replaces an existing collection.
-     
+
      - paramater environmentID: The ID of the environment the collection is in.
      - paramater collectionID: The ID of the collection to update by replacing the collection with
         the updated information.
@@ -818,7 +818,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct json from parameters
         var bodyData = [String: Any]()
         bodyData["name"] = name
@@ -832,7 +832,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -844,7 +844,7 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: json
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
@@ -854,10 +854,10 @@ public class Discovery {
             }
         }
     }
-    
-    /** 
+
+    /**
      Retrieve all unique fields and each field's type stored in a collection's index.
- 
+
      - parameter environmentID: The unique identifier of the environment the collection is in.
      - paramater collectionID: The unique identifier of the collection to display the fields of.
      - paramater failure: A function executed if an error occurs.
@@ -872,7 +872,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -882,7 +882,7 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["fields"]) {
             (response: RestResponse<[Field]>) in
@@ -892,14 +892,14 @@ public class Discovery {
             }
         }
     }
-    
+
     // MARK: - Documents
-    
-    /** 
-     Add document to collection with optional metadata and optional configuration. If both the 
+
+    /**
+     Add document to collection with optional metadata and optional configuration. If both the
      configuration ID and configuration file are provided, the request will be rejected. Either
      metadata or file must be specified.
-        
+
      - parameter environmentID: The unique identifier of the environment the collection is in.
      - parameter collectionID: The unique identifier of the collection to add a document to.
      - parameter configurationID: The unique identifier of the configuration to process the
@@ -908,7 +908,7 @@ public class Discovery {
         paramater is not specified, the metadata parameter must be specififed instead. Accepted MIME
         types are application/json, application/msword, application/pdf, text/html, application/xhtml+xml,
         and application/vnd.openxmlformats-officedocument.wordprocessingml.document.
-     - parameter fileMimeType: Content type of the document to ingest. Specify if the API detects 
+     - parameter fileMimeType: Content type of the document to ingest. Specify if the API detects
         the wrong MIME type.
      - parameter metadata: The JSON specifiying metadata related to the document. If not specified,
         the file parameter must be specified.
@@ -919,7 +919,7 @@ public class Discovery {
      - paramater failure: A function executed if an error occurs.
      - paramater success: A function executed with details of the document.
      */
-    
+
     public func addDocumentToCollection(
         withEnvironmentID environmentID: String,
         withCollectionID collectionID: String,
@@ -937,7 +937,7 @@ public class Discovery {
         if let configurationID = configurationID {
             queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
@@ -965,7 +965,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -977,7 +977,7 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Document>) in
@@ -987,16 +987,16 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Delete document from collection.
-     
+
      - parameter environmentID: The unique identifier of the environment the collection is in.
      - parameter collectionID: The unique identifier of the collection to add a document to.
      - parameter documentID: The unique identifier of the document.
      - paramater failure: A function executed if an error occurs.
      - paramater success: A function executed with details of the document deletion status. If the
-        given document id is invalid or if the document is not found, the status returned is set 
+        given document id is invalid or if the document is not found, the status returned is set
         to 'deleted'.
     */
     public func deleteDocumentFromCollection(
@@ -1009,7 +1009,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -1018,7 +1018,7 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Document>) in
@@ -1028,12 +1028,12 @@ public class Discovery {
             }
         }
     }
-    
-    /** 
+
+    /**
      Fetch status details about a submitted document. Returns only the document's processing status
      and any notices (warnings or errors) that were generated when the document was ingested. To fetch
      the actual document content, use the Query method.
- 
+
      - parameter environmentID: The unique identifier of the environment the collection is in.
      - parameter collectionID: The unique identifier of the collection to add a document to.
      - parameter documentID: The unique identifier of the document.
@@ -1050,7 +1050,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -1059,7 +1059,7 @@ public class Discovery {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Document>) in
@@ -1069,11 +1069,11 @@ public class Discovery {
             }
         }
     }
-    
+
     /**
      Add a new document or replace an existing document with optional metadata and optional configuration
      overrides.
- 
+
      - parameter environmentID: The unique identifier of the environment the collection is in.
      - parameter collectionID: The unique identifier of the collection to add a document to.
      - parameter documentID: The unique identifier of the document.
@@ -1114,7 +1114,7 @@ public class Discovery {
         if let configurationID = configurationID {
             queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
@@ -1142,7 +1142,7 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -1154,7 +1154,7 @@ public class Discovery {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Document>) in
@@ -1164,13 +1164,13 @@ public class Discovery {
             }
         }
     }
-    
+
     // MARK: - Queries
-    
-    /** 
+
+    /**
      Query the documents in your collection. See the documentation for reference on how to build
      a query string. https://console.bluemix.net/docs/services/discovery/using.html.
-     
+
      - parameter environmentID: The unique identifier of the environment the collection is in.
      - parameter collectionID: The unique identifier of the collection to add a document to.
      - parameter filter: The filter query that is cacheable and drives performance.
@@ -1178,14 +1178,14 @@ public class Discovery {
         query returns documents in order based on match level.
      - parameter aggregation: Aggregated metrics and answers from the dataset. If the filter
         is provided, aggregation will run only on the matching documents.
-     - parameter count: The number of documents to return. 
+     - parameter count: The number of documents to return.
      - parameter return: An additional filter on the values of the returned document. A comma-separated
         list of Fully Qualified Names (FQNs) matching the portion(s) of the document hiearchy to return.
      - parameter offset: Returns additional pages of results for pagination purposes. Deep pagination
         should be avoided due to the consequential decrease in performance.
      - paramater failure: A function executed if an error occurs.
      - paramater success: A function executed with the results of the query. The response includes the
-        document ID, metadata and the content of the document. 
+        document ID, metadata and the content of the document.
     */
     public func queryDocumentsInCollection(
         withEnvironmentID environmentID: String,
@@ -1201,7 +1201,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         if let filter = filter {
             guard let filterEncoded = filter.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
                 let error = failWithError(reason: encodingError)
@@ -1219,7 +1219,7 @@ public class Discovery {
             }
             queryParameters.append(URLQueryItem(name: "query", value: queryEncoded))
         }
-        
+
         if let aggregation = aggregation {
             guard let aggregationEncoded = aggregation.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
                 let error = failWithError(reason: encodingError)
@@ -1234,7 +1234,7 @@ public class Discovery {
         if let returnQuery = returnQuery {
             queryParameters.append(URLQueryItem(name: "return", value: returnQuery))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -1244,7 +1244,7 @@ public class Discovery {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<QueryResponse>) in
@@ -1254,7 +1254,7 @@ public class Discovery {
             }
         }
     }
-    
+
     private func failWithError(reason: String) -> NSError {
         let userInfo = [NSLocalizedFailureReasonErrorKey: reason]
         let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)

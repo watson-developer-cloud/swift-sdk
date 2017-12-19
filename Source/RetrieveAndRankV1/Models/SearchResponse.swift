@@ -18,13 +18,13 @@ import Foundation
 
 /** The response received when searching a specific query within the Solr cluster and collection. */
 public struct SearchResponse: JSONDecodable {
-    
+
     /// A header containing information about the request and response.
     public let header: SearchResponseHeader
-    
+
     /// An object containing the results of the Search request.
     public let body: SearchResponseBody
-    
+
     /// Used internally to initialize a `SearchResponse` model from JSON.
     public init(json: JSONWrapper) throws {
         header = try json.decode(at: "responseHeader", type: SearchResponseHeader.self)
@@ -34,16 +34,16 @@ public struct SearchResponse: JSONDecodable {
 
 /** An object returned with a Search request, returning more information about the request. */
 public struct SearchResponseHeader: JSONDecodable {
-    
+
     /// The status.
     public let status: Int
-    
+
     /// The query time.
     public let qTime: Int
-    
+
     /// An object containing the parameters that were sent in the request.
     public let params: RequestParameters
-    
+
     /// Used internally to initialize a `SearchResponseHeader` model from JSON.
     public init(json: JSONWrapper) throws {
         status = try json.getInt(at: "status")
@@ -54,16 +54,16 @@ public struct SearchResponseHeader: JSONDecodable {
 
 /** An object containing the query parameters that were sent in the original request. */
 public struct RequestParameters: JSONDecodable {
-    
+
     /// The original query string.
     public let query: String
-    
+
     /// The return fields the user specified.
     public let returnFields: String
-    
+
     /// The writer type.
     public let writerType: String
-    
+
     /// Used internally to initialize a `RequestParameters` model from JSON.
     public init(json: JSONWrapper) throws {
         query = try json.getString(at: "q")
@@ -77,22 +77,22 @@ public typealias Document = NSDictionary
 
 /** Contains the results of the Search request. */
 public struct SearchResponseBody: JSONDecodable {
-    
+
     /// The number of results found.
     public let numFound: Int
-    
+
     /// The index the given results start from.
     public let start: Int
-    
+
     /// A list of possible answers whose structure depends on the list of fields the user
     /// requested to be returned.
     public let documents: [Document]
-    
+
     /// Used internally to initialize a `SearchResponseBody` model from JSON.
     public init(json: JSONWrapper) throws {
         numFound = try json.getInt(at: "numFound")
         start = try json.getInt(at: "start")
-        
+
         var docs = [Document]()
         let docsJSON = try json.getArray(at: "docs")
         for docJSON in docsJSON {

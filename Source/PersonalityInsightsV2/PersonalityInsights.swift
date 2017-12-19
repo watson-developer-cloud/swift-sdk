@@ -22,42 +22,42 @@ import Foundation
  through blogs, tweets, forum posts, and more.
  */
 public class PersonalityInsights {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV2"
 
     /**
      Create a `PersonalityInsights` object.
-     
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
         credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the response or data represents an error returned by the Personality Insights service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -65,7 +65,7 @@ public class PersonalityInsights {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -84,7 +84,7 @@ public class PersonalityInsights {
 
     /**
      Analyze text to generate a personality profile.
- 
+
      - parameter text: The text to analyze.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
@@ -163,7 +163,7 @@ public class PersonalityInsights {
 
     /**
      Analyze input content items to generate a personality profile.
- 
+
      - parameter contentItems: The content items to analyze.
      - parameter acceptLanguage: The desired language of the response.
      - parameter contentLanguage: The language of the text being analyzed.
@@ -203,7 +203,7 @@ public class PersonalityInsights {
 
     /**
      Analyze content to generate a personality profile.
- 
+
      - parameter content: The content to analyze.
      - parameter contentType: The MIME content-type of the content.
      - parameter acceptLanguage: The desired language of the response.

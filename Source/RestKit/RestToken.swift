@@ -21,18 +21,18 @@ import Foundation
  retrieved at a particular URL using basic authentication credentials (i.e. username and password).
  */
 internal class RestToken {
-    
+
     internal var token: String?
     internal var isRefreshing = false
     internal var retries = 0
-    
+
     private var tokenURL: String
     private var credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.RestKit"
-    
+
     /**
      Create a `RestToken`.
-     
+
      - parameter tokenURL:   The URL that shall be used to obtain a token.
      - parameter username:   The username credential used to obtain a token.
      - parameter password:   The password credential used to obtain a token.
@@ -41,7 +41,7 @@ internal class RestToken {
         self.tokenURL = tokenURL
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      Refresh the authentication token.
 
@@ -57,7 +57,7 @@ internal class RestToken {
             url: tokenURL,
             credentials: credentials,
             headerParameters: [:])
-        
+
         request.responseString(responseToError: responseToError) { response in
             switch response.result {
             case .success(let token):
@@ -68,31 +68,31 @@ internal class RestToken {
             }
         }
     }
-    
+
     /**
      Returns an NSError if the response/data represents an error. Otherwise, returns nil.
-     
+
      - parameter response: an http response from the token url
      - parameter data: raw body data from the token url response
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // fail if no response from token url
         guard let response = response else {
             let description = "Token authentication failed. No response from token url."
             let userInfo = [NSLocalizedDescriptionKey: description]
             return NSError(domain: domain, code: 400, userInfo: userInfo)
         }
-        
+
         // succeed if status code indicates success
         if (200..<300).contains(response.statusCode) {
             return nil
         }
-        
+
         // default error description
         let code = response.statusCode
         var userInfo = [NSLocalizedDescriptionKey: "Token authentication failed."]
-        
+
         // update error description, if available
         if let data = data {
             do {
@@ -101,7 +101,7 @@ internal class RestToken {
                 userInfo[NSLocalizedDescriptionKey] = description
             } catch { /* no need to catch -- falls back to default description */ }
         }
-        
+
         return NSError(domain: domain, code: code, userInfo: userInfo)
     }
 

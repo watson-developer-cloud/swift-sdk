@@ -134,7 +134,7 @@ class CodableExtensionsTests: XCTestCase {
             expected.components(separatedBy: .whitespacesAndNewlines).joined().sorted()
         )
     }
-    
+
     func testEncodeAdditionalProperties() {
         let additionalProperties: [String: JSON] = [
             "null": .null,
@@ -176,7 +176,7 @@ class CodableExtensionsTests: XCTestCase {
             expected.components(separatedBy: .whitespacesAndNewlines).joined().sorted()
         )
     }
-    
+
     func testEncodeOptional() {
         let metadata: [String: JSON] = [
             "null": .null,
@@ -239,7 +239,7 @@ class CodableExtensionsTests: XCTestCase {
             expected.components(separatedBy: .whitespacesAndNewlines).joined().sorted()
         )
     }
-    
+
     func testEncodeOptionalEmpty() {
         let model = ServiceModelOptional(name: "", metadata: nil, additionalProperties: [:])
         let encoder = JSONEncoder()
@@ -248,7 +248,7 @@ class CodableExtensionsTests: XCTestCase {
         let expected = "{\"name\":\"\"}"
         XCTAssertEqual(json.sorted(), expected.sorted())
     }
-    
+
     func testEncodeOptionalNil() {
         let model = ServiceModelOptional(name: nil, metadata: nil, additionalProperties: [:])
         let encoder = JSONEncoder()

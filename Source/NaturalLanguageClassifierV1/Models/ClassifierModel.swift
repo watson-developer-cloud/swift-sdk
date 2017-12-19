@@ -18,22 +18,22 @@ import Foundation
 
 /** A classifer supported by the Natural Language Classifier service. */
 public struct ClassifierModel: JSONDecodable {
-    
+
     /// A unique identifier for this classifier.
     public let classifierId: String
-    
+
     /// A link to the classifer.
     public let url: String
-    
+
     /// The user-supplied name of the classifier.
     public let name: String?
-    
+
     /// The language used for the classifier.
     public let language: String
-    
+
     /// The date and time (UTC) that the classifier was created.
     public let created: String
-    
+
     /// Used internally to initialize a `ClassifierModel` from JSON.
     public init(json: JSONWrapper) throws {
         classifierId = try json.getString(at: "classifier_id")

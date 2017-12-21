@@ -27,7 +27,7 @@ class SpeechToTextTests: XCTestCase {
     private var trainedCustomizationID: String!
     private let corpusName = "swift-sdk-unit-test-corpus"
 
-    static var allTests : [(String, (SpeechToTextTests) -> () throws -> Void)] {
+    static var allTests: [(String, (SpeechToTextTests) -> () throws -> Void)] {
         return [
             ("testModels", testModels),
             ("testTranscribeWithCustomModel", testTranscribeWithCustomModel),
@@ -57,7 +57,7 @@ class SpeechToTextTests: XCTestCase {
             ("testTranscribeDataWithSpeakerLabelsWAV", testTranscribeDataWithSpeakerLabelsWAV),
             ("testTranscribeDataWithSpeakerLabelsOpus", testTranscribeDataWithSpeakerLabelsOpus),
             ("testTranscribeDataWithSpeakerLabelsFLAC", testTranscribeDataWithSpeakerLabelsFLAC),
-            ("testTranscribeStreaming", testTranscribeStreaming)
+            ("testTranscribeStreaming", testTranscribeStreaming),
         ]
     }
 
@@ -121,17 +121,15 @@ class SpeechToTextTests: XCTestCase {
         var customizationStatus: CustomizationStatus?
 
         speechToText.getCustomizations(failure: failure) { customizations in
-            for customization in customizations {
-                if customization.name == self.trainedCustomizationName {
-                    self.trainedCustomizationID = customization.customizationID
-                    customizationStatus = customization.status
-                }
+            for customization in customizations where customization.name == self.trainedCustomizationName {
+                self.trainedCustomizationID = customization.customizationID
+                customizationStatus = customization.status
             }
             expectation.fulfill()
         }
         waitForExpectations()
 
-        if(trainedCustomizationID == nil) {
+        if trainedCustomizationID == nil {
             print("Trained customization does not exist; creating a new one now.")
             createTrainedCustomization()
             print("Adding a corpus to the trained customization.")
@@ -351,7 +349,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssert(results.results.last?.final == true)
             let transcript = results.results.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
-            XCTAssertGreaterThan(transcript!.characters.count, 0)
+            XCTAssertGreaterThan(transcript!.count, 0)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -715,7 +713,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssert(results.results.last?.final == true)
             let transcript = results.results.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
-            XCTAssertGreaterThan(transcript!.characters.count, 0)
+            XCTAssertGreaterThan(transcript!.count, 0)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -766,7 +764,7 @@ class SpeechToTextTests: XCTestCase {
             if results.results.last?.final == true {
                 let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
-                XCTAssertGreaterThan(transcript!.characters.count, 0)
+                XCTAssertGreaterThan(transcript!.count, 0)
                 expectation.fulfill()
             }
         }
@@ -811,7 +809,7 @@ class SpeechToTextTests: XCTestCase {
                 XCTAssert(results.results.last?.final == true)
                 let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
-                XCTAssertGreaterThan(transcript!.characters.count, 0)
+                XCTAssertGreaterThan(transcript!.count, 0)
                 expectation.fulfill()
             }
             waitForExpectations()
@@ -869,7 +867,7 @@ class SpeechToTextTests: XCTestCase {
                 if results.results.last?.final == true {
                     let transcript = results.results.last?.alternatives.last?.transcript
                     XCTAssertNotNil(transcript)
-                    XCTAssertGreaterThan(transcript!.characters.count, 0)
+                    XCTAssertGreaterThan(transcript!.count, 0)
                     expectation.fulfill()
                 }
             }
@@ -919,7 +917,7 @@ class SpeechToTextTests: XCTestCase {
             if results.results.last?.final == true {
                 let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
-                XCTAssertGreaterThan(transcript!.characters.count, 0)
+                XCTAssertGreaterThan(transcript!.count, 0)
                 XCTAssertTrue(transcript!.contains(substring))
                 expectation.fulfill()
             }
@@ -1057,7 +1055,7 @@ class SpeechToTextTests: XCTestCase {
         settings: RecognitionSettings)
     {
         XCTAssertNotNil(transcription.transcript)
-        XCTAssertGreaterThan(transcription.transcript.characters.count, 0)
+        XCTAssertGreaterThan(transcription.transcript.count, 0)
 
         if best && final {
             XCTAssertNotNil(transcription.confidence)
@@ -1093,19 +1091,19 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func validateSTTWordTimestamp(timestamp: WordTimestamp) {
-        XCTAssertGreaterThan(timestamp.word.characters.count, 0)
+        XCTAssertGreaterThan(timestamp.word.count, 0)
         XCTAssertGreaterThanOrEqual(timestamp.startTime, 0.0)
         XCTAssertGreaterThanOrEqual(timestamp.endTime, timestamp.startTime)
     }
 
     func validateSTTWordConfidence(word: WordConfidence) {
-        XCTAssertGreaterThan(word.word.characters.count, 0)
+        XCTAssertGreaterThan(word.word.count, 0)
         XCTAssertGreaterThanOrEqual(word.confidence, 0.0)
         XCTAssertLessThanOrEqual(word.confidence, 1.0)
     }
 
     func validateSTTKeywordResults(keyword: String, keywordResults: [KeywordResult]) {
-        XCTAssertGreaterThan(keyword.characters.count, 0)
+        XCTAssertGreaterThan(keyword.count, 0)
         XCTAssertGreaterThan(keywordResults.count, 0)
         for keywordResult in keywordResults {
             validateSTTKeywordResult(keywordResult: keywordResult)
@@ -1113,7 +1111,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func validateSTTKeywordResult(keywordResult: KeywordResult) {
-        XCTAssertGreaterThan(keywordResult.normalizedText.characters.count, 0)
+        XCTAssertGreaterThan(keywordResult.normalizedText.count, 0)
         XCTAssertGreaterThanOrEqual(keywordResult.startTime, 0)
         XCTAssertGreaterThanOrEqual(keywordResult.endTime, keywordResult.startTime)
         XCTAssertGreaterThanOrEqual(keywordResult.confidence, 0.0)
@@ -1132,7 +1130,7 @@ class SpeechToTextTests: XCTestCase {
     func validateSTTWordAlternativeResult(wordAlternative: WordAlternativeResult) {
         XCTAssertGreaterThanOrEqual(wordAlternative.confidence, 0.0)
         XCTAssertLessThanOrEqual(wordAlternative.confidence, 1.0)
-        XCTAssertGreaterThan(wordAlternative.word.characters.count, 0)
+        XCTAssertGreaterThan(wordAlternative.word.count, 0)
     }
 
     func validateSTTSpeakerLabels(speakerLabels: [SpeakerLabel]) {

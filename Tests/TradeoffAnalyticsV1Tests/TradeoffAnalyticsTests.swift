@@ -23,7 +23,7 @@ class TradeoffAnalyticsTests: XCTestCase {
     private var tradeoffAnalytics: TradeoffAnalytics!
     private let timeout: TimeInterval = 5.0
 
-    static var allTests : [(String, (TradeoffAnalyticsTests) -> () throws -> Void)] {
+    static var allTests: [(String, (TradeoffAnalyticsTests) -> () throws -> Void)] {
         return [
             ("testGetDilemma1", testGetDilemma1),
             ("testGetDilemma2", testGetDilemma2),

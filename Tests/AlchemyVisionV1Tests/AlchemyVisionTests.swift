@@ -51,7 +51,7 @@ class AlchemyVisionTests: XCTestCase {
         loadResources()
     }
 
-    static var allTests : [(String, (AlchemyVisionTests) -> () throws -> Void)] {
+    static var allTests: [(String, (AlchemyVisionTests) -> () throws -> Void)] {
         return [
             ("testGetRankedImageFaceTagsImage1", testGetRankedImageFaceTagsImage1),
             ("testGetRankedImageFaceTagsImage2", testGetRankedImageFaceTagsImage2),

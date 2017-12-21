@@ -23,7 +23,7 @@ class RelationshipExtractionTests: XCTestCase {
     private var relationshipExtraction: RelationshipExtraction!
     private let timeout: TimeInterval = 5.0
 
-    static var allTests : [(String, (RelationshipExtractionTests) -> () throws -> Void)] {
+    static var allTests: [(String, (RelationshipExtractionTests) -> () throws -> Void)] {
         return [
             ("testGetRelationships", testGetRelationships),
             ("testGetRelationshipsEmptyText", testGetRelationshipsEmptyText),

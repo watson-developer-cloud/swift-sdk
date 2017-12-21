@@ -26,10 +26,10 @@ class TextToSpeechTests: XCTestCase {
 
     private let allVoices: [SynthesisVoice] = [
         .de_Birgit, .de_Dieter, .gb_Kate, .es_Enrique, .us_Allison, .us_Lisa, .us_Michael,
-        .es_Laura, .us_Sofia, .fr_Renee, .it_Francesca, .jp_Emi, .br_Isabela
+        .es_Laura, .us_Sofia, .fr_Renee, .it_Francesca, .jp_Emi, .br_Isabela,
     ]
 
-    static var allTests : [(String, (TextToSpeechTests) -> () throws -> Void)] {
+    static var allTests: [(String, (TextToSpeechTests) -> () throws -> Void)] {
         return [
             ("testGetVoices", testGetVoices),
             ("testGetVoice", testGetVoice),
@@ -62,7 +62,7 @@ class TextToSpeechTests: XCTestCase {
             ("testAddMultipleWordsWithBadIDs", testAddMultipleWordsWithBadIDs),
             ("testDeleteWordWithBadIDs", testDeleteWordWithBadIDs),
             ("testGetWordWithBadIDs", testGetWordWithBadIDs),
-            ("testAddWordWithBadIDs", testAddWordWithBadIDs)
+            ("testAddWordWithBadIDs", testAddWordWithBadIDs),
         ]
     }
 
@@ -139,7 +139,7 @@ class TextToSpeechTests: XCTestCase {
         for voice in allVoices {
             let description = "Get information about the given voice."
             let expectation = self.expectation(description: description)
-            textToSpeech.getVoice(voice.rawValue, failure: failWithError) { voice in
+            textToSpeech.getVoice(voice.rawValue, failure: failWithError) { _ in
                 expectation.fulfill()
             }
             waitForExpectations()
@@ -159,7 +159,7 @@ class TextToSpeechTests: XCTestCase {
 
             textToSpeech.getPronunciation(of: text, voice: voice.rawValue, format: .spr, failure: failWithError) {
                 pronunciation in
-                XCTAssertGreaterThan(pronunciation.pronunciation.characters.count, 0)
+                XCTAssertGreaterThan(pronunciation.pronunciation.count, 0)
                 expectation.fulfill()
             }
             waitForExpectations()
@@ -464,8 +464,10 @@ class TextToSpeechTests: XCTestCase {
 
         textToSpeech.addWords(
             toCustomizationID: customizationID,
-            fromArray: [Word(word: "IBM", translation: "eye bee em"),
-                Word(word: "MIL", translation: "mill")],
+            fromArray: [
+                Word(word: "IBM", translation: "eye bee em"),
+                Word(word: "MIL", translation: "mill"),
+            ],
             failure: failWithError) {
 
             expectation2.fulfill()

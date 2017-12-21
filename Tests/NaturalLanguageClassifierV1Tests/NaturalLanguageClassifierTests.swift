@@ -33,7 +33,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
         instantiateNaturalLanguageClassifier()
     }
 
-    static var allTests : [(String, (NaturalLanguageClassifierTests) -> () throws -> Void)] {
+    static var allTests: [(String, (NaturalLanguageClassifierTests) -> () throws -> Void)] {
         return [
             ("testCreateAndDelete", testCreateAndDelete),
             ("testCreateAndDeleteClassifierWithoutOptionalName", testCreateAndDeleteClassifierWithoutOptionalName),
@@ -44,7 +44,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             ("testClassifyEmptyString", testClassifyEmptyString),
             ("testClassifyWithInvalidClassifier", testClassifyWithInvalidClassifier),
             ("testDeleteInvalidClassifier", testDeleteInvalidClassifier),
-            ("testGetInvalidClassifier", testGetInvalidClassifier)
+            ("testGetInvalidClassifier", testGetInvalidClassifier),
         ]
     }
 

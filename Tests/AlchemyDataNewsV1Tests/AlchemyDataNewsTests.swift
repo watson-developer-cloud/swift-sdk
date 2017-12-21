@@ -22,7 +22,7 @@ class AlchemyDataNewsTests: XCTestCase {
     private var alchemyDataNews: AlchemyDataNews!
     private let timeout: TimeInterval = 5.0
 
-    static var allTests : [(String, (AlchemyDataNewsTests) -> () throws -> Void)] {
+    static var allTests: [(String, (AlchemyDataNewsTests) -> () throws -> Void)] {
         return [
             ("testGetNews", testGetNews),
             ("testGetNewsWithQuery", testGetNewsWithQuery),

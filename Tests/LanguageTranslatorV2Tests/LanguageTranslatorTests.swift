@@ -33,7 +33,7 @@ class LanguageTranslatorTests: XCTestCase {
         deleteStaleCustomModels()
     }
 
-    static var allTests : [(String, (LanguageTranslatorTests) -> () throws -> Void)] {
+    static var allTests: [(String, (LanguageTranslatorTests) -> () throws -> Void)] {
         return [
             ("testGetModelsAll", testGetModelsAll),
             ("testGetModelsBySourceLanguage", testGetModelsBySourceLanguage),
@@ -47,7 +47,7 @@ class LanguageTranslatorTests: XCTestCase {
             ("testTranslateArrayWithSourceAndTarget", testTranslateArrayWithSourceAndTarget),
             ("testGetIdentifiableLanguages", testGetIdentifiableLanguages),
             ("testIdentify", testIdentify),
-            ("testGetModelDoesntExist", testGetModelDoesntExist)
+            ("testGetModelDoesntExist", testGetModelDoesntExist),
         ]
     }
 
@@ -65,10 +65,8 @@ class LanguageTranslatorTests: XCTestCase {
         let description = "Delete any stale custom models previously created by unit tests."
         let expectation = self.expectation(description: description)
         languageTranslator.getModels(defaultModelsOnly: false, failure: failWithError) { models in
-            for model in models {
-                if model.baseModelID != "" {
-                    self.languageTranslator.deleteModel(withID: model.modelID)
-                }
+            for model in models where model.baseModelID != "" {
+                self.languageTranslator.deleteModel(withID: model.modelID)
             }
             expectation.fulfill()
         }

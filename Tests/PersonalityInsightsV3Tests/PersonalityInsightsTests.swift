@@ -26,13 +26,13 @@ class PersonalityInsightsTests: XCTestCase {
     private let timeout: Double = 5.0
     private var version: String = "2016-10-20"
 
-    static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
+    static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
             ("testHTMLProfile", testHTMLProfile),
             ("testNeedsAndConsumptionPreferences", testNeedsAndConsumptionPreferences),
-            ("testProfileWithShortText", testProfileWithShortText)
+            ("testProfileWithShortText", testProfileWithShortText),
         ]
     }
 

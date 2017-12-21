@@ -32,7 +32,7 @@ class AlchemyLanguageTests: XCTestCase {
         alchemyLanguage.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    static var allTests : [(String, (AlchemyLanguageTests) -> () throws -> Void)] {
+    static var allTests: [(String, (AlchemyLanguageTests) -> () throws -> Void)] {
         return [
             ("testGetAuthorsURL", testGetAuthorsURL),
             ("testGetAuthorsHtml", testGetAuthorsHtml),
@@ -117,7 +117,7 @@ class AlchemyLanguageTests: XCTestCase {
 
         #if os(iOS)
             let bundle = Bundle(for: type(of: self))
-            guard let url:URL = bundle.url(forResource: name, withExtension: withExtension) else {
+            guard let url: URL = bundle.url(forResource: name, withExtension: withExtension) else {
                 return nil
             }
         #else

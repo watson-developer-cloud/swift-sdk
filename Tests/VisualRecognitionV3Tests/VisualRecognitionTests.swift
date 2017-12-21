@@ -28,7 +28,7 @@ class VisualRecognitionTests: XCTestCase {
     private let timeout: TimeInterval = 10.0
     private let timeoutLong: TimeInterval = 45.0
 
-    static var allTests : [(String, (VisualRecognitionTests) -> () throws -> Void)] {
+    static var allTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] {
         return [
             ("testGetClassifiers", testGetClassifiers),
             ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
@@ -52,7 +52,7 @@ class VisualRecognitionTests: XCTestCase {
             ("testDetectFacesByImage2", testDetectFacesByImage2),
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
-            ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL)
+            ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL),
         ]
     }
 
@@ -141,19 +141,17 @@ class VisualRecognitionTests: XCTestCase {
         }
 
         visualRecognition.getClassifiers(failure: failure) { classifiers in
-            for classifier in classifiers {
-                if classifier.name == self.classifierName {
-                    XCTAssert(classifier.status == "ready", "Wait for training to complete.")
-                    self.classifierID = classifier.classifierID
-                    expectation.fulfill()
-                    return
-                }
+            for classifier in classifiers where classifier.name == self.classifierName {
+                XCTAssert(classifier.status == "ready", "Wait for training to complete.")
+                self.classifierID = classifier.classifierID
+                expectation.fulfill()
+                return
             }
             expectation.fulfill()
         }
         waitForExpectations()
 
-        if (classifierID == nil) {
+        if classifierID == nil {
             trainClassifier()
         }
     }
@@ -265,11 +263,9 @@ class VisualRecognitionTests: XCTestCase {
         }
 
         visualRecognition.getClassifiers(failure: failWithError) { classifiers in
-            for classifier in classifiers {
-                if classifier.classifierID == classifierIDToDelete {
-                    expectation2.fulfill()
-                    return
-                }
+            for classifier in classifiers where classifier.classifierID == classifierIDToDelete {
+                expectation2.fulfill()
+                return
             }
             XCTFail("The created classifier could not be retrieved from the service.")
         }
@@ -319,11 +315,9 @@ class VisualRecognitionTests: XCTestCase {
         let expectation2 = expectation(description: description2)
 
         visualRecognition.getClassifiers(failure: failWithError) { classifiers in
-            for classifier in classifiers {
-                if classifier.classifierID == newClassifierID {
-                    expectation2.fulfill()
-                    return
-                }
+            for classifier in classifiers where classifier.classifierID == newClassifierID {
+                expectation2.fulfill()
+                return
             }
             XCTFail("The created classifier could not be retrieved from the service.")
         }
@@ -386,7 +380,7 @@ class VisualRecognitionTests: XCTestCase {
         }
         var trained = false
         var tries = 0
-        while(!trained) {
+        while !trained {
             tries += 1
             let description = "Get the new classifier."
             let expectation = self.expectation(description: description)
@@ -434,7 +428,7 @@ class VisualRecognitionTests: XCTestCase {
 
         trained = false
         tries = 0
-        while(!trained) {
+        while !trained {
             tries += 1
             let description = "Get the updated classifier and make sure there are 2 classes."
             let expectation = self.expectation(description: description)
@@ -512,7 +506,7 @@ class VisualRecognitionTests: XCTestCase {
 
         var trained = false
         var tries = 0
-        while(!trained) {
+        while !trained {
             tries += 1
             let description = "Get the new classifier."
             let expectation = self.expectation(description: description)
@@ -559,7 +553,7 @@ class VisualRecognitionTests: XCTestCase {
 
         trained = false
         tries = 0
-        while(!trained) {
+        while !trained {
             tries += 1
             let description = "Get the updated classifier and make sure there is 1 class."
             let expectation = self.expectation(description: description)
@@ -641,12 +635,10 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for c in classes {
-                if c.classification == "person" {
-                    containsPersonClass = true
-                    classifierScore = c.score
-                    break
-                }
+            for c in classes where c.classification == "person" {
+                containsPersonClass = true
+                classifierScore = c.score
+                break
             }
             XCTAssertEqual(true, containsPersonClass)
             if let score = classifierScore {
@@ -697,12 +689,10 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for c in classes {
-                if c.classification == "person" {
-                    containsPersonClass = true
-                    classifierScore = c.score
-                    break
-                }
+            for c in classes where c.classification == "person" {
+                containsPersonClass = true
+                classifierScore = c.score
+                break
             }
             XCTAssertEqual(containsPersonClass, true)
             if let score = classifierScore {
@@ -825,11 +815,9 @@ class VisualRecognitionTests: XCTestCase {
                     XCTAssertEqual(classifier.name, "default")
 
                     XCTAssertGreaterThan(classifier.classes.count, 0)
-                    for c in classifier.classes {
-                        if c.classification == "car" {
-                            containsCarClass = true
-                            classifierScore = c.score
-                        }
+                    for c in classifier.classes where c.classification == "car" {
+                        containsCarClass = true
+                        classifierScore = c.score
                     }
                     XCTAssertEqual(containsCarClass, true)
                     if let score = classifierScore {
@@ -881,12 +869,10 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for c in classes {
-                if c.classification == "car" {
-                    containsPersonClass = true
-                    classifierScore = c.score
-                    break
-                }
+            for c in classes where c.classification == "car" {
+                containsPersonClass = true
+                classifierScore = c.score
+                break
             }
             XCTAssertEqual(true, containsPersonClass)
             if let score = classifierScore {
@@ -937,12 +923,10 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for c in classes {
-                if c.classification == "car" {
-                    containsPersonClass = true
-                    classifierScore = c.score
-                    break
-                }
+            for c in classes where c.classification == "car" {
+                containsPersonClass = true
+                classifierScore = c.score
+                break
             }
             XCTAssertEqual(containsPersonClass, true)
             if let score = classifierScore {
@@ -1069,11 +1053,9 @@ class VisualRecognitionTests: XCTestCase {
                     XCTAssertEqual(classifier.name, "default")
 
                     XCTAssertGreaterThan(classifier.classes.count, 0)
-                    for c in classifier.classes {
-                        if c.classification == "car" {
-                            containsCarClass = true
-                            classifierScore = c.score
-                        }
+                    for c in classifier.classes where c.classification == "car" {
+                        containsCarClass = true
+                        classifierScore = c.score
                     }
                     XCTAssertEqual(containsCarClass, true)
                     if let score = classifierScore {

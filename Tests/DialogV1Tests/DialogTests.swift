@@ -44,7 +44,7 @@ class DialogTests: XCTestCase {
         lookupDialog()
     }
 
-    static var allTests : [(String, (DialogTests) -> () throws -> Void)] {
+    static var allTests: [(String, (DialogTests) -> () throws -> Void)] {
         return [
             ("testGetDialogs", testGetDialogs),
             ("testCreateDelete", testCreateDelete),

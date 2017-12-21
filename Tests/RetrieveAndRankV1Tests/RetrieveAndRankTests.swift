@@ -29,7 +29,7 @@ class RetrieveAndRankTests: XCTestCase {
     private let trainedRankerID = "1ba90dx16-rank-674"
     private let trainedRankerName = "trained-swift-sdk-ranker"
 
-    static var allTests : [(String, (RetrieveAndRankTests) -> () throws -> Void)] {
+    static var allTests: [(String, (RetrieveAndRankTests) -> () throws -> Void)] {
         return [
             ("testGetSolrClusters", testGetSolrClusters),
             ("testCreateAndDeleteSolrCluster", testCreateAndDeleteSolrCluster),
@@ -62,7 +62,7 @@ class RetrieveAndRankTests: XCTestCase {
             ("testSearchAndRankWithInvalidClusterID", testSearchAndRankWithInvalidClusterID),
             ("testGetDetailsOfNonExistentRanker", testGetDetailsOfNonExistentRanker),
             ("testDeleteNonExistentRanker", testDeleteNonExistentRanker),
-            ("testRankWithInvalidRankerID", testRankWithInvalidRankerID)
+            ("testRankWithInvalidRankerID", testRankWithInvalidRankerID),
         ]
     }
 

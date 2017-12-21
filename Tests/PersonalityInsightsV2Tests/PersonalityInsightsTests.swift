@@ -25,7 +25,7 @@ class PersonalityInsightsTests: XCTestCase {
     private var kennedySpeech: String!
     private let timeout: TimeInterval = 5.0
 
-    static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
+    static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),

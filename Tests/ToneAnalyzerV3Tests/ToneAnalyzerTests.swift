@@ -23,12 +23,12 @@ class ToneAnalyzerTests: XCTestCase {
     private var toneAnalyzer: ToneAnalyzer!
     private let timeout: TimeInterval = 5.0
 
-    static var allTests : [(String, (ToneAnalyzerTests) -> () throws -> Void)] {
+    static var allTests: [(String, (ToneAnalyzerTests) -> () throws -> Void)] {
         return [
             ("testGetToneWithDefaultParameters", testGetToneWithDefaultParameters),
             ("testGetToneWithCustomParameters", testGetToneWithCustomParameters),
             ("testGetToneEmptyString", testGetToneEmptyString),
-            ("testGetToneInvalidParameters", testGetToneInvalidParameters)
+            ("testGetToneInvalidParameters", testGetToneInvalidParameters),
         ]
     }
 

@@ -37,14 +37,14 @@ class DocumentConversionTests: XCTestCase {
         loadResources()
     }
 
-    static var allTests : [(String, (DocumentConversionTests) -> () throws -> Void)] {
+    static var allTests: [(String, (DocumentConversionTests) -> () throws -> Void)] {
         return [
             ("testConvertToText", testConvertToText),
             ("testConvertToHtml", testConvertToHtml),
             ("testConvertToTextCreateConfig", testConvertToTextCreateConfig),
             ("testConvertToAnswerUnits", testConvertToAnswerUnits),
             ("testInvalidVersion", testInvalidVersion),
-            ("testInvalidFileType", testInvalidFileType)
+            ("testInvalidFileType", testInvalidFileType),
         ]
     }
 
@@ -183,7 +183,7 @@ class DocumentConversionTests: XCTestCase {
                                                 }
                                                 expectation.fulfill()
                                             } catch {
-                                                XCTFail()
+                                                XCTFail("Exception occurred in processing convertDocument response")
                                             }
         }
         waitForExpectations()

@@ -39,7 +39,7 @@ class CodableExtensionsTests: XCTestCase {
         ("testDecodeAdditionalProperties", testDecodeAdditionalProperties),
         ("testDecodeOptional", testDecodeOptional),
         ("testDecodeOptionalEmpty", testDecodeOptionalEmpty),
-        ("testDecodeOptionalNil", testDecodeOptionalNil)
+        ("testDecodeOptionalNil", testDecodeOptionalNil),
     ]
 
     func testEncodeNil() {
@@ -59,7 +59,7 @@ class CodableExtensionsTests: XCTestCase {
             "double": .double(0.5),
             "string": .string("this is a string"),
             "array": .array([.int(1), .int(2), .int(3)]),
-            "object": .object(["x": .int(1)])
+            "object": .object(["x": .int(1)]),
         ]
         let model = ServiceModel(name: "name", metadata: metadata, additionalProperties: [:])
         let encoder = JSONEncoder()
@@ -143,7 +143,7 @@ class CodableExtensionsTests: XCTestCase {
             "double": .double(0.5),
             "string": .string("this is a string"),
             "array": .array([.int(1), .int(2), .int(3)]),
-            "object": .object(["x": .int(1)])
+            "object": .object(["x": .int(1)]),
         ]
         let model = ServiceModel(name: "name", metadata: [:], additionalProperties: additionalProperties)
         let encoder = JSONEncoder()
@@ -185,7 +185,7 @@ class CodableExtensionsTests: XCTestCase {
             "double": .double(0.5),
             "string": .string("this is a string"),
             "array": .array([.int(1), .int(2), .int(3)]),
-            "object": .object(["x": .int(1)])
+            "object": .object(["x": .int(1)]),
         ]
         let additionalProperties: [String: JSON] = [
             "null": .null,
@@ -194,7 +194,7 @@ class CodableExtensionsTests: XCTestCase {
             "double": .double(0.5),
             "string": .string("this is a string"),
             "array": .array([.int(1), .int(2), .int(3)]),
-            "object": .object(["x": .int(1)])
+            "object": .object(["x": .int(1)]),
         ]
         let model = ServiceModelOptional(name: "name", metadata: metadata, additionalProperties: additionalProperties)
         let encoder = JSONEncoder()

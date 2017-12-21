@@ -63,14 +63,14 @@ class DiscoveryTests: XCTestCase {
             trainedEnvironmentID = environment.first?.environmentID
             expectation1.fulfill()
         }
-        let _ = XCTWaiter.wait(for: [expectation1], timeout: 20)
+        _ = XCTWaiter.wait(for: [expectation1], timeout: 20)
 
         let description2 = "Delete the trained environment."
         let expectation2 = XCTestExpectation(description: description2)
-        discovery.deleteEnvironment(withID: trainedEnvironmentID!, failure: failure) { environment in
+        discovery.deleteEnvironment(withID: trainedEnvironmentID!, failure: failure) { _ in
             expectation2.fulfill()
         }
-        let _ = XCTWaiter.wait(for: [expectation2], timeout: 20)
+        _ = XCTWaiter.wait(for: [expectation2], timeout: 20)
     }
 
     /** Instantiate Discovery instance. */
@@ -93,17 +93,15 @@ class DiscoveryTests: XCTestCase {
         }
 
         discovery.getEnvironments(withName: environmentName, failure: failure) { environments in
-            for environment in environments {
-                if environment.name == self.environmentName {
-                    self.environmentID = environment.environmentID
-                    expectation.fulfill()
-                    return
-                }
+            for environment in environments where environment.name == self.environmentName {
+                self.environmentID = environment.environmentID
+                expectation.fulfill()
+                return
             }
             expectation.fulfill()
         }
         waitForExpectations()
-        if (environmentID == nil) {
+        if environmentID == nil {
             createEnvironment()
         }
     }
@@ -142,12 +140,10 @@ class DiscoveryTests: XCTestCase {
         discovery.getConfigurations(
             withEnvironmentID: environmentID,
             failure: failure) { configurations in
-                for configuration in configurations {
-                    if configuration.name == defaultConfigName {
-                        self.configurationID = configuration.configurationID
-                        expectation.fulfill()
-                        return
-                    }
+                for configuration in configurations where configuration.name == defaultConfigName {
+                    self.configurationID = configuration.configurationID
+                    expectation.fulfill()
+                    return
                 }
                 expectation.fulfill()
         }
@@ -162,12 +158,10 @@ class DiscoveryTests: XCTestCase {
         let failure = { (error: Error) in XCTFail("Could not find collection with specified environmentID") }
         discovery.getCollections(withEnvironmentID: environmentID!, failure: failure) {
             collections in
-            for collection in collections {
-                if self.collectionName == collection.name {
-                    self.collectionID = collection.collectionID
-                    expectation.fulfill()
-                    return
-                }
+            for collection in collections where self.collectionName == collection.name {
+                self.collectionID = collection.collectionID
+                expectation.fulfill()
+                return
             }
             expectation.fulfill()
         }
@@ -187,12 +181,10 @@ class DiscoveryTests: XCTestCase {
         }
 
         discovery.getEnvironments(withName: newsEnvironmentName, failure: failure) { environments in
-            for environment in environments {
-                if environment.name == self.newsEnvironmentName {
-                    self.newsEnvironmentID = environment.environmentID
-                    expectation.fulfill()
-                    return
-                }
+            for environment in environments where environment.name == self.newsEnvironmentName {
+                self.newsEnvironmentID = environment.environmentID
+                expectation.fulfill()
+                return
             }
             expectation.fulfill()
         }
@@ -206,12 +198,10 @@ class DiscoveryTests: XCTestCase {
         }
 
         discovery.getCollections(withEnvironmentID: newsEnvironmentID!, withName: newsCollectionName, failure: failure2) { collections in
-            for collection in collections {
-                if collection.name == self.newsCollectionName {
-                    self.newsCollectionID = collection.collectionID
-                    expectation2.fulfill()
-                    return
-                }
+            for collection in collections where collection.name == self.newsCollectionName {
+                self.newsCollectionID = collection.collectionID
+                expectation2.fulfill()
+                return
             }
             expectation2.fulfill()
         }
@@ -223,7 +213,7 @@ class DiscoveryTests: XCTestCase {
 
         var environmentReady = false
         var tries = 0
-        while(!environmentReady) {
+        while !environmentReady {
             tries += 1
             let description = "Get environment and check if it's `active`."
             let expectation = self.expectation(description: description)
@@ -459,11 +449,9 @@ class DiscoveryTests: XCTestCase {
         discovery.getConfigurations(withEnvironmentID: environmentID, failure: failWithError) {
             configurations in
 
-            for configuration in configurations {
-                if configuration.name == "Default Configuration" {
-                    XCTAssertEqual(configuration.description, "The configuration used by default when creating a new collection without specifying a configuration_id.")
-                    expectation.fulfill()
-                }
+            for configuration in configurations where configuration.name == "Default Configuration" {
+                XCTAssertEqual(configuration.description, "The configuration used by default when creating a new collection without specifying a configuration_id.")
+                expectation.fulfill()
             }
         }
         waitForExpectations()
@@ -695,10 +683,9 @@ class DiscoveryTests: XCTestCase {
             withEnvironmentID: environmentID,
             withConfigurationID: newConfigID,
             configuration: configuration2,
-            failure: failWithError) { configuration in
-
-            expectation2.fulfill()
-        }
+            failure: failWithError) { _ in
+                expectation2.fulfill()
+            }
         waitForExpectations()
 
         let description3 = "Retrieve details of the updated configuration."
@@ -1043,6 +1030,7 @@ class DiscoveryTests: XCTestCase {
 
     // MARK: - Test Query
 
+    // swiftlint:disable:next cyclomatic_complexity
     func testQueryInNewsCollection() {
         let description = "Query, filter and aggregate news resources in Watson collection."
         let expectation = self.expectation(description: description)
@@ -1182,16 +1170,14 @@ class DiscoveryTests: XCTestCase {
                             XCTAssertNotNil(enrichedTitle.concepts)
                             var conceptMatchesQuery = false
                             if let concepts = enrichedTitle.concepts {
-                                for concept in concepts {
-                                    if concept.text == query {
-                                        conceptMatchesQuery = true
-                                        XCTAssertNotNil(concept.website, "http://www.un.org/")
-                                        XCTAssertNotNil(concept.dbpedia)
-                                        XCTAssertNotNil(concept.relevance)
-                                        XCTAssertNotNil(concept.freebase)
-                                        XCTAssertNotNil(concept.yago)
-                                        break
-                                    }
+                                for concept in concepts where concept.text == query {
+                                    conceptMatchesQuery = true
+                                    XCTAssertNotNil(concept.website, "http://www.un.org/")
+                                    XCTAssertNotNil(concept.dbpedia)
+                                    XCTAssertNotNil(concept.relevance)
+                                    XCTAssertNotNil(concept.freebase)
+                                    XCTAssertNotNil(concept.yago)
+                                    break
                                 }
                             }
                             XCTAssertEqual(true, conceptMatchesQuery)
@@ -1275,6 +1261,7 @@ class DiscoveryTests: XCTestCase {
     }
 
     /* Test EnrichedTitle.relations, SAO relations within the document in the test collection. */
+    // swiftlint:disable:next cyclomatic_complexity
     func testRelationsModel() {
         let description = "Test EnrichedTitle.docSentiment, subject, action, object models within the documents in the test collection."
         let expectation = self.expectation(description: description)

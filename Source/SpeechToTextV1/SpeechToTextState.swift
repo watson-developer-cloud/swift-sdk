@@ -17,6 +17,7 @@
 import Foundation
 
 /** The state of a `SpeechToTextSession`. */
+// swiftlint:disable identifier_name
 internal enum SpeechToTextState {
 
     /// The session is connecting to the Speech to Text service.

@@ -20,7 +20,9 @@ internal class TextToSpeechDecoder {
 
     var pcmDataWithHeaders = Data()             // object containing the decoded pcm data with wav headers
 
+    // swiftlint:disable:next type_name
     private typealias opus_decoder = OpaquePointer
+    // swiftlint:disable:next identifier_name
     private let MAX_FRAME_SIZE = Int32(960 * 6)
 
     private var streamState: ogg_stream_state   // state of ogg stream
@@ -116,13 +118,14 @@ internal class TextToSpeechDecoder {
 
         // perform cleanup
         opus_multistream_decoder_destroy(decoder)
-        if (!beginStream) {
+        if !beginStream {
             ogg_stream_clear(&streamState)
         }
         ogg_sync_clear(&syncState)
     }
 
     // Extract a packet from the ogg stream and store the extracted data within the packet object.
+    // swiftlint:disable:next cyclomatic_complexity
     private func extractPacket(_ streamState: inout ogg_stream_state, _ packet: inout ogg_packet) throws {
         // attempt to extract a packet from the ogg stream
         while ogg_stream_packetout(&streamState, &packet) == 1 {
@@ -231,7 +234,7 @@ internal class TextToSpeechDecoder {
         }
 
         decoder = opus_multistream_decoder_create(sampleRate, channels, header.nb_streams, header.nb_coupled, &header.stream_map.0, &status)
-        if status != OpusError.ok.rawValue {
+        if status != OpusError.okay.rawValue {
             throw OpusError.badArgument
         }
         return decoder
@@ -278,7 +281,7 @@ internal class TextToSpeechDecoder {
         shortOutput.withMemoryRebound(to: UInt8.self, capacity: Int(outLength) * Int(channels)) { shortOutputUint8 in
             if maxOut > 0 {
                 pcmData.append(shortOutputUint8, count: Int(outLength) * 2)
-                sampOut = sampOut + Int64(outLength)
+                sampOut += Int64(outLength)
             }
         }
 
@@ -351,7 +354,7 @@ internal class TextToSpeechDecoder {
 
 // MARK: - OpusError
 internal enum OpusError: Error {
-    case ok
+    case okay
     case badArgument
     case bufferTooSmall
     case internalError
@@ -362,7 +365,7 @@ internal enum OpusError: Error {
 
     var rawValue: Int32 {
         switch self {
-        case .ok: return OPUS_OK
+        case .okay: return OPUS_OK
         case .badArgument: return OPUS_BAD_ARG
         case .bufferTooSmall: return OPUS_BUFFER_TOO_SMALL
         case .internalError: return OPUS_INTERNAL_ERROR
@@ -375,7 +378,7 @@ internal enum OpusError: Error {
 
     init?(rawValue: Int32) {
         switch rawValue {
-        case OPUS_OK: self = .ok
+        case OPUS_OK: self = .okay
         case OPUS_BAD_ARG: self = .badArgument
         case OPUS_BUFFER_TOO_SMALL: self = .bufferTooSmall
         case OPUS_INTERNAL_ERROR: self = .internalError

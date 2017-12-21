@@ -89,9 +89,11 @@ public struct MapNode: JSONDecodable {
 public struct MapNodeCoordinates: JSONDecodable {
 
     /// X-axis coordinate on the map visualization.
+    // swiftlint:disable:next identifier_name
     public let x: Double
 
     /// Y-axis coordinate on the map visualization.
+    // swiftlint:disable:next identifier_name
     public let y: Double
 
     /// Used internally to initialize a `MapNodeCoordinates` model from JSON.

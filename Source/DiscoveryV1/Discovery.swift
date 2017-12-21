@@ -80,11 +80,11 @@ public class Discovery {
             if let description = try? json.getString(at: "description") {
                 userInfo = [
                     NSLocalizedFailureReasonErrorKey: message,
-                    NSLocalizedRecoverySuggestionErrorKey: description
+                    NSLocalizedRecoverySuggestionErrorKey: description,
                 ]
             } else {
                 userInfo = [
-                    NSLocalizedFailureReasonErrorKey: message
+                    NSLocalizedFailureReasonErrorKey: message,
                 ]
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)

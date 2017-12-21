@@ -43,7 +43,7 @@ public class SpeechToTextSession {
 
     /// The results of the most recent recognition request.
     public var results: SpeechRecognitionResults {
-        get { return socket.results }
+        return socket.results
     }
 
     /// Invoked when the session connects to the Speech to Text service.
@@ -136,6 +136,7 @@ public class SpeechToTextSession {
         self.learningOptOut = learningOptOut
 
         recorder = SpeechToTextRecorder()
+        // swiftlint:disable:next force_try
         encoder = try! SpeechToTextEncoder(
             format: recorder.format,
             opusRate: Int32(recorder.format.mSampleRate),
@@ -209,6 +210,7 @@ public class SpeechToTextSession {
         self.compress = compress
 
         // reset encoder
+        // swiftlint:disable:next force_try
         encoder = try! SpeechToTextEncoder(
             format: recorder.format,
             opusRate: Int32(recorder.format.mSampleRate),
@@ -237,6 +239,7 @@ public class SpeechToTextSession {
             let onMicrophoneDataOpus = { [weak self] (pcm: Data) in
                 guard let `self` = self else { return }
                 guard pcm.count > 0 else { return }
+                // swiftlint:disable:next force_try
                 try! self.encoder.encode(pcm: pcm)
                 let opus = self.encoder.bitstream(flush: true)
                 guard opus.count > 0 else { return }
@@ -279,6 +282,7 @@ public class SpeechToTextSession {
         }
 
         if compress {
+            // swiftlint:disable:next force_try
             let opus = try! encoder.endstream()
             guard opus.count > 0 else { return }
             self.socket.writeAudio(audio: opus)

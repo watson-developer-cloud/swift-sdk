@@ -76,11 +76,11 @@ public class VisualRecognition {
                 let statusInfo = try json.getString(at: "statusInfo")
                 userInfo = [
                     NSLocalizedFailureReasonErrorKey: status,
-                    NSLocalizedDescriptionKey: statusInfo
+                    NSLocalizedDescriptionKey: statusInfo,
                 ]
             } else if let message = try? json.getString(at: "error") {
                 userInfo = [
-                    NSLocalizedDescriptionKey: message
+                    NSLocalizedDescriptionKey: message,
                 ]
             } else {
                 let message = try json.getString(at: "images", 0, "error", "error_id")
@@ -89,7 +89,7 @@ public class VisualRecognition {
                 code = 400
                 userInfo = [
                     NSLocalizedFailureReasonErrorKey: message,
-                    NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)"
+                    NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)",
                 ]
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)

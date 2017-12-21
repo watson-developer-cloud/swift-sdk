@@ -77,7 +77,7 @@ public class RetrieveAndRank {
                 let description = try json.getString(at: "description")
                 userInfo = [
                     NSLocalizedFailureReasonErrorKey: message,
-                    NSLocalizedRecoverySuggestionErrorKey: description
+                    NSLocalizedRecoverySuggestionErrorKey: description,
                 ]
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)
@@ -682,6 +682,7 @@ public class RetrieveAndRank {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchAndRankResponse` object.
      */
+    // swiftlint:disable:next function_parameter_count
     public func searchAndRank(
         withCollectionName collectionName: String,
         fromSolrClusterID solrClusterID: String,

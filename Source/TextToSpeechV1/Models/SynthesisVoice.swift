@@ -17,6 +17,7 @@
 import Foundation
 
 /** A voice to be used for synthesis. */
+// swiftlint:disable identifier_name
 public enum SynthesisVoice: String {
 
     /// German with a female voice (`de-DE_BirgitVoice`).

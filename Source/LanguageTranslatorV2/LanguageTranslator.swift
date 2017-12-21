@@ -78,7 +78,7 @@ public class LanguageTranslator {
                 let description = try json.getString(at: "description")
                 userInfo = [
                     NSLocalizedFailureReasonErrorKey: message,
-                    NSLocalizedRecoverySuggestionErrorKey: description
+                    NSLocalizedRecoverySuggestionErrorKey: description,
                 ]
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)
@@ -173,6 +173,10 @@ public class LanguageTranslator {
             let queryParameter = URLQueryItem(name: "name", value: name)
             queryParameters.append(queryParameter)
         }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
 
         // construct REST request
         let request = RestRequest(
@@ -183,7 +187,7 @@ public class LanguageTranslator {
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
             queryItems: queryParameters,
-            messageBody: try! multipartFormData.toData() // TODO
+            messageBody: body
         )
 
         // execute REST request

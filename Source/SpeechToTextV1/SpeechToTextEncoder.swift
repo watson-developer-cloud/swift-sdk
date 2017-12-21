@@ -23,6 +23,7 @@ internal class SpeechToTextEncoder {
     // For more information about these libraries, refer to their online documentation.
     // (The opus-tools source code was also helpful to verify the implementation.)
 
+    // swiftlint:disable:next type_name
     private typealias opus_encoder = OpaquePointer
 
     private var stream: ogg_stream_state   // state of the ogg stream
@@ -75,7 +76,7 @@ internal class SpeechToTextEncoder {
         // initialize opus encoder
         encoder = opus_encoder_create(opusRate, pcmChannels, application.rawValue, &status)
         guard let error = OpusError(rawValue: status) else { throw OpusError.internalError }
-        guard error == .ok else { throw error }
+        guard error == .okay else { throw error }
 
         // add opus headers to ogg stream
         try addOpusHeader(channels: UInt8(pcmChannels), rate: UInt32(pcmRate))
@@ -176,7 +177,7 @@ internal class SpeechToTextEncoder {
 
         // construct audio buffers
         var pcm = UnsafeMutablePointer<Int16>(mutating: pcm)
-        var opus = Array<UInt8>(repeating: 0, count: Int(maxFrameSize))
+        var opus = [UInt8](repeating: 0, count: Int(maxFrameSize))
         var count = count
 
         // encode cache, if necessary
@@ -211,7 +212,7 @@ internal class SpeechToTextEncoder {
             // advance pcm buffer
             let bytesEncoded = Int(frameSize) * Int(pcmBytesPerFrame)
             pcm = pcm.advanced(by: bytesEncoded / MemoryLayout<Int16>.stride)
-            count = count - bytesEncoded
+            count -= bytesEncoded
         }
 
         // cache remaining pcm data
@@ -239,10 +240,10 @@ internal class SpeechToTextEncoder {
 
         // advance pcm buffer (modifies the inout arguments)
         pcm = pcm.advanced(by: toAppend / MemoryLayout<Int16>.stride)
-        bytes = bytes - toAppend
+        bytes -= toAppend
 
         // encode an opus frame
-        var opus = Array<UInt8>(repeating: 0, count: Int(maxFrameSize))
+        var opus = [UInt8](repeating: 0, count: Int(maxFrameSize))
         var numBytes: opus_int32 = 0
         try pcmCache.withUnsafeBytes { (cache: UnsafePointer<Int16>) in
             numBytes = opus_encode(encoder, cache, frameSize, &opus, maxFrameSize)
@@ -286,11 +287,11 @@ internal class SpeechToTextEncoder {
 
         // add padding to cache to construct complete frame
         let toAppend = Int(frameSize) * Int(pcmBytesPerFrame) - pcmCache.count
-        let padding = Array<UInt8>(repeating: 0, count: toAppend)
+        let padding = [UInt8](repeating: 0, count: toAppend)
         pcmCache.append(padding, count: toAppend)
 
         // encode an opus frame
-        var opus = Array<UInt8>(repeating: 0, count: Int(maxFrameSize))
+        var opus = [UInt8](repeating: 0, count: Int(maxFrameSize))
         var numBytes: opus_int32 = 0
         try pcmCache.withUnsafeBytes { (cache: UnsafePointer<Int16>) in
             numBytes = opus_encode(encoder, cache, frameSize, &opus, maxFrameSize)
@@ -389,7 +390,7 @@ private class CommentHeader {
     init() {
         magicSignature = [ 0x4f, 0x70, 0x75, 0x73, 0x54, 0x61, 0x67, 0x73 ] // "OpusTags"
         vendorString = String(validatingUTF8: opus_get_version_string())!
-        vendorStringLength = UInt32(vendorString.characters.count)
+        vendorStringLength = UInt32(vendorString.count)
         userComments = [Comment(tag: "ENCODER", value: "IBM Mobile Innovation Lab")]
         userCommentListLength = UInt32(userComments.count)
     }
@@ -408,13 +409,13 @@ private class CommentHeader {
 }
 
 // MARK: - Comment
-fileprivate class Comment {
+private class Comment {
     private(set) var length: UInt32
     private(set) var comment: String
 
     fileprivate init(tag: String, value: String) {
         comment = "\(tag)=\(value)"
-        length = UInt32(comment.characters.count)
+        length = UInt32(comment.count)
     }
 
     fileprivate func toData() -> Data {
@@ -426,7 +427,7 @@ fileprivate class Comment {
 }
 
 // MARK: - ChannelMappingFamily
-fileprivate enum ChannelMappingFamily: UInt8 {
+private enum ChannelMappingFamily: UInt8 {
     case rtp = 0
     case vorbis = 1
     case undefined = 255
@@ -458,7 +459,7 @@ internal enum Application {
 
 // MARK: - OpusError
 internal enum OpusError: Error {
-    case ok
+    case okay
     case badArgument
     case bufferTooSmall
     case internalError
@@ -469,7 +470,7 @@ internal enum OpusError: Error {
 
     var rawValue: Int32 {
         switch self {
-        case .ok: return OPUS_OK
+        case .okay: return OPUS_OK
         case .badArgument: return OPUS_BAD_ARG
         case .bufferTooSmall: return OPUS_BUFFER_TOO_SMALL
         case .internalError: return OPUS_INTERNAL_ERROR
@@ -482,7 +483,7 @@ internal enum OpusError: Error {
 
     init?(rawValue: Int32) {
         switch rawValue {
-        case OPUS_OK: self = .ok
+        case OPUS_OK: self = .okay
         case OPUS_BAD_ARG: self = .badArgument
         case OPUS_BUFFER_TOO_SMALL: self = .bufferTooSmall
         case OPUS_INTERNAL_ERROR: self = .internalError

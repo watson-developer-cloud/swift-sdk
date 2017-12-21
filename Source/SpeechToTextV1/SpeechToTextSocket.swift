@@ -21,11 +21,11 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     private(set) internal var results = SpeechRecognitionResults()
     private(set) internal var state: SpeechToTextState = .Disconnected
 
-    internal var onConnect: (() -> Void)? = nil
-    internal var onListening: (() -> Void)? = nil
-    internal var onResults: ((SpeechRecognitionResults) -> Void)? = nil
-    internal var onError: ((Error) -> Void)? = nil
-    internal var onDisconnect: (() -> Void)? = nil
+    internal var onConnect: (() -> Void)?
+    internal var onListening: (() -> Void)?
+    internal var onResults: ((SpeechRecognitionResults) -> Void)?
+    internal var onError: ((Error) -> Void)?
+    internal var onDisconnect: (() -> Void)?
 
     private let url: URL
     private let restToken: RestToken

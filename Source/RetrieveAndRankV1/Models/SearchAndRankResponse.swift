@@ -75,8 +75,11 @@ public struct SearchAndRankResponseBody: JSONDecodable {
         var docs = [Document]()
         let docsJSON = try json.getArray(at: "docs")
         for docJSON in docsJSON {
-            let doc = try JSONSerialization.jsonObject(with: docJSON.serialize(), options: JSONSerialization.ReadingOptions.allowFragments) as! Document
-            docs.append(doc)
+            if let doc = try JSONSerialization.jsonObject(
+                                with: docJSON.serialize(),
+                                options: JSONSerialization.ReadingOptions.allowFragments) as? Document {
+                docs.append(doc)
+            }
         }
         documents = docs
     }

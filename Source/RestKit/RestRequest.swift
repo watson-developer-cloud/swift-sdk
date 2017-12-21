@@ -137,7 +137,7 @@ internal struct RestRequest {
     {
         response() { data, response, error in
 
-            if let error = error ?? responseToError?(response,data) {
+            if let error = error ?? responseToError?(response, data) {
                 let result = RestResult<T>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
@@ -187,7 +187,7 @@ internal struct RestRequest {
     {
         response() { data, response, error in
 
-            if let error = error ?? responseToError?(response,data) {
+            if let error = error ?? responseToError?(response, data) {
                 let result = RestResult<T>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)

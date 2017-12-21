@@ -29,7 +29,7 @@ internal class SpeechToTextRecorder {
     internal var isRecording = false                                 // state of recording
     internal private(set) var format = AudioStreamBasicDescription() // audio data format specification
 
-    private var queue: AudioQueueRef? = nil                          // opaque reference to an audio queue
+    private var queue: AudioQueueRef?                                // opaque reference to an audio queue
     private var powerTimer: Timer?                                   // timer to invoke metering callback
 
     private let callback: AudioQueueInputCallback = {
@@ -45,7 +45,7 @@ internal class SpeechToTextRecorder {
 
         // calculate number of packets
         var numPackets = numPackets
-        if (numPackets == 0 && audioRecorder.format.mBytesPerPacket != 0) {
+        if numPackets == 0 && audioRecorder.format.mBytesPerPacket != 0 {
             numPackets = buffer.mAudioDataByteSize / audioRecorder.format.mBytesPerPacket
         }
 

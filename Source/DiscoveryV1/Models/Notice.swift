@@ -39,7 +39,7 @@ public struct Notice: JSONDecodable {
     public let description: String
 
     /// JSON with details that might help troubleshoot the notice.
-    public let details: [String : Any]
+    public let details: [String: Any]
 
     /// Used internally to initialize a `Notice` model from JSON.
     public init(json: JSONWrapper) throws {

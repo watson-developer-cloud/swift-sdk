@@ -76,7 +76,7 @@ public class NaturalLanguageClassifier {
             let description = try json.getString(at: "description")
             let userInfo = [
                 NSLocalizedFailureReasonErrorKey: message,
-                NSLocalizedRecoverySuggestionErrorKey: description
+                NSLocalizedRecoverySuggestionErrorKey: description,
             ]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {

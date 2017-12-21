@@ -40,7 +40,7 @@ internal struct SpeechRecognitionEvent: JSONDecodable {
         resultIndex = try? json.getInt(at: "result_index")
         results = try? json.decodedArray(at: "results", type: SpeechRecognitionResult.self)
         speakerLabels = try? json.decodedArray(at: "speaker_labels", type: SpeakerLabel.self)
-        if (resultIndex == nil && results == nil && speakerLabels == nil) {
+        if resultIndex == nil && results == nil && speakerLabels == nil {
             throw JSONWrapper.Error.valueNotConvertible(value: json, to: SpeechRecognitionEvent.self)
         }
     }

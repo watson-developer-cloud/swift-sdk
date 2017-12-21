@@ -1,12 +1,10 @@
 
 disabled_rules: # rule identifiers to exclude from running
   - closure_parameter_position
-  - empty_parentheses_with_trailing_closure
   - force_try
   - function_body_length
   - opening_brace
   - redundant_string_enum_value
-  - todo
   - type_body_length
 
 file_length:

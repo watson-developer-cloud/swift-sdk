@@ -111,7 +111,7 @@ internal struct RestRequest {
     }
 
     internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
-        response() { data, response, error in
+        response { data, response, error in
             if let error = error {
                 let result = RestResult<Data>.failure(error)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
@@ -135,7 +135,7 @@ internal struct RestRequest {
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
-        response() { data, response, error in
+        response { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
                 let result = RestResult<T>.failure(error)
@@ -185,7 +185,7 @@ internal struct RestRequest {
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
-        response() { data, response, error in
+        response { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
                 let result = RestResult<T>.failure(error)
@@ -222,7 +222,7 @@ internal struct RestRequest {
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
     {
-        response() { data, response, error in
+        response { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
                 let result = RestResult<[T]>.failure(error)
@@ -273,7 +273,7 @@ internal struct RestRequest {
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<String>) -> Void)
     {
-        response() { data, response, error in
+        response { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
                 let result = RestResult<String>.failure(error)
@@ -309,7 +309,7 @@ internal struct RestRequest {
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<Void>) -> Void)
     {
-        response() { data, response, error in
+        response { data, response, error in
 
             if let error = error ?? responseToError?(response, data) {
                 let result = RestResult<Void>.failure(error)

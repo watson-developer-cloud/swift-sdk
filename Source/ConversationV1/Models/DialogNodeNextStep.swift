@@ -21,7 +21,7 @@ public struct DialogNodeNextStep {
 
     /// How the `next_step` reference is processed.
     public enum Behavior: String {
-        // swiftlint:disable identifier_name
+        // swiftlint:disable:next identifier_name
         case to = "jump_to"
     }
 

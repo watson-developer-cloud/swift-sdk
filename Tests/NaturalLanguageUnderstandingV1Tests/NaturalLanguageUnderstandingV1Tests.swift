@@ -145,8 +145,15 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testAnalyzeTextForConcepts() {
         let description = "Analyze text with features."
         let expectation = self.expectation(description: description)
-        // swiftlint:disable:next line_length
-        let text = "In remote corners of the world, citizens are demanding respect for the dignity of all people no matter their gender, or race, or religion, or disability, or sexual orientation, and those who deny others dignity are subject to public reproach. An explosion of social media has given ordinary people more ways to express themselves, and has raised people's expectations for those of us in power. Indeed, our international order has been so successful that we take it as a given that great powers no longer fight world wars; that the end of the Cold War lifted the shadow of nuclear Armageddon; that the battlefields of Europe have been replaced by peaceful union; that China and India remain on a path of remarkable growth."
+        let text = """
+            In remote corners of the world, citizens are demanding respect for the dignity of all people no matter their
+            gender, or race, or religion, or disability, or sexual orientation, and those who deny others dignity are subject
+            to public reproach. An explosion of social media has given ordinary people more ways to express themselves,
+            and has raised people's expectations for those of us in power. Indeed, our international order has been so
+            successful that we take it as a given that great powers no longer fight world wars; that the end of the Cold
+            War lifted the shadow of nuclear Armageddon; that the battlefields of Europe have been replaced by peaceful
+            union; that China and India remain on a path of remarkable growth.
+        """
         let concepts = ConceptsOptions(limit: 5)
         let features = Features(concepts: concepts)
         let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)

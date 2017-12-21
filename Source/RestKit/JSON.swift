@@ -63,8 +63,8 @@ public enum JSON: Equatable, Codable {
     /// Decode a JSON object value from the keyed container, excluding the given keys.
     internal init(from container: KeyedDecodingContainer<DynamicKeys>, excluding keys: [CodingKey]) throws {
         var object = [String: JSON]()
-        let excludedKeys = keys.map() { $0.stringValue }
-        let includedKeys = container.allKeys.filter() { !excludedKeys.contains($0.stringValue) }
+        let excludedKeys = keys.map { $0.stringValue }
+        let includedKeys = container.allKeys.filter { !excludedKeys.contains($0.stringValue) }
         for codingKey in includedKeys {
             let key = codingKey.stringValue
             let value = try container.decode(JSON.self, forKey: codingKey)
@@ -134,10 +134,10 @@ public enum JSON: Equatable, Codable {
             try container.encode(double)
         case .array(let array):
             var container = encoder.unkeyedContainer()
-            try array.forEach() { try container.encode($0) }
+            try array.forEach { try container.encode($0) }
         case .object(let object):
             var container = encoder.container(keyedBy: DynamicKeys.self)
-            try object.forEach() { key, value in
+            try object.forEach { key, value in
                 guard let codingKey = DynamicKeys(stringValue: key) else {
                     let description = "Cannot construct CodingKey for \(key)"
                     let context = EncodingError.Context(codingPath: encoder.codingPath, debugDescription: description)

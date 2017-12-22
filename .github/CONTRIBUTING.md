@@ -8,6 +8,16 @@ We don't use GitHub as a support forum. For any usage questions that are not spe
 
 See the [issue template](issue_template.md).
 
+# Coding Style
+
+Contributions should follow the established coding style and conventions for this project,
+which are loosely based on [GitHub's Swift Style Guide][styleguide].
+The project is set up so that developers can use [SwiftLint][swiftlint] to check conformance
+to the coding style guidelines.
+
+[styleguide]: https://github.com/github/swift-style-guide
+[swiftlint]: https://github.com/realm/SwiftLint
+
 # Pull Requests
 
 If you want to contribute to the repository, here's a quick guide:

@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try superfluous_disable_command
+
 import XCTest
 
 class CodableExtensionsTests: XCTestCase {

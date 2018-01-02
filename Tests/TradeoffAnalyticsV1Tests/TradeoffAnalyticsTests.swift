@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try superfluous_disable_command
+
 import XCTest
 import Foundation
 import TradeoffAnalyticsV1
@@ -27,7 +29,7 @@ class TradeoffAnalyticsTests: XCTestCase {
         return [
             ("testGetDilemma1", testGetDilemma1),
             ("testGetDilemma2", testGetDilemma2),
-            ("testGetDilemmaMalformedProblem", testGetDilemmaMalformedProblem)
+            ("testGetDilemmaMalformedProblem", testGetDilemmaMalformedProblem),
         ]
     }
 
@@ -268,7 +270,7 @@ class TradeoffAnalyticsTests: XCTestCase {
                 "date": .date(Date()),
                 "numeric-int": .int(0),
                 "numeric-double": .double(0.0),
-                "text": .string("This option should be preferred.")
+                "text": .string("This option should be preferred."),
             ],
             name: "Option 1",
             descriptionHTML: "<b>Option</b> 1"
@@ -280,7 +282,7 @@ class TradeoffAnalyticsTests: XCTestCase {
                 "date": .date(Date()),
                 "numeric-int": .int(100),
                 "numeric-double": .double(1.0),
-                "text": .string("This option should be a shadow.")
+                "text": .string("This option should be a shadow."),
             ],
             name: "Option 2",
             descriptionHTML: "<b>Option</b> 1"
@@ -292,7 +294,7 @@ class TradeoffAnalyticsTests: XCTestCase {
                 "date": .date(Date(timeIntervalSinceNow: -60)),
                 "numeric-int": .int(100),
                 "numeric-double": .double(1.0),
-                "text": .string("This option should not meet preference.")
+                "text": .string("This option should not meet preference."),
             ],
             name: "Option 3",
             descriptionHTML: "<b>Option</b> 1"
@@ -304,7 +306,7 @@ class TradeoffAnalyticsTests: XCTestCase {
                 "date": .date(Date(timeIntervalSinceNow: -60)),
                 "numeric-int": .int(100),
                 "numeric-double": .double(1.0),
-                "text": .string("This option should be incomplete.")
+                "text": .string("This option should be incomplete."),
             ],
             name: "Option 4",
             descriptionHTML: "<b>Option</b> 1"

@@ -23,16 +23,16 @@ import Foundation
  */
 @available(*, deprecated, message: "Its functionality became a part of the IBM Watson Visual Recognition service.")
 public class AlchemyVision {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "http://gateway-a.watsonplatform.net/calls"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     /// The API key credential to use when authenticating with the service.
     private let apiKey: String
-    
+
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let unreservedCharacters = CharacterSet(charactersIn:
         "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~")
@@ -45,21 +45,21 @@ public class AlchemyVision {
     public init(apiKey: String) {
         self.apiKey = apiKey
     }
-    
+
     /**
      If the response or data represents an error returned by the AlchemyVision service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // Typically, we would check the http status code in the response object here, and return
         // `nil` if the status code is successful (200 <= statusCode < 300). However, the Alchemy
         // services return a status code of 200 if you are able to successfully contact the
         // service, without regards to whether the response itself was a success or a failure.
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -67,7 +67,7 @@ public class AlchemyVision {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = 400
@@ -86,7 +86,7 @@ public class AlchemyVision {
     /**
      Perform face recognition on an uploaded image. For each face detected, the service returns
      the estimated bounding box, gender, age, and name (if a celebrity is detected).
- 
+
      - parameter image: The data representation of the image file on which to perform face recognition.
      - parameter knowledgeGraph: Should additional metadata be provided for detected celebrities?
      - parameter failure: A function executed if an error occurs.
@@ -110,7 +110,7 @@ public class AlchemyVision {
                 queryParameters.append(URLQueryItem(name: "knowledgeGraph", value: "0"))
             }
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -122,7 +122,7 @@ public class AlchemyVision {
             queryItems: queryParameters,
             messageBody: imageData
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<FaceTags>) in
@@ -185,7 +185,7 @@ public class AlchemyVision {
 
     /**
      Identify the primary image in an HTML file.
-     
+
      - parameter html: The HTML file that shall be analyzed to identify the primary image.
      - parameter url: The HTML file's URL, for response-tracking purposes.
      - parameter failure: A function executed if an error occurs.
@@ -206,7 +206,7 @@ public class AlchemyVision {
         }
         getImage(fromHTML: html, withURL: url, failure: failure, success: success)
     }
-    
+
     /**
      Identify the primary image in an HTML document.
 
@@ -229,7 +229,7 @@ public class AlchemyVision {
             failure?(error)
             return
         }
-        
+
         // construct body
         guard let body = "html=\(htmlEncoded)".data(using: String.Encoding.utf8) else {
             let failureReason = "Failed to construct body with HTML document."
@@ -238,7 +238,7 @@ public class AlchemyVision {
             failure?(error)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
@@ -305,10 +305,10 @@ public class AlchemyVision {
             }
         }
     }
-    
+
     /**
      Perform image tagging on an uploaded image.
- 
+
      - parameter image: The data representation of the image file on which to perform face recognition.
      - parameter forceShowAll: Should lower confidence tags be included in the response?
      - parameter knowledgeGraph: Should hierarchical metadata be provided for each tag?
@@ -341,7 +341,7 @@ public class AlchemyVision {
                 queryParameters.append(URLQueryItem(name: "knowledgeGraph", value: "0"))
             }
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -353,7 +353,7 @@ public class AlchemyVision {
             queryItems: queryParameters,
             messageBody: imageData
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<ImageKeywords>) in
             switch response.result {
@@ -417,10 +417,10 @@ public class AlchemyVision {
             }
         }
     }
-    
+
     /**
      Identify text in an uploaded image.
- 
+
      - parameter image: The data representation of the image file on which to perform text detection.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the detected text.
@@ -447,7 +447,7 @@ public class AlchemyVision {
             queryItems: queryParameters,
             messageBody: imageData
         )
-        
+
         // execute REST requeset
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SceneText>) in
             switch response.result {

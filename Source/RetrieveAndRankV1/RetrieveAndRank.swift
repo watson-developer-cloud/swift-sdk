@@ -17,47 +17,47 @@
 import Foundation
 
 /**
- The IBM Watson Retrieve and Rank service combines two information retrieval components into a 
+ The IBM Watson Retrieve and Rank service combines two information retrieval components into a
  single service. The service uses Apache Solr in conjunction with a machine learning algorithm to
  provide users with more relevant search results by automatically re-ranking them.
  */
 public class RetrieveAndRank {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/retrieve-and-rank/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.RetrieveAndRankV1"
-    
+
     /**
      Create a `RetrieveAndRank` object.
-     
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the response or data represents an error returned by the Retrieve and Rank service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -65,7 +65,7 @@ public class RetrieveAndRank {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -77,7 +77,7 @@ public class RetrieveAndRank {
                 let description = try json.getString(at: "description")
                 userInfo = [
                     NSLocalizedFailureReasonErrorKey: message,
-                    NSLocalizedRecoverySuggestionErrorKey: description
+                    NSLocalizedRecoverySuggestionErrorKey: description,
                 ]
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)
@@ -85,19 +85,19 @@ public class RetrieveAndRank {
             return nil
         }
     }
-    
+
     // MARK: - Solr Clusters
-    
+
     /**
      Retrieves the list of Solr clusters available for this Retrieve and Rank instance.
-     
+
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with an array of `SolrCluster` objects.
      */
     public func getSolrClusters(
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([SolrCluster]) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -106,7 +106,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["clusters"]) {
             (response: RestResponse<[SolrCluster]>) in
@@ -116,13 +116,13 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Creates a new Solr cluster. The Solr cluster will have an initial status of "Not Available"
      and can't be used until the status becomes "Ready".
-     
+
      - parameter name: The name for the new Solr cluster.
-     - parameter size: The size of the Solr cluster to create. This can range from 1 to 7. You can 
+     - parameter size: The size of the Solr cluster to create. This can range from 1 to 7. You can
             create one small free cluster for testing by keeping this value empty.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SolrCluster` object.
@@ -132,13 +132,13 @@ public class RetrieveAndRank {
         size: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SolrCluster) -> Void) {
-        
+
         // construct body
         var json = ["cluster_name": name]
         if let size = size {
             json["cluster_size"] = String(size)
         }
-        
+
         guard let body = try? JSONWrapper(dictionary: json).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
             let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -146,7 +146,7 @@ public class RetrieveAndRank {
             failure?(error)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -157,7 +157,7 @@ public class RetrieveAndRank {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SolrCluster>) in
@@ -167,10 +167,10 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Stops and deletes a Solr cluster.
-     
+
      - parameter solrClusterID: The ID of the Solr cluster to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
@@ -179,7 +179,7 @@ public class RetrieveAndRank {
         withID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -187,7 +187,7 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -201,10 +201,10 @@ public class RetrieveAndRank {
             }
         }
     }
-    
+
     /**
      Gets the status and other information about a specific cluster.
-     
+
      - parameter solrClusterID: The ID of the cluster that you want more information about.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SolrCluster` object.
@@ -213,7 +213,7 @@ public class RetrieveAndRank {
         withID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SolrCluster) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -222,7 +222,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SolrCluster>) in
@@ -232,20 +232,20 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Gets all configurations for the specific cluster.
-     
+
      - parameter solrClusterID: The ID of the cluster that you want the configurations of.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with a string array listing the names of all the 
+     - parameter success: A function executed with a string array listing the names of all the
             configurations associated with this Solr cluster.
      */
     public func getSolrConfigurations(
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([String]) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -254,7 +254,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["solr_configs"]) {
             (response: RestResponse<[String]>) in
@@ -264,10 +264,10 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Delete this specific configuration from the specified cluster.
-     
+
      - parameter configName: The name of the configuration you want to delete.
      - parameter solrClusterID: The ID of the cluster that you want to delete the configuration of.
      - parameter failure: A function executed if an error occurs.
@@ -278,7 +278,7 @@ public class RetrieveAndRank {
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -286,7 +286,7 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -300,10 +300,10 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Gets a configuration .zip file with the given name from the specified cluster.
-     
+
      - parameter configName: The name of the configuration you want.
      - parameter solrClusterID: The ID of the cluster that you want the configuration of.
      - parameter failure: A function executed if an error occurs.
@@ -314,7 +314,7 @@ public class RetrieveAndRank {
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (URL) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -322,7 +322,7 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders
         )
-        
+
         // locate downloads directory
         let fileManager = FileManager.default
         let directories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
@@ -333,7 +333,7 @@ public class RetrieveAndRank {
             failure?(error)
             return
         }
-        
+
         // construct unique filename
         var filename = configName + ".zip"
         var isUnique = false
@@ -347,17 +347,17 @@ public class RetrieveAndRank {
                 isUnique = true
             }
         }
-        
+
         // specify download destination
         let destinationURL = downloads.appendingPathComponent(filename)
-        
+
         // execute REST request
         request.download(to: destinationURL) { response, error in
             guard error == nil else {
                 failure?(error!)
                 return
             }
-            
+
             guard let statusCode = response?.statusCode else {
                 let failureReason = "Did not receive response."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -365,7 +365,7 @@ public class RetrieveAndRank {
                 failure?(error)
                 return
             }
-            
+
             if statusCode != 200 {
                 let failureReason = "Status code was not acceptable: \(statusCode)."
                 let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
@@ -373,17 +373,17 @@ public class RetrieveAndRank {
                 failure?(error)
                 return
             }
-            
+
             success(destinationURL)
         }
     }
-    
+
     /**
      Uploads a configuration .zip file set with the given name to the specified cluster.
-     
-     Note: in order for your service instance to work with this SDK, you must make sure to define 
+
+     Note: in order for your service instance to work with this SDK, you must make sure to define
      the writer type in your solrconfig.xml file to be "json".
-     
+
      - parameter configName: The name of the configuration you want to update.
      - parameter solrClusterID: The ID of the cluster whose configuration you want to update.
      - parameter zipFile: The zip file configuration set that you would like to upload.
@@ -396,13 +396,13 @@ public class RetrieveAndRank {
         zipFile: URL,
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil) {
-        
+
         // construct body
         guard let body = try? Data(contentsOf: zipFile) else {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -412,7 +412,7 @@ public class RetrieveAndRank {
             contentType: "application/zip",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -426,10 +426,10 @@ public class RetrieveAndRank {
             }
         }
     }
-    
+
     /**
      Creates a new Solr collection.
-     
+
      - parameter name: The name of the collection.
      - parameter solrClusterID: The ID of the cluster to add this collection to.
      - parameter configName: The name of the configuration to use.
@@ -442,13 +442,13 @@ public class RetrieveAndRank {
         withConfigurationName configName: String,
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "action", value: "CREATE"))
         queryParameters.append(URLQueryItem(name: "name", value: name))
         queryParameters.append(URLQueryItem(name: "collection.configName", value: configName))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -457,7 +457,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -471,10 +471,10 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Deletes a Solr collection.
-     
+
      - parameter name: The name of the collection.
      - parameter solrClusterID: The ID of the cluster to delete this collection from.
      - parameter failure: A function executed if an error occurs.
@@ -485,12 +485,12 @@ public class RetrieveAndRank {
         fromSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "action", value: "DELETE"))
         queryParameters.append(URLQueryItem(name: "name", value: name))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -499,7 +499,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -513,13 +513,13 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Lists the names of the collections in this Solr cluster.
-     
+
      Note: For the SDK to work properly, you must define the writer type as "json" within the
      configuration solrconfig.xml file.
-     
+
      - parameter solrClusterID: The ID of the cluster whose collections you want.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with an array of collection names.
@@ -528,12 +528,12 @@ public class RetrieveAndRank {
         forSolrClusterID solrClusterID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([String]) -> Void) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "action", value: "LIST"))
         queryParameters.append(URLQueryItem(name: "wt", value: "json"))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -542,7 +542,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["collections"]) {
             (response: RestResponse<[String]>) in
@@ -552,16 +552,16 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
-     Update a collection by adding content to it. This indexes the documents and allows us to 
+     Update a collection by adding content to it. This indexes the documents and allows us to
      search the newly uploaded data later. For more information about the accepted file types and
      how to structure the content files, refer to this link:
      https://cwiki.apache.org/confluence/display/solr/Indexing+and+Basic+Data+Operations
-     
+
      - parameter collectionName: The name of the collection you would like to update.
      - parameter solrClusterID: The ID of the cluster this collection points to.
-     - parameter contentFile: The content to be added to the collection. Accepted file types are 
+     - parameter contentFile: The content to be added to the collection. Accepted file types are
             listed in the link above.
      - parameter contentType: The media type of the content that is being uploaded.
      - parameter failure: A function executed if an error occurs.
@@ -574,13 +574,13 @@ public class RetrieveAndRank {
         contentType: String,
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil) {
-        
+
         // construct REST body
         guard let body = try? Data(contentsOf: contentFile) else {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -590,7 +590,7 @@ public class RetrieveAndRank {
             contentType: contentType,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -608,14 +608,14 @@ public class RetrieveAndRank {
     /**
      Use the given query to search this specific collection within a given cluster. This command
      doesn't rank the values; to search and rank, use the `searchAndRank()` call.
-     
+
      Note: For the SDK to work properly, you must define the writer type as "json" within the
      configuration solrconfig.xml file.
-     
+
      - parameter collectionName: The name of the collection in the cluster.
      - parameter solrClusterID: The ID of the Solr cluster.
      - parameter query: The query. Refer to the following link for more information on how to
-            structure the query string: 
+            structure the query string:
             https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser
      - parameter returnFields: The fields that should be returned. These fields should correspond
             to the fields within the content that has been uploaded to the collection. This
@@ -633,7 +633,7 @@ public class RetrieveAndRank {
         numberOfDocuments: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchResponse) -> Void) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "q", value: query))
@@ -642,7 +642,7 @@ public class RetrieveAndRank {
         if let numberOfDocuments = numberOfDocuments {
             queryParameters.append(URLQueryItem(name: "rows", value: String(numberOfDocuments)))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -651,7 +651,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SearchResponse>) in
@@ -661,13 +661,13 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Searches the results and then returns them in ranked order.
-     
+
      Note: For the SDK to work properly, you must define the writer type as "json" within the
      configuration solrconfig.xml file.
-     
+
      - parameter collectionName: The name of the collection in the cluster.
      - parameter solrClusterID: The ID of the Solr cluster.
      - parameter rankerID: The ID of the ranker.
@@ -677,11 +677,12 @@ public class RetrieveAndRank {
      - parameter returnFields: The fields that should be returned. These fields should correspond
             to the fields within the content that has been uploaded to the collection. This
             parameter should be a comma-separated list.
-     - parameter numberOfDocuments: The number of documents to return. The default number is set in 
+     - parameter numberOfDocuments: The number of documents to return. The default number is set in
             the solrconfig.xml configuration file.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `SearchAndRankResponse` object.
      */
+    // swiftlint:disable:next function_parameter_count
     public func searchAndRank(
         withCollectionName collectionName: String,
         fromSolrClusterID solrClusterID: String,
@@ -691,7 +692,7 @@ public class RetrieveAndRank {
         numberOfDocuments: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SearchAndRankResponse) -> Void) {
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "q", value: query))
@@ -701,7 +702,7 @@ public class RetrieveAndRank {
         if let numberOfDocuments = numberOfDocuments {
             queryParameters.append(URLQueryItem(name: "rows", value: String(numberOfDocuments)))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -710,7 +711,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SearchAndRankResponse>) in
@@ -720,12 +721,12 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     // MARK: - Rankers
-    
+
     /**
      Retrieves the list of rankers available for this Retrieve and Rank instance.
-     
+
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with an array of `Ranker` objects.
      */
@@ -741,7 +742,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["rankers"]) {
             (response: RestResponse<[Ranker]>) in
@@ -751,11 +752,11 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Creates and trains a new ranker. The status of the ranker will be set to `Training` until
      the ranker is ready. You need to wait until the status is `Available` before using.
-     
+
      - parameter name: An optional name for the ranker.
      - parameter trainingDataFile: The training data content that will be used to train this ranker.
      - parameter failure: A function executed if an error occurs.
@@ -779,7 +780,7 @@ public class RetrieveAndRank {
             failure?(error)
             return
         }
-        
+
         // construct REST body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(trainingDataFile, withName: "training_data")
@@ -788,7 +789,7 @@ public class RetrieveAndRank {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -799,7 +800,7 @@ public class RetrieveAndRank {
             contentType: multipartFormData.contentType,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<RankerDetails>) in
@@ -809,13 +810,13 @@ public class RetrieveAndRank {
             }
         }
     }
-    
+
     /**
      Identifies the top answer from the list of provided results to rank, and provides the
      number of answers requested, listed in order from descending ranked score.
-     
-     - parameter resultsFile: A CSV file containing the search results that you want ranked. The 
-            first column header must be labeled `answer_id`. The other column headers should 
+
+     - parameter resultsFile: A CSV file containing the search results that you want ranked. The
+            first column header must be labeled `answer_id`. The other column headers should
             match the names of the features in the `trainingDataFile` used to train the ranker.
      - parameter rankerID: The ID of the ranker to use.
      - parameter numberOfDocuments: The number of answers needed. The default number is 10.
@@ -828,7 +829,7 @@ public class RetrieveAndRank {
         numberOfDocuments: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Ranking) -> Void) {
-        
+
         // construct REST body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(resultsFile, withName: "answer_data")
@@ -840,7 +841,7 @@ public class RetrieveAndRank {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -851,7 +852,7 @@ public class RetrieveAndRank {
             contentType: multipartFormData.contentType,
             messageBody: body
         )
-        
+
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Ranking>) in
             switch response.result {
@@ -863,7 +864,7 @@ public class RetrieveAndRank {
 
     /**
      Delete a ranker.
-     
+
      - parameter rankerID: The ranker to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed if no error occurs.
@@ -872,7 +873,7 @@ public class RetrieveAndRank {
         withID rankerID: String,
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -880,7 +881,7 @@ public class RetrieveAndRank {
             credentials: credentials,
             headerParameters: defaultHeaders
         )
-        
+
         // execute REST request
         request.responseData { response in
                 switch response.result {
@@ -894,10 +895,10 @@ public class RetrieveAndRank {
                 }
             }
     }
-    
+
     /**
      Get status and information about a specific ranker.
-     
+
      - parameter rankerID: The unique identifier for the ranker you want more information about.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with a `RankerDetails` object.
@@ -906,7 +907,7 @@ public class RetrieveAndRank {
         withID rankerID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (RankerDetails) -> Void) {
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -915,7 +916,7 @@ public class RetrieveAndRank {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<RankerDetails>) in

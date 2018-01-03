@@ -14,13 +14,15 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try superfluous_disable_command
+
 #if !os(Linux)
 import XCTest
 import TextToSpeechV1
 import AVFoundation
 
 class TextToSpeechPlaybackTests: XCTestCase {
-    
+
     private var textToSpeech: TextToSpeech!
     private let timeout: TimeInterval = 5.0
     private let playAudio = true
@@ -29,16 +31,15 @@ class TextToSpeechPlaybackTests: XCTestCase {
     private let japaneseText = "こんにちは"
     private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\">" +
     "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
-    
-    
+
     // MARK: - Test Configuration
-    
+
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
         instantiateTextToSpeech()
     }
-    
+
     /** Instantiate Text to Speech instance. */
     func instantiateTextToSpeech() {
         let username = Credentials.TextToSpeechUsername
@@ -52,21 +53,21 @@ class TextToSpeechPlaybackTests: XCTestCase {
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
-    
+
     /** Wait for expectations. */
     func waitForExpectations() {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     // MARK: - Positive Tests
-    
+
     /** Synthesize text to spoken audio using the default parameters. */
     func testSynthesizeDefault() {
         let description = "Synthesize text to spoken audio using the default parameters."
         let expectation = self.expectation(description: description)
-        
+
         textToSpeech.synthesize(text, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -83,12 +84,12 @@ class TextToSpeechPlaybackTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     /** Synthesize text to spoken audio using the Lisa voice. */
     func testSynthesizeLisa() {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
-        
+
         textToSpeech.synthesize(text, voice: SynthesisVoice.us_Lisa.rawValue, audioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
@@ -106,12 +107,12 @@ class TextToSpeechPlaybackTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     /** Synthesize text to spoken audio using the Dieter voice. */
     func testSynthesizeDieter() {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
-        
+
         textToSpeech.synthesize(germanText, voice: SynthesisVoice.de_Dieter.rawValue, audioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
@@ -129,12 +130,12 @@ class TextToSpeechPlaybackTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     /** Synthesize text to spoken audio using the Emi voice. */
     func testSynthesizeEmi() {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
-        
+
         textToSpeech.synthesize(japaneseText, voice: SynthesisVoice.jp_Emi.rawValue, audioFormat: .wav, failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
@@ -152,12 +153,12 @@ class TextToSpeechPlaybackTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     /** Synthesize SSML to spoken audio. */
     func testSynthesizeSSML() {
         let description = "Synthesize SSML to spoken audio."
         let expectation = self.expectation(description: description)
-        
+
         textToSpeech.synthesize(ssmlString, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -174,7 +175,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     // This test works when you run it individually, but for some reason, running it after the
     // testSynthesizeFlac() method causes this one to fail. The audio types aren't updated somehow,
     // and the service seems to think we are still requesting .flac instead of .opus.
@@ -182,7 +183,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     func testSynthesizeOpus() {
         let description = "Synthesize text to spoken audio in Opus format."
         let expectation = self.expectation(description: description)
-        
+
         textToSpeech.synthesize(text, audioFormat: .opus, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             do {

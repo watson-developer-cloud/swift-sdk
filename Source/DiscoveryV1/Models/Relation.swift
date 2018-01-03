@@ -18,25 +18,25 @@ import Foundation
 
 /** Extracted relationships between the subject, action and object parts of a sentence. */
 public struct Relation: JSONDecodable {
-    
-    /// Action 
+
+    /// Action
     public let action: Action?
-    
+
     /// Object
     public let object: RelationObject?
-    
+
     /// Entities
     public let entities: [Entity]?
-    
+
     /// Subject
     public let subject: Subject?
-    
+
     /// Sentence of the extracted Subject, Action, Object parts
     public let sentence: String?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a Relation object from JSON.
     public init(json: JSONWrapper) throws {
         action = try? json.decode(at: "action", type: Action.self)
@@ -46,7 +46,7 @@ public struct Relation: JSONDecodable {
         sentence = try? json.getString(at: "sentence")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize a 'Relation' model to JSON.
     public func toJSONObject() -> Any {
         return json
@@ -55,19 +55,19 @@ public struct Relation: JSONDecodable {
 
 /** The action as defined by the AlchemyLanguage service. */
 public struct Action: JSONDecodable {
-    
+
     /// Text the action was extracted from.
     public let text: String?
-    
+
     /// see Verb
     public let verb: Verb?
 
     /// The base or dictionary form of the word.
     public let lemmatized: String?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize an Action object from JSON.
     public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
@@ -75,21 +75,21 @@ public struct Action: JSONDecodable {
         lemmatized = try? json.getString(at: "lemmatized")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize an 'Action' model to JSON.
     public func toJSONObject() -> Any {
         return json
     }
-    
+
     /** A verb as defined by the AlchemyLanguage service. */
     public struct Verb: JSONDecodable {
-        
+
         /// Text the verb was extracted from.
         public let text: String?
-        
+
         /// The tense of the verb.
         public let tense: String?
-        
+
         /// Used internally to initalize a Verb object.
         public init(json: JSONWrapper) throws {
             text = try? json.getString(at: "text")
@@ -100,25 +100,25 @@ public struct Action: JSONDecodable {
 
 /** Object related to the Subject-Action-Object extraction. */
 public struct RelationObject: JSONDecodable {
-    
+
     /// keywords found by the SAO extraction
     public let keywords: [Keyword]?
-    
+
     /// see **Entity**
     public let entities: [Entity]?
-    
+
     /// text the relation object was extracted from
     public let text: String?
-    
+
     /// see **Sentiment**
     public let sentiment: Sentiment?
-    
+
     /// see **Sentiment**
     public let sentimentFromSubject: Sentiment?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a RelationObject object from JSON.
     public init(json: JSONWrapper) throws {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
@@ -128,22 +128,22 @@ public struct RelationObject: JSONDecodable {
         entities = try? json.decodedArray(at: "entities", type: Entity.self)
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize a 'RelationObject' model to JSON.
     public func toJSONObject() -> Any {
         return json
     }
-    
+
     /** A keyword. */
     public struct Keyword: JSONDecodable {
-        
+
         /// Text of the extracted keyword.
         public let text: String?
-        
+
         /// How keywords are determined. Can be multiple levels deep.
         /// e.g. /companies/organizations/google finance
         public let knowledgeGraph: KnowledgeGraph?
-        
+
         /// Used internally to initialize a Keyword object.
         public init(json: JSONWrapper) throws {
             text = try? json.getString(at: "text")
@@ -156,19 +156,19 @@ public struct RelationObject: JSONDecodable {
 public struct Subject: JSONDecodable {
     /// Keywords found by the extraction in the subject.
     public let keywords: [Keyword]?
-    
+
     /// text the subject was extracted from
     public let text: String?
-    
+
     /// see **Sentiment**
     public let sentiment: Sentiment?
-    
+
     /// see **Entity**
     public let entities: [Entity]?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a Subject object from JSON.
     public init(json: JSONWrapper) throws {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
@@ -177,7 +177,7 @@ public struct Subject: JSONDecodable {
         entities = try? json.decodedArray(at: "entities", type: Entity.self)
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize a 'Subject' model to JSON.
     public func toJSONObject() -> Any {
         return json

@@ -22,20 +22,20 @@ import Foundation
  to help the writer improve their intended language tones.
 **/
 public class ToneAnalyzer {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/tone-analyzer/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
 
     /**
      Create a `ToneAnalyzer` object.
- 
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
@@ -45,23 +45,23 @@ public class ToneAnalyzer {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
         self.version = version
     }
-    
+
     /**
      If the response or data represents an error returned by the Tone Analyzer service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -69,7 +69,7 @@ public class ToneAnalyzer {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -88,10 +88,10 @@ public class ToneAnalyzer {
 
     /**
      Analyze the tone of the given text.
-     
+
      The message is analyzed for several tones—social, emotional, and writing. For each tone,
      various traits are derived (e.g. conscientiousness, agreeableness, and openness).
-     
+
      - parameter ofText: The text to analyze.
      - parameter tones: Filter the results by a specific tone. Valid values for `tones` are
             `emotion`, `writing`, or `social`.
@@ -114,7 +114,7 @@ public class ToneAnalyzer {
             failure?(error)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -125,7 +125,7 @@ public class ToneAnalyzer {
         if let sentences = sentences {
             queryParameters.append(URLQueryItem(name: "sentences", value: "\(sentences)"))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -137,7 +137,7 @@ public class ToneAnalyzer {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ToneAnalysis>) in

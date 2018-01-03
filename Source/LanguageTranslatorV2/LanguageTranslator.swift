@@ -25,39 +25,39 @@ public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/language-translator/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.LanguageTranslatorV2"
 
     /**
      Create a `LanguageTranslator` object.
-     
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
         credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the response or data represents an error returned by the Language Translator service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -65,7 +65,7 @@ public class LanguageTranslator {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -78,7 +78,7 @@ public class LanguageTranslator {
                 let description = try json.getString(at: "description")
                 userInfo = [
                     NSLocalizedFailureReasonErrorKey: message,
-                    NSLocalizedRecoverySuggestionErrorKey: description
+                    NSLocalizedRecoverySuggestionErrorKey: description,
                 ]
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)
@@ -91,7 +91,7 @@ public class LanguageTranslator {
 
     /**
      List the available standard and custom models.
-     
+
      - parameter sourceLanguage: Filter models by a source language.
      - parameter targetLanguage: Filter models by a target language.
      - parameter defaultModelsOnly: Specify `true` to filter models by whether they are default.
@@ -142,11 +142,11 @@ public class LanguageTranslator {
 
     /**
      Create a custom language translator model by uploading a TMX glossary file.
-     
+
      Depending on the size of the file, training can range from minutes for a glossary to several
      hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file
      size of all uploaded glossary and corpus files is limited to 250 MB.
-     
+
      - parameter fromBaseModelID: Specifies the domain model that is used as the base for the training.
      - parameter withGlossary: A TMX file with your customizations. Anything that is specified in
             this file completely overwrites the domain data translation. You can upload only one
@@ -165,13 +165,17 @@ public class LanguageTranslator {
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(forcedGlossary, withName: "forced_glossary")
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "base_model_id", value: baseModelID))
         if let name = name {
             let queryParameter = URLQueryItem(name: "name", value: name)
             queryParameters.append(queryParameter)
+        }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
         }
 
         // construct REST request
@@ -183,7 +187,7 @@ public class LanguageTranslator {
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
             queryItems: queryParameters,
-            messageBody: try! multipartFormData.toData() // TODO
+            messageBody: body
         )
 
         // execute REST request
@@ -198,7 +202,7 @@ public class LanguageTranslator {
 
     /**
      Delete a trained translation model.
- 
+
      - parameter withID: The translation model's identifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the given model has been deleted.
@@ -233,7 +237,7 @@ public class LanguageTranslator {
 
     /**
      Get information about the given translation model, including training status.
-     
+
      - parameter withID: The translation model's identifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the retrieved information about the model.
@@ -266,7 +270,7 @@ public class LanguageTranslator {
 
     /**
      Translate text from a source language to a target language.
-     
+
      - parameter text: The text to translate.
      - parameter withModelID: The unique model id of the translation model that shall be used to
             translate the text. The model id inherently specifies the source, target language, and
@@ -286,7 +290,7 @@ public class LanguageTranslator {
 
     /**
      Translate text from a source language to a target language.
-     
+
      - parameter text: The text to translate.
      - parameter withModelID: The unique model id of the translation model that shall be used to
             translate the text. The model id inherently specifies the source, target language, and
@@ -303,10 +307,10 @@ public class LanguageTranslator {
         let translateRequest = TranslateRequest(text: text, modelID: modelID)
         translate(translateRequest: translateRequest, failure: failure, success: success)
     }
-    
+
     /**
      Translate text from a source language to a target language.
-     
+
      - parameter text: The text to translate.
      - parameter from: The source language in 2 or 5 letter language code. Use 2 letter codes
             except when clarifying between multiple supported languages.
@@ -328,7 +332,7 @@ public class LanguageTranslator {
 
     /**
      Translate text from a source language to a target language.
-     
+
      - parameter text: The text to translate.
      - parameter from: The source language in 2 or 5 letter language code. Use 2 letter codes
             except when clarifying between multiple supported languages.
@@ -350,7 +354,7 @@ public class LanguageTranslator {
 
     /**
      Process a translation request.
- 
+
      - parameter translateRequest: A `TranslateRequest` object representing the parameters of the
             request to the Language Translator service.
      - parameter failure: A function executed if an error occurs.
@@ -395,7 +399,7 @@ public class LanguageTranslator {
 
     /**
      Get a list of all languages that can be identified.
-     
+
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of all languages that can be identified.
      */
@@ -424,7 +428,7 @@ public class LanguageTranslator {
 
     /**
      Identify the language of the given text.
-     
+
      - parameter languageOf: The text whose language shall be identified.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with all identified languages in the given text.

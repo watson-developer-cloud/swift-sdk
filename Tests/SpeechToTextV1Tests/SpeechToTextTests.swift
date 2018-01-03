@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try superfluous_disable_command
+
 import XCTest
 import Foundation
 import SpeechToTextV1
@@ -26,8 +28,8 @@ class SpeechToTextTests: XCTestCase {
     private let trainedCustomizationDescription = "swift sdk test customization"
     private var trainedCustomizationID: String!
     private let corpusName = "swift-sdk-unit-test-corpus"
-    
-    static var allTests : [(String, (SpeechToTextTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (SpeechToTextTests) -> () throws -> Void)] {
         return [
             ("testModels", testModels),
             ("testTranscribeWithCustomModel", testTranscribeWithCustomModel),
@@ -57,7 +59,7 @@ class SpeechToTextTests: XCTestCase {
             ("testTranscribeDataWithSpeakerLabelsWAV", testTranscribeDataWithSpeakerLabelsWAV),
             ("testTranscribeDataWithSpeakerLabelsOpus", testTranscribeDataWithSpeakerLabelsOpus),
             ("testTranscribeDataWithSpeakerLabelsFLAC", testTranscribeDataWithSpeakerLabelsFLAC),
-            ("testTranscribeStreaming", testTranscribeStreaming)
+            ("testTranscribeStreaming", testTranscribeStreaming),
         ]
     }
 
@@ -67,7 +69,7 @@ class SpeechToTextTests: XCTestCase {
         instantiateSpeechToText()
         lookupCustomization()
     }
-    
+
     /** Instantiate Speech to Text. */
     func instantiateSpeechToText() {
         let username = Credentials.SpeechToTextUsername
@@ -81,24 +83,24 @@ class SpeechToTextTests: XCTestCase {
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
-    
+
     /** Fail false positives. */
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Wait for expectations. */
     func waitForExpectations() {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     /** Load files needed for the following unit tests. */
     private func loadFile(name: String, withExtension: String) -> URL? {
         let bundle = Bundle(for: type(of: self))
@@ -107,31 +109,29 @@ class SpeechToTextTests: XCTestCase {
         }
         return url
     }
-    
+
     /** Look up (or create) the trained customization. */
     func lookupCustomization() {
         let description = "Look up the trained customization."
         let expectation = self.expectation(description: description)
-        
+
         let failure = { (error: Error) in
             XCTFail("Failed to list customizations for this service instance.")
             return
         }
-        
+
         var customizationStatus: CustomizationStatus?
-        
+
         speechToText.getCustomizations(failure: failure) { customizations in
-            for customization in customizations {
-                if customization.name == self.trainedCustomizationName {
-                    self.trainedCustomizationID = customization.customizationID
-                    customizationStatus = customization.status
-                }
+            for customization in customizations where customization.name == self.trainedCustomizationName {
+                self.trainedCustomizationID = customization.customizationID
+                customizationStatus = customization.status
             }
             expectation.fulfill()
         }
         waitForExpectations()
-        
-        if(trainedCustomizationID == nil) {
+
+        if trainedCustomizationID == nil {
             print("Trained customization does not exist; creating a new one now.")
             createTrainedCustomization()
             print("Adding a corpus to the trained customization.")
@@ -143,7 +143,7 @@ class SpeechToTextTests: XCTestCase {
                 XCTFail("Failed to obtain the status of the trained customization status.")
                 return
             }
-            
+
             switch customizationStatus {
             case .available, .ready:
                 break // do nothing, because the customization is trained
@@ -164,13 +164,13 @@ class SpeechToTextTests: XCTestCase {
             }
         }
     }
-    
+
     func createTrainedCustomization() {
         let failToCreateCustomization =  { (error: Error) in
             XCTFail("Failed to create the new customization: \(error)")
             return
         }
-        
+
         let description = "Create a new customization."
         let expectation = self.expectation(description: description)
         speechToText.createCustomization(
@@ -178,25 +178,25 @@ class SpeechToTextTests: XCTestCase {
             withBaseModelName: "en-US_BroadbandModel",
             description: self.trainedCustomizationDescription,
             failure: failToCreateCustomization) { customization in
-                
+
             self.trainedCustomizationID = customization.customizationID
             expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func addCorpusToTrainedCustomization() {
-        
+
         let failToCreateCorpus =  { (error: Error) in
             XCTFail("Failed to create the new corpus: \(error)")
             return
         }
-        
+
         guard let corpusFile = loadFile(name: "healthcare", withExtension: "txt") else {
             XCTFail("Failed to load file needed to create the corpus.")
             return
         }
-        
+
         let description = "Add a corpus for the customization."
         let expectation = self.expectation(description: description)
         speechToText.addCorpus(
@@ -204,41 +204,41 @@ class SpeechToTextTests: XCTestCase {
             fromFile: corpusFile,
             customizationID: self.trainedCustomizationID,
             failure: failToCreateCorpus) {
-                
+
             expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func trainCustomizationWithCorpus() {
-        
+
         let failToGetCorpusStatus = { (error: Error) in
             XCTFail("Failed to get the status of the new corpus: \(error)")
             return
         }
-        
+
         let failToTrainCustomization = { (error: Error) in
             XCTFail("Failed to train the new customization: \(error)")
             return
         }
-        
+
         let failToGetCustomizationStatus = { (error: Error) in
             XCTFail("Failed to get the status of the new customization: \(error)")
             return
         }
-        
+
         var processed = false
         var tries = 0
         repeat {
             tries += 1
             let description = "Wait until the corpus is processed before training the customization."
             let expectation = self.expectation(description: description)
-            
+
             speechToText.getCorpus(
                 withName: corpusName,
                 customizationID: self.trainedCustomizationID,
                 failure: failToGetCorpusStatus) { corpus in
-                    
+
                     if corpus.status == .analyzed {
                         processed = true
                     } else if corpus.status == .undetermined {
@@ -249,35 +249,35 @@ class SpeechToTextTests: XCTestCase {
                     expectation.fulfill()
             }
             waitForExpectations()
-            
+
             if tries > 10 {
                 XCTFail("The corpus is taking too long to process. Please try again later.")
             }
-            
+
             sleep(3)
         } while(!processed)
-        
+
         let description2 = "Train the customization with the new corpus."
         let expectation2 = self.expectation(description: description2)
         speechToText.trainCustomization(
             withID: self.trainedCustomizationID,
             failure: failToTrainCustomization) {
-                
+
             expectation2.fulfill()
         }
         waitForExpectations()
-        
+
         var trained = false
         tries = 0
         repeat {
             tries += 1
             let description3 = "Wait until the customization is trained."
             let expectation3 = self.expectation(description: description3)
-            
+
             speechToText.getCustomization(
                 withID: self.trainedCustomizationID,
                 failure: failToGetCustomizationStatus) { customization in
-                
+
                 if customization.status == .available {
                     trained = true
                 } else if customization.status == .failed {
@@ -288,28 +288,28 @@ class SpeechToTextTests: XCTestCase {
                 expectation3.fulfill()
             }
             waitForExpectations()
-            
+
             if tries > 10 {
                 XCTFail("The customization is taking too long to train. Please try again later.")
             }
-            
+
             sleep(3)
         } while(!trained)
     }
-    
+
     // MARK: - Models
-    
+
     func testModels() {
         let description1 = "Get information about all models."
         let expectation1 = expectation(description: description1)
-        
+
         var allModels = [Model]()
         speechToText.getModels(failure: failWithError) { models in
             allModels = models
             expectation1.fulfill()
         }
         waitForExpectations()
-        
+
         for model in allModels {
             let description2 = "Get information about a particular model."
             let expectation2 = expectation(description: description2)
@@ -324,19 +324,19 @@ class SpeechToTextTests: XCTestCase {
             waitForExpectations()
         }
     }
-    
+
     // MARK: - Custom model
-    
+
     func testTranscribeWithCustomModel() {
         let description = "Transcribe an audio file using custom model."
         let expectation = self.expectation(description: description)
-        
+
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: "SpeechSample", withExtension: "wav") else {
             XCTFail("Unable to locate SpeechSample.wav.")
             return
         }
-        
+
         let settings = RecognitionSettings(contentType: .wav)
         speechToText.recognize(
             audio: file,
@@ -351,19 +351,19 @@ class SpeechToTextTests: XCTestCase {
             XCTAssert(results.results.last?.final == true)
             let transcript = results.results.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
-            XCTAssertGreaterThan(transcript!.characters.count, 0)
+            XCTAssertGreaterThan(transcript!.count, 0)
             expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testGetAllCustomModels() {
         let description = "Retrieve a list of custom language models associated with this account."
         let expectation = self.expectation(description: description)
-        
+
         speechToText.getCustomizations(failure: failWithError) { customizations in
             XCTAssertGreaterThanOrEqual(customizations.count, 1)
-            
+
             for customization in customizations {
                 XCTAssertNotNil(customization.customizationID)
                 XCTAssertNotNil(customization.created)
@@ -375,52 +375,52 @@ class SpeechToTextTests: XCTestCase {
                 XCTAssertNotNil(customization.status)
                 XCTAssertNotNil(customization.progress)
             }
-            
+
             expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testCreateAndDeleteCustomModel() {
         let description = "Create a new customization."
         let expectation = self.expectation(description: description)
-        
+
         var newCustomizationID: String?
-        
+
         speechToText.createCustomization(
             withName: "swift-sdk-unit-test-customization-to-delete",
             withBaseModelName: "en-US_BroadbandModel",
             dialect: "en-US",
             description: "customization created for test",
             failure: failWithError) { customization in
-            
+
             XCTAssertNotNil(customization.customizationID)
             newCustomizationID = customization.customizationID
             expectation.fulfill()
         }
         waitForExpectations()
-        
+
         let description2 = "Delete the new customization."
         let expectation2 = self.expectation(description: description2)
-        
+
         guard let customizationToDelete = newCustomizationID else {
             XCTFail("Failed to instantiate customizationID when creating customization.")
             return
         }
-        
+
         speechToText.deleteCustomization(withID: customizationToDelete, failure: failWithError) {
             expectation2.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testListTrainedCustomModelDetails() {
         let description = "List details of the trained custom model."
         let expectation = self.expectation(description: description)
-        
+
         speechToText.getCustomization(withID: trainedCustomizationID, failure: failWithError) {
             customization in
-            
+
             XCTAssertEqual(customization.customizationID, self.trainedCustomizationID)
             XCTAssertNotNil(customization.created)
             XCTAssertEqual(customization.language, "en-US")
@@ -431,21 +431,21 @@ class SpeechToTextTests: XCTestCase {
             XCTAssertNotNil(customization.status)
             XCTAssertNotNil(customization.progress)
             XCTAssertNil(customization.warnings)
-            
+
             expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     // MARK: - Custom corpora
-    
+
     func testGetAllCorpora() {
         let description = "List all corpora for the trained custom model."
         let expectation = self.expectation(description: description)
-        
+
         speechToText.getCorpora(customizationID: trainedCustomizationID, failure: failWithError) {
             corpora in
-            
+
             XCTAssertGreaterThanOrEqual(corpora.count, 1)
             for corpus in corpora {
                 XCTAssertNotNil(corpus.name)
@@ -457,11 +457,11 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testCreateAndDeleteCorpus() {
         let description = "Create a new corpus."
         let expectation = self.expectation(description: description)
-        
+
         guard let corpusFile = loadFile(name: "healthcare-short", withExtension: "txt") else {
             XCTFail("Failed to load file needed to create the corpus.")
             return
@@ -474,23 +474,23 @@ class SpeechToTextTests: XCTestCase {
             fromFile: corpusFile,
             customizationID: trainedCustomizationID,
             failure: failWithError) {
-            
+
             expectation.fulfill()
         }
         waitForExpectations()
-        
+
         var processed = false
         var tries = 0
         repeat {
             tries += 1
             let description2 = "Wait until the corpus is processed before deleting it."
             let expectation2 = self.expectation(description: description2)
-            
+
             speechToText.getCorpus(
                 withName: newCorpusName,
                 customizationID: self.trainedCustomizationID,
                 failure: failWithError) { corpus in
-                    
+
                     if corpus.status == .analyzed {
                         processed = true
                     } else if corpus.status == .undetermined {
@@ -501,17 +501,17 @@ class SpeechToTextTests: XCTestCase {
                     expectation2.fulfill()
             }
             waitForExpectations()
-            
+
             if tries > 10 {
                 XCTFail("The corpus is taking too long to process. Please try again later.")
             }
-            
+
             sleep(3)
         } while(!processed)
-        
+
         let description3 = "Delete the new corpus."
         let expectation3 = self.expectation(description: description3)
-        
+
         speechToText.deleteCorpus(
             withName: newCorpusName,
             customizationID: trainedCustomizationID,
@@ -520,16 +520,16 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testGetCorpusForTrainedCustomization() {
         let description = "Get the corpus used to build the trained customization."
         let expectation = self.expectation(description: description)
-        
+
         speechToText.getCorpus(
             withName: corpusName,
             customizationID: trainedCustomizationID,
             failure: failWithError) { corpus in
-                
+
             XCTAssertEqual(corpus.name, self.corpusName)
             XCTAssertEqual(corpus.status, .analyzed)
             XCTAssertEqual(corpus.totalWords, 40286)
@@ -539,16 +539,16 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     // MARK: - Custom words
-    
+
     func testGetAllWords() {
         let description = "Get all words of a custom model."
         let expectation = self.expectation(description: description)
 
         speechToText.getWords(customizationID: trainedCustomizationID, wordType: .all, failure: failWithError) {
             words in
-            
+
             XCTAssertGreaterThanOrEqual(words.count, 1)
             for word in words {
                 XCTAssertNotNil(word.word)
@@ -561,28 +561,28 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testAddAndDeleteMultipleWords() {
         let description = "Add 2 words to the trained customization."
         let expectation = self.expectation(description: description)
-        
+
         let word1 = NewWord(word: "HHonors", soundsLike: ["hilton honors", "h honors"], displayAs: "HHonors")
         let word2 = NewWord(word: "IEEE", soundsLike: ["i triple e"])
         speechToText.addWords(customizationID: trainedCustomizationID, words: [word1, word2], failure: failWithError) {
             expectation.fulfill()
         }
         waitForExpectations()
-        
+
         var ready = false
         var tries = 0
         repeat {
             tries += 1
             let description1 = "Wait until the customization is ready before deleting the new words."
             let expectation1 = self.expectation(description: description1)
-            
+
             speechToText.getCustomization(withID: trainedCustomizationID, failure: failWithError) {
                 customization in
-                
+
                 if customization.status == .ready {
                     ready = true
                 } else if customization.status == .failed {
@@ -593,59 +593,59 @@ class SpeechToTextTests: XCTestCase {
                 expectation1.fulfill()
             }
             waitForExpectations()
-            
+
             if tries > 10 {
                 XCTFail("Customization is not ready. Please try again later.")
             }
-            
+
             sleep(3)
         } while(!ready)
-        
+
         let description2 = "Delete word1."
         let expectation2 = self.expectation(description: description2)
-        
+
         speechToText.deleteWord(withName: word1.word!, customizationID: trainedCustomizationID, failure: failWithError) {
             expectation2.fulfill()
         }
         waitForExpectations()
-        
+
         let description3 = "Delete word2."
         let expectation3 = self.expectation(description: description3)
-        
+
         speechToText.deleteWord(withName: word2.word!, customizationID: trainedCustomizationID, failure: failWithError) {
             expectation3.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testAddAndDeleteASingleWord() {
         let description = "Add 1 word to the trained customization."
         let expectation = self.expectation(description: description)
-        
+
         let word1 = NewWord(soundsLike: ["hilton honors", "h honors"], displayAs: "HHonors")
         speechToText.addWord(withName: "HHonors", customizationID: trainedCustomizationID, word: word1, failure: failWithError) {
             expectation.fulfill()
         }
         waitForExpectations()
-        
+
         let description2 = "Delete word1."
         let expectation2 = self.expectation(description: description2)
-        
+
         speechToText.deleteWord(withName: "HHonors", customizationID: trainedCustomizationID, failure: failWithError) {
             expectation2.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testGetWord() {
         let description = "Get a specific word."
         let expectation = self.expectation(description: description)
-        
+
         speechToText.getWord(
             withName: "hyperventilation",
             customizationID: trainedCustomizationID,
             failure: failWithError) { word in
-            
+
             XCTAssertEqual(word.word, "hyperventilation")
             XCTAssertEqual(word.soundsLike, ["hyperventilation"])
             XCTAssertEqual(word.displayAs, "hyperventilation")
@@ -655,19 +655,19 @@ class SpeechToTextTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     // MARK: - Token Authentication
-    
+
     func testInvalidCredentials() {
         let description = "Test invalid credentials."
         let expectation = self.expectation(description: description)
-        
+
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: "SpeechSample", withExtension: "wav") else {
             XCTFail("Unable to locate SpeechSample.wav.")
             return
         }
-        
+
         let speechToText = SpeechToText(username: "invalid", password: "invalid")
         let settings = RecognitionSettings(contentType: .wav)
         let failure = { (error: Error) in
@@ -675,7 +675,7 @@ class SpeechToTextTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        
+
         speechToText.recognize(audio: file, settings: settings, failure: failure, success: failWithResult)
         waitForExpectations()
     }
@@ -715,7 +715,7 @@ class SpeechToTextTests: XCTestCase {
             XCTAssert(results.results.last?.final == true)
             let transcript = results.results.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
-            XCTAssertGreaterThan(transcript!.characters.count, 0)
+            XCTAssertGreaterThan(transcript!.count, 0)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -766,7 +766,7 @@ class SpeechToTextTests: XCTestCase {
             if results.results.last?.final == true {
                 let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
-                XCTAssertGreaterThan(transcript!.characters.count, 0)
+                XCTAssertGreaterThan(transcript!.count, 0)
                 expectation.fulfill()
             }
         }
@@ -800,10 +800,10 @@ class SpeechToTextTests: XCTestCase {
             XCTFail("Unable to locate \(filename).\(withExtension).")
             return
         }
-        
+
         do {
             let audio = try Data(contentsOf: file)
-            
+
             let settings = RecognitionSettings(contentType: format)
             speechToText.recognize(audio: audio, settings: settings, failure: failWithError) { results in
                 self.validateSTTResults(results: results.results, settings: settings)
@@ -811,7 +811,7 @@ class SpeechToTextTests: XCTestCase {
                 XCTAssert(results.results.last?.final == true)
                 let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
-                XCTAssertGreaterThan(transcript!.characters.count, 0)
+                XCTAssertGreaterThan(transcript!.count, 0)
                 expectation.fulfill()
             }
             waitForExpectations()
@@ -848,10 +848,10 @@ class SpeechToTextTests: XCTestCase {
             XCTFail("Unable to locate \(filename).\(withExtension).")
             return
         }
-        
+
         do {
             let audio = try Data(contentsOf: file)
-            
+
             var settings = RecognitionSettings(contentType: format)
             settings.inactivityTimeout = -1
             settings.keywords = ["tornadoes"]
@@ -863,13 +863,13 @@ class SpeechToTextTests: XCTestCase {
             settings.timestamps = true
             settings.filterProfanity = false
             settings.smartFormatting = true
-            
+
             speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
                 self.validateSTTResults(results: results.results, settings: settings)
                 if results.results.last?.final == true {
                     let transcript = results.results.last?.alternatives.last?.transcript
                     XCTAssertNotNil(transcript)
-                    XCTAssertGreaterThan(transcript!.characters.count, 0)
+                    XCTAssertGreaterThan(transcript!.count, 0)
                     expectation.fulfill()
                 }
             }
@@ -879,9 +879,9 @@ class SpeechToTextTests: XCTestCase {
             return
         }
     }
-    
+
     // MARK: - Transcribe Data with Smart Formatting
-    
+
     func testTranscribeStockAnnouncementCustomWAV() {
         transcribeDataCustomForNumbers(
             filename: "StockAnnouncement",
@@ -890,7 +890,7 @@ class SpeechToTextTests: XCTestCase {
             substring: "$152.37"
         )
     }
-    
+
     func transcribeDataCustomForNumbers(
         filename: String,
         withExtension: String,
@@ -899,46 +899,46 @@ class SpeechToTextTests: XCTestCase {
     {
         let description = "Transcribe an audio file with smart formatting."
         let expectation = self.expectation(description: description)
-        
+
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
             XCTFail("Unable to locate \(filename).\(withExtension).")
             return
         }
-        
+
         guard let audio = try? Data(contentsOf: file) else {
             XCTFail("Unable to read \(filename).\(withExtension).")
             return
         }
-        
+
         var settings = RecognitionSettings(contentType: format)
         settings.smartFormatting = true
-        
+
         speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
             self.validateSTTResults(results: results.results, settings: settings)
             if results.results.last?.final == true {
                 let transcript = results.results.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
-                XCTAssertGreaterThan(transcript!.characters.count, 0)
+                XCTAssertGreaterThan(transcript!.count, 0)
                 XCTAssertTrue(transcript!.contains(substring))
                 expectation.fulfill()
             }
         }
         waitForExpectations()
     }
-    
+
     func testTranscribeDataWithSpeakerLabelsWAV() {
         transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "wav", format: .wav)
     }
-    
+
     func testTranscribeDataWithSpeakerLabelsOpus() {
         transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "ogg", format: .oggOpus)
     }
-    
+
     func testTranscribeDataWithSpeakerLabelsFLAC() {
         transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "flac", format: .flac)
     }
-    
+
     func transcribeDataWithSpeakerLabels(
         filename: String,
         withExtension: String,
@@ -947,16 +947,16 @@ class SpeechToTextTests: XCTestCase {
         let description = "Transcribe an audio file."
         let expectation = self.expectation(description: description)
         var expectationFulfilled = false
-        
+
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
             XCTFail("Unable to locate \(filename).\(withExtension).")
             return
         }
-        
+
         do {
             let audio = try Data(contentsOf: file)
-            
+
             var settings = RecognitionSettings(contentType: format)
             settings.inactivityTimeout = -1
             settings.interimResults = false
@@ -978,7 +978,6 @@ class SpeechToTextTests: XCTestCase {
             return
         }
     }
-
 
     // MARK: - Transcribe Streaming
 
@@ -1058,7 +1057,7 @@ class SpeechToTextTests: XCTestCase {
         settings: RecognitionSettings)
     {
         XCTAssertNotNil(transcription.transcript)
-        XCTAssertGreaterThan(transcription.transcript.characters.count, 0)
+        XCTAssertGreaterThan(transcription.transcript.count, 0)
 
         if best && final {
             XCTAssertNotNil(transcription.confidence)
@@ -1094,19 +1093,19 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func validateSTTWordTimestamp(timestamp: WordTimestamp) {
-        XCTAssertGreaterThan(timestamp.word.characters.count, 0)
+        XCTAssertGreaterThan(timestamp.word.count, 0)
         XCTAssertGreaterThanOrEqual(timestamp.startTime, 0.0)
         XCTAssertGreaterThanOrEqual(timestamp.endTime, timestamp.startTime)
     }
 
     func validateSTTWordConfidence(word: WordConfidence) {
-        XCTAssertGreaterThan(word.word.characters.count, 0)
+        XCTAssertGreaterThan(word.word.count, 0)
         XCTAssertGreaterThanOrEqual(word.confidence, 0.0)
         XCTAssertLessThanOrEqual(word.confidence, 1.0)
     }
 
     func validateSTTKeywordResults(keyword: String, keywordResults: [KeywordResult]) {
-        XCTAssertGreaterThan(keyword.characters.count, 0)
+        XCTAssertGreaterThan(keyword.count, 0)
         XCTAssertGreaterThan(keywordResults.count, 0)
         for keywordResult in keywordResults {
             validateSTTKeywordResult(keywordResult: keywordResult)
@@ -1114,7 +1113,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func validateSTTKeywordResult(keywordResult: KeywordResult) {
-        XCTAssertGreaterThan(keywordResult.normalizedText.characters.count, 0)
+        XCTAssertGreaterThan(keywordResult.normalizedText.count, 0)
         XCTAssertGreaterThanOrEqual(keywordResult.startTime, 0)
         XCTAssertGreaterThanOrEqual(keywordResult.endTime, keywordResult.startTime)
         XCTAssertGreaterThanOrEqual(keywordResult.confidence, 0.0)
@@ -1133,16 +1132,16 @@ class SpeechToTextTests: XCTestCase {
     func validateSTTWordAlternativeResult(wordAlternative: WordAlternativeResult) {
         XCTAssertGreaterThanOrEqual(wordAlternative.confidence, 0.0)
         XCTAssertLessThanOrEqual(wordAlternative.confidence, 1.0)
-        XCTAssertGreaterThan(wordAlternative.word.characters.count, 0)
+        XCTAssertGreaterThan(wordAlternative.word.count, 0)
     }
-    
+
     func validateSTTSpeakerLabels(speakerLabels: [SpeakerLabel]) {
         XCTAssertGreaterThan(speakerLabels.count, 0)
         for speakerLabel in speakerLabels {
             validateSTTSpeakerLabel(speakerLabel: speakerLabel)
         }
     }
-    
+
     func validateSTTSpeakerLabel(speakerLabel: SpeakerLabel) {
         XCTAssertGreaterThanOrEqual(speakerLabel.fromTime, 0)
         XCTAssertGreaterThanOrEqual(speakerLabel.toTime, 0)

@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try superfluous_disable_command
+
 import XCTest
 import Foundation
 import ConversationV1
@@ -32,7 +34,7 @@ class ConversationTests: XCTestCase {
         instantiateConversation()
     }
 
-    static var allTests : [(String, (ConversationTests) -> () throws -> Void)] {
+    static var allTests: [(String, (ConversationTests) -> () throws -> Void)] {
         return [
             ("testMessage", testMessage),
             ("testMessageAllFields1", testMessageAllFields1),
@@ -81,7 +83,7 @@ class ConversationTests: XCTestCase {
             ("testCreateUpdateAndDeleteSynonym", testCreateUpdateAndDeleteSynonym),
             ("testListLogs", testListLogs),
             ("testMessageUnknownWorkspace", testMessageUnknownWorkspace),
-            ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID)
+            ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
         ]
     }
 
@@ -342,8 +344,14 @@ class ConversationTests: XCTestCase {
         conversation.message(workspaceID: workspaceID, request: request2, failure: failWithError) {
             response in
             let additionalProperties = response.context.additionalProperties
-            guard case let .string(bar) = additionalProperties["foo"]! else { XCTFail(); return }
-            guard case let .boolean(reprompt) = additionalProperties["reprompt"]! else { XCTFail(); return }
+            guard case let .string(bar) = additionalProperties["foo"]! else {
+                XCTFail("Additional property \"foo\" expected but not present.")
+                return
+            }
+            guard case let .boolean(reprompt) = additionalProperties["reprompt"]! else {
+                XCTFail("Additional property \"reprompt\" expected but not present.")
+                return
+            }
             XCTAssertEqual(bar, "bar")
             XCTAssertTrue(reprompt)
             expectation2.fulfill()
@@ -429,7 +437,7 @@ class ConversationTests: XCTestCase {
         let workspaceDialogNode = CreateDialogNode(dialogNode: "DialogNode1", description: "description of DialogNode1")
         let workspaceCounterexample = CreateCounterexample(text: "This is a counterexample")
 
-        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent], entities: [workspaceEntity], dialogNodes: [workspaceDialogNode], counterexamples: [workspaceCounterexample],metadata: workspaceMetadata)
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent], entities: [workspaceEntity], dialogNodes: [workspaceDialogNode], counterexamples: [workspaceCounterexample], metadata: workspaceMetadata)
         conversation.createWorkspace(properties: createWorkspaceBody, failure: failWithError) { workspace in
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
@@ -1314,7 +1322,7 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
-        conversation.createSynonym(workspaceID: workspaceID,entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
+        conversation.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
             XCTAssertEqual(synonym.synonymText, newSynonym)
@@ -1325,7 +1333,7 @@ class ConversationTests: XCTestCase {
         let description2 = "Delete the new synonym."
         let expectation2 = self.expectation(description: description2)
 
-        conversation.deleteSynonym(workspaceID: workspaceID,entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) {
+        conversation.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) {
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -1336,7 +1344,7 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let synonymName = "headlight"
-        conversation.getSynonym(workspaceID: workspaceID,entity: "appliance", value: "lights", synonym: synonymName, failure: failWithError) { synonym in
+        conversation.getSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: synonymName, failure: failWithError) { synonym in
             XCTAssertEqual(synonym.synonymText, synonymName)
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
@@ -1412,8 +1420,8 @@ class ConversationTests: XCTestCase {
             output: [
                 "text": .object([
                     "selection_policy": .string("random"),
-                    "values": .array([.string("Yes you can!"), .string("Of course!")])
-                ])
+                    "values": .array([.string("Yes you can!"), .string("Of course!")]),
+                ]),
             ],
             context: nil,
             metadata: ["swift-sdk-test": .boolean(true)],
@@ -1423,7 +1431,6 @@ class ConversationTests: XCTestCase {
             nodeType: nil,
             eventName: nil,
             variable: nil)
-
         conversation.createDialogNode(workspaceID: workspaceID, properties: dialogNode, failure: failWithError) {
             node in
             XCTAssertEqual(dialogNode.dialogNode, node.dialogNodeID)
@@ -1546,4 +1553,3 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
 }
-

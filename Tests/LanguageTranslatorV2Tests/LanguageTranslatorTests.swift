@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try superfluous_disable_command
+
 import XCTest
 import Foundation
 import LanguageTranslatorV2
@@ -32,8 +34,8 @@ class LanguageTranslatorTests: XCTestCase {
         instantiateLanguageTranslator()
         deleteStaleCustomModels()
     }
-    
-    static var allTests : [(String, (LanguageTranslatorTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (LanguageTranslatorTests) -> () throws -> Void)] {
         return [
             ("testGetModelsAll", testGetModelsAll),
             ("testGetModelsBySourceLanguage", testGetModelsBySourceLanguage),
@@ -47,7 +49,7 @@ class LanguageTranslatorTests: XCTestCase {
             ("testTranslateArrayWithSourceAndTarget", testTranslateArrayWithSourceAndTarget),
             ("testGetIdentifiableLanguages", testGetIdentifiableLanguages),
             ("testIdentify", testIdentify),
-            ("testGetModelDoesntExist", testGetModelDoesntExist)
+            ("testGetModelDoesntExist", testGetModelDoesntExist),
         ]
     }
 
@@ -65,10 +67,8 @@ class LanguageTranslatorTests: XCTestCase {
         let description = "Delete any stale custom models previously created by unit tests."
         let expectation = self.expectation(description: description)
         languageTranslator.getModels(defaultModelsOnly: false, failure: failWithError) { models in
-            for model in models {
-                if model.baseModelID != "" {
-                    self.languageTranslator.deleteModel(withID: model.modelID)
-                }
+            for model in models where model.baseModelID != "" {
+                self.languageTranslator.deleteModel(withID: model.modelID)
             }
             expectation.fulfill()
         }
@@ -84,7 +84,7 @@ class LanguageTranslatorTests: XCTestCase {
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")
@@ -153,7 +153,7 @@ class LanguageTranslatorTests: XCTestCase {
         let creationExpectation = self.expectation(description: creationDescription)
         let deletionDescription = "Delete the custom language model."
         let deletionExpectation = self.expectation(description: deletionDescription)
-        
+
         #if os(iOS)
             let bundle = Bundle(for: type(of: self))
             guard let glossary = bundle.url(forResource: "glossary", withExtension: "tmx") else {
@@ -163,7 +163,7 @@ class LanguageTranslatorTests: XCTestCase {
         #else
             let glossary = URL(fileURLWithPath: "Tests/LanguageTranslatorV2Tests/glossary.tmx")
         #endif
-        
+
         languageTranslator.createModel(fromBaseModelID: "en-es", withGlossary: glossary,
                                        name: "custom-english-to-spanish-model", failure: failWithError)
         {

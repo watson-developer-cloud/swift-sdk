@@ -15,34 +15,34 @@
  **/
 
 import Foundation
-    
+
 /** A custom voice model supported by the Text to Speech service. */
 public struct Customization: JSONDecodable {
-    
+
     /// The GUID of the custom voice model.
     public let customizationID: String
-    
+
     /// The name of the custom voice model.
     public let name: String
-    
+
     /// The language of the custom voice model
     public let language: String
-    
+
     /// GUID of the service credentials for the owner of the custom voice model.
     public let owner: String
-    
+
     /// The UNIX timestamp that indicates when the custom voice model was created.
     /// The timestamp is a count of seconds since the UNIX Epoch of January 1, 1970
     /// Coordinated Universal Time (UTC).
     public let created: Int? // TODO: change to `Int` after service bug is fixed
-    
+
     /// The UNIX timestamp that indicates when the custom voice model was last modified.
     /// Equals created when a new voice model is first added but has yet to be changed.
     public let lastModified: Int? // TODO: change to `Int` after service bug is fixed
-    
+
     /// A description of the custom voice model.
     public let description: String?
-    
+
     /// Used internally to initialize a `Customization` model from JSON.
     public init(json: JSONWrapper) throws {
         customizationID = try json.getString(at: "customization_id")

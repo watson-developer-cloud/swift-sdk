@@ -17,37 +17,37 @@
 import Foundation
 
 /**
- 
+
  **SentimentResponse**
- 
+
  Response object for **Sentiment** related calls
- 
+
  */
 
 public struct SentimentResponse: JSONDecodable {
-    
+
     /** number of transactions made by the call */
     public let totalTransactions: Int?
-    
+
     /** extracted language */
     public let language: String?
-    
+
     /** the URL information was requested for */
     public let url: String?
-    
+
     /** document text */
     public let text: String?
-    
+
     /** see **Sentiment** */
     public let docSentiment: Sentiment?
-    
+
     /// Used internally to initialize a SentimentResponse object
     public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
             throw JSONWrapper.Error.valueNotConvertible(value: json, to: SentimentResponse.self)
         }
-        
+
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionsString)
         } else {

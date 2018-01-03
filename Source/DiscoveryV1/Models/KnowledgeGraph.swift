@@ -20,16 +20,16 @@ import Foundation
 public struct KnowledgeGraph: JSONDecodable {
     /// Path along the graph to the key.
     public let typeHierarchy: String?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a KnowledgeGraph object
     public init(json: JSONWrapper) throws {
         typeHierarchy = try? json.getString(at: "typeHierarchy")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize a 'KnowledgeGraph' model to JSON.
     public func toJSONObject() -> Any {
         return json

@@ -21,50 +21,50 @@ public struct Concept: JSONDecodable {
 
     /// Website referenced by the concept.
     public let website: String?
-    
+
     /// The path through the knowledge graph to the appropriate keyword.
     public let knowledgeGraph: KnowledgeGraph?
-    
+
     /// Link to Freebase data set for this concept tag.
     public let freebase: String?
-    
+
     /// Link to DBpedia for this concept tag.
     public let dbpedia: String?
-    
+
     /// The text of the concept.
     public let text: String?
-    
+
     /// Relevance score for a detected concept tag ranging from [0, 1].
     /// Higher values represent higher relevance.
     public let relevance: Double?
-    
+
     /// Latitude longitude - the geographic coordinates associated with this concept tag.
     public let geo: String?
-    
+
     /// Link to YAGO for this concept tag.
     public let yago: String?
-    
+
     /// Link to OpenCyc for this concept tag.
     public let opencyc: String?
-    
+
     /// Link to the CIA World Factbook for this concept tag.
     public let ciaFactbook: String?
-    
+
     /// Link to the US Census for this concept tag.
     public let census: String?
-    
+
     /// Link to Geonames for this concept tag.
     public let geonames: String?
-    
+
     /// Link to MusicBrainz for this concept tag.
     public let musicBrainz: String?
-    
+
     /// Link to CrunchBase for this concept tag.
     public let crunchbase: String?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a `Concept` object.
     public init(json: JSONWrapper) throws {
         website = try? json.getString(at: "website")
@@ -83,10 +83,9 @@ public struct Concept: JSONDecodable {
         crunchbase = try? json.getString(at: "crunchbase")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize a 'Concept' model to JSON.
     public func toJSONObject() -> Any {
         return json
     }
 }
-    

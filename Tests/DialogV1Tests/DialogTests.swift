@@ -43,8 +43,8 @@ class DialogTests: XCTestCase {
         instantiateDialog()
         lookupDialog()
     }
-    
-    static var allTests : [(String, (DialogTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (DialogTests) -> () throws -> Void)] {
         return [
             ("testGetDialogs", testGetDialogs),
             ("testCreateDelete", testCreateDelete),
@@ -98,11 +98,11 @@ class DialogTests: XCTestCase {
     func lookupDialog() {
         let description = "Look up (or create) the test dialog application."
         let expectation = self.expectation(description: description)
-        
+
         let failure = { (error: Error) in
             XCTFail("Failed to list the dialog applications.")
         }
-        
+
         dialog.getDialogs(failure: failure) { dialogs in
             for dialog in dialogs {
                 if dialog.name.hasPrefix(self.prefix) {
@@ -115,24 +115,24 @@ class DialogTests: XCTestCase {
             expectation.fulfill()
         }
         waitForExpectations()
-        
+
         if (self.dialogID == nil) || (self.dialogName == nil) {
             createDialog()
         }
     }
-    
+
     /** Create the test dialog application. */
     func createDialog() {
         let description = "Create the test dialog application."
         let expectation = self.expectation(description: description)
-        
+
         let dialogName = createDialogName()
-        
+
         guard let fileURL = loadDialogFile(name: "pizza_sample", withExtension: "xml") else {
             XCTFail("Failed to load dialog file.")
             return
         }
-        
+
         let failure = { (error: Error) in
             XCTFail("Failed to create the test dialog application.")
         }
@@ -154,7 +154,7 @@ class DialogTests: XCTestCase {
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")
@@ -200,7 +200,7 @@ class DialogTests: XCTestCase {
         #else
             let url = URL(fileURLWithPath: "Tests/DialogV1Tests/"+name+"."+withExtension)
         #endif
-        
+
         return url
     }
 
@@ -230,22 +230,22 @@ class DialogTests: XCTestCase {
         let description1 = "Create a dialog application."
         let expectation1 = self.expectation(description: description1)
         var dialogID: DialogID?
-        
+
         let dialogName = createDialogName()
         guard let fileURL = loadDialogFile(name: "pizza_sample", withExtension: "xml") else {
             XCTFail("Failed to load dialog file.")
             return
         }
-        
+
         dialog.createDialog(withName: dialogName, fromFile: fileURL, failure: failWithError) { id in
             dialogID = id
             expectation1.fulfill()
         }
         waitForExpectations()
-        
+
         let description2 = "Delete the dialog application."
         let expectation2 = self.expectation(description: description2)
-        
+
         dialog.deleteDialog(withID: dialogID!, failure: failWithError) {
             expectation2.fulfill()
         }
@@ -256,7 +256,7 @@ class DialogTests: XCTestCase {
     func getDialogFile(format: DialogV1.Format? = nil) {
         let description = "Download the dialog file associated with the test application."
         let expectation = self.expectation(description: description)
-        
+
         dialog.getDialogFile(fromDialogID: dialogID!, inFormat: format, failure: failWithError) { file in
             let fileManager = FileManager.default
             XCTAssertTrue(fileManager.fileExists(atPath: file.path))
@@ -266,7 +266,7 @@ class DialogTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     /** Verify the filetype (extension) of a downloaded dialog file. */
     func verifyFiletype(format: DialogV1.Format?, url: URL) -> Bool {
         var filetype = ".mct"
@@ -365,7 +365,7 @@ class DialogTests: XCTestCase {
     func testGetConversationHistory() {
         let description1 = "Start a conversation with the dialog application."
         let expectation1 = self.expectation(description: description1)
-        
+
         let response1 = "Hi, I\'m Watson! I can help you order a pizza through my " +
                         "convenient Swift SDK! What size would you like?"
         let startTime = Date()

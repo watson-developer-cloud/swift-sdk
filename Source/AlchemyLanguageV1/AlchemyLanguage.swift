@@ -22,43 +22,43 @@ import Foundation
  */
 
 public class AlchemyLanguage {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceUrl = "https://gateway-a.watsonplatform.net/calls"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     /// The API key credential to use when authenticating with the service.
     private let apiKey: String
-    
+
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
-    
+
     // The characters at the end of the CharacterSet break in Linux
     private let unreservedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-._~")
     /**
      Create an `AlchemyLanguage` object.
-     
+
      - parameter apiKey: The API key credential to use when authenticating with the service.
      */
     public init(apiKey: String) {
         self.apiKey = apiKey
     }
-    
+
     /**
      If the response or data represents an error returned by the AlchemyLanguage service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // Typically, we would check the http status code in the response object here, and return
         // `nil` if the status code is successful (200 <= statusCode < 300). However, the Alchemy
         // services return a status code of 200 if you are able to successfully contact the
         // service, without regards to whether the response itself was a success or a failure.
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -66,7 +66,7 @@ public class AlchemyLanguage {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = 400
@@ -81,9 +81,9 @@ public class AlchemyLanguage {
             return nil
         }
     }
-    
+
     private func buildBody(document:  URL, html: Bool) throws -> Data {
-        
+
         guard let docAsString = try String(contentsOfFile: document.relativePath, encoding:.utf8)
             .addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
                 let failureReason = "Profile could not be escaped."
@@ -91,7 +91,7 @@ public class AlchemyLanguage {
                 let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
                 throw error
         }
-        
+
         let type: String
         if html == true {
             type = "html"
@@ -106,10 +106,10 @@ public class AlchemyLanguage {
         }
         return body
     }
-    
+
     /**
      Extracts the Author(s) of given content.
-     
+
      - parameter url:     the URL of the content
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Author information
@@ -119,7 +119,7 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentAuthors) -> Void)
     {
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -133,9 +133,9 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
-            
+
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentAuthors>) in
             switch response.result {
@@ -144,10 +144,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Author(s) of given content.
-     
+
      - parameter html:    an HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
@@ -163,7 +163,7 @@ public class AlchemyLanguage {
         let body = try? buildBody(document: html, html: true)
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
@@ -179,7 +179,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentAuthors>) in
             switch response.result {
@@ -188,10 +188,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Concepts of given content.
-     
+
      - parameter url:            the URL of the content
      - parameter knowledgeGraph: whether to include a knowledgeGraph calculation
      - parameter failure:        a function executed if the call fails
@@ -203,10 +203,10 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ConceptResponse) -> Void)
     {
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
@@ -215,7 +215,7 @@ public class AlchemyLanguage {
             queryParams.append(URLQueryItem(name: "knowledgeGraph",
                                             value: String(myGraph.rawValue)))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -226,7 +226,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<ConceptResponse>) in
             switch response.result {
@@ -235,10 +235,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the concepts of given content.
-     
+
      - parameter html:           an HTML document
      - parameter url:            a reference to where the HTML is located
      - parameter knowledgeGraph: whether to include a knowledgeGraph calculation
@@ -252,12 +252,12 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ConceptResponse) -> Void)
     {
-        
+
         // construct body
         let body = try? buildBody(document: html, html: true)
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
@@ -286,10 +286,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the concepts of given content.
-     
+
      - parameter text:           a Text document
      - parameter knowledgeGraph: whether to include a knowledgeGraph calculation
      - parameter failure:        a function executed if the call fails
@@ -303,10 +303,10 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
@@ -314,7 +314,7 @@ public class AlchemyLanguage {
             queryParams.append(URLQueryItem(name: "knowledgeGraph",
                                             value: String(myGraph.rawValue)))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -325,7 +325,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<ConceptResponse>) in
             switch response.result {
@@ -334,10 +334,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Entities of given content.
-     
+
      - parameter url:                  the URL of the content
      - parameter knowledgeGraph:       whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities: whether to include disambiguate entities
@@ -363,7 +363,7 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
@@ -391,8 +391,7 @@ public class AlchemyLanguage {
             queryParams.append(URLQueryItem(name: "structuredEntities",
                                             value: String(structEnts.rawValue)))
         }
-        
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -402,7 +401,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Entities>) in
             switch response.result {
@@ -411,10 +410,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Entities of given content.
-     
+
      - parameter html:                 a HTML document
      - parameter url:                  a reference to where the HTML is located
      - parameter knowledgeGraph:       whether to include a knowledgeGraph calculation
@@ -442,10 +441,10 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
@@ -475,8 +474,7 @@ public class AlchemyLanguage {
             queryParams.append(URLQueryItem(name: "structuredEntities",
                                             value: String(structEnts.rawValue)))
         }
-        
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -487,7 +485,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Entities>) in
             switch response.result {
@@ -496,10 +494,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Entities of given content.
-     
+
      - parameter text:                 a Text document
      - parameter knowledgeGraph:       whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities: whether to include disambiguate entities
@@ -525,10 +523,10 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myGraph = knowledgeGraph {
@@ -555,8 +553,7 @@ public class AlchemyLanguage {
             queryParams.append(URLQueryItem(name: "structuredEntities",
                                             value: String(structEnts.rawValue)))
         }
-        
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -567,7 +564,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Entities>) in
             switch response.result {
@@ -576,10 +573,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Keywords of given content.
-     
+
      - parameter url:            the URL of the content
      - parameter knowledgeGraph: whether to include a knowledgeGraph calculation
      - parameter strictMode:     whether to run in strict mode
@@ -597,7 +594,7 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
@@ -616,7 +613,7 @@ public class AlchemyLanguage {
             }
             queryParams.append(URLQueryItem(name: "keywordExtractMode", value: mode))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -626,7 +623,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Keywords>) in
             switch response.result {
@@ -635,10 +632,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Keywords of given content.
-     
+
      - parameter html:           a HTML document
      - parameter url:            a reference to where the HTML is located
      - parameter knowledgeGraph: whether to include a knowledgeGraph calculation
@@ -658,10 +655,10 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
@@ -682,7 +679,7 @@ public class AlchemyLanguage {
             }
             queryParams.append(URLQueryItem(name: "keywordExtractMode", value: mode))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -693,7 +690,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Keywords>) in
             switch response.result {
@@ -702,10 +699,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Keywords of given content.
-     
+
      - parameter text:           a Text document
      - parameter knowledgeGraph: whether to include a knowledgeGraph calculation
      - parameter strictMode:     whether to run in strict mode
@@ -723,10 +720,10 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let graph = knowledgeGraph {
@@ -744,7 +741,7 @@ public class AlchemyLanguage {
             }
             queryParams.append(URLQueryItem(name: "keywordExtractMode", value: mode))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -755,7 +752,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Keywords>) in
             switch response.result {
@@ -764,10 +761,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the language of given content.
-     
+
      - parameter url:     the URL of the content
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Language information
@@ -791,7 +788,7 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Language>) in
             switch response.result {
@@ -800,10 +797,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the language of given content.
-     
+
      - parameter text:    a Text document
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Language information
@@ -815,13 +812,13 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -832,7 +829,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Language>) in
             switch response.result {
@@ -841,10 +838,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Microformat Data of given content.
-     
+
      - parameter url:     the URL of the content
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Microformat information
@@ -868,7 +865,7 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Microformats>) in
             switch response.result {
@@ -877,11 +874,11 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Microformat Data of given content.
      The fact URL is required here is a bug.
-     
+
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
@@ -895,16 +892,16 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -915,7 +912,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Microformats>) in
             switch response.result {
@@ -924,10 +921,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Publication Date of given content.
-     
+
      - parameter url:     the URL of the content
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Publication information
@@ -951,7 +948,7 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<PublicationResponse>) in
             switch response.result {
@@ -960,10 +957,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Publication Date of given content.
-     
+
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
@@ -977,16 +974,16 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -997,7 +994,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<PublicationResponse>) in
             switch response.result {
@@ -1006,10 +1003,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Subject-Action-Object relations of given content.
-     
+
      - parameter url:                      the URL of the content
      - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
@@ -1040,7 +1037,7 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
@@ -1073,7 +1070,7 @@ public class AlchemyLanguage {
             queryParams.append(URLQueryItem(name: "sentimentExcludeEntities",
                                             value: String(sentiExEnts.rawValue)))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1083,7 +1080,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SAORelations>) in
             switch response.result {
@@ -1092,10 +1089,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Subject-Action-Object relations of given content.
-     
+
      - parameter html:                     a HTML document
      - parameter url:                      a reference to where the HTML is located
      - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
@@ -1128,10 +1125,10 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
@@ -1166,7 +1163,7 @@ public class AlchemyLanguage {
             queryParams.append(URLQueryItem(name: "sentimentExcludeEntities",
                                             value: String(sentiExEnts.rawValue)))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1177,7 +1174,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SAORelations>) in
             switch response.result {
@@ -1186,10 +1183,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Subject-Action-Object relations of given content.
-     
+
      - parameter text:                     a Text document
      - parameter knowledgeGraph:           whether to include a knowledgeGraph calculation
      - parameter disambiguateEntities:     whether to include disambiguate entities
@@ -1220,10 +1217,10 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let graph = knowledgeGraph {
@@ -1255,7 +1252,7 @@ public class AlchemyLanguage {
             queryParams.append(URLQueryItem(name: "sentimentExcludeEntities",
                                             value: String(sentiExEnts.rawValue)))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1266,7 +1263,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SAORelations>) in
             switch response.result {
@@ -1275,10 +1272,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Sentiment of given content.
-     
+
      - parameter url:     the URL of the content
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
@@ -1302,7 +1299,7 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
@@ -1311,10 +1308,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Sentiment of given content.
-     
+
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
@@ -1328,16 +1325,16 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1348,7 +1345,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
@@ -1357,10 +1354,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Sentiment of given content.
-     
+
      - parameter text:    a Text document
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Sentiment information
@@ -1372,13 +1369,13 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1389,7 +1386,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
@@ -1398,10 +1395,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Sentiment of given content.
-     
+
      - parameter url:     the URL of the content
      - parameter targets:  a pipe delimited list of phrases to target analysis towards
      - parameter failure: a function executed if the call fails
@@ -1427,7 +1424,7 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
@@ -1436,10 +1433,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Sentiment of given content.
-     
+
      - parameter html:    a HTML document
      - parameter targets:  a pipe delimited list of phrases to target analysis towards
      - parameter url:     a reference to where the HTML is located
@@ -1455,17 +1452,17 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "target", value: targets))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1476,7 +1473,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
@@ -1485,10 +1482,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Sentiment of given content.
-     
+
      - parameter text:    a Text document
      - parameter targets:  a pipe delimited list of phrases to target analysis towards
      - parameter failure: a function executed if the call fails
@@ -1502,14 +1499,14 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "target", value: targets))
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1520,7 +1517,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<SentimentResponse>) in
             switch response.result {
@@ -1529,10 +1526,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Taxonomy of given content.
-     
+
      - parameter url:     the URL of the content
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Taxonomy information
@@ -1555,7 +1552,7 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Taxonomies>) in
             switch response.result {
@@ -1564,10 +1561,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Taxonomy of given content.
-     
+
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
@@ -1581,16 +1578,16 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1601,7 +1598,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Taxonomies>) in
             switch response.result {
@@ -1610,10 +1607,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Calculates the Taxonomy of given content.
-     
+
      - parameter text:    a Text document
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Taxonomy information
@@ -1625,13 +1622,13 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: text, html: false)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1642,7 +1639,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Taxonomies>) in
             switch response.result {
@@ -1651,10 +1648,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Raw Text of given content.
-     
+
      - parameter url:     the URL of the content
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Raw Text information
@@ -1677,7 +1674,7 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentText>) in
             switch response.result {
@@ -1686,10 +1683,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Raw Text of given content.
-     
+
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
@@ -1703,16 +1700,16 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1723,7 +1720,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentText>) in
             switch response.result {
@@ -1732,10 +1729,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Text of given content.
-     
+
      - parameter url:          the URL of the content
      - parameter useMetadata:  whether to use metadata embeded in the webpage
      - parameter extractLinks: whether to include hyperlinks in the extracted text
@@ -1751,7 +1748,7 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
@@ -1761,7 +1758,7 @@ public class AlchemyLanguage {
         if let extract = extractLinks {
             queryParams.append(URLQueryItem(name: "extractLinks", value: String(extract.rawValue)))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1771,7 +1768,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentText>) in
             switch response.result {
@@ -1780,10 +1777,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Text of given content.
-     
+
      - parameter html:         a HTML document
      - parameter url:          a reference to where the HTML is located
      - parameter useMetadata:  whether to use metadata embeded in the webpage
@@ -1801,10 +1798,10 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
@@ -1816,7 +1813,7 @@ public class AlchemyLanguage {
         if let extract = extractLinks {
             queryParams.append(URLQueryItem(name: "extractLinks", value: String(extract.rawValue)))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1827,7 +1824,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentText>) in
             switch response.result {
@@ -1836,10 +1833,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Title of given content.
-     
+
      - parameter url:          the URL of the content
      - parameter failure:      a function executed if the call fails
      - parameter success:      a function executed with Title information
@@ -1852,14 +1849,14 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
         if let metadata = useMetadata {
             queryParams.append(URLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1869,7 +1866,7 @@ public class AlchemyLanguage {
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentTitle>) in
             switch response.result {
@@ -1878,10 +1875,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Title of given content.
-     
+
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
@@ -1896,10 +1893,10 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
@@ -1908,7 +1905,7 @@ public class AlchemyLanguage {
         if let metadata = useMetadata {
             queryParams.append(URLQueryItem(name: "useMetadata", value: String(metadata.rawValue)))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -1919,7 +1916,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentTitle>) in
             switch response.result {
@@ -1928,10 +1925,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Feeds of given content.
-     
+
      - parameter url:          the URL of the content
      - parameter failure:      a function executed if the call fails
      - parameter success:      a function executed with Feed information
@@ -1954,7 +1951,7 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Feeds>) in
             switch response.result {
@@ -1963,11 +1960,11 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Feeds of given content.
      The fact that URL is required here is a bug.
-     
+
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
@@ -1981,16 +1978,16 @@ public class AlchemyLanguage {
     {
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -2001,7 +1998,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Feeds>) in
             switch response.result {
@@ -2010,10 +2007,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Emotion of given content.
-     
+
      - parameter url:          the URL of the content
      - parameter failure:      a function executed if the call fails
      - parameter success:      a function executed with Feed information
@@ -2036,7 +2033,7 @@ public class AlchemyLanguage {
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentEmotion>) in
             switch response.result {
@@ -2045,10 +2042,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Emotion of given content.
-     
+
      - parameter html:    a HTML document
      - parameter url:     a reference to where the HTML is located
      - parameter failure: a function executed if the call fails
@@ -2060,19 +2057,19 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentEmotion) -> Void)
     {
-        
+
         // construct body
         let body = try? buildBody(document: html, html: true)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
         }
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -2083,7 +2080,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentEmotion>) in
             switch response.result {
@@ -2092,10 +2089,10 @@ public class AlchemyLanguage {
             }
         }
     }
-    
+
     /**
      Extracts the Emotion of given content.
-     
+
      - parameter text:    a Text document
      - parameter failure: a function executed if the call fails
      - parameter success: a function executed with Feed information
@@ -2105,16 +2102,16 @@ public class AlchemyLanguage {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentEmotion) -> Void)
     {
-        
+
         // construct body
         let body = try? buildBody(document: text, html: false)
-        
+
         // construct query parameters
         var queryParams = [URLQueryItem]()
-        
+
         queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
-        
+
         // construct request
         let request = RestRequest(
             method: "POST",
@@ -2125,7 +2122,7 @@ public class AlchemyLanguage {
             queryItems: queryParams,
             messageBody: body
         )
-        
+
         // execute request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<DocumentEmotion>) in
             switch response.result {

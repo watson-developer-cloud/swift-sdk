@@ -15,19 +15,19 @@
  **/
 
 import Foundation
-    
+
 /** The tone analysis for a particular tone category (e.g. social, emotion, or writing). */
 public struct ToneCategory: JSONDecodable {
-    
+
     /// The name of this tone category (e.g. emotion, social, or language).
     public let name: String
-    
+
     /// A unique number identifying this tone category, irrespective of language or localization.
     public let categoryID: String
-    
+
     /// The individual tone results within this category.
     public let tones: [ToneScore]
-    
+
     /// Used internally to initialize a `ToneCategory` model from JSON.
     public init(json: JSONWrapper) throws {
         name = try json.getString(at: "category_name")

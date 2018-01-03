@@ -14,25 +14,27 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try superfluous_disable_command
+
 import XCTest
 import Foundation
 import NaturalLanguageUnderstandingV1
 
 class NaturalLanguageUnderstandingTests: XCTestCase {
-    
+
     private var naturalLanguageUnderstanding: NaturalLanguageUnderstanding!
     private let timeout: TimeInterval = 5.0
     private let text = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
     private let url = "http://www.politico.com/story/2016/07/dnc-2016-obama-prepared-remarks-226345"
     private var html: String!
-    
+
     override func setUp() {
         super.setUp()
         instantiateNaturalLanguageUnderstanding()
         loadHTML()
     }
-    
-    static var allTests : [(String, (NaturalLanguageUnderstandingTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (NaturalLanguageUnderstandingTests) -> () throws -> Void)] {
         return [
             ("testAnalyzeHTML", testAnalyzeHTML),
             ("testAnalyzeText", testAnalyzeText),
@@ -51,10 +53,10 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testAnalyzeTextForCategories", testAnalyzeTextForCategories),
             ("testCustomModel", testCustomModel),
             ("testDeleteModel", testDeleteModel),
-            ("testListModels", testListModels)
+            ("testListModels", testListModels),
         ]
     }
-    
+
     /** Instantiate Natural Language Understanding instance. */
     func instantiateNaturalLanguageUnderstanding() {
         let username = Credentials.NaturalLanguageUnderstandingUsername
@@ -79,26 +81,26 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
-    
+
     /** Fail false positives. */
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Wait for expectations. */
     func waitForExpectations() {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     // MARK: - Positive tests
-    
+
     /** Default test for HTML input. */
     func testAnalyzeHTML() {
         let description = "Analyze HTML."
@@ -107,7 +109,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let features = Features(concepts: concepts)
         let parameters = Parameters(features: features, html: html)
         naturalLanguageUnderstanding.analyze(parameters: parameters, failure: failWithError) {
-            results in
+            _ in
             expectation.fulfill()
         }
         waitForExpectations()
@@ -121,7 +123,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let features = Features(concepts: concepts)
         let parameters = Parameters(features: features, text: text)
         naturalLanguageUnderstanding.analyze(parameters: parameters, failure: failWithError) {
-            results in
+            _ in
             expectation.fulfill()
         }
         waitForExpectations()
@@ -135,7 +137,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let features = Features(concepts: concepts)
         let parameters = Parameters(features: features, url: url, returnAnalyzedText: true)
         naturalLanguageUnderstanding.analyze(parameters: parameters, failure: failWithError) {
-            results in
+            _ in
             expectation.fulfill()
         }
         waitForExpectations()
@@ -145,7 +147,15 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testAnalyzeTextForConcepts() {
         let description = "Analyze text with features."
         let expectation = self.expectation(description: description)
-        let text = "In remote corners of the world, citizens are demanding respect for the dignity of all people no matter their gender, or race, or religion, or disability, or sexual orientation, and those who deny others dignity are subject to public reproach. An explosion of social media has given ordinary people more ways to express themselves, and has raised people's expectations for those of us in power. Indeed, our international order has been so successful that we take it as a given that great powers no longer fight world wars; that the end of the Cold War lifted the shadow of nuclear Armageddon; that the battlefields of Europe have been replaced by peaceful union; that China and India remain on a path of remarkable growth."
+        let text = """
+            In remote corners of the world, citizens are demanding respect for the dignity of all people no matter their
+            gender, or race, or religion, or disability, or sexual orientation, and those who deny others dignity are subject
+            to public reproach. An explosion of social media has given ordinary people more ways to express themselves,
+            and has raised people's expectations for those of us in power. Indeed, our international order has been so
+            successful that we take it as a given that great powers no longer fight world wars; that the end of the Cold
+            War lifted the shadow of nuclear Armageddon; that the battlefields of Europe have been replaced by peaceful
+            union; that China and India remain on a path of remarkable growth.
+        """
         let concepts = ConceptsOptions(limit: 5)
         let features = Features(concepts: concepts)
         let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)

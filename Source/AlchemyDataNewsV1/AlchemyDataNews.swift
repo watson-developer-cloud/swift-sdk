@@ -22,18 +22,18 @@ import Foundation
  blogs like a database.
  */
 public class AlchemyDataNews {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceUrl = "https://gateway-a.watsonplatform.net/calls"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     /// The API key credential to use when authenticating with the service.
     private let apiKey: String
-    
+
     private let errorDomain = "com.ibm.watson.developer-cloud.AlchemyDataNews"
-    
+
     /**
      Create an `AlchemyDataNews` object.
      - parameter apiKey: The API key credential to use when authenticating with the service.
@@ -41,22 +41,22 @@ public class AlchemyDataNews {
     public init(apiKey: String) {
         self.apiKey = apiKey
     }
-    
+
     /**
      If the response or data represents an error returned by the AlchemyDataNews service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // Typically, we would check the http status code in the response object here, and return
         // `nil` if the status code is successful (200 <= statusCode < 300). However, the Alchemy
         // services return a status code of 200 if you are able to successfully contact the
         // service, without regards to whether the response itself was a success or a failure.
         // https://www.ibm.com/watson/developercloud/alchemydata-news/api/v1/#error-handling
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -64,7 +64,7 @@ public class AlchemyDataNews {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = 400
@@ -79,17 +79,17 @@ public class AlchemyDataNews {
             return nil
         }
     }
-    
+
     /**
      Analyze news using Natural Language Processing (NLP) queries and sophisticated filters.
-     
+
      All time arguments assume seconds as the default unit, but a more user-friendly time format
      can be used to specify relative times. For more information, see this service documentation:
      http://docs.alchemyapi.com/docs/counts
-     
+
      There are several specific query parameters and 'return' fields. A list can be found at:
      http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields
-     
+
      - parameter from: The time (in UTC seconds) of the beginning date and time of the query. Valid
         values are UTC times and relative times.
      - parameter to: The time (in UTC seconds) of the end date and time of the query. Valid values
@@ -128,7 +128,7 @@ public class AlchemyDataNews {
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryItems
         )
-        
+
         // execute rest request
         request.responseObject(responseToError: responseToError) { (response: RestResponse<NewsResponse>) in
             switch response.result {

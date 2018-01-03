@@ -30,8 +30,8 @@ public struct SemanticRolesSubject {
      Initialize a `SemanticRolesSubject` with member variables.
 
      - parameter text: Text that corresponds to the subject role.
-     - parameter entities: 
-     - parameter keywords: 
+     - parameter entities:
+     - parameter keywords:
 
      - returns: An initialized `SemanticRolesSubject`.
     */

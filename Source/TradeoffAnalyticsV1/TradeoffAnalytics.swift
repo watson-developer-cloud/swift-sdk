@@ -23,42 +23,42 @@ import Foundation
  service can help users explore the trade-offs between options to make complex decisions.
  */
 public class TradeoffAnalytics {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/tradeoff-analytics/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.TradeoffAnalyticsV1"
 
     /**
      Create a `TradeoffAnalytics` object.
- 
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the response or data represents an error returned by the Tradeoff Analytics service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -66,7 +66,7 @@ public class TradeoffAnalytics {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -83,11 +83,11 @@ public class TradeoffAnalytics {
 
     /**
      Get a dilemma that contains a problem and its resolution.
-     
+
      The problem contains a set of columns (objectives) and options. The resolution contains a set
      of optimal options, their analytical characteristics, and, by default, their representation
      in a two-dimensional space.
-     
+
      - parameter for: The decision problem.
      - parameter generateVisualization: Indicated whether to calculate the map visualization for
         the results. If `true`, the visualization is returned; if `false`, no visualization is
@@ -109,13 +109,13 @@ public class TradeoffAnalytics {
             failure?(error)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let generateVisualization = generateVisualization {
             queryParameters.append(URLQueryItem(name: "generate_visualization", value: "\(generateVisualization)"))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -127,7 +127,7 @@ public class TradeoffAnalytics {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         // TODO: Add status code validation
         request.responseObject(responseToError: responseToError) { (response: RestResponse<Dilemma>) in

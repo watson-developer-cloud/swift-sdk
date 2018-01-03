@@ -38,7 +38,7 @@ internal extension KeyedEncodingContainer where Key == DynamicKeys {
 
     /// Encode additional properties.
     internal mutating func encode(_ additionalProperties: [String: JSON]) throws {
-        try additionalProperties.forEach() { key, value in
+        try additionalProperties.forEach { key, value in
             guard let codingKey = DynamicKeys(stringValue: key) else {
                 let description = "Cannot construct CodingKey for \(key)"
                 let context = EncodingError.Context(codingPath: codingPath, debugDescription: description)

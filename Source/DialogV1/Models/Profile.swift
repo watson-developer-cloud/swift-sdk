@@ -15,13 +15,13 @@
  **/
 
 import Foundation
-    
+
 /** A dialog profile. */
 public struct Profile: JSONEncodable, JSONDecodable {
-    
+
     /// The client identifier.
     public let clientID: Int?
-    
+
     /// The parameters of the profile.
     public let parameters: [Parameter]
 
@@ -55,16 +55,16 @@ public struct Profile: JSONEncodable, JSONDecodable {
 
 /** A dialog parameter. */
 public struct Parameter: JSONEncodable, JSONDecodable {
-    
+
     /// The name of the parameter.
     public let name: String
-    
+
     /// The value of the parameter.
     public let value: String
-    
+
     /**
      Create a `Parameter` for a profile with a name and value.
- 
+
      - parameter name: The name of the parameter.
      - parameter value: The value of the parameter.
      */

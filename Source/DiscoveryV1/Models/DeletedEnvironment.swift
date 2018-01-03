@@ -18,14 +18,14 @@ import Foundation
 
 /** An object with information about the deleted environment. */
 public struct DeletedEnvironment: JSONDecodable {
-    
+
     /// Unique identifier for the deleted environment.
     public let environmentID: String
-    
+
     /// Status of the environment. A status of `deleted` indicates that the environment
     /// was successfully deleted.
     public let status: String
-    
+
     /// Used internally to initialize a `DeletedEnvironment` model from JSON.
     public init(json: JSONWrapper) throws {
         environmentID = try json.getString(at: "environment_id")

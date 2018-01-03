@@ -22,7 +22,7 @@ import AVFoundation
  your application. It uses machine intelligence to combine information about grammar and language
  structure to generate an accurate transcription. Transcriptions are supported for various audio
  formats and languages.
- 
+
  This class makes it easy to recognize audio with the Speech to Text service. Internally, many
  of the functions make use of the `SpeechToTextSession` class, but this class provides a simpler
  interface by minimizing customizability. If you find that you require more control of the session
@@ -32,16 +32,16 @@ public class SpeechToText {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
-    
+
     /// The URL that shall be used to obtain a token.
     public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-    
+
     /// The URL that shall be used to stream audio for transcription.
     public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let username: String
     private let password: String
     private let credentials: Credentials
@@ -51,7 +51,7 @@ public class SpeechToText {
 
     /**
      Create a `SpeechToText` object.
-     
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      */
@@ -60,23 +60,23 @@ public class SpeechToText {
         self.password = password
         self.credentials = Credentials.basicAuthentication(username: username, password: password)
     }
-    
+
     /**
      If the response or data represents an error returned by the Speech to Text service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
             if response.statusCode >= 200 && response.statusCode < 300 {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -84,7 +84,7 @@ public class SpeechToText {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
@@ -100,10 +100,10 @@ public class SpeechToText {
             return nil
         }
     }
-    
+
     /**
      Retrieve a list of models available for use with the service.
-     
+
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of models.
      */
@@ -116,7 +116,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["models"]) {
             (response: RestResponse<[Model]>) in
@@ -126,10 +126,10 @@ public class SpeechToText {
                 }
             }
     }
-    
+
     /**
      Retrieve information about a particular model that is available for use with the service.
-     
+
      - parameter withID: The alphanumeric ID of the model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the model.
@@ -147,7 +147,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Model>) in
@@ -160,7 +160,7 @@ public class SpeechToText {
 
     /**
      Perform speech recognition for an audio file.
-    
+
      - parameter audio: The audio file to transcribe.
      - parameter settings: The configuration to use for this recognition request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
@@ -234,19 +234,19 @@ public class SpeechToText {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )
-        
+
         // set urls
         session.serviceURL = serviceURL
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
-        
+
         // set headers
         session.defaultHeaders = defaultHeaders
-        
+
         // set callbacks
         session.onResults = success
         session.onError = failure
-        
+
         // execute recognition request
         session.connect()
         session.startRequest(settings: settings)
@@ -258,12 +258,12 @@ public class SpeechToText {
     /**
      Perform speech recognition for microphone audio. To stop the microphone, invoke
      `stopRecognizeMicrophone()`.
-     
+
      Microphone audio is compressed to OggOpus format unless otherwise specified by the `compress`
      parameter. With compression enabled, the `settings` should specify a `contentType` of
      `AudioMediaType.oggOpus`. With compression disabled, the `settings` should specify a
      `contentType` of `AudioMediaType.l16(rate: 16000, channels: 1)`.
-     
+
      This function may cause the system to automatically prompt the user for permission
      to access the microphone. Use `AVAudioSession.requestRecordPermission(_:)` if you
      would prefer to ask for the user's permission in advance.
@@ -301,11 +301,11 @@ public class SpeechToText {
             failure?(error)
             return
         }
-        
+
         // validate settings
         var settings = settings
         settings.contentType = compress ? .oggOpus : .l16(rate: 16000, channels: 1)
-        
+
         // create session
         let session = SpeechToTextSession(
             username: username,
@@ -314,31 +314,31 @@ public class SpeechToText {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )
-        
+
         // set urls
         session.serviceURL = serviceURL
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
-        
+
         // set headers
         session.defaultHeaders = defaultHeaders
-        
+
         // set callbacks
         session.onResults = success
         session.onError = failure
-        
+
         // start recognition request
         session.connect()
         session.startRequest(settings: settings)
         session.startMicrophone(compress: compress)
-        
+
         // store session
         microphoneSession = session
     }
-    
+
     /**
      Stop performing speech recognition for microphone audio.
- 
+
      When invoked, this function will
         1. Stop recording audio from the microphone.
         2. Send a stop message to stop the current recognition request.
@@ -349,13 +349,13 @@ public class SpeechToText {
         microphoneSession?.stopRequest()
         microphoneSession?.disconnect()
     }
-    
+
     // MARK: - Custom Models
-    
+
     /**
      List information about all custom language models owned by the calling user. Specify a language
      to see custom models for that language only.
-     
+
      - parameter language: The language of the custom models that you want returned.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with a list of custom models.
@@ -370,7 +370,7 @@ public class SpeechToText {
         if let language = language {
             queryParameters.append(URLQueryItem(name: "language", value: language))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -380,7 +380,7 @@ public class SpeechToText {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["customizations"]) {
             (response: RestResponse<[Customization]>) in
@@ -390,12 +390,12 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Create a new custom language model for a specified base language model.
-     
+
      - parameter name: The name of the new custom model.
-     - parameter baseModelName: The name of the language model that will be customized by the new 
+     - parameter baseModelName: The name of the language model that will be customized by the new
         model.
      - parameter description: The description of the new model.
      - parameter failure: A function executed whenever an error occurs.
@@ -423,7 +423,7 @@ public class SpeechToText {
             failure?(RestError.serializationError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -434,7 +434,7 @@ public class SpeechToText {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<CustomizationID>) in
@@ -444,11 +444,11 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Delete an existing custom language model with the given ID. The custom model can't be deleted
      if another request, such as adding a corpus to the model, is currently being processed.
-     
+
      - parameter customizationID: The ID of the custom model to delete.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed whenever a success occurs.
@@ -466,7 +466,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -480,10 +480,10 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Get information about a custom language model.
-     
+
      - parameter customizationID: The ID of the custom language model to return information about.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with information about the custom model.
@@ -501,7 +501,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Customization>) in
@@ -511,19 +511,19 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
-     Initiates the training of a custom language model with new corpora, words, or both. The service 
-     cannot accept subsequent training requests, or requests to add new corpora or words, until the 
-     existing request completes. 
-     
-     Training will fail if no new training data has been added, if pre-processing of new corpora 
+     Initiates the training of a custom language model with new corpora, words, or both. The service
+     cannot accept subsequent training requests, or requests to add new corpora or words, until the
+     existing request completes.
+
+     Training will fail if no new training data has been added, if pre-processing of new corpora
      or words is incomplete, or if one or more words have errors that must be fixed.
-     
+
      - parameter customizationID: The ID of the custom model to train.
-     - parameter wordTypeToAdd: The type of words from the custom model's words resource on which 
-        to train the model: `all` trains the model on all new words. `user` trains the model only 
-        on new words that were added or modified by the user - the model is not trained on new 
+     - parameter wordTypeToAdd: The type of words from the custom model's words resource on which
+        to train the model: `all` trains the model on all new words. `user` trains the model only
+        on new words that were added or modified by the user - the model is not trained on new
         words extracted from corpora.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed when a success occurs.
@@ -539,7 +539,7 @@ public class SpeechToText {
         if let wordTypeToAdd = wordTypeToAdd {
             queryParameters.append(URLQueryItem(name: "word_type_to_add", value: "\(wordTypeToAdd.rawValue)"))
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -548,7 +548,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters)
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -562,11 +562,11 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
-     Resets a custom language model by removing all corpora and words from the model. Metadata such 
+     Resets a custom language model by removing all corpora and words from the model. Metadata such
      as the name and language of the model are preserved.
-     
+
      - parameter customizationID: The ID of the custom model to reset.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed when a success occurs.
@@ -583,7 +583,7 @@ public class SpeechToText {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json")
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -597,10 +597,10 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Upgrades a custom language model to the latest release level of the Speech to Text service.
-     
+
      - parameter customizationID: The ID of the custom model to upgrade.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed when a success occurs.
@@ -617,7 +617,7 @@ public class SpeechToText {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json")
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -631,12 +631,12 @@ public class SpeechToText {
             }
         }
     }
-    
+
     // MARK: - Custom Corpora
-    
+
     /**
      Lists information about all corpora for a custom language model.
-     
+
      - parameter customizationID: The ID of the custom language model whose corpora you want
         information about.
      - parameter failure: A function executed whenever an error occurs.
@@ -655,7 +655,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["corpora"]) {
             (response: RestResponse<[Corpus]>) in
@@ -665,11 +665,11 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Deletes a corpus from a custom language model. Note: removing a corpus doesn't affect the custom
      model until you train the model with the `train` method.
-     
+
      - parameter name: The name of the corpus to delete.
      - parameter customizationID: The ID of the custom model the corpus belongs to.
      - parameter failure: A function executed whenever an error occurs.
@@ -689,7 +689,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -703,10 +703,10 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Lists information about a specific corpus for a custom language model.
-     
+
      - parameter name: The name of the corpus you want details about.
      - parameter customizationID: The ID of the custom language model that the corpus is for.
      - parameter failure: A function executed whenever an error occurs.
@@ -726,7 +726,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Corpus>) in
@@ -736,19 +736,19 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Add a corpus text file to a custom language model.
-     
-     - parameter textFile: A plain text file that contains the training data for the corpus. For 
+
+     - parameter textFile: A plain text file that contains the training data for the corpus. For
         more information about how to prepare a corpus file, visit this link:
         https://console.bluemix.net/docs/services/speech-to-text/custom-resource.html#corporaWords
-     - parameter name: The name of the corpus to be added. This cannot be `user`, which is a 
-        reserved word. If a corpus with the same name exists already, you must set `allowOverwrite` 
+     - parameter name: The name of the corpus to be added. This cannot be `user`, which is a
+        reserved word. If a corpus with the same name exists already, you must set `allowOverwrite`
         to true or the request will fail.
      - parameter customizationID: The ID of the custom model to which this corpus should be added.
-     - parameter allowOverwrite: If a corpus with the same name exists, this value must be set to 
-        true or the request will fail. By default, this parameter is false. This parameter is 
+     - parameter allowOverwrite: If a corpus with the same name exists, this value must be set to
+        true or the request will fail. By default, this parameter is false. This parameter is
         ignored if there is no other corpus with the same name.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed when a success occurs.
@@ -766,7 +766,7 @@ public class SpeechToText {
         if let allowOverwrite = allowOverwrite {
             queryParameters.append(URLQueryItem(name: "allow_overwrite", value: "\(allowOverwrite)"))
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(textFile, withName: "body")
@@ -785,7 +785,7 @@ public class SpeechToText {
             contentType: multipartFormData.contentType,
             queryItems: queryParameters,
             messageBody: body)
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -799,17 +799,17 @@ public class SpeechToText {
             }
         }
     }
-    
+
     // MARK: - Custom Words
-    
+
     /**
      List all custom words from a custom language model.
-     
+
      - parameter customizationID: The ID of the custom model.
      - parameter wordType: The types of words to return. By default, all words are returned.
-     - parameter sortOrder: The order in which to return the list of words. By default, words are 
+     - parameter sortOrder: The order in which to return the list of words. By default, words are
         returned in sorted alphabetical order.
-     - parameter sortDirection: The order the list of words should be sorted. By default, words are 
+     - parameter sortDirection: The order the list of words should be sorted. By default, words are
         sorted alphabetically in ascending order.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with a list of words in the custom language model.
@@ -834,7 +834,7 @@ public class SpeechToText {
                 queryParameters.append(URLQueryItem(name: "sort", value: sortOrder.rawValue))
             }
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -844,7 +844,7 @@ public class SpeechToText {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["words"]) {
             (response: RestResponse<[Word]>) in
@@ -854,11 +854,11 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
-     Add one or more words to the custom language model, or replace the definition of an existing 
+     Add one or more words to the custom language model, or replace the definition of an existing
      word with the same name.
-    
+
      - parameter customizationID: The ID of the custom language model to add words to.
      - parameter words: An array of `NewWords` objects that describes what words should be added.
      - parameter failure: A function executed whenever an error occurs.
@@ -877,7 +877,7 @@ public class SpeechToText {
             failure?(RestError.serializationError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -888,7 +888,7 @@ public class SpeechToText {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -902,14 +902,14 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
-     Delete a custom word from the specified custom model. If the word also exists in the service's 
-     base vocabulary, the service removes only the custom pronunciation for the word; the word 
+     Delete a custom word from the specified custom model. If the word also exists in the service's
+     base vocabulary, the service removes only the custom pronunciation for the word; the word
      remains in the base vocabulary.
-     
+
      Note: Removing a custom word does not affect the custom model until you train the model.
-     
+
      - parameter name: The name of the word you would like to delete.
      - parameter customizationID: The ID of the custom model from which you would like to delete the
         word from.
@@ -930,7 +930,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -944,10 +944,10 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Get details of a word from a specific custom language model.
-     
+
      - parameter name: The name of the word.
      - parameter customizationID: The ID of the custom language model.
      - parameter failure: A function executed whenever an error occurs.
@@ -967,7 +967,7 @@ public class SpeechToText {
             headerParameters: defaultHeaders,
             acceptType: "application/json"
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Word>) in
@@ -977,10 +977,10 @@ public class SpeechToText {
             }
         }
     }
-    
+
     /**
      Add a single custom word to the custom language model, or modify an existing word.
-     
+
      - parameter customizationID: The ID of the custom language model to add the new word to.
      - parameter name: The word that should be added.
      - parameter word: An object describing information about the custom word.
@@ -999,7 +999,7 @@ public class SpeechToText {
             failure?(RestError.serializationError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -1010,7 +1010,7 @@ public class SpeechToText {
             contentType: "application/json",
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {

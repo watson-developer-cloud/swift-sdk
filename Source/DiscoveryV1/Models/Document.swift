@@ -18,33 +18,33 @@ import Foundation
 
 /** A document to upload to a collection. */
 public struct Document: JSONDecodable {
-    
+
     /// Unique identifier of the ingested document.
     public let documentID: String
-    
+
     /// The unique identifier of the collection's configuration.
     public let configurationID: String?
-    
+
     /// The creation date of the document in the format yyyy-MM-dd'T'HH:mm
     /// :ss.SSS'Z'.
     public let created: String?
-    
+
     /// The timestamp of when the document was last updated in the format
     /// yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
     public let updated: String?
-    
+
     /// The status of the document in ingestion process.
     public let status: DocumentStatus
-    
-    /// The description of the document status. 
+
+    /// The description of the document status.
     public let statusDescription: String?
-    
+
     /// The array of notices produced by the document-ingestion process.
     public let notices: [Notice]?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a `Document` model from JSON.
     public init(json: JSONWrapper) throws {
         documentID = try json.getString(at: "document_id")
@@ -59,7 +59,7 @@ public struct Document: JSONDecodable {
         notices = try? json.decodedArray(at: "notices", type: Notice.self)
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize a 'Document' model to JSON.
     public func toJSONObject() -> Any {
         return json
@@ -68,20 +68,19 @@ public struct Document: JSONDecodable {
 
 /** Status of a document uploaded to a collection. */
 public enum DocumentStatus: String {
-    
+
     /// Available
     case available = "available"
-    
+
     /// Availabe with notices
     case availableWithNotices = "available with notices"
-    
+
     /// Deleted
     case deleted = "deleted"
-    
+
     /// Failed
     case failed = "failed"
-    
+
     /// Processing
     case processing = "processing"
 }
-

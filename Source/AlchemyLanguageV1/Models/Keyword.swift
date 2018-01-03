@@ -17,27 +17,27 @@
 import Foundation
 
 /**
- 
+
  **Keyword**
- 
+
  Important topics extracted from a document by AlchemyLanguage
- 
+
  */
 
 public struct Keyword: JSONDecodable {
-    
+
     /** see **KnowledgeGraph** */
     public let knowledgeGraph: KnowledgeGraph?
-    
+
     /** relevance score for detected keyword */
     public let relevance: Double?
-    
+
     /** see **Sentiment** */
     public let sentiment: Sentiment?
-    
+
     /** the detected keyword text */
     public let text: String?
-    
+
     /// Used internally to initialize a Keyword object
     public init(json: JSONWrapper) throws {
         knowledgeGraph = try? json.decode(at: "knowledgeGraph", type: KnowledgeGraph.self)

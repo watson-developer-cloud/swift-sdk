@@ -18,32 +18,32 @@ import Foundation
 
 /** A custom configuration for the environment. */
 public struct ConfigurationDetails: JSONDecodable, JSONEncodable {
-    
+
     /// The unique identifier of the configuration.
     public let configurationID: String?
-    
+
     /// The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
     public let created: String?
-    
+
     /// The timestamp of when the configuration was last updated in the format
     /// yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
     public let updated: String?
-    
+
     /// The name of the configuration.
     public let name: String
-    
+
     /// The description of the configuration, if available.
     public let description: String?
-    
+
     /// The configuration's document conversion settings.
     public let conversions: Conversion?
-    
+
     /// The configuration's document enrichment settings.
     public let enrichments: [Enrichment]?
-    
+
     /// The configuration's document normalization settings.
     public let normalizations: [Normalization]?
-    
+
     /// Used internally to initialize a `ConfigurationDetails` model from JSON.
     public init(json: JSONWrapper) throws {
         configurationID = try? json.getString(at: "configuration_id")
@@ -55,10 +55,10 @@ public struct ConfigurationDetails: JSONDecodable, JSONEncodable {
         enrichments = try? json.decodedArray(at: "enrichments")
         normalizations = try? json.decodedArray(at: "normalizations")
     }
-    
+
     /**
      Create a `ConfigurationDetails`.
-     
+
      - parameter name: Name that identifies the configuration. Must be unique in the environment.
      - parameter description: Description of the configuration.
      - parameter conversions: The configuration's doucment conversion settings.
@@ -77,12 +77,12 @@ public struct ConfigurationDetails: JSONDecodable, JSONEncodable {
         self.conversions = conversions
         self.enrichments = enrichments
         self.normalizations = normalizations
-        
+
         self.configurationID = nil
         self.created = nil
         self.updated = nil
     }
-    
+
     /// Used internally to serialize a `ConfigurationDetails` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
@@ -105,24 +105,24 @@ public struct ConfigurationDetails: JSONDecodable, JSONEncodable {
 
 /** The configuration's document conversion settings. */
 public struct Conversion: JSONDecodable {
-    
-    /// A list of Word conversion settings, including the conversions applied to different types of 
+
+    /// A list of Word conversion settings, including the conversions applied to different types of
     /// headings as defined by font attributes and to different formatting styles of text.
     public let word: [String: Any]?
-    
-    /// A list of PDF conversion settings, including the conversions applied to different types of 
+
+    /// A list of PDF conversion settings, including the conversions applied to different types of
     /// headings as defined by font attributes.
     public let pdf: [String: Any]?
-    
-    /// A list of HTML conversion settings, including tags that are to be excluded completely; tags 
-    /// that are to be discarded but their content kept; content that is to be excluded as defined 
-    /// by xpaths; content that is to be kept as defined by xpaths; and tag attributes that are to 
+
+    /// A list of HTML conversion settings, including tags that are to be excluded completely; tags
+    /// that are to be discarded but their content kept; content that is to be excluded as defined
+    /// by xpaths; content that is to be kept as defined by xpaths; and tag attributes that are to
     /// be excluded.
     public let html: [String: Any]?
-    
+
     /// An array of JSON normalization operations.
     public let jsonNormalizations: [Normalization]?
-    
+
     /// Used internally to initialize a `Conversion` model from JSON.
     public init(json: JSONWrapper) throws {
         word = try? json.getDictionary(at: "word")
@@ -130,18 +130,18 @@ public struct Conversion: JSONDecodable {
         html = try? json.getDictionary(at: "html")
         jsonNormalizations = try json.decodedArray(at: "json_normalizations")
     }
-    
+
     /**
      Create a `Conversion`.
-     
-     - parameter word: A list of Word conversion settings, including the conversions applied to 
-            different types of headings as defined by font attributes and to different formatting 
+
+     - parameter word: A list of Word conversion settings, including the conversions applied to
+            different types of headings as defined by font attributes and to different formatting
             styles of text.
-     - parameter pdf: A list of PDF conversion settings, including the conversions applied to 
+     - parameter pdf: A list of PDF conversion settings, including the conversions applied to
             different types of headings as defined by font attributes.
-     - parameter html: A list of HTML conversion settings, including tags that are to be excluded 
-            completely; tags that are to be discarded but their content kept; content that is to 
-            be excluded as defined by xpaths; content that is to be kept as defined by xpaths; and 
+     - parameter html: A list of HTML conversion settings, including tags that are to be excluded
+            completely; tags that are to be discarded but their content kept; content that is to
+            be excluded as defined by xpaths; content that is to be kept as defined by xpaths; and
             tag attributes that are to be excluded.
      - parameter jsonNormalizations: An array of JSON normalization operations.
      */
@@ -156,7 +156,7 @@ public struct Conversion: JSONDecodable {
         self.html = html
         self.jsonNormalizations = jsonNormalizations
     }
-    
+
     /// Used internally to serialize a `Conversion` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
@@ -176,22 +176,21 @@ public struct Conversion: JSONDecodable {
     }
 }
 
-
 /** The configuration document's enrichment settings. */
 public struct Enrichment: JSONDecodable {
-    
+
     /// The field into which the service writes the enriched material.
     public let destinationField: String
-    
+
     /// The field that contains the material that is to be enriched.
     public let sourceField: String
-    
+
     /// The type of enrichment being applied.
     public let enrichment: String
-    
+
     /// A list of options specific to the enrichment.
     public let options: [String: Any]
-    
+
     /// Used internally to initialize an `Enrichment` model from JSON.
     public init(json: JSONWrapper) throws {
         destinationField = try json.getString(at: "destination_field")
@@ -199,10 +198,10 @@ public struct Enrichment: JSONDecodable {
         enrichment = try json.getString(at: "enrichment")
         options = try json.getDictionary(at: "options")
     }
-    
+
     /**
      Create an `Enrichment`.
-     
+
      - parameter destinationField: The field into which the service writes the enriched material.
      - parameter sourceField: The field that contains the material that is to be enriched.
      - parameter enrichment: The type of enrichment being applied.
@@ -219,7 +218,7 @@ public struct Enrichment: JSONDecodable {
         self.enrichment = enrichment
         self.options = options
     }
-    
+
     /// Used internally to serialize an `Enrichment` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
@@ -233,18 +232,18 @@ public struct Enrichment: JSONDecodable {
 
 /** A JSON normalization operation. */
 public struct Normalization: JSONDecodable {
-    
-    /// Can be one of the following: copy, move, merge, remove, or remove_nulls. For more 
+
+    /// Can be one of the following: copy, move, merge, remove, or remove_nulls. For more
     /// information, please refer to the documentation page here:
     /// https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
     public let operation: NormalizationOperation
-    
+
     /// The field that contains the original information.
     public let sourceField: String?
-    
+
     /// The field that information is written to.
     public let destinationField: String?
-    
+
     /// Used internally to initialize a `Normalization` model from JSON.
     public init(json: JSONWrapper) throws {
         guard let normalizationOperation = NormalizationOperation(rawValue: try json.getString(at: "operation")) else {
@@ -254,11 +253,11 @@ public struct Normalization: JSONDecodable {
         sourceField = try? json.getString(at: "source_field")
         destinationField = try? json.getString(at: "destination_field")
     }
-    
+
     /**
      Create a `Normalization`.
-     
-     - parameter operation: Can be one of the following: copy, move, merge, remove, or remove_nulls. 
+
+     - parameter operation: Can be one of the following: copy, move, merge, remove, or remove_nulls.
             For more information, please refer to the documentation page here:
             https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
      - parameter sourceField: The field that contains the original information.
@@ -273,7 +272,7 @@ public struct Normalization: JSONDecodable {
         self.sourceField = sourceField
         self.destinationField = destinationField
     }
-    
+
     /// Used internally to serialize a `Normalization` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
@@ -293,19 +292,19 @@ public struct Normalization: JSONDecodable {
  https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations
  */
 public enum NormalizationOperation: String {
-    
+
     /// Copies the value of the source_field to the destination_field.
     case copy = "copy"
-    
+
     /// Renames (moves) the source_field to the destination_field.
     case move = "move"
-    
+
     /// Merges the value of the source_field with the value of the destination_field.
     case merge = "merge"
-    
+
     /// Deletes the source_field.
     case remove = "remove"
-    
+
     /// Removes all nested null (blank) leaf values from the JSON tree.
     case removeNulls = "remove_nulls"
 }

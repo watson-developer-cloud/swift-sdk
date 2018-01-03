@@ -21,19 +21,19 @@ import Foundation
  product or location.
  */
 public struct Sentiment: JSONDecodable {
-    
+
     /// Whether sentiment is mixed (both positive and negative) (1 == mixed)
     public let mixed: String?
-    
+
     /// sentiment strength (0.0 == neutral)
     public let score: String?
-    
+
     /// sentiment polarity - "positive", "negative", "neutral"
     public let type: String?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a Sentiment object from JSON.
     public init(json: JSONWrapper) throws {
         mixed = try? json.getString(at: "mixed")
@@ -41,7 +41,7 @@ public struct Sentiment: JSONDecodable {
         type = try? json.getString(at: "type")
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize an 'Sentiment' model to JSON.
     public func toJSONObject() -> Any {
         return json

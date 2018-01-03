@@ -22,20 +22,20 @@ import Foundation
  information about that content.
  */
 public class VisualRecognition {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
+
     private let apiKey: String
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
-    
+
     /**
      Create a `VisualRecognition` object.
- 
+
      - parameter apiKey: The API key used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date in
         "YYYY-MM-DD" format.
@@ -44,22 +44,22 @@ public class VisualRecognition {
         self.apiKey = apiKey
         self.version = version
     }
-    
+
     /**
      If the response or data represents an error returned by the Visual Recognition service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // Typically, we would check the http status code in the response object here, and return
-        // `nil` if the status code is successful (200 <= statusCode < 300). However, there are 
+        // `nil` if the status code is successful (200 <= statusCode < 300). However, there are
         // specific endpoints, like the `classify` endpoint, where the service returns a status
         // code of 200 if you are able to successfully contact the service, without regards to
         // whether the response itself was a success or a failure.
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -67,7 +67,7 @@ public class VisualRecognition {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             var code = response?.statusCode ?? 400
@@ -76,11 +76,11 @@ public class VisualRecognition {
                 let statusInfo = try json.getString(at: "statusInfo")
                 userInfo = [
                     NSLocalizedFailureReasonErrorKey: status,
-                    NSLocalizedDescriptionKey: statusInfo
+                    NSLocalizedDescriptionKey: statusInfo,
                 ]
             } else if let message = try? json.getString(at: "error") {
                 userInfo = [
-                    NSLocalizedDescriptionKey: message
+                    NSLocalizedDescriptionKey: message,
                 ]
             } else {
                 let message = try json.getString(at: "images", 0, "error", "error_id")
@@ -89,7 +89,7 @@ public class VisualRecognition {
                 code = 400
                 userInfo = [
                     NSLocalizedFailureReasonErrorKey: message,
-                    NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)"
+                    NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)",
                 ]
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)
@@ -97,12 +97,12 @@ public class VisualRecognition {
             return nil
         }
     }
-    
+
     // MARK: - Methods
-    
+
     /**
      Classify an image at the given URL.
-     
+
      - parameter image: The URL of the image (.jpg or .png). Redirects are followed, so you can use
         shortened URLs. The resolved URL is returned in the response. Maximum image size is 2 MB.
      - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
@@ -140,13 +140,13 @@ public class VisualRecognition {
         if let threshold = threshold {
             queryParameters.append(URLQueryItem(name: "threshold", value: "\(threshold)"))
         }
-        
+
         // construct header parameters
         var headerParameters = defaultHeaders
         if let language = language {
             headerParameters["Accept-Language"] = language
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -156,7 +156,7 @@ public class VisualRecognition {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifiedImages>) in
@@ -166,10 +166,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Upload and classify an image or multiple images in a compressed (.zip) file.
-     
+
      - parameter imageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
         total number of images is limited to 20, with a max .zip size of 5 MB.
      - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
@@ -195,13 +195,13 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct header parameters
         var headerParameters = defaultHeaders
         if let language = language {
             headerParameters["Accept-Language"] = language
         }
-        
+
         // construct visual recognition parameters
         var parameters = [String: Any]()
         if let owners = owners {
@@ -217,7 +217,7 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(image, withName: "image_file", mimeType: "application/octet-stream")
@@ -226,7 +226,7 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -238,7 +238,7 @@ public class VisualRecognition {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ClassifiedImages>) in
@@ -248,11 +248,11 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Detect faces in an image at the given URL. Each face is analyzed to estimate age, gender,
      celebrity name, and more.
-     
+
      - parameter inImage: The URL of the image (.jpg or .png). Redirects are followed, so you
         can use shortened URLs. The resolved URL is returned in the response. Maximum image size is
         2 MB.
@@ -279,7 +279,7 @@ public class VisualRecognition {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ImagesWithFaces>) in
@@ -289,11 +289,11 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Upload and detect faces in an image or multiple images in a compressed (.zip) file. Each face
      is analyzed to estimate age, gender, celebrity name, and more.
-     
+
      - parameter inImageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
         total number of images is limited to 20, with a max .zip size of 5 MB.
      - parameter failure: A function executed if an error occurs.
@@ -316,7 +316,7 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -328,7 +328,7 @@ public class VisualRecognition {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<ImagesWithFaces>) in
@@ -338,12 +338,12 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     // MARK: - Custom Classifiers
 
     /**
      Retrieve a list of custom classifiers.
- 
+
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of classifiers.
      */
@@ -356,7 +356,7 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -366,7 +366,7 @@ public class VisualRecognition {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["classifiers"]) {
             (response: RestResponse<[Classifier]>) in
@@ -376,21 +376,21 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Create and train a classifier with uploaded image data. You must supply at least two compressed
      (.zip) files of images, either two positive example files or one positive and one negative
      example file.
-     
+
      Compressed files containing positive examples are used to create classes that define what the
      new classifier is. There is no limit to the number of positive example files that can be
      uploaded in a single call.
-     
+
      The compressed file containing negative examples is not used to create a class within the
      trained classifier, but does define what the new classifier is not. Negative example files
      should contain images that do not depict the subject of any of the positive examples. You can
      only specify one negative example file in a single call.
- 
+
      - parameter withName: The name of the new classifier.
      - parameter positiveExamples: An array of positive examples, each with a name and a compressed
         (.zip) file of images that depict the visual subject for a class within the new classifier.
@@ -419,18 +419,18 @@ public class VisualRecognition {
             failure?(error)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // encode name as data
         guard let name = name.data(using: .utf8) else {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(name, withName: "name")
@@ -446,7 +446,7 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -458,7 +458,7 @@ public class VisualRecognition {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
@@ -468,10 +468,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Delete a custom classifier.
-     
+
      - parameter withID: The id of the classifier to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the classifier has been successfully deleted.
@@ -485,7 +485,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -494,7 +494,7 @@ public class VisualRecognition {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -508,10 +508,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Retrieve information about a custom classifier.
- 
+
      - parameter withID: The id of the classifier to retrieve information about.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the retrieved information about the given
@@ -526,7 +526,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -535,7 +535,7 @@ public class VisualRecognition {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
@@ -545,10 +545,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Update a custom classifier by adding new classes or images.
-     
+
      - parameter withID: The id of the classifier to update.
      - parameter positiveExamples: An array of positive examples, each with a name and a compressed
         (.zip) file of images that depict the visual subject for a class within the new classifier.
@@ -574,12 +574,12 @@ public class VisualRecognition {
             failure?(error)
             return
         }
-        
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct body
         let multipartFormData = MultipartFormData()
         if let positiveExamples = positiveExamples {
@@ -596,7 +596,7 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -608,7 +608,7 @@ public class VisualRecognition {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
@@ -618,12 +618,12 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     // MARK: - Custom Collections
-    
-    /** 
+
+    /**
      Create a new collection. A maximum of five collections can be created.
-     
+
      - parameter name:  The name of the new collection. The name can be a maximum of 128 UTF-8
         characters. The name cannot contain any spaces.
      - parameter failure: A function executed if an error occurs.
@@ -639,7 +639,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         //construct body
         let multipartFormData = MultipartFormData()
         let nameData = name.data(using: String.Encoding.utf8)!
@@ -648,7 +648,7 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -660,7 +660,7 @@ public class VisualRecognition {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
@@ -673,7 +673,7 @@ public class VisualRecognition {
 
     /**
     List all collections created.
- 
+
     - parameter failure: A function executed if an error occurs.
     - parameter success: A function executed with the list of classifiers.
     */
@@ -686,7 +686,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -696,7 +696,7 @@ public class VisualRecognition {
             acceptType: "application/json",
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["collections"]) {
             (response: RestResponse<[Collection]>) in
@@ -706,10 +706,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Retrieve the information of a specified collection.
-     
+
      - parameter withID: The ID of the collection to retrieve.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the collection retrieved.
@@ -724,7 +724,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -733,7 +733,7 @@ public class VisualRecognition {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
@@ -743,10 +743,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Delete a collection.
-     
+
      - parameter withID: The ID of the collection to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed after the collection has been successfully deleted.
@@ -761,7 +761,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -770,7 +770,7 @@ public class VisualRecognition {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -784,11 +784,11 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Add images to a collection. Each collection can hold 1000000 images. Each image takes
      one second to upload.
-     
+
      - parameter withID: The ID of the collection images will be added to.
      - parameter imageFile: The image file (.jpg or .png) of the image to add to the
         collection. The maximum file size to upload an image is 2 MB. If the images do not
@@ -814,7 +814,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         //construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(image, withName: "image_file")
@@ -825,7 +825,7 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -837,7 +837,7 @@ public class VisualRecognition {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<CollectionImages>) in
@@ -847,11 +847,11 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      List an arbitrary selection of 100 images in a selected collection. Each
      collection can contain 1000000 images.
-     
+
      - parameter withID: The ID of the collection to list the images from.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of images in the collection.
@@ -866,7 +866,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -875,7 +875,7 @@ public class VisualRecognition {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseArray(responseToError: responseToError, path: ["images"]) {
             (response: RestResponse<[CollectionImage]>) in
@@ -885,10 +885,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      List the details of an image within a collection.
-     
+
      - parameter withID: The ID of the collection the image is in.
      - parameter imageID: The ID of the image to get details from.
      - parameter failure: A function executed if an error occurs.
@@ -905,7 +905,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -914,7 +914,7 @@ public class VisualRecognition {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<CollectionImage>) in
@@ -924,10 +924,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
      Delete an image from a collection.
- 
+
      - parameter withID: The ID of the collection to delete the image from.
      - parameter imageID: The ID of the image to delete.
      - parameter failure: A function executed if an error occurs.
@@ -944,7 +944,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -953,7 +953,7 @@ public class VisualRecognition {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -967,10 +967,10 @@ public class VisualRecognition {
             }
         }
     }
- 
+
     /**
      Delete an image's metadata from a collection.
-     
+
      - parameter forImageID: The ID of the image containing the metadata to delete.
      - parameter inCollectionID: The ID of the collection to delete the image's metadata from.
      - parameter failure: A function executed if an error occurs.
@@ -987,7 +987,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
@@ -996,7 +996,7 @@ public class VisualRecognition {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseData { response in
             switch response.result {
@@ -1010,10 +1010,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
-     List an image's metadata from a collection. 
-     
+     List an image's metadata from a collection.
+
      - parameter forImageID: The ID of the image to list metadata from.
      - parameter inCollectionID: The ID of the collection to list the image's metadata from.
      - parameter failure: A function executed if an error occurs.
@@ -1030,7 +1030,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
@@ -1039,7 +1039,7 @@ public class VisualRecognition {
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Metadata>) in
@@ -1049,10 +1049,10 @@ public class VisualRecognition {
             }
         }
     }
-    
+
     /**
-     Update an image's metadata from a collection. 
-     
+     Update an image's metadata from a collection.
+
      - parameter forImageID: The ID of the image to update.
      - parameter inCollectionID: The ID of the collection to update the image's metadata.
      - parameter metadata: The JSON file that adds metadata to the image. The maximum
@@ -1072,7 +1072,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         //construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(metadata, withName: "metadata")
@@ -1080,7 +1080,7 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "PUT",
@@ -1092,7 +1092,7 @@ public class VisualRecognition {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Metadata>) in
@@ -1102,10 +1102,10 @@ public class VisualRecognition {
             }
         }
     }
- 
+
     /**
      Find similar images to an uploaded image within a collection.
-     
+
      - parameter toImageFile: The image file (.jpg or .png) of the image to search against the
         collection.
      - parameter inCollectionID: The ID of the collection to find similar images in.
@@ -1126,7 +1126,7 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         //construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(image, withName: "image_file")
@@ -1134,7 +1134,7 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
@@ -1146,7 +1146,7 @@ public class VisualRecognition {
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<SimilarImages>) in
@@ -1159,13 +1159,13 @@ public class VisualRecognition {
 
     /**
      Write service input parameters to a temporary JSON file that can be uploaded.
-     
+
      - parameter url: An array of image URLs to use.
      - parameter classifierIDs: An array of classifier ids. "default" is the id of the built-in
             classifier.
      - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
      - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
-     
+
      - returns: The URL of a JSON file that includes the given parameters.
      */
     private func writeParameters(
@@ -1189,19 +1189,19 @@ public class VisualRecognition {
         if let showLowConfidence = showLowConfidence {
             json["show_low_confidence"] = showLowConfidence
         }
-        
+
         // create a globally unique file name in a temporary directory
         let suffix = "VisualRecognitionParameters.json"
-        
+
         let uuid = UUID().uuidString
         let fileName = "\(uuid)_\(suffix)"
         let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         let fileURL = directoryURL.appendingPathComponent(fileName)!
-        
+
         // save JSON dictionary to file
         let data = try JSONWrapper(dictionary: json).serialize()
         try data.write(to: fileURL, options: .atomic)
-        
+
         return fileURL
     }
 }

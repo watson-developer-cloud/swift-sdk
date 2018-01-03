@@ -17,25 +17,25 @@
 import Foundation
 
 internal class SpeechToTextSocket: WebSocketDelegate {
-    
+
     private(set) internal var results = SpeechRecognitionResults()
-    private(set) internal var state: SpeechToTextState = .Disconnected
-    
-    internal var onConnect: (() -> Void)? = nil
-    internal var onListening: (() -> Void)? = nil
-    internal var onResults: ((SpeechRecognitionResults) -> Void)? = nil
-    internal var onError: ((Error) -> Void)? = nil
-    internal var onDisconnect: (() -> Void)? = nil
-    
+    private(set) internal var state: SpeechToTextState = .disconnected
+
+    internal var onConnect: (() -> Void)?
+    internal var onListening: (() -> Void)?
+    internal var onResults: ((SpeechRecognitionResults) -> Void)?
+    internal var onError: ((Error) -> Void)?
+    internal var onDisconnect: (() -> Void)?
+
     private let url: URL
     private let restToken: RestToken
     private let maxTokenRefreshes: Int
     private var tokenRefreshes: Int
     private let defaultHeaders: [String: String]
-    
+
     private var socket: WebSocket
     private let queue: OperationQueue
-    
+
     internal init(
         url: URL,
         restToken: RestToken,
@@ -51,21 +51,21 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         queue.maxConcurrentOperationCount = 1
         queue.isSuspended = true
     }
-    
+
     internal func connect() {
         // ensure the socket is not already connected
-        guard state == .Disconnected || state == .Connecting else {
+        guard state == .disconnected || state == .connecting else {
             return
         }
-        
+
         // flush operation queue
-        if state == .Disconnected {
+        if state == .disconnected {
             queue.cancelAllOperations()
         }
-        
+
         // update state
-        state = .Connecting
-        
+        state = .connecting
+
         // restrict the number of retries
         guard tokenRefreshes <= maxTokenRefreshes else {
             let failureReason = "Invalid HTTP upgrade. Check credentials?"
@@ -74,7 +74,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             onError?(error)
             return
         }
-        
+
         // refresh token, if necessary
         guard let token = restToken.token else {
             restToken.refreshToken(failure: onError) {
@@ -83,7 +83,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             }
             return
         }
-        
+
         // create request with headers
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
@@ -92,50 +92,50 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         for (key, value) in defaultHeaders {
             request.addValue(value, forHTTPHeaderField: key)
         }
-        
+
         // initialize socket and connect
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
     }
-    
+
     internal func writeStart(settings: RecognitionSettings) {
-        guard state != .Disconnected else { return }
+        guard state != .disconnected else { return }
         guard let start = try? settings.toJSON().serializeString() else { return }
         queue.addOperation {
             self.socket.write(string: start)
             self.results = SpeechRecognitionResults()
-            if self.state != .Disconnected {
-                self.state = .Listening
+            if self.state != .disconnected {
+                self.state = .listening
                 self.onListening?()
             }
         }
     }
-    
+
     internal func writeAudio(audio: Data) {
-        guard state != .Disconnected else { return }
+        guard state != .disconnected else { return }
         queue.addOperation {
             self.socket.write(data: audio)
-            if self.state == .Listening {
-                self.state = .SentAudio
+            if self.state == .listening {
+                self.state = .sentAudio
             }
         }
     }
-    
+
     internal func writeStop() {
-        guard state != .Disconnected else { return }
+        guard state != .disconnected else { return }
         guard let stop = try? RecognitionStop().toJSON().serializeString() else { return }
         queue.addOperation {
             self.socket.write(string: stop)
         }
     }
-    
+
     internal func waitForResults() {
         queue.addOperation {
             switch self.state {
-            case .Connecting, .Connected, .Listening, .Disconnected:
+            case .connecting, .connected, .listening, .disconnected:
                 return // no results to wait for
-            case .SentAudio, .Transcribing:
+            case .sentAudio, .transcribing:
                 self.queue.isSuspended = true
                 let onListeningCache = self.onListening
                 self.onListening = {
@@ -145,7 +145,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             }
         }
     }
-    
+
     internal func disconnect(forceTimeout: TimeInterval? = nil) {
         queue.addOperation {
             self.queue.isSuspended = true
@@ -153,7 +153,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             self.socket.disconnect(forceTimeout: forceTimeout)
         }
     }
-    
+
     internal static func buildURL(url: String, model: String?, customizationID: String?, learningOptOut: Bool?) -> URL? {
         var queryParameters = [URLQueryItem]()
         if let model = model {
@@ -172,30 +172,30 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     }
 
     private func onStateMessage(state: RecognitionState) {
-        if state.state == "listening" && self.state == .Transcribing {
-            self.state = .Listening
+        if state.state == "listening" && self.state == .transcribing {
+            self.state = .listening
             onListening?()
         }
     }
-    
+
     private func onResultsMessage(event: SpeechRecognitionEvent) {
-        state = .Transcribing
+        state = .transcribing
         results.addResults(event: event)
         onResults?(results)
     }
-    
+
     private func onErrorMessage(error: String) {
         let error = RestError.failure(0, error)
         onError?(error)
     }
-    
+
     private func isAuthenticationFailure(error: Error) -> Bool {
         let error = error as NSError
-        
+
         guard let description = error.userInfo[NSLocalizedDescriptionKey] as? String else {
             return false
         }
-        
+
         let matchesDomain = (error.domain == "WebSocket")
         let matchesCode = (error.code == 400)
         let matchesDescription = (description == "Invalid HTTP upgrade")
@@ -204,7 +204,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
         return false
     }
-    
+
     private func isNormalDisconnect(error: Error) -> Bool {
         let error = error as NSError
         let matchesDomain = (error.domain == "WebSocket")
@@ -214,19 +214,19 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
         return false
     }
-    
+
     internal func websocketDidConnect(socket: WebSocketClient) {
-        state = .Connected
+        state = .connected
         tokenRefreshes = 0
         queue.isSuspended = false
         results = SpeechRecognitionResults()
         onConnect?()
     }
-    
+
     internal func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
         return // should not receive any binary data from the service
     }
-    
+
     internal func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
         guard let json = try? JSONWrapper(string: text) else {
             return
@@ -241,9 +241,9 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             onErrorMessage(error: error)
         }
     }
-    
+
     internal func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
-        state = .Disconnected
+        state = .disconnected
         queue.isSuspended = true
         guard let error = error else {
             onDisconnect?()

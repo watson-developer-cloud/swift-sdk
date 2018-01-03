@@ -15,13 +15,13 @@
  **/
 
 import Foundation
-    
+
 /** A dialog associated with a particular service instance. */
 public struct DialogModel: JSONDecodable {
-    
+
     /// The dialog application identifier.
     public let dialogID: DialogID
-    
+
     /// The name of the dialog application.
     public let name: String
 

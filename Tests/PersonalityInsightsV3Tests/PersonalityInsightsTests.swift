@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try superfluous_disable_command
+
 import XCTest
 import PersonalityInsightsV3
 
@@ -26,13 +28,13 @@ class PersonalityInsightsTests: XCTestCase {
     private let timeout: Double = 5.0
     private var version: String = "2016-10-20"
 
-    static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
+    static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
             ("testHTMLProfile", testHTMLProfile),
             ("testNeedsAndConsumptionPreferences", testNeedsAndConsumptionPreferences),
-            ("testProfileWithShortText", testProfileWithShortText)
+            ("testProfileWithShortText", testProfileWithShortText),
         ]
     }
 
@@ -81,7 +83,7 @@ class PersonalityInsightsTests: XCTestCase {
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")

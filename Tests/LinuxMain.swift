@@ -32,5 +32,5 @@ XCTMain([
     testCase(TextToSpeechTests.allTests),
     testCase(ToneAnalyzerTests.allTests),
     testCase(TradeoffAnalyticsTests.allTests),
-    testCase(VisualRecognitionTests.allTests)
+    testCase(VisualRecognitionTests.allTests),
 ])

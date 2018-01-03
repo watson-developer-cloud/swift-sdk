@@ -24,7 +24,7 @@ public struct ListModelsResults {
     /**
      Initialize a `ListModelsResults` with member variables.
 
-     - parameter models: 
+     - parameter models:
 
      - returns: An initialized `ListModelsResults`.
     */

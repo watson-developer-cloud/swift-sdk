@@ -17,29 +17,29 @@
 import Foundation
 
 /**
- 
+
  **ConversionResponse**
- 
+
  Response object for Document Conversion calls
- 
+
 */
 public struct ConversationResponse: JSONDecodable {
-    
+
     /** Id of the source document */
     public let sourceDocId: String?
-    
+
     /** Time of document conversion */
     public let timestamp: String?
-    
+
     /** The type of media autodetected by the service */
     public let detectedMediaType: String?
-    
+
     /** see **ConversionMetadata** */
     public let metadata: [ConversionMetadata]?
-    
+
     /** see **AnswerUnits**/
     public let answerUnits: [AnswerUnits]?
-    
+
     /** used inernally to initialize ConversationResponse objects */
     public init(json: JSONWrapper) throws {
         sourceDocId = try? json.getString(at: "source_document_id")
@@ -48,5 +48,5 @@ public struct ConversationResponse: JSONDecodable {
         metadata = try? json.decodedArray(at: "metadata", type: ConversionMetadata.self)
         answerUnits = try? json.decodedArray(at: "answer_units", type: AnswerUnits.self)
     }
-    
+
 }

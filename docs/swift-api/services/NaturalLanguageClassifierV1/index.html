@@ -173,12 +173,12 @@
 <p>To build the project, run <code>swift build</code> from the command line.</p>
 <h2 id='service-instances' class='heading'>Service Instances</h2>
 
-<p><a href="https://www.ibm.com/watson/developercloud/">IBM Watson Developer Cloud</a> offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the <a href="https://www.ibm.com/watson/developercloud/services-catalog.html">services catalog</a>. Services are instantiated using the <a href="http://www.ibm.com/cloud-computing/bluemix/">IBM Bluemix</a> cloud platform.</p>
+<p>a href="https://www.ibm.com/watson/developercloud/">IBM Watson</a> offers a variety of services for developing cognitive applications. The complete list of Watson services is available from the <a href="https://www.ibm.com/watson/products-services/">products and services</a> page. Services are instantiated using the <a href="https://www.ibm.com/cloud/">IBM Cloud</a> platform.</p>
 
 <p>Follow these steps to create a service instance and obtain its credentials:</p>
 
 <ol>
-<li>Log in to Bluemix at <a href="https://bluemix.net">https://bluemix.net</a>.</li>
+<li>Log in to IBM Cloud at <a href="https://bluemix.net">https://bluemix.net</a>.</li>
 <li>Create a service instance:
 
 <ol>
@@ -190,7 +190,7 @@
 
 <ol>
 <li>Click <q>Service Credentials</q> on the left side of the page.</li>
-<li>Copy the service&rsquo;s <code>username</code> and <code>password</code> (or <code>api_key</code> for Alchemy).</li>
+<li>Copy the service&rsquo;s <code>username</code> and <code>password</code> (or <code>api_key</code> for Visual Recognition).</li>
 </ol></li>
 </ol>
 
@@ -198,9 +198,9 @@
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">textToSpeech</span> <span class="o">=</span> <span class="kt">TextToSpeech</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">)</span>
 </code></pre>
 
-<p>Note that service credentials are different from your Bluemix username and password.</p>
+<p>Note that service credentials are different from your IBM Cloud username and password.</p>
 
-<p>See <a href="https://console.bluemix.net/docs/services/watson/index.html">Getting Started</a> for more information on getting started with the Watson Developer Cloud and Bluemix.</p>
+<p>See <a href="https://console.bluemix.net/docs/services/watson/index.html">Getting Started with Watson and IBM Cloud</a> for more details.</p>
 <h2 id='custom-service-urls' class='heading'>Custom Service URLs</h2>
 
 <p>In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.</p>
@@ -283,8 +283,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><a href="https://www.ibm.com/watson/developercloud/alchemy-data-news.html">IBM AlchemyData News - Service Page</a></li>
-<li><a href="http://docs.alchemyapi.com/">IBM AlchemyData News - Documentation</a></li>
-<li><a href="http://querybuilder.alchemyapi.com/builder">IBM AlchemyData News - Demo</a></li>
+<li><a href="https://console.bluemix.net/docs/services/alchemydata-news/index.html">IBM AlchemyData News - Documentation</a></li>
 </ul>
 <h2 id='alchemylanguage' class='heading'>AlchemyLanguage</h2>
 
@@ -328,8 +327,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/alchemy-language.html">IBM AlchemyLanguage - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/alchemylanguage/">IBM AlchemyLanguage - Documentation</a></li>
-<li><a href="https://alchemy-language-demo.mybluemix.net/">IBM AlchemyLanguage - Demo</a></li>
+<li><a href="https://console.bluemix.net/docs/services/alchemy-language/index.html">IBM AlchemyLanguage - Documentation</a></li>
 </ul>
 <h2 id='conversation' class='heading'>Conversation</h2>
 
@@ -526,7 +524,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Discovery service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/discovery.html">IBM Discovery - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/discovery/">IBM Discovery - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/discovery/index.html">IBM Discovery - Documentation</a></li>
 <li><a href="https://www.ibm.com/watson/developercloud/discovery/api/v1/">IBM Discovery - API Reference</a></li>
 <li><a href="https://watson-api-explorer.mybluemix.net/apis/discovery-v1">IBM Discovery - API Explorer</a></li>
@@ -563,7 +561,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Document Conversion service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/document-conversion.html">IBM Watson Document Conversion - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/document-conversion/">IBM Watson Document Conversion - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/document-conversion/index.html">IBM Watson Document Conversion - Documentation</a></li>
 <li><a href="https://document-conversion-demo.mybluemix.net/">IBM Watson Document Conversion - Demo</a></li>
 </ul>
@@ -593,9 +591,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Watson Language Translator service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/language-translator.html">IBM Watson Language Translator - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/language-translator/">IBM Watson Language Translator - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/language-translator/index.html">IBM Watson Language Translator - Documentation</a></li>
-<li><a href="https://language-translator-demo.mybluemix.net/">IBM Watson Language Translator - Demo</a></li>
+<li><a href="https://language-translator-demo.ng.bluemix.net/">IBM Watson Language Translator - Demo</a></li>
 </ul>
 <h2 id='natural-language-classifier' class='heading'>Natural Language Classifier</h2>
 
@@ -620,9 +618,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the Natural Language Classifier service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/nl-classifier.html">IBM Watson Natural Language Classifier - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/natural-language-classifier/">IBM Watson Natural Language Classifier - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/natural-language-classifier/natural-language-classifier-overview.html">IBM Watson Natural Language Classifier - Documentation</a></li>
-<li><a href="https://natural-language-classifier-demo.mybluemix.net/">IBM Watson Natural Language Classifier - Demo</a></li>
+<li><a href="https://natural-language-classifier-demo.ng.bluemix.net/">IBM Watson Natural Language Classifier - Demo</a></li>
 </ul>
 <h2 id='natural-language-understanding' class='heading'>Natural Language Understanding</h2>
 
@@ -669,9 +667,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the Natural Language Understanding service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/natural-language-understanding.html">IBM Watson Natural Language Understanding - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/natural-language-understanding/">IBM Watson Natural Language Understanding - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/natural-language-understanding/index.html">IBM Watson Natural Language Understanding - Documentation</a></li>
-<li><a href="http://natural-language-understanding-demo.mybluemix.net">IBM Watson Natural Language Understanding - Demo</a></li>
+<li><a href="https://natural-language-understanding-demo.ng.bluemix.net/">IBM Watson Natural Language Understanding - Demo</a></li>
 </ul>
 <h2 id='personality-insights' class='heading'>Personality Insights</h2>
 
@@ -695,9 +693,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the Personality Insights service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/personality-insights.html">IBM Watson Personality Insights - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/personality-insights/">IBM Watson Personality Insights - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/personality-insights/index.html">IBM Watson Personality Insights - Documentation</a></li>
-<li><a href="https://personality-insights-livedemo.mybluemix.net">IBM Watson Personality Insights - Demo</a></li>
+<li><a href="https://personality-insights-demo.ng.bluemix.net/">IBM Watson Personality Insights - Demo</a></li>
 </ul>
 <h2 id='retrieve-and-rank' class='heading'>Retrieve and Rank</h2>
 
@@ -811,9 +809,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the Retrieve and Rank service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/retrieve-rank.html">IBM Watson Retrieve and Rank - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/retrieve-and-rank/">IBM Watson Retrieve and Rank - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/retrieve-and-rank/index.html">IBM Watson Retrieve and Rank - Documentation</a></li>
-<li><a href="http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/#/">IBM Watson Retrieve and Rank - Demo</a></li>
+<li><a href="http://retrieve-and-rank-demo.ng.bluemix.net/">IBM Watson Retrieve and Rank - Demo</a></li>
 </ul>
 <h2 id='speech-to-text' class='heading'>Speech to Text</h2>
 
@@ -1077,9 +1075,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Speech to Text service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/speech-to-text.html">IBM Watson Speech to Text - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/speech-to-text/">IBM Watson Speech to Text - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">IBM Watson Speech to Text - Documentation</a></li>
-<li><a href="https://speech-to-text-demo.mybluemix.net/">IBM Watson Speech to Text - Demo</a></li>
+<li><a href="https://speech-to-text-demo.ng.bluemix.net/">IBM Watson Speech to Text - Demo</a></li>
 </ul>
 <h2 id='text-to-speech' class='heading'>Text to Speech</h2>
 
@@ -1138,7 +1136,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Text To Speech service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/text-to-speech.html">IBM Watson Text To Speech - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/text-to-speech/">IBM Watson Text To Speech - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/text-to-speech/index.html">IBM Watson Text To Speech - Documentation</a></li>
 <li><a href="https://text-to-speech-demo.mybluemix.net/">IBM Watson Text To Speech - Demo</a></li>
 </ul>
@@ -1166,9 +1164,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Watson Tone Analyzer service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/tone-analyzer.html">IBM Watson Tone Analyzer - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/tone-analyzer/">IBM Watson Tone Analyzer - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/tone-analyzer/index.html">IBM Watson Tone Analyzer - Documentation</a></li>
-<li><a href="https://tone-analyzer-demo.mybluemix.net/">IBM Watson Tone Analyzer - Demo</a></li>
+<li><a href="https://tone-analyzer-demo.ng.bluemix.net/">IBM Watson Tone Analyzer - Demo</a></li>
 </ul>
 <h2 id='tradeoff-analytics' class='heading'>Tradeoff Analytics</h2>
 
@@ -1271,9 +1269,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Watson Visual Recognition service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/visual-recognition.html">IBM Watson Visual Recognition - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/visual-recognition/">IBM Watson Visual Recognition - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/visual-recognition/index.html">IBM Watson Visual Recognition - Documentation</a></li>
-<li><a href="http://visual-recognition-demo.mybluemix.net/">IBM Watson Visual Recognition - Demo</a></li>
+<li><a href="https://visual-recognition-demo.ng.bluemix.net/">IBM Watson Visual Recognition - Demo</a></li>
 </ul>
 
           </section>

@@ -470,7 +470,7 @@ discovery.queryDocumentsInCollection(
 The following links provide more information about the IBM Discovery service:
 
 * [IBM Discovery - Service Page](https://www.ibm.com/watson/services/discovery/)
-* [IBM Discovery - Documentation] (https://console.bluemix.net/docs/services/discovery/index.html)
+* [IBM Discovery - Documentation](https://console.bluemix.net/docs/services/discovery/index.html)
 * [IBM Discovery - API Reference](https://www.ibm.com/watson/developercloud/discovery/api/v1/)
 * [IBM Discovery - API Explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1)
 * [IBM Discovery - Query Building](https://console.bluemix.net/docs/services/discovery/query-reference.html#query-building)
@@ -509,7 +509,7 @@ The following links provide more information about the IBM Document Conversion s
 
 * [IBM Watson Document Conversion - Service Page](https://www.ibm.com/watson/services/document-conversion/)
 * [IBM Watson Document Conversion - Documentation](https://console.bluemix.net/docs/services/document-conversion/index.html)
-* [IBM Watson Document Conversion - Demo](https://document-conversion-demo.mybluemix.net/)
+* [IBM Watson Document Conversion - Demo](https://document-conversion-demo.ng.bluemix.net/)
 
 ## Language Translator
 
@@ -1109,7 +1109,7 @@ The following links provide more information about the IBM Text To Speech servic
 
 * [IBM Watson Text To Speech - Service Page](https://www.ibm.com/watson/services/text-to-speech/)
 * [IBM Watson Text To Speech - Documentation](https://console.bluemix.net/docs/services/text-to-speech/index.html)
-* [IBM Watson Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
+* [IBM Watson Text To Speech - Demo](https://text-to-speech-demo.ng.bluemix.net/)
 
 ## Tone Analyzer
 
@@ -1217,7 +1217,7 @@ The following links provide more information about the IBM Watson Tradeoff Analy
 
 * [IBM Watson Tradeoff Analytics - Service Page](http://www.ibm.com/watson/developercloud/tradeoff-analytics.html)
 * [IBM Watson Tradeoff Analytics - Documentation](https://console.bluemix.net/docs/services/tradeoff-analytics/index.html)
-* [IBM Watson Tradeoff Analytics - Demo](https://tradeoff-analytics-demo.mybluemix.net/)
+* [IBM Watson Tradeoff Analytics - Demo](https://tradeoff-analytics-demo.ng.bluemix.net/)
 
 ## Visual Recognition
 

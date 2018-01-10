@@ -70,7 +70,6 @@
 		12F8005C1DF71BA1006851D6 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005B1DF71BA1006851D6 /* Discovery.swift */; };
 		12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */; };
 		12F800631DF770BC006851D6 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F800621DF770BC006851D6 /* Environment.swift */; };
-		681BA1B71F7DCD57006633A3 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B61F7DCD56006633A3 /* Compression.swift */; };
 		6823CEBF1F8EA0F200A388EC /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE8A1F8EA0A100A388EC /* Conversation.swift */; };
 		6823CEC01F8EA0F700A388EC /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEAE1F8EA0B000A388EC /* Context.swift */; };
 		6823CEC11F8EA0F700A388EC /* Counterexample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEBA1F8EA0B200A388EC /* Counterexample.swift */; };
@@ -485,8 +484,6 @@
 		7AAD66561DCA5D730010481E /* obama.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAD664E1DCA5D730010481E /* obama.jpg */; };
 		7AAD66571DCA5D730010481E /* sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAD664F1DCA5D730010481E /* sign.jpg */; };
 		7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */; };
-		7AAEE5D91DCCCFC50056A346 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */; };
-		7AAEE5DA1DCCCFC50056A346 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */; };
 		7AB4452E1D3E647A00E8748A /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB445241D3E647A00E8748A /* ConversationV1.framework */; };
 		7AB445441D3E658200E8748A /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4451E1D3E643B00E8748A /* ConversationTests.swift */; };
 		7AB53B741CF64DE000FFC9DD /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB53B591CF64DE000FFC9DD /* Authors.swift */; };
@@ -934,10 +931,7 @@
 		12F8005B1DF71BA1006851D6 /* Discovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
 		12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryTests.swift; sourceTree = "<group>"; };
 		12F800621DF770BC006851D6 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		681BA1B21F7DB347006633A3 /* include.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = include.h; sourceTree = "<group>"; };
-		681BA1B31F7DB347006633A3 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		681BA1B41F7DCB1E006633A3 /* RestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestError.swift; sourceTree = "<group>"; };
-		681BA1B61F7DCD56006633A3 /* Compression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compression.swift; sourceTree = "<group>"; };
 		6823CE8A1F8EA0A100A388EC /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		6823CE8B1F8EA0AB00A388EC /* RuntimeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeEntity.swift; sourceTree = "<group>"; };
 		6823CE8C1F8EA0AB00A388EC /* ValueCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueCollection.swift; sourceTree = "<group>"; };
@@ -1179,8 +1173,6 @@
 		7AAD664E1DCA5D730010481E /* obama.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama.jpg; sourceTree = "<group>"; };
 		7AAD664F1DCA5D730010481E /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
 		7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualRecognitionTests.swift; path = Tests/VisualRecognitionV3Tests/VisualRecognitionTests.swift; sourceTree = SOURCE_ROOT; };
-		7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLSecurity.swift; sourceTree = "<group>"; };
-		7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		7AB4451E1D3E643B00E8748A /* ConversationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTests.swift; sourceTree = "<group>"; };
 		7AB445241D3E647A00E8748A /* ConversationV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB4452D1D3E647A00E8748A /* ConversationV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1845,16 +1837,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		681BA1B11F7DB32D006633A3 /* zlib */ = {
-			isa = PBXGroup;
-			children = (
-				681BA1B21F7DB347006633A3 /* include.h */,
-				681BA1B31F7DB347006633A3 /* module.modulemap */,
-			);
-			name = zlib;
-			path = Source/SupportingFiles/Dependencies/Starscream/zlib;
-			sourceTree = SOURCE_ROOT;
-		};
 		682D30681F7D3BFD005562F9 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -2168,7 +2150,6 @@
 				7A9EC80E1D79B76100507725 /* lib */,
 				7A9EC8111D79B76100507725 /* ogg */,
 				7A9EC8161D79B76100507725 /* opus */,
-				7AAEE5D61DCCCFC50056A346 /* Starscream */,
 			);
 			name = Dependencies;
 			path = Source/SupportingFiles/Dependencies;
@@ -2425,18 +2406,6 @@
 			);
 			name = Images;
 			path = Tests/VisualRecognitionV3Tests/Images;
-			sourceTree = SOURCE_ROOT;
-		};
-		7AAEE5D61DCCCFC50056A346 /* Starscream */ = {
-			isa = PBXGroup;
-			children = (
-				681BA1B61F7DCD56006633A3 /* Compression.swift */,
-				7AAEE5D71DCCCFC50056A346 /* SSLSecurity.swift */,
-				7AAEE5D81DCCCFC50056A346 /* WebSocket.swift */,
-				681BA1B11F7DB32D006633A3 /* zlib */,
-			);
-			name = Starscream;
-			path = Source/SupportingFiles/Dependencies/Starscream;
 			sourceTree = SOURCE_ROOT;
 		};
 		7AB445181D3E643B00E8748A /* ConversationV1 */ = {
@@ -4670,7 +4639,6 @@
 				7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */,
 				7A818EB91D81B470008C9720 /* SpeechRecognitionResults.swift in Sources */,
 				7AAAF4661CEE9FB300B74848 /* WordAlternativeResults.swift in Sources */,
-				7AAEE5D91DCCCFC50056A346 /* SSLSecurity.swift in Sources */,
 				68BC28D81F8C35070042810E /* JSON.swift in Sources */,
 				7A9EC8231D7A054400507725 /* SpeechToText.swift in Sources */,
 				7AAAF46A1CEE9FB300B74848 /* SpeechRecognitionEvent.swift in Sources */,
@@ -4679,9 +4647,7 @@
 				68BC28D91F8C35070042810E /* MultipartFormData.swift in Sources */,
 				7A9EC80A1D79B75100507725 /* SpeechToTextEncoder.swift in Sources */,
 				7AAAF46F1CEE9FB300B74848 /* WordTimestamp.swift in Sources */,
-				681BA1B71F7DCD57006633A3 /* Compression.swift in Sources */,
 				68BC28DA1F8C35070042810E /* RestError.swift in Sources */,
-				7AAEE5DA1DCCCFC50056A346 /* WebSocket.swift in Sources */,
 				7AAAF4691CEE9FB300B74848 /* SpeechRecognitionResult.swift in Sources */,
 				7AAAF46D1CEE9FB300B74848 /* RecognitionStop.swift in Sources */,
 				1221C92D1E1EFCB100B740C1 /* Word.swift in Sources */,
@@ -5990,7 +5956,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = $SRCROOT/Source/SupportingFiles/Dependencies/Starscream/zlib;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -6016,7 +5981,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = $SRCROOT/Source/SupportingFiles/Dependencies/Starscream/zlib;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

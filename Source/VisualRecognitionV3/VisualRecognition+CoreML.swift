@@ -337,7 +337,7 @@ extension VisualRecognition {
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: "http://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)/model",
+            url: "https://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)/model",
             credentials: .apiKey,
             headerParameters: headerParameters
         )

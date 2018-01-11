@@ -103,7 +103,10 @@ internal struct RestRequest {
         self.request = request
     }
 
-    internal func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+    internal func response(
+        parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    {
         let task = session.dataTask(with: request) { (data, response, error) in
 
             guard error == nil  else {
@@ -118,7 +121,8 @@ internal struct RestRequest {
             }
 
             guard (200..<300).contains(response.statusCode) else {
-                completionHandler(data, response, self.errorWithCode(code: response.statusCode))
+                let error = parseServiceError?(response, data) ?? self.errorWithCode(code: response.statusCode)
+                completionHandler(data, response, error)
                 return
             }
 
@@ -155,8 +159,8 @@ internal struct RestRequest {
 
     internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
         response { data, response, error in
-            if let error = error {
-                let result = RestResult<Data>.failure(error)
+            guard error == nil else {
+                let result = RestResult<Data>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -178,10 +182,10 @@ internal struct RestRequest {
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
-        response { data, response, error in
+        response(parseServiceError: responseToError) { data, response, error in
 
-            if let error = error ?? responseToError?(response, data) {
-                let result = RestResult<T>.failure(error)
+            guard error == nil else {
+                let result = RestResult<T>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -228,10 +232,10 @@ internal struct RestRequest {
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
-        response { data, response, error in
+        response(parseServiceError: responseToError) { data, response, error in
 
-            if let error = error ?? responseToError?(response, data) {
-                let result = RestResult<T>.failure(error)
+            guard error == nil else {
+                let result = RestResult<T>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -265,10 +269,10 @@ internal struct RestRequest {
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
     {
-        response { data, response, error in
+        response(parseServiceError: responseToError) { data, response, error in
 
-            if let error = error ?? responseToError?(response, data) {
-                let result = RestResult<[T]>.failure(error)
+            guard error == nil else {
+                let result = RestResult<[T]>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -316,10 +320,10 @@ internal struct RestRequest {
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<String>) -> Void)
     {
-        response { data, response, error in
+        response(parseServiceError: responseToError) { data, response, error in
 
-            if let error = error ?? responseToError?(response, data) {
-                let result = RestResult<String>.failure(error)
+            guard error == nil else {
+                let result = RestResult<String>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -352,10 +356,10 @@ internal struct RestRequest {
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<Void>) -> Void)
     {
-        response { data, response, error in
+        response(parseServiceError: responseToError) { data, response, error in
 
-            if let error = error ?? responseToError?(response, data) {
-                let result = RestResult<Void>.failure(error)
+            guard error == nil else {
+                let result = RestResult<Void>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return

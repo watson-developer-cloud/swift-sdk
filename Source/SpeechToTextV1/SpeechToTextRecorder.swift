@@ -14,6 +14,9 @@
  * limitations under the License.
  **/
 
+#if os(Linux)
+#else
+
 import Foundation
 import AudioToolbox
 import AVFoundation
@@ -174,3 +177,5 @@ internal class SpeechToTextRecorder {
         onPowerData?(meters[0].mAveragePower)
     }
 }
+
+#endif

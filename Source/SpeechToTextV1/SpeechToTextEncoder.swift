@@ -14,6 +14,9 @@
  * limitations under the License.
  **/
 
+#if os(Linux)
+#else
+
 import Foundation
 import AudioToolbox
 
@@ -501,3 +504,5 @@ internal enum OggError: Error {
     case outOfSync
     case internalError
 }
+
+#endif

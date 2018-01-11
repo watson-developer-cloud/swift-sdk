@@ -105,9 +105,52 @@ internal struct RestRequest {
 
     internal func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         let task = session.dataTask(with: request) { (data, response, error) in
-            completionHandler(data, response as? HTTPURLResponse, error)
+
+            guard error == nil  else {
+                completionHandler(data, response as? HTTPURLResponse, error)
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse else {
+                let error = RestError.noResponse
+                completionHandler(data, nil, error)
+                return
+            }
+
+            guard (200..<300).contains(response.statusCode) else {
+                completionHandler(data, response, self.errorWithCode(code: response.statusCode))
+                return
+            }
+
+            // Success path
+            completionHandler(data, response, nil)
         }
         task.resume()
+    }
+
+    internal func errorWithCode(code: Int) -> RestError {
+        // This switch is not intended to be exhaustive.  We only include codes
+        // that are likely to be encountered in actual use.
+        switch code {
+        case 400:
+            return RestError.failure(code, "Bad Request")
+        case 401:
+            return RestError.failure(code, "Unauthorized")
+        case 403:
+            return RestError.failure(code, "Forbidden")
+        case 404:
+            return RestError.failure(code, "Not Found")
+        case 415:
+            return RestError.failure(code, "Unsupported Media Type")
+        case 500:
+            return RestError.failure(code, "Internal Server Error")
+        case 502:
+            return RestError.failure(code, "Bad Gateway")
+        case 503:
+            return RestError.failure(code, "Service Unavailable")
+        default:
+            return RestError.failure(code, "HTTP Status \(code)")
+        }
     }
 
     internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {

@@ -328,6 +328,8 @@
 		68BC29031F8C38700042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		68BC29041F8C38700042810E /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		68BC29051F8C38700042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
+		68D8A8862009CF5B0090B84B /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0EEE72006D22700E58658 /* Starscream.framework */; };
+		68D8A8872009CF680090B84B /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 68A0EEE72006D22700E58658 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A1B0F291D82645100783EA3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1B0F281D82645100783EA3 /* Model.swift */; };
 		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */; };
@@ -748,6 +750,16 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68D8A8852009CF480090B84B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				68D8A8872009CF680090B84B /* Starscream.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1468,6 +1480,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68D8A8862009CF5B0090B84B /* Starscream.framework in Frameworks */,
 				7AAAF4581CEE9F8800B74848 /* SpeechToTextV1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3196,6 +3209,7 @@
 				7AAAF4531CEE9F8800B74848 /* Sources */,
 				7AAAF4541CEE9F8800B74848 /* Frameworks */,
 				7AAAF4551CEE9F8800B74848 /* Resources */,
+				68D8A8852009CF480090B84B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -6003,6 +6017,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -6016,6 +6034,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

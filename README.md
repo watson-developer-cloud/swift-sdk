@@ -90,7 +90,7 @@ Then run the following command to build the dependencies and frameworks:
 $ carthage update --platform iOS
 ```
 
-Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired.
+Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired. If you are using Speech to Text, be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application.
 
 ### Swift Package Manager
 
@@ -775,6 +775,8 @@ The following links provide more information about the Retrieve and Rank service
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 
 The `SpeechToText` class is the SDK's primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the `SpeechToTextSession` class that exposes more control over the WebSockets session.
+
+Please be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application. Starscream is a recursive dependency that adds support for WebSockets sessions.
 
 #### Recognition Request Settings
 

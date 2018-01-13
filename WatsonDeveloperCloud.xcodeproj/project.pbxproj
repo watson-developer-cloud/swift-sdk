@@ -123,6 +123,7 @@
 		6823CEF11F8EA0F700A388EC /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9C1F8EA0AD00A388EC /* Workspace.swift */; };
 		6823CEF21F8EA0F700A388EC /* WorkspaceCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEAD1F8EA0B000A388EC /* WorkspaceCollection.swift */; };
 		6823CEF31F8EA0F700A388EC /* WorkspaceExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9A1F8EA0AC00A388EC /* WorkspaceExport.swift */; };
+		6832BBEE2009CE8800BA50A8 /* SpeechToText+Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */; };
 		68A0EEE82006D25400E58658 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0EEE72006D22700E58658 /* Starscream.framework */; };
 		68AC590D1F8DCA0000012CCB /* NaturalLanguageUnderstanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58E91F8DC9ED00012CCB /* NaturalLanguageUnderstanding.swift */; };
 		68AC59131F8DCA0C00012CCB /* AnalysisResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59041F8DC9FC00012CCB /* AnalysisResults.swift */; };
@@ -165,7 +166,6 @@
 		68AC59381F8DCA0C00012CCB /* TargetedEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */; };
 		68AC59391F8DCA0C00012CCB /* TargetedSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59001F8DC9FB00012CCB /* TargetedSentimentResults.swift */; };
 		68AC593A1F8DCA0C00012CCB /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FD1F8DC9FB00012CCB /* Usage.swift */; };
-		68AF76782008167900D35B2D /* SpeechToText+Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */; };
 		68B213EF1F84298B0052DC00 /* CodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */; };
 		68B213F01F84298B0052DC00 /* JSONValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213EE1F8429890052DC00 /* JSONValueTests.swift */; };
 		68BC28661F8C34FE0042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
@@ -4669,6 +4669,7 @@
 				7AAAF4681CEE9FB300B74848 /* SpeechRecognitionAlternative.swift in Sources */,
 				68BC28DD1F8C35070042810E /* RestUtilities.swift in Sources */,
 				7AAAF4651CEE9FB300B74848 /* WordAlternativeResult.swift in Sources */,
+				6832BBEE2009CE8800BA50A8 /* SpeechToText+Recognize.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4973,7 +4974,6 @@
 				68BC28681F8C34FE0042810E /* JSON.swift in Sources */,
 				68BC286C1F8C34FE0042810E /* RestToken.swift in Sources */,
 				68BC286B1F8C34FE0042810E /* RestRequest.swift in Sources */,
-				68AF76782008167900D35B2D /* SpeechToText+Recognize.swift in Sources */,
 				B1A8E54F1D19DCDF00678412 /* Feed.swift in Sources */,
 				B1A8E54A1D19DCDF00678412 /* DocumentEnriched.swift in Sources */,
 				B1A8E54D1D19DCDF00678412 /* EnrichedTitle.swift in Sources */,

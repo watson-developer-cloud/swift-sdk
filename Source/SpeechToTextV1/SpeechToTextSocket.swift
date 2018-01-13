@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import Starscream
 
 internal class SpeechToTextSocket: WebSocketDelegate {
 

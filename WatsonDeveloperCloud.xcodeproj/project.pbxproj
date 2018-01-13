@@ -165,6 +165,7 @@
 		68AC59381F8DCA0C00012CCB /* TargetedEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */; };
 		68AC59391F8DCA0C00012CCB /* TargetedSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59001F8DC9FB00012CCB /* TargetedSentimentResults.swift */; };
 		68AC593A1F8DCA0C00012CCB /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FD1F8DC9FB00012CCB /* Usage.swift */; };
+		68AF76782008167900D35B2D /* SpeechToText+Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */; };
 		68B213EF1F84298B0052DC00 /* CodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */; };
 		68B213F01F84298B0052DC00 /* JSONValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213EE1F8429890052DC00 /* JSONValueTests.swift */; };
 		68BC28661F8C34FE0042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
@@ -1028,6 +1029,7 @@
 		68AC59101F8DCA0100012CCB /* SemanticRolesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesEntity.swift; sourceTree = "<group>"; };
 		68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetedEmotionResults.swift; sourceTree = "<group>"; };
 		68AC59121F8DCA0200012CCB /* SemanticRolesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesOptions.swift; sourceTree = "<group>"; };
+		68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpeechToText+Recognize.swift"; sourceTree = "<group>"; };
 		68B213E71F84296D0052DC00 /* CodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
 		68B213E81F84296D0052DC00 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensionsTests.swift; sourceTree = "<group>"; };
@@ -2255,6 +2257,7 @@
 			children = (
 				7AAA9A111CEE3026002C9564 /* Models */,
 				7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */,
+				68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */,
 				7A9EC8071D79B75100507725 /* SpeechToTextEncoder.swift */,
 				7A9EC8081D79B75100507725 /* SpeechToTextRecorder.swift */,
 				7A9EC8091D79B75100507725 /* SpeechToTextSession.swift */,
@@ -4970,6 +4973,7 @@
 				68BC28681F8C34FE0042810E /* JSON.swift in Sources */,
 				68BC286C1F8C34FE0042810E /* RestToken.swift in Sources */,
 				68BC286B1F8C34FE0042810E /* RestRequest.swift in Sources */,
+				68AF76782008167900D35B2D /* SpeechToText+Recognize.swift in Sources */,
 				B1A8E54F1D19DCDF00678412 /* Feed.swift in Sources */,
 				B1A8E54A1D19DCDF00678412 /* DocumentEnriched.swift in Sources */,
 				B1A8E54D1D19DCDF00678412 /* EnrichedTitle.swift in Sources */,

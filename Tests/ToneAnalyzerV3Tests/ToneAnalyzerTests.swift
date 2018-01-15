@@ -29,7 +29,6 @@ class ToneAnalyzerTests: XCTestCase {
             ("testGetToneWithDefaultParameters", testGetToneWithDefaultParameters),
             ("testGetToneWithCustomParameters", testGetToneWithCustomParameters),
             ("testGetToneEmptyString", testGetToneEmptyString),
-            ("testGetToneInvalidParameters", testGetToneInvalidParameters),
         ]
     }
 
@@ -51,7 +50,7 @@ class ToneAnalyzerTests: XCTestCase {
     func instantiateToneAnalyzer() {
         let username = Credentials.ToneAnalyzerUsername
         let password = Credentials.ToneAnalyzerPassword
-        toneAnalyzer = ToneAnalyzer(username: username, password: password, version: "2016-05-10")
+        toneAnalyzer = ToneAnalyzer(username: username, password: password, version: "2017-09-21")
         toneAnalyzer.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         toneAnalyzer.defaultHeaders["X-Watson-Test"] = "true"
     }
@@ -84,57 +83,19 @@ class ToneAnalyzerTests: XCTestCase {
     func testGetToneWithDefaultParameters() {
         let description = "Analyze the tone of the given text using the default parameters."
         let expectation = self.expectation(description: description)
-
-        toneAnalyzer.getTone(ofText: text, failure: failWithError) { toneAnalysis in
-
-            for emotionTone in toneAnalysis.documentTone[0].tones {
-                XCTAssertNotNil(emotionTone.name)
-                XCTAssertNotNil(emotionTone.id)
-                XCTAssert(emotionTone.score <= 1.0 && emotionTone.score >= 0.0)
+        toneAnalyzer.tone(toneInput: ToneInput(text: text), contentType: "plain/text", failure: failWithError) {
+            toneAnalysis in
+            XCTAssertNotNil(toneAnalysis.documentTone.tones)
+            XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
+            XCTAssertNotNil(toneAnalysis.sentencesTone)
+            XCTAssertGreaterThan(toneAnalysis.sentencesTone!.count, 0)
+            for sentenceAnalysis in toneAnalysis.sentencesTone! {
+                XCTAssertNotNil(sentenceAnalysis.tones)
+                XCTAssertGreaterThan(sentenceAnalysis.tones!.count, 0)
+                XCTAssertNil(sentenceAnalysis.toneCategories)
+                XCTAssertNil(sentenceAnalysis.inputFrom)
+                XCTAssertNil(sentenceAnalysis.inputTo)
             }
-
-            for writingTone in toneAnalysis.documentTone[1].tones {
-                XCTAssertNotNil(writingTone.name)
-                XCTAssertNotNil(writingTone.id)
-                XCTAssert(writingTone.score <= 1.0 && writingTone.score >= 0.0)
-            }
-
-            for socialTone in toneAnalysis.documentTone[2].tones {
-                XCTAssertNotNil(socialTone.name)
-                XCTAssertNotNil(socialTone.id)
-                XCTAssert(socialTone.score <= 1.0 && socialTone.score >= 0.0)
-            }
-
-            guard let sentenceTones = toneAnalysis.sentencesTones else {
-                XCTFail("Sentence tones should not be nil.")
-                return
-            }
-
-            for sentence in sentenceTones {
-                XCTAssert(sentence.sentenceID >= 0)
-                XCTAssertNotEqual(sentence.text, "")
-                XCTAssert(sentence.inputFrom >= 0)
-                XCTAssert(sentence.inputTo > sentence.inputFrom)
-
-                for emotionTone in toneAnalysis.documentTone[0].tones {
-                    XCTAssertNotNil(emotionTone.name)
-                    XCTAssertNotNil(emotionTone.id)
-                    XCTAssert(emotionTone.score <= 1.0 && emotionTone.score >= 0.0)
-                }
-
-                for writingTone in toneAnalysis.documentTone[1].tones {
-                    XCTAssertNotNil(writingTone.name)
-                    XCTAssertNotNil(writingTone.id)
-                    XCTAssert(writingTone.score <= 1.0 && writingTone.score >= 0.0)
-                }
-
-                for socialTone in toneAnalysis.documentTone[2].tones {
-                    XCTAssertNotNil(socialTone.name)
-                    XCTAssertNotNil(socialTone.id)
-                    XCTAssert(socialTone.score <= 1.0 && socialTone.score >= 0.0)
-                }
-            }
-
             expectation.fulfill()
         }
         waitForExpectations()
@@ -144,29 +105,18 @@ class ToneAnalyzerTests: XCTestCase {
     func testGetToneWithCustomParameters() {
         let description = "Analyze the tone of the given text using custom parameters."
         let expectation = self.expectation(description: description)
-
-        let tones = ["emotion", "writing"]
-        toneAnalyzer.getTone(ofText: text, tones: tones, sentences: false, failure: failWithError) {
+        toneAnalyzer.tone(
+            toneInput: ToneInput(text: text),
+            contentType: "plain/text",
+            sentences: false,
+            contentLanguage: "en",
+            acceptLanguage: "en",
+            failure: failWithError)
+        {
             toneAnalysis in
-
-            for emotionTone in toneAnalysis.documentTone[0].tones {
-                XCTAssertNotNil(emotionTone.name)
-                XCTAssertNotNil(emotionTone.id)
-                XCTAssert(emotionTone.score <= 1.0 && emotionTone.score >= 0.0)
-            }
-
-            for writingTone in toneAnalysis.documentTone[1].tones {
-                XCTAssertNotNil(writingTone.name)
-                XCTAssertNotNil(writingTone.id)
-                XCTAssert(writingTone.score <= 1.0 && writingTone.score >= 0.0)
-            }
-
-            for tone in toneAnalysis.documentTone {
-                XCTAssert(tone.name != "Social Tone", "Social tone should not be included")
-            }
-
-            XCTAssertNil(toneAnalysis.sentencesTones)
-
+            XCTAssertNotNil(toneAnalysis.documentTone.tones)
+            XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
+            XCTAssertNil(toneAnalysis.sentencesTone)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -177,25 +127,13 @@ class ToneAnalyzerTests: XCTestCase {
     func testGetToneEmptyString() {
         let description = "Analyze the tone of an empty string."
         let expectation = self.expectation(description: description)
-
-        let failure = { (error: Error) in
-            expectation.fulfill()
-        }
-
-        toneAnalyzer.getTone(ofText: "", failure: failure, success: failWithResult)
-        waitForExpectations()
-    }
-
-    func testGetToneInvalidParameters() {
-        let description = "Analyze the tone of the given text using invalid parameters."
-        let expectation = self.expectation(description: description)
-
-        let failure = { (error: Error) in
-            expectation.fulfill()
-        }
-
-        let tones = ["emotion", "this-tone-is-invalid"]
-        toneAnalyzer.getTone(ofText: text, tones: tones, failure: failure, success: failWithResult)
+        let failure = { (error: Error) in expectation.fulfill() }
+        toneAnalyzer.tone(
+            toneInput: ToneInput(text: ""),
+            contentType: "plain/text",
+            failure: failure,
+            success: failWithResult
+        )
         waitForExpectations()
     }
 }

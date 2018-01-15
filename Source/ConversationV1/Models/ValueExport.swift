@@ -37,7 +37,7 @@ public struct ValueExport {
     /// The timestamp for the last update to the entity value.
     public var updated: String
 
-    /// An array of synonyms.
+    /// An array of synonyms for the entity value.
     public var synonyms: [String]?
 
     /// An array of patterns for the entity value. A pattern is specified as a regular expression.
@@ -54,7 +54,7 @@ public struct ValueExport {
      - parameter updated: The timestamp for the last update to the entity value.
      - parameter valueType: Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      - parameter metadata: Any metadata related to the entity value.
-     - parameter synonyms: An array of synonyms.
+     - parameter synonyms: An array of synonyms for the entity value.
      - parameter patterns: An array of patterns for the entity value. A pattern is specified as a regular expression.
 
      - returns: An initialized `ValueExport`.

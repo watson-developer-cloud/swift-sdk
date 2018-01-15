@@ -105,12 +105,7 @@ public class ToneAnalyzer {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
-            var userInfo = [NSLocalizedDescriptionKey: message]
-            let help = try? json.getString(at: "help")
-            let description = try? json.getString(at: "description")
-            if let recoverySuggestion = help ?? description {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = recoverySuggestion
-            }
+            let userInfo = [NSLocalizedDescriptionKey: message]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil

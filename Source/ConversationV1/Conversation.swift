@@ -291,12 +291,14 @@ public class Conversation {
 
      - parameter workspaceID: The workspace ID.
      - parameter properties: Valid data defining the new workspace content. Any elements included in the new data will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new data.
+     - parameter append: Specifies that the elements included in the request body are to be appended to the existing data in the workspace. The default value is `false`.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func updateWorkspace(
         workspaceID: String,
         properties: UpdateWorkspace? = nil,
+        append: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Workspace) -> Void)
     {
@@ -309,6 +311,10 @@ public class Conversation {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let append = append {
+            let queryParameter = URLQueryItem(name: "append", value: "\(append)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"

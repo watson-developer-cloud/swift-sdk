@@ -24,7 +24,6 @@ class DialogTests: XCTestCase {
     private let prefix = "swift-sdk-unit-test-"
     private var dialogID: DialogID?
     private var dialogName: String?
-    private let timeout: TimeInterval = 10.0
 
     // MARK: - Test Configuration
 
@@ -160,8 +159,8 @@ class DialogTests: XCTestCase {
         XCTFail("Negative test returned a result.")
     }
 
-    /** Wait for expectation */
-    func waitForExpectations() {
+    /** Wait for expectations. */
+    func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

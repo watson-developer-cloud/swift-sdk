@@ -21,7 +21,6 @@ import AlchemyVisionV1
 class AlchemyVisionTests: XCTestCase {
 
     private var alchemyVision: AlchemyVision!
-    private let timeout: TimeInterval = 10.0
 
     private var car: Data!
     private var obama: Data!
@@ -129,7 +128,7 @@ class AlchemyVisionTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

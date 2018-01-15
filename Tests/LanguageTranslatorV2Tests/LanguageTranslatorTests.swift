@@ -23,7 +23,6 @@ import LanguageTranslatorV2
 class LanguageTranslatorTests: XCTestCase {
 
     private var languageTranslator: LanguageTranslator!
-    private let timeout: TimeInterval = 5.0
 
     // MARK: - Test Configuration
 
@@ -91,7 +90,7 @@ class LanguageTranslatorTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

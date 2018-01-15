@@ -23,7 +23,6 @@ import ToneAnalyzerV3
 class ToneAnalyzerTests: XCTestCase {
 
     private var toneAnalyzer: ToneAnalyzer!
-    private let timeout: TimeInterval = 5.0
 
     static var allTests: [(String, (ToneAnalyzerTests) -> () throws -> Void)] {
         return [
@@ -73,7 +72,7 @@ class ToneAnalyzerTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

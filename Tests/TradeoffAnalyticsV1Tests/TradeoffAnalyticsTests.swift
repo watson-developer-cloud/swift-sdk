@@ -23,7 +23,6 @@ import TradeoffAnalyticsV1
 class TradeoffAnalyticsTests: XCTestCase {
 
     private var tradeoffAnalytics: TradeoffAnalytics!
-    private let timeout: TimeInterval = 5.0
 
     static var allTests: [(String, (TradeoffAnalyticsTests) -> () throws -> Void)] {
         return [
@@ -67,7 +66,7 @@ class TradeoffAnalyticsTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

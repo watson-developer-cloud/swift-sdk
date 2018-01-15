@@ -27,8 +27,6 @@ class VisualRecognitionTests: XCTestCase {
     private let collectionName = "swift-sdk-unit-test-faces"
     private var classifierID: String?
     private var imageFaceID: String?
-    private let timeout: TimeInterval = 10.0
-    private let timeoutLong: TimeInterval = 45.0
 
     static var allTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] {
         return [
@@ -209,8 +207,8 @@ class VisualRecognitionTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
-        waitForExpectations(timeout: timeoutLong) { error in
+    func waitForExpectations(timeout: TimeInterval = 45.0) {
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -413,7 +411,7 @@ class VisualRecognitionTests: XCTestCase {
                 XCTFail("Could not train a new classifier. Try again later.")
             }
 
-            sleep(5)
+            sleep(15)
         }
 
         let description2 = "Update the classifier with a positive example."
@@ -462,7 +460,7 @@ class VisualRecognitionTests: XCTestCase {
                 XCTFail("Could not update the classifier. Try again later.")
             }
 
-            sleep(5)
+            sleep(15)
         }
 
         // allow zip files to propagate through object storage, so that
@@ -539,7 +537,7 @@ class VisualRecognitionTests: XCTestCase {
                 XCTFail("Could not train a new classifier. Try again later.")
             }
 
-            sleep(5)
+            sleep(15)
         }
 
         let description2 = "Update the classifier with a negative example."
@@ -587,7 +585,7 @@ class VisualRecognitionTests: XCTestCase {
                 XCTFail("Could not update the classifier. Try again later.")
             }
 
-            sleep(5)
+            sleep(15)
         }
 
         // allow zip files to propagate through object storage, so that
@@ -1093,7 +1091,7 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
-            XCTAssertEqual(classifiedImages.images.count, 16)
+            XCTAssertEqual(classifiedImages.images.count, 4)
 
             for image in classifiedImages.images {
                 // verify the image's metadata
@@ -1137,7 +1135,7 @@ class VisualRecognitionTests: XCTestCase {
 
             expectation.fulfill()
         }
-        waitForExpectations()
+        waitForExpectations(timeout: 60)
     }
 
     /** Detect faces by URL. */

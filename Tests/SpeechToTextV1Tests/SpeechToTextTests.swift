@@ -23,7 +23,6 @@ import SpeechToTextV1
 class SpeechToTextTests: XCTestCase {
 
     private var speechToText: SpeechToText!
-    private let timeout: TimeInterval = 15.0
     private let trainedCustomizationName = "swift-sdk-unit-test-trained-customization"
     private let trainedCustomizationDescription = "swift sdk test customization"
     private var trainedCustomizationID: String!
@@ -95,7 +94,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 15.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

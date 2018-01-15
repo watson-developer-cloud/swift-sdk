@@ -23,7 +23,6 @@ import DiscoveryV1
 class DiscoveryTests: XCTestCase {
 
     private var discovery: Discovery!
-    private let timeout = 20.0
     private let environmentName = "swift-sdk-unit-test-environment"
     private let testDescription = "For testing"
     private var environmentID: String?
@@ -293,7 +292,7 @@ class DiscoveryTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 20.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

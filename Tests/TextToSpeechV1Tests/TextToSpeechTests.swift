@@ -23,7 +23,6 @@ import TextToSpeechV1
 class TextToSpeechTests: XCTestCase {
 
     private var textToSpeech: TextToSpeech!
-    private let timeout: TimeInterval = 5.0
     private let text = "Swift at IBM is awesome. You should try it!"
 
     private let allVoices: [SynthesisVoice] = [
@@ -116,7 +115,7 @@ class TextToSpeechTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

@@ -24,8 +24,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!
     private let newClassifierName = "Swift SDK Test Classifier"
-    private let trainedClassifierId = "2a3230x98-nlc-61"
-    private let timeout: TimeInterval = 5.0
+    private let trainedClassifierId = "0015c6x266-nlc-88"
 
     // MARK: - Test Configuration
 
@@ -75,7 +74,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -117,7 +116,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations()
+        waitForExpectations(timeout: 30)
         return classifierDetails
     }
 

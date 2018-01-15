@@ -24,7 +24,6 @@ import AVFoundation
 class TextToSpeechPlaybackTests: XCTestCase {
 
     private var textToSpeech: TextToSpeech!
-    private let timeout: TimeInterval = 5.0
     private let playAudio = true
     private let text = "Swift at IBM is awesome. You should try it!"
     private let germanText = "Erst denken, dann handeln."
@@ -55,7 +54,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

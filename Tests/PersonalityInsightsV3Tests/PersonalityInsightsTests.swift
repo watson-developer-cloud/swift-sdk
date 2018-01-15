@@ -25,7 +25,6 @@ class PersonalityInsightsTests: XCTestCase {
     private var mobyDickIntro: String?
     private var kennedySpeechTXT: String?
     private var kennedySpeechHTML: String?
-    private let timeout: Double = 5.0
     private var version: String = "2016-10-20"
 
     static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
@@ -90,7 +89,7 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

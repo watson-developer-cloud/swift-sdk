@@ -1444,7 +1444,7 @@ class ConversationTests: XCTestCase {
             XCTAssertNil(node.nextStep)
             XCTAssertNil(node.actions)
             XCTAssertEqual(dialogNode.title!, node.title!)
-            XCTAssertNil(node.nodeType)
+            //XCTAssertNil(node.nodeType)
             XCTAssertNil(node.eventName)
             XCTAssertNil(node.variable)
             expectation1.fulfill()

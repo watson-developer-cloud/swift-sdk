@@ -39,7 +39,6 @@ There are many resources to help you build your first cognitive application with
 * [AlchemyLanguage](#alchemylanguage)
 * [Conversation](#conversation)
 * [Discovery](#discovery)
-* [Document Conversion](#document-conversion)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
 * [Natural Language Understanding](#natural-language-understanding)
@@ -178,9 +177,7 @@ Please see [this tutorial](docs/objective-c.md) for more information about consu
 
 ## Linux Compatibility
 
-The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.
-
-To include the Watson SDK to your Linux projects, please follow the [Swift Package Manager instructions.](#swift-package-manager)
+To use the Watson SDK in your Linux project, please follow the [Swift Package Manager instructions.](#swift-package-manager). Note that Speech to Text and Text to Speech are not supported because they rely on frameworks that are unavailable on Linux.
 
 ## Contributing
 
@@ -474,42 +471,6 @@ The following links provide more information about the IBM Discovery service:
 * [IBM Discovery - API Reference](https://www.ibm.com/watson/developercloud/discovery/api/v1/)
 * [IBM Discovery - API Explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1)
 * [IBM Discovery - Query Building](https://console.bluemix.net/docs/services/discovery/query-reference.html#query-building)
-
-## Document Conversion
-
-The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
-
-The following example demonstrates how to convert a document with the Document Conversation service:
-
-```swift
-import DocumentConversionV1
-
-let username = "your-username-here"
-let password = "your-password-here"
-let version = "2015-12-15"
-let documentConversion = DocumentConversion(username: username, password: password, version: version)
-
-// load document
-let filename = "your-document-filename"
-guard let document = Bundle.main.url(forResource: filename, withExtension: "xml") else {
-    print("Failed to locate document.")
-    return
-}
-
-// convert document
-let config = try! documentConversion.writeConfig(type: ReturnType.text)
-let failure = { (error: Error) in print(error) }
-documentConversion.convertDocument(document, withConfigurationFile: config, failure: failure) {
-    text in
-    print(text)
-}
-```
-
-The following links provide more information about the IBM Document Conversion service:
-
-* [IBM Watson Document Conversion - Service Page](https://www.ibm.com/watson/services/document-conversion/)
-* [IBM Watson Document Conversion - Documentation](https://console.bluemix.net/docs/services/document-conversion/index.html)
-* [IBM Watson Document Conversion - Demo](https://document-conversion-demo.ng.bluemix.net/)
 
 ## Language Translator
 

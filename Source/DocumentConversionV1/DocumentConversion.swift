@@ -22,6 +22,7 @@ import Foundation
  JSON-formatted Answer units that can be used with other Watson services, like the
  Watson Retrieve and Rank Service.
  */
+@available(*, deprecated, message: "Document Conversion was retired in October 2017. The document conversion capabilities of Watson Discovery have continued to improve along with its integrated data pipeline and information retrieval capabilities. If you are a Document Conversion user, get started with Discovery today.")
 public class DocumentConversion {
 
     /// The base URL to use when contacting the service.

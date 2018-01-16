@@ -33,7 +33,7 @@ schemes=(
 )
 
 for scheme in ${schemes[@]}; do
-	xcodebuild -scheme "$scheme" -destination "$DESTINATION" | xcpretty
+	xcodebuild -scheme "$scheme" -destination "$DESTINATION" test | xcpretty
 	checkStatus $?
 done
 

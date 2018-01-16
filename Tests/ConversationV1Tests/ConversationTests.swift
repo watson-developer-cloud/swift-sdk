@@ -81,7 +81,8 @@ class ConversationTests: XCTestCase {
             ("testCreateAndDeleteSynonym", testCreateAndDeleteSynonym),
             ("testGetSynonym", testGetSynonym),
             ("testCreateUpdateAndDeleteSynonym", testCreateUpdateAndDeleteSynonym),
-            ("testListLogs", testListLogs),
+            // Test temporarily disabled pending resolution of server-side issue
+            // ("testListLogs", testListLogs),
             ("testMessageUnknownWorkspace", testMessageUnknownWorkspace),
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
         ]

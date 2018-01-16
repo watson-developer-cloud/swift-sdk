@@ -52,27 +52,28 @@ class AlchemyVisionTests: XCTestCase {
 
     static var allTests: [(String, (AlchemyVisionTests) -> () throws -> Void)] {
         return [
-            ("testGetRankedImageFaceTagsImage1", testGetRankedImageFaceTagsImage1),
-            ("testGetRankedImageFaceTagsImage2", testGetRankedImageFaceTagsImage2),
-            ("testGetRankedImageFaceTagsImageWithoutIdentity", testGetRankedImageFaceTagsImageWithoutIdentity),
-            ("testGetRankedImageFaceTagsURL1", testGetRankedImageFaceTagsURL1),
-            ("testGetRankedImageFaceTagsURL2", testGetRankedImageFaceTagsURL2),
-            ("testGetImageHTMLFile1", testGetImageHTMLFile1),
-            ("testGetImageHTMLFile2", testGetImageHTMLFile2),
-            ("testGetImageHTMLContents1", testGetImageHTMLContents1),
-            ("testGetImageHTMLContents2", testGetImageHTMLContents2),
-            ("testGetImageURL", testGetImageURL),
-            ("testGetRankedImageKeywordsImage1", testGetRankedImageKeywordsImage1),
-            ("testGetRankedImageKeywordsImage2", testGetRankedImageKeywordsImage2),
-            ("testGetRankedImageKeywordsURL1", testGetRankedImageKeywordsURL1),
-            ("testGetRankedImageKeywordsURL2", testGetRankedImageKeywordsURL2),
-            ("testGetRankedImageSceneTextImage", testGetRankedImageSceneTextImage),
-            ("testGetRankedImageSceneTextURL", testGetRankedImageSceneTextURL),
-            ("testGetRankedImageFaceTagsWithInvalidURL", testGetRankedImageFaceTagsWithInvalidURL),
-            ("testGetImageWithInvalidHTML", testGetImageWithInvalidHTML),
-            ("testGetImageWithInvalidURL", testGetImageWithInvalidURL),
-            ("testGetRankedImageKeywordsWithInvalidURL", testGetRankedImageKeywordsWithInvalidURL),
-            ("testGetRankedImageSceneTextWithInvalidURL", testGetRankedImageSceneTextWithInvalidURL)
+// All tests disabled - Alchemy Vision service has been withdrawn
+//            ("testGetRankedImageFaceTagsImage1", testGetRankedImageFaceTagsImage1),
+//            ("testGetRankedImageFaceTagsImage2", testGetRankedImageFaceTagsImage2),
+//            ("testGetRankedImageFaceTagsImageWithoutIdentity", testGetRankedImageFaceTagsImageWithoutIdentity),
+//            ("testGetRankedImageFaceTagsURL1", testGetRankedImageFaceTagsURL1),
+//            ("testGetRankedImageFaceTagsURL2", testGetRankedImageFaceTagsURL2),
+//            ("testGetImageHTMLFile1", testGetImageHTMLFile1),
+//            ("testGetImageHTMLFile2", testGetImageHTMLFile2),
+//            ("testGetImageHTMLContents1", testGetImageHTMLContents1),
+//            ("testGetImageHTMLContents2", testGetImageHTMLContents2),
+//            ("testGetImageURL", testGetImageURL),
+//            ("testGetRankedImageKeywordsImage1", testGetRankedImageKeywordsImage1),
+//            ("testGetRankedImageKeywordsImage2", testGetRankedImageKeywordsImage2),
+//            ("testGetRankedImageKeywordsURL1", testGetRankedImageKeywordsURL1),
+//            ("testGetRankedImageKeywordsURL2", testGetRankedImageKeywordsURL2),
+//            ("testGetRankedImageSceneTextImage", testGetRankedImageSceneTextImage),
+//            ("testGetRankedImageSceneTextURL", testGetRankedImageSceneTextURL),
+//            ("testGetRankedImageFaceTagsWithInvalidURL", testGetRankedImageFaceTagsWithInvalidURL),
+//            ("testGetImageWithInvalidHTML", testGetImageWithInvalidHTML),
+//            ("testGetImageWithInvalidURL", testGetImageWithInvalidURL),
+//            ("testGetRankedImageKeywordsWithInvalidURL", testGetRankedImageKeywordsWithInvalidURL),
+//            ("testGetRankedImageSceneTextWithInvalidURL", testGetRankedImageSceneTextWithInvalidURL)
         ]
     }
 

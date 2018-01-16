@@ -41,8 +41,8 @@ class TextToSpeechTests: XCTestCase {
             ("testSynthesizeL16", testSynthesizeL16),
             ("testGetCustomizations", testGetCustomizations),
             ("testCreateAndDeleteCustomization", testCreateAndDeleteCustomization),
-            ("testCreateUpdateNameAndDeleteCustomVoiceModel", testCreateUpdateNameAndDeleteCustomVoiceModel),
-            ("testCreateUpdateDescriptionAndDeleteCustomVoiceModel", testCreateUpdateDescriptionAndDeleteCustomVoiceModel),
+            // ("testCreateUpdateNameAndDeleteCustomVoiceModel", testCreateUpdateNameAndDeleteCustomVoiceModel), // temporarily disabled
+            // ("testCreateUpdateDescriptionAndDeleteCustomVoiceModel", testCreateUpdateDescriptionAndDeleteCustomVoiceModel), // temporarily disabled
             ("testCreateUpdateWordsListAndDeleteCustomVoiceModel", testCreateUpdateWordsListAndDeleteCustomVoiceModel),
             ("testAddMultipleWordsToCustomVoiceModel", testAddMultipleWordsToCustomVoiceModel),
             ("testAddOneWordToCustomVoiceModel", testAddOneWordToCustomVoiceModel),
@@ -279,6 +279,7 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
     }
 
+    // Temporarily disabled until issue with TTS service is fixed
     /** Create a new custom voice model and update its name. */
     func testCreateUpdateNameAndDeleteCustomVoiceModel() {
         let description1 = "Create a custom voice model."
@@ -332,6 +333,7 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
     }
 
+    // Temporarily disabled until issue with TTS service is fixed
     /** Create a new custom voice model and update its description. */
     func testCreateUpdateDescriptionAndDeleteCustomVoiceModel() {
         let description1 = "Create a custom voice model."

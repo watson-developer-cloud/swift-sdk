@@ -65,15 +65,23 @@ extension VisualRecognition {
             return
         }
 
-        // parse classifier's `updated` date
+        // parse the date on which the classifier was last updated
         getClassifier(withID: classifierID, failure: failure) { classifier in
-            guard let classifierDate = dateFormatter.date(from: classifier.updated) else {
+            // parse the created date
+            guard let createdDate = dateFormatter.date(from: classifier.created) else {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
                 return
             }
 
+            // parse the retrained date
+            let retrainedDate = dateFormatter.date(from: classifier.retrained)
+
+            // set lastUpdatedDate to retrainedDate if it exists.
+            // we will disregard the `updated` field so long as `retrained` is not deprecated.
+            let lastUpdatedDate = retrainedDate != nil ? retrainedDate : createdDate
+
             // download the latest model if a newer version is available
-            if classifierDate > modelDate && classifier.coreMLStatus == "ready" {
+            if lastUpdatedDate! > modelDate && classifier.coreMLStatus == "ready" {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             } else {
                 success?();

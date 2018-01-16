@@ -23,17 +23,11 @@ import DiscoveryV1
 class DiscoveryTests: XCTestCase {
 
     private var discovery: Discovery!
-    private let environmentName = "swift-sdk-unit-test-environment"
-    private let testDescription = "For testing"
-    private var environmentID: String?
-    private let newsEnvironmentName = "Watson News Environment"
-    private var newsEnvironmentID: String?
-    private let newsCollectionName = "watson_news"
-    private var newsCollectionID: String?
+    private var newsEnvironmentID: String = "system"
+    private var newsCollectionID: String = "news-en"
+    private var environmentID: String = Credentials.DiscoveryEnvironmentID
+    private let defaultConfigurationName = "Default Configuration"
     private let collectionName = "swift-sdk-unit-test-collection"
-    private var collectionID: String?
-    private var configurationID: String?
-    private var documentID: String?
 
     // MARK: - Test Configuration
 
@@ -41,126 +35,50 @@ class DiscoveryTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateDiscovery()
-        lookupNewsCollectionEnvironment()
-        lookupEnvironment()
-        lookupConfiguration()
-        lookupCollection()
-        addDocumentToCollection()
-    }
-
-    override class func tearDown() {
-        let failure = { (error: Error) in
-            XCTFail("Failed with error: \(error)")
-        }
-
-        let discovery = Discovery(username: Credentials.DiscoveryUsername, password: Credentials.DiscoveryPassword, version: "2016-12-01")
-        discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
-        discovery.defaultHeaders["X-Watson-Test"] = "true"
-        var trainedEnvironmentID: String?
-
-        let description1 = "Get trained environment ID."
-        let expectation1 = XCTestExpectation(description: description1)
-        discovery.getEnvironments(withName: "swift-sdk-unit-test-environment", failure: failure) { environment in
-            trainedEnvironmentID = environment.first?.environmentID
-            expectation1.fulfill()
-        }
-        _ = XCTWaiter.wait(for: [expectation1], timeout: 20)
-
-        let description2 = "Delete the trained environment."
-        let expectation2 = XCTestExpectation(description: description2)
-        discovery.deleteEnvironment(withID: trainedEnvironmentID!, failure: failure) { _ in
-            expectation2.fulfill()
-        }
-        _ = XCTWaiter.wait(for: [expectation2], timeout: 20)
     }
 
     /** Instantiate Discovery instance. */
     func instantiateDiscovery() {
         let username = Credentials.DiscoveryUsername
         let password = Credentials.DiscoveryPassword
-        let version = "2016-12-01"
+        let version = "2017-08-01"
         discovery = Discovery(username: username, password: password, version: version)
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         discovery.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    /** Look up (or create) environment. */
-    func lookupEnvironment() {
-        let description = "Look up (or create) the environment."
-        let expectation = self.expectation(description: description)
+    /** Lookup a configuration with the given name. */
+    func lookupConfiguration(environmentID: String, configurationName: String) -> String? {
+        var configurationID: String?
 
-        let failure = { (error: Error) in
-            XCTFail("Failed to locate environment")
-        }
+        let failure = { (error: Error) in XCTFail("Could not get configurations: \(error)") }
 
-        discovery.getEnvironments(withName: environmentName, failure: failure) { environments in
-            for environment in environments where environment.name == self.environmentName {
-                self.environmentID = environment.environmentID
-                expectation.fulfill()
-                return
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-        if environmentID == nil {
-            createEnvironment()
-        }
-    }
-
-    /** Create an environment for test suite. */
-    func createEnvironment() {
-        let description = "Create an environment for the test suite."
-        let expectation = self.expectation(description: description)
-
-        let failure = { (error: Error) in XCTFail("Could not create environment") }
-        discovery.createEnvironment(
-            withName: environmentName,
-            withSize: .one,
-            withDescription: testDescription,
-            failure: failure) { environment in
-                self.environmentID = environment.environmentID
-                expectation.fulfill()
-                return
-        }
-        waitForExpectations()
-
-        sleep(30)
-    }
-
-    /** Lookup default configuration for environment created. */
-    func lookupConfiguration() {
-        let description = "Look up default configuration for the test suite's environment."
-        let expectation = self.expectation(description: description)
-
-        let defaultConfigName = "Default Configuration"
-        let failure = { (error: Error) in XCTFail("Could not find configuration") }
-        guard let environmentID = environmentID else {
-            XCTFail("Failed to create environment for test suite.")
-            return
-        }
+        let expectation = self.expectation(description: "Lookup a configuration for the specified environment.")
         discovery.getConfigurations(
             withEnvironmentID: environmentID,
             failure: failure) { configurations in
-                for configuration in configurations where configuration.name == defaultConfigName {
-                    self.configurationID = configuration.configurationID
+                for configuration in configurations where configuration.name == configurationName {
+                    configurationID = configuration.configurationID
                     expectation.fulfill()
                     return
                 }
                 expectation.fulfill()
         }
         waitForExpectations()
+        return configurationID
     }
 
-    /** Lookup (or create) collection for test suite. */
-    func lookupCollection() {
-        let description = "Look up collection for the test suite."
-        let expectation = self.expectation(description: description)
+    /** Lookup a collection with the given name. */
+    func lookupCollection(environmentID: String, collectionName: String) -> String? {
+        var collectionID: String?
 
-        let failure = { (error: Error) in XCTFail("Could not find collection with specified environmentID") }
-        discovery.getCollections(withEnvironmentID: environmentID!, failure: failure) {
+        let failure = { (error: Error) in XCTFail("Could not get collections: \(error)") }
+
+        let expectation = self.expectation(description: "Look up collection.")
+        discovery.getCollections(withEnvironmentID: environmentID, failure: failure) {
             collections in
             for collection in collections where self.collectionName == collection.name {
-                self.collectionID = collection.collectionID
+                collectionID = collection.collectionID
                 expectation.fulfill()
                 return
             }
@@ -168,112 +86,29 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
         if collectionID == nil {
-            createCollection()
+            collectionID = self.createCollection(environmentID: environmentID, collectionName: collectionName)
         }
-    }
-
-    /** Look up news collection from the given news environment. */
-    func lookupNewsCollectionEnvironment() {
-        let description = "Look up example news environment."
-        let expectation = self.expectation(description: description)
-
-        let failure = { (error: Error) in
-            XCTFail("Failed to locate news environment")
-        }
-
-        discovery.getEnvironments(withName: newsEnvironmentName, failure: failure) { environments in
-            for environment in environments where environment.name == self.newsEnvironmentName {
-                self.newsEnvironmentID = environment.environmentID
-                expectation.fulfill()
-                return
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-
-        let description2 = "Look up news collection within found news environment"
-        let expectation2 = self.expectation(description: description2)
-
-        let failure2 = { (error: Error) in
-            XCTFail("Failed to locate news collection")
-        }
-
-        discovery.getCollections(withEnvironmentID: newsEnvironmentID!, withName: newsCollectionName, failure: failure2) { collections in
-            for collection in collections where collection.name == self.newsCollectionName {
-                self.newsCollectionID = collection.collectionID
-                expectation2.fulfill()
-                return
-            }
-            expectation2.fulfill()
-        }
-        waitForExpectations()
+        return collectionID
     }
 
     /** Create a collection for the test suite. */
-    func createCollection() {
+    func createCollection(environmentID: String, collectionName: String) -> String? {
+        var collectionID: String?
 
-        var environmentReady = false
-        var tries = 0
-        while !environmentReady {
-            tries += 1
-            let description = "Get environment and check if it's `active`."
-            let expectation = self.expectation(description: description)
-            self.discovery.getEnvironment(withID: environmentID!, failure: failWithError) { environment in
-                if environment.status == "active" {
-                    environmentReady = true
-                }
-                expectation.fulfill()
-            }
-            waitForExpectations()
+        let failure = { (error: Error) in XCTFail("Could not create collection: \(error)") }
 
-            if tries > 5 {
-                XCTFail("Environment is not ready, could not add new collection. Try again later.")
-                return
-            }
-
-            sleep(5)
-        }
-
-        let description = "Create collection for the test suite."
-        let expectation = self.expectation(description: description)
-
-        let failure = { (error: Error) in XCTFail("Could not create collection.") }
+        let expectation = self.expectation(description: "Create a collection.")
         discovery.createCollection(
-            withEnvironmentID: environmentID!,
+            withEnvironmentID: environmentID,
             withName: collectionName,
-            withDescription: testDescription,
-            withConfigurationID: configurationID!,
+            withDescription: "Collection for Swift SDK tests -- do not delete",
             failure: failure) {
                 collection in
-                self.collectionID = collection.collectionID
+                collectionID = collection.collectionID
                 expectation.fulfill()
         }
         waitForExpectations()
-    }
-
-    /** Add document to collection to test. */
-    func addDocumentToCollection() {
-        let description = "Add a document to the collection."
-        let expectation = self.expectation(description: description)
-
-        let failure = { (error: Error) in XCTFail("Could not add document to collection.") }
-
-        guard let file = Bundle(for: type(of: self)).url(forResource: "KennedySpeech", withExtension: "html") else {
-            XCTFail("Unable to locate KennedySpeech.html")
-            return
-        }
-        discovery.addDocumentToCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
-            file: file,
-            failure: failure) {
-                document in
-                XCTAssertNotNil(document.documentID)
-                self.documentID = document.documentID
-                XCTAssertEqual(document.status, DocumentStatus.processing)
-                expectation.fulfill()
-        }
-        waitForExpectations()
+        return collectionID
     }
 
     /** Fail false negatives. */
@@ -302,9 +137,8 @@ class DiscoveryTests: XCTestCase {
 
     /** Retrieve a list of the environments associated with this service instance. */
     func testGetEnvironments() {
-        let description = "Retrieve a list of environments."
-        let expectation = self.expectation(description: description)
 
+        let expectation = self.expectation(description: "Retrieve a list of environments.")
         discovery.getEnvironments(failure: failWithError) { environments in
             XCTAssertGreaterThan(environments.count, 0)
             expectation.fulfill()
@@ -312,141 +146,109 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Delete and create a test environment. */
-    func testDeleteAndCreateEnvironment() {
+    /** Create, Update, and Delete a test environment. */
+    func testCreateUpdateAndDeleteEnvironment() {
 
-        let description = "Delete the existing test environment."
-        let expectation = self.expectation(description: description)
+        let environmentName = "swift-sdk-test-environment"
+        let environmentDescription = "Test environment for Swift SDK"
+        var environmentID: String?
 
-        discovery.deleteEnvironment(withID: self.environmentID!, failure: failWithError) {
-            environment in
+        let expectation = self.expectation(description: "Create an environment.")
 
-            XCTAssertEqual(environment.environmentID, self.environmentID)
-            XCTAssertEqual(environment.status, "deleted")
-
-            expectation.fulfill()
+        let createFailure = { (error: Error) in
+            if error.localizedDescription.contains("Cannot provision more than one environment") {
+                expectation.fulfill()
+                return
+            }
+            self.failWithError(error: error)
         }
-        waitForExpectations()
-
-        let description2 = "Recreate the deleted environment."
-        let expectation2 = self.expectation(description: description2)
 
         discovery.createEnvironment(
             withName: environmentName,
             withSize: .one,
-            withDescription: testDescription,
-            failure: failWithError)
+            withDescription: environmentDescription,
+            failure: createFailure)
         {
             environment in
 
             // verify that an environment ID was returned, and save this value
             XCTAssertNotNil(environment.environmentID)
-            self.environmentID = environment.environmentID
+            environmentID = environment.environmentID
 
             // check all the fields are present
-            XCTAssertEqual(environment.name, self.environmentName)
-            XCTAssertEqual(environment.description, self.testDescription)
+            XCTAssertEqual(environment.name, environmentName)
+            XCTAssertEqual(environment.description, environmentDescription)
             XCTAssertNotNil(environment.created)
             XCTAssertNotNil(environment.updated)
             XCTAssertNotNil(environment.status)
-            XCTAssertNotNil(environment.indexCapacity?.diskUsage)
-            XCTAssertNotNil(environment.indexCapacity?.memoryUsage)
-
-            // check all the fields within diskUsage are present
-            let diskUsage = environment.indexCapacity?.diskUsage
-            XCTAssertNotNil(diskUsage?.usedBytes)
-            XCTAssertNotNil(diskUsage?.totalBytes)
-            XCTAssertNotNil(diskUsage?.used)
-            XCTAssertNotNil(diskUsage?.total)
-            XCTAssertNotNil(diskUsage?.percentUsed)
-
-            // check all the fields within memoryUsage are present
-            let memoryUsage = environment.indexCapacity?.memoryUsage
-            XCTAssertNotNil(memoryUsage?.usedBytes)
-            XCTAssertNotNil(memoryUsage?.totalBytes)
-            XCTAssertNotNil(memoryUsage?.used)
-            XCTAssertNotNil(memoryUsage?.total)
-            XCTAssertNotNil(memoryUsage?.percentUsed)
-
-            expectation2.fulfill()
-        }
-        waitForExpectations()
-
-        // Allow time for the environment to be ready for the next test.
-        sleep(20)
-    }
-
-    /** Get the trained environment. */
-    func testGetTrainedEnvironment() {
-        let description = "Retrieve the trained environment."
-        let expectation = self.expectation(description: description)
-
-        discovery.getEnvironment(withID: self.environmentID!, failure: failWithError) {
-            environment in
-
-            XCTAssertEqual(environment.name, self.environmentName)
-            XCTAssertEqual(environment.description, self.testDescription)
-
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Update the name and description of the trained environment. */
-    func testUpdateEnvironment() {
-        let description = "Update the trained environment's description and name."
-        let expectation = self.expectation(description: description)
-
-        discovery.updateEnvironment(
-            withID: self.environmentID!,
-            name: "new name",
-            description: "new description",
-            failure: failWithError)
-        {
-            environment in
-
-            XCTAssertEqual(environment.environmentID, self.environmentID)
-            XCTAssertNotEqual(environment.name, self.environmentName)
-            XCTAssertEqual(environment.name, "new name")
-            XCTAssertNotEqual(environment.description, self.testDescription)
-            XCTAssertEqual(environment.description, "new description")
+//            XCTAssertNotNil(environment.indexCapacity?.diskUsage)
+//            XCTAssertNotNil(environment.indexCapacity?.memoryUsage)
+//
+//            // check all the fields within diskUsage are present
+//            let diskUsage = environment.indexCapacity?.diskUsage
+//            XCTAssertNotNil(diskUsage?.usedBytes)
+//            XCTAssertNotNil(diskUsage?.totalBytes)
+//            XCTAssertNotNil(diskUsage?.used)
+//            XCTAssertNotNil(diskUsage?.total)
+//            XCTAssertNotNil(diskUsage?.percentUsed)
+//
+//            // check all the fields within memoryUsage are present
+//            let memoryUsage = environment.indexCapacity?.memoryUsage
+//            XCTAssertNotNil(memoryUsage?.usedBytes)
+//            XCTAssertNotNil(memoryUsage?.totalBytes)
+//            XCTAssertNotNil(memoryUsage?.used)
+//            XCTAssertNotNil(memoryUsage?.total)
+//            XCTAssertNotNil(memoryUsage?.percentUsed)
 
             expectation.fulfill()
         }
         waitForExpectations()
 
-        let description2 = "Change trained environment's description and name back to normal."
-        let expectation2 = self.expectation(description: description2)
+        // Skip the rest of the test if the createEnviroment failed. The createFailure closure
+        // will determine if the test has failed based on the error code
+        if let environmentID = environmentID {
 
-        discovery.updateEnvironment(
-            withID: self.environmentID!,
-            name: self.environmentName,
-            description: self.testDescription,
-            failure: failWithError)
-        {
-            environment in
+            // Allow time for the environment to be ready for the next test.
+            sleep(20)
 
-            XCTAssertEqual(environment.environmentID, self.environmentID)
-            XCTAssertEqual(environment.name, self.environmentName)
-            XCTAssertEqual(environment.description, self.testDescription)
+            let expectation2 = self.expectation(description: "Update the trained environment's description and name.")
 
-            expectation2.fulfill()
+            discovery.updateEnvironment(
+                withID: environmentID,
+                name: "new name",
+                description: "new description",
+                failure: failWithError)
+            {
+                environment in
+
+                XCTAssertEqual(environment.environmentID, environmentID)
+                XCTAssertEqual(environment.name, "new name")
+                XCTAssertEqual(environment.description, "new description")
+
+                expectation2.fulfill()
+            }
+            waitForExpectations()
+
+            let expectation3 = self.expectation(description: "Delete the test environment.")
+
+            discovery.deleteEnvironment(withID: environmentID, failure: failWithError) {
+                environment in
+
+                XCTAssertEqual(environment.environmentID, environmentID)
+                XCTAssertEqual(environment.status, "deleted")
+
+                expectation3.fulfill()
+            }
+            waitForExpectations()
         }
-        waitForExpectations()
     }
 
-    // MARK: Configurations
+    // MARK: - Configurations
 
     /** Retrieve a list of the configurations in the given environment. */
     func testGetConfigurations() {
-        let description = "Retrieve a list of configurations."
-        let expectation = self.expectation(description: description)
 
-        guard let environmentID = environmentID else {
-            XCTFail("Failed to find test environment")
-            return
-        }
-
+        let expectation = self.expectation(description: "Retrieve a list of configurations.")
         discovery.getConfigurations(withEnvironmentID: environmentID, failure: failWithError) {
             configurations in
 
@@ -459,14 +261,7 @@ class DiscoveryTests: XCTestCase {
     }
 
     /** Retrieve a configuration by name where the name contains special chars. */
-    func testGetConfigurationWithFunkyName() {
-        let description = "Retrieve a configuration with a funky name."
-        let expectation = self.expectation(description: description)
-
-        guard let environmentID = environmentID else {
-            XCTFail("Failed to find test environment")
-            return
-        }
+    func testCreateGetDeleteConfigurationWithFunkyName() {
 
         let configurationName = UUID().uuidString + " with \"funky\" ?x=y&foo=bar ,[x](y) ~!@#$%^&*()-+ {} | ;:<>\\/ chars"
 
@@ -474,32 +269,49 @@ class DiscoveryTests: XCTestCase {
             name: configurationName,
             description: "configuration with funky name")
 
+        var newConfigurationID: String?
+
+        let expectation = self.expectation(description: "Retrieve a configuration with a funky name.")
         discovery.createConfiguration(
             withEnvironmentID: environmentID,
             configuration: configuration,
             failure: failWithError) { _ in
 
-                self.discovery.getConfigurations(withEnvironmentID: environmentID, withName: configurationName, failure: self.failWithError) {
+                self.discovery.getConfigurations(withEnvironmentID: self.environmentID, withName: configurationName, failure: self.failWithError) {
                     configurations in
 
                     XCTAssertEqual(configurations.count, 1)
                     XCTAssertEqual(configurations[0].name, configurationName)
+                    XCTAssertNotNil(configurations[0].configurationID)
+                    newConfigurationID = configurations[0].configurationID
+
                     expectation.fulfill()
                 }
             }
 
         waitForExpectations()
+
+        guard let newConfigID = newConfigurationID else {
+            XCTFail("Failed to instantiate configurationID when creating configuration.")
+            return
+        }
+
+        let expectation2 = self.expectation(description: "Delete the new configuration.")
+        discovery.deleteConfiguration(
+            withEnvironmentID: environmentID,
+            withConfigurationID: newConfigID,
+            failure: failWithError) { configuration in
+
+                XCTAssertEqual(configuration.configurationID, newConfigID)
+                XCTAssertEqual(configuration.status, "deleted")
+                XCTAssertNil(configuration.noticeMessages)
+                expectation2.fulfill()
+        }
+        waitForExpectations()
     }
 
     /** Create and delete a configuration. */
     func testCreateAndDeleteConfiguration() {
-        let description = "Create a new configuration."
-        let expectation = self.expectation(description: description)
-
-        guard let environmentID = environmentID else {
-            XCTFail("Failed to find test environment")
-            return
-        }
 
         let normalization1 = Normalization(
             operation: .move,
@@ -532,6 +344,7 @@ class DiscoveryTests: XCTestCase {
 
         var newConfigurationID: String?
 
+        let expectation = self.expectation(description: "Create a new configuration.")
         discovery.createConfiguration(
             withEnvironmentID: environmentID,
             configuration: configuration,
@@ -574,14 +387,12 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
 
-        let description2 = "Delete the new configuration."
-        let expectation2 = self.expectation(description: description2)
-
         guard let newConfigID = newConfigurationID else {
             XCTFail("Failed to instantiate configurationID when creating configuration.")
             return
         }
 
+        let expectation2 = self.expectation(description: "Delete the new configuration.")
         discovery.deleteConfiguration(
             withEnvironmentID: environmentID,
             withConfigurationID: newConfigID,
@@ -597,19 +408,13 @@ class DiscoveryTests: XCTestCase {
 
     /** Get the default configuration. */
     func testGetDefaultConfigurationDetails() {
-        let description = "Retrieve details of the default configuration."
-        let expectation = self.expectation(description: description)
 
-        guard let environmentID = environmentID else {
-            XCTFail("Failed to find test environment")
-            return
-        }
-
-        guard let configurationID = configurationID else {
+        guard let configurationID = lookupConfiguration(environmentID: environmentID, configurationName: defaultConfigurationName) else {
             XCTFail("Failed to find the default configuration.")
             return
         }
 
+        let expectation = self.expectation(description: "Retrieve details of the default configuration.")
         discovery.getConfiguration(
             withEnvironmentID: environmentID,
             withConfigurationID: configurationID,
@@ -629,13 +434,6 @@ class DiscoveryTests: XCTestCase {
 
     /** Test updating a configuration. */
     func testCreateUpdateAndDeleteConfiguration() {
-        let description = "Create a new configuration."
-        let expectation = self.expectation(description: description)
-
-        guard let environmentID = environmentID else {
-            XCTFail("Failed to find test environment")
-            return
-        }
 
         let enrichment = Enrichment(
             destinationField: "alchemy_enriched_text",
@@ -650,6 +448,7 @@ class DiscoveryTests: XCTestCase {
 
         var newConfigurationID: String?
 
+        let expectation = self.expectation(description: "Create a new configuration.")
         discovery.createConfiguration(
             withEnvironmentID: environmentID,
             configuration: configuration,
@@ -666,9 +465,6 @@ class DiscoveryTests: XCTestCase {
             return
         }
 
-        let description2 = "Update the configuration."
-        let expectation2 = self.expectation(description: description2)
-
         let normalization = Normalization(
             operation: .move,
             sourceField: "extracted_metadata.title",
@@ -680,6 +476,7 @@ class DiscoveryTests: XCTestCase {
             description: "replacement test configuration",
             normalizations: [normalization])
 
+        let expectation2 = self.expectation(description: "Update the configuration.")
         discovery.updateConfiguration(
             withEnvironmentID: environmentID,
             withConfigurationID: newConfigID,
@@ -689,9 +486,7 @@ class DiscoveryTests: XCTestCase {
             }
         waitForExpectations()
 
-        let description3 = "Retrieve details of the updated configuration."
-        let expectation3 = self.expectation(description: description3)
-
+        let expectation3 = self.expectation(description: "Retrieve details of the updated configuration.")
         discovery.getConfiguration(
             withEnvironmentID: environmentID,
             withConfigurationID: newConfigID,
@@ -723,9 +518,7 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
 
-        let description4 = "Delete the new configuration."
-        let expectation4 = self.expectation(description: description4)
-
+        let expectation4 = self.expectation(description: "Delete the new configuration.")
         discovery.deleteConfiguration(
             withEnvironmentID: environmentID,
             withConfigurationID: newConfigID,
@@ -743,17 +536,21 @@ class DiscoveryTests: XCTestCase {
 
     /** Test default configuration on document. */
     func testConfigurationOnDocument() {
-        let description = "Test default configuration on document."
-        let expectation = self.expectation(description: description)
+
+        guard let configurationID = lookupConfiguration(environmentID: environmentID, configurationName: defaultConfigurationName) else {
+            XCTFail("Failed to find the default configuration.")
+            return
+        }
 
         guard let file = Bundle(for: type(of: self)).url(forResource: "metadata", withExtension: "json") else {
             XCTFail("Unable to locate metadata.json")
             return
         }
 
+        let expectation = self.expectation(description: "Test default configuration on document.")
         discovery.testConfigurationInEnvironment(
-            withEnvironmentID: environmentID!,
-            withConfigurationID: configurationID!,
+            withEnvironmentID: environmentID,
+            withConfigurationID: configurationID,
             file: file,
             failure: failWithError) {
                 testConfigurationDetails in
@@ -776,14 +573,8 @@ class DiscoveryTests: XCTestCase {
 
     /** Retrieve a list of the collections associated with the test suite's environment. */
     func testGetCollections() {
-        let description = "Retrieve a list of collections."
-        let expectation = self.expectation(description: description)
 
-        guard let environmentID = environmentID else {
-            XCTFail("Failed to find test environment")
-            return
-        }
-
+        let expectation = self.expectation(description: "Retrieve a list of collections.")
         discovery.getCollections(withEnvironmentID: environmentID, withName: collectionName) {
             collections in
             XCTAssertNotNil(collections)
@@ -792,25 +583,19 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Create and delete collection. */
-    func testCreateAndDeleteCollection() {
-        let description = "Create a new collection."
-        let expectation = self.expectation(description: description)
+    /** Create, update and delete collection. */
+    func testCreateUpdateAndDeleteCollection() {
+
+        guard let configurationID = lookupConfiguration(environmentID: environmentID, configurationName: defaultConfigurationName) else {
+            XCTFail("Failed to find the default configuration.")
+            return
+        }
 
         let collectionName = "swift-sdk-unit-test-collection-to-delete"
         let collectionDescription = "collection for test suite"
         var collectionID: String?
 
-        guard let environmentID = environmentID else {
-            XCTFail("Failed to find test environment")
-            return
-        }
-
-        guard let configurationID = configurationID else {
-            XCTFail("Failed to find default configuration ID")
-            return
-        }
-
+        let expectation = self.expectation(description: "Create a new collection.")
         discovery.createCollection(
             withEnvironmentID: environmentID,
             withName: collectionName,
@@ -833,44 +618,70 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
 
-        let description2 = "Delete the new collection."
-        let expectation2 = self.expectation(description: description2)
+        let updatedName = "updated-name"
+        let updatedDescription = "updated-description"
+
+        let expectation2 = self.expectation(description: "Update test collection name and description.")
+        discovery.updateCollection(
+            withEnvironmentID: environmentID,
+            withCollectionID: collectionID!,
+            name: updatedName,
+            description: updatedDescription,
+            configurationID: configurationID) {
+                collection in
+                XCTAssertEqual(updatedName, collection.name)
+                XCTAssertEqual(updatedDescription, collection.description)
+                XCTAssertEqual(configurationID, collection.configurationID)
+
+                expectation2.fulfill()
+        }
+        waitForExpectations()
 
         guard let collectionToDelete = collectionID else {
             XCTFail("Failed to instantiate collectionID when creating collection.")
             return
         }
 
+        let expectation3 = self.expectation(description: "Delete the new collection.")
         discovery.deleteCollection(withEnvironmentID: environmentID, withCollectionID: collectionToDelete, failure: failWithError) {
             collection in
 
             XCTAssertEqual(collection.collectionID, collectionToDelete)
             XCTAssertEqual(collection.status, CollectionStatus.deleted)
 
-            expectation2.fulfill()
+            expectation3.fulfill()
         }
         waitForExpectations()
     }
 
     /** Retrieve test collection details. */
     func testListCollectionDetails() {
-        let description = "Retrieve test collection."
-        let expectation = self.expectation(description: description)
 
+        guard let configurationID = lookupConfiguration(environmentID: environmentID, configurationName: defaultConfigurationName) else {
+            XCTFail("Failed to find the default configuration.")
+            return
+        }
+
+        guard let collectionID = lookupCollection(environmentID: environmentID, collectionName: collectionName) else {
+            XCTFail("Failed to find the test collection.")
+            return
+        }
+
+        let expectation = self.expectation(description: "Retrieve test collection.")
         discovery.listCollectionDetails(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: environmentID,
+            withCollectionID: collectionID,
             failure: failWithError) {
                 collection in
 
                 // Verify all fields are present.
-                XCTAssertEqual(self.collectionID!, collection.collectionID)
+                XCTAssertEqual(collectionID, collection.collectionID)
                 XCTAssertEqual(self.collectionName, collection.name)
-                XCTAssertEqual(self.testDescription, collection.description)
+                XCTAssertNotNil(collection.description)
                 XCTAssertNotNil(collection.created)
                 XCTAssertNotNil(collection.updated)
                 XCTAssertNotNil(collection.status)
-                XCTAssertEqual(self.configurationID!, collection.configurationID)
+                XCTAssertEqual(configurationID, collection.configurationID)
                 XCTAssertNotNil(collection.documentCounts?.available)
                 XCTAssertNotNil(collection.documentCounts?.processing)
                 XCTAssertNotNil(collection.documentCounts?.failed)
@@ -880,56 +691,18 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Update the test collection with a new description. */
-    func testUpdateCollection() {
-        let description = "Update test collection name and description."
-        let expectation = self.expectation(description: description)
-
-        let updatedName = "updated-name"
-        let updatedDescription = "updated-description"
-
-        discovery.updateCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
-            name: updatedName,
-            description: updatedDescription,
-            configurationID: configurationID!) {
-                collection in
-                XCTAssertEqual(updatedName, collection.name)
-                XCTAssertEqual(updatedDescription, collection.description)
-                XCTAssertEqual(self.configurationID, collection.configurationID)
-
-                expectation.fulfill()
-        }
-        waitForExpectations()
-
-        let description2 = "Revert collection and description names to original values."
-        let expectation2 = self.expectation(description: description2)
-
-        discovery.updateCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
-            name: collectionName,
-            description: testDescription,
-            configurationID: configurationID!) {
-                collection in
-                XCTAssertEqual(self.collectionName, collection.name)
-                XCTAssertEqual(self.testDescription, collection.description)
-                XCTAssertEqual(self.configurationID, collection.configurationID)
-
-                expectation2.fulfill()
-        }
-        waitForExpectations()
-    }
-
     /** List the fields in the test suite's collection. */
     func testListCollectionFields() {
-        let description = "List the fields in the test suite's collection."
-        let expectation = self.expectation(description: description)
 
+        guard let collectionID = lookupCollection(environmentID: environmentID, collectionName: collectionName) else {
+            XCTFail("Failed to find the test collection.")
+            return
+        }
+
+        let expectation = self.expectation(description: "List the fields in the test suite's collection.")
         discovery.listCollectionFields(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: environmentID,
+            withCollectionID: collectionID,
             failure: failWithError) {
                 fields in
                 XCTAssertNotNil(fields)
@@ -939,19 +712,24 @@ class DiscoveryTests: XCTestCase {
     }
 
     // MARK: - Test Documents
-    func testAddDeleteDocumentToCollection() {
-        let description = "Add a document to the sample collection."
-        let expectation = self.expectation(description: description)
+    func testAddGetUpdateDeleteDocument() {
+
+        guard let collectionID = lookupCollection(environmentID: environmentID, collectionName: collectionName) else {
+            XCTFail("Failed to find the test collection.")
+            return
+        }
 
         guard let file = Bundle(for: type(of: self)).url(forResource: "discoverySample", withExtension: "json") else {
             XCTFail("Unable to locate discoverySample.json")
             return
         }
+
         var documentID: String?
         // Add document to test collection and environment
+        let expectation = self.expectation(description: "Add a document to the sample collection.")
         discovery.addDocumentToCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: environmentID,
+            withCollectionID: collectionID,
             file: file,
             failure: failWithError) {
                 document in
@@ -961,95 +739,83 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations()
 
-        let description2 = "Delete newly created document from collection."
-        let expectation2 = self.expectation(description: description2)
         guard let docID = documentID else {
             XCTFail("Failed to grab document ID from adding document to collection.")
             return
         }
-        // Delete document from test collection and environment
-        discovery.deleteDocumentFromCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
-            withDocumentID: docID,
-            failure: failWithError) {
-                document in
-                XCTAssertEqual(documentID, document.documentID)
-                XCTAssertEqual(DocumentStatus.deleted, document.status)
-                expectation2.fulfill()
-        }
-        waitForExpectations()
-    }
 
-    /* List details of a document in the test collection. */
-    func testListDocumentDetails() {
-        let description = "List details of a document in the test collection."
-        let expectation = self.expectation(description: description)
+        // List details of a document in the test collection.
 
+        let expectation2 = self.expectation(description: "List details of a document in the test collection.")
         discovery.listDocumentDetails(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: environmentID,
+            withCollectionID: collectionID,
             withDocumentID: documentID!,
             failure: failWithError) { document in
-                XCTAssertEqual(self.documentID!, document.documentID)
+                XCTAssertEqual(documentID!, document.documentID)
                 XCTAssertEqual(document.status, DocumentStatus.processing)
                 XCTAssertNotNil(document.notices)
                 XCTAssertNotNil(document.statusDescription)
-                expectation.fulfill()
+                expectation2.fulfill()
         }
         waitForExpectations()
-    }
 
-    /* Update document in the test collection. */
-    func testUpdateDocument() {
-        let description = "Update document name and description in collection."
-        let expectation = self.expectation(description: description)
-
-        guard let file = Bundle(for: type(of: self)).url(forResource: "discoverySample", withExtension: "json") else {
-            XCTFail("Unable to locate discoverySample.json")
-            return
-        }
+        // Update document in the test collection.
 
         guard let metadata = Bundle(for: type(of: self)).url(forResource: "metadata", withExtension: "json") else {
             XCTFail("Unable to locate metadata.json")
             return
         }
 
+        let expectation3 = self.expectation(description: "Update document name and description in collection.")
         discovery.updateDocumentInCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: environmentID,
+            withCollectionID: collectionID,
             withDocumentID: documentID!,
             file: file,
             metadata: metadata,
             failure: failWithError) { document in
-                XCTAssertEqual(self.documentID!, document.documentID)
+                XCTAssertEqual(documentID!, document.documentID)
                 XCTAssertEqual(document.status, DocumentStatus.processing)
-                expectation.fulfill()
+                expectation3.fulfill()
+        }
+        waitForExpectations()
+
+        // Delete document from test collection and environment
+
+        let expectation4 = self.expectation(description: "Delete newly created document from collection.")
+        discovery.deleteDocumentFromCollection(
+            withEnvironmentID: environmentID,
+            withCollectionID: collectionID,
+            withDocumentID: docID,
+            failure: failWithError) {
+                document in
+                XCTAssertEqual(documentID, document.documentID)
+                XCTAssertEqual(DocumentStatus.deleted, document.status)
+                expectation4.fulfill()
         }
         waitForExpectations()
     }
 
     // MARK: - Test Query
 
+    // https://console.bluemix.net/docs/services/discovery/migrate-bwdn.html#migrating-from-watson-discovery-news-original
+
     // swiftlint:disable:next cyclomatic_complexity
     func testQueryInNewsCollection() {
-        let description = "Query, filter and aggregate news resources in Watson collection."
-        let expectation = self.expectation(description: description)
 
-        let query = "entities:(text:\"general motors\",type:company),language:english,taxonomy:(label:\"technology and computing\")"
-        let aggregation = "[timeslice(blekko.chrondate,12hours).filter(entities.type:Company).term(entities.text).term(docSentiment.type),filter(entities.type:Company).term(entities.text),filter(entities.type:Person).term(entities.text),term(keywords.text),term(blekko.host).term(docSentiment.type),term(docSentiment.type),min(docSentiment.score),max(docSentiment.score)]"
-        let filter = "blekko.chrondate>1481335550"
-        let filterDate = 1481335550
+        let query = "enriched_text.concepts.text:\"Cloud computing\""
+        let aggregation = "[timeslice(publication_date,12hours).filter(entities.type:Company).term(entities.text).term(docSentiment.type),filter(entities.type:Company).term(entities.text),filter(entities.type:Person).term(entities.text),term(keywords.text),term(enriched_text.sentiment.document.score),min(enriched_text.sentiment.document.score),max(enriched_text.sentiment.document.score)]"
         let count = 10
-        let returnWatson = "url,enrichedTitle.text,text,docSentiment.type,blekko.chrondate"
+
+        let expectation = self.expectation(description: "Query, filter and aggregate news resources in Watson collection.")
         discovery.queryDocumentsInCollection(
-            withEnvironmentID: newsEnvironmentID!,
-            withCollectionID: newsCollectionID!,
-            withFilter: filter,
+            withEnvironmentID: newsEnvironmentID,
+            withCollectionID: newsCollectionID,
             withQuery: query,
             withAggregation: aggregation,
             count: count,
-            return: returnWatson,
+            //return: returnWatson,
             failure: failWithError) {
                 queryResponse in
                 XCTAssertNotNil(queryResponse.matchingResults)
@@ -1065,16 +831,8 @@ class DiscoveryTests: XCTestCase {
                         if let sentiment = result.documentSentiment {
                             XCTAssertNotNil(sentiment.type)
                         }
-                        if let blekko = result.blekko {
-                            if let chronDate = blekko.chrondate {
-                                XCTAssertGreaterThan(chronDate, filterDate)
-                            }
-                        }
                         XCTAssertNotNil(result.text)
                         XCTAssertNotNil(result.enrichedTitle)
-                        if let enrichedTitle = result.enrichedTitle {
-                            XCTAssertNotNil(enrichedTitle.text)
-                        }
                         XCTAssertNotNil(result.extractedURL)
                         break
                     }
@@ -1083,8 +841,8 @@ class DiscoveryTests: XCTestCase {
                 XCTAssertNotNil(queryResponse.aggregations)
                 if let aggregations = queryResponse.aggregations {
                     for aggregation in aggregations {
+                        XCTAssertNotNil(aggregation.type)
                         if let type = aggregation.type {
-                            XCTAssertNotNil(type)
                             if type == "term" {
                                 XCTAssertNotNil(aggregation.field)
                                 if let results = aggregation.results {
@@ -1123,19 +881,6 @@ class DiscoveryTests: XCTestCase {
                                 }
                             }
                         }
-                        if let field = aggregation.field {
-                            XCTAssertNotNil(field)
-                            if field == "blekko.host" {
-                                if let results = aggregation.results {
-                                    for result in results {
-                                        XCTAssertNotNil(result.aggregations)
-                                        break
-                                    }
-                                }
-                            }
-                        }
-
-                        XCTAssertNotNil(aggregation.type)
                     }
                 }
                 XCTAssertNotNil(queryResponse.results)
@@ -1147,17 +892,16 @@ class DiscoveryTests: XCTestCase {
 
     /* Test 'Concepts' model within the documents in the test collection. */
     func testConceptsModel() {
-        let description = "Test \'Concepts\' model within the documents in the test collection."
-        let expectation = self.expectation(description: description)
 
         let query = "United Nations"
 
         /// Specify which portion of the document hierarchy to return.
         let returnHierarchies = "enriched_text.concepts"
 
+        let expectation = self.expectation(description: "Test \'Concepts\' model within the documents in the test collection.")
         discovery.queryDocumentsInCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: newsEnvironmentID,
+            withCollectionID: newsCollectionID,
             withQuery: query,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
@@ -1173,11 +917,12 @@ class DiscoveryTests: XCTestCase {
                             if let concepts = enrichedTitle.concepts {
                                 for concept in concepts where concept.text == query {
                                     conceptMatchesQuery = true
-                                    XCTAssertNotNil(concept.website, "http://www.un.org/")
-                                    XCTAssertNotNil(concept.dbpedia)
+                                    //XCTAssertNotNil(concept.website, "http://www.un.org/")
+                                    //XCTAssertNotNil(concept.dbpedia)
                                     XCTAssertNotNil(concept.relevance)
-                                    XCTAssertNotNil(concept.freebase)
-                                    XCTAssertNotNil(concept.yago)
+                                    //XCTAssertNotNil(concept.freebase)
+                                    //XCTAssertNotNil(concept.yago)
+                                    XCTAssertNotNil(concept.json["dbpedia_resource"])
                                     break
                                 }
                             }
@@ -1192,17 +937,16 @@ class DiscoveryTests: XCTestCase {
 
     /* Test EnrichedTitle.docSentiment model within the documents in the test collection. */
     func testDocumentSentimentModel() {
-        let description = "Test EnrichedTitle.docSentiment model within the documents in the test collection."
-        let expectation = self.expectation(description: description)
 
         let query = "United Nations"
 
         /// Specify which portion of the document hierarchy to return.
-        let returnHierarchies = "enriched_text.docSentiment"
+        let returnHierarchies = "enriched_text.sentiment.document"
 
+        let expectation = self.expectation(description: "Test EnrichedTitle.docSentiment model within the documents in the test collection.")
         discovery.queryDocumentsInCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: newsEnvironmentID,
+            withCollectionID: newsCollectionID,
             withQuery: query,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
@@ -1211,12 +955,11 @@ class DiscoveryTests: XCTestCase {
                     for result in results {
                         XCTAssertNotNil(result.enrichedTitle)
                         if let enrichedTitle = result.enrichedTitle {
-                            XCTAssertNotNil(enrichedTitle.documentSentiment)
-                            if let documentSentiment = enrichedTitle.documentSentiment {
-                                XCTAssertNotNil(documentSentiment.mixed)
-                                XCTAssertNotNil(documentSentiment.score)
-                                XCTAssertNotNil(documentSentiment.type)
-                            }
+                            let sentiment = enrichedTitle.json["sentiment"] as? [String: Any]
+                            XCTAssertNotNil(sentiment)
+                            let document = sentiment!["document"] as? [String: Any]
+                            XCTAssertNotNil(document)
+                            XCTAssertNotNil(document!["score"])
                         }
                     }
                 }
@@ -1227,17 +970,16 @@ class DiscoveryTests: XCTestCase {
 
     /* Test EnrichedTitle.taxonomy within the document in the test collection.*/
     func testTaxonomyModel() {
-        let description = "Test EnrichedTitle.docSentiment model within the documents in the test collection."
-        let expectation = self.expectation(description: description)
 
         let query = "United Nations"
 
         /// Specify which portion of the document hierarchy to return.
         let returnHierarchies = "enriched_text.taxonomy"
 
+        let expectation = self.expectation(description: "Test EnrichedTitle.docSentiment model within the documents in the test collection.")
         discovery.queryDocumentsInCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: newsEnvironmentID,
+            withCollectionID: newsCollectionID,
             withQuery: query,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
@@ -1264,17 +1006,18 @@ class DiscoveryTests: XCTestCase {
     /* Test EnrichedTitle.relations, SAO relations within the document in the test collection. */
     // swiftlint:disable:next cyclomatic_complexity
     func testRelationsModel() {
-        let description = "Test EnrichedTitle.docSentiment, subject, action, object models within the documents in the test collection."
-        let expectation = self.expectation(description: description)
 
-        let query = "United Nations"
+        let query = "enriched_title.concepts.text:\"artificial intelligence\""
+        let filter = "enriched_title.semantic_roles.subject.entities.type:\"Company\",enriched_title.semantic_roles.action.normalized:\"acquire\""
 
         /// Specify which portion of the document hierarchy to return.
-        let returnHierarchies = "enriched_text.relations"
+        let returnHierarchies = "enriched_text.semantic_roles"
 
+        let expectation = self.expectation(description: "Test EnrichedTitle.docSentiment, subject, action, object models within the documents in the test collection.")
         discovery.queryDocumentsInCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: newsEnvironmentID,
+            withCollectionID: newsCollectionID,
+            withFilter: filter,
             withQuery: query,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
@@ -1283,41 +1026,13 @@ class DiscoveryTests: XCTestCase {
                     for result in results {
                         XCTAssertNotNil(result.enrichedTitle)
                         if let enrichedTitle = result.enrichedTitle {
-                            XCTAssertNotNil(enrichedTitle.relations)
-                            if let relations = enrichedTitle.relations {
-                                for relation in relations {
-                                    XCTAssertNotNil(relation.sentence)
-                                    XCTAssertNotNil(relation.action)
-                                    if let action = relation.action {
-                                        XCTAssertNotNil(action.lemmatized)
-                                        XCTAssertNotNil(action.text)
-                                        XCTAssertNotNil(action.verb)
-                                    }
-                                    XCTAssertNotNil(relation.sentence)
-                                    XCTAssertNotNil(relation.subject)
-                                    if let subject = relation.subject {
-                                        if let keywords = subject.keywords {
-                                            for keyword in keywords {
-                                                if let knowledgeGraph = keyword.knowledgeGraph {
-                                                    XCTAssertNotNil(knowledgeGraph.typeHierarchy)
-                                                }
-                                                XCTAssertNotNil(keyword.text)
-                                                break
-                                            }
-                                        }
-                                        XCTAssertNotNil(subject.text)
-                                    }
-                                    if let object = relation.object {
-                                        if let keywords = object.keywords {
-                                            XCTAssertNotNil(keywords[0])
-                                        }
-                                        XCTAssertNotNil(object.text)
-                                        if let sentiment = object.sentiment {
-                                            XCTAssertNotNil(sentiment.mixed)
-                                            XCTAssertNotNil(sentiment.type)
-                                            XCTAssertNotNil(sentiment.score)
-                                        }
-                                    }
+                            XCTAssertNotNil(enrichedTitle.json["semantic_roles"])
+                            if let semantic_roles = enrichedTitle.json["semantic_roles"] as? [[String: Any]] {
+                                for semantic_role in semantic_roles {
+                                    XCTAssertNotNil(semantic_role["sentence"])
+                                    XCTAssertNotNil(semantic_role["action"])
+                                    XCTAssertNotNil(semantic_role["subject"])
+                                    //XCTAssertNotNil(semantic_role["object"])
                                 }
                             }
                         }
@@ -1330,17 +1045,16 @@ class DiscoveryTests: XCTestCase {
 
     /** Test enriched_text.entities model. */
     func testEntityModel() {
-        let description = "Test enriched_text.entities models within the documents in the test collection."
-        let expectation = self.expectation(description: description)
 
         let query = "United Nations"
 
         /// Specify which portion of the document hierarchy to return.
         let returnHierarchies = "enriched_text.entities"
 
+        let expectation = self.expectation(description: "Test enriched_text.entities models within the documents in the test collection.")
         discovery.queryDocumentsInCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: newsEnvironmentID,
+            withCollectionID: newsCollectionID,
             withQuery: query,
             return: returnHierarchies,
             failure: failWithError) { queryResponse in
@@ -1370,8 +1084,6 @@ class DiscoveryTests: XCTestCase {
 
     /** Test aggregation query. */
     func testEntityAggregationModel() {
-        let description = "Test enriched_text.entities models within the documents in the test collection."
-        let expectation = self.expectation(description: description)
 
         let query = "United Nations"
         let aggregation = "max(enriched_text.entities.sentiment.score)"
@@ -1379,9 +1091,10 @@ class DiscoveryTests: XCTestCase {
         /// Specify which portion of the document hierarchy to return.
         let returnHierarchies = "enriched_text.entities.sentiment,enriched_text.entities.text"
 
+        let expectation = self.expectation(description: "Test enriched_text.entities models within the documents in the test collection.")
         discovery.queryDocumentsInCollection(
-            withEnvironmentID: environmentID!,
-            withCollectionID: collectionID!,
+            withEnvironmentID: newsEnvironmentID,
+            withCollectionID: newsCollectionID,
             withQuery: query,
             withAggregation: aggregation,
             return: returnHierarchies,

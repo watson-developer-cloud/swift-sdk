@@ -45,9 +45,11 @@ public struct Environment: JSONDecodable {
         environmentID = try json.getString(at: "environment_id")
         name = try json.getString(at: "name")
         description = try json.getString(at: "description")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
-        status = try json.getString(at: "status")
+        // Some environments (e.g. System environment) do not contain created or updated
+        created = (try? json.getString(at: "created")) ?? ""
+        updated = (try? json.getString(at: "updated")) ?? ""
+        // Some instances of environment do not contain status
+        status = (try? json.getString(at: "status")) ?? ""
         indexCapacity = try? json.decode(at: "index_capacity")
     }
 }

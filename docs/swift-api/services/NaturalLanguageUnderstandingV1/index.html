@@ -36,7 +36,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Enums.html">Enums</a>
+            <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Enums/JSON.html">JSON</a>
@@ -47,7 +47,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Structs.html">Structs</a>
+            <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Structs/AnalysisResults.html">AnalysisResults</a>
@@ -222,7 +222,6 @@
 <li><a href="#alchemylanguage">AlchemyLanguage</a></li>
 <li><a href="#conversation">Conversation</a></li>
 <li><a href="#discovery">Discovery</a></li>
-<li><a href="#document-conversion">Document Conversion</a></li>
 <li><a href="#language-translator">Language Translator</a></li>
 <li><a href="#natural-language-classifier">Natural Language Classifier</a></li>
 <li><a href="#natural-language-understanding">Natural Language Understanding</a></li>
@@ -265,7 +264,7 @@
 <pre class="highlight shell"><code><span class="gp">$ </span>carthage update --platform iOS
 </code></pre>
 
-<p>Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired.</p>
+<p>Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired. If you are using Speech to Text, be sure to include both <code>SpeechToTextV1.framework</code> and <code>Starscream.framework</code> in your application.</p>
 <h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
 
 <p>To include the Watson SDK to your projects, add the following to your <code>Package.swift</code> file:</p>
@@ -278,7 +277,7 @@
 <p>To build the project, run <code>swift build</code> from the command line.</p>
 <h2 id='service-instances' class='heading'>Service Instances</h2>
 
-<p>a href="https://www.ibm.com/watson/developercloud/">IBM Watson</a> offers a variety of services for developing cognitive applications. The complete list of Watson services is available from the <a href="https://www.ibm.com/watson/products-services/">products and services</a> page. Services are instantiated using the <a href="https://www.ibm.com/cloud/">IBM Cloud</a> platform.</p>
+<p><a href="https://www.ibm.com/watson/developer/">IBM Watson</a> offers a variety of services for developing cognitive applications. The complete list of Watson services is available from the <a href="https://www.ibm.com/watson/products-services/">products and services</a> page. Services are instantiated using the <a href="https://www.ibm.com/cloud/">IBM Cloud</a> platform.</p>
 
 <p>Follow these steps to create a service instance and obtain its credentials:</p>
 
@@ -305,7 +304,7 @@
 
 <p>Note that service credentials are different from your IBM Cloud username and password.</p>
 
-<p>See <a href="https://console.bluemix.net/docs/services/watson/index.html">Getting Started with Watson and IBM Cloud</a> for more details.</p>
+<p>See <a href="https://console.bluemix.net/docs/services/watson/index.html">Getting started with Watson and IBM Cloud</a> for details.</p>
 <h2 id='custom-service-urls' class='heading'>Custom Service URLs</h2>
 
 <p>In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.</p>
@@ -336,7 +335,7 @@
 <p>By default, the SDK executes all networking operations asynchonously. If your application requires synchronous execution, you can use a <code>DispatchGroup</code>. For example:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dispatchGroup</span> <span class="o">=</span> <span class="kt">DispatchGroup</span><span class="p">()</span>
 <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">enter</span><span class="p">()</span>
-<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">withWorkspace</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
     <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">leave</span><span class="p">()</span>
 <span class="p">}</span>
@@ -347,9 +346,7 @@
 <p>Please see <a href="docs/objective-c.md">this tutorial</a> for more information about consuming the Watson Developer Cloud Swift SDK in an Objective-C application.</p>
 <h2 id='linux-compatibility' class='heading'>Linux Compatibility</h2>
 
-<p>The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.</p>
-
-<p>To include the Watson SDK to your Linux projects, please follow the <a href="#swift-package-manager">Swift Package Manager instructions.</a></p>
+<p>To use the Watson SDK in your Linux project, please follow the <a href="#swift-package-manager">Swift Package Manager instructions.</a>. Note that Speech to Text and Text to Speech are not supported because they rely on frameworks that are unavailable on Linux.</p>
 <h2 id='contributing' class='heading'>Contributing</h2>
 
 <p>We would love any and all help! If you would like to contribute, please read our <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a> documentation with information on getting started.</p>
@@ -487,7 +484,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="p">}</span>
 </code></pre>
 
-<p>For reference, the <code>JSON</code> type is defined as:</p>
+<p>For reference, the <code><a href="Enums/JSON.html">JSON</a></code> type is defined as:</p>
 <pre class="highlight swift"><code><span class="c1">/// A JSON value (one of string, number, object, array, true, false, or null).</span>
 <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">JSON</span><span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Codable</span> <span class="p">{</span>
     <span class="k">case</span> <span class="n">null</span>
@@ -634,41 +631,6 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><a href="https://www.ibm.com/watson/developercloud/discovery/api/v1/">IBM Discovery - API Reference</a></li>
 <li><a href="https://watson-api-explorer.mybluemix.net/apis/discovery-v1">IBM Discovery - API Explorer</a></li>
 <li><a href="https://console.bluemix.net/docs/services/discovery/query-reference.html#query-building">IBM Discovery - Query Building</a></li>
-</ul>
-<h2 id='document-conversion' class='heading'>Document Conversion</h2>
-
-<p>The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.</p>
-
-<p>The following example demonstrates how to convert a document with the Document Conversation service:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">DocumentConversionV1</span>
-
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"2015-12-15"</span>
-<span class="k">let</span> <span class="nv">documentConversion</span> <span class="o">=</span> <span class="kt">DocumentConversion</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
-
-<span class="c1">// load document</span>
-<span class="k">let</span> <span class="nv">filename</span> <span class="o">=</span> <span class="s">"your-document-filename"</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">document</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"xml"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to locate document."</span><span class="p">)</span>
-    <span class="k">return</span>
-<span class="p">}</span>
-
-<span class="c1">// convert document</span>
-<span class="k">let</span> <span class="nv">config</span> <span class="o">=</span> <span class="k">try!</span> <span class="n">documentConversion</span><span class="o">.</span><span class="nf">writeConfig</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">ReturnType</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">documentConversion</span><span class="o">.</span><span class="nf">convertDocument</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="nv">withConfigurationFile</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">text</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>The following links provide more information about the IBM Document Conversion service:</p>
-
-<ul>
-<li><a href="https://www.ibm.com/watson/services/document-conversion/">IBM Watson Document Conversion - Service Page</a></li>
-<li><a href="https://console.bluemix.net/docs/services/document-conversion/index.html">IBM Watson Document Conversion - Documentation</a></li>
-<li><a href="https://document-conversion-demo.mybluemix.net/">IBM Watson Document Conversion - Demo</a></li>
 </ul>
 <h2 id='language-translator' class='heading'>Language Translator</h2>
 
@@ -923,6 +885,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.</p>
 
 <p>The <code>SpeechToText</code> class is the SDK&rsquo;s primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the <code>SpeechToTextSession</code> class that exposes more control over the WebSockets session.</p>
+
+<p>Please be sure to include both <code>SpeechToTextV1.framework</code> and <code>Starscream.framework</code> in your application. Starscream is a recursive dependency that adds support for WebSockets sessions.</p>
 <h4 id='recognition-request-settings' class='heading'>Recognition Request Settings</h4>
 
 <p>The <code>RecognitionSettings</code> class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart">initating a request</a>.</p>
@@ -1243,7 +1207,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <ul>
 <li><a href="https://www.ibm.com/watson/services/text-to-speech/">IBM Watson Text To Speech - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/text-to-speech/index.html">IBM Watson Text To Speech - Documentation</a></li>
-<li><a href="https://text-to-speech-demo.mybluemix.net/">IBM Watson Text To Speech - Demo</a></li>
+<li><a href="https://text-to-speech-demo.ng.bluemix.net/">IBM Watson Text To Speech - Demo</a></li>
 </ul>
 <h2 id='tone-analyzer' class='heading'>Tone Analyzer</h2>
 
@@ -1349,7 +1313,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <ul>
 <li><a href="http://www.ibm.com/watson/developercloud/tradeoff-analytics.html">IBM Watson Tradeoff Analytics - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/tradeoff-analytics/index.html">IBM Watson Tradeoff Analytics - Documentation</a></li>
-<li><a href="https://tradeoff-analytics-demo.mybluemix.net/">IBM Watson Tradeoff Analytics - Demo</a></li>
+<li><a href="https://tradeoff-analytics-demo.ng.bluemix.net/">IBM Watson Tradeoff Analytics - Demo</a></li>
 </ul>
 <h2 id='visual-recognition' class='heading'>Visual Recognition</h2>
 
@@ -1382,8 +1346,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-10-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

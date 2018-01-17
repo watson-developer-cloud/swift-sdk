@@ -1,69 +1,90 @@
 [
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
+  "warnings": [
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/TradeoffAnalyticsV1/Models/Resolution.swift",
+      "line": 93,
+      "symbol": "MapNodeCoordinates.x",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/TradeoffAnalyticsV1/Models/Resolution.swift",
+      "line": 97,
+      "symbol": "MapNodeCoordinates.y",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+},
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
+  "warnings": [
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/TextToSpeechV1/Models/SynthesisVoice.swift",
+      "line": 21,
+      "symbol": "SynthesisVoice",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+},
+	{
+  "warnings": [
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/RecognitionSettings.swift",
+      "line": 103,
+      "symbol": "RecognitionSettings.toJSONObject()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+},
+	{
+  "warnings": [
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/RetrieveAndRankV1/RetrieveAndRank.swift",
+      "line": 686,
+      "symbol": "RetrieveAndRank.searchAndRank(withCollectionName:fromSolrClusterID:rankerID:query:returnFields:numberOfDocuments:failure:success:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+},
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
--e -n 	
-{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
--e -n 	
-{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
--e -n 	
-{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
--e -n 	
-{
+	{
   "warnings": [
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/ListModelsResults.swift",
@@ -110,43 +131,37 @@
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
@@ -367,35 +382,35 @@
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 24,
+      "line": 25,
       "symbol": "DialogNodeNextStep.Behavior.to",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 29,
+      "line": 30,
       "symbol": "DialogNodeNextStep.Selector.condition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 30,
+      "line": 31,
       "symbol": "DialogNodeNextStep.Selector.client",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 31,
+      "line": 32,
       "symbol": "DialogNodeNextStep.Selector.userInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 32,
+      "line": 33,
       "symbol": "DialogNodeNextStep.Selector.body",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -592,22 +607,19 @@
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 },
--e -n 	
-{
+	{
   "warnings": [
 
   ],

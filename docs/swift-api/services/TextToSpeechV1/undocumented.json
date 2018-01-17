@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/TextToSpeechV1/Models/SynthesisVoice.swift",
+      "line": 21,
+      "symbol": "SynthesisVoice",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
 }

@@ -2,7 +2,7 @@ Change Log
 ==========
 
 ## Version 0.20.0
-_2018_01_17_
+_2018-01-17_
 
 This release extracts Starscream to be an _external_ dependency. Starscream adds support for WebSockets sessions and is required for use with the Speech to Text service. Because it is an _external_ dependency, developers using the SDK must now link and embed it in their projects. For more information, see [Readme: Speech to Text](https://github.com/watson-developer-cloud/swift-sdk#speech-to-text).
 

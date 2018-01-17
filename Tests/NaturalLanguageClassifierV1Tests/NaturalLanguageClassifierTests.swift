@@ -24,7 +24,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!
     private let newClassifierName = "Swift SDK Test Classifier"
-    private let trainedClassifierId = "0015c6x266-nlc-88"
+    private let trainedClassifierId = "0015c6x266-nlc-4850"
 
     // MARK: - Test Configuration
 

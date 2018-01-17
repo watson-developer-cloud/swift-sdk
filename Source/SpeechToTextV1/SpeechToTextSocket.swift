@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import Starscream
 
 internal class SpeechToTextSocket: WebSocketDelegate {
 
@@ -41,12 +42,14 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         restToken: RestToken,
         defaultHeaders: [String: String])
     {
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 30
+        self.socket = WebSocket(request: request)
         self.url = url
         self.restToken = restToken
         self.maxTokenRefreshes = 1
         self.tokenRefreshes = 0
         self.defaultHeaders = defaultHeaders
-        self.socket = WebSocket(url: url)
         self.queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         queue.isSuspended = true

@@ -219,35 +219,35 @@
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 24,
+      "line": 25,
       "symbol": "DialogNodeNextStep.Behavior.to",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 29,
+      "line": 30,
       "symbol": "DialogNodeNextStep.Selector.condition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 30,
+      "line": 31,
       "symbol": "DialogNodeNextStep.Selector.client",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 31,
+      "line": 32,
       "symbol": "DialogNodeNextStep.Selector.userInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 32,
+      "line": 33,
       "symbol": "DialogNodeNextStep.Selector.body",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"

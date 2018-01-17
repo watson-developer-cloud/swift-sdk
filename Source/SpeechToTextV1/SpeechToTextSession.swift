@@ -14,6 +14,9 @@
  * limitations under the License.
  **/
 
+#if os(Linux)
+#else
+
 import Foundation
 import AVFoundation
 
@@ -304,3 +307,5 @@ public class SpeechToTextSession {
         socket.disconnect()
     }
 }
+
+#endif

@@ -1,16 +1,20 @@
 #!/bin/bash
 
-set -o pipefail
-exitCode=0
+# This script builds and tests each scheme of the Swift SDK using the
+# iOS Simulator. This script will not run on Linux.
+
+####################
+# Environment Vars
+####################
+
+# the device to build for
 DESTINATION="OS=11.2,name=iPhone 7"
 
-function checkStatus {
-    if [[ $exitCode == 0 && $1 != 0 ]]; then
-        exitCode=$1
-    fi
-}
+# the exit code of each build command
+EXIT_CODES=()
 
-schemes=(
+# the schemes to build
+SCHEMES=(
 	"AlchemyDataNewsV1"
 	"AlchemyLanguageV1"
 	"AlchemyVisionV1"
@@ -32,9 +36,38 @@ schemes=(
 	"VisualRecognitionV3"
 )
 
-for scheme in ${schemes[@]}; do
-	xcodebuild -scheme "$scheme" -destination "$DESTINATION" | xcpretty
-	checkStatus $?
+####################
+# Dependencies
+####################
+
+brew update
+brew outdated carthage || brew upgrade carthage
+carthage bootstrap --platform iOS
+
+####################
+# Build and Test
+####################
+
+# set a pipeline's return status to the value of the last (rightmost) commmand
+# to exit with a non-zero status, or zero if all commands exited successfully
+# (required to check status code when using xcpretty)
+set -o pipefail
+
+# build each scheme
+for SCHEME in ${SCHEMES[@]}; do
+	xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" | xcpretty
+	EXIT_CODES+=($?)
 done
 
-exit $exitCode
+####################
+# Set Exit Code
+####################
+
+# exit with the first non-zero status or zero if all builds exited successfully
+for EXIT_CODE in ${EXIT_CODES[@]}; do
+	if [ $EXIT_CODE -ne 0 ]
+	then
+		exit $EXIT_CODE
+	fi
+done
+exit 0

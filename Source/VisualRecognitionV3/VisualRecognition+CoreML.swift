@@ -65,9 +65,9 @@ extension VisualRecognition {
             return
         }
 
-        // parse classifier's `updated` date
+        // parse the date on which the classifier was last updated
         getClassifier(withID: classifierID, failure: failure) { classifier in
-            guard let classifierDate = dateFormatter.date(from: classifier.updated) else {
+            guard let classifierDate = dateFormatter.date(from: classifier.retrained ?? classifier.created) else {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
                 return
             }

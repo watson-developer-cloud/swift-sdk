@@ -39,6 +39,9 @@ public struct Classifier: JSONDecodable {
     
     /// The time and date when the classifier was updated.
     public let updated: String
+
+    /// The time and date when the classifier was retrained.
+    public let retrained: String?
     
     /// The classes of the classifier.
     public let classes: [String]
@@ -58,6 +61,7 @@ public struct Classifier: JSONDecodable {
         explanation = try? json.getString(at: "explanation")
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")
+        retrained = try? json.getString(at: "retrained")
         classes = try json.getArray(at: "classes").map { try $0.getString(at: "class") }
         coreMLEnabled = try json.getBool(at: "core_ml_enabled")
         coreMLStatus = try json.getString(at: "core_ml_status")

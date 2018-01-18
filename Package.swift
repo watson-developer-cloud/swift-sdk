@@ -66,5 +66,26 @@ let package = Package(
         .target(name: "ToneAnalyzerV3", dependencies: []),
         .target(name: "TradeoffAnalyticsV1", dependencies: []),
         .target(name: "VisualRecognitionV3", dependencies: []),
+        .testTarget(name: "AlchemyDataNewsV1Tests", dependencies: ["AlchemyDataNewsV1"]),
+        .testTarget(name: "AlchemyLanguageV1Tests", dependencies: ["AlchemyLanguageV1"]),
+//        .testTarget(name: "AlchemyVisionV1Tests", dependencies: ["AlchemyVisionV1"]),    ///////
+        .testTarget(name: "ConversationV1Tests", dependencies: ["ConversationV1"]),
+//        .testTarget(name: "DialogV1Tests", dependencies: ["DialogV1"]),                 //////
+//        .testTarget(name: "DiscoveryV1Tests", dependencies: ["DiscoveryV1"]),              //////
+        .testTarget(name: "DocumentConversionV1Tests", dependencies: ["DocumentConversionV1"]),
+        .testTarget(name: "LanguageTranslatorV2Tests", dependencies: ["LanguageTranslatorV2"]),
+        .testTarget(name: "NaturalLanguageClassifierV1Tests", dependencies: ["NaturalLanguageClassifierV1"]),
+        .testTarget(name: "NaturalLanguageUnderstandingV1Tests", dependencies: ["NaturalLanguageUnderstandingV1"]),
+        .testTarget(name: "PersonalityInsightsV2Tests", dependencies: ["PersonalityInsightsV2"]),
+        .testTarget(name: "PersonalityInsightsV3Tests", dependencies: ["PersonalityInsightsV3"]),
+        .testTarget(name: "RelationshipExtractionV1BetaTests", dependencies: ["RelationshipExtractionV1Beta"]),
+//        .testTarget(name: "RestKitTests", dependencies: ["RestKit"]),      // RestKit not found?
+        .testTarget(name: "RetrieveAndRankV1Tests", dependencies: ["RetrieveAndRankV1"]),
+//        .testTarget(name: "SpeechToTextV1Tests", dependencies: ["SpeechToTextV1"]),    // SpeechToTextV1 not founddependencies
+//        .testTarget(name: "TextToSpeechV1Tests", dependencies: ["TextToSpeechV1"]),    //TextToSpeechV1 not found
+        .testTarget(name: "ToneAnalyzerV3Tests", dependencies: ["ToneAnalyzerV3"]),
+        .testTarget(name: "TradeoffAnalyticsV1Tests", dependencies: ["TradeoffAnalyticsV1"]),
+        .testTarget(name: "VisualRecognitionV3Tests", dependencies: ["VisualRecognitionV3"]),
     ]
+
 )

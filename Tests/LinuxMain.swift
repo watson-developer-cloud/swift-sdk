@@ -10,7 +10,7 @@ import XCTest
 @testable import NaturalLanguageClassifierV1Tests
 //@testable import PersonalityInsightsV2Tests   Fatal error: init(for:) is not yet implemented: file Foundation/Bundle.swift, line 56
 @testable import RelationshipExtractionV1BetaTests
-//@testable import RetrieveAndRankV1Tests  Fatal error: init(for:) is not yet implemented: file Foundation/Bundle.swift, line 56
+@testable import RetrieveAndRankV1Tests
 //@testable import TextToSpeechV1Tests    /SwiftSDK/Tests/LinuxMain.swift:14:18: error: no such module 'TextToSpeechV1Tests'
 @testable import ToneAnalyzerV3Tests
 @testable import TradeoffAnalyticsV1Tests
@@ -28,7 +28,7 @@ XCTMain([
     testCase(NaturalLanguageClassifierTests.allTests),
 //    testCase(PersonalityInsightsTests.allTests),
     testCase(RelationshipExtractionTests.allTests),
-//    testCase(RetrieveAndRankTests.allTests),   Fatal error: init(for:) is not yet implemented: file Foundation/Bundle.swift, line 56
+    testCase(RetrieveAndRankTests.allTests),
 //    testCase(TextToSpeechTests.allTests),
     testCase(ToneAnalyzerTests.allTests),
     testCase(TradeoffAnalyticsTests.allTests),

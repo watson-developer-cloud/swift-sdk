@@ -31,6 +31,41 @@ class RetrieveAndRankTests: XCTestCase {
     private let trainedRankerName = "trained-swift-sdk-ranker"
 
     static var allTests: [(String, (RetrieveAndRankTests) -> () throws -> Void)] {
+        #if os(Linux)
+        return [
+            ("testGetSolrClusters", testGetSolrClusters),
+            ("testCreateAndDeleteSolrCluster", testCreateAndDeleteSolrCluster),
+            ("testGetSolrCluster", testGetSolrCluster),
+            ("testListAllSolrConfigurations", testListAllSolrConfigurations),
+            ("testCreateAndDeleteSolrConfiguration", testCreateAndDeleteSolrConfiguration),
+            ("testGetSolrCollections", testGetSolrCollections),
+            ("testCreateAndDeleteSolrCollection", testCreateAndDeleteSolrCollection),
+            ("testUpdateSolrCollection", testUpdateSolrCollection),
+            ("testSearch", testSearch),
+            ("testSearchAndRank", testSearchAndRank),
+            ("testGetRankers", testGetRankers),
+            ("testGetRankerWithSpecificID", testGetRankerWithSpecificID),
+            ("testCreateAndDeleteRanker", testCreateAndDeleteRanker),
+            ("testRanker", testRanker),
+            ("testCreateSolrClusterWithInvalidSize", testCreateSolrClusterWithInvalidSize),
+            ("testDeleteSolrClusterWithBadID", testDeleteSolrClusterWithBadID),
+            ("testGetSolrClusterWithInvalidID", testGetSolrClusterWithInvalidID),
+            ("testGetConfigurationsWithInvalidSolrClusterID", testGetConfigurationsWithInvalidSolrClusterID),
+            ("testGetConfigurationsWithInaccessibleSolrClusterID", testGetConfigurationsWithInaccessibleSolrClusterID),
+            ("testCreateSolrConfigurationWithBadSolrClusterID", testCreateSolrConfigurationWithBadSolrClusterID),
+            ("testCreateSolrConfigurationWithDuplicateName", testCreateSolrConfigurationWithDuplicateName),
+            ("testDeleteSolrConfigurationWithInvalidClusterID", testDeleteSolrConfigurationWithInvalidClusterID),
+            ("testGetCollectionsOfNonExistentCluster", testGetCollectionsOfNonExistentCluster),
+            ("testCreateCollectionInNonExistentCluster", testCreateCollectionInNonExistentCluster),
+            ("testDeleteCollectionInNonExistentCluster", testDeleteCollectionInNonExistentCluster),
+            ("testUpdateCollectionWithinNonExistentCluster", testUpdateCollectionWithinNonExistentCluster),
+            ("testSearchWithInvalidClusterID", testSearchWithInvalidClusterID),
+            ("testSearchAndRankWithInvalidClusterID", testSearchAndRankWithInvalidClusterID),
+            ("testGetDetailsOfNonExistentRanker", testGetDetailsOfNonExistentRanker),
+            ("testDeleteNonExistentRanker", testDeleteNonExistentRanker),
+            ("testRankWithInvalidRankerID", testRankWithInvalidRankerID),
+        ]
+        #else
         return [
             ("testGetSolrClusters", testGetSolrClusters),
             ("testCreateAndDeleteSolrCluster", testCreateAndDeleteSolrCluster),
@@ -65,6 +100,8 @@ class RetrieveAndRankTests: XCTestCase {
             ("testDeleteNonExistentRanker", testDeleteNonExistentRanker),
             ("testRankWithInvalidRankerID", testRankWithInvalidRankerID),
         ]
+        #endif
+        
     }
 
     // MARK: - Test Configuration
@@ -276,10 +313,15 @@ class RetrieveAndRankTests: XCTestCase {
 
     /** Load files needed for the following unit tests. */
     private func loadFile(name: String, withExtension: String) -> URL? {
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
-            return nil
-        }
+        #if os(iOS)
+            let bundle = Bundle(for: type(of: self))
+            guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
+                return nil
+            }
+        #else
+            let url = URL(fileURLWithPath: "Tests/RetrieveAndRankTests/"+name+"."+withExtension)
+        #endif
+
         return url
     }
 
@@ -384,22 +426,25 @@ class RetrieveAndRankTests: XCTestCase {
     }
 
     /** Get a specific configuration. */
-    func testGetSolrConfiguration() {
-        let description = "Get the trained configuration in the trained Solr cluster."
-        let expectation = self.expectation(description: description)
+    #if os(Linux)
+    #else
+        func testGetSolrConfiguration() {
+            let description = "Get the trained configuration in the trained Solr cluster."
+            let expectation = self.expectation(description: description)
 
-        retrieveAndRank.getSolrConfiguration(
-            withName: trainedConfigurationName,
-            fromSolrClusterID: trainedClusterID,
-            failure: failWithError) { file in
+            retrieveAndRank.getSolrConfiguration(
+                withName: trainedConfigurationName,
+                fromSolrClusterID: trainedClusterID,
+                failure: failWithError) { file in
 
-            let fileManager = FileManager.default
-            XCTAssertTrue(fileManager.fileExists(atPath: file.path))
-            try! fileManager.removeItem(at: file)
-            expectation.fulfill()
+                let fileManager = FileManager.default
+                XCTAssertTrue(fileManager.fileExists(atPath: file.path))
+                try! fileManager.removeItem(at: file)
+                expectation.fulfill()
+            }
+            waitForExpectations()
         }
-        waitForExpectations()
-    }
+    #endif
 
     /** List all Solr collections associated with the trained cluster. */
     func testGetSolrCollections() {

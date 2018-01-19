@@ -69,7 +69,7 @@ let package = Package(
         .testTarget(name: "AlchemyDataNewsV1Tests", dependencies: ["AlchemyDataNewsV1"]),
         .testTarget(name: "AlchemyLanguageV1Tests", dependencies: ["AlchemyLanguageV1"]),
         .testTarget(name: "ConversationV1Tests", dependencies: ["ConversationV1"]),
-//        .testTarget(name: "DiscoveryV1Tests", dependencies: ["DiscoveryV1"]),
+        .testTarget(name: "DiscoveryV1Tests", dependencies: ["DiscoveryV1"]),
         .testTarget(name: "DocumentConversionV1Tests", dependencies: ["DocumentConversionV1"]),
         .testTarget(name: "LanguageTranslatorV2Tests", dependencies: ["LanguageTranslatorV2"]),
         .testTarget(name: "NaturalLanguageClassifierV1Tests", dependencies: ["NaturalLanguageClassifierV1"]),

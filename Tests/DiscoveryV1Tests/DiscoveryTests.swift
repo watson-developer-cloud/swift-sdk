@@ -634,8 +634,7 @@ class DiscoveryTests: XCTestCase {
                 return
             }
         #else
-            let file = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/" + "metadata" + "." +, withExtension: "json"
-)
+             let file = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/metadata.json")
         #endif
             
         let expectation = self.expectation(description: "Test default configuration on document.")

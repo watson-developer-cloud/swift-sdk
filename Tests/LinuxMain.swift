@@ -1,8 +1,7 @@
 import XCTest
 @testable import AlchemyDataNewsV1Tests
-//@testable import AlchemyLanguageV1Tests
 @testable import ConversationV1Tests
-//@testable import DiscoveryV1Tests
+@testable import DiscoveryV1Tests
 @testable import DocumentConversionV1Tests
 @testable import LanguageTranslatorV2Tests
 @testable import NaturalLanguageClassifierV1Tests

@@ -58,12 +58,17 @@ class PersonalityInsightsTests: XCTestCase {
 
     /** Load external files to test. Fails if unable to locate file. */
     func load(forResource resource: String, ofType ext: String) -> String? {
-        let bundle = Bundle(for: type(of: self))
-        guard let file = bundle.path(forResource: resource, ofType: ext) else {
-            XCTFail("Unable to locate \(resource).\(ext) file.")
-            return nil
-        }
-        return try? String(contentsOfFile: file)
+        #if os(iOS)
+            let bundle = Bundle(for: type(of: self))
+            guard let file = bundle.path(forResource: resource, ofType: ext) else {
+                XCTFail("Unable to locate \(resource).\(ext) file.")
+                return nil
+            }
+            return try? String(contentsOfFile: file)
+        #else
+            let file = URL(fileURLWithPath: "Tests/PersonalityInsightsV3Tests/" + name + "." + ext).absoluteString
+            return try? String(contentsOfFile:file, encoding: .utf8)
+        #endif
     }
 
     /** Load all testing resources required to run the tests. */

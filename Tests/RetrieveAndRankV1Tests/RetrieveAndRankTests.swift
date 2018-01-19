@@ -31,7 +31,6 @@ class RetrieveAndRankTests: XCTestCase {
     private let trainedRankerName = "trained-swift-sdk-ranker"
 
     static var allTests: [(String, (RetrieveAndRankTests) -> () throws -> Void)] {
-        #if os(Linux)
         return [
             ("testGetSolrClusters", testGetSolrClusters),
             ("testCreateAndDeleteSolrCluster", testCreateAndDeleteSolrCluster),
@@ -49,6 +48,7 @@ class RetrieveAndRankTests: XCTestCase {
             ("testRanker", testRanker),
             ("testCreateSolrClusterWithInvalidSize", testCreateSolrClusterWithInvalidSize),
             ("testDeleteSolrClusterWithBadID", testDeleteSolrClusterWithBadID),
+//            ("testGetSolrConfiguration", testGetSolrConfiguration),
             ("testGetSolrClusterWithInvalidID", testGetSolrClusterWithInvalidID),
             ("testGetConfigurationsWithInvalidSolrClusterID", testGetConfigurationsWithInvalidSolrClusterID),
             ("testGetConfigurationsWithInaccessibleSolrClusterID", testGetConfigurationsWithInaccessibleSolrClusterID),
@@ -65,43 +65,6 @@ class RetrieveAndRankTests: XCTestCase {
             ("testDeleteNonExistentRanker", testDeleteNonExistentRanker),
             ("testRankWithInvalidRankerID", testRankWithInvalidRankerID),
         ]
-        #else
-        return [
-            ("testGetSolrClusters", testGetSolrClusters),
-            ("testCreateAndDeleteSolrCluster", testCreateAndDeleteSolrCluster),
-            ("testGetSolrCluster", testGetSolrCluster),
-            ("testListAllSolrConfigurations", testListAllSolrConfigurations),
-            ("testCreateAndDeleteSolrConfiguration", testCreateAndDeleteSolrConfiguration),
-            ("testGetSolrConfiguration", testGetSolrConfiguration),
-            ("testGetSolrCollections", testGetSolrCollections),
-            ("testCreateAndDeleteSolrCollection", testCreateAndDeleteSolrCollection),
-            ("testUpdateSolrCollection", testUpdateSolrCollection),
-            ("testSearch", testSearch),
-            ("testSearchAndRank", testSearchAndRank),
-            ("testGetRankers", testGetRankers),
-            ("testGetRankerWithSpecificID", testGetRankerWithSpecificID),
-            ("testCreateAndDeleteRanker", testCreateAndDeleteRanker),
-            ("testRanker", testRanker),
-            ("testCreateSolrClusterWithInvalidSize", testCreateSolrClusterWithInvalidSize),
-            ("testDeleteSolrClusterWithBadID", testDeleteSolrClusterWithBadID),
-            ("testGetSolrClusterWithInvalidID", testGetSolrClusterWithInvalidID),
-            ("testGetConfigurationsWithInvalidSolrClusterID", testGetConfigurationsWithInvalidSolrClusterID),
-            ("testGetConfigurationsWithInaccessibleSolrClusterID", testGetConfigurationsWithInaccessibleSolrClusterID),
-            ("testCreateSolrConfigurationWithBadSolrClusterID", testCreateSolrConfigurationWithBadSolrClusterID),
-            ("testCreateSolrConfigurationWithDuplicateName", testCreateSolrConfigurationWithDuplicateName),
-            ("testDeleteSolrConfigurationWithInvalidClusterID", testDeleteSolrConfigurationWithInvalidClusterID),
-            ("testGetCollectionsOfNonExistentCluster", testGetCollectionsOfNonExistentCluster),
-            ("testCreateCollectionInNonExistentCluster", testCreateCollectionInNonExistentCluster),
-            ("testDeleteCollectionInNonExistentCluster", testDeleteCollectionInNonExistentCluster),
-            ("testUpdateCollectionWithinNonExistentCluster", testUpdateCollectionWithinNonExistentCluster),
-            ("testSearchWithInvalidClusterID", testSearchWithInvalidClusterID),
-            ("testSearchAndRankWithInvalidClusterID", testSearchAndRankWithInvalidClusterID),
-            ("testGetDetailsOfNonExistentRanker", testGetDetailsOfNonExistentRanker),
-            ("testDeleteNonExistentRanker", testDeleteNonExistentRanker),
-            ("testRankWithInvalidRankerID", testRankWithInvalidRankerID),
-        ]
-        #endif
-        
     }
 
     // MARK: - Test Configuration

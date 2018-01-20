@@ -24,7 +24,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!
     private let newClassifierName = "Swift SDK Test Classifier"
-    private let trainedClassifierId = "0015c6x266-nlc-4850"
+    private let trainedClassifierId = "0015a0x264-nlc-12512"
 
     // MARK: - Test Configuration
 
@@ -159,21 +159,6 @@ class NaturalLanguageClassifierTests: XCTestCase {
         return classifierDetails
     }
 
-    /** Classify some text. */
-    func classifyText(_ text: String, usingID classifierId: String) -> NaturalLanguageClassifierV1.Classification? {
-        let description = "Classify the given text using the classifier created for these unit tests."
-        let expectation = self.expectation(description: description)
-        var classificationDetails: NaturalLanguageClassifierV1.Classification?
-
-        naturalLanguageClassifier.classify(text, withClassifierID: classifierId,
-                                           failure: failWithError) { classification in
-            classificationDetails = classification
-            expectation.fulfill()
-        }
-        waitForExpectations()
-        return classificationDetails
-    }
-
     /** Attempt to get the trained classifier; if it doesn't exist, created one. */
     func lookupTrainedClassifier(classifierId: String) {
         let description = "Ensure the given trained classifier is available."
@@ -302,14 +287,16 @@ class NaturalLanguageClassifierTests: XCTestCase {
     func testClassify() {
         lookupTrainedClassifier(classifierId: trainedClassifierId)
 
-        guard let classification = classifyText("How hot will it be today?",
-                                                usingID: trainedClassifierId) else {
-            XCTFail("Failed to classify the text.")
-            return
+        let expectation = self.expectation(description: "Classify text using the test classifier.")
+        naturalLanguageClassifier.classify("How hot will it be today?",
+                                           withClassifierID: trainedClassifierId,
+                                           failure: failWithError) {
+            classification in
+            XCTAssertEqual(classification.topClass, "temperature", "Expected the top class returned to be temperature.")
+            XCTAssertEqual(classification.classes.count, 2, "Expected there to be two classes returned.")
+            expectation.fulfill()
         }
-
-        XCTAssertEqual(classification.topClass, "temperature", "Expected the top class returned to be temperature.")
-        XCTAssertEqual(classification.classes.count, 2, "Expected there to be two classes returned.")
+        waitForExpectations(timeout: 20)
     }
 
     // MARK: - Negative Tests

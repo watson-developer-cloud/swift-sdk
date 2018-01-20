@@ -27,8 +27,6 @@ class VisualRecognitionTests: XCTestCase {
     private let collectionName = "swift-sdk-unit-test-faces"
     private var classifierID: String?
     private var imageFaceID: String?
-    private let timeout: TimeInterval = 10.0
-    private let timeoutLong: TimeInterval = 45.0
 
     static var allTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] {
         return [
@@ -64,6 +62,7 @@ class VisualRecognitionTests: XCTestCase {
     private var faces: URL!
     private var face1: URL!
     private var car: URL!
+    private var carz: URL!
     private var obama: URL!
     private var sign: URL!
 
@@ -106,6 +105,7 @@ class VisualRecognitionTests: XCTestCase {
                 let faces =             bundle.url(forResource: "faces", withExtension: "zip"),
                 let face1 =             bundle.url(forResource: "face1", withExtension: "jpg"),
                 let car =               bundle.url(forResource: "car", withExtension: "png"),
+                let carz =              bundle.url(forResource: "carz", withExtension: "zip"),
                 let obama =             bundle.url(forResource: "obama", withExtension: "jpg"),
                 let sign =              bundle.url(forResource: "sign", withExtension: "jpg")
                 else {
@@ -119,6 +119,7 @@ class VisualRecognitionTests: XCTestCase {
             let faces =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/faces.zip")
             let face1 =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/face1.jpg")
             let car =               URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/car.jpg")
+            let carz =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/carz.zip")
             let obama =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/obama.jpg")
             let sign =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/sign.jpg")
         #endif
@@ -129,14 +130,14 @@ class VisualRecognitionTests: XCTestCase {
         self.faces = faces
         self.face1 = face1
         self.car = car
+        self.carz = carz
         self.obama = obama
         self.sign = sign
     }
 
     /** Look up (or create) the trained classifier. */
     func lookupClassifier() {
-        let description = "Look up (or create) the trained classifier."
-        let expectation = self.expectation(description: description)
+        let expectation = self.expectation(description: "Look up (or create) the trained classifier.")
 
         let failure = { (error: Error) in
             XCTFail("Failed to locate the trained classifier.")
@@ -160,8 +161,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Train a classifier for the test suite. */
     func trainClassifier() {
-        let description = "Train a classifier for the test suite."
-        let expectation = self.expectation(description: description)
+        let expectation = self.expectation(description: "Train a classifier for the test suite.")
 
         let car = PositiveExample(name: "car", examples: examplesCars)
         let failure = { (error: Error) in XCTFail("Could not train classifier for test suite.") }
@@ -209,8 +209,8 @@ class VisualRecognitionTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
-        waitForExpectations(timeout: timeoutLong) { error in
+    func waitForExpectations(timeout: TimeInterval = 45.0) {
+        waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
@@ -219,8 +219,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Retrieve a list of user-trained classifiers. */
     func testGetClassifiers() {
-        let description = "Retrieve a list of user-trained classifiers."
-        let expectation = self.expectation(description: description)
+        let expectation = self.expectation(description: "Retrieve a list of user-trained classifiers.")
 
         visualRecognition.getClassifiers(failure: failWithError) { classifiers in
             for classifier in classifiers {
@@ -238,9 +237,6 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Train a classifier with only positive examples. */
     func testCreateDeleteClassifier1() {
-        let description1 = "Train a classifier with only positive examples."
-        let expectation1 = expectation(description: description1)
-
         let name = "swift-sdk-unit-test-1"
         let baseball = PositiveExample(name: "baseball", examples: examplesBaseball)
         let cars = PositiveExample(name: "car", examples: examplesCars)
@@ -248,6 +244,7 @@ class VisualRecognitionTests: XCTestCase {
         let classes = [baseball, cars, trucks]
 
         var classifierID: String?
+        let expectation1 = expectation(description: "Train a classifier with only positive examples.")
         visualRecognition.createClassifier(withName: name, positiveExamples: classes, failure: failWithError) {
             classifier in
             XCTAssertEqual(classifier.name, name)
@@ -257,13 +254,11 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations()
 
-        let description2 = "Check that our classifier can be retrieved."
-        let expectation2 = expectation(description: description2)
-
         guard let classifierIDToDelete = classifierID else {
             return
         }
 
+        let expectation2 = expectation(description: "Check that our classifier can be retrieved.")
         visualRecognition.getClassifiers(failure: failWithError) { classifiers in
             for classifier in classifiers where classifier.classifierID == classifierIDToDelete {
                 expectation2.fulfill()
@@ -278,9 +273,7 @@ class VisualRecognitionTests: XCTestCase {
         // (otherwise they remain and dramatically slow down the tests)
         sleep(15) // wait 15 seconds
 
-        let description3 = "Delete the custom classifier."
-        let expectation3 = expectation(description: description3)
-
+        let expectation3 = expectation(description: "Delete the custom classifier.")
         visualRecognition.deleteClassifier(withID: classifierIDToDelete, failure: failWithError) {
             expectation3.fulfill()
         }
@@ -289,13 +282,11 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Train a classifier with both positive and negative examples. */
     func testCreateDeleteClassifier2() {
-        let description1 = "Train a classifier with both positive and negative examples."
-        let expectation1 = expectation(description: description1)
-
         let name = "swift-sdk-unit-test-2"
         let cars = PositiveExample(name: "car", examples: examplesCars)
 
         var classifierID: String?
+        let expectation1 = expectation(description: "Train a classifier with both positive and negative examples.")
         visualRecognition.createClassifier(
             withName: name,
             positiveExamples: [cars],
@@ -313,9 +304,7 @@ class VisualRecognitionTests: XCTestCase {
             return
         }
 
-        let description2 = "Check that our classifier can be retrieved."
-        let expectation2 = expectation(description: description2)
-
+        let expectation2 = expectation(description: "Check that our classifier can be retrieved.")
         visualRecognition.getClassifiers(failure: failWithError) { classifiers in
             for classifier in classifiers where classifier.classifierID == newClassifierID {
                 expectation2.fulfill()
@@ -330,9 +319,7 @@ class VisualRecognitionTests: XCTestCase {
         // (otherwise they remain and dramatically slow down the tests)
         sleep(15) // wait 15 seconds
 
-        let description3 = "Delete the custom classifier."
-        let expectation3 = expectation(description: description3)
-
+        let expectation3 = expectation(description: "Delete the custom classifier.")
         visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
             expectation3.fulfill()
         }
@@ -341,10 +328,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Get information about the trained classifier. */
     func testGetClassifier() {
-
-        let description = "Get information about the trained classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Get information about the trained classifier.")
         visualRecognition.getClassifier(withID: classifierID!, failure: failWithError) {
             classifier in
             XCTAssertEqual(classifier.name, self.classifierName)
@@ -356,14 +340,12 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Update the classifier with a positive example. */
     func testUpdateClassifierWithPositiveExample() {
-        let description1 = "Train a new classifier with positive examples."
-        let expectation1 = expectation(description: description1)
-
         let name = "swift-sdk-unit-test-positive-update"
         let cars = PositiveExample(name: "car", examples: examplesCars)
         let trucks = PositiveExample(name: "truck", examples: examplesTrucks)
 
         var classifierID: String?
+        let expectation1 = expectation(description: "Train a new classifier with positive examples.")
         visualRecognition.createClassifier(
             withName: name,
             positiveExamples: [cars],
@@ -380,12 +362,27 @@ class VisualRecognitionTests: XCTestCase {
             XCTFail("Failed to create a new classifier due to free account.")
             return
         }
+
+        defer {
+            // allow zip files to propagate through object storage, so that
+            // they will be deleted when the service deletes the classifier
+            // (otherwise they remain and dramatically slow down the tests)
+            sleep(15) // wait 15 seconds
+
+            let expectation = self.expectation(description: "Delete the new classifier.")
+
+            visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
+                expectation.fulfill()
+            }
+            waitForExpectations()
+        }
+
         var trained = false
         var tries = 0
         while !trained {
-            tries += 1
-            let description = "Get the new classifier."
-            let expectation = self.expectation(description: description)
+            sleep(15)
+
+            let expectation = self.expectation(description: "Get the new classifier.")
             visualRecognition.getClassifier(withID: newClassifierID, failure: failWithError) {
                 classifier in
 
@@ -396,28 +393,14 @@ class VisualRecognitionTests: XCTestCase {
             }
             waitForExpectations()
 
-            if tries > 5 {
-                // allow zip files to propagate through object storage, so that
-                // they will be deleted when the service deletes the classifier
-                // (otherwise they remain and dramatically slow down the tests)
-                sleep(15) // wait 15 seconds
-
-                let description = "Delete the new classifier."
-                let expectation = self.expectation(description: description)
-
-                visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
-                    expectation.fulfill()
-                }
-                waitForExpectations()
-
+            tries += 1
+            if tries > 8 {
                 XCTFail("Could not train a new classifier. Try again later.")
+                return
             }
-
-            sleep(5)
         }
 
-        let description2 = "Update the classifier with a positive example."
-        let expectation2 = expectation(description: description2)
+        let expectation2 = expectation(description: "Update the classifier with a positive example.")
 
         visualRecognition.updateClassifier(
             withID: newClassifierID,
@@ -431,9 +414,9 @@ class VisualRecognitionTests: XCTestCase {
         trained = false
         tries = 0
         while !trained {
-            tries += 1
-            let description = "Get the updated classifier and make sure there are 2 classes."
-            let expectation = self.expectation(description: description)
+            sleep(15)
+
+            let expectation = self.expectation(description: "Get the updated classifier.")
             visualRecognition.getClassifier(withID: newClassifierID, failure: failWithError) {
                 classifier in
 
@@ -445,44 +428,17 @@ class VisualRecognitionTests: XCTestCase {
             }
             waitForExpectations()
 
-            if tries > 5 {
-                // allow zip files to propagate through object storage, so that
-                // they will be deleted when the service deletes the classifier
-                // (otherwise they remain and dramatically slow down the tests)
-                sleep(15) // wait 15 seconds
-
-                let description = "Delete the new classifier."
-                let expectation = self.expectation(description: description)
-
-                visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
-                    expectation.fulfill()
-                }
-                waitForExpectations()
-
+            tries += 1
+            if tries > 8 {
                 XCTFail("Could not update the classifier. Try again later.")
+                return
             }
-
-            sleep(5)
         }
-
-        // allow zip files to propagate through object storage, so that
-        // they will be deleted when the service deletes the classifier
-        // (otherwise they remain and dramatically slow down the tests)
-        sleep(15) // wait 15 seconds
-
-        let description4 = "Delete the custom classifier."
-        let expectation4 = expectation(description: description4)
-
-        visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
-            expectation4.fulfill()
-        }
-        waitForExpectations()
     }
 
     /** Update the classifier with a negative example. */
     func testUpdateClassifierWithNegativeExample() {
-        let description1 = "Train a new classifier with positive examples."
-        let expectation1 = expectation(description: description1)
+        let expectation1 = expectation(description: "Train a new classifier with positive examples.")
 
         let name = "swift-sdk-unit-test-negative-update"
         let cars = PositiveExample(name: "car", examples: examplesCars)
@@ -506,12 +462,26 @@ class VisualRecognitionTests: XCTestCase {
             return
         }
 
+        defer {
+            // allow zip files to propagate through object storage, so that
+            // they will be deleted when the service deletes the classifier
+            // (otherwise they remain and dramatically slow down the tests)
+            sleep(15) // wait 15 seconds
+
+            let expectation = self.expectation(description: "Delete the new classifier.")
+
+            visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
+                expectation.fulfill()
+            }
+            waitForExpectations()
+        }
+
         var trained = false
         var tries = 0
         while !trained {
-            tries += 1
-            let description = "Get the new classifier."
-            let expectation = self.expectation(description: description)
+            sleep(15)
+
+            let expectation = self.expectation(description: "Get the new classifier.")
             visualRecognition.getClassifier(withID: newClassifierID, failure: failWithError) {
                 classifier in
 
@@ -522,28 +492,14 @@ class VisualRecognitionTests: XCTestCase {
             }
             waitForExpectations()
 
-            if tries > 5 {
-                // allow zip files to propagate through object storage, so that
-                // they will be deleted when the service deletes the classifier
-                // (otherwise they remain and dramatically slow down the tests)
-                sleep(15) // wait 15 seconds
-
-                let description = "Delete the new classifier."
-                let expectation = self.expectation(description: description)
-
-                visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
-                    expectation.fulfill()
-                }
-                waitForExpectations()
-
-                XCTFail("Could not train a new classifier. Try again later.")
+            tries += 1
+            if tries > 8 {
+                 XCTFail("Could not train a new classifier. Try again later.")
+                return
             }
-
-            sleep(5)
         }
 
-        let description2 = "Update the classifier with a negative example."
-        let expectation2 = expectation(description: description2)
+        let expectation2 = expectation(description: "Update the classifier with a negative example.")
         visualRecognition.updateClassifier(
             withID: newClassifierID,
             negativeExamples: examplesBaseball,
@@ -556,9 +512,9 @@ class VisualRecognitionTests: XCTestCase {
         trained = false
         tries = 0
         while !trained {
-            tries += 1
-            let description = "Get the updated classifier and make sure there is 1 class."
-            let expectation = self.expectation(description: description)
+            sleep(15)
+
+            let expectation = self.expectation(description: "Get the updated classifier.")
             visualRecognition.getClassifier(withID: newClassifierID, failure: failWithError) {
                 classifier in
 
@@ -570,44 +526,17 @@ class VisualRecognitionTests: XCTestCase {
             }
             waitForExpectations()
 
-            if tries > 5 {
-                // allow zip files to propagate through object storage, so that
-                // they will be deleted when the service deletes the classifier
-                // (otherwise they remain and dramatically slow down the tests)
-                sleep(15) // wait 15 seconds
-
-                let description = "Delete the new classifier."
-                let expectation = self.expectation(description: description)
-
-                visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
-                    expectation.fulfill()
-                }
-                waitForExpectations()
-
+            tries += 1
+            if tries > 8 {
                 XCTFail("Could not update the classifier. Try again later.")
+                return
             }
-
-            sleep(5)
         }
-
-        // allow zip files to propagate through object storage, so that
-        // they will be deleted when the service deletes the classifier
-        // (otherwise they remain and dramatically slow down the tests)
-        sleep(15) // wait 15 seconds
-
-        let description4 = "Delete the custom classifier."
-        let expectation4 = expectation(description: description4)
-
-        visualRecognition.deleteClassifier(withID: newClassifierID, failure: failWithError) {
-            expectation4.fulfill()
-        }
-        waitForExpectations()
     }
 
     /** Classify an image by URL using the default classifier and all default parameters. */
     func testClassifyByURL1() {
-        let description = "Classify an image by URL using the default classifier."
-        let expectation = self.expectation(description: description)
+        let expectation = self.expectation(description: "Classify an image by URL")
 
         visualRecognition.classify(image: obamaURL, failure: failWithError) {
             classifiedImages in
@@ -654,9 +583,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify an image by URL using the default classifier and specifying default parameters. */
     func testClassifyByURL2() {
-        let description = "Classify an image by URL using the default classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an image by URL using the default classifier.")
         visualRecognition.classify(
             image: obamaURL,
             owners: ["IBM"],
@@ -708,9 +635,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify an image by URL using a custom classifier and all default parameters. */
     func testClassifyByURL3() {
-        let description = "Classify an image by URL using a custom classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an image by URL using a custom classifier.")
         visualRecognition.classify(image: carURL, classifierIDs: [classifierID!], failure: failWithError) {
             classifiedImages in
 
@@ -743,9 +668,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify an image by URL using a custom classifier and specifying default parameters. */
     func testClassifyByURL4() {
-        let description = "Classify an image by URL using a custom classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an image by URL using a custom classifier.")
         visualRecognition.classify(
             image: carURL,
             owners: ["me"],
@@ -785,9 +708,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify an image by URL with both the default classifier and a custom classifier. */
     func testClassifyByURL5() {
-        let description = "Classify an image by URL using a custom classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an image by URL using a custom classifier.")
         visualRecognition.classify(image: carURL, classifierIDs: ["default", classifierID!], failure: failWithError) {
             classifiedImages in
 
@@ -843,9 +764,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify an uploaded image using the default classifier and all default parameters. */
     func testClassifyImage1() {
-        let description = "Classify an uploaded image using the default classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an uploaded image using the default classifier.")
         visualRecognition.classify(imageFile: car, failure: failWithError) {
             classifiedImages in
             var containsPersonClass = false
@@ -888,9 +807,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify an uploaded image using the default classifier and specifying default parameters. */
     func testClassifyImage2() {
-        let description = "Classify an uploaded image using the default classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an uploaded image using the default classifier.")
         visualRecognition.classify(
             imageFile: car,
             owners: ["IBM"],
@@ -941,9 +858,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify an uploaded image using a custom classifier and all default parameters. */
     func testClassifyImage3() {
-        let description = "Classify an uploaded image using a custom classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an uploaded image using a custom classifier.")
         visualRecognition.classify(imageFile: car, classifierIDs: [classifierID!], failure: failWithError) {
             classifiedImages in
 
@@ -976,9 +891,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify an uploaded image using a custom classifier and specifying default parameters. */
     func testClassifyImage4() {
-        let description = "Classify an uploaded image using a custom classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an uploaded image using a custom classifier.")
         visualRecognition.classify(
             imageFile: car,
             owners: ["me"],
@@ -1018,9 +931,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify an uploaded image with both the default classifier and a custom classifier. */
     func testClassifyImage5() {
-        let description = "Classify an uploaded image with the default and custom classifiers."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an uploaded image with the default and custom classifiers.")
         visualRecognition.classify(
             imageFile: car,
             classifierIDs: ["default", classifierID!],
@@ -1081,11 +992,9 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Classify multiple images using a custom classifier. */
     func testClassifyImage6() {
-        let description = "Classify multiple images using a custom classifier."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify multiple images using a custom classifier.")
         visualRecognition.classify(
-            imageFile: examplesCars,
+            imageFile: carz,
             classifierIDs: ["default", classifierID!],
             failure: failWithError)
         {
@@ -1093,7 +1002,7 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
-            XCTAssertEqual(classifiedImages.images.count, 16)
+            XCTAssertEqual(classifiedImages.images.count, 4)
 
             for image in classifiedImages.images {
                 // verify the image's metadata
@@ -1137,14 +1046,12 @@ class VisualRecognitionTests: XCTestCase {
 
             expectation.fulfill()
         }
-        waitForExpectations()
+        waitForExpectations(timeout: 60)
     }
 
     /** Detect faces by URL. */
     func testDetectFacesByURL() {
-        let description = "Detect faces by URL."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Detect faces by URL.")
         visualRecognition.detectFaces(inImage: obamaURL, failure: failWithError) {
             faceImages in
 
@@ -1191,9 +1098,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Detect faces in an uploaded image */
     func testDetectFacesByImage1() {
-        let description = "Detect faces in an uploaded image."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Detect faces in an uploaded image.")
         visualRecognition.detectFaces(inImageFile: obama, failure: failWithError) {
             faceImages in
 
@@ -1240,9 +1145,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Detect faces in uploaded images. */
     func testDetectFacesByImage2() {
-        let description = "Detect faces in uploaded images."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Detect faces in uploaded images.")
         visualRecognition.detectFaces(inImageFile: faces, failure: failWithError) {
             faceImages in
 
@@ -1293,9 +1196,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Test creating a classifier with a single image for positive examples. */
     func testCreateClassifierWithInvalidPositiveExamples() {
-        let description = "Create classifier with invalid positive example."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Create classifier with invalid positive example.")
         let failure = { (error: Error) in
             expectation.fulfill()
         }
@@ -1312,9 +1213,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Test classifying an invalid URL using the default classifier and parameters. */
     func testClassifyByInvalidURL() {
-        let description = "Classify an image with an invalid URL."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an image with an invalid URL.")
         let failure = { (error: Error) in
             expectation.fulfill()
         }
@@ -1326,9 +1225,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Test detecting faces with an invalid URL using the default classifier and parameters. */
     func testDetectFacesByInvalidURL() {
-        let description = "Classify an image with an invalid type."
-        let expectation = self.expectation(description: description)
-
+        let expectation = self.expectation(description: "Classify an image with an invalid type.")
         let failure = { (error: Error) in
             expectation.fulfill()
         }

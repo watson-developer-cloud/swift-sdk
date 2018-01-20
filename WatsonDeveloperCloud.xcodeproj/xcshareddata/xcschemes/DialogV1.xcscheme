@@ -40,6 +40,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "DialogTests">
+               </Test>
+               <Test
                   Identifier = "DialogTests/testCreateDialogWithNonexistentFile()">
                </Test>
                <Test

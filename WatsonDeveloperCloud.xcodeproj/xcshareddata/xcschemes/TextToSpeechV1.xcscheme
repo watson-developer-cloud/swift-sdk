@@ -57,6 +57,12 @@
                   Identifier = "TextToSpeechPlaybackTests/testSynthesizeOpus()">
                </Test>
                <Test
+                  Identifier = "TextToSpeechTests/testCreateUpdateDescriptionAndDeleteCustomVoiceModel()">
+               </Test>
+               <Test
+                  Identifier = "TextToSpeechTests/testCreateUpdateNameAndDeleteCustomVoiceModel()">
+               </Test>
+               <Test
                   Identifier = "TextToSpeechTests/testSynthesizeOpus()">
                </Test>
             </SkippedTests>

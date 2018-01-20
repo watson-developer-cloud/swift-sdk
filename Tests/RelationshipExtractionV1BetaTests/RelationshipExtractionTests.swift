@@ -21,7 +21,6 @@ import RelationshipExtractionV1Beta
 class RelationshipExtractionTests: XCTestCase {
 
     private var relationshipExtraction: RelationshipExtraction!
-    private let timeout: TimeInterval = 5.0
 
     static var allTests: [(String, (RelationshipExtractionTests) -> () throws -> Void)] {
         return [
@@ -68,7 +67,7 @@ class RelationshipExtractionTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

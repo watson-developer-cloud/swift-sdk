@@ -23,7 +23,6 @@ import RetrieveAndRankV1
 class RetrieveAndRankTests: XCTestCase {
 
     private var retrieveAndRank: RetrieveAndRank!
-    private let timeout: TimeInterval = 30.0
     private let trainedClusterID = "sc36a81e8a_bc3e_4c51_9998_7fc5148d11cb"
     private let trainedClusterName = "trained-swift-sdk-solr-cluster"
     private let trainedConfigurationName = "trained-swift-sdk-config"
@@ -103,7 +102,7 @@ class RetrieveAndRankTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 30.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

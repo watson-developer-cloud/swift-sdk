@@ -37,6 +37,9 @@ public struct Environment: JSONDecodable {
     /// Status of the environment.
     public let status: String
 
+    /// If true, then the environment contains read-only collections which are maintained by IBM.
+    public let readOnly: Bool?
+
     /// Object containing information about disk and memory usage.
     public let indexCapacity: IndexCapacity?
 
@@ -45,9 +48,12 @@ public struct Environment: JSONDecodable {
         environmentID = try json.getString(at: "environment_id")
         name = try json.getString(at: "name")
         description = try json.getString(at: "description")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
-        status = try json.getString(at: "status")
+        // Some environments (e.g. System environment) do not contain created or updated
+        created = (try? json.getString(at: "created")) ?? ""
+        updated = (try? json.getString(at: "updated")) ?? ""
+        // Some instances of environment do not contain status
+        status = (try? json.getString(at: "status")) ?? ""
+        readOnly = try? json.getBool(at: "read_only")
         indexCapacity = try? json.decode(at: "index_capacity")
     }
 }

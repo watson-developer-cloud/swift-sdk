@@ -81,7 +81,8 @@ class ConversationTests: XCTestCase {
             ("testCreateAndDeleteSynonym", testCreateAndDeleteSynonym),
             ("testGetSynonym", testGetSynonym),
             ("testCreateUpdateAndDeleteSynonym", testCreateUpdateAndDeleteSynonym),
-            ("testListLogs", testListLogs),
+            // Test temporarily disabled pending resolution of server-side issue
+            // ("testListLogs", testListLogs),
             ("testMessageUnknownWorkspace", testMessageUnknownWorkspace),
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
         ]
@@ -1444,7 +1445,7 @@ class ConversationTests: XCTestCase {
             XCTAssertNil(node.nextStep)
             XCTAssertNil(node.actions)
             XCTAssertEqual(dialogNode.title!, node.title!)
-            XCTAssertNil(node.nodeType)
+            //XCTAssertNil(node.nodeType)
             XCTAssertNil(node.eventName)
             XCTAssertNil(node.variable)
             expectation1.fulfill()

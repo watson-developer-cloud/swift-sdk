@@ -21,7 +21,6 @@ import DocumentConversionV1
 class DocumentConversionTests: XCTestCase {
 
     private var documentConversion: DocumentConversion!
-    private let timeout: TimeInterval = 5.0
 
     private var testDocument: URL!
     private var testPng: URL!
@@ -102,7 +101,7 @@ class DocumentConversionTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

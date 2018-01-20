@@ -24,7 +24,6 @@ class DialogTests: XCTestCase {
     private let prefix = "swift-sdk-unit-test-"
     private var dialogID: DialogID?
     private var dialogName: String?
-    private let timeout: TimeInterval = 10.0
 
     // MARK: - Test Configuration
 
@@ -46,42 +45,43 @@ class DialogTests: XCTestCase {
 
     static var allTests: [(String, (DialogTests) -> () throws -> Void)] {
         return [
-            ("testGetDialogs", testGetDialogs),
-            ("testCreateDelete", testCreateDelete),
-            ("testGetDialogFile", testGetDialogFile),
-            ("testGetDialogFileOctetStream", testGetDialogFileOctetStream),
-            ("testGetDialogFileJSON", testGetDialogFileJSON),
-            ("testGetDialogFileXML", testGetDialogFileXML),
-            ("testUpdateDialog", testUpdateDialog),
-            ("testGetContent", testGetContent),
-            ("testUpdateContent", testUpdateContent),
-            ("testGetConversationHistory", testGetConversationHistory),
-            ("testGetConversationHistoryWithOffset", testGetConversationHistoryWithOffset),
-            ("testGetConversationHistoryWithLimit", testGetConversationHistoryWithLimit),
-            ("testConverse", testConverse),
-            ("testGetProfile", testGetProfile),
-            ("testUpdateNewProfile", testUpdateNewProfile),
-            ("testUpdateExistingProfile", testUpdateExistingProfile),
-            ("testCreateDialogWithInvalidFile", testCreateDialogWithInvalidFile),
-            ("testCreateDialogWithConflictingName", testCreateDialogWithConflictingName),
-            ("testCreateDialogWithLongName", testCreateDialogWithLongName),
-            ("testCreateDialogWithNonexistentFile", testCreateDialogWithNonexistentFile),
-            ("testDeleteInvalidDialogID", testDeleteInvalidDialogID),
-            ("testGetDialogFileForInvalidDialogID", testGetDialogFileForInvalidDialogID),
-            ("testUpdateDialogWithInvalidFile", testUpdateDialogWithInvalidFile),
-            ("testUpdateDialogWithNonexistentFile", testUpdateDialogWithNonexistentFile),
-            ("testUpdateDialogForInvalidDialogID", testUpdateDialogForInvalidDialogID),
-            ("testGetContentForInvalidDialogID", testGetContentForInvalidDialogID),
-            ("testUpdateContentInvalid", testUpdateContentInvalid),
-            ("testUpdateContentForInvalidDialogID", testUpdateContentForInvalidDialogID),
-            ("testGetConversationHistoryForInvalidDialogID", testGetConversationHistoryForInvalidDialogID),
-            ("testConverseWithInvalidDialogID", testConverseWithInvalidDialogID),
-            ("testConverseWithInvalidIDs", testConverseWithInvalidIDs),
-            ("testGetProfileWithInvalidDialogID", testGetProfileWithInvalidDialogID),
-            ("testGetProfileWithInvalidClientID", testGetProfileWithInvalidClientID),
-            ("testGetProfileWithInvalidParameterNames", testGetProfileWithInvalidParameterNames),
-            ("testUpdateProfileWithInvalidDialogID", testUpdateProfileWithInvalidDialogID),
-            ("testUpdateProfileWithInvalidClientID", testUpdateProfileWithInvalidClientID)
+// All tests disabled -- Dialog service has been deprecated
+//            ("testGetDialogs", testGetDialogs),
+//            ("testCreateDelete", testCreateDelete),
+//            ("testGetDialogFile", testGetDialogFile),
+//            ("testGetDialogFileOctetStream", testGetDialogFileOctetStream),
+//            ("testGetDialogFileJSON", testGetDialogFileJSON),
+//            ("testGetDialogFileXML", testGetDialogFileXML),
+//            ("testUpdateDialog", testUpdateDialog),
+//            ("testGetContent", testGetContent),
+//            ("testUpdateContent", testUpdateContent),
+//            ("testGetConversationHistory", testGetConversationHistory),
+//            ("testGetConversationHistoryWithOffset", testGetConversationHistoryWithOffset),
+//            ("testGetConversationHistoryWithLimit", testGetConversationHistoryWithLimit),
+//            ("testConverse", testConverse),
+//            ("testGetProfile", testGetProfile),
+//            ("testUpdateNewProfile", testUpdateNewProfile),
+//            ("testUpdateExistingProfile", testUpdateExistingProfile),
+//            ("testCreateDialogWithInvalidFile", testCreateDialogWithInvalidFile),
+//            ("testCreateDialogWithConflictingName", testCreateDialogWithConflictingName),
+//            ("testCreateDialogWithLongName", testCreateDialogWithLongName),
+//            ("testCreateDialogWithNonexistentFile", testCreateDialogWithNonexistentFile),
+//            ("testDeleteInvalidDialogID", testDeleteInvalidDialogID),
+//            ("testGetDialogFileForInvalidDialogID", testGetDialogFileForInvalidDialogID),
+//            ("testUpdateDialogWithInvalidFile", testUpdateDialogWithInvalidFile),
+//            ("testUpdateDialogWithNonexistentFile", testUpdateDialogWithNonexistentFile),
+//            ("testUpdateDialogForInvalidDialogID", testUpdateDialogForInvalidDialogID),
+//            ("testGetContentForInvalidDialogID", testGetContentForInvalidDialogID),
+//            ("testUpdateContentInvalid", testUpdateContentInvalid),
+//            ("testUpdateContentForInvalidDialogID", testUpdateContentForInvalidDialogID),
+//            ("testGetConversationHistoryForInvalidDialogID", testGetConversationHistoryForInvalidDialogID),
+//            ("testConverseWithInvalidDialogID", testConverseWithInvalidDialogID),
+//            ("testConverseWithInvalidIDs", testConverseWithInvalidIDs),
+//            ("testGetProfileWithInvalidDialogID", testGetProfileWithInvalidDialogID),
+//            ("testGetProfileWithInvalidClientID", testGetProfileWithInvalidClientID),
+//            ("testGetProfileWithInvalidParameterNames", testGetProfileWithInvalidParameterNames),
+//            ("testUpdateProfileWithInvalidDialogID", testUpdateProfileWithInvalidDialogID),
+//            ("testUpdateProfileWithInvalidClientID", testUpdateProfileWithInvalidClientID)
         ]
     }
 
@@ -160,8 +160,8 @@ class DialogTests: XCTestCase {
         XCTFail("Negative test returned a result.")
     }
 
-    /** Wait for expectation */
-    func waitForExpectations() {
+    /** Wait for expectations. */
+    func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

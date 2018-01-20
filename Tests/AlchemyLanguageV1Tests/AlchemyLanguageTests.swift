@@ -21,7 +21,6 @@ import AlchemyLanguageV1
 class AlchemyLanguageTests: XCTestCase {
 
     private var alchemyLanguage: AlchemyLanguage!
-    private let timeout: TimeInterval = 5.0
     private let testUrl = "http://arstechnica.com/gadgets/2016/05/android-instant-apps-will-blur-the-lines-between-apps-and-mobile-sites/"
     private let testHtmlFileName = "testArticle"
 
@@ -96,7 +95,7 @@ class AlchemyLanguageTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

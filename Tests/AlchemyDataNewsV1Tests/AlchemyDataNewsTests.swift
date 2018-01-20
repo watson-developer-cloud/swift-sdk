@@ -20,7 +20,6 @@ import AlchemyDataNewsV1
 class AlchemyDataNewsTests: XCTestCase {
 
     private var alchemyDataNews: AlchemyDataNews!
-    private let timeout: TimeInterval = 5.0
 
     static var allTests: [(String, (AlchemyDataNewsTests) -> () throws -> Void)] {
         return [
@@ -55,7 +54,7 @@ class AlchemyDataNewsTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

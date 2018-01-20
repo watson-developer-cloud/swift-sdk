@@ -23,7 +23,6 @@ import NaturalLanguageUnderstandingV1
 class NaturalLanguageUnderstandingTests: XCTestCase {
 
     private var naturalLanguageUnderstanding: NaturalLanguageUnderstanding!
-    private let timeout: TimeInterval = 5.0
     private let text = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
     private let url = "http://www.politico.com/story/2016/07/dnc-2016-obama-prepared-remarks-226345"
     private var html: String!
@@ -93,7 +92,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -483,6 +482,6 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             XCTAssertNotNil(results.models)
             expectation.fulfill()
         }
-        waitForExpectations()
+        waitForExpectations(timeout: 10)
     }
 }

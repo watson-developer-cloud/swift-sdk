@@ -37,6 +37,7 @@ class RetrieveAndRankTests: XCTestCase {
             ("testGetSolrCluster", testGetSolrCluster),
             ("testListAllSolrConfigurations", testListAllSolrConfigurations),
             ("testCreateAndDeleteSolrConfiguration", testCreateAndDeleteSolrConfiguration),
+            ("testGetSolrConfiguration", testGetSolrConfiguration),
             ("testGetSolrCollections", testGetSolrCollections),
             ("testCreateAndDeleteSolrCollection", testCreateAndDeleteSolrCollection),
             ("testUpdateSolrCollection", testUpdateSolrCollection),
@@ -48,7 +49,6 @@ class RetrieveAndRankTests: XCTestCase {
             ("testRanker", testRanker),
             ("testCreateSolrClusterWithInvalidSize", testCreateSolrClusterWithInvalidSize),
             ("testDeleteSolrClusterWithBadID", testDeleteSolrClusterWithBadID),
-//            ("testGetSolrConfiguration", testGetSolrConfiguration),
             ("testGetSolrClusterWithInvalidID", testGetSolrClusterWithInvalidID),
             ("testGetConfigurationsWithInvalidSolrClusterID", testGetConfigurationsWithInvalidSolrClusterID),
             ("testGetConfigurationsWithInaccessibleSolrClusterID", testGetConfigurationsWithInaccessibleSolrClusterID),
@@ -282,7 +282,7 @@ class RetrieveAndRankTests: XCTestCase {
                 return nil
             }
         #else
-            let url = URL(fileURLWithPath: "Tests/RetrieveAndRankTests/"+name+"."+withExtension)
+            let url = URL(fileURLWithPath: "Tests/RetrieveAndRankTests/" + name + "." + withExtension)
         #endif
 
         return url
@@ -389,9 +389,10 @@ class RetrieveAndRankTests: XCTestCase {
     }
 
     /** Get a specific configuration. */
-    #if os(Linux)
-    #else
         func testGetSolrConfiguration() {
+            //This test is temporarily disabled on Linux because of runtime error with `getSolrConfiguration`.
+            #if os(Linux)
+            #else
             let description = "Get the trained configuration in the trained Solr cluster."
             let expectation = self.expectation(description: description)
 
@@ -406,8 +407,8 @@ class RetrieveAndRankTests: XCTestCase {
                 expectation.fulfill()
             }
             waitForExpectations()
+            #endif
         }
-    #endif
 
     /** List all Solr collections associated with the trained cluster. */
     func testGetSolrCollections() {

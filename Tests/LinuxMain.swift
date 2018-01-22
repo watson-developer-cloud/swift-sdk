@@ -15,7 +15,7 @@ import XCTest
 XCTMain([
     testCase(AlchemyDataNewsTests.allTests),
     testCase(ConversationTests.allTests),
-//    testCase(DiscoveryTests.allTests),
+    testCase(DiscoveryTests.allTests),
     testCase(DocumentConversionTests.allTests),
     testCase(LanguageTranslatorTests.allTests),
     testCase(NaturalLanguageClassifierTests.allTests),

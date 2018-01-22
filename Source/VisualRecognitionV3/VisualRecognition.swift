@@ -388,10 +388,12 @@ public class VisualRecognition {
     /**
      Retrieve a list of custom classifiers.
 
+     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of classifiers.
      */
     public func getClassifiers(
+        owners: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Classifier]) -> Void)
     {
@@ -400,6 +402,10 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
+        if let owners = owners {
+            let list = owners.joined(separator: ",")
+            queryParameters.append(URLQueryItem(name: "owners", value: list))
+        }
         
         // construct REST request
         let request = RestRequest(

@@ -556,7 +556,7 @@ public class VisualRecognition {
     /**
      Retrieve information about a custom classifier.
  
-     - parameter withID: The id of the classifier to retrieve information about.
+     - parameter withID: The classifier ID or IBM model ID of the classifier to retrieve information about.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the retrieved information about the given
             classifier.

@@ -73,7 +73,7 @@ extension VisualRecognition {
             }
 
             // download the latest model if a newer version is available
-            if classifierDate > modelDate && classifier.coreMLStatus == "ready" {
+            if classifierDate > modelDate && classifier.status == "ready" {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             } else {
                 success?();

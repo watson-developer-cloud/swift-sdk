@@ -26,7 +26,7 @@ extension SpeechToText {
 
     /**
      Perform speech recognition for an audio file.
-     
+
      - parameter audio: The audio file to transcribe.
      - parameter settings: The configuration to use for this recognition request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
@@ -67,10 +67,10 @@ extension SpeechToText {
             return
         }
     }
-    
+
     /**
      Perform speech recognition for audio data.
-     
+
      - parameter audio: The audio data to transcribe.
      - parameter settings: The configuration to use for this recognition request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
@@ -100,19 +100,19 @@ extension SpeechToText {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )
-        
+
         // set urls
         session.serviceURL = serviceURL
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
-        
+
         // set headers
         session.defaultHeaders = defaultHeaders
-        
+
         // set callbacks
         session.onResults = success
         session.onError = failure
-        
+
         // execute recognition request
         session.connect()
         session.startRequest(settings: settings)
@@ -120,20 +120,20 @@ extension SpeechToText {
         session.stopRequest()
         session.disconnect()
     }
-    
+
     /**
      Perform speech recognition for microphone audio. To stop the microphone, invoke
      `stopRecognizeMicrophone()`.
-     
+
      Microphone audio is compressed to OggOpus format unless otherwise specified by the `compress`
      parameter. With compression enabled, the `settings` should specify a `contentType` of
      `AudioMediaType.oggOpus`. With compression disabled, the `settings` should specify a
      `contentType` of `AudioMediaType.l16(rate: 16000, channels: 1)`.
-     
+
      This function may cause the system to automatically prompt the user for permission
      to access the microphone. Use `AVAudioSession.requestRecordPermission(_:)` if you
      would prefer to ask for the user's permission in advance.
-     
+
      - parameter settings: The configuration for this transcription request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
        https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
@@ -168,11 +168,11 @@ extension SpeechToText {
             failure?(error)
             return
         }
-        
+
         // validate settings
         var settings = settings
         settings.contentType = compress ? .oggOpus : .l16(rate: 16000, channels: 1)
-        
+
         // create session
         let session = SpeechToTextSession(
             username: username,
@@ -181,31 +181,31 @@ extension SpeechToText {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )
-        
+
         // set urls
         session.serviceURL = serviceURL
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
-        
+
         // set headers
         session.defaultHeaders = defaultHeaders
-        
+
         // set callbacks
         session.onResults = success
         session.onError = failure
-        
+
         // start recognition request
         session.connect()
         session.startRequest(settings: settings)
         session.startMicrophone(compress: compress)
-        
+
         // store session
         microphoneSession = session
     }
-    
+
     /**
      Stop performing speech recognition for microphone audio.
-     
+
      When invoked, this function will
      1. Stop recording audio from the microphone.
      2. Send a stop message to stop the current recognition request.

@@ -44,40 +44,40 @@ public struct DialogNode {
     public var dialogNodeID: String
 
     /// The description of the dialog node.
-    public var description: String
+    public var description: String?
 
     /// The condition that triggers the dialog node.
-    public var conditions: String
+    public var conditions: String?
 
     /// The ID of the parent dialog node.
-    public var parent: String
+    public var parent: String?
 
     /// The ID of the previous sibling dialog node.
-    public var previousSibling: String
+    public var previousSibling: String?
 
     /// The output of the dialog node.
-    public var output: [String: JSON]
+    public var output: [String: JSON]?
 
     /// The context (if defined) for the dialog node.
-    public var context: [String: JSON]
+    public var context: [String: JSON]?
 
     /// The metadata (if any) for the dialog node.
-    public var metadata: [String: JSON]
+    public var metadata: [String: JSON]?
 
     /// The next step to execute following this dialog node.
-    public var nextStep: DialogNodeNextStep
+    public var nextStep: DialogNodeNextStep?
 
     /// The timestamp for creation of the dialog node.
     public var created: String
 
     /// The timestamp for the most recent update to the dialog node.
-    public var updated: String?
+    public var updated: String
 
     /// The actions for the dialog node.
     public var actions: [DialogNodeAction]?
 
     /// The alias used to identify the dialog node.
-    public var title: String
+    public var title: String?
 
     /// How the dialog node is processed.
     public var nodeType: String?
@@ -92,6 +92,8 @@ public struct DialogNode {
      Initialize a `DialogNode` with member variables.
 
      - parameter dialogNodeID: The dialog node ID.
+     - parameter created: The timestamp for creation of the dialog node.
+     - parameter updated: The timestamp for the most recent update to the dialog node.
      - parameter description: The description of the dialog node.
      - parameter conditions: The condition that triggers the dialog node.
      - parameter parent: The ID of the parent dialog node.
@@ -100,18 +102,18 @@ public struct DialogNode {
      - parameter context: The context (if defined) for the dialog node.
      - parameter metadata: The metadata (if any) for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
-     - parameter created: The timestamp for creation of the dialog node.
-     - parameter title: The alias used to identify the dialog node.
-     - parameter updated: The timestamp for the most recent update to the dialog node.
      - parameter actions: The actions for the dialog node.
+     - parameter title: The alias used to identify the dialog node.
      - parameter nodeType: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
 
      - returns: An initialized `DialogNode`.
     */
-    public init(dialogNodeID: String, description: String, conditions: String, parent: String, previousSibling: String, output: [String: JSON], context: [String: JSON], metadata: [String: JSON], nextStep: DialogNodeNextStep, created: String, title: String, updated: String? = nil, actions: [DialogNodeAction]? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil) {
+    public init(dialogNodeID: String, created: String, updated: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, actions: [DialogNodeAction]? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil) {
         self.dialogNodeID = dialogNodeID
+        self.created = created
+        self.updated = updated
         self.description = description
         self.conditions = conditions
         self.parent = parent
@@ -120,10 +122,8 @@ public struct DialogNode {
         self.context = context
         self.metadata = metadata
         self.nextStep = nextStep
-        self.created = created
-        self.title = title
-        self.updated = updated
         self.actions = actions
+        self.title = title
         self.nodeType = nodeType
         self.eventName = eventName
         self.variable = variable
@@ -155,18 +155,18 @@ extension DialogNode: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         dialogNodeID = try container.decode(String.self, forKey: .dialogNodeID)
-        description = try container.decode(String.self, forKey: .description)
-        conditions = try container.decode(String.self, forKey: .conditions)
-        parent = try container.decode(String.self, forKey: .parent)
-        previousSibling = try container.decode(String.self, forKey: .previousSibling)
-        output = try container.decode([String: JSON].self, forKey: .output)
-        context = try container.decode([String: JSON].self, forKey: .context)
-        metadata = try container.decode([String: JSON].self, forKey: .metadata)
-        nextStep = try container.decode(DialogNodeNextStep.self, forKey: .nextStep)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        conditions = try container.decodeIfPresent(String.self, forKey: .conditions)
+        parent = try container.decodeIfPresent(String.self, forKey: .parent)
+        previousSibling = try container.decodeIfPresent(String.self, forKey: .previousSibling)
+        output = try container.decodeIfPresent([String: JSON].self, forKey: .output)
+        context = try container.decodeIfPresent([String: JSON].self, forKey: .context)
+        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
+        nextStep = try container.decodeIfPresent(DialogNodeNextStep.self, forKey: .nextStep)
         created = try container.decode(String.self, forKey: .created)
-        updated = try container.decodeIfPresent(String.self, forKey: .updated)
+        updated = try container.decode(String.self, forKey: .updated)
         actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
-        title = try container.decode(String.self, forKey: .title)
+        title = try container.decodeIfPresent(String.self, forKey: .title)
         nodeType = try container.decodeIfPresent(String.self, forKey: .nodeType)
         eventName = try container.decodeIfPresent(String.self, forKey: .eventName)
         variable = try container.decodeIfPresent(String.self, forKey: .variable)
@@ -175,18 +175,18 @@ extension DialogNode: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(dialogNodeID, forKey: .dialogNodeID)
-        try container.encode(description, forKey: .description)
-        try container.encode(conditions, forKey: .conditions)
-        try container.encode(parent, forKey: .parent)
-        try container.encode(previousSibling, forKey: .previousSibling)
-        try container.encode(output, forKey: .output)
-        try container.encode(context, forKey: .context)
-        try container.encode(metadata, forKey: .metadata)
-        try container.encode(nextStep, forKey: .nextStep)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(conditions, forKey: .conditions)
+        try container.encodeIfPresent(parent, forKey: .parent)
+        try container.encodeIfPresent(previousSibling, forKey: .previousSibling)
+        try container.encodeIfPresent(output, forKey: .output)
+        try container.encodeIfPresent(context, forKey: .context)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(nextStep, forKey: .nextStep)
         try container.encode(created, forKey: .created)
-        try container.encodeIfPresent(updated, forKey: .updated)
+        try container.encode(updated, forKey: .updated)
         try container.encodeIfPresent(actions, forKey: .actions)
-        try container.encode(title, forKey: .title)
+        try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(nodeType, forKey: .nodeType)
         try container.encodeIfPresent(eventName, forKey: .eventName)
         try container.encodeIfPresent(variable, forKey: .variable)

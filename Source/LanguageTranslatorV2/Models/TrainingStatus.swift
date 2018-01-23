@@ -28,7 +28,10 @@ public enum TrainingStatus: String {
 
     /// Training is still in progress.
     case training = "training"
-
+    
+    /// Training is uploading.
+    case uploading = "uploading"
+    
     /// Training has been uploaded.
     case uploaded = "uploaded"
 

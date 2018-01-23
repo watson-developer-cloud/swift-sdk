@@ -348,12 +348,14 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter request: The user's input, with optional intents, entities, and other properties from the response.
+     - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that were visited during processing of the message.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func message(
         workspaceID: String,
         request: MessageRequest? = nil,
+        nodesVisitedDetails: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (MessageResponse) -> Void)
     {
@@ -366,6 +368,10 @@ public class Conversation {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let nodesVisitedDetails = nodesVisitedDetails {
+            let queryParameter = URLQueryItem(name: "nodes_visited_details", value: "\(nodesVisitedDetails)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/message"

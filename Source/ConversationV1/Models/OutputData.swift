@@ -28,6 +28,9 @@ public struct OutputData {
     /// An array of the nodes that were triggered to create the response.
     public var nodesVisited: [String]?
 
+    /// An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message.
+    public var nodesVisitedDetails: [DialogNodeVisitedDetails]?
+
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
@@ -37,13 +40,15 @@ public struct OutputData {
      - parameter logMessages: Up to 50 messages logged with the request.
      - parameter text: An array of responses to the user.
      - parameter nodesVisited: An array of the nodes that were triggered to create the response.
+     - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message.
 
      - returns: An initialized `OutputData`.
     */
-    public init(logMessages: [LogMessage], text: [String], nodesVisited: [String]? = nil, additionalProperties: [String: JSON] = [:]) {
+    public init(logMessages: [LogMessage], text: [String], nodesVisited: [String]? = nil, nodesVisitedDetails: [DialogNodeVisitedDetails]? = nil, additionalProperties: [String: JSON] = [:]) {
         self.logMessages = logMessages
         self.text = text
         self.nodesVisited = nodesVisited
+        self.nodesVisitedDetails = nodesVisitedDetails
         self.additionalProperties = additionalProperties
     }
 }
@@ -54,7 +59,8 @@ extension OutputData: Codable {
         case logMessages = "log_messages"
         case text = "text"
         case nodesVisited = "nodes_visited"
-        static let allValues = [logMessages, text, nodesVisited]
+        case nodesVisitedDetails = "nodes_visited_details"
+        static let allValues = [logMessages, text, nodesVisited, nodesVisitedDetails]
     }
 
     public init(from decoder: Decoder) throws {
@@ -62,6 +68,7 @@ extension OutputData: Codable {
         logMessages = try container.decode([LogMessage].self, forKey: .logMessages)
         text = try container.decode([String].self, forKey: .text)
         nodesVisited = try container.decodeIfPresent([String].self, forKey: .nodesVisited)
+        nodesVisitedDetails = try container.decodeIfPresent([DialogNodeVisitedDetails].self, forKey: .nodesVisitedDetails)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
@@ -71,6 +78,7 @@ extension OutputData: Codable {
         try container.encode(logMessages, forKey: .logMessages)
         try container.encode(text, forKey: .text)
         try container.encodeIfPresent(nodesVisited, forKey: .nodesVisited)
+        try container.encodeIfPresent(nodesVisitedDetails, forKey: .nodesVisitedDetails)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }

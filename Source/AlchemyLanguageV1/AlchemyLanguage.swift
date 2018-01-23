@@ -60,7 +60,7 @@ public class AlchemyLanguage {
         // service, without regards to whether the response itself was a success or a failure.
 
         // First check http status code in response
-        // If statusCode indicates and error, return nil so that RestKit uses its default error
+        // If statusCode indicates an error, return nil so that RestKit uses its default error
         if let response = response {
             if !(200..<300).contains(response.statusCode) {
                 return nil

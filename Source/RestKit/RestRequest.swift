@@ -121,8 +121,13 @@ internal struct RestRequest {
             }
 
             guard (200..<300).contains(response.statusCode) else {
-                let error = parseServiceError?(response, data) ?? self.errorWithCode(code: response.statusCode)
-                completionHandler(data, response, error)
+                if let serviceError = parseServiceError?(response, data) {
+                    completionHandler(data, response, serviceError)
+                } else {
+                    let genericMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
+                    let genericError = RestError.failure(response.statusCode, genericMessage)
+                    completionHandler(data, response, genericError)
+                }
                 return
             }
 
@@ -130,31 +135,6 @@ internal struct RestRequest {
             completionHandler(data, response, nil)
         }
         task.resume()
-    }
-
-    internal func errorWithCode(code: Int) -> RestError {
-        // This switch is not intended to be exhaustive.  We only include codes
-        // that are likely to be encountered in actual use.
-        switch code {
-        case 400:
-            return RestError.failure(code, "Bad Request")
-        case 401:
-            return RestError.failure(code, "Unauthorized")
-        case 403:
-            return RestError.failure(code, "Forbidden")
-        case 404:
-            return RestError.failure(code, "Not Found")
-        case 415:
-            return RestError.failure(code, "Unsupported Media Type")
-        case 500:
-            return RestError.failure(code, "Internal Server Error")
-        case 502:
-            return RestError.failure(code, "Bad Gateway")
-        case 503:
-            return RestError.failure(code, "Service Unavailable")
-        default:
-            return RestError.failure(code, "HTTP Status \(code)")
-        }
     }
 
     internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {

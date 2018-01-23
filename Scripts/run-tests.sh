@@ -44,6 +44,8 @@ brew update
 brew outdated carthage || brew upgrade carthage
 carthage bootstrap --platform iOS
 
+brew outdated swiftlint || brew upgrade swiftlint
+
 ####################
 # Build and Test
 ####################

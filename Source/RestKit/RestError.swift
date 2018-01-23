@@ -19,6 +19,9 @@ import Foundation
 /// An error from processing a network request or response.
 public enum RestError: Error {
 
+    /// No response was received from the server.
+    case noResponse
+
     /// No data was returned from the server.
     case noData
 

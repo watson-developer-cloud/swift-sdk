@@ -56,7 +56,7 @@ public class NaturalLanguageClassifier {
 
         // First check http status code in response
         if let response = response {
-            if response.statusCode >= 200 && response.statusCode < 300 {
+            if (200..<300).contains(response.statusCode) {
                 return nil
             }
         }

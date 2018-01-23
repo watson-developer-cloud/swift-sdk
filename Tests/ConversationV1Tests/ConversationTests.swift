@@ -1429,7 +1429,7 @@ class ConversationTests: XCTestCase {
             nextStep: nil,
             actions: nil,
             title: "YesYouCan",
-            nodeType: nil,
+            nodeType: "standard",
             eventName: nil,
             variable: nil)
         conversation.createDialogNode(workspaceID: workspaceID, properties: dialogNode, failure: failWithError) {
@@ -1444,8 +1444,8 @@ class ConversationTests: XCTestCase {
             XCTAssertEqual(dialogNode.metadata!, node.metadata!)
             XCTAssertNil(node.nextStep)
             XCTAssertNil(node.actions)
-            XCTAssertEqual(dialogNode.title!, node.title!)
-            //XCTAssertNil(node.nodeType)
+            XCTAssertEqual(dialogNode.title!, node.title)
+            XCTAssertEqual(dialogNode.nodeType!, node.nodeType)
             XCTAssertNil(node.eventName)
             XCTAssertNil(node.variable)
             expectation1.fulfill()

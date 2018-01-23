@@ -410,8 +410,8 @@ class RetrieveAndRankTests: XCTestCase {
             forSolrClusterID: trainedClusterID,
             failure: failWithError) { collections in
 
-            XCTAssertEqual(collections.count, 1)
-            XCTAssertEqual(collections.first, self.trainedCollectionName)
+            XCTAssertGreaterThanOrEqual(collections.count, 1)
+            XCTAssertTrue(collections.contains(self.trainedCollectionName))
             expectation.fulfill()
         }
         waitForExpectations()

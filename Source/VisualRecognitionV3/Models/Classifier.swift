@@ -36,9 +36,6 @@ public struct Classifier: JSONDecodable {
     
     /// The time and date when the classifier was created.
     public let created: String
-    
-    /// The time and date when the classifier was updated.
-    public let updated: String
 
     /// The time and date when the classifier was retrained.
     public let retrained: String?
@@ -49,9 +46,6 @@ public struct Classifier: JSONDecodable {
     /// If the classifier is CoreML Enabled.
     public let coreMLEnabled: Bool
     
-    /// The status of the CoreML classifier.
-    public let coreMLStatus: String
-    
     /// Used internally to initialize a `Classifier` model from JSON.
     public init(json: JSONWrapper) throws {
         classifierID = try json.getString(at: "classifier_id")
@@ -60,10 +54,8 @@ public struct Classifier: JSONDecodable {
         status = try json.getString(at: "status")
         explanation = try? json.getString(at: "explanation")
         created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
         retrained = try? json.getString(at: "retrained")
         classes = try json.getArray(at: "classes").map { try $0.getString(at: "class") }
         coreMLEnabled = try json.getBool(at: "core_ml_enabled")
-        coreMLStatus = try json.getString(at: "core_ml_status")
     }
 }

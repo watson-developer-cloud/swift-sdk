@@ -387,13 +387,13 @@ public class VisualRecognition {
 
     /**
      Retrieve a list of custom classifiers.
- 
-     - parameter coreMLEnabled: Filter by Core ML enabled classifiers.
+
+     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the list of classifiers.
      */
     public func getClassifiers(
-        coreMLEnabled: Bool? = nil,
+        owners: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping ([Classifier]) -> Void)
     {
@@ -402,9 +402,9 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
-        if let coreMLEnabled = coreMLEnabled {
-            let queryParameter = URLQueryItem(name: "core_ml_enabled", value: "\(coreMLEnabled)")
-            queryParameters.append(queryParameter)
+        if let owners = owners {
+            let list = owners.joined(separator: ",")
+            queryParameters.append(URLQueryItem(name: "owners", value: list))
         }
         
         // construct REST request
@@ -447,7 +447,6 @@ public class VisualRecognition {
         Must contain a minimum of 10 images.
      - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
         subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
-     - parameter coreMLEnabled: Enable Core ML support for this classifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the created classifier.
      */
@@ -455,7 +454,6 @@ public class VisualRecognition {
         withName name: String,
         positiveExamples: [PositiveExample],
         negativeExamples: URL? = nil,
-        coreMLEnabled: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -476,10 +474,6 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let coreMLEnabled = coreMLEnabled {
-            let queryParameter = URLQueryItem(name: "core_ml_enabled", value: "\(coreMLEnabled)")
-            queryParameters.append(queryParameter)
-        }
         
         // encode name as data
         guard let name = name.data(using: .utf8) else {
@@ -568,7 +562,7 @@ public class VisualRecognition {
     /**
      Retrieve information about a custom classifier.
  
-     - parameter withID: The id of the classifier to retrieve information about.
+     - parameter withID: The classifier ID or IBM model ID of the classifier to retrieve information about.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the retrieved information about the given
             classifier.
@@ -617,7 +611,6 @@ public class VisualRecognition {
         Must contain a minimum of 10 images.
      - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
         subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
-     - parameter coreMLEnabled: Enable Core ML support for this classifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with information about the created classifier.
      */
@@ -625,7 +618,6 @@ public class VisualRecognition {
         withID classifierID: String,
         positiveExamples: [PositiveExample]? = nil,
         negativeExamples: URL? = nil,
-        coreMLEnabled: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -643,10 +635,6 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let coreMLEnabled = coreMLEnabled {
-            let queryParameter = URLQueryItem(name: "core_ml_enabled", value: "\(coreMLEnabled)")
-            queryParameters.append(queryParameter)
-        }
         
         // construct body
         let multipartFormData = MultipartFormData()

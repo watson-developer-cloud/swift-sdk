@@ -57,10 +57,10 @@ extension VisualRecognition {
             return
         }
 
-        // parse model's `updated` date
+        // parse the date on which the local model was last updated
         let description = model.modelDescription
         let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
-        guard let updated = metadata["updated"], let modelDate = dateFormatter.date(from: updated) else {
+        guard let updated = metadata["retrained"] ?? metadata["created"], let modelDate = dateFormatter.date(from: updated) else {
             downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             return
         }
@@ -73,7 +73,7 @@ extension VisualRecognition {
             }
 
             // download the latest model if a newer version is available
-            if classifierDate > modelDate && classifier.coreMLStatus == "ready" {
+            if classifierDate > modelDate && classifier.status == "ready" {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             } else {
                 success?();

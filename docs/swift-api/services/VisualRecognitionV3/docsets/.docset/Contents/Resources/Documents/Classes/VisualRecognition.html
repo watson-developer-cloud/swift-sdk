@@ -812,9 +812,9 @@ total number of images is limited to 20, with a max .zip size of 5 MB.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C14getClassifiersySbSg13coreMLEnabled_ys5Error_pcSg7failureySayAA10ClassifierVGc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getClassifiers(coreMLEnabled:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14getClassifiersySbSg13coreMLEnabled_ys5Error_pcSg7failureySayAA10ClassifierVGc7successtF">getClassifiers(coreMLEnabled:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C14getClassifiersySaySSGSg6owners_ys5Error_pcSg7failureySayAA10ClassifierVGc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getClassifiers(owners:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14getClassifiersySaySSGSg6owners_ys5Error_pcSg7failureySayAA10ClassifierVGc7successtF">getClassifiers(owners:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -830,7 +830,7 @@ total number of images is limited to 20, with a max .zip size of 5 MB.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifiers</span><span class="p">(</span>
-    <span class="nv">coreMLEnabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -843,12 +843,12 @@ total number of images is limited to 20, with a max .zip size of 5 MB.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>coreMLEnabled</em>
+                                <em>owners</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Filter by CoreML enabled classifiers.</p>
+                                  <p>An array of owners. Must be <q>IBM</q>, <q>me</q>, or a combination of the two.</p>
                                 </div>
                               </td>
                             </tr>
@@ -885,9 +885,9 @@ total number of images is limited to 20, with a max .zip size of 5 MB.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16createClassifierySS8withName_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeK0SbSg13coreMLEnabledys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createClassifier(withName:positiveExamples:negativeExamples:coreMLEnabled:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16createClassifierySS8withName_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeK0SbSg13coreMLEnabledys5Error_pcSg7failureyAA0E0Vc7successtF">createClassifier(withName:positiveExamples:negativeExamples:coreMLEnabled:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C16createClassifierySS8withName_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeK0ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createClassifier(withName:positiveExamples:negativeExamples:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16createClassifierySS8withName_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeK0ys5Error_pcSg7failureyAA0E0Vc7successtF">createClassifier(withName:positiveExamples:negativeExamples:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -917,7 +917,6 @@ only specify one negative example file in a single call.</p>
     <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">],</span>
     <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">coreMLEnabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -963,18 +962,6 @@ Must contain a minimum of 10 images.</p>
                                 <div>
                                   <p>A compressed (.zip) file of images that do not depict the visual
 subject of any of the classes of the new classifier. Must contain a minimum of 10 images.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>coreMLEnabled</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Enables the processing of the classifier as a local CoreML model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1120,7 +1107,7 @@ subject of any of the classes of the new classifier. Must contain a minimum of 1
                               </td>
                               <td>
                                 <div>
-                                  <p>The id of the classifier to retrieve information about.</p>
+                                  <p>The classifier ID or IBM model ID of the classifier to retrieve information about.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1158,9 +1145,9 @@ subject of any of the classes of the new classifier. Must contain a minimum of 1
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16updateClassifierySS6withID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0SbSg13coreMLEnabledys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateClassifier(withID:positiveExamples:negativeExamples:coreMLEnabled:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateClassifierySS6withID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0SbSg13coreMLEnabledys5Error_pcSg7failureyAA0E0Vc7successtF">updateClassifier(withID:positiveExamples:negativeExamples:coreMLEnabled:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C16updateClassifierySS6withID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateClassifier(withID:positiveExamples:negativeExamples:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateClassifierySS6withID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0ys5Error_pcSg7failureyAA0E0Vc7successtF">updateClassifier(withID:positiveExamples:negativeExamples:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1179,7 +1166,6 @@ subject of any of the classes of the new classifier. Must contain a minimum of 1
     <span class="n">withID</span> <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">coreMLEnabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1225,18 +1211,6 @@ Must contain a minimum of 10 images.</p>
                                 <div>
                                   <p>A compressed (.zip) file of images that do not depict the visual
 subject of any of the classes of the new classifier. Must contain a minimum of 10 images.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>coreMLEnabled</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Enables the processing of the classifier as a local CoreML model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2561,7 +2535,7 @@ built-in classifier.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-12-13)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

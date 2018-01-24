@@ -342,18 +342,18 @@ extension VisualRecognition {
             headerParameters: headerParameters
         )
 
-        // locate downloads directory
+        // create temporary downloads directory
         let fileManager = FileManager.default
         let downloads: URL
         do {
             downloads = try fileManager.url(
-                for: .downloadsDirectory,
+                for: .itemReplacementDirectory,
                 in: .userDomainMask,
-                appropriateFor: nil,
+                appropriateFor: FileManager.default.temporaryDirectory,
                 create: true
             )
         } catch {
-            let description = "Failed to locate downloads directory: \(error.localizedDescription)"
+            let description = "Failed to create temporary downloads directory: \(error.localizedDescription)"
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)

@@ -109,7 +109,7 @@ internal struct RestRequest {
     {
         let task = session.dataTask(with: request) { (data, response, error) in
 
-            guard error == nil  else {
+            guard error == nil else {
                 completionHandler(data, response as? HTTPURLResponse, error)
                 return
             }
@@ -140,6 +140,7 @@ internal struct RestRequest {
     internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
         response { data, response, error in
             guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
                 let result = RestResult<Data>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
@@ -165,6 +166,7 @@ internal struct RestRequest {
         response(parseServiceError: responseToError) { data, response, error in
 
             guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
                 let result = RestResult<T>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
@@ -215,6 +217,7 @@ internal struct RestRequest {
         response(parseServiceError: responseToError) { data, response, error in
 
             guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
                 let result = RestResult<T>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
@@ -252,6 +255,7 @@ internal struct RestRequest {
         response(parseServiceError: responseToError) { data, response, error in
 
             guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
                 let result = RestResult<[T]>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
@@ -303,6 +307,7 @@ internal struct RestRequest {
         response(parseServiceError: responseToError) { data, response, error in
 
             guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
                 let result = RestResult<String>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
@@ -339,6 +344,7 @@ internal struct RestRequest {
         response(parseServiceError: responseToError) { data, response, error in
 
             guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
                 let result = RestResult<Void>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)

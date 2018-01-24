@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-// swiftlint:disable function_body_length force_try superfluous_disable_command
+// swiftlint:disable function_body_length force_try force_unwrapping superfluous_disable_command
 
 import XCTest
 

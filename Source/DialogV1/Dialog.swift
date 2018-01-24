@@ -275,6 +275,7 @@ public class Dialog {
         // execute REST request
         request.download(to: destination) { response, error in
             guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
                 failure?(error!)
                 return
             }

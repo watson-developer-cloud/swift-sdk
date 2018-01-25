@@ -67,7 +67,7 @@ class PersonalityInsightsTests: XCTestCase {
             return try? String(contentsOfFile: file)
         #else
             let file = URL(fileURLWithPath: "Tests/PersonalityInsightsV3Tests/" + resource + "." + ext).path
-            return try? String(contentsOfFile:file, encoding: .utf8)
+            return try? String(contentsOfFile: file, encoding: .utf8)
         #endif
     }
 

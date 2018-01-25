@@ -38,7 +38,7 @@ class DiscoveryTests: XCTestCase {
         instantiateDiscovery()
         self.environmentID = lookupEnvironment()
     }
-    
+
     static var allTests: [(String, (DiscoveryTests) -> () throws -> Void)] {
         return [
             ("testGetEnvironments", testGetEnvironments),
@@ -636,7 +636,7 @@ class DiscoveryTests: XCTestCase {
         #else
              let file = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/metadata.json")
         #endif
-            
+
         let expectation = self.expectation(description: "Test default configuration on document.")
         discovery.testConfigurationInEnvironment(
             withEnvironmentID: environmentID!,

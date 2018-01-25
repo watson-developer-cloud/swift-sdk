@@ -62,12 +62,11 @@ class RetrieveAndRankTests: XCTestCase {
             ("testDeleteNonExistentRanker", testDeleteNonExistentRanker),
             ("testRankWithInvalidRankerID", testRankWithInvalidRankerID),
         ]
-        
-        //Failing Tests below =(
-        //("testCreateAndDeleteSolrConfiguration", testCreateAndDeleteSolrConfiguration),
-        //("testUpdateSolrCollection", testUpdateSolrCollection),
-        //("testCreateAndDeleteRanker", testCreateAndDeleteRanker),
-        //
+
+        // The following tests are currently failing on Linux
+        // ("testCreateAndDeleteSolrConfiguration", testCreateAndDeleteSolrConfiguration),
+        // ("testUpdateSolrCollection", testUpdateSolrCollection),
+        // ("testCreateAndDeleteRanker", testCreateAndDeleteRanker),
     }
 
     // MARK: - Test Configuration
@@ -392,26 +391,26 @@ class RetrieveAndRankTests: XCTestCase {
     }
 
     /** Get a specific configuration. */
-        func testGetSolrConfiguration() {
-            //This test is temporarily disabled on Linux because of runtime error with `getSolrConfiguration`.
-            #if os(Linux)
-            #else
+    func testGetSolrConfiguration() {
+        // this test is temporarily disabled on Linux
+        // because of a runtime error with `getSolrConfiguration`
+        #if os(Linux)
+        #else
             let description = "Get the trained configuration in the trained Solr cluster."
             let expectation = self.expectation(description: description)
-
             retrieveAndRank.getSolrConfiguration(
                 withName: trainedConfigurationName,
                 fromSolrClusterID: trainedClusterID,
-                failure: failWithError) { file in
-
-                let fileManager = FileManager.default
-                XCTAssertTrue(fileManager.fileExists(atPath: file.path))
-                try! fileManager.removeItem(at: file)
-                expectation.fulfill()
+                failure: failWithError) {
+                    file in
+                    let fileManager = FileManager.default
+                    XCTAssertTrue(fileManager.fileExists(atPath: file.path))
+                    try! fileManager.removeItem(at: file)
+                    expectation.fulfill()
             }
             waitForExpectations()
-            #endif
-        }
+        #endif
+    }
 
     /** List all Solr collections associated with the trained cluster. */
     func testGetSolrCollections() {

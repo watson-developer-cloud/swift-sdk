@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import AlchemyDataNewsV1Tests
 @testable import ConversationV1Tests
 @testable import DiscoveryV1Tests
@@ -11,6 +12,18 @@ import XCTest
 @testable import ToneAnalyzerV3Tests
 @testable import TradeoffAnalyticsV1Tests
 @testable import VisualRecognitionV3Tests
+
+// the following tests are currently disabled becuase
+// their dependencies do not build with Swift Package Manager
+// @testable import TextToSpeechV1Tests
+// @testable import SpeechToTextV1Tests
+
+// the following tests are currently disabled because
+// the services are deprecated and will be removed soon
+// @testable import AlchemyLanguageV1Tests
+// @testable import AlchemyVisionV1Tests
+// @testable import DialogV1Tests
+// @testable import PersonalityInsightsV2Tests
 
 XCTMain([
     testCase(AlchemyDataNewsTests.allTests),
@@ -25,4 +38,16 @@ XCTMain([
     testCase(ToneAnalyzerTests.allTests),
     testCase(TradeoffAnalyticsTests.allTests),
     testCase(VisualRecognitionTests.allTests),
+
+    // the following tests are currently disabled because their
+    // dependencies do not build with Swift Package Manager
+    // testCase(TextToSpeechTests.allTests)
+    // testCase(SpeechToTextTests.allTests)
+
+    // the following tests are currently disabled because
+    // the services are deprecated and will be removed soon
+    // testCase(AlchemyLanguageTests.allTests),
+    // testCase(AlchemyVisionTests.allTests),
+    // testCase(DialogV1Tests.allTests),
+    // testCase(PersonalityInsightsTests.allTests)
 ])

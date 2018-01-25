@@ -75,7 +75,7 @@ public class NaturalLanguageClassifier {
             let message = try json.getString(at: "error")
             let description = try json.getString(at: "description")
             let userInfo = [
-                NSLocalizedFailureReasonErrorKey: message,
+                NSLocalizedDescriptionKey: message,
                 NSLocalizedRecoverySuggestionErrorKey: description,
             ]
             return NSError(domain: domain, code: code, userInfo: userInfo)
@@ -181,7 +181,7 @@ public class NaturalLanguageClassifier {
         let json = JSONWrapper(dictionary: ["text": text])
         guard let body = try? json.serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

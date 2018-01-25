@@ -6,6 +6,7 @@ import XCTest
 @testable import DocumentConversionV1Tests
 @testable import LanguageTranslatorV2Tests
 @testable import NaturalLanguageClassifierV1Tests
+@testable import NaturalLanguageUnderstandingV1Tests
 @testable import PersonalityInsightsV3Tests
 @testable import RelationshipExtractionV1BetaTests
 @testable import RetrieveAndRankV1Tests
@@ -32,6 +33,7 @@ XCTMain([
     testCase(DocumentConversionTests.allTests),
     testCase(LanguageTranslatorTests.allTests),
     testCase(NaturalLanguageClassifierTests.allTests),
+    testCase(NaturalLanguageUnderstandingTests.allTests),
     testCase(PersonalityInsightsTests.allTests),
     testCase(RelationshipExtractionTests.allTests),
     testCase(RetrieveAndRankTests.allTests),

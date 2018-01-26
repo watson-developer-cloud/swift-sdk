@@ -39,6 +39,31 @@ class DiscoveryTests: XCTestCase {
         self.environmentID = lookupEnvironment()
     }
 
+    static var allTests: [(String, (DiscoveryTests) -> () throws -> Void)] {
+        return [
+            ("testGetEnvironments", testGetEnvironments),
+            ("testCreateUpdateAndDeleteEnvironment", testCreateUpdateAndDeleteEnvironment),
+            ("testGetConfigurations", testGetConfigurations),
+            ("testCreateGetDeleteConfigurationWithFunkyName", testCreateGetDeleteConfigurationWithFunkyName),
+            ("testCreateAndDeleteConfiguration", testCreateAndDeleteConfiguration),
+            ("testGetDefaultConfigurationDetails", testGetDefaultConfigurationDetails),
+            ("testCreateUpdateAndDeleteConfiguration", testCreateUpdateAndDeleteConfiguration),
+            ("testConfigurationOnDocument", testConfigurationOnDocument),
+            ("testGetCollections", testGetCollections),
+            ("testCreateUpdateAndDeleteCollection", testCreateUpdateAndDeleteCollection),
+            ("testListCollectionDetails", testListCollectionDetails),
+            ("testListCollectionFields", testListCollectionFields),
+            ("testAddGetUpdateDeleteDocument", testAddGetUpdateDeleteDocument),
+            ("testQueryInNewsCollection", testQueryInNewsCollection),
+            ("testConceptsModel", testConceptsModel),
+            ("testDocumentSentimentModel", testDocumentSentimentModel),
+            ("testTaxonomyModel", testTaxonomyModel),
+            ("testRelationsModel", testRelationsModel),
+            ("testEntityModel", testEntityModel),
+            ("testEntityAggregationModel", testEntityAggregationModel),
+        ]
+    }
+
     /** Instantiate Discovery instance. */
     func instantiateDiscovery() {
         let username = Credentials.DiscoveryUsername
@@ -603,11 +628,14 @@ class DiscoveryTests: XCTestCase {
             XCTFail("Failed to find the default configuration.")
             return
         }
-
-        guard let file = Bundle(for: type(of: self)).url(forResource: "metadata", withExtension: "json") else {
-            XCTFail("Unable to locate metadata.json")
-            return
-        }
+        #if os(iOS)
+            guard let file = Bundle(for: type(of: self)).url(forResource: "metadata", withExtension: "json") else {
+                XCTFail("Unable to locate metadata.json")
+                return
+            }
+        #else
+             let file = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/metadata.json")
+        #endif
 
         let expectation = self.expectation(description: "Test default configuration on document.")
         discovery.testConfigurationInEnvironment(
@@ -780,11 +808,14 @@ class DiscoveryTests: XCTestCase {
             XCTFail("Failed to find the test collection.")
             return
         }
-
-        guard let file = Bundle(for: type(of: self)).url(forResource: "discoverySample", withExtension: "json") else {
-            XCTFail("Unable to locate discoverySample.json")
-            return
-        }
+        #if os(iOS)
+            guard let file = Bundle(for: type(of: self)).url(forResource: "discoverySample", withExtension: "json") else {
+                XCTFail("Unable to locate discoverySample.json")
+                return
+            }
+        #else
+            let file = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/discoverySample.json")
+        #endif
 
         var documentID: String?
         // Add document to test collection and environment
@@ -823,11 +854,14 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations()
 
         // Update document in the test collection.
-
-        guard let metadata = Bundle(for: type(of: self)).url(forResource: "metadata", withExtension: "json") else {
-            XCTFail("Unable to locate metadata.json")
-            return
-        }
+        #if os(iOS)
+            guard let metadata = Bundle(for: type(of: self)).url(forResource: "metadata", withExtension: "json") else {
+                XCTFail("Unable to locate metadata.json")
+                return
+            }
+        #else
+            let metadata = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/metadata.json")
+        #endif
 
         let expectation3 = self.expectation(description: "Update document name and description in collection.")
         discovery.updateDocumentInCollection(

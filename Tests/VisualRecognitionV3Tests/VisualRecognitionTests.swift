@@ -118,7 +118,7 @@ class VisualRecognitionTests: XCTestCase {
             let examplesTrucks =    URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/trucks.zip")
             let faces =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/faces.zip")
             let face1 =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/face1.jpg")
-            let car =               URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/car.jpg")
+            let car =               URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/car.png")
             let carz =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/carz.zip")
             let obama =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/obama.jpg")
             let sign =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/sign.jpg")

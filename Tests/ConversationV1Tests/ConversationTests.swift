@@ -130,7 +130,7 @@ class ConversationTests: XCTestCase {
         let nodes1 = ["node_1_1467221909631"]
 
         var context: Context?
-        conversation.message(workspaceID: workspaceID, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, nodesVisitedDetails: true, failure: failWithError) {
             response in
 
             // verify input
@@ -152,7 +152,12 @@ class ConversationTests: XCTestCase {
             // verify output
             XCTAssertTrue(response.output.logMessages.isEmpty)
             XCTAssertEqual(response.output.text, response1)
+            XCTAssertNotNil(response.output.nodesVisited)
             XCTAssertEqual(response.output.nodesVisited!, nodes1)
+            XCTAssertNotNil(response.output.nodesVisitedDetails)
+            XCTAssertNotNil(response.output.nodesVisitedDetails!.first)
+            XCTAssertNotNil(response.output.nodesVisitedDetails!.first!.dialogNode)
+            XCTAssertEqual(response.output.nodesVisitedDetails!.first!.dialogNode!, nodes1.first!)
 
             context = response.context
             expectation1.fulfill()
@@ -1185,19 +1190,23 @@ class ConversationTests: XCTestCase {
     func testListAllValues() {
         let description = "List all the values for an entity."
         let expectation = self.expectation(description: description)
-
         let entityName = "appliance"
-
-        conversation.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
-            for value in valueCollection.values {
-                XCTAssertNotNil(value.valueText)
-                XCTAssertNotNil(value.created)
-                XCTAssertNotNil(value.updated)
-            }
-            XCTAssertNotNil(valueCollection.pagination.refreshUrl)
-            XCTAssertNil(valueCollection.pagination.total)
-            XCTAssertNil(valueCollection.pagination.matched)
-            expectation.fulfill()
+        conversation.listValues(
+            workspaceID: workspaceID,
+            entity: entityName,
+            export: true,
+            includeCount: true,
+            failure: failWithError) {
+                valueCollection in
+                for value in valueCollection.values {
+                    XCTAssertNotNil(value.valueText)
+                    XCTAssertNotNil(value.created)
+                    XCTAssertNotNil(value.updated)
+                }
+                XCTAssertNotNil(valueCollection.pagination.refreshUrl)
+                XCTAssertNotNil(valueCollection.pagination.total)
+                XCTAssertNotNil(valueCollection.pagination.matched)
+                expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -1394,15 +1403,15 @@ class ConversationTests: XCTestCase {
         let description = "List all dialog nodes"
         let expectation = self.expectation(description: description)
 
-        conversation.listDialogNodes(workspaceID: workspaceID, failure: failWithError) { nodes in
+        conversation.listDialogNodes(workspaceID: workspaceID, includeCount: true, failure: failWithError) { nodes in
             for node in nodes.dialogNodes {
                 XCTAssertNotNil(node.dialogNodeID)
             }
             XCTAssertGreaterThan(nodes.dialogNodes.count, 0)
             XCTAssertNotNil(nodes.pagination.refreshUrl)
             XCTAssertNil(nodes.pagination.nextUrl)
-            XCTAssertNil(nodes.pagination.total)
-            XCTAssertNil(nodes.pagination.matched)
+            XCTAssertNotNil(nodes.pagination.total)
+            XCTAssertNotNil(nodes.pagination.matched)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1510,15 +1519,22 @@ class ConversationTests: XCTestCase {
 
     // MARK: - Logs
 
-    func testListLogs() {
-        let description = "List the logs from the sdk"
-        let expectation = self.expectation(description: description)
+    func testListAllLogs() {
+        let expectation = self.expectation(description: "List all logs")
+        let filter = "workspace_id::\(workspaceID),language::en"
+        conversation.listAllLogs(filter: filter, failure: failWithError) { logCollection in
+            XCTAssert(logCollection.logs.count > 0)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
 
+    func testListLogs() {
+        let expectation = self.expectation(description: "List logs")
         conversation.listLogs(workspaceID: workspaceID, failure: failWithError) { logCollection in
             XCTAssert(logCollection.logs.count > 0)
             expectation.fulfill()
         }
-
         waitForExpectations()
     }
 

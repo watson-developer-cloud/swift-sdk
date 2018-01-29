@@ -61,7 +61,7 @@ extension SpeechToText {
             )
         } catch {
             let failureReason = "Could not load audio data from \(audio)."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -163,7 +163,7 @@ extension SpeechToText {
             try audioSession.setActive(true)
         } catch {
             let failureReason = "Failed to setup the AVAudioSession sharedInstance properly."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

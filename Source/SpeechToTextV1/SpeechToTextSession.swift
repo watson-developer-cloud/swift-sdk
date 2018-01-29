@@ -176,7 +176,7 @@ public class SpeechToTextSession {
             recognize(audio: data)
         } catch {
             let failureReason = "Could not load audio data from \(audio)."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             onError?(error)
             return
@@ -224,7 +224,7 @@ public class SpeechToTextSession {
         recorder.session.requestRecordPermission { granted in
             guard granted else {
                 let failureReason = "Permission was not granted to access the microphone."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let userInfo = [NSLocalizedDescriptionKey: failureReason]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 self.onError?(error)
                 return
@@ -262,7 +262,7 @@ public class SpeechToTextSession {
                 try self.recorder.startRecording()
             } catch {
                 let failureReason = "Failed to start recording."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let userInfo = [NSLocalizedDescriptionKey: failureReason]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 self.onError?(error)
                 return
@@ -278,7 +278,7 @@ public class SpeechToTextSession {
             try recorder.stopRecording()
         } catch {
             let failureReason = "Failed to stop recording."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             self.onError?(error)
             return

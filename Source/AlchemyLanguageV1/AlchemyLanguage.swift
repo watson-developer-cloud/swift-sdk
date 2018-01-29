@@ -81,8 +81,8 @@ public class AlchemyLanguage {
             let status = try json.getString(at: "status")
             let statusInfo = try json.getString(at: "statusInfo")
             let userInfo = [
-                NSLocalizedFailureReasonErrorKey: status,
-                NSLocalizedDescriptionKey: statusInfo
+                NSLocalizedDescriptionKey: status,
+                NSLocalizedRecoverySuggestionErrorKey: statusInfo
             ]
             return NSError(domain: errorDomain, code: code, userInfo: userInfo)
         } catch {
@@ -95,7 +95,7 @@ public class AlchemyLanguage {
         guard let docAsString = try String(contentsOfFile: document.relativePath, encoding:.utf8)
             .addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
                 let failureReason = "Profile could not be escaped."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let userInfo = [NSLocalizedDescriptionKey: failureReason]
                 let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
                 throw error
         }
@@ -108,7 +108,7 @@ public class AlchemyLanguage {
         }
         guard let body = "\(type)=\(docAsString)".data(using: String.Encoding.utf8) else {
             let failureReason = "Profile could not be encoded."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: errorDomain, code: 0, userInfo: userInfo)
             throw error
         }

@@ -1256,7 +1256,7 @@ public class Discovery {
     }
 
     private func failWithError(reason: String) -> NSError {
-        let userInfo = [NSLocalizedFailureReasonErrorKey: reason]
+        let userInfo = [NSLocalizedDescriptionKey: reason]
         let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
         return error
     }

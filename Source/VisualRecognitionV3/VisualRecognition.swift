@@ -75,8 +75,8 @@ public class VisualRecognition {
             if let status = try? json.getString(at: "status") {
                 let statusInfo = try json.getString(at: "statusInfo")
                 userInfo = [
-                    NSLocalizedFailureReasonErrorKey: status,
-                    NSLocalizedDescriptionKey: statusInfo,
+                    NSLocalizedDescriptionKey: status,
+                    NSLocalizedRecoverySuggestionErrorKey: statusInfo,
                 ]
             } else if let message = try? json.getString(at: "error") {
                 userInfo = [
@@ -88,8 +88,8 @@ public class VisualRecognition {
                 let imagesProcessed = try json.getInt(at: "images_processed")
                 code = 400
                 userInfo = [
-                    NSLocalizedFailureReasonErrorKey: message,
-                    NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)",
+                    NSLocalizedDescriptionKey: message,
+                    NSLocalizedRecoverySuggestionErrorKey: description + " -- Images Processed: \(imagesProcessed)",
                 ]
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)
@@ -414,7 +414,7 @@ public class VisualRecognition {
             let failureReason = "You must supply at least two compressed (.zip) files of images, " +
                                 "either two positive example files or one positive and one " +
                                 "negative example file."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -569,7 +569,7 @@ public class VisualRecognition {
         guard (positiveExamples != nil) || (negativeExamples != nil) else {
             let failureReason = "To update a classifier, you must provide at least one " +
                                 "compressed file of either positive or negative examples."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

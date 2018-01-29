@@ -86,7 +86,7 @@ public class SpeechToText {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
-            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            var userInfo = [NSLocalizedDescriptionKey: message]
             let codeDescription = try? json.getString(at: "code_description")
             let description = try? json.getString(at: "description")
             if let recoverySuggestion = codeDescription ?? description {

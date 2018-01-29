@@ -72,7 +72,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         // restrict the number of retries
         guard tokenRefreshes <= maxTokenRefreshes else {
             let failureReason = "Invalid HTTP upgrade. Check credentials?"
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: "WebSocket", code: 400, userInfo: userInfo)
             onError?(error)
             return

@@ -71,12 +71,12 @@ public class RetrieveAndRank {
             let code = response?.statusCode ?? 400
             let userInfo: [String: String]
             if let message = try? json.getString(at: "msg") {
-                userInfo = [NSLocalizedFailureReasonErrorKey: message]
+                userInfo = [NSLocalizedDescriptionKey: message]
             } else {
                 let message = try json.getString(at: "error")
                 let description = try json.getString(at: "description")
                 userInfo = [
-                    NSLocalizedFailureReasonErrorKey: message,
+                    NSLocalizedDescriptionKey: message,
                     NSLocalizedRecoverySuggestionErrorKey: description,
                 ]
             }
@@ -141,7 +141,7 @@ public class RetrieveAndRank {
 
         guard let body = try? JSONWrapper(dictionary: json).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -328,7 +328,7 @@ public class RetrieveAndRank {
         let directories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
         guard let downloads = directories.first else {
             let failureReason = "Cannot locate documents directory."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -360,7 +360,7 @@ public class RetrieveAndRank {
 
             guard let statusCode = response?.statusCode else {
                 let failureReason = "Did not receive response."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let userInfo = [NSLocalizedDescriptionKey: failureReason]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
                 return
@@ -368,7 +368,7 @@ public class RetrieveAndRank {
 
             if statusCode != 200 {
                 let failureReason = "Status code was not acceptable: \(statusCode)."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let userInfo = [NSLocalizedDescriptionKey: failureReason]
                 let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
                 failure?(error)
                 return
@@ -775,7 +775,7 @@ public class RetrieveAndRank {
         }
         guard let trainingMetadata = try? JSONWrapper(dictionary: json).serialize() else {
             let failureReason = "Ranker metadata could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

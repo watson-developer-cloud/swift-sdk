@@ -85,7 +85,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations(timeout: TimeInterval = 5.0) {
+    func waitForExpectations(timeout: TimeInterval = 20.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -169,7 +169,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             XCTAssertEqual(classification.classes.count, 2)
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 20)
+        waitForExpectations()
     }
 
     // MARK: - Negative Tests

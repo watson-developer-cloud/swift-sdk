@@ -20,7 +20,7 @@ import Foundation
 public struct UtteranceAnalysis {
 
     /// The unique identifier of the utterance. The first utterance has ID 0, and the ID of each subsequent utterance is incremented by one.
-    public var utteranceID: String
+    public var utteranceID: Int
 
     /// The text of the utterance.
     public var utteranceText: String
@@ -41,7 +41,7 @@ public struct UtteranceAnalysis {
 
      - returns: An initialized `UtteranceAnalysis`.
     */
-    public init(utteranceID: String, utteranceText: String, tones: [ToneChatScore], error: String? = nil) {
+    public init(utteranceID: Int, utteranceText: String, tones: [ToneChatScore], error: String? = nil) {
         self.utteranceID = utteranceID
         self.utteranceText = utteranceText
         self.tones = tones
@@ -61,7 +61,7 @@ extension UtteranceAnalysis: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        utteranceID = try container.decode(String.self, forKey: .utteranceID)
+        utteranceID = try container.decode(Int.self, forKey: .utteranceID)
         utteranceText = try container.decode(String.self, forKey: .utteranceText)
         tones = try container.decode([ToneChatScore].self, forKey: .tones)
         error = try container.decodeIfPresent(String.self, forKey: .error)

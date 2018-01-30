@@ -26,16 +26,26 @@ class ToneAnalyzerTests: XCTestCase {
 
     static var allTests: [(String, (ToneAnalyzerTests) -> () throws -> Void)] {
         return [
-            ("testGetToneWithDefaultParameters", testGetToneWithDefaultParameters),
-            ("testGetToneWithCustomParameters", testGetToneWithCustomParameters),
+            ("testGetTone", testGetTone),
+            ("testGetToneCustom", testGetToneCustom),
+            ("testToneChat", testToneChat),
             ("testGetToneEmptyString", testGetToneEmptyString),
         ]
     }
 
-    let text = "I know the times are difficult! Our sales have been disappointing for " +
-               "the past three quarters for our data analytics product suite. We have a " +
-               "competitive data analytics product suite in the industry. But we need " +
-               "to do our job selling it! "
+    let text = """
+        I know the times are difficult! Our sales have been disappointing for the past three quarters for
+        our data analytics product suite. We have a competitive data analytics product suite in the industry.
+        But we need to do our job selling it!
+    """
+
+    let utterances = [
+        Utterance(text: "My charger isn't working.", user: "customer"),
+        Utterance(text: "Thanks for reaching out. Can you give me some more detail about the issue?", user: "agent"),
+        Utterance(text: "I put my charger in my phone last night to charge and it isn't working. " +
+            "Which is ridiculous, it's a new charger, I bought it yesterday.", user: "customer"),
+        Utterance(text: "I'm sorry you're having issues with charging. What kind of charger do you have?", user: "agent")
+    ]
 
     // MARK: - Test Configuration
 
@@ -79,10 +89,8 @@ class ToneAnalyzerTests: XCTestCase {
 
     // MARK: - Positive Tests
 
-    /** Analyze the tone of the given text using the default parameters. */
-    func testGetToneWithDefaultParameters() {
-        let description = "Analyze the tone of the given text using the default parameters."
-        let expectation = self.expectation(description: description)
+    func testGetTone() {
+        let expectation = self.expectation(description: "Get tone.")
         toneAnalyzer.tone(toneInput: ToneInput(text: text), contentType: "plain/text", failure: failWithError) {
             toneAnalysis in
             XCTAssertNotNil(toneAnalysis.documentTone.tones)
@@ -101,10 +109,8 @@ class ToneAnalyzerTests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Analyze the tone of the given text with custom parameters. */
-    func testGetToneWithCustomParameters() {
-        let description = "Analyze the tone of the given text using custom parameters."
-        let expectation = self.expectation(description: description)
+    func testGetToneCustom() {
+        let expectation = self.expectation(description: "Get tone with custom parameters.")
         toneAnalyzer.tone(
             toneInput: ToneInput(text: text),
             contentType: "plain/text",
@@ -122,11 +128,19 @@ class ToneAnalyzerTests: XCTestCase {
         waitForExpectations()
     }
 
+    func testToneChat() {
+        let expectation = self.expectation(description: "Tone chat.")
+        toneAnalyzer.toneChat(utterances: utterances, acceptLanguage: "en", failure: failWithError) { analyses in
+            print(analyses)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
     // MARK: - Negative Tests
 
     func testGetToneEmptyString() {
-        let description = "Analyze the tone of an empty string."
-        let expectation = self.expectation(description: description)
+        let expectation = self.expectation(description: "Get tone with an empty string.")
         let failure = { (error: Error) in expectation.fulfill() }
         toneAnalyzer.tone(
             toneInput: ToneInput(text: ""),
@@ -134,6 +148,13 @@ class ToneAnalyzerTests: XCTestCase {
             failure: failure,
             success: failWithResult
         )
+        waitForExpectations()
+    }
+
+    func testToneChatEmptyArray() {
+        let expectation = self.expectation(description: "Tone chat with an empty array.")
+        let failure = { (error: Error) in expectation.fulfill() }
+        toneAnalyzer.toneChat(utterances: [], acceptLanguage: "en", failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

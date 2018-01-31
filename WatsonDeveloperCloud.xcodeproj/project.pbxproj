@@ -4336,7 +4336,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/ConversationV1\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/ConversationV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/ConversationV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A691FE984BE002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4350,7 +4350,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/DiscoveryV1\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/DiscoveryV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/DiscoveryV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A6A1FE985AD002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4364,7 +4364,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/DocumentConversionV1\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/DocumentConversionV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/DocumentConversionV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A6B1FE985F7002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4378,7 +4378,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/LanguageTranslatorV2\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/LanguageTranslatorV2Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/LanguageTranslatorV2\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A6C1FE98624002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4392,7 +4392,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/NaturalLanguageClassifierV1\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/NaturalLanguageClassifierV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/NaturalLanguageClassifierV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A6D1FE98655002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4406,7 +4406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/NaturalLanguageUnderstandingV1\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/NaturalLanguageUnderstandingV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/NaturalLanguageUnderstandingV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A6E1FE986CB002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4420,7 +4420,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/PersonalityInsightsV3\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/PersonalityInsightsV3Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/PersonalityInsightsV3\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A6F1FE98728002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4434,7 +4434,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/RetrieveAndRankV1\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/RetrieveAndRankV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/RetrieveAndRankV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A701FE987CE002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4448,7 +4448,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/SpeechToTextV1\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/SpeechToTextV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/SpeechToTextV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A711FE98808002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4462,7 +4462,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/TextToSpeechV1\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/TextToSpeechV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/TextToSpeechV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A721FE9883D002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4476,7 +4476,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/ToneAnalyzerV3\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/ToneAnalyzerV3Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/ToneAnalyzerV3\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A731FE9886C002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4490,7 +4490,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/TradeoffAnalyticsV1\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/TradeoffAnalyticsV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results.  See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/TradeoffAnalyticsV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results.  See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A741FE988AB002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4504,7 +4504,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/VisualRecognitionV3\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/VisualRecognitionV3Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/VisualRecognitionV3\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

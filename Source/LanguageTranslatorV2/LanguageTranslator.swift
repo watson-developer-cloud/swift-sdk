@@ -71,13 +71,13 @@ public class LanguageTranslator {
             let code = response?.statusCode ?? 400
             let userInfo: [String: String]
             if let message = try? json.getString(at: "error_message") {
-                userInfo = [NSLocalizedFailureReasonErrorKey: message]
+                userInfo = [NSLocalizedDescriptionKey: message]
                 return NSError(domain: domain, code: code, userInfo: userInfo)
             } else {
                 let message = try json.getString(at: "error")
                 let description = try json.getString(at: "description")
                 userInfo = [
-                    NSLocalizedFailureReasonErrorKey: message,
+                    NSLocalizedDescriptionKey: message,
                     NSLocalizedRecoverySuggestionErrorKey: description,
                 ]
             }
@@ -368,7 +368,7 @@ public class LanguageTranslator {
         // serialize translate request to JSON
         guard let body = try? translateRequest.toJSON().serialize() else {
             let failureReason = "Translation request could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -441,7 +441,7 @@ public class LanguageTranslator {
         // convert text to NSData with UTF-8 encoding
         guard let body = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

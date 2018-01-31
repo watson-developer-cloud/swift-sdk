@@ -74,7 +74,7 @@ public class DocumentConversion {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
-            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            var userInfo = [NSLocalizedDescriptionKey: message]
             if let description = try? json.getString(at: "description") {
                 userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
             }
@@ -182,7 +182,7 @@ public class DocumentConversion {
             try data.write(to: fileURL, options: .atomic)
         } catch {
             let message = "Unable to create config file"
-            let userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            let userInfo = [NSLocalizedDescriptionKey: message]
             throw NSError(domain: domain, code: 0, userInfo: userInfo)
         }
 

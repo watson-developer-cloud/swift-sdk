@@ -199,7 +199,7 @@ public class AlchemyVision {
     {
         guard let html = try? String(contentsOf: html) else {
             let failureReason = "Failed to read the HTML file."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -224,7 +224,7 @@ public class AlchemyVision {
         // encode html document
         guard let htmlEncoded = html.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
             let failureReason = "Failed to percent encode HTML document."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -233,7 +233,7 @@ public class AlchemyVision {
         // construct body
         guard let body = "html=\(htmlEncoded)".data(using: String.Encoding.utf8) else {
             let failureReason = "Failed to construct body with HTML document."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

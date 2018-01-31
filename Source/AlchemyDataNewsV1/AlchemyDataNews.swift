@@ -71,8 +71,8 @@ public class AlchemyDataNews {
             let status = try json.getString(at: "status")
             let statusInfo = try json.getString(at: "statusInfo")
             let userInfo = [
-                NSLocalizedFailureReasonErrorKey: status,
-                NSLocalizedDescriptionKey: statusInfo
+                NSLocalizedDescriptionKey: status,
+                NSLocalizedRecoverySuggestionErrorKey: statusInfo
             ]
             return NSError(domain: errorDomain, code: code, userInfo: userInfo)
         } catch {

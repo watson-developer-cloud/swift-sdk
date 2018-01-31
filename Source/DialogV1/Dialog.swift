@@ -79,7 +79,7 @@ public class Dialog {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
-            let userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            let userInfo = [NSLocalizedDescriptionKey: message]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
@@ -249,7 +249,7 @@ public class Dialog {
         let directories = fileManager.urls(for: .downloadsDirectory, in: .userDomainMask)
         guard let downloads = directories.first else {
             let failureReason = "Cannot locate documents directory."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -282,7 +282,7 @@ public class Dialog {
 
             guard let statusCode = response?.statusCode else {
                 let failureReason = "Did not receive response."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let userInfo = [NSLocalizedDescriptionKey: failureReason]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                 failure?(error)
                 return
@@ -290,7 +290,7 @@ public class Dialog {
 
             if statusCode != 200 {
                 let failureReason = "Status code was not acceptable: \(statusCode)."
-                let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                let userInfo = [NSLocalizedDescriptionKey: failureReason]
                 let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
                 failure?(error)
                 return
@@ -406,7 +406,7 @@ public class Dialog {
         let json = JSONWrapper(dictionary: ["items": nodes.map { $0.toJSONObject() }])
         guard let body = try? json.serialize() else {
             let failureReason = "Nodes could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -619,7 +619,7 @@ public class Dialog {
         let profile = Profile(clientID: clientID, parameters: parameters)
         guard let body = try? profile.toJSON().serialize() else {
             let failureReason = "Profile could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

@@ -71,7 +71,7 @@ public class TextToSpeech {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
-            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            var userInfo = [NSLocalizedDescriptionKey: message]
             let codeDescription = try? json.getString(at: "code_description")
             let description = try? json.getString(at: "description")
             if let recoverySuggestion = codeDescription ?? description {
@@ -265,7 +265,7 @@ public class TextToSpeech {
                         var wav = data
                         guard TextToSpeech.isWAVFile(data: wav) else {
                             let failureReason = "Returned audio is in an unexpected format."
-                            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                            let userInfo = [NSLocalizedDescriptionKey: failureReason]
                             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                             failure?(error)
                             return
@@ -278,7 +278,7 @@ public class TextToSpeech {
                             success(decodedAudio.pcmDataWithHeaders)
                         } catch {
                             let failureReason = "Returned audio is in an unexpected format."
-                            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+                            let userInfo = [NSLocalizedDescriptionKey: failureReason]
                             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                             failure?(error)
                             return
@@ -364,7 +364,7 @@ public class TextToSpeech {
 
         guard let body = try? JSONWrapper(dictionary: dict).serialize() else {
             let failureReason = "Custom voice model metadata could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -482,7 +482,7 @@ public class TextToSpeech {
         let customVoiceUpdate = CustomVoiceUpdate(name: name, description: description, words: words)
         guard let body = try? customVoiceUpdate.toJSON().serialize() else {
             let failureReason = "Translation request could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -563,7 +563,7 @@ public class TextToSpeech {
         let customVoiceUpdate = CustomVoiceUpdate(words: words)
         guard let body = try? customVoiceUpdate.toJSON().serialize() else {
             let failureReason = "Translation request could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -682,7 +682,7 @@ public class TextToSpeech {
         let dict = ["translation": translation]
         guard let body = try? JSONWrapper(dictionary: dict).serialize() else {
             let failureReason = "Translation request could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

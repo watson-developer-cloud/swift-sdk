@@ -74,7 +74,7 @@ public class ToneAnalyzer {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
-            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            var userInfo = [NSLocalizedDescriptionKey: message]
             let help = try? json.getString(at: "help")
             let description = try? json.getString(at: "description")
             if let recoverySuggestion = help ?? description {
@@ -109,7 +109,7 @@ public class ToneAnalyzer {
         // construct body
         guard let body = try? JSONWrapper(dictionary: ["text": text]).serialize() else {
             let failureReason = "Classification text could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

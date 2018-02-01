@@ -2,10 +2,11 @@ Change Log
 ==========
 
 ## Version 0.21.0
-_2018-01-31_
+_2018-02-01_
 
-- Change instances of `NSLocalizedFailureReasonErrorKey` to `NSLocalizedDescriptionKey` for Linux compatibility
-- Fix style errors reported by `swiftlint` (fixes a carthage bug with --no-use-binaries)
+- Change uses of `NSLocalizedFailureReasonErrorKey` to `NSLocalizedDescriptionKey` for Linux compatibility
+- Only lint the `Source/Service` folder for framework build targets (fixes a bug with carthage --no-use-binaries)
+- Fix style errors reported by `swiftlint` (fixes a bug with carthage --no-use-binaries)
 - Improve test infrastructure for simulator and Linux
 
 ## Version 0.20.0

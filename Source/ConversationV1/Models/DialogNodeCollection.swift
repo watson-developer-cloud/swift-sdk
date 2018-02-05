@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public struct DialogNodeCollection {
     /**
      Initialize a `DialogNodeCollection` with member variables.
 
-     - parameter dialogNodes:
+     - parameter dialogNodes: 
      - parameter pagination: An object defining the pagination data for the returned objects.
 
      - returns: An initialized `DialogNodeCollection`.

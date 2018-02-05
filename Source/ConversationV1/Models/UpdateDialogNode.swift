@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import Foundation
 /** UpdateDialogNode. */
 public struct UpdateDialogNode {
 
-    /// How the node is processed.
+    /// How the dialog node is processed.
     public enum NodeType: String {
         case standard = "standard"
         case eventHandler = "event_handler"
@@ -70,7 +70,7 @@ public struct UpdateDialogNode {
     /// The alias used to identify the dialog node.
     public var title: String?
 
-    /// How the node is processed.
+    /// How the dialog node is processed.
     public var nodeType: String?
 
     /// How an `event_handler` node is processed.
@@ -95,7 +95,7 @@ public struct UpdateDialogNode {
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
      - parameter title: The alias used to identify the dialog node.
-     - parameter nodeType: How the node is processed.
+     - parameter nodeType: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
      - parameter actions: The actions for the dialog node.

@@ -49,7 +49,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
         return [
             ("testCreateAndDelete", testCreateAndDelete),
             ("testCreateAndDeleteClassifierWithoutOptionalName", testCreateAndDeleteClassifierWithoutOptionalName),
-            ("testGetAllClassifiers", testGetAllClassifiers),
+            ("testListClassifiers", testListClassifiers),
             ("testGetClassifier", testGetClassifier),
             ("testClassify", testClassify),
             ("testCreateClassifierWithMissingMetadata", testCreateClassifierWithMissingMetadata),
@@ -119,11 +119,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     func testCreateAndDelete() {
         let expectation = self.expectation(description: "Create and delete a classifier")
-        naturalLanguageClassifier.createClassifier(fromMetadataFile: metadataFile, andTrainingFile: trainingFile, failure: failWithError) {
+        naturalLanguageClassifier.createClassifier(metadata: metadataFile, trainingData: trainingFile, failure: failWithError) {
             classifier in
             XCTAssertEqual(classifier.name, self.temporaryClassifierName)
             XCTAssertEqual(classifier.language, "en")
-            self.naturalLanguageClassifier.deleteClassifier(withID: classifier.classifierId, failure: self.failWithError) {
+            self.naturalLanguageClassifier.deleteClassifier(classifierID: classifier.classifierID, failure: self.failWithError) {
                 expectation.fulfill()
             }
         }
@@ -132,21 +132,21 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     func testCreateAndDeleteClassifierWithoutOptionalName() {
         let expectation = self.expectation(description: "Create and delete a classifier with no name.")
-        naturalLanguageClassifier.createClassifier(fromMetadataFile: metadataFileMissingName, andTrainingFile: trainingFile, failure: failWithError) {
+        naturalLanguageClassifier.createClassifier(metadata: metadataFileMissingName, trainingData: trainingFile, failure: failWithError) {
             classifier in
             XCTAssertEqual(classifier.name, nil)
             XCTAssertEqual(classifier.language, "en")
-            self.naturalLanguageClassifier.deleteClassifier(withID: classifier.classifierId, failure: self.failWithError) {
+            self.naturalLanguageClassifier.deleteClassifier(classifierID: classifier.classifierID, failure: self.failWithError) {
                 expectation.fulfill()
             }
         }
         waitForExpectations()
     }
 
-    func testGetAllClassifiers() {
+    func testListClassifiers() {
         let expectation = self.expectation(description: "Get classifiers.")
-        naturalLanguageClassifier.getClassifiers(failure: failWithError) { classifiers in
-            XCTAssertGreaterThan(classifiers.count, 0)
+        naturalLanguageClassifier.listClassifiers(failure: failWithError) { classifiers in
+            XCTAssertGreaterThan(classifiers.classifiers.count, 0)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -154,7 +154,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     func testGetClassifier() {
         let expectation = self.expectation(description: "Get classifier.")
-        naturalLanguageClassifier.getClassifier(withID: trainedClassifierId, failure: failWithError) { classifier in
+        naturalLanguageClassifier.getClassifier(classifierID: trainedClassifierId, failure: failWithError) { classifier in
             XCTAssertEqual(classifier.name, self.trainedClassifierName)
             expectation.fulfill()
         }
@@ -163,10 +163,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     func testClassify() {
         let expectation = self.expectation(description: "Classify text.")
-        naturalLanguageClassifier.classify("How hot will it be today?", withClassifierID: trainedClassifierId, failure: failWithError) {
+        naturalLanguageClassifier.classify(classifierID: trainedClassifierId, text: "How hot will it be today?", failure: failWithError) {
             classification in
             XCTAssertEqual(classification.topClass, "temperature")
-            XCTAssertEqual(classification.classes.count, 2)
+            XCTAssertNotNil(classification.classes)
+            XCTAssertEqual(classification.classes!.count, 2)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -178,8 +179,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectation = self.expectation(description: "Create a classifier with missing metadata")
         let failure = { (error: Error) in expectation.fulfill() }
         naturalLanguageClassifier.createClassifier(
-            fromMetadataFile: metadataFileEmpty,
-            andTrainingFile: trainingFile,
+            metadata: metadataFileEmpty,
+            trainingData: trainingFile,
             failure: failure,
             success: failWithResult)
         waitForExpectations()
@@ -188,7 +189,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     func testClassifyEmptyString() {
         let expectation = self.expectation(description: "Classify and empty string.")
         let failure = { (error: Error) in expectation.fulfill() }
-        naturalLanguageClassifier.classify("", withClassifierID: trainedClassifierId, failure: failure, success: failWithResult)
+        naturalLanguageClassifier.classify(classifierID: trainedClassifierId, text: "", failure: failure, success: failWithResult)
         waitForExpectations()
     }
 
@@ -196,8 +197,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectation = self.expectation(description: "Classify using an invalid classifier id.")
         let failure = { (error: Error) in expectation.fulfill() }
         naturalLanguageClassifier.classify(
-            "How hot will it be today?",
-            withClassifierID: "this-is-an-invalid-classifier-id",
+            classifierID: "this-is-an-invalid-classifier-id",
+            text: "How hot will it be today?",
             failure: failure,
             success: failWithResult
         )
@@ -208,7 +209,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectation = self.expectation(description: "Delete a classifier using an invalid classifier id.")
         let failure = { (error: Error) in expectation.fulfill() }
         naturalLanguageClassifier.deleteClassifier(
-            withID: "this-is-an-invalid-classifier-id",
+            classifierID: "this-is-an-invalid-classifier-id",
             failure: failure,
             success: failWithResult
         )
@@ -219,7 +220,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
         let expectation = self.expectation(description: "Get classifier using an invalid classifier id.")
         let failure = { (error: Error) in expectation.fulfill() }
         naturalLanguageClassifier.getClassifier(
-            withID: "this-is-an-invalid-classifier-id",
+            classifierID: "this-is-an-invalid-classifier-id",
             failure: failure,
             success: failWithResult
         )

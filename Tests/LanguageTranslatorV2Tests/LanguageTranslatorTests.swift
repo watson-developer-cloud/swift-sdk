@@ -43,9 +43,7 @@ class LanguageTranslatorTests: XCTestCase {
             ("testCreateDeleteModel", testCreateDeleteModel),
             ("testGetModel", testGetModel),
             ("testTranslateStringWithModelID", testTranslateStringWithModelID),
-            ("testTranslateArrayWithModelID", testTranslateArrayWithModelID),
             ("testTranslateStringWithSourceAndTarget", testTranslateStringWithSourceAndTarget),
-            ("testTranslateArrayWithSourceAndTarget", testTranslateArrayWithSourceAndTarget),
             ("testGetIdentifiableLanguages", testGetIdentifiableLanguages),
             ("testIdentify", testIdentify),
             ("testGetModelDoesntExist", testGetModelDoesntExist),
@@ -65,9 +63,9 @@ class LanguageTranslatorTests: XCTestCase {
     func deleteStaleCustomModels() {
         let description = "Delete any stale custom models previously created by unit tests."
         let expectation = self.expectation(description: description)
-        languageTranslator.getModels(defaultModelsOnly: false, failure: failWithError) { models in
-            for model in models where model.baseModelID != "" {
-                self.languageTranslator.deleteModel(withID: model.modelID)
+        languageTranslator.listModels(defaultModels: false, failure: failWithError) { models in
+            for model in models.models where model.baseModelID != "" {
+                self.languageTranslator.deleteModel(modelID: model.modelID, failure: self.failWithError) { _ in }
             }
             expectation.fulfill()
         }
@@ -103,8 +101,8 @@ class LanguageTranslatorTests: XCTestCase {
         let description = "Get all models."
         let expectation = self.expectation(description: description)
 
-        languageTranslator.getModels(failure: failWithError) { models in
-            XCTAssertGreaterThan(models.count, 0, "Expected at least 1 model to be returned.")
+        languageTranslator.listModels(failure: failWithError) { models in
+            XCTAssertGreaterThan(models.models.count, 0, "Expected at least 1 model to be returned.")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -115,8 +113,8 @@ class LanguageTranslatorTests: XCTestCase {
         let description = "Get models, filtered by source language."
         let expectation = self.expectation(description: description)
 
-        languageTranslator.getModels(sourceLanguage: "es", failure: failWithError) { models in
-            XCTAssertGreaterThan(models.count, 0, "Expected at least 1 model to be returned.")
+        languageTranslator.listModels(source: "es", failure: failWithError) { models in
+            XCTAssertGreaterThan(models.models.count, 0, "Expected at least 1 model to be returned.")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -127,8 +125,8 @@ class LanguageTranslatorTests: XCTestCase {
         let description = "Get models, filtered by target language."
         let expectation = self.expectation(description: description)
 
-        languageTranslator.getModels(targetLanguage: "pt", failure: failWithError) { models in
-            XCTAssertGreaterThan(models.count, 0, "Expected at least 1 model to be returned.")
+        languageTranslator.listModels(target: "pt", failure: failWithError) { models in
+            XCTAssertGreaterThan(models.models.count, 0, "Expected at least 1 model to be returned.")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -139,8 +137,8 @@ class LanguageTranslatorTests: XCTestCase {
         let description = "Get models, filtered to include only default models."
         let expectation = self.expectation(description: description)
 
-        languageTranslator.getModels(defaultModelsOnly: true, failure: failWithError) { models in
-            XCTAssertGreaterThan(models.count, 0, "Expected at least 1 model to be returned.")
+        languageTranslator.listModels(defaultModels: true, failure: failWithError) { models in
+            XCTAssertGreaterThan(models.models.count, 0, "Expected at least 1 model to be returned.")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -163,14 +161,16 @@ class LanguageTranslatorTests: XCTestCase {
             let glossary = URL(fileURLWithPath: "Tests/LanguageTranslatorV2Tests/glossary.tmx")
         #endif
 
-        languageTranslator.createModel(fromBaseModelID: "en-es", withGlossary: glossary,
-                                       name: "custom-english-to-spanish-model", failure: failWithError)
+        languageTranslator.createModel(
+            baseModelID: "en-es",
+            name: "custom-english-to-spanish-model",
+            forcedGlossary: glossary,
+            failure: failWithError)
         {
-            modelID in
-            XCTAssertNotEqual(modelID, "")
+            model in
+            XCTAssertNotEqual(model.modelID, "")
             creationExpectation.fulfill()
-
-            self.languageTranslator.deleteModel(withID: modelID, failure: self.failWithError) {
+            self.languageTranslator.deleteModel(modelID: model.modelID, failure: self.failWithError) { _ in
                 deletionExpectation.fulfill()
             }
         }
@@ -182,8 +182,8 @@ class LanguageTranslatorTests: XCTestCase {
         let description = "Get a model's training status."
         let expectation = self.expectation(description: description)
 
-        languageTranslator.getModel(withID: "en-es", failure: failWithError) { monitorTraining in
-            XCTAssertEqual(monitorTraining.status, TrainingStatus.available)
+        languageTranslator.getModel(modelID: "en-es", failure: failWithError) { model in
+            XCTAssertEqual(model.status, TranslationModel.Status.available.rawValue)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -193,33 +193,13 @@ class LanguageTranslatorTests: XCTestCase {
     func testTranslateStringWithModelID() {
         let description = "Translate text string, specifying the model by model id."
         let expectation = self.expectation(description: description)
-
-        let text = "Hello"
-        let modelID = "en-es-conversational"
-        languageTranslator.translate(text, withModelID: modelID, failure: failWithError) {
+        let request = TranslateRequest(text: ["Hello"], modelID: "en-es-conversational")
+        languageTranslator.translate(body: request, failure: failWithError) {
             translation in
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
             XCTAssertEqual(translation.translations.count, 1)
-            XCTAssertEqual(translation.translations.first?.translation, "Hola")
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Translate a text array, specifying the model by model id. */
-    func testTranslateArrayWithModelID() {
-        let description = "Translate text array, specifying the model by model id."
-        let expectation = self.expectation(description: description)
-
-        let text = ["Hello"]
-        let modelID = "en-es-conversational"
-        languageTranslator.translate(text, withModelID: modelID, failure: failWithError) {
-            translation in
-            XCTAssertEqual(translation.wordCount, 1)
-            XCTAssertEqual(translation.characterCount, 5)
-            XCTAssertEqual(translation.translations.count, 1)
-            XCTAssertEqual(translation.translations.first?.translation, "Hola")
+            XCTAssertEqual(translation.translations.first?.translationOutput, "Hola")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -229,29 +209,13 @@ class LanguageTranslatorTests: XCTestCase {
     func testTranslateStringWithSourceAndTarget() {
         let description = "Translate text string, specifying the model by source and target."
         let expectation = self.expectation(description: description)
-
-        languageTranslator.translate("Hello", from: "en", to: "es", failure: failWithError) {
+        let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")
+        languageTranslator.translate(body: request, failure: failWithError) {
             translation in
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
             XCTAssertEqual(translation.translations.count, 1)
-            XCTAssertEqual(translation.translations.first?.translation, "Hola")
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Translate a text array, specifying the model by source and target language. */
-    func testTranslateArrayWithSourceAndTarget() {
-        let description = "Translate text array, specifying the model by source and target."
-        let expectation = self.expectation(description: description)
-
-        languageTranslator.translate(["Hello"], from: "en", to: "es", failure: failWithError) {
-            translation in
-            XCTAssertEqual(translation.wordCount, 1)
-            XCTAssertEqual(translation.characterCount, 5)
-            XCTAssertEqual(translation.translations.count, 1)
-            XCTAssertEqual(translation.translations.first?.translation, "Hola")
+            XCTAssertEqual(translation.translations.first?.translationOutput, "Hola")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -261,9 +225,8 @@ class LanguageTranslatorTests: XCTestCase {
     func testGetIdentifiableLanguages() {
         let description = "Get all identifiable languages."
         let expectation = self.expectation(description: description)
-
-        languageTranslator.getIdentifiableLanguages(failure: failWithError) { languages in
-            XCTAssertGreaterThan(languages.count, 0, "Expected at least 1 language to be returned.")
+        languageTranslator.listIdentifiableLanguages(failure: failWithError) { identifiableLanguages in
+            XCTAssertGreaterThan(identifiableLanguages.languages.count, 0)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -273,9 +236,9 @@ class LanguageTranslatorTests: XCTestCase {
     func testIdentify() {
         let description = "Identify the language of a text string."
         let expectation = self.expectation(description: description)
-
-        languageTranslator.identify(languageOf: "Hola", failure: failWithError) { languages in
-            XCTAssertGreaterThan(languages.count, 0, "Expected at least 1 language to be returned.")
+        languageTranslator.identify(text: "Hola", failure: failWithError) { identifiableLanguages in
+            let languages = identifiableLanguages.languages
+            XCTAssertGreaterThan(languages.count, 0)
             XCTAssertEqual(languages.first?.language, "es")
             XCTAssertGreaterThanOrEqual(languages.first!.confidence, 0.0)
             XCTAssertLessThanOrEqual(languages.first!.confidence, 1.0)
@@ -290,12 +253,8 @@ class LanguageTranslatorTests: XCTestCase {
     func testGetModelDoesntExist() {
         let description = "Try to get information about a model that doesn't exist."
         let expectation = self.expectation(description: description)
-
-        let failure = { (error: Error) in
-            expectation.fulfill()
-        }
-
-        languageTranslator.getModel(withID: "invalid_model_id", failure: failure, success: failWithResult)
+        let failure = { (error: Error) in expectation.fulfill() }
+        languageTranslator.getModel(modelID: "invalid_model_id", failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

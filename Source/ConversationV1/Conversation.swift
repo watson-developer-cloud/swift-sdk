@@ -72,9 +72,7 @@ public class Conversation {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error")
-            let userInfo = [NSLocalizedDescriptionKey: message]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return nil
         }
@@ -1266,19 +1264,19 @@ public class Conversation {
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
-     - parameter properties: A CreateValue object defining the content of the new value for the entity.
+     - parameter body: A CreateValue object defining the content of the new value for the entity.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func createValue(
         workspaceID: String,
         entity: String,
-        properties: CreateValue,
+        body: CreateValue,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(properties) else {
+        guard let body = try? JSONEncoder().encode(body) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1503,7 +1501,7 @@ public class Conversation {
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
-     - parameter properties: An UpdateValue object defining the new content for value for the entity.
+     - parameter body: An UpdateValue object defining the new content for value for the entity.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
@@ -1511,12 +1509,12 @@ public class Conversation {
         workspaceID: String,
         entity: String,
         value: String,
-        properties: UpdateValue,
+        body: UpdateValue,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(properties) else {
+        guard let body = try? JSONEncoder().encode(body) else {
             failure?(RestError.serializationError)
             return
         }

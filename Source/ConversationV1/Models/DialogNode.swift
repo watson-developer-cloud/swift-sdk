@@ -71,7 +71,7 @@ public struct DialogNode {
     public var created: String
 
     /// The timestamp for the most recent update to the dialog node.
-    public var updated: String?
+    public var updated: String
 
     /// The actions for the dialog node.
     public var actions: [DialogNodeAction]?
@@ -92,6 +92,8 @@ public struct DialogNode {
      Initialize a `DialogNode` with member variables.
 
      - parameter dialogNodeID: The dialog node ID.
+     - parameter created: The timestamp for creation of the dialog node.
+     - parameter updated: The timestamp for the most recent update to the dialog node.
      - parameter description: The description of the dialog node.
      - parameter conditions: The condition that triggers the dialog node.
      - parameter parent: The ID of the parent dialog node.
@@ -112,6 +114,8 @@ public struct DialogNode {
     */
     public init(dialogNodeID: String, description: String, conditions: String, parent: String, previousSibling: String, output: [String: JSON], context: [String: JSON], metadata: [String: JSON], nextStep: DialogNodeNextStep, created: String, title: String, updated: String? = nil, actions: [DialogNodeAction]? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil) {
         self.dialogNodeID = dialogNodeID
+        self.created = created
+        self.updated = updated
         self.description = description
         self.conditions = conditions
         self.parent = parent

@@ -125,6 +125,11 @@
 		6823CEF31F8EA0F700A388EC /* WorkspaceExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9A1F8EA0AC00A388EC /* WorkspaceExport.swift */; };
 		6832BBEE2009CE8800BA50A8 /* SpeechToText+Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */; };
 		68A0EEE82006D25400E58658 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0EEE72006D22700E58658 /* Starscream.framework */; };
+		68A6A9AC202A38490069585F /* ClassifiedClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6A9A7202A38490069585F /* ClassifiedClass.swift */; };
+		68A6A9AD202A38490069585F /* ClassifyInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6A9A8202A38490069585F /* ClassifyInput.swift */; };
+		68A6A9AE202A38490069585F /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6A9A9202A38490069585F /* Classifier.swift */; };
+		68A6A9AF202A38490069585F /* ClassifierList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6A9AA202A38490069585F /* ClassifierList.swift */; };
+		68A6A9B0202A38490069585F /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6A9AB202A38490069585F /* Classification.swift */; };
 		68AC590D1F8DCA0000012CCB /* NaturalLanguageUnderstanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58E91F8DC9ED00012CCB /* NaturalLanguageUnderstanding.swift */; };
 		68AC59131F8DCA0C00012CCB /* AnalysisResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59041F8DC9FC00012CCB /* AnalysisResults.swift */; };
 		68AC59141F8DCA0C00012CCB /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59051F8DC9FD00012CCB /* Author.swift */; };
@@ -428,9 +433,6 @@
 		7AAAF4A11CEEA09200B74848 /* MobyDickIntro.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A61175D1CB598D9009A4DA1 /* MobyDickIntro.txt */; };
 		7AAAF4A21CEEA09200B74848 /* PersonalityInsightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61175E1CB598D9009A4DA1 /* PersonalityInsightsTests.swift */; };
 		7AAAF4B91CEEA10700B74848 /* NaturalLanguageClassifierV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AAAF4AF1CEEA10600B74848 /* NaturalLanguageClassifierV1.framework */; };
-		7AAAF4C61CEEA11700B74848 /* ClassifierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */; };
-		7AAAF4C71CEEA11700B74848 /* ClassifierDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A248511CD1482200C63CF1 /* ClassifierDetails.swift */; };
-		7AAAF4C81CEEA11700B74848 /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B07D101CD791A300B20B38 /* Classification.swift */; };
 		7AAAF4C91CEEA11900B74848 /* NaturalLanguageClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */; };
 		7AAAF4CA1CEEA11E00B74848 /* NaturalLanguageClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */; };
 		7AAAF4CB1CEEA11E00B74848 /* weather_data_train.csv in Resources */ = {isa = PBXBuildFile; fileRef = 12A248561CD3171800C63CF1 /* weather_data_train.csv */; };
@@ -924,12 +926,9 @@
 		124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechTests.swift; sourceTree = "<group>"; };
 		124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeech.swift; sourceTree = "<group>"; };
 		12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechPlaybackTests.swift; sourceTree = "<group>"; };
-		12A248511CD1482200C63CF1 /* ClassifierDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierDetails.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierDetails.swift; sourceTree = "<group>"; };
 		12A248561CD3171800C63CF1 /* weather_data_train.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = weather_data_train.csv; sourceTree = "<group>"; };
 		12AE2BCE1CCFB54A0034CF4E /* NaturalLanguageClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifier.swift; path = Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift; sourceTree = "<group>"; };
-		12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierModel.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierModel.swift; sourceTree = "<group>"; };
 		12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifierTests.swift; path = Tests/NaturalLanguageClassifierV1Tests/NaturalLanguageClassifierTests.swift; sourceTree = SOURCE_ROOT; };
-		12B07D101CD791A300B20B38 /* Classification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classification.swift; path = Source/NaturalLanguageClassifierV1/Models/Classification.swift; sourceTree = "<group>"; };
 		12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta_empty.txt; sourceTree = "<group>"; };
 		12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta_missing_name.txt; sourceTree = "<group>"; };
 		12D82B4D1E26DBAE00430DB3 /* healthcare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = healthcare.txt; sourceTree = "<group>"; };
@@ -1001,6 +1000,11 @@
 		6823CEBD1F8EA0B300A388EC /* CounterexampleCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterexampleCollection.swift; sourceTree = "<group>"; };
 		6823CEBE1F8EA0B300A388EC /* CreateDialogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDialogNode.swift; sourceTree = "<group>"; };
 		68A0EEE72006D22700E58658 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
+		68A6A9A7202A38490069585F /* ClassifiedClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifiedClass.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifiedClass.swift; sourceTree = "<group>"; };
+		68A6A9A8202A38490069585F /* ClassifyInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifyInput.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifyInput.swift; sourceTree = "<group>"; };
+		68A6A9A9202A38490069585F /* Classifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classifier.swift; path = Source/NaturalLanguageClassifierV1/Models/Classifier.swift; sourceTree = "<group>"; };
+		68A6A9AA202A38490069585F /* ClassifierList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifierList.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifierList.swift; sourceTree = "<group>"; };
+		68A6A9AB202A38490069585F /* Classification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Classification.swift; path = Source/NaturalLanguageClassifierV1/Models/Classification.swift; sourceTree = "<group>"; };
 		68AC58E91F8DC9ED00012CCB /* NaturalLanguageUnderstanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalLanguageUnderstanding.swift; sourceTree = "<group>"; };
 		68AC58EA1F8DC9F800012CCB /* KeywordsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsOptions.swift; sourceTree = "<group>"; };
 		68AC58EB1F8DC9F900012CCB /* SemanticRolesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesObject.swift; sourceTree = "<group>"; };
@@ -1783,9 +1787,11 @@
 		12AE2BCC1CCFB5250034CF4E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				12AE2BD01CCFB9470034CF4E /* ClassifierModel.swift */,
-				12A248511CD1482200C63CF1 /* ClassifierDetails.swift */,
-				12B07D101CD791A300B20B38 /* Classification.swift */,
+				68A6A9AB202A38490069585F /* Classification.swift */,
+				68A6A9A7202A38490069585F /* ClassifiedClass.swift */,
+				68A6A9A9202A38490069585F /* Classifier.swift */,
+				68A6A9AA202A38490069585F /* ClassifierList.swift */,
+				68A6A9A8202A38490069585F /* ClassifyInput.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -4942,18 +4948,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68A6A9AF202A38490069585F /* ClassifierList.swift in Sources */,
+				68A6A9AD202A38490069585F /* ClassifyInput.swift in Sources */,
 				68BC28AD1F8C35030042810E /* RestUtilities.swift in Sources */,
-				7AAAF4C61CEEA11700B74848 /* ClassifierModel.swift in Sources */,
 				68BC28AB1F8C35030042810E /* RestRequest.swift in Sources */,
 				68BC28A81F8C35030042810E /* JSON.swift in Sources */,
+				68A6A9AE202A38490069585F /* Classifier.swift in Sources */,
+				68A6A9AC202A38490069585F /* ClassifiedClass.swift in Sources */,
 				68BC28A91F8C35030042810E /* MultipartFormData.swift in Sources */,
 				68BC28AA1F8C35030042810E /* RestError.swift in Sources */,
-				7AAAF4C71CEEA11700B74848 /* ClassifierDetails.swift in Sources */,
+				68A6A9B0202A38490069585F /* Classification.swift in Sources */,
 				68BC28A61F8C35030042810E /* CodableExtensions.swift in Sources */,
 				68BC28AC1F8C35030042810E /* RestToken.swift in Sources */,
 				68BC28A71F8C35030042810E /* JSONWrapper.swift in Sources */,
 				7AAAF4C91CEEA11900B74848 /* NaturalLanguageClassifier.swift in Sources */,
-				7AAAF4C81CEEA11700B74848 /* Classification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

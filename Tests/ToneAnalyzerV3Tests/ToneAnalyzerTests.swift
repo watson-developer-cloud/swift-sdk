@@ -30,6 +30,7 @@ class ToneAnalyzerTests: XCTestCase {
             ("testGetToneCustom", testGetToneCustom),
             ("testToneChat", testToneChat),
             ("testGetToneEmptyString", testGetToneEmptyString),
+            ("testToneChatEmptyArray", testToneChatEmptyArray),
         ]
     }
 

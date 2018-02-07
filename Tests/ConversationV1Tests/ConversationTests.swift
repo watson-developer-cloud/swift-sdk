@@ -81,8 +81,12 @@ class ConversationTests: XCTestCase {
             ("testCreateAndDeleteSynonym", testCreateAndDeleteSynonym),
             ("testGetSynonym", testGetSynonym),
             ("testCreateUpdateAndDeleteSynonym", testCreateUpdateAndDeleteSynonym),
-            // Test temporarily disabled pending resolution of server-side issue
-            // ("testListLogs", testListLogs),
+            ("testListAllDialogNodes", testListAllDialogNodes),
+            ("testCreateAndDeleteDialogNode", testCreateAndDeleteDialogNode),
+            ("testCreateUpdateAndDeleteDialogNode", testCreateUpdateAndDeleteDialogNode),
+            ("testGetDialogNode", testGetDialogNode),
+            // ("testListAllLogs", testListAllLogs), // temporarily disabled due to server-side bug
+            // ("testListLogs", testListLogs), // temporarily disabled due to server-side bug
             ("testMessageUnknownWorkspace", testMessageUnknownWorkspace),
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
         ]

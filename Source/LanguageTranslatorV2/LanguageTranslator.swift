@@ -81,17 +81,17 @@ public class LanguageTranslator {
     /**
      Translates the input text from the source language to the target language.
 
-     - parameter body: The translate request containing the text, with optional source, target, and model_id.
+     - parameter request: The translate request containing the text, with optional source, target, and model_id.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func translate(
-        body: TranslateRequest,
+        request: TranslateRequest,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslationResult) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(body) else {
+        guard let body = try? JSONEncoder().encode(request) else {
             failure?(RestError.serializationError)
             return
         }

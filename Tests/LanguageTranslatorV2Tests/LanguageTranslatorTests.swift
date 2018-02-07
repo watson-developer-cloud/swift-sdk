@@ -174,7 +174,7 @@ class LanguageTranslatorTests: XCTestCase {
     func testTranslateStringWithModelID() {
         let expectation = self.expectation(description: "Translate text string using model id.")
         let request = TranslateRequest(text: ["Hello"], modelID: "en-es-conversational")
-        languageTranslator.translate(body: request, failure: failWithError) {
+        languageTranslator.translate(request: request, failure: failWithError) {
             translation in
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
@@ -188,7 +188,7 @@ class LanguageTranslatorTests: XCTestCase {
     func testTranslateStringWithSourceAndTarget() {
         let expectation = self.expectation(description: "Translate text string using source and target.")
         let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")
-        languageTranslator.translate(body: request, failure: failWithError) {
+        languageTranslator.translate(request: request, failure: failWithError) {
             translation in
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)

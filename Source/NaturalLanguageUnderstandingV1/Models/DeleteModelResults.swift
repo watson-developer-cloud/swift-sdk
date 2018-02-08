@@ -16,25 +16,25 @@
 
 import Foundation
 
-/** InlineResponse200. */
-public struct InlineResponse200 {
+/** Information about the deleted model. */
+public struct DeleteModelResults {
 
     /// model_id of the deleted model.
     public var deleted: String?
 
     /**
-     Initialize a `InlineResponse200` with member variables.
+     Initialize a `DeleteModelResults` with member variables.
 
      - parameter deleted: model_id of the deleted model.
 
-     - returns: An initialized `InlineResponse200`.
+     - returns: An initialized `DeleteModelResults`.
     */
     public init(deleted: String? = nil) {
         self.deleted = deleted
     }
 }
 
-extension InlineResponse200: Codable {
+extension DeleteModelResults: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case deleted = "deleted"

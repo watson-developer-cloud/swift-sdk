@@ -124,48 +124,51 @@
 		6823CEF21F8EA0F700A388EC /* WorkspaceCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEAD1F8EA0B000A388EC /* WorkspaceCollection.swift */; };
 		6823CEF31F8EA0F700A388EC /* WorkspaceExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9A1F8EA0AC00A388EC /* WorkspaceExport.swift */; };
 		6832BBEE2009CE8800BA50A8 /* SpeechToText+Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */; };
+		683947D5202CF4F7007E3CF3 /* RelationArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AA202CF4F3007E3CF3 /* RelationArgument.swift */; };
+		683947D6202CF4F7007E3CF3 /* RelationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AB202CF4F3007E3CF3 /* RelationsResult.swift */; };
+		683947D7202CF4F7007E3CF3 /* SemanticRolesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AC202CF4F3007E3CF3 /* SemanticRolesObject.swift */; };
+		683947D8202CF4F7007E3CF3 /* SemanticRolesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AD202CF4F3007E3CF3 /* SemanticRolesOptions.swift */; };
+		683947D9202CF4F7007E3CF3 /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AE202CF4F3007E3CF3 /* Usage.swift */; };
+		683947DA202CF4F7007E3CF3 /* CategoriesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AF202CF4F3007E3CF3 /* CategoriesOptions.swift */; };
+		683947DB202CF4F7007E3CF3 /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B0202CF4F3007E3CF3 /* Features.swift */; };
+		683947DC202CF4F7007E3CF3 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B1202CF4F3007E3CF3 /* Feed.swift */; };
+		683947DD202CF4F7007E3CF3 /* KeywordsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B2202CF4F3007E3CF3 /* KeywordsOptions.swift */; };
+		683947DE202CF4F7007E3CF3 /* MetadataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B3202CF4F3007E3CF3 /* MetadataResult.swift */; };
+		683947DF202CF4F7007E3CF3 /* MetadataOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B4202CF4F3007E3CF3 /* MetadataOptions.swift */; };
+		683947E0202CF4F7007E3CF3 /* DisambiguationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B5202CF4F4007E3CF3 /* DisambiguationResult.swift */; };
+		683947E1202CF4F7007E3CF3 /* RelationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B6202CF4F4007E3CF3 /* RelationEntity.swift */; };
+		683947E2202CF4F7007E3CF3 /* EntityMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B7202CF4F4007E3CF3 /* EntityMention.swift */; };
+		683947E3202CF4F7007E3CF3 /* SemanticRolesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B8202CF4F4007E3CF3 /* SemanticRolesEntity.swift */; };
+		683947E4202CF4F7007E3CF3 /* SemanticRolesKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947B9202CF4F4007E3CF3 /* SemanticRolesKeyword.swift */; };
+		683947E5202CF4F7007E3CF3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947BA202CF4F4007E3CF3 /* Model.swift */; };
+		683947E6202CF4F7007E3CF3 /* DocumentSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947BB202CF4F4007E3CF3 /* DocumentSentimentResults.swift */; };
+		683947E7202CF4F7007E3CF3 /* SemanticRolesVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947BC202CF4F4007E3CF3 /* SemanticRolesVerb.swift */; };
+		683947E8202CF4F7007E3CF3 /* SentimentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947BD202CF4F4007E3CF3 /* SentimentResult.swift */; };
+		683947E9202CF4F7007E3CF3 /* CategoriesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947BE202CF4F4007E3CF3 /* CategoriesResult.swift */; };
+		683947EA202CF4F7007E3CF3 /* EmotionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947BF202CF4F4007E3CF3 /* EmotionOptions.swift */; };
+		683947EB202CF4F7007E3CF3 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C0202CF4F4007E3CF3 /* Author.swift */; };
+		683947EC202CF4F7007E3CF3 /* SemanticRolesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C1202CF4F5007E3CF3 /* SemanticRolesAction.swift */; };
+		683947ED202CF4F7007E3CF3 /* ListModelsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C2202CF4F5007E3CF3 /* ListModelsResults.swift */; };
+		683947EE202CF4F7007E3CF3 /* EmotionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C3202CF4F5007E3CF3 /* EmotionResult.swift */; };
+		683947EF202CF4F7007E3CF3 /* EntitiesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C4202CF4F5007E3CF3 /* EntitiesResult.swift */; };
+		683947F0202CF4F7007E3CF3 /* KeywordsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C5202CF4F5007E3CF3 /* KeywordsResult.swift */; };
+		683947F1202CF4F7007E3CF3 /* EmotionScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C6202CF4F5007E3CF3 /* EmotionScores.swift */; };
+		683947F2202CF4F7007E3CF3 /* RelationsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C7202CF4F5007E3CF3 /* RelationsOptions.swift */; };
+		683947F3202CF4F7007E3CF3 /* SemanticRolesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C8202CF4F5007E3CF3 /* SemanticRolesResult.swift */; };
+		683947F4202CF4F7007E3CF3 /* TargetedEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947C9202CF4F5007E3CF3 /* TargetedEmotionResults.swift */; };
+		683947F5202CF4F7007E3CF3 /* TargetedSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947CA202CF4F5007E3CF3 /* TargetedSentimentResults.swift */; };
+		683947F6202CF4F7007E3CF3 /* SentimentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947CB202CF4F6007E3CF3 /* SentimentOptions.swift */; };
+		683947F7202CF4F7007E3CF3 /* ConceptsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947CC202CF4F6007E3CF3 /* ConceptsOptions.swift */; };
+		683947F8202CF4F7007E3CF3 /* InlineResponse200.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947CD202CF4F6007E3CF3 /* InlineResponse200.swift */; };
+		683947F9202CF4F7007E3CF3 /* AnalysisResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947CE202CF4F6007E3CF3 /* AnalysisResults.swift */; };
+		683947FA202CF4F7007E3CF3 /* DocumentEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947CF202CF4F6007E3CF3 /* DocumentEmotionResults.swift */; };
+		683947FB202CF4F7007E3CF3 /* ConceptsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947D0202CF4F6007E3CF3 /* ConceptsResult.swift */; };
+		683947FC202CF4F7007E3CF3 /* FeatureSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947D1202CF4F6007E3CF3 /* FeatureSentimentResults.swift */; };
+		683947FD202CF4F7007E3CF3 /* SemanticRolesSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947D2202CF4F6007E3CF3 /* SemanticRolesSubject.swift */; };
+		683947FE202CF4F7007E3CF3 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947D3202CF4F6007E3CF3 /* Parameters.swift */; };
+		683947FF202CF4F7007E3CF3 /* EntitiesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947D4202CF4F7007E3CF3 /* EntitiesOptions.swift */; };
 		68A0EEE82006D25400E58658 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0EEE72006D22700E58658 /* Starscream.framework */; };
 		68AC590D1F8DCA0000012CCB /* NaturalLanguageUnderstanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58E91F8DC9ED00012CCB /* NaturalLanguageUnderstanding.swift */; };
-		68AC59131F8DCA0C00012CCB /* AnalysisResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59041F8DC9FC00012CCB /* AnalysisResults.swift */; };
-		68AC59141F8DCA0C00012CCB /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59051F8DC9FD00012CCB /* Author.swift */; };
-		68AC59151F8DCA0C00012CCB /* CategoriesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F11F8DC9F900012CCB /* CategoriesOptions.swift */; };
-		68AC59161F8DCA0C00012CCB /* CategoriesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FF1F8DC9FB00012CCB /* CategoriesResult.swift */; };
-		68AC59171F8DCA0C00012CCB /* ConceptsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590E1F8DCA0000012CCB /* ConceptsOptions.swift */; };
-		68AC59181F8DCA0C00012CCB /* ConceptsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FB1F8DC9FA00012CCB /* ConceptsResult.swift */; };
-		68AC59191F8DCA0C00012CCB /* DisambiguationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FC1F8DC9FA00012CCB /* DisambiguationResult.swift */; };
-		68AC591A1F8DCA0C00012CCB /* DocumentEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EF1F8DC9F900012CCB /* DocumentEmotionResults.swift */; };
-		68AC591B1F8DCA0C00012CCB /* DocumentSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F01F8DC9F900012CCB /* DocumentSentimentResults.swift */; };
-		68AC591C1F8DCA0C00012CCB /* EmotionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F41F8DC9FA00012CCB /* EmotionOptions.swift */; };
-		68AC591D1F8DCA0C00012CCB /* EmotionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F51F8DC9FA00012CCB /* EmotionResult.swift */; };
-		68AC591E1F8DCA0C00012CCB /* EmotionScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59031F8DC9FC00012CCB /* EmotionScores.swift */; };
-		68AC591F1F8DCA0C00012CCB /* EntitiesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590C1F8DCA0000012CCB /* EntitiesOptions.swift */; };
-		68AC59201F8DCA0C00012CCB /* EntitiesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FA1F8DC9FA00012CCB /* EntitiesResult.swift */; };
-		68AC59211F8DCA0C00012CCB /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EC1F8DC9F900012CCB /* Features.swift */; };
-		68AC59221F8DCA0C00012CCB /* FeatureSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59061F8DC9FE00012CCB /* FeatureSentimentResults.swift */; };
-		68AC59231F8DCA0C00012CCB /* KeywordsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EA1F8DC9F800012CCB /* KeywordsOptions.swift */; };
-		68AC59241F8DCA0C00012CCB /* KeywordsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F21F8DC9F900012CCB /* KeywordsResult.swift */; };
-		68AC59251F8DCA0C00012CCB /* ListModelsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F91F8DC9FA00012CCB /* ListModelsResults.swift */; };
-		68AC59261F8DCA0C00012CCB /* MetadataOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590F1F8DCA0100012CCB /* MetadataOptions.swift */; };
-		68AC59271F8DCA0C00012CCB /* MetadataResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59071F8DC9FE00012CCB /* MetadataResult.swift */; };
-		68AC59281F8DCA0C00012CCB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F61F8DC9FA00012CCB /* Model.swift */; };
-		68AC59291F8DCA0C00012CCB /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F31F8DC9FA00012CCB /* Parameters.swift */; };
-		68AC592A1F8DCA0C00012CCB /* RelationArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FE1F8DC9FB00012CCB /* RelationArgument.swift */; };
-		68AC592B1F8DCA0C00012CCB /* RelationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EE1F8DC9F900012CCB /* RelationEntity.swift */; };
-		68AC592C1F8DCA0C00012CCB /* RelationsOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F71F8DC9FA00012CCB /* RelationsOptions.swift */; };
-		68AC592D1F8DCA0C00012CCB /* RelationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59081F8DC9FF00012CCB /* RelationsResult.swift */; };
-		68AC592E1F8DCA0C00012CCB /* SemanticRolesAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58ED1F8DC9F900012CCB /* SemanticRolesAction.swift */; };
-		68AC592F1F8DCA0C00012CCB /* SemanticRolesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59101F8DCA0100012CCB /* SemanticRolesEntity.swift */; };
-		68AC59301F8DCA0C00012CCB /* SemanticRolesKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590A1F8DC9FF00012CCB /* SemanticRolesKeyword.swift */; };
-		68AC59311F8DCA0C00012CCB /* SemanticRolesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58EB1F8DC9F900012CCB /* SemanticRolesObject.swift */; };
-		68AC59321F8DCA0C00012CCB /* SemanticRolesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59121F8DCA0200012CCB /* SemanticRolesOptions.swift */; };
-		68AC59331F8DCA0C00012CCB /* SemanticRolesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59011F8DC9FB00012CCB /* SemanticRolesResult.swift */; };
-		68AC59341F8DCA0C00012CCB /* SemanticRolesSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59091F8DC9FF00012CCB /* SemanticRolesSubject.swift */; };
-		68AC59351F8DCA0C00012CCB /* SemanticRolesVerb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58F81F8DC9FA00012CCB /* SemanticRolesVerb.swift */; };
-		68AC59361F8DCA0C00012CCB /* SentimentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59021F8DC9FC00012CCB /* SentimentOptions.swift */; };
-		68AC59371F8DCA0C00012CCB /* SentimentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC590B1F8DC9FF00012CCB /* SentimentResult.swift */; };
-		68AC59381F8DCA0C00012CCB /* TargetedEmotionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */; };
-		68AC59391F8DCA0C00012CCB /* TargetedSentimentResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC59001F8DC9FB00012CCB /* TargetedSentimentResults.swift */; };
-		68AC593A1F8DCA0C00012CCB /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC58FD1F8DC9FB00012CCB /* Usage.swift */; };
 		68B213EF1F84298B0052DC00 /* CodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */; };
 		68B213F01F84298B0052DC00 /* JSONValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213EE1F8429890052DC00 /* JSONValueTests.swift */; };
 		68BC28661F8C34FE0042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
@@ -1000,48 +1003,51 @@
 		6823CEBC1F8EA0B200A388EC /* DialogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogNode.swift; sourceTree = "<group>"; };
 		6823CEBD1F8EA0B300A388EC /* CounterexampleCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterexampleCollection.swift; sourceTree = "<group>"; };
 		6823CEBE1F8EA0B300A388EC /* CreateDialogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDialogNode.swift; sourceTree = "<group>"; };
+		683947AA202CF4F3007E3CF3 /* RelationArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationArgument.swift; sourceTree = "<group>"; };
+		683947AB202CF4F3007E3CF3 /* RelationsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationsResult.swift; sourceTree = "<group>"; };
+		683947AC202CF4F3007E3CF3 /* SemanticRolesObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesObject.swift; sourceTree = "<group>"; };
+		683947AD202CF4F3007E3CF3 /* SemanticRolesOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesOptions.swift; sourceTree = "<group>"; };
+		683947AE202CF4F3007E3CF3 /* Usage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
+		683947AF202CF4F3007E3CF3 /* CategoriesOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesOptions.swift; sourceTree = "<group>"; };
+		683947B0202CF4F3007E3CF3 /* Features.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
+		683947B1202CF4F3007E3CF3 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		683947B2202CF4F3007E3CF3 /* KeywordsOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordsOptions.swift; sourceTree = "<group>"; };
+		683947B3202CF4F3007E3CF3 /* MetadataResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataResult.swift; sourceTree = "<group>"; };
+		683947B4202CF4F3007E3CF3 /* MetadataOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataOptions.swift; sourceTree = "<group>"; };
+		683947B5202CF4F4007E3CF3 /* DisambiguationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisambiguationResult.swift; sourceTree = "<group>"; };
+		683947B6202CF4F4007E3CF3 /* RelationEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationEntity.swift; sourceTree = "<group>"; };
+		683947B7202CF4F4007E3CF3 /* EntityMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityMention.swift; sourceTree = "<group>"; };
+		683947B8202CF4F4007E3CF3 /* SemanticRolesEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesEntity.swift; sourceTree = "<group>"; };
+		683947B9202CF4F4007E3CF3 /* SemanticRolesKeyword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesKeyword.swift; sourceTree = "<group>"; };
+		683947BA202CF4F4007E3CF3 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		683947BB202CF4F4007E3CF3 /* DocumentSentimentResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentSentimentResults.swift; sourceTree = "<group>"; };
+		683947BC202CF4F4007E3CF3 /* SemanticRolesVerb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesVerb.swift; sourceTree = "<group>"; };
+		683947BD202CF4F4007E3CF3 /* SentimentResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentResult.swift; sourceTree = "<group>"; };
+		683947BE202CF4F4007E3CF3 /* CategoriesResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesResult.swift; sourceTree = "<group>"; };
+		683947BF202CF4F4007E3CF3 /* EmotionOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionOptions.swift; sourceTree = "<group>"; };
+		683947C0202CF4F4007E3CF3 /* Author.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		683947C1202CF4F5007E3CF3 /* SemanticRolesAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesAction.swift; sourceTree = "<group>"; };
+		683947C2202CF4F5007E3CF3 /* ListModelsResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModelsResults.swift; sourceTree = "<group>"; };
+		683947C3202CF4F5007E3CF3 /* EmotionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionResult.swift; sourceTree = "<group>"; };
+		683947C4202CF4F5007E3CF3 /* EntitiesResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitiesResult.swift; sourceTree = "<group>"; };
+		683947C5202CF4F5007E3CF3 /* KeywordsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordsResult.swift; sourceTree = "<group>"; };
+		683947C6202CF4F5007E3CF3 /* EmotionScores.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionScores.swift; sourceTree = "<group>"; };
+		683947C7202CF4F5007E3CF3 /* RelationsOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationsOptions.swift; sourceTree = "<group>"; };
+		683947C8202CF4F5007E3CF3 /* SemanticRolesResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesResult.swift; sourceTree = "<group>"; };
+		683947C9202CF4F5007E3CF3 /* TargetedEmotionResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetedEmotionResults.swift; sourceTree = "<group>"; };
+		683947CA202CF4F5007E3CF3 /* TargetedSentimentResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetedSentimentResults.swift; sourceTree = "<group>"; };
+		683947CB202CF4F6007E3CF3 /* SentimentOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentimentOptions.swift; sourceTree = "<group>"; };
+		683947CC202CF4F6007E3CF3 /* ConceptsOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConceptsOptions.swift; sourceTree = "<group>"; };
+		683947CD202CF4F6007E3CF3 /* InlineResponse200.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineResponse200.swift; sourceTree = "<group>"; };
+		683947CE202CF4F6007E3CF3 /* AnalysisResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisResults.swift; sourceTree = "<group>"; };
+		683947CF202CF4F6007E3CF3 /* DocumentEmotionResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentEmotionResults.swift; sourceTree = "<group>"; };
+		683947D0202CF4F6007E3CF3 /* ConceptsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConceptsResult.swift; sourceTree = "<group>"; };
+		683947D1202CF4F6007E3CF3 /* FeatureSentimentResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureSentimentResults.swift; sourceTree = "<group>"; };
+		683947D2202CF4F6007E3CF3 /* SemanticRolesSubject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesSubject.swift; sourceTree = "<group>"; };
+		683947D3202CF4F6007E3CF3 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
+		683947D4202CF4F7007E3CF3 /* EntitiesOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitiesOptions.swift; sourceTree = "<group>"; };
 		68A0EEE72006D22700E58658 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		68AC58E91F8DC9ED00012CCB /* NaturalLanguageUnderstanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalLanguageUnderstanding.swift; sourceTree = "<group>"; };
-		68AC58EA1F8DC9F800012CCB /* KeywordsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsOptions.swift; sourceTree = "<group>"; };
-		68AC58EB1F8DC9F900012CCB /* SemanticRolesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesObject.swift; sourceTree = "<group>"; };
-		68AC58EC1F8DC9F900012CCB /* Features.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
-		68AC58ED1F8DC9F900012CCB /* SemanticRolesAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesAction.swift; sourceTree = "<group>"; };
-		68AC58EE1F8DC9F900012CCB /* RelationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationEntity.swift; sourceTree = "<group>"; };
-		68AC58EF1F8DC9F900012CCB /* DocumentEmotionResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentEmotionResults.swift; sourceTree = "<group>"; };
-		68AC58F01F8DC9F900012CCB /* DocumentSentimentResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSentimentResults.swift; sourceTree = "<group>"; };
-		68AC58F11F8DC9F900012CCB /* CategoriesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesOptions.swift; sourceTree = "<group>"; };
-		68AC58F21F8DC9F900012CCB /* KeywordsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordsResult.swift; sourceTree = "<group>"; };
-		68AC58F31F8DC9FA00012CCB /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
-		68AC58F41F8DC9FA00012CCB /* EmotionOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionOptions.swift; sourceTree = "<group>"; };
-		68AC58F51F8DC9FA00012CCB /* EmotionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionResult.swift; sourceTree = "<group>"; };
-		68AC58F61F8DC9FA00012CCB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		68AC58F71F8DC9FA00012CCB /* RelationsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationsOptions.swift; sourceTree = "<group>"; };
-		68AC58F81F8DC9FA00012CCB /* SemanticRolesVerb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesVerb.swift; sourceTree = "<group>"; };
-		68AC58F91F8DC9FA00012CCB /* ListModelsResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModelsResults.swift; sourceTree = "<group>"; };
-		68AC58FA1F8DC9FA00012CCB /* EntitiesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesResult.swift; sourceTree = "<group>"; };
-		68AC58FB1F8DC9FA00012CCB /* ConceptsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptsResult.swift; sourceTree = "<group>"; };
-		68AC58FC1F8DC9FA00012CCB /* DisambiguationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisambiguationResult.swift; sourceTree = "<group>"; };
-		68AC58FD1F8DC9FB00012CCB /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
-		68AC58FE1F8DC9FB00012CCB /* RelationArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationArgument.swift; sourceTree = "<group>"; };
-		68AC58FF1F8DC9FB00012CCB /* CategoriesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResult.swift; sourceTree = "<group>"; };
-		68AC59001F8DC9FB00012CCB /* TargetedSentimentResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetedSentimentResults.swift; sourceTree = "<group>"; };
-		68AC59011F8DC9FB00012CCB /* SemanticRolesResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesResult.swift; sourceTree = "<group>"; };
-		68AC59021F8DC9FC00012CCB /* SentimentOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentOptions.swift; sourceTree = "<group>"; };
-		68AC59031F8DC9FC00012CCB /* EmotionScores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionScores.swift; sourceTree = "<group>"; };
-		68AC59041F8DC9FC00012CCB /* AnalysisResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisResults.swift; sourceTree = "<group>"; };
-		68AC59051F8DC9FD00012CCB /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
-		68AC59061F8DC9FE00012CCB /* FeatureSentimentResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureSentimentResults.swift; sourceTree = "<group>"; };
-		68AC59071F8DC9FE00012CCB /* MetadataResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataResult.swift; sourceTree = "<group>"; };
-		68AC59081F8DC9FF00012CCB /* RelationsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationsResult.swift; sourceTree = "<group>"; };
-		68AC59091F8DC9FF00012CCB /* SemanticRolesSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesSubject.swift; sourceTree = "<group>"; };
-		68AC590A1F8DC9FF00012CCB /* SemanticRolesKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesKeyword.swift; sourceTree = "<group>"; };
-		68AC590B1F8DC9FF00012CCB /* SentimentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentimentResult.swift; sourceTree = "<group>"; };
-		68AC590C1F8DCA0000012CCB /* EntitiesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesOptions.swift; sourceTree = "<group>"; };
-		68AC590E1F8DCA0000012CCB /* ConceptsOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptsOptions.swift; sourceTree = "<group>"; };
-		68AC590F1F8DCA0100012CCB /* MetadataOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataOptions.swift; sourceTree = "<group>"; };
-		68AC59101F8DCA0100012CCB /* SemanticRolesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesEntity.swift; sourceTree = "<group>"; };
-		68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetedEmotionResults.swift; sourceTree = "<group>"; };
-		68AC59121F8DCA0200012CCB /* SemanticRolesOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemanticRolesOptions.swift; sourceTree = "<group>"; };
 		68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpeechToText+Recognize.swift"; sourceTree = "<group>"; };
 		68B213E71F84296D0052DC00 /* CodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
 		68B213E81F84296D0052DC00 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -1726,46 +1732,49 @@
 		124E7B531E39091D00F09E38 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				68AC59041F8DC9FC00012CCB /* AnalysisResults.swift */,
-				68AC59051F8DC9FD00012CCB /* Author.swift */,
-				68AC58F11F8DC9F900012CCB /* CategoriesOptions.swift */,
-				68AC58FF1F8DC9FB00012CCB /* CategoriesResult.swift */,
-				68AC590E1F8DCA0000012CCB /* ConceptsOptions.swift */,
-				68AC58FB1F8DC9FA00012CCB /* ConceptsResult.swift */,
-				68AC58FC1F8DC9FA00012CCB /* DisambiguationResult.swift */,
-				68AC58EF1F8DC9F900012CCB /* DocumentEmotionResults.swift */,
-				68AC58F01F8DC9F900012CCB /* DocumentSentimentResults.swift */,
-				68AC58F41F8DC9FA00012CCB /* EmotionOptions.swift */,
-				68AC58F51F8DC9FA00012CCB /* EmotionResult.swift */,
-				68AC59031F8DC9FC00012CCB /* EmotionScores.swift */,
-				68AC590C1F8DCA0000012CCB /* EntitiesOptions.swift */,
-				68AC58FA1F8DC9FA00012CCB /* EntitiesResult.swift */,
-				68AC58EC1F8DC9F900012CCB /* Features.swift */,
-				68AC59061F8DC9FE00012CCB /* FeatureSentimentResults.swift */,
-				68AC58EA1F8DC9F800012CCB /* KeywordsOptions.swift */,
-				68AC58F21F8DC9F900012CCB /* KeywordsResult.swift */,
-				68AC58F91F8DC9FA00012CCB /* ListModelsResults.swift */,
-				68AC590F1F8DCA0100012CCB /* MetadataOptions.swift */,
-				68AC59071F8DC9FE00012CCB /* MetadataResult.swift */,
-				68AC58F61F8DC9FA00012CCB /* Model.swift */,
-				68AC58F31F8DC9FA00012CCB /* Parameters.swift */,
-				68AC58FE1F8DC9FB00012CCB /* RelationArgument.swift */,
-				68AC58EE1F8DC9F900012CCB /* RelationEntity.swift */,
-				68AC58F71F8DC9FA00012CCB /* RelationsOptions.swift */,
-				68AC59081F8DC9FF00012CCB /* RelationsResult.swift */,
-				68AC58ED1F8DC9F900012CCB /* SemanticRolesAction.swift */,
-				68AC59101F8DCA0100012CCB /* SemanticRolesEntity.swift */,
-				68AC590A1F8DC9FF00012CCB /* SemanticRolesKeyword.swift */,
-				68AC58EB1F8DC9F900012CCB /* SemanticRolesObject.swift */,
-				68AC59121F8DCA0200012CCB /* SemanticRolesOptions.swift */,
-				68AC59011F8DC9FB00012CCB /* SemanticRolesResult.swift */,
-				68AC59091F8DC9FF00012CCB /* SemanticRolesSubject.swift */,
-				68AC58F81F8DC9FA00012CCB /* SemanticRolesVerb.swift */,
-				68AC59021F8DC9FC00012CCB /* SentimentOptions.swift */,
-				68AC590B1F8DC9FF00012CCB /* SentimentResult.swift */,
-				68AC59111F8DCA0200012CCB /* TargetedEmotionResults.swift */,
-				68AC59001F8DC9FB00012CCB /* TargetedSentimentResults.swift */,
-				68AC58FD1F8DC9FB00012CCB /* Usage.swift */,
+				683947CE202CF4F6007E3CF3 /* AnalysisResults.swift */,
+				683947C0202CF4F4007E3CF3 /* Author.swift */,
+				683947AF202CF4F3007E3CF3 /* CategoriesOptions.swift */,
+				683947BE202CF4F4007E3CF3 /* CategoriesResult.swift */,
+				683947CC202CF4F6007E3CF3 /* ConceptsOptions.swift */,
+				683947D0202CF4F6007E3CF3 /* ConceptsResult.swift */,
+				683947B5202CF4F4007E3CF3 /* DisambiguationResult.swift */,
+				683947CF202CF4F6007E3CF3 /* DocumentEmotionResults.swift */,
+				683947BB202CF4F4007E3CF3 /* DocumentSentimentResults.swift */,
+				683947BF202CF4F4007E3CF3 /* EmotionOptions.swift */,
+				683947C3202CF4F5007E3CF3 /* EmotionResult.swift */,
+				683947C6202CF4F5007E3CF3 /* EmotionScores.swift */,
+				683947D4202CF4F7007E3CF3 /* EntitiesOptions.swift */,
+				683947C4202CF4F5007E3CF3 /* EntitiesResult.swift */,
+				683947B7202CF4F4007E3CF3 /* EntityMention.swift */,
+				683947B0202CF4F3007E3CF3 /* Features.swift */,
+				683947D1202CF4F6007E3CF3 /* FeatureSentimentResults.swift */,
+				683947B1202CF4F3007E3CF3 /* Feed.swift */,
+				683947CD202CF4F6007E3CF3 /* InlineResponse200.swift */,
+				683947B2202CF4F3007E3CF3 /* KeywordsOptions.swift */,
+				683947C5202CF4F5007E3CF3 /* KeywordsResult.swift */,
+				683947C2202CF4F5007E3CF3 /* ListModelsResults.swift */,
+				683947B4202CF4F3007E3CF3 /* MetadataOptions.swift */,
+				683947B3202CF4F3007E3CF3 /* MetadataResult.swift */,
+				683947BA202CF4F4007E3CF3 /* Model.swift */,
+				683947D3202CF4F6007E3CF3 /* Parameters.swift */,
+				683947AA202CF4F3007E3CF3 /* RelationArgument.swift */,
+				683947B6202CF4F4007E3CF3 /* RelationEntity.swift */,
+				683947C7202CF4F5007E3CF3 /* RelationsOptions.swift */,
+				683947AB202CF4F3007E3CF3 /* RelationsResult.swift */,
+				683947C1202CF4F5007E3CF3 /* SemanticRolesAction.swift */,
+				683947B8202CF4F4007E3CF3 /* SemanticRolesEntity.swift */,
+				683947B9202CF4F4007E3CF3 /* SemanticRolesKeyword.swift */,
+				683947AC202CF4F3007E3CF3 /* SemanticRolesObject.swift */,
+				683947AD202CF4F3007E3CF3 /* SemanticRolesOptions.swift */,
+				683947C8202CF4F5007E3CF3 /* SemanticRolesResult.swift */,
+				683947D2202CF4F6007E3CF3 /* SemanticRolesSubject.swift */,
+				683947BC202CF4F4007E3CF3 /* SemanticRolesVerb.swift */,
+				683947CB202CF4F6007E3CF3 /* SentimentOptions.swift */,
+				683947BD202CF4F4007E3CF3 /* SentimentResult.swift */,
+				683947C9202CF4F5007E3CF3 /* TargetedEmotionResults.swift */,
+				683947CA202CF4F5007E3CF3 /* TargetedSentimentResults.swift */,
+				683947AE202CF4F3007E3CF3 /* Usage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4544,55 +4553,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68AC59211F8DCA0C00012CCB /* Features.swift in Sources */,
 				68BC28B41F8C35040042810E /* RestToken.swift in Sources */,
-				68AC592F1F8DCA0C00012CCB /* SemanticRolesEntity.swift in Sources */,
-				68AC592A1F8DCA0C00012CCB /* RelationArgument.swift in Sources */,
 				68BC28AF1F8C35040042810E /* JSONWrapper.swift in Sources */,
+				683947E7202CF4F7007E3CF3 /* SemanticRolesVerb.swift in Sources */,
+				683947EF202CF4F7007E3CF3 /* EntitiesResult.swift in Sources */,
+				683947FD202CF4F7007E3CF3 /* SemanticRolesSubject.swift in Sources */,
+				683947F3202CF4F7007E3CF3 /* SemanticRolesResult.swift in Sources */,
+				683947E3202CF4F7007E3CF3 /* SemanticRolesEntity.swift in Sources */,
+				683947ED202CF4F7007E3CF3 /* ListModelsResults.swift in Sources */,
+				683947FE202CF4F7007E3CF3 /* Parameters.swift in Sources */,
 				68BC28B11F8C35040042810E /* MultipartFormData.swift in Sources */,
-				68AC59351F8DCA0C00012CCB /* SemanticRolesVerb.swift in Sources */,
-				68AC59381F8DCA0C00012CCB /* TargetedEmotionResults.swift in Sources */,
-				68AC59361F8DCA0C00012CCB /* SentimentOptions.swift in Sources */,
-				68AC592C1F8DCA0C00012CCB /* RelationsOptions.swift in Sources */,
-				68AC591E1F8DCA0C00012CCB /* EmotionScores.swift in Sources */,
-				68AC591A1F8DCA0C00012CCB /* DocumentEmotionResults.swift in Sources */,
-				68AC592D1F8DCA0C00012CCB /* RelationsResult.swift in Sources */,
-				68AC59181F8DCA0C00012CCB /* ConceptsResult.swift in Sources */,
-				68AC591B1F8DCA0C00012CCB /* DocumentSentimentResults.swift in Sources */,
-				68AC59221F8DCA0C00012CCB /* FeatureSentimentResults.swift in Sources */,
-				68AC59271F8DCA0C00012CCB /* MetadataResult.swift in Sources */,
-				68AC59191F8DCA0C00012CCB /* DisambiguationResult.swift in Sources */,
-				68AC591C1F8DCA0C00012CCB /* EmotionOptions.swift in Sources */,
 				68BC28AE1F8C35040042810E /* CodableExtensions.swift in Sources */,
-				68AC59341F8DCA0C00012CCB /* SemanticRolesSubject.swift in Sources */,
-				68AC59231F8DCA0C00012CCB /* KeywordsOptions.swift in Sources */,
-				68AC59161F8DCA0C00012CCB /* CategoriesResult.swift in Sources */,
-				68AC59371F8DCA0C00012CCB /* SentimentResult.swift in Sources */,
-				68AC592B1F8DCA0C00012CCB /* RelationEntity.swift in Sources */,
+				683947E0202CF4F7007E3CF3 /* DisambiguationResult.swift in Sources */,
 				68BC28B51F8C35040042810E /* RestUtilities.swift in Sources */,
-				68AC59281F8DCA0C00012CCB /* Model.swift in Sources */,
-				68AC59241F8DCA0C00012CCB /* KeywordsResult.swift in Sources */,
-				68AC59251F8DCA0C00012CCB /* ListModelsResults.swift in Sources */,
-				68AC59261F8DCA0C00012CCB /* MetadataOptions.swift in Sources */,
-				68AC59201F8DCA0C00012CCB /* EntitiesResult.swift in Sources */,
-				68AC59321F8DCA0C00012CCB /* SemanticRolesOptions.swift in Sources */,
+				683947F1202CF4F7007E3CF3 /* EmotionScores.swift in Sources */,
+				683947F9202CF4F7007E3CF3 /* AnalysisResults.swift in Sources */,
+				683947E1202CF4F7007E3CF3 /* RelationEntity.swift in Sources */,
 				68BC28B31F8C35040042810E /* RestRequest.swift in Sources */,
-				68AC591D1F8DCA0C00012CCB /* EmotionResult.swift in Sources */,
-				68AC59391F8DCA0C00012CCB /* TargetedSentimentResults.swift in Sources */,
 				68BC28B21F8C35040042810E /* RestError.swift in Sources */,
-				68AC59141F8DCA0C00012CCB /* Author.swift in Sources */,
-				68AC59151F8DCA0C00012CCB /* CategoriesOptions.swift in Sources */,
-				68AC592E1F8DCA0C00012CCB /* SemanticRolesAction.swift in Sources */,
 				68AC590D1F8DCA0000012CCB /* NaturalLanguageUnderstanding.swift in Sources */,
-				68AC59331F8DCA0C00012CCB /* SemanticRolesResult.swift in Sources */,
-				68AC59171F8DCA0C00012CCB /* ConceptsOptions.swift in Sources */,
-				68AC59131F8DCA0C00012CCB /* AnalysisResults.swift in Sources */,
+				683947E2202CF4F7007E3CF3 /* EntityMention.swift in Sources */,
+				683947DD202CF4F7007E3CF3 /* KeywordsOptions.swift in Sources */,
+				683947F6202CF4F7007E3CF3 /* SentimentOptions.swift in Sources */,
+				683947F7202CF4F7007E3CF3 /* ConceptsOptions.swift in Sources */,
+				683947DC202CF4F7007E3CF3 /* Feed.swift in Sources */,
+				683947DB202CF4F7007E3CF3 /* Features.swift in Sources */,
+				683947EE202CF4F7007E3CF3 /* EmotionResult.swift in Sources */,
+				683947F2202CF4F7007E3CF3 /* RelationsOptions.swift in Sources */,
+				683947E4202CF4F7007E3CF3 /* SemanticRolesKeyword.swift in Sources */,
+				683947DE202CF4F7007E3CF3 /* MetadataResult.swift in Sources */,
+				683947E8202CF4F7007E3CF3 /* SentimentResult.swift in Sources */,
+				683947DA202CF4F7007E3CF3 /* CategoriesOptions.swift in Sources */,
+				683947DF202CF4F7007E3CF3 /* MetadataOptions.swift in Sources */,
+				683947F8202CF4F7007E3CF3 /* InlineResponse200.swift in Sources */,
+				683947E5202CF4F7007E3CF3 /* Model.swift in Sources */,
+				683947F5202CF4F7007E3CF3 /* TargetedSentimentResults.swift in Sources */,
+				683947E9202CF4F7007E3CF3 /* CategoriesResult.swift in Sources */,
+				683947F0202CF4F7007E3CF3 /* KeywordsResult.swift in Sources */,
+				683947FF202CF4F7007E3CF3 /* EntitiesOptions.swift in Sources */,
+				683947EC202CF4F7007E3CF3 /* SemanticRolesAction.swift in Sources */,
+				683947FC202CF4F7007E3CF3 /* FeatureSentimentResults.swift in Sources */,
+				683947D7202CF4F7007E3CF3 /* SemanticRolesObject.swift in Sources */,
+				683947F4202CF4F7007E3CF3 /* TargetedEmotionResults.swift in Sources */,
+				683947D8202CF4F7007E3CF3 /* SemanticRolesOptions.swift in Sources */,
+				683947D5202CF4F7007E3CF3 /* RelationArgument.swift in Sources */,
+				683947EB202CF4F7007E3CF3 /* Author.swift in Sources */,
+				683947E6202CF4F7007E3CF3 /* DocumentSentimentResults.swift in Sources */,
+				683947D9202CF4F7007E3CF3 /* Usage.swift in Sources */,
+				683947FA202CF4F7007E3CF3 /* DocumentEmotionResults.swift in Sources */,
+				683947D6202CF4F7007E3CF3 /* RelationsResult.swift in Sources */,
+				683947FB202CF4F7007E3CF3 /* ConceptsResult.swift in Sources */,
+				683947EA202CF4F7007E3CF3 /* EmotionOptions.swift in Sources */,
 				68BC28B01F8C35040042810E /* JSON.swift in Sources */,
-				68AC59311F8DCA0C00012CCB /* SemanticRolesObject.swift in Sources */,
-				68AC591F1F8DCA0C00012CCB /* EntitiesOptions.swift in Sources */,
-				68AC593A1F8DCA0C00012CCB /* Usage.swift in Sources */,
-				68AC59291F8DCA0C00012CCB /* Parameters.swift in Sources */,
-				68AC59301F8DCA0C00012CCB /* SemanticRolesKeyword.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

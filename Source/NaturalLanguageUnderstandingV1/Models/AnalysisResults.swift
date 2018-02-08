@@ -61,6 +61,10 @@ public struct AnalysisResults {
     /**
      Initialize a `AnalysisResults` with member variables.
 
+     - parameter language: Language used to analyze the text.
+     - parameter analyzedText: Text that was used in the analysis.
+     - parameter retrievedUrl: URL that was used to retrieve HTML content.
+     - parameter usage: API usage information for the request.
      - parameter concepts: The general concepts referenced or alluded to in the specified content.
      - parameter entities: The important entities in the specified content.
      - parameter keywords: The important keywords in content organized by relevance.
@@ -70,14 +74,14 @@ public struct AnalysisResults {
      - parameter relations: The relationships between entities in the content.
      - parameter semanticRoles: The subjects of actions and the objects the actions act upon.
      - parameter sentiment: The sentiment of the content.
-     - parameter language: Language used to analyze the text.
-     - parameter analyzedText: Text that was used in the analysis.
-     - parameter retrievedUrl: URL that was used to retrieve HTML content.
-     - parameter usage: API usage information for the request.
 
      - returns: An initialized `AnalysisResults`.
     */
-    public init(concepts: [ConceptsResult]? = nil, entities: [EntitiesResult]? = nil, keywords: [KeywordsResult]? = nil, categories: [CategoriesResult]? = nil, emotion: EmotionResult? = nil, metadata: MetadataResult? = nil, relations: [RelationsResult]? = nil, semanticRoles: [SemanticRolesResult]? = nil, sentiment: SentimentResult? = nil, language: String? = nil, analyzedText: String? = nil, retrievedUrl: String? = nil, usage: Usage? = nil) {
+    public init(language: String? = nil, analyzedText: String? = nil, retrievedUrl: String? = nil, usage: Usage? = nil, concepts: [ConceptsResult]? = nil, entities: [EntitiesResult]? = nil, keywords: [KeywordsResult]? = nil, categories: [CategoriesResult]? = nil, emotion: EmotionResult? = nil, metadata: MetadataResult? = nil, relations: [RelationsResult]? = nil, semanticRoles: [SemanticRolesResult]? = nil, sentiment: SentimentResult? = nil) {
+        self.language = language
+        self.analyzedText = analyzedText
+        self.retrievedUrl = retrievedUrl
+        self.usage = usage
         self.concepts = concepts
         self.entities = entities
         self.keywords = keywords
@@ -87,10 +91,6 @@ public struct AnalysisResults {
         self.relations = relations
         self.semanticRoles = semanticRoles
         self.sentiment = sentiment
-        self.language = language
-        self.analyzedText = analyzedText
-        self.retrievedUrl = retrievedUrl
-        self.usage = usage
     }
 }
 

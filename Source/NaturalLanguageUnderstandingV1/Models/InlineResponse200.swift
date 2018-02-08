@@ -16,47 +16,39 @@
 
 import Foundation
 
-/** An entity that corresponds with an argument in a relation. */
-public struct RelationEntity {
+/** InlineResponse200. */
+public struct InlineResponse200 {
 
-    /// Text that corresponds to the entity.
-    public var text: String?
-
-    /// Entity type.
-    public var type: String?
+    /// model_id of the deleted model.
+    public var deleted: String?
 
     /**
-     Initialize a `RelationEntity` with member variables.
+     Initialize a `InlineResponse200` with member variables.
 
-     - parameter text: Text that corresponds to the entity.
-     - parameter type: Entity type.
+     - parameter deleted: model_id of the deleted model.
 
-     - returns: An initialized `RelationEntity`.
+     - returns: An initialized `InlineResponse200`.
     */
-    public init(text: String? = nil, type: String? = nil) {
-        self.text = text
-        self.type = type
+    public init(deleted: String? = nil) {
+        self.deleted = deleted
     }
 }
 
-extension RelationEntity: Codable {
+extension InlineResponse200: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case type = "type"
-        static let allValues = [text, type]
+        case deleted = "deleted"
+        static let allValues = [deleted]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        type = try container.decodeIfPresent(String.self, forKey: .type)
+        deleted = try container.decodeIfPresent(String.self, forKey: .deleted)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(deleted, forKey: .deleted)
     }
 
 }

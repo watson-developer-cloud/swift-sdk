@@ -16,47 +16,39 @@
 
 import Foundation
 
-/** An entity that corresponds with an argument in a relation. */
-public struct RelationEntity {
+/** RSS or ATOM feed found on the webpage. */
+public struct Feed {
 
-    /// Text that corresponds to the entity.
-    public var text: String?
-
-    /// Entity type.
-    public var type: String?
+    /// URL of the RSS or ATOM feed.
+    public var link: String?
 
     /**
-     Initialize a `RelationEntity` with member variables.
+     Initialize a `Feed` with member variables.
 
-     - parameter text: Text that corresponds to the entity.
-     - parameter type: Entity type.
+     - parameter link: URL of the RSS or ATOM feed.
 
-     - returns: An initialized `RelationEntity`.
+     - returns: An initialized `Feed`.
     */
-    public init(text: String? = nil, type: String? = nil) {
-        self.text = text
-        self.type = type
+    public init(link: String? = nil) {
+        self.link = link
     }
 }
 
-extension RelationEntity: Codable {
+extension Feed: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case type = "type"
-        static let allValues = [text, type]
+        case link = "link"
+        static let allValues = [link]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        type = try container.decodeIfPresent(String.self, forKey: .type)
+        link = try container.decodeIfPresent(String.self, forKey: .link)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(link, forKey: .link)
     }
 
 }

@@ -22,6 +22,9 @@ public struct EntitiesOptions {
     /// Maximum number of entities to return.
     public var limit: Int?
 
+    /// Set this to true to return locations of entity mentions.
+    public var mentions: Bool?
+
     /// Enter a custom model ID to override the standard entity detection model.
     public var model: String?
 
@@ -35,14 +38,16 @@ public struct EntitiesOptions {
      Initialize a `EntitiesOptions` with member variables.
 
      - parameter limit: Maximum number of entities to return.
+     - parameter mentions: Set this to true to return locations of entity mentions.
      - parameter model: Enter a custom model ID to override the standard entity detection model.
      - parameter sentiment: Set this to true to return sentiment information for detected entities.
      - parameter emotion: Set this to true to analyze emotion for detected keywords.
 
      - returns: An initialized `EntitiesOptions`.
     */
-    public init(limit: Int? = nil, model: String? = nil, sentiment: Bool? = nil, emotion: Bool? = nil) {
+    public init(limit: Int? = nil, mentions: Bool? = nil, model: String? = nil, sentiment: Bool? = nil, emotion: Bool? = nil) {
         self.limit = limit
+        self.mentions = mentions
         self.model = model
         self.sentiment = sentiment
         self.emotion = emotion
@@ -53,15 +58,17 @@ extension EntitiesOptions: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case limit = "limit"
+        case mentions = "mentions"
         case model = "model"
         case sentiment = "sentiment"
         case emotion = "emotion"
-        static let allValues = [limit, model, sentiment, emotion]
+        static let allValues = [limit, mentions, model, sentiment, emotion]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         limit = try container.decodeIfPresent(Int.self, forKey: .limit)
+        mentions = try container.decodeIfPresent(Bool.self, forKey: .mentions)
         model = try container.decodeIfPresent(String.self, forKey: .model)
         sentiment = try container.decodeIfPresent(Bool.self, forKey: .sentiment)
         emotion = try container.decodeIfPresent(Bool.self, forKey: .emotion)
@@ -70,6 +77,7 @@ extension EntitiesOptions: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(limit, forKey: .limit)
+        try container.encodeIfPresent(mentions, forKey: .mentions)
         try container.encodeIfPresent(model, forKey: .model)
         try container.encodeIfPresent(sentiment, forKey: .sentiment)
         try container.encodeIfPresent(emotion, forKey: .emotion)

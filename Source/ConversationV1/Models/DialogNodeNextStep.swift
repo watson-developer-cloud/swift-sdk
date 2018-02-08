@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ public struct DialogNodeNextStep {
 
     /// How the `next_step` reference is processed.
     public enum Behavior: String {
-        // swiftlint:disable:next identifier_name
         case to = "jump_to"
     }
 

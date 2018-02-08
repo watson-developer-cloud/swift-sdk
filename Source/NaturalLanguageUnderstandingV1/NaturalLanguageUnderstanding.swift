@@ -183,7 +183,7 @@ public class NaturalLanguageUnderstanding {
     public func deleteModel(
         modelID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        success: @escaping (InlineResponse200) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -207,10 +207,10 @@ public class NaturalLanguageUnderstanding {
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<InlineResponse200>) in
             switch response.result {
-            case .success: success()
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }

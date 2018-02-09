@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,55 @@
 
 import Foundation
 
-/** The tone analysis for a particular tone category (e.g. social, emotion, or writing). */
-public struct ToneCategory: JSONDecodable {
+/** ToneCategory. */
+public struct ToneCategory {
 
-    /// The name of this tone category (e.g. emotion, social, or language).
-    public let name: String
+    /// An array of `ToneScore` objects that provides the results for the tones of the category.
+    public var tones: [ToneScore]
 
-    /// A unique number identifying this tone category, irrespective of language or localization.
-    public let categoryID: String
+    /// The unique, non-localized identifier of the category for the results. The service can return results for the following category IDs: `emotion_tone`, `language_tone`, and `social_tone`.
+    public var categoryID: String
 
-    /// The individual tone results within this category.
-    public let tones: [ToneScore]
+    /// The user-visible, localized name of the category.
+    public var categoryName: String
 
-    /// Used internally to initialize a `ToneCategory` model from JSON.
-    public init(json: JSONWrapper) throws {
-        name = try json.getString(at: "category_name")
-        categoryID = try json.getString(at: "category_id")
-        tones = try json.decodedArray(at: "tones", type: ToneScore.self)
+    /**
+     Initialize a `ToneCategory` with member variables.
+
+     - parameter tones: An array of `ToneScore` objects that provides the results for the tones of the category.
+     - parameter categoryID: The unique, non-localized identifier of the category for the results. The service can return results for the following category IDs: `emotion_tone`, `language_tone`, and `social_tone`.
+     - parameter categoryName: The user-visible, localized name of the category.
+
+     - returns: An initialized `ToneCategory`.
+    */
+    public init(tones: [ToneScore], categoryID: String, categoryName: String) {
+        self.tones = tones
+        self.categoryID = categoryID
+        self.categoryName = categoryName
     }
+}
+
+extension ToneCategory: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case tones = "tones"
+        case categoryID = "category_id"
+        case categoryName = "category_name"
+        static let allValues = [tones, categoryID, categoryName]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        tones = try container.decode([ToneScore].self, forKey: .tones)
+        categoryID = try container.decode(String.self, forKey: .categoryID)
+        categoryName = try container.decode(String.self, forKey: .categoryName)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(tones, forKey: .tones)
+        try container.encode(categoryID, forKey: .categoryID)
+        try container.encode(categoryName, forKey: .categoryName)
+    }
+
 }

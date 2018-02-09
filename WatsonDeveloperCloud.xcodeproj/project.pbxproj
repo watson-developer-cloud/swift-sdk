@@ -328,6 +328,13 @@
 		68BC29031F8C38700042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		68BC29041F8C38700042810E /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		68BC29051F8C38700042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
+		68D09C1F200D61870087ADE5 /* ToneChatInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D09C18200D61870087ADE5 /* ToneChatInput.swift */; };
+		68D09C20200D61870087ADE5 /* UtteranceAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D09C19200D61870087ADE5 /* UtteranceAnalysis.swift */; };
+		68D09C21200D61870087ADE5 /* ToneChatScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D09C1A200D61870087ADE5 /* ToneChatScore.swift */; };
+		68D09C22200D61870087ADE5 /* UtteranceAnalyses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D09C1B200D61870087ADE5 /* UtteranceAnalyses.swift */; };
+		68D09C23200D61870087ADE5 /* ToneInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D09C1C200D61870087ADE5 /* ToneInput.swift */; };
+		68D09C24200D61870087ADE5 /* Utterance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D09C1D200D61870087ADE5 /* Utterance.swift */; };
+		68D09C25200D61870087ADE5 /* DocumentAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D09C1E200D61870087ADE5 /* DocumentAnalysis.swift */; };
 		68D8A8862009CF5B0090B84B /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0EEE72006D22700E58658 /* Starscream.framework */; };
 		68D8A8872009CF680090B84B /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 68A0EEE72006D22700E58658 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68C441502017B19000B251C6 /* DialogNodeVisitedDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C4414E2017B17B00B251C6 /* DialogNodeVisitedDetails.swift */; };
@@ -1051,6 +1058,13 @@
 		68B213EE1F8429890052DC00 /* JSONValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValueTests.swift; sourceTree = "<group>"; };
 		68C4414E2017B17B00B251C6 /* DialogNodeVisitedDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeVisitedDetails.swift; sourceTree = "<group>"; };
 		68C974AA200D52E4002DCFA3 /* CaptureGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureGroup.swift; sourceTree = "<group>"; };
+		68D09C18200D61870087ADE5 /* ToneChatInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneChatInput.swift; sourceTree = "<group>"; };
+		68D09C19200D61870087ADE5 /* UtteranceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtteranceAnalysis.swift; sourceTree = "<group>"; };
+		68D09C1A200D61870087ADE5 /* ToneChatScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneChatScore.swift; sourceTree = "<group>"; };
+		68D09C1B200D61870087ADE5 /* UtteranceAnalyses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtteranceAnalyses.swift; sourceTree = "<group>"; };
+		68D09C1C200D61870087ADE5 /* ToneInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneInput.swift; sourceTree = "<group>"; };
+		68D09C1D200D61870087ADE5 /* Utterance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utterance.swift; sourceTree = "<group>"; };
+		68D09C1E200D61870087ADE5 /* DocumentAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentAnalysis.swift; sourceTree = "<group>"; };
 		7A0F95B61C23288E004C01C0 /* WatsonDeveloperCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WatsonDeveloperCloud.h; path = Source/SupportingFiles/WatsonDeveloperCloud.h; sourceTree = "<group>"; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
@@ -2649,10 +2663,17 @@
 		B1F21DF01CE2461800393146 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				68D09C1E200D61870087ADE5 /* DocumentAnalysis.swift */,
 				B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */,
 				B1F21DF31CE2461800393146 /* ToneAnalysis.swift */,
 				B1F21DF41CE2461800393146 /* ToneCategory.swift */,
+				68D09C18200D61870087ADE5 /* ToneChatInput.swift */,
+				68D09C1A200D61870087ADE5 /* ToneChatScore.swift */,
+				68D09C1C200D61870087ADE5 /* ToneInput.swift */,
 				B1F21DF51CE2461800393146 /* ToneScore.swift */,
+				68D09C1D200D61870087ADE5 /* Utterance.swift */,
+				68D09C1B200D61870087ADE5 /* UtteranceAnalyses.swift */,
+				68D09C19200D61870087ADE5 /* UtteranceAnalysis.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4842,16 +4863,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68D09C21200D61870087ADE5 /* ToneChatScore.swift in Sources */,
 				7AAAF4101CEE9D5300B74848 /* SentenceAnalysis.swift in Sources */,
 				68BC28E81F8C35080042810E /* JSON.swift in Sources */,
 				68BC28E71F8C35080042810E /* JSONWrapper.swift in Sources */,
+				68D09C25200D61870087ADE5 /* DocumentAnalysis.swift in Sources */,
 				7AAAF4131CEE9D5300B74848 /* ToneScore.swift in Sources */,
 				68BC28E61F8C35080042810E /* CodableExtensions.swift in Sources */,
 				68BC28EC1F8C35080042810E /* RestToken.swift in Sources */,
+				68D09C22200D61870087ADE5 /* UtteranceAnalyses.swift in Sources */,
 				68BC28EB1F8C35080042810E /* RestRequest.swift in Sources */,
+				68D09C24200D61870087ADE5 /* Utterance.swift in Sources */,
 				7AAAF4121CEE9D5300B74848 /* ToneCategory.swift in Sources */,
 				68BC28EA1F8C35080042810E /* RestError.swift in Sources */,
 				68BC28ED1F8C35080042810E /* RestUtilities.swift in Sources */,
+				68D09C20200D61870087ADE5 /* UtteranceAnalysis.swift in Sources */,
+				68D09C1F200D61870087ADE5 /* ToneChatInput.swift in Sources */,
+				68D09C23200D61870087ADE5 /* ToneInput.swift in Sources */,
 				68BC28E91F8C35080042810E /* MultipartFormData.swift in Sources */,
 				7AAAF4141CEE9D5600B74848 /* ToneAnalyzer.swift in Sources */,
 				7AAAF4111CEE9D5300B74848 /* ToneAnalysis.swift in Sources */,

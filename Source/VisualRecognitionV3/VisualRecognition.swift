@@ -29,7 +29,7 @@ public class VisualRecognition {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let apiKey: String
+    private let credentials: Credentials
     private let version: String
     private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
 
@@ -41,7 +41,7 @@ public class VisualRecognition {
         "YYYY-MM-DD" format.
      */
     public init(apiKey: String, version: String) {
-        self.apiKey = apiKey
+        self.credentials = .apiKey(name: "api_key", key: apiKey, in: .query)
         self.version = version
     }
 
@@ -126,7 +126,6 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         queryParameters.append(URLQueryItem(name: "url", value: url))
         if let owners = owners {
@@ -151,7 +150,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/classify",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: headerParameters,
             acceptType: "application/json",
             queryItems: queryParameters
@@ -193,7 +192,6 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct header parameters
@@ -231,7 +229,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classify",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: headerParameters,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -266,7 +264,6 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         queryParameters.append(URLQueryItem(name: "url", value: url))
 
@@ -274,7 +271,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/detect_faces",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters
@@ -306,7 +303,6 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct body
@@ -321,7 +317,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/detect_faces",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -353,7 +349,6 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
         queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
 
@@ -361,7 +356,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/classifiers",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters
@@ -422,7 +417,6 @@ public class VisualRecognition {
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // encode name as data
@@ -451,7 +445,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classifiers",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -483,14 +477,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -524,14 +517,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -577,7 +569,6 @@ public class VisualRecognition {
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct body
@@ -601,7 +592,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -637,7 +628,6 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         //construct body
@@ -653,7 +643,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/collections",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -684,14 +674,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/collections",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters
@@ -722,14 +711,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/collections/\(collectionID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -759,14 +747,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + "/v3/collections/\(collectionID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -812,7 +799,6 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         //construct body
@@ -830,7 +816,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/collections/\(collectionID)/images",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -864,14 +850,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/collections/\(collectionID)/images",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -903,14 +888,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -942,14 +926,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -985,14 +968,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -1028,14 +1010,13 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             queryItems: queryParameters
         )
@@ -1070,7 +1051,6 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         //construct body
@@ -1085,7 +1065,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "PUT",
             url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
@@ -1124,7 +1104,6 @@ public class VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         //construct body
@@ -1139,7 +1118,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/collections/\(collectionID)/find_similar",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,

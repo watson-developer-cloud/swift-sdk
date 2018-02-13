@@ -4364,7 +4364,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/RestKit\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Test/RestKitTests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Source/RestKit\n    swiftlint lint --config ${PROJECT_DIR}/.swiftlint.yml --no-cache --path Tests/RestKitTests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
 		};
 		CAEC7A671FE961C7002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;

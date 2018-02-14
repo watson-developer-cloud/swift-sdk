@@ -82,28 +82,21 @@ internal struct RestRequest {
             urlComponents.queryItems = queryItems
         }
 
-        // Must encode "+" to %2B (URLComponents does not do this)
+        // encode "+" to %2B (URLComponents does not do this)
         urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
 
-        // construct basic mutable request
-        var request = URLRequest(url: urlComponents.url!)
+        // construct mutable request
+        let url = urlComponents.url!
+        var request = URLRequest(url: url)
         request.httpMethod = method
         request.httpBody = messageBody
 
-        // set the request's user agent
+        // set headers
         request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
-
-        // set the request's header parameters
-        for (key, value) in headerParameters {
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-
-        // set the request's accept type
+        headerParameters.forEach { (key, value) in request.setValue(value, forHTTPHeaderField: key) }
         if let acceptType = acceptType {
             request.setValue(acceptType, forHTTPHeaderField: "Accept")
         }
-
-        // set the request's content type
         if let contentType = contentType {
             request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }

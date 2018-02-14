@@ -30,9 +30,7 @@ public class AlchemyVision {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    /// The API key credential to use when authenticating with the service.
-    private let apiKey: String
-
+    private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.AlchemyVisionV1"
     private let unreservedCharacters = CharacterSet(charactersIn:
         "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~")
@@ -43,7 +41,7 @@ public class AlchemyVision {
      - parameter apiKey: The API key credential to use when authenticating with the service.
      */
     public init(apiKey: String) {
-        self.apiKey = apiKey
+        self.credentials = .apiKey(name: "apikey", key: apiKey, in: .query)
     }
 
     /**
@@ -100,7 +98,6 @@ public class AlchemyVision {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParameters.append(URLQueryItem(name: "imagePostMode", value: "raw"))
         if let knowledgeGraph = knowledgeGraph {
@@ -115,7 +112,7 @@ public class AlchemyVision {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/image/ImageGetRankedImageFaceTags",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
@@ -151,7 +148,6 @@ public class AlchemyVision {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParameters.append(URLQueryItem(name: "url", value: url))
         if let knowledgeGraph = knowledgeGraph {
@@ -166,7 +162,7 @@ public class AlchemyVision {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/url/URLGetRankedImageFaceTags",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
@@ -241,7 +237,6 @@ public class AlchemyVision {
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         if let url = url {
             queryParameters.append(URLQueryItem(name: "url", value: url))
@@ -251,7 +246,7 @@ public class AlchemyVision {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/html/HTMLGetImage",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
@@ -283,7 +278,6 @@ public class AlchemyVision {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParameters.append(URLQueryItem(name: "url", value: url))
 
@@ -291,7 +285,7 @@ public class AlchemyVision {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/url/URLGetImage",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters
@@ -324,7 +318,6 @@ public class AlchemyVision {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParameters.append(URLQueryItem(name: "imagePostMode", value: "raw"))
         if let forceShowAll = forceShowAll {
@@ -346,7 +339,7 @@ public class AlchemyVision {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/image/ImageGetRankedImageKeywords",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
@@ -381,7 +374,6 @@ public class AlchemyVision {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParameters.append(URLQueryItem(name: "url", value: url))
         if let forceShowAll = forceShowAll {
@@ -403,7 +395,7 @@ public class AlchemyVision {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/url/URLGetRankedImageKeywords",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters
@@ -432,7 +424,6 @@ public class AlchemyVision {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParameters.append(URLQueryItem(name: "imagePostMode", value: "raw"))
 
@@ -440,7 +431,7 @@ public class AlchemyVision {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/url/URLGetRankedImageSceneText",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
@@ -471,7 +462,6 @@ public class AlchemyVision {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParameters.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParameters.append(URLQueryItem(name: "url", value: url))
 
@@ -479,7 +469,7 @@ public class AlchemyVision {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/url/URLGetRankedImageSceneText",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             queryItems: queryParameters

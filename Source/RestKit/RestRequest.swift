@@ -59,9 +59,26 @@ internal struct RestRequest {
         queryItems: [URLQueryItem]? = nil,
         messageBody: Data? = nil)
     {
-        // construct url with query parameters
+        // create mutable copies
+        var headerParameters = headerParameters
+        var queryItems = queryItems ?? []
+
+        // set authentication credentials
+        switch credentials {
+        case .basicAuthentication(let username, let password):
+            let authData = (username + ":" + password).data(using: .utf8)!
+            let authString = authData.base64EncodedString()
+            headerParameters["Authorization"] = "Basic \(authString)"
+        case .apiKey(let name, let key, let location):
+            switch location {
+            case .header: headerParameters[name] = key
+            case .query: queryItems.append(URLQueryItem(name: name, value: key))
+            }
+        }
+
+        // construct url components
         var urlComponents = URLComponents(string: url)!
-        if let queryItems = queryItems, !queryItems.isEmpty {
+        if !queryItems.isEmpty {
             urlComponents.queryItems = queryItems
         }
 
@@ -75,15 +92,6 @@ internal struct RestRequest {
 
         // set the request's user agent
         request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
-
-        // set the request's authentication credentials
-        switch credentials {
-        case .apiKey: break
-        case .basicAuthentication(let username, let password):
-            let authData = (username + ":" + password).data(using: .utf8)!
-            let authString = authData.base64EncodedString()
-            request.setValue("Basic \(authString)", forHTTPHeaderField: "Authorization")
-        }
 
         // set the request's header parameters
         for (key, value) in headerParameters {
@@ -389,6 +397,11 @@ internal enum RestResult<T> {
 }
 
 internal enum Credentials {
-    case apiKey
     case basicAuthentication(username: String, password: String)
+    case apiKey(name: String, key: String, in: APIKeyLocation)
+
+    internal enum APIKeyLocation {
+        case header
+        case query
+    }
 }

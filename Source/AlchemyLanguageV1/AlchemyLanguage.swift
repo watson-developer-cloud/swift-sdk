@@ -29,9 +29,7 @@ public class AlchemyLanguage {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    /// The API key credential to use when authenticating with the service.
-    private let apiKey: String
-
+    private let credentials: Credentials
     private let errorDomain = "com.watsonplatform.alchemyLanguage"
 
     // The characters at the end of the CharacterSet break in Linux
@@ -42,7 +40,7 @@ public class AlchemyLanguage {
      - parameter apiKey: The API key credential to use when authenticating with the service.
      */
     public init(apiKey: String) {
-        self.apiKey = apiKey
+        self.credentials = .apiKey(name: "apikey", key: apiKey, in: .query)
     }
 
     /**
@@ -132,13 +130,12 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetAuthors",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
 
@@ -171,8 +168,6 @@ public class AlchemyLanguage {
         let body = try? buildBody(document: html, html: true)
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -181,7 +176,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetAuthors",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -214,8 +209,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
         queryParams.append(URLQueryItem(name: "url", value: url))
@@ -228,7 +221,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetRankedConcepts",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
@@ -265,8 +258,6 @@ public class AlchemyLanguage {
         let body = try? buildBody(document: html, html: true)
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
         if let myUrl = url {
@@ -280,7 +271,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedConcepts",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -314,8 +305,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "linkedData", value: "1"))
         if let myGraph = knowledgeGraph {
@@ -327,7 +316,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/text/TextGetRankedConcepts",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -371,8 +360,6 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
         if let myGraph = knowledgeGraph {
@@ -404,7 +391,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetRankedNamedEntities",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
@@ -452,8 +439,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -487,7 +472,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedNamedEntities",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -534,8 +519,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myGraph = knowledgeGraph {
             queryParams.append(URLQueryItem(name: "knowledgeGraph",
@@ -566,7 +549,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/text/TextGetRankedNamedEntities",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -602,8 +585,6 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
         if let graph = knowledgeGraph {
@@ -626,7 +607,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetRankedKeywords",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
@@ -666,8 +647,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -692,7 +671,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedKeywords",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -731,8 +710,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let graph = knowledgeGraph {
             queryParams.append(URLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
@@ -754,7 +731,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/text/TextGetRankedKeywords",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -786,13 +763,12 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetLanguage",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
@@ -823,15 +799,13 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
 
         // construct request
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/text/TextGetLanguage",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -863,13 +837,12 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetMicroformatData",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
@@ -903,8 +876,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -914,7 +885,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetMicroformatData",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -946,13 +917,12 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetPubDate",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
@@ -985,8 +955,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -996,7 +964,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetPubDate",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1045,8 +1013,6 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
         if let graph = knowledgeGraph {
@@ -1083,7 +1049,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetRelations",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
@@ -1136,8 +1102,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -1176,7 +1140,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetRelations",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1228,8 +1192,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let graph = knowledgeGraph {
             queryParams.append(URLQueryItem(name: "knowledgeGraph", value: String(graph.rawValue)))
@@ -1265,7 +1227,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/text/TextGetRelations",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1297,13 +1259,12 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetTextSentiment",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
@@ -1336,8 +1297,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -1347,7 +1306,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetTextSentiment",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1380,15 +1339,13 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
 
         // construct request
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/text/TextGetTextSentiment",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1422,13 +1379,12 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetTargetedSentiment",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "target", value: targets),
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
@@ -1463,8 +1419,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "target", value: targets))
         if let myUrl = url {
@@ -1475,7 +1429,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetTargetedSentiment",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1510,8 +1464,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "target", value: targets))
 
@@ -1519,7 +1471,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/text/TextGetTargetedSentiment",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1551,12 +1503,11 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetRankedTaxonomy",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
@@ -1589,8 +1540,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -1600,7 +1549,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetRankedTaxonomy",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1633,15 +1582,13 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
 
         // construct request
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/text/TextGetRankedTaxonomy",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1673,12 +1620,11 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetRawText",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
@@ -1711,8 +1657,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -1722,7 +1666,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetRawText",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1756,8 +1700,6 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
         if let metadata = useMetadata {
@@ -1771,7 +1713,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetText",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
@@ -1809,8 +1751,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -1826,7 +1766,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetText",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1857,8 +1797,6 @@ public class AlchemyLanguage {
     {
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         queryParams.append(URLQueryItem(name: "url", value: url))
         if let metadata = useMetadata {
@@ -1869,7 +1807,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetTitle",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams
@@ -1904,8 +1842,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -1918,7 +1854,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetTitle",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -1950,12 +1886,11 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetFeedLinks",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
@@ -1989,8 +1924,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -2000,7 +1933,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetFeedLinks",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -2032,12 +1965,11 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/url/URLGetEmotion",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: [
                 URLQueryItem(name: "url", value: url),
-                URLQueryItem(name: "apikey", value: apiKey),
                 URLQueryItem(name: "outputMode", value: "json")
             ]
         )
@@ -2071,8 +2003,6 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
         if let myUrl = url {
             queryParams.append(URLQueryItem(name: "url", value: myUrl))
@@ -2082,7 +2012,7 @@ public class AlchemyLanguage {
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/html/HTMLGetEmotion",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,
@@ -2116,15 +2046,13 @@ public class AlchemyLanguage {
 
         // construct query parameters
         var queryParams = [URLQueryItem]()
-
-        queryParams.append(URLQueryItem(name: "apikey", value: apiKey))
         queryParams.append(URLQueryItem(name: "outputMode", value: "json"))
 
         // construct request
         let request = RestRequest(
             method: "POST",
             url: serviceUrl + "/text/TextGetEmotion",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             contentType: "application/x-www-form-urlencoded",
             queryItems: queryParams,

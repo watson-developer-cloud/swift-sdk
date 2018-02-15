@@ -16,39 +16,39 @@
 
 import Foundation
 
-/** An object containing the emotion results of a document. */
-public struct DocumentEmotionResults {
+/** Information about the deleted model. */
+public struct DeleteModelResults {
 
-    /// An object containing the emotion results for the document.
-    public var emotion: EmotionScores?
+    /// model_id of the deleted model.
+    public var deleted: String?
 
     /**
-     Initialize a `DocumentEmotionResults` with member variables.
+     Initialize a `DeleteModelResults` with member variables.
 
-     - parameter emotion: An object containing the emotion results for the document.
+     - parameter deleted: model_id of the deleted model.
 
-     - returns: An initialized `DocumentEmotionResults`.
+     - returns: An initialized `DeleteModelResults`.
     */
-    public init(emotion: EmotionScores? = nil) {
-        self.emotion = emotion
+    public init(deleted: String? = nil) {
+        self.deleted = deleted
     }
 }
 
-extension DocumentEmotionResults: Codable {
+extension DeleteModelResults: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case emotion = "emotion"
-        static let allValues = [emotion]
+        case deleted = "deleted"
+        static let allValues = [deleted]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        emotion = try container.decodeIfPresent(EmotionScores.self, forKey: .emotion)
+        deleted = try container.decodeIfPresent(String.self, forKey: .deleted)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(emotion, forKey: .emotion)
+        try container.encodeIfPresent(deleted, forKey: .deleted)
     }
 
 }

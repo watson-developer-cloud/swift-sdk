@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 import Foundation
 
-/** The entities extracted from a sentence in a given document. */
+/** An entity that corresponds with an argument in a relation. */
 public struct RelationEntity {
 
     /// Text that corresponds to the entity.

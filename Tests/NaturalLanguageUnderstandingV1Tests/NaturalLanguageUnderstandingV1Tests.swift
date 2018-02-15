@@ -450,9 +450,16 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testCustomModel() {
         let description = "Test a custom model."
         let expectation = self.expectation(description: description)
-        let entities = EntitiesOptions(model: "en-news")
-        let relations = RelationsOptions(model: "en-news")
-        let features = Features(entities: entities, relations: relations)
+        let features = Features(
+            concepts: ConceptsOptions(limit: 5),
+            emotion: EmotionOptions(document: true, targets: ["happy"]),
+            entities: EntitiesOptions(limit: 5, mentions: true, model: "en-news", sentiment: true, emotion: true),
+            keywords: KeywordsOptions(limit: 5, sentiment: true, emotion: true),
+            relations: RelationsOptions(model: "en-news"),
+            semanticRoles: SemanticRolesOptions(limit: 5, keywords: true, entities: true),
+            sentiment: SentimentOptions(document: true, targets: ["happy"]),
+            categories: CategoriesOptions(additionalProperties: ["example-key": .string("example-value")])
+        )
         let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
         naturalLanguageUnderstanding.analyze(parameters: parameters, failure: failWithError) {
             results in
@@ -472,9 +479,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             XCTAssert(error.localizedDescription.contains("invalid model_id"))
             expectation.fulfill()
         }
-        naturalLanguageUnderstanding.deleteModel(modelID: "invalid_model_id", failure: failure) {
-            XCTFail("Operation should not succeed.")
-        }
+        naturalLanguageUnderstanding.deleteModel(modelID: "invalid_model_id", failure: failure, success: failWithResult)
         waitForExpectations()
     }
 

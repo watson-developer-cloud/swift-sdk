@@ -16,39 +16,39 @@
 
 import Foundation
 
-/** An object containing the emotion results of a document. */
-public struct DocumentEmotionResults {
+/** RSS or ATOM feed found on the webpage. */
+public struct Feed {
 
-    /// An object containing the emotion results for the document.
-    public var emotion: EmotionScores?
+    /// URL of the RSS or ATOM feed.
+    public var link: String?
 
     /**
-     Initialize a `DocumentEmotionResults` with member variables.
+     Initialize a `Feed` with member variables.
 
-     - parameter emotion: An object containing the emotion results for the document.
+     - parameter link: URL of the RSS or ATOM feed.
 
-     - returns: An initialized `DocumentEmotionResults`.
+     - returns: An initialized `Feed`.
     */
-    public init(emotion: EmotionScores? = nil) {
-        self.emotion = emotion
+    public init(link: String? = nil) {
+        self.link = link
     }
 }
 
-extension DocumentEmotionResults: Codable {
+extension Feed: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case emotion = "emotion"
-        static let allValues = [emotion]
+        case link = "link"
+        static let allValues = [link]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        emotion = try container.decodeIfPresent(EmotionScores.self, forKey: .emotion)
+        link = try container.decodeIfPresent(String.self, forKey: .link)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(emotion, forKey: .emotion)
+        try container.encodeIfPresent(link, forKey: .link)
     }
 
 }

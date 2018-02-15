@@ -16,54 +16,47 @@
 
 import Foundation
 
-/** RelationArgument. */
-public struct RelationArgument {
+/** EntityMention. */
+public struct EntityMention {
 
-    public var entities: [RelationEntity]?
+    /// Entity mention text.
+    public var text: String?
 
     /// Character offsets indicating the beginning and end of the mention in the analyzed text.
     public var location: [Int]?
 
-    /// Text that corresponds to the argument.
-    public var text: String?
-
     /**
-     Initialize a `RelationArgument` with member variables.
+     Initialize a `EntityMention` with member variables.
 
-     - parameter entities:
+     - parameter text: Entity mention text.
      - parameter location: Character offsets indicating the beginning and end of the mention in the analyzed text.
-     - parameter text: Text that corresponds to the argument.
 
-     - returns: An initialized `RelationArgument`.
+     - returns: An initialized `EntityMention`.
     */
-    public init(entities: [RelationEntity]? = nil, location: [Int]? = nil, text: String? = nil) {
-        self.entities = entities
-        self.location = location
+    public init(text: String? = nil, location: [Int]? = nil) {
         self.text = text
+        self.location = location
     }
 }
 
-extension RelationArgument: Codable {
+extension EntityMention: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case entities = "entities"
-        case location = "location"
         case text = "text"
-        static let allValues = [entities, location, text]
+        case location = "location"
+        static let allValues = [text, location]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        entities = try container.decodeIfPresent([RelationEntity].self, forKey: .entities)
-        location = try container.decodeIfPresent([Int].self, forKey: .location)
         text = try container.decodeIfPresent(String.self, forKey: .text)
+        location = try container.decodeIfPresent([Int].self, forKey: .location)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(entities, forKey: .entities)
-        try container.encodeIfPresent(location, forKey: .location)
         try container.encodeIfPresent(text, forKey: .text)
+        try container.encodeIfPresent(location, forKey: .location)
     }
 
 }

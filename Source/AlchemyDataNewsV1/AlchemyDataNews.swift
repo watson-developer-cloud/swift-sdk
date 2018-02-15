@@ -29,9 +29,7 @@ public class AlchemyDataNews {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    /// The API key credential to use when authenticating with the service.
-    private let apiKey: String
-
+    private let credentials: Credentials
     private let errorDomain = "com.ibm.watson.developer-cloud.AlchemyDataNews"
 
     /**
@@ -39,7 +37,7 @@ public class AlchemyDataNews {
      - parameter apiKey: The API key credential to use when authenticating with the service.
      */
     public init(apiKey: String) {
-        self.apiKey = apiKey
+        self.credentials = .apiKey(name: "apikey", key: apiKey, in: .query)
     }
 
     /**
@@ -110,7 +108,6 @@ public class AlchemyDataNews {
         var queryItems = [URLQueryItem]()
         queryItems.append(URLQueryItem(name: "start", value: startTime))
         queryItems.append(URLQueryItem(name: "end", value: endTime))
-        queryItems.append(URLQueryItem(name: "apikey", value: apiKey))
         queryItems.append(URLQueryItem(name: "outputMode", value: "json"))
         if let query = query {
             for (key, value) in query {
@@ -122,7 +119,7 @@ public class AlchemyDataNews {
         let request = RestRequest(
             method: "GET",
             url: serviceUrl + "/data/GetNews",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/x-www-form-urlencoded",

@@ -16,39 +16,39 @@
 
 import Foundation
 
-/** Pronunciation. */
-public struct Pronunciation {
+/** Voices. */
+public struct Voices {
 
-    /// The pronunciation of the requested text in the specified voice and format.
-    public var pronunciation: String
+    /// A list of available voices.
+    public var voices: [Voice]
 
     /**
-     Initialize a `Pronunciation` with member variables.
+     Initialize a `Voices` with member variables.
 
-     - parameter pronunciation: The pronunciation of the requested text in the specified voice and format.
+     - parameter voices: A list of available voices.
 
-     - returns: An initialized `Pronunciation`.
+     - returns: An initialized `Voices`.
     */
-    public init(pronunciation: String) {
-        self.pronunciation = pronunciation
+    public init(voices: [Voice]) {
+        self.voices = voices
     }
 }
 
-extension Pronunciation: Codable {
+extension Voices: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case pronunciation = "pronunciation"
-        static let allValues = [pronunciation]
+        case voices = "voices"
+        static let allValues = [voices]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        pronunciation = try container.decode(String.self, forKey: .pronunciation)
+        voices = try container.decode([Voice].self, forKey: .voices)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(pronunciation, forKey: .pronunciation)
+        try container.encode(voices, forKey: .voices)
     }
 
 }

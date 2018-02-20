@@ -184,6 +184,7 @@
 		689A169C203C88C7002CFC66 /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A168C203C88C7002CFC66 /* Face.swift */; };
 		689A169D203C88C7002CFC66 /* ClassifiedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A168D203C88C7002CFC66 /* ClassifiedImages.swift */; };
 		689A169F203C89A6002CFC66 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A169E203C89A6002CFC66 /* Parameters.swift */; };
+		689A16A1203C89F5002CFC66 /* PositiveExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A0203C89F5002CFC66 /* PositiveExample.swift */; };
 		68A0EEE82006D25400E58658 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0EEE72006D22700E58658 /* Starscream.framework */; };
 		68A6A99D202A0EE90069585F /* TranslationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6A993202A0EE80069585F /* TranslationModels.swift */; };
 		68A6A99E202A0EE90069585F /* DeleteModelResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6A994202A0EE80069585F /* DeleteModelResult.swift */; };
@@ -1083,6 +1084,7 @@
 		689A168C203C88C7002CFC66 /* Face.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		689A168D203C88C7002CFC66 /* ClassifiedImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedImages.swift; sourceTree = "<group>"; };
 		689A169E203C89A6002CFC66 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
+		689A16A0203C89F5002CFC66 /* PositiveExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveExample.swift; sourceTree = "<group>"; };
 		68A0EEE72006D22700E58658 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		68A6A993202A0EE80069585F /* TranslationModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModels.swift; sourceTree = "<group>"; };
 		68A6A994202A0EE80069585F /* DeleteModelResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteModelResult.swift; sourceTree = "<group>"; };
@@ -2422,6 +2424,7 @@
 				689A1680203C88C6002CFC66 /* FaceLocation.swift */,
 				689A1681203C88C6002CFC66 /* ImageWithFaces.swift */,
 				689A169E203C89A6002CFC66 /* Parameters.swift */,
+				689A16A0203C89F5002CFC66 /* PositiveExample.swift */,
 				689A1688203C88C6002CFC66 /* WarningInfo.swift */,
 			);
 			path = Models;
@@ -4887,6 +4890,7 @@
 				68BC28F71F8C350A0042810E /* JSONWrapper.swift in Sources */,
 				689A1693203C88C7002CFC66 /* ErrorInfo.swift in Sources */,
 				689A168F203C88C7002CFC66 /* FaceGender.swift in Sources */,
+				689A16A1203C89F5002CFC66 /* PositiveExample.swift in Sources */,
 				68BC28F91F8C350A0042810E /* MultipartFormData.swift in Sources */,
 				689A169C203C88C7002CFC66 /* Face.swift in Sources */,
 				68BC28F61F8C350A0042810E /* CodableExtensions.swift in Sources */,

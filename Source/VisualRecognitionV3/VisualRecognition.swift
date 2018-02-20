@@ -183,7 +183,7 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         if let imagesFile = imagesFile {
-            multipartFormData.append(imagesFile, withName: "images_file")
+            multipartFormData.append(imagesFile, withName: "images_file", mimeType: "application/octet-stream")
         }
         if let url = url {
             let parameters = Parameters(url: url, threshold: nil, owners: nil, classifierIDs: nil)

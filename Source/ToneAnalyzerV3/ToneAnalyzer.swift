@@ -17,34 +17,11 @@
 import Foundation
 
 /**
-  ### Service Overview
- The IBM Watson Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written text.
+  The IBM Watson Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written text.
  The service can analyze tone at both the document and sentence levels. You can use the service to understand how your
  written communications are perceived and then to improve the tone of your communications. Businesses can use the
  service to learn the tone of their customers' communications and to respond to each customer appropriately, or to
  understand and improve their customer conversations.
- ### API Usage
- The following information provides details about using the service to analyze tone:
- * **The tone method:** The service offers `GET` and `POST /v3/tone` methods that use the general purpose endpoint to
- analyze the tone of input content. The methods accept content in JSON, plain text, or HTML format.
- * **The tone_chat method:** The service offers a `POST /v3/tone_chat` method that uses the customer engagement endpoint
- to analyze the tone of customer service and customer support conversations. The method accepts content in JSON format.
- * **Authentication:** You authenticate to the service by using your service credentials. You can use your credentials
- to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
- contact the service directly. See [Service credentials for Watson
- services](https://console.bluemix.net/docs/services/watson/getting-started-credentials.html) and [Tokens for
- authentication](https://console.bluemix.net/docs/services/watson/getting-started-tokens.html).
- * **Request Logging:** By default, all Watson services log requests and their results. Data is collected only to
- improve the Watson services. If you do not want to share your data, set the header parameter
- `X-Watson-Learning-Opt-Out` to `true` for each request. Data is collected for any request that omits this header. See
- [Controlling request logging for Watson
- services](https://console.bluemix.net/docs/services/watson/getting-started-logging.html).
-
- For more information about the service, see [About Tone
- Analyzer](https://console.bluemix.net/docs/services/tone-analyzer/index.html).
-
- **Note:** Method descriptions apply to the latest version of the interface, `2017-09-21`. Where necessary, parameters
- and models describe differences between versions `2017-09-21` and `2016-05-19`.
  */
 public class ToneAnalyzer {
 
@@ -98,29 +75,25 @@ public class ToneAnalyzer {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error")
-            let userInfo = [NSLocalizedDescriptionKey: message]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return nil
         }
     }
 
     /**
-     Analyze general purpose tone.
+     Analyze general tone.
 
-          Uses the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
+          Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
      emotional and language tones. The method always analyzes the tone of the full document; by default, it also
      analyzes the tone of each individual sentence of the content.   You can submit no more than 128 KB of total input
      content and no more than 1000 individual sentences in JSON, plain text, or HTML format. The service analyzes the
      first 1000 sentences for document-level analysis and only the first 100 sentences for sentence-level analysis.
-     Use the `POST` request method to analyze larger amounts of content in any of the available formats. Use the `GET`
-     request method to analyze smaller quantities of plain text content.   Per the JSON specification, the default
-     character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default encoding
-     for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content type of
-     plain text or HTML, include the `charset` parameter to indicate the character encoding of the input text; for
-     example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the service removes HTML tags and analyzes only
-     the textual content.
+     Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
+     HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
+     set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
+     character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
+     service removes HTML tags and analyzes only the textual content.
 
      - parameter toneInput: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type `ToneInput`.
      - parameter contentType: The type of the input: application/json, text/plain, or text/html. A character encoding can be specified by including a `charset` parameter. For example, 'text/plain;charset=utf-8'.

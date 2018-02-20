@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,63 @@
 
 import Foundation
 
-/** A keyword identified by Speech to Text. */
-public struct KeywordResult: JSONDecodable {
+/** KeywordResult. */
+public struct KeywordResult {
 
-    /// The specified keyword normalized to the spoken phrase that matched in the audio input.
-    public let normalizedText: String
+    /// A specified keyword normalized to the spoken phrase that matched in the audio input.
+    public var normalizedText: String
 
-    /// The start time, in seconds, of the keyword match.
-    public let startTime: Double
+    /// The start time in seconds of the keyword match.
+    public var startTime: Double
 
-    /// The end time, in seconds, of the keyword match.
-    public let endTime: Double
+    /// The end time in seconds of the keyword match.
+    public var endTime: Double
 
-    /// The confidence score of the keyword match, between 0 and 1. The confidence must be at
-    /// least as great as the specified threshold to be included in the results.
-    public let confidence: Double
+    /// A confidence score for the keyword match in the range of 0 to 1.
+    public var confidence: Double
 
-    /// Used internally to initialize a `KeywordResult` model from JSON.
-    public init(json: JSONWrapper) throws {
-        normalizedText = try json.getString(at: "normalized_text")
-        startTime = try json.getDouble(at: "start_time")
-        endTime = try json.getDouble(at: "end_time")
-        confidence = try json.getDouble(at: "confidence")
+    /**
+     Initialize a `KeywordResult` with member variables.
+
+     - parameter normalizedText: A specified keyword normalized to the spoken phrase that matched in the audio input.
+     - parameter startTime: The start time in seconds of the keyword match.
+     - parameter endTime: The end time in seconds of the keyword match.
+     - parameter confidence: A confidence score for the keyword match in the range of 0 to 1.
+
+     - returns: An initialized `KeywordResult`.
+    */
+    public init(normalizedText: String, startTime: Double, endTime: Double, confidence: Double) {
+        self.normalizedText = normalizedText
+        self.startTime = startTime
+        self.endTime = endTime
+        self.confidence = confidence
     }
+}
+
+extension KeywordResult: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case normalizedText = "normalized_text"
+        case startTime = "start_time"
+        case endTime = "end_time"
+        case confidence = "confidence"
+        static let allValues = [normalizedText, startTime, endTime, confidence]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        normalizedText = try container.decode(String.self, forKey: .normalizedText)
+        startTime = try container.decode(Double.self, forKey: .startTime)
+        endTime = try container.decode(Double.self, forKey: .endTime)
+        confidence = try container.decode(Double.self, forKey: .confidence)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(normalizedText, forKey: .normalizedText)
+        try container.encode(startTime, forKey: .startTime)
+        try container.encode(endTime, forKey: .endTime)
+        try container.encode(confidence, forKey: .confidence)
+    }
+
 }

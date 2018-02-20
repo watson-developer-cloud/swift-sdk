@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,10 @@
 import Foundation
 
 /**
- The IBM Watson Discovery service uses data analysis combined with cognitive intuition to take your
- unstructured data and enrich it so you can query it for the information you need.
+  The IBM Watson Discovery Service is a cognitive search and content analytics engine that you can add to applications to
+ identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and
+ unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual
+ filtering of results.
  */
 public class Discovery {
 
@@ -31,9 +33,6 @@ public class Discovery {
     private let credentials: Credentials
     private let domain = "com.ibm.watson.developer-cloud.DiscoveryV1"
     private let version: String
-    private let unreservedCharacters = CharacterSet(charactersIn:
-        "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "1234567890-._~(),:.&=")
-    private let encodingError = "Failed to percent encode HTML document"
 
     /**
      Create a `Discovery` object.
@@ -41,10 +40,10 @@ public class Discovery {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
-            in "YYYY-MM-DD" format.
+       in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
-        self.credentials = Credentials.basicAuthentication(username: username, password: password)
+        self.credentials = .basicAuthentication(username: username, password: password)
         self.version = version
     }
 
@@ -75,99 +74,41 @@ public class Discovery {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error")
-            let userInfo: [String: String]
-            if let description = try? json.getString(at: "description") {
-                userInfo = [
-                    NSLocalizedDescriptionKey: message,
-                    NSLocalizedRecoverySuggestionErrorKey: description,
-                ]
-            } else {
-                userInfo = [
-                    NSLocalizedDescriptionKey: message,
-                ]
-            }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return nil
         }
     }
 
-    // MARK: - Environments
-
     /**
-     Get all existing environments for this Discovery instance.
+     Add an environment.
 
-     - parameter name: Show only the environment with the given name.
+          Creates a new environment.  You can create only one environment per service instance. An attempt to create another
+     environment results in an error.
+
+     - parameter name: Name that identifies the environment.
+     - parameter description: Description of the environment.
+     - parameter size: **Deprecated**: Size of the environment.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with a list of all environments associated with this service instance.
-     */
-    public func getEnvironments (
-        withName name: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Environment]) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        if let name = name {
-            queryParameters.append(URLQueryItem(name: "name", value: name))
-        }
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/environments",
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseArray(responseToError: responseToError, path: ["environments"]) {
-            (response: RestResponse<[Environment]>) in
-            switch response.result {
-            case .success(let environments): success(environments)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Create an environment for this service instance.
-
-     For the experimental release, the size of the environment is fixed at 2GB
-     available disk space, and 1GB RAM.
-
-     - parameter name: The name of the new environment.
-     - parameter size: The size of the environment.
-     - parameter description: The description of the new environment.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the newly created environment.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func createEnvironment(
-        withName name: String,
-        withSize size: EnvironmentSize,
-        withDescription description: String? = nil,
+        name: String,
+        description: String? = nil,
+        size: Int? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
     {
+        // construct body
+        let createEnvironmentRequest = CreateEnvironmentRequest(name: name, description: description, size: size)
+        guard let body = try? JSONEncoder().encode(createEnvironmentRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct body
-        var jsonData = [String: Any]()
-        jsonData["name"] = name
-        jsonData["size"] = size.rawValue
-        if let description = description {
-            jsonData["description"] = description
-        }
-        guard let body = try? JSONWrapper(dictionary: jsonData).serialize() else {
-            failure?(RestError.encodingError)
-            return
-        }
 
         // construct REST request
         let request = RestRequest(
@@ -185,56 +126,64 @@ public class Discovery {
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
             switch response.result {
-            case .success(let environment): success(environment)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Delete the environment with the given environment ID.
+     Delete environment.
 
-     - parameter environmentID: The name of the new environment.
+     - parameter environmentID: The ID of the environment.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the newly deleted environment.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func deleteEnvironment(
-        withID environmentID: String,
+        environmentID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeletedEnvironment) -> Void)
+        success: @escaping (DeleteEnvironmentResponse) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v1/environments/\(environmentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + "/v1/environments/\(environmentID)",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeletedEnvironment>) in
+            (response: RestResponse<DeleteEnvironmentResponse>) in
             switch response.result {
-            case .success(let environment): success(environment)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Retrieve information about an environment.
+     Get environment info.
 
-     - parameter environmentID: The ID of the environment to retrieve information about.
+     - parameter environmentID: The ID of the environment.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the requested environment.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func getEnvironment(
-        withID environmentID: String,
+        environmentID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
     {
@@ -243,19 +192,119 @@ public class Discovery {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v1/environments/\(environmentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/environments/\(environmentID)",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
             switch response.result {
-            case .success(let environment): success(environment)
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List environments.
+
+          List existing environments for the service instance.
+
+     - parameter name: Show only the environment with the given name.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listEnvironments(
+        name: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ListEnvironmentsResponse) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let name = name {
+            let queryParameter = URLQueryItem(name: "name", value: name)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/environments",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ListEnvironmentsResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List fields in specified collecitons.
+
+          Gets a list of the unique fields (and their types) stored in the indexes of the specified collecitons.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listFields(
+        environmentID: String,
+        collectionIds: [String],
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ListCollectionFieldsResponse) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIds.joined(separator: ",")))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/fields"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ListCollectionFieldsResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
@@ -264,38 +313,42 @@ public class Discovery {
     /**
      Update an environment.
 
-     - parameter environmentID: The ID of the environment to retrieve information about.
-     - parameter name: The updated name of the environment.
-     - parameter description: The updated description of the environment.
+          Updates an environment. The environment's `name` and  `description` parameters can be changed. You must specify a
+     `name` for the environment.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter name: Name that identifies the environment.
+     - parameter description: Description of the environment.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the requested environment.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func updateEnvironment(
-        withID environmentID: String,
-        name: String,
+        environmentID: String,
+        name: String? = nil,
         description: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
     {
+        // construct body
+        let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description)
+        guard let body = try? JSONEncoder().encode(updateEnvironmentRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
-        // construct body
-        var jsonData = [String: Any]()
-        jsonData["name"] = name
-        if let description = description {
-            jsonData["description"] = description
-        }
-        guard let body = try? JSONWrapper(dictionary: jsonData).serialize() else {
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
         }
-
-        // construct REST request
         let request = RestRequest(
             method: "PUT",
-            url: serviceURL + "/v1/environments/\(environmentID)",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -308,85 +361,52 @@ public class Discovery {
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
             switch response.result {
-            case .success(let environment): success(environment)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
-    // MARK: - Configurations
-
     /**
-     List existing configurations for the service instance.
+     Add configuration.
 
-     - parameter environmentID: The ID of your environment.
-     - parameter name: Show only the configuration with the given name.
+          Creates a new configuration.  If the input configuration contains the `configuration_id`, `created`, or `updated`
+     properties, then they are ignored and overridden by the system, and an error is not returned so that the overridden
+     fields do not need to be removed when copying a configuration.  The configuration can contain unrecognized JSON
+     fields. Any such fields are ignored and do not generate an error. This makes it easier to use newer configuration
+     files with older versions of the API and the service. It also makes it possible for the tooling to add additional
+     metadata and information to the configuration.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter configuration: Input an object that enables you to customize how your content is ingested and what enrichments are added to your data.   `name` is required and must be unique within the current `environment`. All other properties are optional.  If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they will be ignored and overridden by the system (an error is not returned so that the overridden fields do not need to be removed when copying a configuration).   The configuration can contain unrecognized JSON fields. Any such fields will be ignored and will not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the configurations.
+     - parameter success: A function executed with the successful result.
     */
-    public func getConfigurations(
-        withEnvironmentID environmentID: String,
-        withName name: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping([Configuration]) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        if let name = name {
-            queryParameters.append(URLQueryItem(name: "name", value: name))
-        }
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/environments/\(environmentID)/configurations",
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseArray(responseToError: responseToError, path: ["configurations"]) {
-            (response: RestResponse<[Configuration]>) in
-            switch response.result {
-            case .success(let configurations): success(configurations)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Create a new configuration for this service instance.
-
-     - parameter environmentID: The ID of your environment.
-     - parameter configuration:  JSON object that allows you to customize how your content is
-        ingested and what enrichments are added to your data. `name` is required and must be
-        unique within the current environment. All other properties are optional.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the configurations.
-     */
     public func createConfiguration(
-        withEnvironmentID environmentID: String,
-        configuration: ConfigurationDetails,
+        environmentID: String,
+        configuration: Configuration,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(ConfigurationDetails) -> Void)
+        success: @escaping (Configuration) -> Void)
     {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
         // construct body
-        guard let body = try? configuration.toJSON().serialize() else {
-            failure?(RestError.encodingError)
+        guard let body = try? JSONEncoder().encode(configuration) else {
+            failure?(RestError.serializationError)
             return
         }
 
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/configurations"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/environments/\(environmentID)/configurations",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -397,118 +417,201 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ConfigurationDetails>) in
+            (response: RestResponse<Configuration>) in
             switch response.result {
-            case .success(let configuration): success(configuration)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Delete the specified configuration.
+     Delete a configuration.
 
-     - parameter environmentID: The ID of your environment.
-     - parameter configurationID: The ID of your configuration.
+          The deletion is performed unconditionally. A configuration deletion request succeeds even if the configuration is
+     referenced by a collection or document ingestion. However, documents that have already been submitted for
+     processing continue to use the deleted configuration. Documents are always processed with a snapshot of the
+     configuration as it existed at the time the document was submitted.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter configurationID: The ID of the configuration.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the deleted configuration.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func deleteConfiguration(
-        withEnvironmentID environmentID: String,
-        withConfigurationID configurationID: String,
+        environmentID: String,
+        configurationID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(DeletedConfiguration) -> Void)
+        success: @escaping (DeleteConfigurationResponse) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + "/v1/environments/\(environmentID)/configurations/\(configurationID)",
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeletedConfiguration>) in
-            switch response.result {
-            case .success(let configuration): success(configuration)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Get details of a specific configuration.
-
-     - parameter environmentID: The ID of your environment.
-     - parameter configurationID: The ID of your configuration.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the configuration.
-     */
-    public func getConfiguration(
-        withEnvironmentID environmentID: String,
-        withConfigurationID configurationID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping(ConfigurationDetails) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/environments/\(environmentID)/configurations/\(configurationID)",
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ConfigurationDetails>) in
-            switch response.result {
-            case .success(let configuration): success(configuration)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Replaces the configuration that was at the given path before.
-
-     - parameter environmentID: The ID of the environment in which the configuration is located.
-     - parameter configurationID: The ID of the configuration you want to replace.
-     - parameter configuration: A JSON object with the new configuration details.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the configuration.
-     */
-    public func updateConfiguration(
-        withEnvironmentID environmentID: String,
-        withConfigurationID configurationID: String,
-        configuration: ConfigurationDetails,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping(ConfigurationDetails) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct body
-        guard let body = try? configuration.toJSON().serialize() else {
+        let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
         }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DeleteConfigurationResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Get configuration details.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter configurationID: The ID of the configuration.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func getConfiguration(
+        environmentID: String,
+        configurationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Configuration) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Configuration>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List configurations.
+
+          Lists existing configurations for the service instance.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter name: Find configurations with the given name.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listConfigurations(
+        environmentID: String,
+        name: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ListConfigurationsResponse) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let name = name {
+            let queryParameter = URLQueryItem(name: "name", value: name)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/configurations"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ListConfigurationsResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Update a configuration.
+
+          Replaces an existing configuration.   * Completely replaces the original configuration.   * The `configuration_id`,
+     `updated`, and `created` fields are accepted in the request, but they are ignored, and an error is not generated.
+     It is also acceptable for users to submit an updated configuration with none of the three properties.   * Documents
+     are processed with a snapshot of the configuration as it was at the time the document was submitted to be ingested.
+     This means that already submitted documents will not see any updates made to the configuration.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter configurationID: The ID of the configuration.
+     - parameter configuration: Input an object that enables you to update and customize how your data is ingested and what enrichments are added to your data.  The `name` parameter is required and must be unique within the current `environment`. All other properties are optional, but if they are omitted  the default values replace the current value of each omitted property.  If the input configuration contains the `configuration_id`, `created`, or `updated` properties, they are ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be removed when updating a configuration.   The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func updateConfiguration(
+        environmentID: String,
+        configurationID: String,
+        configuration: Configuration,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Configuration) -> Void)
+    {
+        // construct body
+        guard let body = try? JSONEncoder().encode(configuration) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "PUT",
-            url: serviceURL + "/v1/environments/\(environmentID)/configurations/\(configurationID)",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -519,84 +622,80 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ConfigurationDetails>) in
+            (response: RestResponse<Configuration>) in
             switch response.result {
-            case .success(let configuration): success(configuration)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
-    // MARK: - Test Configuration on Document
-
     /**
-     Run a sample document against your configuration or the default configuration
-     to return diagnostic information to help you understand how the document was
-     processed. The document is not added to the index.
+     Test configuration.
 
-     - parameter environmentID: The ID of the environment in which the configuration is located.
-     - parameter configuration: The configuration to use to process the document. If
-        this parameter is provided, the provided configuration of the environment will bee
-        used to process the document. If both the configuration and configurationID parameter
-        are provided, the request will be rejected. The maximum supported configuration size
-        is 1MB. Must provide either a configuration or the configuration ID.
-     - parameter configurationID: The ID of the configuration to use to process the document.
-        If both the configurationID and the configuration parameters are provided, the
-        request will be rejected. Must provide either a configuration or the configuration ID.
-     - parameter file: The content of the document to ingest and test the configuration on.
-        The maximum supported file size is 50 MB. Files larger than 50 MB will be rejected.
-        Must provide either a file or a metadata.
-     - parameter metadata: If you're using the Data Crawler to upload your documents, you
-        can test a document against the type of metadata that the Data Crawler might send.
-        The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB
-        are rejected. Must provide either a file or a metadata.
+          Runs a sample document through the default or your configuration and returns diagnostic information designed to
+     help you understand how the document was processed. The document is not added to the index.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter configuration: The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the `configuration_id` is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.
+     - parameter step: Specify to only run the input document through the given step instead of running the input document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
+     - parameter configurationID: The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected.
+     - parameter file: The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected.
+     - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```.
+     - parameter fileContentType: The content type of file.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the configuration.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func testConfigurationInEnvironment(
-        withEnvironmentID environmentID: String,
-        withConfiguration configuration: URL? = nil,
-        withConfigurationID configurationID: String? = nil,
+        environmentID: String,
+        configuration: String? = nil,
+        step: String? = nil,
+        configurationID: String? = nil,
         file: URL? = nil,
-        metadata: URL? = nil,
+        metadata: String? = nil,
+        fileContentType: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(TestConfigurationDetails) -> Void)
+        success: @escaping (TestDocument) -> Void)
     {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let configurationID = configurationID {
-            queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
-        }
-
         // construct body
         let multipartFormData = MultipartFormData()
+        if let configuration = configuration {
+            let configurationData = configuration.data(using: String.Encoding.utf8)!
+            multipartFormData.append(configurationData, withName: "configuration")
+        }
         if let file = file {
             multipartFormData.append(file, withName: "file")
         }
         if let metadata = metadata {
-            guard let data = try? Data(contentsOf: metadata) else {
-                failure?(RestError.encodingError)
-                return
-            }
-            multipartFormData.append(data, withName: "metadata")
-        }
-        if let configuration = configuration {
-            guard let data = try? Data(contentsOf: configuration) else {
-                failure?(RestError.encodingError)
-                return
-            }
-            multipartFormData.append(data, withName: "configuration")
+            let metadataData = metadata.data(using: String.Encoding.utf8)!
+            multipartFormData.append(metadataData, withName: "metadata")
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return
         }
 
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let step = step {
+            let queryParameter = URLQueryItem(name: "step", value: step)
+            queryParameters.append(queryParameter)
+        }
+        if let configurationID = configurationID {
+            let queryParameter = URLQueryItem(name: "configuration_id", value: configurationID)
+            queryParameters.append(queryParameter)
+        }
+
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/preview"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/environments/\(environmentID)/preview",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -607,369 +706,522 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<TestConfigurationDetails>) in
+            (response: RestResponse<TestDocument>) in
             switch response.result {
-            case .success(let configurationDetails): success(configurationDetails)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
-    // MARK: - Collections
-
     /**
-     Get all existing collections.
+     Create a collection.
 
-     - parameter environmentID: The ID of the environment the collections are stored in.
-     - parameter name: The name of the collection.
+     - parameter environmentID: The ID of the environment.
+     - parameter body: Input an object that allows you to add a collection.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the collections.
+     - parameter success: A function executed with the successful result.
     */
-    public func getCollections(
-        withEnvironmentID environmentID: String,
-        withName name: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping([Collection]) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        if let name = name {
-            queryParameters.append(URLQueryItem(name: "name", value: name))
-        }
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections",
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseArray(responseToError: responseToError, path: ["collections"]) {
-            (response: RestResponse<[Collection]>) in
-            switch response.result {
-            case .success(let collections): success(collections)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Create a new collection for storing documents.
-
-     - parameter environmentID: The unique ID of the environment to create a collection in.
-     - parameter name: The name of the new collection.
-     - parameter description: The description of the configuration.
-     - parameter configurationID: The unique ID of the configuration the collection will be
-        created with. If nil, the default value will be specified. Call the getConfigurationID method
-        to find the default value.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the created collection.
-     */
     public func createCollection(
-        withEnvironmentID environmentID: String,
-        withName name: String,
-        withDescription description: String? = nil,
-        withConfigurationID configurationID: String? = nil,
+        environmentID: String,
+        body: CreateCollectionRequest,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Collection) -> Void)
+        success: @escaping (Collection) -> Void)
     {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct json from parameters
-        var bodyData = [String: Any]()
-        bodyData["name"] = name
-        if let description = description {
-            bodyData["description"] = description
-        }
-        if let configurationID = configurationID {
-            bodyData["configuration_id"] = configurationID
-        }
-        guard let json = try? JSONWrapper(dictionary: bodyData).serialize() else {
-            failure?(RestError.encodingError)
+        // construct body
+        guard let body = try? JSONEncoder().encode(body) else {
+            failure?(RestError.serializationError)
             return
         }
 
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
             queryItems: queryParameters,
-            messageBody: json
+            messageBody: body
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
             switch response.result {
-            case .success(let collection): success(collection)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Delete a collection in the environment the collection is located in.
+     Set the expansion list.
 
-     - parameter environmentID: The ID of the environment the collection is in.
-     - parameter collectionID: The ID of the collection to delete.
+          Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
+     `500`. The current expansion list is replaced with the uploaded content.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter expansions: An array of query expansion definitions.    Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms. Each expansion object can be configured so that all terms are expanded to all other terms in the object - bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.   To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the `expanded_terms` array are then expanded to the other items in the same array.   To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`. When items in the `input_terms` array are present in a query, they are expanded using the items listed in the `expanded_terms` array.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the newly deleted environment.
-     */
-    public func deleteCollection(
-        withEnvironmentID environmentID: String,
-        withCollectionID collectionID: String,
+     - parameter success: A function executed with the successful result.
+    */
+    public func createExpansions(
+        environmentID: String,
+        collectionID: String,
+        expansions: [Expansion],
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeletedCollection) -> Void)
+        success: @escaping (Expansions) -> Void)
+    {
+        // construct body
+        let createExpansionsRequest = Expansions(expansions: expansions)
+        guard let body = try? JSONEncoder().encode(createExpansionsRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "multipart/form-data",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Expansions>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete a collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func deleteCollection(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DeleteCollectionResponse) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeletedCollection>) in
+            (response: RestResponse<DeleteCollectionResponse>) in
             switch response.result {
-            case .success(let collection): success(collection)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Retrieve the information of a specified collection.
+     Delete the expansions list.
 
-     - paramater environmentID: The ID of the environment the collection is in.
-     - paramater collectionID: The ID of the collection to retrieve details of.
+          Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion
+     for a collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the collection retrieved.
-     */
-    public func listCollectionDetails(
-        withEnvironmentID environmentID: String,
-        withCollectionID collectionID: String,
+     - parameter success: A function executed with the successful result.
+    */
+    public func deleteExpansions(
+        environmentID: String,
+        collectionID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Collection) -> Void)
+        success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)",
+            method: "DELETE",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Collection>) in
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
             switch response.result {
-            case .success(let collection): success(collection)
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Replaces an existing collection.
+     Get collection details.
 
-     - paramater environmentID: The ID of the environment the collection is in.
-     - paramater collectionID: The ID of the collection to update by replacing the collection with
-        the updated information.
-     - parameter name: The updated name of the collection.
-     - parameter description: The updated description of the collection. If ommitted, the default
-        description will replace the current description.
-     - parameter configurationID: The configuration ID of the collection in which the collection is to
-        be updated. If omitted, the default configuration ID will replace the current ID.
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with details of the collection retrieved.
+     - parameter success: A function executed with the successful result.
+    */
+    public func getCollection(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Collection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Collection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List unique fields.
+
+          Gets a list of the unique fields (and their types) stored in the index.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listCollectionFields(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ListCollectionFieldsResponse) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/fields"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ListCollectionFieldsResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List collections.
+
+          Lists existing collections for the service instance.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter name: Find collections with the given name.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listCollections(
+        environmentID: String,
+        name: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ListCollectionsResponse) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let name = name {
+            let queryParameter = URLQueryItem(name: "name", value: name)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ListCollectionsResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List current expansions.
+
+          Returns the current expansion list for the specified collection. If an expansion list is not specified, an object
+     with empty expansion arrays is returned.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listExpansions(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Expansions) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Expansions>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Update a collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter name: The name of the collection.
+     - parameter description: A description of the collection.
+     - parameter configurationID: The ID of the configuration in which the collection is to be updated.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
     */
     public func updateCollection(
-        withEnvironmentID environmentID: String,
-        withCollectionID collectionID: String,
+        environmentID: String,
+        collectionID: String,
         name: String,
         description: String? = nil,
         configurationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Collection) -> Void)
+        success: @escaping (Collection) -> Void)
     {
+        // construct body
+        let updateCollectionRequest = UpdateCollectionRequest(name: name, description: description, configurationID: configurationID)
+        guard let body = try? JSONEncoder().encodeIfPresent(updateCollectionRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
-        // construct json from parameters
-        var bodyData = [String: Any]()
-        bodyData["name"] = name
-        if let description = description {
-            bodyData["description"] = description
-        }
-        if let configurationID = configurationID {
-            bodyData["configuration_id"] = configurationID
-        }
-        guard let json = try? JSONWrapper(dictionary: bodyData).serialize() else {
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
         }
-
-        // construct REST request
         let request = RestRequest(
             method: "PUT",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: "application/json",
             queryItems: queryParameters,
-            messageBody: json
+            messageBody: body
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Collection>) in
             switch response.result {
-            case .success(let collection): success(collection)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Retrieve all unique fields and each field's type stored in a collection's index.
+     Add a document.
 
-     - parameter environmentID: The unique identifier of the environment the collection is in.
-     - paramater collectionID: The unique identifier of the collection to display the fields of.
-     - paramater failure: A function executed if an error occurs.
-     - paramater success: A function executed with details of the fields.
+          Add a document to a collection with optional metadata.    * The `version` query parameter is still required.    *
+     Returns immediately after the system has accepted the document for processing.    * The user must provide document
+     content, metadata, or both. If the request is missing both document content and metadata, it is rejected.    * The
+     user can set the `Content-Type` parameter on the `file` part to indicate the media type of the document. If the
+     `Content-Type` parameter is missing or is one of the generic media types (for example, `application/octet-stream`),
+     then the service attempts to automatically detect the document's media type.    * The following field names are
+     reserved and will be filtered out if present after normalization: `id`, `score`, `highlight`, and any field with
+     the prefix of: `_`, `+`, or `-`    * Fields with empty name values after normalization are filtered out before
+     indexing.    * Fields containing the following characters after normalization are filtered out before indexing: `#`
+     and `,`.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter file: The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected.
+     - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```.
+     - parameter fileContentType: The content type of file.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
     */
-    public func listCollectionFields(
-        withEnvironmentID environmentID: String,
-        withCollectionID collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping([Field]) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/fields",
-            credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseArray(responseToError: responseToError, path: ["fields"]) {
-            (response: RestResponse<[Field]>) in
-            switch response.result {
-            case .success(let fields): success(fields)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    // MARK: - Documents
-
-    /**
-     Add document to collection with optional metadata and optional configuration. If both the
-     configuration ID and configuration file are provided, the request will be rejected. Either
-     metadata or file must be specified.
-
-     - parameter environmentID: The unique identifier of the environment the collection is in.
-     - parameter collectionID: The unique identifier of the collection to add a document to.
-     - parameter configurationID: The unique identifier of the configuration to process the
-        document.
-     - parameter file: The content of the document to ingest. Maximum file size is 50 MB. If this
-        paramater is not specified, the metadata parameter must be specififed instead. Accepted MIME
-        types are application/json, application/msword, application/pdf, text/html, application/xhtml+xml,
-        and application/vnd.openxmlformats-officedocument.wordprocessingml.document.
-     - parameter fileMimeType: Content type of the document to ingest. Specify if the API detects
-        the wrong MIME type.
-     - parameter metadata: The JSON specifiying metadata related to the document. If not specified,
-        the file parameter must be specified.
-     - parameter configuration: The configuration used to process the document. If this
-        parameter is specified at the same time as the configuration ID is specified, the request
-        will be rejected. Maximum configuration size is 1 MB. To see an example configuration, call
-        the getConfigurationOfCollection method.
-     - paramater failure: A function executed if an error occurs.
-     - paramater success: A function executed with details of the document.
-     */
-
-    public func addDocumentToCollection(
-        withEnvironmentID environmentID: String,
-        withCollectionID collectionID: String,
-        withConfigurationID configurationID: String? = nil,
+    public func addDocument(
+        environmentID: String,
+        collectionID: String,
         file: URL? = nil,
-        fileMimeType: String? = nil,
-        metadata: URL? = nil,
-        configuration: URL? = nil,
+        metadata: String? = nil,
+        fileContentType: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Document) -> Void)
+        success: @escaping (DocumentAccepted) -> Void)
     {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let configurationID = configurationID {
-            queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
-        }
-
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
             multipartFormData.append(file, withName: "file")
         }
-        if let fileMimeType = fileMimeType {
-            let type = fileMimeType.data(using: String.Encoding.utf8)!
-            multipartFormData.append(type, withName: "type")
-        }
         if let metadata = metadata {
-            guard let data = try? Data(contentsOf: metadata) else {
-                failure?(RestError.encodingError)
-                return
-            }
-            multipartFormData.append(data, withName: "metadata")
-        }
-        if let configuration = configuration {
-            guard let data = try? Data(contentsOf: configuration) else {
-                failure?(RestError.encodingError)
-                return
-            }
-            multipartFormData.append(data, withName: "configuration")
+            let metadataData = metadata.data(using: String.Encoding.utf8)!
+            multipartFormData.append(metadataData, withName: "metadata")
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return
         }
 
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -980,173 +1232,166 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Document>) in
+            (response: RestResponse<DocumentAccepted>) in
             switch response.result {
-            case .success(let document): success(document)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Delete document from collection.
+     Delete a document.
 
-     - parameter environmentID: The unique identifier of the environment the collection is in.
-     - parameter collectionID: The unique identifier of the collection to add a document to.
-     - parameter documentID: The unique identifier of the document.
-     - paramater failure: A function executed if an error occurs.
-     - paramater success: A function executed with details of the document deletion status. If the
-        given document id is invalid or if the document is not found, the status returned is set
-        to 'deleted'.
+          If the given document ID is invalid, or if the document is not found, then the a success response is returned (HTTP
+     status code `200`) with the status set to 'deleted'.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter documentID: The ID of the document.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
     */
-    public func deleteDocumentFromCollection(
-        withEnvironmentID environmentID: String,
-        withCollectionID collectionID: String,
-        withDocumentID documentID: String,
+    public func deleteDocument(
+        environmentID: String,
+        collectionID: String,
+        documentID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Document) -> Void)
+        success: @escaping (DeleteDocumentResponse) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Document>) in
+            (response: RestResponse<DeleteDocumentResponse>) in
             switch response.result {
-            case .success(let document): success(document)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Fetch status details about a submitted document. Returns only the document's processing status
-     and any notices (warnings or errors) that were generated when the document was ingested. To fetch
-     the actual document content, use the Query method.
+     Get document details.
 
-     - parameter environmentID: The unique identifier of the environment the collection is in.
-     - parameter collectionID: The unique identifier of the collection to add a document to.
-     - parameter documentID: The unique identifier of the document.
-     - paramater failure: A function executed if an error occurs.
-     - paramater success: A function executed with details of the document.
+          Fetch status details about a submitted document. **Note:** this operation does not return the document itself.
+     Instead, it returns only the document's processing status and any notices (warnings or errors) that were generated
+     when the document was ingested. Use the query API to retrieve the actual document content.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter documentID: The ID of the document.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
     */
-    public func listDocumentDetails(
-        withEnvironmentID environmentID: String,
-        withCollectionID collectionID: String,
-        withDocumentID documentID: String,
+    public func getDocumentStatus(
+        environmentID: String,
+        collectionID: String,
+        documentID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Document) -> Void)
+        success: @escaping (DocumentStatus) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Document>) in
+            (response: RestResponse<DocumentStatus>) in
             switch response.result {
-            case .success(let document): success(document)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
     /**
-     Add a new document or replace an existing document with optional metadata and optional configuration
-     overrides.
+     Update a document.
 
-     - parameter environmentID: The unique identifier of the environment the collection is in.
-     - parameter collectionID: The unique identifier of the collection to add a document to.
-     - parameter documentID: The unique identifier of the document.
-     - parameter configurationID: The unique identifier of the configuration to process the
-        document. If the configuration parameter is also provided at the same time, the request will
-        be rejected.
-     - parameter file: The content of the document to ingest. Maximum file size is 50 MB. If this
-        paramater is not specified, the metadata parameter must be specififed instead. Accepted MIME
-        types are application/json, application/msword, application/pdf, text/html, application/xhtml+xml,
-        and application/vnd.openxmlformats-officedocument.wordprocessingml.document.
-     - parameter fileMimeType: Content type of the document to ingest. Specify if the API detects
-        the wrong MIME type.
-     - parameter metadata: The JSON specifiying metadata related to the document. The maximum supported
-        metadata file size is 1 MB. If you're using the Data Crawler If not specified,
-        the file parameter must be specified.
-     - parameter configuration: The configuration used to process the document. If this
-        parameter is specified at the same time as the configuration ID is specified, the request
-        will be rejected. Maximum configuration size is 1 MB. To see an example configuration, call
-        the getConfigurationOfCollection method.
-     - paramater failure: A function executed if an error occurs.
-     - paramater success: A function executed with details of the document.
+          Replace an existing document. Starts ingesting a document with optional metadata.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter documentID: The ID of the document.
+     - parameter file: The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected.
+     - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```.
+     - parameter fileContentType: The content type of file.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
     */
-    public func updateDocumentInCollection(
-        withEnvironmentID environmentID: String,
-        withCollectionID collectionID: String,
-        withDocumentID documentID: String,
-        withConfigurationID configurationID: String? = nil,
+    public func updateDocument(
+        environmentID: String,
+        collectionID: String,
+        documentID: String,
         file: URL? = nil,
-        fileMimeType: String? = nil,
-        metadata: URL? = nil,
-        configuration: URL? = nil,
+        metadata: String? = nil,
+        fileContentType: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(Document) -> Void)
+        success: @escaping (DocumentAccepted) -> Void)
     {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let configurationID = configurationID {
-            queryParameters.append(URLQueryItem(name: "configuration_id", value: configurationID))
-        }
-
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
             multipartFormData.append(file, withName: "file")
         }
-        if let fileMimeType = fileMimeType {
-            let type = fileMimeType.data(using: String.Encoding.utf8)!
-            multipartFormData.append(type, withName: "type")
-        }
         if let metadata = metadata {
-            guard let data = try? Data(contentsOf: metadata) else {
-                failure?(RestError.encodingError)
-                return
-            }
-            multipartFormData.append(data, withName: "metadata")
-        }
-        if let configuration = configuration {
-            guard let data = try? Data(contentsOf: configuration) else {
-                failure?(RestError.encodingError)
-                return
-            }
-            multipartFormData.append(data, withName: "configuration")
+            let metadataData = metadata.data(using: String.Encoding.utf8)!
+            multipartFormData.append(metadataData, withName: "metadata")
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return
         }
 
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
@@ -1157,107 +1402,1129 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Document>) in
+            (response: RestResponse<DocumentAccepted>) in
             switch response.result {
-            case .success(let document): success(document)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
-    // MARK: - Queries
-
     /**
-     Query the documents in your collection. See the documentation for reference on how to build
-     a query string. https://console.bluemix.net/docs/services/discovery/using.html.
+     Query documents in multiple collections.
 
-     - parameter environmentID: The unique identifier of the environment the collection is in.
-     - parameter collectionID: The unique identifier of the collection to add a document to.
-     - parameter filter: The filter query that is cacheable and drives performance.
-     - parameter query: The full text (TF/IDF) based ranking query. Not cacheable, but the
-        query returns documents in order based on match level.
-     - parameter aggregation: Aggregated metrics and answers from the dataset. If the filter
-        is provided, aggregation will run only on the matching documents.
-     - parameter count: The number of documents to return.
-     - parameter return: An additional filter on the values of the returned document. A comma-separated
-        list of Fully Qualified Names (FQNs) matching the portion(s) of the document hiearchy to return.
-     - parameter offset: Returns additional pages of results for pagination purposes. Deep pagination
-        should be avoided due to the consequential decrease in performance.
-     - paramater failure: A function executed if an error occurs.
-     - paramater success: A function executed with the results of the query. The response includes the
-        document ID, metadata and the content of the document.
+          See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more
+     details.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
+     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `naturalLanguageQuery` and `query` at the same time.
+     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter count: Number of documents to return.
+     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     - parameter highlight: When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
+     - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
     */
-    public func queryDocumentsInCollection(
-        withEnvironmentID environmentID: String,
-        withCollectionID collectionID: String,
-        withFilter filter: String? = nil,
-        withQuery query: String? = nil,
-        withAggregation aggregation: String? = nil,
+    public func federatedQuery(
+        environmentID: String,
+        collectionIds: [String],
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        aggregation: String? = nil,
         count: Int? = nil,
-        return returnQuery: String? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        deduplicate: Bool? = nil,
+        deduplicateField: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping(QueryResponse) -> Void)
+        success: @escaping (QueryResponse) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-
+        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIds.joined(separator: ",")))
         if let filter = filter {
-            guard let filterEncoded = filter.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
-                let error = failWithError(reason: encodingError)
-                failure?(error)
-                return
-            }
-            queryParameters.append(URLQueryItem(name: "filter", value: filterEncoded))
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
         }
-
         if let query = query {
-            guard let queryEncoded = query.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
-                let error = failWithError(reason: encodingError)
-                failure?(error)
-                return
-            }
-            queryParameters.append(URLQueryItem(name: "query", value: queryEncoded))
+            let queryParameter = URLQueryItem(name: "query", value: query)
+            queryParameters.append(queryParameter)
         }
-
+        if let naturalLanguageQuery = naturalLanguageQuery {
+            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
+            queryParameters.append(queryParameter)
+        }
         if let aggregation = aggregation {
-            guard let aggregationEncoded = aggregation.addingPercentEncoding(withAllowedCharacters: unreservedCharacters) else {
-                let error = failWithError(reason: encodingError)
-                failure?(error)
-                return
-            }
-            queryParameters.append(URLQueryItem(name: "aggregation", value: aggregationEncoded))
+            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
+            queryParameters.append(queryParameter)
         }
         if let count = count {
-            queryParameters.append(URLQueryItem(name: "count", value: "\(count)"))
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
         }
-        if let returnQuery = returnQuery {
-            queryParameters.append(URLQueryItem(name: "return", value: returnQuery))
+        if let returnFields = returnFields {
+            let queryParameter = URLQueryItem(name: "return_fields", value: "\(returnFields)")
+            queryParameters.append(queryParameter)
+        }
+        if let offset = offset {
+            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: "\(sort)")
+            queryParameters.append(queryParameter)
+        }
+        if let highlight = highlight {
+            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
+            queryParameters.append(queryParameter)
+        }
+        if let deduplicate = deduplicate {
+            let queryParameter = URLQueryItem(name: "deduplicate", value: "\(deduplicate)")
+            queryParameters.append(queryParameter)
+        }
+        if let deduplicateField = deduplicateField {
+            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
+            queryParameters.append(queryParameter)
         }
 
         // construct REST request
+        let path = "/v1/environments/\(environmentID)/query"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/environments/\(environmentID)/collections/\(collectionID)/query",
+            url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryItems: queryParameters
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<QueryResponse>) in
             switch response.result {
-            case .success(let queryResponse): success(queryResponse)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
-    private func failWithError(reason: String) -> NSError {
-        let userInfo = [NSLocalizedDescriptionKey: reason]
-        let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-        return error
+    /**
+     Query multiple collection system notices.
+
+          Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
+     ingesting documents and performing relevance training. See the [Discovery service
+     documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query
+     language.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
+     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `naturalLanguageQuery` and `query` at the same time.
+     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter count: Number of documents to return.
+     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     - parameter highlight: When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func federatedQueryNotices(
+        environmentID: String,
+        collectionIds: [String],
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        aggregation: String? = nil,
+        count: Int? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        deduplicateField: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (QueryNoticesResponse) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIds.joined(separator: ",")))
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let query = query {
+            let queryParameter = URLQueryItem(name: "query", value: query)
+            queryParameters.append(queryParameter)
+        }
+        if let naturalLanguageQuery = naturalLanguageQuery {
+            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
+            queryParameters.append(queryParameter)
+        }
+        if let aggregation = aggregation {
+            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
+            queryParameters.append(queryParameter)
+        }
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+        if let returnFields = returnFields {
+            let queryParameter = URLQueryItem(name: "return_fields", value: "\(returnFields)")
+            queryParameters.append(queryParameter)
+        }
+        if let offset = offset {
+            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: "\(sort)")
+            queryParameters.append(queryParameter)
+        }
+        if let highlight = highlight {
+            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
+            queryParameters.append(queryParameter)
+        }
+        if let deduplicateField = deduplicateField {
+            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/notices"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<QueryNoticesResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
     }
+
+    /**
+     Query documents.
+
+          See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more
+     details.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `naturalLanguageQuery` and `query` at the same time.
+     - parameter passages: A passages query that returns the most relevant passages from the results.
+     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter count: Number of documents to return.
+     - parameter returnFields: A comma separated list of the portion of the document hierarchy to returnFields.
+     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     - parameter highlight: When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
+     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
+     - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
+     - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func query(
+        environmentID: String,
+        collectionID: String,
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        passages: Bool? = nil,
+        aggregation: String? = nil,
+        count: Int? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        passagesFields: [String]? = nil,
+        passagesCount: Int? = nil,
+        passagesCharacters: Int? = nil,
+        deduplicate: Bool? = nil,
+        deduplicateField: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (QueryResponse) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let query = query {
+            let queryParameter = URLQueryItem(name: "query", value: query)
+            queryParameters.append(queryParameter)
+        }
+        if let naturalLanguageQuery = naturalLanguageQuery {
+            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
+            queryParameters.append(queryParameter)
+        }
+        if let passages = passages {
+            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
+            queryParameters.append(queryParameter)
+        }
+        if let aggregation = aggregation {
+            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
+            queryParameters.append(queryParameter)
+        }
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+        if let returnFields = returnFields {
+            let queryParameter = URLQueryItem(name: "return", value: "\(returnFields)")
+            queryParameters.append(queryParameter)
+        }
+        if let offset = offset {
+            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: "\(sort)")
+            queryParameters.append(queryParameter)
+        }
+        if let highlight = highlight {
+            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesFields = passagesFields {
+            let queryParameter = URLQueryItem(name: "passages.fields", value: "\(passagesFields)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCount = passagesCount {
+            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCharacters = passagesCharacters {
+            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
+            queryParameters.append(queryParameter)
+        }
+        if let deduplicate = deduplicate {
+            let queryParameter = URLQueryItem(name: "deduplicate", value: "\(deduplicate)")
+            queryParameters.append(queryParameter)
+        }
+        if let deduplicateField = deduplicateField {
+            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<QueryResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Knowledge Graph entity query.
+
+          See the [Knowledge Graph documentation](https://console.bluemix.net/docs/services/discovery/building-kg.html) for
+     more details.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter entityQuery: An object specifying the entities to query, which functions to perform, and any additional constraints.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func queryEntities(
+        environmentID: String,
+        collectionID: String,
+        entityQuery: QueryEntities,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (QueryEntitiesResponse) -> Void)
+    {
+        // construct body
+        guard let body = try? JSONEncoder().encode(entityQuery) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_entities"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<QueryEntitiesResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Query system notices.
+
+          Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
+     ingesting documents and performing relevance training. See the [Discovery service
+     documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query
+     language.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `naturalLanguageQuery` and `query` at the same time.
+     - parameter passages: A passages query that returns the most relevant passages from the results.
+     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter count: Number of documents to return.
+     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     - parameter highlight: When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
+     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
+     - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func queryNotices(
+        environmentID: String,
+        collectionID: String,
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        passages: Bool? = nil,
+        aggregation: String? = nil,
+        count: Int? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        passagesFields: [String]? = nil,
+        passagesCount: Int? = nil,
+        passagesCharacters: Int? = nil,
+        deduplicateField: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (QueryNoticesResponse) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let query = query {
+            let queryParameter = URLQueryItem(name: "query", value: query)
+            queryParameters.append(queryParameter)
+        }
+        if let naturalLanguageQuery = naturalLanguageQuery {
+            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
+            queryParameters.append(queryParameter)
+        }
+        if let passages = passages {
+            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
+            queryParameters.append(queryParameter)
+        }
+        if let aggregation = aggregation {
+            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
+            queryParameters.append(queryParameter)
+        }
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+        if let returnFields = returnFields {
+            let queryParameter = URLQueryItem(name: "return_fields", value: "\(returnFields)")
+            queryParameters.append(queryParameter)
+        }
+        if let offset = offset {
+            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: "\(sort)")
+            queryParameters.append(queryParameter)
+        }
+        if let highlight = highlight {
+            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesFields = passagesFields {
+            let queryParameter = URLQueryItem(name: "passages.fields", value: "\(passagesFields)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCount = passagesCount {
+            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCharacters = passagesCharacters {
+            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
+            queryParameters.append(queryParameter)
+        }
+        if let deduplicateField = deduplicateField {
+            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/notices"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<QueryNoticesResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Knowledge Graph relationship query.
+
+          See the [Knowledge Graph documentation](https://console.bluemix.net/docs/services/discovery/building-kg.html) for
+     more details.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter relationshipQuery: An object that describes the relationships to be queried and any query constraints (such as filters).
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func queryRelations(
+        environmentID: String,
+        collectionID: String,
+        relationshipQuery: QueryRelations,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (QueryRelationsResponse) -> Void)
+    {
+        // construct body
+        guard let body = try? JSONEncoder().encode(relationshipQuery) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_relations"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<QueryRelationsResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          Adds a query to the training data for this collection. The query can contain a filter and natural language query.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter naturalLanguageQuery:
+     - parameter filter:
+     - parameter examples:
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func addTrainingData(
+        environmentID: String,
+        collectionID: String,
+        naturalLanguageQuery: String? = nil,
+        filter: String? = nil,
+        examples: [TrainingExample]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingQuery) -> Void)
+    {
+        // construct body
+        let addTrainingDataRequest = NewTrainingQuery(naturalLanguageQuery: naturalLanguageQuery, filter: filter, examples: examples)
+        guard let body = try? JSONEncoder().encode(addTrainingDataRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingQuery>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          Adds a new example to this training data query.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter documentID:
+     - parameter crossReference:
+     - parameter relevance:
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func createTrainingExample(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        documentID: String? = nil,
+        crossReference: String? = nil,
+        relevance: Int? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingExample) -> Void)
+    {
+        // construct body
+        let createTrainingExampleRequest = TrainingExample(documentID: documentID, crossReference: crossReference, relevance: relevance)
+        guard let body = try? JSONEncoder().encode(createTrainingExampleRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingExample>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          Clears all training data for this collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func deleteAllTrainingData(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          Removes the training data and all associated examples from the training data set.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func deleteTrainingData(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          Removes the example with the given ID for the training data query.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter exampleID: The ID of the document as it is indexed.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func deleteTrainingExample(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        exampleID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          Shows details for a specific training data query, including the query string and all examples.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func getTrainingData(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingQuery) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingQuery>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          Gets the details for this training example.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter exampleID: The ID of the document as it is indexed.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func getTrainingExample(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        exampleID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingExample) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingExample>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          Lists the training data for this collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listTrainingData(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingDataSet) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingDataSet>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          List all examples for this training data query.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listTrainingExamples(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingExampleList) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingExampleList>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+          Changes the label or cross reference query for this training example.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter exampleID: The ID of the document as it is indexed.
+     - parameter crossReference:
+     - parameter relevance:
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func updateTrainingExample(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        exampleID: String,
+        crossReference: String? = nil,
+        relevance: Int? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingExample) -> Void)
+    {
+        // construct body
+        let updateTrainingExampleRequest = TrainingExamplePatch(crossReference: crossReference, relevance: relevance)
+        guard let body = try? JSONEncoder().encode(updateTrainingExampleRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "PUT",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: "application/json",
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingExample>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
 }

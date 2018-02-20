@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,24 +16,55 @@
 
 import Foundation
 
-/** Word alternatives produced by Speech to Text. */
-public struct WordAlternativeResults: JSONDecodable {
+/** WordAlternativeResults. */
+public struct WordAlternativeResults {
 
-    /// The time, in seconds, at which the word with alternative
-    /// word hypotheses starts in the audio input.
-    public let startTime: Double
+    /// The start time in seconds of the word from the input audio that corresponds to the word alternatives.
+    public var startTime: Double
 
-    /// The time, in seconds, at which the word with alternative
-    /// word hypotheses ends in the audio input.
-    public let endTime: Double
+    /// The end time in seconds of the word from the input audio that corresponds to the word alternatives.
+    public var endTime: Double
 
-    /// A list of alternative word hypotheses for a word in the audio input.
-    public let alternatives: [WordAlternativeResult]
+    /// An array of alternative hypotheses for a word from the input audio.
+    public var alternatives: [WordAlternativeResult]
 
-    /// Used internally to initialize an `WordAlternativeResults` model from JSON.
-    public init(json: JSONWrapper) throws {
-        startTime = try json.getDouble(at: "start_time")
-        endTime = try json.getDouble(at: "end_time")
-        alternatives = try json.decodedArray(at: "alternatives", type: WordAlternativeResult.self)
+    /**
+     Initialize a `WordAlternativeResults` with member variables.
+
+     - parameter startTime: The start time in seconds of the word from the input audio that corresponds to the word alternatives.
+     - parameter endTime: The end time in seconds of the word from the input audio that corresponds to the word alternatives.
+     - parameter alternatives: An array of alternative hypotheses for a word from the input audio.
+
+     - returns: An initialized `WordAlternativeResults`.
+    */
+    public init(startTime: Double, endTime: Double, alternatives: [WordAlternativeResult]) {
+        self.startTime = startTime
+        self.endTime = endTime
+        self.alternatives = alternatives
     }
+}
+
+extension WordAlternativeResults: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case startTime = "start_time"
+        case endTime = "end_time"
+        case alternatives = "alternatives"
+        static let allValues = [startTime, endTime, alternatives]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        startTime = try container.decode(Double.self, forKey: .startTime)
+        endTime = try container.decode(Double.self, forKey: .endTime)
+        alternatives = try container.decode([WordAlternativeResult].self, forKey: .alternatives)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(startTime, forKey: .startTime)
+        try container.encode(endTime, forKey: .endTime)
+        try container.encode(alternatives, forKey: .alternatives)
+    }
+
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +16,76 @@
 
 import Foundation
 
-/** A model used by the Text To Speech service, containing a word and its translation. */
-public struct Word: JSONEncodable, JSONDecodable {
+/** Word. */
+public struct Word {
+
+    /// **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+    public enum PartOfSpeech: String {
+        case josi = "Josi"
+        case mesi = "Mesi"
+        case kigo = "Kigo"
+        case gobi = "Gobi"
+        case dosi = "Dosi"
+        case jodo = "Jodo"
+        case koyu = "Koyu"
+        case stbi = "Stbi"
+        case suji = "Suji"
+        case kedo = "Kedo"
+        case fuku = "Fuku"
+        case keyo = "Keyo"
+        case stto = "Stto"
+        case reta = "Reta"
+        case stzo = "Stzo"
+        case kato = "Kato"
+        case hoka = "Hoka"
+    }
 
     /// A word from the custom voice model.
-    public let word: String
+    public var word: String
 
-    /// The phonetic or sounds-like translation for the word.
-    public let translation: String
+    /// The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation consists of one or more words that, when combined, sound like the word.
+    public var translation: String
 
-    /// Used to initialize a `Word` model.
-    public init(word: String, translation: String) {
+    /// **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+    public var partOfSpeech: String?
+
+    /**
+     Initialize a `Word` with member variables.
+
+     - parameter word: A word from the custom voice model.
+     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation consists of one or more words that, when combined, sound like the word.
+     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+
+     - returns: An initialized `Word`.
+    */
+    public init(word: String, translation: String, partOfSpeech: String? = nil) {
         self.word = word
         self.translation = translation
+        self.partOfSpeech = partOfSpeech
+    }
+}
+
+extension Word: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case word = "word"
+        case translation = "translation"
+        case partOfSpeech = "part_of_speech"
+        static let allValues = [word, translation, partOfSpeech]
     }
 
-    /// Used internally to initialize a `Word` model from JSON.
-    public init(json: JSONWrapper) throws {
-        word = try json.getString(at: "word")
-        translation = try json.getString(at: "translation")
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        word = try container.decode(String.self, forKey: .word)
+        translation = try container.decode(String.self, forKey: .translation)
+        partOfSpeech = try container.decodeIfPresent(String.self, forKey: .partOfSpeech)
     }
 
-    /// Used internally to serialize a `Word` model to JSON.
-    public func toJSONObject() -> Any {
-        return ["word": word, "translation": translation]
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(word, forKey: .word)
+        try container.encode(translation, forKey: .translation)
+        try container.encodeIfPresent(partOfSpeech, forKey: .partOfSpeech)
     }
+
 }

@@ -185,6 +185,7 @@
 		689A169D203C88C7002CFC66 /* ClassifiedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A168D203C88C7002CFC66 /* ClassifiedImages.swift */; };
 		689A169F203C89A6002CFC66 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A169E203C89A6002CFC66 /* Parameters.swift */; };
 		689A16A1203C89F5002CFC66 /* PositiveExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A0203C89F5002CFC66 /* PositiveExample.swift */; };
+		689A16A3203C9337002CFC66 /* VisualRecognition+UIImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */; };
 		689A16A5203C9358002CFC66 /* VisualRecognition+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A4203C9358002CFC66 /* VisualRecognition+UIImage.swift */; };
 		68A0EEE82006D25400E58658 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0EEE72006D22700E58658 /* Starscream.framework */; };
 		68A6A99D202A0EE90069585F /* TranslationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6A993202A0EE80069585F /* TranslationModels.swift */; };
@@ -1086,6 +1087,7 @@
 		689A168D203C88C7002CFC66 /* ClassifiedImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedImages.swift; sourceTree = "<group>"; };
 		689A169E203C89A6002CFC66 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		689A16A0203C89F5002CFC66 /* PositiveExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveExample.swift; sourceTree = "<group>"; };
+		689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VisualRecognition+UIImageTests.swift"; path = "Tests/VisualRecognitionV3Tests/VisualRecognition+UIImageTests.swift"; sourceTree = SOURCE_ROOT; };
 		689A16A4203C9358002CFC66 /* VisualRecognition+UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VisualRecognition+UIImage.swift"; sourceTree = "<group>"; };
 		68A0EEE72006D22700E58658 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		68A6A993202A0EE80069585F /* TranslationModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModels.swift; sourceTree = "<group>"; };
@@ -2438,8 +2440,9 @@
 			children = (
 				7AAD66471DCA5D730010481E /* Classes */,
 				7AAD664B1DCA5D730010481E /* Images */,
-				7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */,
 				CE6B98DB1DF22638004CD6B5 /* metadata.txt */,
+				689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */,
+				7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -4927,6 +4930,7 @@
 			files = (
 				7A6C7B4D1D8C960300CD97FA /* Credentials.swift in Sources */,
 				7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */,
+				689A16A3203C9337002CFC66 /* VisualRecognition+UIImageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

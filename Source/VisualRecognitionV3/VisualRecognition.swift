@@ -111,7 +111,10 @@ public class VisualRecognition {
     */
     public func classify(
         imagesFile: URL? = nil,
-        parameters: String? = nil,
+        url: String? = nil,
+        threshold: Double? = nil,
+        owners: [String]? = nil,
+        classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
         imagesFileContentType: String? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -122,10 +125,12 @@ public class VisualRecognition {
         if let imagesFile = imagesFile {
             multipartFormData.append(imagesFile, withName: "images_file")
         }
-        if let parameters = parameters {
-            let parametersData = parameters.data(using: String.Encoding.utf8)!
-            multipartFormData.append(parametersData, withName: "parameters")
+        let parameters = Parameters(url: url, threshold: threshold, owners: owners, classifierIDs: classifierIDs)
+        guard let parametersData = try? JSONEncoder().encode(parameters) else {
+            failure?(RestError.encodingError)
+            return
         }
+        multipartFormData.append(parametersData, withName: "parameters")
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return
@@ -172,8 +177,8 @@ public class VisualRecognition {
     */
     public func detectFaces(
         imagesFile: URL? = nil,
-        parameters: String? = nil,
         imagesFileContentType: String? = nil,
+        url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DetectedFaces) -> Void)
     {
@@ -182,9 +187,11 @@ public class VisualRecognition {
         if let imagesFile = imagesFile {
             multipartFormData.append(imagesFile, withName: "images_file")
         }
-        if let parameters = parameters {
-            let parametersData = parameters.data(using: String.Encoding.utf8)!
-            multipartFormData.append(parametersData, withName: "parameters")
+        if let url = url {
+            let parameters = Parameters(url: url, threshold: nil, owners: nil, classifierIDs: nil)
+            if let parametersData = try? JSONEncoder().encode(parameters) {
+                multipartFormData.append(parametersData, withName: "parameters")
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)

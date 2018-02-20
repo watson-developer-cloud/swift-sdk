@@ -241,7 +241,7 @@ public class VisualRecognition {
     */
     public func createClassifier(
         name: String,
-        classnamePositiveExamples: URL,
+        positiveExamples: [PositiveExample],
         negativeExamples: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
@@ -250,7 +250,9 @@ public class VisualRecognition {
         let multipartFormData = MultipartFormData()
         let nameData = name.data(using: String.Encoding.utf8)!
         multipartFormData.append(nameData, withName: "name")
-        multipartFormData.append(classnamePositiveExamples, withName: "classname_positive_examples")
+        positiveExamples.forEach { example in
+            multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
+        }
         if let negativeExamples = negativeExamples {
             multipartFormData.append(negativeExamples, withName: "negative_examples")
         }
@@ -437,15 +439,17 @@ public class VisualRecognition {
     */
     public func updateClassifier(
         classifierID: String,
-        classnamePositiveExamples: URL? = nil,
+        positiveExamples: [PositiveExample]? = nil,
         negativeExamples: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        if let classnamePositiveExamples = classnamePositiveExamples {
-            multipartFormData.append(classnamePositiveExamples, withName: "classname_positive_examples")
+        if let positiveExamples = positiveExamples {
+            positiveExamples.forEach { example in
+                multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
+            }
         }
         if let negativeExamples = negativeExamples {
             multipartFormData.append(negativeExamples, withName: "negative_examples")

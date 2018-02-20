@@ -116,7 +116,6 @@ public class VisualRecognition {
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
-        imagesFileContentType: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
@@ -177,7 +176,6 @@ public class VisualRecognition {
     */
     public func detectFaces(
         imagesFile: URL? = nil,
-        imagesFileContentType: String? = nil,
         url: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DetectedFaces) -> Void)

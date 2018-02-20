@@ -17,10 +17,9 @@
 import Foundation
 
 /**
-   Language Translator translates text from one language to another. The service offers multiple
-  domain-specific models that you can customize based on your unique terminology and language. Use
-  Language Translator to take news from across the globe and present it in your language,
-  communicate with your customers in their own language, and more.
+  Language Translator translates text from one language to another. The service offers multiple domain-specific models
+ that you can customize based on your unique terminology and language. Use Language Translator to take news from across
+ the globe and present it in your language, communicate with your customers in their own language, and more.
  */
 public class LanguageTranslator {
 
@@ -70,9 +69,7 @@ public class LanguageTranslator {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error_message")
-            let userInfo = [NSLocalizedDescriptionKey: message]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return nil
         }
@@ -165,7 +162,8 @@ public class LanguageTranslator {
     /**
      Lists all languages that can be identified by the API.
 
-     Lists all languages that the service can identify. Returns the two-letter code (for example, `en` for English or `es` for Spanish) and name of each language.
+          Lists all languages that the service can identify. Returns the two-letter code (for example, `en` for English or
+     `es` for Spanish) and name of each language.
 
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -199,7 +197,9 @@ public class LanguageTranslator {
     /**
      Uploads a TMX glossary file on top of a domain to customize a translation model.
 
-     Depending on the size of the file, training can range from minutes for a glossary to several hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded glossary and corpus files is limited to 250 MB.
+          Depending on the size of the file, training can range from minutes for a glossary to several hours for a large
+     parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded glossary and
+     corpus files is limited to 250 MB.
 
      - parameter baseModelID: Specifies the domain model that is used as the base for the training. To see current supported domain models, use the GET /v2/models parameter.
      - parameter name: The model name. Valid characters are letters, numbers, -, and _. No spaces.

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,31 +16,63 @@
 
 import Foundation
 
-/** A result from a Speech to Text recognition request. */
-public struct SpeechRecognitionResult: JSONDecodable {
+/** SpeechRecognitionResult. */
+public struct SpeechRecognitionResult {
 
-    /// If `true`, then the transcription result for this
-    /// utterance is final and will not be updated further.
-    public let final: Bool
+    /// An indication of whether the transcription results are final. If `true`, the results for this utterance are not updated further; no additional results are sent for a `result_index` once its results are indicated as final.
+    public var finalResults: Bool
 
-    /// Alternative transcription results.
-    public let alternatives: [SpeechRecognitionAlternative]
+    /// An array of alternative transcripts. The `alternatives` array can include additional requested output such as word confidence or timestamps.
+    public var alternatives: [SpeechRecognitionAlternative]
 
-    /// A dictionary of spotted keywords and their associated matches. A keyword will have
-    /// no associated matches if it was not found within the audio input or the threshold
-    /// was set too high.
-    public let keywordResults: [String: [KeywordResult]]?
+    /// A dictionary (or associative array) whose keys are the strings specified for `keywords` if both that parameter and `keywords_threshold` are specified. A keyword for which no matches are found is omitted from the array. The array is omitted if no keywords are found.
+    public var keywordsResult: [String: [KeywordResult]]?
 
-    /// A list of acoustically similar alternatives for words of the input audio.
-    public let wordAlternatives: [WordAlternativeResults]?
+    /// An array of alternative hypotheses found for words of the input audio if a `word_alternatives_threshold` is specified.
+    public var wordAlternatives: [WordAlternativeResults]?
 
-    /// Used internally to initialize a `SpeechRecognitionResult` model from JSON.
-    public init(json: JSONWrapper) throws {
-        final = try json.getBool(at: "final")
-        alternatives = try json.decodedArray(at: "alternatives", type: SpeechRecognitionAlternative.self)
-        keywordResults = try? json.getDictionary(at: "keywords_result").map {
-            json in try json.decodedArray(type: KeywordResult.self)
-        }
-        wordAlternatives = try? json.decodedArray(at: "word_alternatives", type: WordAlternativeResults.self)
+    /**
+     Initialize a `SpeechRecognitionResult` with member variables.
+
+     - parameter finalResults: An indication of whether the transcription results are final. If `true`, the results for this utterance are not updated further; no additional results are sent for a `result_index` once its results are indicated as final.
+     - parameter alternatives: An array of alternative transcripts. The `alternatives` array can include additional requested output such as word confidence or timestamps.
+     - parameter keywordsResult: A dictionary (or associative array) whose keys are the strings specified for `keywords` if both that parameter and `keywords_threshold` are specified. A keyword for which no matches are found is omitted from the array. The array is omitted if no keywords are found.
+     - parameter wordAlternatives: An array of alternative hypotheses found for words of the input audio if a `word_alternatives_threshold` is specified.
+
+     - returns: An initialized `SpeechRecognitionResult`.
+    */
+    public init(finalResults: Bool, alternatives: [SpeechRecognitionAlternative], keywordsResult: [String: [KeywordResult]]? = nil, wordAlternatives: [WordAlternativeResults]? = nil) {
+        self.finalResults = finalResults
+        self.alternatives = alternatives
+        self.keywordsResult = keywordsResult
+        self.wordAlternatives = wordAlternatives
     }
+}
+
+extension SpeechRecognitionResult: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case finalResults = "final"
+        case alternatives = "alternatives"
+        case keywordsResult = "keywords_result"
+        case wordAlternatives = "word_alternatives"
+        static let allValues = [finalResults, alternatives, keywordsResult, wordAlternatives]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        finalResults = try container.decode(Bool.self, forKey: .finalResults)
+        alternatives = try container.decode([SpeechRecognitionAlternative].self, forKey: .alternatives)
+        keywordsResult = try container.decodeIfPresent([String: [KeywordResult]].self, forKey: .keywordsResult)
+        wordAlternatives = try container.decodeIfPresent([WordAlternativeResults].self, forKey: .wordAlternatives)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(finalResults, forKey: .finalResults)
+        try container.encode(alternatives, forKey: .alternatives)
+        try container.encodeIfPresent(keywordsResult, forKey: .keywordsResult)
+        try container.encodeIfPresent(wordAlternatives, forKey: .wordAlternatives)
+    }
+
 }

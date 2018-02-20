@@ -17,9 +17,9 @@
 import Foundation
 
 /**
-   IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching
-  predefined classes for short text input. You create and train a classifier to connect predefined
-  classes to example texts so that the service can apply those classes to new inputs.
+  IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching predefined classes
+ for short text input. You create and train a classifier to connect predefined classes to example texts so that the
+ service can apply those classes to new inputs.
  */
 public class NaturalLanguageClassifier {
 
@@ -69,10 +69,7 @@ public class NaturalLanguageClassifier {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            let error = try? json.getString(at: "error")
-            let description = try? json.getString(at: "description")
-            let userInfo = [NSLocalizedDescriptionKey: error ?? "", NSLocalizedFailureReasonErrorKey: description ?? ""]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return nil
         }
@@ -81,7 +78,8 @@ public class NaturalLanguageClassifier {
     /**
      Classify.
 
-     Returns label information for the input. The status must be `Available` before you can use the classifier to classify text. Use `Get information about a classifier` to retrieve the status.
+          Returns label information for the input. The status must be `Available` before you can use the classifier to
+     classify text. Use `Get information about a classifier` to retrieve the status.
 
      - parameter classifierID: Classifier ID to use.
      - parameter text: The submitted phrase.
@@ -131,7 +129,7 @@ public class NaturalLanguageClassifier {
     /**
      Create classifier.
 
-     Sends data to create and train a classifier and returns information about the new classifier.
+          Sends data to create and train a classifier and returns information about the new classifier.
 
      - parameter metadata: Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier. For details, see the [API reference](https://www.ibm.com/watson/developercloud/natural-language-classifier/api/v1/#create_classifier).
      - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can include up to 15,000 records. For details, see [Using your own data](https://www.ibm.com/watson/developercloud/doc/natural-language-classifier/using-your-data.html).
@@ -217,7 +215,7 @@ public class NaturalLanguageClassifier {
     /**
      Get information about a classifier.
 
-     Returns status and other information about a classifier.
+          Returns status and other information about a classifier.
 
      - parameter classifierID: Classifier ID to query.
      - parameter failure: A function executed if an error occurs.
@@ -258,7 +256,7 @@ public class NaturalLanguageClassifier {
     /**
      List classifiers.
 
-     Returns an empty array if no classifiers are available.
+          Returns an empty array if no classifiers are available.
 
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.

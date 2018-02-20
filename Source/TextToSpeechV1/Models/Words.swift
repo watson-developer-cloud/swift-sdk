@@ -16,39 +16,39 @@
 
 import Foundation
 
-/** Pronunciation. */
-public struct Pronunciation {
+/** Words. */
+public struct Words {
 
-    /// The pronunciation of the requested text in the specified voice and format.
-    public var pronunciation: String
+    /// An array of words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+    public var words: [Word]
 
     /**
-     Initialize a `Pronunciation` with member variables.
+     Initialize a `Words` with member variables.
 
-     - parameter pronunciation: The pronunciation of the requested text in the specified voice and format.
+     - parameter words: An array of words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
 
-     - returns: An initialized `Pronunciation`.
+     - returns: An initialized `Words`.
     */
-    public init(pronunciation: String) {
-        self.pronunciation = pronunciation
+    public init(words: [Word]) {
+        self.words = words
     }
 }
 
-extension Pronunciation: Codable {
+extension Words: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case pronunciation = "pronunciation"
-        static let allValues = [pronunciation]
+        case words = "words"
+        static let allValues = [words]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        pronunciation = try container.decode(String.self, forKey: .pronunciation)
+        words = try container.decode([Word].self, forKey: .words)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(pronunciation, forKey: .pronunciation)
+        try container.encode(words, forKey: .words)
     }
 
 }

@@ -67,7 +67,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio using the default parameters."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text, failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)

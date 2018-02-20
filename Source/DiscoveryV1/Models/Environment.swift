@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,133 +17,109 @@
 import Foundation
 
 /** Details about an environment. */
-public struct Environment: JSONDecodable {
-
-    /// Unique identifier for this environment.
-    public let environmentID: String
-
-    /// Name that identifies this environment.
-    public let name: String
-
-    /// Description of the environment.
-    public let description: String
-
-    /// Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-    public let created: String
-
-    /// Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-    public let updated: String
+public struct Environment {
 
     /// Status of the environment.
-    public let status: String
+    public enum Status: String {
+        case active = "active"
+        case pending = "pending"
+        case maintenance = "maintenance"
+    }
+
+    /// Unique identifier for the environment.
+    public var environmentID: String?
+
+    /// Name that identifies the environment.
+    public var name: String?
+
+    /// Description of the environment.
+    public var description: String?
+
+    /// Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    public var created: String?
+
+    /// Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    public var updated: String?
+
+    /// Status of the environment.
+    public var status: String?
 
     /// If true, then the environment contains read-only collections which are maintained by IBM.
-    public let readOnly: Bool?
+    public var readOnly: Bool?
 
-    /// Object containing information about disk and memory usage.
-    public let indexCapacity: IndexCapacity?
+    /// **Deprecated**: Size of the environment.
+    public var size: Int?
 
-    /// Used internally to initialize an `Environment` model from JSON.
-    public init(json: JSONWrapper) throws {
-        environmentID = try json.getString(at: "environment_id")
-        name = try json.getString(at: "name")
-        description = try json.getString(at: "description")
-        // Some environments (e.g. System environment) do not contain created or updated
-        created = (try? json.getString(at: "created")) ?? ""
-        updated = (try? json.getString(at: "updated")) ?? ""
-        // Some instances of environment do not contain status
-        status = (try? json.getString(at: "status")) ?? ""
-        readOnly = try? json.getBool(at: "read_only")
-        indexCapacity = try? json.decode(at: "index_capacity")
+    /// Details about the resource usage and capacity of the environment.
+    public var indexCapacity: IndexCapacity?
+
+    /**
+     Initialize a `Environment` with member variables.
+
+     - parameter environmentID: Unique identifier for the environment.
+     - parameter name: Name that identifies the environment.
+     - parameter description: Description of the environment.
+     - parameter created: Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     - parameter updated: Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     - parameter status: Status of the environment.
+     - parameter readOnly: If true, then the environment contains read-only collections which are maintained by IBM.
+     - parameter size: **Deprecated**: Size of the environment.
+     - parameter indexCapacity: Details about the resource usage and capacity of the environment.
+
+     - returns: An initialized `Environment`.
+    */
+    public init(environmentID: String? = nil, name: String? = nil, description: String? = nil, created: String? = nil, updated: String? = nil, status: String? = nil, readOnly: Bool? = nil, size: Int? = nil, indexCapacity: IndexCapacity? = nil) {
+        self.environmentID = environmentID
+        self.name = name
+        self.description = description
+        self.created = created
+        self.updated = updated
+        self.status = status
+        self.readOnly = readOnly
+        self.size = size
+        self.indexCapacity = indexCapacity
     }
 }
 
-/** Details about the disk and memory usage of this environment. */
-public struct IndexCapacity: JSONDecodable {
+extension Environment: Codable {
 
-    /// Summary of the disk usage of the environment.
-    public let diskUsage: DiskUsage
-
-    /// Summary of the memory usage of the environment.
-    public let memoryUsage: MemoryUsage
-
-    /// Used internally to initialize an `IndexCapacity` model from JSON.
-    public init(json: JSONWrapper) throws {
-        diskUsage = try json.decode(at: "disk_usage")
-        memoryUsage = try json.decode(at: "memory_usage")
+    private enum CodingKeys: String, CodingKey {
+        case environmentID = "environment_id"
+        case name = "name"
+        case description = "description"
+        case created = "created"
+        case updated = "updated"
+        case status = "status"
+        case readOnly = "read_only"
+        case size = "size"
+        case indexCapacity = "index_capacity"
+        static let allValues = [environmentID, name, description, created, updated, status, readOnly, size, indexCapacity]
     }
-}
 
-/** Summary of the disk usage statistics for this environment. */
-public struct DiskUsage: JSONDecodable {
-
-    /// Number of bytes used on the environment's disk capacity.
-    public let usedBytes: Int
-
-    /// Total number of bytes available in the environment's disk capacity.
-    public let totalBytes: Int
-
-    /// Amount of disk capacity used, in KB or GB format.
-    public let used: String
-
-    /// Total amount of the environment's disk capacity, in KB or GB format.
-    public let total: String
-
-    /// Percentage of the environment's disk capacity that is being used.
-    public let percentUsed: Double
-
-    /// Used internally to initialize a `DiskUsage` model from JSON.
-    public init(json: JSONWrapper) throws {
-        usedBytes = try json.getInt(at: "used_bytes")
-        totalBytes = try json.getInt(at: "total_bytes")
-        used = try json.getString(at: "used")
-        total = try json.getString(at: "total")
-        percentUsed = try json.getDouble(at: "percent_used")
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        environmentID = try container.decodeIfPresent(String.self, forKey: .environmentID)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        created = try container.decodeIfPresent(String.self, forKey: .created)
+        updated = try container.decodeIfPresent(String.self, forKey: .updated)
+        status = try container.decodeIfPresent(String.self, forKey: .status)
+        readOnly = try container.decodeIfPresent(Bool.self, forKey: .readOnly)
+        size = try container.decodeIfPresent(Int.self, forKey: .size)
+        indexCapacity = try container.decodeIfPresent(IndexCapacity.self, forKey: .indexCapacity)
     }
-}
 
-/** Summary of the memory usage statistics for this environment. */
-public struct MemoryUsage: JSONDecodable {
-
-    /// Number of bytes used in the environment's memory capacity.
-    public let usedBytes: Int
-
-    /// Total number of bytes available in the environment's memory capacity.
-    public let totalBytes: Int
-
-    /// Amount of memory capacity used, in KB or GB format.
-    public let used: String
-
-    /// Total amount of the environment's memory capacity, in KB or GB format.
-    public let total: String
-
-    /// Percentage of the environment's memory capacity that is being used.
-    public let percentUsed: Double
-
-    /// Used internally to initialize a `MemoryUsage` model from JSON.
-    public init(json: JSONWrapper) throws {
-        usedBytes = try json.getInt(at: "used_bytes")
-        totalBytes = try json.getInt(at: "total_bytes")
-        used = try json.getString(at: "used")
-        total = try json.getString(at: "total")
-        percentUsed = try json.getDouble(at: "percent_used")
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(environmentID, forKey: .environmentID)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(created, forKey: .created)
+        try container.encodeIfPresent(updated, forKey: .updated)
+        try container.encodeIfPresent(status, forKey: .status)
+        try container.encodeIfPresent(readOnly, forKey: .readOnly)
+        try container.encodeIfPresent(size, forKey: .size)
+        try container.encodeIfPresent(indexCapacity, forKey: .indexCapacity)
     }
-}
 
-/** The size of the environment. */
-public enum EnvironmentSize: Int {
-
-    /// A free trial environment. 2GB disk space, 1GB RAM, unlimited enrichments, single search
-    /// node, so therefore no high availability. 30-day trial only.
-    /// Only one free trial environment per service instance is allowed.
-    case zero = 0
-
-    /// 48GB disk space, 2GB RAM, 4000 enrichments.
-    case one = 1
-
-    /// 192GB disk space, 8GB RAM, 16000 enrichments.
-    case two = 2
-
-    /// 384GB disk space, 16GB RAM, 32000 enrichments.
-    case three = 3
 }

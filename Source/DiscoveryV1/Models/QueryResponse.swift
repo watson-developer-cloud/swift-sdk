@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,31 +16,66 @@
 
 import Foundation
 
-/** A response produced by the Discovery service to analyze the input provided. */
-public struct QueryResponse: JSONDecodable {
+/** A response containing the documents and aggregations for the query. */
+public struct QueryResponse {
 
-    /// Number of matching results.
-    public let matchingResults: Int?
+    public var matchingResults: Int?
 
-    /// Results returned by the Discovery service.
-    public let results: [Result]?
+    public var results: [QueryResult]?
 
-    /// Aggregations returned by the Discovery service.
-    public let aggregations: [Aggregation]?
+    public var aggregations: [QueryAggregation]?
 
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
+    public var passages: [QueryPassages]?
 
-    /// Used internally to initialize a `QueryResponse` model from JSON.
-    public init(json: JSONWrapper) throws {
-        matchingResults = try? json.getInt(at: "matching_results")
-        results = try? json.decodedArray(at: "results", type: Result.self)
-        aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
-        self.json = try json.getDictionaryObject()
+    public var duplicatesRemoved: Int?
+
+    /**
+     Initialize a `QueryResponse` with member variables.
+
+     - parameter matchingResults:
+     - parameter results:
+     - parameter aggregations:
+     - parameter passages:
+     - parameter duplicatesRemoved:
+
+     - returns: An initialized `QueryResponse`.
+    */
+    public init(matchingResults: Int? = nil, results: [QueryResult]? = nil, aggregations: [QueryAggregation]? = nil, passages: [QueryPassages]? = nil, duplicatesRemoved: Int? = nil) {
+        self.matchingResults = matchingResults
+        self.results = results
+        self.aggregations = aggregations
+        self.passages = passages
+        self.duplicatesRemoved = duplicatesRemoved
+    }
+}
+
+extension QueryResponse: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case matchingResults = "matching_results"
+        case results = "results"
+        case aggregations = "aggregations"
+        case passages = "passages"
+        case duplicatesRemoved = "duplicates_removed"
+        static let allValues = [matchingResults, results, aggregations, passages, duplicatesRemoved]
     }
 
-    /// Used internally to serialize a 'QueryResponse' model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        matchingResults = try container.decodeIfPresent(Int.self, forKey: .matchingResults)
+        results = try container.decodeIfPresent([QueryResult].self, forKey: .results)
+        aggregations = try container.decodeIfPresent([QueryAggregation].self, forKey: .aggregations)
+        passages = try container.decodeIfPresent([QueryPassages].self, forKey: .passages)
+        duplicatesRemoved = try container.decodeIfPresent(Int.self, forKey: .duplicatesRemoved)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(matchingResults, forKey: .matchingResults)
+        try container.encodeIfPresent(results, forKey: .results)
+        try container.encodeIfPresent(aggregations, forKey: .aggregations)
+        try container.encodeIfPresent(passages, forKey: .passages)
+        try container.encodeIfPresent(duplicatesRemoved, forKey: .duplicatesRemoved)
+    }
+
 }

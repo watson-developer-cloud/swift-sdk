@@ -79,7 +79,19 @@ public class VisualRecognition {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            return NSError(domain: domain, code: code, userInfo: nil)
+            let errorID = (try? json.getString(at: "error_id")) ?? (try? json.getString(at: "error", "error_id"))
+            let error = try? json.getString(at: "error")
+            let status = try? json.getString(at: "status")
+            let html = try? json.getString(at: "Error")
+            let message = errorID ?? error ?? status ?? html ?? "Unknown error."
+            let description = (try? json.getString(at: "description")) ?? (try? json.getString(at: "error", "description"))
+            let statusInfo = try? json.getString(at: "statusInfo")
+            let reason = description ?? statusInfo ?? "Please use the status code to refer to the documentation."
+            let userInfo = [
+                NSLocalizedDescriptionKey: message,
+                NSLocalizedFailureReasonErrorKey: reason,
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }

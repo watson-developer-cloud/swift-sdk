@@ -27,7 +27,7 @@ public struct DialogNodeCollection {
     /**
      Initialize a `DialogNodeCollection` with member variables.
 
-     - parameter dialogNodes:
+     - parameter dialogNodes: 
      - parameter pagination: An object defining the pagination data for the returned objects.
 
      - returns: An initialized `DialogNodeCollection`.

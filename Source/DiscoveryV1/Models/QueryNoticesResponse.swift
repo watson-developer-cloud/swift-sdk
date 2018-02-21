@@ -16,12 +16,12 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse {
+/** QueryNoticesResponse. */
+public struct QueryNoticesResponse {
 
     public var matchingResults: Int?
 
-    public var results: [QueryResult]?
+    public var results: [QueryNoticesResult]?
 
     public var aggregations: [QueryAggregation]?
 
@@ -30,7 +30,7 @@ public struct QueryResponse {
     public var duplicatesRemoved: Int?
 
     /**
-     Initialize a `QueryResponse` with member variables.
+     Initialize a `QueryNoticesResponse` with member variables.
 
      - parameter matchingResults:
      - parameter results:
@@ -38,9 +38,9 @@ public struct QueryResponse {
      - parameter passages:
      - parameter duplicatesRemoved:
 
-     - returns: An initialized `QueryResponse`.
+     - returns: An initialized `QueryNoticesResponse`.
     */
-    public init(matchingResults: Int? = nil, results: [QueryResult]? = nil, aggregations: [QueryAggregation]? = nil, passages: [QueryPassages]? = nil, duplicatesRemoved: Int? = nil) {
+    public init(matchingResults: Int? = nil, results: [QueryNoticesResult]? = nil, aggregations: [QueryAggregation]? = nil, passages: [QueryPassages]? = nil, duplicatesRemoved: Int? = nil) {
         self.matchingResults = matchingResults
         self.results = results
         self.aggregations = aggregations
@@ -49,7 +49,7 @@ public struct QueryResponse {
     }
 }
 
-extension QueryResponse: Codable {
+extension QueryNoticesResponse: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case matchingResults = "matching_results"
@@ -63,7 +63,7 @@ extension QueryResponse: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         matchingResults = try container.decodeIfPresent(Int.self, forKey: .matchingResults)
-        results = try container.decodeIfPresent([QueryResult].self, forKey: .results)
+        results = try container.decodeIfPresent([QueryNoticesResult].self, forKey: .results)
         aggregations = try container.decodeIfPresent([QueryAggregation].self, forKey: .aggregations)
         passages = try container.decodeIfPresent([QueryPassages].self, forKey: .passages)
         duplicatesRemoved = try container.decodeIfPresent(Int.self, forKey: .duplicatesRemoved)

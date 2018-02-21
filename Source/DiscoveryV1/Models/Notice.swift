@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,52 +16,93 @@
 
 import Foundation
 
-/** A notice produced by the ingestion process. */
-public struct Notice: JSONDecodable {
-
-    /// Unique identifier of the notice.
-    public let noticeID: String
-
-    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mm
-    /// :ss.SSS'Z'.
-    public let created: String
-
-    /// Unique identifier of the ingested document.
-    public let documentID: String
+/** A notice produced for the collection. */
+public struct Notice {
 
     /// Severity level of the notice.
-    public let severity: NoticeSeverity
+    public enum Severity: String {
+        case warning = "warning"
+        case error = "error"
+    }
 
-    /// Ingestion step in which the notice occurred.
-    public let step: String
+    /// Identifies the notice. Many notices might have the same ID. This field exists so that user applications can programmatically identify a notice and take automatic corrective action.
+    public var noticeID: String?
+
+    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    public var created: String?
+
+    /// Unique identifier of the document.
+    public var documentID: String?
+
+    /// Unique identifier of the query used for relevance training.
+    public var queryID: String?
+
+    /// Severity level of the notice.
+    public var severity: String?
+
+    /// Ingestion or training step in which the notice occurred.
+    public var step: String?
 
     /// The description of the notice.
-    public let description: String
+    public var description: String?
 
-    /// JSON with details that might help troubleshoot the notice.
-    public let details: [String: Any]
+    /**
+     Initialize a `Notice` with member variables.
 
-    /// Used internally to initialize a `Notice` model from JSON.
-    public init(json: JSONWrapper) throws {
-        noticeID = try json.getString(at: "notice_id")
-        created = try json.getString(at: "created")
-        documentID = try json.getString(at: "document_id")
-        guard let noticeSeverity = NoticeSeverity(rawValue: try json.getString(at: "severity")) else {
-            throw JSONWrapper.Error.valueNotConvertible(value: json, to: NoticeSeverity.self)
-        }
-        severity = noticeSeverity
-        step = try json.getString(at: "step")
-        description = try json.getString(at: "description")
-        details = try json.getDictionary(at: "details")
+     - parameter noticeID: Identifies the notice. Many notices might have the same ID. This field exists so that user applications can programmatically identify a notice and take automatic corrective action.
+     - parameter created: The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     - parameter documentID: Unique identifier of the document.
+     - parameter queryID: Unique identifier of the query used for relevance training.
+     - parameter severity: Severity level of the notice.
+     - parameter step: Ingestion or training step in which the notice occurred.
+     - parameter description: The description of the notice.
+
+     - returns: An initialized `Notice`.
+    */
+    public init(noticeID: String? = nil, created: String? = nil, documentID: String? = nil, queryID: String? = nil, severity: String? = nil, step: String? = nil, description: String? = nil) {
+        self.noticeID = noticeID
+        self.created = created
+        self.documentID = documentID
+        self.queryID = queryID
+        self.severity = severity
+        self.step = step
+        self.description = description
     }
 }
 
-/** Severity of a notice. */
-public enum NoticeSeverity: String {
+extension Notice: Codable {
 
-    /// Warning
-    case warning = "warning"
+    private enum CodingKeys: String, CodingKey {
+        case noticeID = "notice_id"
+        case created = "created"
+        case documentID = "document_id"
+        case queryID = "query_id"
+        case severity = "severity"
+        case step = "step"
+        case description = "description"
+        static let allValues = [noticeID, created, documentID, queryID, severity, step, description]
+    }
 
-    /// Error
-    case error = "error"
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        noticeID = try container.decodeIfPresent(String.self, forKey: .noticeID)
+        created = try container.decodeIfPresent(String.self, forKey: .created)
+        documentID = try container.decodeIfPresent(String.self, forKey: .documentID)
+        queryID = try container.decodeIfPresent(String.self, forKey: .queryID)
+        severity = try container.decodeIfPresent(String.self, forKey: .severity)
+        step = try container.decodeIfPresent(String.self, forKey: .step)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(noticeID, forKey: .noticeID)
+        try container.encodeIfPresent(created, forKey: .created)
+        try container.encodeIfPresent(documentID, forKey: .documentID)
+        try container.encodeIfPresent(queryID, forKey: .queryID)
+        try container.encodeIfPresent(severity, forKey: .severity)
+        try container.encodeIfPresent(step, forKey: .step)
+        try container.encodeIfPresent(description, forKey: .description)
+    }
+
 }

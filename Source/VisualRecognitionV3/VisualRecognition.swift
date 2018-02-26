@@ -571,9 +571,9 @@ public class VisualRecognition {
         success: @escaping (Classifier) -> Void)
     {
         // construct query parameters
-         var queryParameters = [URLQueryItem]()
-         queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-         queryParameters.append(URLQueryItem(name: "version", value: version))
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(

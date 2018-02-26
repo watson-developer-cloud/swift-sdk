@@ -332,7 +332,9 @@ extension VisualRecognition {
             method: "GET",
             url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model",
             credentials: .apiKey,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
         )
 
         // create temporary downloads directory

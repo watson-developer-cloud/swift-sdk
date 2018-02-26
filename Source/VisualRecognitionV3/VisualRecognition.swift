@@ -580,7 +580,9 @@ public class VisualRecognition {
             method: "GET",
             url: serviceURL + "/v3/classifiers/\(classifierID)",
             credentials: .apiKey,
-            headerParameters: defaultHeaders
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
         )
         
         // execute REST request

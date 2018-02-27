@@ -333,7 +333,7 @@ extension VisualRecognition {
             url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model",
             credentials: .apiKey,
             headerParameters: defaultHeaders,
-            acceptType: "application/json",
+            acceptType: "application/octet-stream",
             queryItems: queryParameters
         )
 

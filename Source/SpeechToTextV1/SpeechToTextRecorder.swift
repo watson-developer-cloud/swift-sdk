@@ -14,38 +14,41 @@
  * limitations under the License.
  **/
 
+#if os(Linux)
+#else
+
 import Foundation
 import AudioToolbox
 import AVFoundation
 
 internal class SpeechToTextRecorder {
-    
+
     // This implementation closely follows Apple's "Audio Queue Services Programming Guide".
     // See the guide for more information about audio queues and recording.
-    
+
     internal var onMicrophoneData: ((Data) -> Void)?                 // callback to handle pcm buffer
     internal var onPowerData: ((Float32) -> Void)?                   // callback for average dB power
     internal let session = AVAudioSession.sharedInstance()           // session for recording permission
     internal var isRecording = false                                 // state of recording
     internal private(set) var format = AudioStreamBasicDescription() // audio data format specification
-    
-    private var queue: AudioQueueRef? = nil                          // opaque reference to an audio queue
+
+    private var queue: AudioQueueRef?                                // opaque reference to an audio queue
     private var powerTimer: Timer?                                   // timer to invoke metering callback
-    
+
     private let callback: AudioQueueInputCallback = {
         userData, queue, bufferRef, startTimeRef, numPackets, packetDescriptions in
-        
+
         // parse `userData` as `SpeechToTextRecorder`
         guard let userData = userData else { return }
         let audioRecorder = Unmanaged<SpeechToTextRecorder>.fromOpaque(userData).takeUnretainedValue()
-        
+
         // dereference pointers
         let buffer = bufferRef.pointee
         let startTime = startTimeRef.pointee
-        
+
         // calculate number of packets
         var numPackets = numPackets
-        if (numPackets == 0 && audioRecorder.format.mBytesPerPacket != 0) {
+        if numPackets == 0 && audioRecorder.format.mBytesPerPacket != 0 {
             numPackets = buffer.mAudioDataByteSize / audioRecorder.format.mBytesPerPacket
         }
 
@@ -55,18 +58,18 @@ internal class SpeechToTextRecorder {
             let pcm = Data(bytes: buffer.mAudioData, count: Int(buffer.mAudioDataByteSize))
             audioRecorder.onMicrophoneData?(pcm)
         }
-        
+
         // return early if recording is stopped
         guard audioRecorder.isRecording else {
             return
         }
-        
+
         // enqueue buffer
         if let queue = audioRecorder.queue {
             AudioQueueEnqueueBuffer(queue, bufferRef, 0, nil)
         }
     }
-    
+
     internal init() {
         // define audio format
         var formatFlags = AudioFormatFlags()
@@ -84,21 +87,21 @@ internal class SpeechToTextRecorder {
             mReserved: 0
         )
     }
-    
+
     private func prepareToRecord() {
         // create recording queue
         let pointer = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
         AudioQueueNewInput(&format, callback, pointer, nil, nil, 0, &queue)
-        
+
         // ensure queue was set
         guard let queue = queue else {
             return
         }
-        
+
         // update audio format
         var formatSize = UInt32(MemoryLayout<AudioStreamBasicDescription>.stride)
         AudioQueueGetProperty(queue, kAudioQueueProperty_StreamDescription, &format, &formatSize)
-        
+
         // allocate and enqueue buffers
         let numBuffers = 5
         let bufferSize = deriveBufferSize(seconds: 0.5)
@@ -109,13 +112,13 @@ internal class SpeechToTextRecorder {
                 AudioQueueEnqueueBuffer(queue, buffer, 0, nil)
             }
         }
-        
+
         // enable metering
         var metering: UInt32 = 1
         let meteringSize = UInt32(MemoryLayout<UInt32>.stride)
         let meteringProperty = kAudioQueueProperty_EnableLevelMetering
         AudioQueueSetProperty(queue, meteringProperty, &metering, meteringSize)
-        
+
         // set metering timer to invoke callback
         powerTimer = Timer(
             timeInterval: 0.025,
@@ -126,7 +129,7 @@ internal class SpeechToTextRecorder {
         )
         RunLoop.current.add(powerTimer!, forMode: RunLoopMode.commonModes)
     }
- 
+
     internal func startRecording() throws {
         guard !isRecording else { return }
         self.prepareToRecord()
@@ -134,7 +137,7 @@ internal class SpeechToTextRecorder {
         guard let queue = queue else { return }
         AudioQueueStart(queue, nil)
     }
- 
+
     internal func stopRecording() throws {
         guard isRecording else { return }
         guard let queue = queue else { return }
@@ -143,7 +146,7 @@ internal class SpeechToTextRecorder {
         AudioQueueStop(queue, true)
         AudioQueueDispose(queue, false)
     }
- 
+
     private func deriveBufferSize(seconds: Float64) -> UInt32 {
         guard let queue = queue else { return 0 }
         let maxBufferSize = UInt32(0x50000)
@@ -157,12 +160,12 @@ internal class SpeechToTextRecorder {
                 &maxVBRPacketSize
             )
         }
-        
+
         let numBytesForTime = UInt32(format.mSampleRate * Float64(maxPacketSize) * seconds)
         let bufferSize = (numBytesForTime < maxBufferSize ? numBytesForTime : maxBufferSize)
         return bufferSize
     }
-    
+
     @objc
     private func samplePower() {
         guard let queue = queue else { return }
@@ -174,3 +177,5 @@ internal class SpeechToTextRecorder {
         onPowerData?(meters[0].mAveragePower)
     }
 }
+
+#endif

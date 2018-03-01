@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try force_unwrapping superfluous_disable_command
+
 import XCTest
 import PersonalityInsightsV3
 
@@ -23,16 +25,15 @@ class PersonalityInsightsTests: XCTestCase {
     private var mobyDickIntro: String?
     private var kennedySpeechTXT: String?
     private var kennedySpeechHTML: String?
-    private let timeout: Double = 5.0
     private var version: String = "2016-10-20"
 
-    static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
+    static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
             ("testHTMLProfile", testHTMLProfile),
             ("testNeedsAndConsumptionPreferences", testNeedsAndConsumptionPreferences),
-            ("testProfileWithShortText", testProfileWithShortText)
+            ("testProfileWithShortText", testProfileWithShortText),
         ]
     }
 
@@ -57,12 +58,17 @@ class PersonalityInsightsTests: XCTestCase {
 
     /** Load external files to test. Fails if unable to locate file. */
     func load(forResource resource: String, ofType ext: String) -> String? {
-        let bundle = Bundle(for: type(of: self))
-        guard let file = bundle.path(forResource: resource, ofType: ext) else {
-            XCTFail("Unable to locate \(resource).\(ext) file.")
-            return nil
-        }
-        return try? String(contentsOfFile: file)
+        #if os(iOS)
+            let bundle = Bundle(for: type(of: self))
+            guard let file = bundle.path(forResource: resource, ofType: ext) else {
+                XCTFail("Unable to locate \(resource).\(ext) file.")
+                return nil
+            }
+            return try? String(contentsOfFile: file)
+        #else
+            let file = URL(fileURLWithPath: "Tests/PersonalityInsightsV3Tests/" + resource + "." + ext).path
+            return try? String(contentsOfFile: file, encoding: .utf8)
+        #endif
     }
 
     /** Load all testing resources required to run the tests. */
@@ -81,14 +87,14 @@ class PersonalityInsightsTests: XCTestCase {
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

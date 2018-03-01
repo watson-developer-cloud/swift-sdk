@@ -19,23 +19,23 @@ import Foundation
 /** Detailed results of content distribution over every weekday and hour of
     each day. */
 public struct BehaviorNode: JSONDecodable {
-    
+
     /// The globally unique id of the characteristic that pertains to behavior
     /// day and hour.
     public let traitID: String
-    
+
     /// The user-displayable name of the characteristic.
     public let name: String
-    
+
     /// The category of the characteristic which will always be behavior.
     public let category: String
-    
-    /// The percentage of content items that occurred during that day of the 
+
+    /// The percentage of content items that occurred during that day of the
     /// week or hour of the day. For example, the behavioral characteristic
     /// behavior_0000 with a percentage of 0.456 indicates about 46% of content
     /// items were created between midnight and 1:00 AM.
     public let percentage: Double
-    
+
     /// Used internally to initialize a `BehaviorNode` model from JSON.
     public init(json: JSONWrapper) throws {
         traitID = try json.getString(at: "trait_id")

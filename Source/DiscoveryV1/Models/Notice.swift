@@ -18,29 +18,29 @@ import Foundation
 
 /** A notice produced by the ingestion process. */
 public struct Notice: JSONDecodable {
-    
+
     /// Unique identifier of the notice.
     public let noticeID: String
-    
+
     /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mm
     /// :ss.SSS'Z'.
     public let created: String
-    
+
     /// Unique identifier of the ingested document.
     public let documentID: String
-    
+
     /// Severity level of the notice.
     public let severity: NoticeSeverity
-    
+
     /// Ingestion step in which the notice occurred.
     public let step: String
-    
+
     /// The description of the notice.
     public let description: String
-    
+
     /// JSON with details that might help troubleshoot the notice.
-    public let details: [String : Any]
-    
+    public let details: [String: Any]
+
     /// Used internally to initialize a `Notice` model from JSON.
     public init(json: JSONWrapper) throws {
         noticeID = try json.getString(at: "notice_id")
@@ -58,10 +58,10 @@ public struct Notice: JSONDecodable {
 
 /** Severity of a notice. */
 public enum NoticeSeverity: String {
-    
+
     /// Warning
     case warning = "warning"
-    
+
     /// Error
     case error = "error"
 }

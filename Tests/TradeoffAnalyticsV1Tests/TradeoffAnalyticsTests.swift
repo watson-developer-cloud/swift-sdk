@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try force_unwrapping superfluous_disable_command
+
 import XCTest
 import Foundation
 import TradeoffAnalyticsV1
@@ -21,25 +23,24 @@ import TradeoffAnalyticsV1
 class TradeoffAnalyticsTests: XCTestCase {
 
     private var tradeoffAnalytics: TradeoffAnalytics!
-    private let timeout: TimeInterval = 5.0
-    
-    static var allTests : [(String, (TradeoffAnalyticsTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (TradeoffAnalyticsTests) -> () throws -> Void)] {
         return [
             ("testGetDilemma1", testGetDilemma1),
             ("testGetDilemma2", testGetDilemma2),
-            ("testGetDilemmaMalformedProblem", testGetDilemmaMalformedProblem)
+            ("testGetDilemmaMalformedProblem", testGetDilemmaMalformedProblem),
         ]
     }
-    
+
     // MARK: - Test Configuration
-    
+
     /** Set up for each test by instantiating the service. */
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
         instantiateTradeoffAnalytics()
     }
-    
+
     /** Instantiate Tradeoff Analytics. */
     func instantiateTradeoffAnalytics() {
         let username = Credentials.TradeoffAnalyticsUsername
@@ -53,30 +54,30 @@ class TradeoffAnalyticsTests: XCTestCase {
     func failWithError(error: Error) {
         XCTFail("Positive test failed with error: \(error)")
     }
-    
+
     /** Fail false positives. */
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     // MARK: - Positive Tests
-    
+
     func testGetDilemma1() {
         let description = "Create and resolve a sample problem."
         let expectation = self.expectation(description: description)
-        
+
         // define columns
         let price = Column(
             key: "price",
@@ -104,7 +105,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             range: Range.categoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
             preference: ["android", "ios"]
         )
-        
+
         // define options
         let galaxy = Option(
             key: "galaxy",
@@ -128,15 +129,15 @@ class TradeoffAnalyticsTests: XCTestCase {
             options: [galaxy, iphone, optimus],
             subject: "Phone"
         )
-        
+
         tradeoffAnalytics.getDilemma(for: problem, failure: failWithError) {
             dilemma in
-            
+
             // verify problem
             XCTAssertEqual(dilemma.problem.columns.count, 4)
             XCTAssertEqual(dilemma.problem.subject, "Phone")
             XCTAssertEqual(dilemma.problem.options.count, 3)
-            
+
             // verify problem columns
             let columns = dilemma.problem.columns
             XCTAssertEqual(columns[0].type, ColumnType.numeric)
@@ -178,7 +179,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             XCTAssertNotNil(options[2].values["os"])
             XCTAssertNotNil(options[2].values["ram"])
             XCTAssertNotNil(options[2].values["screen"])
-            
+
             // verify solutions
             let solutions = dilemma.resolution.solutions
             XCTAssertNil(solutions[0].shadowMe)
@@ -196,16 +197,16 @@ class TradeoffAnalyticsTests: XCTestCase {
             XCTAssertEqual(solutions[2].solutionRef, "iphone")
             XCTAssertEqual(solutions[2].status, SolutionStatus.excluded)
             XCTAssertNil(solutions[2].statusCause)
-            
+
             expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testGetDilemma2() {
         let description = "Create and resolve a sample problem."
         let expectation = self.expectation(description: description)
-        
+
         // define columns
         let categorical = Column(
             key: "categorical",
@@ -259,7 +260,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             fullName: "Text Column",
             description: "This column tests the text column type."
         )
-        
+
         // define options
         let option1 = Option(
             key: "option1",
@@ -268,7 +269,7 @@ class TradeoffAnalyticsTests: XCTestCase {
                 "date": .date(Date()),
                 "numeric-int": .int(0),
                 "numeric-double": .double(0.0),
-                "text": .string("This option should be preferred.")
+                "text": .string("This option should be preferred."),
             ],
             name: "Option 1",
             descriptionHTML: "<b>Option</b> 1"
@@ -280,7 +281,7 @@ class TradeoffAnalyticsTests: XCTestCase {
                 "date": .date(Date()),
                 "numeric-int": .int(100),
                 "numeric-double": .double(1.0),
-                "text": .string("This option should be a shadow.")
+                "text": .string("This option should be a shadow."),
             ],
             name: "Option 2",
             descriptionHTML: "<b>Option</b> 1"
@@ -292,7 +293,7 @@ class TradeoffAnalyticsTests: XCTestCase {
                 "date": .date(Date(timeIntervalSinceNow: -60)),
                 "numeric-int": .int(100),
                 "numeric-double": .double(1.0),
-                "text": .string("This option should not meet preference.")
+                "text": .string("This option should not meet preference."),
             ],
             name: "Option 3",
             descriptionHTML: "<b>Option</b> 1"
@@ -304,27 +305,27 @@ class TradeoffAnalyticsTests: XCTestCase {
                 "date": .date(Date(timeIntervalSinceNow: -60)),
                 "numeric-int": .int(100),
                 "numeric-double": .double(1.0),
-                "text": .string("This option should be incomplete.")
+                "text": .string("This option should be incomplete."),
             ],
             name: "Option 4",
             descriptionHTML: "<b>Option</b> 1"
         )
-        
+
         // define problem
         let problem = Problem(
             columns: [categorical, date, numericInt, numericDouble, text],
             options: [option1, option2, option3, option4],
             subject: "TestProblem"
         )
-        
+
         tradeoffAnalytics.getDilemma(for: problem, failure: failWithError) {
             dilemma in
-            
+
             // verify problem
             XCTAssertEqual(dilemma.problem.columns.count, 5)
             XCTAssertEqual(dilemma.problem.subject, "TestProblem")
             XCTAssertEqual(dilemma.problem.options.count, 4)
-            
+
             // verify problem columns
             let columns = dilemma.problem.columns
             XCTAssertEqual(columns[0].type, ColumnType.categorical)
@@ -376,7 +377,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             XCTAssertNotNil(columns[4].description)
             XCTAssertEqual(columns[4].goal, Goal.maximize)
             XCTAssert(columns[4].isObjective == false)
-            
+
             // verify problem options
             let options = dilemma.problem.options
             XCTAssertEqual(options[0].key, "option3")
@@ -411,7 +412,7 @@ class TradeoffAnalyticsTests: XCTestCase {
             XCTAssertNotNil(options[3].values["numeric-int"])
             XCTAssertNotNil(options[3].values["numeric-double"])
             XCTAssertNotNil(options[3].descriptionHTML)
-            
+
             // verify solutions
             let solutions = dilemma.resolution.solutions
             XCTAssertNil(solutions[0].shadowMe)
@@ -434,29 +435,29 @@ class TradeoffAnalyticsTests: XCTestCase {
             XCTAssertEqual(solutions[3].solutionRef, "option1")
             XCTAssertEqual(solutions[3].status, SolutionStatus.front)
             XCTAssertNil(solutions[3].statusCause)
-            
+
             expectation.fulfill()
-            
+
         }
         waitForExpectations()
     }
-    
+
     // MARK: - Negative Tests
-    
+
     func testGetDilemmaMalformedProblem() {
         let description = "Try to resolve a malformed problem."
         let expectation = self.expectation(description: description)
-        
+
         let problem = Problem(
             columns: [],
             options: [],
             subject: "TestProblem"
         )
-        
+
         let failure = { (error: Error) in
             expectation.fulfill()
         }
-        
+
         tradeoffAnalytics.getDilemma(for: problem, failure: failure, success: failWithResult)
         waitForExpectations()
     }

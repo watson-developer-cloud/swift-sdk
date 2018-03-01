@@ -18,45 +18,45 @@ import Foundation
 
 /** A custom language model. */
 public struct Customization: JSONDecodable {
-    
+
     /// The ID of this custom language model.
     public let customizationID: String
-    
+
     /// The creation date of the custom language model, in the format YYYY-MM-DDThh:mm:ss.sTZD.
     public let created: String
-    
+
     /// The language of the custom language model. For example, `en-US` or `ja-JP`.
     public let language: String
-    
+
     /// The dialect of the language for the custom model. For US English and Japanese models,
     /// the field is always `en-US` or `ja-JP`. For Spanish models, the field indicates the
     /// dialect for which the model was created: `es-ES` for Castilian Spanish (the default);
     /// `es-LA` for Latin-American Spanish; or `es-US` for North-American (Mexican) Spanish.
     public let dialect: String
-    
+
     /// The ID of the service credentials for the owner of this model.
     public let owner: String
-    
+
     /// The name of the custom language model.
     public let name: String
-    
+
     /// The description of the custom language model.
     public let description: String
-    
+
     /// The name of the base language model for which this custom language model was created.
     public let baseModelName: String
-    
+
     /// The current status of the custom language model.
     public let status: CustomizationStatus
-    
-    /// A percentage indicating the progress of the model's current training. A value of `100` 
+
+    /// A percentage indicating the progress of the model's current training. A value of `100`
     /// means that the model is fully trained.
     public let progress: Int
-    
-    /// If the request contained unknown query parameters, a list of those unknown parameters will 
+
+    /// If the request contained unknown query parameters, a list of those unknown parameters will
     /// be included here.
     public let warnings: String?
-    
+
     /// Used internally to initialize a `Customization` model from JSON.
     public init(json: JSONWrapper) throws {
         customizationID = try json.getString(at: "customization_id")
@@ -78,20 +78,20 @@ public struct Customization: JSONDecodable {
 
 /** The current status of the custom language model. */
 public enum CustomizationStatus: String {
-    
-    /// The model was created but is waiting either for training data to be added or for the 
+
+    /// The model was created but is waiting either for training data to be added or for the
     /// service to finish analyzing added data.
     case pending = "pending"
-    
+
     /// The model contains data and is ready to be trained.
     case ready = "ready"
-    
+
     /// The model is currently being trained.
     case training = "training"
-    
+
     /// The model is trained and ready to use.
     case available = "available"
-    
+
     /// Training of the model failed.
     case failed = "failed"
 }

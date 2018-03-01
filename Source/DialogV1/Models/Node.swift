@@ -15,19 +15,19 @@
  **/
 
 import Foundation
-    
+
 /** A dialog node. */
 public struct Node: JSONEncodable, JSONDecodable {
-    
+
     /// The node's associated content.
     public let content: String
-    
+
     /// The node's type.
     public let node: String
 
     /**
      Create a `Node` with associated content and a type.
- 
+
      - parameter content: The node's associated content.
      - parameter node: The node's type.
      */

@@ -17,17 +17,17 @@
 import Foundation
 
 /**
- 
+
  **Authors**
- 
+
  Authors extracted from a document by the AlchemyLanguage service.
- 
+
  */
 public struct Authors: JSONDecodable {
-    
+
     /** Names of the extracted authors */
     public let names: [String]
-    
+
     /// Used internally to initialize a Authors object
     public init(json: JSONWrapper) throws {
         names = try json.decodedArray(at: "names", type: Swift.String.self)

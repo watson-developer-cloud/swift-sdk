@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016-2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,49 +17,56 @@
 import Foundation
 
 /**
- The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images,
- identify scenes, objects, faces, text, and other content, and return keywords that provide
- information about that content.
+ **Important:** As of September 8, 2017, the beta period for Similarity Search is closed. For more information, see
+ [Visual Recognition API – Similarity Search Update](https://www.ibm.com/blogs/bluemix/2017/08/visual-recognition-api-similarity-search-update).
+
+ The IBM Watson Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces  in
+ images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
+ needs.
+
+ **Tip:** To test calls to the **Custom classifiers** methods with the API explorer, provide your `api_key` from your
+ IBM Cloud service instance.
  */
 public class VisualRecognition {
-    
+
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
-    
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
-    
-    internal let apiKey: String
-    internal let version: String
-    internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
-    
+
+    private let credentials: Credentials
+    private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
+    private let version: String
+
     /**
      Create a `VisualRecognition` object.
- 
+
      - parameter apiKey: The API key used to authenticate with the service.
-     - parameter version: The release date of the version of the API to use. Specify the date in
-        "YYYY-MM-DD" format.
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
      */
     public init(apiKey: String, version: String) {
-        self.apiKey = apiKey
+        self.credentials = .apiKey(name: "api_key", key: apiKey, in: .query)
         self.version = version
     }
-    
+
     /**
      If the response or data represents an error returned by the Visual Recognition service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
-        // Typically, we would check the http status code in the response object here, and return
-        // `nil` if the status code is successful (200 <= statusCode < 300). However, there are 
-        // specific endpoints, like the `classify` endpoint, where the service returns a status
-        // code of 200 if you are able to successfully contact the service, without regards to
-        // whether the response itself was a success or a failure.
-        
+
+        // First check http status code in response
+        if let response = response {
+            if (200..<300).contains(response.statusCode) {
+                return nil
+            }
+        }
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -67,425 +74,213 @@ public class VisualRecognition {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
-            var code = response?.statusCode ?? 400
-            let userInfo: [String: String]
-            if let status = try? json.getString(at: "status") {
-                let statusInfo = try json.getString(at: "statusInfo")
-                userInfo = [
-                    NSLocalizedFailureReasonErrorKey: status,
-                    NSLocalizedDescriptionKey: statusInfo
-                ]
-            } else if let message = try? json.getString(at: "error") {
-                userInfo = [
-                    NSLocalizedDescriptionKey: message
-                ]
-            } else {
-                let message = try json.getString(at: "images", 0, "error", "error_id")
-                let description = try json.getString(at: "images", 0, "error", "description")
-                let imagesProcessed = try json.getInt(at: "images_processed")
-                code = 400
-                userInfo = [
-                    NSLocalizedFailureReasonErrorKey: message,
-                    NSLocalizedDescriptionKey: description + " -- Images Processed: \(imagesProcessed)"
-                ]
-            }
+            let code = response?.statusCode ?? 400
+            let errorID = (try? json.getString(at: "error_id")) ?? (try? json.getString(at: "error", "error_id"))
+            let error = try? json.getString(at: "error")
+            let status = try? json.getString(at: "status")
+            let html = try? json.getString(at: "Error")
+            let message = errorID ?? error ?? status ?? html ?? "Unknown error."
+            let description = (try? json.getString(at: "description")) ?? (try? json.getString(at: "error", "description"))
+            let statusInfo = try? json.getString(at: "statusInfo")
+            let reason = description ?? statusInfo ?? "Please use the status code to refer to the documentation."
+            let userInfo = [
+                NSLocalizedDescriptionKey: message,
+                NSLocalizedFailureReasonErrorKey: reason,
+            ]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }
     }
-    
-    // MARK: - Methods
-    
+
     /**
-     Classify an image at the given URL.
-     
-     - parameter image: The URL of the image (.jpg or .png). Redirects are followed, so you can use
-        shortened URLs. The resolved URL is returned in the response. Maximum image size is 2 MB.
-     - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
-     - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
-        built-in classifier.
-     - parameter threshold: The minimum score a class must have to be displayed in the response.
-     - parameter language: The language of the output class names. Can be "en" (English), "es"
-        (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
-        are omitted.
+     Classify images.
+
+     Classify images with built-in or custom classifiers.
+
+     - parameter imagesFile: An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB.
+        Include no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in
+        UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII
+        characters. You can also include images with the `url` parameter.
+    - parameter url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
+        pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
+        in the `imagesFile` parameter.
+    - parameter threshold: A floating point value that specifies the minimum score a class must have to be displayed
+        in the response. The default threshold for returning scores from a classifier is `0.5`. Set the threshold
+        to `0.0` to ignore the classification score and return all values.
+    - parameter owners: An array of the categories of classifiers to apply. Use `IBM` to classify against the `default`
+        general classifier, and use `me` to classify against your custom classifiers. To analyze the image against
+        both classifier categories, set the value to both `IBM` and `me`. The built-in `default` classifier is
+        used if both `classifierIDs` and `owners` parameters are empty. The `classifierIDs` parameter
+        overrides `owners`, so make sure that `classifierIDs` is empty.
+    - parameter classifierIDs: Specifies which classifiers to apply and overrides the `owners` parameter. You can
+        specify both custom and built-in classifiers. The built-in `default` classifier is used if both
+        `classifier_ids` and `owners` parameters are empty.  The following built-in classifier IDs
+        require no training:
+        - `default`: Returns classes from thousands of general tags.
+        - `food`: (Beta) Enhances specificity and accuracy for images of food items.
+        - `explicit`: (Beta) Evaluates whether the image might be pornographic.
+     - parameter acceptLanguage: Specifies the language of the output class names.  Can be `en` (English), `ar`
+        (Arabic), `de` (German), `es` (Spanish), `it` (Italian), `ja` (Japanese), or `ko` (Korean).  Classes for
+        which no translation is available are omitted.  The response might not be in the specified language under
+        these conditions:
+        - English is returned when the requested language is not supported.
+        - Classes are not returned when there is no translation for them.
+        - Custom classifiers returned with this method return tags in the language of the custom classifier.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the image classifications.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func classify(
-        image url: String,
+        imagesFile: URL? = nil,
+        url: String? = nil,
+        threshold: Double? = nil,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
-        threshold: Double? = nil,
-        language: String? = nil,
+        acceptLanguage: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "url", value: url))
-        if let owners = owners {
-            let list = owners.joined(separator: ",")
-            queryParameters.append(URLQueryItem(name: "owners", value: list))
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let imagesFile = imagesFile {
+            multipartFormData.append(imagesFile, withName: "images_file")
         }
-        if let classifierIDs = classifierIDs {
-            let list = classifierIDs.joined(separator: ",")
-            queryParameters.append(URLQueryItem(name: "classifier_ids", value: list))
-        }
-        if let threshold = threshold {
-            queryParameters.append(URLQueryItem(name: "threshold", value: "\(threshold)"))
-        }
-        
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let language = language {
-            headerParameters["Accept-Language"] = language
-        }
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/classify",
-            credentials: .apiKey,
-            headerParameters: headerParameters,
-            acceptType: "application/json",
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ClassifiedImages>) in
-            switch response.result {
-            case .success(let classifiedImages): success(classifiedImages)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-    
-    /**
-     Upload and classify an image or multiple images in a compressed (.zip) file.
-     
-     - parameter imageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
-     total number of images is limited to 20, with a max .zip size of 5 MB.
-     - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
-     - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
-     built-in classifier.
-     - parameter threshold: The minimum score a class must have to be displayed in the response.
-     - parameter language: The language of the output class names. Can be "en" (English), "es"
-     (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
-     are omitted.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the image classifications.
-     */
-    public func classify(
-        imageFile image: URL,
-        owners: [String]? = nil,
-        classifierIDs: [String]? = nil,
-        threshold: Double? = nil,
-        language: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifiedImages) -> Void)
-    {
-        print( "hitting WatsonVR endpoint..." )
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let language = language {
-            headerParameters["Accept-Language"] = language
-        }
-        
-        // construct visual recognition parameters
-        var parameters = [String: Any]()
-        if let owners = owners {
-            parameters["owners"] = owners
-        }
-        if let classifierIDs = classifierIDs {
-            parameters["classifier_ids"] = classifierIDs
-        }
-        if let threshold = threshold {
-            parameters["threshold"] = threshold
-        }
-        guard let json = try? JSONWrapper(dictionary: parameters).serialize() else {
+        let parameters = Parameters(url: url, threshold: threshold, owners: owners, classifierIDs: classifierIDs)
+        guard let parametersData = try? JSONEncoder().encode(parameters) else {
             failure?(RestError.encodingError)
             return
         }
-        
-        // construct body
-        let multipartFormData = MultipartFormData()
-        multipartFormData.append(image, withName: "image_file", mimeType: "application/octet-stream")
-        multipartFormData.append(json, withName: "parameters", mimeType: "application/octet-stream", fileName: "parameters.json")
+        multipartFormData.append(parametersData, withName: "parameters")
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return
         }
-        
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classify",
-            credentials: .apiKey,
-            headerParameters: headerParameters,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ClassifiedImages>) in
-            switch response.result {
-            case .success(let classifiedImages): success(classifiedImages)
-            case .failure(let error):
-                print(response)
-                failure?(error)
-            }
-        }
-    }
-    
-    /**
-     TODO - proper implementation without writing to temp file
-     
-     Upload and classify an image from NSData
-     
-     - parameter image: The image as NSData
-     - parameter owners: A list of the classifiers to run. Acceptable values are "IBM" and "me".
-     - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
-        built-in classifier.
-     - parameter threshold: The minimum score a class must have to be displayed in the response.
-     - parameter language: The language of the output class names. Can be "en" (English), "es"
-        (Spanish), "ar" (Arabic), or "ja" (Japanese). Classes for which no translation is available
-        are omitted.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the image classifications.
-     */
-    public func classify(
-        image: Data,
-        owners: [String]? = nil,
-        classifierIDs: [String]? = nil,
-        threshold: Double? = nil,
-        language: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifiedImages) -> Void)
-    {
-        // write to temp file
-        print("Writing image to temporary file...")
-        let tempImagePath = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("temp.jpeg")
-        do {
-            try image.write( to: tempImagePath, options: .atomic)
-        } catch {
-            print("Failed to write temporary file to disk.\n\(error)")
-            return
-        }
-        
-        // hit classify endpoint from image file
-        self.classify(imageFile: tempImagePath, owners: owners, classifierIDs:classifierIDs, threshold:threshold, language:language, failure:failure, success: success)
-    }
-    
-    /**
-     Detect faces in an image at the given URL. Each face is analyzed to estimate age, gender,
-     celebrity name, and more.
-     
-     - parameter inImage: The URL of the image (.jpg or .png). Redirects are followed, so you
-        can use shortened URLs. The resolved URL is returned in the response. Maximum image size is
-        2 MB.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the detected faces.
-     */
-    public func detectFaces(
-        inImage url: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ImagesWithFaces) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "url", value: url))
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/detect_faces",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ImagesWithFaces>) in
-            switch response.result {
-            case .success(let classifiedImages): success(classifiedImages)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-    
-    /**
-     Upload and detect faces in an image or multiple images in a compressed (.zip) file. Each face
-     is analyzed to estimate age, gender, celebrity name, and more.
-     
-     - parameter inImageFile: The image file (.jpg or .png) or compressed (.zip) file of images. The
-        total number of images is limited to 20, with a max .zip size of 5 MB.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the image classifications.
-     */
-    public func detectFaces(
-        inImageFile image: URL,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ImagesWithFaces) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct body
-        let multipartFormData = MultipartFormData()
-        multipartFormData.append(image, withName: "image_file", mimeType: "application/octet-stream")
-        guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
-            return
-        }
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + "/v3/detect_faces",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ImagesWithFaces>) in
+            (response: RestResponse<ClassifiedImages>) in
             switch response.result {
-            case .success(let classifiedImages): success(classifiedImages)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
-    // MARK: - Custom Classifiers
 
     /**
-     Retrieve a list of custom classifiers.
+     Detect faces in images.
 
-     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
+     Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can
+     identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The
+     Detect faces method does not support general biometric facial recognition.
+
+     - parameter imagesFile: An image file (.jpg, .png) or .zip file with images. Include no more than 15 images. You
+        can also include images with the `url` parameter.  All faces are detected, but if there are more than 10 faces
+        in an image, age and gender confidence scores might return scores of 0.
+     - parameter url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
+        pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
+        in the `imagesFile` parameter.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the list of classifiers.
-     */
-    public func getClassifiers(
-        owners: [String]? = nil,
+     - parameter success: A function executed with the successful result.
+    */
+    public func detectFaces(
+        imagesFile: URL? = nil,
+        url: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Classifier]) -> Void)
+        success: @escaping (DetectedFaces) -> Void)
     {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let imagesFile = imagesFile {
+            multipartFormData.append(imagesFile, withName: "images_file", mimeType: "application/octet-stream")
+        }
+        if let url = url {
+            let parameters = Parameters(url: url, threshold: nil, owners: nil, classifierIDs: nil)
+            if let parametersData = try? JSONEncoder().encode(parameters) {
+                multipartFormData.append(parametersData, withName: "parameters")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "verbose", value: "true"))
-        if let owners = owners {
-            let list = owners.joined(separator: ",")
-            queryParameters.append(URLQueryItem(name: "owners", value: list))
-        }
-        
+
         // construct REST request
         let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/classifiers",
-            credentials: .apiKey,
+            method: "POST",
+            url: serviceURL + "/v3/detect_faces",
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryItems: queryParameters
+            contentType: multipartFormData.contentType,
+            queryItems: queryParameters,
+            messageBody: body
         )
-        
+
         // execute REST request
-        request.responseArray(responseToError: responseToError, path: ["classifiers"]) {
-            (response: RestResponse<[Classifier]>) in
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DetectedFaces>) in
             switch response.result {
-            case .success(let classifiers): success(classifiers)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
-     Create and train a classifier with uploaded image data. You must supply at least two compressed
-     (.zip) files of images, either two positive example files or one positive and one negative
-     example file.
-     
-     Compressed files containing positive examples are used to create classes that define what the
-     new classifier is. There is no limit to the number of positive example files that can be
-     uploaded in a single call.
-     
-     The compressed file containing negative examples is not used to create a class within the
-     trained classifier, but does define what the new classifier is not. Negative example files
-     should contain images that do not depict the subject of any of the positive examples. You can
-     only specify one negative example file in a single call.
- 
-     - parameter withName: The name of the new classifier.
+     Create a classifier.
+
+     Train a new multi-faceted classifier on the uploaded image data. Create your custom classifier with positive or
+     negative examples. Include at least two sets of examples, either two positive example files or one positive and one
+     negative file. You can upload a maximum of 256 MB per call.  Encode all names in UTF-8 if they contain non-ASCII
+     characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it
+     encounters non-ASCII characters.
+
+     - parameter name: The name of the new classifier. Encode special characters in UTF-8.
      - parameter positiveExamples: An array of positive examples, each with a name and a compressed
-        (.zip) file of images that depict the visual subject for a class within the new classifier.
-        Must contain a minimum of 10 images.
-     - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
-        subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
+        (.zip) file of images that depict the visual subject for a class within the new classifier. Include at least
+        10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number
+        of images is 10,000 images or 100 MB per .zip file.
+     - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual subject of any
+        of the classes of the new classifier. Must contain a minimum of 10 images.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the created classifier.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func createClassifier(
-        withName name: String,
+        name: String,
         positiveExamples: [PositiveExample],
         negativeExamples: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
-        // ensure at least two classes were specified
-        let twoOrMoreClasses = (positiveExamples.count >= 2)
-        let positiveAndNegative = (positiveExamples.count >= 1 && negativeExamples != nil)
-        guard twoOrMoreClasses || positiveAndNegative else {
-            let failureReason = "You must supply at least two compressed (.zip) files of images, " +
-                                "either two positive example files or one positive and one " +
-                                "negative example file."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-            failure?(error)
-            return
-        }
-        
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // encode name as data
-        guard let name = name.data(using: .utf8) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        
         // construct body
         let multipartFormData = MultipartFormData()
-        multipartFormData.append(name, withName: "name")
-        for positiveExample in positiveExamples {
-            let name = positiveExample.name + "_positive_examples"
-            let examples = positiveExample.examples
-            multipartFormData.append(examples, withName: name)
+        let nameData = name.data(using: String.Encoding.utf8)!
+        multipartFormData.append(nameData, withName: "name")
+        positiveExamples.forEach { example in
+            multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
         }
         if let negativeExamples = negativeExamples {
             multipartFormData.append(negativeExamples, withName: "negative_examples")
@@ -494,148 +289,205 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classifiers",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
             contentType: multipartFormData.contentType,
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
             switch response.result {
-            case .success(let classifier): success(classifier)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
-     Delete a custom classifier.
-     
-     - parameter withID: The id of the classifier to delete.
+     Delete a classifier.
+
+     - parameter classifierID: The ID of the classifier.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed after the classifier has been successfully deleted.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func deleteClassifier(
-        withID classifierID: String,
+        classifierID: String,
         failure: ((Error) -> Void)? = nil,
-        success: (() -> Void)? = nil)
+        success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        
+
         // construct REST request
+        let path = "/v3/classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + "/v3/classifiers/\(classifierID)",
-            credentials: .apiKey,
+            url: serviceURL + encodedPath,
+            credentials: credentials,
             headerParameters: defaultHeaders,
-            queryItems: queryParameters
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
         )
-        
+
         // execute REST request
-        request.responseData { response in
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
             switch response.result {
-            case .success(let data):
-                switch self.responseToError(response: response.response, data: data) {
-                case .some(let error): failure?(error)
-                case .none: success?()
-                }
-            case .failure(let error):
-                failure?(error)
+            case .success: success()
+            case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
+     Retrieve classifier details.
+
      Retrieve information about a custom classifier.
- 
-     - parameter withID: The classifier ID or IBM model ID of the classifier to retrieve information about.
+
+     - parameter classifierID: The ID of the classifier.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the retrieved information about the given
-            classifier.
-     */
+     - parameter success: A function executed with the successful result.
+    */
     public func getClassifier(
-        withID classifierID: String,
+        classifierID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+        let path = "/v3/classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v3/classifiers/\(classifierID)",
-            credentials: .apiKey,
+            url: serviceURL + encodedPath,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            queryItems: queryParameters
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
             switch response.result {
-            case .success(let classifier): success(classifier)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
-    
+
     /**
-     Update a custom classifier by adding new classes or images.
-     
-     - parameter withID: The id of the classifier to update.
-     - parameter positiveExamples: An array of positive examples, each with a name and a compressed
-        (.zip) file of images that depict the visual subject for a class within the new classifier.
-        Must contain a minimum of 10 images.
-     - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual
-        subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
+     Retrieve a list of custom classifiers.
+
+     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
+     - parameter verbose: Specify `true` to return details about the classifiers.
+        Omit this parameter to return a brief list of classifiers.
      - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the created classifier.
-     */
+     - parameter success: A function executed with the successful result.
+    */
+    public func listClassifiers(
+        owners: [String]? = nil,
+        verbose: Bool? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Classifiers) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let owners = owners {
+            let list = owners.joined(separator: ",")
+            queryParameters.append(URLQueryItem(name: "owners", value: list))
+        }
+        if let verbose = verbose {
+            let queryParameter = URLQueryItem(name: "verbose", value: "\(verbose)")
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/classifiers",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Classifiers>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Update a classifier.
+
+     Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
+     existing classes. You must supply at least one set of positive or negative examples. For details, see
+     [Updating custom classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
+     Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
+     class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Important:** You can't
+     update a custom classifier with an API key for a Lite plan. To update a custom classifer on a Lite plan, create
+     another service instance on a Standard plan and re-create your custom classifier.  **Tip:** Don't make retraining
+     calls on a classifier until the status is ready. When you submit retraining requests in parallel, the last request
+     overwrites the previous requests. The retrained property shows the last time the classifier retraining finished.
+
+     - parameter classifierID: The ID of the classifier.
+     - parameter positiveExamples: An array of positive examples, each with a name and a compressed
+        (.zip) file of images that depict the visual subject for a class within the new classifier. Include at least
+        10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number
+        of images is 10,000 images or 100 MB per .zip file.
+     - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual subject of any
+        of the classes of the new classifier. Must contain a minimum of 10 images.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
     public func updateClassifier(
-        withID classifierID: String,
+        classifierID: String,
         positiveExamples: [PositiveExample]? = nil,
         negativeExamples: URL? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
-        // ensure there is at least one compressed file
-        guard (positiveExamples != nil) || (negativeExamples != nil) else {
-            let failureReason = "To update a classifier, you must provide at least one " +
-                                "compressed file of either positive or negative examples."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
-            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-            failure?(error)
-            return
-        }
-        
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
         // construct body
         let multipartFormData = MultipartFormData()
         if let positiveExamples = positiveExamples {
-            for positiveExample in positiveExamples {
-                let name = positiveExample.name + "_positive_examples"
-                let examples = positiveExample.examples
-                multipartFormData.append(examples, withName: name)
+            positiveExamples.forEach { example in
+                multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
             }
         }
         if let negativeExamples = negativeExamples {
@@ -645,612 +497,36 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
-        
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
+        let path = "/v3/classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/classifiers/\(classifierID)",
-            credentials: .apiKey,
+            url: serviceURL + encodedPath,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: multipartFormData.contentType,
+            contentType: nil,
             queryItems: queryParameters,
             messageBody: body
         )
-        
+
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
             switch response.result {
-            case .success(let classifier): success(classifier)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-    
-    // MARK: - Custom Collections
-    
-    /** 
-     Create a new collection. A maximum of five collections can be created.
-     
-     - parameter name:  The name of the new collection. The name can be a maximum of 128 UTF-8
-        characters. The name cannot contain any spaces.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the newly created collection.
-    */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func createCollection (
-        withName name: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Collection) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        //construct body
-        let multipartFormData = MultipartFormData()
-        let nameData = name.data(using: String.Encoding.utf8)!
-        multipartFormData.append(nameData, withName: "name")
-        guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
-            return
-        }
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + "/v3/collections",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Collection>) in
-            switch response.result {
-            case .success(let collection): success(collection)
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
     }
 
-    /**
-    List all collections created.
- 
-    - parameter failure: A function executed if an error occurs.
-    - parameter success: A function executed with the list of classifiers.
-    */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func getCollections(
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping ([Collection]) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/collections",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseArray(responseToError: responseToError, path: ["collections"]) {
-            (response: RestResponse<[Collection]>) in
-            switch response.result {
-            case .success(let collections): success(collections)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-    
-    /**
-     Retrieve the information of a specified collection.
-     
-     - parameter withID: The ID of the collection to retrieve.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the collection retrieved.
-     */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func retrieveCollectionDetails(
-        withID collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Collection) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/collections/\(collectionID)",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Collection>) in
-            switch response.result {
-            case .success(let collection): success(collection)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-    
-    /**
-     Delete a collection.
-     
-     - parameter withID: The ID of the collection to delete.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed after the collection has been successfully deleted.
-    */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func deleteCollection(
-        withID collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: (() -> Void)? = nil)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + "/v3/collections/\(collectionID)",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseData { response in
-            switch response.result {
-            case .success(let data):
-                switch self.responseToError(response: response.response, data: data) {
-                case .some(let error): failure?(error)
-                case .none: success?()
-                }
-            case .failure(let error):
-                failure?(error)
-            }
-        }
-    }
-    
-    /**
-     Add images to a collection. Each collection can hold 1000000 images. Each image takes
-     one second to upload.
-     
-     - parameter withID: The ID of the collection images will be added to.
-     - parameter imageFile: The image file (.jpg or .png) of the image to add to the
-        collection. The maximum file size to upload an image is 2 MB. If the images do not
-        require a specific resolution, shrink the image to make the request faster.
-        Concurrent requests of uploading photos is not supported. Uploading more than one
-        image (.zip or folder of images) is not supported too. Uploading one image takes
-        approximately one second.
-     - parameter metadata: The JSON file that adds metadata to the image. The maximum
-        file size for each image is 2 KB. Metadata can be used to identify images.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with information about the image added to the
-        collection.
-     */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func addImageToCollection(
-        withID collectionID: String,
-        imageFile image: URL,
-        metadata: URL? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (CollectionImages) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        //construct body
-        let multipartFormData = MultipartFormData()
-        multipartFormData.append(image, withName: "image_file")
-        if let metadata = metadata {
-            multipartFormData.append(metadata, withName: "metadata")
-        }
-        guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
-            return
-        }
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + "/v3/collections/\(collectionID)/images",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<CollectionImages>) in
-            switch response.result {
-            case .success(let images): success(images)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-    
-    /**
-     List an arbitrary selection of 100 images in a selected collection. Each
-     collection can contain 1000000 images.
-     
-     - parameter withID: The ID of the collection to list the images from.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the list of images in the collection.
-     */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func getImagesInCollection(
-        withID collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping ([CollectionImage]) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/collections/\(collectionID)/images",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseArray(responseToError: responseToError, path: ["images"]) {
-            (response: RestResponse<[CollectionImage]>) in
-            switch response.result {
-            case .success(let images): success(images)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-    
-    /**
-     List the details of an image within a collection.
-     
-     - parameter withID: The ID of the collection the image is in.
-     - parameter imageID: The ID of the image to get details from.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the image's details.
-     */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func listImageDetailsInCollection(
-        withID collectionID: String,
-        imageID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (CollectionImage) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<CollectionImage>) in
-            switch response.result {
-            case .success(let image): success(image)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-    
-    /**
-     Delete an image from a collection.
- 
-     - parameter withID: The ID of the collection to delete the image from.
-     - parameter imageID: The ID of the image to delete.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed when the image is deleted successfully.
-    */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func deleteImageFromCollection(
-        withID collectionID: String,
-        imageID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: (() -> Void)? = nil)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseData { response in
-            switch response.result {
-            case .success(let data):
-                switch self.responseToError(response: response.response, data: data) {
-                case .some(let error): failure?(error)
-                case .none: success?()
-                }
-            case .failure(let error):
-                failure?(error)
-            }
-        }
-    }
- 
-    /**
-     Delete an image's metadata from a collection.
-     
-     - parameter forImageID: The ID of the image containing the metadata to delete.
-     - parameter inCollectionID: The ID of the collection to delete the image's metadata from.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed when the image metadata is deleted successfully.
-    */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func deleteImageMetadata(
-        forImageID imageID: String,
-        inCollectionID collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: (() -> Void)? = nil)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseData { response in
-            switch response.result {
-            case .success(let data):
-                switch self.responseToError(response: response.response, data: data) {
-                case .some(let error): failure?(error)
-                case .none: success?()
-                }
-            case .failure(let error):
-                failure?(error)
-            }
-        }
-    }
-    
-    /**
-     List an image's metadata from a collection. 
-     
-     - parameter forImageID: The ID of the image to list metadata from.
-     - parameter inCollectionID: The ID of the collection to list the image's metadata from.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed when the image metadata is listed successfully.
-     */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func listImageMetadata(
-        forImageID imageID: String,
-        inCollectionID collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Metadata) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            queryItems: queryParameters
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Metadata>) in
-            switch response.result {
-            case .success(let metadata): success(metadata)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-    
-    /**
-     Update an image's metadata from a collection. 
-     
-     - parameter forImageID: The ID of the image to update.
-     - parameter inCollectionID: The ID of the collection to update the image's metadata.
-     - parameter metadata: The JSON file that adds metadata to the image. The maximum
-        file size for each image is 2 KB. Metadata can be used to identify images.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed when the image metadata is updated successfully.
-    */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func updateImageMetadata(
-        forImageID imageID: String,
-        inCollectionID collectionID: String,
-        metadata: URL,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Metadata) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        //construct body
-        let multipartFormData = MultipartFormData()
-        multipartFormData.append(metadata, withName: "metadata")
-        guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
-            return
-        }
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "PUT",
-            url: serviceURL + "/v3/collections/\(collectionID)/images/\(imageID)/metadata",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Metadata>) in
-            switch response.result {
-            case .success(let metadata): success(metadata)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
- 
-    /**
-     Find similar images to an uploaded image within a collection.
-     
-     - parameter toImageFile: The image file (.jpg or .png) of the image to search against the
-        collection.
-     - parameter inCollectionID: The ID of the collection to find similar images in.
-     - parameter limit: The number of similar results you want returned. Default is 10 with
-         a max of 100 results.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the list of similar images.
-    */
-    @available(*, deprecated, message: "The beta period for Similarity Search was closed on September 8, 2017.")
-    public func findSimilarImages(
-        toImageFile image: URL,
-        inCollectionID collectionID: String,
-        limit: Int? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SimilarImages) -> Void)
-    {
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        
-        //construct body
-        let multipartFormData = MultipartFormData()
-        multipartFormData.append(image, withName: "image_file")
-        guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
-            return
-        }
-        
-        // construct REST request
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + "/v3/collections/\(collectionID)/find_similar",
-            credentials: .apiKey,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-        
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<SimilarImages>) in
-            switch response.result {
-            case .success(let similarImages): success(similarImages)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Write service input parameters to a temporary JSON file that can be uploaded.
-     
-     - parameter url: An array of image URLs to use.
-     - parameter classifierIDs: An array of classifier ids. "default" is the id of the built-in
-            classifier.
-     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
-     - parameter showLowConfidence: If true, then the results will include lower-confidence classes.
-     
-     - returns: The URL of a JSON file that includes the given parameters.
-     */
-    private func writeParameters(
-        url: String? = nil,
-        classifierIDs: [String]? = nil,
-        owners: [String]? = nil,
-        showLowConfidence: Bool? = nil) throws
-        -> URL
-    {
-        // construct JSON dictionary
-        var json = [String: Any]()
-        if let url = url {
-            json["url"] = url
-        }
-        if let classifierIDs = classifierIDs {
-            json["classifier_ids"] = classifierIDs
-        }
-        if let owners = owners {
-            json["owners"] = owners
-        }
-        if let showLowConfidence = showLowConfidence {
-            json["show_low_confidence"] = showLowConfidence
-        }
-        
-        // create a globally unique file name in a temporary directory
-        let suffix = "VisualRecognitionParameters.json"
-        
-        let uuid = UUID().uuidString
-        let fileName = "\(uuid)_\(suffix)"
-        let directoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        let fileURL = directoryURL.appendingPathComponent(fileName)!
-        
-        // save JSON dictionary to file
-        let data = try JSONWrapper(dictionary: json).serialize()
-        try data.write(to: fileURL, options: .atomic)
-        
-        return fileURL
-    }
 }

@@ -17,25 +17,25 @@
 import Foundation
 
 /**
- 
+
  **Sentiment**
- 
+
  Sentiment is the attitude, opinion or feeling toward something, such as a person, organization,
  product or location.
- 
+
  */
 
 public struct Sentiment: JSONDecodable {
-    
+
     /** whether sentiment is mixed (both positive and negative) (1 == mixed) */
     public let mixed: Int?
-    
+
     /** sentiment strength (0.0 == neutral) */
     public let score: Double?
-    
+
     /** sentiment polarity - "positive", "negative", "neutral" */
     public let type: String?
-    
+
     /// Used internally to initialize a Sentiment object
     public init(json: JSONWrapper) throws {
         if let mixString = try? json.getString(at: "mixed") {

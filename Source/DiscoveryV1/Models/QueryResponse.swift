@@ -18,19 +18,19 @@ import Foundation
 
 /** A response produced by the Discovery service to analyze the input provided. */
 public struct QueryResponse: JSONDecodable {
-    
+
     /// Number of matching results.
     public let matchingResults: Int?
-    
+
     /// Results returned by the Discovery service.
     public let results: [Result]?
-    
+
     /// Aggregations returned by the Discovery service.
     public let aggregations: [Aggregation]?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
-    
+
     /// Used internally to initialize a `QueryResponse` model from JSON.
     public init(json: JSONWrapper) throws {
         matchingResults = try? json.getInt(at: "matching_results")
@@ -38,7 +38,7 @@ public struct QueryResponse: JSONDecodable {
         aggregations = try? json.decodedArray(at: "aggregations", type: Aggregation.self)
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize a 'QueryResponse' model to JSON.
     public func toJSONObject() -> Any {
         return json

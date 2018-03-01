@@ -39,7 +39,6 @@ There are many resources to help you build your first cognitive application with
 * [AlchemyLanguage](#alchemylanguage)
 * [Conversation](#conversation)
 * [Discovery](#discovery)
-* [Document Conversion](#document-conversion)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
 * [Natural Language Understanding](#natural-language-understanding)
@@ -90,7 +89,7 @@ Then run the following command to build the dependencies and frameworks:
 $ carthage update --platform iOS
 ```
 
-Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired.
+Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired. If you are using Speech to Text, be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application.
 
 ### Swift Package Manager
 
@@ -106,18 +105,18 @@ To build the project, run `swift build` from the command line.
 
 ## Service Instances
 
-[IBM Watson Developer Cloud](https://www.ibm.com/watson/developercloud/) offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the [services catalog](https://www.ibm.com/watson/developercloud/services-catalog.html). Services are instantiated using the [IBM Bluemix](http://www.ibm.com/cloud-computing/bluemix/) cloud platform.
+[IBM Watson](https://www.ibm.com/watson/developer/) offers a variety of services for developing cognitive applications. The complete list of Watson services is available from the [products and services](https://www.ibm.com/watson/products-services/) page. Services are instantiated using the [IBM Cloud](https://www.ibm.com/cloud/) platform.
 
 Follow these steps to create a service instance and obtain its credentials:
 
-1. Log in to Bluemix at [https://bluemix.net](https://bluemix.net).
+1. Log in to IBM Cloud at [https://bluemix.net](https://bluemix.net).
 2. Create a service instance:
     1. From the Dashboard, select "Use Services or APIs".
     2. Select the service you want to use.
     3. Click "Create".
 3. Copy your service credentials:
     1. Click "Service Credentials" on the left side of the page.
-    2. Copy the service's `username` and `password` (or `api_key` for Alchemy).
+    2. Copy the service's `username` and `password` (or `api_key` for Visual Recognition).
 
 You will need to provide these service credentials in your mobile application. For example:
 
@@ -125,9 +124,9 @@ You will need to provide these service credentials in your mobile application. F
 let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-password-here")
 ```
 
-Note that service credentials are different from your Bluemix username and password.
+Note that service credentials are different from your IBM Cloud username and password.
 
-See [Getting Started](https://console.bluemix.net/docs/services/watson/index.html) for more information on getting started with the Watson Developer Cloud and Bluemix.
+See [Getting started with Watson and IBM Cloud](https://console.bluemix.net/docs/services/watson/index.html) for details.
 
 ## Custom Service URLs
 
@@ -178,9 +177,7 @@ Please see [this tutorial](docs/objective-c.md) for more information about consu
 
 ## Linux Compatibility
 
-The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.
-
-To include the Watson SDK to your Linux projects, please follow the [Swift Package Manager instructions.](#swift-package-manager)
+To use the Watson SDK in your Linux project, please follow the [Swift Package Manager instructions.](#swift-package-manager). Note that Speech to Text and Text to Speech are not supported because they rely on frameworks that are unavailable on Linux.
 
 ## Contributing
 
@@ -223,8 +220,7 @@ Refine your query by referring to the [Count and TimeSlice Queries](http://docs.
 The following links provide more information about the IBM AlchemyData News service:
 
 * [IBM AlchemyData News - Service Page](https://www.ibm.com/watson/developercloud/alchemy-data-news.html)
-* [IBM AlchemyData News - Documentation](http://docs.alchemyapi.com/)
-* [IBM AlchemyData News - Demo](http://querybuilder.alchemyapi.com/builder)
+* [IBM AlchemyData News - Documentation](https://console.bluemix.net/docs/services/alchemydata-news/index.html)
 
 ## AlchemyLanguage
 
@@ -262,8 +258,7 @@ alchemyLanguage.getTextSentiment(fromContentAtURL: url, failure: failure) { sent
 The following links provide more information about the IBM AlchemyLanguage service:
 
 * [IBM AlchemyLanguage - Service Page](http://www.ibm.com/watson/developercloud/alchemy-language.html)
-* [IBM AlchemyLanguage - Documentation](http://www.ibm.com/watson/developercloud/doc/alchemylanguage/)
-* [IBM AlchemyLanguage - Demo](https://alchemy-language-demo.mybluemix.net/)
+* [IBM AlchemyLanguage - Documentation](https://console.bluemix.net/docs/services/alchemy-language/index.html)
 
 ## Conversation
 
@@ -471,47 +466,11 @@ discovery.queryDocumentsInCollection(
 
 The following links provide more information about the IBM Discovery service:
 
-* [IBM Discovery - Service Page](http://www.ibm.com/watson/developercloud/discovery.html)
-* [IBM Discovery - Documentation] (https://console.bluemix.net/docs/services/discovery/index.html)
+* [IBM Discovery - Service Page](https://www.ibm.com/watson/services/discovery/)
+* [IBM Discovery - Documentation](https://console.bluemix.net/docs/services/discovery/index.html)
 * [IBM Discovery - API Reference](https://www.ibm.com/watson/developercloud/discovery/api/v1/)
 * [IBM Discovery - API Explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1)
 * [IBM Discovery - Query Building](https://console.bluemix.net/docs/services/discovery/query-reference.html#query-building)
-
-## Document Conversion
-
-The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.
-
-The following example demonstrates how to convert a document with the Document Conversation service:
-
-```swift
-import DocumentConversionV1
-
-let username = "your-username-here"
-let password = "your-password-here"
-let version = "2015-12-15"
-let documentConversion = DocumentConversion(username: username, password: password, version: version)
-
-// load document
-let filename = "your-document-filename"
-guard let document = Bundle.main.url(forResource: filename, withExtension: "xml") else {
-    print("Failed to locate document.")
-    return
-}
-
-// convert document
-let config = try! documentConversion.writeConfig(type: ReturnType.text)
-let failure = { (error: Error) in print(error) }
-documentConversion.convertDocument(document, withConfigurationFile: config, failure: failure) {
-    text in
-    print(text)
-}
-```
-
-The following links provide more information about the IBM Document Conversion service:
-
-* [IBM Watson Document Conversion - Service Page](http://www.ibm.com/watson/developercloud/document-conversion.html)
-* [IBM Watson Document Conversion - Documentation](https://console.bluemix.net/docs/services/document-conversion/index.html)
-* [IBM Watson Document Conversion - Demo](https://document-conversion-demo.mybluemix.net/)
 
 ## Language Translator
 
@@ -540,9 +499,9 @@ languageTranslator.translate("Hello", from: "en", to: "es", failure: failure) {
 
 The following links provide more information about the IBM Watson Language Translator service:
 
-* [IBM Watson Language Translator - Service Page](http://www.ibm.com/watson/developercloud/language-translator.html)
+* [IBM Watson Language Translator - Service Page](https://www.ibm.com/watson/services/language-translator/)
 * [IBM Watson Language Translator - Documentation](https://console.bluemix.net/docs/services/language-translator/index.html)
-* [IBM Watson Language Translator - Demo](https://language-translator-demo.mybluemix.net/)
+* [IBM Watson Language Translator - Demo](https://language-translator-demo.ng.bluemix.net/)
 
 ## Natural Language Classifier
 
@@ -568,9 +527,9 @@ naturalLanguageClassifier.classify(text, withClassifierID: classifierID, failure
 
 The following links provide more information about the Natural Language Classifier service:
 
-* [IBM Watson Natural Language Classifier - Service Page](http://www.ibm.com/watson/developercloud/nl-classifier.html)
+* [IBM Watson Natural Language Classifier - Service Page](https://www.ibm.com/watson/services/natural-language-classifier/)
 * [IBM Watson Natural Language Classifier - Documentation](https://console.bluemix.net/docs/services/natural-language-classifier/natural-language-classifier-overview.html)
-* [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.mybluemix.net/)
+* [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.ng.bluemix.net/)
 
 ## Natural Language Understanding
 
@@ -616,9 +575,9 @@ Note that **you are required to include at least one feature in your request.** 
 
 The following links provide more information about the Natural Language Understanding service:
 
-* [IBM Watson Natural Language Understanding - Service Page](http://www.ibm.com/watson/developercloud/natural-language-understanding.html)
+* [IBM Watson Natural Language Understanding - Service Page](https://www.ibm.com/watson/services/natural-language-understanding/)
 * [IBM Watson Natural Language Understanding - Documentation](https://console.bluemix.net/docs/services/natural-language-understanding/index.html)
-* [IBM Watson Natural Language Understanding - Demo](http://natural-language-understanding-demo.mybluemix.net)
+* [IBM Watson Natural Language Understanding - Demo](https://natural-language-understanding-demo.ng.bluemix.net/)
 
 ## Personality Insights
 
@@ -643,9 +602,9 @@ personalityInsights.getProfile(fromText: text, failure: failure) { profile in
 
 The following links provide more information about the Personality Insights service:
 
-* [IBM Watson Personality Insights - Service Page](http://www.ibm.com/watson/developercloud/personality-insights.html)
+* [IBM Watson Personality Insights - Service Page](https://www.ibm.com/watson/services/personality-insights/)
 * [IBM Watson Personality Insights - Documentation](https://console.bluemix.net/docs/services/personality-insights/index.html)
-* [IBM Watson Personality Insights - Demo](https://personality-insights-livedemo.mybluemix.net)
+* [IBM Watson Personality Insights - Demo](https://personality-insights-demo.ng.bluemix.net/)
 
 ## Retrieve and Rank
 
@@ -768,15 +727,17 @@ retrieveAndRank.searchAndRank(
 
 The following links provide more information about the Retrieve and Rank service:
 
-* [IBM Watson Retrieve and Rank - Service Page](http://www.ibm.com/watson/developercloud/retrieve-rank.html)
+* [IBM Watson Retrieve and Rank - Service Page](https://www.ibm.com/watson/services/retrieve-and-rank/)
 * [IBM Watson Retrieve and Rank - Documentation](https://console.bluemix.net/docs/services/retrieve-and-rank/index.html)
-* [IBM Watson Retrieve and Rank - Demo](http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/#/)
+* [IBM Watson Retrieve and Rank - Demo](http://retrieve-and-rank-demo.ng.bluemix.net/)
 
 ## Speech to Text
 
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 
 The `SpeechToText` class is the SDK's primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the `SpeechToTextSession` class that exposes more control over the WebSockets session.
+
+Please be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application. Starscream is a recursive dependency that adds support for WebSockets sessions.
 
 #### Recognition Request Settings
 
@@ -1047,9 +1008,9 @@ do {
 
 The following links provide more information about the IBM Speech to Text service:
 
-* [IBM Watson Speech to Text - Service Page](http://www.ibm.com/watson/developercloud/speech-to-text.html)
+* [IBM Watson Speech to Text - Service Page](https://www.ibm.com/watson/services/speech-to-text/)
 * [IBM Watson Speech to Text - Documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html)
-* [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.mybluemix.net/)
+* [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.ng.bluemix.net/)
 
 ## Text to Speech
 
@@ -1109,9 +1070,9 @@ textToSpeech.synthesize(text, voice: SynthesisVoice.gb_Kate.rawValue, failure: f
 
 The following links provide more information about the IBM Text To Speech service:
 
-* [IBM Watson Text To Speech - Service Page](http://www.ibm.com/watson/developercloud/text-to-speech.html)
+* [IBM Watson Text To Speech - Service Page](https://www.ibm.com/watson/services/text-to-speech/)
 * [IBM Watson Text To Speech - Documentation](https://console.bluemix.net/docs/services/text-to-speech/index.html)
-* [IBM Watson Text To Speech - Demo](https://text-to-speech-demo.mybluemix.net/)
+* [IBM Watson Text To Speech - Demo](https://text-to-speech-demo.ng.bluemix.net/)
 
 ## Tone Analyzer
 
@@ -1138,9 +1099,9 @@ toneAnalyzer.getTone(ofText: text, failure: failure) { tones in
 
 The following links provide more information about the IBM Watson Tone Analyzer service:
 
-* [IBM Watson Tone Analyzer - Service Page](http://www.ibm.com/watson/developercloud/tone-analyzer.html)
+* [IBM Watson Tone Analyzer - Service Page](https://www.ibm.com/watson/services/tone-analyzer/)
 * [IBM Watson Tone Analyzer - Documentation](https://console.bluemix.net/docs/services/tone-analyzer/index.html)
-* [IBM Watson Tone Analyzer - Demo](https://tone-analyzer-demo.mybluemix.net/)
+* [IBM Watson Tone Analyzer - Demo](https://tone-analyzer-demo.ng.bluemix.net/)
 
 ## Tradeoff Analytics
 
@@ -1219,7 +1180,7 @@ The following links provide more information about the IBM Watson Tradeoff Analy
 
 * [IBM Watson Tradeoff Analytics - Service Page](http://www.ibm.com/watson/developercloud/tradeoff-analytics.html)
 * [IBM Watson Tradeoff Analytics - Documentation](https://console.bluemix.net/docs/services/tradeoff-analytics/index.html)
-* [IBM Watson Tradeoff Analytics - Demo](https://tradeoff-analytics-demo.mybluemix.net/)
+* [IBM Watson Tradeoff Analytics - Demo](https://tradeoff-analytics-demo.ng.bluemix.net/)
 
 ## Visual Recognition
 
@@ -1269,6 +1230,6 @@ print(localModels)
 
 The following links provide more information about the IBM Watson Visual Recognition service:
 
-* [IBM Watson Visual Recognition - Service Page](http://www.ibm.com/watson/developercloud/visual-recognition.html)
+* [IBM Watson Visual Recognition - Service Page](https://www.ibm.com/watson/services/visual-recognition/)
 * [IBM Watson Visual Recognition - Documentation](https://console.bluemix.net/docs/services/visual-recognition/index.html)
-* [IBM Watson Visual Recognition - Demo](http://visual-recognition-demo.mybluemix.net/)
+* [IBM Watson Visual Recognition - Demo](https://visual-recognition-demo.ng.bluemix.net/)

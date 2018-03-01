@@ -31,7 +31,7 @@ public struct WordConfidence: JSONDecodable {
         word = try array[Index.word.rawValue].getString()
         confidence = try array[Index.confidence.rawValue].getDouble()
     }
-    
+
     /// The index of each element in the JSON array.
     private enum Index: Int {
         case word = 0

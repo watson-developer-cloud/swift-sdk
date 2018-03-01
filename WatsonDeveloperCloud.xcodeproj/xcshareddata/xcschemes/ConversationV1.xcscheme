@@ -38,6 +38,14 @@
                BlueprintName = "ConversationV1Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "ConversationTests/testListAllLogs()">
+               </Test>
+               <Test
+                  Identifier = "ConversationTests/testListLogs()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

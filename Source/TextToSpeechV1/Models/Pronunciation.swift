@@ -15,13 +15,13 @@
  **/
 
 import Foundation
-    
+
 /** A pronunciation of text based on the voice and phoneme. */
 public struct Pronunciation: JSONDecodable {
-    
+
     /// Pronunciation of the requested text in the specified voice and format.
     public let pronunciation: String
-    
+
     /// Used internally to initialize a `Pronunciation` model from JSON.
     public init(json: JSONWrapper) throws {
         pronunciation = try json.getString(at: "pronunciation")

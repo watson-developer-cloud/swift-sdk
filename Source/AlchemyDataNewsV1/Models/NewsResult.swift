@@ -17,27 +17,27 @@
 import Foundation
 
 /**
- 
+
  **NewsResult**
- 
+
  The result of the query given to the AlchemyDataNews service
- 
+
  */
 public struct NewsResult: JSONDecodable {
-    
+
     /** see **Document** */
     public let docs: [Document]?
-    
+
     /** a query may return multiple pages of results. Append this value with the key 'next' to
      your query to access the next page of results */
     public let next: String?
-    
+
     /** the number of documents that fit the query */
     public let count: Int?
-    
+
     /** the number of articles within a defined time slice */
     public let slices: [Int]?
-    
+
     /// used internally to initialize NewsResult objects
     public init(json: JSONWrapper) throws {
         docs = try? json.decodedArray(at: "docs", type: Document.self)
@@ -45,5 +45,5 @@ public struct NewsResult: JSONDecodable {
         count = try? json.getInt(at: "count")
         slices = try? json.decodedArray(at: "slices", type: Int.self)
     }
-    
+
 }

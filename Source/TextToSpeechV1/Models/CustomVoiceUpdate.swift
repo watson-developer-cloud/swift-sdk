@@ -18,23 +18,23 @@ import Foundation
 
 /** A custom voice model used by the Text to Speech service. */
 public struct CustomVoiceUpdate: JSONEncodable {
-    
+
     /// The new name for the custom voice model.
     private let name: String?
-    
+
     /// The new description for the custom voice model.
     private let description: String?
-    
+
     /// A list of words and their translations from the custom voice model.
     private let words: [Word]
-    
+
     /// Used to initialize a `CustomVoiceUpdate` model.
     public init(name: String? = nil, description: String? = nil, words: [Word] = []) {
         self.name = name
         self.description = description
         self.words = words
     }
-    
+
     /// Used internally to serialize a `CustomVoiceUpdate` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
@@ -45,7 +45,7 @@ public struct CustomVoiceUpdate: JSONEncodable {
             json["description"] = description
         }
         json["words"] = words.map { word in word.toJSONObject() }
-        
+
         return json
     }
 }

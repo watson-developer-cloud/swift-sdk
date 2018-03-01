@@ -8,6 +8,16 @@ We don't use GitHub as a support forum. For any usage questions that are not spe
 
 See the [issue template](issue_template.md).
 
+# Coding Style
+
+Contributions should follow the established coding style and conventions for this project,
+which are loosely based on [GitHub's Swift Style Guide][styleguide].
+The project is set up so that developers can use [SwiftLint][swiftlint] to check conformance
+to the coding style guidelines.
+
+[styleguide]: https://github.com/github/swift-style-guide
+[swiftlint]: https://github.com/realm/SwiftLint
+
 # Pull Requests
 
 If you want to contribute to the repository, here's a quick guide:
@@ -18,7 +28,7 @@ If you want to contribute to the repository, here's a quick guide:
     * Please respect the original code [style guide][styleguide].
     * Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
     * Check for unnecessary whitespace with `git diff --check` before committing.
-  5. Verify that tests pass successfully.
+  5. Verify that tests pass successfully. Instructions on running the Swift tests on Linux while on a Mac can be found [here](https://github.com/watson-developer-cloud/swift-sdk/wiki/Running-Swift-Linux-Tests-on-Mac).
   6. Push to your fork and submit a pull request to the **master** branch.
 
 # Developer's Certificate of Origin 1.1

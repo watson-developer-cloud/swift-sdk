@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try force_unwrapping superfluous_disable_command
+
 import XCTest
 
 class JSONTests: XCTestCase {
@@ -230,7 +232,10 @@ class JSONTests: XCTestCase {
         let json = "{ \"key\": [null, true, 1, 0.5, \"this is a string\"] }"
         let data = json.data(using: .utf8)!
         let object = try! JSONDecoder().decode([String: JSON].self, from: data)
-        guard case let .array(array) = object["key"]! else { XCTFail(); return }
+        guard case let .array(array) = object["key"]! else {
+            XCTFail("Expected element \"key\" not present in decoded object")
+            return
+        }
         XCTAssertEqual(array.count, 5)
         XCTAssertEqual(array[0], .null)
         XCTAssertEqual(array[1], .boolean(true))
@@ -255,8 +260,14 @@ class JSONTests: XCTestCase {
         let json = "[[1, 2, 3], [4, 5, 6]]"
         let data = json.data(using: .utf8)!
         let array = try! JSONDecoder().decode([JSON].self, from: data)
-        guard case let .array(subarray1) = array[0] else { XCTFail(); return }
-        guard case let .array(subarray2) = array[1] else { XCTFail(); return }
+        guard case let .array(subarray1) = array[0] else {
+            XCTFail("Error decoding nested arrays")
+            return
+        }
+        guard case let .array(subarray2) = array[1] else {
+            XCTFail("Error decoding nested arrays")
+            return
+        }
         XCTAssertEqual(subarray1[0], .int(1))
         XCTAssertEqual(subarray1[1], .int(2))
         XCTAssertEqual(subarray1[2], .int(3))
@@ -269,8 +280,14 @@ class JSONTests: XCTestCase {
         let json = "[{ \"x\": 1 }, { \"y\": 2}, { \"z\": 3 }]"
         let data = json.data(using: .utf8)!
         let array = try! JSONDecoder().decode([JSON].self, from: data)
-        guard case let .object(object1) = array[0] else { XCTFail(); return }
-        guard case let .object(object2) = array[1] else { XCTFail(); return }
+        guard case let .object(object1) = array[0] else {
+            XCTFail("Error decoding array of objects")
+            return
+        }
+        guard case let .object(object2) = array[1] else {
+            XCTFail("Error decoding array of objects")
+            return
+        }
         XCTAssertEqual(object1["x"], .int(1))
         XCTAssertEqual(object2["y"], .int(2))
     }
@@ -279,7 +296,10 @@ class JSONTests: XCTestCase {
         let json = "{ \"key\": { \"null\": null, \"bool\": true, \"int\": 1, \"double\": 0.5, \"string\": \"this is a string\" }}"
         let data = json.data(using: .utf8)!
         let object = try! JSONDecoder().decode([String: JSON].self, from: data)
-        guard case let .object(subobject) = object["key"]! else { XCTFail(); return }
+        guard case let .object(subobject) = object["key"]! else {
+            XCTFail("Error decoding nested object")
+            return
+        }
         XCTAssertEqual(subobject["null"], .null)
         XCTAssertEqual(subobject["bool"], .boolean(true))
         XCTAssertEqual(subobject["int"], .int(1))
@@ -298,9 +318,18 @@ class JSONTests: XCTestCase {
         let json = "{ \"key\": { \"array\": [1, 2, 3], \"object\": { \"x\": 1, \"y\": 2, \"z\": 3 }}}"
         let data = json.data(using: .utf8)!
         let object = try! JSONDecoder().decode([String: JSON].self, from: data)
-        guard case let .object(subobject) = object["key"]! else { XCTFail(); return }
-        guard case let .array(array) = subobject["array"]! else { XCTFail(); return }
-        guard case let .object(subsubobject) = subobject["object"]! else { XCTFail(); return }
+        guard case let .object(subobject) = object["key"]! else {
+            XCTFail("Error decoding nested object")
+            return
+        }
+        guard case let .array(array) = subobject["array"]! else {
+            XCTFail("Error decoding array within nested object")
+            return
+        }
+        guard case let .object(subsubobject) = subobject["object"]! else {
+            XCTFail("Error decoding object within nested object")
+            return
+        }
         XCTAssertEqual(array[0], .int(1))
         XCTAssertEqual(array[1], .int(2))
         XCTAssertEqual(array[2], .int(3))
@@ -313,10 +342,22 @@ class JSONTests: XCTestCase {
         let json = "{ \"key1\": { \"key2\": { \"key3\": { \"key4\": [1,2,3] }}}}"
         let data = json.data(using: .utf8)!
         let object1 = try! JSONDecoder().decode([String: JSON].self, from: data)
-        guard case let .object(object2) = object1["key1"]! else { XCTFail(); return }
-        guard case let .object(object3) = object2["key2"]! else { XCTFail(); return }
-        guard case let .object(object4) = object3["key3"]! else { XCTFail(); return }
-        guard case let .array(array) = object4["key4"]! else { XCTFail(); return }
+        guard case let .object(object2) = object1["key1"]! else {
+            XCTFail("Error decoding nested object")
+            return
+        }
+        guard case let .object(object3) = object2["key2"]! else {
+            XCTFail("Error decoding doubly nested object")
+            return
+        }
+        guard case let .object(object4) = object3["key3"]! else {
+            XCTFail("Error decoding triply nested object")
+            return
+        }
+        guard case let .array(array) = object4["key4"]! else {
+            XCTFail("Error decoding deeply nested object")
+            return
+        }
         XCTAssertEqual(array[0], .int(1))
         XCTAssertEqual(array[1], .int(2))
         XCTAssertEqual(array[2], .int(3))

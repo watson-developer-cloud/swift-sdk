@@ -1,6 +1,25 @@
 Change Log
 ==========
 
+## Version 0.21.0
+_2018-02-01_
+
+- Change uses of `NSLocalizedFailureReasonErrorKey` to `NSLocalizedDescriptionKey` for Linux compatibility
+- Only lint the `Source/Service` folder for framework build targets (fixes a bug with carthage --no-use-binaries)
+- Fix style errors reported by `swiftlint` (fixes a bug with carthage --no-use-binaries)
+- Improve test infrastructure for simulator and Linux
+
+## Version 0.20.0
+_2018-01-17_
+
+This release extracts Starscream to be an _external_ dependency. Starscream adds support for WebSockets sessions and is required for use with the Speech to Text service. Because it is an _external_ dependency, developers using the SDK must now link and embed it in their projects. For more information, see [Readme: Speech to Text](https://github.com/watson-developer-cloud/swift-sdk#speech-to-text).
+
+This release also includes the following additional changes:
+- Deprecate Document Conversion
+- Add conditional compilation by platform to improve future compatibility with Linux
+- Set client WebSockets timeout to match the Speech to Text service (30s)
+- Improve code style using SwiftLint
+
 ## Version 0.19.0
 _2017-10-24_
 

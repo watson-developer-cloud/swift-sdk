@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,55 @@
 
 import Foundation
 
-/** Information about an error that occurred during classification. */
-public struct ErrorInfo: JSONDecodable {
-    
-    /// A codified error string (e.g. "input_error").
-    public let errorID: String
-    
-    /// A human-readable error string (e.g. "Ignoring image with no valid data").
-    public let description: String
-    
-    /// Used internally to initialize an `ErrorInfo` model from JSON.
-    public init(json: JSONWrapper) throws {
-        errorID = try json.getString(at: "error_id")
-        description = try json.getString(at: "description")
+/** Information about what might have caused a failure, such as an image that is too large. Not returned when there is no error. */
+public struct ErrorInfo {
+
+    /// HTTP status code.
+    public var code: Int
+
+    /// Human-readable error description. For example, `File size limit exceeded`.
+    public var description: String
+
+    /// Codified error string. For example, `limit_exceeded`.
+    public var errorID: String
+
+    /**
+     Initialize a `ErrorInfo` with member variables.
+
+     - parameter code: HTTP status code.
+     - parameter description: Human-readable error description. For example, `File size limit exceeded`.
+     - parameter errorID: Codified error string. For example, `limit_exceeded`.
+
+     - returns: An initialized `ErrorInfo`.
+    */
+    public init(code: Int, description: String, errorID: String) {
+        self.code = code
+        self.description = description
+        self.errorID = errorID
     }
+}
+
+extension ErrorInfo: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case code = "code"
+        case description = "description"
+        case errorID = "error_id"
+        static let allValues = [code, description, errorID]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        code = try container.decode(Int.self, forKey: .code)
+        description = try container.decode(String.self, forKey: .description)
+        errorID = try container.decode(String.self, forKey: .errorID)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(code, forKey: .code)
+        try container.encode(description, forKey: .description)
+        try container.encode(errorID, forKey: .errorID)
+    }
+
 }

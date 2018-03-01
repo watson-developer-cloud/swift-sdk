@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,47 @@
 
 import Foundation
 
-/** Information about a warning that occurred. */
-public struct WarningInfo: JSONDecodable {
-    
-    /// A codified warning string (e.g. "limit_reached").
-    public let warningID: String
-    
-    /// A human-readable warning string (e.g. "Max number of images (100) reached").
-    public let description: String
-    
-    /// Used internally to initialize a `WarningInfo` model from JSON.
-    public init(json: JSONWrapper) throws {
-        warningID = try json.getString(at: "warning_id")
-        description = try json.getString(at: "description")
+/** Information about something that went wrong. */
+public struct WarningInfo {
+
+    /// Codified warning string, such as `limit_reached`.
+    public var warningID: String
+
+    /// Information about the error.
+    public var description: String
+
+    /**
+     Initialize a `WarningInfo` with member variables.
+
+     - parameter warningID: Codified warning string, such as `limit_reached`.
+     - parameter description: Information about the error.
+
+     - returns: An initialized `WarningInfo`.
+    */
+    public init(warningID: String, description: String) {
+        self.warningID = warningID
+        self.description = description
     }
+}
+
+extension WarningInfo: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case warningID = "warning_id"
+        case description = "description"
+        static let allValues = [warningID, description]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        warningID = try container.decode(String.self, forKey: .warningID)
+        description = try container.decode(String.self, forKey: .description)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(warningID, forKey: .warningID)
+        try container.encode(description, forKey: .description)
+    }
+
 }

@@ -17,21 +17,21 @@
 import Foundation
 
 /**
- 
+
  **ImageKeyword**
- 
+
  A set of keywords for an image analyzed by the Alchemy Vision service.
- 
+
  */
 
 public struct ImageKeyword: JSONDecodable {
-    
+
     /** A keyword that is associated with the specified image. */
     public let text: String?
-    
+
     /** The likelihood that this keyword corresponds to the image. */
     public let score: Double?
-    
+
     /// Used internally to initialize an ImageKeyword object
     public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")

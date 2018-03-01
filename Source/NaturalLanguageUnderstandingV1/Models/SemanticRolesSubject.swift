@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ public struct SemanticRolesSubject {
      Initialize a `SemanticRolesSubject` with member variables.
 
      - parameter text: Text that corresponds to the subject role.
-     - parameter entities: 
-     - parameter keywords: 
+     - parameter entities:
+     - parameter keywords:
 
      - returns: An initialized `SemanticRolesSubject`.
     */

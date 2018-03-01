@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,60 +15,64 @@
  **/
 
 import Foundation
-    
-/** A request to translate input text from a source language to a target language. */
-internal struct TranslateRequest: JSONEncodable {
 
-    private let modelID: String?
-    private let source: String?
-    private let target: String?
-    private let text: [String]
+/** TranslateRequest. */
+public struct TranslateRequest {
+
+    /// Input text in UTF-8 encoding. It is a list so that multiple paragraphs can be submitted. Also accept a single string, instead of an array, as valid input.
+    public var text: [String]
+
+    /// The unique model_id of the translation model being used to translate text. The model_id inherently specifies source language, target language, and domain. If the model_id is specified, there is no need for the source and target parameters and the values are ignored.
+    public var modelID: String?
+
+    /// Used in combination with target as an alternative way to select the model for translation. When target and source are set, and model_id is not set, the system chooses a default model with the right language pair to translate (usually the model based on the news domain).
+    public var source: String?
+
+    /// Used in combination with source as an alternative way to select the model for translation. When target and source are set, and model_id is not set, the system chooses a default model with the right language pair to translate (usually the model based on the news domain).
+    public var target: String?
 
     /**
-     Initialize a translation request with input text and a model id.
+     Initialize a `TranslateRequest` with member variables.
 
-     - parameter text: Input text in UTF-8 encoding. It is a list so that multiple
-        sentences/paragraphs can be submitted.
-     - parameter modelID: The unique modelID of the translation model being used to
-        translate text. The modelID inherently specifies source language, target
-        language and domain.
+     - parameter text: Input text in UTF-8 encoding. It is a list so that multiple paragraphs can be submitted. Also accept a single string, instead of an array, as valid input.
+     - parameter modelID: The unique model_id of the translation model being used to translate text. The model_id inherently specifies source language, target language, and domain. If the model_id is specified, there is no need for the source and target parameters and the values are ignored.
+     - parameter source: Used in combination with target as an alternative way to select the model for translation. When target and source are set, and model_id is not set, the system chooses a default model with the right language pair to translate (usually the model based on the news domain).
+     - parameter target: Used in combination with source as an alternative way to select the model for translation. When target and source are set, and model_id is not set, the system chooses a default model with the right language pair to translate (usually the model based on the news domain).
 
-     - returns: An initialized `TranslateRequest` that represents a translation
-        request to the Language Translator service.
-     */
-    init(text: [String], modelID: String) {
-        self.modelID = modelID
-        self.source = nil
-        self.target = nil
+     - returns: An initialized `TranslateRequest`.
+    */
+    public init(text: [String], modelID: String? = nil, source: String? = nil, target: String? = nil) {
         self.text = text
-    }
-
-    /**
-     Initialize a translation request with input text, a source language, and a
-     target language.
-
-     - parameter text: Input text in UTF-8 encoding. It is a list so that multiple
-        sentences/paragraphs can be submitted.
-     - parameter source: The source language of the input text.
-     - parameter target: The target language that the input text will be translated to.
-
-     - returns: An initialized `TranslateRequest` that represents a translation
-        request to the Language Translator service.
-     */
-    init(text: [String], source: String, target: String) {
-        self.modelID = nil
+        self.modelID = modelID
         self.source = source
         self.target = target
-        self.text = text
+    }
+}
+
+extension TranslateRequest: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+        case modelID = "model_id"
+        case source = "source"
+        case target = "target"
+        static let allValues = [text, modelID, source, target]
     }
 
-    /// Used internally to serialize a `TranslateRequest` model to JSON.
-    func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let modelID = modelID { json["model_id"] = modelID }
-        if let source = source { json["source"] = source }
-        if let target = target { json["target"] = target }
-        json["text"] = text
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.decode([String].self, forKey: .text)
+        modelID = try container.decodeIfPresent(String.self, forKey: .modelID)
+        source = try container.decodeIfPresent(String.self, forKey: .source)
+        target = try container.decodeIfPresent(String.self, forKey: .target)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(text, forKey: .text)
+        try container.encodeIfPresent(modelID, forKey: .modelID)
+        try container.encodeIfPresent(source, forKey: .source)
+        try container.encodeIfPresent(target, forKey: .target)
+    }
+
 }

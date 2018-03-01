@@ -17,27 +17,27 @@
 import Foundation
 
 /**
- 
+
  **SAORelation**
- 
+
  Extracted Subject, Action, and Object parts of a sentence
- 
+
  */
 
 public struct SAORelation: JSONDecodable {
-    
+
     /// see Action
     public let action: Action?
-    
+
     /// an extracted Sentence
     public let sentence: String?
-    
+
     /// see Subject
     public let subject: Subject?
-    
+
     /// see RelationObject
     public let object: RelationObject?
-    
+
     /// Used internally to initialize a SAORelation object
     public init(json: JSONWrapper) throws {
         action = try? json.decode(at: "action", type: Action.self)
@@ -45,44 +45,44 @@ public struct SAORelation: JSONDecodable {
         subject = try? json.decode(at: "subject", type: Subject.self)
         object = try? json.decode(at: "object", type: RelationObject.self)
     }
-    
+
 }
 
 /**
  An action as defined by the AlchemyLanguage service
  */
 public struct Action: JSONDecodable {
-    
+
     /// text the action was extracted from
     public let text: String?
-    
+
     /// the base or dictionary form of the word
     public let lemmatized: String?
-    
+
     /// see Verb
     public let verb: Verb?
-    
+
     /// Used internally to initialize an Action object
     public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         lemmatized = try? json.getString(at: "lemmatized")
         verb = try? json.decode(at: "verb", type: Verb.self)
     }
-    
+
     /**
      A verb as defined by the AlchemyLanguage service
      */
     public struct Verb: JSONDecodable {
-        
+
         /// text the verb was extracted from
         public let text: String?
-        
+
         /// the tense of the verb
         public let tense: String?
-        
+
         /// was the verb negated
         public let negated: Int?
-        
+
         /// Used internally to initalize a Verb object
         public init(json: JSONWrapper) throws {
             text = try? json.getString(at: "text")
@@ -100,16 +100,16 @@ public struct Action: JSONDecodable {
  A subjet extracted by the AlchemyLanguage service
  */
 public struct Subject: JSONDecodable {
-    
+
     /// text the subject was extracted from
     public let text: String?
-    
+
     /// see **Sentiment**
     public let sentiment: Sentiment?
-    
+
     /// see **Entity**
     public let entity: Entity?
-    
+
     /// Used internally to initialize a Subject object
     public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
@@ -122,19 +122,19 @@ public struct Subject: JSONDecodable {
  **Sentiment** related to the Subject-Action-Object extraction
  */
 public struct RelationObject: JSONDecodable {
-    
+
     /// text the relation object was extracted from
     public let text: String?
-    
+
     /// see **Sentiment**
     public let sentiment: Sentiment?
-    
+
     /// see **Sentiment**
     public let sentimentFromSubject: Sentiment?
-    
+
     /// see **Entity**
     public let entity: Entity?
-    
+
     /// Used internally to initialize a RelationObject object
     public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
@@ -143,5 +143,4 @@ public struct RelationObject: JSONDecodable {
         entity = try? json.decode(at: "entity", type: Entity.self)
     }
 }
-
 

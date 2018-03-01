@@ -49,19 +49,19 @@ public class PersonalityInsights {
     /**
      If the response or data represents an error returned by the Personality Insights service,
      then return NSError with information about the error that occured. Otherwise, return nil.
-     
+
      - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
      */
     private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-        
+
         // First check http status code in response
         if let response = response {
-            if response.statusCode >= 200 && response.statusCode < 300 {
+            if (200..<300).contains(response.statusCode) {
                 return nil
             }
         }
-        
+
         // ensure data is not nil
         guard let data = data else {
             if let code = response?.statusCode {
@@ -69,12 +69,12 @@ public class PersonalityInsights {
             }
             return nil  // RestKit will generate error for this case
         }
-        
+
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
-            var userInfo = [NSLocalizedFailureReasonErrorKey: message]
+            var userInfo = [NSLocalizedDescriptionKey: message]
             let help = try? json.getString(at: "help")
             let description = try? json.getString(at: "description")
             if let recoverySuggestion = help ?? description {
@@ -111,7 +111,7 @@ public class PersonalityInsights {
     {
         guard let content = text.data(using: String.Encoding.utf8) else {
             let failureReason = "Text could not be encoded to NSData with NSUTF8StringEncoding."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -155,7 +155,7 @@ public class PersonalityInsights {
     {
         guard let content = html.data(using: String.Encoding.utf8) else {
             let failureReason = "HTML could not be encoded to NSData with NSUTF8StringEncoding."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
@@ -199,7 +199,7 @@ public class PersonalityInsights {
         let json = JSONWrapper(dictionary: ["contentItems": contentItems.map { $0.toJSONObject() }])
         guard let content = try? json.serialize() else {
             let failureReason = "Content items could not be serialized to JSON."
-            let userInfo = [NSLocalizedFailureReasonErrorKey: failureReason]
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
             return

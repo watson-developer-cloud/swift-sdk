@@ -309,6 +309,8 @@ extension VisualRecognition {
         return try JSONDecoder().decode(ClassifiedImages.self, from: JSONEncoder().encode(classifiedImages))
     }
 
+    // swiftlint:disable function_body_length
+
     /**
      Download a Core ML model to the local filesystem. The model is compiled and moved to the application support
      directory with a filename of `[classifier-id].mlmodelc`.
@@ -443,4 +445,6 @@ extension VisualRecognition {
             success?()
         }
     }
+
+    // swiftlint:enable function_body_length
 }

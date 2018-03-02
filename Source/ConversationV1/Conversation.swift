@@ -17,8 +17,8 @@
 import Foundation
 
 /**
-   The IBM Watson Conversation service combines machine learning, natural language understanding, and
-  integrated dialog tools to create conversation flows between your apps and your users.
+  The IBM Watson Conversation service combines machine learning, natural language understanding, and integrated dialog
+ tools to create conversation flows between your apps and your users.
  */
 public class Conversation {
 
@@ -72,9 +72,7 @@ public class Conversation {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error")
-            let userInfo = [NSLocalizedDescriptionKey: message]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return nil
         }
@@ -83,16 +81,17 @@ public class Conversation {
     /**
      Create workspace.
 
-     Create a workspace based on component objects. You must provide workspace components defining the content of the new workspace.
+          Create a workspace based on component objects. You must provide workspace components defining the content of the
+     new workspace.
 
      - parameter properties: Valid data defining the content of the new workspace.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func createWorkspace(
-        properties: CreateWorkspace? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Workspace) -> Void)
+    properties: CreateWorkspace? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Workspace) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
@@ -129,16 +128,16 @@ public class Conversation {
     /**
      Delete workspace.
 
-     Delete a workspace from the service instance.
+          Delete a workspace from the service instance.
 
      - parameter workspaceID: The workspace ID.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func deleteWorkspace(
-        workspaceID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    workspaceID: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -174,24 +173,30 @@ public class Conversation {
     /**
      Get information about a workspace.
 
-     Get information about a workspace, optionally including all workspace content.
+          Get information about a workspace, optionally including all workspace content.
 
      - parameter workspaceID: The workspace ID.
      - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func getWorkspace(
-        workspaceID: String,
-        export: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceExport) -> Void)
+    workspaceID: String,
+    export: Bool? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (WorkspaceExport) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let export = export {
             let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -225,22 +230,24 @@ public class Conversation {
     /**
      List workspaces.
 
-     List the workspaces associated with a Conversation service instance.
+          List the workspaces associated with a Conversation service instance.
 
      - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
      - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func listWorkspaces(
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceCollection) -> Void)
+    pageLimit: Int? = nil,
+    includeCount: Bool? = nil,
+    sort: String? = nil,
+    cursor: String? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (WorkspaceCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -259,6 +266,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -287,7 +298,8 @@ public class Conversation {
     /**
      Update workspace.
 
-     Update an existing workspace with new or modified data. You must provide component objects defining the content of the updated workspace.
+          Update an existing workspace with new or modified data. You must provide component objects defining the content of
+     the updated workspace.
 
      - parameter workspaceID: The workspace ID.
      - parameter properties: Valid data defining the new workspace content. Any elements included in the new data will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new data.
@@ -296,11 +308,11 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func updateWorkspace(
-        workspaceID: String,
-        properties: UpdateWorkspace? = nil,
-        append: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Workspace) -> Void)
+    workspaceID: String,
+    properties: UpdateWorkspace? = nil,
+    append: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Workspace) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
@@ -347,17 +359,17 @@ public class Conversation {
      Get a response to a user's input.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter request: The user's input, with optional intents, entities, and other properties from the response.
+     - parameter request: The user's input, with optional intents, entities, and other request from the response.
      - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that were visited during processing of the message.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func message(
-        workspaceID: String,
-        request: MessageRequest? = nil,
-        nodesVisitedDetails: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (MessageResponse) -> Void)
+    workspaceID: String,
+    request: MessageRequest? = nil,
+    nodesVisitedDetails: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (MessageResponse) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encodeIfPresent(request) else {
@@ -403,7 +415,7 @@ public class Conversation {
     /**
      Create intent.
 
-     Create a new intent.
+          Create a new intent.
 
      - parameter workspaceID: The workspace ID.
      - parameter intent: The name of the intent.
@@ -413,12 +425,12 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func createIntent(
-        workspaceID: String,
-        intent: String,
-        description: String? = nil,
-        examples: [CreateExample]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Intent) -> Void)
+    workspaceID: String,
+    intent: String,
+    description: String? = nil,
+    examples: [CreateExample]? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Intent) -> Void)
     {
         // construct body
         let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
@@ -461,7 +473,7 @@ public class Conversation {
     /**
      Delete intent.
 
-     Delete an intent from a workspace.
+          Delete an intent from a workspace.
 
      - parameter workspaceID: The workspace ID.
      - parameter intent: The intent name (for example, `pizza_order`).
@@ -469,10 +481,10 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func deleteIntent(
-        workspaceID: String,
-        intent: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    workspaceID: String,
+    intent: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -508,26 +520,32 @@ public class Conversation {
     /**
      Get intent.
 
-     Get information about an intent, optionally including all intent content.
+          Get information about an intent, optionally including all intent content.
 
      - parameter workspaceID: The workspace ID.
      - parameter intent: The intent name (for example, `pizza_order`).
      - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func getIntent(
-        workspaceID: String,
-        intent: String,
-        export: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentExport) -> Void)
+    workspaceID: String,
+    intent: String,
+    export: Bool? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (IntentExport) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let export = export {
             let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -561,7 +579,7 @@ public class Conversation {
     /**
      List intents.
 
-     List the intents for a workspace.
+          List the intents for a workspace.
 
      - parameter workspaceID: The workspace ID.
      - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
@@ -569,18 +587,20 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
      - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func listIntents(
-        workspaceID: String,
-        export: Bool? = nil,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentCollection) -> Void)
+    workspaceID: String,
+    export: Bool? = nil,
+    pageLimit: Int? = nil,
+    includeCount: Bool? = nil,
+    sort: String? = nil,
+    cursor: String? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (IntentCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -603,6 +623,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -636,7 +660,8 @@ public class Conversation {
     /**
      Update intent.
 
-     Update an existing intent with new or modified data. You must provide data defining the content of the updated intent.
+          Update an existing intent with new or modified data. You must provide data defining the content of the updated
+     intent.
 
      - parameter workspaceID: The workspace ID.
      - parameter intent: The intent name (for example, `pizza_order`).
@@ -647,13 +672,13 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func updateIntent(
-        workspaceID: String,
-        intent: String,
-        newIntent: String? = nil,
-        newDescription: String? = nil,
-        newExamples: [CreateExample]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Intent) -> Void)
+    workspaceID: String,
+    intent: String,
+    newIntent: String? = nil,
+    newDescription: String? = nil,
+    newExamples: [CreateExample]? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Intent) -> Void)
     {
         // construct body
         let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
@@ -696,7 +721,7 @@ public class Conversation {
     /**
      Create user input example.
 
-     Add a new user input example to an intent.
+          Add a new user input example to an intent.
 
      - parameter workspaceID: The workspace ID.
      - parameter intent: The intent name (for example, `pizza_order`).
@@ -705,11 +730,11 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func createExample(
-        workspaceID: String,
-        intent: String,
-        text: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Example) -> Void)
+    workspaceID: String,
+    intent: String,
+    text: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Example) -> Void)
     {
         // construct body
         let createExampleRequest = CreateExample(text: text)
@@ -752,7 +777,7 @@ public class Conversation {
     /**
      Delete user input example.
 
-     Delete a user input example from an intent.
+          Delete a user input example from an intent.
 
      - parameter workspaceID: The workspace ID.
      - parameter intent: The intent name (for example, `pizza_order`).
@@ -761,11 +786,11 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func deleteExample(
-        workspaceID: String,
-        intent: String,
-        text: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    workspaceID: String,
+    intent: String,
+    text: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -801,24 +826,30 @@ public class Conversation {
     /**
      Get user input example.
 
-     Get information about a user input example.
+          Get information about a user input example.
 
      - parameter workspaceID: The workspace ID.
      - parameter intent: The intent name (for example, `pizza_order`).
      - parameter text: The text of the user input example.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func getExample(
-        workspaceID: String,
-        intent: String,
-        text: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Example) -> Void)
+    workspaceID: String,
+    intent: String,
+    text: String,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Example) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
@@ -850,7 +881,7 @@ public class Conversation {
     /**
      List user input examples.
 
-     List the user input examples for an intent.
+          List the user input examples for an intent.
 
      - parameter workspaceID: The workspace ID.
      - parameter intent: The intent name (for example, `pizza_order`).
@@ -858,18 +889,20 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
      - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func listExamples(
-        workspaceID: String,
-        intent: String,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleCollection) -> Void)
+    workspaceID: String,
+    intent: String,
+    pageLimit: Int? = nil,
+    includeCount: Bool? = nil,
+    sort: String? = nil,
+    cursor: String? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (ExampleCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -888,6 +921,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -921,7 +958,7 @@ public class Conversation {
     /**
      Update user input example.
 
-     Update the text of a user input example.
+          Update the text of a user input example.
 
      - parameter workspaceID: The workspace ID.
      - parameter intent: The intent name (for example, `pizza_order`).
@@ -931,12 +968,12 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func updateExample(
-        workspaceID: String,
-        intent: String,
-        text: String,
-        newText: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Example) -> Void)
+    workspaceID: String,
+    intent: String,
+    text: String,
+    newText: String? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Example) -> Void)
     {
         // construct body
         let updateExampleRequest = UpdateExample(text: newText)
@@ -979,7 +1016,7 @@ public class Conversation {
     /**
      Create entity.
 
-     Create a new entity.
+          Create a new entity.
 
      - parameter workspaceID: The workspace ID.
      - parameter properties: A CreateEntity object defining the content of the new entity.
@@ -987,10 +1024,10 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func createEntity(
-        workspaceID: String,
-        properties: CreateEntity,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Entity) -> Void)
+    workspaceID: String,
+    properties: CreateEntity,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Entity) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -1032,7 +1069,7 @@ public class Conversation {
     /**
      Delete entity.
 
-     Delete an entity from a workspace.
+          Delete an entity from a workspace.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1040,10 +1077,10 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func deleteEntity(
-        workspaceID: String,
-        entity: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    workspaceID: String,
+    entity: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1079,26 +1116,32 @@ public class Conversation {
     /**
      Get entity.
 
-     Get information about an entity, optionally including all entity content.
+          Get information about an entity, optionally including all entity content.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
      - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func getEntity(
-        workspaceID: String,
-        entity: String,
-        export: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (EntityExport) -> Void)
+    workspaceID: String,
+    entity: String,
+    export: Bool? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (EntityExport) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let export = export {
             let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1132,7 +1175,7 @@ public class Conversation {
     /**
      List entities.
 
-     List the entities for a workspace.
+          List the entities for a workspace.
 
      - parameter workspaceID: The workspace ID.
      - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
@@ -1140,18 +1183,20 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
      - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func listEntities(
-        workspaceID: String,
-        export: Bool? = nil,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (EntityCollection) -> Void)
+    workspaceID: String,
+    export: Bool? = nil,
+    pageLimit: Int? = nil,
+    includeCount: Bool? = nil,
+    sort: String? = nil,
+    cursor: String? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (EntityCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1174,6 +1219,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1207,7 +1256,7 @@ public class Conversation {
     /**
      Update entity.
 
-     Update an existing entity with new or modified data.
+          Update an existing entity with new or modified data.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1216,11 +1265,11 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func updateEntity(
-        workspaceID: String,
-        entity: String,
-        properties: UpdateEntity,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Entity) -> Void)
+    workspaceID: String,
+    entity: String,
+    properties: UpdateEntity,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Entity) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -1262,7 +1311,7 @@ public class Conversation {
     /**
      Add entity value.
 
-     Create a new value for an entity.
+          Create a new value for an entity.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1271,11 +1320,11 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func createValue(
-        workspaceID: String,
-        entity: String,
-        properties: CreateValue,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Value) -> Void)
+    workspaceID: String,
+    entity: String,
+    properties: CreateValue,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Value) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -1317,7 +1366,7 @@ public class Conversation {
     /**
      Delete entity value.
 
-     Delete a value for an entity.
+          Delete a value for an entity.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1326,11 +1375,11 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func deleteValue(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    workspaceID: String,
+    entity: String,
+    value: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1366,28 +1415,34 @@ public class Conversation {
     /**
      Get entity value.
 
-     Get information about an entity value.
+          Get information about an entity value.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter export: Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func getValue(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        export: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ValueExport) -> Void)
+    workspaceID: String,
+    entity: String,
+    value: String,
+    export: Bool? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (ValueExport) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let export = export {
             let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1421,7 +1476,7 @@ public class Conversation {
     /**
      List entity values.
 
-     List the values for an entity.
+          List the values for an entity.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1430,19 +1485,21 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
      - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func listValues(
-        workspaceID: String,
-        entity: String,
-        export: Bool? = nil,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ValueCollection) -> Void)
+    workspaceID: String,
+    entity: String,
+    export: Bool? = nil,
+    pageLimit: Int? = nil,
+    includeCount: Bool? = nil,
+    sort: String? = nil,
+    cursor: String? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (ValueCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1465,6 +1522,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1498,7 +1559,7 @@ public class Conversation {
     /**
      Update entity value.
 
-     Update the content of a value for an entity.
+          Update the content of a value for an entity.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1508,12 +1569,12 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func updateValue(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        properties: UpdateValue,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Value) -> Void)
+    workspaceID: String,
+    entity: String,
+    value: String,
+    properties: UpdateValue,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Value) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -1555,7 +1616,7 @@ public class Conversation {
     /**
      Add entity value synonym.
 
-     Add a new synonym to an entity value.
+          Add a new synonym to an entity value.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1565,12 +1626,12 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func createSynonym(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        synonym: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Synonym) -> Void)
+    workspaceID: String,
+    entity: String,
+    value: String,
+    synonym: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Synonym) -> Void)
     {
         // construct body
         let createSynonymRequest = CreateSynonym(synonym: synonym)
@@ -1613,7 +1674,7 @@ public class Conversation {
     /**
      Delete entity value synonym.
 
-     Delete a synonym for an entity value.
+          Delete a synonym for an entity value.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1623,12 +1684,12 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func deleteSynonym(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        synonym: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    workspaceID: String,
+    entity: String,
+    value: String,
+    synonym: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1664,26 +1725,32 @@ public class Conversation {
     /**
      Get entity value synonym.
 
-     Get information about a synonym for an entity value.
+          Get information about a synonym for an entity value.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter synonym: The text of the synonym.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func getSynonym(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        synonym: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Synonym) -> Void)
+    workspaceID: String,
+    entity: String,
+    value: String,
+    synonym: String,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Synonym) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
@@ -1715,7 +1782,7 @@ public class Conversation {
     /**
      List entity value synonyms.
 
-     List the synonyms for an entity value.
+          List the synonyms for an entity value.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1724,19 +1791,21 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
      - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func listSynonyms(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SynonymCollection) -> Void)
+    workspaceID: String,
+    entity: String,
+    value: String,
+    pageLimit: Int? = nil,
+    includeCount: Bool? = nil,
+    sort: String? = nil,
+    cursor: String? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (SynonymCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1755,6 +1824,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1788,7 +1861,7 @@ public class Conversation {
     /**
      Update entity value synonym.
 
-     Update the information about a synonym for an entity value.
+          Update the information about a synonym for an entity value.
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
@@ -1799,13 +1872,13 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func updateSynonym(
-        workspaceID: String,
-        entity: String,
-        value: String,
-        synonym: String,
-        newSynonym: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Synonym) -> Void)
+    workspaceID: String,
+    entity: String,
+    value: String,
+    synonym: String,
+    newSynonym: String? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Synonym) -> Void)
     {
         // construct body
         let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
@@ -1848,7 +1921,7 @@ public class Conversation {
     /**
      Create dialog node.
 
-     Create a dialog node.
+          Create a dialog node.
 
      - parameter workspaceID: The workspace ID.
      - parameter properties: A CreateDialogNode object defining the content of the new dialog node.
@@ -1856,10 +1929,10 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func createDialogNode(
-        workspaceID: String,
-        properties: CreateDialogNode,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DialogNode) -> Void)
+    workspaceID: String,
+    properties: CreateDialogNode,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (DialogNode) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -1901,7 +1974,7 @@ public class Conversation {
     /**
      Delete dialog node.
 
-     Delete a dialog node from the workspace.
+          Delete a dialog node from the workspace.
 
      - parameter workspaceID: The workspace ID.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
@@ -1909,10 +1982,10 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func deleteDialogNode(
-        workspaceID: String,
-        dialogNode: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    workspaceID: String,
+    dialogNode: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1948,22 +2021,28 @@ public class Conversation {
     /**
      Get dialog node.
 
-     Get information about a dialog node.
+          Get information about a dialog node.
 
      - parameter workspaceID: The workspace ID.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func getDialogNode(
-        workspaceID: String,
-        dialogNode: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DialogNode) -> Void)
+    workspaceID: String,
+    dialogNode: String,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (DialogNode) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
@@ -1995,24 +2074,26 @@ public class Conversation {
     /**
      List dialog nodes.
 
-     List the dialog nodes in the workspace.
+          List the dialog nodes in the workspace.
 
      - parameter workspaceID: The workspace ID.
      - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
      - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func listDialogNodes(
-        workspaceID: String,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DialogNodeCollection) -> Void)
+    workspaceID: String,
+    pageLimit: Int? = nil,
+    includeCount: Bool? = nil,
+    sort: String? = nil,
+    cursor: String? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (DialogNodeCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2031,6 +2112,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -2064,7 +2149,7 @@ public class Conversation {
     /**
      Update dialog node.
 
-     Update information for a dialog node.
+          Update information for a dialog node.
 
      - parameter workspaceID: The workspace ID.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
@@ -2073,11 +2158,11 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func updateDialogNode(
-        workspaceID: String,
-        dialogNode: String,
-        properties: UpdateDialogNode,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DialogNode) -> Void)
+    workspaceID: String,
+    dialogNode: String,
+    properties: UpdateDialogNode,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (DialogNode) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -2119,7 +2204,7 @@ public class Conversation {
     /**
      List log events in all workspaces.
 
-     List log events in all workspaces in the service instance.
+          List log events in all workspaces in the service instance.
 
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or `request.context.metadata.deployment`. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
@@ -2129,12 +2214,12 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func listAllLogs(
-        filter: String,
-        sort: String? = nil,
-        pageLimit: Int? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LogCollection) -> Void)
+    filter: String,
+    sort: String? = nil,
+    pageLimit: Int? = nil,
+    cursor: String? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (LogCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2178,7 +2263,7 @@ public class Conversation {
     /**
      List log events in a workspace.
 
-     List log events in a specific workspace.
+          List log events in a specific workspace.
 
      - parameter workspaceID: The workspace ID.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
@@ -2189,13 +2274,13 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func listLogs(
-        workspaceID: String,
-        sort: String? = nil,
-        filter: String? = nil,
-        pageLimit: Int? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LogCollection) -> Void)
+    workspaceID: String,
+    sort: String? = nil,
+    filter: String? = nil,
+    pageLimit: Int? = nil,
+    cursor: String? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (LogCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2247,7 +2332,7 @@ public class Conversation {
     /**
      Create counterexample.
 
-     Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
+          Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
 
      - parameter workspaceID: The workspace ID.
      - parameter text: The text of a user input marked as irrelevant input.
@@ -2255,10 +2340,10 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func createCounterexample(
-        workspaceID: String,
-        text: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Counterexample) -> Void)
+    workspaceID: String,
+    text: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Counterexample) -> Void)
     {
         // construct body
         let createCounterexampleRequest = CreateCounterexample(text: text)
@@ -2301,7 +2386,7 @@ public class Conversation {
     /**
      Delete counterexample.
 
-     Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
+          Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
 
      - parameter workspaceID: The workspace ID.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
@@ -2309,10 +2394,10 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func deleteCounterexample(
-        workspaceID: String,
-        text: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    workspaceID: String,
+    text: String,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping () -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2348,22 +2433,28 @@ public class Conversation {
     /**
      Get counterexample.
 
-     Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+          Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
 
      - parameter workspaceID: The workspace ID.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func getCounterexample(
-        workspaceID: String,
-        text: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Counterexample) -> Void)
+    workspaceID: String,
+    text: String,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Counterexample) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
@@ -2395,24 +2486,26 @@ public class Conversation {
     /**
      List counterexamples.
 
-     List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
+          List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
 
      - parameter workspaceID: The workspace ID.
      - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
      - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func listCounterexamples(
-        workspaceID: String,
-        pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
-        sort: String? = nil,
-        cursor: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (CounterexampleCollection) -> Void)
+    workspaceID: String,
+    pageLimit: Int? = nil,
+    includeCount: Bool? = nil,
+    sort: String? = nil,
+    cursor: String? = nil,
+    includeAudit: Bool? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (CounterexampleCollection) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2431,6 +2524,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -2464,7 +2561,7 @@ public class Conversation {
     /**
      Update counterexample.
 
-     Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+          Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
 
      - parameter workspaceID: The workspace ID.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
@@ -2473,11 +2570,11 @@ public class Conversation {
      - parameter success: A function executed with the successful result.
     */
     public func updateCounterexample(
-        workspaceID: String,
-        text: String,
-        newText: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Counterexample) -> Void)
+    workspaceID: String,
+    text: String,
+    newText: String? = nil,
+    failure: ((Error) -> Void)? = nil,
+    success: @escaping (Counterexample) -> Void)
     {
         // construct body
         let updateCounterexampleRequest = UpdateCounterexample(text: newText)

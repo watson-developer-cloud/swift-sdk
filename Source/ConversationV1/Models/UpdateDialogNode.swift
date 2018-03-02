@@ -41,7 +41,7 @@ public struct UpdateDialogNode {
     }
 
     /// The dialog node ID.
-    public var dialogNode: String
+    public var dialogNode: String?
 
     /// The description of the dialog node.
     public var description: String?
@@ -102,7 +102,7 @@ public struct UpdateDialogNode {
 
      - returns: An initialized `UpdateDialogNode`.
     */
-    public init(dialogNode: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, actions: [DialogNodeAction]? = nil) {
+    public init(dialogNode: String? = nil, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, actions: [DialogNodeAction]? = nil) {
         self.dialogNode = dialogNode
         self.description = description
         self.conditions = conditions
@@ -142,7 +142,7 @@ extension UpdateDialogNode: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        dialogNode = try container.decode(String.self, forKey: .dialogNode)
+        dialogNode = try container.decodeIfPresent(String.self, forKey: .dialogNode)
         description = try container.decodeIfPresent(String.self, forKey: .description)
         conditions = try container.decodeIfPresent(String.self, forKey: .conditions)
         parent = try container.decodeIfPresent(String.self, forKey: .parent)
@@ -160,7 +160,7 @@ extension UpdateDialogNode: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(dialogNode, forKey: .dialogNode)
+        try container.encodeIfPresent(dialogNode, forKey: .dialogNode)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(conditions, forKey: .conditions)
         try container.encodeIfPresent(parent, forKey: .parent)

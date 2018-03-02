@@ -19,10 +19,14 @@ import Foundation
 /** The next step to execute following this dialog node. */
 public struct DialogNodeNextStep {
 
-    /// How the `next_step` reference is processed.
+    /// How the `next_step` reference is processed. If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
     public enum Behavior: String {
-        // swiftlint:disable:next identifier_name
-        case to = "jump_to"
+        case getUserInput = "get_user_input"
+        case skipUserInput = "skip_user_input"
+        case jumpTo = "jump_to"
+        case reprompt = "reprompt"
+        case skipSlot = "skip_slot"
+        case skipAllSlots = "skip_all_slots"
     }
 
     /// Which part of the dialog node to process next.
@@ -33,10 +37,10 @@ public struct DialogNodeNextStep {
         case body = "body"
     }
 
-    /// How the `next_step` reference is processed.
+    /// How the `next_step` reference is processed. If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
     public var behavior: String
 
-    /// The ID of the dialog node to process next.
+    /// The ID of the dialog node to process next. This parameter is required if `behavior`=`jump_to`.
     public var dialogNode: String?
 
     /// Which part of the dialog node to process next.
@@ -45,8 +49,8 @@ public struct DialogNodeNextStep {
     /**
      Initialize a `DialogNodeNextStep` with member variables.
 
-     - parameter behavior: How the `next_step` reference is processed.
-     - parameter dialogNode: The ID of the dialog node to process next.
+     - parameter behavior: How the `next_step` reference is processed. If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
+     - parameter dialogNode: The ID of the dialog node to process next. This parameter is required if `behavior`=`jump_to`.
      - parameter selector: Which part of the dialog node to process next.
 
      - returns: An initialized `DialogNodeNextStep`.

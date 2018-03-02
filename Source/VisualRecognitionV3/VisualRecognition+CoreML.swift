@@ -66,8 +66,8 @@ extension VisualRecognition {
         }
 
         // parse the date on which the classifier was last updated
-        getClassifier(withID: classifierID, failure: failure) { classifier in
-            guard let classifierDate = dateFormatter.date(from: classifier.retrained ?? classifier.created) else {
+        getClassifier(classifierID: classifierID, failure: failure) { classifier in
+            guard let dateString = classifier.retrained ?? classifier.created, let classifierDate = dateFormatter.date(from: dateString) else {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
                 return
             }
@@ -123,7 +123,7 @@ extension VisualRecognition {
 
     /**
      Classify an image using a Core ML model from the local filesystem.
-     
+
      - parameter image: The image to classify.
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
        built-in classifier.
@@ -306,7 +306,7 @@ extension VisualRecognition {
 
         let classifiedImage: [String: Any] = ["classifiers": classifiers]
         let classifiedImages: [String: Any] = ["images": [classifiedImage]]
-        return try ClassifiedImages(json: JSONWrapper(dictionary: classifiedImages))
+        return try JSONDecoder().decode(ClassifiedImages.self, from: JSONEncoder().encode(classifiedImages))
     }
 
     /**
@@ -324,14 +324,13 @@ extension VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/octet-stream",
             queryItems: queryParameters

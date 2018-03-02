@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,149 +17,125 @@
 import Foundation
 
 /** A collection for storing documents. */
-public struct Collection: JSONDecodable {
+public struct Collection {
+
+    /// The status of the collection.
+    public enum Status: String {
+        case active = "active"
+        case pending = "pending"
+        case maintenance = "maintenance"
+    }
 
     /// The unique identifier of the collection.
-    public let collectionID: String?
+    public var collectionID: String?
 
-    /// The name of the collection with a maximum length of 255 characters.
-    public let name: String
+    /// The name of the collection.
+    public var name: String?
 
     /// The description of the collection.
-    public let description: String?
+    public var description: String?
 
     /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'.
-    public let created: String
+    public var created: String?
 
-    /// The timestamp of when the collection was last updated in the format
-    /// yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-    public let updated: String
+    /// The timestamp of when the collection was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    public var updated: String?
 
     /// The status of the collection.
-    public let status: CollectionStatus
+    public var status: String?
 
     /// The unique identifier of the collection's configuration.
-    public let configurationID: String
+    public var configurationID: String?
 
-    /// The language of the collection's documents.
-    public let language: String?
+    /// The language of the documents stored in the collection. Permitted values include `en` (English), `de` (German), and `es` (Spanish).
+    public var language: String?
 
-    /// The object providing information about the documents in the collection.
-    /// Seen only when retrieving details of a colleciton.
-    public let documentCounts: DocumentCounts?
+    /// The object providing information about the documents in the collection. Present only when retrieving details of a collection.
+    public var documentCounts: DocumentCounts?
 
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
+    /// The object providing information about the disk usage of the collection. Present only when retrieving details of a collection.
+    public var diskUsage: CollectionDiskUsage?
 
-    /// Used internally to initialize a `Collection` model from JSON.
-    public init(json: JSONWrapper) throws {
-        collectionID = try? json.getString(at: "collection_id")
-        name = try json.getString(at: "name")
-        description = try? json.getString(at: "description")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
+    /// Provides information about the status of relevance training for collection.
+    public var trainingStatus: TrainingStatus?
 
-        guard let collectionStatus = CollectionStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSONWrapper.Error.valueNotConvertible(value: json, to: CollectionStatus.self)
-        }
-        status = collectionStatus
-        configurationID = try json.getString(at: "configuration_id")
-        language = try? json.getString(at: "langauge")
-        documentCounts = try? json.decode(at: "document_counts", type: DocumentCounts.self)
-        self.json = try json.getDictionaryObject()
-    }
+    /**
+     Initialize a `Collection` with member variables.
 
-    /// Used internally to serialize an 'Collection' model to JSON.
-    public func toJSONObject() -> Any {
-        return json
-    }
-}
+     - parameter collectionID: The unique identifier of the collection.
+     - parameter name: The name of the collection.
+     - parameter description: The description of the collection.
+     - parameter created: The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'.
+     - parameter updated: The timestamp of when the collection was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     - parameter status: The status of the collection.
+     - parameter configurationID: The unique identifier of the collection's configuration.
+     - parameter language: The language of the documents stored in the collection. Permitted values include `en` (English), `de` (German), and `es` (Spanish).
+     - parameter documentCounts: The object providing information about the documents in the collection. Present only when retrieving details of a collection.
+     - parameter diskUsage: The object providing information about the disk usage of the collection. Present only when retrieving details of a collection.
+     - parameter trainingStatus: Provides information about the status of relevance training for collection.
 
-/** The information about documents in a collection. */
-public struct DocumentCounts: JSONDecodable {
-
-    /// Number of available documents.
-    public let available: Int?
-
-    /// Number of processing documents.
-    public let processing: Int?
-
-    /// Number of failed documents.
-    public let failed: Int?
-
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
-
-    /// Used internally to initialize a 'DocumentCounts' model from JSON.
-    public init(json: JSONWrapper) throws {
-        available = try? json.getInt(at: "available")
-        processing = try? json.getInt(at: "processing")
-        failed = try? json.getInt(at: "failed")
-        self.json = try json.getDictionaryObject()
-    }
-
-    /// Used internally to serialize a 'DocumentCounts' model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+     - returns: An initialized `Collection`.
+    */
+    public init(collectionID: String? = nil, name: String? = nil, description: String? = nil, created: String? = nil, updated: String? = nil, status: String? = nil, configurationID: String? = nil, language: String? = nil, documentCounts: DocumentCounts? = nil, diskUsage: CollectionDiskUsage? = nil, trainingStatus: TrainingStatus? = nil) {
+        self.collectionID = collectionID
+        self.name = name
+        self.description = description
+        self.created = created
+        self.updated = updated
+        self.status = status
+        self.configurationID = configurationID
+        self.language = language
+        self.documentCounts = documentCounts
+        self.diskUsage = diskUsage
+        self.trainingStatus = trainingStatus
     }
 }
 
-/** The field of a collection. */
-public struct Field: JSONDecodable {
+extension Collection: Codable {
 
-    /// The name of the field.
-    public let field: String
-
-    /// The type of the field.
-    public let type: String
-
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
-
-    /// Used internally to initialize a 'Field' model from JSON.
-    public init(json: JSONWrapper) throws {
-        field = try json.getString(at: "field")
-        type = try json.getString(at: "type")
-        self.json = try json.getDictionaryObject()
-    }
-}
-
-/** A deleted collection. */
-public struct DeletedCollection: JSONDecodable {
-
-    /// The ID of the deleted collection.
-    public let collectionID: String
-
-    /// The status of the collection.
-    public let status: CollectionStatus
-
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
-
-    /// Used internally to initialize a 'DeletedCollection' model from JSON.
-    public init(json: JSONWrapper) throws {
-        collectionID = try json.getString(at: "collection_id")
-        guard let collectionStatus = CollectionStatus(rawValue: try json.getString(at: "status")) else {
-            throw JSONWrapper.Error.valueNotConvertible(value: json, to: CollectionStatus.self)
-        }
-        status = collectionStatus
-        self.json = try json.getDictionaryObject()
+    private enum CodingKeys: String, CodingKey {
+        case collectionID = "collection_id"
+        case name = "name"
+        case description = "description"
+        case created = "created"
+        case updated = "updated"
+        case status = "status"
+        case configurationID = "configuration_id"
+        case language = "language"
+        case documentCounts = "document_counts"
+        case diskUsage = "disk_usage"
+        case trainingStatus = "training_status"
+        static let allValues = [collectionID, name, description, created, updated, status, configurationID, language, documentCounts, diskUsage, trainingStatus]
     }
 
-    /// Used internally to serialize a 'DeletedCollectoin' model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        collectionID = try container.decodeIfPresent(String.self, forKey: .collectionID)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        created = try container.decodeIfPresent(String.self, forKey: .created)
+        updated = try container.decodeIfPresent(String.self, forKey: .updated)
+        status = try container.decodeIfPresent(String.self, forKey: .status)
+        configurationID = try container.decodeIfPresent(String.self, forKey: .configurationID)
+        language = try container.decodeIfPresent(String.self, forKey: .language)
+        documentCounts = try container.decodeIfPresent(DocumentCounts.self, forKey: .documentCounts)
+        diskUsage = try container.decodeIfPresent(CollectionDiskUsage.self, forKey: .diskUsage)
+        trainingStatus = try container.decodeIfPresent(TrainingStatus.self, forKey: .trainingStatus)
     }
-}
 
-/** The status of a collection. */
-public enum CollectionStatus: String {
-    /// Active
-    case active = "active"
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(collectionID, forKey: .collectionID)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(created, forKey: .created)
+        try container.encodeIfPresent(updated, forKey: .updated)
+        try container.encodeIfPresent(status, forKey: .status)
+        try container.encodeIfPresent(configurationID, forKey: .configurationID)
+        try container.encodeIfPresent(language, forKey: .language)
+        try container.encodeIfPresent(documentCounts, forKey: .documentCounts)
+        try container.encodeIfPresent(diskUsage, forKey: .diskUsage)
+        try container.encodeIfPresent(trainingStatus, forKey: .trainingStatus)
+    }
 
-    /// Pending
-    case pending = "pending"
-
-    /// Deleted
-    case deleted = "deleted"
 }

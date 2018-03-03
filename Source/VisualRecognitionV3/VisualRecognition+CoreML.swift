@@ -292,24 +292,31 @@ extension VisualRecognition {
         threshold: Double? = nil)
         throws -> ClassifiedImages
     {
-        var classifiers = [[String: Any]]()
+        var classifiers = [String]()
         for (model, var observations) in results {
             if let threshold = threshold {
                 observations = observations.filter { $0.confidence > Float(threshold) }
             }
             let description = model.modelDescription
             let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
-            let classifierResults: [String: Any] = [
-                "name": metadata["name"] ?? "",
-                "classifier_id": metadata["classifier_id"] ?? "",
-                "classes": observations.map() { ["class": $0.identifier, "score": Double($0.confidence)] }
-            ]
+            let name = metadata["name"] ?? ""
+            let classifierID = metadata["classifier_id"] ?? ""
+            let classes = observations.map { classs in
+                """
+                { "class": "\(classs.identifier)", "score": \(Double(classs.confidence)) }
+                """
+            }.joined(separator: ",")
+            let classifierResults =
+                """
+                { "name": "\(name)", "classifier_id": "\(classifierID)", "classes": [\(classes)] }
+                """
             classifiers.append(classifierResults)
         }
-
-        let classifiedImage: [String: Any] = ["classifiers": classifiers]
-        let classifiedImages: [String: Any] = ["images": [classifiedImage]]
-        return try JSONDecoder().decode(ClassifiedImages.self, from: JSONEncoder().encode(classifiedImages))
+        let json = """
+            { "images": [{ "classifiers": [ \(classifiers.joined(separator: ",")) ] }] }
+        """
+        guard let data = json.data(using: .utf8) else { throw RestError.serializationError }
+        return try JSONDecoder().decode(ClassifiedImages.self, from: data)
     }
 
     // swiftlint:disable function_body_length

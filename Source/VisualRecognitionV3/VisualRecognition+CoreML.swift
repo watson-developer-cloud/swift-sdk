@@ -76,7 +76,7 @@ extension VisualRecognition {
             if classifierDate > modelDate && classifier.status == "ready" {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             } else {
-                success?();
+                success?()
             }
         }
     }
@@ -101,7 +101,7 @@ extension VisualRecognition {
         let fileManager = FileManager.default
         if let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
             let allContents = try fileManager.contentsOfDirectory(atPath: appSupport.path)
-            let modelPaths = allContents.filter() { $0.contains(".mlmodelc") }
+            let modelPaths = allContents.filter { $0.contains(".mlmodelc") }
             for modelPath in modelPaths {
                 let classifierID = String(modelPath.split(separator: ".")[0])
                 models.insert(classifierID)
@@ -167,8 +167,9 @@ extension VisualRecognition {
 
                 // get classifier model
                 let model: MLModel
-                do { model = try self.loadModelFromDisk(classifierID: classifierID) }
-                catch {
+                do {
+                    model = try self.loadModelFromDisk(classifierID: classifierID)
+                } catch {
                     dispatchGroup.leave()
                     let description = "Failed to load model for classifier \(classifierID): \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
@@ -179,8 +180,9 @@ extension VisualRecognition {
 
                 // convert MLModel to VNCoreMLModel
                 let classifier: VNCoreMLModel
-                do { classifier = try VNCoreMLModel(for: model) }
-                catch {
+                do {
+                    classifier = try VNCoreMLModel(for: model)
+                } catch {
                     dispatchGroup.leave()
                     let description = "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
@@ -233,8 +235,9 @@ extension VisualRecognition {
         dispatchGroup.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
             guard !results.isEmpty else { return }
             let classifiedImages: ClassifiedImages
-            do { classifiedImages = try self.convert(results: results, threshold: threshold) }
-            catch {
+            do {
+                classifiedImages = try self.convert(results: results, threshold: threshold)
+            } catch {
                 let description = "Failed to represent results as JSON: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -292,7 +295,7 @@ extension VisualRecognition {
         var classifiers = [[String: Any]]()
         for (model, var observations) in results {
             if let threshold = threshold {
-                observations = observations.filter() { $0.confidence > Float(threshold) }
+                observations = observations.filter { $0.confidence > Float(threshold) }
             }
             let description = model.modelDescription
             let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]

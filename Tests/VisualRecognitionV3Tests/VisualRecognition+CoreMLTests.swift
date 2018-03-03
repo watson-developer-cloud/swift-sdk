@@ -34,7 +34,7 @@ class VisualRecognition_CoreMLTests: XCTestCase {
     func instantiateVisualRecognition() {
         let apiKey = Credentials.VisualRecognitionAPIKey
         let version = "2016-11-04"
-        visualRecognition = VisualRecognition(apiKey: apiKey, version: version, apiKeyTestServer: "c8325ab4-80e3-4dc5-880c-9cbb42de475c")
+        visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
     }
@@ -133,7 +133,7 @@ class VisualRecognition_CoreMLTests: XCTestCase {
     func testGetClassifier() {
         let expectation = self.expectation(description: "getClassifier")
         let failure = { (error: Error) in print(error) }
-        visualRecognition.getClassifier(withID: classifierID, failure: failure) { classifier in
+        visualRecognition.getClassifier(classifierID: classifierID, failure: failure) { _ in
             expectation.fulfill()
         }
         waitForExpectations()

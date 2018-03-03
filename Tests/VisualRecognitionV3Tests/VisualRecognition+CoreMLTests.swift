@@ -133,14 +133,4 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             XCTFail("Core ML required iOS 11+")
         }
     }
-
-    /** Test connection to the test server. */
-    func testGetClassifier() {
-        let expectation = self.expectation(description: "getClassifier")
-        let failure = { (error: Error) in print(error) }
-        visualRecognition.getClassifier(classifierID: classifierID, failure: failure) { _ in
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
 }

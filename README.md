@@ -1277,7 +1277,7 @@ The local Core ML model can be updated as needed.
 let classifierID = "your-classifier-id"
 let failure = { (error: Error) in print(error) }
 visualRecognition.updateLocalModel(classifierID: classifierID, failure: failure) {
-        print("model updated")
+    print("model updated")
 }
 ```
 
@@ -1288,14 +1288,14 @@ let localModels = try! visualRecognition.listLocalModels()
 print(localModels)
 ```
 
-The following example demonstrates how to reference a local Core ML model by classifierID.
+If you would prefer to bypass `classifyWithLocalModel` and construct your own Core ML classification request, then you can retrieve a Core ML model from the local filesystem with the following example.
 ```swift
 let classifierID = "your-classifier-id"
 let localModel = try! visualRecognition.getLocalModel(classifierID: classifierID)
 print(localModel)
 ```
 
-The following example demonstrates how to delete a local Core ML model from the device's filesystem.
+The following example demonstrates how to delete a local Core ML model from the filesystem. This saves space the model is no longer needed.
 ```swift
 let classifierID = "your-classifier-id"
 visualRecognition.deleteLocalModel(classifierID: classifierID)

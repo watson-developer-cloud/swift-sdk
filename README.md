@@ -4,7 +4,7 @@
 ![](https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg)](http://watson-developer-cloud.github.io/swift-sdk)
-[![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
+[![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
 
 ## Overview
 
@@ -184,12 +184,12 @@ To include the Watson SDK to your Linux projects, please follow the [Swift Packa
 
 ## Contributing
 
-We would love any and all help! If you would like to contribute, please read our [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md) documentation with information on getting started.
+We would love any and all help! If you would like to contribute, please read our [CONTRIBUTING](https://github.com/watson-developer-cloud/swift-sdk/blob/master/.github/CONTRIBUTING.md) documentation with information on getting started.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is
-available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE).
+available in [LICENSE](https://github.com/watson-developer-cloud/swift-sdk/blob/master/LICENSE).
 
 This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
 
@@ -789,7 +789,7 @@ var settings = RecognitionSettings(contentType: .wav)
 settings.interimResults = true
 ```
 
-See the [class documentation](http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) for more information about the available settings.
+See the [class documentation](http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) for more information about the available settings.
 
 #### Microphone Audio and Compression
 

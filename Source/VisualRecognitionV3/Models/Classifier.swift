@@ -42,10 +42,10 @@ public struct Classifier: JSONDecodable {
     
     /// The classes of the classifier.
     public let classes: [String]
-    
+
     /// If the classifier is CoreML Enabled.
-    public let coreMLEnabled: Bool
-    
+    public let coreMLEnabled: Bool?
+
     /// Used internally to initialize a `Classifier` model from JSON.
     public init(json: JSONWrapper) throws {
         classifierID = try json.getString(at: "classifier_id")
@@ -56,6 +56,6 @@ public struct Classifier: JSONDecodable {
         created = try json.getString(at: "created")
         retrained = try? json.getString(at: "retrained")
         classes = try json.getArray(at: "classes").map { try $0.getString(at: "class") }
-        coreMLEnabled = try json.getBool(at: "core_ml_enabled")
+        coreMLEnabled = try? json.getBool(at: "core_ml_enabled")
     }
 }

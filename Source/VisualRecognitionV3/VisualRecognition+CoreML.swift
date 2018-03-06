@@ -322,24 +322,19 @@ extension VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: (() -> Void)? = nil)
     {
-        // TODO: revert networking from test server to public service
-        // url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model"
-
         // construct query parameters
-        // var queryParameters = [URLQueryItem]()
-        // queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        // queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct header parameters for test server
-        var headerParameters = defaultHeaders
-        headerParameters["X-API-Key"] = apiKeyTestServer
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: "https://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)/model",
+            url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model",
             credentials: .apiKey,
-            headerParameters: headerParameters
+            headerParameters: defaultHeaders,
+            acceptType: "application/octet-stream",
+            queryItems: queryParameters
         )
 
         // create temporary downloads directory

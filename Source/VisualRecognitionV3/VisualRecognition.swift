@@ -30,7 +30,6 @@ public class VisualRecognition {
     public var defaultHeaders = [String: String]()
     
     internal let apiKey: String
-    internal let apiKeyTestServer: String
     internal let version: String
     internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     
@@ -41,10 +40,9 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date in
         "YYYY-MM-DD" format.
      */
-    public init(apiKey: String, version: String, apiKeyTestServer: String) {
+    public init(apiKey: String, version: String) {
         self.apiKey = apiKey
         self.version = version
-        self.apiKeyTestServer = apiKeyTestServer  // TODO: remove before release
     }
     
     /**
@@ -572,24 +570,19 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
-        // TODO: revert networking from test server to public service
-        // url: serviceURL + "/v3/classifiers/\(classifierID)"
-
         // construct query parameters
-        // var queryParameters = [URLQueryItem]()
-        // queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
-        // queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // set headers with api key for test server
-        var headers = defaultHeaders
-        headers["X-API-Key"] = apiKeyTestServer
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
+        queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: "https://solution-kit-dev.mybluemix.net/api/v1.0/classifiers/\(classifierID)",
+            url: serviceURL + "/v3/classifiers/\(classifierID)",
             credentials: .apiKey,
-            headerParameters: headers
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            queryItems: queryParameters
         )
         
         // execute REST request

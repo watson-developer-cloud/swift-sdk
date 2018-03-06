@@ -249,16 +249,18 @@ public class TextToSpeech {
      the `POST /v1/synthesize` method. For examples of calls to the method, see the [Text to Speech API
      reference](http://www.ibm.com/watson/developercloud/text-to-speech/api/v1/).
 
+     - parameter text: The text to synthesize.
+     - parameter accept: The type of the response: audio/basic, audio/flac, audio/l16;rate=nnnn, audio/ogg, audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/mp3, audio/mpeg, audio/mulaw;rate=nnnn, audio/wav, audio/webm, audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
      - parameter voice: The voice to use for synthesis. Retrieve available voices with the `GET /v1/voices` method.
      - parameter customizationID: The GUID of a custom voice model to use for the synthesis. If a custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to use the specified voice with no customization.
-     - parameter text: The text to synthesize.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func synthesize(
+        text: String,
+        accept: String,
         voice: String? = nil,
         customizationID: String? = nil,
-        text: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (URL) -> Void)
     {
@@ -286,7 +288,7 @@ public class TextToSpeech {
             url: serviceURL + "/v1/synthesize",
             credentials: credentials,
             headerParameters: defaultHeaders,
-            acceptType: "audio/basic",
+            acceptType: accept,
             contentType: "application/json",
             queryItems: queryParameters,
             messageBody: body

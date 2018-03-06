@@ -1295,7 +1295,7 @@ let localModel = try! visualRecognition.getLocalModel(classifierID: classifierID
 print(localModel)
 ```
 
-The following example demonstrates how to delete a local Core ML model from the filesystem. This saves space the model is no longer needed.
+The following example demonstrates how to delete a local Core ML model from the filesystem. This saves space when the model is no longer needed.
 ```swift
 let classifierID = "your-classifier-id"
 visualRecognition.deleteLocalModel(classifierID: classifierID)

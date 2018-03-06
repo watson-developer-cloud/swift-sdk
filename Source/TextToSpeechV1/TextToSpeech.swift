@@ -185,7 +185,6 @@ public class TextToSpeech {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
             queryItems: queryParameters,
             messageBody: nil
         )
@@ -220,7 +219,6 @@ public class TextToSpeech {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
             queryItems: nil,
             messageBody: nil
         )
@@ -350,7 +348,6 @@ public class TextToSpeech {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
             queryItems: queryParameters,
             messageBody: nil
         )
@@ -439,8 +436,6 @@ public class TextToSpeech {
             url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            acceptType: nil,
-            contentType: nil,
             queryItems: nil,
             messageBody: nil
         )
@@ -485,7 +480,6 @@ public class TextToSpeech {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
             queryItems: nil,
             messageBody: nil
         )
@@ -532,7 +526,6 @@ public class TextToSpeech {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
             queryItems: queryParameters,
             messageBody: nil
         )
@@ -589,7 +582,6 @@ public class TextToSpeech {
             url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            acceptType: nil,
             contentType: "application/json",
             queryItems: nil,
             messageBody: body
@@ -646,7 +638,6 @@ public class TextToSpeech {
             url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            acceptType: nil,
             contentType: "application/json",
             queryItems: nil,
             messageBody: body
@@ -699,7 +690,6 @@ public class TextToSpeech {
             url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            acceptType: nil,
             contentType: "application/json",
             queryItems: nil,
             messageBody: body
@@ -744,8 +734,6 @@ public class TextToSpeech {
             url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: defaultHeaders,
-            acceptType: nil,
-            contentType: nil,
             queryItems: nil,
             messageBody: nil
         )
@@ -790,7 +778,6 @@ public class TextToSpeech {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
             queryItems: nil,
             messageBody: nil
         )
@@ -834,7 +821,6 @@ public class TextToSpeech {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
             queryItems: nil,
             messageBody: nil
         )

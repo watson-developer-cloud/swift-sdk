@@ -256,7 +256,7 @@ public class TextToSpeech {
     */
     public func synthesize(
         text: String,
-        accept: String,
+        accept: String? = nil,
         voice: String? = nil,
         customizationID: String? = nil,
         failure: ((Error) -> Void)? = nil,

@@ -100,7 +100,10 @@ public class PersonalityInsights {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            return NSError(domain: domain, code: code, userInfo: nil)
+            let message = try json.getString(at: "error")
+            let help = try? json.getString(at: "help")
+            let userInfo = [NSLocalizedDescriptionKey: message, NSLocalizedFailureReasonErrorKey: help ?? ""]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }

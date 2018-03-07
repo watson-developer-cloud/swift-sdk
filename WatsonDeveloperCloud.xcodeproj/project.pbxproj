@@ -112,6 +112,7 @@
 		6823CEF11F8EA0F700A388EC /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9C1F8EA0AD00A388EC /* Workspace.swift */; };
 		6823CEF21F8EA0F700A388EC /* WorkspaceCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEAD1F8EA0B000A388EC /* WorkspaceCollection.swift */; };
 		6823CEF31F8EA0F700A388EC /* WorkspaceExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9A1F8EA0AC00A388EC /* WorkspaceExport.swift */; };
+		682ED52F204F348100B17B06 /* WAVRepair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682ED52E204F348100B17B06 /* WAVRepair.swift */; };
 		6832BBEE2009CE8800BA50A8 /* SpeechToText+Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */; };
 		683947D5202CF4F7007E3CF3 /* RelationArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AA202CF4F3007E3CF3 /* RelationArgument.swift */; };
 		683947D6202CF4F7007E3CF3 /* RelationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AB202CF4F3007E3CF3 /* RelationsResult.swift */; };
@@ -1004,6 +1005,7 @@
 		6823CEBC1F8EA0B200A388EC /* DialogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogNode.swift; sourceTree = "<group>"; };
 		6823CEBD1F8EA0B300A388EC /* CounterexampleCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterexampleCollection.swift; sourceTree = "<group>"; };
 		6823CEBE1F8EA0B300A388EC /* CreateDialogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDialogNode.swift; sourceTree = "<group>"; };
+		682ED52E204F348100B17B06 /* WAVRepair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVRepair.swift; sourceTree = "<group>"; };
 		683947AA202CF4F3007E3CF3 /* RelationArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationArgument.swift; sourceTree = "<group>"; };
 		683947AB202CF4F3007E3CF3 /* RelationsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationsResult.swift; sourceTree = "<group>"; };
 		683947AC202CF4F3007E3CF3 /* SemanticRolesObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesObject.swift; sourceTree = "<group>"; };
@@ -1724,6 +1726,7 @@
 			children = (
 				12F1405A1EB2410400D4047D /* TextToSpeechDecoder.swift */,
 				124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */,
+				682ED52E204F348100B17B06 /* WAVRepair.swift */,
 				124C2E071D19E2FA00D9F602 /* Models */,
 				124C2E131D19E2FA00D9F602 /* Tests */,
 			);
@@ -4677,6 +4680,7 @@
 				68BC28E51F8C35080042810E /* RestUtilities.swift in Sources */,
 				68BC28E31F8C35080042810E /* RestRequest.swift in Sources */,
 				689A170D203CCDA9002CFC66 /* Words.swift in Sources */,
+				682ED52F204F348100B17B06 /* WAVRepair.swift in Sources */,
 				68BC28E01F8C35080042810E /* JSON.swift in Sources */,
 				689A1707203CCDA9002CFC66 /* Voices.swift in Sources */,
 				689A1709203CCDA9002CFC66 /* UpdateVoiceModel.swift in Sources */,

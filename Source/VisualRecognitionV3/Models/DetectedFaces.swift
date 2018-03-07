@@ -16,60 +16,52 @@
 
 import Foundation
 
-/** Classify results for multiple images. */
-public struct ClassifiedImages {
-
-    /// The number of custom classes identified in the images.
-    public var customClasses: Int?
+/** DetectedFaces. */
+public struct DetectedFaces {
 
     /// Number of images processed for the API call.
     public var imagesProcessed: Int?
 
-    /// The array of classified images.
-    public var images: [ClassifiedImage]
+    /// The array of images.
+    public var images: [ImageWithFaces]
 
     /// Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.
     public var warnings: [WarningInfo]?
 
     /**
-     Initialize a `ClassifiedImages` with member variables.
+     Initialize a `DetectedFaces` with member variables.
 
-     - parameter images: The array of classified images.
-     - parameter customClasses: The number of custom classes identified in the images.
+     - parameter images: The array of images.
      - parameter imagesProcessed: Number of images processed for the API call.
      - parameter warnings: Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.
 
-     - returns: An initialized `ClassifiedImages`.
+     - returns: An initialized `DetectedFaces`.
     */
-    public init(images: [ClassifiedImage], customClasses: Int? = nil, imagesProcessed: Int? = nil, warnings: [WarningInfo]? = nil) {
+    public init(images: [ImageWithFaces], imagesProcessed: Int? = nil, warnings: [WarningInfo]? = nil) {
         self.images = images
-        self.customClasses = customClasses
         self.imagesProcessed = imagesProcessed
         self.warnings = warnings
     }
 }
 
-extension ClassifiedImages: Codable {
+extension DetectedFaces: Codable {
 
     private enum CodingKeys: String, CodingKey {
-        case customClasses = "custom_classes"
         case imagesProcessed = "images_processed"
         case images = "images"
         case warnings = "warnings"
-        static let allValues = [customClasses, imagesProcessed, images, warnings]
+        static let allValues = [imagesProcessed, images, warnings]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        customClasses = try container.decodeIfPresent(Int.self, forKey: .customClasses)
         imagesProcessed = try container.decodeIfPresent(Int.self, forKey: .imagesProcessed)
-        images = try container.decode([ClassifiedImage].self, forKey: .images)
+        images = try container.decode([ImageWithFaces].self, forKey: .images)
         warnings = try container.decodeIfPresent([WarningInfo].self, forKey: .warnings)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(customClasses, forKey: .customClasses)
         try container.encodeIfPresent(imagesProcessed, forKey: .imagesProcessed)
         try container.encode(images, forKey: .images)
         try container.encodeIfPresent(warnings, forKey: .warnings)

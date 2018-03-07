@@ -260,7 +260,7 @@ public class TextToSpeech {
         voice: String? = nil,
         customizationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (URL) -> Void)
+        success: @escaping (Data) -> Void)
     {
         // construct body
         let synthesizeRequest = Text(text: text)
@@ -293,11 +293,41 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<URL>) in
+        request.responseData { response in
             switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
+            case .success(let data):
+                switch self.responseToError(response: response.response, data: data) {
+                case .some(let error): failure?(error)
+                case .none:
+                    if accept?.lowercased().contains("audio/wav") == true {
+                        // repair the WAV header
+                        var wav = data
+                        guard WAVRepair.isWAVFile(data: wav) else {
+                            let failureReason = "Returned audio is in an unexpected format."
+                            let userInfo = [NSLocalizedDescriptionKey: failureReason]
+                            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                            failure?(error)
+                            return
+                        }
+                        WAVRepair.repairWAVHeader(data: &wav)
+                        success(wav)
+                    } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
+                        do {
+                            let decodedAudio = try TextToSpeechDecoder(audioData: data)
+                            success(decodedAudio.pcmDataWithHeaders)
+                        } catch {
+                            let failureReason = "Returned audio is in an unexpected format."
+                            let userInfo = [NSLocalizedDescriptionKey: failureReason]
+                            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                            failure?(error)
+                            return
+                        }
+                    } else {
+                        success(data)
+                    }
+                }
+            case .failure(let error):
+                failure?(error)
             }
         }
     }

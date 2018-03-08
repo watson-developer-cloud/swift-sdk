@@ -142,7 +142,13 @@ public class TextToSpeech {
         do {
             let json = try JSONWrapper(data: data)
             let code = response?.statusCode ?? 400
-            return NSError(domain: domain, code: code, userInfo: nil)
+            let error = try json.getString(at: "error")
+            let codeDescription = try? json.getString(at: "code_description")
+            let userInfo = [
+                NSLocalizedDescriptionKey: error,
+                NSLocalizedFailureReasonErrorKey: codeDescription ?? "",
+            ]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return nil
         }

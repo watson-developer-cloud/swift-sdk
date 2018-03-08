@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,40 +16,95 @@
 
 import Foundation
 
-/** A voice supported by the Text to Speech service. */
-public struct Voice: JSONDecodable {
+/** Voice. */
+public struct Voice {
 
     /// The URI of the voice.
-    public let url: String
+    public var url: String
 
-    /// The gender of the voice: male or female.
-    public let gender: String
+    /// The gender of the voice: `male` or `female`.
+    public var gender: String
 
-    /// The name of the voice. Use this value as the voice
-    /// identifier in all requests that accept a voice.
-    public let name: String
+    /// The name of the voice. Use this as the voice identifier in all requests.
+    public var name: String
 
-    /// The language and region of the voice; for example, en-US for US English.
-    public let language: String
+    /// The language and region of the voice (for example, `en-US`).
+    public var language: String
 
-    /// A description of the voice.
-    public let description: String
+    /// A textual description of the voice.
+    public var description: String
 
-    /// Indicates whether the voice can be customized with a custom voice model.
-    public let customizable: Bool
+    /// If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `custom_pronunciation`; maintained for backward compatibility.).
+    public var customizable: Bool
 
-    /// A Customization object that provides information about a specific custom voice model
-    /// for the voice. Returned only when a customization_id is is specified with the call.
-    public let customization: Customization?
+    /// Describes the additional service features supported with the voice.
+    public var supportedFeatures: SupportedFeatures
 
-    /// Used internally to initialize a `Voice` model from JSON.
-    public init(json: JSONWrapper) throws {
-        name = try json.getString(at: "name")
-        gender = try json.getString(at: "gender")
-        language = try json.getString(at: "language")
-        url = try json.getString(at: "url")
-        description = try json.getString(at: "description")
-        customizable = try json.getBool(at: "customizable")
-        customization = try? json.decode(at: "customization")
+    /// Returns information about a specified custom voice model. **Note:** This field is returned only when you list information about a specific voice and specify the GUID of a custom voice model that is based on that voice.
+    public var customization: VoiceModel?
+
+    /**
+     Initialize a `Voice` with member variables.
+
+     - parameter url: The URI of the voice.
+     - parameter gender: The gender of the voice: `male` or `female`.
+     - parameter name: The name of the voice. Use this as the voice identifier in all requests.
+     - parameter language: The language and region of the voice (for example, `en-US`).
+     - parameter description: A textual description of the voice.
+     - parameter customizable: If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `custom_pronunciation`; maintained for backward compatibility.).
+     - parameter supportedFeatures: Describes the additional service features supported with the voice.
+     - parameter customization: Returns information about a specified custom voice model. **Note:** This field is returned only when you list information about a specific voice and specify the GUID of a custom voice model that is based on that voice.
+
+     - returns: An initialized `Voice`.
+    */
+    public init(url: String, gender: String, name: String, language: String, description: String, customizable: Bool, supportedFeatures: SupportedFeatures, customization: VoiceModel? = nil) {
+        self.url = url
+        self.gender = gender
+        self.name = name
+        self.language = language
+        self.description = description
+        self.customizable = customizable
+        self.supportedFeatures = supportedFeatures
+        self.customization = customization
     }
+}
+
+extension Voice: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case url = "url"
+        case gender = "gender"
+        case name = "name"
+        case language = "language"
+        case description = "description"
+        case customizable = "customizable"
+        case supportedFeatures = "supported_features"
+        case customization = "customization"
+        static let allValues = [url, gender, name, language, description, customizable, supportedFeatures, customization]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        url = try container.decode(String.self, forKey: .url)
+        gender = try container.decode(String.self, forKey: .gender)
+        name = try container.decode(String.self, forKey: .name)
+        language = try container.decode(String.self, forKey: .language)
+        description = try container.decode(String.self, forKey: .description)
+        customizable = try container.decode(Bool.self, forKey: .customizable)
+        supportedFeatures = try container.decode(SupportedFeatures.self, forKey: .supportedFeatures)
+        customization = try container.decodeIfPresent(VoiceModel.self, forKey: .customization)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(url, forKey: .url)
+        try container.encode(gender, forKey: .gender)
+        try container.encode(name, forKey: .name)
+        try container.encode(language, forKey: .language)
+        try container.encode(description, forKey: .description)
+        try container.encode(customizable, forKey: .customizable)
+        try container.encode(supportedFeatures, forKey: .supportedFeatures)
+        try container.encodeIfPresent(customization, forKey: .customization)
+    }
+
 }

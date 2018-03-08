@@ -1301,8 +1301,7 @@ let classifierID = "your-classifier-id"
 visualRecognition.deleteLocalModel(classifierID: classifierID)
 ```
 
-#### Important notes
-* Alternatively, a Watson created Core ML model can be packaged in the main app bundle using the naming convention `<classified_id>.mlmodel`. The SDK will reference this model for any updates if no model can be found in the `Application Support` directory. Updated models will be downloaded to the `Application Support` directory.
+You may also choose to include a Core ML model with your application, enabling images to be classified offline without having to download a model first. To include a model, add it to your application bundle following the naming convention [classifier_id].mlmodel. This will enable the SDK to locate the model when using any function that accepts a classifierID argument.
 
 The following links provide more information about the IBM Watson Visual Recognition service:
 

@@ -1260,7 +1260,7 @@ visualRecognition.updateLocalModel(classifierID: classifierID, failure: failure)
 }
 ```
 
-Once the Core ML model is in the device's file system, images can be classified offline without updating the local Core ML model.
+Once the Core ML model is in the device's file system, images can be classified offline, directly on the device.
 
 ```swift
 let classifierID = "your-classifier-id"
@@ -1300,6 +1300,9 @@ The following example demonstrates how to delete a local Core ML model from the 
 let classifierID = "your-classifier-id"
 visualRecognition.deleteLocalModel(classifierID: classifierID)
 ```
+
+#### Important notes
+* Alternatively, a Watson created Core ML model can be packaged in the main app bundle using the naming convention `<classified_id>.mlmodel`. The SDK will reference this model for any updates if no model can be found in the `Application Support` directory. Updated models will be downloaded to the `Application Support` directory.
 
 The following links provide more information about the IBM Watson Visual Recognition service:
 

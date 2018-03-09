@@ -17,28 +17,28 @@
 import Foundation
 
 /**
- 
+
  **DocumentTitle**
- 
+
  Reponse object for Title related calls
- 
+
  */
 
 public struct DocumentTitle: JSONDecodable {
-    
+
     /** the URL information was requested for */
     public let url: String?
-    
+
     /** extracted title */
     public let title: String?
-    
+
     /// Used internally to initialize a DocumentTitle object
     public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
             throw JSONWrapper.Error.valueNotConvertible(value: json, to: DocumentTitle.self)
         }
-        
+
         url = try? json.getString(at: "url")
         title = try? json.getString(at: "title")
     }

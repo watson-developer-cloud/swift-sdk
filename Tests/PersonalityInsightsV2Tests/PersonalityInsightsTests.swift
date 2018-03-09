@@ -23,9 +23,8 @@ class PersonalityInsightsTests: XCTestCase {
     private var personalityInsights: PersonalityInsights!
     private var mobyDickIntro: String!
     private var kennedySpeech: String!
-    private let timeout: TimeInterval = 5.0
-    
-    static var allTests : [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
             ("testProfile", testProfile),
             ("testContentItem", testContentItem),
@@ -92,21 +91,21 @@ class PersonalityInsightsTests: XCTestCase {
     func failWithResult<T>(result: T) {
         XCTFail("Negative test returned a result.")
     }
-    
+
     /** Fail false positives. */
     func failWithResult() {
         XCTFail("Negative test returned a result.")
     }
 
     /** Wait for expectations. */
-    func waitForExpectations() {
+    func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     // MARK: - Positive Tests
-    
+
     /** Analyze the text of Kennedy's speech. */
     func testProfile() {
         let description = "Analyze the text of Kennedy's speech."
@@ -118,7 +117,7 @@ class PersonalityInsightsTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     /** Analyze content items. */
     func testContentItem() {
         let description = "Analyze content items."
@@ -148,7 +147,7 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     // MARK: - Negative Tests
-    
+
     /** Test getProfile() with text that is too short (less than 100 words). */
     func testProfileWithShortText() {
         let description = "Try to analyze text that is too short (less than 100 words)."

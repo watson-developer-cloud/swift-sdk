@@ -19,24 +19,27 @@ import Foundation
 /// An error from processing a network request or response.
 public enum RestError: Error {
 
+    /// No response was received from the server.
+    case noResponse
+
     /// No data was returned from the server.
     case noData
-    
+
     /// Failed to serialize JSON to data.
     case serializationError
-    
+
     /// Failed to replace special characters in the
     /// URL path with percent encoded characters.
     case encodingError
-    
+
     /// FileManager failed to handle the given file.
     /// (The file may already exist or the disk may be full.)
     case fileManagerError
-    
+
     /// Failed to load the given file.
     case invalidFile
-    
+
     /// An HTTP error with a status code and description.
     case failure(Int, String)
-    
+
 }

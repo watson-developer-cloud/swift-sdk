@@ -17,11 +17,11 @@
 import Foundation
 
 /**
- 
+
  **Entity**
- 
+
  A named entity (a person, company, organization, etc) extracted from a document by Alchemy services
- 
+
  */
 
 public struct Entity: JSONDecodable {
@@ -41,7 +41,7 @@ public struct Entity: JSONDecodable {
     public let text: String?
     /** Classification */
     public let type: String?
-    
+
     /// Used internally to initialize an Entity object
     public init(json: JSONWrapper) throws {
         if let countString = try? json.getString(at: "count") {

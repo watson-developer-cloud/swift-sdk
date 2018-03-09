@@ -14,11 +14,13 @@
  * limitations under the License.
  **/
 
+// swiftlint:disable function_body_length force_try force_unwrapping superfluous_disable_command
+
 import XCTest
 import VisualRecognitionV3
 
-class VisualRecognition_CoreMLTests: XCTestCase {
-    
+class VisualRecognitionCoreMLTests: XCTestCase {
+
     private var visualRecognition: VisualRecognition!
     private let timeout: TimeInterval = 30.0
     private let classifierID = "demo"
@@ -34,7 +36,7 @@ class VisualRecognition_CoreMLTests: XCTestCase {
     func instantiateVisualRecognition() {
         let apiKey = Credentials.VisualRecognitionAPIKey
         let version = "2016-11-04"
-        visualRecognition = VisualRecognition(apiKey: apiKey, version: version, apiKeyTestServer: "c8325ab4-80e3-4dc5-880c-9cbb42de475c")
+        visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
     }
@@ -63,7 +65,7 @@ class VisualRecognition_CoreMLTests: XCTestCase {
             waitForExpectations()
 
             // get the local model
-            guard let _ = try? visualRecognition.getLocalModel(classifierID: classifierID) else {
+            guard (try? visualRecognition.getLocalModel(classifierID: classifierID)) != nil else {
                 XCTFail("Failed to get the local model after it was updated.")
                 return
             }
@@ -79,7 +81,7 @@ class VisualRecognition_CoreMLTests: XCTestCase {
             XCTAssert(localModels.contains(classifierID))
 
             // delete the local model
-            guard let _ = try? visualRecognition.deleteLocalModel(classifierID: classifierID) else {
+            guard (try? visualRecognition.deleteLocalModel(classifierID: classifierID)) != nil else {
                 XCTFail("Failed to delete the local model.")
                 return
             }
@@ -121,21 +123,14 @@ class VisualRecognition_CoreMLTests: XCTestCase {
             waitForExpectations()
 
             // delete the local model
-            do { try visualRecognition.deleteLocalModel(classifierID: classifierID) }
-            catch { XCTFail("Failed to delete the local model: \(error)") }
+            do {
+                try visualRecognition.deleteLocalModel(classifierID: classifierID)
+            } catch {
+                XCTFail("Failed to delete the local model: \(error)")
+            }
 
         } else {
             XCTFail("Core ML required iOS 11+")
         }
-    }
-
-    /** Test connection to the test server. */
-    func testGetClassifier() {
-        let expectation = self.expectation(description: "getClassifier")
-        let failure = { (error: Error) in print(error) }
-        visualRecognition.getClassifier(withID: classifierID, failure: failure) { classifier in
-            expectation.fulfill()
-        }
-        waitForExpectations()
     }
 }

@@ -15,22 +15,22 @@
  **/
 
 import Foundation
-    
+
 /** A dialog conversation response. */
 public struct ConversationResponse: JSONDecodable {
-    
+
     /// The response from the dialog application.
     public let response: [String]
-    
+
     /// The input string that prompted the dialog application to respond.
     public let input: String
-    
+
     /// The conversation identifier.
     public let conversationID: Int
-    
+
     /// The confidence associated with the conversation response.
     public let confidence: Double
-    
+
     /// The client identifier.
     public let clientID: Int
 

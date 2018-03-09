@@ -17,21 +17,21 @@
 import Foundation
 
 /**
- 
+
  **PublicationDate**
- 
+
  Date of publication extracted from a document by AlchemyLanguage
- 
+
  */
 
 public struct PublicationDate: JSONDecodable {
-    
+
     /** confidence level of the detection */
     public let confident: String?
-    
+
     /** detected publication date */
     public let date: String?
-    
+
     /// Used internally to initialize a PublicanDate object
     public init(json: JSONWrapper) throws {
         confident = try? json.getString(at: "confident")

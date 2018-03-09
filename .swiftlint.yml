@@ -1,0 +1,53 @@
+
+# Exclude deprecated/legacy services
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Source/AlchemyDataNewsV1
+  - Source/AlchemyLanguageV1
+  - Source/AlchemyVisionV1
+  - Source/DialogV1
+  - Source/PersonalityInsightsV2
+  - Source/RelationshipExtractionV1Beta
+  - Source/TradeoffAnalyticsV1
+  - Source/SupportingFiles/Dependencies
+  - Tests/AlchemyDataNewsV1Tests
+  - Tests/AlchemyLanguageV1Tests
+  - Tests/AlchemyVisionV1Tests
+  - Tests/DialogV1Tests
+  - Tests/PersonalityInsightsV2Tests
+  - Tests/RelationshipExtractionV1BetaTests
+  - Tests/TradeoffAnalyticsV1Tests
+
+disabled_rules: # rule identifiers to exclude from running
+  - closure_parameter_position
+  - opening_brace
+  - redundant_string_enum_value
+
+opt_in_rules:
+ - force_unwrapping
+
+file_length:
+  warning: 3000
+  error: 4000
+
+type_body_length:
+  warning: 3000
+  error: 4000
+
+function_body_length:
+  warning: 50
+  error: 80
+
+line_length:
+  warning: 500
+  error: 999
+
+identifier_name:
+  excluded: # excluded via string array
+    - id
+
+trailing_comma:
+  mandatory_comma: true
+
+trailing_whitespace:
+  severity: error

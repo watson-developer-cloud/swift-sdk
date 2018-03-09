@@ -34,7 +34,7 @@ public struct ImageLink: JSONDecodable {
         guard status == "OK" else {
             throw JSONWrapper.Error.valueNotConvertible(value: json, to: ImageLink.self)
         }
-        
+
         url = try json.getString(at: "url")
         image = try json.getString(at: "image")
     }

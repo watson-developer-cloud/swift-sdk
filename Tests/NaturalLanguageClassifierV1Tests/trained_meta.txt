@@ -1,1 +1,4 @@
-{"language":"en","name":"Trained Classifier"}
+{
+    "language": "en",
+    "name": "swift-sdk-test-classifier"
+}

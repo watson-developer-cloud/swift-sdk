@@ -17,20 +17,20 @@
 import Foundation
 
 /**
- 
+
  **DocumentSource**
- 
+
  Contains source information about the document
- 
+
  */
 public struct DocumentSource: JSONDecodable {
-    
+
     /** see **DocumentEnriched** */
     public let enriched: DocumentEnriched?
-    
+
     /// used internally to initialize a DocumentSource object
     public init(json: JSONWrapper) throws {
         enriched = try? json.decode(at: "enriched", type: DocumentEnriched.self)
     }
-    
+
 }

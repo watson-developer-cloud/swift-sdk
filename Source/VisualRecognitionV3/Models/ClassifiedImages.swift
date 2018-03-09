@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,88 +16,63 @@
 
 import Foundation
 
-/** The results from classifying one or more images. */
-public struct ClassifiedImages: JSONDecodable {
-    
-    /// The images that were classified.
-    public let images: [ClassifiedImage]
-    
-    /// Any warnings produced during classification.
-    public let warnings: [WarningInfo]?
-    
-    /// Used internally to initialize a `ClassifiedImages` model from JSON.
-    public init(json: JSONWrapper) throws {
-        images = try json.decodedArray(at: "images", type: ClassifiedImage.self)
-        warnings = try? json.decodedArray(at: "warnings", type: WarningInfo.self)
+/** Classify results for multiple images. */
+public struct ClassifiedImages {
+
+    /// The number of custom classes identified in the images.
+    public var customClasses: Int?
+
+    /// Number of images processed for the API call.
+    public var imagesProcessed: Int?
+
+    /// The array of classified images.
+    public var images: [ClassifiedImage]
+
+    /// Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.
+    public var warnings: [WarningInfo]?
+
+    /**
+     Initialize a `ClassifiedImages` with member variables.
+
+     - parameter images: The array of classified images.
+     - parameter customClasses: The number of custom classes identified in the images.
+     - parameter imagesProcessed: Number of images processed for the API call.
+     - parameter warnings: Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.
+
+     - returns: An initialized `ClassifiedImages`.
+    */
+    public init(images: [ClassifiedImage], customClasses: Int? = nil, imagesProcessed: Int? = nil, warnings: [WarningInfo]? = nil) {
+        self.images = images
+        self.customClasses = customClasses
+        self.imagesProcessed = imagesProcessed
+        self.warnings = warnings
     }
 }
 
-/** A classified image. */
-public struct ClassifiedImage: JSONDecodable {
-    
-    /// The source URL of the image, before any redirects. This is omitted if the image was uploaded.
-    public let sourceURL: String?
-    
-    /// The fully-resolved URL of the image, after redirects are followed.
-    /// This is omitted if the image was uploaded.
-    public let resolvedURL: String?
-    
-    /// The relative path of the image file. This is omitted if the image was passed by URL.
-    public let image: String?
-    
-    /// Information about what might have caused a failure, such as an image
-    /// that is too large. This omitted if there is no error or warning.
-    public let error: ErrorInfo?
-    
-    /// Classifications of the given image by classifier.
-    public let classifiers: [ClassifierResults]
-    
-    /// Used internally to initialize a `ClassifiedImage` model from JSON.
-    public init(json: JSONWrapper) throws {
-        sourceURL = try? json.getString(at: "source_url")
-        resolvedURL = try? json.getString(at: "resolved_url")
-        image = try? json.getString(at: "image")
-        error = try? json.decode(at: "error")
-        classifiers = try json.decodedArray(at: "classifiers", type: ClassifierResults.self)
-    }
-}
+extension ClassifiedImages: Codable {
 
-/** A classifier's classifications for a given image. */
-public struct ClassifierResults: JSONDecodable {
-    
-    /// The name of the classifier.
-    public let name: String
-    
-    /// The id of the classifier.
-    public let classifierID: String?
-    
-    /// The classes identified by the classifier.
-    public let classes: [Classification]
-    
-    /// Used internally to initialize a `ClassifierResults` model from JSON.
-    public init(json: JSONWrapper) throws {
-        name = try json.getString(at: "name")
-        classifierID = try json.getString(at: "classifier_id")
-        classes = try json.decodedArray(at: "classes", type: Classification.self)
+    private enum CodingKeys: String, CodingKey {
+        case customClasses = "custom_classes"
+        case imagesProcessed = "images_processed"
+        case images = "images"
+        case warnings = "warnings"
+        static let allValues = [customClasses, imagesProcessed, images, warnings]
     }
-}
 
-/** The classification of an image. */
-public struct Classification: JSONDecodable {
-    
-    /// The class identified in the image.
-    public let classification: String
-    
-    /// The confidence score of the identified class. Scores range from 0 to 1, with a higher score indicating greater confidence.
-    public let score: Double
-    
-    /// The type hierarchy of the identified class, if found.
-    public let typeHierarchy: String?
-    
-    /// Used internally to initialize a `Classification` model from JSON.
-    public init(json: JSONWrapper) throws {
-        classification = try json.getString(at: "class")
-        score = try json.getDouble(at: "score")
-        typeHierarchy = try? json.getString(at: "type_hierarchy")
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        customClasses = try container.decodeIfPresent(Int.self, forKey: .customClasses)
+        imagesProcessed = try container.decodeIfPresent(Int.self, forKey: .imagesProcessed)
+        images = try container.decode([ClassifiedImage].self, forKey: .images)
+        warnings = try container.decodeIfPresent([WarningInfo].self, forKey: .warnings)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(customClasses, forKey: .customClasses)
+        try container.encodeIfPresent(imagesProcessed, forKey: .imagesProcessed)
+        try container.encode(images, forKey: .images)
+        try container.encodeIfPresent(warnings, forKey: .warnings)
+    }
+
 }

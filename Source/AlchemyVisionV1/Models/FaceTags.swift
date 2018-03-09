@@ -37,7 +37,7 @@ public struct FaceTags: JSONDecodable {
         guard status == "OK" else {
             throw JSONWrapper.Error.valueNotConvertible(value: json, to: FaceTags.self)
         }
-        
+
         url = try? json.getString(at: "url")
         totalTransactions = try Int(json.getString(at: "totalTransactions"))!
         imageFaces = try json.decodedArray(at: "imageFaces", type: ImageFace.self)
@@ -120,7 +120,7 @@ public struct Identity: JSONDecodable {
 
     /// The likelihood that this name corresponds to the detected face.
     public let score: Double
-    
+
     /// Information to disambiguate the identity of the detected face.
     public let disambiguated: Disambiguated
 

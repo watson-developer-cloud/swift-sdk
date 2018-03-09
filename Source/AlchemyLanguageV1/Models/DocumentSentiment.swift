@@ -16,28 +16,26 @@
 
 import Foundation
 
-
-
 /**
- 
+
  **DocumentSentiment**
- 
+
  Response object for **Sentiment** related calls
- 
+
  */
 public struct DocumentSentiment: JSONDecodable {
-    
+
     /** inputted text */
     public let text: String?
-    
+
     /** see **Sentiment** */
     public let sentiment: Sentiment?
-    
+
     /// Used internally to initialize a DocumentSentiment object
     public init(json: JSONWrapper) throws {
         text = try? json.getString(at: "text")
         sentiment = try? json.decode(at: "sentiment", type: Sentiment.self)
     }
-    
+
 }
 

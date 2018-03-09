@@ -20,8 +20,8 @@ internal struct RestRequest {
 
     internal static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
-        let sdkVersion = "0.19.0"
-        
+        let sdkVersion = "0.21.0"
+
         let operatingSystem: String = {
             #if os(iOS)
                 return "iOS"
@@ -37,18 +37,18 @@ internal struct RestRequest {
                 return "Unknown"
             #endif
         }()
-        
+
         let operatingSystemVersion: String = {
             let os = ProcessInfo.processInfo.operatingSystemVersion
             return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
         }()
-        
+
         return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
     }()
 
     private let request: URLRequest
     private let session = URLSession(configuration: URLSessionConfiguration.default)
-    
+
     internal init(
         method: String,
         url: String,
@@ -59,61 +59,90 @@ internal struct RestRequest {
         queryItems: [URLQueryItem]? = nil,
         messageBody: Data? = nil)
     {
-        // construct url with query parameters
-        var urlComponents = URLComponents(string: url)!
-        if let queryItems = queryItems, !queryItems.isEmpty {
-            urlComponents.queryItems = queryItems
-        }
+        // create mutable copies
+        var headerParameters = headerParameters
+        var queryItems = queryItems ?? []
 
-        // Must encode "+" to %2B (URLComponents does not do this)
-        urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-
-        // construct basic mutable request
-        var request = URLRequest(url: urlComponents.url!)
-        request.httpMethod = method
-        request.httpBody = messageBody
-        
-        // set the request's user agent
-        request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
-        
-        // set the request's authentication credentials
+        // set authentication credentials
         switch credentials {
-        case .apiKey: break
         case .basicAuthentication(let username, let password):
             let authData = (username + ":" + password).data(using: .utf8)!
             let authString = authData.base64EncodedString()
-            request.setValue("Basic \(authString)", forHTTPHeaderField: "Authorization")
+            headerParameters["Authorization"] = "Basic \(authString)"
+        case .apiKey(let name, let key, let location):
+            switch location {
+            case .header: headerParameters[name] = key
+            case .query: queryItems.append(URLQueryItem(name: name, value: key))
+            }
         }
-        
-        // set the request's header parameters
-        for (key, value) in headerParameters {
-            request.setValue(value, forHTTPHeaderField: key)
+
+        // construct url components
+        var urlComponents = URLComponents(string: url)!
+        if !queryItems.isEmpty {
+            urlComponents.queryItems = queryItems
         }
-        
-        // set the request's accept type
+
+        // encode "+" to %2B (URLComponents does not do this)
+        urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+
+        // construct mutable request
+        let url = urlComponents.url!
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.httpBody = messageBody
+
+        // set headers
+        request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
+        headerParameters.forEach { (key, value) in request.setValue(value, forHTTPHeaderField: key) }
         if let acceptType = acceptType {
             request.setValue(acceptType, forHTTPHeaderField: "Accept")
         }
-        
-        // set the request's content type
         if let contentType = contentType {
             request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
-        
+
         self.request = request
     }
-    
-    internal func response(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+
+    internal func response(
+        parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    {
         let task = session.dataTask(with: request) { (data, response, error) in
-            completionHandler(data, response as? HTTPURLResponse, error)
+
+            guard error == nil else {
+                completionHandler(data, response as? HTTPURLResponse, error)
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse else {
+                let error = RestError.noResponse
+                completionHandler(data, nil, error)
+                return
+            }
+
+            guard (200..<300).contains(response.statusCode) else {
+                if let serviceError = parseServiceError?(response, data) {
+                    completionHandler(data, response, serviceError)
+                } else {
+                    let genericMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
+                    let genericError = RestError.failure(response.statusCode, genericMessage)
+                    completionHandler(data, response, genericError)
+                }
+                return
+            }
+
+            // Success path
+            completionHandler(data, response, nil)
         }
         task.resume()
     }
-    
+
     internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
-        response() { data, response, error in
-            if let error = error {
-                let result = RestResult<Data>.failure(error)
+        response { data, response, error in
+            guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
+                let result = RestResult<Data>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -135,10 +164,11 @@ internal struct RestRequest {
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
-        response() { data, response, error in
+        response(parseServiceError: responseToError) { data, response, error in
 
-            if let error = error ?? responseToError?(response,data) {
-                let result = RestResult<T>.failure(error)
+            guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
+                let result = RestResult<T>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -174,26 +204,27 @@ internal struct RestRequest {
             } catch {
                 result = .failure(error)
             }
-            
+
             // execute callback
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
-    
+
     internal func responseObject<T: Decodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
-        response() { data, response, error in
-            
-            if let error = error ?? responseToError?(response,data) {
-                let result = RestResult<T>.failure(error)
+        response(parseServiceError: responseToError) { data, response, error in
+
+            guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
+                let result = RestResult<T>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
-            
+
             // ensure data is not nil
             guard let data = data else {
                 let result = RestResult<T>.failure(RestError.noData)
@@ -201,7 +232,7 @@ internal struct RestRequest {
                 completionHandler(dataResponse)
                 return
             }
-            
+
             // parse json object
             let result: RestResult<T>
             do {
@@ -210,7 +241,7 @@ internal struct RestRequest {
             } catch {
                 result = .failure(error)
             }
-            
+
             // execute callback
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
@@ -222,10 +253,11 @@ internal struct RestRequest {
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
     {
-        response() { data, response, error in
+        response(parseServiceError: responseToError) { data, response, error in
 
-            if let error = error ?? responseToError?(response, data) {
-                let result = RestResult<[T]>.failure(error)
+            guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
+                let result = RestResult<[T]>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -262,7 +294,7 @@ internal struct RestRequest {
             } catch {
                 result = .failure(error)
             }
-            
+
             // execute callback
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
@@ -273,10 +305,11 @@ internal struct RestRequest {
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<String>) -> Void)
     {
-        response() { data, response, error in
+        response(parseServiceError: responseToError) { data, response, error in
 
-            if let error = error ?? responseToError?(response, data) {
-                let result = RestResult<String>.failure(error)
+            guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
+                let result = RestResult<String>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -297,7 +330,7 @@ internal struct RestRequest {
                 completionHandler(dataResponse)
                 return
             }
-            
+
             // execute callback
             let result = RestResult.success(string)
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
@@ -309,10 +342,11 @@ internal struct RestRequest {
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<Void>) -> Void)
     {
-        response() { data, response, error in
+        response(parseServiceError: responseToError) { data, response, error in
 
-            if let error = error ?? responseToError?(response, data) {
-                let result = RestResult<Void>.failure(error)
+            guard error == nil else {
+                // swiftlint:disable:next force_unwrapping
+                let result = RestResult<Void>.failure(error!)
                 let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
@@ -356,6 +390,11 @@ internal enum RestResult<T> {
 }
 
 internal enum Credentials {
-    case apiKey
     case basicAuthentication(username: String, password: String)
+    case apiKey(name: String, key: String, in: APIKeyLocation)
+
+    internal enum APIKeyLocation {
+        case header
+        case query
+    }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ public struct SemanticRolesObject {
      Initialize a `SemanticRolesObject` with member variables.
 
      - parameter text: Object text.
-     - parameter keywords: 
+     - parameter keywords:
 
      - returns: An initialized `SemanticRolesObject`.
     */

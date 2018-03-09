@@ -18,22 +18,22 @@ import Foundation
 
 /** An object containing information about speaker label object. */
 public struct SpeakerLabel: JSONDecodable {
-    
+
     /// The from/start timestamp, in seconds, of this speaker label
     public let fromTime: Double
-    
+
     /// The to/end timestamp, in seconds, of this speaker label
     public let toTime: Double
-    
+
     /// The confidence score of the speaker label between 0 and 1
     public let confidence: Double
-    
+
     /// The speaker label in the form of an integer (greater than or equal to 0)
     public let speaker: Int
-    
+
     /// The final field will only be true for the last word of a complete audio stream.  Otherwise, the final field will be false
     public let final: Bool
-    
+
     /// Used internally to initialize a `SpeakerLabel` model from JSON.
     public init(json: JSONWrapper) throws {
         fromTime = try json.getDouble(at: "from")

@@ -17,17 +17,17 @@
 import Foundation
 
 /**
- 
+
  **Feed**
- 
+
  A RSS/ATOM feed link extracted from a document
- 
+
  */
 
 public struct Feed: JSONDecodable {
     /** extracted feed */
     public let feed: String?
-    
+
     /// Used internally to initialize a Feed object
     public init(json: JSONWrapper) throws {
         feed = try? json.getString(at: "feed")

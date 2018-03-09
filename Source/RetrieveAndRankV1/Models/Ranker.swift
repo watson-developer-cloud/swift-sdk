@@ -18,19 +18,19 @@ import Foundation
 
 /** A model containing information about a specific ranker. */
 public struct Ranker: JSONDecodable {
-    
+
     /// The unique identifier for this ranker.
     public let rankerID: String
-    
+
     /// The link to this ranker.
     public let url: String
-    
+
     /// The user-supplied name for this ranker.
     public let name: String
-    
+
     /// The date and time, in UTC, that the ranker was created.
     public let created: String
-    
+
     /// Used internally to initialize a `Ranker` model from JSON.
     public init(json: JSONWrapper) throws {
         rankerID = try json.getString(at: "ranker_id")

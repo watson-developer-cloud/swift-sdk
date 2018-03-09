@@ -17,34 +17,34 @@
 import Foundation
 
 /**
- 
+
  **Feeds**
- 
+
  Response object for **Feed** related calls
- 
+
  */
 
 public struct Feeds: JSONDecodable {
-    
+
     /** the number of transactions made by the call */
     public let totalTransactions: Int?
-    
+
     /** extracted language */
     public let language: String?
-    
+
     /** the URL information was requested for */
     public let url: String?
-    
+
     /** see **Feed** */
     public let feeds: [Feed]?
-    
+
     /// Used internally to initialize a Feeds object
     public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
             throw JSONWrapper.Error.valueNotConvertible(value: json, to: Feeds.self)
         }
-        
+
         if let totalTransactionString = try? json.getString(at: "totalTransactions") {
             totalTransactions = Int(totalTransactionString)
         } else {

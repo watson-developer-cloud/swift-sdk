@@ -18,10 +18,10 @@ import Foundation
 
 /** The results of a Speech to Text recognition request. */
 public struct SpeechRecognitionResults {
-    
+
     /// All recognition results from a recognition request.
     public var results = [SpeechRecognitionResult]()
- 
+
     /// A concatenation of the transcripts with the greatest confidence.
     public var bestTranscript: String {
         var transcripts = [String]()
@@ -32,10 +32,10 @@ public struct SpeechRecognitionResults {
         }
         return transcripts.reduce("") { $0 + " " + $1 }
     }
-    
+
     /// All the speaker labels from the recognition request.
     public var speakerLabels = [SpeakerLabel]()
-    
+
     /// Add the updates specified by a `SpeechRecognitionEvent`.
     mutating internal func addResults(event: SpeechRecognitionEvent) {
         if let index = event.resultIndex, let updates = event.results {

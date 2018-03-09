@@ -17,33 +17,33 @@
 import Foundation
 
 /**
- 
+
  **Answer Units**
- 
+
  Answer Units are a format that can be used with other Watson services, such as the
  Watson Retrieve and Rank Service
- 
+
  */
 public struct AnswerUnits: JSONDecodable {
-    
+
     /** an Id for the unit */
     public let id: String?
-    
+
     /** type of the unit */
     public let type: String?
-    
+
     /** Id of the parent, should the unit have one */
     public let parentId: String?
-    
+
     /** title of the current unit */
     public let title: String?
-    
+
     /** the direction the current unit is read (left to right, etc) */
     public let direction: String?
-    
+
     /** see **Content** */
     public let content: [Content]?
-    
+
     /** used internally to initialize AnswerUnits objects */
     public init(json: JSONWrapper) throws {
         id = try? json.getString(at: "id")
@@ -53,5 +53,5 @@ public struct AnswerUnits: JSONDecodable {
         direction = try? json.getString(at: "direction")
         content = try? json.decodedArray(at: "content", type: Content.self)
     }
-    
+
 }

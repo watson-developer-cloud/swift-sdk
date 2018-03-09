@@ -1,59 +1,75 @@
 #!/bin/bash
 
+# This script builds and tests each scheme of the Swift SDK using the
+# iOS Simulator. This script will not run on Linux.
+
+####################
+# Environment Vars
+####################
+
+# the device to build for
+DESTINATION="OS=11.2,name=iPhone 7"
+
+# the exit code of each build command
+EXIT_CODES=()
+
+# the schemes to build
+SCHEMES=(
+	"AlchemyDataNewsV1"
+	"AlchemyLanguageV1"
+	"AlchemyVisionV1"
+	"ConversationV1"
+	"DialogV1"
+	"DiscoveryV1"
+	"DocumentConversionV1"
+	"LanguageTranslatorV2"
+	"NaturalLanguageClassifierV1"
+	"NaturalLanguageUnderstandingV1"
+	"PersonalityInsightsV2"
+	"PersonalityInsightsV3"
+	"RelationshipExtractionV1Beta"
+	"RetrieveAndRankV1"
+	"SpeechToTextV1"
+	"TextToSpeechV1"
+	"ToneAnalyzerV3"
+	"TradeoffAnalyticsV1"
+	"VisualRecognitionV3"
+)
+
+####################
+# Dependencies
+####################
+
+brew update
+brew outdated carthage || brew upgrade carthage
+carthage bootstrap --platform iOS
+
+brew outdated swiftlint || brew upgrade swiftlint
+
+####################
+# Build and Test
+####################
+
+# set a pipeline's return status to the value of the last (rightmost) commmand
+# to exit with a non-zero status, or zero if all commands exited successfully
+# (required to check status code when using xcpretty)
 set -o pipefail
-exitCode=0
-IOS_SDK=${IOS_SDK:-"iphonesimulator10.3"}
-IOS_DESTINATION=${IOS_DESTINATION:-"OS=10.3.1,name=iPhone 7"}
 
-function checkStatus {
-    if [[ $exitCode == 0 && $1 != 0 ]]; then
-        exitCode=$1
-    fi
-}
+# build each scheme
+for SCHEME in ${SCHEMES[@]}; do
+	xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" test | xcpretty
+	EXIT_CODES+=($?)
+done
 
-function uploadCodecov {
-    bash <(curl -s https://codecov.io/bash)
-}
+####################
+# Set Exit Code
+####################
 
-xcodebuild build -scheme "RestKit" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" | xcpretty
-checkStatus $?
-xcodebuild test -scheme "AlchemyDataNewsV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "AlchemyLanguageV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "AlchemyVisionV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "ConversationV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "DialogV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "DiscoveryV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "DocumentConversionV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "LanguageTranslatorV2" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "NaturalLanguageClassifierV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "NaturalLanguageUnderstandingV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "PersonalityInsightsV2" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "PersonalityInsightsV3" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "RelationshipExtractionV1Beta" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "RetrieveAndRankV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "SpeechToTextV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "TextToSpeechV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "ToneAnalyzerV3" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "TradeoffAnalyticsV1" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES" | xcpretty
-checkStatus $? && uploadCodecov
-xcodebuild test -scheme "VisualRecognitionV3" -sdk "$IOS_SDK" -destination "$IOS_DESTINATION" -enableCodeCoverage "YES"
-checkStatus $? && uploadCodecov
-
-exit $exitCode
+# exit with the first non-zero status or zero if all builds exited successfully
+for EXIT_CODE in ${EXIT_CODES[@]}; do
+	if [ $EXIT_CODE -ne 0 ]
+	then
+		exit $EXIT_CODE
+	fi
+done
+exit 0

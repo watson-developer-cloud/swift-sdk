@@ -18,33 +18,33 @@ import Foundation
 
 /** A result produced by the Discovery service to analyze the input provided. */
 public struct EnrichedTitle: JSONDecodable {
-    
+
     /// Status of the document analyzed with enrichments.
     public let status: String?
-    
+
     /// The attitude, opinion or feeling toward something such as a person, product,
     /// organization or location.
     public let documentSentiment: Sentiment?
-    
+
     /// The extracted topic categories.
     public let taxonomy: [Taxonomy]?
-    
+
     /// The relations between entities (such as people, locations, organizations, events,
     /// and the relationships between these entities.
     public let relations: [Relation]?
-    
+
     /// Entities
     public let entities: [Entity]?
-    
+
     /// The text of the document title.
     public let text: String?
-    
+
     /// Concepts within the document.
     public let concepts: [Concept]?
-    
+
     /// Keywords found.
     public let keywords: [Keyword]?
-    
+
     /// The raw JSON object used to construct this model.
     public let json: [String: Any]
 
@@ -60,7 +60,7 @@ public struct EnrichedTitle: JSONDecodable {
         keywords = try? json.decodedArray(at: "keywords", type: Keyword.self)
         self.json = try json.getDictionaryObject()
     }
-    
+
     /// Used internally to serialize an 'EnrichedTitle' model to JSON.
     public func toJSONObject() -> Any {
         return json

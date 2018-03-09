@@ -66,8 +66,8 @@ extension VisualRecognition {
         }
 
         // parse the date on which the classifier was last updated
-        getClassifier(withID: classifierID, failure: failure) { classifier in
-            guard let classifierDate = dateFormatter.date(from: classifier.retrained ?? classifier.created) else {
+        getClassifier(classifierID: classifierID, failure: failure) { classifier in
+            guard let dateString = classifier.retrained ?? classifier.created, let classifierDate = dateFormatter.date(from: dateString) else {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
                 return
             }
@@ -76,7 +76,7 @@ extension VisualRecognition {
             if classifierDate > modelDate && classifier.status == "ready" {
                 self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
             } else {
-                success?();
+                success?()
             }
         }
     }
@@ -101,7 +101,7 @@ extension VisualRecognition {
         let fileManager = FileManager.default
         if let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
             let allContents = try fileManager.contentsOfDirectory(atPath: appSupport.path)
-            let modelPaths = allContents.filter() { $0.contains(".mlmodelc") }
+            let modelPaths = allContents.filter { $0.contains(".mlmodelc") }
             for modelPath in modelPaths {
                 let classifierID = String(modelPath.split(separator: ".")[0])
                 models.insert(classifierID)
@@ -123,7 +123,7 @@ extension VisualRecognition {
 
     /**
      Classify an image using a Core ML model from the local filesystem.
-     
+
      - parameter image: The image to classify.
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
        built-in classifier.
@@ -167,8 +167,9 @@ extension VisualRecognition {
 
                 // get classifier model
                 let model: MLModel
-                do { model = try self.loadModelFromDisk(classifierID: classifierID) }
-                catch {
+                do {
+                    model = try self.loadModelFromDisk(classifierID: classifierID)
+                } catch {
                     dispatchGroup.leave()
                     let description = "Failed to load model for classifier \(classifierID): \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
@@ -179,8 +180,9 @@ extension VisualRecognition {
 
                 // convert MLModel to VNCoreMLModel
                 let classifier: VNCoreMLModel
-                do { classifier = try VNCoreMLModel(for: model) }
-                catch {
+                do {
+                    classifier = try VNCoreMLModel(for: model)
+                } catch {
                     dispatchGroup.leave()
                     let description = "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
@@ -233,8 +235,9 @@ extension VisualRecognition {
         dispatchGroup.notify(queue: DispatchQueue.global(qos: .userInitiated)) {
             guard !results.isEmpty else { return }
             let classifiedImages: ClassifiedImages
-            do { classifiedImages = try self.convert(results: results, threshold: threshold) }
-            catch {
+            do {
+                classifiedImages = try self.convert(results: results, threshold: threshold)
+            } catch {
                 let description = "Failed to represent results as JSON: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
@@ -289,25 +292,34 @@ extension VisualRecognition {
         threshold: Double? = nil)
         throws -> ClassifiedImages
     {
-        var classifiers = [[String: Any]]()
+        var classifiers = [String]()
         for (model, var observations) in results {
             if let threshold = threshold {
-                observations = observations.filter() { $0.confidence > Float(threshold) }
+                observations = observations.filter { $0.confidence > Float(threshold) }
             }
             let description = model.modelDescription
             let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
-            let classifierResults: [String: Any] = [
-                "name": metadata["name"] ?? "",
-                "classifier_id": metadata["classifier_id"] ?? "",
-                "classes": observations.map() { ["class": $0.identifier, "score": Double($0.confidence)] }
-            ]
+            let name = metadata["name"] ?? ""
+            let classifierID = metadata["classifier_id"] ?? ""
+            let classes = observations.map { classs in
+                """
+                { "class": "\(classs.identifier)", "score": \(Double(classs.confidence)) }
+                """
+            }.joined(separator: ",")
+            let classifierResults =
+                """
+                { "name": "\(name)", "classifier_id": "\(classifierID)", "classes": [\(classes)] }
+                """
             classifiers.append(classifierResults)
         }
-
-        let classifiedImage: [String: Any] = ["classifiers": classifiers]
-        let classifiedImages: [String: Any] = ["images": [classifiedImage]]
-        return try ClassifiedImages(json: JSONWrapper(dictionary: classifiedImages))
+        let json = """
+            { "images": [{ "classifiers": [ \(classifiers.joined(separator: ",")) ] }] }
+        """
+        guard let data = json.data(using: .utf8) else { throw RestError.serializationError }
+        return try JSONDecoder().decode(ClassifiedImages.self, from: data)
     }
+
+    // swiftlint:disable function_body_length
 
     /**
      Download a Core ML model to the local filesystem. The model is compiled and moved to the application support
@@ -324,14 +336,13 @@ extension VisualRecognition {
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "api_key", value: apiKey))
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model",
-            credentials: .apiKey,
+            credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/octet-stream",
             queryItems: queryParameters
@@ -444,4 +455,6 @@ extension VisualRecognition {
             success?()
         }
     }
+
+    // swiftlint:enable function_body_length
 }

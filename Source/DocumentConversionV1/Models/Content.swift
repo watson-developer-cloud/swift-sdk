@@ -17,24 +17,24 @@
 import Foundation
 
 /**
- 
+
  **Content**
- 
+
  The content of an **AnswerUnit**
- 
+
  */
 public struct Content: JSONDecodable {
-    
+
     /** The type of the content *text/plain, etc */
     public let mediaType: String?
-    
+
     /** The text of the Answer Unit */
     public let text: String?
-    
+
     /** used internally to initialize Content objects */
     public init(json: JSONWrapper) throws {
         mediaType = try? json.getString(at: "media_type")
         text = try? json.getString(at: "text")
     }
-    
+
 }

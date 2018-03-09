@@ -17,34 +17,34 @@
 import Foundation
 
 /**
- 
+
  **ConceptResponse**
- 
+
  Response object for Concept related calls
- 
+
  */
 
 public struct ConceptResponse: JSONDecodable {
-    
+
     /** extracted language */
     public let language: String?
-    
+
     /** the URL information was requested for */
     public let url: String?
-    
+
     /** number of transactions made by the call */
     public let totalTransactions: Int?
-    
+
     /** see **Concept** */
     public let concepts: [Concept]?
-    
+
     /// Used internally to initialize a ConceptResponse object
     public init(json: JSONWrapper) throws {
         let status = try json.getString(at: "status")
         guard status == "OK" else {
             throw JSONWrapper.Error.valueNotConvertible(value: json, to: ConceptResponse.self)
         }
-        
+
         language = try? json.getString(at: "language")
         url = try? json.getString(at: "url")
         if let totalTransactionsString = try? json.getString(at: "totalTransactions") {
@@ -55,5 +55,4 @@ public struct ConceptResponse: JSONDecodable {
         concepts = try? json.decodedArray(at: "concepts", type: Concept.self)
     }
 }
-
 

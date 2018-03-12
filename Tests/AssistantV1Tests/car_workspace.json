@@ -1,0 +1,3026 @@
+{
+  "name": "Car_Dashboard",
+  "created": "2016-07-14T15:23:56.824Z",
+  "intents": [{
+    "intent": "capabilities",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "can I manipulate the",
+      "created": "2016-07-15T20:24:44.295Z"
+    }, {
+      "text": "help",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "help me",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How are you going to help me?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how can you help me",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "need help",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "tell me what things you can do",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "tell me what you can do",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "What are you",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what are you capable of",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what are your capabilities Watson?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what can I do",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "What can i say",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what can you do",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what can you do for me",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what can you help me with",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what do you know",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what else",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what things can you do",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "goodbyes",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "adieu",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "adios",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "au revoir",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "BYE",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "bye bye",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "bye now",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "cya",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "farewell",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "goodbye",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "good bye",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "good day",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "good night",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "gotta go",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "gotta run",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "got to go",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "gtg",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "have to go",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "have to leave",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "have to run",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I'm leaving",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "later",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "laters",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "logging off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "my time is up",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "need to go",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "need to leave",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "need to run",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "ok bye",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "out of time",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "over and out",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "see ya",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "see ya later",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "see ya soon",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "see you",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "see you later",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "see you soon",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "should be going",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "should go",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "signing off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "signing out",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "so long",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "thanks watson",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "thank you for your help",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "then bye",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "time to go",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "toodles",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "greetings",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "aloha",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "bad",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "bonjour",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "buenos dias",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "ciao",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "feeling bit low",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "g'day",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "good",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "good day",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "good evening",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "good how are you",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "good morning",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "greetings",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Hello",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Hello, how are you?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Hello Watson",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hey",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "heya",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hey there",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hi",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hi how are u",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hi there",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Hi watson",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hiya",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Hola",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hola como estas",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How are you doing?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "howdy",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I am not feeling good",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I'm feeling good thanks",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Its not that good",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "namaste",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "yello",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "yo",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "locate_amenity",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "Amenities",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "can you find a good place to eat?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "can you find me a",
+      "created": "2016-07-15T20:14:26.815Z"
+    }, {
+      "text": "can you find the nearest gas station for me",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "can you locate a",
+      "created": "2016-07-15T20:14:21.582Z"
+    }, {
+      "text": "drive to the",
+      "created": "2016-07-15T20:10:57.412Z"
+    }, {
+      "text": "find a restaurant",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Find best gas option",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "find me a restaurant",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "get me directions",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "go to a",
+      "created": "2016-07-15T20:10:36.942Z"
+    }, {
+      "text": "go to the closest",
+      "created": "2016-07-15T20:10:43.616Z"
+    }, {
+      "text": "I am hungry",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I'd like to get something to eat",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "i'm hungry",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "im hungry I want to eat something",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "i need some coffee",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "i need to stop for gas",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Information on locations near me",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I want a bar",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "i want drink",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I want eat",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "i want pizza",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I want to eat pizza",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I want to stop for some food",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "let's get some grub",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "locate ammenity",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Navigation",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "nearby restaurant",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "order a pizza",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "pizza",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "restaurant",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "restaurants",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "show me the best path",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Stop for food/coffee",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "take me to",
+      "created": "2016-07-15T20:10:51.360Z"
+    }, {
+      "text": "what is closeby",
+      "created": "2016-07-15T19:49:36.519Z"
+    }, {
+      "text": "what is near",
+      "created": "2016-07-15T19:49:01.673Z"
+    }, {
+      "text": "what is nearby",
+      "created": "2016-07-15T19:49:23.730Z"
+    }, {
+      "text": "what is near me",
+      "created": "2016-07-15T19:49:19.366Z"
+    }, {
+      "text": "what's closeby",
+      "created": "2016-07-15T19:49:40.105Z"
+    }, {
+      "text": "what's close to me",
+      "created": "2016-07-15T19:49:45.829Z"
+    }, {
+      "text": "what's near",
+      "created": "2016-07-15T19:49:05.424Z"
+    }, {
+      "text": "what's nearby Watson",
+      "created": "2016-07-15T19:49:29.826Z"
+    }, {
+      "text": "where are the closest restrooms",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where can i drink",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where can i eat pizza?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where can i have pizza",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where is a restaurant",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where is ATM",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where is the bathroom?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where is the pool",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where's the nearest exit",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "off_topic",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "aho",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "asdasdasda",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "asdasidjiwe",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "book a flight for NY on sunday",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "carrot",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "cats are my favorite animal",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "cool",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "culd",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "deploy airbags",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "dfddfg",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "don't you know any jokes",
+      "created": "2016-07-15T19:33:24.724Z"
+    }, {
+      "text": "fdsafsaHi watson",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how far is the moon",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how many licks does it take to get to the center of a tootsie roll",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how much do you weigh",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how tall are you",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "huhu",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I'd like to have dinner with you",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I enjoy petting cats",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I love dolphins",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I love spicy food",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "i need a new wheelchair",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I need to shut it down",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "it's too dark",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "i want jokes",
+      "created": "2016-07-15T19:33:10.560Z"
+    }, {
+      "text": "I want to date you",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I want to eat tacos everyday",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "i want to see how this demo works",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I want to talk",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "know any jokes",
+      "created": "2016-07-15T19:33:02.129Z"
+    }, {
+      "text": "lgiths",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "lgits",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "nope",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Nuts",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "ok watson, why should I use you",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "open door",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "poop",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Post-it notes taste terrible.",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "repair my car",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "roll down windows",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "shutdown",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "shut down",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "system error, unable to lonin",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "tell me some jokes",
+      "created": "2016-07-15T19:33:15.928Z"
+    }, {
+      "text": "tell me your favorite color",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "tell me your favorite foods",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "test",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "testing om",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "This is awesome",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "This is good",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Turn left",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what is my speed?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what is your name",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what is your name?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what kind of food do you eat",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "What's the speed?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "whats the square root of 70",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "whats your favorite color",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "whats your favorite movie",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what's your name",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "whats your name",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "What's your name?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what time is it?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what types of food do you like",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where is the poop deck on this ship?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where should I turn?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "which color is best for wedding",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "why?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "why is the sky blue",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "yeah",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "yes",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Yolo",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "You're asking me too much",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "out_of_scope",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "Can I play music through bluetooth from my phone?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "change bulb",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "changing gears",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "changing the light bulb",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "checking the engine oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "coolant level",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "fuel tank flap",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hi to switch on the fog lights",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how can i change oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how can i connect the phone",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how can i find current level of oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how can i lock the car",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how can i replace light bulb",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i adjust exterior mirrors",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i adjust head restraint",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i adjust the cruise control speed",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i adjust the mirror",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i adjust the mirror inside",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i adjust the rear view mirror",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i adjust the vehicle distance",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i arm the alarm",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i browse the tracks on the iPod",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i cancel cruise control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i change oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i change the headlight bulbs",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i change the lights bulb",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i change the oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i clean the vehicle",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i close the window",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i connect my phone",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i connect USB device",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i control a phone",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i disable the vehicle stability control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i fill in the engine oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i find the fuel consumption",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i lock the window",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i lock the windows",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i lock the windows to prevent children from opening",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i open the doors",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i open the fuel filler flap",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i open the power windows",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i open the rear window",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i open the side window",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i open the tank fuel",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i open the window",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How do I pair my android phone to the radio?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How do I pair my iPhone to the radio?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i pause song in my iPod",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i play an iPod",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i play the track on the iPod",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How do I program my radio stations?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i refill the engine oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i resume cruise control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i resume the cruise speed",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i resume the vehicle speed",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i save my favourite radio station",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i save the seat position",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i scroll the screen",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i select a desired track on the iPod",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i select the song on the iPod",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i set the adaptive cruise control speed",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i set the cruise speed",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i set the vehicle speed",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i switch on the cruise control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i tune the radio",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn off ambient lights",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn off the alarm",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn off the cruise control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn off the high beams",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn off the traction control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn off voice guidance",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on adaptive cruise control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on ambient lights",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on cruise control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on front seat heating",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on headlamps",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on high beams",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on the alarm",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on the cruise control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on the fog lamps",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How do I turn on the high-beams?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on the pre collision system",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on the traction control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on traffic info",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i turn on windscreen washer",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i unlock the windows",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How do I use cruise control?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i use the blind spot monitor",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i use the electric power steering",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i use the iPod",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i use the pre collision system",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i use the traction control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how do i wash the car",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How frequently should I change the oil?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how often should i change the oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how to adjust the vehicle to vehicle distance",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how to change engine oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how to change oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how to change the oil",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How to connect bluetooth?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how to replace light bulbs",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how to turn on warning lights",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Is there a lane change assist feature?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Is there an automatic parallel park feature?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Is there a warning light for low washer fluid?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "light bulbs replacement",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "opening the windows",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "operating the radio",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "parking brake",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "refilling the engine coolant",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "show me how to change the light bulbs",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "switch on fog light",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn off traffic info",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what are the crash ratings?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what is the pre collision system",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what is the traction control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what is the vehicle stability control",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what kind of fuel does the car require?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what kind of fuel should i use",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "What kind of fuel should I use?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "What PSI do I inflate the spare tire to",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what's the tires pressure",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what type of oil do i need?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where are fog lights",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where are the lights",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "where can i start air conditioning",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Where is the fuse box",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Where is the fuse box located?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "phone",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "answer the phone",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "call dad",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "call on the telephone",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "dial Home",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "do you have a phone?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I'd like to call my mom",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I'd like to make a call",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I want to text my father",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I would like to call someone on the phone",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "make a phone call",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "smartphone",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "text mom",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "text someone",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "use the phone",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "What's your phone number?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "traffic_update",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "are there any accidents ahead",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Are there any jams",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Estimated time left?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "ETA",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "give me traffic updates",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how far",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how is traffic looking this evening?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how long it would take me get home?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how long until I arrive",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How long will it take to get there?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "How's the traffic?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how's the traffic today?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how's traffic",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how's traffic?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hows traffic",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hows traffic?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hows traffic looking",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "is the highway busy?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "is there an accident ahead",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "jam?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "traffic conditions",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "traffic conditions on 85",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "whats my ETA",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what's the Estimated Time of Arrival?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "whats the traffic like on 101",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "when do we arrive?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "when rain there is lot of trafic jams",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "when will we arrive?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "turn_down",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "decrease the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I need you to turn my down",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "lessen the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "lower the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "please turn the down",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "reduce the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "the needs to be turned down",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn down the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn it down",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn my down",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn the down",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn the down for me",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn this down",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "turn_off",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "cancel",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I don't need the anymore",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I need my off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "I want the off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "power off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "shut off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "stop",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "switch it off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "switch off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "switch off please",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "switch off the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Turn off my",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn off my please",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn off the for me",
+      "created": "2016-07-15T17:37:12.964Z"
+    }, {
+      "text": "turn off the please",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn the off",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "will you turn my off please",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "turn_on",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "can you turn on the",
+      "created": "2016-07-15T15:16:36.114Z"
+    }, {
+      "text": "on",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "on now",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "play",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "play me some",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "power on",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "power on the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "start",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "switch on",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "switch on the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn my on",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn my on for me",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn on",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn on my",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Turn on the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn on the light",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn on the please",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn the on",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "watson please turn my on",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "turn_up",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "amplify the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "boost",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "can you increase the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "can you turn my up",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "can you turn the up",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "enhance the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "increase the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "increase the for me",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "intensify",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "magnify the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "play the louder",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "please turn my up",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "please turn the up",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "please turn up the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "step up the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn the up",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn the up now",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn up the",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "turn up this",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }, {
+    "intent": "weather",
+    "created": "2016-07-14T15:23:56.824Z",
+    "examples": [{
+      "text": "check the weather",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "check the wheather",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "check weather",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "cold",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "Does the weather get worse",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "do I need a jacket?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "hot",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how cold?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how cold is it out?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how cold is it outside",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how hot",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how hot is it outside",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how hot is it outside?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how long will it rain",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "how warm is it?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "is it dark outside",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "is it raining",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "is it raining?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "It's cold here",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "it's hot",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "tell me the weather",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what is the weather like?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "what's the weather",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "whats the weather like right now",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "whats the weather outside?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "When will the rain stop?",
+      "created": "2016-07-14T15:23:56.824Z"
+    }, {
+      "text": "when will the sun come out",
+      "created": "2016-07-14T15:23:56.824Z"
+    }],
+    "description": null
+  }],
+  "entities": [{
+    "entity": "amenity",
+    "values": [{
+      "value": "gas",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["fuel", "fuel station", "fuel stations", "gas station", "gas stations", "pump", "pumps"]
+    }, {
+      "value": "restaurant",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["eat", " food", "hungry", " meal", " meals", " restaurants"]
+    }, {
+      "value": "restroom",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": [" bathroom", " bathrooms", "loo", " restrooms", " toilet", " toilets"]
+    }],
+    "created": "2016-07-14T15:23:56.824Z",
+    "open_list": false,
+    "description": null
+  }, {
+    "entity": "appliance",
+    "values": [{
+      "value": "ac",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["acs", "air conditioner", "air conditioners", "air conditioning", "fans"]
+    }, {
+      "value": "fan",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["fans"]
+    }, {
+      "value": "heater",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["heat"]
+    }, {
+      "value": "lights",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["bulb", "bulbs", "headlight", "head light", "headlights", "head lights", "light", "tubelight", "tubelights"]
+    }, {
+      "value": "music",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["radio", "song", "songs"]
+    }, {
+      "value": "volume",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["sound"]
+    }, {
+      "value": "wipers",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["windshield wiper", "windshield wipers", "wiper"]
+    }],
+    "created": "2016-07-14T15:23:56.824Z",
+    "open_list": false,
+    "description": null
+  }, {
+    "entity": "cuisine",
+    "values": [{
+      "value": "burgers",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["american", "burger", "burgers", "cheeseburger", "cheeseburgers", "hamburger", "hamburgers"]
+    }, {
+      "value": "pasta",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Italian", "pasta", "pizza"]
+    }, {
+      "value": "seafood",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["fish", "seafood", "shrimp"]
+    }, {
+      "value": "tacos",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Mexican", "taco", "tacos"]
+    }],
+    "created": "2016-07-14T15:23:56.824Z",
+    "open_list": false,
+    "description": null
+  }, {
+    "entity": "cuisine_bad",
+    "values": [{
+      "value": "african",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "american",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "argentine",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "asian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "austrian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "basque",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "belgian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "breakfast",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "british",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "cajun",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "californian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "canadian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "caribbean",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "chinese",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "christmas",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "comfort",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "creole",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "cuban",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "danish",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "english",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "european",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "french",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "galician",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "german",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "gluten free",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "greek",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "halal",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "hawaiian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "indian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "irish",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "israeli",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "italian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "jamaican",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "japanese",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "korean",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "kosher",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "latin",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "malaysian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "mediterranean",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "mexican",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "middle eastern",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "moroccan",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "paleo",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "persian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "peruvian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "pescatarian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "portuguese",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "russian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "scandinavian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "scottish",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "sichuan",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "soul",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "southern",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "southwestern",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "spanish",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "texan",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "tex mex",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "thai",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "turkish",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "tuscan",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "vegan",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "vegetarian",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }, {
+      "value": "vietnamese",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null
+    }],
+    "created": "2016-07-14T15:23:56.824Z",
+    "open_list": false,
+    "description": null
+  }, {
+    "entity": "genre",
+    "values": [{
+      "value": "classical",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["avant-garde", "baroque", "chamber", "chant", "choral", "classical", "impressionist", "medieval", "opera", "orchestra", "orchestral", "renaissance", "wedding"]
+    }, {
+      "value": "jazz",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["anything", "bebop", "big band", "dixie", "jazz", "lounge", "swing", "whatever"]
+    }, {
+      "value": "pop",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["pop", "popular"]
+    }, {
+      "value": "rock",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["jam", "metal", "prog", "progressive", "punk", "punkrock", "rock", "surf"]
+    }],
+    "created": "2016-07-14T15:23:56.824Z",
+    "open_list": false,
+    "description": null
+  }, {
+    "entity": "genre_bad",
+    "values": [{
+      "value": "Alternative",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["alt", "altrock", "grunge", "new wave"]
+    }, {
+      "value": "Blues",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Ragtime", "sad"]
+    }, {
+      "value": "Childrens",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["disney", "lullabies", "singalong"]
+    }, {
+      "value": "Comedy",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["standup", "tv"]
+    }, {
+      "value": "Country",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["americana", "bluegrass", "honky tonk", "outlaw", "urban cowboy"]
+    }, {
+      "value": "Dance",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["club", "deep house", "dubstep", "edm", "electro house", "electroswing", "exercise", "house", "jungle", "techno", "trance", "trap"]
+    }, {
+      "value": "Electronic",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["ambient", "crunk", "drum and bass", "drum & bass", "electro", "electronica", "industrial", "trip hop"]
+    }, {
+      "value": "Folk",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Acoustic", "traditional"]
+    }, {
+      "value": "Hip Hop",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Bounce", "dirty south", "rap"]
+    }, {
+      "value": "Holiday",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Chanukah", "christmas", "easter", "halloween", "thanksgiving"]
+    }, {
+      "value": "Instrumental",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["marching band"]
+    }, {
+      "value": "J-Pop",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["J-Rock"]
+    }, {
+      "value": "Latin",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Baladas", "bossa nova", "brazilian", "cubmia", "flamenco", "portuguese", "reggaeton", "salsa", "Tango"]
+    }, {
+      "value": "New Age",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Environmental", "healing", "meditation", "relaxation"]
+    }, {
+      "value": "R&B",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Disco", "Funk", "Motown", "Soul"]
+    }, {
+      "value": "Reggae",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["dancehall", "dub", "roots", "ska"]
+    }, {
+      "value": "Religious",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Christian", "gospel"]
+    }, {
+      "value": "Soundtrack",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["cinema", "musical"]
+    }, {
+      "value": "Vocal",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["acapella", "acappella", "A cappella", "barbershop", "doowop"]
+    }, {
+      "value": "World",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["Afrobeat", "afropop", "cajun", "calypso", "caribbean", "celtic", "congo", "polka", "soca", "zydeco"]
+    }],
+    "created": "2016-07-14T15:23:56.824Z",
+    "open_list": false,
+    "description": null
+  }, {
+    "entity": "option",
+    "values": [{
+      "value": "closest",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["closest", " nearest"]
+    }, {
+      "value": "fifth",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["5", "fifth", "five"]
+    }, {
+      "value": "first",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": [" 1", " first", "one"]
+    }, {
+      "value": "fourth",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["4", "four", "fourth"]
+    }, {
+      "value": "second",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["2", " second", " two"]
+    }, {
+      "value": "third",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": [" 3", " third", "three"]
+    }],
+    "created": "2016-07-14T15:23:56.824Z",
+    "open_list": false,
+    "description": null
+  }, {
+    "entity": "phone",
+    "values": [{
+      "value": "call",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": ["call", " calls"]
+    }, {
+      "value": "text",
+      "created": "2016-07-14T15:23:56.824Z",
+      "metadata": null,
+      "synonyms": [" message", " messages", "text", " texts"]
+    }],
+    "created": "2016-07-14T15:23:56.824Z",
+    "open_list": false,
+    "description": null
+  }],
+  "language": "en",
+  "metadata": null,
+  "modified": "2016-07-15T20:24:44.295Z",
+  "created_by": null,
+  "description": "Cognitive Car workspace which allows multi-turn conversations to perform tasks in the car.",
+  "modified_by": null,
+  "dialog_nodes": [{
+    "go_to": null,
+    "output": {
+      "text": "Great choice! Playing some @genre music for you."
+    },
+    "parent": "node_1_1467232431348",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@genre",
+    "description": null,
+    "dialog_node": "node_1_1468248435880",
+    "previous_sibling": "node_2_1467232480480"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Great choice! Playing some @genre music for you."
+    },
+    "parent": "node_1_1467994455318",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@genre",
+    "description": null,
+    "dialog_node": "node_1_1467994522653",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Great choice! Playing some @genre music for you."
+    },
+    "parent": "node_2_1467232480480",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@genre",
+    "description": null,
+    "dialog_node": "node_2_1467748591022",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Hello! I'm here to help you..just say the word."
+    },
+    "parent": null,
+    "context": null,
+    "created": "2016-07-15T18:45:29.878Z",
+    "metadata": null,
+    "conditions": "#greetings",
+    "description": null,
+    "dialog_node": "node_7_1468608329601",
+    "previous_sibling": "node_11_1468608786372"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Hi. It looks like a nice drive today. What would you like me to do?"
+    },
+    "parent": null,
+    "context": {
+      "defaultCounter": 0
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "conversation_start",
+    "description": null,
+    "dialog_node": "node_1_1467221909631",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I am having trouble understanding you. Try asking your question in a different way."
+    },
+    "parent": "node_2_1467221939202",
+    "context": {
+      "defaultCounter": 0
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "$defaultCounter>2",
+    "description": null,
+    "dialog_node": "node_1_1467919680248",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I'm not sure about that. You can say things like \"Turn on my lights\" or \"Play some music.\""
+    },
+    "parent": "node_2_1467221939202",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_2_1467919781627",
+    "previous_sibling": "node_1_1467919680248"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I'm trained to turn things on or off in the car, play music and find nearby locations."
+    },
+    "parent": null,
+    "context": null,
+    "created": "2016-07-15T18:53:07.789Z",
+    "metadata": null,
+    "conditions": "#capabilities",
+    "description": null,
+    "dialog_node": "node_11_1468608786372",
+    "previous_sibling": "node_1_1467304857249"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I prefer not to text while I drive."
+    },
+    "parent": "node_1_1467304857249",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@phone:text",
+    "description": null,
+    "dialog_node": "node_2_1467307757606",
+    "previous_sibling": "node_1_1467307743052"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "It doesn't look like there are any restaurants that serve @cuisine_bad around you. Try saying things like burgers or tacos."
+    },
+    "parent": "node_10_1467233806357",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@cuisine_bad",
+    "description": null,
+    "dialog_node": "node_9_1468364300050",
+    "previous_sibling": "node_13_1467234287024"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I understand you want me to locate an amenity. I can find restaurants, gas stations and restrooms nearby."
+    },
+    "parent": "node_7_1467233747449",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_12_1467234209966",
+    "previous_sibling": "node_8_1467233758272"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I understand you want me to turn down something. You can say turn down the volume or lower the heat."
+    },
+    "parent": "node_1_1467233388598",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_5_1467233563932",
+    "previous_sibling": "node_2_1467233413666"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I understand you want me to turn off something. You can say turn off the wipers or switch off the ac."
+    },
+    "parent": "node_7_1467232789215",
+    "context": {
+      "reprompt": false
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_9_1467232828857",
+    "previous_sibling": "node_8_1467232810733"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I understand you want me to turn on something. You can say turn on the wipers or switch on the lights."
+    },
+    "parent": "node_1_1467232431348",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_1_1467310860502",
+    "previous_sibling": "node_8_1468364240009"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I understand you want me to turn up something. You can say increase the volume or turn up the ac."
+    },
+    "parent": "node_10_1467233003109",
+    "context": {
+      "reprompt": false
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_12_1467233032148",
+    "previous_sibling": "node_11_1467233013716"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "I've found the closest restroom stops. Which one would you like to drive to?"
+    },
+    "parent": "node_8_1467233758272",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@amenity:restroom",
+    "description": null,
+    "dialog_node": "node_11_1467233815579",
+    "previous_sibling": "node_10_1467233806357"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Of course. Do you have a specific cuisine in mind?"
+    },
+    "parent": "node_8_1467233758272",
+    "context": {
+      "reprompt": true
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@amenity:restaurant",
+    "description": null,
+    "dialog_node": "node_10_1467233806357",
+    "previous_sibling": "node_9_1467233775768"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Ok. Navigating to @option restroom. We should get there quickly."
+    },
+    "parent": "node_11_1467233815579",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@option",
+    "description": null,
+    "dialog_node": "node_19_1467234523021",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Ok. Turning down the @appliance."
+    },
+    "parent": "node_2_1467233413666",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@appliance:ac || @appliance:heater || @appliance:music || @appliance:volume || @appliance:fan",
+    "description": null,
+    "dialog_node": "node_3_1467233447156",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Ok. Turning off the @appliance."
+    },
+    "parent": "node_7_1467232789215",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@appliance",
+    "description": null,
+    "dialog_node": "node_8_1467232810733",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Ok. Turning on the @appliance."
+    },
+    "parent": "node_2_1467232480480",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_1_1467749020340",
+    "previous_sibling": "node_1_1467994455318"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Ok. Turning up the @appliance."
+    },
+    "parent": "node_11_1467233013716",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@appliance:ac || @appliance:heater || @appliance:music || @appliance:volume || @appliance:fan",
+    "description": null,
+    "dialog_node": "node_13_1467233048218",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Sadly, the @appliance cannot be turned down. Try something like decrease the volume or turn down the ac.."
+    },
+    "parent": "node_2_1467233413666",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_4_1467233504463",
+    "previous_sibling": "node_3_1467233447156"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Sadly, the @appliance cannot be turned up. Try something like increase the volume or turn up the ac."
+    },
+    "parent": "node_11_1467233013716",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_14_1467233257478",
+    "previous_sibling": "node_13_1467233048218"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Sorry I don't know how to make a phone call. I must be all out of minute!"
+    },
+    "parent": "node_1_1467304857249",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@phone:call",
+    "description": null,
+    "dialog_node": "node_1_1467307743052",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Sorry I haven't yet learnt to perform operations with phones."
+    },
+    "parent": "node_1_1467304857249",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_3_1467307837947",
+    "previous_sibling": "node_2_1467307757606"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Super! I've found some options for you. Which one do you like?"
+    },
+    "parent": "node_10_1467233806357",
+    "context": {
+      "reprompt": true
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@cuisine",
+    "description": null,
+    "dialog_node": "node_13_1467234287024",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Sure! Let me know if you have more requests or questions."
+    },
+    "parent": null,
+    "context": null,
+    "created": "2016-07-15T18:45:49.544Z",
+    "metadata": null,
+    "conditions": "#goodbyes",
+    "description": null,
+    "dialog_node": "node_8_1468608349230",
+    "previous_sibling": "node_7_1468608329601"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Sure! Navigating to the @option gas station."
+    },
+    "parent": "node_9_1467233775768",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@option",
+    "description": null,
+    "dialog_node": "node_17_1467234455512",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Sure thing. That place gets great reviews. You'll be there soon."
+    },
+    "parent": "node_13_1467234287024",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@option",
+    "description": null,
+    "dialog_node": "node_15_1467234349255",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Sure thing! Which genre would you prefer? Jazz is my personal favorite.."
+    },
+    "parent": "node_2_1467232480480",
+    "context": {
+      "reprompt": true
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@appliance:music",
+    "description": null,
+    "dialog_node": "node_1_1467994455318",
+    "previous_sibling": "node_10_1468364525410"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "That question is out of scope for this application, take a look at the Conversation Enhanced application to handle questions like these."
+    },
+    "parent": "node_1_1467743415843",
+    "context": {
+      "callRetrieveAndRank": true
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "intents[0].confidence>0.5",
+    "description": null,
+    "dialog_node": "node_1_1467910920863",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "There are a few gas stations nearby. Which one would you like to drive to?"
+    },
+    "parent": "node_8_1467233758272",
+    "context": {
+      "reprompt": true
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@amenity:gas",
+    "description": null,
+    "dialog_node": "node_9_1467233775768",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "This is a short shower, it should only last a minute."
+    },
+    "parent": "node_1_1467303308178",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "input_text.contains('rain')",
+    "description": null,
+    "dialog_node": "node_2_1467303426532",
+    "previous_sibling": null
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Traffic gets a little heavier downtown, but your route isn't affected."
+    },
+    "parent": null,
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "#traffic_update",
+    "description": null,
+    "dialog_node": "node_6_1467233590477",
+    "previous_sibling": "node_12_1468608830899"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Unfortunately I don't have any @genre_bad music in my collection. Try genres like jazz or rock."
+    },
+    "parent": "node_1_1467232431348",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@genre_bad",
+    "description": null,
+    "dialog_node": "node_8_1468364240009",
+    "previous_sibling": "node_1_1468248435880"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Unfortunately I don't have any @genre_bad music in my collection. Try genres like jazz or rock."
+    },
+    "parent": "node_1_1467994455318",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@genre_bad",
+    "description": null,
+    "dialog_node": "node_11_1468364542917",
+    "previous_sibling": "node_1_1467994522653"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Unfortunately I don't have any @genre_bad music in my collection. Try genres like jazz or rock."
+    },
+    "parent": "node_2_1467232480480",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@genre_bad",
+    "description": null,
+    "dialog_node": "node_10_1468364525410",
+    "previous_sibling": "node_2_1467748591022"
+  }, {
+    "go_to": null,
+    "output": {
+      "text": "Unfortunately I don't know much about the weather..I'm still learning."
+    },
+    "parent": "node_1_1467303308178",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_3_1467303459465",
+    "previous_sibling": "node_2_1467303426532"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "body",
+      "dialog_node": "node_1_1468248435880"
+    },
+    "output": {},
+    "parent": null,
+    "context": null,
+    "created": "2016-07-15T18:53:51.240Z",
+    "metadata": null,
+    "conditions": "@genre",
+    "description": null,
+    "dialog_node": "node_12_1468608830899",
+    "previous_sibling": "node_1_1467233388598"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "body",
+      "dialog_node": "node_13_1467234287024"
+    },
+    "output": {},
+    "parent": null,
+    "context": null,
+    "created": "2016-07-15T19:12:46.025Z",
+    "metadata": null,
+    "conditions": "@cuisine",
+    "description": null,
+    "dialog_node": "node_14_1468609965699",
+    "previous_sibling": "node_7_1467233747449"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "body",
+      "dialog_node": "node_2_1467221939202"
+    },
+    "output": {
+      "text": "I haven't learned answers to questions like this, try saying things like \"Turn on my lights\" or \"Play some music.\""
+    },
+    "parent": "node_1_1467743415843",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "true",
+    "description": null,
+    "dialog_node": "node_2_1467911128151",
+    "previous_sibling": "node_1_1467910920863"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_10_1467233806357"
+    },
+    "output": {},
+    "parent": "node_9_1467233775768",
+    "context": null,
+    "created": "2016-07-15T20:05:04.602Z",
+    "metadata": null,
+    "conditions": "@amenity:restaurant || @amenity:restroom",
+    "description": null,
+    "dialog_node": "node_2_1468613104364",
+    "previous_sibling": "node_17_1467234455512"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_11_1467233013716"
+    },
+    "output": {},
+    "parent": null,
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "#turn_up",
+    "description": null,
+    "dialog_node": "node_10_1467233003109",
+    "previous_sibling": "node_7_1467232789215"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_1_1467307743052"
+    },
+    "output": {
+      "text": ""
+    },
+    "parent": null,
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "#phone || @phone",
+    "description": null,
+    "dialog_node": "node_1_1467304857249",
+    "previous_sibling": "node_1_1467303308178"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_1_1467910920863"
+    },
+    "output": {
+      "text": ""
+    },
+    "parent": null,
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "#out_of_scope",
+    "description": null,
+    "dialog_node": "node_1_1467743415843",
+    "previous_sibling": "node_8_1468608349230"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_1_1467919680248"
+    },
+    "output": {
+      "text": ""
+    },
+    "parent": null,
+    "context": {
+      "defaultCounter": "<?$defaultCounter+1?>"
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "anything_else",
+    "description": null,
+    "dialog_node": "node_2_1467221939202",
+    "previous_sibling": "node_1_1467743415843"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_13_1467233048218"
+    },
+    "output": {
+      "text": ""
+    },
+    "parent": "node_10_1467233003109",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@appliance",
+    "description": null,
+    "dialog_node": "node_11_1467233013716",
+    "previous_sibling": null
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_2_1467232480480"
+    },
+    "output": {},
+    "parent": null,
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "#turn_on",
+    "description": null,
+    "dialog_node": "node_1_1467232431348",
+    "previous_sibling": "node_1_1467221909631"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_2_1467233413666"
+    },
+    "output": {},
+    "parent": null,
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "#turn_down",
+    "description": null,
+    "dialog_node": "node_1_1467233388598",
+    "previous_sibling": "node_10_1467233003109"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_2_1467303426532"
+    },
+    "output": {},
+    "parent": null,
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "#weather",
+    "description": null,
+    "dialog_node": "node_1_1467303308178",
+    "previous_sibling": "node_1_1468610017772"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_2_1467748591022"
+    },
+    "output": {
+      "text": ""
+    },
+    "parent": "node_1_1467232431348",
+    "context": {
+      "reprompt": true
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@appliance",
+    "description": null,
+    "dialog_node": "node_2_1467232480480",
+    "previous_sibling": null
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_3_1467233447156"
+    },
+    "output": {
+      "text": ""
+    },
+    "parent": "node_1_1467233388598",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@appliance",
+    "description": null,
+    "dialog_node": "node_2_1467233413666",
+    "previous_sibling": null
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_8_1467232810733"
+    },
+    "output": {},
+    "parent": null,
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "#turn_off",
+    "description": null,
+    "dialog_node": "node_7_1467232789215",
+    "previous_sibling": "node_1_1467232431348"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_8_1467233758272"
+    },
+    "output": {},
+    "parent": null,
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "#locate_amenity",
+    "description": null,
+    "dialog_node": "node_7_1467233747449",
+    "previous_sibling": "node_6_1467233590477"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_9_1467233775768"
+    },
+    "output": {},
+    "parent": null,
+    "context": null,
+    "created": "2016-07-15T19:13:37.977Z",
+    "metadata": null,
+    "conditions": "@amenity",
+    "description": null,
+    "dialog_node": "node_1_1468610017772",
+    "previous_sibling": "node_14_1468609965699"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_9_1467233775768"
+    },
+    "output": {},
+    "parent": "node_10_1467233806357",
+    "context": null,
+    "created": "2016-07-15T20:04:05.706Z",
+    "metadata": null,
+    "conditions": "@amenity:gas || @amenity:restroom",
+    "description": null,
+    "dialog_node": "node_1_1468613045307",
+    "previous_sibling": "node_9_1468364300050"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_9_1467233775768"
+    },
+    "output": {},
+    "parent": "node_11_1467233815579",
+    "context": null,
+    "created": "2016-07-15T20:05:55.301Z",
+    "metadata": null,
+    "conditions": "@amenity:gas || @amenity:restaurant",
+    "description": null,
+    "dialog_node": "node_3_1468613155086",
+    "previous_sibling": "node_19_1467234523021"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "condition",
+      "dialog_node": "node_9_1467233775768"
+    },
+    "output": {},
+    "parent": "node_7_1467233747449",
+    "context": null,
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "@amenity",
+    "description": null,
+    "dialog_node": "node_8_1467233758272",
+    "previous_sibling": null
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "user_input",
+      "dialog_node": "node_1_1467994522653"
+    },
+    "output": {
+      "text": "Oops..I don't have that in my collection. Want to try some other genre? Jazz? Rock?"
+    },
+    "parent": "node_1_1467994455318",
+    "context": {
+      "reprompt": false
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "$reprompt",
+    "description": null,
+    "dialog_node": "node_2_1467994543354",
+    "previous_sibling": "node_11_1468364542917"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "user_input",
+      "dialog_node": "node_13_1467234287024"
+    },
+    "output": {
+      "text": "I see a few nearby restaurants serving tacos, burgers, seafood and pasta. You can select one of these.."
+    },
+    "parent": "node_10_1467233806357",
+    "context": {
+      "reprompt": false
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "$reprompt",
+    "description": null,
+    "dialog_node": "node_14_1467234311677",
+    "previous_sibling": "node_1_1468613045307"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "user_input",
+      "dialog_node": "node_15_1467234349255"
+    },
+    "output": {
+      "text": "Which option would you like? You can say first, third, nearest and so on.."
+    },
+    "parent": "node_13_1467234287024",
+    "context": {
+      "reprompt": false
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "$reprompt",
+    "description": null,
+    "dialog_node": "node_16_1467234390805",
+    "previous_sibling": "node_15_1467234349255"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "user_input",
+      "dialog_node": "node_17_1467234455512"
+    },
+    "output": {
+      "text": "Which option would you like? You can say first, third, nearest and so on.."
+    },
+    "parent": "node_9_1467233775768",
+    "context": {
+      "reprompt": false
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "$reprompt",
+    "description": null,
+    "dialog_node": "node_18_1467234505187",
+    "previous_sibling": "node_2_1468613104364"
+  }, {
+    "go_to": {
+      "return": null,
+      "selector": "user_input",
+      "dialog_node": "node_19_1467234523021"
+    },
+    "output": {
+      "text": "Which option would you like? You can say first, third, nearest and so on.."
+    },
+    "parent": "node_11_1467233815579",
+    "context": {
+      "reprompt": false
+    },
+    "created": "2016-07-14T15:23:56.824Z",
+    "metadata": null,
+    "conditions": "$reprompt",
+    "description": null,
+    "dialog_node": "node_20_1467234565322",
+    "previous_sibling": "node_3_1468613155086"
+  }],
+  "workspace_id": "f2955706-865a-4a62-988c-20283bb9054b"
+}

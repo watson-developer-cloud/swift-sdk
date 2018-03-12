@@ -18,6 +18,7 @@ SCHEMES=(
 	"AlchemyDataNewsV1"
 	"AlchemyLanguageV1"
 	"AlchemyVisionV1"
+	"AssistantV1"
 	"ConversationV1"
 	"DialogV1"
 	"DiscoveryV1"

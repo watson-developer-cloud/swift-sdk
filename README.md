@@ -1208,16 +1208,24 @@ visualRecognition.classify(image: url, failure: failure) { classifiedImages in
 
 The Watson Swift SDK supports offline image classification using Apple Core ML. Classifiers must be trained or updated with the `coreMLEnabled` flag set to true. Once the classifier's `coreMLStatus` is `ready` then a Core ML model is available to download and use for offline classification. 
 
-The following example demonstrates how to download a classifier's Core ML model and use it offline:
+Once the Core ML model is in the device's file system, images can be classified offline, directly on the device.
 
 ```swift
 let classifierID = "your-classifier-id"
 let failure = { (error: Error) in print(error) }
 let image = UIImage(named: "your-image-filename")
+visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], failure: failure) {
+    classifiedImages in print(classifiedImages)
+}
+```
+
+The local Core ML model can be updated as needed.
+
+```swift
+let classifierID = "your-classifier-id"
+let failure = { (error: Error) in print(error) }
 visualRecognition.updateLocalModel(classifierID: classifierID, failure: failure) {
-    visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], failure: failure) {
-        classifiedImages in print(classifiedImages)
-    }
+    print("model updated")
 }
 ```
 
@@ -1227,6 +1235,22 @@ The following example demonstrates how to list the Core ML models that are store
 let localModels = try! visualRecognition.listLocalModels()
 print(localModels)
 ```
+
+If you would prefer to bypass `classifyWithLocalModel` and construct your own Core ML classification request, then you can retrieve a Core ML model from the local filesystem with the following example.
+```swift
+let classifierID = "your-classifier-id"
+let localModel = try! visualRecognition.getLocalModel(classifierID: classifierID)
+print(localModel)
+```
+
+The following example demonstrates how to delete a local Core ML model from the filesystem. This saves space when the model is no longer needed.
+```swift
+let classifierID = "your-classifier-id"
+visualRecognition.deleteLocalModel(classifierID: classifierID)
+```
+
+#### Bundling a model directly with your application
+You may also choose to include a Core ML model with your application, enabling images to be classified offline without having to download a model first. To include a model, add it to your application bundle following the naming convention [classifier_id].mlmodel. This will enable the SDK to locate the model when using any function that accepts a classifierID argument.
 
 The following links provide more information about the IBM Watson Visual Recognition service:
 

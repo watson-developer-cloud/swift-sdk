@@ -26,6 +26,7 @@ public struct UpdateDialogNode {
         case frame = "frame"
         case slot = "slot"
         case responseCondition = "response_condition"
+        case folder = "folder"
     }
 
     /// How an `event_handler` node is processed.
@@ -38,6 +39,27 @@ public struct UpdateDialogNode {
         case generic = "generic"
         case nomatch = "nomatch"
         case nomatchResponsesDepleted = "nomatch_responses_depleted"
+    }
+
+    /// Whether this top-level dialog node can be digressed into.
+    public enum DigressIn: String {
+        case notAvailable = "not_available"
+        case returns = "returns"
+        case doesNotReturn = "does_not_return"
+    }
+
+    /// Whether this dialog node can be returned to after a digression.
+    public enum DigressOut: String {
+        case returning = "allow_returning"
+        case all = "allow_all"
+        case allNeverReturn = "allow_all_never_return"
+    }
+
+    /// Whether the user can digress to top-level nodes while filling out slots.
+    public enum DigressOutSlots: String {
+        case notAllowed = "not_allowed"
+        case allowReturning = "allow_returning"
+        case allowAll = "allow_all"
     }
 
     /// The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.
@@ -82,6 +104,15 @@ public struct UpdateDialogNode {
     /// An array of objects describing any actions to be invoked by the dialog node.
     public var actions: [DialogNodeAction]?
 
+    /// Whether this top-level dialog node can be digressed into.
+    public var digressIn: String?
+
+    /// Whether this dialog node can be returned to after a digression.
+    public var digressOut: String?
+
+    /// Whether the user can digress to top-level nodes while filling out slots.
+    public var digressOutSlots: String?
+
     /**
      Initialize a `UpdateDialogNode` with member variables.
 
@@ -99,10 +130,13 @@ public struct UpdateDialogNode {
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
      - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
+     - parameter digressIn: Whether this top-level dialog node can be digressed into.
+     - parameter digressOut: Whether this dialog node can be returned to after a digression.
+     - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
 
      - returns: An initialized `UpdateDialogNode`.
     */
-    public init(dialogNode: String? = nil, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, actions: [DialogNodeAction]? = nil) {
+    public init(dialogNode: String? = nil, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, actions: [DialogNodeAction]? = nil, digressIn: String? = nil, digressOut: String? = nil, digressOutSlots: String? = nil) {
         self.dialogNode = dialogNode
         self.description = description
         self.conditions = conditions
@@ -117,6 +151,9 @@ public struct UpdateDialogNode {
         self.eventName = eventName
         self.variable = variable
         self.actions = actions
+        self.digressIn = digressIn
+        self.digressOut = digressOut
+        self.digressOutSlots = digressOutSlots
     }
 }
 
@@ -137,7 +174,10 @@ extension UpdateDialogNode: Codable {
         case eventName = "event_name"
         case variable = "variable"
         case actions = "actions"
-        static let allValues = [dialogNode, description, conditions, parent, previousSibling, output, context, metadata, nextStep, title, nodeType, eventName, variable, actions]
+        case digressIn = "digress_in"
+        case digressOut = "digress_out"
+        case digressOutSlots = "digress_out_slots"
+        static let allValues = [dialogNode, description, conditions, parent, previousSibling, output, context, metadata, nextStep, title, nodeType, eventName, variable, actions, digressIn, digressOut, digressOutSlots]
     }
 
     public init(from decoder: Decoder) throws {
@@ -156,6 +196,9 @@ extension UpdateDialogNode: Codable {
         eventName = try container.decodeIfPresent(String.self, forKey: .eventName)
         variable = try container.decodeIfPresent(String.self, forKey: .variable)
         actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
+        digressIn = try container.decodeIfPresent(String.self, forKey: .digressIn)
+        digressOut = try container.decodeIfPresent(String.self, forKey: .digressOut)
+        digressOutSlots = try container.decodeIfPresent(String.self, forKey: .digressOutSlots)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -174,6 +217,9 @@ extension UpdateDialogNode: Codable {
         try container.encodeIfPresent(eventName, forKey: .eventName)
         try container.encodeIfPresent(variable, forKey: .variable)
         try container.encodeIfPresent(actions, forKey: .actions)
+        try container.encodeIfPresent(digressIn, forKey: .digressIn)
+        try container.encodeIfPresent(digressOut, forKey: .digressOut)
+        try container.encodeIfPresent(digressOutSlots, forKey: .digressOutSlots)
     }
 
 }

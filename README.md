@@ -37,7 +37,7 @@ There are many resources to help you build your first cognitive application with
 
 * [AlchemyData News](#alchemydata-news)
 * [AlchemyLanguage](#alchemylanguage)
-* [Conversation](#conversation)
+* [Assistant](#assistant)
 * [Discovery](#discovery)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
@@ -168,7 +168,7 @@ By default, the SDK executes all networking operations asynchonously. If your ap
 ```swift
 let dispatchGroup = DispatchGroup()
 dispatchGroup.enter()
-conversation.message(workspaceID: workspaceID) { response in
+assistant.message(workspaceID: workspaceID) { response in
     print(response.output.text)
     dispatchGroup.leave()
 }
@@ -264,37 +264,37 @@ The following links provide more information about the IBM AlchemyLanguage servi
 * [IBM AlchemyLanguage - Service Page](http://www.ibm.com/watson/developercloud/alchemy-language.html)
 * [IBM AlchemyLanguage - Documentation](https://console.bluemix.net/docs/services/alchemy-language/index.html)
 
-## Conversation
+## Assistant
 
-With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
+With the IBM Watson Assistant service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
 
-The following example shows how to start a conversation with the Conversation service:
+The following example shows how to start a conversation with the Assistant service:
 
 ```swift
-import ConversationV1
+import AssistantV1
 
 let username = "your-username-here"
 let password = "your-password-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
-let conversation = Conversation(username: username, password: password, version: version)
+let assistant = Assistant(username: username, password: password, version: version)
 
 let workspaceID = "your-workspace-id-here"
 let failure = { (error: Error) in print(error) }
 var context: Context? // save context to continue conversation
-conversation.message(workspaceID: workspaceID, failure: failure) {
+assistant.message(workspaceID: workspaceID, failure: failure) {
     response in
     print(response.output.text)
     context = response.context
 }
 ```
 
-The following example shows how to continue an existing conversation with the Conversation service:
+The following example shows how to continue an existing conversation with the Assistant service:
 
 ```swift
 let input = InputData(text: "Turn on the radio.")
 let request = MessageRequest(input: input, context: context)
 let failure = { (error: Error) in print(error) }
-conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+assistant.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     print(response.output.text)
     context = response.context
@@ -303,13 +303,13 @@ conversation.message(workspaceID: workspaceID, request: request, failure: failur
 
 #### Context Variables
 
-The Conversation service allows users to define custom context variables in their application's payload. For example, a Conversation workspace that guides users through a pizza order might include a context variable for pizza size: `"pizza_size": "large"`.
+The Assistant service allows users to define custom context variables in their application's payload. For example, a workspace that guides users through a pizza order might include a context variable for pizza size: `"pizza_size": "large"`.
 
 Context variables are get/set using the `var additionalProperties: [String: JSON]` property of a `Context` model. The following example shows how to get and set a user-defined `pizza_size` variable:
 
 ```swift
 // get the `pizza_size` context variable
-conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+assistant.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     if case let .string(size) = response.context.additionalProperties["pizza_size"]! {
         print(size)
@@ -317,7 +317,7 @@ conversation.message(workspaceID: workspaceID, request: request, failure: failur
 }
 
 // set the `pizza_size` context variable
-conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+assistant.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     var context = response.context // `var` makes the context mutable
     context?.additionalProperties["pizza_size"] = .string("large")
@@ -339,10 +339,10 @@ public enum JSON: Equatable, Codable {
 }
 ```
 
-The following links provide more information about the IBM Conversation service:
+The following links provide more information about the IBM Watson Assistant service:
 
-* [IBM Watson Conversation - Service Page](https://www.ibm.com/watson/services/conversation/)
-* [IBM Watson Conversation - Documentation](https://console.bluemix.net/docs/services/conversation/index.html)
+* [IBM Watson Assistant - Service Page](https://www.ibm.com/watson/services/conversation/)
+* [IBM Watson Assistant - Documentation](https://console.bluemix.net/docs/services/conversation/index.html)
 
 ## Discovery
 

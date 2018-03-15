@@ -130,13 +130,17 @@ See [Getting started with Watson and IBM Cloud](https://console.bluemix.net/docs
 
 ## Custom Service URLs
 
-In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.
+You can set a custom service URL by modifying the `serviceURL` property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.
 
-You can set a custom service URL like so:
+For example, here is how to connect to a Tone Analyzer instance that is hosted in Germany:
 
 ```swift
-let dialog = Dialog(username: "your-username-here", password: "your-password-here")
-dialog.serviceURL = "your-custom-service-url"
+let toneAnalyzer = ToneAnalyzer(
+    username: "your-username-here",
+    password: "your-password-here",
+    version: "yyyy-mm-dd"
+)
+toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
 ```
 
 ## Custom Headers

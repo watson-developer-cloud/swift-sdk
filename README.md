@@ -338,7 +338,7 @@ public enum JSON: Equatable, Codable {
 The following links provide more information about the IBM Watson Assistant service:
 
 * [IBM Watson Assistant - Service Page](https://www.ibm.com/watson/services/conversation/)
-* [IBM Watson Assistant - Documentation](https://console.bluemix.net/docs/services/assistant/index.html)
+* [IBM Watson Assistant - Documentation](https://console.bluemix.net/docs/services/conversation/index.html)
 
 ## Discovery
 

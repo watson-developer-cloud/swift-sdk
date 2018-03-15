@@ -15,6 +15,7 @@ EXIT_CODES=()
 
 # the schemes to build
 SCHEMES=(
+	"AssistantV1"
 	"ConversationV1"
 	"DiscoveryV1"
 	"LanguageTranslatorV2"

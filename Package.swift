@@ -30,6 +30,7 @@ import PackageDescription
 let package = Package(
     name: "WatsonDeveloperCloud",
     products: [
+        .library(name: "AssistantV1", targets: ["AssistantV1"]),
         .library(name: "ConversationV1", targets: ["ConversationV1"]),
         .library(name: "DiscoveryV1", targets: ["DiscoveryV1"]),
         .library(name: "LanguageTranslatorV2", targets: ["LanguageTranslatorV2"]),
@@ -40,6 +41,8 @@ let package = Package(
         .library(name: "VisualRecognitionV3", targets: ["VisualRecognitionV3"]),
     ],
     targets: [
+        .target(name: "AssistantV1", dependencies: []),
+        .testTarget(name: "AssistantV1Tests", dependencies: ["AssistantV1"]),
         .target(name: "ConversationV1", dependencies: []),
         .testTarget(name: "ConversationV1Tests", dependencies: ["ConversationV1"]),
         .target(name: "DiscoveryV1", dependencies: []),

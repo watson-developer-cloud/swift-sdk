@@ -5,6 +5,7 @@
 ################################################################################
 
 services=(
+  AssistantV1
   ConversationV1
   DiscoveryV1
   LanguageTranslatorV2

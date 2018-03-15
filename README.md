@@ -35,7 +35,7 @@ There are many resources to help you build your first cognitive application with
 
 ### Services
 
-* [Conversation](#conversation)
+* [Assistant](#assistant)
 * [Discovery](#discovery)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
@@ -126,13 +126,17 @@ See [Getting started with Watson and IBM Cloud](https://console.bluemix.net/docs
 
 ## Custom Service URLs
 
-In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.
+You can set a custom service URL by modifying the `serviceURL` property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.
 
-You can set a custom service URL like so:
+For example, here is how to connect to a Tone Analyzer instance that is hosted in Germany:
 
 ```swift
-let dialog = Dialog(username: "your-username-here", password: "your-password-here")
-dialog.serviceURL = "your-custom-service-url"
+let toneAnalyzer = ToneAnalyzer(
+    username: "your-username-here",
+    password: "your-password-here",
+    version: "yyyy-mm-dd"
+)
+toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
 ```
 
 ## Custom Headers
@@ -160,7 +164,7 @@ By default, the SDK executes all networking operations asynchonously. If your ap
 ```swift
 let dispatchGroup = DispatchGroup()
 dispatchGroup.enter()
-conversation.message(workspaceID: workspaceID) { response in
+assistant.message(workspaceID: workspaceID) { response in
     print(response.output.text)
     dispatchGroup.leave()
 }
@@ -186,37 +190,37 @@ available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/ma
 
 This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
 
-## Conversation
+## Assistant
 
-With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
+With the IBM Watson Assistant service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
 
-The following example shows how to start a conversation with the Conversation service:
+The following example shows how to start a conversation with the Assistant service:
 
 ```swift
-import ConversationV1
+import AssistantV1
 
 let username = "your-username-here"
 let password = "your-password-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
-let conversation = Conversation(username: username, password: password, version: version)
+let assistant = Assistant(username: username, password: password, version: version)
 
 let workspaceID = "your-workspace-id-here"
 let failure = { (error: Error) in print(error) }
 var context: Context? // save context to continue conversation
-conversation.message(workspaceID: workspaceID, failure: failure) {
+assistant.message(workspaceID: workspaceID, failure: failure) {
     response in
     print(response.output.text)
     context = response.context
 }
 ```
 
-The following example shows how to continue an existing conversation with the Conversation service:
+The following example shows how to continue an existing conversation with the Assistant service:
 
 ```swift
 let input = InputData(text: "Turn on the radio.")
 let request = MessageRequest(input: input, context: context)
 let failure = { (error: Error) in print(error) }
-conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+assistant.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     print(response.output.text)
     context = response.context
@@ -225,13 +229,13 @@ conversation.message(workspaceID: workspaceID, request: request, failure: failur
 
 #### Context Variables
 
-The Conversation service allows users to define custom context variables in their application's payload. For example, a Conversation workspace that guides users through a pizza order might include a context variable for pizza size: `"pizza_size": "large"`.
+The Assistant service allows users to define custom context variables in their application's payload. For example, a workspace that guides users through a pizza order might include a context variable for pizza size: `"pizza_size": "large"`.
 
 Context variables are get/set using the `var additionalProperties: [String: JSON]` property of a `Context` model. The following example shows how to get and set a user-defined `pizza_size` variable:
 
 ```swift
 // get the `pizza_size` context variable
-conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+assistant.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     if case let .string(size) = response.context.additionalProperties["pizza_size"]! {
         print(size)
@@ -239,7 +243,7 @@ conversation.message(workspaceID: workspaceID, request: request, failure: failur
 }
 
 // set the `pizza_size` context variable
-conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+assistant.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     var context = response.context // `var` makes the context mutable
     context?.additionalProperties["pizza_size"] = .string("large")
@@ -261,10 +265,10 @@ public enum JSON: Equatable, Codable {
 }
 ```
 
-The following links provide more information about the IBM Conversation service:
+The following links provide more information about the IBM Watson Assistant service:
 
-* [IBM Watson Conversation - Service Page](https://www.ibm.com/watson/services/conversation/)
-* [IBM Watson Conversation - Documentation](https://console.bluemix.net/docs/services/conversation/index.html)
+* [IBM Watson Assistant - Service Page](https://www.ibm.com/watson/services/conversation/)
+* [IBM Watson Assistant - Documentation](https://console.bluemix.net/docs/services/conversation/index.html)
 
 ## Discovery
 

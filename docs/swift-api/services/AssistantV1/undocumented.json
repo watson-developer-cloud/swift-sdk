@@ -1,0 +1,684 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 24,
+      "symbol": "CreateDialogNode.NodeType.standard",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 25,
+      "symbol": "CreateDialogNode.NodeType.eventHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 26,
+      "symbol": "CreateDialogNode.NodeType.frame",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 27,
+      "symbol": "CreateDialogNode.NodeType.slot",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 28,
+      "symbol": "CreateDialogNode.NodeType.responseCondition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 29,
+      "symbol": "CreateDialogNode.NodeType.folder",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 34,
+      "symbol": "CreateDialogNode.EventName.focus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 35,
+      "symbol": "CreateDialogNode.EventName.input",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 36,
+      "symbol": "CreateDialogNode.EventName.filled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 37,
+      "symbol": "CreateDialogNode.EventName.validate",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 38,
+      "symbol": "CreateDialogNode.EventName.filledMultiple",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 39,
+      "symbol": "CreateDialogNode.EventName.generic",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 40,
+      "symbol": "CreateDialogNode.EventName.nomatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 41,
+      "symbol": "CreateDialogNode.EventName.nomatchResponsesDepleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 46,
+      "symbol": "CreateDialogNode.DigressIn.notAvailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 47,
+      "symbol": "CreateDialogNode.DigressIn.returns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 48,
+      "symbol": "CreateDialogNode.DigressIn.doesNotReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 53,
+      "symbol": "CreateDialogNode.DigressOut.returning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 54,
+      "symbol": "CreateDialogNode.DigressOut.all",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 55,
+      "symbol": "CreateDialogNode.DigressOut.allNeverReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 60,
+      "symbol": "CreateDialogNode.DigressOutSlots.notAllowed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 61,
+      "symbol": "CreateDialogNode.DigressOutSlots.allowReturning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 62,
+      "symbol": "CreateDialogNode.DigressOutSlots.allowAll",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateValue.swift",
+      "line": 24,
+      "symbol": "CreateValue.ValueType.synonyms",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/CreateValue.swift",
+      "line": 25,
+      "symbol": "CreateValue.ValueType.patterns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 24,
+      "symbol": "DialogNode.NodeType.standard",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 25,
+      "symbol": "DialogNode.NodeType.eventHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 26,
+      "symbol": "DialogNode.NodeType.frame",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 27,
+      "symbol": "DialogNode.NodeType.slot",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 28,
+      "symbol": "DialogNode.NodeType.responseCondition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 29,
+      "symbol": "DialogNode.NodeType.folder",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 34,
+      "symbol": "DialogNode.EventName.focus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 35,
+      "symbol": "DialogNode.EventName.input",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 36,
+      "symbol": "DialogNode.EventName.filled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 37,
+      "symbol": "DialogNode.EventName.validate",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 38,
+      "symbol": "DialogNode.EventName.filledMultiple",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 39,
+      "symbol": "DialogNode.EventName.generic",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 40,
+      "symbol": "DialogNode.EventName.nomatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 41,
+      "symbol": "DialogNode.EventName.nomatchResponsesDepleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 46,
+      "symbol": "DialogNode.DigressIn.notAvailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 47,
+      "symbol": "DialogNode.DigressIn.returns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 48,
+      "symbol": "DialogNode.DigressIn.doesNotReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 53,
+      "symbol": "DialogNode.DigressOut.returning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 54,
+      "symbol": "DialogNode.DigressOut.all",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 55,
+      "symbol": "DialogNode.DigressOut.allNeverReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 60,
+      "symbol": "DialogNode.DigressOutSlots.notAllowed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 61,
+      "symbol": "DialogNode.DigressOutSlots.allowReturning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 62,
+      "symbol": "DialogNode.DigressOutSlots.allowAll",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeAction.swift",
+      "line": 24,
+      "symbol": "DialogNodeAction.ActionType.client",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeAction.swift",
+      "line": 25,
+      "symbol": "DialogNodeAction.ActionType.server",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 24,
+      "symbol": "DialogNodeNextStep.Behavior.getUserInput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 25,
+      "symbol": "DialogNodeNextStep.Behavior.skipUserInput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 26,
+      "symbol": "DialogNodeNextStep.Behavior.jumpTo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 27,
+      "symbol": "DialogNodeNextStep.Behavior.reprompt",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 28,
+      "symbol": "DialogNodeNextStep.Behavior.skipSlot",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 29,
+      "symbol": "DialogNodeNextStep.Behavior.skipAllSlots",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 34,
+      "symbol": "DialogNodeNextStep.Selector.condition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 35,
+      "symbol": "DialogNodeNextStep.Selector.client",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 36,
+      "symbol": "DialogNodeNextStep.Selector.userInput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 37,
+      "symbol": "DialogNodeNextStep.Selector.body",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/LogMessage.swift",
+      "line": 24,
+      "symbol": "LogMessage.Level.info",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/LogMessage.swift",
+      "line": 25,
+      "symbol": "LogMessage.Level.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/LogMessage.swift",
+      "line": 26,
+      "symbol": "LogMessage.Level.warn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 24,
+      "symbol": "UpdateDialogNode.NodeType.standard",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 25,
+      "symbol": "UpdateDialogNode.NodeType.eventHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 26,
+      "symbol": "UpdateDialogNode.NodeType.frame",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 27,
+      "symbol": "UpdateDialogNode.NodeType.slot",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 28,
+      "symbol": "UpdateDialogNode.NodeType.responseCondition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 29,
+      "symbol": "UpdateDialogNode.NodeType.folder",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 34,
+      "symbol": "UpdateDialogNode.EventName.focus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 35,
+      "symbol": "UpdateDialogNode.EventName.input",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 36,
+      "symbol": "UpdateDialogNode.EventName.filled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 37,
+      "symbol": "UpdateDialogNode.EventName.validate",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 38,
+      "symbol": "UpdateDialogNode.EventName.filledMultiple",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 39,
+      "symbol": "UpdateDialogNode.EventName.generic",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 40,
+      "symbol": "UpdateDialogNode.EventName.nomatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 41,
+      "symbol": "UpdateDialogNode.EventName.nomatchResponsesDepleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 46,
+      "symbol": "UpdateDialogNode.DigressIn.notAvailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 47,
+      "symbol": "UpdateDialogNode.DigressIn.returns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 48,
+      "symbol": "UpdateDialogNode.DigressIn.doesNotReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 53,
+      "symbol": "UpdateDialogNode.DigressOut.returning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 54,
+      "symbol": "UpdateDialogNode.DigressOut.all",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 55,
+      "symbol": "UpdateDialogNode.DigressOut.allNeverReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 60,
+      "symbol": "UpdateDialogNode.DigressOutSlots.notAllowed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 61,
+      "symbol": "UpdateDialogNode.DigressOutSlots.allowReturning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 62,
+      "symbol": "UpdateDialogNode.DigressOutSlots.allowAll",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateValue.swift",
+      "line": 24,
+      "symbol": "UpdateValue.ValueType.synonyms",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/UpdateValue.swift",
+      "line": 25,
+      "symbol": "UpdateValue.ValueType.patterns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/Value.swift",
+      "line": 24,
+      "symbol": "Value.ValueType.synonyms",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/Value.swift",
+      "line": 25,
+      "symbol": "Value.ValueType.patterns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/ValueExport.swift",
+      "line": 24,
+      "symbol": "ValueExport.ValueType.synonyms",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/ValueExport.swift",
+      "line": 25,
+      "symbol": "ValueExport.ValueType.patterns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 24,
+      "symbol": "WorkspaceExport.Status.nonExistent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 25,
+      "symbol": "WorkspaceExport.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 26,
+      "symbol": "WorkspaceExport.Status.failed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 27,
+      "symbol": "WorkspaceExport.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 28,
+      "symbol": "WorkspaceExport.Status.unavailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+}

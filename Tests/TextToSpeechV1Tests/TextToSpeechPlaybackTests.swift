@@ -54,7 +54,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations(timeout: TimeInterval = 5.0) {
+    func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -67,7 +67,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio using the default parameters."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text, failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/wav", failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -89,7 +89,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text, voice: SynthesisVoice.us_Lisa.rawValue, audioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(text: text, accept: "audio/wav", voice: "en-US_LisaVoice", failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -112,7 +112,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(germanText, voice: SynthesisVoice.de_Dieter.rawValue, audioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(text: germanText, accept: "audio/wav", voice: "de-DE_DieterVoice", failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -135,7 +135,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(japaneseText, voice: SynthesisVoice.jp_Emi.rawValue, audioFormat: .wav, failure: failWithError) {
+        textToSpeech.synthesize(text: japaneseText, accept: "audio/wav", voice: "ja-JP_EmiVoice", failure: failWithError) {
             data in
             XCTAssertGreaterThan(data.count, 0)
             do {
@@ -158,7 +158,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize SSML to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(ssmlString, failure: failWithError) { data in
+        textToSpeech.synthesize(text: ssmlString, accept: "audio/wav", failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -183,7 +183,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio in Opus format."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text, audioFormat: .opus, failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/ogg;codecs=opus", failure: failWithError) { data in
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)

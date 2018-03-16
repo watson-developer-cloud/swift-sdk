@@ -16,11 +16,11 @@
 
 // swiftlint:disable function_body_length force_try force_unwrapping superfluous_disable_command
 
-#if os(Linux)
-#else
+#if os(iOS) || os(tvOS) || os(watchOS)
 
 import XCTest
 import Foundation
+import UIKit
 import VisualRecognitionV3
 
 class VisualRecognitionUIImageTests: XCTestCase {

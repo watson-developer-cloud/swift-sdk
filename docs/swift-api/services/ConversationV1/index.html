@@ -50,6 +50,9 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Context.html">Context</a>
               </li>
               <li class="nav-group-task">
@@ -117,6 +120,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/DialogNodeNextStep/Selector.html">– Selector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeVisitedDetails.html">DialogNodeVisitedDetails</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Entity.html">Entity</a>
@@ -299,20 +305,16 @@
 <h3 id='services' class='heading'>Services</h3>
 
 <ul>
-<li><a href="#alchemydata-news">AlchemyData News</a></li>
-<li><a href="#alchemylanguage">AlchemyLanguage</a></li>
-<li><a href="#conversation">Conversation</a></li>
+<li><a href="#assistant">Assistant</a></li>
 <li><a href="#discovery">Discovery</a></li>
 <li><a href="#document-conversion">Document Conversion</a></li>
 <li><a href="#language-translator">Language Translator</a></li>
 <li><a href="#natural-language-classifier">Natural Language Classifier</a></li>
 <li><a href="#natural-language-understanding">Natural Language Understanding</a></li>
 <li><a href="#personality-insights">Personality Insights</a></li>
-<li><a href="#retrieve-and-rank">Retrieve and Rank</a></li>
 <li><a href="#speech-to-text">Speech to Text</a></li>
 <li><a href="#text-to-speech">Text to Speech</a></li>
 <li><a href="#tone-analyzer">Tone Analyzer</a></li>
-<li><a href="#tradeoff-analytics">Tradeoff Analytics</a></li>
 <li><a href="#visual-recognition">Visual Recognition</a></li>
 </ul>
 <h2 id='requirements' class='heading'>Requirements</h2>
@@ -389,11 +391,15 @@
 <p>See <a href="https://console.bluemix.net/docs/services/watson/index.html">Getting Started</a> for more information on getting started with the Watson Developer Cloud and Bluemix.</p>
 <h2 id='custom-service-urls' class='heading'>Custom Service URLs</h2>
 
-<p>In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.</p>
+<p>You can set a custom service URL by modifying the <code>serviceURL</code> property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.</p>
 
-<p>You can set a custom service URL like so:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dialog</span> <span class="o">=</span> <span class="kt">Dialog</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">)</span>
-<span class="n">dialog</span><span class="o">.</span><span class="n">serviceURL</span> <span class="o">=</span> <span class="s">"your-custom-service-url"</span>
+<p>For example, here is how to connect to a Tone Analyzer instance that is hosted in Germany:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">toneAnalyzer</span> <span class="o">=</span> <span class="kt">ToneAnalyzer</span><span class="p">(</span>
+    <span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span>
+    <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">,</span>
+    <span class="nv">version</span><span class="p">:</span> <span class="s">"yyyy-mm-dd"</span>
+<span class="p">)</span>
+<span class="n">toneAnalyzer</span><span class="o">.</span><span class="n">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway-fra.watsonplatform.net/tone-analyzer/api"</span>
 </code></pre>
 <h2 id='custom-headers' class='heading'>Custom Headers</h2>
 
@@ -417,7 +423,7 @@
 <p>By default, the SDK executes all networking operations asynchonously. If your application requires synchronous execution, you can use a <code>DispatchGroup</code>. For example:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dispatchGroup</span> <span class="o">=</span> <span class="kt">DispatchGroup</span><span class="p">()</span>
 <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">enter</span><span class="p">()</span>
-<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
     <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">leave</span><span class="p">()</span>
 <span class="p">}</span>
@@ -440,6 +446,7 @@
 available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE">LICENSE</a>.</p>
 
 <p>This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.</p>
+<<<<<<< HEAD
 <h2 id='alchemydata-news' class='heading'>AlchemyData News</h2>
 
 <p>AlchemyData News provides news and blog content enriched with natural language processing to allow for highly targeted search and trend analysis. Now you can query the world&rsquo;s news sources and blogs like a database.</p>
@@ -518,32 +525,35 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><a href="https://alchemy-language-demo.mybluemix.net/">IBM AlchemyLanguage - Demo</a></li>
 </ul>
 <h2 id='conversation' class='heading'>Conversation</h2>
+=======
+<h2 id='assistant' class='heading'>Assistant</h2>
+>>>>>>> upstream/master
 
-<p>With the IBM Watson Conversation service you can create cognitive agents&ndash;virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.</p>
+<p>With the IBM Watson Assistant service you can create cognitive agents&ndash;virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.</p>
 
-<p>The following example shows how to start a conversation with the Conversation service:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">ConversationV1</span>
+<p>The following example shows how to start a conversation with the Assistant service:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">AssistantV1</span>
 
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
 <span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
-<span class="k">let</span> <span class="nv">conversation</span> <span class="o">=</span> <span class="kt">Conversation</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">assistant</span> <span class="o">=</span> <span class="kt">Assistant</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">workspaceID</span> <span class="o">=</span> <span class="s">"your-workspace-id-here"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">var</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">Context</span><span class="p">?</span> <span class="c1">// save context to continue conversation</span>
-<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">response</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
     <span class="n">context</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>The following example shows how to continue an existing conversation with the Conversation service:</p>
+<p>The following example shows how to continue an existing conversation with the Assistant service:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">input</span> <span class="o">=</span> <span class="kt">InputData</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="s">"Turn on the radio."</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">MessageRequest</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">context</span><span class="p">:</span> <span class="n">context</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">response</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
     <span class="n">context</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span>
@@ -551,11 +561,11 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 </code></pre>
 <h4 id='context-variables' class='heading'>Context Variables</h4>
 
-<p>The Conversation service allows users to define custom context variables in their application&rsquo;s payload. For example, a Conversation workspace that guides users through a pizza order might include a context variable for pizza size: <code>&quot;pizza_size&quot;: &quot;large&quot;</code>.</p>
+<p>The Assistant service allows users to define custom context variables in their application&rsquo;s payload. For example, a workspace that guides users through a pizza order might include a context variable for pizza size: <code>&quot;pizza_size&quot;: &quot;large&quot;</code>.</p>
 
 <p>Context variables are get/set using the <code>var additionalProperties: [String: JSON]</code> property of a <code><a href="Structs/Context.html">Context</a></code> model. The following example shows how to get and set a user-defined <code>pizza_size</code> variable:</p>
 <pre class="highlight swift"><code><span class="c1">// get the `pizza_size` context variable</span>
-<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">response</span> <span class="k">in</span>
     <span class="k">if</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">additionalProperties</span><span class="p">[</span><span class="s">"pizza_size"</span><span class="p">]</span><span class="o">!</span> <span class="p">{</span>
         <span class="nf">print</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
@@ -563,7 +573,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="p">}</span>
 
 <span class="c1">// set the `pizza_size` context variable</span>
-<span class="n">conversation</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">response</span> <span class="k">in</span>
     <span class="k">var</span> <span class="nv">context</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span> <span class="c1">// `var` makes the context mutable</span>
     <span class="n">context</span><span class="p">?</span><span class="o">.</span><span class="n">additionalProperties</span><span class="p">[</span><span class="s">"pizza_size"</span><span class="p">]</span> <span class="o">=</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="s">"large"</span><span class="p">)</span>
@@ -583,11 +593,11 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="p">}</span>
 </code></pre>
 
-<p>The following links provide more information about the IBM Conversation service:</p>
+<p>The following links provide more information about the IBM Watson Assistant service:</p>
 
 <ul>
-<li><a href="https://www.ibm.com/watson/services/conversation/">IBM Watson Conversation - Service Page</a></li>
-<li><a href="https://console.bluemix.net/docs/services/conversation/index.html">IBM Watson Conversation - Documentation</a></li>
+<li><a href="https://www.ibm.com/watson/services/conversation/">IBM Watson Assistant - Service Page</a></li>
+<li><a href="https://console.bluemix.net/docs/services/conversation/index.html">IBM Watson Assistant - Documentation</a></li>
 </ul>
 <h2 id='discovery' class='heading'>Discovery</h2>
 
@@ -885,6 +895,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><a href="https://console.bluemix.net/docs/services/personality-insights/index.html">IBM Watson Personality Insights - Documentation</a></li>
 <li><a href="https://personality-insights-livedemo.mybluemix.net">IBM Watson Personality Insights - Demo</a></li>
 </ul>
+<<<<<<< HEAD
 <h2 id='retrieve-and-rank' class='heading'>Retrieve and Rank</h2>
 
 <p>The IBM Watson Retrieve and Rank service combines Apache Solr and a machine learning algorithm, two information retrieval components, into a single service in order to provide users with the most relevant search information.</p>
@@ -1001,6 +1012,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><a href="https://console.bluemix.net/docs/services/retrieve-and-rank/index.html">IBM Watson Retrieve and Rank - Documentation</a></li>
 <li><a href="http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/#/">IBM Watson Retrieve and Rank - Demo</a></li>
 </ul>
+=======
+>>>>>>> upstream/master
 <h2 id='speech-to-text' class='heading'>Speech to Text</h2>
 
 <p>The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.</p>
@@ -1356,6 +1369,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><a href="https://console.bluemix.net/docs/services/tone-analyzer/index.html">IBM Watson Tone Analyzer - Documentation</a></li>
 <li><a href="https://tone-analyzer-demo.mybluemix.net/">IBM Watson Tone Analyzer - Demo</a></li>
 </ul>
+<<<<<<< HEAD
 <h2 id='tradeoff-analytics' class='heading'>Tradeoff Analytics</h2>
 
 <p>The IBM Watson Tradeoff Analytics service helps people make better choices when faced with multiple, often conflicting, goals and alternatives. By using mathematical filtering techniques to identify the best candidate options based on different criteria, the service can help users explore the tradeoffs between options to make complex decisions. The service combines smart visualization and analytical recommendations for easy and intuitive exploration of tradeoffs.</p>
@@ -1434,6 +1448,8 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <li><a href="https://console.bluemix.net/docs/services/tradeoff-analytics/index.html">IBM Watson Tradeoff Analytics - Documentation</a></li>
 <li><a href="https://tradeoff-analytics-demo.mybluemix.net/">IBM Watson Tradeoff Analytics - Demo</a></li>
 </ul>
+=======
+>>>>>>> upstream/master
 <h2 id='visual-recognition' class='heading'>Visual Recognition</h2>
 
 <p>The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, faces, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.</p>
@@ -1484,8 +1500,13 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
           </section>
         </section>
         <section id="footer">
+<<<<<<< HEAD
           <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+=======
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+>>>>>>> upstream/master
         </section>
       </article>
     </div>

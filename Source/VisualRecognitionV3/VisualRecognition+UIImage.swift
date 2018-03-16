@@ -14,14 +14,15 @@
  * limitations under the License.
  **/
 
+#if os(iOS) || os(tvOS) || os(watchOS)
+
 import Foundation
+import UIKit
 
 // This extension adds convenience methods for using `UIImage`. The comments and interface were copied from
 // `VisualRecognition.swift`, then modified to use `UIImage` instead of `URL`. Some parameters were also
 // removed or modified because they are not necessary in this context (e.g. `imagesFileContentType`).
 
-#if os(Linux)
-#else
 extension VisualRecognition {
 
     /**
@@ -146,4 +147,5 @@ extension VisualRecognition {
         return file
     }
 }
+
 #endif

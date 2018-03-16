@@ -22,16 +22,15 @@ import PersonalityInsightsV3
 class PersonalityInsightsTests: XCTestCase {
 
     private var personalityInsights: PersonalityInsights!
-    private var mobyDickIntro: String?
-    private var kennedySpeechTXT: String?
-    private var kennedySpeechHTML: String?
-    private var version: String = "2016-10-20"
+    private var text: String!
+    private var html: String!
+    private var short: String!
 
     static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
-            ("testProfile", testProfile),
-            ("testContentItem", testContentItem),
-            ("testHTMLProfile", testHTMLProfile),
+            ("testProfileText", testProfileText),
+            ("testProfileHTML", testProfileHTML),
+            ("testProfileContent", testProfileContent),
             ("testNeedsAndConsumptionPreferences", testNeedsAndConsumptionPreferences),
             ("testProfileWithShortText", testProfileWithShortText),
         ]
@@ -39,7 +38,6 @@ class PersonalityInsightsTests: XCTestCase {
 
     // MARK: - Test Configuration
 
-    /** Set up for each test by loading text files and instantiating the service. */
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
@@ -47,16 +45,14 @@ class PersonalityInsightsTests: XCTestCase {
         loadTestResources()
     }
 
-    /** Instantiate Personality Insights. */
     func instantiatePersonalityInsights() {
         let username = Credentials.PersonalityInsightsV3Username
         let password = Credentials.PersonalityInsightsV3Password
-        personalityInsights = PersonalityInsights(username: username, password: password, version: version)
+        personalityInsights = PersonalityInsights(username: username, password: password, version: "2016-10-20")
         personalityInsights.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         personalityInsights.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    /** Load external files to test. Fails if unable to locate file. */
     func load(forResource resource: String, ofType ext: String) -> String? {
         #if os(iOS)
             let bundle = Bundle(for: type(of: self))
@@ -71,11 +67,10 @@ class PersonalityInsightsTests: XCTestCase {
         #endif
     }
 
-    /** Load all testing resources required to run the tests. */
     public func loadTestResources() {
-        self.mobyDickIntro = load(forResource: "MobyDickIntro", ofType: "txt")
-        self.kennedySpeechTXT = load(forResource: "KennedySpeech", ofType: "txt")
-        self.kennedySpeechHTML = load(forResource: "KennedySpeech", ofType: "html")
+        self.text = load(forResource: "KennedySpeech", ofType: "txt")
+        self.html = load(forResource: "KennedySpeech", ofType: "html")
+        self.short = load(forResource: "MobyDickIntro", ofType: "txt")
     }
 
     /** Fail false negatives. */
@@ -102,19 +97,9 @@ class PersonalityInsightsTests: XCTestCase {
 
     // MARK: - Positive Tests
 
-    /** Analyze the text of Kennedy's speech. */
-    func testProfile() {
-        let description = "Analyze the text of Kennedy's speech."
-        let expectation = self.expectation(description: description)
-
-        guard let kennedySpeech = kennedySpeechTXT else {
-            XCTFail("Unable to read KennedySpeech.txt file.")
-            return
-        }
-        personalityInsights.getProfile(fromText: kennedySpeech,
-                                         failure: failWithError)
-        {
-            profile in
+    func testProfileText() {
+        let expectation = self.expectation(description: "profile(text:)")
+        personalityInsights.profile(text: text, failure: failWithError) { profile in
             for preference in profile.personality {
                 XCTAssertNotNil(preference.name)
                 break
@@ -124,19 +109,9 @@ class PersonalityInsightsTests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Analyze the HTML text of Kennedy's speech. */
-    func testHTMLProfile() {
-        let description = "Analyze the HTML text of Kennedy's speech."
-        let expectation = self.expectation(description: description)
-
-        guard let kennedySpeech = kennedySpeechHTML else {
-            XCTFail("Unable to read KennedySpeech.html file.")
-            return
-        }
-        personalityInsights.getProfile(fromHTML: kennedySpeech,
-                                       failure: failWithError)
-        {
-            profile in
+    func testProfileHTML() {
+        let expectation = self.expectation(description: "profile(html:)")
+        personalityInsights.profile(html: html, failure: failWithError) { profile in
             for preference in profile.personality {
                 XCTAssertNotNil(preference.name)
                 break
@@ -146,33 +121,21 @@ class PersonalityInsightsTests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Analyze content items. */
-    func testContentItem() {
-        let description = "Analyze content items."
-        let expectation = self.expectation(description: description)
-
-        guard let kennedySpeech = kennedySpeechTXT else {
-            XCTFail("Unable to read KennedySpeech.txt file.")
-            return
-        }
-
-        let contentItem = PersonalityInsightsV3.ContentItem(
-            content: kennedySpeech,
+    func testProfileContent() {
+        let expectation = self.expectation(description: "profile(content:)")
+        let contentItem = ContentItem(
+            content: text,
             id: "245160944223793152",
             created: 1427720427,
             updated: 1427720427,
-            contentType: "text/plain",
+            contenttype: "text/plain",
             language: "en",
-            parentID: "",
+            parentid: "",
             reply: false,
             forward: false
         )
-
-        let contentItems = [contentItem, contentItem]
-        personalityInsights.getProfile(fromContentItems: contentItems,
-                                         failure: failWithError)
-        {
-            profile in
+        let content = Content(contentItems: [contentItem])
+        personalityInsights.profile(content: content, failure: failWithError) { profile in
             if let behaviors = profile.behavior {
                 for behavior in behaviors {
                     XCTAssertNotNil(behavior.traitID)
@@ -183,21 +146,48 @@ class PersonalityInsightsTests: XCTestCase {
         waitForExpectations()
     }
 
-    /** Analyze needs and consumption preferences. */
-    func testNeedsAndConsumptionPreferences() {
-        let description = "Analyze needs and consumption preferences."
-        let expectation = self.expectation(description: description)
-
-        guard let kennedySpeech = kennedySpeechTXT else {
-            XCTFail("Unable to read KennedySpeech.txt file.")
-            return
+    func testProfileAsCsvText() {
+        let expectation = self.expectation(description: "profile(text:)")
+        personalityInsights.profileAsCsv(text: text, failure: failWithError) { csv in
+            XCTAssertGreaterThan(csv.count, 0)
+            expectation.fulfill()
         }
+        waitForExpectations()
+    }
 
-        personalityInsights.getProfile(fromText: kennedySpeech,
-                                       rawScores: true,
-                                       consumptionPreferences: true,
-                                       failure: failWithError)
-        {
+    func testProfileAsCsvHTML() {
+        let expectation = self.expectation(description: "profile(html:)")
+        personalityInsights.profileAsCsv(html: html, failure: failWithError) { csv in
+            XCTAssertGreaterThan(csv.count, 0)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testProfileAsCsvContent() {
+        let expectation = self.expectation(description: "profile(content:)")
+        let contentItem = ContentItem(
+            content: text,
+            id: "245160944223793152",
+            created: 1427720427,
+            updated: 1427720427,
+            contenttype: "text/plain",
+            language: "en",
+            parentid: "",
+            reply: false,
+            forward: false
+        )
+        let content = Content(contentItems: [contentItem])
+        personalityInsights.profileAsCsv(content: content, failure: failWithError) { csv in
+            XCTAssertGreaterThan(csv.count, 0)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testNeedsAndConsumptionPreferences() {
+        let expectation = self.expectation(description: "profile(text:)")
+        personalityInsights.profile(text: text, rawScores: true, consumptionPreferences: true, failure: failWithError) {
             profile in
             for need in profile.needs {
                 XCTAssertNotNil(need.rawScore)
@@ -209,7 +199,7 @@ class PersonalityInsightsTests: XCTestCase {
             }
             for consumption in preferences {
                 for node in consumption.consumptionPreferences {
-                    XCTAssertNotNil(consumption.consumptionPreferenceCategoryId)
+                    XCTAssertNotNil(consumption.consumptionPreferenceCategoryID)
                     XCTAssertNotNil(node.score)
                     expectation.fulfill()
                     return
@@ -222,25 +212,10 @@ class PersonalityInsightsTests: XCTestCase {
 
     // MARK: - Negative Tests
 
-    /** Test getProfile() with text that is too short (less than 100 words). */
     func testProfileWithShortText() {
-        let description = "Try to analyze text that is too short (less than 100 words)."
-        let expectation = self.expectation(description: description)
-
-        guard let mobyDickIntro = mobyDickIntro else {
-            XCTFail("Unable to read MobyDickIntro.txt file.")
-            return
-        }
-
-        let failure = { (error: Error) in
-            expectation.fulfill()
-        }
-
-        personalityInsights.getProfile(
-            fromText: mobyDickIntro,
-            failure: failure,
-            success: failWithResult
-        )
+        let expectation = self.expectation(description: "profile(text:)")
+        let failure = { (error: Error) in expectation.fulfill() }
+        personalityInsights.profile(text: short, failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

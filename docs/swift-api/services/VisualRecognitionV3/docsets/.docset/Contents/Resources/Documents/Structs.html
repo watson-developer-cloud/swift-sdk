@@ -50,10 +50,10 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/Age.html">Age</a>
+                <a href="Structs/Class.html">Class</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/Classification.html">Classification</a>
+                <a href="Structs/ClassResult.html">ClassResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ClassifiedImage.html">ClassifiedImage</a>
@@ -65,16 +65,16 @@
                 <a href="Structs/Classifier.html">Classifier</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/ClassifierResults.html">ClassifierResults</a>
+                <a href="Structs/Classifier/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/Collection.html">Collection</a>
+                <a href="Structs/ClassifierResult.html">ClassifierResult</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/CollectionImage.html">CollectionImage</a>
+                <a href="Structs/Classifiers.html">Classifiers</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/CollectionImages.html">CollectionImages</a>
+                <a href="Structs/DetectedFaces.html">DetectedFaces</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ErrorInfo.html">ErrorInfo</a>
@@ -83,31 +83,25 @@
                 <a href="Structs/Face.html">Face</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/FaceAge.html">FaceAge</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FaceGender.html">FaceGender</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FaceIdentity.html">FaceIdentity</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/FaceLocation.html">FaceLocation</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/Gender.html">Gender</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/Identity.html">Identity</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ImageWithFaces.html">ImageWithFaces</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/ImagesWithFaces.html">ImagesWithFaces</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs.html#/s:19VisualRecognitionV311JSONWrapperV">JSONWrapper</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/Metadata.html">Metadata</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/PositiveExample.html">PositiveExample</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/SimilarImages.html">SimilarImages</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/WarningInfo.html">WarningInfo</a>
@@ -125,6 +119,7 @@
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+<<<<<<< HEAD
               <ul>
                 <li class="item">
                   <div>
@@ -157,6 +152,8 @@
               </ul>
             </div>
             <div class="task-group">
+=======
+>>>>>>> upstream/master
               <div class="task-name-container">
                 <a name="/JSON"></a>
                 <a name="//apple_ref/swift/Section/JSON" class="dashAnchor"></a>
@@ -200,9 +197,9 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV310ClassifierV"></a>
-                    <a name="//apple_ref/swift/Struct/Classifier" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV310ClassifierV">Classifier</a>
+                    <a name="/s:19VisualRecognitionV39ErrorInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/ErrorInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV39ErrorInfoV">ErrorInfo</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -210,15 +207,19 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A classifier for the Visual Recognition service.</p>
+                        <p>Information about what might have caused a failure, such as an image that is too large. Not returned when there is no error.</p>
 
-                        <a href="Structs/Classifier.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/ErrorInfo.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Classifier</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ErrorInfo</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
@@ -232,9 +233,9 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV39ErrorInfoV"></a>
-                    <a name="//apple_ref/swift/Struct/ErrorInfo" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV39ErrorInfoV">ErrorInfo</a>
+                    <a name="/s:19VisualRecognitionV310FaceGenderV"></a>
+                    <a name="//apple_ref/swift/Struct/FaceGender" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV310FaceGenderV">FaceGender</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -242,15 +243,19 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Information about an error that occurred during classification.</p>
+                        <p>Provides information about the gender of the face. If there are more than 10 faces in an image, the response might return the confidence score 0.</p>
 
-                        <a href="Structs/ErrorInfo.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/FaceGender.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ErrorInfo</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FaceGender</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
@@ -296,6 +301,7 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                 <li class="item">
                   <div>
                     <code>
+<<<<<<< HEAD
                     <a name="/s:19VisualRecognitionV315ImagesWithFacesV"></a>
                     <a name="//apple_ref/swift/Struct/ImagesWithFaces" class="dashAnchor"></a>
                     <a class="token" href="#/s:19VisualRecognitionV315ImagesWithFacesV">ImagesWithFaces</a>
@@ -352,6 +358,8 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                 <li class="item">
                   <div>
                     <code>
+=======
+>>>>>>> upstream/master
                     <a name="/s:19VisualRecognitionV34FaceV"></a>
                     <a name="//apple_ref/swift/Struct/Face" class="dashAnchor"></a>
                     <a class="token" href="#/s:19VisualRecognitionV34FaceV">Face</a>
@@ -362,7 +370,7 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A face identified in an image.</p>
+                        <p>Provides information about the face.</p>
 
                         <a href="Structs/Face.html" class="slightly-smaller">See more</a>
                       </div>
@@ -370,19 +378,27 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Face</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Face</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV33AgeV"></a>
-                    <a name="//apple_ref/swift/Struct/Age" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV33AgeV">Age</a>
+                    <a name="/s:19VisualRecognitionV311ClassifiersV"></a>
+                    <a name="//apple_ref/swift/Struct/Classifiers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV311ClassifiersV">Classifiers</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -390,27 +406,35 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The age of an identified face.</p>
+                        <p>Verbose list of classifiers retrieved in the GET v2/classifiers call.</p>
 
-                        <a href="Structs/Age.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/Classifiers.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Age</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Classifiers</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV36GenderV"></a>
-                    <a name="//apple_ref/swift/Struct/Gender" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV36GenderV">Gender</a>
+                    <a name="/s:19VisualRecognitionV35ClassV"></a>
+                    <a name="//apple_ref/swift/Struct/Class" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV35ClassV">Class</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -418,21 +442,29 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The gender of an identified face.</p>
+                        <p>A category within a classifier.</p>
 
-                        <a href="Structs/Gender.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/Class.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Gender</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Class</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
@@ -446,7 +478,7 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The location of an identified face.</p>
+                        <p>Defines the location of the bounding box around the face.</p>
 
                         <a href="Structs/FaceLocation.html" class="slightly-smaller">See more</a>
                       </div>
@@ -454,19 +486,27 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FaceLocation</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FaceLocation</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV38IdentityV"></a>
-                    <a name="//apple_ref/swift/Struct/Identity" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV38IdentityV">Identity</a>
+                    <a name="/s:19VisualRecognitionV313DetectedFacesV"></a>
+                    <a name="//apple_ref/swift/Struct/DetectedFaces" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV313DetectedFacesV">DetectedFaces</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -474,15 +514,271 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The identity of an identified face.</p>
+                        <p>DetectedFaces.</p>
 
-                        <a href="Structs/Identity.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/DetectedFaces.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Identity</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DetectedFaces</span></code></pre>
+>>>>>>> upstream/master
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV316ClassifierResultV"></a>
+                    <a name="//apple_ref/swift/Struct/ClassifierResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV316ClassifierResultV">ClassifierResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Classifier and score combination.</p>
+
+                        <a href="Structs/ClassifierResult.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WarningInfo</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifierResult</span></code></pre>
+>>>>>>> upstream/master
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV315ClassifiedImageV"></a>
+                    <a name="//apple_ref/swift/Struct/ClassifiedImage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV315ClassifiedImageV">ClassifiedImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Classifier results for one image.</p>
+
+                        <a href="Structs/ClassifiedImage.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionImages</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifiedImage</span></code></pre>
+>>>>>>> upstream/master
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV312FaceIdentityV"></a>
+                    <a name="//apple_ref/swift/Struct/FaceIdentity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV312FaceIdentityV">FaceIdentity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides information about a celebrity who is detected in the image. Not returned when a celebrity is not detected.</p>
+
+                        <a href="Structs/FaceIdentity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionImage</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FaceIdentity</span></code></pre>
+>>>>>>> upstream/master
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV37FaceAgeV"></a>
+                    <a name="//apple_ref/swift/Struct/FaceAge" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV37FaceAgeV">FaceAge</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides age information about a face. If there are more than 10 faces in an image, the response might return the confidence score `0g.</p>
+
+                        <a href="Structs/FaceAge.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Metadata</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FaceAge</span></code></pre>
+>>>>>>> upstream/master
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV310ClassifierV"></a>
+                    <a name="//apple_ref/swift/Struct/Classifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV310ClassifierV">Classifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information about a classifier.</p>
+
+                        <a href="Structs/Classifier.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SimilarImages</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Classifier</span></code></pre>
+>>>>>>> upstream/master
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV311ClassResultV"></a>
+                    <a name="//apple_ref/swift/Struct/ClassResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV311ClassResultV">ClassResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Result of a class within a classifier.</p>
+
+                        <a href="Structs/ClassResult.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifiedImages</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassResult</span></code></pre>
+>>>>>>> upstream/master
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV314ImageWithFacesV"></a>
+                    <a name="//apple_ref/swift/Struct/ImageWithFaces" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV314ImageWithFacesV">ImageWithFaces</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>ImageWithFaces.</p>
+
+                        <a href="Structs/ImageWithFaces.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifiedImage</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ImageWithFaces</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
@@ -506,7 +802,7 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Information about a warning that occurred.</p>
+                        <p>Information about something that went wrong.</p>
 
                         <a href="Structs/WarningInfo.html" class="slightly-smaller">See more</a>
                       </div>
@@ -514,123 +810,11 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WarningInfo</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV316CollectionImagesV"></a>
-                    <a name="//apple_ref/swift/Struct/CollectionImages" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV316CollectionImagesV">CollectionImages</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A collection of images.</p>
-
-                        <a href="Structs/CollectionImages.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionImages</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV315CollectionImageV"></a>
-                    <a name="//apple_ref/swift/Struct/CollectionImage" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV315CollectionImageV">CollectionImage</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A collection image.</p>
-
-                        <a href="Structs/CollectionImage.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionImage</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV38MetadataV"></a>
-                    <a name="//apple_ref/swift/Struct/Metadata" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV38MetadataV">Metadata</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Metadata object to handle updating, viewing metadata per image within a collection.</p>
-
-                        <a href="Structs/Metadata.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Metadata</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV313SimilarImagesV"></a>
-                    <a name="//apple_ref/swift/Struct/SimilarImages" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV313SimilarImagesV">SimilarImages</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Similar images found by the service.</p>
-
-                        <a href="Structs/SimilarImages.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SimilarImages</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifierResults</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WarningInfo</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
@@ -654,7 +838,7 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The results from classifying one or more images.</p>
+                        <p>Classify results for multiple images.</p>
 
                         <a href="Structs/ClassifiedImages.html" class="slightly-smaller">See more</a>
                       </div>
@@ -662,91 +846,11 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifiedImages</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV315ClassifiedImageV"></a>
-                    <a name="//apple_ref/swift/Struct/ClassifiedImage" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV315ClassifiedImageV">ClassifiedImage</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A classified image.</p>
-
-                        <a href="Structs/ClassifiedImage.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifiedImage</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV317ClassifierResultsV"></a>
-                    <a name="//apple_ref/swift/Struct/ClassifierResults" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV317ClassifierResultsV">ClassifierResults</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A classifier&rsquo;s classifications for a given image.</p>
-
-                        <a href="Structs/ClassifierResults.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifierResults</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV314ClassificationV"></a>
-                    <a name="//apple_ref/swift/Struct/Classification" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV314ClassificationV">Classification</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The classification of an image.</p>
-
-                        <a href="Structs/Classification.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Classification</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifiedImages</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
@@ -758,8 +862,13 @@ Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.<
           </section>
         </section>
         <section id="footer">
+<<<<<<< HEAD
           <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+=======
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+>>>>>>> upstream/master
         </section>
       </article>
     </div>

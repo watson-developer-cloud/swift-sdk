@@ -69,6 +69,9 @@
                 <a href="../Structs/ConceptsResult.html">ConceptsResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/DeleteModelResults.html">DeleteModelResults</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/DisambiguationResult.html">DisambiguationResult</a>
               </li>
               <li class="nav-group-task">
@@ -93,10 +96,16 @@
                 <a href="../Structs/EntitiesResult.html">EntitiesResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/EntityMention.html">EntityMention</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/FeatureSentimentResults.html">FeatureSentimentResults</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Features.html">Features</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Feed.html">Feed</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs.html#/s:30NaturalLanguageUnderstandingV111JSONWrapperV">JSONWrapper</a>
@@ -277,9 +286,63 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:30NaturalLanguageUnderstandingV114MetadataResultVACSayAA6AuthorVGSg7authors_SSSg15publicationDateAI5titletcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(authors:publicationDate:title:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV114MetadataResultVACSayAA6AuthorVGSg7authors_SSSg15publicationDateAI5titletcfc">init(authors:publicationDate:title:)</a>
+                    <a name="/s:30NaturalLanguageUnderstandingV114MetadataResultV5imageSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/image" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV114MetadataResultV5imageSSSgv">image</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>URL of a prominent image on the webpage.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV114MetadataResultV5feedsSayAA4FeedVGSgv"></a>
+                    <a name="//apple_ref/swift/Property/feeds" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV114MetadataResultV5feedsSayAA4FeedVGSgv">feeds</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>RSS/ATOM feeds found on the webpage.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">feeds</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Feed.html">Feed</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV114MetadataResultVACSayAA6AuthorVGSg7authors_SSSg15publicationDateAI5titleAI5imageSayAA4FeedVGSg5feedstcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(authors:publicationDate:title:image:feeds:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV114MetadataResultVACSayAA6AuthorVGSg7authors_SSSg15publicationDateAI5titleAI5imageSayAA4FeedVGSg5feedstcfc">init(authors:publicationDate:title:image:feeds:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -294,7 +357,11 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">authors</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Author.html">Author</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">publicationDate</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">authors</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Author.html">Author</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">publicationDate</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">feeds</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Feed.html">Feed</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+>>>>>>> upstream/master
 
                         </div>
                       </div>
@@ -335,6 +402,30 @@
                               <td>
                                 <div>
                                   <p>The title of the document.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>image</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>URL of a prominent image on the webpage.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>feeds</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>RSS/ATOM feeds found on the webpage.</p>
                                 </div>
                               </td>
                             </tr>
@@ -409,8 +500,13 @@
           </section>
         </section>
         <section id="footer">
+<<<<<<< HEAD
           <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+=======
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+>>>>>>> upstream/master
         </section>
       </article>
     </div>

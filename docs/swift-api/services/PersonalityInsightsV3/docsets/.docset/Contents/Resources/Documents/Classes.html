@@ -50,16 +50,25 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/BehaviorNode.html">BehaviorNode</a>
+                <a href="Structs/Behavior.html">Behavior</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/ConsumptionPreferencesCategoryNode.html">ConsumptionPreferencesCategoryNode</a>
+                <a href="Structs/ConsumptionPreferences.html">ConsumptionPreferences</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/ConsumptionPreferencesNode.html">ConsumptionPreferencesNode</a>
+                <a href="Structs/ConsumptionPreferencesCategory.html">ConsumptionPreferencesCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Content.html">Content</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ContentItem.html">ContentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ContentItem/Contenttype.html">– Contenttype</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ContentItem/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs.html#/s:21PersonalityInsightsV311JSONWrapperV">JSONWrapper</a>
@@ -68,10 +77,19 @@
                 <a href="Structs/Profile.html">Profile</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TraitTreeNode.html">TraitTreeNode</a>
+                <a href="Structs/Profile/ProcessedLanguage.html">– ProcessedLanguage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Trait.html">Trait</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Trait/Category.html">– Category</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Warning.html">Warning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Warning/WarningID.html">– WarningID</a>
               </li>
             </ul>
           </li>
@@ -100,9 +118,41 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The Watson Personality Insights service uses linguistic analytics to extract a spectrum
-of cognitive and social characteristics from the text data that a person generates
-through blogs, tweets, forum posts, and more.</p>
+                        <h3 id='service-overview' class='heading'>Service Overview</h3>
+
+<p>The IBM Watson Personality Insights service provides a Representational State Transfer (REST) Application Programming
+Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital
+communications. The service uses linguistic analytics to infer individuals&rsquo; intrinsic personality characteristics,
+including Big Five, Needs, and Values, from digital communications such as email, text messages, tweets, and forum
+posts. The service can automatically infer, from potentially noisy social media, portraits of individuals that reflect
+their personality characteristics. The service can report consumption preferences based on the results of its analysis,
+and for JSON content that is timestamped, it can report temporal behavior.</p>
+<h3 id='api-usage' class='heading'>API Usage</h3>
+
+<p>The following information provides details about using the service to obtain a personality profile:</p>
+
+<ul>
+<li><strong>The profile method:</strong> The service offers a single <code>/v3/profile</code> method that accepts up to 20 MB of input data and
+produces results in JSON or CSV format. The service accepts input in Arabic, English, Japanese, Korean, or Spanish and
+can produce output in a variety of languages.</li>
+<li><strong>Authentication:</strong> You authenticate to the service by using your service credentials. You can use your credentials
+to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
+contact the service directly. See <a href="https://console.bluemix.net/docs/services/watson/getting-started-credentials.html">Service credentials for Watson
+services</a> and <a href="https://console.bluemix.net/docs/services/watson/getting-started-tokens.html">Tokens for
+authentication</a>.</li>
+<li><strong>Request Logging:</strong> By default, all Watson services log requests and their results. Data is collected only to
+improve the Watson services. If you do not want to share your data, set the header parameter
+<code>X-Watson-Learning-Opt-Out</code> to <code>true</code> for each request. Data is collected for any request that omits this header. See
+<a href="https://console.bluemix.net/docs/services/watson/getting-started-logging.html">Controlling request logging for Watson
+services</a>.</li>
+</ul>
+
+<p>For more information about the service, see <a href="https://console.bluemix.net/docs/services/personality-insights/index.html">About Personality
+Insights</a>. For information about calling the
+service and the responses it can generate, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html">Requesting a
+profile</a>, <a href="https://console.bluemix.net/docs/services/personality-insights/output.html">Understanding a JSON
+profile</a>, and <a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">Understanding a CSV
+profile</a>.</p>
 
                         <a href="Classes/PersonalityInsights.html" class="slightly-smaller">See more</a>
                       </div>
@@ -122,8 +172,13 @@ through blogs, tweets, forum posts, and more.</p>
           </section>
         </section>
         <section id="footer">
+<<<<<<< HEAD
           <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+=======
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+>>>>>>> upstream/master
         </section>
       </article>
     </div>

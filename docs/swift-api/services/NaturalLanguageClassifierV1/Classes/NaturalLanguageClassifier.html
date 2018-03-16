@@ -40,9 +40,6 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/ClassifierStatus.html">ClassifierStatus</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Enums/JSON.html">JSON</a>
               </li>
               <li class="nav-group-task">
@@ -60,10 +57,16 @@
                 <a href="../Structs/ClassifiedClass.html">ClassifiedClass</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/ClassifierDetails.html">ClassifierDetails</a>
+                <a href="../Structs/Classifier.html">Classifier</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/ClassifierModel.html">ClassifierModel</a>
+                <a href="../Structs/Classifier/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassifierList.html">ClassifierList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassifyInput.html">ClassifyInput</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs.html#/s:27NaturalLanguageClassifierV111JSONWrapperV">JSONWrapper</a>
@@ -82,11 +85,9 @@
 
                 </div>
               </div>
-            <p>The IBM Watson Natural Language Classifier service enables developers without a background in
-machine learning or statistical algorithms to create natural language interfaces for their
-applications. The service interprets the intent behind text and returns a corresponding
-classification with associated confidence levels. The return value can then be used to trigger
-a corresponding action, such as redirecting the request or answering a question.</p>
+            <p>IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching
+predefined classes for short text input. You create and train a classifier to connect predefined
+classes to example texts so that the service can apply those classes to new inputs.</p>
 
           </section>
           <section class="section task-group-section">
@@ -207,9 +208,9 @@ a corresponding action, such as redirecting the request or answering a question.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C14getClassifiersyys5Error_pcSg7failure_ySayAA0C5ModelVGc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getClassifiers(failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C14getClassifiersyys5Error_pcSg7failure_ySayAA0C5ModelVGc7successtF">getClassifiers(failure:success:)</a>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C8classifyySS12classifierID_SS4textys5Error_pcSg7failureyAA14ClassificationVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/classify(classifierID:text:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C8classifyySS12classifierID_SS4textys5Error_pcSg7failureyAA14ClassificationVc7successtF">classify(classifierID:text:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -217,168 +218,22 @@ a corresponding action, such as redirecting the request or answering a question.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retrieves the list of classifiers for the service instance.</p>
+                        <p>Classify.</p>
+
+<p>Returns label information for the input. The status must be <code>Available</code> before you can use the classifier to classify text. Use <code>Get information about a classifier</code> to retrieve the status.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifiers</span><span class="p">(</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/ClassifierModel.html">ClassifierModel</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the list of available standard and custom models.
-The array is empty if no classifiers are available.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C06createC0y10Foundation3URLV16fromMetadataFile_AG011andTrainingJ0ys5Error_pcSg7failureyAA0C7DetailsVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createClassifier(fromMetadataFile:andTrainingFile:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C06createC0y10Foundation3URLV16fromMetadataFile_AG011andTrainingJ0ys5Error_pcSg7failureyAA0C7DetailsVc7successtF">createClassifier(fromMetadataFile:andTrainingFile:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Sends data to create and train a classifier. When the operation is successful, the status of 
-the classifier is set to <q>Training</q>. The status must be <q>Available</q> before you can use the 
-classifier.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createClassifier</span><span class="p">(</span>
-    <span class="n">fromMetadataFile</span> <span class="nv">trainingMetadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="n">andTrainingFile</span> <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifierDetails.html">ClassifierDetails</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>trainingMetadata</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A file that contains, in JSON form, the user-supplied name for 
-the classifier and the language of the training data.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>trainingData</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The set of questions and their <q>keys</q> used to adapt a system to a 
-domain (the ground truth).</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the list of available standard and custom models.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C8classifyySS_SS04withC2IDys5Error_pcSg7failureyAA14ClassificationVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/classify(_:withClassifierID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C8classifyySS_SS04withC2IDys5Error_pcSg7failureyAA14ClassificationVc7successtF">classify(_:withClassifierID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Uses the provided classifier to assign labels to the input text. The status of the classifier
-must be <q>Available</q> before you can classify calls.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">withClassifierID</span> <span class="nv">classifierId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
+    <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+>>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classification.html">Classification</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -391,24 +246,24 @@ must be <q>Available</q> before you can classify calls.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>classifierID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Classifier ID to use.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>text</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Phrase to classify</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>classifierId</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Classifier ID to use</p>
+                                  <p>The submitted phrase.</p>
                                 </div>
                               </td>
                             </tr>
@@ -432,7 +287,7 @@ must be <q>Available</q> before you can classify calls.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the list of available standard and custom models.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -445,9 +300,9 @@ must be <q>Available</q> before you can classify calls.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C06deleteC0ySS6withID_ys5Error_pcSg7failureyycSg7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteClassifier(withID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C06deleteC0ySS6withID_ys5Error_pcSg7failureyycSg7successtF">deleteClassifier(withID:failure:success:)</a>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C06createC0y10Foundation3URLV8metadata_AG12trainingDatays5Error_pcSg7failureyAA0C0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createClassifier(metadata:trainingData:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C06createC0y10Foundation3URLV8metadata_AG12trainingDatays5Error_pcSg7failureyAA0C0Vc7successtF">createClassifier(metadata:trainingData:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -455,17 +310,213 @@ must be <q>Available</q> before you can classify calls.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Deletes the classifier with the classifierId.</p>
+<<<<<<< HEAD
+                        <p>Sends data to create and train a classifier. When the operation is successful, the status of 
+the classifier is set to <q>Training</q>. The status must be <q>Available</q> before you can use the 
+classifier.</p>
+=======
+                        <p>Create classifier.</p>
+
+<p>Sends data to create and train a classifier and returns information about the new classifier.</p>
+>>>>>>> upstream/master
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createClassifier</span><span class="p">(</span>
+    <span class="n">fromMetadataFile</span> <span class="nv">trainingMetadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">andTrainingFile</span> <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createClassifier</span><span class="p">(</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+>>>>>>> upstream/master
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>metadata</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+<<<<<<< HEAD
+                                  <p>A file that contains, in JSON form, the user-supplied name for 
+the classifier and the language of the training data.</p>
+=======
+                                  <p>Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier. For details, see the <a href="https://www.ibm.com/watson/developercloud/natural-language-classifier/api/v1/#create_classifier">API reference</a>.</p>
+>>>>>>> upstream/master
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+<<<<<<< HEAD
+                                  <p>The set of questions and their <q>keys</q> used to adapt a system to a 
+domain (the ground truth).</p>
+=======
+                                  <p>Training data in CSV format. Each text value must have at least one class. The data can include up to 15,000 records. For details, see <a href="https://www.ibm.com/watson/developercloud/doc/natural-language-classifier/using-your-data.html">Using your own data</a>.</p>
+>>>>>>> upstream/master
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C06deleteC0ySS12classifierID_ys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteClassifier(classifierID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C06deleteC0ySS12classifierID_ys5Error_pcSg7failureyyc7successtF">deleteClassifier(classifierID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete classifier.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withClassifierID</span> <span class="nv">classifierId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
+    <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+>>>>>>> upstream/master
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifierID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Classifier ID to delete.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C03getC0ySS12classifierID_ys5Error_pcSg7failureyAA0C0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getClassifier(classifierID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C03getC0ySS12classifierID_ys5Error_pcSg7failureyAA0C0Vc7successtF">getClassifier(classifierID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get information about a classifier.</p>
+
+<p>Returns status and other information about a classifier.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
     <span class="n">withID</span> <span class="nv">classifierId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifier</span><span class="p">(</span>
+    <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+>>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -476,12 +527,12 @@ must be <q>Available</q> before you can classify calls.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>classifierId</em>
+                                <em>classifierID</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The classifer ID used to delete the classifier</p>
+                                  <p>Classifier ID to query.</p>
                                 </div>
                               </td>
                             </tr>
@@ -505,7 +556,7 @@ must be <q>Available</q> before you can classify calls.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the list of available standard and custom models.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -518,9 +569,9 @@ must be <q>Available</q> before you can classify calls.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C03getC0ySS6withID_ys5Error_pcSg7failureyAA0C7DetailsVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getClassifier(withID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C03getC0ySS6withID_ys5Error_pcSg7failureyAA0C7DetailsVc7successtF">getClassifier(withID:failure:success:)</a>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C15listClassifiersyys5Error_pcSg7failure_yAA0C4ListVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listClassifiers(failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C15listClassifiersyys5Error_pcSg7failure_yAA0C4ListVc7successtF">listClassifiers(failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -528,17 +579,23 @@ must be <q>Available</q> before you can classify calls.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Provides detailed information about the classifier with the user-specified classifierId.</p>
+                        <p>List classifiers.</p>
+
+<p>Returns an empty array if no classifiers are available.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
+<<<<<<< HEAD
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifier</span><span class="p">(</span>
     <span class="n">withID</span> <span class="nv">classifierId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+=======
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassifiers</span><span class="p">(</span>
+>>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifierDetails.html">ClassifierDetails</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifierList.html">ClassifierList</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -546,18 +603,6 @@ must be <q>Available</q> before you can classify calls.</p>
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>classifierId</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The classifer ID used to retrieve the classifier</p>
-                                </div>
-                              </td>
-                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -578,7 +623,7 @@ must be <q>Available</q> before you can classify calls.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the list of available standard and custom models.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -593,8 +638,13 @@ must be <q>Available</q> before you can classify calls.</p>
           </section>
         </section>
         <section id="footer">
+<<<<<<< HEAD
           <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+=======
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+>>>>>>> upstream/master
         </section>
       </article>
     </div>

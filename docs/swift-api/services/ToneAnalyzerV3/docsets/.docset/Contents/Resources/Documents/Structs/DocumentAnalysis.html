@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DocumentAnalysis Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/DocumentAnalysis" class="dashAnchor"></a>
+    <a title="DocumentAnalysis Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        DocumentAnalysis Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/ToneAnalyzer.html">ToneAnalyzer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RestError.html">RestError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentAnalysis.html">DocumentAnalysis</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:14ToneAnalyzerV311JSONWrapperV">JSONWrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SentenceAnalysis.html">SentenceAnalysis</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ToneAnalysis.html">ToneAnalysis</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ToneCategory.html">ToneCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ToneChatInput.html">ToneChatInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ToneChatScore.html">ToneChatScore</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ToneInput.html">ToneInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ToneScore.html">ToneScore</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Utterance.html">Utterance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UtteranceAnalyses.html">UtteranceAnalyses</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UtteranceAnalysis.html">UtteranceAnalysis</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>DocumentAnalysis</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DocumentAnalysis</span></code></pre>
+
+                </div>
+              </div>
+            <p>DocumentAnalysis.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV316DocumentAnalysisV5tonesSayAA0A5ScoreVGSgv"></a>
+                    <a name="//apple_ref/swift/Property/tones" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV316DocumentAnalysisV5tonesSayAA0A5ScoreVGSgv">tones</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>2017-09-21</code>:** An array of <code><a href="../Structs/ToneScore.html">ToneScore</a></code> objects that provides the results of the analysis for each qualifying tone of the document. The array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that meets this threshold. <strong><code>2016-05-19</code>:</strong> Not returned.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ToneScore.html">ToneScore</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV316DocumentAnalysisV14toneCategoriesSayAA0A8CategoryVGSgv"></a>
+                    <a name="//apple_ref/swift/Property/toneCategories" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV316DocumentAnalysisV14toneCategoriesSayAA0A8CategoryVGSgv">toneCategories</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>2017-09-21</code>:** Not returned. <strong><code>2016-05-19</code>:</strong> An array of <code><a href="../Structs/ToneCategory.html">ToneCategory</a></code> objects that provides the results of the tone analysis for the full document of the input content. The service returns results only for the tones specified with the <code><a href="../Structs/DocumentAnalysis.html#/s:14ToneAnalyzerV316DocumentAnalysisV5tonesSayAA0A5ScoreVGSgv">tones</a></code> parameter of the request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">toneCategories</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ToneCategory.html">ToneCategory</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV316DocumentAnalysisV7warningSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/warning" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV316DocumentAnalysisV7warningSSSgv">warning</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>2017-09-21</code>:** A warning message if the overall content exceeds 128 KB or contains more than 1000 sentences. The service analyzes only the first 1000 sentences for document-level analysis and the first 100 sentences for sentence-level analysis. <strong><code>2016-05-19</code>:</strong> Not returned.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">warning</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV316DocumentAnalysisVACSayAA0A5ScoreVGSg5tones_SayAA0A8CategoryVGSg14toneCategoriesSSSg7warningtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(tones:toneCategories:warning:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV316DocumentAnalysisVACSayAA0A5ScoreVGSg5tones_SayAA0A8CategoryVGSg14toneCategoriesSSSg7warningtcfc">init(tones:toneCategories:warning:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a <code>DocumentAnalysis</code> with member variables.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ToneScore.html">ToneScore</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">toneCategories</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ToneCategory.html">ToneCategory</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">warning</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tones</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><strong><code>2017-09-21</code>:</strong> An array of <code><a href="../Structs/ToneScore.html">ToneScore</a></code> objects that provides the results of the analysis for each qualifying tone of the document. The array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that meets this threshold. <strong><code>2016-05-19</code>:</strong> Not returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>toneCategories</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><strong><code>2017-09-21</code>:</strong> Not returned. <strong><code>2016-05-19</code>:</strong> An array of <code><a href="../Structs/ToneCategory.html">ToneCategory</a></code> objects that provides the results of the tone analysis for the full document of the input content. The service returns results only for the tones specified with the <code><a href="../Structs/DocumentAnalysis.html#/s:14ToneAnalyzerV316DocumentAnalysisV5tonesSayAA0A5ScoreVGSgv">tones</a></code> parameter of the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>warning</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><strong><code>2017-09-21</code>:</strong> A warning message if the overall content exceeds 128 KB or contains more than 1000 sentences. The service analyzes only the first 1000 sentences for document-level analysis and the first 100 sentences for sentence-level analysis. <strong><code>2016-05-19</code>:</strong> Not returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>DocumentAnalysis</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9DecodablePxs7Decoder_p4from_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9DecodablePxs7Decoder_p4from_tKcfc">init(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9EncodableP6encodeys7Encoder_p2to_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9EncodableP6encodeys7Encoder_p2to_tKF">encode(to:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

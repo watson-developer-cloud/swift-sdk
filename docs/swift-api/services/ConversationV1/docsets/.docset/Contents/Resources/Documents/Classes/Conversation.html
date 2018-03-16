@@ -51,6 +51,9 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Context.html">Context</a>
               </li>
               <li class="nav-group-task">
@@ -118,6 +121,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNodeNextStep/Selector.html">– Selector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeVisitedDetails.html">DialogNodeVisitedDetails</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Entity.html">Entity</a>
@@ -755,9 +761,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ConversationV10A0C15updateWorkspaceySS11workspaceID_AA06UpdateD0VSg10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateWorkspace(workspaceID:properties:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ConversationV10A0C15updateWorkspaceySS11workspaceID_AA06UpdateD0VSg10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF">updateWorkspace(workspaceID:properties:failure:success:)</a>
+                    <a name="/s:14ConversationV10A0C15updateWorkspaceySS11workspaceID_AA06UpdateD0VSg10propertiesSbSg6appendys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateWorkspace(workspaceID:properties:append:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV10A0C15updateWorkspaceySS11workspaceID_AA06UpdateD0VSg10propertiesSbSg6appendys5Error_pcSg7failureyAA0D0Vc7successtF">updateWorkspace(workspaceID:properties:append:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -777,6 +783,7 @@ in <q>YYYY-MM-DD</q> format.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateWorkspace</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/UpdateWorkspace.html">UpdateWorkspace</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">append</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Workspace.html">Workspace</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -813,6 +820,18 @@ in <q>YYYY-MM-DD</q> format.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>append</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specifies that the elements included in the request body are to be appended to the existing data in the workspace. The default value is <code>false</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -843,9 +862,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ConversationV10A0C7messageySS11workspaceID_AA14MessageRequestVSg7requestys5Error_pcSg7failureyAA0F8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/message(workspaceID:request:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ConversationV10A0C7messageySS11workspaceID_AA14MessageRequestVSg7requestys5Error_pcSg7failureyAA0F8ResponseVc7successtF">message(workspaceID:request:failure:success:)</a>
+                    <a name="/s:14ConversationV10A0C7messageySS11workspaceID_AA14MessageRequestVSg7requestSbSg19nodesVisitedDetailsys5Error_pcSg7failureyAA0F8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/message(workspaceID:request:nodesVisitedDetails:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV10A0C7messageySS11workspaceID_AA14MessageRequestVSg7requestSbSg19nodesVisitedDetailsys5Error_pcSg7failureyAA0F8ResponseVc7successtF">message(workspaceID:request:nodesVisitedDetails:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -863,6 +882,7 @@ in <q>YYYY-MM-DD</q> format.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">message</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageRequest.html">MessageRequest</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">nodesVisitedDetails</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MessageResponse.html">MessageResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -893,6 +913,18 @@ in <q>YYYY-MM-DD</q> format.</p>
                               <td>
                                 <div>
                                   <p>The user&rsquo;s input, with optional intents, entities, and other properties from the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>nodesVisitedDetails</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include additional diagnostic information about the dialog nodes that were visited during processing of the message.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4271,6 +4303,120 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:14ConversationV10A0C11listAllLogsySS6filter_SSSg4sortSiSg9pageLimitAF6cursorys5Error_pcSg7failureyAA13LogCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listAllLogs(filter:sort:pageLimit:cursor:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV10A0C11listAllLogsySS6filter_SSSg4sortSiSg9pageLimitAF6cursorys5Error_pcSg7failureyAA13LogCollectionVc7successtF">listAllLogs(filter:sort:pageLimit:cursor:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List log events in all workspaces.</p>
+
+<p>List log events in all workspaces in the service instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listAllLogs</span><span class="p">(</span>
+    <span class="nv">filter</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/LogCollection.html">LogCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter query that includes a value for <code>language</code>, as well as a value for <code>workspace_id</code> or <code>request.context.metadata.deployment</code>. For more information, see the <a href="https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax">documentation</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sort</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Sorts the response according to the value of the specified property, in ascending or descending order.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pageLimit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of records to return in each page of results. The default page limit is 100.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cursor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A token identifying the last value from the previous page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:14ConversationV10A0C8listLogsySS11workspaceID_SSSg4sortAF6filterSiSg9pageLimitAF6cursorys5Error_pcSg7failureyAA13LogCollectionVc7successtF"></a>
                     <a name="//apple_ref/swift/Method/listLogs(workspaceID:sort:filter:pageLimit:cursor:failure:success:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:14ConversationV10A0C8listLogsySS11workspaceID_SSSg4sortAF6filterSiSg9pageLimitAF6cursorys5Error_pcSg7failureyAA13LogCollectionVc7successtF">listLogs(workspaceID:sort:filter:pageLimit:cursor:failure:success:)</a>
@@ -4892,7 +5038,7 @@ in <q>YYYY-MM-DD</q> format.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-17)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

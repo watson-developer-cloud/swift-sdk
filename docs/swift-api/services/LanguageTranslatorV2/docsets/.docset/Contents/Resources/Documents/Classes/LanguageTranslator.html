@@ -45,34 +45,46 @@
               <li class="nav-group-task">
                 <a href="../Enums/RestError.html">RestError</a>
               </li>
-              <li class="nav-group-task">
-                <a href="../Enums/TrainingStatus.html">TrainingStatus</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/DeleteModelResult.html">DeleteModelResult</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/IdentifiableLanguage.html">IdentifiableLanguage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IdentifiableLanguages.html">IdentifiableLanguages</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/IdentifiedLanguage.html">IdentifiedLanguage</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/IdentifiedLanguages.html">IdentifiedLanguages</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs.html#/s:20LanguageTranslatorV211JSONWrapperV">JSONWrapper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/MonitorTraining.html">MonitorTraining</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/TranslateResponse.html">TranslateResponse</a>
+                <a href="../Structs/TranslateRequest.html">TranslateRequest</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Translation.html">Translation</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TranslationModel.html">TranslationModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TranslationModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TranslationModels.html">TranslationModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TranslationResult.html">TranslationResult</a>
               </li>
             </ul>
           </li>
@@ -88,9 +100,10 @@
 
                 </div>
               </div>
-            <p>The Watson Language Translator service provides domain-specific translation utilizing
-Statistical Machine Translation techniques that have been perfected in our research labs
-over the past few decades.</p>
+            <p>Language Translator translates text from one language to another. The service offers multiple
+domain-specific models that you can customize based on your unique terminology and language. Use
+Language Translator to take news from across the globe and present it in your language,
+communicate with your customers in their own language, and more.</p>
 
           </section>
           <section class="section task-group-section">
@@ -208,23 +221,12 @@ over the past few decades.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Models"></a>
-                <a name="//apple_ref/swift/Section/Models" class="dashAnchor"></a>
-                <a href="#/Models">
-                  <h3 class="section-name">Models</h3>
-                </a>
-              </div>
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C9getModelsySSSg06sourceA0_AE06targetA0SbSg07defaultE4Onlyys5Error_pcSg7failureySayAA16TranslationModelVGc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getModels(sourceLanguage:targetLanguage:defaultModelsOnly:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C9getModelsySSSg06sourceA0_AE06targetA0SbSg07defaultE4Onlyys5Error_pcSg7failureySayAA16TranslationModelVGc7successtF">getModels(sourceLanguage:targetLanguage:defaultModelsOnly:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C9translateyAA16TranslateRequestV7request_ys5Error_pcSg7failureyAA17TranslationResultVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/translate(request:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C9translateyAA16TranslateRequestV7request_ys5Error_pcSg7failureyAA17TranslationResultVc7successtF">translate(request:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -232,19 +234,17 @@ over the past few decades.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>List the available standard and custom models.</p>
+                        <p>Translates the input text from the source language to the target language.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getModels</span><span class="p">(</span>
-    <span class="nv">sourceLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">targetLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="n">defaultModelsOnly</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">translate</span><span class="p">(</span>
+    <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Structs/TranslateRequest.html">TranslateRequest</a></span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/TranslationModel.html">TranslationModel</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationResult.html">TranslationResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -255,36 +255,12 @@ over the past few decades.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>sourceLanguage</em>
+                                <em>request</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Filter models by a source language.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>targetLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Filter models by a target language.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>defaultModelsOnly</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Specify <code>true</code> to filter models by whether they are default.</p>
+                                  <p>The translate request containing the text, with optional source, target, and model_id.</p>
                                 </div>
                               </td>
                             </tr>
@@ -308,7 +284,7 @@ over the past few decades.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the list of available standard and custom models.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -321,9 +297,9 @@ over the past few decades.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C11createModelySS08fromBaseE2ID_10Foundation3URLV12withGlossarySSSg4nameys5Error_pcSg7failureySSc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createModel(fromBaseModelID:withGlossary:name:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C11createModelySS08fromBaseE2ID_10Foundation3URLV12withGlossarySSSg4nameys5Error_pcSg7failureySSc7successtF">createModel(fromBaseModelID:withGlossary:name:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C8identifyySS4text_ys5Error_pcSg7failureyAA19IdentifiedLanguagesVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/identify(text:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C8identifyySS4text_ys5Error_pcSg7failureyAA19IdentifiedLanguagesVc7successtF">identify(text:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -331,23 +307,17 @@ over the past few decades.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Create a custom language translator model by uploading a TMX glossary file.</p>
-
-<p>Depending on the size of the file, training can range from minutes for a glossary to several
-hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file
-size of all uploaded glossary and corpus files is limited to 250 MB.</p>
+                        <p>Identifies the language of the input text.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createModel</span><span class="p">(</span>
-    <span class="n">fromBaseModelID</span> <span class="nv">baseModelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">withGlossary</span> <span class="nv">forcedGlossary</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">identify</span><span class="p">(</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IdentifiedLanguages.html">IdentifiedLanguages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -358,25 +328,153 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>fromBaseModelID</em>
+                                <em>text</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Specifies the domain model that is used as the base for the training.</p>
+                                  <p>Input text in UTF-8 format.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>withGlossary</em>
+                                <em>failure</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A TMX file with your customizations. Anything that is specified in
-   this file completely overwrites the domain data translation. You can upload only one</p>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:20LanguageTranslatorV20aB0C25listIdentifiableLanguagesyys5Error_pcSg7failure_yAA0eF0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listIdentifiableLanguages(failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C25listIdentifiableLanguagesyys5Error_pcSg7failure_yAA0eF0Vc7successtF">listIdentifiableLanguages(failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Lists all languages that can be identified by the API.</p>
+
+<p>Lists all languages that the service can identify. Returns the two-letter code (for example, <code>en</code> for English or <code>es</code> for Spanish) and name of each language.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listIdentifiableLanguages</span><span class="p">(</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IdentifiableLanguages.html">IdentifiableLanguages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:20LanguageTranslatorV20aB0C11createModelySS04baseE2ID_SSSg4name10Foundation3URLVSg14forcedGlossaryAK14parallelCorpusAK011monolingualN0ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createModel(baseModelID:name:forcedGlossary:parallelCorpus:monolingualCorpus:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C11createModelySS04baseE2ID_SSSg4name10Foundation3URLVSg14forcedGlossaryAK14parallelCorpusAK011monolingualN0ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF">createModel(baseModelID:name:forcedGlossary:parallelCorpus:monolingualCorpus:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Uploads a TMX glossary file on top of a domain to customize a translation model.</p>
+
+<p>Depending on the size of the file, training can range from minutes for a glossary to several hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded glossary and corpus files is limited to 250 MB.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createModel</span><span class="p">(</span>
+    <span class="nv">baseModelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">forcedGlossary</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">parallelCorpus</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">monolingualCorpus</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModel.html">TranslationModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>baseModelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specifies the domain model that is used as the base for the training. To see current supported domain models, use the GET /v2/models parameter.</p>
                                 </div>
                               </td>
                             </tr>
@@ -388,8 +486,43 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The model name. Valid characters are letters, numbers, -, and _. No spaces.
-   glossary with a file size less than 10 MB per call.</p>
+                                  <p>The model name. Valid characters are letters, numbers, -, and _. No spaces.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forcedGlossary</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A TMX file with your customizations. The customizations in the file completely overwrite the domain data translation, including high frequency or high confidence phrase translations. You can upload only one glossary with a file size less than 10 MB per call.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>parallelCorpus</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A TMX file that contains entries that are treated as a parallel corpus instead of a glossary.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>monolingualCorpus</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A UTF-8 encoded plain text file that is used to customize the target language model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -413,7 +546,7 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the modelID of the created model.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -426,9 +559,9 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C11deleteModelySS6withID_ys5Error_pcSg7failureyycSg7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteModel(withID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C11deleteModelySS6withID_ys5Error_pcSg7failureyycSg7successtF">deleteModel(withID:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C11deleteModelySS7modelID_ys5Error_pcSg7failureyAA06DeleteE6ResultVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteModel(modelID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C11deleteModelySS7modelID_ys5Error_pcSg7failureyAA06DeleteE6ResultVc7successtF">deleteModel(modelID:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -436,7 +569,7 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Delete a trained translation model.</p>
+                        <p>Deletes a custom translation model.</p>
 
                       </div>
                       <div class="declaration">
@@ -444,9 +577,9 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteModel</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeleteModelResult.html">DeleteModelResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -457,12 +590,12 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>withID</em>
+                                <em>modelID</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The translation model&rsquo;s identifier.</p>
+                                  <p>The model identifier.</p>
                                 </div>
                               </td>
                             </tr>
@@ -486,7 +619,7 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed after the given model has been deleted.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -499,9 +632,9 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C8getModelySS6withID_ys5Error_pcSg7failureyAA15MonitorTrainingVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getModel(withID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C8getModelySS6withID_ys5Error_pcSg7failureyAA15MonitorTrainingVc7successtF">getModel(withID:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C8getModelySS7modelID_ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getModel(modelID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C8getModelySS7modelID_ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF">getModel(modelID:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -517,9 +650,9 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getModel</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MonitorTraining.html">MonitorTraining</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModel.html">TranslationModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -530,12 +663,12 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>withID</em>
+                                <em>modelID</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The translation model&rsquo;s identifier.</p>
+                                  <p>Model ID to use.</p>
                                 </div>
                               </td>
                             </tr>
@@ -559,106 +692,7 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the retrieved information about the model.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Translate"></a>
-                <a name="//apple_ref/swift/Section/Translate" class="dashAnchor"></a>
-                <a href="#/Translate">
-                  <h3 class="section-name">Translate</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C9translateySS_SS11withModelIDys5Error_pcSg7failureyAA17TranslateResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/translate(_:withModelID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C9translateySS_SS11withModelIDys5Error_pcSg7failureyAA17TranslateResponseVc7successtF">translate(_:withModelID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Translate text from a source language to a target language.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">translate</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">withModelID</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslateResponse.html">TranslateResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>text</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The text to translate.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>withModelID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The unique model id of the translation model that shall be used to
-   translate the text. The model id inherently specifies the source, target language, and
-   domain.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the translation.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -671,9 +705,9 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C9translateySaySSG_SS11withModelIDys5Error_pcSg7failureyAA17TranslateResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/translate(_:withModelID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C9translateySaySSG_SS11withModelIDys5Error_pcSg7failureyAA17TranslateResponseVc7successtF">translate(_:withModelID:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C10listModelsySSSg6source_AE6targetSbSg07defaultE0ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listModels(source:target:defaultModels:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C10listModelsySSSg6source_AE6targetSbSg07defaultE0ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF">listModels(source:target:defaultModels:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -681,18 +715,19 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Translate text from a source language to a target language.</p>
+                        <p>Lists available standard and custom models by source or target language.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">translate</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span>
-    <span class="n">withModelID</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listModels</span><span class="p">(</span>
+    <span class="nv">source</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">defaultModels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslateResponse.html">TranslateResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModels.html">TranslationModels</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -703,26 +738,36 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>text</em>
+                                <em>source</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The text to translate.</p>
+                                  <p>Filter models by source language.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>withModelID</em>
+                                <em>target</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The unique model id of the translation model that shall be used to
-   translate the text. The model id inherently specifies the source, target language, and
-   domain.</p>
+                                  <p>Filter models by target language.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>defaultModels</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Valid values are leaving it unset, <code>true</code>, and <code>false</code>. When <code>true</code>, it filters models to return the defaultModels model or models. When <code>false</code>, it returns the non-defaultModels model or models. If not set, it returns all models, defaultModels and non-defaultModels.</p>
                                 </div>
                               </td>
                             </tr>
@@ -746,353 +791,7 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the translation.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C9translateySS_SS4fromSS2toys5Error_pcSg7failureyAA17TranslateResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/translate(_:from:to:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C9translateySS_SS4fromSS2toys5Error_pcSg7failureyAA17TranslateResponseVc7successtF">translate(_:from:to:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Translate text from a source language to a target language.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">translate</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">from</span> <span class="nv">sourceLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">to</span> <span class="nv">targetLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslateResponse.html">TranslateResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>text</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The text to translate.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>from</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The source language in 2 or 5 letter language code. Use 2 letter codes
-   except when clarifying between multiple supported languages.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>to</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The target language in 2 or 5 letter language code. Use 2 letter codes
-   except when clarifying between multiple supported languages.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the translation.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C9translateySaySSG_SS4fromSS2toys5Error_pcSg7failureyAA17TranslateResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/translate(_:from:to:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C9translateySaySSG_SS4fromSS2toys5Error_pcSg7failureyAA17TranslateResponseVc7successtF">translate(_:from:to:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Translate text from a source language to a target language.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">translate</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span>
-    <span class="n">from</span> <span class="nv">sourceLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">to</span> <span class="nv">targetLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslateResponse.html">TranslateResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>text</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The text to translate.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>from</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The source language in 2 or 5 letter language code. Use 2 letter codes
-   except when clarifying between multiple supported languages.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>to</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The target language in 2 or 5 letter language code. Use 2 letter codes
-   except when clarifying between multiple supported languages.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the translation.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Identify"></a>
-                <a name="//apple_ref/swift/Section/Identify" class="dashAnchor"></a>
-                <a href="#/Identify">
-                  <h3 class="section-name">Identify</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C24getIdentifiableLanguagesyys5Error_pcSg7failure_ySayAA0eA0VGc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getIdentifiableLanguages(failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C24getIdentifiableLanguagesyys5Error_pcSg7failure_ySayAA0eA0VGc7successtF">getIdentifiableLanguages(failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get a list of all languages that can be identified.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getIdentifiableLanguages</span><span class="p">(</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/IdentifiableLanguage.html">IdentifiableLanguage</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the list of all languages that can be identified.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C8identifyySS10languageOf_ys5Error_pcSg7failureySayAA010IdentifiedA0VGc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/identify(languageOf:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C8identifyySS10languageOf_ys5Error_pcSg7failureySayAA010IdentifiedA0VGc7successtF">identify(languageOf:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Identify the language of the given text.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">identify</span><span class="p">(</span>
-    <span class="n">languageOf</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/IdentifiedLanguage.html">IdentifiedLanguage</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>languageOf</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The text whose language shall be identified.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with all identified languages in the given text.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1107,7 +806,7 @@ size of all uploaded glossary and corpus files is limited to 250 MB.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-17)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

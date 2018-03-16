@@ -108,7 +108,7 @@
             <h1>TextToSpeech</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TextToSpeech</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TextToSpeech</span></code></pre>
 
                 </div>
               </div>
@@ -224,7 +224,7 @@ Speech</a>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://stream.watsonplatform.net/text-to-speech/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://stream.watsonplatform.net/text-to-speech/api"</span></code></pre>
 
                         </div>
                       </div>
@@ -251,7 +251,7 @@ Speech</a>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
 
                         </div>
                       </div>
@@ -278,7 +278,7 @@ Speech</a>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -340,13 +340,9 @@ to see a list of all available voices.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVoices</span><span class="p">(</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVoice</span><span class="p">(</span>
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Voice.html">Voice</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -433,13 +429,7 @@ to see a list of all available voices.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVoice</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVoices</span><span class="p">(</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Voices.html">Voices</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -510,14 +500,9 @@ reference</a>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getPronunciation</span><span class="p">(</span>
-    <span class="n">of</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">synthesize</span><span class="p">(</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">accept</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -632,13 +617,8 @@ voice model.   <strong>Note:</strong> This method is currently a beta release.</
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">synthesize</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getPronunciation</span><span class="p">(</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -752,12 +732,8 @@ used to create it.   <strong>Note:</strong> This method is currently a beta rele
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCustomizations</span><span class="p">(</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createVoiceModel</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -825,12 +801,7 @@ used to create it.   <strong>Note:</strong> This method is currently a beta rele
                               </td>
                               <td>
                                 <div>
-<<<<<<< HEAD
-                                  <p>A function executed with an array of information about your custom voice 
-   models.</p>
-=======
                                   <p>A function executed with the successful result.</p>
->>>>>>> upstream/master
                                 </div>
                               </td>
                             </tr>
@@ -863,15 +834,8 @@ the service that owns a model to delete it.   <strong>Note:</strong> This method
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCustomization</span><span class="p">(</span>
-    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteVoiceModel</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -949,13 +913,8 @@ method. You must use credentials for the instance of the service that owns a mod
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCustomization</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVoiceModel</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1033,13 +992,8 @@ service that owns a model to list information about it.   <strong>Note:</strong>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCustomization</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVoiceModels</span><span class="p">(</span>
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/VoiceModels.html">VoiceModels</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1106,29 +1060,19 @@ service that owns a model to list information about it.   <strong>Note:</strong>
                       <div class="abstract">
                         <p>Updates information and words for a custom voice model.</p>
 
-<<<<<<< HEAD
-<p>You can update metadata of the custom voice model, such as the name and description of the 
-voice model. You can also update or add words and translations in the model.</p>
-=======
 <p>Updates information for the custom voice model with the specified <code>customization_id</code>. You can update the metadata
 such as the name and description of the voice model. You can also update the words in the model and their
 translations. Adding a new translation for a word that already exists in a custom model overwrites the word&rsquo;s
 existing translation. A custom model can contain no more than 20,000 entries. You must use credentials for the
 instance of the service that owns a model to update it.   <strong>Note:</strong> This method is currently a beta release.</p>
->>>>>>> upstream/master
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateCustomization</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateVoiceModel</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Word.html">Word</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1244,16 +1188,11 @@ owns a model to add a word to it.   <strong>Note:</strong> This method is curren
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getWords</span><span class="p">(</span>
-    <span class="n">forCustomizationID</span> <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addWord</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">translation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">partOfSpeech</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1366,15 +1305,9 @@ the service that owns a model to add words to it.   <strong>Note:</strong> This 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addWords</span><span class="p">(</span>
-    <span class="n">toCustomizationID</span> <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">fromArray</span> <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Word.html">Word</a></span><span class="p">],</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addWords</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Word.html">Word</a></span><span class="p">],</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1462,15 +1395,9 @@ release.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteWord</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">fromCustomizationID</span> <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteWord</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1558,15 +1485,9 @@ owns a model to query information about its words.   <strong>Note:</strong> This
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getTranslation</span><span class="p">(</span>
-    <span class="k">for</span> <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">withCustomizationID</span> <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getWord</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Translation.html">Translation</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1655,15 +1576,8 @@ release.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addWord</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">toCustomizationID</span> <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">withTranslation</span> <span class="nv">translation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listWords</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Words.html">Words</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1720,13 +1634,8 @@ release.</p>
           </section>
         </section>
         <section id="footer">
-<<<<<<< HEAD
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-=======
           <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
->>>>>>> upstream/master
         </section>
       </article>
     </div>

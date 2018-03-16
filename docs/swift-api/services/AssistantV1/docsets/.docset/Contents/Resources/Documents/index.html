@@ -300,7 +300,7 @@
 <img src="https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat" alt="">
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
 <a href="http://watson-developer-cloud.github.io/swift-sdk"><img src="https://img.shields.io/badge/Documentation-API-blue.svg" alt="Documentation"></a>
-<a href="https://cla-assistant.io/watson-developer-cloud/swift-sdk"><img src="https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk" alt="CLA assistant"></a></p>
+<a href="https://cla-assistant.io/watson-developer-cloud/swift-sdk"><img src="https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk" alt="CLA assistant"></a></p>
 <h2 id='overview' class='heading'>Overview</h2>
 
 <p>The Watson Developer Cloud Swift SDK makes it easy for mobile developers to build Watson-powered applications. With the Swift SDK you can leverage the power of Watson&rsquo;s advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.</p>
@@ -334,7 +334,6 @@
 <ul>
 <li><a href="#assistant">Assistant</a></li>
 <li><a href="#discovery">Discovery</a></li>
-<li><a href="#document-conversion">Document Conversion</a></li>
 <li><a href="#language-translator">Language Translator</a></li>
 <li><a href="#natural-language-classifier">Natural Language Classifier</a></li>
 <li><a href="#natural-language-understanding">Natural Language Understanding</a></li>
@@ -375,7 +374,7 @@
 <pre class="highlight shell"><code><span class="gp">$ </span>carthage update --platform iOS
 </code></pre>
 
-<p>Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired.</p>
+<p>Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired. If you are using Speech to Text, be sure to include both <code>SpeechToTextV1.framework</code> and <code>Starscream.framework</code> in your application.</p>
 <h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
 
 <p>To include the Watson SDK to your projects, add the following to your <code>Package.swift</code> file:</p>
@@ -388,12 +387,12 @@
 <p>To build the project, run <code>swift build</code> from the command line.</p>
 <h2 id='service-instances' class='heading'>Service Instances</h2>
 
-<p><a href="https://www.ibm.com/watson/developercloud/">IBM Watson Developer Cloud</a> offers a variety of services for developing cognitive applications. The complete list of Watson Developer Cloud services is available from the <a href="https://www.ibm.com/watson/developercloud/services-catalog.html">services catalog</a>. Services are instantiated using the <a href="http://www.ibm.com/cloud-computing/bluemix/">IBM Bluemix</a> cloud platform.</p>
+<p><a href="https://www.ibm.com/watson/developer/">IBM Watson</a> offers a variety of services for developing cognitive applications. The complete list of Watson services is available from the <a href="https://www.ibm.com/watson/products-services/">products and services</a> page. Services are instantiated using the <a href="https://www.ibm.com/cloud/">IBM Cloud</a> platform.</p>
 
 <p>Follow these steps to create a service instance and obtain its credentials:</p>
 
 <ol>
-<li>Log in to Bluemix at <a href="https://bluemix.net">https://bluemix.net</a>.</li>
+<li>Log in to IBM Cloud at <a href="https://bluemix.net">https://bluemix.net</a>.</li>
 <li>Create a service instance:
 
 <ol>
@@ -405,7 +404,7 @@
 
 <ol>
 <li>Click <q>Service Credentials</q> on the left side of the page.</li>
-<li>Copy the service&rsquo;s <code>username</code> and <code>password</code> (or <code>api_key</code> for Alchemy).</li>
+<li>Copy the service&rsquo;s <code>username</code> and <code>password</code> (or <code>api_key</code> for Visual Recognition).</li>
 </ol></li>
 </ol>
 
@@ -413,9 +412,9 @@
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">textToSpeech</span> <span class="o">=</span> <span class="kt">TextToSpeech</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">)</span>
 </code></pre>
 
-<p>Note that service credentials are different from your Bluemix username and password.</p>
+<p>Note that service credentials are different from your IBM Cloud username and password.</p>
 
-<p>See <a href="https://console.bluemix.net/docs/services/watson/index.html">Getting Started</a> for more information on getting started with the Watson Developer Cloud and Bluemix.</p>
+<p>See <a href="https://console.bluemix.net/docs/services/watson/index.html">Getting started with Watson and IBM Cloud</a> for details.</p>
 <h2 id='custom-service-urls' class='heading'>Custom Service URLs</h2>
 
 <p>You can set a custom service URL by modifying the <code>serviceURL</code> property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.</p>
@@ -461,85 +460,22 @@
 <p>Please see <a href="docs/objective-c.md">this tutorial</a> for more information about consuming the Watson Developer Cloud Swift SDK in an Objective-C application.</p>
 <h2 id='linux-compatibility' class='heading'>Linux Compatibility</h2>
 
-<p>The following services offer basic support in Linux: Conversation, Language Translator, Natural Language Classifier, Personality Insights V3, Tone Analyzer, and Tradeoff Analytics. Please note some services are not yet fully supported such as Alchemy Language, Alchemy Data News, Document Conversion, Text to Speech, Speech to Text, and Visual Recognition.</p>
-
-<p>To include the Watson SDK to your Linux projects, please follow the <a href="#swift-package-manager">Swift Package Manager instructions.</a></p>
+<p>To use the Watson SDK in your Linux project, please follow the <a href="#swift-package-manager">Swift Package Manager instructions.</a>. Note that Speech to Text and Text to Speech are not supported because they rely on frameworks that are unavailable on Linux.</p>
 <h2 id='contributing' class='heading'>Contributing</h2>
 
-<p>We would love any and all help! If you would like to contribute, please read our <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a> documentation with information on getting started.</p>
+<p>We would love any and all help! If you would like to contribute, please read our <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a> documentation with information on getting started.</p>
 <h2 id='license' class='heading'>License</h2>
 
 <p>This library is licensed under Apache 2.0. Full license text is
-available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE">LICENSE</a>.</p>
+available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/master/LICENSE">LICENSE</a>.</p>
 
 <p>This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.</p>
 <h2 id='assistant' class='heading'>Assistant</h2>
 
 <p>With the IBM Watson Assistant service you can create cognitive agents&ndash;virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.</p>
 
-<<<<<<< HEAD:docs/swift-api/services/PersonalityInsightsV2/index.html
-<p>The following links provide more information about the IBM AlchemyData News service:</p>
-
-<ul>
-<li><a href="https://www.ibm.com/watson/developercloud/alchemy-data-news.html">IBM AlchemyData News - Service Page</a></li>
-<li><a href="http://docs.alchemyapi.com/">IBM AlchemyData News - Documentation</a></li>
-<li><a href="http://querybuilder.alchemyapi.com/builder">IBM AlchemyData News - Demo</a></li>
-</ul>
-<h2 id='alchemylanguage' class='heading'>AlchemyLanguage</h2>
-
-<p>AlchemyLanguage is a collection of text analysis functions that derive semantic information from your content. You can input text, HTML, or a public URL and leverage sophisticated natural language processing techniques to get a quick high-level understanding of your content and obtain detailed insights such as directional sentiment from entity to object.</p>
-
-<p>AlchemyLanguage has a number of features, including:</p>
-<li>Entity Extraction</li>
-<li>Sentiment Analysis</li>
-<div class="aside aside-keyword">
-    <p class="aside-title">Keyword</p>
-    Keyword Extraction
-
-</div>
-<li>Concept Tagging</li>
-<li>Relation Extraction</li>
-<li>Taxonomy Classification</li>
-<div class="aside aside-author">
-    <p class="aside-title">Author</p>
-    Author Extraction
-
-</div>
-<li>Language Detection</li>
-<li>Text Extraction</li>
-<li>Microformats Parsing</li>
-<li>Feed Detection</li>
-
-<p>The following example demonstrates how to use the AlchemyLanguage service:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">AlchemyLanguageV1</span>
-
-<span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-apikey-here"</span>
-<span class="k">let</span> <span class="nv">alchemyLanguage</span> <span class="o">=</span> <span class="kt">AlchemyLanguage</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
-
-<span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">alchemyLanguage</span><span class="o">.</span><span class="nf">getTextSentiment</span><span class="p">(</span><span class="nv">fromContentAtURL</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">sentiment</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">sentiment</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>The following links provide more information about the IBM AlchemyLanguage service:</p>
-
-<ul>
-<li><a href="http://www.ibm.com/watson/developercloud/alchemy-language.html">IBM AlchemyLanguage - Service Page</a></li>
-<li><a href="http://www.ibm.com/watson/developercloud/doc/alchemylanguage/">IBM AlchemyLanguage - Documentation</a></li>
-<li><a href="https://alchemy-language-demo.mybluemix.net/">IBM AlchemyLanguage - Demo</a></li>
-</ul>
-<h2 id='conversation' class='heading'>Conversation</h2>
-
-<p>With the IBM Watson Conversation service you can create cognitive agents&ndash;virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.</p>
-
-<p>The following example shows how to start a conversation with the Conversation service:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">ConversationV1</span>
-=======
 <p>The following example shows how to start a conversation with the Assistant service:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">AssistantV1</span>
->>>>>>> upstream/master:docs/swift-api/services/AssistantV1/docsets/.docset/Contents/Resources/Documents/index.html
 
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
@@ -729,46 +665,11 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Discovery service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/discovery.html">IBM Discovery - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/discovery/">IBM Discovery - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/discovery/index.html">IBM Discovery - Documentation</a></li>
 <li><a href="https://www.ibm.com/watson/developercloud/discovery/api/v1/">IBM Discovery - API Reference</a></li>
 <li><a href="https://watson-api-explorer.mybluemix.net/apis/discovery-v1">IBM Discovery - API Explorer</a></li>
 <li><a href="https://console.bluemix.net/docs/services/discovery/query-reference.html#query-building">IBM Discovery - Query Building</a></li>
-</ul>
-<h2 id='document-conversion' class='heading'>Document Conversion</h2>
-
-<p>The IBM Watson Document Conversion Service converts a single HTML, PDF, or Microsoft Word™ document. The input document is transformed into normalized HTML, plain text, or a set of JSON-formatted Answer units that can be used with other Watson services, like the Watson Retrieve and Rank Service.</p>
-
-<p>The following example demonstrates how to convert a document with the Document Conversation service:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">DocumentConversionV1</span>
-
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"2015-12-15"</span>
-<span class="k">let</span> <span class="nv">documentConversion</span> <span class="o">=</span> <span class="kt">DocumentConversion</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
-
-<span class="c1">// load document</span>
-<span class="k">let</span> <span class="nv">filename</span> <span class="o">=</span> <span class="s">"your-document-filename"</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">document</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"xml"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to locate document."</span><span class="p">)</span>
-    <span class="k">return</span>
-<span class="p">}</span>
-
-<span class="c1">// convert document</span>
-<span class="k">let</span> <span class="nv">config</span> <span class="o">=</span> <span class="k">try!</span> <span class="n">documentConversion</span><span class="o">.</span><span class="nf">writeConfig</span><span class="p">(</span><span class="nv">type</span><span class="p">:</span> <span class="kt">ReturnType</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">documentConversion</span><span class="o">.</span><span class="nf">convertDocument</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="nv">withConfigurationFile</span><span class="p">:</span> <span class="n">config</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">text</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>The following links provide more information about the IBM Document Conversion service:</p>
-
-<ul>
-<li><a href="http://www.ibm.com/watson/developercloud/document-conversion.html">IBM Watson Document Conversion - Service Page</a></li>
-<li><a href="https://console.bluemix.net/docs/services/document-conversion/index.html">IBM Watson Document Conversion - Documentation</a></li>
-<li><a href="https://document-conversion-demo.mybluemix.net/">IBM Watson Document Conversion - Demo</a></li>
 </ul>
 <h2 id='language-translator' class='heading'>Language Translator</h2>
 
@@ -796,9 +697,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Watson Language Translator service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/language-translator.html">IBM Watson Language Translator - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/language-translator/">IBM Watson Language Translator - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/language-translator/index.html">IBM Watson Language Translator - Documentation</a></li>
-<li><a href="https://language-translator-demo.mybluemix.net/">IBM Watson Language Translator - Demo</a></li>
+<li><a href="https://language-translator-demo.ng.bluemix.net/">IBM Watson Language Translator - Demo</a></li>
 </ul>
 <h2 id='natural-language-classifier' class='heading'>Natural Language Classifier</h2>
 
@@ -823,9 +724,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the Natural Language Classifier service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/nl-classifier.html">IBM Watson Natural Language Classifier - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/natural-language-classifier/">IBM Watson Natural Language Classifier - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/natural-language-classifier/natural-language-classifier-overview.html">IBM Watson Natural Language Classifier - Documentation</a></li>
-<li><a href="https://natural-language-classifier-demo.mybluemix.net/">IBM Watson Natural Language Classifier - Demo</a></li>
+<li><a href="https://natural-language-classifier-demo.ng.bluemix.net/">IBM Watson Natural Language Classifier - Demo</a></li>
 </ul>
 <h2 id='natural-language-understanding' class='heading'>Natural Language Understanding</h2>
 
@@ -872,9 +773,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the Natural Language Understanding service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/natural-language-understanding.html">IBM Watson Natural Language Understanding - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/natural-language-understanding/">IBM Watson Natural Language Understanding - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/natural-language-understanding/index.html">IBM Watson Natural Language Understanding - Documentation</a></li>
-<li><a href="http://natural-language-understanding-demo.mybluemix.net">IBM Watson Natural Language Understanding - Demo</a></li>
+<li><a href="https://natural-language-understanding-demo.ng.bluemix.net/">IBM Watson Natural Language Understanding - Demo</a></li>
 </ul>
 <h2 id='personality-insights' class='heading'>Personality Insights</h2>
 
@@ -898,134 +799,17 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the Personality Insights service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/personality-insights.html">IBM Watson Personality Insights - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/personality-insights/">IBM Watson Personality Insights - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/personality-insights/index.html">IBM Watson Personality Insights - Documentation</a></li>
-<li><a href="https://personality-insights-livedemo.mybluemix.net">IBM Watson Personality Insights - Demo</a></li>
+<li><a href="https://personality-insights-demo.ng.bluemix.net/">IBM Watson Personality Insights - Demo</a></li>
 </ul>
-<<<<<<< HEAD:docs/swift-api/services/PersonalityInsightsV2/index.html
-<h2 id='retrieve-and-rank' class='heading'>Retrieve and Rank</h2>
-
-<p>The IBM Watson Retrieve and Rank service combines Apache Solr and a machine learning algorithm, two information retrieval components, into a single service in order to provide users with the most relevant search information.</p>
-
-<p>The following example demonstrates how to instantiate a <code>Retrieve and Rank</code> object.</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RetrieveAndRankV1</span>
-
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">retrieveAndRank</span> <span class="o">=</span> <span class="kt">RetrieveAndRank</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
-</code></pre>
-
-<p>The following example demonstrates how to create a Solr Cluster, configuration, and collection.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-
-<span class="c1">// Create and store the Solr Cluster so you can access it later.</span>
-<span class="k">var</span> <span class="nv">cluster</span><span class="p">:</span> <span class="kt">SolrCluster</span><span class="o">!</span>
-<span class="k">let</span> <span class="nv">clusterName</span> <span class="o">=</span> <span class="s">"your-cluster-name-here"</span>
-<span class="n">retrieveAndRank</span><span class="o">.</span><span class="nf">createSolrCluster</span><span class="p">(</span><span class="nv">withName</span><span class="p">:</span> <span class="n">clusterName</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">solrCluster</span> <span class="k">in</span>
-    <span class="n">cluster</span> <span class="o">=</span> <span class="n">solrCluster</span>
-<span class="p">}</span>
-
-<span class="c1">// Load the configuration file.</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">configFile</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"your-config-filename"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"zip"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to locate configuration file."</span><span class="p">)</span>
-    <span class="k">return</span>
-<span class="p">}</span>
-
-<span class="c1">// Create the configuration. Make sure the Solr Cluster status is READY first.</span>
-<span class="k">let</span> <span class="nv">configurationName</span> <span class="o">=</span> <span class="s">"your-config-name-here"</span>
-<span class="n">retrieveAndRank</span><span class="o">.</span><span class="nf">uploadSolrConfiguration</span><span class="p">(</span>
-    <span class="nv">withName</span><span class="p">:</span> <span class="n">configurationName</span><span class="p">,</span>
-    <span class="nv">toSolrClusterID</span><span class="p">:</span> <span class="n">cluster</span><span class="o">.</span><span class="n">solrClusterID</span><span class="p">,</span>
-    <span class="nv">zipFile</span><span class="p">:</span> <span class="n">configFile</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span>
-<span class="p">)</span>
-
-<span class="c1">// Create and store your Solr collection name.</span>
-<span class="k">let</span> <span class="nv">collectionName</span> <span class="o">=</span> <span class="s">"your-collection-name-here"</span>
-<span class="n">retrieveAndRank</span><span class="o">.</span><span class="nf">createSolrCollection</span><span class="p">(</span>
-    <span class="nv">withName</span><span class="p">:</span> <span class="n">collectionName</span><span class="p">,</span>
-    <span class="nv">forSolrClusterID</span><span class="p">:</span> <span class="n">cluster</span><span class="o">.</span><span class="n">solrClusterID</span><span class="p">,</span>
-    <span class="nv">withConfigurationName</span><span class="p">:</span> <span class="n">configurationName</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span>
-<span class="p">)</span>
-
-<span class="c1">// Load the documents you want to add to your collection.</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">collectionFile</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"your-collection-filename"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"json"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to locate collection file."</span><span class="p">)</span>
-    <span class="k">return</span>
-<span class="p">}</span>
-
-<span class="c1">// Upload the documents to your collection.</span>
-<span class="n">retrieveAndRank</span><span class="o">.</span><span class="nf">updateSolrCollection</span><span class="p">(</span>
-    <span class="nv">withName</span><span class="p">:</span> <span class="n">collectionName</span><span class="p">,</span>
-    <span class="nv">inSolrClusterID</span><span class="p">:</span> <span class="n">cluster</span><span class="o">.</span><span class="n">solrClusterID</span><span class="p">,</span>
-    <span class="nv">contentFile</span><span class="p">:</span> <span class="n">collectionFile</span><span class="p">,</span>
-    <span class="nv">contentType</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span>
-<span class="p">)</span>
-</code></pre>
-
-<p>The following example demonstrates how to use the Retrieve and Rank service to retrieve answers without ranking them.</p>
-<pre class="highlight swift"><code><span class="n">retrieveAndRank</span><span class="o">.</span><span class="nf">search</span><span class="p">(</span>
-    <span class="nv">withCollectionName</span><span class="p">:</span> <span class="n">collectionName</span><span class="p">,</span>
-    <span class="nv">fromSolrClusterID</span><span class="p">:</span> <span class="n">cluster</span><span class="o">.</span><span class="n">solrClusterID</span><span class="p">,</span>
-    <span class="nv">query</span><span class="p">:</span> <span class="s">"your-query-here"</span><span class="p">,</span>
-    <span class="nv">returnFields</span><span class="p">:</span> <span class="s">"your-return-fields-here"</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">response</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>The following example demonstrates how to create and train a Ranker.</p>
-<pre class="highlight swift"><code><span class="c1">// Load the ranker training data file.</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">rankerTrainingFile</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"your-ranker-training-data-filename"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"json"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to locate collection file."</span><span class="p">)</span>
-    <span class="k">return</span>
-<span class="p">}</span>
-
-<span class="c1">// Create and store the ranker.</span>
-<span class="k">var</span> <span class="nv">ranker</span><span class="p">:</span> <span class="kt">RankerDetails</span><span class="o">!</span>
-<span class="n">retrieveAndRank</span><span class="o">.</span><span class="nf">createRanker</span><span class="p">(</span>
-    <span class="nv">withName</span><span class="p">:</span> <span class="s">"your-ranker-name-here"</span><span class="p">,</span>
-    <span class="nv">fromFile</span><span class="p">:</span> <span class="n">rankerTrainingFile</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">rankerDetails</span> <span class="k">in</span>
-    <span class="n">ranker</span> <span class="o">=</span> <span class="n">rankerDetails</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>The following example demonstrates how to use the service to retrieve and rank the results.</p>
-<pre class="highlight swift"><code><span class="n">retrieveAndRank</span><span class="o">.</span><span class="nf">searchAndRank</span><span class="p">(</span>
-    <span class="nv">withCollectionName</span><span class="p">:</span> <span class="n">collectionName</span><span class="p">,</span>
-    <span class="nv">fromSolrClusterID</span><span class="p">:</span> <span class="n">cluster</span><span class="o">.</span><span class="n">solrClusterID</span><span class="p">,</span>
-    <span class="nv">rankerID</span><span class="p">:</span> <span class="n">ranker</span><span class="o">.</span><span class="n">rankerID</span><span class="p">,</span>
-    <span class="nv">query</span><span class="p">:</span> <span class="s">"your-query-here"</span><span class="p">,</span>
-    <span class="nv">returnFields</span><span class="p">:</span> <span class="s">"your-return-fields-here"</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">response</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>The following links provide more information about the Retrieve and Rank service:</p>
-
-<ul>
-<li><a href="http://www.ibm.com/watson/developercloud/retrieve-rank.html">IBM Watson Retrieve and Rank - Service Page</a></li>
-<li><a href="https://console.bluemix.net/docs/services/retrieve-and-rank/index.html">IBM Watson Retrieve and Rank - Documentation</a></li>
-<li><a href="http://retrieve-and-rank-demo.mybluemix.net/rnr-demo/dist/#/">IBM Watson Retrieve and Rank - Demo</a></li>
-</ul>
-=======
->>>>>>> upstream/master:docs/swift-api/services/AssistantV1/docsets/.docset/Contents/Resources/Documents/index.html
 <h2 id='speech-to-text' class='heading'>Speech to Text</h2>
 
 <p>The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.</p>
 
 <p>The <code>SpeechToText</code> class is the SDK&rsquo;s primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the <code>SpeechToTextSession</code> class that exposes more control over the WebSockets session.</p>
+
+<p>Please be sure to include both <code>SpeechToTextV1.framework</code> and <code>Starscream.framework</code> in your application. Starscream is a recursive dependency that adds support for WebSockets sessions.</p>
 <h4 id='recognition-request-settings' class='heading'>Recognition Request Settings</h4>
 
 <p>The <code>RecognitionSettings</code> class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart">initating a request</a>.</p>
@@ -1035,7 +819,7 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
 </code></pre>
 
-<p>See the <a href="http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html">class documentation</a> or <a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">service documentation</a> for more information about the available settings.</p>
+<p>See the <a href="http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html">class documentation</a> or <a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">service documentation</a> for more information about the available settings.</p>
 <h4 id='microphone-audio-and-compression' class='heading'>Microphone Audio and Compression</h4>
 
 <p>The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as <code>recognizeMicrophone(settings:model:customizationID:learningOptOut:compress:failure:success)</code> and <code>stopRecognizeMicrophone()</code> or <code>startMicrophone(compress:)</code> and <code>stopMicrophone()</code>).</p>
@@ -1283,9 +1067,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Speech to Text service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/speech-to-text.html">IBM Watson Speech to Text - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/speech-to-text/">IBM Watson Speech to Text - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">IBM Watson Speech to Text - Documentation</a></li>
-<li><a href="https://speech-to-text-demo.mybluemix.net/">IBM Watson Speech to Text - Demo</a></li>
+<li><a href="https://speech-to-text-demo.ng.bluemix.net/">IBM Watson Speech to Text - Demo</a></li>
 </ul>
 <h2 id='text-to-speech' class='heading'>Text to Speech</h2>
 
@@ -1344,9 +1128,9 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Text To Speech service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/text-to-speech.html">IBM Watson Text To Speech - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/text-to-speech/">IBM Watson Text To Speech - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/text-to-speech/index.html">IBM Watson Text To Speech - Documentation</a></li>
-<li><a href="https://text-to-speech-demo.mybluemix.net/">IBM Watson Text To Speech - Demo</a></li>
+<li><a href="https://text-to-speech-demo.ng.bluemix.net/">IBM Watson Text To Speech - Demo</a></li>
 </ul>
 <h2 id='tone-analyzer' class='heading'>Tone Analyzer</h2>
 
@@ -1372,91 +1156,10 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <p>The following links provide more information about the IBM Watson Tone Analyzer service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/tone-analyzer.html">IBM Watson Tone Analyzer - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/tone-analyzer/">IBM Watson Tone Analyzer - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/tone-analyzer/index.html">IBM Watson Tone Analyzer - Documentation</a></li>
-<li><a href="https://tone-analyzer-demo.mybluemix.net/">IBM Watson Tone Analyzer - Demo</a></li>
+<li><a href="https://tone-analyzer-demo.ng.bluemix.net/">IBM Watson Tone Analyzer - Demo</a></li>
 </ul>
-<<<<<<< HEAD:docs/swift-api/services/PersonalityInsightsV2/index.html
-<h2 id='tradeoff-analytics' class='heading'>Tradeoff Analytics</h2>
-
-<p>The IBM Watson Tradeoff Analytics service helps people make better choices when faced with multiple, often conflicting, goals and alternatives. By using mathematical filtering techniques to identify the best candidate options based on different criteria, the service can help users explore the tradeoffs between options to make complex decisions. The service combines smart visualization and analytical recommendations for easy and intuitive exploration of tradeoffs.</p>
-
-<p>The following example demonstrates how to use the Tradeoff Analytics service:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">TradeoffAnalyticsV1</span>
-
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">tradeoffAnalytics</span> <span class="o">=</span> <span class="kt">TradeoffAnalytics</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
-
-<span class="c1">// define columns</span>
-<span class="k">let</span> <span class="nv">price</span> <span class="o">=</span> <span class="kt">Column</span><span class="p">(</span>
-    <span class="nv">key</span><span class="p">:</span> <span class="s">"price"</span><span class="p">,</span>
-    <span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">numeric</span><span class="p">,</span>
-    <span class="nv">goal</span><span class="p">:</span> <span class="o">.</span><span class="n">minimize</span><span class="p">,</span>
-    <span class="nv">isObjective</span><span class="p">:</span> <span class="kc">true</span>
-<span class="p">)</span>
-<span class="k">let</span> <span class="nv">ram</span> <span class="o">=</span> <span class="kt">Column</span><span class="p">(</span>
-    <span class="nv">key</span><span class="p">:</span> <span class="s">"ram"</span><span class="p">,</span>
-    <span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">numeric</span><span class="p">,</span>
-    <span class="nv">goal</span><span class="p">:</span> <span class="o">.</span><span class="n">maximize</span><span class="p">,</span>
-    <span class="nv">isObjective</span><span class="p">:</span> <span class="kc">true</span>
-<span class="p">)</span>
-<span class="k">let</span> <span class="nv">screen</span> <span class="o">=</span> <span class="kt">Column</span><span class="p">(</span>
-    <span class="nv">key</span><span class="p">:</span> <span class="s">"screen"</span><span class="p">,</span>
-    <span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">numeric</span><span class="p">,</span>
-    <span class="nv">goal</span><span class="p">:</span> <span class="o">.</span><span class="n">maximize</span><span class="p">,</span>
-    <span class="nv">isObjective</span><span class="p">:</span> <span class="kc">true</span>
-<span class="p">)</span>
-<span class="k">let</span> <span class="nv">os</span> <span class="o">=</span> <span class="kt">Column</span><span class="p">(</span>
-    <span class="nv">key</span><span class="p">:</span> <span class="s">"os"</span><span class="p">,</span>
-    <span class="nv">type</span><span class="p">:</span> <span class="o">.</span><span class="n">categorical</span><span class="p">,</span>
-    <span class="nv">isObjective</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">.</span><span class="nf">categoricalRange</span><span class="p">(</span><span class="nv">categories</span><span class="p">:</span> <span class="p">[</span><span class="s">"android"</span><span class="p">,</span> <span class="s">"windows-phone"</span><span class="p">,</span> <span class="s">"blackberry"</span><span class="p">,</span> <span class="s">"ios"</span><span class="p">]),</span>
-    <span class="nv">preference</span><span class="p">:</span> <span class="p">[</span><span class="s">"android"</span><span class="p">,</span> <span class="s">"ios"</span><span class="p">]</span>
-<span class="p">)</span>
-
-<span class="c1">// define options</span>
-<span class="k">let</span> <span class="nv">galaxy</span> <span class="o">=</span> <span class="kt">Option</span><span class="p">(</span>
-    <span class="nv">key</span><span class="p">:</span> <span class="s">"galaxy"</span><span class="p">,</span>
-    <span class="nv">values</span><span class="p">:</span> <span class="p">[</span><span class="s">"price"</span><span class="p">:</span> <span class="o">.</span><span class="nf">int</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="s">"ram"</span><span class="p">:</span> <span class="o">.</span><span class="nf">int</span><span class="p">(</span><span class="mi">45</span><span class="p">),</span> <span class="s">"screen"</span><span class="p">:</span> <span class="o">.</span><span class="nf">int</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="s">"os"</span><span class="p">:</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="s">"android"</span><span class="p">)],</span>
-    <span class="nv">name</span><span class="p">:</span> <span class="s">"Galaxy S4"</span>
-<span class="p">)</span>
-<span class="k">let</span> <span class="nv">iphone</span> <span class="o">=</span> <span class="kt">Option</span><span class="p">(</span>
-    <span class="nv">key</span><span class="p">:</span> <span class="s">"iphone"</span><span class="p">,</span>
-    <span class="nv">values</span><span class="p">:</span> <span class="p">[</span><span class="s">"price"</span><span class="p">:</span> <span class="o">.</span><span class="nf">int</span><span class="p">(</span><span class="mi">99</span><span class="p">),</span> <span class="s">"ram"</span><span class="p">:</span> <span class="o">.</span><span class="nf">int</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span> <span class="s">"screen"</span><span class="p">:</span> <span class="o">.</span><span class="nf">int</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="s">"os"</span><span class="p">:</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="s">"ios"</span><span class="p">)],</span>
-    <span class="nv">name</span><span class="p">:</span> <span class="s">"iPhone 5"</span>
-<span class="p">)</span>
-<span class="k">let</span> <span class="nv">optimus</span> <span class="o">=</span> <span class="kt">Option</span><span class="p">(</span>
-    <span class="nv">key</span><span class="p">:</span> <span class="s">"optimus"</span><span class="p">,</span>
-    <span class="nv">values</span><span class="p">:</span> <span class="p">[</span><span class="s">"price"</span><span class="p">:</span> <span class="o">.</span><span class="nf">int</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s">"ram"</span><span class="p">:</span> <span class="o">.</span><span class="nf">int</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span> <span class="s">"screen"</span><span class="p">:</span> <span class="o">.</span><span class="nf">int</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="s">"os"</span><span class="p">:</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="s">"android"</span><span class="p">)],</span>
-    <span class="nv">name</span><span class="p">:</span> <span class="s">"LG Optimus G"</span>
-<span class="p">)</span>
-
-<span class="c1">// define problem</span>
-<span class="k">let</span> <span class="nv">problem</span> <span class="o">=</span> <span class="kt">Problem</span><span class="p">(</span>
-    <span class="nv">columns</span><span class="p">:</span> <span class="p">[</span><span class="n">price</span><span class="p">,</span> <span class="n">ram</span><span class="p">,</span> <span class="n">screen</span><span class="p">,</span> <span class="n">os</span><span class="p">],</span>
-    <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="n">galaxy</span><span class="p">,</span> <span class="n">iphone</span><span class="p">,</span> <span class="n">optimus</span><span class="p">],</span>
-    <span class="nv">subject</span><span class="p">:</span> <span class="s">"Phone"</span>
-<span class="p">)</span>
-
-<span class="c1">// define failure function</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-
-<span class="c1">// identify optimal options</span>
-<span class="n">tradeoffAnalytics</span><span class="o">.</span><span class="nf">getDilemma</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="n">problem</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">dilemma</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">dilemma</span><span class="o">.</span><span class="n">resolution</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>The following links provide more information about the IBM Watson Tradeoff Analytics service:</p>
-
-<ul>
-<li><a href="http://www.ibm.com/watson/developercloud/tradeoff-analytics.html">IBM Watson Tradeoff Analytics - Service Page</a></li>
-<li><a href="https://console.bluemix.net/docs/services/tradeoff-analytics/index.html">IBM Watson Tradeoff Analytics - Documentation</a></li>
-<li><a href="https://tradeoff-analytics-demo.mybluemix.net/">IBM Watson Tradeoff Analytics - Demo</a></li>
-</ul>
-=======
->>>>>>> upstream/master:docs/swift-api/services/AssistantV1/docsets/.docset/Contents/Resources/Documents/index.html
 <h2 id='visual-recognition' class='heading'>Visual Recognition</h2>
 
 <p>The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, faces, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.</p>
@@ -1480,14 +1183,20 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 
 <p>The Watson Swift SDK supports offline image classification using Apple Core ML. Classifiers must be trained or updated with the <code>coreMLEnabled</code> flag set to true. Once the classifier&rsquo;s <code>coreMLStatus</code> is <code>ready</code> then a Core ML model is available to download and use for offline classification. </p>
 
-<p>The following example demonstrates how to download a classifier&rsquo;s Core ML model and use it offline:</p>
+<p>Once the Core ML model is in the device&rsquo;s file system, images can be classified offline, directly on the device.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">classifierID</span> <span class="o">=</span> <span class="s">"your-classifier-id"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">let</span> <span class="nv">image</span> <span class="o">=</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"your-image-filename"</span><span class="p">)</span>
+<span class="n">visualRecognition</span><span class="o">.</span><span class="nf">classifyWithLocalModel</span><span class="p">(</span><span class="nv">image</span><span class="p">:</span> <span class="n">image</span><span class="p">,</span> <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="n">classifierID</span><span class="p">],</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">classifiedImages</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">classifiedImages</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>The local Core ML model can be updated as needed.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">classifierID</span> <span class="o">=</span> <span class="s">"your-classifier-id"</span>
+<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">visualRecognition</span><span class="o">.</span><span class="nf">updateLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="n">classifierID</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">visualRecognition</span><span class="o">.</span><span class="nf">classifyWithLocalModel</span><span class="p">(</span><span class="nv">image</span><span class="p">:</span> <span class="n">image</span><span class="p">,</span> <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="n">classifierID</span><span class="p">],</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">classifiedImages</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">classifiedImages</span><span class="p">)</span>
-    <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"model updated"</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -1496,24 +1205,33 @@ available in <a href="https://github.com/watson-developer-cloud/ios-sdk/blob/mas
 <span class="nf">print</span><span class="p">(</span><span class="n">localModels</span><span class="p">)</span>
 </code></pre>
 
+<p>If you would prefer to bypass <code>classifyWithLocalModel</code> and construct your own Core ML classification request, then you can retrieve a Core ML model from the local filesystem with the following example.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">classifierID</span> <span class="o">=</span> <span class="s">"your-classifier-id"</span>
+<span class="k">let</span> <span class="nv">localModel</span> <span class="o">=</span> <span class="k">try!</span> <span class="n">visualRecognition</span><span class="o">.</span><span class="nf">getLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="n">classifierID</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">localModel</span><span class="p">)</span>
+</code></pre>
+
+<p>The following example demonstrates how to delete a local Core ML model from the filesystem. This saves space when the model is no longer needed.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">classifierID</span> <span class="o">=</span> <span class="s">"your-classifier-id"</span>
+<span class="n">visualRecognition</span><span class="o">.</span><span class="nf">deleteLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="n">classifierID</span><span class="p">)</span>
+</code></pre>
+<h4 id='bundling-a-model-directly-with-your-application' class='heading'>Bundling a model directly with your application</h4>
+
+<p>You may also choose to include a Core ML model with your application, enabling images to be classified offline without having to download a model first. To include a model, add it to your application bundle following the naming convention [classifier_id].mlmodel. This will enable the SDK to locate the model when using any function that accepts a classifierID argument.</p>
+
 <p>The following links provide more information about the IBM Watson Visual Recognition service:</p>
 
 <ul>
-<li><a href="http://www.ibm.com/watson/developercloud/visual-recognition.html">IBM Watson Visual Recognition - Service Page</a></li>
+<li><a href="https://www.ibm.com/watson/services/visual-recognition/">IBM Watson Visual Recognition - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/visual-recognition/index.html">IBM Watson Visual Recognition - Documentation</a></li>
-<li><a href="http://visual-recognition-demo.mybluemix.net/">IBM Watson Visual Recognition - Demo</a></li>
+<li><a href="https://visual-recognition-demo.ng.bluemix.net/">IBM Watson Visual Recognition - Demo</a></li>
 </ul>
 
           </section>
         </section>
         <section id="footer">
-<<<<<<< HEAD:docs/swift-api/services/PersonalityInsightsV2/index.html
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-=======
           <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
->>>>>>> upstream/master:docs/swift-api/services/AssistantV1/docsets/.docset/Contents/Resources/Documents/index.html
         </section>
       </article>
     </div>

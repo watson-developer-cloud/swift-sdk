@@ -81,7 +81,7 @@
             <h1>NaturalLanguageClassifier</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">NaturalLanguageClassifier</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">NaturalLanguageClassifier</span></code></pre>
 
                 </div>
               </div>
@@ -113,7 +113,7 @@ classes to example texts so that the service can apply those classes to new inpu
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/natural-language-classifier/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/natural-language-classifier/api"</span></code></pre>
 
                         </div>
                       </div>
@@ -140,7 +140,7 @@ classes to example texts so that the service can apply those classes to new inpu
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
 
                         </div>
                       </div>
@@ -167,7 +167,7 @@ classes to example texts so that the service can apply those classes to new inpu
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -227,13 +227,9 @@ classes to example texts so that the service can apply those classes to new inpu
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifiers</span><span class="p">(</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classification.html">Classification</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -310,30 +306,18 @@ classes to example texts so that the service can apply those classes to new inpu
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-<<<<<<< HEAD
-                        <p>Sends data to create and train a classifier. When the operation is successful, the status of 
-the classifier is set to <q>Training</q>. The status must be <q>Available</q> before you can use the 
-classifier.</p>
-=======
                         <p>Create classifier.</p>
 
 <p>Sends data to create and train a classifier and returns information about the new classifier.</p>
->>>>>>> upstream/master
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createClassifier</span><span class="p">(</span>
-    <span class="n">fromMetadataFile</span> <span class="nv">trainingMetadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="n">andTrainingFile</span> <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createClassifier</span><span class="p">(</span>
     <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -351,12 +335,7 @@ classifier.</p>
                               </td>
                               <td>
                                 <div>
-<<<<<<< HEAD
-                                  <p>A file that contains, in JSON form, the user-supplied name for 
-the classifier and the language of the training data.</p>
-=======
                                   <p>Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier. For details, see the <a href="https://www.ibm.com/watson/developercloud/natural-language-classifier/api/v1/#create_classifier">API reference</a>.</p>
->>>>>>> upstream/master
                                 </div>
                               </td>
                             </tr>
@@ -368,12 +347,7 @@ the classifier and the language of the training data.</p>
                               </td>
                               <td>
                                 <div>
-<<<<<<< HEAD
-                                  <p>The set of questions and their <q>keys</q> used to adapt a system to a 
-domain (the ground truth).</p>
-=======
                                   <p>Training data in CSV format. Each text value must have at least one class. The data can include up to 15,000 records. For details, see <a href="https://www.ibm.com/watson/developercloud/doc/natural-language-classifier/using-your-data.html">Using your own data</a>.</p>
->>>>>>> upstream/master
                                 </div>
                               </td>
                             </tr>
@@ -427,14 +401,8 @@ domain (the ground truth).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
-    <span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">withClassifierID</span> <span class="nv">classifierId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -508,13 +476,8 @@ domain (the ground truth).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">classifierId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -588,12 +551,7 @@ domain (the ground truth).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifier</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">classifierId</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassifiers</span><span class="p">(</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifierList.html">ClassifierList</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -638,13 +596,8 @@ domain (the ground truth).</p>
           </section>
         </section>
         <section id="footer">
-<<<<<<< HEAD
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-=======
           <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
->>>>>>> upstream/master
         </section>
       </article>
     </div>

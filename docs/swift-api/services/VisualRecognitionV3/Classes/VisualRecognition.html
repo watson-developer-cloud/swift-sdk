@@ -117,7 +117,7 @@
             <h1>VisualRecognition</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">VisualRecognition</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">VisualRecognition</span></code></pre>
 
                 </div>
               </div>
@@ -155,7 +155,7 @@ IBM Cloud service instance.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway-a.watsonplatform.net/visual-recognition/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway-a.watsonplatform.net/visual-recognition/api"</span></code></pre>
 
                         </div>
                       </div>
@@ -182,7 +182,7 @@ IBM Cloud service instance.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
 
                         </div>
                       </div>
@@ -192,9 +192,9 @@ IBM Cloud service instance.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0CACSS6apiKey_SS7versionSS0dE10TestServertcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(apiKey:version:apiKeyTestServer:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0CACSS6apiKey_SS7versionSS0dE10TestServertcfc">init(apiKey:version:apiKeyTestServer:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0CACSS6apiKey_SS7versiontcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(apiKey:version:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0CACSS6apiKey_SS7versiontcfc">init(apiKey:version:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -209,7 +209,7 @@ IBM Cloud service instance.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">apiKeyTestServer</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -270,15 +270,10 @@ in <q>YYYY-MM-DD</q> format.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
-    <span class="n">image</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
     <span class="nv">imagesFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -446,18 +441,9 @@ Detect faces method does not support general biometric facial recognition.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
-    <span class="n">imageFile</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
     <span class="nv">imagesFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -528,145 +514,9 @@ in the <code>imagesFile</code> parameter.</p>
                 <li class="item">
                   <div>
                     <code>
-<<<<<<< HEAD
-                    <a name="/s:19VisualRecognitionV30aB0C8classifyy10Foundation4DataV5image_SaySSGSg6ownersAJ13classifierIDsSdSg9thresholdSSSg8languageys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/classify(image:owners:classifierIDs:threshold:language:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classifyy10Foundation4DataV5image_SaySSGSg6ownersAJ13classifierIDsSdSg9thresholdSSSg8languageys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF">classify(image:owners:classifierIDs:threshold:language:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>TODO - proper implementation without writing to temp file</p>
-
-<p>Upload and classify an image from NSData</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
-    <span class="nv">image</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
-    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>image</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The image as NSData</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>owners</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A list of the classifiers to run. Acceptable values are <q>IBM</q> and <q>me</q>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>classifierIDs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A list of the classifier ids to use. <q>default</q> is the id of the
-built-in classifier.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>threshold</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The minimum score a class must have to be displayed in the response.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>language</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The language of the output class names. Can be <q>en</q> (English), <q>es</q>
-(Spanish), <q>ar</q> (Arabic), or <q>ja</q> (Japanese). Classes for which no translation is available
-are omitted.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the image classifications.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C11detectFacesySS7inImage_ys5Error_pcSg7failureyAA010ImagesWithE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/detectFaces(inImage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFacesySS7inImage_ys5Error_pcSg7failureyAA010ImagesWithE0Vc7successtF">detectFaces(inImage:failure:success:)</a>
-=======
                     <a name="/s:19VisualRecognitionV30aB0C16createClassifierySS4name_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeJ0ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/createClassifier(name:positiveExamples:negativeExamples:failure:success:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:19VisualRecognitionV30aB0C16createClassifierySS4name_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeJ0ys5Error_pcSg7failureyAA0E0Vc7successtF">createClassifier(name:positiveExamples:negativeExamples:failure:success:)</a>
->>>>>>> upstream/master
                     </code>
                   </div>
                   <div class="height-container">
@@ -687,15 +537,10 @@ encounters non-ASCII characters.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
-    <span class="n">inImage</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createClassifier</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">],</span>
     <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -795,13 +640,8 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
-    <span class="n">inImageFile</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -856,15 +696,9 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                 <li class="item">
                   <div>
                     <code>
-<<<<<<< HEAD
-                    <a name="/s:19VisualRecognitionV30aB0C14getClassifiersySaySSGSg6owners_ys5Error_pcSg7failureySayAA10ClassifierVGc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getClassifiers(owners:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14getClassifiersySaySSGSg6owners_ys5Error_pcSg7failureySayAA10ClassifierVGc7successtF">getClassifiers(owners:failure:success:)</a>
-=======
                     <a name="/s:19VisualRecognitionV30aB0C13getClassifierySS12classifierID_ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getClassifier(classifierID:failure:success:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:19VisualRecognitionV30aB0C13getClassifierySS12classifierID_ys5Error_pcSg7failureyAA0E0Vc7successtF">getClassifier(classifierID:failure:success:)</a>
->>>>>>> upstream/master
                     </code>
                   </div>
                   <div class="height-container">
@@ -881,13 +715,8 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifiers</span><span class="p">(</span>
-    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -900,20 +729,12 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                             <tr>
                               <td>
                                 <code>
-<<<<<<< HEAD
-                                <em>owners</em>
-=======
                                 <em>classifierID</em>
->>>>>>> upstream/master
                                 </code>
                               </td>
                               <td>
                                 <div>
-<<<<<<< HEAD
-                                  <p>An array of owners. Must be <q>IBM</q>, <q>me</q>, or a combination of the two.</p>
-=======
                                   <p>The ID of the classifier.</p>
->>>>>>> upstream/master
                                 </div>
                               </td>
                             </tr>
@@ -950,9 +771,9 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiersySbSg7verbose_ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listClassifiers(verbose:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiersySbSg7verbose_ys5Error_pcSg7failureyAA0E0Vc7successtF">listClassifiers(verbose:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiersySaySSGSg6owners_SbSg7verboseys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listClassifiers(owners:verbose:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiersySaySSGSg6owners_SbSg7verboseys5Error_pcSg7failureyAA0E0Vc7successtF">listClassifiers(owners:verbose:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -967,15 +788,9 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createClassifier</span><span class="p">(</span>
-    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">],</span>
-    <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassifiers</span><span class="p">(</span>
+    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">verbose</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifiers.html">Classifiers</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -985,6 +800,18 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>owners</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of owners. Must be <q>IBM</q>, <q>me</q>, or a combination of the two.</p>
+                                </div>
+                              </td>
+                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -1058,15 +885,10 @@ overwrites the previous requests. The retrained property shows the last time the
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1172,17 +994,12 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifier</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
     <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
     <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1200,13 +1017,9 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                               </td>
                               <td>
                                 <div>
-<<<<<<< HEAD
-                                  <p>The classifier ID or IBM model ID of the classifier to retrieve information about.</p>
-=======
                                   <p>An image to classify. Since the service limits images to 10MB, the image will be compressed.
 For greater control over the image&rsquo;s compression, you should compress the image yourself, save it to a file,
 and call the other <code>classify</code> method.</p>
->>>>>>> upstream/master
                                 </div>
                               </td>
                             </tr>
@@ -1238,48 +1051,6 @@ to <code>0.0</code> to ignore the classification score and return all values.</p
                                 </div>
                               </td>
                             </tr>
-<<<<<<< HEAD
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16updateClassifierySS6withID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateClassifier(withID:positiveExamples:negativeExamples:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateClassifierySS6withID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0ys5Error_pcSg7failureyAA0E0Vc7successtF">updateClassifier(withID:positiveExamples:negativeExamples:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Update a custom classifier by adding new classes or images.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateClassifier</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-=======
->>>>>>> upstream/master
                             <tr>
                               <td>
                                 <code>
@@ -1398,50 +1169,13 @@ in the <code>imagesFile</code> parameter.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-<<<<<<< HEAD
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCollection</span> <span class="p">(</span>
-    <span class="n">withName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-=======
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
     <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
->>>>>>> upstream/master
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
-<<<<<<< HEAD
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C14getCollectionsyys5Error_pcSg7failure_ySayAA10CollectionVGc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getCollections(failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14getCollectionsyys5Error_pcSg7failure_ySayAA10CollectionVGc7successtF">getCollections(failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List all collections created.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCollections</span><span class="p">(</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/Collection.html">Collection</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-=======
->>>>>>> upstream/master
                       <div>
                         <h4>Parameters</h4>
                         <table class="graybox">
@@ -1449,870 +1183,7 @@ in the <code>imagesFile</code> parameter.</li>
                             <tr>
                               <td>
                                 <code>
-<<<<<<< HEAD
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the list of classifiers.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C25retrieveCollectionDetailsySS6withID_ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/retrieveCollectionDetails(withID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C25retrieveCollectionDetailsySS6withID_ys5Error_pcSg7failureyAA0E0Vc7successtF">retrieveCollectionDetails(withID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Retrieve the information of a specified collection.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retrieveCollectionDetails</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Collection.html">Collection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>withID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection to retrieve.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the collection retrieved.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16deleteCollectionySS6withID_ys5Error_pcSg7failureyycSg7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteCollection(withID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteCollectionySS6withID_ys5Error_pcSg7failureyycSg7successtF">deleteCollection(withID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Delete a collection.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCollection</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>withID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection to delete.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed after the collection has been successfully deleted.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C20addImageToCollectionySS6withID_10Foundation3URLV9imageFileAHSg8metadatays5Error_pcSg7failureyAA0G6ImagesVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/addImageToCollection(withID:imageFile:metadata:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C20addImageToCollectionySS6withID_10Foundation3URLV9imageFileAHSg8metadatays5Error_pcSg7failureyAA0G6ImagesVc7successtF">addImageToCollection(withID:imageFile:metadata:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Add images to a collection. Each collection can hold 1000000 images. Each image takes
-one second to upload.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addImageToCollection</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">imageFile</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/CollectionImages.html">CollectionImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>withID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection images will be added to.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>imageFile</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The image file (.jpg or .png) of the image to add to the
-collection. The maximum file size to upload an image is 2 MB. If the images do not
-require a specific resolution, shrink the image to make the request faster.
-Concurrent requests of uploading photos is not supported. Uploading more than one
-image (.zip or folder of images) is not supported too. Uploading one image takes
-approximately one second.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>metadata</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The JSON file that adds metadata to the image. The maximum
-file size for each image is 2 KB. Metadata can be used to identify images.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with information about the image added to the
-collection.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C21getImagesInCollectionySS6withID_ys5Error_pcSg7failureySayAA0G5ImageVGc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getImagesInCollection(withID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C21getImagesInCollectionySS6withID_ys5Error_pcSg7failureySayAA0G5ImageVGc7successtF">getImagesInCollection(withID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List an arbitrary selection of 100 images in a selected collection. Each
-collection can contain 1000000 images.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getImagesInCollection</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Structs/CollectionImage.html">CollectionImage</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>withID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection to list the images from.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the list of images in the collection.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C28listImageDetailsInCollectionySS6withID_SS05imageJ0ys5Error_pcSg7failureyAA0hE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listImageDetailsInCollection(withID:imageID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C28listImageDetailsInCollectionySS6withID_SS05imageJ0ys5Error_pcSg7failureyAA0hE0Vc7successtF">listImageDetailsInCollection(withID:imageID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List the details of an image within a collection.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listImageDetailsInCollection</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">imageID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/CollectionImage.html">CollectionImage</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>withID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection the image is in.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>imageID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the image to get details from.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the image&rsquo;s details.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C25deleteImageFromCollectionySS6withID_SS05imageI0ys5Error_pcSg7failureyycSg7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteImageFromCollection(withID:imageID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C25deleteImageFromCollectionySS6withID_SS05imageI0ys5Error_pcSg7failureyycSg7successtF">deleteImageFromCollection(withID:imageID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Delete an image from a collection.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteImageFromCollection</span><span class="p">(</span>
-    <span class="n">withID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">imageID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>withID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection to delete the image from.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>imageID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the image to delete.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed when the image is deleted successfully.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C19deleteImageMetadataySS03forE2ID_SS012inCollectionH0ys5Error_pcSg7failureyycSg7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteImageMetadata(forImageID:inCollectionID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C19deleteImageMetadataySS03forE2ID_SS012inCollectionH0ys5Error_pcSg7failureyycSg7successtF">deleteImageMetadata(forImageID:inCollectionID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Delete an image&rsquo;s metadata from a collection.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteImageMetadata</span><span class="p">(</span>
-    <span class="n">forImageID</span> <span class="nv">imageID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">inCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>forImageID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the image containing the metadata to delete.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>inCollectionID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection to delete the image&rsquo;s metadata from.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed when the image metadata is deleted successfully.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C17listImageMetadataySS03forE2ID_SS012inCollectionH0ys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listImageMetadata(forImageID:inCollectionID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C17listImageMetadataySS03forE2ID_SS012inCollectionH0ys5Error_pcSg7failureyAA0F0Vc7successtF">listImageMetadata(forImageID:inCollectionID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List an image&rsquo;s metadata from a collection. </p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listImageMetadata</span><span class="p">(</span>
-    <span class="n">forImageID</span> <span class="nv">imageID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">inCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Metadata.html">Metadata</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>forImageID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the image to list metadata from.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>inCollectionID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection to list the image&rsquo;s metadata from.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed when the image metadata is listed successfully.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C19updateImageMetadataySS03forE2ID_SS012inCollectionH010Foundation3URLV8metadatays5Error_pcSg7failureyAA0F0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateImageMetadata(forImageID:inCollectionID:metadata:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C19updateImageMetadataySS03forE2ID_SS012inCollectionH010Foundation3URLV8metadatays5Error_pcSg7failureyAA0F0Vc7successtF">updateImageMetadata(forImageID:inCollectionID:metadata:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Update an image&rsquo;s metadata from a collection. </p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateImageMetadata</span><span class="p">(</span>
-    <span class="n">forImageID</span> <span class="nv">imageID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="n">inCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Metadata.html">Metadata</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>forImageID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the image to update.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>inCollectionID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection to update the image&rsquo;s metadata.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>metadata</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The JSON file that adds metadata to the image. The maximum
-file size for each image is 2 KB. Metadata can be used to identify images.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed when the image metadata is updated successfully.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C17findSimilarImagesy10Foundation3URLV11toImageFile_SS14inCollectionIDSiSg5limitys5Error_pcSg7failureyAA0eF0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/findSimilarImages(toImageFile:inCollectionID:limit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C17findSimilarImagesy10Foundation3URLV11toImageFile_SS14inCollectionIDSiSg5limitys5Error_pcSg7failureyAA0eF0Vc7successtF">findSimilarImages(toImageFile:inCollectionID:limit:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Find similar images to an uploaded image within a collection.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">findSimilarImages</span><span class="p">(</span>
-    <span class="n">toImageFile</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="n">inCollectionID</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SimilarImages.html">SimilarImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>toImageFile</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The image file (.jpg or .png) of the image to search against the
-collection.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>inCollectionID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection to find similar images in.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>limit</em>
-=======
                                 <em>imagesFile</em>
->>>>>>> upstream/master
                                 </code>
                               </td>
                               <td>
@@ -2384,7 +1255,7 @@ in an image, age and gender confidence scores might return scores of 0.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">MLModel</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">MLModel</span></code></pre>
 
                         </div>
                       </div>
@@ -2436,7 +1307,7 @@ in order to download the latest model.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateLocalModel</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateLocalModel</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
@@ -2509,7 +1380,7 @@ in order to download the latest model.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listLocalModels</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listLocalModels</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -2540,7 +1411,7 @@ in order to download the latest model.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -2586,7 +1457,7 @@ in order to download the latest model.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classifyWithLocalModel</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classifyWithLocalModel</span><span class="p">(</span>
     <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
     <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">"default"</span><span class="p">],</span>
     <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -2671,13 +1542,8 @@ built-in classifier.</p>
           </section>
         </section>
         <section id="footer">
-<<<<<<< HEAD
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-=======
           <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
->>>>>>> upstream/master
         </section>
       </article>
     </div>

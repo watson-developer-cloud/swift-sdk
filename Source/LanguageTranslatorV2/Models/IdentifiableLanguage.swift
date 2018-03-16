@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,47 @@
 
 import Foundation
 
-/** A language that can be identified by the Language Translator service. */
-public struct IdentifiableLanguage: JSONDecodable {
+/** IdentifiableLanguage. */
+public struct IdentifiableLanguage {
 
-    /// The code of the identifiable language.
-    public let language: String
+    /// The code for an identifiable language.
+    public var language: String
 
     /// The name of the identifiable language.
-    public let name: String
+    public var name: String
 
-    /// Used internally to initialize an `IdentifiableLanguage` model from JSON.
-    public init(json: JSONWrapper) throws {
-        language = try json.getString(at: "language")
-        name = try json.getString(at: "name")
+    /**
+     Initialize a `IdentifiableLanguage` with member variables.
+
+     - parameter language: The code for an identifiable language.
+     - parameter name: The name of the identifiable language.
+
+     - returns: An initialized `IdentifiableLanguage`.
+    */
+    public init(language: String, name: String) {
+        self.language = language
+        self.name = name
     }
+}
+
+extension IdentifiableLanguage: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case language = "language"
+        case name = "name"
+        static let allValues = [language, name]
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        language = try container.decode(String.self, forKey: .language)
+        name = try container.decode(String.self, forKey: .name)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(language, forKey: .language)
+        try container.encode(name, forKey: .name)
+    }
+
 }

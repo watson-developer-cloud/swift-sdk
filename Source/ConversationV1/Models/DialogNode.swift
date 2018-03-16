@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,10 +68,10 @@ public struct DialogNode {
     public var nextStep: DialogNodeNextStep?
 
     /// The timestamp for creation of the dialog node.
-    public var created: String?
+    public var created: String
 
     /// The timestamp for the most recent update to the dialog node.
-    public var updated: String?
+    public var updated: String
 
     /// The actions for the dialog node.
     public var actions: [DialogNodeAction]?
@@ -92,6 +92,8 @@ public struct DialogNode {
      Initialize a `DialogNode` with member variables.
 
      - parameter dialogNodeID: The dialog node ID.
+     - parameter created: The timestamp for creation of the dialog node.
+     - parameter updated: The timestamp for the most recent update to the dialog node.
      - parameter description: The description of the dialog node.
      - parameter conditions: The condition that triggers the dialog node.
      - parameter parent: The ID of the parent dialog node.
@@ -100,8 +102,6 @@ public struct DialogNode {
      - parameter context: The context (if defined) for the dialog node.
      - parameter metadata: The metadata (if any) for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
-     - parameter created: The timestamp for creation of the dialog node.
-     - parameter updated: The timestamp for the most recent update to the dialog node.
      - parameter actions: The actions for the dialog node.
      - parameter title: The alias used to identify the dialog node.
      - parameter nodeType: How the dialog node is processed.
@@ -110,8 +110,10 @@ public struct DialogNode {
 
      - returns: An initialized `DialogNode`.
     */
-    public init(dialogNodeID: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, created: String? = nil, updated: String? = nil, actions: [DialogNodeAction]? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil) {
+    public init(dialogNodeID: String, created: String, updated: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, actions: [DialogNodeAction]? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil) {
         self.dialogNodeID = dialogNodeID
+        self.created = created
+        self.updated = updated
         self.description = description
         self.conditions = conditions
         self.parent = parent
@@ -120,8 +122,6 @@ public struct DialogNode {
         self.context = context
         self.metadata = metadata
         self.nextStep = nextStep
-        self.created = created
-        self.updated = updated
         self.actions = actions
         self.title = title
         self.nodeType = nodeType
@@ -163,8 +163,8 @@ extension DialogNode: Codable {
         context = try container.decodeIfPresent([String: JSON].self, forKey: .context)
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
         nextStep = try container.decodeIfPresent(DialogNodeNextStep.self, forKey: .nextStep)
-        created = try container.decodeIfPresent(String.self, forKey: .created)
-        updated = try container.decodeIfPresent(String.self, forKey: .updated)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
         actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
         title = try container.decodeIfPresent(String.self, forKey: .title)
         nodeType = try container.decodeIfPresent(String.self, forKey: .nodeType)
@@ -183,8 +183,8 @@ extension DialogNode: Codable {
         try container.encodeIfPresent(context, forKey: .context)
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encodeIfPresent(nextStep, forKey: .nextStep)
-        try container.encodeIfPresent(created, forKey: .created)
-        try container.encodeIfPresent(updated, forKey: .updated)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
         try container.encodeIfPresent(actions, forKey: .actions)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(nodeType, forKey: .nodeType)

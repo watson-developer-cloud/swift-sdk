@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import Foundation
    The IBM Watson Conversation service combines machine learning, natural language understanding, and
   integrated dialog tools to create conversation flows between your apps and your users.
  */
+@available(*, deprecated, message: "The IBM Watson Conversation service has been renamed to Assistant. Please use the `Assistant` class instead of `Conversation`. The `Conversation` class will be removed in a future release.")
 public class Conversation {
 
     /// The base URL to use when contacting the service.
@@ -291,12 +292,14 @@ public class Conversation {
 
      - parameter workspaceID: The workspace ID.
      - parameter properties: Valid data defining the new workspace content. Any elements included in the new data will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new data.
+     - parameter append: Specifies that the elements included in the request body are to be appended to the existing data in the workspace. The default value is `false`.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func updateWorkspace(
         workspaceID: String,
         properties: UpdateWorkspace? = nil,
+        append: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Workspace) -> Void)
     {
@@ -309,6 +312,10 @@ public class Conversation {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let append = append {
+            let queryParameter = URLQueryItem(name: "append", value: "\(append)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
@@ -342,12 +349,14 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter request: The user's input, with optional intents, entities, and other properties from the response.
+     - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that were visited during processing of the message.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func message(
         workspaceID: String,
         request: MessageRequest? = nil,
+        nodesVisitedDetails: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (MessageResponse) -> Void)
     {
@@ -360,6 +369,10 @@ public class Conversation {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let nodesVisitedDetails = nodesVisitedDetails {
+            let queryParameter = URLQueryItem(name: "nodes_visited_details", value: "\(nodesVisitedDetails)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/message"
@@ -2097,6 +2110,65 @@ public class Conversation {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DialogNode>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List log events in all workspaces.
+
+     List log events in all workspaces in the service instance.
+
+     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or `request.context.metadata.deployment`. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     - parameter sort: Sorts the response according to the value of the specified property, in ascending or descending order.
+     - parameter pageLimit: The number of records to return in each page of results. The default page limit is 100.
+     - parameter cursor: A token identifying the last value from the previous page of results.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+    */
+    public func listAllLogs(
+        filter: String,
+        sort: String? = nil,
+        pageLimit: Int? = nil,
+        cursor: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (LogCollection) -> Void)
+    {
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "filter", value: filter))
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
+            queryParameters.append(queryParameter)
+        }
+        if let pageLimit = pageLimit {
+            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let cursor = cursor {
+            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/logs",
+            credentials: credentials,
+            headerParameters: defaultHeaders,
+            acceptType: "application/json",
+            contentType: nil,
+            queryItems: queryParameters,
+            messageBody: nil
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<LogCollection>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

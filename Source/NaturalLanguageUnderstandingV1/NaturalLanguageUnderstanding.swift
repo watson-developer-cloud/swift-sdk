@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -183,7 +183,7 @@ public class NaturalLanguageUnderstanding {
     public func deleteModel(
         modelID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        success: @escaping (DeleteModelResults) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -207,10 +207,10 @@ public class NaturalLanguageUnderstanding {
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DeleteModelResults>) in
             switch response.result {
-            case .success: success()
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }

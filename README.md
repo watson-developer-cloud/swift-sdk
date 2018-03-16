@@ -35,19 +35,15 @@ There are many resources to help you build your first cognitive application with
 
 ### Services
 
-* [AlchemyData News](#alchemydata-news)
-* [AlchemyLanguage](#alchemylanguage)
-* [Conversation](#conversation)
+* [Assistant](#assistant)
 * [Discovery](#discovery)
 * [Language Translator](#language-translator)
 * [Natural Language Classifier](#natural-language-classifier)
 * [Natural Language Understanding](#natural-language-understanding)
 * [Personality Insights](#personality-insights)
-* [Retrieve and Rank](#retrieve-and-rank)
 * [Speech to Text](#speech-to-text)
 * [Text to Speech](#text-to-speech)
 * [Tone Analyzer](#tone-analyzer)
-* [Tradeoff Analytics](#tradeoff-analytics)
 * [Visual Recognition](#visual-recognition)
 
 ## Requirements
@@ -130,13 +126,17 @@ See [Getting started with Watson and IBM Cloud](https://console.bluemix.net/docs
 
 ## Custom Service URLs
 
-In some instances, users will need to use their own custom URL to access the Watson services. Thus, to make it easier to update, we have exposed the service URL as a public property of each class.
+You can set a custom service URL by modifying the `serviceURL` property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.
 
-You can set a custom service URL like so:
+For example, here is how to connect to a Tone Analyzer instance that is hosted in Germany:
 
 ```swift
-let dialog = Dialog(username: "your-username-here", password: "your-password-here")
-dialog.serviceURL = "your-custom-service-url"
+let toneAnalyzer = ToneAnalyzer(
+    username: "your-username-here",
+    password: "your-password-here",
+    version: "yyyy-mm-dd"
+)
+toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
 ```
 
 ## Custom Headers
@@ -164,7 +164,7 @@ By default, the SDK executes all networking operations asynchonously. If your ap
 ```swift
 let dispatchGroup = DispatchGroup()
 dispatchGroup.enter()
-conversation.message(workspaceID: workspaceID) { response in
+assistant.message(workspaceID: workspaceID) { response in
     print(response.output.text)
     dispatchGroup.leave()
 }
@@ -190,107 +190,37 @@ available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/ma
 
 This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
 
-## AlchemyData News
+## Assistant
 
-AlchemyData News provides news and blog content enriched with natural language processing to allow for highly targeted search and trend analysis. Now you can query the world's news sources and blogs like a database.
+With the IBM Watson Assistant service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
 
-The following example demonstrates how to use the AlchemyData News service:
-
-```swift
-import AlchemyDataNewsV1
-
-let apiKey = "your-apikey-here"
-let alchemyDataNews = AlchemyDataNews(apiKey: apiKey)
-
-let start = "now-1d" // yesterday
-let end = "now" // today
-let query = [
-    "q.enriched.url.title": "O[IBM^Apple]",
-    "return": "enriched.url.title,enriched.url.entities.entity.text,enriched.url.entities.entity.type"
-]
-let failure = { (error: Error) in print(error) }
-
-alchemyDataNews.getNews(from: start, to: end, query: query, failure: failure) { news in
-    print(news)
-}
-```
-
-Refine your query by referring to the [Count and TimeSlice Queries](http://docs.alchemyapi.com/docs/counts) and [API Fields](http://docs.alchemyapi.com/docs/full-list-of-supported-news-api-fields) documentation.
-
-The following links provide more information about the IBM AlchemyData News service:
-
-* [IBM AlchemyData News - Service Page](https://www.ibm.com/watson/developercloud/alchemy-data-news.html)
-* [IBM AlchemyData News - Documentation](https://console.bluemix.net/docs/services/alchemydata-news/index.html)
-
-## AlchemyLanguage
-
-AlchemyLanguage is a collection of text analysis functions that derive semantic information from your content. You can input text, HTML, or a public URL and leverage sophisticated natural language processing techniques to get a quick high-level understanding of your content and obtain detailed insights such as directional sentiment from entity to object.
-
-AlchemyLanguage has a number of features, including:
-
-- Entity Extraction
-- Sentiment Analysis
-- Keyword Extraction
-- Concept Tagging
-- Relation Extraction
-- Taxonomy Classification
-- Author Extraction
-- Language Detection
-- Text Extraction
-- Microformats Parsing
-- Feed Detection
-
-The following example demonstrates how to use the AlchemyLanguage service:
+The following example shows how to start a conversation with the Assistant service:
 
 ```swift
-import AlchemyLanguageV1
-
-let apiKey = "your-apikey-here"
-let alchemyLanguage = AlchemyLanguage(apiKey: apiKey)
-
-let url = "https://github.com/watson-developer-cloud/swift-sdk"
-let failure = { (error: Error) in print(error) }
-alchemyLanguage.getTextSentiment(fromContentAtURL: url, failure: failure) { sentiment in
-    print(sentiment)
-}
-```
-
-The following links provide more information about the IBM AlchemyLanguage service:
-
-* [IBM AlchemyLanguage - Service Page](http://www.ibm.com/watson/developercloud/alchemy-language.html)
-* [IBM AlchemyLanguage - Documentation](https://console.bluemix.net/docs/services/alchemy-language/index.html)
-
-## Conversation
-
-With the IBM Watson Conversation service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
-
-The following example shows how to start a conversation with the Conversation service:
-
-```swift
-import ConversationV1
+import AssistantV1
 
 let username = "your-username-here"
 let password = "your-password-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
-let conversation = Conversation(username: username, password: password, version: version)
+let assistant = Assistant(username: username, password: password, version: version)
 
 let workspaceID = "your-workspace-id-here"
 let failure = { (error: Error) in print(error) }
 var context: Context? // save context to continue conversation
-conversation.message(workspaceID: workspaceID, failure: failure) {
+assistant.message(workspaceID: workspaceID, failure: failure) {
     response in
     print(response.output.text)
     context = response.context
 }
 ```
 
-The following example shows how to continue an existing conversation with the Conversation service:
+The following example shows how to continue an existing conversation with the Assistant service:
 
 ```swift
 let input = InputData(text: "Turn on the radio.")
 let request = MessageRequest(input: input, context: context)
 let failure = { (error: Error) in print(error) }
-conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+assistant.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     print(response.output.text)
     context = response.context
@@ -299,13 +229,13 @@ conversation.message(workspaceID: workspaceID, request: request, failure: failur
 
 #### Context Variables
 
-The Conversation service allows users to define custom context variables in their application's payload. For example, a Conversation workspace that guides users through a pizza order might include a context variable for pizza size: `"pizza_size": "large"`.
+The Assistant service allows users to define custom context variables in their application's payload. For example, a workspace that guides users through a pizza order might include a context variable for pizza size: `"pizza_size": "large"`.
 
 Context variables are get/set using the `var additionalProperties: [String: JSON]` property of a `Context` model. The following example shows how to get and set a user-defined `pizza_size` variable:
 
 ```swift
 // get the `pizza_size` context variable
-conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+assistant.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     if case let .string(size) = response.context.additionalProperties["pizza_size"]! {
         print(size)
@@ -313,7 +243,7 @@ conversation.message(workspaceID: workspaceID, request: request, failure: failur
 }
 
 // set the `pizza_size` context variable
-conversation.message(workspaceID: workspaceID, request: request, failure: failure) {
+assistant.message(workspaceID: workspaceID, request: request, failure: failure) {
     response in
     var context = response.context // `var` makes the context mutable
     context?.additionalProperties["pizza_size"] = .string("large")
@@ -335,10 +265,10 @@ public enum JSON: Equatable, Codable {
 }
 ```
 
-The following links provide more information about the IBM Conversation service:
+The following links provide more information about the IBM Watson Assistant service:
 
-* [IBM Watson Conversation - Service Page](https://www.ibm.com/watson/services/conversation/)
-* [IBM Watson Conversation - Documentation](https://console.bluemix.net/docs/services/conversation/index.html)
+* [IBM Watson Assistant - Service Page](https://www.ibm.com/watson/services/conversation/)
+* [IBM Watson Assistant - Documentation](https://console.bluemix.net/docs/services/conversation/index.html)
 
 ## Discovery
 
@@ -605,131 +535,6 @@ The following links provide more information about the Personality Insights serv
 * [IBM Watson Personality Insights - Service Page](https://www.ibm.com/watson/services/personality-insights/)
 * [IBM Watson Personality Insights - Documentation](https://console.bluemix.net/docs/services/personality-insights/index.html)
 * [IBM Watson Personality Insights - Demo](https://personality-insights-demo.ng.bluemix.net/)
-
-## Retrieve and Rank
-
-The IBM Watson Retrieve and Rank service combines Apache Solr and a machine learning algorithm, two information retrieval components, into a single service in order to provide users with the most relevant search information.
-
-The following example demonstrates how to instantiate a `Retrieve and Rank` object.
-
-```swift
-import RetrieveAndRankV1
-
-let username = "your-username-here"
-let password = "your-password-here"
-let retrieveAndRank = RetrieveAndRank(username: username, password: password)
-```
-
-The following example demonstrates how to create a Solr Cluster, configuration, and collection.
-
-```swift
-let failure = { (error: Error) in print(error) }
-
-// Create and store the Solr Cluster so you can access it later.
-var cluster: SolrCluster!
-let clusterName = "your-cluster-name-here"
-retrieveAndRank.createSolrCluster(withName: clusterName, failure: failure) {
-    solrCluster in
-    cluster = solrCluster
-}
-
-// Load the configuration file.
-guard let configFile = Bundle.main.url(forResource: "your-config-filename", withExtension: "zip") else {
-    print("Failed to locate configuration file.")
-    return
-}
-
-// Create the configuration. Make sure the Solr Cluster status is READY first.
-let configurationName = "your-config-name-here"
-retrieveAndRank.uploadSolrConfiguration(
-    withName: configurationName,
-    toSolrClusterID: cluster.solrClusterID,
-    zipFile: configFile,
-    failure: failure
-)
-
-// Create and store your Solr collection name.
-let collectionName = "your-collection-name-here"
-retrieveAndRank.createSolrCollection(
-    withName: collectionName,
-    forSolrClusterID: cluster.solrClusterID,
-    withConfigurationName: configurationName,
-    failure: failure
-)
-
-// Load the documents you want to add to your collection.
-guard let collectionFile = Bundle.main.url(forResource: "your-collection-filename", withExtension: "json") else {
-    print("Failed to locate collection file.")
-    return
-}
-
-// Upload the documents to your collection.
-retrieveAndRank.updateSolrCollection(
-    withName: collectionName,
-    inSolrClusterID: cluster.solrClusterID,
-    contentFile: collectionFile,
-    contentType: "application/json",
-    failure: failure
-)
-```
-
-The following example demonstrates how to use the Retrieve and Rank service to retrieve answers without ranking them.
-
-```swift
-retrieveAndRank.search(
-    withCollectionName: collectionName,
-    fromSolrClusterID: cluster.solrClusterID,
-    query: "your-query-here",
-    returnFields: "your-return-fields-here",
-    failure: failure)
-{
-    response in
-    print(response)
-}
-```
-
-The following example demonstrates how to create and train a Ranker.
-
-``` swift
-// Load the ranker training data file.
-guard let rankerTrainingFile = Bundle.main.url(forResource: "your-ranker-training-data-filename", withExtension: "json") else {
-    print("Failed to locate collection file.")
-    return
-}
-
-// Create and store the ranker.
-var ranker: RankerDetails!
-retrieveAndRank.createRanker(
-    withName: "your-ranker-name-here",
-    fromFile: rankerTrainingFile,
-    failure: failure)
-{
-    rankerDetails in
-    ranker = rankerDetails
-}
-```
-
-The following example demonstrates how to use the service to retrieve and rank the results.
-
-```swift
-retrieveAndRank.searchAndRank(
-    withCollectionName: collectionName,
-    fromSolrClusterID: cluster.solrClusterID,
-    rankerID: ranker.rankerID,
-    query: "your-query-here",
-    returnFields: "your-return-fields-here",
-    failure: failure)
-{
-    response in
-    print(response)
-}
-```
-
-The following links provide more information about the Retrieve and Rank service:
-
-* [IBM Watson Retrieve and Rank - Service Page](https://www.ibm.com/watson/services/retrieve-and-rank/)
-* [IBM Watson Retrieve and Rank - Documentation](https://console.bluemix.net/docs/services/retrieve-and-rank/index.html)
-* [IBM Watson Retrieve and Rank - Demo](http://retrieve-and-rank-demo.ng.bluemix.net/)
 
 ## Speech to Text
 
@@ -1102,85 +907,6 @@ The following links provide more information about the IBM Watson Tone Analyzer 
 * [IBM Watson Tone Analyzer - Service Page](https://www.ibm.com/watson/services/tone-analyzer/)
 * [IBM Watson Tone Analyzer - Documentation](https://console.bluemix.net/docs/services/tone-analyzer/index.html)
 * [IBM Watson Tone Analyzer - Demo](https://tone-analyzer-demo.ng.bluemix.net/)
-
-## Tradeoff Analytics
-
-The IBM Watson Tradeoff Analytics service helps people make better choices when faced with multiple, often conflicting, goals and alternatives. By using mathematical filtering techniques to identify the best candidate options based on different criteria, the service can help users explore the tradeoffs between options to make complex decisions. The service combines smart visualization and analytical recommendations for easy and intuitive exploration of tradeoffs.
-
-The following example demonstrates how to use the Tradeoff Analytics service:
-
-```swift
-import TradeoffAnalyticsV1
-
-let username = "your-username-here"
-let password = "your-password-here"
-let tradeoffAnalytics = TradeoffAnalytics(username: username, password: password)
-
-// define columns
-let price = Column(
-    key: "price",
-    type: .numeric,
-    goal: .minimize,
-    isObjective: true
-)
-let ram = Column(
-    key: "ram",
-    type: .numeric,
-    goal: .maximize,
-    isObjective: true
-)
-let screen = Column(
-    key: "screen",
-    type: .numeric,
-    goal: .maximize,
-    isObjective: true
-)
-let os = Column(
-    key: "os",
-    type: .categorical,
-    isObjective: true,
-    range: Range.categoricalRange(categories: ["android", "windows-phone", "blackberry", "ios"]),
-    preference: ["android", "ios"]
-)
-
-// define options
-let galaxy = Option(
-    key: "galaxy",
-    values: ["price": .int(50), "ram": .int(45), "screen": .int(5), "os": .string("android")],
-    name: "Galaxy S4"
-)
-let iphone = Option(
-    key: "iphone",
-    values: ["price": .int(99), "ram": .int(40), "screen": .int(4), "os": .string("ios")],
-    name: "iPhone 5"
-)
-let optimus = Option(
-    key: "optimus",
-    values: ["price": .int(10), "ram": .int(300), "screen": .int(5), "os": .string("android")],
-    name: "LG Optimus G"
-)
-
-// define problem
-let problem = Problem(
-    columns: [price, ram, screen, os],
-    options: [galaxy, iphone, optimus],
-    subject: "Phone"
-)
-
-// define failure function
-let failure = { (error: Error) in print(error) }
-
-// identify optimal options
-tradeoffAnalytics.getDilemma(for: problem, failure: failure) { dilemma in
-    print(dilemma.resolution)
-}
-```
-
-The following links provide more information about the IBM Watson Tradeoff Analytics service:
-
-* [IBM Watson Tradeoff Analytics - Service Page](http://www.ibm.com/watson/developercloud/tradeoff-analytics.html)
-* [IBM Watson Tradeoff Analytics - Documentation](https://console.bluemix.net/docs/services/tradeoff-analytics/index.html)
-* [IBM Watson Tradeoff Analytics - Demo](https://tradeoff-analytics-demo.ng.bluemix.net/)
 
 ## Visual Recognition
 

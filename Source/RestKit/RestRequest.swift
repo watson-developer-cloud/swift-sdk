@@ -59,43 +59,44 @@ internal struct RestRequest {
         queryItems: [URLQueryItem]? = nil,
         messageBody: Data? = nil)
     {
-        // construct url with query parameters
-        var urlComponents = URLComponents(string: url)!
-        if let queryItems = queryItems, !queryItems.isEmpty {
-            urlComponents.queryItems = queryItems
-        }
+        // create mutable copies
+        var headerParameters = headerParameters
+        var queryItems = queryItems ?? []
 
-        // Must encode "+" to %2B (URLComponents does not do this)
-        urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-
-        // construct basic mutable request
-        var request = URLRequest(url: urlComponents.url!)
-        request.httpMethod = method
-        request.httpBody = messageBody
-
-        // set the request's user agent
-        request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
-
-        // set the request's authentication credentials
+        // set authentication credentials
         switch credentials {
-        case .apiKey: break
         case .basicAuthentication(let username, let password):
             let authData = (username + ":" + password).data(using: .utf8)!
             let authString = authData.base64EncodedString()
-            request.setValue("Basic \(authString)", forHTTPHeaderField: "Authorization")
+            headerParameters["Authorization"] = "Basic \(authString)"
+        case .apiKey(let name, let key, let location):
+            switch location {
+            case .header: headerParameters[name] = key
+            case .query: queryItems.append(URLQueryItem(name: name, value: key))
+            }
         }
 
-        // set the request's header parameters
-        for (key, value) in headerParameters {
-            request.setValue(value, forHTTPHeaderField: key)
+        // construct url components
+        var urlComponents = URLComponents(string: url)!
+        if !queryItems.isEmpty {
+            urlComponents.queryItems = queryItems
         }
 
-        // set the request's accept type
+        // encode "+" to %2B (URLComponents does not do this)
+        urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+
+        // construct mutable request
+        let url = urlComponents.url!
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.httpBody = messageBody
+
+        // set headers
+        request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
+        headerParameters.forEach { (key, value) in request.setValue(value, forHTTPHeaderField: key) }
         if let acceptType = acceptType {
             request.setValue(acceptType, forHTTPHeaderField: "Accept")
         }
-
-        // set the request's content type
         if let contentType = contentType {
             request.setValue(contentType, forHTTPHeaderField: "Content-Type")
         }
@@ -389,6 +390,11 @@ internal enum RestResult<T> {
 }
 
 internal enum Credentials {
-    case apiKey
     case basicAuthentication(username: String, password: String)
+    case apiKey(name: String, key: String, in: APIKeyLocation)
+
+    internal enum APIKeyLocation {
+        case header
+        case query
+    }
 }

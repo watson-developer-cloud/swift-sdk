@@ -51,10 +51,10 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/Age.html">Age</a>
+                <a href="../Structs/Class.html">Class</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Classification.html">Classification</a>
+                <a href="../Structs/ClassResult.html">ClassResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ClassifiedImage.html">ClassifiedImage</a>
@@ -66,16 +66,16 @@
                 <a href="../Structs/Classifier.html">Classifier</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/ClassifierResults.html">ClassifierResults</a>
+                <a href="../Structs/Classifier/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Collection.html">Collection</a>
+                <a href="../Structs/ClassifierResult.html">ClassifierResult</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CollectionImage.html">CollectionImage</a>
+                <a href="../Structs/Classifiers.html">Classifiers</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CollectionImages.html">CollectionImages</a>
+                <a href="../Structs/DetectedFaces.html">DetectedFaces</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ErrorInfo.html">ErrorInfo</a>
@@ -84,31 +84,25 @@
                 <a href="../Structs/Face.html">Face</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/FaceAge.html">FaceAge</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FaceGender.html">FaceGender</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FaceIdentity.html">FaceIdentity</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/FaceLocation.html">FaceLocation</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/Gender.html">Gender</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/Identity.html">Identity</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ImageWithFaces.html">ImageWithFaces</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/ImagesWithFaces.html">ImagesWithFaces</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs.html#/s:19VisualRecognitionV311JSONWrapperV">JSONWrapper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Metadata.html">Metadata</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/PositiveExample.html">PositiveExample</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/SimilarImages.html">SimilarImages</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/WarningInfo.html">WarningInfo</a>
@@ -123,7 +117,7 @@
             <h1>RestError</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RestError</span><span class="p">:</span> <span class="kt">Error</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">RestError</span><span class="p">:</span> <span class="kt">Error</span></code></pre>
 
                 </div>
               </div>
@@ -131,6 +125,37 @@
 
           </section>
           <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV39RestErrorO10noResponseA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/noResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV39RestErrorO10noResponseA2CmF">noResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>No response was received from the server.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">noResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
             <div class="task-group">
               <ul>
                 <li class="item">
@@ -153,7 +178,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">noData</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">noData</span></code></pre>
 
                         </div>
                       </div>
@@ -184,7 +209,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">serializationError</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">serializationError</span></code></pre>
 
                         </div>
                       </div>
@@ -216,7 +241,7 @@ URL path with percent encoded characters.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">encodingError</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">encodingError</span></code></pre>
 
                         </div>
                       </div>
@@ -248,7 +273,7 @@ URL path with percent encoded characters.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">fileManagerError</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">fileManagerError</span></code></pre>
 
                         </div>
                       </div>
@@ -279,7 +304,7 @@ URL path with percent encoded characters.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">invalidFile</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">invalidFile</span></code></pre>
 
                         </div>
                       </div>
@@ -310,7 +335,7 @@ URL path with percent encoded characters.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="nf">failure</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">failure</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -322,8 +347,8 @@ URL path with percent encoded characters.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

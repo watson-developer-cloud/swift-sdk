@@ -51,16 +51,25 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/BehaviorNode.html">BehaviorNode</a>
+                <a href="../Structs/Behavior.html">Behavior</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/ConsumptionPreferencesCategoryNode.html">ConsumptionPreferencesCategoryNode</a>
+                <a href="../Structs/ConsumptionPreferences.html">ConsumptionPreferences</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/ConsumptionPreferencesNode.html">ConsumptionPreferencesNode</a>
+                <a href="../Structs/ConsumptionPreferencesCategory.html">ConsumptionPreferencesCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Content.html">Content</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ContentItem.html">ContentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentItem/Contenttype.html">– Contenttype</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentItem/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs.html#/s:21PersonalityInsightsV311JSONWrapperV">JSONWrapper</a>
@@ -69,10 +78,19 @@
                 <a href="../Structs/Profile.html">Profile</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TraitTreeNode.html">TraitTreeNode</a>
+                <a href="../Structs/Profile/ProcessedLanguage.html">– ProcessedLanguage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Trait.html">Trait</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Trait/Category.html">– Category</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Warning.html">Warning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Warning/WarningID.html">– WarningID</a>
               </li>
             </ul>
           </li>
@@ -84,13 +102,45 @@
             <h1>PersonalityInsights</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PersonalityInsights</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">PersonalityInsights</span></code></pre>
 
                 </div>
               </div>
-            <p>The Watson Personality Insights service uses linguistic analytics to extract a spectrum
-of cognitive and social characteristics from the text data that a person generates
-through blogs, tweets, forum posts, and more.</p>
+            <h3 id='service-overview' class='heading'>Service Overview</h3>
+
+<p>The IBM Watson Personality Insights service provides a Representational State Transfer (REST) Application Programming
+Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital
+communications. The service uses linguistic analytics to infer individuals&rsquo; intrinsic personality characteristics,
+including Big Five, Needs, and Values, from digital communications such as email, text messages, tweets, and forum
+posts. The service can automatically infer, from potentially noisy social media, portraits of individuals that reflect
+their personality characteristics. The service can report consumption preferences based on the results of its analysis,
+and for JSON content that is timestamped, it can report temporal behavior.</p>
+<h3 id='api-usage' class='heading'>API Usage</h3>
+
+<p>The following information provides details about using the service to obtain a personality profile:</p>
+
+<ul>
+<li><strong>The profile method:</strong> The service offers a single <code>/v3/profile</code> method that accepts up to 20 MB of input data and
+produces results in JSON or CSV format. The service accepts input in Arabic, English, Japanese, Korean, or Spanish and
+can produce output in a variety of languages.</li>
+<li><strong>Authentication:</strong> You authenticate to the service by using your service credentials. You can use your credentials
+to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
+contact the service directly. See <a href="https://console.bluemix.net/docs/services/watson/getting-started-credentials.html">Service credentials for Watson
+services</a> and <a href="https://console.bluemix.net/docs/services/watson/getting-started-tokens.html">Tokens for
+authentication</a>.</li>
+<li><strong>Request Logging:</strong> By default, all Watson services log requests and their results. Data is collected only to
+improve the Watson services. If you do not want to share your data, set the header parameter
+<code>X-Watson-Learning-Opt-Out</code> to <code>true</code> for each request. Data is collected for any request that omits this header. See
+<a href="https://console.bluemix.net/docs/services/watson/getting-started-logging.html">Controlling request logging for Watson
+services</a>.</li>
+</ul>
+
+<p>For more information about the service, see <a href="https://console.bluemix.net/docs/services/personality-insights/index.html">About Personality
+Insights</a>. For information about calling the
+service and the responses it can generate, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html">Requesting a
+profile</a>, <a href="https://console.bluemix.net/docs/services/personality-insights/output.html">Understanding a JSON
+profile</a>, and <a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">Understanding a CSV
+profile</a>.</p>
 
           </section>
           <section class="section task-group-section">
@@ -116,7 +166,7 @@ through blogs, tweets, forum posts, and more.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/personality-insights/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/personality-insights/api"</span></code></pre>
 
                         </div>
                       </div>
@@ -143,7 +193,7 @@ through blogs, tweets, forum posts, and more.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
 
                         </div>
                       </div>
@@ -170,7 +220,7 @@ through blogs, tweets, forum posts, and more.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -211,7 +261,7 @@ through blogs, tweets, forum posts, and more.</p>
                               <td>
                                 <div>
                                   <p>The release date of the version of the API to use. Specify the date
-   in <q>YYYY-MM-DD</q> format.</p>
+in <q>YYYY-MM-DD</q> format.</p>
                                 </div>
                               </td>
                             </tr>
@@ -224,9 +274,9 @@ through blogs, tweets, forum posts, and more.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:21PersonalityInsightsV30aB0C10getProfileySS8fromText_SSSg14acceptLanguageAF07contentI0SbSg9rawScoresAI22consumptionPreferencesys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getProfile(fromText:acceptLanguage:contentLanguage:rawScores:consumptionPreferences:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C10getProfileySS8fromText_SSSg14acceptLanguageAF07contentI0SbSg9rawScoresAI22consumptionPreferencesys5Error_pcSg7failureyAA0E0Vc7successtF">getProfile(fromText:acceptLanguage:contentLanguage:rawScores:consumptionPreferences:failure:success:)</a>
+                    <a name="/s:21PersonalityInsightsV30aB0C7profileyAA7ContentV7content_SSSg0F8LanguageAH06acceptG0SbSg9rawScoresAK22consumptionPreferencesys5Error_pcSg7failureyAA7ProfileVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profile(content:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileyAA7ContentV7content_SSSg0F8LanguageAH06acceptG0SbSg9rawScoresAK22consumptionPreferencesys5Error_pcSg7failureyAA7ProfileVc7successtF">profile(content:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -234,17 +284,23 @@ through blogs, tweets, forum posts, and more.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Analyze text to generate a personality profile.</p>
+                        <p>Generates a personality profile based on input text.</p>
+
+<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
+much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
+input</a>. Accepts input in
+Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
+HTML, or JSON content, and receive results in JSON or CSV format.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getProfile</span><span class="p">(</span>
-    <span class="n">fromText</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profile</span><span class="p">(</span>
+    <span class="nv">content</span><span class="p">:</span> <span class="kt"><a href="../Structs/Content.html">Content</a></span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -259,24 +315,12 @@ through blogs, tweets, forum posts, and more.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>fromText</em>
+                                <em>content</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The text to analyze.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of the response.</p>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -288,7 +332,19 @@ through blogs, tweets, forum posts, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the text being analyzed.</p>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>contentLanguage</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>contentLanguage</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>contentLanguage</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>contentLanguage</code> and <code>Accept-Language</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -300,9 +356,7 @@ through blogs, tweets, forum posts, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If true, then a raw score for each characteristic is returned in
-addition to a normalized score. Raw scores are not compared with a sample population.
-An average Mean Absolute Error (MAE) is returned to measure the results&rsquo; precision.</p>
+                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -314,8 +368,7 @@ An average Mean Absolute Error (MAE) is returned to measure the results&rsquo; p
                               </td>
                               <td>
                                 <div>
-                                  <p>If true, then information inferred about consumption
-preferences is returned in addition to the results.</p>
+                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -339,7 +392,7 @@ preferences is returned in addition to the results.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the personality profile.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -352,9 +405,9 @@ preferences is returned in addition to the results.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:21PersonalityInsightsV30aB0C10getProfileySS8fromHTML_SSSg14acceptLanguageAF07contentI0SbSg9rawScoresAI22consumptionPreferencesys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getProfile(fromHTML:acceptLanguage:contentLanguage:rawScores:consumptionPreferences:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C10getProfileySS8fromHTML_SSSg14acceptLanguageAF07contentI0SbSg9rawScoresAI22consumptionPreferencesys5Error_pcSg7failureyAA0E0Vc7successtF">getProfile(fromHTML:acceptLanguage:contentLanguage:rawScores:consumptionPreferences:failure:success:)</a>
+                    <a name="/s:21PersonalityInsightsV30aB0C7profileySS4text_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencesys5Error_pcSg7failureyAA7ProfileVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profile(text:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileySS4text_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencesys5Error_pcSg7failureyAA7ProfileVc7successtF">profile(text:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -362,18 +415,23 @@ preferences is returned in addition to the results.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Analyze the text of a webpage to generate a personality profile.
-The HTML tags are stripped before the text is analyzed.</p>
+                        <p>Generates a personality profile based on input text.</p>
+
+<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
+much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
+input</a>. Accepts input in
+Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
+HTML, or JSON content, and receive results in JSON or CSV format.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getProfile</span><span class="p">(</span>
-    <span class="n">fromHTML</span> <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profile</span><span class="p">(</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -388,24 +446,12 @@ The HTML tags are stripped before the text is analyzed.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>fromHTML</em>
+                                <em>content</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The HTML text to analyze.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of the response.</p>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -417,7 +463,19 @@ The HTML tags are stripped before the text is analyzed.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the text being analyzed.</p>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>contentLanguage</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>contentLanguage</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>contentLanguage</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>contentLanguage</code> and <code>Accept-Language</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -429,9 +487,7 @@ The HTML tags are stripped before the text is analyzed.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If true, then a raw score for each characteristic is returned in
-addition to a normalized score. Raw scores are not compared with a sample population.
-An average Mean Absolute Error (MAE) is returned to measure the results&rsquo; precision.</p>
+                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -443,8 +499,7 @@ An average Mean Absolute Error (MAE) is returned to measure the results&rsquo; p
                               </td>
                               <td>
                                 <div>
-                                  <p>If true, then information inferred about consumption
-preferences is returned in addition to the results.</p>
+                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -468,7 +523,7 @@ preferences is returned in addition to the results.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the personality profile.</p>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -481,9 +536,9 @@ preferences is returned in addition to the results.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:21PersonalityInsightsV30aB0C10getProfileySayAA11ContentItemVG04fromF5Items_SSSg14acceptLanguageAI07contentK0SbSg9rawScoresAL22consumptionPreferencesys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getProfile(fromContentItems:acceptLanguage:contentLanguage:rawScores:consumptionPreferences:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C10getProfileySayAA11ContentItemVG04fromF5Items_SSSg14acceptLanguageAI07contentK0SbSg9rawScoresAL22consumptionPreferencesys5Error_pcSg7failureyAA0E0Vc7successtF">getProfile(fromContentItems:acceptLanguage:contentLanguage:rawScores:consumptionPreferences:failure:success:)</a>
+                    <a name="/s:21PersonalityInsightsV30aB0C7profileySS4html_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencesys5Error_pcSg7failureyAA7ProfileVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profile(html:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileySS4html_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencesys5Error_pcSg7failureyAA7ProfileVc7successtF">profile(html:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -491,17 +546,23 @@ preferences is returned in addition to the results.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Analyze input content items to generate a personality profile.</p>
+                        <p>Generates a personality profile based on input text.</p>
+
+<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
+much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
+input</a>. Accepts input in
+Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
+HTML, or JSON content, and receive results in JSON or CSV format.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getProfile</span><span class="p">(</span>
-    <span class="n">fromContentItems</span> <span class="nv">contentItems</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ContentItem.html">ContentItem</a></span><span class="p">],</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profile</span><span class="p">(</span>
+    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -516,24 +577,12 @@ preferences is returned in addition to the results.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>fromContentItems</em>
+                                <em>content</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The content items to analyze.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of the response.</p>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -545,7 +594,19 @@ preferences is returned in addition to the results.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the text being analyzed.</p>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>contentLanguage</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>contentLanguage</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>contentLanguage</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>contentLanguage</code> and <code>Accept-Language</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -557,9 +618,7 @@ preferences is returned in addition to the results.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If true, then a raw score for each characteristic is returned in
-addition to a normalized score. Raw scores are not compared with a sample population.
-An average Mean Absolute Error (MAE) is returned to measure the results&rsquo; precision.</p>
+                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -571,8 +630,7 @@ An average Mean Absolute Error (MAE) is returned to measure the results&rsquo; p
                               </td>
                               <td>
                                 <div>
-                                  <p>If true, then information inferred about consumption
-preferences is returned in addition to the results.</p>
+                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -596,7 +654,439 @@ preferences is returned in addition to the results.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with the personality profile.</p>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvyAA7ContentV7content_SSSg0H8LanguageAH06acceptI0SbSg9rawScoresAK10csvHeadersAK22consumptionPreferencesys5Error_pcSg7failureySSc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profileAsCsv(content:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvyAA7ContentV7content_SSSg0H8LanguageAH06acceptI0SbSg9rawScoresAK10csvHeadersAK22consumptionPreferencesys5Error_pcSg7failureySSc7successtF">profileAsCsv(content:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Generates a personality profile based on input text.</p>
+
+<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
+much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
+input</a>. Accepts input in
+Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
+HTML, or JSON content, and receive results in JSON or CSV format.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profileAsCsv</span><span class="p">(</span>
+    <span class="nv">content</span><span class="p">:</span> <span class="kt"><a href="../Structs/Content.html">Content</a></span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">csvHeaders</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>content</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>Content-Language</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>Content-Language</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>Content-Language</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>Content-Language</code> and <code>Accept-Language</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rawScores</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>csvHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, column labels are returned with a CSV response; if <code>false</code> (the default), they are not. Applies only when the <code>Accept</code> header is set to <code>text/csv</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>consumptionPreferences</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4text_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencesys5Error_pcSg7failureySSc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profileAsCsv(text:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4text_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencesys5Error_pcSg7failureySSc7successtF">profileAsCsv(text:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Generates a personality profile based on input text.</p>
+
+<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
+much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
+input</a>. Accepts input in
+Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
+HTML, or JSON content, and receive results in JSON or CSV format.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profileAsCsv</span><span class="p">(</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">csvHeaders</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>content</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>Content-Language</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>Content-Language</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>Content-Language</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>Content-Language</code> and <code>Accept-Language</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rawScores</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>csvHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, column labels are returned with a CSV response; if <code>false</code> (the default), they are not. Applies only when the <code>Accept</code> header is set to <code>text/csv</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>consumptionPreferences</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4html_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencesys5Error_pcSg7failureySSc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profileAsCsv(html:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4html_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencesys5Error_pcSg7failureySSc7successtF">profileAsCsv(html:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Generates a personality profile based on input text.</p>
+
+<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
+much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
+input</a>. Accepts input in
+Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
+HTML, or JSON content, and receive results in JSON or CSV format.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profileAsCsv</span><span class="p">(</span>
+    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">csvHeaders</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>content</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>Content-Language</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>Content-Language</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>Content-Language</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>Content-Language</code> and <code>Accept-Language</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rawScores</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>csvHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, column labels are returned with a CSV response; if <code>false</code> (the default), they are not. Applies only when the <code>Accept</code> header is set to <code>text/csv</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>consumptionPreferences</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
                                 </div>
                               </td>
                             </tr>
@@ -611,8 +1101,8 @@ preferences is returned in addition to the results.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

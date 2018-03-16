@@ -40,19 +40,10 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/AudioFormat.html">AudioFormat</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Enums/JSON.html">JSON</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Enums/PhonemeFormat.html">PhonemeFormat</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Enums/RestError.html">RestError</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Enums/SynthesisVoice.html">SynthesisVoice</a>
               </li>
             </ul>
           </li>
@@ -60,16 +51,10 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/CustomVoiceUpdate.html">CustomVoiceUpdate</a>
+                <a href="../Structs/CreateVoiceModel.html">CreateVoiceModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Customization.html">Customization</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CustomizationID.html">CustomizationID</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CustomizationWords.html">CustomizationWords</a>
+                <a href="../Structs/CreateVoiceModel/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs.html#/s:14TextToSpeechV111JSONWrapperV">JSONWrapper</a>
@@ -78,13 +63,40 @@
                 <a href="../Structs/Pronunciation.html">Pronunciation</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Text.html">Text</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Translation.html">Translation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Translation/PartOfSpeech.html">– PartOfSpeech</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateVoiceModel.html">UpdateVoiceModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Voice.html">Voice</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/VoiceModel.html">VoiceModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/VoiceModels.html">VoiceModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Voices.html">Voices</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Word.html">Word</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Word/PartOfSpeech.html">– PartOfSpeech</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Words.html">Words</a>
               </li>
             </ul>
           </li>
@@ -96,11 +108,11 @@
             <h1>Voice</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Voice</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Voice</span></code></pre>
 
                 </div>
               </div>
-            <p>A voice supported by the Text to Speech service.</p>
+            <p>Voice.</p>
 
           </section>
           <section class="section task-group-section">
@@ -126,7 +138,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -146,14 +158,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The gender of the voice: male or female.</p>
+                        <p>The gender of the voice: <code>male</code> or <code>female</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">gender</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">gender</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -173,15 +185,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The name of the voice. Use this value as the voice
-identifier in all requests that accept a voice.</p>
+                        <p>The name of the voice. Use this as the voice identifier in all requests.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -201,14 +212,14 @@ identifier in all requests that accept a voice.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The language and region of the voice; for example, en-US for US English.</p>
+                        <p>The language and region of the voice (for example, <code>en-US</code>).</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -228,14 +239,14 @@ identifier in all requests that accept a voice.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A description of the voice.</p>
+                        <p>A textual description of the voice.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -255,14 +266,14 @@ identifier in all requests that accept a voice.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Indicates whether the voice can be customized with a custom voice model.</p>
+                        <p>If <code>true</code>, the voice can be customized; if <code>false</code>, the voice cannot be customized. (Same as <code>custom_pronunciation</code>; maintained for backward compatibility.).</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">customizable</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">customizable</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -272,9 +283,36 @@ identifier in all requests that accept a voice.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV15VoiceV13customizationAA13CustomizationVSgv"></a>
+                    <a name="/s:14TextToSpeechV15VoiceV17supportedFeaturesAA09SupportedG0Vv"></a>
+                    <a name="//apple_ref/swift/Property/supportedFeatures" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV15VoiceV17supportedFeaturesAA09SupportedG0Vv">supportedFeatures</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Describes the additional service features supported with the voice.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">supportedFeatures</span><span class="p">:</span> <span class="kt"><a href="../Structs/SupportedFeatures.html">SupportedFeatures</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV15VoiceV13customizationAA0E5ModelVSgv"></a>
                     <a name="//apple_ref/swift/Property/customization" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV15VoiceV13customizationAA13CustomizationVSgv">customization</a>
+                    <a class="token" href="#/s:14TextToSpeechV15VoiceV13customizationAA0E5ModelVSgv">customization</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -282,15 +320,14 @@ identifier in all requests that accept a voice.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A Customization object that provides information about a specific custom voice model
-for the voice. Returned only when a customization_id is is specified with the call.</p>
+                        <p>Returns information about a specified custom voice model. <strong>Note:</strong> This field is returned only when you list information about a specific voice and specify the GUID of a custom voice model that is based on that voice.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">customization</span><span class="p">:</span> <span class="kt"><a href="../Structs/Customization.html">Customization</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">customization</span><span class="p">:</span> <span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -300,9 +337,9 @@ for the voice. Returned only when a customization_id is is specified with the ca
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV15VoiceVAcA11JSONWrapperV4json_tKcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(json:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV15VoiceVAcA11JSONWrapperV4json_tKcfc">init(json:)</a>
+                    <a name="/s:14TextToSpeechV15VoiceVACSS3url_SS6genderSS4nameSS8languageSS11descriptionSb12customizableAA17SupportedFeaturesV09supportedM0AA0E5ModelVSg13customizationtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(url:gender:name:language:description:customizable:supportedFeatures:customization:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV15VoiceVACSS3url_SS6genderSS4nameSS8languageSS11descriptionSb12customizableAA17SupportedFeaturesV09supportedM0AA0E5ModelVSg13customizationtcfc">init(url:gender:name:language:description:customizable:supportedFeatures:customization:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -310,14 +347,177 @@ for the voice. Returned only when a customization_id is is specified with the ca
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Used internally to initialize a <code>Voice</code> model from JSON.</p>
+                        <p>Initialize a <code>Voice</code> with member variables.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="kt"><a href="../Structs.html#/s:14TextToSpeechV111JSONWrapperV">JSONWrapper</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">gender</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">customizable</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">supportedFeatures</span><span class="p">:</span> <span class="kt"><a href="../Structs/SupportedFeatures.html">SupportedFeatures</a></span><span class="p">,</span> <span class="nv">customization</span><span class="p">:</span> <span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URI of the voice.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>gender</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The gender of the voice: <code>male</code> or <code>female</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the voice. Use this as the voice identifier in all requests.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language and region of the voice (for example, <code>en-US</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A textual description of the voice.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, the voice can be customized; if <code>false</code>, the voice cannot be customized. (Same as <code>custom_pronunciation</code>; maintained for backward compatibility.).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>supportedFeatures</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Describes the additional service features supported with the voice.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customization</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns information about a specified custom voice model. <strong>Note:</strong> This field is returned only when you list information about a specific voice and specify the GUID of a custom voice model that is based on that voice.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>Voice</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9DecodablePxs7Decoder_p4from_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9DecodablePxs7Decoder_p4from_tKcfc">init(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9EncodableP6encodeys7Encoder_p2to_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9EncodableP6encodeys7Encoder_p2to_tKF">encode(to:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -329,8 +529,8 @@ for the voice. Returned only when a customization_id is is specified with the ca
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

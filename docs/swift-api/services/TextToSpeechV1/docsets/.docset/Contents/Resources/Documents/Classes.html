@@ -39,19 +39,10 @@
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Enums/AudioFormat.html">AudioFormat</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Enums/JSON.html">JSON</a>
               </li>
               <li class="nav-group-task">
-                <a href="Enums/PhonemeFormat.html">PhonemeFormat</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Enums/RestError.html">RestError</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Enums/SynthesisVoice.html">SynthesisVoice</a>
               </li>
             </ul>
           </li>
@@ -59,16 +50,10 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/CustomVoiceUpdate.html">CustomVoiceUpdate</a>
+                <a href="Structs/CreateVoiceModel.html">CreateVoiceModel</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/Customization.html">Customization</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/CustomizationID.html">CustomizationID</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/CustomizationWords.html">CustomizationWords</a>
+                <a href="Structs/CreateVoiceModel/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs.html#/s:14TextToSpeechV111JSONWrapperV">JSONWrapper</a>
@@ -77,13 +62,40 @@
                 <a href="Structs/Pronunciation.html">Pronunciation</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/SupportedFeatures.html">SupportedFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Text.html">Text</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Translation.html">Translation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Translation/PartOfSpeech.html">– PartOfSpeech</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateVoiceModel.html">UpdateVoiceModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Voice.html">Voice</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/VoiceModel.html">VoiceModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/VoiceModels.html">VoiceModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Voices.html">Voices</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Word.html">Word</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Word/PartOfSpeech.html">– PartOfSpeech</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Words.html">Words</a>
               </li>
             </ul>
           </li>
@@ -112,10 +124,93 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The Text to Speech service provides an API that uses IBM&rsquo;s speech-synthesis capabilities to
-synthesize text into natural-sounding speech in a variety of languages, accents, and voices. The
-service supports at least one male or female voice, sometimes both, for each language. The audio
-is streamed back to the client with minimal delay.</p>
+                        <h3 id='service-overview' class='heading'>Service Overview</h3>
+
+<p>The IBM Text to Speech service provides a Representational State Transfer (REST) Application Programming Interface
+(API) that uses IBM&rsquo;s speech-synthesis capabilities to synthesize text into natural-sounding speech in a variety of
+languages, dialects, and voices. The service currently synthesizes text from US English, UK English, French, German,
+Italian, Japanese, Spanish, or Brazilian Portuguese into audio spoken in a male or female voice (the service supports
+only a single gender for some languages). The audio is streamed back to the client with minimal delay.</p>
+<h3 id='api-overview' class='heading'>API Overview</h3>
+
+<p>The Text to Speech service consists of the following related endpoints:</p>
+
+<ul>
+<li><code>/v1/voices</code> provides information about the voices available for synthesized speech.</li>
+<li><code>/v1/synthesize</code> synthesizes written text to audio speech.</li>
+<li><code>/v1/pronunciation</code> returns the pronunciation for a specified word. The <code>/v1/pronunciation</code> method is currently beta
+functionality.</li>
+<li><code>/v1/customizations</code> and <code>/v1/customizations/{customization_id}</code> lets users create custom voice models, which are
+dictionaries of words and their translations for use in speech synthesis. All <code>/v1/customizations</code> methods are
+currently beta functionality.</li>
+<li><code>/v1/customizations/{customization_id}/words</code> and <code>/v1/customizations/{customization_id}/words/{word}</code> lets users
+manage the words in a custom voice model.</li>
+</ul>
+
+<p><strong>Note about the Try It Out feature:</strong> The <code>Try it out!</code> button lets you experiment with the methods of the API by
+making actual cURL calls to the service. The feature is <strong>not</strong> supported for use with the <code>POST /v1/synthesize</code>
+method. For examples of calls to this method, see the <a href="http://www.ibm.com/watson/developercloud/text-to-speech/api/v1/">Text to Speech API
+reference</a>.</p>
+<h3 id='api-usage' class='heading'>API Usage</h3>
+
+<p>The following information provides details about using the service to synthesize audio:</p>
+
+<ul>
+<li><strong>Audio formats:</strong> The service supports a number of audio formats (MIME types). For more information about audio
+formats and sampling rates, including links to a number of Internet sites that provide technical and usage details
+about the different formats, see <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#format">Specifying an audio
+format</a>.</li>
+<li><strong>SSML:</strong> Many methods refer to the Speech Synthesis Markup Language (SSML), an XML-based markup language that
+provides annotations of text for speech-synthesis applications; for example, many methods accept or produce
+translations that use an SSML-based phoneme format. See <a href="https://console.bluemix.net/docs/services/text-to-speech/SSML.html">Using
+SSML</a> and <a href="https://console.bluemix.net/docs/services/text-to-speech/SPRs.html">Using IBM
+SPR</a>.</li>
+<li><strong>Word translations:</strong> Many customization methods accept or return sounds-like or phonetic translations for words. A
+phonetic translation is based on the SSML format for representing the phonetic string of a word. Phonetic translations
+can use standard International Phonetic Alphabet (IPA) representation:</li>
+</ul>
+
+<p>&lt;phoneme alphabet=<q>ipa</q> ph=<q>t&#601;m&#712;&#593;to</q>&gt;&lt;/phoneme&gt;</p>
+
+<p>or the proprietary IBM Symbolic Phonetic Representation (SPR):</p>
+
+<p>&lt;phoneme alphabet=<q>ibm</q> ph=<q>1gAstroEntxrYFXs</q>&gt;&lt;/phoneme&gt;</p>
+
+<p>For more information about customization and about sounds-like and phonetic translations, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding
+customization</a>.</p>
+
+<ul>
+<li><strong>GUIDs:</strong> The pronunciation and customization methods accept or return a Globally Unique Identifier (GUID). For
+example, customization IDs (specified with the <code>customization_id</code> parameter) and service credentials are GUIDs. GUIDs
+are hexadecimal strings that have the format <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>.</li>
+<li><strong>WebSocket interface:</strong> The service also offers a WebSocket interface as an alternative to its HTTP REST interface
+for speech synthesis. The WebSocket interface supports both plain text and SSML input, including the SSML &lt;mark&gt;
+element and word timings. See <a href="https://console.bluemix.net/docs/services/text-to-speech/websockets.html">The WebSocket
+interface</a>.</li>
+<li><strong>Authentication:</strong> You authenticate to the service by using your service credentials. You can use your credentials
+to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
+contact the service directly. See <a href="https://console.bluemix.net/docs/services/watson/getting-started-credentials.html">Service credentials for Watson
+services</a> and <a href="https://console.bluemix.net/docs/services/watson/getting-started-tokens.html">Tokens for
+authentication</a>.</li>
+<li><strong>Custom voice model ownership:</strong> In all cases, you must use service credentials created for the instance of the
+service that owns a custom voice model to use the methods described in this documentation with that model. For more
+information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#customOwner">Ownership of custom voice
+models</a>.</li>
+<li><strong>Request Logging:</strong> By default, all Watson services log requests and their results. Data is collected only to
+improve the Watson services. If you do not want to share your data, set the header parameter
+<code>X-Watson-Learning-Opt-Out</code> to <code>true</code> for each request. Data is collected for any request that omits this header. See
+<a href="https://console.bluemix.net/docs/services/watson/getting-started-logging.html">Controlling request logging for Watson
+services</a>.</li>
+</ul>
+
+<p>The service does not log data (words and translations) that are used to build custom language models; your training
+data is never used to improve the service&rsquo;s base models. The service does log data when a custom model is used with a
+synthesize request; you must set the <code>X-Watson-Learning-Opt-Out</code> request header to prevent logging for recognition
+requests. For more information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#customLogging">Request logging and data
+privacy</a>.</p>
+
+<p>For more information about the service and its various interfaces, see <a href="https://console.bluemix.net/docs/services/text-to-speech/index.html">About Text to
+Speech</a>.</p>
 
                         <a href="Classes/TextToSpeech.html" class="slightly-smaller">See more</a>
                       </div>
@@ -123,7 +218,7 @@ is streamed back to the client with minimal delay.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TextToSpeech</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TextToSpeech</span></code></pre>
 
                         </div>
                       </div>
@@ -135,8 +230,8 @@ is streamed back to the client with minimal delay.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

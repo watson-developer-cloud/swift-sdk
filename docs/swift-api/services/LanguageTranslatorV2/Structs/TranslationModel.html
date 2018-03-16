@@ -45,34 +45,46 @@
               <li class="nav-group-task">
                 <a href="../Enums/RestError.html">RestError</a>
               </li>
-              <li class="nav-group-task">
-                <a href="../Enums/TrainingStatus.html">TrainingStatus</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/DeleteModelResult.html">DeleteModelResult</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/IdentifiableLanguage.html">IdentifiableLanguage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IdentifiableLanguages.html">IdentifiableLanguages</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/IdentifiedLanguage.html">IdentifiedLanguage</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/IdentifiedLanguages.html">IdentifiedLanguages</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs.html#/s:20LanguageTranslatorV211JSONWrapperV">JSONWrapper</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/MonitorTraining.html">MonitorTraining</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/TranslateResponse.html">TranslateResponse</a>
+                <a href="../Structs/TranslateRequest.html">TranslateRequest</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Translation.html">Translation</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TranslationModel.html">TranslationModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TranslationModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TranslationModels.html">TranslationModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TranslationResult.html">TranslationResult</a>
               </li>
             </ul>
           </li>
@@ -84,16 +96,44 @@
             <h1>TranslationModel</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TranslationModel</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TranslationModel</span></code></pre>
 
                 </div>
               </div>
-            <p>A translation model that can be used to translate between a source and target language.</p>
+            <p>Response payload for models.</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV6StatusO"></a>
+                    <a name="//apple_ref/swift/Enum/Status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV6StatusO">Status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Availability of a model.</p>
+
+                        <a href="../Structs/TranslationModel/Status.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Status</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -107,16 +147,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A globally unique string that identifies the underllying model that is used for
-translation. This string contains all the information about source language,
-target language, domain, and various other related configurations.</p>
+                        <p>A globally unique string that identifies the underlying model that is used for translation. This string contains all the information about source language, target language, domain, and various other related configurations.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -126,9 +164,9 @@ target language, domain, and various other related configurations.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelV4nameSSv"></a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV4nameSSSgv"></a>
                     <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV4nameSSv">name</a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV4nameSSSgv">name</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -136,15 +174,14 @@ target language, domain, and various other related configurations.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If a model is trained by a user, there might be an optional <q>name</q> parameter
-attached during training to help the user identify the model.</p>
+                        <p>If a model is trained by a user, there might be an optional “name” parameter attached during training to help the user identify the model.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -154,9 +191,9 @@ attached during training to help the user identify the model.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelV6sourceSSv"></a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV6sourceSSSgv"></a>
                     <a name="//apple_ref/swift/Property/source" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV6sourceSSv">source</a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV6sourceSSSgv">source</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -164,17 +201,14 @@ attached during training to help the user identify the model.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Source language in two-letter language code. Use the five letter code when clarifying
-between multiple supported languages. When <code><a href="../Structs/TranslationModel.html#/s:20LanguageTranslatorV216TranslationModelV7modelIDSSv">modelID</a></code> is used directly, it will
-override the source-target language combination. Also, when a two-letter language
-code is used, but no suitable default is found, it returns an error.</p>
+                        <p>Source language in two letter language code. Use the five letter code when clarifying between multiple supported languages. When model_id is used directly, it will override the source-target language combination. Also, when a two letter language code is used, but no suitable default is found, it returns an error.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -184,9 +218,9 @@ code is used, but no suitable default is found, it returns an error.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelV6targetSSv"></a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV6targetSSSgv"></a>
                     <a name="//apple_ref/swift/Property/target" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV6targetSSv">target</a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV6targetSSSgv">target</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -194,14 +228,14 @@ code is used, but no suitable default is found, it returns an error.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Target language in two-letter language code.</p>
+                        <p>Target language in two letter language code.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -211,9 +245,9 @@ code is used, but no suitable default is found, it returns an error.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelV04baseE2IDSSv"></a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV04baseE2IDSSSgv"></a>
                     <a name="//apple_ref/swift/Property/baseModelID" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV04baseE2IDSSv">baseModelID</a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV04baseE2IDSSSgv">baseModelID</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -221,15 +255,14 @@ code is used, but no suitable default is found, it returns an error.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If this model is a custom model, this returns the base model that it is trained on.
-For a base model, this response value is empty.</p>
+                        <p>If this model is a custom model, this returns the base model that it is trained on. For a base model, this response value is empty.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">baseModelID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">baseModelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -239,9 +272,9 @@ For a base model, this response value is empty.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelV6domainSSv"></a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV6domainSSSgv"></a>
                     <a name="//apple_ref/swift/Property/domain" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV6domainSSv">domain</a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV6domainSSSgv">domain</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -256,7 +289,7 @@ For a base model, this response value is empty.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -266,9 +299,9 @@ For a base model, this response value is empty.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelV12customizableSbv"></a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV12customizableSbSgv"></a>
                     <a name="//apple_ref/swift/Property/customizable" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV12customizableSbv">customizable</a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV12customizableSbSgv">customizable</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -276,14 +309,14 @@ For a base model, this response value is empty.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Whether this model can be used as a base for customization.</p>
+                        <p>Whether this model can be used as a base for customization. Customized models are not further customizable, and we don&rsquo;t allow the customization of certain base models.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">customizable</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">customizable</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -293,9 +326,9 @@ For a base model, this response value is empty.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelV07defaultE0Sbv"></a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV07defaultE0SbSgv"></a>
                     <a name="//apple_ref/swift/Property/defaultModel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV07defaultE0Sbv">defaultModel</a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV07defaultE0SbSgv">defaultModel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -303,15 +336,14 @@ For a base model, this response value is empty.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Whether this model is considered a default model and is used when the source and
-target languages are specified without the <code><a href="../Structs/TranslationModel.html#/s:20LanguageTranslatorV216TranslationModelV7modelIDSSv">modelID</a></code>.</p>
+                        <p>Whether this model is considered a default model and is used when the source and target languages are specified without the model_id.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">defaultModel</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultModel</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -321,9 +353,9 @@ target languages are specified without the <code><a href="../Structs/Translation
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelV5ownerSSv"></a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV5ownerSSSgv"></a>
                     <a name="//apple_ref/swift/Property/owner" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV5ownerSSv">owner</a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV5ownerSSSgv">owner</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -331,15 +363,14 @@ target languages are specified without the <code><a href="../Structs/Translation
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns the Bluemix ID of the instance that created the model, or an empty
-string if it is a model that is trained by IBM.</p>
+                        <p>Returns the ID of the Language Translator service instance that created the model, or an empty string if it is a model that is trained by IBM.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">owner</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">owner</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -349,9 +380,9 @@ string if it is a model that is trained by IBM.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelV6statusAA14TrainingStatusOv"></a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelV6statusSSSgv"></a>
                     <a name="//apple_ref/swift/Property/status" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV6statusAA14TrainingStatusOv">status</a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelV6statusSSSgv">status</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -359,14 +390,14 @@ string if it is a model that is trained by IBM.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Availability of model (available, training, or error).</p>
+                        <p>Availability of a model.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Enums/TrainingStatus.html">TrainingStatus</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">status</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -376,9 +407,9 @@ string if it is a model that is trained by IBM.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV216TranslationModelVAcA11JSONWrapperV4json_tKcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(json:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelVAcA11JSONWrapperV4json_tKcfc">init(json:)</a>
+                    <a name="/s:20LanguageTranslatorV216TranslationModelVACSS7modelID_SSSg4nameAE6sourceAE6targetAE04baseeG0AE6domainSbSg12customizableAK07defaultE0AE5ownerAE6statustcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(modelID:name:source:target:baseModelID:domain:customizable:defaultModel:owner:status:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV216TranslationModelVACSS7modelID_SSSg4nameAE6sourceAE6targetAE04baseeG0AE6domainSbSg12customizableAK07defaultE0AE5ownerAE6statustcfc">init(modelID:name:source:target:baseModelID:domain:customizable:defaultModel:owner:status:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -386,14 +417,201 @@ string if it is a model that is trained by IBM.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Used internally to initialize a <code>TranslationModel</code> model from JSON.</p>
+                        <p>Initialize a <code>TranslationModel</code> with member variables.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="kt"><a href="../Structs.html#/s:20LanguageTranslatorV211JSONWrapperV">JSONWrapper</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">baseModelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">domain</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">customizable</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="n"><a href="../Structs/TranslationModel.html#/s:20LanguageTranslatorV216TranslationModelV07defaultE0SbSgv">defaultModel</a></span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">owner</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">status</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A globally unique string that identifies the underlying model that is used for translation. This string contains all the information about source language, target language, domain, and various other related configurations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If a model is trained by a user, there might be an optional “name” parameter attached during training to help the user identify the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>source</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Source language in two letter language code. Use the five letter code when clarifying between multiple supported languages. When model_id is used directly, it will override the source-target language combination. Also, when a two letter language code is used, but no suitable default is found, it returns an error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>target</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Target language in two letter language code.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>baseModelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If this model is a custom model, this returns the base model that it is trained on. For a base model, this response value is empty.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>domain</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The domain of the translation model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether this model can be used as a base for customization. Customized models are not further customizable, and we don&rsquo;t allow the customization of certain base models.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>defaultModel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether this model is considered a default model and is used when the source and target languages are specified without the model_id.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>owner</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Returns the ID of the Language Translator service instance that created the model, or an empty string if it is a model that is trained by IBM.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>status</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Availability of a model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>TranslationModel</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9DecodablePxs7Decoder_p4from_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9DecodablePxs7Decoder_p4from_tKcfc">init(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9EncodableP6encodeys7Encoder_p2to_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9EncodableP6encodeys7Encoder_p2to_tKF">encode(to:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -405,8 +623,8 @@ string if it is a model that is trained by IBM.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -198,7 +198,7 @@
             <h1>Normalization</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Normalization</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Normalization</span><span class="p">:</span> <span class="kt">JSONDecodable</span></code></pre>
 
                 </div>
               </div>
@@ -221,7 +221,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Can be one of the following: copy, move, merge, remove, or remove_nulls. For more 
+                        <p>Can be one of the following: copy, move, merge, remove, or remove_nulls. For more
 information, please refer to the documentation page here:
 <a href="https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations">https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations</a></p>
 
@@ -230,7 +230,7 @@ information, please refer to the documentation page here:
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">operation</span><span class="p">:</span> <span class="kt"><a href="../Enums/NormalizationOperation.html">NormalizationOperation</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">operation</span><span class="p">:</span> <span class="kt"><a href="../Enums/NormalizationOperation.html">NormalizationOperation</a></span></code></pre>
 
                         </div>
                       </div>
@@ -257,7 +257,7 @@ information, please refer to the documentation page here:
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">sourceField</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">sourceField</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -284,7 +284,7 @@ information, please refer to the documentation page here:
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">destinationField</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">destinationField</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -311,7 +311,7 @@ information, please refer to the documentation page here:
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="kt"><a href="../Structs.html#/s:11DiscoveryV111JSONWrapperV">JSONWrapper</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">json</span><span class="p">:</span> <span class="kt"><a href="../Structs.html#/s:11DiscoveryV111JSONWrapperV">JSONWrapper</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -338,7 +338,7 @@ information, please refer to the documentation page here:
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">operation</span><span class="p">:</span> <span class="kt"><a href="../Enums/NormalizationOperation.html">NormalizationOperation</a></span><span class="p">,</span>
     <span class="nv">sourceField</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">destinationField</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
@@ -357,7 +357,7 @@ information, please refer to the documentation page here:
                               </td>
                               <td>
                                 <div>
-                                  <p>Can be one of the following: copy, move, merge, remove, or remove_nulls. 
+                                  <p>Can be one of the following: copy, move, merge, remove, or remove_nulls.
    For more information, please refer to the documentation page here:
    <a href="https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations">https://www.ibm.com/watson/developercloud/discovery/api/v1/#json_normalizations</a></p>
                                 </div>
@@ -413,7 +413,7 @@ information, please refer to the documentation page here:
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toJSONObject</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toJSONObject</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Any</span></code></pre>
 
                         </div>
                       </div>
@@ -425,8 +425,8 @@ information, please refer to the documentation page here:
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

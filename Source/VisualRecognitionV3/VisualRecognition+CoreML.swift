@@ -100,11 +100,13 @@ extension VisualRecognition {
         // search for models in the application support directory
         let fileManager = FileManager.default
         if let appSupport = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-            let allContents = try fileManager.contentsOfDirectory(atPath: appSupport.path)
-            let modelPaths = allContents.filter { $0.contains(".mlmodelc") }
-            for modelPath in modelPaths {
-                let classifierID = String(modelPath.split(separator: ".")[0])
-                models.insert(classifierID)
+            if fileManager.fileExists(atPath: appSupport.path) {
+                let allContents = try fileManager.contentsOfDirectory(atPath: appSupport.path)
+                let modelPaths = allContents.filter { $0.contains(".mlmodelc") }
+                for modelPath in modelPaths {
+                    let classifierID = String(modelPath.split(separator: ".")[0])
+                    models.insert(classifierID)
+                }
             }
         }
 

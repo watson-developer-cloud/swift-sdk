@@ -22,14 +22,14 @@ public struct CounterexampleCollection {
     /// An array of objects describing the examples marked as irrelevant input.
     public var counterexamples: [Counterexample]
 
-    /// An object defining the pagination data for the returned objects.
+    /// The pagination data for the returned objects.
     public var pagination: Pagination
 
     /**
      Initialize a `CounterexampleCollection` with member variables.
 
      - parameter counterexamples: An array of objects describing the examples marked as irrelevant input.
-     - parameter pagination: An object defining the pagination data for the returned objects.
+     - parameter pagination: The pagination data for the returned objects.
 
      - returns: An initialized `CounterexampleCollection`.
     */

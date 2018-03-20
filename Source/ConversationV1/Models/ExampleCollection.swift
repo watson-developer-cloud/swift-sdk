@@ -19,17 +19,17 @@ import Foundation
 /** ExampleCollection. */
 public struct ExampleCollection {
 
-    /// An array of Example objects describing the examples defined for the intent.
+    /// An array of objects describing the examples defined for the intent.
     public var examples: [Example]
 
-    /// An object defining the pagination data for the returned objects.
+    /// The pagination data for the returned objects.
     public var pagination: Pagination
 
     /**
      Initialize a `ExampleCollection` with member variables.
 
-     - parameter examples: An array of Example objects describing the examples defined for the intent.
-     - parameter pagination: An object defining the pagination data for the returned objects.
+     - parameter examples: An array of objects describing the examples defined for the intent.
+     - parameter pagination: The pagination data for the returned objects.
 
      - returns: An initialized `ExampleCollection`.
     */

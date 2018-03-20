@@ -19,10 +19,10 @@ import Foundation
 /** UpdateEntity. */
 public struct UpdateEntity {
 
-    /// The name of the entity.
+    /// The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
     public var entity: String?
 
-    /// The description of the entity.
+    /// The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
     public var description: String?
 
     /// Any metadata related to the entity.
@@ -37,8 +37,8 @@ public struct UpdateEntity {
     /**
      Initialize a `UpdateEntity` with member variables.
 
-     - parameter entity: The name of the entity.
-     - parameter description: The description of the entity.
+     - parameter entity: The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
+     - parameter description: The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      - parameter metadata: Any metadata related to the entity.
      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
      - parameter values: An array of entity values.

@@ -19,19 +19,19 @@ import Foundation
 /** A term from the request that was identified as an entity. */
 public struct RuntimeEntity {
 
-    /// The recognized entity from a term in the input.
+    /// An entity detected in the input.
     public var entity: String
 
-    /// Zero-based character offsets that indicate where the entity value begins and ends in the input text.
+    /// An array of zero-based character offsets that indicate where the detected entity values begin and end in the input text.
     public var location: [Int]
 
-    /// The term in the input text that was recognized.
+    /// The term in the input text that was recognized as an entity value.
     public var value: String
 
     /// A decimal percentage that represents Watson's confidence in the entity.
     public var confidence: Double?
 
-    /// The metadata for the entity.
+    /// Any metadata for the entity.
     public var metadata: [String: JSON]?
 
     /// The recognized capture groups for the entity, as defined by the entity pattern.
@@ -43,11 +43,11 @@ public struct RuntimeEntity {
     /**
      Initialize a `RuntimeEntity` with member variables.
 
-     - parameter entity: The recognized entity from a term in the input.
-     - parameter location: Zero-based character offsets that indicate where the entity value begins and ends in the input text.
-     - parameter value: The term in the input text that was recognized.
+     - parameter entity: An entity detected in the input.
+     - parameter location: An array of zero-based character offsets that indicate where the detected entity values begin and end in the input text.
+     - parameter value: The term in the input text that was recognized as an entity value.
      - parameter confidence: A decimal percentage that represents Watson's confidence in the entity.
-     - parameter metadata: The metadata for the entity.
+     - parameter metadata: Any metadata for the entity.
      - parameter groups: The recognized capture groups for the entity, as defined by the entity pattern.
 
      - returns: An initialized `RuntimeEntity`.

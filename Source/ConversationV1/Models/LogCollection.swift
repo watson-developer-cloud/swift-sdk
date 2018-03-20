@@ -19,17 +19,17 @@ import Foundation
 /** LogCollection. */
 public struct LogCollection {
 
-    /// An array of log events.
+    /// An array of objects describing log events.
     public var logs: [LogExport]
 
-    /// An object defining the pagination data for the returned objects.
+    /// The pagination data for the returned objects.
     public var pagination: LogPagination
 
     /**
      Initialize a `LogCollection` with member variables.
 
-     - parameter logs: An array of log events.
-     - parameter pagination: An object defining the pagination data for the returned objects.
+     - parameter logs: An array of objects describing log events.
+     - parameter pagination: The pagination data for the returned objects.
 
      - returns: An initialized `LogCollection`.
     */

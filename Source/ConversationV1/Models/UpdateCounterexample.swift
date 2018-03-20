@@ -19,13 +19,13 @@ import Foundation
 /** UpdateCounterexample. */
 public struct UpdateCounterexample {
 
-    /// The text of the example to be marked as irrelevant input.
+    /// The text of a user input counterexample.
     public var text: String?
 
     /**
      Initialize a `UpdateCounterexample` with member variables.
 
-     - parameter text: The text of the example to be marked as irrelevant input.
+     - parameter text: The text of a user input counterexample.
 
      - returns: An initialized `UpdateCounterexample`.
     */

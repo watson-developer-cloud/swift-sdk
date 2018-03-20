@@ -19,35 +19,35 @@ import Foundation
 /** CreateValue. */
 public struct CreateValue {
 
-    /// Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+    /// Specifies the type of value.
     public enum ValueType: String {
         case synonyms = "synonyms"
         case patterns = "patterns"
     }
 
-    /// The text of the entity value.
+    /// The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
     public var value: String
 
     /// Any metadata related to the entity value.
     public var metadata: [String: JSON]?
 
-    /// An array of synonyms for the entity value.
+    /// An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A synonym must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
     public var synonyms: [String]?
 
-    /// An array of patterns for the entity value. A pattern is specified as a regular expression.
+    /// An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
     public var patterns: [String]?
 
-    /// Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+    /// Specifies the type of value.
     public var valueType: String?
 
     /**
      Initialize a `CreateValue` with member variables.
 
-     - parameter value: The text of the entity value.
+     - parameter value: The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
      - parameter metadata: Any metadata related to the entity value.
-     - parameter synonyms: An array of synonyms for the entity value.
-     - parameter patterns: An array of patterns for the entity value. A pattern is specified as a regular expression.
-     - parameter valueType: Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+     - parameter synonyms: An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A synonym must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     - parameter patterns: An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+     - parameter valueType: Specifies the type of value.
 
      - returns: An initialized `CreateValue`.
     */

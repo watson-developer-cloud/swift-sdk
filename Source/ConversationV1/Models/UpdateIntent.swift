@@ -19,7 +19,7 @@ import Foundation
 /** UpdateIntent. */
 public struct UpdateIntent {
 
-    /// The name of the intent.
+    /// The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
     public var intent: String?
 
     /// The description of the intent.
@@ -31,7 +31,7 @@ public struct UpdateIntent {
     /**
      Initialize a `UpdateIntent` with member variables.
 
-     - parameter intent: The name of the intent.
+     - parameter intent: The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
      - parameter description: The description of the intent.
      - parameter examples: An array of user input examples for the intent.
 

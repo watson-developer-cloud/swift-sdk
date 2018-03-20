@@ -26,6 +26,7 @@ public struct UpdateDialogNode {
         case frame = "frame"
         case slot = "slot"
         case responseCondition = "response_condition"
+        case folder = "folder"
     }
 
     /// How an `event_handler` node is processed.
@@ -40,22 +41,43 @@ public struct UpdateDialogNode {
         case nomatchResponsesDepleted = "nomatch_responses_depleted"
     }
 
-    /// The dialog node ID.
-    public var dialogNode: String
+    /// Whether this top-level dialog node can be digressed into.
+    public enum DigressIn: String {
+        case notAvailable = "not_available"
+        case returns = "returns"
+        case doesNotReturn = "does_not_return"
+    }
 
-    /// The description of the dialog node.
+    /// Whether this dialog node can be returned to after a digression.
+    public enum DigressOut: String {
+        case returning = "allow_returning"
+        case all = "allow_all"
+        case allNeverReturn = "allow_all_never_return"
+    }
+
+    /// Whether the user can digress to top-level nodes while filling out slots.
+    public enum DigressOutSlots: String {
+        case notAllowed = "not_allowed"
+        case allowReturning = "allow_returning"
+        case allowAll = "allow_all"
+    }
+
+    /// The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.
+    public var dialogNode: String?
+
+    /// The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
     public var description: String?
 
-    /// The condition that will trigger the dialog node.
+    /// The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
     public var conditions: String?
 
-    /// The ID of the parent dialog node (if any).
+    /// The ID of the parent dialog node.
     public var parent: String?
 
-    /// The previous dialog node.
+    /// The ID of the previous sibling dialog node.
     public var previousSibling: String?
 
-    /// The output of the dialog node.
+    /// The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
     public var output: [String: JSON]?
 
     /// The context for the dialog node.
@@ -64,10 +86,10 @@ public struct UpdateDialogNode {
     /// The metadata for the dialog node.
     public var metadata: [String: JSON]?
 
-    /// The next step to execute following this dialog node.
+    /// The next step to be executed in dialog processing.
     public var nextStep: DialogNodeNextStep?
 
-    /// The alias used to identify the dialog node.
+    /// The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.
     public var title: String?
 
     /// How the dialog node is processed.
@@ -79,30 +101,42 @@ public struct UpdateDialogNode {
     /// The location in the dialog context where output is stored.
     public var variable: String?
 
-    /// The actions for the dialog node.
+    /// An array of objects describing any actions to be invoked by the dialog node.
     public var actions: [DialogNodeAction]?
+
+    /// Whether this top-level dialog node can be digressed into.
+    public var digressIn: String?
+
+    /// Whether this dialog node can be returned to after a digression.
+    public var digressOut: String?
+
+    /// Whether the user can digress to top-level nodes while filling out slots.
+    public var digressOutSlots: String?
 
     /**
      Initialize a `UpdateDialogNode` with member variables.
 
-     - parameter dialogNode: The dialog node ID.
-     - parameter description: The description of the dialog node.
-     - parameter conditions: The condition that will trigger the dialog node.
-     - parameter parent: The ID of the parent dialog node (if any).
-     - parameter previousSibling: The previous dialog node.
-     - parameter output: The output of the dialog node.
+     - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.
+     - parameter description: The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
+     - parameter parent: The ID of the parent dialog node.
+     - parameter previousSibling: The ID of the previous sibling dialog node.
+     - parameter output: The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
-     - parameter nextStep: The next step to execute following this dialog node.
-     - parameter title: The alias used to identify the dialog node.
+     - parameter nextStep: The next step to be executed in dialog processing.
+     - parameter title: The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.
      - parameter nodeType: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
-     - parameter actions: The actions for the dialog node.
+     - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
+     - parameter digressIn: Whether this top-level dialog node can be digressed into.
+     - parameter digressOut: Whether this dialog node can be returned to after a digression.
+     - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
 
      - returns: An initialized `UpdateDialogNode`.
     */
-    public init(dialogNode: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, actions: [DialogNodeAction]? = nil) {
+    public init(dialogNode: String? = nil, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, actions: [DialogNodeAction]? = nil, digressIn: String? = nil, digressOut: String? = nil, digressOutSlots: String? = nil) {
         self.dialogNode = dialogNode
         self.description = description
         self.conditions = conditions
@@ -117,6 +151,9 @@ public struct UpdateDialogNode {
         self.eventName = eventName
         self.variable = variable
         self.actions = actions
+        self.digressIn = digressIn
+        self.digressOut = digressOut
+        self.digressOutSlots = digressOutSlots
     }
 }
 
@@ -137,12 +174,15 @@ extension UpdateDialogNode: Codable {
         case eventName = "event_name"
         case variable = "variable"
         case actions = "actions"
-        static let allValues = [dialogNode, description, conditions, parent, previousSibling, output, context, metadata, nextStep, title, nodeType, eventName, variable, actions]
+        case digressIn = "digress_in"
+        case digressOut = "digress_out"
+        case digressOutSlots = "digress_out_slots"
+        static let allValues = [dialogNode, description, conditions, parent, previousSibling, output, context, metadata, nextStep, title, nodeType, eventName, variable, actions, digressIn, digressOut, digressOutSlots]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        dialogNode = try container.decode(String.self, forKey: .dialogNode)
+        dialogNode = try container.decodeIfPresent(String.self, forKey: .dialogNode)
         description = try container.decodeIfPresent(String.self, forKey: .description)
         conditions = try container.decodeIfPresent(String.self, forKey: .conditions)
         parent = try container.decodeIfPresent(String.self, forKey: .parent)
@@ -156,11 +196,14 @@ extension UpdateDialogNode: Codable {
         eventName = try container.decodeIfPresent(String.self, forKey: .eventName)
         variable = try container.decodeIfPresent(String.self, forKey: .variable)
         actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
+        digressIn = try container.decodeIfPresent(String.self, forKey: .digressIn)
+        digressOut = try container.decodeIfPresent(String.self, forKey: .digressOut)
+        digressOutSlots = try container.decodeIfPresent(String.self, forKey: .digressOutSlots)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(dialogNode, forKey: .dialogNode)
+        try container.encodeIfPresent(dialogNode, forKey: .dialogNode)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(conditions, forKey: .conditions)
         try container.encodeIfPresent(parent, forKey: .parent)
@@ -174,6 +217,9 @@ extension UpdateDialogNode: Codable {
         try container.encodeIfPresent(eventName, forKey: .eventName)
         try container.encodeIfPresent(variable, forKey: .variable)
         try container.encodeIfPresent(actions, forKey: .actions)
+        try container.encodeIfPresent(digressIn, forKey: .digressIn)
+        try container.encodeIfPresent(digressOut, forKey: .digressOut)
+        try container.encodeIfPresent(digressOutSlots, forKey: .digressOutSlots)
     }
 
 }

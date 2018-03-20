@@ -16,7 +16,7 @@
 
 import Foundation
 
-/** An input object that includes the input text. */
+/** The text of the user input. */
 public struct MessageInput {
 
     /// The user's input.

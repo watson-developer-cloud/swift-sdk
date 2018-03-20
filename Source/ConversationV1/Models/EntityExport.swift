@@ -23,10 +23,10 @@ public struct EntityExport {
     public var entityName: String
 
     /// The timestamp for creation of the entity.
-    public var created: String
+    public var created: String?
 
     /// The timestamp for the last update to the entity.
-    public var updated: String
+    public var updated: String?
 
     /// The description of the entity.
     public var description: String?
@@ -37,7 +37,7 @@ public struct EntityExport {
     /// Whether fuzzy matching is used for the entity.
     public var fuzzyMatch: Bool?
 
-    /// An array of entity values.
+    /// An array objects describing the entity values.
     public var values: [ValueExport]?
 
     /**
@@ -49,11 +49,11 @@ public struct EntityExport {
      - parameter description: The description of the entity.
      - parameter metadata: Any metadata related to the entity.
      - parameter fuzzyMatch: Whether fuzzy matching is used for the entity.
-     - parameter values: An array of entity values.
+     - parameter values: An array objects describing the entity values.
 
      - returns: An initialized `EntityExport`.
     */
-    public init(entityName: String, created: String, updated: String, description: String? = nil, metadata: [String: JSON]? = nil, fuzzyMatch: Bool? = nil, values: [ValueExport]? = nil) {
+    public init(entityName: String, created: String? = nil, updated: String? = nil, description: String? = nil, metadata: [String: JSON]? = nil, fuzzyMatch: Bool? = nil, values: [ValueExport]? = nil) {
         self.entityName = entityName
         self.created = created
         self.updated = updated
@@ -80,8 +80,8 @@ extension EntityExport: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         entityName = try container.decode(String.self, forKey: .entityName)
-        created = try container.decode(String.self, forKey: .created)
-        updated = try container.decode(String.self, forKey: .updated)
+        created = try container.decodeIfPresent(String.self, forKey: .created)
+        updated = try container.decodeIfPresent(String.self, forKey: .updated)
         description = try container.decodeIfPresent(String.self, forKey: .description)
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
         fuzzyMatch = try container.decodeIfPresent(Bool.self, forKey: .fuzzyMatch)
@@ -91,8 +91,8 @@ extension EntityExport: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(entityName, forKey: .entityName)
-        try container.encode(created, forKey: .created)
-        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(created, forKey: .created)
+        try container.encodeIfPresent(updated, forKey: .updated)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encodeIfPresent(fuzzyMatch, forKey: .fuzzyMatch)

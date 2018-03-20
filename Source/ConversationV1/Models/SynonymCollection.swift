@@ -22,14 +22,14 @@ public struct SynonymCollection {
     /// An array of synonyms.
     public var synonyms: [Synonym]
 
-    /// An object defining the pagination data for the returned objects.
+    /// The pagination data for the returned objects.
     public var pagination: Pagination
 
     /**
      Initialize a `SynonymCollection` with member variables.
 
      - parameter synonyms: An array of synonyms.
-     - parameter pagination: An object defining the pagination data for the returned objects.
+     - parameter pagination: The pagination data for the returned objects.
 
      - returns: An initialized `SynonymCollection`.
     */

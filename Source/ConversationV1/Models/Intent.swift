@@ -23,10 +23,10 @@ public struct Intent {
     public var intentName: String
 
     /// The timestamp for creation of the intent.
-    public var created: String
+    public var created: String?
 
     /// The timestamp for the last update to the intent.
-    public var updated: String
+    public var updated: String?
 
     /// The description of the intent.
     public var description: String?
@@ -41,7 +41,7 @@ public struct Intent {
 
      - returns: An initialized `Intent`.
     */
-    public init(intentName: String, created: String, updated: String, description: String? = nil) {
+    public init(intentName: String, created: String? = nil, updated: String? = nil, description: String? = nil) {
         self.intentName = intentName
         self.created = created
         self.updated = updated
@@ -62,16 +62,16 @@ extension Intent: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         intentName = try container.decode(String.self, forKey: .intentName)
-        created = try container.decode(String.self, forKey: .created)
-        updated = try container.decode(String.self, forKey: .updated)
+        created = try container.decodeIfPresent(String.self, forKey: .created)
+        updated = try container.decodeIfPresent(String.self, forKey: .updated)
         description = try container.decodeIfPresent(String.self, forKey: .description)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(intentName, forKey: .intentName)
-        try container.encode(created, forKey: .created)
-        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(created, forKey: .created)
+        try container.encodeIfPresent(updated, forKey: .updated)
         try container.encodeIfPresent(description, forKey: .description)
     }
 

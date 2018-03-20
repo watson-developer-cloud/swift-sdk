@@ -19,17 +19,17 @@ import Foundation
 /** Log message details. */
 public struct LogMessage {
 
-    /// The severity of the message.
+    /// The severity of the log message.
     public enum Level: String {
         case info = "info"
         case error = "error"
         case warn = "warn"
     }
 
-    /// The severity of the message.
+    /// The severity of the log message.
     public var level: String
 
-    /// The text of the message.
+    /// The text of the log message.
     public var msg: String
 
     /// Additional properties associated with this model.
@@ -38,8 +38,8 @@ public struct LogMessage {
     /**
      Initialize a `LogMessage` with member variables.
 
-     - parameter level: The severity of the message.
-     - parameter msg: The text of the message.
+     - parameter level: The severity of the log message.
+     - parameter msg: The text of the log message.
 
      - returns: An initialized `LogMessage`.
     */

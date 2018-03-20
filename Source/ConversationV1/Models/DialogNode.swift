@@ -26,6 +26,7 @@ public struct DialogNode {
         case frame = "frame"
         case slot = "slot"
         case responseCondition = "response_condition"
+        case folder = "folder"
     }
 
     /// How an `event_handler` node is processed.
@@ -40,6 +41,27 @@ public struct DialogNode {
         case nomatchResponsesDepleted = "nomatch_responses_depleted"
     }
 
+    /// Whether this top-level dialog node can be digressed into.
+    public enum DigressIn: String {
+        case notAvailable = "not_available"
+        case returns = "returns"
+        case doesNotReturn = "does_not_return"
+    }
+
+    /// Whether this dialog node can be returned to after a digression.
+    public enum DigressOut: String {
+        case returning = "allow_returning"
+        case all = "allow_all"
+        case allNeverReturn = "allow_all_never_return"
+    }
+
+    /// Whether the user can digress to top-level nodes while filling out slots.
+    public enum DigressOutSlots: String {
+        case notAllowed = "not_allowed"
+        case allowReturning = "allow_returning"
+        case allowAll = "allow_all"
+    }
+
     /// The dialog node ID.
     public var dialogNodeID: String
 
@@ -49,10 +71,10 @@ public struct DialogNode {
     /// The condition that triggers the dialog node.
     public var conditions: String?
 
-    /// The ID of the parent dialog node.
+    /// The ID of the parent dialog node. This property is not returned if the dialog node has no parent.
     public var parent: String?
 
-    /// The ID of the previous sibling dialog node.
+    /// The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous sibling.
     public var previousSibling: String?
 
     /// The output of the dialog node.
@@ -61,17 +83,17 @@ public struct DialogNode {
     /// The context (if defined) for the dialog node.
     public var context: [String: JSON]?
 
-    /// The metadata (if any) for the dialog node.
+    /// Any metadata for the dialog node.
     public var metadata: [String: JSON]?
 
     /// The next step to execute following this dialog node.
     public var nextStep: DialogNodeNextStep?
 
     /// The timestamp for creation of the dialog node.
-    public var created: String
+    public var created: String?
 
     /// The timestamp for the most recent update to the dialog node.
-    public var updated: String
+    public var updated: String?
 
     /// The actions for the dialog node.
     public var actions: [DialogNodeAction]?
@@ -88,32 +110,42 @@ public struct DialogNode {
     /// The location in the dialog context where output is stored.
     public var variable: String?
 
+    /// Whether this top-level dialog node can be digressed into.
+    public var digressIn: String?
+
+    /// Whether this dialog node can be returned to after a digression.
+    public var digressOut: String?
+
+    /// Whether the user can digress to top-level nodes while filling out slots.
+    public var digressOutSlots: String?
+
     /**
      Initialize a `DialogNode` with member variables.
 
      - parameter dialogNodeID: The dialog node ID.
-     - parameter created: The timestamp for creation of the dialog node.
-     - parameter updated: The timestamp for the most recent update to the dialog node.
      - parameter description: The description of the dialog node.
      - parameter conditions: The condition that triggers the dialog node.
-     - parameter parent: The ID of the parent dialog node.
-     - parameter previousSibling: The ID of the previous sibling dialog node.
+     - parameter parent: The ID of the parent dialog node. This property is not returned if the dialog node has no parent.
+     - parameter previousSibling: The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous sibling.
      - parameter output: The output of the dialog node.
      - parameter context: The context (if defined) for the dialog node.
-     - parameter metadata: The metadata (if any) for the dialog node.
+     - parameter metadata: Any metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
+     - parameter created: The timestamp for creation of the dialog node.
+     - parameter updated: The timestamp for the most recent update to the dialog node.
      - parameter actions: The actions for the dialog node.
      - parameter title: The alias used to identify the dialog node.
      - parameter nodeType: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
+     - parameter digressIn: Whether this top-level dialog node can be digressed into.
+     - parameter digressOut: Whether this dialog node can be returned to after a digression.
+     - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
 
      - returns: An initialized `DialogNode`.
     */
-    public init(dialogNodeID: String, created: String, updated: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, actions: [DialogNodeAction]? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil) {
+    public init(dialogNodeID: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSON]? = nil, context: [String: JSON]? = nil, metadata: [String: JSON]? = nil, nextStep: DialogNodeNextStep? = nil, created: String? = nil, updated: String? = nil, actions: [DialogNodeAction]? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, digressIn: String? = nil, digressOut: String? = nil, digressOutSlots: String? = nil) {
         self.dialogNodeID = dialogNodeID
-        self.created = created
-        self.updated = updated
         self.description = description
         self.conditions = conditions
         self.parent = parent
@@ -122,11 +154,16 @@ public struct DialogNode {
         self.context = context
         self.metadata = metadata
         self.nextStep = nextStep
+        self.created = created
+        self.updated = updated
         self.actions = actions
         self.title = title
         self.nodeType = nodeType
         self.eventName = eventName
         self.variable = variable
+        self.digressIn = digressIn
+        self.digressOut = digressOut
+        self.digressOutSlots = digressOutSlots
     }
 }
 
@@ -149,7 +186,10 @@ extension DialogNode: Codable {
         case nodeType = "type"
         case eventName = "event_name"
         case variable = "variable"
-        static let allValues = [dialogNodeID, description, conditions, parent, previousSibling, output, context, metadata, nextStep, created, updated, actions, title, nodeType, eventName, variable]
+        case digressIn = "digress_in"
+        case digressOut = "digress_out"
+        case digressOutSlots = "digress_out_slots"
+        static let allValues = [dialogNodeID, description, conditions, parent, previousSibling, output, context, metadata, nextStep, created, updated, actions, title, nodeType, eventName, variable, digressIn, digressOut, digressOutSlots]
     }
 
     public init(from decoder: Decoder) throws {
@@ -163,13 +203,16 @@ extension DialogNode: Codable {
         context = try container.decodeIfPresent([String: JSON].self, forKey: .context)
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
         nextStep = try container.decodeIfPresent(DialogNodeNextStep.self, forKey: .nextStep)
-        created = try container.decode(String.self, forKey: .created)
-        updated = try container.decode(String.self, forKey: .updated)
+        created = try container.decodeIfPresent(String.self, forKey: .created)
+        updated = try container.decodeIfPresent(String.self, forKey: .updated)
         actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
         title = try container.decodeIfPresent(String.self, forKey: .title)
         nodeType = try container.decodeIfPresent(String.self, forKey: .nodeType)
         eventName = try container.decodeIfPresent(String.self, forKey: .eventName)
         variable = try container.decodeIfPresent(String.self, forKey: .variable)
+        digressIn = try container.decodeIfPresent(String.self, forKey: .digressIn)
+        digressOut = try container.decodeIfPresent(String.self, forKey: .digressOut)
+        digressOutSlots = try container.decodeIfPresent(String.self, forKey: .digressOutSlots)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -183,13 +226,16 @@ extension DialogNode: Codable {
         try container.encodeIfPresent(context, forKey: .context)
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encodeIfPresent(nextStep, forKey: .nextStep)
-        try container.encode(created, forKey: .created)
-        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(created, forKey: .created)
+        try container.encodeIfPresent(updated, forKey: .updated)
         try container.encodeIfPresent(actions, forKey: .actions)
         try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(nodeType, forKey: .nodeType)
         try container.encodeIfPresent(eventName, forKey: .eventName)
         try container.encodeIfPresent(variable, forKey: .variable)
+        try container.encodeIfPresent(digressIn, forKey: .digressIn)
+        try container.encodeIfPresent(digressOut, forKey: .digressOut)
+        try container.encodeIfPresent(digressOutSlots, forKey: .digressOutSlots)
     }
 
 }

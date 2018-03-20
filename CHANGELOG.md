@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.23.0
+_2018-03-20_
+
+This update adds Apple Core ML support for Visual Recognition. With Core ML you can download a trained classifier model and use it for offline image classification.
+
 ## Version 0.22.0
 _2018-03-16_
 

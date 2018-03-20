@@ -144,8 +144,8 @@ class ConversationTests: XCTestCase {
             XCTAssertNotNil(response.context.conversationID)
             XCTAssertNotEqual(response.context.conversationID, "")
             XCTAssertNotNil(response.context.system)
-            XCTAssertNotNil(response.context.system.additionalProperties)
-            XCTAssertFalse(response.context.system.additionalProperties.isEmpty)
+            XCTAssertNotNil(response.context.system!.additionalProperties)
+            XCTAssertFalse(response.context.system!.additionalProperties.isEmpty)
 
             // verify entities
             XCTAssertTrue(response.entities.isEmpty)
@@ -185,8 +185,8 @@ class ConversationTests: XCTestCase {
             // verify context
             XCTAssertEqual(response.context.conversationID, context!.conversationID)
             XCTAssertNotNil(response.context.system)
-            XCTAssertNotNil(response.context.system.additionalProperties)
-            XCTAssertFalse(response.context.system.additionalProperties.isEmpty)
+            XCTAssertNotNil(response.context.system!.additionalProperties)
+            XCTAssertFalse(response.context.system!.additionalProperties.isEmpty)
 
             // verify entities
             XCTAssertEqual(response.entities.count, 1)

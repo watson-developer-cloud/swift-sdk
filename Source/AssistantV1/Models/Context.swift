@@ -20,10 +20,10 @@ import Foundation
 public struct Context {
 
     /// The unique identifier of the conversation.
-    public var conversationID: String
+    public var conversationID: String?
 
     /// For internal use only.
-    public var system: SystemResponse
+    public var system: SystemResponse?
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
@@ -36,7 +36,7 @@ public struct Context {
 
      - returns: An initialized `Context`.
     */
-    public init(conversationID: String, system: SystemResponse, additionalProperties: [String: JSON] = [:]) {
+    public init(conversationID: String? = nil, system: SystemResponse? = nil, additionalProperties: [String: JSON] = [:]) {
         self.conversationID = conversationID
         self.system = system
         self.additionalProperties = additionalProperties
@@ -53,16 +53,16 @@ extension Context: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        conversationID = try container.decode(String.self, forKey: .conversationID)
-        system = try container.decode(SystemResponse.self, forKey: .system)
+        conversationID = try container.decodeIfPresent(String.self, forKey: .conversationID)
+        system = try container.decodeIfPresent(SystemResponse.self, forKey: .system)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(conversationID, forKey: .conversationID)
-        try container.encode(system, forKey: .system)
+        try container.encodeIfPresent(conversationID, forKey: .conversationID)
+        try container.encodeIfPresent(system, forKey: .system)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }

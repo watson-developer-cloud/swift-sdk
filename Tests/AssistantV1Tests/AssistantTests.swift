@@ -452,8 +452,6 @@ class AssistantTests: XCTestCase {
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
-            XCTAssertNotNil(workspace.created)
-            XCTAssertNotNil(workspace.updated)
             XCTAssertNotNil(workspace.workspaceID)
 
             newWorkspace = workspace.workspaceID
@@ -548,8 +546,6 @@ class AssistantTests: XCTestCase {
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
-            XCTAssertNotNil(workspace.created)
-            XCTAssertNotNil(workspace.updated)
             XCTAssertNotNil(workspace.workspaceID)
 
             newWorkspace = workspace.workspaceID
@@ -572,8 +568,6 @@ class AssistantTests: XCTestCase {
             XCTAssertEqual(workspace.name, newWorkspaceName)
             XCTAssertEqual(workspace.description, newWorkspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
-            XCTAssertNotNil(workspace.created)
-            XCTAssertNotNil(workspace.updated)
             XCTAssertNotNil(workspace.workspaceID)
             expectation2.fulfill()
         }
@@ -688,8 +682,6 @@ class AssistantTests: XCTestCase {
         assistant.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
             XCTAssertEqual(intent.intentName, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
-            XCTAssertNotNil(intent.created)
-            XCTAssertNotNil(intent.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -733,8 +725,6 @@ class AssistantTests: XCTestCase {
         assistant.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
             XCTAssertEqual(intent.intentName, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
-            XCTAssertNotNil(intent.created)
-            XCTAssertNotNil(intent.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -748,8 +738,6 @@ class AssistantTests: XCTestCase {
         assistant.updateIntent(workspaceID: workspaceID, intent: newIntentName, newIntent: updatedIntentName, newDescription: updatedIntentDescription, newExamples: [updatedExample1], failure: failWithError) { intent in
             XCTAssertEqual(intent.intentName, updatedIntentName)
             XCTAssertEqual(intent.description, updatedIntentDescription)
-            XCTAssertNotNil(intent.created)
-            XCTAssertNotNil(intent.updated)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -828,8 +816,6 @@ class AssistantTests: XCTestCase {
 
         let newExample = "swift-sdk-test-example" + UUID().uuidString
         assistant.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
-            XCTAssertNotNil(example.created)
-            XCTAssertNotNil(example.updated)
             XCTAssertEqual(example.exampleText, newExample)
             expectation.fulfill()
         }
@@ -954,8 +940,6 @@ class AssistantTests: XCTestCase {
 
         let newExample = "swift-sdk-test-counterexample" + UUID().uuidString
         assistant.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
-            XCTAssertNotNil(counterexample.created)
-            XCTAssertNotNil(counterexample.updated)
             XCTAssertNotNil(counterexample.text)
             expectation.fulfill()
         }
@@ -1107,8 +1091,6 @@ class AssistantTests: XCTestCase {
         assistant.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
             XCTAssertEqual(entityResponse.entityName, entityName)
             XCTAssertEqual(entityResponse.description, entityDescription)
-            XCTAssertNotNil(entityResponse.created)
-            XCTAssertNotNil(entityResponse.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1133,8 +1115,6 @@ class AssistantTests: XCTestCase {
         assistant.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
             XCTAssertEqual(entityResponse.entityName, entityName)
             XCTAssertEqual(entityResponse.description, entityDescription)
-            XCTAssertNotNil(entityResponse.created)
-            XCTAssertNotNil(entityResponse.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1148,8 +1128,6 @@ class AssistantTests: XCTestCase {
         assistant.updateEntity(workspaceID: workspaceID, entity: entityName, properties: updatedEntity, failure: failWithError){ entityResponse in
             XCTAssertEqual(entityResponse.entityName, updatedEntityName)
             XCTAssertEqual(entityResponse.description, updatedEntityDescription)
-            XCTAssertNotNil(entityResponse.created)
-            XCTAssertNotNil(entityResponse.updated)
             expectationTwo.fulfill()
         }
         waitForExpectations()
@@ -1217,8 +1195,6 @@ class AssistantTests: XCTestCase {
         let value = CreateValue(value: valueName)
         assistant.createValue(workspaceID: workspaceID, entity: entityName, properties: value, failure: failWithError) { value in
             XCTAssertEqual(value.valueText, valueName)
-            XCTAssertNotNil(value.created)
-            XCTAssertNotNil(value.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1230,8 +1206,6 @@ class AssistantTests: XCTestCase {
         let updatedValue = UpdateValue(value: updatedValueName, metadata: ["oldname": .string(valueName)])
         assistant.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, properties: updatedValue, failure: failWithError) { value in
             XCTAssertEqual(value.valueText, updatedValueName)
-            XCTAssertNotNil(value.created)
-            XCTAssertNotNil(value.updated)
             XCTAssertNotNil(value.metadata)
             expectationTwo.fulfill()
         }
@@ -1330,8 +1304,6 @@ class AssistantTests: XCTestCase {
 
         let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
         assistant.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
-            XCTAssertNotNil(synonym.created)
-            XCTAssertNotNil(synonym.updated)
             XCTAssertEqual(synonym.synonymText, newSynonym)
             expectation.fulfill()
         }

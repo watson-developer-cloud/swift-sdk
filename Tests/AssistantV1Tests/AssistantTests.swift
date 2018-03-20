@@ -375,7 +375,7 @@ class AssistantTests: XCTestCase {
         let description = "List all workspaces."
         let expectation = self.expectation(description: description)
 
-        assistant.listWorkspaces(failure: failWithError) { workspaceResponse in
+        assistant.listWorkspaces(includeAudit: true, failure: failWithError) { workspaceResponse in
             for workspace in workspaceResponse.workspaces {
                 XCTAssertNotNil(workspace.name)
                 XCTAssertNotNil(workspace.created)
@@ -393,7 +393,7 @@ class AssistantTests: XCTestCase {
         let description = "List all workspaces with page limit specified as 1."
         let expectation = self.expectation(description: description)
 
-        assistant.listWorkspaces(pageLimit: 1, failure: failWithError) { workspaceResponse in
+        assistant.listWorkspaces(pageLimit: 1, includeAudit: true, failure: failWithError) { workspaceResponse in
             XCTAssertEqual(workspaceResponse.workspaces.count, 1)
             for workspace in workspaceResponse.workspaces {
                 XCTAssertNotNil(workspace.name)
@@ -413,7 +413,7 @@ class AssistantTests: XCTestCase {
         let description = "List all workspaces with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        assistant.listWorkspaces(includeCount: true, failure: failWithError) { workspaceResponse in
+        assistant.listWorkspaces(includeCount: true, includeAudit: true, failure: failWithError) { workspaceResponse in
             for workspace in workspaceResponse.workspaces {
                 XCTAssertNotNil(workspace.name)
                 XCTAssertNotNil(workspace.created)
@@ -469,7 +469,7 @@ class AssistantTests: XCTestCase {
         let description2 = "Get the newly created workspace."
         let expectation2 = expectation(description: description2)
 
-        assistant.getWorkspace(workspaceID: newWorkspaceID, export: true, failure: failWithError) { workspace in
+        assistant.getWorkspace(workspaceID: newWorkspaceID, export: true, includeAudit: true, failure: failWithError) { workspace in
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
@@ -517,7 +517,7 @@ class AssistantTests: XCTestCase {
         let description = "List details of a single workspace."
         let expectation = self.expectation(description: description)
 
-        assistant.getWorkspace(workspaceID: workspaceID, export: false, failure: failWithError) { workspace in
+        assistant.getWorkspace(workspaceID: workspaceID, export: false, includeAudit: true, failure: failWithError) { workspace in
             XCTAssertNotNil(workspace.name)
             XCTAssertNotNil(workspace.created)
             XCTAssertNotNil(workspace.updated)
@@ -594,7 +594,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the intents in a workspace."
         let expectation = self.expectation(description: description)
 
-        assistant.listIntents(workspaceID: workspaceID, failure: failWithError) { intents in
+        assistant.listIntents(workspaceID: workspaceID, includeAudit: true, failure: failWithError) { intents in
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
@@ -614,7 +614,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the intents in a workspace with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        assistant.listIntents(workspaceID: workspaceID, includeCount: true, failure: failWithError) { intents in
+        assistant.listIntents(workspaceID: workspaceID, includeCount: true, includeAudit: true, failure: failWithError) { intents in
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
@@ -635,7 +635,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the intents in a workspace with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        assistant.listIntents(workspaceID: workspaceID, pageLimit: 1, failure: failWithError) { intents in
+        assistant.listIntents(workspaceID: workspaceID, pageLimit: 1, includeAudit: true, failure: failWithError) { intents in
             XCTAssertEqual(intents.intents.count, 1)
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
@@ -656,7 +656,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the intents in a workspace with export as true."
         let expectation = self.expectation(description: description)
 
-        assistant.listIntents(workspaceID: workspaceID, export: true, failure: failWithError) { intents in
+        assistant.listIntents(workspaceID: workspaceID, export: true, includeAudit: true, failure: failWithError) { intents in
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
@@ -707,7 +707,7 @@ class AssistantTests: XCTestCase {
         let description = "Get details of a specific intent."
         let expectation = self.expectation(description: description)
 
-        assistant.getIntent(workspaceID: workspaceID, intent: "weather", export: true, failure: failWithError) { intent in
+        assistant.getIntent(workspaceID: workspaceID, intent: "weather", export: true, includeAudit: true, failure: failWithError) { intent in
             XCTAssertNotNil(intent.intentName)
             XCTAssertNotNil(intent.created)
             XCTAssertNotNil(intent.updated)
@@ -769,7 +769,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the examples of an intent."
         let expectation = self.expectation(description: description)
 
-        assistant.listExamples(workspaceID: workspaceID, intent: "weather", failure: failWithError) { examples in
+        assistant.listExamples(workspaceID: workspaceID, intent: "weather", includeAudit: true, failure: failWithError) { examples in
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
@@ -787,7 +787,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the examples for an intent with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        assistant.listExamples(workspaceID: workspaceID, intent: "weather", includeCount: true, failure: failWithError) { examples in
+        assistant.listExamples(workspaceID: workspaceID, intent: "weather", includeCount: true, includeAudit: true, failure: failWithError) { examples in
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
@@ -806,7 +806,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the examples for an intent with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        assistant.listExamples(workspaceID: workspaceID, intent: "weather", pageLimit: 1, failure: failWithError) { examples in
+        assistant.listExamples(workspaceID: workspaceID, intent: "weather", pageLimit: 1, includeAudit: true, failure: failWithError) { examples in
             XCTAssertEqual(examples.examples.count, 1)
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
@@ -849,7 +849,7 @@ class AssistantTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let exampleText = "tell me the weather"
-        assistant.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, failure: failWithError) { example in
+        assistant.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, includeAudit: true, failure: failWithError) { example in
             XCTAssertNotNil(example.created)
             XCTAssertNotNil(example.updated)
             XCTAssertEqual(example.exampleText, exampleText)
@@ -864,8 +864,6 @@ class AssistantTests: XCTestCase {
 
         let newExample = "swift-sdk-test-example" + UUID().uuidString
         assistant.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
-            XCTAssertNotNil(example.created)
-            XCTAssertNotNil(example.updated)
             XCTAssertEqual(example.exampleText, newExample)
             expectation.fulfill()
         }
@@ -876,8 +874,6 @@ class AssistantTests: XCTestCase {
 
         let updatedText = "updated-" + newExample
         assistant.updateExample(workspaceID: workspaceID, intent: "weather", text: newExample, newText: updatedText, failure: failWithError) { example in
-            XCTAssertNotNil(example.created)
-            XCTAssertNotNil(example.updated)
             XCTAssertEqual(example.exampleText, updatedText)
             expectation2.fulfill()
         }
@@ -898,7 +894,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the counterexamples of a workspace."
         let expectation = self.expectation(description: description)
 
-        assistant.listCounterexamples(workspaceID: workspaceID, failure: failWithError) { counterexamples in
+        assistant.listCounterexamples(workspaceID: workspaceID, includeAudit: true, failure: failWithError) { counterexamples in
             for counterexample in counterexamples.counterexamples {
                 XCTAssertNotNil(counterexample.created)
                 XCTAssertNotNil(counterexample.updated)
@@ -917,7 +913,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the counterexamples of a workspace with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        assistant.listCounterexamples(workspaceID: workspaceID, includeCount: true, failure: failWithError) { counterexamples in
+        assistant.listCounterexamples(workspaceID: workspaceID, includeCount: true, includeAudit: true, failure: failWithError) { counterexamples in
             for counterexample in counterexamples.counterexamples {
                 XCTAssertNotNil(counterexample.created)
                 XCTAssertNotNil(counterexample.updated)
@@ -937,7 +933,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the counterexamples of a workspace with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        assistant.listCounterexamples(workspaceID: workspaceID, pageLimit: 1, failure: failWithError) { counterexamples in
+        assistant.listCounterexamples(workspaceID: workspaceID, pageLimit: 1, includeAudit: true, failure: failWithError) { counterexamples in
             for counterexample in counterexamples.counterexamples {
                 XCTAssertNotNil(counterexample.created)
                 XCTAssertNotNil(counterexample.updated)
@@ -979,7 +975,7 @@ class AssistantTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let exampleText = "I want financial advice today."
-        assistant.getCounterexample(workspaceID: workspaceID, text: exampleText, failure: failWithError) { counterexample in
+        assistant.getCounterexample(workspaceID: workspaceID, text: exampleText, includeAudit: true, failure: failWithError) { counterexample in
             XCTAssertNotNil(counterexample.created)
             XCTAssertNotNil(counterexample.updated)
             XCTAssertEqual(counterexample.text, exampleText)
@@ -994,8 +990,6 @@ class AssistantTests: XCTestCase {
 
         let newExample = "swift-sdk-test-counterexample" + UUID().uuidString
         assistant.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
-            XCTAssertNotNil(counterexample.created)
-            XCTAssertNotNil(counterexample.updated)
             XCTAssertEqual(counterexample.text, newExample)
             expectation.fulfill()
         }
@@ -1006,8 +1000,6 @@ class AssistantTests: XCTestCase {
 
         let updatedText = "updated-"+newExample
         assistant.updateCounterexample(workspaceID: workspaceID, text: newExample, newText: updatedText, failure: failWithError) { counterexample in
-            XCTAssertNotNil(counterexample.created)
-            XCTAssertNotNil(counterexample.updated)
             XCTAssertEqual(counterexample.text, updatedText)
             expectation2.fulfill()
         }
@@ -1028,7 +1020,7 @@ class AssistantTests: XCTestCase {
         let description = "List all entities"
         let expectation = self.expectation(description: description)
 
-        assistant.listEntities(workspaceID: workspaceID, failure: failWithError){entities in
+        assistant.listEntities(workspaceID: workspaceID, includeAudit: true, failure: failWithError){entities in
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1048,7 +1040,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the entities in a workspace with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        assistant.listEntities(workspaceID: workspaceID, includeCount: true, failure: failWithError) { entities in
+        assistant.listEntities(workspaceID: workspaceID, includeCount: true, includeAudit: true, failure: failWithError) { entities in
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1068,7 +1060,7 @@ class AssistantTests: XCTestCase {
         let description = "List all entities with page limit 1"
         let expectation = self.expectation(description: description)
 
-        assistant.listEntities(workspaceID: workspaceID, pageLimit: 1, failure: failWithError){entities in
+        assistant.listEntities(workspaceID: workspaceID, pageLimit: 1, includeAudit: true, failure: failWithError){entities in
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1089,7 +1081,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the entities in a workspace with export as true."
         let expectation = self.expectation(description: description)
 
-        assistant.listEntities(workspaceID: workspaceID, export: true, failure: failWithError) { entities in
+        assistant.listEntities(workspaceID: workspaceID, export: true, includeAudit: true, failure: failWithError) { entities in
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1178,7 +1170,7 @@ class AssistantTests: XCTestCase {
         assistant.listEntities(workspaceID: workspaceID, failure: failWithError) {entityCollection in
             XCTAssert(entityCollection.entities.count > 0)
             let entity = entityCollection.entities[0]
-            self.assistant.getEntity(workspaceID: self.workspaceID, entity: entity.entityName, export: true, failure: self.failWithError) { entityExport in
+            self.assistant.getEntity(workspaceID: self.workspaceID, entity: entity.entityName, export: true, includeAudit: true, failure: self.failWithError) { entityExport in
                 XCTAssertEqual(entityExport.entityName, entity.entityName)
                 XCTAssertEqual(entityExport.description, entity.description)
                 XCTAssertNotNil(entityExport.created)
@@ -1200,6 +1192,7 @@ class AssistantTests: XCTestCase {
             entity: entityName,
             export: true,
             includeCount: true,
+            includeAudit: true,
             failure: failWithError) {
                 valueCollection in
                 for value in valueCollection.values {
@@ -1262,7 +1255,7 @@ class AssistantTests: XCTestCase {
         assistant.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
             XCTAssert(valueCollection.values.count > 0)
             let value = valueCollection.values[0]
-            self.assistant.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.valueText, export: true, failure: self.failWithError) { valueExport in
+            self.assistant.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.valueText, export: true, includeAudit: true, failure: self.failWithError) { valueExport in
                 XCTAssertEqual(valueExport.valueText, value.valueText)
                 XCTAssertNotNil(valueExport.created)
                 XCTAssertNotNil(valueExport.updated)
@@ -1278,7 +1271,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the synonyms for an entity and value."
         let expectation = self.expectation(description: description)
 
-        assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", failure: failWithError) { synonyms in
+        assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeAudit: true, failure: failWithError) { synonyms in
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
@@ -1296,7 +1289,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the synonyms for an entity and value with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeCount: true, failure: failWithError) { synonyms in
+        assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeCount: true, includeAudit: true, failure: failWithError) { synonyms in
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
@@ -1315,7 +1308,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the synonyms for an entity and value with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", pageLimit: 1, failure: failWithError) { synonyms in
+        assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", pageLimit: 1, includeAudit: true, failure: failWithError) { synonyms in
             XCTAssertEqual(synonyms.synonyms.count, 1)
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
@@ -1358,7 +1351,7 @@ class AssistantTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let synonymName = "headlight"
-        assistant.getSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: synonymName, failure: failWithError) { synonym in
+        assistant.getSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: synonymName, includeAudit: true, failure: failWithError) { synonym in
             XCTAssertEqual(synonym.synonymText, synonymName)
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
@@ -1373,8 +1366,6 @@ class AssistantTests: XCTestCase {
 
         let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
         assistant.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
-            XCTAssertNotNil(synonym.created)
-            XCTAssertNotNil(synonym.updated)
             XCTAssertEqual(synonym.synonymText, newSynonym)
             expectation.fulfill()
         }
@@ -1385,8 +1376,6 @@ class AssistantTests: XCTestCase {
 
         let updatedSynonym = "new-" + newSynonym
         assistant.updateSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, newSynonym: updatedSynonym, failure: failWithError){ synonym in
-            XCTAssertNotNil(synonym.created)
-            XCTAssertNotNil(synonym.updated)
             XCTAssertEqual(synonym.synonymText, updatedSynonym)
             expectation2.fulfill()
         }

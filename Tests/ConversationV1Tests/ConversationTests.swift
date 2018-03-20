@@ -1458,7 +1458,7 @@ class ConversationTests: XCTestCase {
 
         let description3 = "Delete a dialog node."
         let expectation3 = self.expectation(description: description3)
-        conversation.deleteDialogNode(workspaceID: workspaceID, dialogNode: updatedNode.dialogNode, failure: failWithError) {
+        conversation.deleteDialogNode(workspaceID: workspaceID, dialogNode: updatedNode.dialogNode!, failure: failWithError) {
             expectation3.fulfill()
         }
         waitForExpectations()

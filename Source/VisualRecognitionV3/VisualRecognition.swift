@@ -35,9 +35,9 @@ public class VisualRecognition {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let credentials: Credentials
-    private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
-    private let version: String
+    internal let credentials: Credentials
+    internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
+    internal let version: String
 
     /**
      Create a `VisualRecognition` object.
@@ -407,12 +407,14 @@ public class VisualRecognition {
     /**
      Retrieve a list of custom classifiers.
 
+     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
      - parameter verbose: Specify `true` to return details about the classifiers.
         Omit this parameter to return a brief list of classifiers.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func listClassifiers(
+        owners: [String]? = nil,
         verbose: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifiers) -> Void)
@@ -420,6 +422,10 @@ public class VisualRecognition {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let owners = owners {
+            let list = owners.joined(separator: ",")
+            queryParameters.append(URLQueryItem(name: "owners", value: list))
+        }
         if let verbose = verbose {
             let queryParameter = URLQueryItem(name: "verbose", value: "\(verbose)")
             queryParameters.append(queryParameter)

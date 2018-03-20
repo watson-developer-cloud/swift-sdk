@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		039B3F661FB368B600A7B5DE /* VisualRecognition+CoreML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039B3F651FB3660700A7B5DE /* VisualRecognition+CoreML.swift */; };
 		120092691DFF0EF900107C0A /* DeletedConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120092671DFF0EF500107C0A /* DeletedConfiguration.swift */; };
 		1200926B1E005A7300107C0A /* ConfigurationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1200926A1E005A7300107C0A /* ConfigurationDetails.swift */; };
 		1200926D1E01947500107C0A /* DeletedEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1200926C1E01947500107C0A /* DeletedEnvironment.swift */; };
@@ -357,6 +358,7 @@
 		68BC29031F8C38700042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		68BC29041F8C38700042810E /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		68BC29051F8C38700042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
+		68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */; };
 		68C441502017B19000B251C6 /* DialogNodeVisitedDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C4414E2017B17B00B251C6 /* DialogNodeVisitedDetails.swift */; };
 		68C974AC200D52F6002DCFA3 /* CaptureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C974AA200D52E4002DCFA3 /* CaptureGroup.swift */; };
 		68D09C1F200D61870087ADE5 /* ToneChatInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D09C18200D61870087ADE5 /* ToneChatInput.swift */; };
@@ -645,6 +647,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		039B3F651FB3660700A7B5DE /* VisualRecognition+CoreML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VisualRecognition+CoreML.swift"; sourceTree = "<group>"; };
 		120092671DFF0EF500107C0A /* DeletedConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedConfiguration.swift; sourceTree = "<group>"; };
 		1200926A1E005A7300107C0A /* ConfigurationDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationDetails.swift; sourceTree = "<group>"; };
 		1200926C1E01947500107C0A /* DeletedEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedEnvironment.swift; sourceTree = "<group>"; };
@@ -898,6 +901,7 @@
 		68B213E81F84296D0052DC00 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensionsTests.swift; sourceTree = "<group>"; };
 		68B213EE1F8429890052DC00 /* JSONValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValueTests.swift; sourceTree = "<group>"; };
+		68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VisualRecognition+CoreMLTests.swift"; path = "Tests/VisualRecognitionV3Tests/VisualRecognition+CoreMLTests.swift"; sourceTree = SOURCE_ROOT; };
 		68C4414E2017B17B00B251C6 /* DialogNodeVisitedDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeVisitedDetails.swift; sourceTree = "<group>"; };
 		68C974AA200D52E4002DCFA3 /* CaptureGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureGroup.swift; sourceTree = "<group>"; };
 		68D09C18200D61870087ADE5 /* ToneChatInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneChatInput.swift; sourceTree = "<group>"; };
@@ -1790,6 +1794,7 @@
 			isa = PBXGroup;
 			children = (
 				7AAA9A5A1CEE6089002C9564 /* VisualRecognition.swift */,
+				039B3F651FB3660700A7B5DE /* VisualRecognition+CoreML.swift */,
 				689A16A4203C9358002CFC66 /* VisualRecognition+UIImage.swift */,
 				7AAA9A471CEE6089002C9564 /* Models */,
 				7AAA9A4F1CEE6089002C9564 /* Tests */,
@@ -1828,6 +1833,7 @@
 			children = (
 				7AAD66471DCA5D730010481E /* Classes */,
 				7AAD664B1DCA5D730010481E /* Images */,
+				68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */,
 				CE6B98DB1DF22638004CD6B5 /* metadata.txt */,
 				689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */,
 				7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */,
@@ -3509,6 +3515,7 @@
 				689A1698203C88C7002CFC66 /* WarningInfo.swift in Sources */,
 				689A169D203C88C7002CFC66 /* ClassifiedImages.swift in Sources */,
 				7AAAF3DA1CEE9A4700B74848 /* VisualRecognition.swift in Sources */,
+				039B3F661FB368B600A7B5DE /* VisualRecognition+CoreML.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3517,6 +3524,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A6C7B4D1D8C960300CD97FA /* Credentials.swift in Sources */,
+				68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */,
 				7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */,
 				689A16A3203C9337002CFC66 /* VisualRecognition+UIImageTests.swift in Sources */,
 			);

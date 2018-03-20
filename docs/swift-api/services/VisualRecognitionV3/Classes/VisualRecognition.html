@@ -771,9 +771,9 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiersySbSg7verbose_ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listClassifiers(verbose:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiersySbSg7verbose_ys5Error_pcSg7failureyAA0E0Vc7successtF">listClassifiers(verbose:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiersySaySSGSg6owners_SbSg7verboseys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listClassifiers(owners:verbose:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiersySaySSGSg6owners_SbSg7verboseys5Error_pcSg7failureyAA0E0Vc7successtF">listClassifiers(owners:verbose:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -789,6 +789,7 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassifiers</span><span class="p">(</span>
+    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">verbose</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifiers.html">Classifiers</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -799,6 +800,18 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>owners</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of owners. Must be <q>IBM</q>, <q>me</q>, or a combination of the two.</p>
+                                </div>
+                              </td>
+                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -1202,6 +1215,319 @@ in an image, age and gender confidence scores might return scores of 0.</p>
                               <td>
                                 <div>
                                   <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Core%20ML"></a>
+                <a name="//apple_ref/swift/Section/Core ML" class="dashAnchor"></a>
+                <a href="#/Core%20ML">
+                  <h3 class="section-name">Core ML</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV30aB0C13getLocalModelSo7MLModelCSS12classifierID_tKF"></a>
+                    <a name="//apple_ref/swift/Method/getLocalModel(classifierID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getLocalModelSo7MLModelCSS12classifierID_tKF">getLocalModel(classifierID:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieve a Core ML model from the local filesystem.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">MLModel</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifierID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the classifier whose Core ML model will be retrieved.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Core ML model loaded from the local filesystem.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV30aB0C16updateLocalModelySS12classifierID_ys5Error_pcSg7failureyycSg7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateLocalModel(classifierID:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateLocalModelySS12classifierID_ys5Error_pcSg7failureyycSg7successtF">updateLocalModel(classifierID:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Download the latest Core ML model to the local filesystem, unless the latest version
+is already available locally. The classifier must have a <code>coreMLStatus</code> of <code>ready</code>
+in order to download the latest model.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateLocalModel</span><span class="p">(</span>
+    <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifierID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the classifier whose Core ML model will be retrieved.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed after the local model has been updated.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV30aB0C15listLocalModelsSaySSGyKF"></a>
+                    <a name="//apple_ref/swift/Method/listLocalModels()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listLocalModelsSaySSGyKF">listLocalModels()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List the Core ML models stored in the local filesystem.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listLocalModels</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A list of classifier IDs with local Core ML models that are available for classification.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV30aB0C16deleteLocalModelySS12classifierID_tKF"></a>
+                    <a name="//apple_ref/swift/Method/deleteLocalModel(classifierID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteLocalModelySS12classifierID_tKF">deleteLocalModel(classifierID:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a Core ML model from the local filesystem.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteLocalModel</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifierID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the classifier whose Core ML model shall be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV30aB0C22classifyWithLocalModelySo7UIImageC5image_SaySSG13classifierIDsSdSg9thresholdys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/classifyWithLocalModel(image:classifierIDs:threshold:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C22classifyWithLocalModelySo7UIImageC5image_SaySSG13classifierIDsSdSg9thresholdys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF">classifyWithLocalModel(image:classifierIDs:threshold:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Classify an image using a Core ML model from the local filesystem.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classifyWithLocalModel</span><span class="p">(</span>
+    <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
+    <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">"default"</span><span class="p">],</span>
+    <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>image</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The image to classify.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifierIDs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A list of the classifier ids to use. <q>default</q> is the id of the
+built-in classifier.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>threshold</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The minimum score a class must have to be displayed in the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the image classifications.</p>
                                 </div>
                               </td>
                             </tr>

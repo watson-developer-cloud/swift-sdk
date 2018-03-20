@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Structures  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Structures  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Structures  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Assistant.html">Assistant</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RestError.html">RestError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Context.html">Context</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Counterexample.html">Counterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CounterexampleCollection.html">CounterexampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateCounterexample.html">CreateCounterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode.html">CreateDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateEntity.html">CreateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateExample.html">CreateExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateIntent.html">CreateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateSynonym.html">CreateSynonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateValue.html">CreateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateValue/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateWorkspace.html">CreateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode.html">DialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeAction.html">DialogNodeAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeAction/ActionType.html">– ActionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeCollection.html">DialogNodeCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeNextStep.html">DialogNodeNextStep</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeNextStep/Behavior.html">– Behavior</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeNextStep/Selector.html">– Selector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeVisitedDetails.html">DialogNodeVisitedDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Entity.html">Entity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EntityCollection.html">EntityCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EntityExport.html">EntityExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Example.html">Example</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ExampleCollection.html">ExampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InputData.html">InputData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Intent.html">Intent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/IntentCollection.html">IntentCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/IntentExport.html">IntentExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:11AssistantV111JSONWrapperV">JSONWrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogExport.html">LogExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogMessage.html">LogMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogMessage/Level.html">– Level</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogPagination.html">LogPagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageInput.html">MessageInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageRequest.html">MessageRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageResponse.html">MessageResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/OutputData.html">OutputData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Pagination.html">Pagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeEntity.html">RuntimeEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeIntent.html">RuntimeIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Synonym.html">Synonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SynonymCollection.html">SynonymCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SystemResponse.html">SystemResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateCounterexample.html">UpdateCounterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode.html">UpdateDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateEntity.html">UpdateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateExample.html">UpdateExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateIntent.html">UpdateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateSynonym.html">UpdateSynonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateValue.html">UpdateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateValue/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateWorkspace.html">UpdateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Value.html">Value</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Value/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ValueCollection.html">ValueCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ValueExport.html">ValueExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ValueExport/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Workspace.html">Workspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceCollection.html">WorkspaceCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceExport.html">WorkspaceExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceExport/Status.html">– Status</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Structures</h1>
+            <p>The following structures are available globally.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV114MessageRequestV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageRequest" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV114MessageRequestV">MessageRequest</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A request formatted for the Assistant service.</p>
+
+                        <a href="Structs/MessageRequest.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageRequest</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV112UpdateEntityV"></a>
+                    <a name="//apple_ref/swift/Struct/UpdateEntity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV112UpdateEntityV">UpdateEntity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>UpdateEntity.</p>
+
+                        <a href="Structs/UpdateEntity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateEntity</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV113CreateExampleV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateExample" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV113CreateExampleV">CreateExample</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CreateExample.</p>
+
+                        <a href="Structs/CreateExample.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateExample</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV113LogPaginationV"></a>
+                    <a name="//apple_ref/swift/Struct/LogPagination" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV113LogPaginationV">LogPagination</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The pagination data for the returned objects.</p>
+
+                        <a href="Structs/LogPagination.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogPagination</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV111CreateValueV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV111CreateValueV">CreateValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CreateValue.</p>
+
+                        <a href="Structs/CreateValue.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateValue</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV115CreateWorkspaceV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateWorkspace" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV115CreateWorkspaceV">CreateWorkspace</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CreateWorkspace.</p>
+
+                        <a href="Structs/CreateWorkspace.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateWorkspace</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV113UpdateSynonymV"></a>
+                    <a name="//apple_ref/swift/Struct/UpdateSynonym" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV113UpdateSynonymV">UpdateSynonym</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>UpdateSynonym.</p>
+
+                        <a href="Structs/UpdateSynonym.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateSynonym</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV19WorkspaceV"></a>
+                    <a name="//apple_ref/swift/Struct/Workspace" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV19WorkspaceV">Workspace</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Workspace.</p>
+
+                        <a href="Structs/Workspace.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Workspace</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV120UpdateCounterexampleV"></a>
+                    <a name="//apple_ref/swift/Struct/UpdateCounterexample" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV120UpdateCounterexampleV">UpdateCounterexample</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>UpdateCounterexample.</p>
+
+                        <a href="Structs/UpdateCounterexample.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateCounterexample</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV112IntentExportV"></a>
+                    <a name="//apple_ref/swift/Struct/IntentExport" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV112IntentExportV">IntentExport</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>IntentExport.</p>
+
+                        <a href="Structs/IntentExport.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">IntentExport</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV17SynonymV"></a>
+                    <a name="//apple_ref/swift/Struct/Synonym" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV17SynonymV">Synonym</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Synonym.</p>
+
+                        <a href="Structs/Synonym.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Synonym</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/JSON"></a>
+                <a name="//apple_ref/swift/Section/JSON" class="dashAnchor"></a>
+                <a href="#/JSON">
+                  <h3 class="section-name">JSON</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV111JSONWrapperV"></a>
+                    <a name="//apple_ref/swift/Struct/JSONWrapper" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV111JSONWrapperV">JSONWrapper</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Used internally to serialize and deserialize JSON.
+Will soon be removed in favor of Swift 4&rsquo;s <code>Codable</code> protocol.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">JSONWrapper</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV113RuntimeIntentV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeIntent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV113RuntimeIntentV">RuntimeIntent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An intent identified in the user input.</p>
+
+                        <a href="Structs/RuntimeIntent.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeIntent</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV115UpdateWorkspaceV"></a>
+                    <a name="//apple_ref/swift/Struct/UpdateWorkspace" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV115UpdateWorkspaceV">UpdateWorkspace</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>UpdateWorkspace.</p>
+
+                        <a href="Structs/UpdateWorkspace.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateWorkspace</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV112CaptureGroupV"></a>
+                    <a name="//apple_ref/swift/Struct/CaptureGroup" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV112CaptureGroupV">CaptureGroup</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CaptureGroup.</p>
+
+                        <a href="Structs/CaptureGroup.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CaptureGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV118DialogNodeNextStepV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeNextStep" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV118DialogNodeNextStepV">DialogNodeNextStep</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The next step to execute following this dialog node.</p>
+
+                        <a href="Structs/DialogNodeNextStep.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeNextStep</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV120DialogNodeCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV120DialogNodeCollectionV">DialogNodeCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An array of dialog nodes.</p>
+
+                        <a href="Structs/DialogNodeCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV110OutputDataV"></a>
+                    <a name="//apple_ref/swift/Struct/OutputData" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV110OutputDataV">OutputData</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An output object that includes the response to the user, the nodes that were hit, and messages from the log.</p>
+
+                        <a href="Structs/OutputData.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">OutputData</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV117ExampleCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/ExampleCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV117ExampleCollectionV">ExampleCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>ExampleCollection.</p>
+
+                        <a href="Structs/ExampleCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ExampleCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV119WorkspaceCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/WorkspaceCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV119WorkspaceCollectionV">WorkspaceCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>WorkspaceCollection.</p>
+
+                        <a href="Structs/WorkspaceCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WorkspaceCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV110DialogNodeV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV110DialogNodeV">DialogNode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>DialogNode.</p>
+
+                        <a href="Structs/DialogNode.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNode</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV115ValueCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/ValueCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV115ValueCollectionV">ValueCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>ValueCollection.</p>
+
+                        <a href="Structs/ValueCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ValueCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV124CounterexampleCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/CounterexampleCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV124CounterexampleCollectionV">CounterexampleCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CounterexampleCollection.</p>
+
+                        <a href="Structs/CounterexampleCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CounterexampleCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV111ValueExportV"></a>
+                    <a name="//apple_ref/swift/Struct/ValueExport" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV111ValueExportV">ValueExport</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>ValueExport.</p>
+
+                        <a href="Structs/ValueExport.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ValueExport</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV17ContextV"></a>
+                    <a name="//apple_ref/swift/Struct/Context" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV17ContextV">Context</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>State information for the conversation. To maintain state, include the context from the previous response.</p>
+
+                        <a href="Structs/Context.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Context</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV113UpdateExampleV"></a>
+                    <a name="//apple_ref/swift/Struct/UpdateExample" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV113UpdateExampleV">UpdateExample</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>UpdateExample.</p>
+
+                        <a href="Structs/UpdateExample.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateExample</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV17ExampleV"></a>
+                    <a name="//apple_ref/swift/Struct/Example" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV17ExampleV">Example</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Example.</p>
+
+                        <a href="Structs/Example.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Example</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV113RuntimeEntityV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeEntity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV113RuntimeEntityV">RuntimeEntity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A term from the request that was identified as an entity.</p>
+
+                        <a href="Structs/RuntimeEntity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeEntity</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116DialogNodeActionV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeAction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116DialogNodeActionV">DialogNodeAction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>DialogNodeAction.</p>
+
+                        <a href="Structs/DialogNodeAction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeAction</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116IntentCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/IntentCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116IntentCollectionV">IntentCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>IntentCollection.</p>
+
+                        <a href="Structs/IntentCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">IntentCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV117SynonymCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/SynonymCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV117SynonymCollectionV">SynonymCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SynonymCollection.</p>
+
+                        <a href="Structs/SynonymCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SynonymCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV113CreateSynonymV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateSynonym" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV113CreateSynonymV">CreateSynonym</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CreateSynonym.</p>
+
+                        <a href="Structs/CreateSynonym.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateSynonym</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV19LogExportV"></a>
+                    <a name="//apple_ref/swift/Struct/LogExport" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV19LogExportV">LogExport</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>LogExport.</p>
+
+                        <a href="Structs/LogExport.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogExport</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV"></a>
+                    <a name="//apple_ref/swift/Struct/UpdateDialogNode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV">UpdateDialogNode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>UpdateDialogNode.</p>
+
+                        <a href="Structs/UpdateDialogNode.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateDialogNode</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV19InputDataV"></a>
+                    <a name="//apple_ref/swift/Struct/InputData" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV19InputDataV">InputData</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The user input.</p>
+
+                        <a href="Structs/InputData.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">InputData</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116CreateDialogNodeV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateDialogNode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116CreateDialogNodeV">CreateDialogNode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CreateDialogNode.</p>
+
+                        <a href="Structs/CreateDialogNode.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateDialogNode</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV112EntityExportV"></a>
+                    <a name="//apple_ref/swift/Struct/EntityExport" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV112EntityExportV">EntityExport</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>EntityExport.</p>
+
+                        <a href="Structs/EntityExport.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EntityExport</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV110PaginationV"></a>
+                    <a name="//apple_ref/swift/Struct/Pagination" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV110PaginationV">Pagination</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The pagination data for the returned objects.</p>
+
+                        <a href="Structs/Pagination.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Pagination</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV16IntentV"></a>
+                    <a name="//apple_ref/swift/Struct/Intent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV16IntentV">Intent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Intent.</p>
+
+                        <a href="Structs/Intent.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Intent</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV124DialogNodeVisitedDetailsV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeVisitedDetails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV124DialogNodeVisitedDetailsV">DialogNodeVisitedDetails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>DialogNodeVisitedDetails.</p>
+
+                        <a href="Structs/DialogNodeVisitedDetails.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeVisitedDetails</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV110LogMessageV"></a>
+                    <a name="//apple_ref/swift/Struct/LogMessage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV110LogMessageV">LogMessage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Log message details.</p>
+
+                        <a href="Structs/LogMessage.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogMessage</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV115WorkspaceExportV"></a>
+                    <a name="//apple_ref/swift/Struct/WorkspaceExport" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV115WorkspaceExportV">WorkspaceExport</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>WorkspaceExport.</p>
+
+                        <a href="Structs/WorkspaceExport.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WorkspaceExport</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV114SystemResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/SystemResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV114SystemResponseV">SystemResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For internal use only.</p>
+
+                        <a href="Structs/SystemResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SystemResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116EntityCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/EntityCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116EntityCollectionV">EntityCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An array of entities.</p>
+
+                        <a href="Structs/EntityCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EntityCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV114CounterexampleV"></a>
+                    <a name="//apple_ref/swift/Struct/Counterexample" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV114CounterexampleV">Counterexample</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Counterexample.</p>
+
+                        <a href="Structs/Counterexample.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Counterexample</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV112MessageInputV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageInput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV112MessageInputV">MessageInput</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The text of the user input.</p>
+
+                        <a href="Structs/MessageInput.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageInput</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV16EntityV"></a>
+                    <a name="//apple_ref/swift/Struct/Entity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV16EntityV">Entity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Entity.</p>
+
+                        <a href="Structs/Entity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Entity</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV113LogCollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/LogCollection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV113LogCollectionV">LogCollection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>LogCollection.</p>
+
+                        <a href="Structs/LogCollection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogCollection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV112CreateEntityV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateEntity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV112CreateEntityV">CreateEntity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CreateEntity.</p>
+
+                        <a href="Structs/CreateEntity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateEntity</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV120CreateCounterexampleV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateCounterexample" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV120CreateCounterexampleV">CreateCounterexample</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CreateCounterexample.</p>
+
+                        <a href="Structs/CreateCounterexample.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateCounterexample</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV111UpdateValueV"></a>
+                    <a name="//apple_ref/swift/Struct/UpdateValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV111UpdateValueV">UpdateValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>UpdateValue.</p>
+
+                        <a href="Structs/UpdateValue.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateValue</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV115MessageResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV115MessageResponseV">MessageResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A response from the Assistant service.</p>
+
+                        <a href="Structs/MessageResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV15ValueV"></a>
+                    <a name="//apple_ref/swift/Struct/Value" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV15ValueV">Value</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Value.</p>
+
+                        <a href="Structs/Value.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Value</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV112UpdateIntentV"></a>
+                    <a name="//apple_ref/swift/Struct/UpdateIntent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV112UpdateIntentV">UpdateIntent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>UpdateIntent.</p>
+
+                        <a href="Structs/UpdateIntent.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateIntent</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV112CreateIntentV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateIntent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV112CreateIntentV">CreateIntent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CreateIntent.</p>
+
+                        <a href="Structs/CreateIntent.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateIntent</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

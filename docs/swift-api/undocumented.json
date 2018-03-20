@@ -1,597 +1,1858 @@
 [
 	{
   "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/TextToSpeechV1/Models/SynthesisVoice.swift",
-      "line": 21,
-      "symbol": "SynthesisVoice",
-      "symbol_kind": "source.lang.swift.decl.enum",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/ClassifiedImage.swift",
+      "line": 31,
+      "symbol": "ClassifiedImage.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/ClassifiedImage.swift",
+      "line": 33,
+      "symbol": "ClassifiedImage.classifiers",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
+      "line": 24,
+      "symbol": "Classifier.Status.ready",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
+      "line": 25,
+      "symbol": "Classifier.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
+      "line": 26,
+      "symbol": "Classifier.Status.retraining",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
+      "line": 27,
+      "symbol": "Classifier.Status.failed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/Classifiers.swift",
+      "line": 22,
+      "symbol": "Classifiers.classifiers",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/Face.swift",
+      "line": 22,
+      "symbol": "Face.age",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/Face.swift",
+      "line": 24,
+      "symbol": "Face.gender",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/Face.swift",
+      "line": 26,
+      "symbol": "Face.faceLocation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/Face.swift",
+      "line": 28,
+      "symbol": "Face.identity",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/VisualRecognitionV3/Models/ImageWithFaces.swift",
+      "line": 34,
+      "symbol": "ImageWithFaces.error",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
+},
+	{
+  "warnings": [
+
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
 },
 	{
   "warnings": [
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/RecognitionSettings.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 24,
+      "symbol": "CreateVoiceModel.Language.deDe",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 25,
+      "symbol": "CreateVoiceModel.Language.enUs",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 26,
+      "symbol": "CreateVoiceModel.Language.enGb",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 27,
+      "symbol": "CreateVoiceModel.Language.esEs",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 28,
+      "symbol": "CreateVoiceModel.Language.esLa",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 29,
+      "symbol": "CreateVoiceModel.Language.esUs",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 30,
+      "symbol": "CreateVoiceModel.Language.frFr",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 31,
+      "symbol": "CreateVoiceModel.Language.itIt",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 32,
+      "symbol": "CreateVoiceModel.Language.jaJp",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/CreateVoiceModel.swift",
+      "line": 33,
+      "symbol": "CreateVoiceModel.Language.ptBr",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 24,
+      "symbol": "Translation.PartOfSpeech.josi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 25,
+      "symbol": "Translation.PartOfSpeech.mesi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 26,
+      "symbol": "Translation.PartOfSpeech.kigo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 27,
+      "symbol": "Translation.PartOfSpeech.gobi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 28,
+      "symbol": "Translation.PartOfSpeech.dosi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 29,
+      "symbol": "Translation.PartOfSpeech.jodo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 30,
+      "symbol": "Translation.PartOfSpeech.koyu",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 31,
+      "symbol": "Translation.PartOfSpeech.stbi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 32,
+      "symbol": "Translation.PartOfSpeech.suji",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 33,
+      "symbol": "Translation.PartOfSpeech.kedo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 34,
+      "symbol": "Translation.PartOfSpeech.fuku",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 35,
+      "symbol": "Translation.PartOfSpeech.keyo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 36,
+      "symbol": "Translation.PartOfSpeech.stto",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 37,
+      "symbol": "Translation.PartOfSpeech.reta",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 38,
+      "symbol": "Translation.PartOfSpeech.stzo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 39,
+      "symbol": "Translation.PartOfSpeech.kato",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 40,
+      "symbol": "Translation.PartOfSpeech.hoka",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 24,
+      "symbol": "Word.PartOfSpeech.josi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 25,
+      "symbol": "Word.PartOfSpeech.mesi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 26,
+      "symbol": "Word.PartOfSpeech.kigo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 27,
+      "symbol": "Word.PartOfSpeech.gobi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 28,
+      "symbol": "Word.PartOfSpeech.dosi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 29,
+      "symbol": "Word.PartOfSpeech.jodo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 30,
+      "symbol": "Word.PartOfSpeech.koyu",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 31,
+      "symbol": "Word.PartOfSpeech.stbi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 32,
+      "symbol": "Word.PartOfSpeech.suji",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 33,
+      "symbol": "Word.PartOfSpeech.kedo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 34,
+      "symbol": "Word.PartOfSpeech.fuku",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 35,
+      "symbol": "Word.PartOfSpeech.keyo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 36,
+      "symbol": "Word.PartOfSpeech.stto",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 37,
+      "symbol": "Word.PartOfSpeech.reta",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 38,
+      "symbol": "Word.PartOfSpeech.stzo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 39,
+      "symbol": "Word.PartOfSpeech.kato",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 40,
+      "symbol": "Word.PartOfSpeech.hoka",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
+},
+	{
+  "warnings": [
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/SpeechToTextV1/Models/RecognitionSettings.swift",
       "line": 103,
       "symbol": "RecognitionSettings.toJSONObject()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
 },
 	{
   "warnings": [
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/ListModelsResults.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/ContentItem.swift",
+      "line": 24,
+      "symbol": "ContentItem.Contenttype.plain",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/ContentItem.swift",
+      "line": 25,
+      "symbol": "ContentItem.Contenttype.html",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/ContentItem.swift",
+      "line": 30,
+      "symbol": "ContentItem.Language.ar",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/ContentItem.swift",
+      "line": 31,
+      "symbol": "ContentItem.Language.en",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/ContentItem.swift",
+      "line": 32,
+      "symbol": "ContentItem.Language.es",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/ContentItem.swift",
+      "line": 33,
+      "symbol": "ContentItem.Language.ja",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/ContentItem.swift",
+      "line": 34,
+      "symbol": "ContentItem.Language.ko",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Profile.swift",
+      "line": 24,
+      "symbol": "Profile.ProcessedLanguage.ar",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Profile.swift",
+      "line": 25,
+      "symbol": "Profile.ProcessedLanguage.en",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Profile.swift",
+      "line": 26,
+      "symbol": "Profile.ProcessedLanguage.es",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Profile.swift",
+      "line": 27,
+      "symbol": "Profile.ProcessedLanguage.ja",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Profile.swift",
+      "line": 28,
+      "symbol": "Profile.ProcessedLanguage.ko",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Trait.swift",
+      "line": 24,
+      "symbol": "Trait.Category.personality",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Trait.swift",
+      "line": 25,
+      "symbol": "Trait.Category.needs",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Trait.swift",
+      "line": 26,
+      "symbol": "Trait.Category.values",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Warning.swift",
+      "line": 24,
+      "symbol": "Warning.WarningID.wordCountMessage",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Warning.swift",
+      "line": 25,
+      "symbol": "Warning.WarningID.jsonAsText",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Warning.swift",
+      "line": 26,
+      "symbol": "Warning.WarningID.contentTruncated",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/PersonalityInsightsV3/Models/Warning.swift",
+      "line": 27,
+      "symbol": "Warning.WarningID.partialTextUsed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
+},
+	{
+  "warnings": [
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/ListModelsResults.swift",
       "line": 22,
       "symbol": "ListModelsResults.models",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/RelationArgument.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/RelationArgument.swift",
       "line": 22,
       "symbol": "RelationArgument.entities",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesAction.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesAction.swift",
       "line": 28,
       "symbol": "SemanticRolesAction.verb",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesObject.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesObject.swift",
       "line": 25,
       "symbol": "SemanticRolesObject.keywords",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesSubject.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesSubject.swift",
       "line": 25,
       "symbol": "SemanticRolesSubject.entities",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesSubject.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesSubject.swift",
       "line": 27,
       "symbol": "SemanticRolesSubject.keywords",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
 },
 	{
   "warnings": [
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 24,
+      "symbol": "Classifier.Status.nonExistent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 25,
+      "symbol": "Classifier.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 26,
+      "symbol": "Classifier.Status.failed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 27,
+      "symbol": "Classifier.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 28,
+      "symbol": "Classifier.Status.unavailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
+},
+	{
+  "warnings": [
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 24,
+      "symbol": "TranslationModel.Status.uploading",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 25,
+      "symbol": "TranslationModel.Status.uploaded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 26,
+      "symbol": "TranslationModel.Status.dispatching",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 27,
+      "symbol": "TranslationModel.Status.queued",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 28,
+      "symbol": "TranslationModel.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 29,
+      "symbol": "TranslationModel.Status.trained",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 30,
+      "symbol": "TranslationModel.Status.publishing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 31,
+      "symbol": "TranslationModel.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 32,
+      "symbol": "TranslationModel.Status.deleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
+      "line": 33,
+      "symbol": "TranslationModel.Status.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
+},
+	{
+  "warnings": [
+
+  ],
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
+},
+	{
+  "warnings": [
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 24,
       "symbol": "CreateDialogNode.NodeType.standard",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 25,
       "symbol": "CreateDialogNode.NodeType.eventHandler",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 26,
       "symbol": "CreateDialogNode.NodeType.frame",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 27,
       "symbol": "CreateDialogNode.NodeType.slot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 28,
       "symbol": "CreateDialogNode.NodeType.responseCondition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 33,
       "symbol": "CreateDialogNode.EventName.focus",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 34,
       "symbol": "CreateDialogNode.EventName.input",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 35,
       "symbol": "CreateDialogNode.EventName.filled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 36,
       "symbol": "CreateDialogNode.EventName.validate",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 37,
       "symbol": "CreateDialogNode.EventName.filledMultiple",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 38,
       "symbol": "CreateDialogNode.EventName.generic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 39,
       "symbol": "CreateDialogNode.EventName.nomatch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 40,
       "symbol": "CreateDialogNode.EventName.nomatchResponsesDepleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateValue.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateValue.swift",
       "line": 24,
       "symbol": "CreateValue.ValueType.synonyms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/CreateValue.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/CreateValue.swift",
       "line": 25,
       "symbol": "CreateValue.ValueType.patterns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 24,
       "symbol": "DialogNode.NodeType.standard",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 25,
       "symbol": "DialogNode.NodeType.eventHandler",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 26,
       "symbol": "DialogNode.NodeType.frame",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 27,
       "symbol": "DialogNode.NodeType.slot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 28,
       "symbol": "DialogNode.NodeType.responseCondition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 33,
       "symbol": "DialogNode.EventName.focus",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 34,
       "symbol": "DialogNode.EventName.input",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 35,
       "symbol": "DialogNode.EventName.filled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 36,
       "symbol": "DialogNode.EventName.validate",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 37,
       "symbol": "DialogNode.EventName.filledMultiple",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 38,
       "symbol": "DialogNode.EventName.generic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 39,
       "symbol": "DialogNode.EventName.nomatch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 40,
       "symbol": "DialogNode.EventName.nomatchResponsesDepleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeAction.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNodeAction.swift",
       "line": 24,
       "symbol": "DialogNodeAction.ActionType.client",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeAction.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNodeAction.swift",
       "line": 25,
       "symbol": "DialogNodeAction.ActionType.server",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeCollection.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNodeCollection.swift",
       "line": 22,
       "symbol": "DialogNodeCollection.dialogNodes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 25,
       "symbol": "DialogNodeNextStep.Behavior.to",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 30,
       "symbol": "DialogNodeNextStep.Selector.condition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 31,
       "symbol": "DialogNodeNextStep.Selector.client",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 32,
       "symbol": "DialogNodeNextStep.Selector.userInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 33,
       "symbol": "DialogNodeNextStep.Selector.body",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
       "line": 24,
       "symbol": "LogMessage.Level.info",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
       "line": 25,
       "symbol": "LogMessage.Level.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
       "line": 26,
       "symbol": "LogMessage.Level.warn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 24,
       "symbol": "UpdateDialogNode.NodeType.standard",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 25,
       "symbol": "UpdateDialogNode.NodeType.eventHandler",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 26,
       "symbol": "UpdateDialogNode.NodeType.frame",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 27,
       "symbol": "UpdateDialogNode.NodeType.slot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 28,
       "symbol": "UpdateDialogNode.NodeType.responseCondition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 33,
       "symbol": "UpdateDialogNode.EventName.focus",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 34,
       "symbol": "UpdateDialogNode.EventName.input",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 35,
       "symbol": "UpdateDialogNode.EventName.filled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 36,
       "symbol": "UpdateDialogNode.EventName.validate",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 37,
       "symbol": "UpdateDialogNode.EventName.filledMultiple",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 38,
       "symbol": "UpdateDialogNode.EventName.generic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 39,
       "symbol": "UpdateDialogNode.EventName.nomatch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 40,
       "symbol": "UpdateDialogNode.EventName.nomatchResponsesDepleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateValue.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateValue.swift",
       "line": 24,
       "symbol": "UpdateValue.ValueType.synonyms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/UpdateValue.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/UpdateValue.swift",
       "line": 25,
       "symbol": "UpdateValue.ValueType.patterns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/Value.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/Value.swift",
       "line": 24,
       "symbol": "Value.ValueType.synonyms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/Value.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/Value.swift",
       "line": 25,
       "symbol": "Value.ValueType.patterns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/ValueExport.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/ValueExport.swift",
       "line": 24,
       "symbol": "ValueExport.ValueType.synonyms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/ValueExport.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/ValueExport.swift",
       "line": 25,
       "symbol": "ValueExport.ValueType.patterns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 24,
       "symbol": "WorkspaceExport.Status.nonExistent",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 25,
       "symbol": "WorkspaceExport.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 26,
       "symbol": "WorkspaceExport.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 27,
       "symbol": "WorkspaceExport.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 28,
       "symbol": "WorkspaceExport.Status.unavailable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
 },
 	{
   "warnings": [
-
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 24,
+      "symbol": "CreateDialogNode.NodeType.standard",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 25,
+      "symbol": "CreateDialogNode.NodeType.eventHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 26,
+      "symbol": "CreateDialogNode.NodeType.frame",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 27,
+      "symbol": "CreateDialogNode.NodeType.slot",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 28,
+      "symbol": "CreateDialogNode.NodeType.responseCondition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 29,
+      "symbol": "CreateDialogNode.NodeType.folder",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 34,
+      "symbol": "CreateDialogNode.EventName.focus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 35,
+      "symbol": "CreateDialogNode.EventName.input",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 36,
+      "symbol": "CreateDialogNode.EventName.filled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 37,
+      "symbol": "CreateDialogNode.EventName.validate",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 38,
+      "symbol": "CreateDialogNode.EventName.filledMultiple",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 39,
+      "symbol": "CreateDialogNode.EventName.generic",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 40,
+      "symbol": "CreateDialogNode.EventName.nomatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 41,
+      "symbol": "CreateDialogNode.EventName.nomatchResponsesDepleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 46,
+      "symbol": "CreateDialogNode.DigressIn.notAvailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 47,
+      "symbol": "CreateDialogNode.DigressIn.returns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 48,
+      "symbol": "CreateDialogNode.DigressIn.doesNotReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 53,
+      "symbol": "CreateDialogNode.DigressOut.returning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 54,
+      "symbol": "CreateDialogNode.DigressOut.all",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 55,
+      "symbol": "CreateDialogNode.DigressOut.allNeverReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 60,
+      "symbol": "CreateDialogNode.DigressOutSlots.notAllowed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 61,
+      "symbol": "CreateDialogNode.DigressOutSlots.allowReturning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
+      "line": 62,
+      "symbol": "CreateDialogNode.DigressOutSlots.allowAll",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateValue.swift",
+      "line": 24,
+      "symbol": "CreateValue.ValueType.synonyms",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/CreateValue.swift",
+      "line": 25,
+      "symbol": "CreateValue.ValueType.patterns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 24,
+      "symbol": "DialogNode.NodeType.standard",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 25,
+      "symbol": "DialogNode.NodeType.eventHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 26,
+      "symbol": "DialogNode.NodeType.frame",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 27,
+      "symbol": "DialogNode.NodeType.slot",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 28,
+      "symbol": "DialogNode.NodeType.responseCondition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 29,
+      "symbol": "DialogNode.NodeType.folder",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 34,
+      "symbol": "DialogNode.EventName.focus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 35,
+      "symbol": "DialogNode.EventName.input",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 36,
+      "symbol": "DialogNode.EventName.filled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 37,
+      "symbol": "DialogNode.EventName.validate",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 38,
+      "symbol": "DialogNode.EventName.filledMultiple",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 39,
+      "symbol": "DialogNode.EventName.generic",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 40,
+      "symbol": "DialogNode.EventName.nomatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 41,
+      "symbol": "DialogNode.EventName.nomatchResponsesDepleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 46,
+      "symbol": "DialogNode.DigressIn.notAvailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 47,
+      "symbol": "DialogNode.DigressIn.returns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 48,
+      "symbol": "DialogNode.DigressIn.doesNotReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 53,
+      "symbol": "DialogNode.DigressOut.returning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 54,
+      "symbol": "DialogNode.DigressOut.all",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 55,
+      "symbol": "DialogNode.DigressOut.allNeverReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 60,
+      "symbol": "DialogNode.DigressOutSlots.notAllowed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 61,
+      "symbol": "DialogNode.DigressOutSlots.allowReturning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNode.swift",
+      "line": 62,
+      "symbol": "DialogNode.DigressOutSlots.allowAll",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeAction.swift",
+      "line": 24,
+      "symbol": "DialogNodeAction.ActionType.client",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeAction.swift",
+      "line": 25,
+      "symbol": "DialogNodeAction.ActionType.server",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 24,
+      "symbol": "DialogNodeNextStep.Behavior.getUserInput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 25,
+      "symbol": "DialogNodeNextStep.Behavior.skipUserInput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 26,
+      "symbol": "DialogNodeNextStep.Behavior.jumpTo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 27,
+      "symbol": "DialogNodeNextStep.Behavior.reprompt",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 28,
+      "symbol": "DialogNodeNextStep.Behavior.skipSlot",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 29,
+      "symbol": "DialogNodeNextStep.Behavior.skipAllSlots",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 34,
+      "symbol": "DialogNodeNextStep.Selector.condition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 35,
+      "symbol": "DialogNodeNextStep.Selector.client",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 36,
+      "symbol": "DialogNodeNextStep.Selector.userInput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/DialogNodeNextStep.swift",
+      "line": 37,
+      "symbol": "DialogNodeNextStep.Selector.body",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/LogMessage.swift",
+      "line": 24,
+      "symbol": "LogMessage.Level.info",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/LogMessage.swift",
+      "line": 25,
+      "symbol": "LogMessage.Level.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/LogMessage.swift",
+      "line": 26,
+      "symbol": "LogMessage.Level.warn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 24,
+      "symbol": "UpdateDialogNode.NodeType.standard",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 25,
+      "symbol": "UpdateDialogNode.NodeType.eventHandler",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 26,
+      "symbol": "UpdateDialogNode.NodeType.frame",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 27,
+      "symbol": "UpdateDialogNode.NodeType.slot",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 28,
+      "symbol": "UpdateDialogNode.NodeType.responseCondition",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 29,
+      "symbol": "UpdateDialogNode.NodeType.folder",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 34,
+      "symbol": "UpdateDialogNode.EventName.focus",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 35,
+      "symbol": "UpdateDialogNode.EventName.input",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 36,
+      "symbol": "UpdateDialogNode.EventName.filled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 37,
+      "symbol": "UpdateDialogNode.EventName.validate",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 38,
+      "symbol": "UpdateDialogNode.EventName.filledMultiple",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 39,
+      "symbol": "UpdateDialogNode.EventName.generic",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 40,
+      "symbol": "UpdateDialogNode.EventName.nomatch",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 41,
+      "symbol": "UpdateDialogNode.EventName.nomatchResponsesDepleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 46,
+      "symbol": "UpdateDialogNode.DigressIn.notAvailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 47,
+      "symbol": "UpdateDialogNode.DigressIn.returns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 48,
+      "symbol": "UpdateDialogNode.DigressIn.doesNotReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 53,
+      "symbol": "UpdateDialogNode.DigressOut.returning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 54,
+      "symbol": "UpdateDialogNode.DigressOut.all",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 55,
+      "symbol": "UpdateDialogNode.DigressOut.allNeverReturn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 60,
+      "symbol": "UpdateDialogNode.DigressOutSlots.notAllowed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 61,
+      "symbol": "UpdateDialogNode.DigressOutSlots.allowReturning",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateDialogNode.swift",
+      "line": 62,
+      "symbol": "UpdateDialogNode.DigressOutSlots.allowAll",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateValue.swift",
+      "line": 24,
+      "symbol": "UpdateValue.ValueType.synonyms",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/UpdateValue.swift",
+      "line": 25,
+      "symbol": "UpdateValue.ValueType.patterns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/Value.swift",
+      "line": 24,
+      "symbol": "Value.ValueType.synonyms",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/Value.swift",
+      "line": 25,
+      "symbol": "Value.ValueType.patterns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/ValueExport.swift",
+      "line": 24,
+      "symbol": "ValueExport.ValueType.synonyms",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/ValueExport.swift",
+      "line": 25,
+      "symbol": "ValueExport.ValueType.patterns",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 24,
+      "symbol": "WorkspaceExport.Status.nonExistent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 25,
+      "symbol": "WorkspaceExport.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 26,
+      "symbol": "WorkspaceExport.Status.failed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 27,
+      "symbol": "WorkspaceExport.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/pluto-swift-sdk/Source/AssistantV1/Models/WorkspaceExport.swift",
+      "line": 28,
+      "symbol": "WorkspaceExport.Status.unavailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
   ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
-},
-	{
-  "warnings": [
-
-  ],
-  "source_directory": "/Users/glennrfisher/Projects/swift-sdk"
+  "source_directory": "/Users/glennrfisher/Projects/pluto-swift-sdk"
 }
 ]

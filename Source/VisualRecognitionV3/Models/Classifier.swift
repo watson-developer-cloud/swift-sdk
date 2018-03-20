@@ -51,6 +51,9 @@ public struct Classifier {
     /// Date and time in Coordinated Universal Time that the classifier was updated. Returned when verbose=`true`. Might not be returned by some requests.
     public var retrained: String?
 
+    /// If the classifier is CoreML Enabled.
+    public let coreMLEnabled: Bool?
+
     /**
      Initialize a `Classifier` with member variables.
 
@@ -62,10 +65,11 @@ public struct Classifier {
      - parameter created: Date and time in Coordinated Universal Time that the classifier was created.
      - parameter classes: Array of classes that define a classifier.
      - parameter retrained: Date and time in Coordinated Universal Time that the classifier was updated. Returned when verbose=`true`. Might not be returned by some requests.
+     - parameter coreMLEnabled: If the classifier is CoreML Enabled.
 
      - returns: An initialized `Classifier`.
     */
-    public init(classifierID: String, name: String, owner: String? = nil, status: String? = nil, explanation: String? = nil, created: String? = nil, classes: [Class]? = nil, retrained: String? = nil) {
+    public init(classifierID: String, name: String, owner: String? = nil, status: String? = nil, explanation: String? = nil, created: String? = nil, classes: [Class]? = nil, retrained: String? = nil, coreMLEnabled: Bool? = nil) {
         self.classifierID = classifierID
         self.name = name
         self.owner = owner
@@ -74,6 +78,7 @@ public struct Classifier {
         self.created = created
         self.classes = classes
         self.retrained = retrained
+        self.coreMLEnabled = coreMLEnabled
     }
 }
 
@@ -88,7 +93,8 @@ extension Classifier: Codable {
         case created = "created"
         case classes = "classes"
         case retrained = "retrained"
-        static let allValues = [classifierID, name, owner, status, explanation, created, classes, retrained]
+        case coreMLEnabled = "core_ml_enabled"
+        static let allValues = [classifierID, name, owner, status, explanation, created, classes, retrained, coreMLEnabled]
     }
 
     public init(from decoder: Decoder) throws {
@@ -101,6 +107,7 @@ extension Classifier: Codable {
         created = try container.decodeIfPresent(String.self, forKey: .created)
         classes = try container.decodeIfPresent([Class].self, forKey: .classes)
         retrained = try container.decodeIfPresent(String.self, forKey: .retrained)
+        coreMLEnabled = try container.decodeIfPresent(Bool.self, forKey: .coreMLEnabled)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -113,6 +120,7 @@ extension Classifier: Codable {
         try container.encodeIfPresent(created, forKey: .created)
         try container.encodeIfPresent(classes, forKey: .classes)
         try container.encodeIfPresent(retrained, forKey: .retrained)
+        try container.encodeIfPresent(coreMLEnabled, forKey: .coreMLEnabled)
     }
 
 }

@@ -51,6 +51,9 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Context.html">Context</a>
               </li>
               <li class="nav-group-task">
@@ -118,6 +121,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNodeNextStep/Selector.html">– Selector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeVisitedDetails.html">DialogNodeVisitedDetails</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Entity.html">Entity</a>
@@ -358,6 +364,33 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:14ConversationV110OutputDataV19nodesVisitedDetailsSayAA010DialogNodefG0VGSgv"></a>
+                    <a name="//apple_ref/swift/Property/nodesVisitedDetails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV110OutputDataV19nodesVisitedDetailsSayAA010DialogNodefG0VGSgv">nodesVisitedDetails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">nodesVisitedDetails</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNodeVisitedDetails.html">DialogNodeVisitedDetails</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:14ConversationV110OutputDataV20additionalPropertiess10DictionaryVySSAA4JSONOGv"></a>
                     <a name="//apple_ref/swift/Property/additionalProperties" class="dashAnchor"></a>
                     <a class="token" href="#/s:14ConversationV110OutputDataV20additionalPropertiess10DictionaryVySSAA4JSONOGv">additionalProperties</a>
@@ -385,9 +418,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ConversationV110OutputDataVACSayAA10LogMessageVG11logMessages_SaySSG4textAHSg12nodesVisiteds10DictionaryVySSAA4JSONOG20additionalPropertiestcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(logMessages:text:nodesVisited:additionalProperties:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ConversationV110OutputDataVACSayAA10LogMessageVG11logMessages_SaySSG4textAHSg12nodesVisiteds10DictionaryVySSAA4JSONOG20additionalPropertiestcfc">init(logMessages:text:nodesVisited:additionalProperties:)</a>
+                    <a name="/s:14ConversationV110OutputDataVACSayAA10LogMessageVG11logMessages_SaySSG4textAHSg12nodesVisitedSayAA010DialogNodeK7DetailsVGSg0jkN0s10DictionaryVySSAA4JSONOG20additionalPropertiestcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(logMessages:text:nodesVisited:nodesVisitedDetails:additionalProperties:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV110OutputDataVACSayAA10LogMessageVG11logMessages_SaySSG4textAHSg12nodesVisitedSayAA010DialogNodeK7DetailsVGSg0jkN0s10DictionaryVySSAA4JSONOG20additionalPropertiestcfc">init(logMessages:text:nodesVisited:nodesVisitedDetails:additionalProperties:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -402,7 +435,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">logMessages</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/LogMessage.html">LogMessage</a></span><span class="p">],</span> <span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">nodesVisited</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">additionalProperties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">logMessages</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/LogMessage.html">LogMessage</a></span><span class="p">],</span> <span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">nodesVisited</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">nodesVisitedDetails</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNodeVisitedDetails.html">DialogNodeVisitedDetails</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">additionalProperties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span></code></pre>
 
                         </div>
                       </div>
@@ -443,6 +476,18 @@
                               <td>
                                 <div>
                                   <p>An array of the nodes that were triggered to create the response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>nodesVisitedDetails</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message.</p>
                                 </div>
                               </td>
                             </tr>
@@ -517,7 +562,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-01-17)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

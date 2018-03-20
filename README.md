@@ -4,7 +4,7 @@
 ![](https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg)](http://watson-developer-cloud.github.io/swift-sdk)
-[![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/ios-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
+[![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
 
 ## Overview
 
@@ -181,12 +181,12 @@ To use the Watson SDK in your Linux project, please follow the [Swift Package Ma
 
 ## Contributing
 
-We would love any and all help! If you would like to contribute, please read our [CONTRIBUTING](https://github.com/watson-developer-cloud/ios-sdk/blob/master/.github/CONTRIBUTING.md) documentation with information on getting started.
+We would love any and all help! If you would like to contribute, please read our [CONTRIBUTING](https://github.com/watson-developer-cloud/swift-sdk/blob/master/.github/CONTRIBUTING.md) documentation with information on getting started.
 
 ## License
 
 This library is licensed under Apache 2.0. Full license text is
-available in [LICENSE](https://github.com/watson-developer-cloud/ios-sdk/blob/master/LICENSE).
+available in [LICENSE](https://github.com/watson-developer-cloud/swift-sdk/blob/master/LICENSE).
 
 This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
 
@@ -555,7 +555,7 @@ var settings = RecognitionSettings(contentType: .wav)
 settings.interimResults = true
 ```
 
-See the [class documentation](http://watson-developer-cloud.github.io/ios-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) for more information about the available settings.
+See the [class documentation](http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) for more information about the available settings.
 
 #### Microphone Audio and Compression
 
@@ -929,6 +929,54 @@ visualRecognition.classify(image: url, failure: failure) { classifiedImages in
     print(classifiedImages)
 }
 ```
+
+### Using Core ML
+
+The Watson Swift SDK supports offline image classification using Apple Core ML. Classifiers must be trained or updated with the `coreMLEnabled` flag set to true. Once the classifier's `coreMLStatus` is `ready` then a Core ML model is available to download and use for offline classification. 
+
+Once the Core ML model is in the device's file system, images can be classified offline, directly on the device.
+
+```swift
+let classifierID = "your-classifier-id"
+let failure = { (error: Error) in print(error) }
+let image = UIImage(named: "your-image-filename")
+visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], failure: failure) {
+    classifiedImages in print(classifiedImages)
+}
+```
+
+The local Core ML model can be updated as needed.
+
+```swift
+let classifierID = "your-classifier-id"
+let failure = { (error: Error) in print(error) }
+visualRecognition.updateLocalModel(classifierID: classifierID, failure: failure) {
+    print("model updated")
+}
+```
+
+The following example demonstrates how to list the Core ML models that are stored in the filesystem and available for offline use:
+
+```swift
+let localModels = try! visualRecognition.listLocalModels()
+print(localModels)
+```
+
+If you would prefer to bypass `classifyWithLocalModel` and construct your own Core ML classification request, then you can retrieve a Core ML model from the local filesystem with the following example.
+```swift
+let classifierID = "your-classifier-id"
+let localModel = try! visualRecognition.getLocalModel(classifierID: classifierID)
+print(localModel)
+```
+
+The following example demonstrates how to delete a local Core ML model from the filesystem. This saves space when the model is no longer needed.
+```swift
+let classifierID = "your-classifier-id"
+visualRecognition.deleteLocalModel(classifierID: classifierID)
+```
+
+#### Bundling a model directly with your application
+You may also choose to include a Core ML model with your application, enabling images to be classified offline without having to download a model first. To include a model, add it to your application bundle following the naming convention [classifier_id].mlmodel. This will enable the SDK to locate the model when using any function that accepts a classifierID argument.
 
 The following links provide more information about the IBM Watson Visual Recognition service:
 

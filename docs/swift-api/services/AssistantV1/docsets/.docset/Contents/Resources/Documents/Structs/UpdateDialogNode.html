@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>UpdateDialogNode Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/UpdateDialogNode" class="dashAnchor"></a>
+    <a title="UpdateDialogNode Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        UpdateDialogNode Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Assistant.html">Assistant</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RestError.html">RestError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Context.html">Context</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Counterexample.html">Counterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CounterexampleCollection.html">CounterexampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateCounterexample.html">CreateCounterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode.html">CreateDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateEntity.html">CreateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateExample.html">CreateExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateIntent.html">CreateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateSynonym.html">CreateSynonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateValue.html">CreateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateValue/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateWorkspace.html">CreateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode.html">DialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeAction.html">DialogNodeAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeAction/ActionType.html">– ActionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeCollection.html">DialogNodeCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeNextStep/Behavior.html">– Behavior</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeNextStep/Selector.html">– Selector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeVisitedDetails.html">DialogNodeVisitedDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Entity.html">Entity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EntityCollection.html">EntityCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EntityExport.html">EntityExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Example.html">Example</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ExampleCollection.html">ExampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/InputData.html">InputData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Intent.html">Intent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntentCollection.html">IntentCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntentExport.html">IntentExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:11AssistantV111JSONWrapperV">JSONWrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogExport.html">LogExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessage.html">LogMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessage/Level.html">– Level</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogPagination.html">LogPagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageInput.html">MessageInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageRequest.html">MessageRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageResponse.html">MessageResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OutputData.html">OutputData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Pagination.html">Pagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeEntity.html">RuntimeEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeIntent.html">RuntimeIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Synonym.html">Synonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SynonymCollection.html">SynonymCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SystemResponse.html">SystemResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateCounterexample.html">UpdateCounterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode.html">UpdateDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateEntity.html">UpdateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateExample.html">UpdateExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateIntent.html">UpdateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateSynonym.html">UpdateSynonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateValue.html">UpdateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateValue/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateWorkspace.html">UpdateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Value.html">Value</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Value/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ValueCollection.html">ValueCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ValueExport.html">ValueExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ValueExport/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Workspace.html">Workspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceCollection.html">WorkspaceCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceExport.html">WorkspaceExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceExport/Status.html">– Status</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>UpdateDialogNode</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateDialogNode</span></code></pre>
+
+                </div>
+              </div>
+            <p>UpdateDialogNode.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV0E4TypeO"></a>
+                    <a name="//apple_ref/swift/Enum/NodeType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV0E4TypeO">NodeType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>How the dialog node is processed.</p>
+
+                        <a href="../Structs/UpdateDialogNode/NodeType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">NodeType</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV9EventNameO"></a>
+                    <a name="//apple_ref/swift/Enum/EventName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV9EventNameO">EventName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>How an <code>event_handler</code> node is processed.</p>
+
+                        <a href="../Structs/UpdateDialogNode/EventName.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">EventName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV9DigressInO"></a>
+                    <a name="//apple_ref/swift/Enum/DigressIn" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV9DigressInO">DigressIn</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether this top-level dialog node can be digressed into.</p>
+
+                        <a href="../Structs/UpdateDialogNode/DigressIn.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">DigressIn</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV10DigressOutO"></a>
+                    <a name="//apple_ref/swift/Enum/DigressOut" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV10DigressOutO">DigressOut</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether this dialog node can be returned to after a digression.</p>
+
+                        <a href="../Structs/UpdateDialogNode/DigressOut.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">DigressOut</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV15DigressOutSlotsO"></a>
+                    <a name="//apple_ref/swift/Enum/DigressOutSlots" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV15DigressOutSlotsO">DigressOutSlots</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether the user can digress to top-level nodes while filling out slots.</p>
+
+                        <a href="../Structs/UpdateDialogNode/DigressOutSlots.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">DigressOutSlots</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV06dialogE0SSSgv"></a>
+                    <a name="//apple_ref/swift/Property/dialogNode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV06dialogE0SSSgv">dialogNode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dialogNode</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV11descriptionSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV11descriptionSSSgv">description</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV10conditionsSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/conditions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV10conditionsSSSgv">conditions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">conditions</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV6parentSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/parent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV6parentSSSgv">parent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The ID of the parent dialog node.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">parent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV15previousSiblingSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/previousSibling" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV15previousSiblingSSSgv">previousSibling</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The ID of the previous sibling dialog node.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">previousSibling</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV6outputs10DictionaryVySSAA4JSONOGSgv"></a>
+                    <a name="//apple_ref/swift/Property/output" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV6outputs10DictionaryVySSAA4JSONOGSgv">output</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The output of the dialog node. For more information about how to specify dialog node output, see the <a href="https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">output</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV7contexts10DictionaryVySSAA4JSONOGSgv"></a>
+                    <a name="//apple_ref/swift/Property/context" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV7contexts10DictionaryVySSAA4JSONOGSgv">context</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The context for the dialog node.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">context</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV8metadatas10DictionaryVySSAA4JSONOGSgv"></a>
+                    <a name="//apple_ref/swift/Property/metadata" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV8metadatas10DictionaryVySSAA4JSONOGSgv">metadata</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The metadata for the dialog node.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV8nextStepAA0de4NextG0VSgv"></a>
+                    <a name="//apple_ref/swift/Property/nextStep" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV8nextStepAA0de4NextG0VSgv">nextStep</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The next step to be executed in dialog processing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">nextStep</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV5titleSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/title" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV5titleSSSgv">title</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV8nodeTypeSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/nodeType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV8nodeTypeSSSgv">nodeType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>How the dialog node is processed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">nodeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV9eventNameSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/eventName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV9eventNameSSSgv">eventName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>How an <code>event_handler</code> node is processed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">eventName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV8variableSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/variable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV8variableSSSgv">variable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The location in the dialog context where output is stored.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">variable</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV7actionsSayAA0dE6ActionVGSgv"></a>
+                    <a name="//apple_ref/swift/Property/actions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV7actionsSayAA0dE6ActionVGSgv">actions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An array of objects describing any actions to be invoked by the dialog node.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNodeAction.html">DialogNodeAction</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV9digressInSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/digressIn" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV9digressInSSSgv">digressIn</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether this top-level dialog node can be digressed into.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">digressIn</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV10digressOutSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/digressOut" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV10digressOutSSSgv">digressOut</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether this dialog node can be returned to after a digression.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">digressOut</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeV15digressOutSlotsSSSgv"></a>
+                    <a name="//apple_ref/swift/Property/digressOutSlots" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeV15digressOutSlotsSSSgv">digressOutSlots</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Whether the user can digress to top-level nodes while filling out slots.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">digressOutSlots</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV116UpdateDialogNodeVACSSSg06dialogE0_AD11descriptionAD10conditionsAD6parentAD15previousSiblings10DictionaryVySSAA4JSONOGSg6outputAO7contextAO8metadataAA0dE8NextStepVSg04nextR0AD5titleAD8nodeTypeAD9eventNameAD8variableSayAA0dE6ActionVGSg7actionsAD9digressInAD10digressOutAD15digressOutSlotstcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(dialogNode:description:conditions:parent:previousSibling:output:context:metadata:nextStep:title:nodeType:eventName:variable:actions:digressIn:digressOut:digressOutSlots:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV116UpdateDialogNodeVACSSSg06dialogE0_AD11descriptionAD10conditionsAD6parentAD15previousSiblings10DictionaryVySSAA4JSONOGSg6outputAO7contextAO8metadataAA0dE8NextStepVSg04nextR0AD5titleAD8nodeTypeAD9eventNameAD8variableSayAA0dE6ActionVGSg7actionsAD9digressInAD10digressOutAD15digressOutSlotstcfc">init(dialogNode:description:conditions:parent:previousSibling:output:context:metadata:nextStep:title:nodeType:eventName:variable:actions:digressIn:digressOut:digressOutSlots:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a <code>UpdateDialogNode</code> with member variables.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">dialogNode</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">conditions</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">parent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">previousSibling</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">output</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">context</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">nextStep</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">nodeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">eventName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">variable</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNodeAction.html">DialogNodeAction</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">digressIn</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">digressOut</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">digressOutSlots</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dialogNode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>conditions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>parent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the parent dialog node.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>previousSibling</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the previous sibling dialog node.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>output</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The output of the dialog node. For more information about how to specify dialog node output, see the <a href="https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>context</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The context for the dialog node.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>metadata</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The metadata for the dialog node.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>nextStep</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The next step to be executed in dialog processing.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>nodeType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How the dialog node is processed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How an <code>event_handler</code> node is processed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>variable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The location in the dialog context where output is stored.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>actions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of objects describing any actions to be invoked by the dialog node.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>digressIn</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether this top-level dialog node can be digressed into.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>digressOut</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether this dialog node can be returned to after a digression.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>digressOutSlots</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the user can digress to top-level nodes while filling out slots.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>UpdateDialogNode</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9DecodablePxs7Decoder_p4from_tKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9DecodablePxs7Decoder_p4from_tKcfc">init(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9EncodableP6encodeys7Encoder_p2to_tKF"></a>
+                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9EncodableP6encodeys7Encoder_p2to_tKF">encode(to:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

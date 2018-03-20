@@ -375,7 +375,7 @@ class ConversationTests: XCTestCase {
         let description = "List all workspaces."
         let expectation = self.expectation(description: description)
 
-        conversation.listWorkspaces(failure: failWithError) { workspaceResponse in
+        conversation.listWorkspaces(includeAudit: true, failure: failWithError) { workspaceResponse in
             for workspace in workspaceResponse.workspaces {
                 XCTAssertNotNil(workspace.name)
                 XCTAssertNotNil(workspace.created)
@@ -393,7 +393,7 @@ class ConversationTests: XCTestCase {
         let description = "List all workspaces with page limit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listWorkspaces(pageLimit: 1, failure: failWithError) { workspaceResponse in
+        conversation.listWorkspaces(pageLimit: 1, includeAudit: true, failure: failWithError) { workspaceResponse in
             XCTAssertEqual(workspaceResponse.workspaces.count, 1)
             for workspace in workspaceResponse.workspaces {
                 XCTAssertNotNil(workspace.name)
@@ -413,7 +413,7 @@ class ConversationTests: XCTestCase {
         let description = "List all workspaces with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listWorkspaces(includeCount: true, failure: failWithError) { workspaceResponse in
+        conversation.listWorkspaces(includeCount: true, includeAudit: true, failure: failWithError) { workspaceResponse in
             for workspace in workspaceResponse.workspaces {
                 XCTAssertNotNil(workspace.name)
                 XCTAssertNotNil(workspace.created)
@@ -452,8 +452,6 @@ class ConversationTests: XCTestCase {
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
-            XCTAssertNotNil(workspace.created)
-            XCTAssertNotNil(workspace.updated)
             XCTAssertNotNil(workspace.workspaceID)
 
             newWorkspace = workspace.workspaceID
@@ -469,7 +467,7 @@ class ConversationTests: XCTestCase {
         let description2 = "Get the newly created workspace."
         let expectation2 = expectation(description: description2)
 
-        conversation.getWorkspace(workspaceID: newWorkspaceID, export: true, failure: failWithError) { workspace in
+        conversation.getWorkspace(workspaceID: newWorkspaceID, export: true, includeAudit: true, failure: failWithError) { workspace in
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
@@ -517,7 +515,7 @@ class ConversationTests: XCTestCase {
         let description = "List details of a single workspace."
         let expectation = self.expectation(description: description)
 
-        conversation.getWorkspace(workspaceID: workspaceID, export: false, failure: failWithError) { workspace in
+        conversation.getWorkspace(workspaceID: workspaceID, export: false, includeAudit: true, failure: failWithError) { workspace in
             XCTAssertNotNil(workspace.name)
             XCTAssertNotNil(workspace.created)
             XCTAssertNotNil(workspace.updated)
@@ -548,8 +546,6 @@ class ConversationTests: XCTestCase {
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
-            XCTAssertNotNil(workspace.created)
-            XCTAssertNotNil(workspace.updated)
             XCTAssertNotNil(workspace.workspaceID)
 
             newWorkspace = workspace.workspaceID
@@ -572,8 +568,6 @@ class ConversationTests: XCTestCase {
             XCTAssertEqual(workspace.name, newWorkspaceName)
             XCTAssertEqual(workspace.description, newWorkspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
-            XCTAssertNotNil(workspace.created)
-            XCTAssertNotNil(workspace.updated)
             XCTAssertNotNil(workspace.workspaceID)
             expectation2.fulfill()
         }
@@ -594,7 +588,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the intents in a workspace."
         let expectation = self.expectation(description: description)
 
-        conversation.listIntents(workspaceID: workspaceID, failure: failWithError) { intents in
+        conversation.listIntents(workspaceID: workspaceID, includeAudit: true, failure: failWithError) { intents in
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
@@ -614,7 +608,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the intents in a workspace with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listIntents(workspaceID: workspaceID, includeCount: true, failure: failWithError) { intents in
+        conversation.listIntents(workspaceID: workspaceID, includeCount: true, includeAudit: true, failure: failWithError) { intents in
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
@@ -635,7 +629,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the intents in a workspace with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listIntents(workspaceID: workspaceID, pageLimit: 1, failure: failWithError) { intents in
+        conversation.listIntents(workspaceID: workspaceID, pageLimit: 1, includeAudit: true, failure: failWithError) { intents in
             XCTAssertEqual(intents.intents.count, 1)
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
@@ -656,7 +650,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the intents in a workspace with export as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listIntents(workspaceID: workspaceID, export: true, failure: failWithError) { intents in
+        conversation.listIntents(workspaceID: workspaceID, export: true, includeAudit: true, failure: failWithError) { intents in
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
@@ -688,8 +682,6 @@ class ConversationTests: XCTestCase {
         conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
             XCTAssertEqual(intent.intentName, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
-            XCTAssertNotNil(intent.created)
-            XCTAssertNotNil(intent.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -707,7 +699,7 @@ class ConversationTests: XCTestCase {
         let description = "Get details of a specific intent."
         let expectation = self.expectation(description: description)
 
-        conversation.getIntent(workspaceID: workspaceID, intent: "weather", export: true, failure: failWithError) { intent in
+        conversation.getIntent(workspaceID: workspaceID, intent: "weather", export: true, includeAudit: true, failure: failWithError) { intent in
             XCTAssertNotNil(intent.intentName)
             XCTAssertNotNil(intent.created)
             XCTAssertNotNil(intent.updated)
@@ -733,8 +725,6 @@ class ConversationTests: XCTestCase {
         conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
             XCTAssertEqual(intent.intentName, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
-            XCTAssertNotNil(intent.created)
-            XCTAssertNotNil(intent.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -748,8 +738,6 @@ class ConversationTests: XCTestCase {
         conversation.updateIntent(workspaceID: workspaceID, intent: newIntentName, newIntent: updatedIntentName, newDescription: updatedIntentDescription, newExamples: [updatedExample1], failure: failWithError) { intent in
             XCTAssertEqual(intent.intentName, updatedIntentName)
             XCTAssertEqual(intent.description, updatedIntentDescription)
-            XCTAssertNotNil(intent.created)
-            XCTAssertNotNil(intent.updated)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -769,7 +757,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the examples of an intent."
         let expectation = self.expectation(description: description)
 
-        conversation.listExamples(workspaceID: workspaceID, intent: "weather", failure: failWithError) { examples in
+        conversation.listExamples(workspaceID: workspaceID, intent: "weather", includeAudit: true, failure: failWithError) { examples in
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
@@ -787,7 +775,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the examples for an intent with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listExamples(workspaceID: workspaceID, intent: "weather", includeCount: true, failure: failWithError) { examples in
+        conversation.listExamples(workspaceID: workspaceID, intent: "weather", includeCount: true, includeAudit: true, failure: failWithError) { examples in
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
@@ -806,7 +794,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the examples for an intent with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listExamples(workspaceID: workspaceID, intent: "weather", pageLimit: 1, failure: failWithError) { examples in
+        conversation.listExamples(workspaceID: workspaceID, intent: "weather", pageLimit: 1, includeAudit: true, failure: failWithError) { examples in
             XCTAssertEqual(examples.examples.count, 1)
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
@@ -828,8 +816,6 @@ class ConversationTests: XCTestCase {
 
         let newExample = "swift-sdk-test-example" + UUID().uuidString
         conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
-            XCTAssertNotNil(example.created)
-            XCTAssertNotNil(example.updated)
             XCTAssertEqual(example.exampleText, newExample)
             expectation.fulfill()
         }
@@ -849,7 +835,7 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let exampleText = "tell me the weather"
-        conversation.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, failure: failWithError) { example in
+        conversation.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, includeAudit: true, failure: failWithError) { example in
             XCTAssertNotNil(example.created)
             XCTAssertNotNil(example.updated)
             XCTAssertEqual(example.exampleText, exampleText)
@@ -864,8 +850,6 @@ class ConversationTests: XCTestCase {
 
         let newExample = "swift-sdk-test-example" + UUID().uuidString
         conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
-            XCTAssertNotNil(example.created)
-            XCTAssertNotNil(example.updated)
             XCTAssertEqual(example.exampleText, newExample)
             expectation.fulfill()
         }
@@ -876,8 +860,6 @@ class ConversationTests: XCTestCase {
 
         let updatedText = "updated-" + newExample
         conversation.updateExample(workspaceID: workspaceID, intent: "weather", text: newExample, newText: updatedText, failure: failWithError) { example in
-            XCTAssertNotNil(example.created)
-            XCTAssertNotNil(example.updated)
             XCTAssertEqual(example.exampleText, updatedText)
             expectation2.fulfill()
         }
@@ -898,7 +880,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the counterexamples of a workspace."
         let expectation = self.expectation(description: description)
 
-        conversation.listCounterexamples(workspaceID: workspaceID, failure: failWithError) { counterexamples in
+        conversation.listCounterexamples(workspaceID: workspaceID, includeAudit: true, failure: failWithError) { counterexamples in
             for counterexample in counterexamples.counterexamples {
                 XCTAssertNotNil(counterexample.created)
                 XCTAssertNotNil(counterexample.updated)
@@ -917,7 +899,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the counterexamples of a workspace with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listCounterexamples(workspaceID: workspaceID, includeCount: true, failure: failWithError) { counterexamples in
+        conversation.listCounterexamples(workspaceID: workspaceID, includeCount: true, includeAudit: true, failure: failWithError) { counterexamples in
             for counterexample in counterexamples.counterexamples {
                 XCTAssertNotNil(counterexample.created)
                 XCTAssertNotNil(counterexample.updated)
@@ -937,7 +919,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the counterexamples of a workspace with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listCounterexamples(workspaceID: workspaceID, pageLimit: 1, failure: failWithError) { counterexamples in
+        conversation.listCounterexamples(workspaceID: workspaceID, pageLimit: 1, includeAudit: true, failure: failWithError) { counterexamples in
             for counterexample in counterexamples.counterexamples {
                 XCTAssertNotNil(counterexample.created)
                 XCTAssertNotNil(counterexample.updated)
@@ -958,8 +940,6 @@ class ConversationTests: XCTestCase {
 
         let newExample = "swift-sdk-test-counterexample" + UUID().uuidString
         conversation.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
-            XCTAssertNotNil(counterexample.created)
-            XCTAssertNotNil(counterexample.updated)
             XCTAssertNotNil(counterexample.text)
             expectation.fulfill()
         }
@@ -979,7 +959,7 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let exampleText = "I want financial advice today."
-        conversation.getCounterexample(workspaceID: workspaceID, text: exampleText, failure: failWithError) { counterexample in
+        conversation.getCounterexample(workspaceID: workspaceID, text: exampleText, includeAudit: true, failure: failWithError) { counterexample in
             XCTAssertNotNil(counterexample.created)
             XCTAssertNotNil(counterexample.updated)
             XCTAssertEqual(counterexample.text, exampleText)
@@ -994,8 +974,6 @@ class ConversationTests: XCTestCase {
 
         let newExample = "swift-sdk-test-counterexample" + UUID().uuidString
         conversation.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
-            XCTAssertNotNil(counterexample.created)
-            XCTAssertNotNil(counterexample.updated)
             XCTAssertEqual(counterexample.text, newExample)
             expectation.fulfill()
         }
@@ -1006,8 +984,6 @@ class ConversationTests: XCTestCase {
 
         let updatedText = "updated-"+newExample
         conversation.updateCounterexample(workspaceID: workspaceID, text: newExample, newText: updatedText, failure: failWithError) { counterexample in
-            XCTAssertNotNil(counterexample.created)
-            XCTAssertNotNil(counterexample.updated)
             XCTAssertEqual(counterexample.text, updatedText)
             expectation2.fulfill()
         }
@@ -1028,7 +1004,7 @@ class ConversationTests: XCTestCase {
         let description = "List all entities"
         let expectation = self.expectation(description: description)
 
-        conversation.listEntities(workspaceID: workspaceID, failure: failWithError){entities in
+        conversation.listEntities(workspaceID: workspaceID, includeAudit: true, failure: failWithError){entities in
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1048,7 +1024,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the entities in a workspace with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listEntities(workspaceID: workspaceID, includeCount: true, failure: failWithError) { entities in
+        conversation.listEntities(workspaceID: workspaceID, includeCount: true, includeAudit: true, failure: failWithError) { entities in
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1068,7 +1044,7 @@ class ConversationTests: XCTestCase {
         let description = "List all entities with page limit 1"
         let expectation = self.expectation(description: description)
 
-        conversation.listEntities(workspaceID: workspaceID, pageLimit: 1, failure: failWithError){entities in
+        conversation.listEntities(workspaceID: workspaceID, pageLimit: 1, includeAudit: true, failure: failWithError){entities in
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1089,7 +1065,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the entities in a workspace with export as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listEntities(workspaceID: workspaceID, export: true, failure: failWithError) { entities in
+        conversation.listEntities(workspaceID: workspaceID, export: true, includeAudit: true, failure: failWithError) { entities in
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1115,8 +1091,6 @@ class ConversationTests: XCTestCase {
         conversation.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
             XCTAssertEqual(entityResponse.entityName, entityName)
             XCTAssertEqual(entityResponse.description, entityDescription)
-            XCTAssertNotNil(entityResponse.created)
-            XCTAssertNotNil(entityResponse.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1141,8 +1115,6 @@ class ConversationTests: XCTestCase {
         conversation.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
             XCTAssertEqual(entityResponse.entityName, entityName)
             XCTAssertEqual(entityResponse.description, entityDescription)
-            XCTAssertNotNil(entityResponse.created)
-            XCTAssertNotNil(entityResponse.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1156,8 +1128,6 @@ class ConversationTests: XCTestCase {
         conversation.updateEntity(workspaceID: workspaceID, entity: entityName, properties: updatedEntity, failure: failWithError){ entityResponse in
             XCTAssertEqual(entityResponse.entityName, updatedEntityName)
             XCTAssertEqual(entityResponse.description, updatedEntityDescription)
-            XCTAssertNotNil(entityResponse.created)
-            XCTAssertNotNil(entityResponse.updated)
             expectationTwo.fulfill()
         }
         waitForExpectations()
@@ -1178,7 +1148,7 @@ class ConversationTests: XCTestCase {
         conversation.listEntities(workspaceID: workspaceID, failure: failWithError) {entityCollection in
             XCTAssert(entityCollection.entities.count > 0)
             let entity = entityCollection.entities[0]
-            self.conversation.getEntity(workspaceID: self.workspaceID, entity: entity.entityName, export: true, failure: self.failWithError) { entityExport in
+            self.conversation.getEntity(workspaceID: self.workspaceID, entity: entity.entityName, export: true, includeAudit: true, failure: self.failWithError) { entityExport in
                 XCTAssertEqual(entityExport.entityName, entity.entityName)
                 XCTAssertEqual(entityExport.description, entity.description)
                 XCTAssertNotNil(entityExport.created)
@@ -1200,6 +1170,7 @@ class ConversationTests: XCTestCase {
             entity: entityName,
             export: true,
             includeCount: true,
+            includeAudit: true,
             failure: failWithError) {
                 valueCollection in
                 for value in valueCollection.values {
@@ -1224,8 +1195,6 @@ class ConversationTests: XCTestCase {
         let value = CreateValue(value: valueName)
         conversation.createValue(workspaceID: workspaceID, entity: entityName, properties: value, failure: failWithError) { value in
             XCTAssertEqual(value.valueText, valueName)
-            XCTAssertNotNil(value.created)
-            XCTAssertNotNil(value.updated)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1237,8 +1206,6 @@ class ConversationTests: XCTestCase {
         let updatedValue = UpdateValue(value: updatedValueName, metadata: ["oldname": .string(valueName)])
         conversation.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, properties: updatedValue, failure: failWithError) { value in
             XCTAssertEqual(value.valueText, updatedValueName)
-            XCTAssertNotNil(value.created)
-            XCTAssertNotNil(value.updated)
             XCTAssertNotNil(value.metadata)
             expectationTwo.fulfill()
         }
@@ -1262,7 +1229,7 @@ class ConversationTests: XCTestCase {
         conversation.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
             XCTAssert(valueCollection.values.count > 0)
             let value = valueCollection.values[0]
-            self.conversation.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.valueText, export: true, failure: self.failWithError) { valueExport in
+            self.conversation.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.valueText, export: true, includeAudit: true, failure: self.failWithError) { valueExport in
                 XCTAssertEqual(valueExport.valueText, value.valueText)
                 XCTAssertNotNil(valueExport.created)
                 XCTAssertNotNil(valueExport.updated)
@@ -1278,7 +1245,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the synonyms for an entity and value."
         let expectation = self.expectation(description: description)
 
-        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", failure: failWithError) { synonyms in
+        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeAudit: true, failure: failWithError) { synonyms in
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
@@ -1296,7 +1263,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the synonyms for an entity and value with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeCount: true, failure: failWithError) { synonyms in
+        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeCount: true, includeAudit: true, failure: failWithError) { synonyms in
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
@@ -1315,7 +1282,7 @@ class ConversationTests: XCTestCase {
         let description = "List all the synonyms for an entity and value with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", pageLimit: 1, failure: failWithError) { synonyms in
+        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", pageLimit: 1, includeAudit: true, failure: failWithError) { synonyms in
             XCTAssertEqual(synonyms.synonyms.count, 1)
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
@@ -1337,8 +1304,6 @@ class ConversationTests: XCTestCase {
 
         let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
         conversation.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
-            XCTAssertNotNil(synonym.created)
-            XCTAssertNotNil(synonym.updated)
             XCTAssertEqual(synonym.synonymText, newSynonym)
             expectation.fulfill()
         }
@@ -1358,7 +1323,7 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let synonymName = "headlight"
-        conversation.getSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: synonymName, failure: failWithError) { synonym in
+        conversation.getSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: synonymName, includeAudit: true, failure: failWithError) { synonym in
             XCTAssertEqual(synonym.synonymText, synonymName)
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
@@ -1373,8 +1338,6 @@ class ConversationTests: XCTestCase {
 
         let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
         conversation.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
-            XCTAssertNotNil(synonym.created)
-            XCTAssertNotNil(synonym.updated)
             XCTAssertEqual(synonym.synonymText, newSynonym)
             expectation.fulfill()
         }
@@ -1385,8 +1348,6 @@ class ConversationTests: XCTestCase {
 
         let updatedSynonym = "new-" + newSynonym
         conversation.updateSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, newSynonym: updatedSynonym, failure: failWithError){ synonym in
-            XCTAssertNotNil(synonym.created)
-            XCTAssertNotNil(synonym.updated)
             XCTAssertEqual(synonym.synonymText, updatedSynonym)
             expectation2.fulfill()
         }

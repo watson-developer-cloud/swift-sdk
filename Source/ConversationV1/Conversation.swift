@@ -148,6 +148,7 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -156,6 +157,7 @@ public class Conversation {
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (WorkspaceCollection) -> Void)
     {
@@ -176,6 +178,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -258,12 +264,14 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getWorkspace(
         workspaceID: String,
         export: Bool? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (WorkspaceExport) -> Void)
     {
@@ -272,6 +280,10 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let export = export {
             let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -422,6 +434,7 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -432,6 +445,7 @@ public class Conversation {
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (IntentCollection) -> Void)
     {
@@ -456,6 +470,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -555,6 +573,7 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -562,6 +581,7 @@ public class Conversation {
         workspaceID: String,
         intent: String,
         export: Bool? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (IntentExport) -> Void)
     {
@@ -570,6 +590,10 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let export = export {
             let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -722,6 +746,7 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -732,6 +757,7 @@ public class Conversation {
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ExampleCollection) -> Void)
     {
@@ -752,6 +778,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -848,6 +878,7 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
      - parameter text: The text of the user input example.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -855,12 +886,17 @@ public class Conversation {
         workspaceID: String,
         intent: String,
         text: String,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Example) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
@@ -1009,6 +1045,7 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1018,6 +1055,7 @@ public class Conversation {
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CounterexampleCollection) -> Void)
     {
@@ -1038,6 +1076,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1131,18 +1173,24 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getCounterexample(
         workspaceID: String,
         text: String,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Counterexample) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
@@ -1289,6 +1337,7 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1299,6 +1348,7 @@ public class Conversation {
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (EntityCollection) -> Void)
     {
@@ -1323,6 +1373,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1417,6 +1471,7 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1424,6 +1479,7 @@ public class Conversation {
         workspaceID: String,
         entity: String,
         export: Bool? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (EntityExport) -> Void)
     {
@@ -1432,6 +1488,10 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let export = export {
             let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1580,6 +1640,7 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1591,6 +1652,7 @@ public class Conversation {
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ValueCollection) -> Void)
     {
@@ -1615,6 +1677,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1711,6 +1777,7 @@ public class Conversation {
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1719,6 +1786,7 @@ public class Conversation {
         entity: String,
         value: String,
         export: Bool? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ValueExport) -> Void)
     {
@@ -1727,6 +1795,10 @@ public class Conversation {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let export = export {
             let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -1879,6 +1951,7 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1890,6 +1963,7 @@ public class Conversation {
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SynonymCollection) -> Void)
     {
@@ -1910,6 +1984,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -2009,6 +2087,7 @@ public class Conversation {
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter synonym: The text of the synonym.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2017,12 +2096,17 @@ public class Conversation {
         entity: String,
         value: String,
         synonym: String,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Synonym) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
@@ -2175,6 +2259,7 @@ public class Conversation {
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2184,6 +2269,7 @@ public class Conversation {
         includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogNodeCollection) -> Void)
     {
@@ -2204,6 +2290,10 @@ public class Conversation {
         }
         if let cursor = cursor {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -2296,18 +2386,24 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getDialogNode(
         workspaceID: String,
         dialogNode: String,
+        includeAudit: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogNode) -> Void)
     {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"

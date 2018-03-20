@@ -96,7 +96,7 @@ class AssistantTests: XCTestCase {
     func instantiateAssistant() {
         let username = Credentials.AssistantUsername
         let password = Credentials.AssistantPassword
-        let version = "2017-05-26"
+        let version = "2018-02-16"
         assistant = Assistant(username: username, password: password, version: version)
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         assistant.defaultHeaders["X-Watson-Test"] = "true"

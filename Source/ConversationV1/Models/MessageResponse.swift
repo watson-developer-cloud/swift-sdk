@@ -28,7 +28,7 @@ public struct MessageResponse {
     /// An array of entities identified in the user input.
     public var entities: [RuntimeEntity]
 
-    /// Whether to return more than one intent. `true` indicates that all matching intents are returned.
+    /// Whether to return more than one intent. A value of `true` indicates that all matching intents are returned.
     public var alternateIntents: Bool?
 
     /// State information for the conversation.
@@ -48,7 +48,7 @@ public struct MessageResponse {
      - parameter context: State information for the conversation.
      - parameter output: Output from the dialog, including the response to the user, the nodes that were triggered, and log messages.
      - parameter input: The user input from the request.
-     - parameter alternateIntents: Whether to return more than one intent. `true` indicates that all matching intents are returned.
+     - parameter alternateIntents: Whether to return more than one intent. A value of `true` indicates that all matching intents are returned.
 
      - returns: An initialized `MessageResponse`.
     */

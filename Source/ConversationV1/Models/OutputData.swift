@@ -19,16 +19,16 @@ import Foundation
 /** An output object that includes the response to the user, the nodes that were hit, and messages from the log. */
 public struct OutputData {
 
-    /// Up to 50 messages logged with the request.
+    /// An array of up to 50 messages logged with the request.
     public var logMessages: [LogMessage]
 
     /// An array of responses to the user.
     public var text: [String]
 
-    /// An array of the nodes that were triggered to create the response.
+    /// An array of the nodes that were triggered to create the response, in the order in which they were visited. This information is useful for debugging and for tracing the path taken through the node tree.
     public var nodesVisited: [String]?
 
-    /// An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message.
+    /// An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message. Included only if **nodes_visited_details** is set to `true` in the message request.
     public var nodesVisitedDetails: [DialogNodeVisitedDetails]?
 
     /// Additional properties associated with this model.
@@ -37,10 +37,10 @@ public struct OutputData {
     /**
      Initialize a `OutputData` with member variables.
 
-     - parameter logMessages: Up to 50 messages logged with the request.
+     - parameter logMessages: An array of up to 50 messages logged with the request.
      - parameter text: An array of responses to the user.
-     - parameter nodesVisited: An array of the nodes that were triggered to create the response.
-     - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message.
+     - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in which they were visited. This information is useful for debugging and for tracing the path taken through the node tree.
+     - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message. Included only if **nodes_visited_details** is set to `true` in the message request.
 
      - returns: An initialized `OutputData`.
     */

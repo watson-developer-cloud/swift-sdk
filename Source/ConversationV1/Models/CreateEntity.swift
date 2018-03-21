@@ -19,16 +19,16 @@ import Foundation
 /** CreateEntity. */
 public struct CreateEntity {
 
-    /// The name of the entity.
+    /// The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
     public var entity: String
 
-    /// The description of the entity.
+    /// The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
     public var description: String?
 
     /// Any metadata related to the value.
     public var metadata: [String: JSON]?
 
-    /// An array of entity values.
+    /// An array of objects describing the entity values.
     public var values: [CreateValue]?
 
     /// Whether to use fuzzy matching for the entity.
@@ -37,10 +37,10 @@ public struct CreateEntity {
     /**
      Initialize a `CreateEntity` with member variables.
 
-     - parameter entity: The name of the entity.
-     - parameter description: The description of the entity.
+     - parameter entity: The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
+     - parameter description: The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      - parameter metadata: Any metadata related to the value.
-     - parameter values: An array of entity values.
+     - parameter values: An array of objects describing the entity values.
      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
 
      - returns: An initialized `CreateEntity`.

@@ -19,17 +19,17 @@ import Foundation
 /** IntentCollection. */
 public struct IntentCollection {
 
-    /// An array of intents.
+    /// An array of objects describing the intents defined for the workspace.
     public var intents: [IntentExport]
 
-    /// An object defining the pagination data for the returned objects.
+    /// The pagination data for the returned objects.
     public var pagination: Pagination
 
     /**
      Initialize a `IntentCollection` with member variables.
 
-     - parameter intents: An array of intents.
-     - parameter pagination: An object defining the pagination data for the returned objects.
+     - parameter intents: An array of objects describing the intents defined for the workspace.
+     - parameter pagination: The pagination data for the returned objects.
 
      - returns: An initialized `IntentCollection`.
     */

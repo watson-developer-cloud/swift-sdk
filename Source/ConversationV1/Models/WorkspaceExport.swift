@@ -41,10 +41,10 @@ public struct WorkspaceExport {
     public var metadata: [String: JSON]
 
     /// The timestamp for creation of the workspace.
-    public var created: String
+    public var created: String?
 
     /// The timestamp for the last update to the workspace.
-    public var updated: String
+    public var updated: String?
 
     /// The workspace ID.
     public var workspaceID: String
@@ -74,11 +74,11 @@ public struct WorkspaceExport {
      - parameter description: The description of the workspace.
      - parameter language: The language of the workspace.
      - parameter metadata: Any metadata that is required by the workspace.
-     - parameter created: The timestamp for creation of the workspace.
-     - parameter updated: The timestamp for the last update to the workspace.
      - parameter workspaceID: The workspace ID.
      - parameter status: The current status of the workspace.
      - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+     - parameter created: The timestamp for creation of the workspace.
+     - parameter updated: The timestamp for the last update to the workspace.
      - parameter intents: An array of intents.
      - parameter entities: An array of entities.
      - parameter counterexamples: An array of counterexamples.
@@ -86,16 +86,16 @@ public struct WorkspaceExport {
 
      - returns: An initialized `WorkspaceExport`.
     */
-    public init(name: String, description: String, language: String, metadata: [String: JSON], created: String, updated: String, workspaceID: String, status: String, learningOptOut: Bool, intents: [IntentExport]? = nil, entities: [EntityExport]? = nil, counterexamples: [Counterexample]? = nil, dialogNodes: [DialogNode]? = nil) {
+    public init(name: String, description: String, language: String, metadata: [String: JSON], workspaceID: String, status: String, learningOptOut: Bool, created: String? = nil, updated: String? = nil, intents: [IntentExport]? = nil, entities: [EntityExport]? = nil, counterexamples: [Counterexample]? = nil, dialogNodes: [DialogNode]? = nil) {
         self.name = name
         self.description = description
         self.language = language
         self.metadata = metadata
-        self.created = created
-        self.updated = updated
         self.workspaceID = workspaceID
         self.status = status
         self.learningOptOut = learningOptOut
+        self.created = created
+        self.updated = updated
         self.intents = intents
         self.entities = entities
         self.counterexamples = counterexamples
@@ -128,8 +128,8 @@ extension WorkspaceExport: Codable {
         description = try container.decode(String.self, forKey: .description)
         language = try container.decode(String.self, forKey: .language)
         metadata = try container.decode([String: JSON].self, forKey: .metadata)
-        created = try container.decode(String.self, forKey: .created)
-        updated = try container.decode(String.self, forKey: .updated)
+        created = try container.decodeIfPresent(String.self, forKey: .created)
+        updated = try container.decodeIfPresent(String.self, forKey: .updated)
         workspaceID = try container.decode(String.self, forKey: .workspaceID)
         status = try container.decode(String.self, forKey: .status)
         learningOptOut = try container.decode(Bool.self, forKey: .learningOptOut)
@@ -145,8 +145,8 @@ extension WorkspaceExport: Codable {
         try container.encode(description, forKey: .description)
         try container.encode(language, forKey: .language)
         try container.encode(metadata, forKey: .metadata)
-        try container.encode(created, forKey: .created)
-        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(created, forKey: .created)
+        try container.encodeIfPresent(updated, forKey: .updated)
         try container.encode(workspaceID, forKey: .workspaceID)
         try container.encode(status, forKey: .status)
         try container.encode(learningOptOut, forKey: .learningOptOut)

@@ -19,7 +19,7 @@ import Foundation
 /** WorkspaceCollection. */
 public struct WorkspaceCollection {
 
-    /// An array of workspaces.
+    /// An array of objects describing the workspaces associated with the service instance.
     public var workspaces: [Workspace]
 
     /// An object defining the pagination data for the returned objects.
@@ -28,7 +28,7 @@ public struct WorkspaceCollection {
     /**
      Initialize a `WorkspaceCollection` with member variables.
 
-     - parameter workspaces: An array of workspaces.
+     - parameter workspaces: An array of objects describing the workspaces associated with the service instance.
      - parameter pagination: An object defining the pagination data for the returned objects.
 
      - returns: An initialized `WorkspaceCollection`.

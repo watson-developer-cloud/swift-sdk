@@ -19,17 +19,17 @@ import Foundation
 /** An array of entities. */
 public struct EntityCollection {
 
-    /// An array of entities.
+    /// An array of objects describing the entities defined for the workspace.
     public var entities: [EntityExport]
 
-    /// An object defining the pagination data for the returned objects.
+    /// The pagination data for the returned objects.
     public var pagination: Pagination
 
     /**
      Initialize a `EntityCollection` with member variables.
 
-     - parameter entities: An array of entities.
-     - parameter pagination: An object defining the pagination data for the returned objects.
+     - parameter entities: An array of objects describing the entities defined for the workspace.
+     - parameter pagination: The pagination data for the returned objects.
 
      - returns: An initialized `EntityCollection`.
     */

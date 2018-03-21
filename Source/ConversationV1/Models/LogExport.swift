@@ -19,13 +19,13 @@ import Foundation
 /** LogExport. */
 public struct LogExport {
 
-    /// A request formatted for the Conversation service.
+    /// A request received by the workspace, including the user input and context.
     public var request: MessageRequest
 
-    /// A response from the Conversation service.
+    /// The response sent by the workspace, including the output text, detected intents and entities, and context.
     public var response: MessageResponse
 
-    /// A unique identifier for the logged message.
+    /// A unique identifier for the logged event.
     public var logID: String
 
     /// The timestamp for receipt of the message.
@@ -34,7 +34,7 @@ public struct LogExport {
     /// The timestamp for the system response to the message.
     public var responseTimestamp: String
 
-    /// The workspace ID.
+    /// The unique identifier of the workspace where the request was made.
     public var workspaceID: String
 
     /// The language of the workspace where the message request was made.
@@ -43,12 +43,12 @@ public struct LogExport {
     /**
      Initialize a `LogExport` with member variables.
 
-     - parameter request: A request formatted for the Conversation service.
-     - parameter response: A response from the Conversation service.
-     - parameter logID: A unique identifier for the logged message.
+     - parameter request: A request received by the workspace, including the user input and context.
+     - parameter response: The response sent by the workspace, including the output text, detected intents and entities, and context.
+     - parameter logID: A unique identifier for the logged event.
      - parameter requestTimestamp: The timestamp for receipt of the message.
      - parameter responseTimestamp: The timestamp for the system response to the message.
-     - parameter workspaceID: The workspace ID.
+     - parameter workspaceID: The unique identifier of the workspace where the request was made.
      - parameter language: The language of the workspace where the message request was made.
 
      - returns: An initialized `LogExport`.

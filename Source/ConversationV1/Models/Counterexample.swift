@@ -23,10 +23,10 @@ public struct Counterexample {
     public var text: String
 
     /// The timestamp for creation of the counterexample.
-    public var created: String
+    public var created: String?
 
     /// The timestamp for the last update to the counterexample.
-    public var updated: String
+    public var updated: String?
 
     /**
      Initialize a `Counterexample` with member variables.
@@ -37,7 +37,7 @@ public struct Counterexample {
 
      - returns: An initialized `Counterexample`.
     */
-    public init(text: String, created: String, updated: String) {
+    public init(text: String, created: String? = nil, updated: String? = nil) {
         self.text = text
         self.created = created
         self.updated = updated
@@ -56,15 +56,15 @@ extension Counterexample: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         text = try container.decode(String.self, forKey: .text)
-        created = try container.decode(String.self, forKey: .created)
-        updated = try container.decode(String.self, forKey: .updated)
+        created = try container.decodeIfPresent(String.self, forKey: .created)
+        updated = try container.decodeIfPresent(String.self, forKey: .updated)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(text, forKey: .text)
-        try container.encode(created, forKey: .created)
-        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(created, forKey: .created)
+        try container.encodeIfPresent(updated, forKey: .updated)
     }
 
 }

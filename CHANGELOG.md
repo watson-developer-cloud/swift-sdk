@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.23.1
+_2018-03-22_
+
+This release fixes a bug with `created` and `updated` dates when using the `2018-02-16` version of Assistant or Conversation.
+
 ## Version 0.23.0
 _2018-03-20_
 

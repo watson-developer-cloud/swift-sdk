@@ -75,6 +75,15 @@
                 <a href="../Structs/CreateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CreateEntity.html">CreateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -103,6 +112,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOutSlots.html">– DigressOutSlots</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNodeAction.html">DialogNodeAction</a>
@@ -213,6 +231,15 @@
                 <a href="../Structs/UpdateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/UpdateEntity.html">UpdateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -293,7 +320,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Up to 50 messages logged with the request.</p>
+                        <p>An array of up to 50 messages logged with the request.</p>
 
                       </div>
                       <div class="declaration">
@@ -347,7 +374,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of the nodes that were triggered to create the response.</p>
+                        <p>An array of the nodes that were triggered to create the response, in the order in which they were visited. This information is useful for debugging and for tracing the path taken through the node tree.</p>
 
                       </div>
                       <div class="declaration">
@@ -374,7 +401,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message.</p>
+                        <p>An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message. Included only if <strong>nodes_visited_details</strong> is set to <code>true</code> in the message request.</p>
 
                       </div>
                       <div class="declaration">
@@ -451,7 +478,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Up to 50 messages logged with the request.</p>
+                                  <p>An array of up to 50 messages logged with the request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -475,7 +502,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of the nodes that were triggered to create the response.</p>
+                                  <p>An array of the nodes that were triggered to create the response, in the order in which they were visited. This information is useful for debugging and for tracing the path taken through the node tree.</p>
                                 </div>
                               </td>
                             </tr>
@@ -487,7 +514,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message.</p>
+                                  <p>An array of objects containing detailed diagnostic information about the nodes that were triggered during processing of the input message. Included only if <strong>nodes_visited_details</strong> is set to <code>true</code> in the message request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -562,7 +589,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

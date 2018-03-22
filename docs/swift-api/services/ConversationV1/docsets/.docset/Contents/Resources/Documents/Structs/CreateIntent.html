@@ -75,6 +75,15 @@
                 <a href="../Structs/CreateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CreateEntity.html">CreateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -103,6 +112,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOutSlots.html">– DigressOutSlots</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNodeAction.html">DialogNodeAction</a>
@@ -213,6 +231,15 @@
                 <a href="../Structs/UpdateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/UpdateEntity.html">UpdateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -293,7 +320,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The name of the intent.</p>
+                        <p>The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix <code>sys-</code>.  - It must be no longer than 128 characters.</p>
 
                       </div>
                       <div class="declaration">
@@ -320,7 +347,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The description of the intent.</p>
+                        <p>The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.</p>
 
                       </div>
                       <div class="declaration">
@@ -347,7 +374,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of user input examples.</p>
+                        <p>An array of user input examples for the intent.</p>
 
                       </div>
                       <div class="declaration">
@@ -397,7 +424,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The name of the intent.</p>
+                                  <p>The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix <code>sys-</code>.  - It must be no longer than 128 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -409,7 +436,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The description of the intent.</p>
+                                  <p>The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -421,7 +448,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of user input examples.</p>
+                                  <p>An array of user input examples for the intent.</p>
                                 </div>
                               </td>
                             </tr>
@@ -496,7 +523,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -75,6 +75,15 @@
                 <a href="../../Structs/CreateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Structs/CreateEntity.html">CreateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -103,6 +112,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNode/DigressOutSlots.html">– DigressOutSlots</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/DialogNodeAction.html">DialogNodeAction</a>
@@ -213,6 +231,15 @@
                 <a href="../../Structs/UpdateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Structs/UpdateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/UpdateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/UpdateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Structs/UpdateEntity.html">UpdateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -274,7 +301,7 @@
 
                 </div>
               </div>
-            <p>How the <code>next_step</code> reference is processed.</p>
+            <p>What happens after the dialog node completes. The valid values depend on the node type:  - The following values are valid for any node:    - <code>get_user_input</code>    - <code>skip_user_input</code>    - <code>jump_to</code>  - If the node is of type <code>event_handler</code> and its parent node is of type <code>slot</code> or <code>frame</code>, additional values are also valid:    - if <strong>event_name</strong>=<code>filled</code> and the type of the parent node is <code>slot</code>:      - <code>reprompt</code>      - <code>skip_all_slots</code>  - if <strong>event_name</strong>=<code>nomatch</code> and the type of the parent node is <code>slot</code>:      - <code>reprompt</code>      - <code>skip_slot</code>      - <code>skip_all_slots</code>  - if <strong>event_name</strong>=<code>generic</code> and the type of the parent node is <code>frame</code>:      - <code>reprompt</code>      - <code>skip_slot</code>      - <code>skip_all_slots</code>        If you specify <code>jump_to</code>, then you must also specify a value for the <code>dialog_node</code> property.</p>
 
           </section>
           <section class="section task-group-section">
@@ -283,9 +310,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ConversationV118DialogNodeNextStepV8BehaviorO2toA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/to" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ConversationV118DialogNodeNextStepV8BehaviorO2toA2EmF">to</a>
+                    <a name="/s:14ConversationV118DialogNodeNextStepV8BehaviorO12getUserInputA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/getUserInput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV118DialogNodeNextStepV8BehaviorO12getUserInputA2EmF">getUserInput</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -300,7 +327,162 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">to</span> <span class="o">=</span> <span class="s">"jump_to"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">getUserInput</span> <span class="o">=</span> <span class="s">"get_user_input"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ConversationV118DialogNodeNextStepV8BehaviorO13skipUserInputA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/skipUserInput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV118DialogNodeNextStepV8BehaviorO13skipUserInputA2EmF">skipUserInput</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">skipUserInput</span> <span class="o">=</span> <span class="s">"skip_user_input"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ConversationV118DialogNodeNextStepV8BehaviorO6jumpToA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/jumpTo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV118DialogNodeNextStepV8BehaviorO6jumpToA2EmF">jumpTo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">jumpTo</span> <span class="o">=</span> <span class="s">"jump_to"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ConversationV118DialogNodeNextStepV8BehaviorO8repromptA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/reprompt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV118DialogNodeNextStepV8BehaviorO8repromptA2EmF">reprompt</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">reprompt</span> <span class="o">=</span> <span class="s">"reprompt"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ConversationV118DialogNodeNextStepV8BehaviorO8skipSlotA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/skipSlot" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV118DialogNodeNextStepV8BehaviorO8skipSlotA2EmF">skipSlot</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">skipSlot</span> <span class="o">=</span> <span class="s">"skip_slot"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ConversationV118DialogNodeNextStepV8BehaviorO12skipAllSlotsA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/skipAllSlots" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ConversationV118DialogNodeNextStepV8BehaviorO12skipAllSlotsA2EmF">skipAllSlots</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">skipAllSlots</span> <span class="o">=</span> <span class="s">"skip_all_slots"</span></code></pre>
 
                         </div>
                       </div>
@@ -312,7 +494,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

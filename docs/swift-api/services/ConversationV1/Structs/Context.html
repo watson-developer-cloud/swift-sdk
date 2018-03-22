@@ -75,6 +75,15 @@
                 <a href="../Structs/CreateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CreateEntity.html">CreateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -103,6 +112,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOutSlots.html">– DigressOutSlots</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNodeAction.html">DialogNodeAction</a>
@@ -213,6 +231,15 @@
                 <a href="../Structs/UpdateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/UpdateEntity.html">UpdateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -274,7 +301,7 @@
 
                 </div>
               </div>
-            <p>Context information for the message. Include the context from the previous response to maintain state for the conversation.</p>
+            <p>State information for the conversation. To maintain state, include the context from the previous response.</p>
 
           </section>
           <section class="section task-group-section">
@@ -283,9 +310,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ConversationV17ContextV14conversationIDSSv"></a>
+                    <a name="/s:14ConversationV17ContextV14conversationIDSSSgv"></a>
                     <a name="//apple_ref/swift/Property/conversationID" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ConversationV17ContextV14conversationIDSSv">conversationID</a>
+                    <a class="token" href="#/s:14ConversationV17ContextV14conversationIDSSSgv">conversationID</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -300,7 +327,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">conversationID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">conversationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -310,9 +337,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ConversationV17ContextV6systemAA14SystemResponseVv"></a>
+                    <a name="/s:14ConversationV17ContextV6systemAA14SystemResponseVSgv"></a>
                     <a name="//apple_ref/swift/Property/system" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ConversationV17ContextV6systemAA14SystemResponseVv">system</a>
+                    <a class="token" href="#/s:14ConversationV17ContextV6systemAA14SystemResponseVSgv">system</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -327,7 +354,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">system</span><span class="p">:</span> <span class="kt"><a href="../Structs/SystemResponse.html">SystemResponse</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">system</span><span class="p">:</span> <span class="kt"><a href="../Structs/SystemResponse.html">SystemResponse</a></span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -364,9 +391,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ConversationV17ContextVACSS14conversationID_AA14SystemResponseV6systems10DictionaryVySSAA4JSONOG20additionalPropertiestcfc"></a>
+                    <a name="/s:14ConversationV17ContextVACSSSg14conversationID_AA14SystemResponseVSg6systems10DictionaryVySSAA4JSONOG20additionalPropertiestcfc"></a>
                     <a name="//apple_ref/swift/Method/init(conversationID:system:additionalProperties:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ConversationV17ContextVACSS14conversationID_AA14SystemResponseV6systems10DictionaryVySSAA4JSONOG20additionalPropertiestcfc">init(conversationID:system:additionalProperties:)</a>
+                    <a class="token" href="#/s:14ConversationV17ContextVACSSSg14conversationID_AA14SystemResponseVSg6systems10DictionaryVySSAA4JSONOG20additionalPropertiestcfc">init(conversationID:system:additionalProperties:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -381,7 +408,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">conversationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">system</span><span class="p">:</span> <span class="kt"><a href="../Structs/SystemResponse.html">SystemResponse</a></span><span class="p">,</span> <span class="nv">additionalProperties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">conversationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">system</span><span class="p">:</span> <span class="kt"><a href="../Structs/SystemResponse.html">SystemResponse</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">additionalProperties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span></code></pre>
 
                         </div>
                       </div>
@@ -484,7 +511,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

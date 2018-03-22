@@ -75,6 +75,15 @@
                 <a href="../Structs/CreateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CreateEntity.html">CreateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -103,6 +112,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOutSlots.html">– DigressOutSlots</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNodeAction.html">DialogNodeAction</a>
@@ -213,6 +231,15 @@
                 <a href="../Structs/UpdateDialogNode/EventName.html">– EventName</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/UpdateEntity.html">UpdateEntity</a>
               </li>
               <li class="nav-group-task">
@@ -293,7 +320,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Specifies the type of value (<code><a href="../Structs/UpdateValue.html#/s:14ConversationV111UpdateValueV8synonymsSaySSGSgv">synonyms</a></code> or <code><a href="../Structs/UpdateValue.html#/s:14ConversationV111UpdateValueV8patternsSaySSGSgv">patterns</a></code>). The default value is <code><a href="../Structs/UpdateValue.html#/s:14ConversationV111UpdateValueV8synonymsSaySSGSgv">synonyms</a></code>.</p>
+                        <p>Specifies the type of value.</p>
 
                         <a href="../Structs/UpdateValue/ValueType.html" class="slightly-smaller">See more</a>
                       </div>
@@ -321,7 +348,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The text of the entity value.</p>
+                        <p>The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
 
                       </div>
                       <div class="declaration">
@@ -375,7 +402,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Specifies the type of value (<code><a href="../Structs/UpdateValue.html#/s:14ConversationV111UpdateValueV8synonymsSaySSGSgv">synonyms</a></code> or <code><a href="../Structs/UpdateValue.html#/s:14ConversationV111UpdateValueV8patternsSaySSGSgv">patterns</a></code>). The default value is <code><a href="../Structs/UpdateValue.html#/s:14ConversationV111UpdateValueV8synonymsSaySSGSgv">synonyms</a></code>.</p>
+                        <p>Specifies the type of value.</p>
 
                       </div>
                       <div class="declaration">
@@ -402,7 +429,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of synonyms for the entity value.</p>
+                        <p>An array of synonyms for the entity value. You can provide either synonyms or patterns (as indicated by <strong>type</strong>), but not both. A synonym must conform to the following resrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
 
                       </div>
                       <div class="declaration">
@@ -429,7 +456,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of patterns for the entity value. A pattern is specified as a regular expression.</p>
+                        <p>An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by <strong>type</strong>), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the <a href="https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -479,7 +506,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The text of the entity value.</p>
+                                  <p>The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -503,7 +530,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Specifies the type of value (<code><a href="../Structs/UpdateValue.html#/s:14ConversationV111UpdateValueV8synonymsSaySSGSgv">synonyms</a></code> or <code><a href="../Structs/UpdateValue.html#/s:14ConversationV111UpdateValueV8patternsSaySSGSgv">patterns</a></code>). The default value is <code><a href="../Structs/UpdateValue.html#/s:14ConversationV111UpdateValueV8synonymsSaySSGSgv">synonyms</a></code>.</p>
+                                  <p>Specifies the type of value.</p>
                                 </div>
                               </td>
                             </tr>
@@ -515,7 +542,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of synonyms for the entity value.</p>
+                                  <p>An array of synonyms for the entity value. You can provide either synonyms or patterns (as indicated by <strong>type</strong>), but not both. A synonym must conform to the following resrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -527,7 +554,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of patterns for the entity value. A pattern is specified as a regular expression.</p>
+                                  <p>An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by <strong>type</strong>), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the <a href="https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -602,7 +629,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-16)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

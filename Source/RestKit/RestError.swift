@@ -25,7 +25,7 @@ public enum RestError: Error {
     /// No data was returned from the server.
     case noData
 
-    /// Failed to serialize JSON to data.
+    /// Failed to serialize value(s) to data.
     case serializationError
 
     /// Failed to replace special characters in the

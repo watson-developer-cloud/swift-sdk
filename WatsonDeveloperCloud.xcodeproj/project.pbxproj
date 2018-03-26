@@ -435,6 +435,7 @@
 		68BC29031F8C38700042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		68BC29041F8C38700042810E /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3D1CEE3059002C9564 /* RestToken.swift */; };
 		68BC29051F8C38700042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
+		68BF6A5A206999BB00B6BD30 /* QueryAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BF6A59206999BB00B6BD30 /* QueryAggregation.swift */; };
 		68C441502017B19000B251C6 /* DialogNodeVisitedDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C4414E2017B17B00B251C6 /* DialogNodeVisitedDetails.swift */; };
 		68C974AC200D52F6002DCFA3 /* CaptureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C974AA200D52E4002DCFA3 /* CaptureGroup.swift */; };
 		68D09C1F200D61870087ADE5 /* ToneChatInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D09C18200D61870087ADE5 /* ToneChatInput.swift */; };
@@ -1038,6 +1039,7 @@
 		68B213E81F84296D0052DC00 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensionsTests.swift; sourceTree = "<group>"; };
 		68B213EE1F8429890052DC00 /* JSONValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValueTests.swift; sourceTree = "<group>"; };
+		68BF6A59206999BB00B6BD30 /* QueryAggregation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryAggregation.swift; sourceTree = "<group>"; };
 		68C4414E2017B17B00B251C6 /* DialogNodeVisitedDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeVisitedDetails.swift; sourceTree = "<group>"; };
 		68C974AA200D52E4002DCFA3 /* CaptureGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureGroup.swift; sourceTree = "<group>"; };
 		68D09C18200D61870087ADE5 /* ToneChatInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneChatInput.swift; sourceTree = "<group>"; };
@@ -1649,6 +1651,7 @@
 				68AF8ED0206968CC00D552E3 /* Notice.swift */,
 				68AF8EE5206968CC00D552E3 /* PdfHeadingDetection.swift */,
 				68AF8ECF206968CC00D552E3 /* PdfSettings.swift */,
+				68BF6A59206999BB00B6BD30 /* QueryAggregation.swift */,
 				68AF8EEE206968CC00D552E3 /* QueryEntities.swift */,
 				68AF8EF1206968CC00D552E3 /* QueryEntitiesContext.swift */,
 				68AF8EEF206968CC00D552E3 /* QueryEntitiesEntity.swift */,
@@ -3526,6 +3529,7 @@
 				68AF8F702069690300D552E3 /* QueryEvidence.swift in Sources */,
 				68AF8F522069690300D552E3 /* ListCollectionFieldsResponse.swift in Sources */,
 				68AF8F782069690300D552E3 /* QueryEvidenceEntity.swift in Sources */,
+				68BF6A5A206999BB00B6BD30 /* QueryAggregation.swift in Sources */,
 				68D97E2B206989010087432F /* GenericQueryAggregation.swift in Sources */,
 				68AF8F8C2069690300D552E3 /* AggregationResult.swift in Sources */,
 				68AF8F6A2069690300D552E3 /* TrainingDataSet.swift in Sources */,

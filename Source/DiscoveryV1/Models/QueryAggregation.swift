@@ -17,33 +17,50 @@
 import Foundation
 
 /** An aggregation produced by the Discovery service to analyze the input provided. */
-public struct QueryAggregation: Decodable {
+public enum QueryAggregation: Decodable {
 
-    /// The type of aggregation command used. For example: term, filter, max, min, etc.
-    public var type: String?
+    // reference: https://console.bluemix.net/docs/services/discovery/query-reference.html#aggregations
 
-    /// The field where the aggregation is located in the document.
-    public var field: String?
+    case term(Term)
+    case filter(GenericQueryAggregation)
+    case nested(GenericQueryAggregation)
+    case histogram(Histogram)
+    case timeslice(GenericQueryAggregation)
+    case topHits(GenericQueryAggregation)
+    case uniqueCount(GenericQueryAggregation)
+    case max(Calculation)
+    case min(Calculation)
+    case average(Calculation)
+    case sum(Calculation)
+    case generic(GenericQueryAggregation)
 
-    public var results: [AggregationResult]?
-
-    /// The match the aggregated results queried for.
-    public var match: String?
-
-    /// Number of matching results.
-    public var matchingResults: Int?
-
-    /// Aggregations returned by the Discovery service.
-    public var aggregations: [QueryAggregation]?
-
-    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
-        case field = "field"
-        case results = "results"
-        case match = "match"
-        case matchingResults = "matching_results"
-        case aggregations = "aggregations"
+    }
+
+    // swiftlint:disable:next cyclomatic_complexity
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard let type = try container.decodeIfPresent(String.self, forKey: .type) else {
+            // the specification does not identify `type` as a required field,
+            // so we need a generic catch-all in case it is not present
+            self = .generic(try GenericQueryAggregation(from: decoder))
+            return
+        }
+        switch type {
+        case "term": self = .term(try Term(from: decoder))
+        case "filter": self = .filter(try GenericQueryAggregation(from: decoder))
+        case "nested": self = .nested(try GenericQueryAggregation(from: decoder))
+        case "histogram": self = .histogram(try Histogram(from: decoder))
+        case "timeslice": self = .timeslice(try GenericQueryAggregation(from: decoder))
+        case "top_hits": self = .topHits(try GenericQueryAggregation(from: decoder))
+        case "unique_count": self = .uniqueCount(try GenericQueryAggregation(from: decoder))
+        case "max": self = .max(try Calculation(from: decoder))
+        case "min": self = .min(try Calculation(from: decoder))
+        case "average": self = .average(try Calculation(from: decoder))
+        case "sum": self = .sum(try Calculation(from: decoder))
+        default: self = .generic(try GenericQueryAggregation(from: decoder))
+        }
     }
 
 }

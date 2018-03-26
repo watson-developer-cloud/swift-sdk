@@ -16,12 +16,12 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** QueryNoticesResponse. */
+public struct QueryNoticesResponse: Decodable {
 
     public var matchingResults: Int?
 
-    public var results: [QueryResult]?
+    public var results: [QueryNoticesResult]?
 
     public var aggregations: [QueryAggregation]?
 

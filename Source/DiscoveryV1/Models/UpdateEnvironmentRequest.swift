@@ -16,26 +16,32 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** UpdateEnvironmentRequest. */
+public struct UpdateEnvironmentRequest: Encodable {
 
-    public var matchingResults: Int?
+    /// Name that identifies the environment.
+    public var name: String?
 
-    public var results: [QueryResult]?
-
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// Description of the environment.
+    public var description: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case name = "name"
+        case description = "description"
+    }
+
+    /**
+     Initialize a `UpdateEnvironmentRequest` with member variables.
+
+     - parameter name: Name that identifies the environment.
+     - parameter description: Description of the environment.
+
+     - returns: An initialized `UpdateEnvironmentRequest`.
+    */
+    public init(name: String? = nil, description: String? = nil) {
+        self.name = name
+        self.description = description
     }
 
 }

@@ -16,26 +16,19 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** Summary of the collection usage in the environment. */
+public struct CollectionUsage: Decodable {
 
-    public var matchingResults: Int?
+    /// Number of active collections in the environment.
+    public var available: Int?
 
-    public var results: [QueryResult]?
-
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// Total number of collections allowed in the environment.
+    public var maximumAllowed: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case available = "available"
+        case maximumAllowed = "maximum_allowed"
     }
 
 }

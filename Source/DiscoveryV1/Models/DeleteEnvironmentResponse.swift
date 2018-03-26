@@ -16,26 +16,24 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** DeleteEnvironmentResponse. */
+public struct DeleteEnvironmentResponse: Decodable {
 
-    public var matchingResults: Int?
+    /// Status of the environment.
+    public enum Status: String {
+        case deleted = "deleted"
+    }
 
-    public var results: [QueryResult]?
+    /// The unique identifier for the environment.
+    public var environmentID: String
 
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// Status of the environment.
+    public var status: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case environmentID = "environment_id"
+        case status = "status"
     }
 
 }

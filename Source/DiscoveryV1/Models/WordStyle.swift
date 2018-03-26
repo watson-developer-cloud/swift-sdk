@@ -16,26 +16,30 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** WordStyle. */
+public struct WordStyle: Codable {
 
-    public var matchingResults: Int?
+    public var level: Int?
 
-    public var results: [QueryResult]?
-
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    public var names: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case level = "level"
+        case names = "names"
+    }
+
+    /**
+     Initialize a `WordStyle` with member variables.
+
+     - parameter level:
+     - parameter names:
+
+     - returns: An initialized `WordStyle`.
+    */
+    public init(level: Int? = nil, names: [String]? = nil) {
+        self.level = level
+        self.names = names
     }
 
 }

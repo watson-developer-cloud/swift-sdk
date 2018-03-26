@@ -16,26 +16,24 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** DeleteCollectionResponse. */
+public struct DeleteCollectionResponse: Decodable {
 
-    public var matchingResults: Int?
+    /// The status of the collection. The status of a successful deletion operation is `deleted`.
+    public enum Status: String {
+        case deleted = "deleted"
+    }
 
-    public var results: [QueryResult]?
+    /// The unique identifier of the collection that is being deleted.
+    public var collectionID: String
 
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// The status of the collection. The status of a successful deletion operation is `deleted`.
+    public var status: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case collectionID = "collection_id"
+        case status = "status"
     }
 
 }

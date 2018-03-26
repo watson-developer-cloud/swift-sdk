@@ -16,26 +16,23 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** DocumentCounts. */
+public struct DocumentCounts: Decodable {
 
-    public var matchingResults: Int?
+    /// The total number of available documents in the collection.
+    public var available: Int?
 
-    public var results: [QueryResult]?
+    /// The number of documents in the collection that are currently being processed.
+    public var processing: Int?
 
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// The number of documents in the collection that failed to be ingested.
+    public var failed: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case available = "available"
+        case processing = "processing"
+        case failed = "failed"
     }
 
 }

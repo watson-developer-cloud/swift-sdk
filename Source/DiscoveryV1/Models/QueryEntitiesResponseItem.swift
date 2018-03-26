@@ -16,26 +16,23 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** Object containing Entity query response information. */
+public struct QueryEntitiesResponseItem: Decodable {
 
-    public var matchingResults: Int?
+    /// Entity text content.
+    public var text: String?
 
-    public var results: [QueryResult]?
+    /// The type of the result entity.
+    public var type: String?
 
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// List of different evidentiary items to support the result.
+    public var evidence: [QueryEvidence]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case text = "text"
+        case type = "type"
+        case evidence = "evidence"
     }
 
 }

@@ -16,26 +16,34 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** Field. */
+public struct Field: Decodable {
 
-    public var matchingResults: Int?
+    /// The type of the field.
+    public enum FieldType: String {
+        case nested = "nested"
+        case string = "string"
+        case date = "date"
+        case long = "long"
+        case integer = "integer"
+        case short = "short"
+        case byte = "byte"
+        case double = "double"
+        case float = "float"
+        case boolean = "boolean"
+        case binary = "binary"
+    }
 
-    public var results: [QueryResult]?
+    /// The name of the field.
+    public var fieldName: String?
 
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// The type of the field.
+    public var fieldType: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case fieldName = "field"
+        case fieldType = "type"
     }
 
 }

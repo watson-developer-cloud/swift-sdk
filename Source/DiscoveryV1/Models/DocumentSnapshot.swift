@@ -16,26 +16,26 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** DocumentSnapshot. */
+public struct DocumentSnapshot: Decodable {
 
-    public var matchingResults: Int?
+    public enum Step: String {
+        case htmlInput = "html_input"
+        case htmlOutput = "html_output"
+        case jsonOutput = "json_output"
+        case jsonNormalizationsOutput = "json_normalizations_output"
+        case enrichmentsOutput = "enrichments_output"
+        case normalizationsOutput = "normalizations_output"
+    }
 
-    public var results: [QueryResult]?
+    public var step: String?
 
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    public var snapshot: [String: JSON]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case step = "step"
+        case snapshot = "snapshot"
     }
 
 }

@@ -16,26 +16,27 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** Details about the resource usage and capacity of the environment. */
+public struct IndexCapacity: Decodable {
 
-    public var matchingResults: Int?
+    /// Summary of the document usage statistics for the environment.
+    public var documents: EnvironmentDocuments?
 
-    public var results: [QueryResult]?
+    /// Summary of the disk usage of the environment.
+    public var diskUsage: DiskUsage?
 
-    public var aggregations: [QueryAggregation]?
+    /// Summary of the collection usage in the environment.
+    public var collections: CollectionUsage?
 
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// **Deprecated**: Summary of the memory usage of the environment.
+    public var memoryUsage: MemoryUsage?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case documents = "documents"
+        case diskUsage = "disk_usage"
+        case collections = "collections"
+        case memoryUsage = "memory_usage"
     }
 
 }

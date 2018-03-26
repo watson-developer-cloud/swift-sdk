@@ -16,26 +16,27 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** QueryRelationsRelationship. */
+public struct QueryRelationsRelationship: Decodable {
 
-    public var matchingResults: Int?
+    /// The identified relationship type.
+    public var type: String?
 
-    public var results: [QueryResult]?
+    /// The number of times the relationship is mentioned.
+    public var frequency: Int?
 
-    public var aggregations: [QueryAggregation]?
+    /// Information about the relationship.
+    public var arguments: [QueryRelationsArgument]?
 
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// List of different evidentiary items to support the result.
+    public var evidence: [QueryEvidence]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case type = "type"
+        case frequency = "frequency"
+        case arguments = "arguments"
+        case evidence = "evidence"
     }
 
 }

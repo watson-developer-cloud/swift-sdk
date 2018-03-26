@@ -16,26 +16,28 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** DeleteConfigurationResponse. */
+public struct DeleteConfigurationResponse: Decodable {
 
-    public var matchingResults: Int?
+    /// Status of the configuration. A deleted configuration has the status deleted.
+    public enum Status: String {
+        case deleted = "deleted"
+    }
 
-    public var results: [QueryResult]?
+    /// The unique identifier for the configuration.
+    public var configurationID: String
 
-    public var aggregations: [QueryAggregation]?
+    /// Status of the configuration. A deleted configuration has the status deleted.
+    public var status: String
 
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// An array of notice messages, if any.
+    public var notices: [Notice]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case configurationID = "configuration_id"
+        case status = "status"
+        case notices = "notices"
     }
 
 }

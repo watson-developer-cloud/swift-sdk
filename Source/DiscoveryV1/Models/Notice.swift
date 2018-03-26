@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,52 +16,45 @@
 
 import Foundation
 
-/** A notice produced by the ingestion process. */
-public struct Notice: JSONDecodable {
-
-    /// Unique identifier of the notice.
-    public let noticeID: String
-
-    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mm
-    /// :ss.SSS'Z'.
-    public let created: String
-
-    /// Unique identifier of the ingested document.
-    public let documentID: String
+/** A notice produced for the collection. */
+public struct Notice: Decodable {
 
     /// Severity level of the notice.
-    public let severity: NoticeSeverity
+    public enum Severity: String {
+        case warning = "warning"
+        case error = "error"
+    }
 
-    /// Ingestion step in which the notice occurred.
-    public let step: String
+    /// Identifies the notice. Many notices might have the same ID. This field exists so that user applications can programmatically identify a notice and take automatic corrective action.
+    public var noticeID: String?
+
+    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    public var created: String?
+
+    /// Unique identifier of the document.
+    public var documentID: String?
+
+    /// Unique identifier of the query used for relevance training.
+    public var queryID: String?
+
+    /// Severity level of the notice.
+    public var severity: String?
+
+    /// Ingestion or training step in which the notice occurred.
+    public var step: String?
 
     /// The description of the notice.
-    public let description: String
+    public var description: String?
 
-    /// JSON with details that might help troubleshoot the notice.
-    public let details: [String: Any]
-
-    /// Used internally to initialize a `Notice` model from JSON.
-    public init(json: JSONWrapper) throws {
-        noticeID = try json.getString(at: "notice_id")
-        created = try json.getString(at: "created")
-        documentID = try json.getString(at: "document_id")
-        guard let noticeSeverity = NoticeSeverity(rawValue: try json.getString(at: "severity")) else {
-            throw JSONWrapper.Error.valueNotConvertible(value: json, to: NoticeSeverity.self)
-        }
-        severity = noticeSeverity
-        step = try json.getString(at: "step")
-        description = try json.getString(at: "description")
-        details = try json.getDictionary(at: "details")
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case noticeID = "notice_id"
+        case created = "created"
+        case documentID = "document_id"
+        case queryID = "query_id"
+        case severity = "severity"
+        case step = "step"
+        case description = "description"
     }
-}
 
-/** Severity of a notice. */
-public enum NoticeSeverity: String {
-
-    /// Warning
-    case warning = "warning"
-
-    /// Error
-    case error = "error"
 }

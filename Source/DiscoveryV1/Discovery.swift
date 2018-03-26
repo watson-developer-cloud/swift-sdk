@@ -1734,6 +1734,8 @@ public class Discovery {
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
+
     /**
      Query documents.
 
@@ -1890,6 +1892,8 @@ public class Discovery {
             }
         }
     }
+
+    // swiftlint:enable cyclomatic_complexity
 
     /**
      Knowledge Graph entity query.

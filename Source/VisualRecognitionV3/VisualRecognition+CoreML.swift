@@ -14,6 +14,8 @@
  * limitations under the License.
  **/
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+
 import Foundation
 import CoreML
 import Vision
@@ -460,3 +462,5 @@ extension VisualRecognition {
 
     // swiftlint:enable function_body_length
 }
+
+#endif

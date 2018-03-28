@@ -89,15 +89,13 @@ Finally, drag-and-drop the built frameworks into your Xcode project and import t
 
 ### Swift Package Manager
 
-To include the Watson SDK to your projects, add the following to your `Package.swift` file:
+Add the following to your `Package.swift` file to identify the Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with `swift build`.
 
 ```swift
 dependencies: [
-    .Package(url: "https://github.com/watson-developer-cloud/swift-sdk",
-             majorVersion: 0)
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.23.1")
 ]
 ```
-To build the project, run `swift build` from the command line.
 
 ## Service Instances
 

@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+## Version 0.23.2
+_2018-03-28_
+
+This release fixes a few bugs for Linux compatibility:
+- Only `import CoreML` in supported environments
+- Include Assistant tests in `LinuxMain.swift`
+
+It also updates the readme for API changes introduced in v0.22.0.
+
 ## Version 0.23.1
 _2018-03-22_
 

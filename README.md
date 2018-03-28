@@ -89,15 +89,13 @@ Finally, drag-and-drop the built frameworks into your Xcode project and import t
 
 ### Swift Package Manager
 
-To include the Watson SDK to your projects, add the following to your `Package.swift` file:
+Add the following to your `Package.swift` file to identify the Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with `swift build`.
 
 ```swift
 dependencies: [
-    .Package(url: "https://github.com/watson-developer-cloud/swift-sdk",
-             majorVersion: 0)
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.23.1")
 ]
 ```
-To build the project, run `swift build` from the command line.
 
 ## Service Instances
 
@@ -421,7 +419,8 @@ let languageTranslator = LanguageTranslator(username: username, password: passwo
 // languageTranslator.serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
 
 let failure = { (error: Error) in print(error) }
-languageTranslator.translate("Hello", from: "en", to: "es", failure: failure) {
+let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")
+languageTranslator.translate(request: request, failure: failure) {
     translation in
     print(translation)
 }
@@ -449,7 +448,7 @@ let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, pa
 let classifierID = "your-trained-classifier-id"
 let text = "your-text-here"
 let failure = { (error: Error) in print(error) }
-naturalLanguageClassifier.classify(text, withClassifierID: classifierID, failure: failure) {
+naturalLanguageClassifier.classify(classifierID: classifierID, text: text, failure: failure) {
     classification in
     print(classification)
 }
@@ -484,20 +483,15 @@ import NaturalLanguageUnderstandingV1
 let username = "your-username-here"
 let password = "your-password-here"
 let version = "yyyy-mm-dd" // use today's date for the most recent version
-
 let naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
 
-let textToAnalyze = "In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."
-
 let features = Features(concepts: ConceptsOptions(limit: 5))
-let parameters = Parameters(features: features, text: textToAnalyze)
-
+let parameters = Parameters(features: features, text: "your-text-here")
 let failure = { (error: Error) in print(error) }
-naturalLanguageUnderstanding.analyzeContent(withParameters: parameters, failure: failure) {
+naturalLanguageUnderstanding.analyze(parameters: parameters, failure: failure) {
     results in
-    print (results)
+    print(results)
 }
-
 ```
 
 #### 500 errors
@@ -523,9 +517,8 @@ let password = "your-password-here"
 let version = "yyyy-mm-dd" // use today's date for the most recent version
 let personalityInsights = PersonalityInsights(username: username, password: password, version: version)
 
-let text = "your-input-text"
 let failure = { (error: Error) in print(error) }
-personalityInsights.getProfile(fromText: text, failure: failure) { profile in
+personalityInsights.profile(text: "your-input-text", failure: failure) { profile in
     print(profile)
 }
 ```
@@ -830,19 +823,20 @@ import AVFoundation
 let username = "your-username-here"
 let password = "your-password-here"
 let textToSpeech = TextToSpeech(username: username, password: password)
-var audioPlayer = AVAudioPlayer() // see note below
+
+// The AVAudioPlayer object will stop playing if it falls out-of-scope.
+// Therefore, to prevent it from falling out-of-scope we declare it as
+// a property outside the completion handler where it will be played.
+var audioPlayer = AVAudioPlayer()
 
 let text = "your-text-here"
+let accept = "audio/wav"
 let failure = { (error: Error) in print(error) }
-textToSpeech.synthesize(text, failure: failure) { data in
+textToSpeech.synthesize(text: text, accept: accept, failure: failure) { data in
     audioPlayer = try! AVAudioPlayer(data: data)
     audioPlayer.prepareToPlay()
     audioPlayer.play()
 }
-
-// A note about AVAudioPlayer: The AVAudioPlayer object will stop playing
-// if it falls out-of-scope. Therefore, it's important to declare it as a
-// property or otherwise keep it in-scope beyond the completion handler.
 ```
 
 The Text to Speech service supports a number of [voices](https://console.bluemix.net/docs/services/text-to-speech/http.html#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
@@ -853,25 +847,22 @@ import TextToSpeechV1
 let username = "your-username-here"
 let password = "your-password-here"
 let textToSpeech = TextToSpeech(username: username, password: password)
-var audioPlayer = AVAudioPlayer() // see note below
+
+// The AVAudioPlayer object will stop playing if it falls out-of-scope.
+// Therefore, to prevent it from falling out-of-scope we declare it as
+// a property outside the completion handler where it will be played.
+var audioPlayer = AVAudioPlayer()
 
 let text = "your-text-here"
+let accept = "audio/wav"
+let voice = "en-US_LisaVoice"
 let failure = { (error: Error) in print(error) }
-textToSpeech.synthesize(text, voice: SynthesisVoice.gb_Kate.rawValue, failure: failure) { data in
+textToSpeech.synthesize(text: text, accept: accept, voice: voice, failure: failure) { data in
     audioPlayer = try! AVAudioPlayer(data: data)
     audioPlayer.prepareToPlay()
     audioPlayer.play()
 }
-
-// A note about AVAudioPlayer: The AVAudioPlayer object will stop playing
-// if it falls out-of-scope. Therefore, it's important to declare it as a
-// property or otherwise keep it in-scope beyond the completion handler.
 ```
-
-#### Important notes
-* Prior to v0.15.2, users could already request Opus as the return type. Opus files are much smaller than WAV files, so this would save bandwidth. However, Opus isn't playable by the iOS platform.
-* In v0.15.2, we have added functionality to decode Opus files and convert them to WAV files.
-* Currently, this is being done automatically when Opus files are requested. In a future release, we will allow users more control over when the decoding process occurs.
 
 The following links provide more information about the IBM Text To Speech service:
 
@@ -895,9 +886,9 @@ let password = "your-password-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
 let toneAnalyzer = ToneAnalyzer(username: username, password: password, version: version)
 
-let text = "your-input-text"
+let toneInput = ToneInput(text: "your-input-text")
 let failure = { (error: Error) in print(error) }
-toneAnalyzer.getTone(ofText: text, failure: failure) { tones in
+toneAnalyzer.tone(toneInput: toneInput, contentType: "plain/text", failure: failure) { tones in
     print(tones)
 }
 ```
@@ -913,8 +904,6 @@ The following links provide more information about the IBM Watson Tone Analyzer 
 The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, faces, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.
 
 The following example demonstrates how to use the Visual Recognition service:
-
-The following example demonstrates how to use the Visual Recognition service to detect faces in an image:
 
 ```swift
 import VisualRecognitionV3

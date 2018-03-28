@@ -16,6 +16,8 @@
 
 // swiftlint:disable function_body_length force_try force_unwrapping superfluous_disable_command
 
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
+
 import XCTest
 import VisualRecognitionV3
 
@@ -134,3 +136,5 @@ class VisualRecognitionCoreMLTests: XCTestCase {
         }
     }
 }
+
+#endif

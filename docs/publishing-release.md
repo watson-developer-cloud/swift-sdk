@@ -9,6 +9,7 @@ The following tasks should be completed before publishing a release. Track the p
 
 - [ ] Add service to `README.md`
 - [ ] Add service to `Package.swift`
+- [ ] Add service to `Tests/LinuxMain.swift`
 - [ ] Add service to `generate-documentation.md` script
 - [ ] Add service to `run-tests.sh` script
 - [ ] Add service credentials to `Credentials.swift` and `CredentialsExample.swift`
@@ -28,6 +29,6 @@ The following tasks should be completed before publishing a release. Track the p
 
 #### Publish Release
 
-- [ ] Use Github to create a tag/release.
-- [ ] Execute the `generate-binaries.sh` script to build and archive frameworks into a `WatsonDeveloperCloud.framework.zip` file. Then attach `WatsonDeveloperCloud.framework.zip` to the GitHub release.
+- [ ] Execute `generate-binaries.sh` to build and archive frameworks into `WatsonDeveloperCloud.framework.zip`.
+- [ ] Use Github to create a tag/release and attach `WatsonDeveloperCloud.framework.zip`.
 - [ ] Test that Carthage successfully builds each service's framework.

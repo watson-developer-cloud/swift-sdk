@@ -905,8 +905,6 @@ The IBM Watson Visual Recognition service uses deep learning algorithms to analy
 
 The following example demonstrates how to use the Visual Recognition service:
 
-The following example demonstrates how to use the Visual Recognition service to detect faces in an image:
-
 ```swift
 import VisualRecognitionV3
 

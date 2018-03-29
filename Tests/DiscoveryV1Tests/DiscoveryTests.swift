@@ -101,6 +101,10 @@ class DiscoveryTests: XCTestCase {
             ("testDeleteAllTrainingData", testDeleteAllTrainingData),
             ("testListTrainingExamples", testListTrainingExamples),
             ("testTrainingExamplesCRUD", testTrainingExamplesCRUD),
+            ("testGetEnvironmentWithInvalidID", testGetEnvironmentWithInvalidID),
+            ("testGetConfigurationWithInvalidID", testGetConfigurationWithInvalidID),
+            ("testGetCollectionWithInvalidID", testGetCollectionWithInvalidID),
+            ("testQueryWithInvalidID", testQueryWithInvalidID),
         ]
     }
 
@@ -1312,4 +1316,53 @@ class DiscoveryTests: XCTestCase {
         wait(for: [expectation5], timeout: timeout)
     }
 
+    // MARK: - Negative Tests
+
+    func testGetEnvironmentWithInvalidID() {
+        let expectation = self.expectation(description: "getEnvironment")
+        let failure = { (error: Error) in
+            XCTAssert(error.localizedDescription.lowercased().contains("invalid environment id"))
+            expectation.fulfill()
+        }
+        discovery.getEnvironment(environmentID: "invalid-id", failure: failure, success: failWithResult)
+        wait(for: [expectation], timeout: timeout)
+    }
+
+    func testGetConfigurationWithInvalidID() {
+        let expectation = self.expectation(description: "getEnvironment")
+        let environmentID = environment.environmentID!
+        let failure = { (error: Error) in
+            XCTAssert(error.localizedDescription.lowercased().contains("invalid configuration id"))
+            expectation.fulfill()
+        }
+        discovery.getConfiguration(environmentID: environmentID, configurationID: "invalid-id", failure: failure, success: failWithResult)
+        wait(for: [expectation], timeout: timeout)
+    }
+
+    func testGetCollectionWithInvalidID() {
+        let expectation = self.expectation(description: "getEnvironment")
+        let environmentID = environment.environmentID!
+        let failure = { (error: Error) in
+            XCTAssert(error.localizedDescription.lowercased().contains("could not find"))
+            expectation.fulfill()
+        }
+        discovery.getCollection(environmentID: environmentID, collectionID: "invalid-id", failure: failure, success: failWithResult)
+        wait(for: [expectation], timeout: timeout)
+    }
+
+    func testQueryWithInvalidID() {
+        let expectation = self.expectation(description: "getEnvironment")
+        let failure = { (error: Error) in
+            XCTAssert(error.localizedDescription.lowercased().contains("invalid environment id"))
+            expectation.fulfill()
+        }
+        discovery.query(
+            environmentID: "invalid-id",
+            collectionID: "invalid-id",
+            query: "enriched_text.concepts.text:\"Cloud computing\"",
+            failure: failure,
+            success: failWithResult
+        )
+        wait(for: [expectation], timeout: timeout)
+    }
 }

@@ -151,6 +151,8 @@ naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 
 * [Simple Chat (Swift)](https://github.com/watson-developer-cloud/simple-chat-swift)
 * [Simple Chat (Objective-C)](https://github.com/watson-developer-cloud/simple-chat-objective-c)
+* [Visual Recognition with Core ML](https://github.com/watson-developer-cloud/visual-recognition-coreml)
+* [Visual Recognition and Discovery with Core ML](https://github.com/watson-developer-cloud/visual-recognition-with-discovery-coreml)
 * [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
 * [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
 * [Cognitive Concierge](https://github.com/IBM-MIL/CognitiveConcierge)

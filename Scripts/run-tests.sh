@@ -8,7 +8,7 @@
 ####################
 
 # the device to build for
-DESTINATION="OS=11.2,name=iPhone 7"
+DESTINATION=${DESTINATION:-"OS=11.2,name=iPhone 7"}
 
 # the exit code of each build command
 EXIT_CODES=()
@@ -39,6 +39,17 @@ carthage bootstrap --platform iOS
 brew outdated swiftlint || brew upgrade swiftlint
 
 ####################
+# Setup
+####################
+
+# Xcode over-writes the coverage info with each build, so we create a directory
+# where we accumulate all the coverage files
+BUILD_ROOT=$(xcodebuild -showBuildSettings | grep '\<BUILD_ROOT\>' | awk '{print $3}')
+COVERAGE_DIR=$BUILD_ROOT/../Coverage
+rm -rf $COVERAGE_DIR
+mkdir $COVERAGE_DIR
+
+####################
 # Build and Test
 ####################
 
@@ -49,9 +60,24 @@ set -o pipefail
 
 # build each scheme
 for SCHEME in ${SCHEMES[@]}; do
-	xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" test | xcpretty
+	xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" -enableCodeCoverage YES test | xcpretty
 	EXIT_CODES+=($?)
+	PROF_DIR=$(dirname $(find $BUILD_ROOT/.. -name Coverage.profdata))
+	cp $PROF_DIR/*.profraw $COVERAGE_DIR
 done
+
+####################
+# Create a composite coverage report
+####################
+
+xcrun llvm-profdata merge -sparse $(ls $COVERAGE_DIR/*.profraw) -o $COVERAGE_DIR/Coverage.profdata
+
+FRAMEWORKS=$(ls -d $BUILD_ROOT/Debug-iphonesimulator/*.framework)
+BINARIES=$(echo $FRAMEWORKS | sed 's/\(\([A-Za-z0-9]*\).framework\)/\1\/\2/g' | sed 's/ / -object /g')
+
+xcrun llvm-cov show -instr-profile $COVERAGE_DIR/Coverage.profdata $BINARIES > $COVERAGE_DIR/Coverage.txt
+
+# Composite coverage report in $COVERAGE_DIR/Coverage.txt"
 
 ####################
 # Set Exit Code

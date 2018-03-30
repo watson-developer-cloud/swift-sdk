@@ -152,12 +152,12 @@ public enum JSON: Equatable, Codable {
     public static func == (lhs: JSON, rhs: JSON) -> Bool {
         switch (lhs, rhs) {
         case (.null, null): return true
-        case (.boolean(let x), .boolean(let y)): return x == y
-        case (.string(let x), .string(let y)): return x == y
-        case (.int(let x), .int(let y)): return x == y
-        case (.double(let x), .double(let y)): return x == y
-        case (.array(let x), .array(let y)): return x == y
-        case (.object(let x), .object(let y)): return x == y
+        case (.boolean(let x), .boolean(let y)): return x == y //swiftlint:disable:this identifier_name
+        case (.string(let x), .string(let y)): return x == y   //swiftlint:disable:this identifier_name
+        case (.int(let x), .int(let y)): return x == y         //swiftlint:disable:this identifier_name
+        case (.double(let x), .double(let y)): return x == y   //swiftlint:disable:this identifier_name
+        case (.array(let x), .array(let y)): return x == y     //swiftlint:disable:this identifier_name
+        case (.object(let x), .object(let y)): return x == y   //swiftlint:disable:this identifier_name
         default: return false
         }
     }

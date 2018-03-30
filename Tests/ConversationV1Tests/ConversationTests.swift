@@ -244,17 +244,17 @@ class ConversationTests: XCTestCase {
             XCTAssertNotNil(output)
 
             // verify intents are equal
-            for i in 0..<response.intents.count {
-                let intent1 = intents![i]
-                let intent2 = response.intents[i]
+            for index in 0..<response.intents.count {
+                let intent1 = intents![index]
+                let intent2 = response.intents[index]
                 XCTAssertEqual(intent1.intent, intent2.intent)
                 XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
 
             // verify entities are equal
-            for i in 0..<response.entities.count {
-                let entity1 = entities![i]
-                let entity2 = response.entities[i]
+            for index in 0..<response.entities.count {
+                let entity1 = entities![index]
+                let entity2 = response.entities[index]
                 XCTAssertEqual(entity1.entity, entity2.entity)
                 XCTAssertEqual(entity1.location[0], entity2.location[0])
                 XCTAssertEqual(entity1.location[1], entity2.location[1])
@@ -311,17 +311,17 @@ class ConversationTests: XCTestCase {
             XCTAssertNotNil(output)
 
             // verify intents are equal
-            for i in 0..<response.intents.count {
-                let intent1 = intents![i]
-                let intent2 = response.intents[i]
+            for index in 0..<response.intents.count {
+                let intent1 = intents![index]
+                let intent2 = response.intents[index]
                 XCTAssertEqual(intent1.intent, intent2.intent)
                 XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
 
             // verify entities are equal
-            for i in 0..<response.entities.count {
-                let entity1 = entities![i]
-                let entity2 = response.entities[i]
+            for index in 0..<response.entities.count {
+                let entity1 = entities![index]
+                let entity2 = response.entities[index]
                 XCTAssertEqual(entity1.entity, entity2.entity)
                 XCTAssertEqual(entity1.location[0], entity2.location[0])
                 XCTAssertEqual(entity1.location[1], entity2.location[1])

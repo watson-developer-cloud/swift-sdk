@@ -1123,11 +1123,11 @@ class DiscoveryTests: XCTestCase {
                         XCTAssertNotNil(result.enrichedTitle)
                         if let enrichedTitle = result.enrichedTitle {
                             XCTAssertNotNil(enrichedTitle.json["semantic_roles"])
-                            if let semantic_roles = enrichedTitle.json["semantic_roles"] as? [[String: Any]] {
-                                for semantic_role in semantic_roles {
-                                    XCTAssertNotNil(semantic_role["sentence"])
-                                    XCTAssertNotNil(semantic_role["action"])
-                                    XCTAssertNotNil(semantic_role["subject"])
+                            if let semanticRoles = enrichedTitle.json["semantic_roles"] as? [[String: Any]] {
+                                for semanticRole in semanticRoles {
+                                    XCTAssertNotNil(semanticRole["sentence"])
+                                    XCTAssertNotNil(semanticRole["action"])
+                                    XCTAssertNotNil(semanticRole["subject"])
                                     //XCTAssertNotNil(semantic_role["object"])
                                 }
                             }

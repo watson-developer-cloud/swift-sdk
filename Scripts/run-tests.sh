@@ -8,7 +8,7 @@
 ####################
 
 # the device to build for
-DESTINATION="OS=11.2,name=iPhone 7"
+DESTINATION="OS=11.3,name=iPhone 7"
 
 # the exit code of each build command
 EXIT_CODES=()

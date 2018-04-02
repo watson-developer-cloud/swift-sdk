@@ -568,9 +568,9 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for c in classes where c.className == "person" {
+            for cls in classes where cls.className == "person" {
                 containsPersonClass = true
-                classifierScore = c.score
+                classifierScore = cls.score
                 break
             }
             XCTAssertEqual(true, containsPersonClass)
@@ -620,9 +620,9 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for c in classes where c.className == "person" {
+            for cls in classes where cls.className == "person" {
                 containsPersonClass = true
-                classifierScore = c.score
+                classifierScore = cls.score
                 break
             }
             XCTAssertEqual(containsPersonClass, true)
@@ -740,9 +740,9 @@ class VisualRecognitionTests: XCTestCase {
                     XCTAssertEqual(classifier.name, "default")
 
                     XCTAssertGreaterThan(classifier.classes.count, 0)
-                    for c in classifier.classes where c.className == "car" {
+                    for cls in classifier.classes where cls.className == "car" {
                         containsCarClass = true
-                        classifierScore = c.score
+                        classifierScore = cls.score
                     }
                     XCTAssertEqual(containsCarClass, true)
                     if let score = classifierScore {
@@ -792,9 +792,9 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for c in classes where c.className == "car" {
+            for cls in classes where cls.className == "car" {
                 containsPersonClass = true
-                classifierScore = c.score
+                classifierScore = cls.score
                 break
             }
             XCTAssertEqual(true, containsPersonClass)
@@ -844,9 +844,9 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for c in classes where c.className == "car" {
+            for cls in classes where cls.className == "car" {
                 containsPersonClass = true
-                classifierScore = c.score
+                classifierScore = cls.score
                 break
             }
             XCTAssertEqual(containsPersonClass, true)
@@ -968,9 +968,9 @@ class VisualRecognitionTests: XCTestCase {
                     XCTAssertEqual(classifier.name, "default")
 
                     XCTAssertGreaterThan(classifier.classes.count, 0)
-                    for c in classifier.classes where c.className == "car" {
+                    for cls in classifier.classes where cls.className == "car" {
                         containsCarClass = true
-                        classifierScore = c.score
+                        classifierScore = cls.score
                     }
                     XCTAssertEqual(containsCarClass, true)
                     if let score = classifierScore {
@@ -1022,11 +1022,11 @@ class VisualRecognitionTests: XCTestCase {
                         XCTAssertEqual(classifier.classifierID, "default")
                         XCTAssertEqual(classifier.name, "default")
                         XCTAssertGreaterThan(classifier.classes.count, 0)
-                        for c in classifier.classes {
+                        for cls in classifier.classes {
                             let classes = ["car", "vehicle", "sedan", "Parking Garage (Indoor)"]
-                            if classes.contains(c.className) {
+                            if classes.contains(cls.className) {
                                 containsCarClass = true
-                                classifierScore = c.score
+                                classifierScore = cls.score
                             }
                         }
                         XCTAssertEqual(containsCarClass, true)

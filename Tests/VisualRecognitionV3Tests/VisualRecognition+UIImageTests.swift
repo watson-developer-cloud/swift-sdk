@@ -89,9 +89,9 @@ class VisualRecognitionUIImageTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for c in classes where c.className == "car" {
+            for cls in classes where cls.className == "car" {
                 containsPersonClass = true
-                classifierScore = c.score
+                classifierScore = cls.score
                 break
             }
             XCTAssertEqual(true, containsPersonClass)

@@ -4,7 +4,7 @@ matrix:
       dist: trusty
       sudo: required
     - os: osx
-      osx_image: xcode9.3
+      osx_image: xcode9.3beta
 branches:
   only:
     - master

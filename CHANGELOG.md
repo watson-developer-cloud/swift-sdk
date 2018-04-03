@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.23.3
+_2018-04-02_
+
+This release improves support for Swift 4.1 and Xcode 9.3.
+
 ## Version 0.23.2
 _2018-03-28_
 

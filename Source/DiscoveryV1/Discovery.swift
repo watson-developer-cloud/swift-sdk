@@ -139,94 +139,6 @@ public class Discovery {
     }
 
     /**
-     Delete environment.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func deleteEnvironment(
-        environmentID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteEnvironmentResponse) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeleteEnvironmentResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Get environment info.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func getEnvironment(
-        environmentID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Environment) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Environment>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
      List environments.
 
      List existing environments for the service instance.
@@ -272,20 +184,16 @@ public class Discovery {
     }
 
     /**
-     List fields in specified collections.
-
-     Gets a list of the unique fields (and their types) stored in the indexes of the specified collections.
+     Get environment info.
 
      - parameter environmentID: The ID of the environment.
-     - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func listFields(
+    public func getEnvironment(
         environmentID: String,
-        collectionIds: [String],
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListCollectionFieldsResponse) -> Void)
+        success: @escaping (Environment) -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
@@ -294,10 +202,9 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIds.joined(separator: ",")))
 
         // construct REST request
-        let path = "/v1/environments/\(environmentID)/fields"
+        let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -312,7 +219,7 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ListCollectionFieldsResponse>) in
+            (response: RestResponse<Environment>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -373,6 +280,99 @@ public class Discovery {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Environment>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete environment.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteEnvironment(
+        environmentID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DeleteEnvironmentResponse) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DeleteEnvironmentResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List fields in specified collections.
+
+     Gets a list of the unique fields (and their types) stored in the indexes of the specified collections.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listFields(
+        environmentID: String,
+        collectionIds: [String],
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ListCollectionFieldsResponse) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIds.joined(separator: ",")))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/fields"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ListCollectionFieldsResponse>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -442,23 +442,20 @@ public class Discovery {
     }
 
     /**
-     Delete a configuration.
+     List configurations.
 
-     The deletion is performed unconditionally. A configuration deletion request succeeds even if the configuration is
-     referenced by a collection or document ingestion. However, documents that have already been submitted for
-     processing continue to use the deleted configuration. Documents are always processed with a snapshot of the
-     configuration as it existed at the time the document was submitted.
+     Lists existing configurations for the service instance.
 
      - parameter environmentID: The ID of the environment.
-     - parameter configurationID: The ID of the configuration.
+     - parameter name: Find configurations with the given name.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func deleteConfiguration(
+    public func listConfigurations(
         environmentID: String,
-        configurationID: String,
+        name: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteConfigurationResponse) -> Void)
+        success: @escaping (ListConfigurationsResponse) -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
@@ -467,15 +464,19 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let name = name {
+            let queryParameter = URLQueryItem(name: "name", value: name)
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
-        let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
+        let path = "/v1/environments/\(environmentID)/configurations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
         }
         let request = RestRequest(
-            method: "DELETE",
+            method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: headers,
@@ -484,7 +485,7 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeleteConfigurationResponse>) in
+            (response: RestResponse<ListConfigurationsResponse>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -531,58 +532,6 @@ public class Discovery {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Configuration>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     List configurations.
-
-     Lists existing configurations for the service instance.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter name: Find configurations with the given name.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func listConfigurations(
-        environmentID: String,
-        name: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListConfigurationsResponse) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let name = name {
-            let queryParameter = URLQueryItem(name: "name", value: name)
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/configurations"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ListConfigurationsResponse>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -645,6 +594,57 @@ public class Discovery {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Configuration>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete a configuration.
+
+     The deletion is performed unconditionally. A configuration deletion request succeeds even if the configuration is
+     referenced by a collection or document ingestion. However, documents that have already been submitted for
+     processing continue to use the deleted configuration. Documents are always processed with a snapshot of the
+     configuration as it existed at the time the document was submitted.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter configurationID: The ID of the configuration.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteConfiguration(
+        environmentID: String,
+        configurationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DeleteConfigurationResponse) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DeleteConfigurationResponse>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -800,255 +800,6 @@ public class Discovery {
     }
 
     /**
-     Set the expansion list.
-
-     Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
-     `500`. The current expansion list is replaced with the uploaded content.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter expansions: An array of query expansion definitions.    Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms. Each expansion object can be configured so that all terms are expanded to all other terms in the object - bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.   To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the `expanded_terms` array are then expanded to the other items in the same array.   To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`. When items in the `input_terms` array are present in a query, they are expanded using the items listed in the `expanded_terms` array.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func createExpansions(
-        environmentID: String,
-        collectionID: String,
-        expansions: [Expansion],
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Expansions) -> Void)
-    {
-        // construct body
-        let createExpansionsRequest = Expansions(expansions: expansions)
-        guard let body = try? JSONEncoder().encode(createExpansionsRequest) else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Expansions>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Delete a collection.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func deleteCollection(
-        environmentID: String,
-        collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteCollectionResponse) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeleteCollectionResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Delete the expansions list.
-
-     Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion
-     for a collection.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func deleteExpansions(
-        environmentID: String,
-        collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Get collection details.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func getCollection(
-        environmentID: String,
-        collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Collection) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Collection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     List unique fields.
-
-     Gets a list of the unique fields (and their types) stored in the index.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func listCollectionFields(
-        environmentID: String,
-        collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListCollectionFieldsResponse) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/fields"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ListCollectionFieldsResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
      List collections.
 
      Lists existing collections for the service instance.
@@ -1101,21 +852,18 @@ public class Discovery {
     }
 
     /**
-     List current expansions.
-
-     Returns the current expansion list for the specified collection. If an expansion list is not specified, an object
-     with empty expansion arrays is returned.
+     Get collection details.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func listExpansions(
+    public func getCollection(
         environmentID: String,
         collectionID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Expansions) -> Void)
+        success: @escaping (Collection) -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
@@ -1126,7 +874,7 @@ public class Discovery {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -1141,7 +889,7 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Expansions>) in
+            (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -1205,6 +953,258 @@ public class Discovery {
             (response: RestResponse<Collection>) in
             switch response.result {
             case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete a collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteCollection(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DeleteCollectionResponse) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DeleteCollectionResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List unique fields.
+
+     Gets a list of the unique fields (and their types) stored in the index.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listCollectionFields(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ListCollectionFieldsResponse) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/fields"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ListCollectionFieldsResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List current expansions.
+
+     Returns the current expansion list for the specified collection. If an expansion list is not specified, an object
+     with empty expansion arrays is returned.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listExpansions(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Expansions) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Expansions>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Set the expansion list.
+
+     Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
+     `500`. The current expansion list is replaced with the uploaded content.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter expansions: An array of query expansion definitions.    Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms. Each expansion object can be configured so that all terms are expanded to all other terms in the object - bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.   To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the `expanded_terms` array are then expanded to the other items in the same array.   To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`. When items in the `input_terms` array are present in a query, they are expanded using the items listed in the `expanded_terms` array.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func createExpansions(
+        environmentID: String,
+        collectionID: String,
+        expansions: [Expansion],
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Expansions) -> Void)
+    {
+        // construct body
+        let createExpansionsRequest = Expansions(expansions: expansions)
+        guard let body = try? JSONEncoder().encode(createExpansionsRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Expansions>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete the expansions list.
+
+     Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion
+     for a collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteExpansions(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }
@@ -1285,57 +1285,6 @@ public class Discovery {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DocumentAccepted>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Delete a document.
-
-     If the given document ID is invalid, or if the document is not found, then the a success response is returned (HTTP
-     status code `200`) with the status set to 'deleted'.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter documentID: The ID of the document.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func deleteDocument(
-        environmentID: String,
-        collectionID: String,
-        documentID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteDocumentResponse) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeleteDocumentResponse>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -1463,6 +1412,371 @@ public class Discovery {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DocumentAccepted>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete a document.
+
+     If the given document ID is invalid, or if the document is not found, then the a success response is returned (HTTP
+     status code `200`) with the status set to 'deleted'.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter documentID: The ID of the document.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteDocument(
+        environmentID: String,
+        collectionID: String,
+        documentID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DeleteDocumentResponse) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<DeleteDocumentResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    // swiftlint:disable cyclomatic_complexity
+
+    /**
+     Query documents.
+
+     See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more
+     details.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+     - parameter passages: A passages query that returns the most relevant passages from the results.
+     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter count: Number of documents to return.
+     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     - parameter highlight: When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
+     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
+     - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
+     - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func query(
+        environmentID: String,
+        collectionID: String,
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        passages: Bool? = nil,
+        aggregation: String? = nil,
+        count: Int? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        passagesFields: [String]? = nil,
+        passagesCount: Int? = nil,
+        passagesCharacters: Int? = nil,
+        deduplicate: Bool? = nil,
+        deduplicateField: String? = nil,
+        similar: Bool? = nil,
+        similarDocumentIds: [String]? = nil,
+        similarFields: [String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (QueryResponse) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let query = query {
+            let queryParameter = URLQueryItem(name: "query", value: query)
+            queryParameters.append(queryParameter)
+        }
+        if let naturalLanguageQuery = naturalLanguageQuery {
+            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
+            queryParameters.append(queryParameter)
+        }
+        if let passages = passages {
+            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
+            queryParameters.append(queryParameter)
+        }
+        if let aggregation = aggregation {
+            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
+            queryParameters.append(queryParameter)
+        }
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+        if let returnFields = returnFields {
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let offset = offset {
+            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let highlight = highlight {
+            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesFields = passagesFields {
+            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCount = passagesCount {
+            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCharacters = passagesCharacters {
+            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
+            queryParameters.append(queryParameter)
+        }
+        if let deduplicate = deduplicate {
+            let queryParameter = URLQueryItem(name: "deduplicate", value: "\(deduplicate)")
+            queryParameters.append(queryParameter)
+        }
+        if let deduplicateField = deduplicateField {
+            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
+            queryParameters.append(queryParameter)
+        }
+        if let similar = similar {
+            let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
+            queryParameters.append(queryParameter)
+        }
+        if let similarDocumentIds = similarDocumentIds {
+            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let similarFields = similarFields {
+            let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<QueryResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    // swiftlint:enable cyclomatic_complexity
+
+    /**
+     Query system notices.
+
+     Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
+     ingesting documents and performing relevance training. See the [Discovery service
+     documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query
+     language.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+     - parameter passages: A passages query that returns the most relevant passages from the results.
+     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter count: Number of documents to return.
+     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     - parameter highlight: When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
+     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
+     - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func queryNotices(
+        environmentID: String,
+        collectionID: String,
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        passages: Bool? = nil,
+        aggregation: String? = nil,
+        count: Int? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        passagesFields: [String]? = nil,
+        passagesCount: Int? = nil,
+        passagesCharacters: Int? = nil,
+        deduplicateField: String? = nil,
+        similar: Bool? = nil,
+        similarDocumentIds: [String]? = nil,
+        similarFields: [String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (QueryNoticesResponse) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let query = query {
+            let queryParameter = URLQueryItem(name: "query", value: query)
+            queryParameters.append(queryParameter)
+        }
+        if let naturalLanguageQuery = naturalLanguageQuery {
+            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
+            queryParameters.append(queryParameter)
+        }
+        if let passages = passages {
+            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
+            queryParameters.append(queryParameter)
+        }
+        if let aggregation = aggregation {
+            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
+            queryParameters.append(queryParameter)
+        }
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+        if let returnFields = returnFields {
+            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let offset = offset {
+            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let highlight = highlight {
+            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesFields = passagesFields {
+            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCount = passagesCount {
+            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCharacters = passagesCharacters {
+            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
+            queryParameters.append(queryParameter)
+        }
+        if let deduplicateField = deduplicateField {
+            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
+            queryParameters.append(queryParameter)
+        }
+        if let similar = similar {
+            let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
+            queryParameters.append(queryParameter)
+        }
+        if let similarDocumentIds = similarDocumentIds {
+            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let similarFields = similarFields {
+            let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/notices"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<QueryNoticesResponse>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -1734,167 +2048,6 @@ public class Discovery {
         }
     }
 
-    // swiftlint:disable cyclomatic_complexity
-
-    /**
-     Query documents.
-
-     See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more
-     details.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
-     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
-     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
-     - parameter passages: A passages query that returns the most relevant passages from the results.
-     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
-     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
-     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
-     - parameter highlight: When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
-     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
-     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
-     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
-     - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
-     - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
-     - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
-     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
-     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func query(
-        environmentID: String,
-        collectionID: String,
-        filter: String? = nil,
-        query: String? = nil,
-        naturalLanguageQuery: String? = nil,
-        passages: Bool? = nil,
-        aggregation: String? = nil,
-        count: Int? = nil,
-        returnFields: [String]? = nil,
-        offset: Int? = nil,
-        sort: [String]? = nil,
-        highlight: Bool? = nil,
-        passagesFields: [String]? = nil,
-        passagesCount: Int? = nil,
-        passagesCharacters: Int? = nil,
-        deduplicate: Bool? = nil,
-        deduplicateField: String? = nil,
-        similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
-        similarFields: [String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (QueryResponse) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let filter = filter {
-            let queryParameter = URLQueryItem(name: "filter", value: filter)
-            queryParameters.append(queryParameter)
-        }
-        if let query = query {
-            let queryParameter = URLQueryItem(name: "query", value: query)
-            queryParameters.append(queryParameter)
-        }
-        if let naturalLanguageQuery = naturalLanguageQuery {
-            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
-            queryParameters.append(queryParameter)
-        }
-        if let passages = passages {
-            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
-            queryParameters.append(queryParameter)
-        }
-        if let aggregation = aggregation {
-            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
-            queryParameters.append(queryParameter)
-        }
-        if let count = count {
-            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
-            queryParameters.append(queryParameter)
-        }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let offset = offset {
-            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
-            queryParameters.append(queryParameter)
-        }
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let highlight = highlight {
-            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesFields = passagesFields {
-            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCount = passagesCount {
-            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCharacters = passagesCharacters {
-            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicate = deduplicate {
-            let queryParameter = URLQueryItem(name: "deduplicate", value: "\(deduplicate)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicateField = deduplicateField {
-            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
-            queryParameters.append(queryParameter)
-        }
-        if let similar = similar {
-            let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
-            queryParameters.append(queryParameter)
-        }
-        if let similarDocumentIds = similarDocumentIds {
-            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let similarFields = similarFields {
-            let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<QueryResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    // swiftlint:enable cyclomatic_complexity
-
     /**
      Knowledge Graph entity query.
 
@@ -1955,159 +2108,6 @@ public class Discovery {
     }
 
     /**
-     Query system notices.
-
-     Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
-     ingesting documents and performing relevance training. See the [Discovery service
-     documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query
-     language.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
-     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
-     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
-     - parameter passages: A passages query that returns the most relevant passages from the results.
-     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
-     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
-     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
-     - parameter highlight: When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
-     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
-     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
-     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
-     - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
-     - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
-     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
-     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func queryNotices(
-        environmentID: String,
-        collectionID: String,
-        filter: String? = nil,
-        query: String? = nil,
-        naturalLanguageQuery: String? = nil,
-        passages: Bool? = nil,
-        aggregation: String? = nil,
-        count: Int? = nil,
-        returnFields: [String]? = nil,
-        offset: Int? = nil,
-        sort: [String]? = nil,
-        highlight: Bool? = nil,
-        passagesFields: [String]? = nil,
-        passagesCount: Int? = nil,
-        passagesCharacters: Int? = nil,
-        deduplicateField: String? = nil,
-        similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
-        similarFields: [String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (QueryNoticesResponse) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let filter = filter {
-            let queryParameter = URLQueryItem(name: "filter", value: filter)
-            queryParameters.append(queryParameter)
-        }
-        if let query = query {
-            let queryParameter = URLQueryItem(name: "query", value: query)
-            queryParameters.append(queryParameter)
-        }
-        if let naturalLanguageQuery = naturalLanguageQuery {
-            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
-            queryParameters.append(queryParameter)
-        }
-        if let passages = passages {
-            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
-            queryParameters.append(queryParameter)
-        }
-        if let aggregation = aggregation {
-            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
-            queryParameters.append(queryParameter)
-        }
-        if let count = count {
-            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
-            queryParameters.append(queryParameter)
-        }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let offset = offset {
-            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
-            queryParameters.append(queryParameter)
-        }
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let highlight = highlight {
-            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesFields = passagesFields {
-            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCount = passagesCount {
-            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCharacters = passagesCharacters {
-            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicateField = deduplicateField {
-            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
-            queryParameters.append(queryParameter)
-        }
-        if let similar = similar {
-            let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
-            queryParameters.append(queryParameter)
-        }
-        if let similarDocumentIds = similarDocumentIds {
-            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let similarFields = similarFields {
-            let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/notices"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<QueryNoticesResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
      Knowledge Graph relationship query.
 
      See the [Knowledge Graph documentation](https://console.bluemix.net/docs/services/discovery/building-kg.html) for
@@ -2159,6 +2159,52 @@ public class Discovery {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<QueryRelationsResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Lists the training data for this collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listTrainingData(
+        environmentID: String,
+        collectionID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingDataSet) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingDataSet>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -2228,69 +2274,6 @@ public class Discovery {
     }
 
     /**
-     Adds a new example to this training data query.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter queryID: The ID of the query used for training.
-     - parameter documentID:
-     - parameter crossReference:
-     - parameter relevance:
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func createTrainingExample(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        documentID: String? = nil,
-        crossReference: String? = nil,
-        relevance: Int? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingExample) -> Void)
-    {
-        // construct body
-        let createTrainingExampleRequest = TrainingExample(documentID: documentID, crossReference: crossReference, relevance: relevance)
-        guard let body = try? JSONEncoder().encode(createTrainingExampleRequest) else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<TrainingExample>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
      Clears all training data for this collection.
 
      - parameter environmentID: The ID of the environment.
@@ -2314,104 +2297,6 @@ public class Discovery {
 
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Removes the training data and all associated examples from the training data set.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter queryID: The ID of the query used for training.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func deleteTrainingData(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Removes the example with the given ID for the training data query.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter queryID: The ID of the query used for training.
-     - parameter exampleID: The ID of the document as it is indexed.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func deleteTrainingExample(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        exampleID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -2483,22 +2368,20 @@ public class Discovery {
     }
 
     /**
-     Gets the details for this training example.
+     Removes the training data and all associated examples from the training data set.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
-     - parameter exampleID: The ID of the document as it is indexed.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func getTrainingExample(
+    public func deleteTrainingData(
         environmentID: String,
         collectionID: String,
         queryID: String,
-        exampleID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingExample) -> Void)
+        success: @escaping () -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
@@ -2509,13 +2392,13 @@ public class Discovery {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
         }
         let request = RestRequest(
-            method: "GET",
+            method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: headers,
@@ -2523,56 +2406,10 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<TrainingExample>) in
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
             switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Lists the training data for this collection.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func listTrainingData(
-        environmentID: String,
-        collectionID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingDataSet) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<TrainingDataSet>) in
-            switch response.result {
-            case .success(let retval): success(retval)
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }
@@ -2621,6 +2458,119 @@ public class Discovery {
             (response: RestResponse<TrainingExampleList>) in
             switch response.result {
             case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Adds a new example to this training data query.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter documentID:
+     - parameter crossReference:
+     - parameter relevance:
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func createTrainingExample(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        documentID: String? = nil,
+        crossReference: String? = nil,
+        relevance: Int? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingExample) -> Void)
+    {
+        // construct body
+        let createTrainingExampleRequest = TrainingExample(documentID: documentID, crossReference: crossReference, relevance: relevance)
+        guard let body = try? JSONEncoder().encode(createTrainingExampleRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingExample>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Removes the example with the given ID for the training data query.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter exampleID: The ID of the document as it is indexed.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteTrainingExample(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        exampleID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }
@@ -2677,6 +2627,56 @@ public class Discovery {
             headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TrainingExample>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Gets the details for this training example.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter queryID: The ID of the query used for training.
+     - parameter exampleID: The ID of the document as it is indexed.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func getTrainingExample(
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        exampleID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TrainingExample) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request

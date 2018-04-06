@@ -844,8 +844,7 @@ class DiscoveryTests: XCTestCase {
                 return
             }
             XCTAssertEqual(nested.type, "nested")
-            // path is returned by service but not yet documented in swagger specification
-            // XCTAssertEqual(nested.path, "enriched_text.entities")
+            XCTAssertEqual(nested.path, "enriched_text.entities")
             XCTAssertNotNil(nested.matchingResults)
             XCTAssertGreaterThan(nested.matchingResults!, 0)
             expectation.fulfill()
@@ -905,8 +904,7 @@ class DiscoveryTests: XCTestCase {
             }
             XCTAssertEqual(timeslice.type, "timeslice")
             XCTAssertEqual(timeslice.field, "publication_date")
-            // interval is not yet documented in the swagger specification
-            // XCTAssertEqual(timeslice.interval, "12h")
+            XCTAssertEqual(timeslice.interval, "12h")
             XCTAssertNotNil(timeslice.results)
             XCTAssertGreaterThan(timeslice.results!.count, 0)
             XCTAssertNotNil(timeslice.results!.first!.key)
@@ -936,16 +934,12 @@ class DiscoveryTests: XCTestCase {
                 return
             }
             XCTAssertEqual(topHits.type, "top_hits")
-            // the following values are returned by the service
-            // but not documented in the swagger specification
-            // XCTAssertEqual(topHits.size, 1)
-            // XCTAssertEqual(topHits.count, 10)
-            // XCTAssertNotNil(topHits.hits)
-            // XCTAssertGreaterThan(topHits.hits!.count, 0)
-            // XCTAssertNotNil(topHits.hits!.matchingResults)
-            // XCTAssertGreaterThan(topHits.hits!.matchingResults.count, 0)
-            // XCTAssertNotNil(topHits.hits!.hits)
-            // XCTAssertGreaterThan(topHits.hits!.hits!.count, 0)
+            XCTAssertEqual(topHits.size, 1)
+            XCTAssertNotNil(topHits.hits)
+            XCTAssertNotNil(topHits.hits!.matchingResults)
+            XCTAssertGreaterThan(topHits.hits!.matchingResults!, 0)
+            XCTAssertNotNil(topHits.hits!.hits)
+            XCTAssertGreaterThan(topHits.hits!.hits!.count, 0)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)

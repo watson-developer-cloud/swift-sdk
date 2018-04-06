@@ -22,11 +22,11 @@ public enum QueryAggregation: Decodable {
     // reference: https://console.bluemix.net/docs/services/discovery/query-reference.html#aggregations
 
     case term(Term)
-    case filter(GenericQueryAggregation)
-    case nested(GenericQueryAggregation)
+    case filter(Filter)
+    case nested(Nested)
     case histogram(Histogram)
-    case timeslice(GenericQueryAggregation)
-    case topHits(GenericQueryAggregation)
+    case timeslice(Timeslice)
+    case topHits(TopHits)
     case uniqueCount(Calculation)
     case max(Calculation)
     case min(Calculation)
@@ -49,11 +49,11 @@ public enum QueryAggregation: Decodable {
         }
         switch type {
         case "term": self = .term(try Term(from: decoder))
-        case "filter": self = .filter(try GenericQueryAggregation(from: decoder))
-        case "nested": self = .nested(try GenericQueryAggregation(from: decoder))
+        case "filter": self = .filter(try Filter(from: decoder))
+        case "nested": self = .nested(try Nested(from: decoder))
         case "histogram": self = .histogram(try Histogram(from: decoder))
-        case "timeslice": self = .timeslice(try GenericQueryAggregation(from: decoder))
-        case "top_hits": self = .topHits(try GenericQueryAggregation(from: decoder))
+        case "timeslice": self = .timeslice(try Timeslice(from: decoder))
+        case "top_hits": self = .topHits(try TopHits(from: decoder))
         case "unique_count": self = .uniqueCount(try Calculation(from: decoder))
         case "max": self = .max(try Calculation(from: decoder))
         case "min": self = .min(try Calculation(from: decoder))

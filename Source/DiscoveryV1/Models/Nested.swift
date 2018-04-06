@@ -16,8 +16,8 @@
 
 import Foundation
 
-/** An aggregation produced by the Discovery service to analyze the input provided. */
-public struct GenericQueryAggregation: Decodable {
+/** Nested. */
+public struct Nested {
 
     /// The type of aggregation command used. For example: term, filter, max, min, etc.
     public var type: String?
@@ -30,12 +30,16 @@ public struct GenericQueryAggregation: Decodable {
     /// Aggregations returned by the Discovery service.
     public var aggregations: [QueryAggregation]?
 
+    /// The area of the results the aggregation was restricted to.
+    public var path: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
         case results = "results"
         case matchingResults = "matching_results"
         case aggregations = "aggregations"
+        case path = "path"
     }
 
 }

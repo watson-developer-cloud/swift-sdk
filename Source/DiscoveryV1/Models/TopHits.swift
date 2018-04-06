@@ -16,8 +16,8 @@
 
 import Foundation
 
-/** An aggregation produced by the Discovery service to analyze the input provided. */
-public struct GenericQueryAggregation: Decodable {
+/** TopHits. */
+public struct TopHits {
 
     /// The type of aggregation command used. For example: term, filter, max, min, etc.
     public var type: String?
@@ -30,12 +30,19 @@ public struct GenericQueryAggregation: Decodable {
     /// Aggregations returned by the Discovery service.
     public var aggregations: [QueryAggregation]?
 
+    /// Number of top hits returned by the aggregation.
+    public var size: Int?
+
+    public var hits: TopHitsResults?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
         case results = "results"
         case matchingResults = "matching_results"
         case aggregations = "aggregations"
+        case size = "size"
+        case hits = "hits"
     }
 
 }

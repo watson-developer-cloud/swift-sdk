@@ -198,6 +198,11 @@
 		683947FE202CF4F7007E3CF3 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947D3202CF4F6007E3CF3 /* Parameters.swift */; };
 		683947FF202CF4F7007E3CF3 /* EntitiesOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947D4202CF4F7007E3CF3 /* EntitiesOptions.swift */; };
 		68394801202D141F007E3CF3 /* DeleteModelResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68394800202D141E007E3CF3 /* DeleteModelResults.swift */; };
+		683955052077E613009E1C8A /* Nested.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683955002077E612009E1C8A /* Nested.swift */; };
+		683955062077E613009E1C8A /* TopHits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683955012077E612009E1C8A /* TopHits.swift */; };
+		683955072077E613009E1C8A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683955022077E612009E1C8A /* Filter.swift */; };
+		683955082077E613009E1C8A /* TopHitsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683955032077E613009E1C8A /* TopHitsResults.swift */; };
+		683955092077E613009E1C8A /* Timeslice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683955042077E613009E1C8A /* Timeslice.swift */; };
 		6877FA652056D4F100383B25 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
 		6877FA6C2056D4F100383B25 /* JSONWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSONWrapper.swift */; };
 		6877FA702056D4F100383B25 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
@@ -894,6 +899,11 @@
 		683947D3202CF4F6007E3CF3 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		683947D4202CF4F7007E3CF3 /* EntitiesOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntitiesOptions.swift; sourceTree = "<group>"; };
 		68394800202D141E007E3CF3 /* DeleteModelResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteModelResults.swift; sourceTree = "<group>"; };
+		683955002077E612009E1C8A /* Nested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nested.swift; sourceTree = "<group>"; };
+		683955012077E612009E1C8A /* TopHits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopHits.swift; sourceTree = "<group>"; };
+		683955022077E612009E1C8A /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		683955032077E613009E1C8A /* TopHitsResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopHitsResults.swift; sourceTree = "<group>"; };
+		683955042077E613009E1C8A /* Timeslice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeslice.swift; sourceTree = "<group>"; };
 		6877FA9A2056D4F100383B25 /* AssistantV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6877FAAA2056D4F500383B25 /* AssistantV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssistantV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		689A167E203C88C6002CFC66 /* FaceIdentity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceIdentity.swift; sourceTree = "<group>"; };
@@ -1628,6 +1638,7 @@
 				68AF8EE2206968CC00D552E3 /* Expansion.swift */,
 				68AF8EC3206968CC00D552E3 /* Expansions.swift */,
 				68AF8ED6206968CC00D552E3 /* Field.swift */,
+				683955022077E612009E1C8A /* Filter.swift */,
 				68AF8EC4206968CC00D552E3 /* FontSetting.swift */,
 				68D97E2A206989010087432F /* GenericQueryAggregation.swift */,
 				68AF8ECB206968CC00D552E3 /* Histogram.swift */,
@@ -1638,6 +1649,7 @@
 				68AF8EF0206968CC00D552E3 /* ListConfigurationsResponse.swift */,
 				68AF8EF5206968CC00D552E3 /* ListEnvironmentsResponse.swift */,
 				68AF8EBD206968CC00D552E3 /* MemoryUsage.swift */,
+				683955002077E612009E1C8A /* Nested.swift */,
 				68AF8EC1206968CC00D552E3 /* NewTrainingQuery.swift */,
 				68AF8EFA206968CC00D552E3 /* NluEnrichmentCategories.swift */,
 				68AF8EB7206968CC00D552E3 /* NluEnrichmentEmotion.swift */,
@@ -1674,6 +1686,9 @@
 				68AE2FD120697C2800330836 /* QueryResultMetadata.swift */,
 				68AF8EE7206968CC00D552E3 /* Term.swift */,
 				68AF8EB3206968CC00D552E3 /* TestDocument.swift */,
+				683955042077E613009E1C8A /* Timeslice.swift */,
+				683955012077E612009E1C8A /* TopHits.swift */,
+				683955032077E613009E1C8A /* TopHitsResults.swift */,
 				68AF8EC6206968CC00D552E3 /* TrainingDataSet.swift */,
 				68AF8EDB206968CC00D552E3 /* TrainingExample.swift */,
 				68AF8EBF206968CC00D552E3 /* TrainingExampleList.swift */,
@@ -3509,6 +3524,7 @@
 				68AF8F532069690300D552E3 /* QueryEntitiesResponseItem.swift in Sources */,
 				68AF8F7E2069690300D552E3 /* QueryNoticesResult.swift in Sources */,
 				68AF8F992069690300D552E3 /* ListEnvironmentsResponse.swift in Sources */,
+				683955062077E613009E1C8A /* TopHits.swift in Sources */,
 				68AF8F5C2069690300D552E3 /* NluEnrichmentFeatures.swift in Sources */,
 				68AF8F592069690300D552E3 /* NluEnrichmentSentiment.swift in Sources */,
 				68AF8F6F2069690300D552E3 /* Histogram.swift in Sources */,
@@ -3544,6 +3560,7 @@
 				68AF8F552069690300D552E3 /* IndexCapacity.swift in Sources */,
 				68AF8F572069690300D552E3 /* TestDocument.swift in Sources */,
 				68AF8F852069690300D552E3 /* XPathPatterns.swift in Sources */,
+				683955072077E613009E1C8A /* Filter.swift in Sources */,
 				68AF8F872069690300D552E3 /* DeleteConfigurationResponse.swift in Sources */,
 				68BC28911F8C35010042810E /* MultipartFormData.swift in Sources */,
 				68AF8F7A2069690300D552E3 /* Field.swift in Sources */,
@@ -3568,6 +3585,7 @@
 				68AF8F5B2069690300D552E3 /* NluEnrichmentEmotion.swift in Sources */,
 				68BC28921F8C35010042810E /* RestError.swift in Sources */,
 				68AF8FA02069690300D552E3 /* Configuration.swift in Sources */,
+				683955082077E613009E1C8A /* TopHitsResults.swift in Sources */,
 				68AF8F6E2069690300D552E3 /* QueryRelationsFilter.swift in Sources */,
 				68AF8F942069690300D552E3 /* ListConfigurationsResponse.swift in Sources */,
 				68AF8F822069690300D552E3 /* NluEnrichmentEntities.swift in Sources */,
@@ -3580,6 +3598,8 @@
 				68AF8F9E2069690300D552E3 /* NluEnrichmentCategories.swift in Sources */,
 				68AF8F692069690300D552E3 /* Conversions.swift in Sources */,
 				68AF8F9C2069690300D552E3 /* DocumentStatus.swift in Sources */,
+				683955092077E613009E1C8A /* Timeslice.swift in Sources */,
+				683955052077E613009E1C8A /* Nested.swift in Sources */,
 				68AF8F892069690300D552E3 /* PdfHeadingDetection.swift in Sources */,
 				68AF8F8B2069690300D552E3 /* Term.swift in Sources */,
 				68AF8F9D2069690300D552E3 /* NluEnrichmentRelations.swift in Sources */,

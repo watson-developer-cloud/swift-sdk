@@ -17,7 +17,7 @@
 import Foundation
 
 /** TopHitsResults. */
-public struct TopHitsResults {
+public struct TopHitsResults: Decodable {
 
     /// Number of matching results.
     public var matchingResults: Int?

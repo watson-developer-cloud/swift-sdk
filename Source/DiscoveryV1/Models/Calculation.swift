@@ -17,7 +17,7 @@
 import Foundation
 
 /** Calculation. */
-public struct Calculation {
+public struct Calculation: Decodable {
 
     /// The type of aggregation command used. For example: term, filter, max, min, etc.
     public var type: String?

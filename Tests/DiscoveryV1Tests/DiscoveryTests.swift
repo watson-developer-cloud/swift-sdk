@@ -971,10 +971,8 @@ class DiscoveryTests: XCTestCase {
             }
             XCTAssertEqual(uniqueCount.type, "unique_count")
             XCTAssertEqual(uniqueCount.field, "enriched_text.keywords.text")
-            // value is returned by the service but not
-            // documented in the swagger specification
-            // XCTAssertNotNil(uniqueCount.value)
-            // XCTAssertGreaterThan(uniqueCount.value!, 0)
+            XCTAssertNotNil(uniqueCount.value)
+            XCTAssertGreaterThan(uniqueCount.value!, 0)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)

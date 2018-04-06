@@ -514,7 +514,7 @@ public class VisualRecognition {
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/json",
-            contentType: nil,
+            contentType: multipartFormData.contentType,
             queryItems: queryParameters,
             messageBody: body
         )

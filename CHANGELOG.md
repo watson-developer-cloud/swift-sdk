@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.24.0
+_2018-04-09_
+
+This release includes major updates to support the latest version of the Discovery service. Note that the Discovery Service's API has been changed in order to improve uniformity between the Watson SDKs.
+
 ## Version 0.23.4
 _2018-04-09_
 

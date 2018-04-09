@@ -16,26 +16,30 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** TrainingExamplePatch. */
+internal struct TrainingExamplePatch: Encodable {
 
-    public var matchingResults: Int?
+    public var crossReference: String?
 
-    public var results: [QueryResult]?
-
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    public var relevance: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case crossReference = "cross_reference"
+        case relevance = "relevance"
+    }
+
+    /**
+     Initialize a `TrainingExamplePatch` with member variables.
+
+     - parameter crossReference:
+     - parameter relevance:
+
+     - returns: An initialized `TrainingExamplePatch`.
+    */
+    public init(crossReference: String? = nil, relevance: Int? = nil) {
+        self.crossReference = crossReference
+        self.relevance = relevance
     }
 
 }

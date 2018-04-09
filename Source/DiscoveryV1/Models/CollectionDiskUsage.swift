@@ -16,26 +16,15 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** Summary of the disk usage statistics for this collection. */
+public struct CollectionDiskUsage: Decodable {
 
-    public var matchingResults: Int?
-
-    public var results: [QueryResult]?
-
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// Number of bytes used by the collection.
+    public var usedBytes: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case usedBytes = "used_bytes"
     }
 
 }

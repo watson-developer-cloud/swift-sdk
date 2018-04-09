@@ -16,26 +16,23 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** TrainingQuery. */
+public struct TrainingQuery: Decodable {
 
-    public var matchingResults: Int?
+    public var queryID: String?
 
-    public var results: [QueryResult]?
+    public var naturalLanguageQuery: String?
 
-    public var aggregations: [QueryAggregation]?
+    public var filter: String?
 
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    public var examples: [TrainingExample]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case queryID = "query_id"
+        case naturalLanguageQuery = "natural_language_query"
+        case filter = "filter"
+        case examples = "examples"
     }
 
 }

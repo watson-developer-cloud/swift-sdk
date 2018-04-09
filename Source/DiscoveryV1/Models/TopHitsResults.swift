@@ -16,26 +16,19 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** TopHitsResults. */
+public struct TopHitsResults: Decodable {
 
+    /// Number of matching results.
     public var matchingResults: Int?
 
-    public var results: [QueryResult]?
-
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// Top results returned by the aggregation.
+    public var hits: [QueryResult]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case hits = "hits"
     }
 
 }

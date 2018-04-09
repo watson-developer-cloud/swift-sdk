@@ -16,26 +16,31 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** AggregationResult. */
+public struct AggregationResult: Decodable {
 
+    /// Key that matched the aggregation type.
+    public var key: String?
+
+    /// Number of matching results.
     public var matchingResults: Int?
 
-    public var results: [QueryResult]?
-
+    /// Aggregations returned in the case of chained aggregations.
     public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
+        case key = "key"
         case matchingResults = "matching_results"
-        case results = "results"
         case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let keyAsString = try? container.decode(String.self, forKey: .key) { key = keyAsString }
+        if let keyAsInt = try? container.decode(Int.self, forKey: .key) { key = "\(keyAsInt)" }
+        matchingResults = try container.decodeIfPresent(Int.self, forKey: .matchingResults)
+        aggregations = try container.decodeIfPresent([QueryAggregation].self, forKey: .aggregations)
     }
 
 }

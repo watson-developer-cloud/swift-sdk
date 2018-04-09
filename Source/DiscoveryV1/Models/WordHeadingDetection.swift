@@ -16,26 +16,30 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** WordHeadingDetection. */
+public struct WordHeadingDetection: Codable {
 
-    public var matchingResults: Int?
+    public var fonts: [FontSetting]?
 
-    public var results: [QueryResult]?
-
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    public var styles: [WordStyle]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case fonts = "fonts"
+        case styles = "styles"
+    }
+
+    /**
+     Initialize a `WordHeadingDetection` with member variables.
+
+     - parameter fonts:
+     - parameter styles:
+
+     - returns: An initialized `WordHeadingDetection`.
+    */
+    public init(fonts: [FontSetting]? = nil, styles: [WordStyle]? = nil) {
+        self.fonts = fonts
+        self.styles = styles
     }
 
 }

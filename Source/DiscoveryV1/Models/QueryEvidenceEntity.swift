@@ -16,26 +16,27 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** Entity description and location within evidence field. */
+public struct QueryEvidenceEntity: Decodable {
 
-    public var matchingResults: Int?
+    /// The entity type for this entity. Possible types vary based on model used.
+    public var type: String?
 
-    public var results: [QueryResult]?
+    /// The original text of this entity as found in the evidence field.
+    public var text: String?
 
-    public var aggregations: [QueryAggregation]?
+    /// The start location of the entity text in the identified field. This value is inclusive.
+    public var startOffset: Int?
 
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// The end location of the entity text in the identified field. This value is exclusive.
+    public var endOffset: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case type = "type"
+        case text = "text"
+        case startOffset = "start_offset"
+        case endOffset = "end_offset"
     }
 
 }

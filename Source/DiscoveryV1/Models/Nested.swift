@@ -16,26 +16,30 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
-public struct QueryResponse: Decodable {
+/** Nested. */
+public struct Nested: Decodable {
 
+    /// The type of aggregation command used. For example: term, filter, max, min, etc.
+    public var type: String?
+
+    public var results: [AggregationResult]?
+
+    /// Number of matching results.
     public var matchingResults: Int?
 
-    public var results: [QueryResult]?
-
+    /// Aggregations returned by the Discovery service.
     public var aggregations: [QueryAggregation]?
 
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+    /// The area of the results the aggregation was restricted to.
+    public var path: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
+        case type = "type"
         case results = "results"
+        case matchingResults = "matching_results"
         case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
+        case path = "path"
     }
 
 }

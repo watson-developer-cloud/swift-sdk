@@ -272,9 +272,13 @@ The following links provide more information about the IBM Watson Assistant serv
 
 ## Discovery
 
-The IBM Discovery Service allows for rapid automated ingestion and feature enrichment of unstructured data. Enrichments of documents ingested include concepts, relationship extraction and sentiment analysis through Natural Language Processing. With the IBM Discovery service you can take advantage of IBM Watson algorithms to take your unstructured data, enrich it, and query it to return the information you need from it.
+IBM Watson Discovery makes it possible to rapidly build cognitive, cloud-based exploration applications that unlock actionable insights hidden in unstructured data — including your own proprietary data, as well as public and third-party data. With Discovery, it only takes a few steps to prepare your unstructured data, create a query that will pinpoint the information you need, and then integrate those insights into your new application or existing solution.
 
-The following example shows how to instantiate a Discovery object:
+### Discovery News
+
+IBM Watson Discovery News is included with Discovery. Watson Discovery News is an indexed dataset with news articles from the past 60 days — approximately 300,000 English articles daily. The dataset is pre-enriched with the following cognitive insights: Keyword Extraction, Entity Extraction, Semantic Role Extraction, Sentiment Analysis, Relation Extraction, and Category Classification.
+
+The following example shows how to query the Watson Discovery News dataset:
 
 ```swift
 import DiscoveryV1
@@ -283,114 +287,68 @@ let username = "your-username-here"
 let password = "your-password-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
 let discovery = Discovery(username: username, password: password, version: version)
-}
-```
-The following example demonstrates how to create a Discovery environment and collection with the default configuration, and add documents to the collection.
 
-```swift
-let failure = { (error: Error) in print(error) }
-
-// Create and store the environment ID for you to access later:
-var environmentID: String?
-let environmentName = "your-environment-name-here"
-
-discovery.createEnvironment(
-    withName: environmentName,
-    withSize: .zero,
-    withDescription: testDescription,
+let failure = { (error: Error) in print(failure) }
+discovery.query(
+    environmentID: "system",
+    collectionID: "news-en",
+    query: "enriched_text.concepts.text:\"Cloud computing\"",
     failure: failure)
-{
-	environment in
-    self.environmentID = environment.environmentID
-}
-
-// Wait for the environment to be ready before creating a collection:
-bool environmentReady = false
-while (!environmentReady) {
-	discovery.getEnvironment(withName: environmentName, failure: failure)
-	{
-		environment in
-		if environment.status == "active" {
-		 self.environmentReady = true
-		}
-	}
-}
-
-// Create a collection and store the collection ID for you to access later:
-var collectionID: String?
-
-let collectionName = "your-collection-name-here"
-discovery.createCollection(
-    withEnvironmentID: environmentID!,
-    withName: collectionName,
-    withDescription: collectionDescription,
-    withConfigurationID: configurationID,
-    failure: failure)
-{
-	collection in
-    self.collectionID = collection.collectionID
-}
-
-// Wait for the collection to be "available" before adding a document:
-bool collectionReady = false
-while (!collectionReady) {
-	discovery.listCollectionDetails(
-	withEnvironmentID: environmentID!,
-	withCollectionID: collectionID!,
-	failure: failWithError)
-{
-    collection in
-    if collection.status == CollectionStatus.active {
-        self.collectionReady = true
-    }
-}
-
-// Add a document to the collection with the saved environment and collection ID:
-guard let file = Bundle(for: type(of: self)).url(forResource: "your-Document-Name", withExtension: "document-type") else {
-    XCTFail("Unable to locate your-Document-Name.document-type")
-    return
-}
-discovery.addDocumentToCollection(
-    withEnvironmentID: environmentID!,
-    withCollectionID: collectionID!,
-    file: file,
-    failure: failWithError)
-{
-    document in
-    NSLog(document)
-}
-
-```
-The following example demonstrates how to perform a query on the Discovery instance using the `KennedySpeech.html` we have within our `DiscoveryV1Tests` folder:
-
-```swift
-/// String to search for within the documents.
-let query = "United Nations"
-
-/// Find the max sentiment score for entities within the enriched text.
-let aggregation = "max(enriched_text.entities.sentiment.score)"
-
-/// Specify which portion of the document hierarchy to return.
-let returnHierarchies = "enriched_text.entities.sentiment,enriched_text.entities.text"
-
-discovery.queryDocumentsInCollection(
-    withEnvironmentID: environmentID!,
-    withCollectionID: collectionID!,
-    withQuery: query,
-    withAggregation: aggregation,
-    return: returnHierarchies,
-    failure: failWithError)
 {
     queryResponse in
-    if let results = queryResponse.results {
-        for result in results {
-            if let entities = result.entities {
-                for entity in entities {
-						NSLog(entity)
-                }
-            }
-        }
-    }
+    print(queryResponse)
+}
+```
+
+### Private Data Collections
+
+The Swift SDK supports environment management, collection management, and document uploading. But you may find it easier to create private data collections using the [Discovery Tooling](https://console.bluemix.net/docs/services/discovery/getting-started-tool.html#getting-started-with-the-tooling) instead.
+
+Once your content has been uploaded and enriched by the Discovery service, you can search the collection with queries. The following example demonstrates a complex query with a filter, query, and aggregation:
+
+```swift
+import DiscoveryV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let discovery = Discovery(username: username, password: password, version: version)
+
+let failure = { (error: Error) in print(failure) }
+discovery.query(
+    environmentID: "your-environment-id",
+    collectionID: "your-collection-id",
+    filter: "enriched_text.concepts.text:\"Technology\"",
+    query: "enriched_text.concepts.text:\"Cloud computing\"",
+    aggregation: "term(enriched_text.concepts.text,count:10)",
+    failure: failure)
+{
+    queryResponse in
+    print(queryResponse)
+}
+```
+
+You can also upload new documents into your private collection:
+
+```swift
+import DiscoveryV1
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let discovery = Discovery(username: username, password: password, version: version)
+
+let failure = { (error: Error) in print(failure) }
+let file = Bundle.main.url(forResource: "KennedySpeech", withExtension: "html")!
+discovery.addDocument(
+    environmentID: "your-environment-id",
+    collectionID: "your-collection-id",
+    file: file,
+    fileContentType: "text/html",
+    failure: failWithError)
+{
+    response in
+    print(response)
 }
 ```
 
@@ -398,9 +356,7 @@ The following links provide more information about the IBM Discovery service:
 
 * [IBM Discovery - Service Page](https://www.ibm.com/watson/services/discovery/)
 * [IBM Discovery - Documentation](https://console.bluemix.net/docs/services/discovery/index.html)
-* [IBM Discovery - API Reference](https://www.ibm.com/watson/developercloud/discovery/api/v1/)
-* [IBM Discovery - API Explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1)
-* [IBM Discovery - Query Building](https://console.bluemix.net/docs/services/discovery/query-reference.html#query-building)
+* [IBM Discovery - Demo](https://discovery-news-demo.ng.bluemix.net/)
 
 ## Language Translator
 

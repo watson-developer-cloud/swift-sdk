@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.23.4
+_2018-04-09_
+
+This release fixes a bug with the `updateClassifier` method in Visual Recognition.
+
 ## Version 0.23.3
 _2018-04-02_
 

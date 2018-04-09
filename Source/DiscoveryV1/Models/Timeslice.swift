@@ -16,8 +16,8 @@
 
 import Foundation
 
-/** Histogram. */
-public struct Histogram: Decodable {
+/** Timeslice. */
+public struct Timeslice: Decodable {
 
     /// The type of aggregation command used. For example: term, filter, max, min, etc.
     public var type: String?
@@ -33,8 +33,11 @@ public struct Histogram: Decodable {
     /// The field where the aggregation is located in the document.
     public var field: String?
 
-    /// Interval of the aggregation. (For 'histogram' type).
-    public var interval: Int?
+    /// Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days, week/weeks, month/months, and year/years.
+    public var interval: String?
+
+    /// Used to inducate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
+    public var anomaly: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -44,6 +47,7 @@ public struct Histogram: Decodable {
         case aggregations = "aggregations"
         case field = "field"
         case interval = "interval"
+        case anomaly = "anomaly"
     }
 
 }

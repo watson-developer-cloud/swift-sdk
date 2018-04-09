@@ -16,8 +16,8 @@
 
 import Foundation
 
-/** Histogram. */
-public struct Histogram: Decodable {
+/** Nested. */
+public struct Nested: Decodable {
 
     /// The type of aggregation command used. For example: term, filter, max, min, etc.
     public var type: String?
@@ -30,11 +30,8 @@ public struct Histogram: Decodable {
     /// Aggregations returned by the Discovery service.
     public var aggregations: [QueryAggregation]?
 
-    /// The field where the aggregation is located in the document.
-    public var field: String?
-
-    /// Interval of the aggregation. (For 'histogram' type).
-    public var interval: Int?
+    /// The area of the results the aggregation was restricted to.
+    public var path: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -42,8 +39,7 @@ public struct Histogram: Decodable {
         case results = "results"
         case matchingResults = "matching_results"
         case aggregations = "aggregations"
-        case field = "field"
-        case interval = "interval"
+        case path = "path"
     }
 
 }

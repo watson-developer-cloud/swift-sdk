@@ -16,34 +16,19 @@
 
 import Foundation
 
-/** Histogram. */
-public struct Histogram: Decodable {
-
-    /// The type of aggregation command used. For example: term, filter, max, min, etc.
-    public var type: String?
-
-    public var results: [AggregationResult]?
+/** TopHitsResults. */
+public struct TopHitsResults: Decodable {
 
     /// Number of matching results.
     public var matchingResults: Int?
 
-    /// Aggregations returned by the Discovery service.
-    public var aggregations: [QueryAggregation]?
-
-    /// The field where the aggregation is located in the document.
-    public var field: String?
-
-    /// Interval of the aggregation. (For 'histogram' type).
-    public var interval: Int?
+    /// Top results returned by the aggregation.
+    public var hits: [QueryResult]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case type = "type"
-        case results = "results"
         case matchingResults = "matching_results"
-        case aggregations = "aggregations"
-        case field = "field"
-        case interval = "interval"
+        case hits = "hits"
     }
 
 }

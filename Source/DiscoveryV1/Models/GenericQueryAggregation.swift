@@ -22,13 +22,7 @@ public struct GenericQueryAggregation: Decodable {
     /// The type of aggregation command used. For example: term, filter, max, min, etc.
     public var type: String?
 
-    /// The field where the aggregation is located in the document.
-    public var field: String?
-
     public var results: [AggregationResult]?
-
-    /// The match the aggregated results queried for.
-    public var match: String?
 
     /// Number of matching results.
     public var matchingResults: Int?
@@ -39,9 +33,7 @@ public struct GenericQueryAggregation: Decodable {
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
-        case field = "field"
         case results = "results"
-        case match = "match"
         case matchingResults = "matching_results"
         case aggregations = "aggregations"
     }

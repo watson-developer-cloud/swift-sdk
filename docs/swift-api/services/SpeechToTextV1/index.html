@@ -221,14 +221,11 @@
 <p>Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired. If you are using Speech to Text, be sure to include both <code>SpeechToTextV1.framework</code> and <code>Starscream.framework</code> in your application.</p>
 <h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
 
-<p>To include the Watson SDK to your projects, add the following to your <code>Package.swift</code> file:</p>
+<p>Add the following to your <code>Package.swift</code> file to identify the Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with <code>swift build</code>.</p>
 <pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span>
-             <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.23.1"</span><span class="p">)</span>
 <span class="p">]</span>
 </code></pre>
-
-<p>To build the project, run <code>swift build</code> from the command line.</p>
 <h2 id='service-instances' class='heading'>Service Instances</h2>
 
 <p><a href="https://www.ibm.com/watson/developer/">IBM Watson</a> offers a variety of services for developing cognitive applications. The complete list of Watson services is available from the <a href="https://www.ibm.com/watson/products-services/">products and services</a> page. Services are instantiated using the <a href="https://www.ibm.com/cloud/">IBM Cloud</a> platform.</p>
@@ -284,6 +281,8 @@
 <ul>
 <li><a href="https://github.com/watson-developer-cloud/simple-chat-swift">Simple Chat (Swift)</a></li>
 <li><a href="https://github.com/watson-developer-cloud/simple-chat-objective-c">Simple Chat (Objective-C)</a></li>
+<li><a href="https://github.com/watson-developer-cloud/visual-recognition-coreml">Visual Recognition with Core ML</a></li>
+<li><a href="https://github.com/watson-developer-cloud/visual-recognition-with-discovery-coreml">Visual Recognition and Discovery with Core ML</a></li>
 <li><a href="https://github.com/watson-developer-cloud/speech-to-text-swift">Speech to Text</a></li>
 <li><a href="https://github.com/watson-developer-cloud/text-to-speech-swift">Text to Speech</a></li>
 <li><a href="https://github.com/IBM-MIL/CognitiveConcierge">Cognitive Concierge</a></li>
@@ -388,121 +387,75 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 </ul>
 <h2 id='discovery' class='heading'>Discovery</h2>
 
-<p>The IBM Discovery Service allows for rapid automated ingestion and feature enrichment of unstructured data. Enrichments of documents ingested include concepts, relationship extraction and sentiment analysis through Natural Language Processing. With the IBM Discovery service you can take advantage of IBM Watson algorithms to take your unstructured data, enrich it, and query it to return the information you need from it.</p>
+<p>IBM Watson Discovery makes it possible to rapidly build cognitive, cloud-based exploration applications that unlock actionable insights hidden in unstructured data — including your own proprietary data, as well as public and third-party data. With Discovery, it only takes a few steps to prepare your unstructured data, create a query that will pinpoint the information you need, and then integrate those insights into your new application or existing solution.</p>
+<h3 id='discovery-news' class='heading'>Discovery News</h3>
 
-<p>The following example shows how to instantiate a Discovery object:</p>
+<p>IBM Watson Discovery News is included with Discovery. Watson Discovery News is an indexed dataset with news articles from the past 60 days — approximately 300,000 English articles daily. The dataset is pre-enriched with the following cognitive insights: Keyword Extraction, Entity Extraction, Semantic Role Extraction, Sentiment Analysis, Relation Extraction, and Category Classification.</p>
+
+<p>The following example shows how to query the Watson Discovery News dataset:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">DiscoveryV1</span>
 
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
 <span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
 <span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
 
-<p>The following example demonstrates how to create a Discovery environment and collection with the default configuration, and add documents to the collection.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-
-<span class="c1">// Create and store the environment ID for you to access later:</span>
-<span class="k">var</span> <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
-<span class="k">let</span> <span class="nv">environmentName</span> <span class="o">=</span> <span class="s">"your-environment-name-here"</span>
-
-<span class="n">discovery</span><span class="o">.</span><span class="nf">createEnvironment</span><span class="p">(</span>
-    <span class="nv">withName</span><span class="p">:</span> <span class="n">environmentName</span><span class="p">,</span>
-    <span class="nv">withSize</span><span class="p">:</span> <span class="o">.</span><span class="n">zero</span><span class="p">,</span>
-    <span class="nv">withDescription</span><span class="p">:</span> <span class="n">testDescription</span><span class="p">,</span>
+<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">failure</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">discovery</span><span class="o">.</span><span class="nf">query</span><span class="p">(</span>
+    <span class="nv">environmentID</span><span class="p">:</span> <span class="s">"system"</span><span class="p">,</span>
+    <span class="nv">collectionID</span><span class="p">:</span> <span class="s">"news-en"</span><span class="p">,</span>
+    <span class="nv">query</span><span class="p">:</span> <span class="s">"enriched_text.concepts.text:</span><span class="se">\"</span><span class="s">Cloud computing</span><span class="se">\"</span><span class="s">"</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">environment</span> <span class="k">in</span>
-    <span class="k">self</span><span class="o">.</span><span class="n">environmentID</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">environmentID</span>
-<span class="p">}</span>
-
-<span class="c1">// Wait for the environment to be ready before creating a collection:</span>
-<span class="n">bool</span> <span class="n">environmentReady</span> <span class="o">=</span> <span class="kc">false</span>
-<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">environmentReady</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">discovery</span><span class="o">.</span><span class="nf">getEnvironment</span><span class="p">(</span><span class="nv">withName</span><span class="p">:</span> <span class="n">environmentName</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">environment</span> <span class="k">in</span>
-        <span class="k">if</span> <span class="n">environment</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s">"active"</span> <span class="p">{</span>
-         <span class="k">self</span><span class="o">.</span><span class="n">environmentReady</span> <span class="o">=</span> <span class="kc">true</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// Create a collection and store the collection ID for you to access later:</span>
-<span class="k">var</span> <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
-
-<span class="k">let</span> <span class="nv">collectionName</span> <span class="o">=</span> <span class="s">"your-collection-name-here"</span>
-<span class="n">discovery</span><span class="o">.</span><span class="nf">createCollection</span><span class="p">(</span>
-    <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
-    <span class="nv">withName</span><span class="p">:</span> <span class="n">collectionName</span><span class="p">,</span>
-    <span class="nv">withDescription</span><span class="p">:</span> <span class="n">collectionDescription</span><span class="p">,</span>
-    <span class="nv">withConfigurationID</span><span class="p">:</span> <span class="n">configurationID</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">collection</span> <span class="k">in</span>
-    <span class="k">self</span><span class="o">.</span><span class="n">collectionID</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">collectionID</span>
-<span class="p">}</span>
-
-<span class="c1">// Wait for the collection to be "available" before adding a document:</span>
-<span class="n">bool</span> <span class="n">collectionReady</span> <span class="o">=</span> <span class="kc">false</span>
-<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">collectionReady</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">discovery</span><span class="o">.</span><span class="nf">listCollectionDetails</span><span class="p">(</span>
-    <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
-    <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">collection</span> <span class="k">in</span>
-    <span class="k">if</span> <span class="n">collection</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="kt">CollectionStatus</span><span class="o">.</span><span class="n">active</span> <span class="p">{</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">collectionReady</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// Add a document to the collection with the saved environment and collection ID:</span>
-<span class="k">guard</span> <span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="nf">type</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="k">self</span><span class="p">))</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"your-Document-Name"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"document-type"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="kt">XCTFail</span><span class="p">(</span><span class="s">"Unable to locate your-Document-Name.document-type"</span><span class="p">)</span>
-    <span class="k">return</span>
-<span class="p">}</span>
-<span class="n">discovery</span><span class="o">.</span><span class="nf">addDocumentToCollection</span><span class="p">(</span>
-    <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
-    <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
-    <span class="nv">file</span><span class="p">:</span> <span class="n">file</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">document</span> <span class="k">in</span>
-    <span class="kt">NSLog</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
-<span class="p">}</span>
-
-</code></pre>
-
-<p>The following example demonstrates how to perform a query on the Discovery instance using the <code>KennedySpeech.html</code> we have within our <code>DiscoveryV1Tests</code> folder:</p>
-<pre class="highlight swift"><code><span class="c1">/// String to search for within the documents.</span>
-<span class="k">let</span> <span class="nv">query</span> <span class="o">=</span> <span class="s">"United Nations"</span>
-
-<span class="c1">/// Find the max sentiment score for entities within the enriched text.</span>
-<span class="k">let</span> <span class="nv">aggregation</span> <span class="o">=</span> <span class="s">"max(enriched_text.entities.sentiment.score)"</span>
-
-<span class="c1">/// Specify which portion of the document hierarchy to return.</span>
-<span class="k">let</span> <span class="nv">returnHierarchies</span> <span class="o">=</span> <span class="s">"enriched_text.entities.sentiment,enriched_text.entities.text"</span>
-
-<span class="n">discovery</span><span class="o">.</span><span class="nf">queryDocumentsInCollection</span><span class="p">(</span>
-    <span class="nv">withEnvironmentID</span><span class="p">:</span> <span class="n">environmentID</span><span class="o">!</span><span class="p">,</span>
-    <span class="nv">withCollectionID</span><span class="p">:</span> <span class="n">collectionID</span><span class="o">!</span><span class="p">,</span>
-    <span class="nv">withQuery</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
-    <span class="nv">withAggregation</span><span class="p">:</span> <span class="n">aggregation</span><span class="p">,</span>
-    <span class="nv">return</span><span class="p">:</span> <span class="n">returnHierarchies</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">queryResponse</span> <span class="k">in</span>
-    <span class="k">if</span> <span class="k">let</span> <span class="nv">results</span> <span class="o">=</span> <span class="n">queryResponse</span><span class="o">.</span><span class="n">results</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="n">result</span> <span class="k">in</span> <span class="n">results</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="k">let</span> <span class="nv">entities</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">entities</span> <span class="p">{</span>
-                <span class="k">for</span> <span class="n">entity</span> <span class="k">in</span> <span class="n">entities</span> <span class="p">{</span>
-                        <span class="kt">NSLog</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">queryResponse</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='private-data-collections' class='heading'>Private Data Collections</h3>
+
+<p>The Swift SDK supports environment management, collection management, and document uploading. But you may find it easier to create private data collections using the <a href="https://console.bluemix.net/docs/services/discovery/getting-started-tool.html#getting-started-with-the-tooling">Discovery Tooling</a> instead.</p>
+
+<p>Once your content has been uploaded and enriched by the Discovery service, you can search the collection with queries. The following example demonstrates a complex query with a filter, query, and aggregation:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">DiscoveryV1</span>
+
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
+<span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">failure</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">discovery</span><span class="o">.</span><span class="nf">query</span><span class="p">(</span>
+    <span class="nv">environmentID</span><span class="p">:</span> <span class="s">"your-environment-id"</span><span class="p">,</span>
+    <span class="nv">collectionID</span><span class="p">:</span> <span class="s">"your-collection-id"</span><span class="p">,</span>
+    <span class="nv">filter</span><span class="p">:</span> <span class="s">"enriched_text.concepts.text:</span><span class="se">\"</span><span class="s">Technology</span><span class="se">\"</span><span class="s">"</span><span class="p">,</span>
+    <span class="nv">query</span><span class="p">:</span> <span class="s">"enriched_text.concepts.text:</span><span class="se">\"</span><span class="s">Cloud computing</span><span class="se">\"</span><span class="s">"</span><span class="p">,</span>
+    <span class="nv">aggregation</span><span class="p">:</span> <span class="s">"term(enriched_text.concepts.text,count:10)"</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">queryResponse</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">queryResponse</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>You can also upload new documents into your private collection:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">DiscoveryV1</span>
+
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
+<span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">failure</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"KennedySpeech"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"html"</span><span class="p">)</span><span class="o">!</span>
+<span class="n">discovery</span><span class="o">.</span><span class="nf">addDocument</span><span class="p">(</span>
+    <span class="nv">environmentID</span><span class="p">:</span> <span class="s">"your-environment-id"</span><span class="p">,</span>
+    <span class="nv">collectionID</span><span class="p">:</span> <span class="s">"your-collection-id"</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="n">file</span><span class="p">,</span>
+    <span class="nv">fileContentType</span><span class="p">:</span> <span class="s">"text/html"</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failWithError</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">response</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -511,9 +464,7 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <ul>
 <li><a href="https://www.ibm.com/watson/services/discovery/">IBM Discovery - Service Page</a></li>
 <li><a href="https://console.bluemix.net/docs/services/discovery/index.html">IBM Discovery - Documentation</a></li>
-<li><a href="https://www.ibm.com/watson/developercloud/discovery/api/v1/">IBM Discovery - API Reference</a></li>
-<li><a href="https://watson-api-explorer.mybluemix.net/apis/discovery-v1">IBM Discovery - API Explorer</a></li>
-<li><a href="https://console.bluemix.net/docs/services/discovery/query-reference.html#query-building">IBM Discovery - Query Building</a></li>
+<li><a href="https://discovery-news-demo.ng.bluemix.net/">IBM Discovery - Demo</a></li>
 </ul>
 <h2 id='language-translator' class='heading'>Language Translator</h2>
 
@@ -532,7 +483,8 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <span class="c1">// languageTranslator.serviceURL = "https://gateway.watsonplatform.net/language-translation/api"</span>
 
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">languageTranslator</span><span class="o">.</span><span class="nf">translate</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"en"</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span> <span class="s">"es"</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">TranslateRequest</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="s">"Hello"</span><span class="p">],</span> <span class="nv">source</span><span class="p">:</span> <span class="s">"en"</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="s">"es"</span><span class="p">)</span>
+<span class="n">languageTranslator</span><span class="o">.</span><span class="nf">translate</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">translation</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
 <span class="p">}</span>
@@ -559,7 +511,7 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <span class="k">let</span> <span class="nv">classifierID</span> <span class="o">=</span> <span class="s">"your-trained-classifier-id"</span>
 <span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-text-here"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">naturalLanguageClassifier</span><span class="o">.</span><span class="nf">classify</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nv">withClassifierID</span><span class="p">:</span> <span class="n">classifierID</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">naturalLanguageClassifier</span><span class="o">.</span><span class="nf">classify</span><span class="p">(</span><span class="nv">classifierID</span><span class="p">:</span> <span class="n">classifierID</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">classification</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">classification</span><span class="p">)</span>
 <span class="p">}</span>
@@ -595,20 +547,15 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
 <span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"yyyy-mm-dd"</span> <span class="c1">// use today's date for the most recent version</span>
-
 <span class="k">let</span> <span class="nv">naturalLanguageUnderstanding</span> <span class="o">=</span> <span class="kt">NaturalLanguageUnderstanding</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="nv">textToAnalyze</span> <span class="o">=</span> <span class="s">"In 2009, Elliot Turner launched AlchemyAPI to process the written word, with all of its quirks and nuances, and got immediate traction."</span>
-
 <span class="k">let</span> <span class="nv">features</span> <span class="o">=</span> <span class="kt">Features</span><span class="p">(</span><span class="nv">concepts</span><span class="p">:</span> <span class="kt">ConceptsOptions</span><span class="p">(</span><span class="nv">limit</span><span class="p">:</span> <span class="mi">5</span><span class="p">))</span>
-<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="kt">Parameters</span><span class="p">(</span><span class="nv">features</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="n">textToAnalyze</span><span class="p">)</span>
-
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="kt">Parameters</span><span class="p">(</span><span class="nv">features</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="s">"your-text-here"</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">naturalLanguageUnderstanding</span><span class="o">.</span><span class="nf">analyzeContent</span><span class="p">(</span><span class="nv">withParameters</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">naturalLanguageUnderstanding</span><span class="o">.</span><span class="nf">analyze</span><span class="p">(</span><span class="nv">parameters</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">results</span> <span class="k">in</span>
-    <span class="nf">print</span> <span class="p">(</span><span class="n">results</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 <span class="p">}</span>
-
 </code></pre>
 <h4 id='500-errors' class='heading'>500 errors</h4>
 
@@ -633,9 +580,8 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"yyyy-mm-dd"</span> <span class="c1">// use today's date for the most recent version</span>
 <span class="k">let</span> <span class="nv">personalityInsights</span> <span class="o">=</span> <span class="kt">PersonalityInsights</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-input-text"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">personalityInsights</span><span class="o">.</span><span class="nf">getProfile</span><span class="p">(</span><span class="nv">fromText</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">profile</span> <span class="k">in</span>
+<span class="n">personalityInsights</span><span class="o">.</span><span class="nf">profile</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="s">"your-input-text"</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">profile</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
@@ -926,19 +872,20 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
 <span class="k">let</span> <span class="nv">textToSpeech</span> <span class="o">=</span> <span class="kt">TextToSpeech</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
-<span class="k">var</span> <span class="nv">audioPlayer</span> <span class="o">=</span> <span class="kt">AVAudioPlayer</span><span class="p">()</span> <span class="c1">// see note below</span>
+
+<span class="c1">// The AVAudioPlayer object will stop playing if it falls out-of-scope.</span>
+<span class="c1">// Therefore, to prevent it from falling out-of-scope we declare it as</span>
+<span class="c1">// a property outside the completion handler where it will be played.</span>
+<span class="k">var</span> <span class="nv">audioPlayer</span> <span class="o">=</span> <span class="kt">AVAudioPlayer</span><span class="p">()</span>
 
 <span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-text-here"</span>
+<span class="k">let</span> <span class="nv">accept</span> <span class="o">=</span> <span class="s">"audio/wav"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">textToSpeech</span><span class="o">.</span><span class="nf">synthesize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
+<span class="n">textToSpeech</span><span class="o">.</span><span class="nf">synthesize</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">accept</span><span class="p">:</span> <span class="n">accept</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
     <span class="n">audioPlayer</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">AVAudioPlayer</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">prepareToPlay</span><span class="p">()</span>
     <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">play</span><span class="p">()</span>
 <span class="p">}</span>
-
-<span class="c1">// A note about AVAudioPlayer: The AVAudioPlayer object will stop playing</span>
-<span class="c1">// if it falls out-of-scope. Therefore, it's important to declare it as a</span>
-<span class="c1">// property or otherwise keep it in-scope beyond the completion handler.</span>
 </code></pre>
 
 <p>The Text to Speech service supports a number of <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#voices">voices</a> for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:</p>
@@ -947,27 +894,22 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
 <span class="k">let</span> <span class="nv">textToSpeech</span> <span class="o">=</span> <span class="kt">TextToSpeech</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
-<span class="k">var</span> <span class="nv">audioPlayer</span> <span class="o">=</span> <span class="kt">AVAudioPlayer</span><span class="p">()</span> <span class="c1">// see note below</span>
+
+<span class="c1">// The AVAudioPlayer object will stop playing if it falls out-of-scope.</span>
+<span class="c1">// Therefore, to prevent it from falling out-of-scope we declare it as</span>
+<span class="c1">// a property outside the completion handler where it will be played.</span>
+<span class="k">var</span> <span class="nv">audioPlayer</span> <span class="o">=</span> <span class="kt">AVAudioPlayer</span><span class="p">()</span>
 
 <span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-text-here"</span>
+<span class="k">let</span> <span class="nv">accept</span> <span class="o">=</span> <span class="s">"audio/wav"</span>
+<span class="k">let</span> <span class="nv">voice</span> <span class="o">=</span> <span class="s">"en-US_LisaVoice"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">textToSpeech</span><span class="o">.</span><span class="nf">synthesize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nv">voice</span><span class="p">:</span> <span class="kt">SynthesisVoice</span><span class="o">.</span><span class="n">gb_Kate</span><span class="o">.</span><span class="n">rawValue</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
+<span class="n">textToSpeech</span><span class="o">.</span><span class="nf">synthesize</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">accept</span><span class="p">:</span> <span class="n">accept</span><span class="p">,</span> <span class="nv">voice</span><span class="p">:</span> <span class="n">voice</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
     <span class="n">audioPlayer</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">AVAudioPlayer</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">prepareToPlay</span><span class="p">()</span>
     <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">play</span><span class="p">()</span>
 <span class="p">}</span>
-
-<span class="c1">// A note about AVAudioPlayer: The AVAudioPlayer object will stop playing</span>
-<span class="c1">// if it falls out-of-scope. Therefore, it's important to declare it as a</span>
-<span class="c1">// property or otherwise keep it in-scope beyond the completion handler.</span>
 </code></pre>
-<h4 id='important-notes' class='heading'>Important notes</h4>
-
-<ul>
-<li>Prior to v0.15.2, users could already request Opus as the return type. Opus files are much smaller than WAV files, so this would save bandwidth. However, Opus isn&rsquo;t playable by the iOS platform.</li>
-<li>In v0.15.2, we have added functionality to decode Opus files and convert them to WAV files.</li>
-<li>Currently, this is being done automatically when Opus files are requested. In a future release, we will allow users more control over when the decoding process occurs.</li>
-</ul>
 
 <p>The following links provide more information about the IBM Text To Speech service:</p>
 
@@ -990,9 +932,9 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
 <span class="k">let</span> <span class="nv">toneAnalyzer</span> <span class="o">=</span> <span class="kt">ToneAnalyzer</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-input-text"</span>
+<span class="k">let</span> <span class="nv">toneInput</span> <span class="o">=</span> <span class="kt">ToneInput</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="s">"your-input-text"</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">toneAnalyzer</span><span class="o">.</span><span class="nf">getTone</span><span class="p">(</span><span class="nv">ofText</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">tones</span> <span class="k">in</span>
+<span class="n">toneAnalyzer</span><span class="o">.</span><span class="nf">tone</span><span class="p">(</span><span class="nv">toneInput</span><span class="p">:</span> <span class="n">toneInput</span><span class="p">,</span> <span class="nv">contentType</span><span class="p">:</span> <span class="s">"plain/text"</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">tones</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">tones</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
@@ -1009,8 +951,6 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <p>The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, faces, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.</p>
 
 <p>The following example demonstrates how to use the Visual Recognition service:</p>
-
-<p>The following example demonstrates how to use the Visual Recognition service to detect faces in an image:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">VisualRecognitionV3</span>
 
 <span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-apikey-here"</span>
@@ -1074,7 +1014,7 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-03-22)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

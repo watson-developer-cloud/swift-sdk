@@ -99,7 +99,6 @@ public struct RecognitionSettings: JSONEncodable {
     }
 
     /** Used internally to serialize a `RecognitionSettings` model to JSON. */
-    // swiftlint:disable:next cyclomatic_complexity
     public func toJSONObject() -> Any {
         var json = [String: Any]()
         json["action"] = action

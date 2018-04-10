@@ -483,6 +483,8 @@
 		68F7FF1A207D458900E84DBF /* RegisterStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEFB207D458900E84DBF /* RegisterStatus.swift */; };
 		68F7FF20207D47BD00E84DBF /* RecognitionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1B207D47BC00E84DBF /* RecognitionSettings.swift */; };
 		68F7FF21207D47BD00E84DBF /* RecognitionStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1C207D47BC00E84DBF /* RecognitionStop.swift */; };
+		68F7FF22207D47BD00E84DBF /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1D207D47BD00E84DBF /* WordTimestamp.swift */; };
+		68F7FF23207D47BD00E84DBF /* WordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1E207D47BD00E84DBF /* WordConfidence.swift */; };
 		68F7FF24207D47BD00E84DBF /* RecognitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */; };
 		68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */; };
 		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1106,6 +1108,8 @@
 		68F7FEFB207D458900E84DBF /* RegisterStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStatus.swift; sourceTree = "<group>"; };
 		68F7FF1B207D47BC00E84DBF /* RecognitionSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionSettings.swift; sourceTree = "<group>"; };
 		68F7FF1C207D47BC00E84DBF /* RecognitionStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionStop.swift; sourceTree = "<group>"; };
+		68F7FF1D207D47BD00E84DBF /* WordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTimestamp.swift; sourceTree = "<group>"; };
+		68F7FF1E207D47BD00E84DBF /* WordConfidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordConfidence.swift; sourceTree = "<group>"; };
 		68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionState.swift; sourceTree = "<group>"; };
 		68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VisualRecognition+CoreMLTests.swift"; path = "Tests/VisualRecognitionV3Tests/VisualRecognition+CoreMLTests.swift"; sourceTree = SOURCE_ROOT; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
@@ -2008,8 +2012,10 @@
 				68F7FEDE207D458500E84DBF /* Word.swift */,
 				68F7FEED207D458700E84DBF /* WordAlternativeResult.swift */,
 				68F7FEE2207D458600E84DBF /* WordAlternativeResults.swift */,
+				68F7FF1E207D47BD00E84DBF /* WordConfidence.swift */,
 				68F7FEEE207D458700E84DBF /* WordError.swift */,
 				68F7FEF5207D458800E84DBF /* Words.swift */,
+				68F7FF1D207D47BD00E84DBF /* WordTimestamp.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3920,11 +3926,13 @@
 				68F7FF1A207D458900E84DBF /* RegisterStatus.swift in Sources */,
 				68F7FF09207D458900E84DBF /* SpeechRecognitionResult.swift in Sources */,
 				68F7FF14207D458900E84DBF /* Words.swift in Sources */,
+				68F7FF23207D47BD00E84DBF /* WordConfidence.swift in Sources */,
 				68BC28D71F8C35070042810E /* JSONWrapper.swift in Sources */,
 				68F7FEFE207D458900E84DBF /* CreateLanguageModel.swift in Sources */,
 				68F7FF0A207D458900E84DBF /* SpeechModels.swift in Sources */,
 				68F7FF06207D458900E84DBF /* AudioDetails.swift in Sources */,
 				68F7FF0E207D458900E84DBF /* AudioResource.swift in Sources */,
+				68F7FF22207D47BD00E84DBF /* WordTimestamp.swift in Sources */,
 				68BC28DD1F8C35070042810E /* RestUtilities.swift in Sources */,
 				68F7FF19207D458900E84DBF /* CreateAcousticModel.swift in Sources */,
 				68F7FF00207D458900E84DBF /* AcousticModels.swift in Sources */,

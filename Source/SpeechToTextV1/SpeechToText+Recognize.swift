@@ -92,6 +92,15 @@ extension SpeechToText {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechRecognitionResults) -> Void)
     {
+        // extract credentials
+        guard case let .basicAuthentication(username, password) = credentials else {
+            let failureReason = "Invalid credentials format."
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
         // create session
         let session = SpeechToTextSession(
             username: username,
@@ -172,6 +181,15 @@ extension SpeechToText {
         // validate settings
         var settings = settings
         settings.contentType = compress ? .oggOpus : .l16(rate: 16000, channels: 1)
+
+        // extract credentials
+        guard case let .basicAuthentication(username, password) = credentials else {
+            let failureReason = "Invalid credentials format."
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
 
         // create session
         let session = SpeechToTextSession(

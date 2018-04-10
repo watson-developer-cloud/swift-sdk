@@ -180,7 +180,7 @@ extension SpeechToText {
 
         // validate settings
         var settings = settings
-        settings.contentType = compress ? .oggOpus : .l16(rate: 16000, channels: 1)
+        settings.contentType = compress ? "audio/ogg;codecs=opus" : "audio/l16;rate=16000;channels=1"
 
         // extract credentials
         guard case let .basicAuthentication(username, password) = credentials else {

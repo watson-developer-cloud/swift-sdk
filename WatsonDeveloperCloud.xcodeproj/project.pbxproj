@@ -486,6 +486,7 @@
 		68F7FF22207D47BD00E84DBF /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1D207D47BD00E84DBF /* WordTimestamp.swift */; };
 		68F7FF23207D47BD00E84DBF /* WordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1E207D47BD00E84DBF /* WordConfidence.swift */; };
 		68F7FF24207D47BD00E84DBF /* RecognitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */; };
+		68F7FF28207D4B4300E84DBF /* SpeechRecognitionResultsAccumulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF27207D4B4300E84DBF /* SpeechRecognitionResultsAccumulator.swift */; };
 		68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */; };
 		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */; };
@@ -1111,6 +1112,7 @@
 		68F7FF1D207D47BD00E84DBF /* WordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTimestamp.swift; sourceTree = "<group>"; };
 		68F7FF1E207D47BD00E84DBF /* WordConfidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordConfidence.swift; sourceTree = "<group>"; };
 		68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionState.swift; sourceTree = "<group>"; };
+		68F7FF27207D4B4300E84DBF /* SpeechRecognitionResultsAccumulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionResultsAccumulator.swift; sourceTree = "<group>"; };
 		68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VisualRecognition+CoreMLTests.swift"; path = "Tests/VisualRecognitionV3Tests/VisualRecognition+CoreMLTests.swift"; sourceTree = SOURCE_ROOT; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
@@ -2007,6 +2009,7 @@
 				68F7FEE9207D458600E84DBF /* SpeechRecognitionAlternative.swift */,
 				68F7FEEA207D458600E84DBF /* SpeechRecognitionResult.swift */,
 				68F7FEF7207D458800E84DBF /* SpeechRecognitionResults.swift */,
+				68F7FF27207D4B4300E84DBF /* SpeechRecognitionResultsAccumulator.swift */,
 				68F7FEE5207D458600E84DBF /* SpeechSession.swift */,
 				68F7FEF9207D458800E84DBF /* SupportedFeatures.swift */,
 				68F7FEDE207D458500E84DBF /* Word.swift */,
@@ -3891,6 +3894,7 @@
 				7A9EC8201D79D7E300507725 /* SpeechToTextSocket.swift in Sources */,
 				7A9EC80C1D79B75100507725 /* SpeechToTextSession.swift in Sources */,
 				68BC28DB1F8C35070042810E /* RestRequest.swift in Sources */,
+				68F7FF28207D4B4300E84DBF /* SpeechRecognitionResultsAccumulator.swift in Sources */,
 				7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */,
 				68F7FEFD207D458900E84DBF /* Word.swift in Sources */,
 				68F7FF13207D458900E84DBF /* Corpora.swift in Sources */,

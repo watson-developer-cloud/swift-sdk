@@ -481,6 +481,9 @@
 		68F7FF18207D458900E84DBF /* SupportedFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEF9207D458800E84DBF /* SupportedFeatures.swift */; };
 		68F7FF19207D458900E84DBF /* CreateAcousticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEFA207D458800E84DBF /* CreateAcousticModel.swift */; };
 		68F7FF1A207D458900E84DBF /* RegisterStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEFB207D458900E84DBF /* RegisterStatus.swift */; };
+		68F7FF20207D47BD00E84DBF /* RecognitionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1B207D47BC00E84DBF /* RecognitionSettings.swift */; };
+		68F7FF21207D47BD00E84DBF /* RecognitionStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1C207D47BC00E84DBF /* RecognitionStop.swift */; };
+		68F7FF24207D47BD00E84DBF /* RecognitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */; };
 		68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */; };
 		7A1F486B1D47AF7E00971377 /* ConversationV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A1F486A1D47AF7E00971377 /* ConversationV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */; };
@@ -1101,6 +1104,9 @@
 		68F7FEF9207D458800E84DBF /* SupportedFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportedFeatures.swift; sourceTree = "<group>"; };
 		68F7FEFA207D458800E84DBF /* CreateAcousticModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAcousticModel.swift; sourceTree = "<group>"; };
 		68F7FEFB207D458900E84DBF /* RegisterStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStatus.swift; sourceTree = "<group>"; };
+		68F7FF1B207D47BC00E84DBF /* RecognitionSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionSettings.swift; sourceTree = "<group>"; };
+		68F7FF1C207D47BC00E84DBF /* RecognitionStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionStop.swift; sourceTree = "<group>"; };
+		68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionState.swift; sourceTree = "<group>"; };
 		68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VisualRecognition+CoreMLTests.swift"; path = "Tests/VisualRecognitionV3Tests/VisualRecognition+CoreMLTests.swift"; sourceTree = SOURCE_ROOT; };
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "Source/SupportingFiles/Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Tests.plist"; path = "Source/SupportingFiles/Info-Tests.plist"; sourceTree = "<group>"; };
@@ -1987,6 +1993,9 @@
 				68F7FEF1207D458700E84DBF /* LanguageModels.swift */,
 				68F7FEE6207D458600E84DBF /* RecognitionJob.swift */,
 				68F7FEE8207D458600E84DBF /* RecognitionJobs.swift */,
+				68F7FF1B207D47BC00E84DBF /* RecognitionSettings.swift */,
+				68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */,
+				68F7FF1C207D47BC00E84DBF /* RecognitionStop.swift */,
 				68F7FEFB207D458900E84DBF /* RegisterStatus.swift */,
 				68F7FEF3207D458700E84DBF /* SpeakerLabelsResult.swift */,
 				68F7FEE3207D458600E84DBF /* SpeechModel.swift */,
@@ -3880,8 +3889,10 @@
 				68F7FEFD207D458900E84DBF /* Word.swift in Sources */,
 				68F7FF13207D458900E84DBF /* Corpora.swift in Sources */,
 				68F7FF12207D458900E84DBF /* SpeakerLabelsResult.swift in Sources */,
+				68F7FF21207D47BD00E84DBF /* RecognitionStop.swift in Sources */,
 				68BC28D81F8C35070042810E /* JSON.swift in Sources */,
 				68F7FF0F207D458900E84DBF /* AudioListing.swift in Sources */,
+				68F7FF20207D47BD00E84DBF /* RecognitionSettings.swift in Sources */,
 				68F7FF01207D458900E84DBF /* WordAlternativeResults.swift in Sources */,
 				68F7FF16207D458900E84DBF /* SpeechRecognitionResults.swift in Sources */,
 				68F7FF17207D458900E84DBF /* CustomWord.swift in Sources */,
@@ -3904,6 +3915,7 @@
 				68F7FF0B207D458900E84DBF /* KeywordResult.swift in Sources */,
 				7A9EC80B1D79B75100507725 /* SpeechToTextRecorder.swift in Sources */,
 				68F7FF02207D458900E84DBF /* SpeechModel.swift in Sources */,
+				68F7FF24207D47BD00E84DBF /* RecognitionState.swift in Sources */,
 				68F7FEFC207D458900E84DBF /* AudioResources.swift in Sources */,
 				68F7FF1A207D458900E84DBF /* RegisterStatus.swift in Sources */,
 				68F7FF09207D458900E84DBF /* SpeechRecognitionResult.swift in Sources */,

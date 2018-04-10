@@ -6,6 +6,7 @@ disabled_rules: # rule identifiers to exclude from running
   - closure_parameter_position
   - opening_brace
   - redundant_string_enum_value
+  - cyclomatic_complexity
 
 opt_in_rules:
  - force_unwrapping

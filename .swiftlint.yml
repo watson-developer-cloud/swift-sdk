@@ -35,3 +35,6 @@ trailing_comma:
 
 trailing_whitespace:
   severity: error
+
+superfluous_disable_command:
+  severity: warning

@@ -16,23 +16,15 @@
 
 import Foundation
 
-/** WordAlternativeResults. */
-public struct WordAlternativeResults: Decodable {
+/** LanguageModels. */
+public struct LanguageModels: Decodable {
 
-    /// The start time in seconds of the word from the input audio that corresponds to the word alternatives.
-    public var startTime: Double
-
-    /// The end time in seconds of the word from the input audio that corresponds to the word alternatives.
-    public var endTime: Double
-
-    /// An array of alternative hypotheses for a word from the input audio.
-    public var alternatives: [WordAlternativeResult]
+    /// An array of objects that provides information about each available custom language model. The array is empty if the requesting service credentials own no custom language models (if no language is specified) or own no custom language models for the specified language.
+    public var customizations: [LanguageModel]
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case startTime = "start_time"
-        case endTime = "end_time"
-        case alternatives = "alternatives"
+        case customizations = "customizations"
     }
 
 }

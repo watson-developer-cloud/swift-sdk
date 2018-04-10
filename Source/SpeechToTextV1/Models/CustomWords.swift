@@ -16,23 +16,26 @@
 
 import Foundation
 
-/** WordAlternativeResults. */
-public struct WordAlternativeResults: Decodable {
+/** CustomWords. */
+public struct CustomWords: Encodable {
 
-    /// The start time in seconds of the word from the input audio that corresponds to the word alternatives.
-    public var startTime: Double
-
-    /// The end time in seconds of the word from the input audio that corresponds to the word alternatives.
-    public var endTime: Double
-
-    /// An array of alternative hypotheses for a word from the input audio.
-    public var alternatives: [WordAlternativeResult]
+    /// An array of objects that provides information about each custom word that is to be added to or updated in the custom language model.
+    public var words: [CustomWord]
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case startTime = "start_time"
-        case endTime = "end_time"
-        case alternatives = "alternatives"
+        case words = "words"
+    }
+
+    /**
+     Initialize a `CustomWords` with member variables.
+
+     - parameter words: An array of objects that provides information about each custom word that is to be added to or updated in the custom language model.
+
+     - returns: An initialized `CustomWords`.
+    */
+    public init(words: [CustomWord]) {
+        self.words = words
     }
 
 }

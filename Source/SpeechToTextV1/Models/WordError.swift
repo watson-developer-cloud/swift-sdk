@@ -16,23 +16,15 @@
 
 import Foundation
 
-/** WordAlternativeResults. */
-public struct WordAlternativeResults: Decodable {
+/** WordError. */
+public struct WordError: Decodable {
 
-    /// The start time in seconds of the word from the input audio that corresponds to the word alternatives.
-    public var startTime: Double
-
-    /// The end time in seconds of the word from the input audio that corresponds to the word alternatives.
-    public var endTime: Double
-
-    /// An array of alternative hypotheses for a word from the input audio.
-    public var alternatives: [WordAlternativeResult]
+    /// A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem and `message` describes the problem. The following example describes a problem with one of the word's sounds-like definitions: `"sounds_like_string": "Numbers are not allowed in sounds-like. You can try for example 'suggested_string'."` You must correct the error before you can train the model.
+    public var element: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case startTime = "start_time"
-        case endTime = "end_time"
-        case alternatives = "alternatives"
+        case element = "element"
     }
 
 }

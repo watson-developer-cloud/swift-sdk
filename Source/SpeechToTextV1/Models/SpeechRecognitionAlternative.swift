@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,28 +16,27 @@
 
 import Foundation
 
-/** A transcription alternative produced by Speech to Text. */
-public struct SpeechRecognitionAlternative: JSONDecodable {
+/** SpeechRecognitionAlternative. */
+public struct SpeechRecognitionAlternative: Decodable {
 
-    /// A transcript of the utterance.
-    public let transcript: String
+    /// A transcription of the audio.
+    public var transcript: String
 
-    /// The confidence score of the transcript, between 0 and 1. Available only for the best
-    /// alternative and only in results marked as final.
-    public let confidence: Double?
+    /// A score that indicates the service's confidence in the transcript in the range of 0 to 1. Available only for the best alternative and only in results marked as final.
+    public var confidence: Double?
 
-    /// Timestamps for each word of the transcript.
-    public let timestamps: [WordTimestamp]?
+    /// Time alignments for each word from the transcript as a list of lists. Each inner list consists of three elements: the word followed by its start and end time in seconds. Example: `[["hello",0.0,1.2],["world",1.2,2.5]]`. Available only for the best alternative.
+    public var timestamps: [String]?
 
-    /// Confidence scores for each word of the transcript, between 0 and 1. Available only
-    /// for the best alternative and only in results marked as final.
-    public let wordConfidence: [WordConfidence]?
+    /// A confidence score for each word of the transcript as a list of lists. Each inner list consists of two elements: the word and its confidence score in the range of 0 to 1. Example: `[["hello",0.95],["world",0.866]]`. Available only for the best alternative and only in results marked as final.
+    public var wordConfidence: [String]?
 
-    /// Used internally to initialize a `SpeechRecognitionAlternative` model from JSON.
-    public init(json: JSONWrapper) throws {
-        transcript = try json.getString(at: "transcript")
-        confidence = try? json.getDouble(at: "confidence")
-        timestamps = try? json.decodedArray(at: "timestamps", type: WordTimestamp.self)
-        wordConfidence = try? json.decodedArray(at: "word_confidence", type: WordConfidence.self)
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case transcript = "transcript"
+        case confidence = "confidence"
+        case timestamps = "timestamps"
+        case wordConfidence = "word_confidence"
     }
+
 }

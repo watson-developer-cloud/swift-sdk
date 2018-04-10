@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,15 @@
 
 import Foundation
 
-/** Signals the end of an audio transmission to Speech to Text. */
-internal struct RecognitionStop: JSONEncodable {
+/** RecognitionJobs. */
+public struct RecognitionJobs: Decodable {
 
-    /// The action to perform. Must be `stop` to end the request.
-    private let action = "stop"
+    /// An array of objects that provides the status for each of the user's current jobs. The array is empty if the user has no current jobs.
+    public var recognitions: [RecognitionJob]
 
-    /** Serialize a `RecognitionStop` model to JSON. */
-    internal func toJSONObject() -> Any {
-        return ["action": action]
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case recognitions = "recognitions"
     }
+
 }

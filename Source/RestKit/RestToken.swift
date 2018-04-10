@@ -33,13 +33,12 @@ internal class RestToken {
     /**
      Create a `RestToken`.
 
-     - parameter tokenURL:   The URL that shall be used to obtain a token.
-     - parameter username:   The username credential used to obtain a token.
-     - parameter password:   The password credential used to obtain a token.
+     - parameter tokenURL: The URL that shall be used to obtain a token.
+     - parameter credentials: The credentials that shall be used to obtain a token.
      */
-    internal init(tokenURL: String, username: String, password: String) {
+    internal init(tokenURL: String, credentials: Credentials) {
         self.tokenURL = tokenURL
-        self.credentials = Credentials.basicAuthentication(username: username, password: password)
+        self.credentials = credentials
     }
 
     /**

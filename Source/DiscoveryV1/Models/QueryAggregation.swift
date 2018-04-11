@@ -38,7 +38,6 @@ public enum QueryAggregation: Decodable {
         case type = "type"
     }
 
-    // swiftlint:disable:next cyclomatic_complexity
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         guard let type = try container.decodeIfPresent(String.self, forKey: .type) else {

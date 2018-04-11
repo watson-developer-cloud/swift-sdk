@@ -125,7 +125,6 @@ internal class TextToSpeechDecoder {
     }
 
     // Extract a packet from the ogg stream and store the extracted data within the packet object.
-    // swiftlint:disable:next cyclomatic_complexity
     private func extractPacket(_ streamState: inout ogg_stream_state, _ packet: inout ogg_packet) throws {
         // attempt to extract a packet from the ogg stream
         while ogg_stream_packetout(&streamState, &packet) == 1 {

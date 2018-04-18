@@ -58,6 +58,7 @@ class SpeechToTextTests: XCTestCase {
             ("testTranscribeDataWithSpeakerLabelsWAV", testTranscribeDataWithSpeakerLabelsWAV),
             ("testTranscribeDataWithSpeakerLabelsOpus", testTranscribeDataWithSpeakerLabelsOpus),
             ("testTranscribeDataWithSpeakerLabelsFLAC", testTranscribeDataWithSpeakerLabelsFLAC),
+            ("testResultsAccumulator", testResultsAccumulator),
             ("testTranscribeStreaming", testTranscribeStreaming),
         ]
     }
@@ -921,6 +922,82 @@ class SpeechToTextTests: XCTestCase {
             XCTFail("Unable to read \(filename).\(withExtension).")
             return
         }
+    }
+
+    // MARK: - Results Accumulator
+
+    func testResultsAccumulator() {
+        let results1 = """
+            {
+              "results": [{
+                "alternatives": [{
+                  "transcript": "the quick "
+                }],
+                "final": false
+              }],
+              "result_index": 0
+            }
+            """
+
+        let results2 = """
+            {
+              "results": [{
+                "alternatives": [{
+                  "confidence": 0.922,
+                  "transcript": "the quick brown fox"
+                }],
+                "final": true
+              }],
+              "result_index": 0,
+              "speaker_labels": [
+                {
+                  "from": 0.68,
+                  "to": 1.19,
+                  "speaker": 2,
+                  "confidence": 0.418,
+                  "final": false
+                },
+                {
+                  "from": 1.47,
+                  "to": 1.93,
+                  "speaker": 1,
+                  "confidence": 0.521,
+                  "final": false
+                }
+              ]
+            }
+            """
+
+        let results3 = """
+            {
+              "results": [{
+                "alternatives": [{
+                  "confidence": 0.873,
+                  "transcript": "jumps over the lazy dog"
+                }],
+                "final": true
+              }],
+              "result_index": 1,
+              "speaker_labels": [
+                {
+                  "from": 1.96,
+                  "to": 2.59,
+                  "speaker": 2,
+                  "confidence": 0.418,
+                  "final": false
+                }
+              ]
+            }
+            """
+
+        var accumulator = SpeechRecognitionResultsAccumulator()
+        accumulator.add(results: try! JSONDecoder().decode(SpeechRecognitionResults.self, from: results1.data(using: .utf8)!))
+        accumulator.add(results: try! JSONDecoder().decode(SpeechRecognitionResults.self, from: results2.data(using: .utf8)!))
+        accumulator.add(results: try! JSONDecoder().decode(SpeechRecognitionResults.self, from: results3.data(using: .utf8)!))
+
+        XCTAssertEqual(accumulator.results.count, 2)
+        XCTAssertEqual(accumulator.speakerLabels.count, 3)
+        XCTAssertEqual(accumulator.bestTranscript, "the quick brown fox jumps over the lazy dog")
     }
 
     // MARK: - Transcribe Streaming

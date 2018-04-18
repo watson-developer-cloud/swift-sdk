@@ -1648,6 +1648,22 @@
 			path = ../../Tests/RestKitTests;
 			sourceTree = "<group>";
 		};
+		685E5D812087E343009BB020 /* WebSockets */ = {
+			isa = PBXGroup;
+			children = (
+				68F7FF1B207D47BC00E84DBF /* RecognitionSettings.swift */,
+				68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */,
+				68F7FF1C207D47BC00E84DBF /* RecognitionStop.swift */,
+				68F7FF27207D4B4300E84DBF /* SpeechRecognitionResultsAccumulator.swift */,
+				7A9EC8071D79B75100507725 /* SpeechToTextEncoder.swift */,
+				7A9EC8081D79B75100507725 /* SpeechToTextRecorder.swift */,
+				7A9EC8091D79B75100507725 /* SpeechToTextSession.swift */,
+				7A9EC81F1D79D7E300507725 /* SpeechToTextSocket.swift */,
+				7A9EC8211D79D8F300507725 /* SpeechToTextState.swift */,
+			);
+			path = WebSockets;
+			sourceTree = "<group>";
+		};
 		68AF8EAA206968CC00D552E3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1968,12 +1984,8 @@
 				7AAA9A111CEE3026002C9564 /* Models */,
 				7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */,
 				68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */,
-				7A9EC8071D79B75100507725 /* SpeechToTextEncoder.swift */,
-				7A9EC8081D79B75100507725 /* SpeechToTextRecorder.swift */,
-				7A9EC8091D79B75100507725 /* SpeechToTextSession.swift */,
-				7A9EC81F1D79D7E300507725 /* SpeechToTextSocket.swift */,
-				7A9EC8211D79D8F300507725 /* SpeechToTextState.swift */,
 				7AAA9A201CEE3026002C9564 /* Tests */,
+				685E5D812087E343009BB020 /* WebSockets */,
 			);
 			name = SpeechToTextV1;
 			path = Source/SpeechToTextV1;
@@ -1999,9 +2011,6 @@
 				68F7FEF1207D458700E84DBF /* LanguageModels.swift */,
 				68F7FEE6207D458600E84DBF /* RecognitionJob.swift */,
 				68F7FEE8207D458600E84DBF /* RecognitionJobs.swift */,
-				68F7FF1B207D47BC00E84DBF /* RecognitionSettings.swift */,
-				68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */,
-				68F7FF1C207D47BC00E84DBF /* RecognitionStop.swift */,
 				68F7FEFB207D458900E84DBF /* RegisterStatus.swift */,
 				68F7FEF3207D458700E84DBF /* SpeakerLabelsResult.swift */,
 				68F7FEE3207D458600E84DBF /* SpeechModel.swift */,
@@ -2009,7 +2018,6 @@
 				68F7FEE9207D458600E84DBF /* SpeechRecognitionAlternative.swift */,
 				68F7FEEA207D458600E84DBF /* SpeechRecognitionResult.swift */,
 				68F7FEF7207D458800E84DBF /* SpeechRecognitionResults.swift */,
-				68F7FF27207D4B4300E84DBF /* SpeechRecognitionResultsAccumulator.swift */,
 				68F7FEE5207D458600E84DBF /* SpeechSession.swift */,
 				68F7FEF9207D458800E84DBF /* SupportedFeatures.swift */,
 				68F7FEDE207D458500E84DBF /* Word.swift */,

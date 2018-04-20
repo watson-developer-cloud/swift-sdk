@@ -52,6 +52,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             ("testListClassifiers", testListClassifiers),
             ("testGetClassifier", testGetClassifier),
             ("testClassify", testClassify),
+            ("testClassifyCollection", testClassifyCollection),
             ("testCreateClassifierWithMissingMetadata", testCreateClassifierWithMissingMetadata),
             ("testClassifyEmptyString", testClassifyEmptyString),
             ("testClassifyWithInvalidClassifier", testClassifyWithInvalidClassifier),
@@ -168,6 +169,26 @@ class NaturalLanguageClassifierTests: XCTestCase {
             XCTAssertEqual(classification.topClass, "temperature")
             XCTAssertNotNil(classification.classes)
             XCTAssertEqual(classification.classes!.count, 2)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testClassifyCollection() {
+        let expectation = self.expectation(description: "classifyCollection")
+        let text1 = "How hot will it be today?"
+        let text2 = "How sunny will it be today?"
+        let collection = [ClassifyInput(text: text1), ClassifyInput(text: text2)]
+        naturalLanguageClassifier.classifyCollection(classifierID: trainedClassifierId, collection: collection, failure: failWithError) {
+            classifications in
+            XCTAssertNotNil(classifications.classifierID)
+            XCTAssertEqual(classifications.classifierID, self.trainedClassifierId)
+            XCTAssertNotNil(classifications.collection)
+            XCTAssertEqual(classifications.collection!.count, 2)
+            XCTAssertEqual(classifications.collection![0].text, text1)
+            XCTAssertEqual(classifications.collection![0].topClass, "temperature")
+            XCTAssertEqual(classifications.collection![1].text, text2)
+            XCTAssertEqual(classifications.collection![1].topClass, "conditions")
             expectation.fulfill()
         }
         waitForExpectations()

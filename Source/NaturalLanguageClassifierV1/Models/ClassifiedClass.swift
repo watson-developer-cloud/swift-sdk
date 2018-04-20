@@ -17,7 +17,7 @@
 import Foundation
 
 /** Class and confidence. */
-public struct ClassifiedClass {
+public struct ClassifiedClass: Decodable {
 
     /// A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher confidences.
     public var confidence: Double?
@@ -25,38 +25,10 @@ public struct ClassifiedClass {
     /// Class label.
     public var className: String?
 
-    /**
-     Initialize a `ClassifiedClass` with member variables.
-
-     - parameter confidence: A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher confidences.
-     - parameter className: Class label.
-
-     - returns: An initialized `ClassifiedClass`.
-    */
-    public init(confidence: Double? = nil, className: String? = nil) {
-        self.confidence = confidence
-        self.className = className
-    }
-}
-
-extension ClassifiedClass: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case confidence = "confidence"
         case className = "class_name"
-        static let allValues = [confidence, className]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        confidence = try container.decodeIfPresent(Double.self, forKey: .confidence)
-        className = try container.decodeIfPresent(String.self, forKey: .className)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(confidence, forKey: .confidence)
-        try container.encodeIfPresent(className, forKey: .className)
     }
 
 }

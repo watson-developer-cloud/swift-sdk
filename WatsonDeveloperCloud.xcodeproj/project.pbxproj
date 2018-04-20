@@ -19,7 +19,6 @@
 		124C2E241D19E31600D9F602 /* TextToSpeechV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		126DF90B1EB25A45001FF980 /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 12F140681EB244DB00D4047D /* opus_header.c */; };
 		12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */; };
-		12D82B4E1E26DBAE00430DB3 /* healthcare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12D82B4D1E26DBAE00430DB3 /* healthcare.txt */; };
 		12D82B501E2D2E5300430DB3 /* healthcare-short.txt in Resources */ = {isa = PBXBuildFile; fileRef = 12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */; };
 		12F1405B1EB2410400D4047D /* TextToSpeechDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F1405A1EB2410400D4047D /* TextToSpeechDecoder.swift */; };
 		12F1405C1EB241D500D4047D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9EC80F1D79B76100507725 /* libogg.a */; };
@@ -749,7 +748,6 @@
 		12AE2BD41CCFC9100034CF4E /* NaturalLanguageClassifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NaturalLanguageClassifierTests.swift; path = Tests/NaturalLanguageClassifierV1Tests/NaturalLanguageClassifierTests.swift; sourceTree = SOURCE_ROOT; };
 		12B07D121CDA75DB00B20B38 /* training_meta_empty.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta_empty.txt; sourceTree = "<group>"; };
 		12B07D2A1CDBEE2100B20B38 /* training_meta_missing_name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = training_meta_missing_name.txt; sourceTree = "<group>"; };
-		12D82B4D1E26DBAE00430DB3 /* healthcare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = healthcare.txt; sourceTree = "<group>"; };
 		12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "healthcare-short.txt"; sourceTree = "<group>"; };
 		12F1405A1EB2410400D4047D /* TextToSpeechDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToSpeechDecoder.swift; sourceTree = "<group>"; };
 		12F140681EB244DB00D4047D /* opus_header.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
@@ -2038,7 +2036,6 @@
 			children = (
 				7AAA9A211CEE3026002C9564 /* Audio Files */,
 				7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */,
-				12D82B4D1E26DBAE00430DB3 /* healthcare.txt */,
 				68BB78F82089A97E00173438 /* SpeechToTextRecognizeTests.swift */,
 				12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */,
 			);
@@ -3082,7 +3079,6 @@
 				7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */,
 				7AAAF4731CEE9FBA00B74848 /* SpeechSample.flac in Resources */,
 				7AAAF4741CEE9FBA00B74848 /* SpeechSample.ogg in Resources */,
-				12D82B4E1E26DBAE00430DB3 /* healthcare.txt in Resources */,
 				12D82B501E2D2E5300430DB3 /* healthcare-short.txt in Resources */,
 				7AAAF4751CEE9FBA00B74848 /* SpeechSample.wav in Resources */,
 			);

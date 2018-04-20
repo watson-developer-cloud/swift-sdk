@@ -132,6 +132,59 @@ public class NaturalLanguageClassifier {
     }
 
     /**
+     Classify multiple phrases.
+
+     Returns label information for multiple phrases. The status must be `Available` before you can use the classifier to
+     classify text.  Note that classifying Japanese texts is a beta feature.
+
+     - parameter classifierID: Classifier ID to use.
+     - parameter collection: The submitted phrases.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func classifyCollection(
+        classifierID: String,
+        collection: [ClassifyInput],
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassificationCollection) -> Void)
+    {
+        // construct body
+        let classifyCollectionRequest = ClassifyCollectionInput(collection: collection)
+        guard let body = try? JSONEncoder().encode(classifyCollectionRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
+        // construct REST request
+        let path = "/v1/classifiers/\(classifierID)/classify_collection"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ClassificationCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
      Create classifier.
 
      Sends data to create and train a classifier and returns information about the new classifier.

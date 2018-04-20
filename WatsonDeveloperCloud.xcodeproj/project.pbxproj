@@ -203,6 +203,9 @@
 		683955072077E613009E1C8A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683955022077E612009E1C8A /* Filter.swift */; };
 		683955082077E613009E1C8A /* TopHitsResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683955032077E613009E1C8A /* TopHitsResults.swift */; };
 		683955092077E613009E1C8A /* Timeslice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683955042077E613009E1C8A /* Timeslice.swift */; };
+		68438E9F208A987400FD7DB9 /* ClassificationCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68438E9C208A987300FD7DB9 /* ClassificationCollection.swift */; };
+		68438EA0208A987400FD7DB9 /* ClassifyCollectionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68438E9D208A987300FD7DB9 /* ClassifyCollectionInput.swift */; };
+		68438EA1208A987400FD7DB9 /* CollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68438E9E208A987400FD7DB9 /* CollectionItem.swift */; };
 		6877FA652056D4F100383B25 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
 		6877FA6C2056D4F100383B25 /* JSONWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEBE4361DBEAA130089188C /* JSONWrapper.swift */; };
 		6877FA702056D4F100383B25 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
@@ -904,6 +907,9 @@
 		683955022077E612009E1C8A /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		683955032077E613009E1C8A /* TopHitsResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopHitsResults.swift; sourceTree = "<group>"; };
 		683955042077E613009E1C8A /* Timeslice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeslice.swift; sourceTree = "<group>"; };
+		68438E9C208A987300FD7DB9 /* ClassificationCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassificationCollection.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassificationCollection.swift; sourceTree = "<group>"; };
+		68438E9D208A987300FD7DB9 /* ClassifyCollectionInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClassifyCollectionInput.swift; path = Source/NaturalLanguageClassifierV1/Models/ClassifyCollectionInput.swift; sourceTree = "<group>"; };
+		68438E9E208A987400FD7DB9 /* CollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionItem.swift; path = Source/NaturalLanguageClassifierV1/Models/CollectionItem.swift; sourceTree = "<group>"; };
 		6877FA9A2056D4F100383B25 /* AssistantV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6877FAAA2056D4F500383B25 /* AssistantV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssistantV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		689A167E203C88C6002CFC66 /* FaceIdentity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceIdentity.swift; sourceTree = "<group>"; };
@@ -1473,10 +1479,13 @@
 			isa = PBXGroup;
 			children = (
 				68A6A9AB202A38490069585F /* Classification.swift */,
+				68438E9C208A987300FD7DB9 /* ClassificationCollection.swift */,
 				68A6A9A7202A38490069585F /* ClassifiedClass.swift */,
 				68A6A9A9202A38490069585F /* Classifier.swift */,
 				68A6A9AA202A38490069585F /* ClassifierList.swift */,
+				68438E9D208A987300FD7DB9 /* ClassifyCollectionInput.swift */,
 				68A6A9A8202A38490069585F /* ClassifyInput.swift */,
+				68438E9E208A987400FD7DB9 /* CollectionItem.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -3885,11 +3894,14 @@
 			files = (
 				68A6A9AF202A38490069585F /* ClassifierList.swift in Sources */,
 				68A6A9AD202A38490069585F /* ClassifyInput.swift in Sources */,
+				68438EA0208A987400FD7DB9 /* ClassifyCollectionInput.swift in Sources */,
 				68BC28AD1F8C35030042810E /* RestUtilities.swift in Sources */,
 				68BC28AB1F8C35030042810E /* RestRequest.swift in Sources */,
 				68BC28A81F8C35030042810E /* JSON.swift in Sources */,
+				68438E9F208A987400FD7DB9 /* ClassificationCollection.swift in Sources */,
 				68A6A9AE202A38490069585F /* Classifier.swift in Sources */,
 				68A6A9AC202A38490069585F /* ClassifiedClass.swift in Sources */,
+				68438EA1208A987400FD7DB9 /* CollectionItem.swift in Sources */,
 				68BC28A91F8C35030042810E /* MultipartFormData.swift in Sources */,
 				68BC28AA1F8C35030042810E /* RestError.swift in Sources */,
 				68A6A9B0202A38490069585F /* Classification.swift in Sources */,

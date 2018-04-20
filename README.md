@@ -495,6 +495,8 @@ The `SpeechToText` class is the SDK's primary interface for performing speech re
 
 Please be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application. Starscream is a recursive dependency that adds support for WebSockets sessions.
 
+Beginning with iOS 10+, any application that accesses the microphone must include the `NSMicrophoneUsageDescription` key in the app's `Info.plist` file. Otherwise, the app will crash. Find more information about this [here](https://forums.developer.apple.com/thread/61521).
+
 #### Recognition Request Settings
 
 The `RecognitionSettings` class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when [initating a request](https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart).
@@ -502,7 +504,7 @@ The `RecognitionSettings` class is used to define the audio format and behavior 
 The following example demonstrates how to define a recognition request that transcribes WAV audio data with interim results:
 
 ```swift
-var settings = RecognitionSettings(contentType: .wav)
+var settings = RecognitionSettings(contentType: "audio/wav")
 settings.interimResults = true
 ```
 
@@ -523,11 +525,28 @@ To reduce latency and bandwidth, the microphone audio is compressed to OggOpus f
 It's important to specify the correct audio format for recognition requests that use the microphone:
 
 ```swift
-// compressed microphone audio uses the OggOpus format
-let settings = RecognitionSettings(contentType: .oggOpus)
+// compressed microphone audio uses the opus format
+let settings = RecognitionSettings(contentType: "audio/ogg;codecs=opus")
 
 // uncompressed microphone audio uses a 16-bit mono PCM format at 16 kHz
-let settings = RecognitionSettings(contentType: .l16(rate: 16000, channels: 1))
+let settings = RecognitionSettings(contentType: "audio/l16;rate=16000;channels=1")
+```
+
+#### Recognition Results Accumulator
+
+The Speech to Text service may not always return the entire transcription in a single response. Instead, the transcription may be streamed over multiple responses, each with a chunk of the overall results. This is especially common for long audio files, since the entire transcription may contain a significant amount of text.
+
+To help combine multiple responses, the Swift SDK provides a `SpeechRecognitionResultsAccumulator` object. The accumulator tracks results as they are added and maintains several useful instance variables:
+    - `results`: A list of all accumulated recognition results.
+    - `speakerLabels`: A list of all accumulated speaker labels.
+    - `bestTranscript`: A concatenation of transcripts with the greatest confidence.
+
+To use the accumulator, initialize an instance of the object then add results as you receive them:
+
+```swift
+var accumulator = SpeechRecognitionResultsAccumulator()
+accumulator.add(results: results)
+print(accumulator.bestTranscript)
 ```
 
 #### Transcribe Recorded Audio
@@ -541,13 +560,16 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
+var accumulator = SpeechRecognitionResultsAccumulator()
+
 let audio = Bundle.main.url(forResource: "filename", withExtension: "wav")!
-var settings = RecognitionSettings(contentType: .wav)
+var settings = RecognitionSettings(contentType: "audio/wav")
 settings.interimResults = true
 let failure = { (error: Error) in print(error) }
 speechToText.recognize(audio, settings: settings, failure: failure) {
     results in
-    print(results.bestTranscript)
+    accumulator.add(results: results)
+    print(accumulator.bestTranscript)
 }
 ```
 
@@ -562,12 +584,15 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToText = SpeechToText(username: username, password: password)
 
+var accumulator = SpeechRecognitionResultsAccumulator()
+
 func startStreaming() {
-    var settings = RecognitionSettings(contentType: .oggOpus)
+    var settings = RecognitionSettings(contentType: "audio/ogg;codecs=opus")
     settings.interimResults = true
     let failure = { (error: Error) in print(error) }
     speechToText.recognizeMicrophone(settings: settings, failure: failure) { results in
-        print(results.bestTranscript)
+        accumulator.add(results: results)
+        print(accumulator.bestTranscript)
     }
 }
 
@@ -599,6 +624,8 @@ A `SpeechToTextSession` also provides several (optional) callbacks. The callback
 - `onError`: Invoked when an error or warning occurs.
 - `onDisconnect`: Invoked when the session disconnects from the Speech to Text service.
 
+Note that the `AVAudioSession.sharedInstance()` must be configured to allow microphone access when using `SpeechToTextSession`. This allows users to set a particular configuration for the `AVAudioSession`. An example configuration is shown in the code below.
+
 The following example demonstrates how to use `SpeechToTextSession` to transcribe microphone audio:
 
 ```swift
@@ -608,12 +635,14 @@ let username = "your-username-here"
 let password = "your-password-here"
 let speechToTextSession = SpeechToTextSession(username: username, password: password)
 
+var accumulator = SpeechRecognitionResultsAccumulator()
+
 do {
     let session = AVAudioSession.sharedInstance()
     try session.setActive(true)
     try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .defaultToSpeaker])
 } catch {
-    // handle errors
+    print(error.localizedDescription)
 }
 
 func startStreaming() {
@@ -623,10 +652,13 @@ func startStreaming() {
     speechToTextSession.onError = { error in print(error) }
     speechToTextSession.onPowerData = { decibels in print(decibels) }
     speechToTextSession.onMicrophoneData = { data in print("received data") }
-    speechToTextSession.onResults = { results in print(results.bestTranscript) }
+    speechToTextSession.onResults = { results in
+        accumulator.add(results: results)
+        print(accumulator.bestTranscript)
+    }
 
     // define recognition request settings
-    var settings = RecognitionSettings(contentType: .oggOpus)
+    var settings = RecognitionSettings(contentType: "audio/ogg;codecs=opus")
     settings.interimResults = true
 
     // start streaming microphone audio for transcription
@@ -643,122 +675,8 @@ func stopStreaming() {
 ```
 
 #### Customization
-Customize the language model interface to include and tailor domain-specific data and terminology. Improve the accuracy of speech recognition for domains within health care, law, medicine, information technology, and so on.
 
-The following example demonstrates an example of how to customize the language model:
-
-```swift
-import SpeechToTextV1
-
-let username = "your-username-here"
-let password = "your-password-here"
-let speechToText = SpeechToText(username: username, password: password)
-
-guard let corpusFile = loadFile(name: "healthcare-short", withExtension: "txt") else {
-    NSLog("Failed to load file needed to create the corpus.")
-    return
-}
-
-let newCorpusName = "swift-sdk-unit-test-corpus"
-
-speechToText.addCorpus(
-    withName: newCorpusName,
-    fromFile: corpusFile,
-    customizationID: trainedCustomizationID,
-    failure: failWithError) {
-}
-
-// Get the custom corpus to build the trained customization
-speechToText.getCorpus(
-    withName: corpusName,
-    customizationID: trainedCustomizationID,
-    failure: failWithError) { corpus in
-
-    print(corpus.name)
-    // Check that the corpus is finished processing
-    print("finished processing: \(corpus.status == .analyzed)")
-    print(corpus.totalWords)
-    print(corpus.outOfVocabularyWords)
-    // Check the corpus has no error
-    print("errors: \(corpus.error == nil)")
-}
-```
-
-There is also an option to add words to a trained customization:
-
-```swift
-import SpeechToTextV1
-
-let username = "your-username-here"
-let password = "your-password-here"
-let speechToText = SpeechToText(username: username, password: password)
-let error = NSError(domain: "testing", code: 0)
-
-var trainedCustomizationName = "your-customization-name-here"
-var customizationStatus = CustomizationStatus?
-
-
-// Look up the customization to add the words to
-speechToText.getCustomizations(failure: failure) { customizations in
-    for customization in customizations {
-        if customization.name == self.trainedCustomizationName {
-            self.trainedCustomizationID = customization.customizationID
-            customizationStatus = customization.status
-        }
-    }
-}
-
-guard let customizationStatus = customizationStatus else {
-	throw error
-}
-
-// Check the customization status
-switch customizationStatus {
-case .available, .ready:
-    break // do nothing, because the customization is trained
-case .pending: // train -> then fail (wait for training)
-    print("Training the `trained customization` used for tests.")
-    self.trainCustomizationWithCorpus()
-    print("The customization has been trained and is ready for use.")
-case .training: // fail (wait for training)
-    let message = "Please wait a few minutes for the trained customization to finish " +
-    "training. You can try running the tests again afterwards."
-    print(message)
-    throw error
-case .failed: // training failed => delete & retry
-    let message = "Creating a trained ranker has failed. Check the errors " +
-    "within the corpus and customization and retry."
-    print(message)
-    throw error
-}
-
-// Add custom words to the corpus
-if customizationStatus == .available {
-	let customWord1 = NewWord(word: "HHonors", soundsLike: ["hilton honors", "h honors"], displayAs: "HHonors")
-	let customWord2 = NewWord(word: "IEEE", soundsLike: ["i triple e"])
-
-	speechToText.addWords(
-		customizationID: trainedCustomizationID,
-		words: [customWord1, customWord2],
-		failure: failWithError) {
-		print("added words to corpus")
-	}
-}
-```
-
-#### Important notes
-* Since v0.11.0, if you use `SpeechToTextSession`, you'll need to manage the setup for the `AVAudioSession` shared instance. Without the code below, you won't receive data from the Speech To Text service properly. This isn't necessary if you use the `SpeechToText` class.
-```swift
-do {
-    let session = AVAudioSession.sharedInstance()
-    try session.setActive(true)
-    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .defaultToSpeaker])
-} catch {
-    // handle errors
-}
-```
-
-* As of iOS 10, if you access the device's microphone, you'll be required to include the `NSMicrophoneUsageDescription` key in your `Info.plist` file, or the app will exit. Find more information about this [here](https://forums.developer.apple.com/thread/61521).
+There are a number of ways that Speech to Text can be customized to suit your particular application. For example, you can define custom words or upload audio to train an acoustic model. For more information, refer to the [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) or [API documentation](http://watson-developer-cloud.github.io/swift-sdk/swift-api/services/SpeechToTextV1/Classes/SpeechToText.html).
 
 #### Additional Information
 

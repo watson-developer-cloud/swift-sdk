@@ -2312,7 +2312,7 @@ public class SpeechToText {
     public func addAudio(
         customizationID: String,
         audioName: String,
-        audioResource: [Data],
+        audioResource: Data,
         contentType: String,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
@@ -2320,10 +2320,7 @@ public class SpeechToText {
         success: @escaping () -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(audioResource) else {
-            failure?(RestError.serializationError)
-            return
-        }
+        let body = audioResource
 
         // construct header parameters
         var headers = defaultHeaders

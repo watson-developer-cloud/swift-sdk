@@ -102,6 +102,11 @@ public class NaturalLanguageClassifier {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -112,10 +117,7 @@ public class NaturalLanguageClassifier {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -158,15 +160,17 @@ public class NaturalLanguageClassifier {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = multipartFormData.contentType
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/classifiers",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -192,6 +196,10 @@ public class NaturalLanguageClassifier {
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -202,11 +210,7 @@ public class NaturalLanguageClassifier {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -233,6 +237,10 @@ public class NaturalLanguageClassifier {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -243,11 +251,7 @@ public class NaturalLanguageClassifier {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -272,16 +276,16 @@ public class NaturalLanguageClassifier {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierList) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/classifiers",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request

@@ -79,10 +79,10 @@ public class NaturalLanguageClassifier {
     }
 
     /**
-     Classify.
+     Classify a phrase.
 
      Returns label information for the input. The status must be `Available` before you can use the classifier to
-     classify text. Use `Get information about a classifier` to retrieve the status.
+     classify text.
 
      - parameter classifierID: Classifier ID to use.
      - parameter text: The submitted phrase.
@@ -137,11 +137,12 @@ public class NaturalLanguageClassifier {
      Sends data to create and train a classifier and returns information about the new classifier.
 
      - parameter metadata: Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the
-     classifier. For details, see the [API
-     reference](https://www.ibm.com/watson/developercloud/natural-language-classifier/api/v1/#create_classifier).
-     - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can include up to 15,000
-     records. For details, see [Using your own
-     data](https://www.ibm.com/watson/developercloud/doc/natural-language-classifier/using-your-data.html).
+     classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.
+     Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese
+     (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
+     - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000
+     records. For details, see [Data
+     preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */

@@ -56,7 +56,7 @@ public class SpeechToTextSession {
     }
 
     /// Invoked with microphone audio when a recording audio queue buffer has been filled.
-    /// If microphone audio is being compressed, then the audio data is in OggOpus format.
+    /// If microphone audio is being compressed, then the audio data is in Opus format.
     /// If uncompressed, then the audio data is in 16-bit mono PCM format at 16 kHZ.
     public var onMicrophoneData: ((Data) -> Void)?
 
@@ -192,19 +192,19 @@ public class SpeechToTextSession {
     /**
      Start streaming microphone audio data to transcribe.
 
-     By default, microphone audio data is compressed to OggOpus format to reduce latency and bandwidth.
-     To disable OggOpus compression and send linear PCM data instead, set `compress` to `false`.
+     By default, microphone audio data is compressed to Opus format to reduce latency and bandwidth.
+     To disable Opus compression and send linear PCM data instead, set `compress` to `false`.
 
      If compression is enabled, the recognitions request's `contentType` setting should be set to
-     `AudioMediaType.oggOpus`. If compression is disabled, then the `contentType` settings should be
-     set to `AudioMediaType.L16(rate: 16000, channels: 1)`.
+     "audio/ogg;codecs=opus". If compression is disabled, then the `contentType` settings should be
+     set to "audio/l16;rate=16000;channels=1".
 
      This function may cause the system to automatically prompt the user for permission
      to access the microphone. Use `AVAudioSession.requestRecordPermission(_:)` if you
      would rather prefer to ask for the user's permission in advance.
 
-     - parameter compress: Should microphone audio be compressed to OggOpus format?
-        (OggOpus compression reduces latency and bandwidth.)
+     - parameter compress: Should microphone audio be compressed to Opus format?
+        (Opus compression reduces latency and bandwidth.)
      */
     public func startMicrophone(compress: Bool = true) {
         self.compress = compress

@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.24.1
+_2018-04-21_
+
+This release fixes a bug with SwiftLint and Xcode 9.3 by reducing the severity of the `superfluous_disable_command` rule to a `warning` instead of an `error`.
+
 ## Version 0.24.0
 _2018-04-09_
 

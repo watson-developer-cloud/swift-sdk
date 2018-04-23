@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,15 @@
 
 import Foundation
 
-/** The state of the Speech to Text service. */
-internal struct RecognitionState: JSONDecodable {
+/** RecognitionJobs. */
+public struct RecognitionJobs: Decodable {
 
-    /// The state of the Speech to Text service.
-    internal let state: String
+    /// An array of objects that provides the status for each of the user's current jobs. The array is empty if the user has no current jobs.
+    public var recognitions: [RecognitionJob]
 
-    /// Used internally to initialize a `RecognitionState` model from JSON.
-    internal init(json: JSONWrapper) throws {
-        state = try json.getString(at: "state")
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case recognitions = "recognitions"
     }
+
 }

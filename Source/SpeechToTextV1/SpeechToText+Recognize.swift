@@ -92,6 +92,15 @@ extension SpeechToText {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechRecognitionResults) -> Void)
     {
+        // extract credentials
+        guard case let .basicAuthentication(username, password) = credentials else {
+            let failureReason = "Invalid credentials format."
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
         // create session
         let session = SpeechToTextSession(
             username: username,
@@ -125,10 +134,10 @@ extension SpeechToText {
      Perform speech recognition for microphone audio. To stop the microphone, invoke
      `stopRecognizeMicrophone()`.
 
-     Microphone audio is compressed to OggOpus format unless otherwise specified by the `compress`
+     Microphone audio is compressed to Opus format unless otherwise specified by the `compress`
      parameter. With compression enabled, the `settings` should specify a `contentType` of
-     `AudioMediaType.oggOpus`. With compression disabled, the `settings` should specify a
-     `contentType` of `AudioMediaType.l16(rate: 16000, channels: 1)`.
+     "audio/ogg;codecs=opus". With compression disabled, the `settings` should specify a
+     `contentType` of "audio/l16;rate=16000;channels=1".
 
      This function may cause the system to automatically prompt the user for permission
      to access the microphone. Use `AVAudioSession.requestRecordPermission(_:)` if you
@@ -141,8 +150,8 @@ extension SpeechToText {
        request. The base language model of the specified custom language model must match the
        model specified with the `model` parameter. By default, no custom model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
-     - parameter compress: Should microphone audio be compressed to OggOpus format?
-       (OggOpus compression reduces latency and bandwidth.)
+     - parameter compress: Should microphone audio be compressed to Opus format?
+       (Opus compression reduces latency and bandwidth.)
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
        a final or interim transcription is received.
@@ -171,7 +180,16 @@ extension SpeechToText {
 
         // validate settings
         var settings = settings
-        settings.contentType = compress ? .oggOpus : .l16(rate: 16000, channels: 1)
+        settings.contentType = compress ? "audio/ogg;codecs=opus" : "audio/l16;rate=16000;channels=1"
+
+        // extract credentials
+        guard case let .basicAuthentication(username, password) = credentials else {
+            let failureReason = "Invalid credentials format."
+            let userInfo = [NSLocalizedDescriptionKey: failureReason]
+            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
 
         // create session
         let session = SpeechToTextSession(

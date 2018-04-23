@@ -17,7 +17,7 @@
 import Foundation
 
 /** The timestamp of a word in a Speech to Text transcription. */
-public struct WordTimestamp: JSONDecodable {
+public struct WordTimestamp: Decodable {
 
     /// A particular word from the transcription.
     public let word: String
@@ -29,17 +29,10 @@ public struct WordTimestamp: JSONDecodable {
     public let endTime: Double
 
     /// Used internally to initialize a `WordTimestamp` model from JSON.
-    public init(json: JSONWrapper) throws {
-        let array = try json.getArray()
-        word = try array[Index.word.rawValue].getString()
-        startTime = try array[Index.startTime.rawValue].getDouble()
-        endTime = try array[Index.endTime.rawValue].getDouble()
-    }
-
-    /// The index of each element in the JSON array.
-    private enum Index: Int {
-        case word = 0
-        case startTime = 1
-        case endTime = 2
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        word = try container.decode(String.self)
+        startTime = try container.decode(Double.self)
+        endTime = try container.decode(Double.self)
     }
 }

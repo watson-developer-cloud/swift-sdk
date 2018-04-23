@@ -104,7 +104,8 @@ internal class SpeechToTextSocket: WebSocketDelegate {
 
     internal func writeStart(settings: RecognitionSettings) {
         guard state != .disconnected else { return }
-        guard let start = try? settings.toJSON().serializeString() else { return }
+        guard let data = try? JSONEncoder().encode(settings) else { return }
+        guard let start = String(data: data, encoding: .utf8) else { return }
         queue.addOperation {
             self.socket.write(string: start)
             self.results = SpeechRecognitionResults()
@@ -181,9 +182,8 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
     }
 
-    private func onResultsMessage(event: SpeechRecognitionEvent) {
+    private func onResultsMessage(results: SpeechRecognitionResults) {
         state = .transcribing
-        results.addResults(event: event)
         onResults?(results)
     }
 
@@ -226,17 +226,16 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     }
 
     internal func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-        guard let json = try? JSONWrapper(string: text) else {
-            return
-        }
-        if let state = try? json.decode(type: RecognitionState.self) {
+        guard let json = text.data(using: .utf8) else { return }
+        let decoder = JSONDecoder()
+        if let state = try? decoder.decode(RecognitionState.self, from: json) {
             onStateMessage(state: state)
-        }
-        if let event = try? json.decode(type: SpeechRecognitionEvent.self) {
-            onResultsMessage(event: event)
-        }
-        if let error = try? json.getString(at: "error") {
+        } else if let object = try? decoder.decode([String: String].self, from: json), let error = object["error"] {
             onErrorMessage(error: error)
+        } else if let results = try? decoder.decode(SpeechRecognitionResults.self, from: json) {
+            // all properties of `SpeechRecognitionResults` are optional, so this block will always
+            // execute unless the message has already been parsed as a `RecognitionState` or error
+            onResultsMessage(results: results)
         }
     }
 

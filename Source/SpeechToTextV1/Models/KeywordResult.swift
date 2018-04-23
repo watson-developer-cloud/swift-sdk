@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,27 +16,27 @@
 
 import Foundation
 
-/** A keyword identified by Speech to Text. */
-public struct KeywordResult: JSONDecodable {
+/** KeywordResult. */
+public struct KeywordResult: Decodable {
 
-    /// The specified keyword normalized to the spoken phrase that matched in the audio input.
-    public let normalizedText: String
+    /// A specified keyword normalized to the spoken phrase that matched in the audio input.
+    public var normalizedText: String
 
-    /// The start time, in seconds, of the keyword match.
-    public let startTime: Double
+    /// The start time in seconds of the keyword match.
+    public var startTime: Double
 
-    /// The end time, in seconds, of the keyword match.
-    public let endTime: Double
+    /// The end time in seconds of the keyword match.
+    public var endTime: Double
 
-    /// The confidence score of the keyword match, between 0 and 1. The confidence must be at
-    /// least as great as the specified threshold to be included in the results.
-    public let confidence: Double
+    /// A confidence score for the keyword match in the range of 0 to 1.
+    public var confidence: Double
 
-    /// Used internally to initialize a `KeywordResult` model from JSON.
-    public init(json: JSONWrapper) throws {
-        normalizedText = try json.getString(at: "normalized_text")
-        startTime = try json.getDouble(at: "start_time")
-        endTime = try json.getDouble(at: "end_time")
-        confidence = try json.getDouble(at: "confidence")
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case normalizedText = "normalized_text"
+        case startTime = "start_time"
+        case endTime = "end_time"
+        case confidence = "confidence"
     }
+
 }

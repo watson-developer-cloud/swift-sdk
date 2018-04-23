@@ -23,7 +23,7 @@ import Foundation
  For more information about the Speech to Text service parameters, visit:
  https://console.bluemix.net/docs/services/speech-to-text/input.html
  */
-public struct RecognitionSettings: JSONEncodable {
+public struct RecognitionSettings: Encodable {
 
     /// The action to perform. Must be `start` to begin the request.
     private let action = "start"
@@ -31,7 +31,7 @@ public struct RecognitionSettings: JSONEncodable {
     /// The format of the audio data. Endianness is automatically detected by the Speech to Text
     /// service. For more information aboutthe supported formats, visit:
     /// https://console.bluemix.net/docs/services/speech-to-text/input.html#formats
-    public var contentType: AudioMediaType
+    public var contentType: String
 
     /// The number of seconds after which the connection is to time out due to inactivity.
     /// Use `-1` to set the timeout to infinity. The default is `30` seconds.
@@ -94,117 +94,23 @@ public struct RecognitionSettings: JSONEncodable {
         Configure additional parameters for the recognition request by directly modifying
         the returned object's properties.
      */
-    public init(contentType: AudioMediaType) {
+    public init(contentType: String) {
         self.contentType = contentType
     }
 
-    /** Used internally to serialize a `RecognitionSettings` model to JSON. */
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["action"] = action
-        json["content-type"] = contentType.toString
-        if let inactivityTimeout = inactivityTimeout {
-            json["inactivity_timeout"] = inactivityTimeout
-        }
-        if let keywords = keywords {
-            json["keywords"] = keywords
-        }
-        if let keywordsThreshold = keywordsThreshold {
-            json["keywords_threshold"] = keywordsThreshold
-        }
-        if let maxAlternatives = maxAlternatives {
-            json["max_alternatives"] = maxAlternatives
-        }
-        if let interimResults = interimResults {
-            json["interim_results"] = interimResults
-        }
-        if let wordAlternativesThreshold = wordAlternativesThreshold {
-            json["word_alternatives_threshold"] = wordAlternativesThreshold
-        }
-        if let wordConfidence = wordConfidence {
-            json["word_confidence"] = wordConfidence
-        }
-        if let timestamps = timestamps {
-            json["timestamps"] = timestamps
-        }
-        if let filterProfanity = filterProfanity {
-            json["profanity_filter"] = filterProfanity
-        }
-        if let smartFormatting = smartFormatting {
-            json["smart_formatting"] = smartFormatting
-        }
-        if let speakerLabels = speakerLabels {
-            json["speaker_labels"] = speakerLabels
-        }
-
-        return json
-    }
-}
-
-/**
- Audio formats supported by the Watson Speech to Text service.
- */
-public enum AudioMediaType {
-
-    /// FLAC audio format
-    case flac
-
-    /// MP3 audio format
-    case mp3
-
-    /// MPEG audio format
-    case mpeg
-
-    /// L16 audio format with a rate and channels
-    case l16(rate: Int, channels: Int)
-
-    /// WAV audio format
-    case wav
-
-    /// Ogg audio format
-    case ogg
-
-    /// Ogg audio format with Opus codec
-    case oggOpus
-
-    /// Ogg audio format with Opus codec
-    case opus // note: for backwards-compatibility before oggOpus and webmOpus
-
-    /// Ogg audio format with Vorbis codec
-    case oggVorbis
-
-    /// WebM audio format
-    case webm
-
-    /// WebM audio format with Opus codec
-    case webmOpus
-
-    /// WebM audio format with Vorbis codec
-    case webmVorbis
-
-    /// mu-law audio format
-    case muLaw
-
-    /// Basic audio format
-    case basic
-
-    /// A representation of the audio format as a MIME type string.
-    var toString: String {
-        switch self {
-        case .flac:                        return "audio/flac"
-        case .mp3:                         return "audio/mp3"
-        case .mpeg:                        return "audio/mpeg"
-        case .l16(let rate, let channels): return "audio/l16;rate=\(rate);channels=\(channels)"
-        case .wav:                         return "audio/wav"
-        case .ogg:                         return "audio/ogg"
-        case .oggOpus:                     return "audio/ogg;codecs=opus"
-        case .opus:                        return "audio/ogg;codecs=opus"
-        case .oggVorbis:                   return "audio/ogg;codecs=vorbis"
-        case .webm:                        return "audio/webm"
-        case .webmOpus:                    return "audio/webm;codecs=opus"
-        case .webmVorbis:                  return "audio/webm;codecs=vorbis"
-        case .muLaw:                       return "audio/mulaw"
-        case .basic:                       return "audio/basic"
-        }
+    private enum CodingKeys: String, CodingKey {
+        case action = "action"
+        case contentType = "content-type"
+        case inactivityTimeout = "inactivity_timeout"
+        case keywords = "keywords"
+        case keywordsThreshold = "keywords_threshold"
+        case maxAlternatives = "max_alternatives"
+        case interimResults = "interim_results"
+        case wordAlternativesThreshold = "word_alternatives_threshold"
+        case wordConfidence = "word_confidence"
+        case timestamps = "timestamps"
+        case filterProfanity = "profanity_filter"
+        case smartFormatting = "smart_formatting"
+        case speakerLabels = "speaker_labels"
     }
 }

@@ -16,23 +16,15 @@
 
 import Foundation
 
-/** WordAlternativeResults. */
-public struct WordAlternativeResults: Decodable {
+/** Corpora. */
+public struct Corpora: Decodable {
 
-    /// The start time in seconds of the word from the input audio that corresponds to the word alternatives.
-    public var startTime: Double
-
-    /// The end time in seconds of the word from the input audio that corresponds to the word alternatives.
-    public var endTime: Double
-
-    /// An array of alternative hypotheses for a word from the input audio.
-    public var alternatives: [WordAlternativeResult]
+    /// Information about corpora of the custom model. The array is empty if the custom model has no corpora.
+    public var corpora: [Corpus]
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case startTime = "start_time"
-        case endTime = "end_time"
-        case alternatives = "alternatives"
+        case corpora = "corpora"
     }
 
 }

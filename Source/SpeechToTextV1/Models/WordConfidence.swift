@@ -17,7 +17,7 @@
 import Foundation
 
 /** The confidence of a word in a Speech to Text transcription. */
-public struct WordConfidence: JSONDecodable {
+public struct WordConfidence: Decodable {
 
     /// A particular word from the transcription.
     public let word: String
@@ -26,15 +26,9 @@ public struct WordConfidence: JSONDecodable {
     public let confidence: Double
 
     /// Used internally to initialize a `WordConfidence` model from JSON.
-    public init(json: JSONWrapper) throws {
-        let array = try json.getArray()
-        word = try array[Index.word.rawValue].getString()
-        confidence = try array[Index.confidence.rawValue].getDouble()
-    }
-
-    /// The index of each element in the JSON array.
-    private enum Index: Int {
-        case word = 0
-        case confidence = 1
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        word = try container.decode(String.self)
+        confidence = try container.decode(Double.self)
     }
 }

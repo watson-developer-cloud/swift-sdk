@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * Copyright IBM Corporation 2018
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,19 @@
 
 import Foundation
 
-/** Alternative word hypotheses from Speech to Text for a word in the audio input. */
-public struct WordAlternativeResult: JSONDecodable {
+/** WordAlternativeResult. */
+public struct WordAlternativeResult: Decodable {
 
-    /// The confidence score of the alternative word hypothesis, between 0 and 1.
-    public let confidence: Double
+    /// A confidence score for the word alternative hypothesis in the range of 0 to 1.
+    public var confidence: Double
 
-    /// The alternative word hypothesis for a word in the audio input.
-    public let word: String
+    /// An alternative hypothesis for a word from the input audio.
+    public var word: String
 
-    /// Used internally to initialize an `WordAlternativeResult` model from JSON.
-    public init(json: JSONWrapper) throws {
-        confidence = try json.getDouble(at: "confidence")
-        word = try json.getString(at: "word")
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case confidence = "confidence"
+        case word = "word"
     }
+
 }

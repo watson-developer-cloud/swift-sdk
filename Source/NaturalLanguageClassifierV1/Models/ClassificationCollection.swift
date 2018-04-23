@@ -16,15 +16,23 @@
 
 import Foundation
 
-/** List of available classifiers. */
-public struct ClassifierList: Decodable {
+/** Response from the classifier for multiple phrases. */
+public struct ClassificationCollection: Decodable {
 
-    /// The classifiers available to the user. Returns an empty array if no classifiers are available.
-    public var classifiers: [Classifier]
+    /// Unique identifier for this classifier.
+    public var classifierID: String?
+
+    /// Link to the classifier.
+    public var url: String?
+
+    /// An array of classifier responses for each submitted phrase.
+    public var collection: [CollectionItem]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case classifiers = "classifiers"
+        case classifierID = "classifier_id"
+        case url = "url"
+        case collection = "collection"
     }
 
 }

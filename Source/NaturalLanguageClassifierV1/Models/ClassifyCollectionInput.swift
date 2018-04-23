@@ -16,15 +16,26 @@
 
 import Foundation
 
-/** List of available classifiers. */
-public struct ClassifierList: Decodable {
+/** Request payload to classify. */
+public struct ClassifyCollectionInput: Encodable {
 
-    /// The classifiers available to the user. Returns an empty array if no classifiers are available.
-    public var classifiers: [Classifier]
+    /// The submitted phrases.
+    public var collection: [ClassifyInput]
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case classifiers = "classifiers"
+        case collection = "collection"
+    }
+
+    /**
+     Initialize a `ClassifyCollectionInput` with member variables.
+
+     - parameter collection: The submitted phrases.
+
+     - returns: An initialized `ClassifyCollectionInput`.
+    */
+    public init(collection: [ClassifyInput]) {
+        self.collection = collection
     }
 
 }

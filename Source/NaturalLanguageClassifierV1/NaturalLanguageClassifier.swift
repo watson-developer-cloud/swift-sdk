@@ -17,9 +17,9 @@
 import Foundation
 
 /**
-   IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching
-  predefined classes for short text input. You create and train a classifier to connect predefined
-  classes to example texts so that the service can apply those classes to new inputs.
+ IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching predefined classes
+ for short text input. You create and train a classifier to connect predefined classes to example texts so that the
+ service can apply those classes to new inputs.
  */
 public class NaturalLanguageClassifier {
 
@@ -79,15 +79,16 @@ public class NaturalLanguageClassifier {
     }
 
     /**
-     Classify.
+     Classify a phrase.
 
-     Returns label information for the input. The status must be `Available` before you can use the classifier to classify text. Use `Get information about a classifier` to retrieve the status.
+     Returns label information for the input. The status must be `Available` before you can use the classifier to
+     classify text.
 
      - parameter classifierID: Classifier ID to use.
      - parameter text: The submitted phrase.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func classify(
         classifierID: String,
         text: String,
@@ -101,6 +102,11 @@ public class NaturalLanguageClassifier {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -111,10 +117,7 @@ public class NaturalLanguageClassifier {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -129,15 +132,73 @@ public class NaturalLanguageClassifier {
     }
 
     /**
+     Classify multiple phrases.
+
+     Returns label information for multiple phrases. The status must be `Available` before you can use the classifier to
+     classify text.  Note that classifying Japanese texts is a beta feature.
+
+     - parameter classifierID: Classifier ID to use.
+     - parameter collection: The submitted phrases.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func classifyCollection(
+        classifierID: String,
+        collection: [ClassifyInput],
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassificationCollection) -> Void)
+    {
+        // construct body
+        let classifyCollectionRequest = ClassifyCollectionInput(collection: collection)
+        guard let body = try? JSONEncoder().encode(classifyCollectionRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
+        // construct REST request
+        let path = "/v1/classifiers/\(classifierID)/classify_collection"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ClassificationCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
      Create classifier.
 
      Sends data to create and train a classifier and returns information about the new classifier.
 
-     - parameter metadata: Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier. For details, see the [API reference](https://www.ibm.com/watson/developercloud/natural-language-classifier/api/v1/#create_classifier).
-     - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can include up to 15,000 records. For details, see [Using your own data](https://www.ibm.com/watson/developercloud/doc/natural-language-classifier/using-your-data.html).
+     - parameter metadata: Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the
+     classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.
+     Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese
+     (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
+     - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000
+     records. For details, see [Data
+     preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func createClassifier(
         metadata: URL,
         trainingData: URL,
@@ -153,15 +214,17 @@ public class NaturalLanguageClassifier {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = multipartFormData.contentType
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/classifiers",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -181,12 +244,16 @@ public class NaturalLanguageClassifier {
      - parameter classifierID: Classifier ID to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func deleteClassifier(
         classifierID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -197,11 +264,7 @@ public class NaturalLanguageClassifier {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -222,12 +285,16 @@ public class NaturalLanguageClassifier {
      - parameter classifierID: Classifier ID to query.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func getClassifier(
         classifierID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -238,11 +305,7 @@ public class NaturalLanguageClassifier {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -262,21 +325,21 @@ public class NaturalLanguageClassifier {
 
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func listClassifiers(
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierList) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/classifiers",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request

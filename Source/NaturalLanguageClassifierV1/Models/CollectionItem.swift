@@ -16,15 +16,23 @@
 
 import Foundation
 
-/** List of available classifiers. */
-public struct ClassifierList: Decodable {
+/** Response from the classifier for a phrase in a collection. */
+public struct CollectionItem: Decodable {
 
-    /// The classifiers available to the user. Returns an empty array if no classifiers are available.
-    public var classifiers: [Classifier]
+    /// The submitted phrase.
+    public var text: String?
+
+    /// The class with the highest confidence.
+    public var topClass: String?
+
+    /// An array of up to ten class-confidence pairs sorted in descending order of confidence.
+    public var classes: [ClassifiedClass]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case classifiers = "classifiers"
+        case text = "text"
+        case topClass = "top_class"
+        case classes = "classes"
     }
 
 }

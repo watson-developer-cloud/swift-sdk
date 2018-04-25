@@ -16,47 +16,19 @@
 
 import Foundation
 
-/** Provides information about the gender of the face. If there are more than 10 faces in an image, the response might return the confidence score 0. */
-public struct FaceGender {
+/** Provides information about the gender of the face. */
+public struct FaceGender: Decodable {
 
     /// Gender identified by the face. For example, `MALE` or `FEMALE`.
     public var gender: String
 
-    /// Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
+    /// Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the property.
     public var score: Double?
 
-    /**
-     Initialize a `FaceGender` with member variables.
-
-     - parameter gender: Gender identified by the face. For example, `MALE` or `FEMALE`.
-     - parameter score: Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
-
-     - returns: An initialized `FaceGender`.
-    */
-    public init(gender: String, score: Double? = nil) {
-        self.gender = gender
-        self.score = score
-    }
-}
-
-extension FaceGender: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case gender = "gender"
         case score = "score"
-        static let allValues = [gender, score]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        gender = try container.decode(String.self, forKey: .gender)
-        score = try container.decodeIfPresent(Double.self, forKey: .score)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(gender, forKey: .gender)
-        try container.encodeIfPresent(score, forKey: .score)
     }
 
 }

@@ -17,7 +17,7 @@
 import Foundation
 
 /** Classifier and score combination. */
-public struct ClassifierResult {
+public struct ClassifierResult: Decodable {
 
     /// Name of the classifier.
     public var name: String
@@ -28,43 +28,11 @@ public struct ClassifierResult {
     /// An array of classes within the classifier.
     public var classes: [ClassResult]
 
-    /**
-     Initialize a `ClassifierResult` with member variables.
-
-     - parameter name: Name of the classifier.
-     - parameter classifierID: The ID of a classifier identified in the image.
-     - parameter classes: An array of classes within the classifier.
-
-     - returns: An initialized `ClassifierResult`.
-    */
-    public init(name: String, classifierID: String, classes: [ClassResult]) {
-        self.name = name
-        self.classifierID = classifierID
-        self.classes = classes
-    }
-}
-
-extension ClassifierResult: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
         case classifierID = "classifier_id"
         case classes = "classes"
-        static let allValues = [name, classifierID, classes]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        classifierID = try container.decode(String.self, forKey: .classifierID)
-        classes = try container.decode([ClassResult].self, forKey: .classes)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encode(classifierID, forKey: .classifierID)
-        try container.encode(classes, forKey: .classes)
     }
 
 }

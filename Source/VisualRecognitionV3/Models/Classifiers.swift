@@ -16,38 +16,14 @@
 
 import Foundation
 
-/** Verbose list of classifiers retrieved in the GET v2/classifiers call. */
-public struct Classifiers {
+/** List of classifiers. */
+public struct Classifiers: Decodable {
 
     public var classifiers: [Classifier]
 
-    /**
-     Initialize a `Classifiers` with member variables.
-
-     - parameter classifiers:
-
-     - returns: An initialized `Classifiers`.
-    */
-    public init(classifiers: [Classifier]) {
-        self.classifiers = classifiers
-    }
-}
-
-extension Classifiers: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case classifiers = "classifiers"
-        static let allValues = [classifiers]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        classifiers = try container.decode([Classifier].self, forKey: .classifiers)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(classifiers, forKey: .classifiers)
     }
 
 }

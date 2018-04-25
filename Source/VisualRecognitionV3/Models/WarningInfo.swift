@@ -17,7 +17,7 @@
 import Foundation
 
 /** Information about something that went wrong. */
-public struct WarningInfo {
+public struct WarningInfo: Decodable {
 
     /// Codified warning string, such as `limit_reached`.
     public var warningID: String
@@ -25,38 +25,10 @@ public struct WarningInfo {
     /// Information about the error.
     public var description: String
 
-    /**
-     Initialize a `WarningInfo` with member variables.
-
-     - parameter warningID: Codified warning string, such as `limit_reached`.
-     - parameter description: Information about the error.
-
-     - returns: An initialized `WarningInfo`.
-    */
-    public init(warningID: String, description: String) {
-        self.warningID = warningID
-        self.description = description
-    }
-}
-
-extension WarningInfo: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case warningID = "warning_id"
         case description = "description"
-        static let allValues = [warningID, description]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        warningID = try container.decode(String.self, forKey: .warningID)
-        description = try container.decode(String.self, forKey: .description)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(warningID, forKey: .warningID)
-        try container.encode(description, forKey: .description)
     }
 
 }

@@ -17,7 +17,7 @@
 import Foundation
 
 /** Defines the location of the bounding box around the face. */
-public struct FaceLocation {
+public struct FaceLocation: Decodable {
 
     /// Width in pixels of face region.
     public var width: Double
@@ -31,48 +31,12 @@ public struct FaceLocation {
     /// Y-position of top-left pixel of face region.
     public var top: Double
 
-    /**
-     Initialize a `FaceLocation` with member variables.
-
-     - parameter width: Width in pixels of face region.
-     - parameter height: Height in pixels of face region.
-     - parameter left: X-position of top-left pixel of face region.
-     - parameter top: Y-position of top-left pixel of face region.
-
-     - returns: An initialized `FaceLocation`.
-    */
-    public init(width: Double, height: Double, left: Double, top: Double) {
-        self.width = width
-        self.height = height
-        self.left = left
-        self.top = top
-    }
-}
-
-extension FaceLocation: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case width = "width"
         case height = "height"
         case left = "left"
         case top = "top"
-        static let allValues = [width, height, left, top]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        width = try container.decode(Double.self, forKey: .width)
-        height = try container.decode(Double.self, forKey: .height)
-        left = try container.decode(Double.self, forKey: .left)
-        top = try container.decode(Double.self, forKey: .top)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(width, forKey: .width)
-        try container.encode(height, forKey: .height)
-        try container.encode(left, forKey: .left)
-        try container.encode(top, forKey: .top)
     }
 
 }

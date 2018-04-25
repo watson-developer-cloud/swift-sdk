@@ -17,38 +17,14 @@
 import Foundation
 
 /** A category within a classifier. */
-public struct Class {
+public struct Class: Decodable {
 
     /// The name of the class.
     public var className: String
 
-    /**
-     Initialize a `Class` with member variables.
-
-     - parameter className: The name of the class.
-
-     - returns: An initialized `Class`.
-    */
-    public init(className: String) {
-        self.className = className
-    }
-}
-
-extension Class: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case className = "class"
-        static let allValues = [className]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        className = try container.decode(String.self, forKey: .className)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(className, forKey: .className)
     }
 
 }

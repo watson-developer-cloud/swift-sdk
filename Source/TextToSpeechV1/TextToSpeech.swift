@@ -126,6 +126,41 @@ public class TextToSpeech {
     }
 
     /**
+     Get voices.
+
+     Retrieves a list of all voices available for use with the service. The information includes the name, language,
+     gender, and other details about the voice.
+
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listVoices(
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Voices) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/voices",
+            credentials: credentials,
+            headerParameters: headers
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Voices>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
      Get a voice.
 
      Lists information about the specified voice. The information includes the name, language, gender, and other details
@@ -173,41 +208,6 @@ public class TextToSpeech {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Voice>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Get voices.
-
-     Retrieves a list of all voices available for use with the service. The information includes the name, language,
-     gender, and other details about the voice.
-
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func listVoices(
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Voices) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/voices",
-            credentials: credentials,
-            headerParameters: headers
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Voices>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -446,93 +446,6 @@ public class TextToSpeech {
     }
 
     /**
-     Delete a custom model.
-
-     Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
-     model to delete it.  **Note:** This method is currently a beta release.
-
-     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-     the service that owns the custom model.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func deleteVoiceModel(
-        customizationID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-
-        // construct REST request
-        let path = "/v1/customizations/\(customizationID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers
-        )
-
-        // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     List a custom model.
-
-     Lists all information about a specified custom voice model. In addition to metadata such as the name and
-     description of the voice model, the output includes the words and their translations as defined in the model. To
-     see just the metadata for a voice model, use the **List custom models** method.   **Note:** This method is
-     currently a beta release.
-
-     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-     the service that owns the custom model.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func getVoiceModel(
-        customizationID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (VoiceModel) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct REST request
-        let path = "/v1/customizations/\(customizationID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<VoiceModel>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
      List custom models.
 
      Lists metadata such as the name and description for all custom voice models that are owned by an instance of the
@@ -643,56 +556,80 @@ public class TextToSpeech {
     }
 
     /**
-     Add a custom word.
+     List a custom model.
 
-     Adds a single word and its translation to the specified custom voice model. Adding a new translation for a word
-     that already exists in a custom model overwrites the word's existing translation. A custom model can contain no
-     more than 20,000 entries.  **Note:** This method is currently a beta release.
+     Lists all information about a specified custom voice model. In addition to metadata such as the name and
+     description of the voice model, the output includes the words and their translations as defined in the model. To
+     see just the metadata for a voice model, use the **List custom models** method.   **Note:** This method is
+     currently a beta release.
 
      - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
      the service that owns the custom model.
-     - parameter word: The word that is to be added or updated for the custom voice model.
-     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
-     representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A sounds-like
-     is one or more words that, when combined, sound like the word.
-     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
-     for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
-     create multiple entries with different parts of speech for the same word. For more information, see [Working with
-     Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func addWord(
+    public func getVoiceModel(
         customizationID: String,
-        word: String,
-        translation: String,
-        partOfSpeech: String? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        success: @escaping (VoiceModel) -> Void)
     {
-        // construct body
-        let addWordRequest = Translation(translation: translation, partOfSpeech: partOfSpeech)
-        guard let body = try? JSONEncoder().encode(addWordRequest) else {
-            failure?(RestError.serializationError)
-            return
-        }
-
         // construct header parameters
         var headers = defaultHeaders
-        headers["Content-Type"] = "application/json"
+        headers["Accept"] = "application/json"
 
         // construct REST request
-        let path = "/v1/customizations/\(customizationID)/words/\(word)"
+        let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
         }
         let request = RestRequest(
-            method: "PUT",
+            method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
-            messageBody: body
+            headerParameters: headers
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<VoiceModel>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete a custom model.
+
+     Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
+     model to delete it.  **Note:** This method is currently a beta release.
+
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteVoiceModel(
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+
+        // construct REST request
+        let path = "/v1/customizations/\(customizationID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers
         )
 
         // execute REST request
@@ -764,24 +701,86 @@ public class TextToSpeech {
     }
 
     /**
-     Delete a custom word.
+     List custom words.
 
-     Deletes a single word from the specified custom voice model.  **Note:** This method is currently a beta release.
+     Lists all of the words and their translations for the specified custom voice model. The output shows the
+     translations as they are defined in the model.  **Note:** This method is currently a beta release.
 
      - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
      the service that owns the custom model.
-     - parameter word: The word that is to be deleted from the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func deleteWord(
+    public func listWords(
         customizationID: String,
-        word: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        success: @escaping (Words) -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct REST request
+        let path = "/v1/customizations/\(customizationID)/words"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Words>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Add a custom word.
+
+     Adds a single word and its translation to the specified custom voice model. Adding a new translation for a word
+     that already exists in a custom model overwrites the word's existing translation. A custom model can contain no
+     more than 20,000 entries.  **Note:** This method is currently a beta release.
+
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
+     - parameter word: The word that is to be added or updated for the custom voice model.
+     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
+     representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A sounds-like
+     is one or more words that, when combined, sound like the word.
+     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
+     for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
+     create multiple entries with different parts of speech for the same word. For more information, see [Working with
+     Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func addWord(
+        customizationID: String,
+        word: String,
+        translation: String,
+        partOfSpeech: String? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct body
+        let addWordRequest = Translation(translation: translation, partOfSpeech: partOfSpeech)
+        guard let body = try? JSONEncoder().encode(addWordRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Content-Type"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
@@ -790,10 +789,11 @@ public class TextToSpeech {
             return
         }
         let request = RestRequest(
-            method: "DELETE",
+            method: "PUT",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headers,
+            messageBody: body
         )
 
         // execute REST request
@@ -852,43 +852,43 @@ public class TextToSpeech {
     }
 
     /**
-     List custom words.
+     Delete a custom word.
 
-     Lists all of the words and their translations for the specified custom voice model. The output shows the
-     translations as they are defined in the model.  **Note:** This method is currently a beta release.
+     Deletes a single word from the specified custom voice model.  **Note:** This method is currently a beta release.
 
      - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
      the service that owns the custom model.
+     - parameter word: The word that is to be deleted from the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func listWords(
+    public func deleteWord(
         customizationID: String,
+        word: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Words) -> Void)
+        success: @escaping () -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
-        headers["Accept"] = "application/json"
 
         // construct REST request
-        let path = "/v1/customizations/\(customizationID)/words"
+        let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
         }
         let request = RestRequest(
-            method: "GET",
+            method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
             headerParameters: headers
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Words>) in
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
             switch response.result {
-            case .success(let retval): success(retval)
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }

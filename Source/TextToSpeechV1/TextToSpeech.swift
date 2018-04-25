@@ -145,6 +145,10 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Voice) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let customizationID = customizationID {
@@ -162,10 +166,8 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -191,15 +193,16 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Voices) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/voices",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -255,6 +258,13 @@ public class TextToSpeech {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Content-Type"] = "application/json"
+        if let accept = accept {
+            headers["Accept"] = accept
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let voice = voice {
@@ -271,9 +281,7 @@ public class TextToSpeech {
             method: "POST",
             url: serviceURL + "/v1/synthesize",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: accept,
-            contentType: "application/json",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -347,6 +355,10 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Pronunciation) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "text", value: text))
@@ -368,10 +380,8 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + "/v1/pronunciation",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -411,15 +421,17 @@ public class TextToSpeech {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/customizations",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -449,6 +461,9 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -459,9 +474,7 @@ public class TextToSpeech {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -492,6 +505,10 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (VoiceModel) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -502,10 +519,7 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -537,6 +551,10 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (VoiceModels) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let language = language {
@@ -549,10 +567,8 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + "/v1/customizations",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -598,6 +614,10 @@ public class TextToSpeech {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -608,9 +628,7 @@ public class TextToSpeech {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -659,6 +677,10 @@ public class TextToSpeech {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -669,9 +691,7 @@ public class TextToSpeech {
             method: "PUT",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -715,6 +735,10 @@ public class TextToSpeech {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -725,9 +749,7 @@ public class TextToSpeech {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -758,6 +780,9 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -768,9 +793,7 @@ public class TextToSpeech {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -801,6 +824,10 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Translation) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -811,10 +838,7 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -843,6 +867,10 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Words) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -853,10 +881,7 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request

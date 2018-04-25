@@ -99,8 +99,6 @@ public class ToneAnalyzer {
 
      - parameter toneInput: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type
      `ToneInput`.
-     - parameter contentType: The type of the input: application/json, text/plain, or text/html. A character encoding can be specified by
-     including a `charset` parameter. For example, 'text/plain;charset=utf-8'.
      - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
      the full document. If `true` (the default), the service returns results for each sentence.
      - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the
@@ -120,7 +118,6 @@ public class ToneAnalyzer {
      */
     public func tone(
         toneInput: ToneInput,
-        contentType: String,
         sentences: Bool? = nil,
         tones: [String]? = nil,
         contentLanguage: String? = nil,

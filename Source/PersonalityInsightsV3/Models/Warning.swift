@@ -17,7 +17,7 @@
 import Foundation
 
 /** Warning. */
-public struct Warning {
+public struct Warning: Decodable {
 
     /// The identifier of the warning message.
     public enum WarningID: String {
@@ -33,38 +33,10 @@ public struct Warning {
     /// The message associated with the `warning_id`: * `WORD_COUNT_MESSAGE`: "There were {number} words in the input. We need a minimum of 600, preferably 1,200 or more, to compute statistically significant estimates." * `JSON_AS_TEXT`: "Request input was processed as text/plain as indicated, however detected a JSON input. Did you mean application/json?" * `CONTENT_TRUNCATED`: "For maximum accuracy while also optimizing processing time, only the first 250KB of input text (excluding markup) was analyzed. Accuracy levels off at approximately 3,000 words so this did not affect the accuracy of the profile." * `PARTIAL_TEXT_USED`, "The text provided to compute the profile was trimmed for performance reasons. This action does not affect the accuracy of the output, as not all of the input text was required." Applies only when Arabic input text exceeds a threshold at which additional words do not contribute to the accuracy of the profile.
     public var message: String
 
-    /**
-     Initialize a `Warning` with member variables.
-
-     - parameter warningID: The identifier of the warning message.
-     - parameter message: The message associated with the `warning_id`: * `WORD_COUNT_MESSAGE`: "There were {number} words in the input. We need a minimum of 600, preferably 1,200 or more, to compute statistically significant estimates." * `JSON_AS_TEXT`: "Request input was processed as text/plain as indicated, however detected a JSON input. Did you mean application/json?" * `CONTENT_TRUNCATED`: "For maximum accuracy while also optimizing processing time, only the first 250KB of input text (excluding markup) was analyzed. Accuracy levels off at approximately 3,000 words so this did not affect the accuracy of the profile." * `PARTIAL_TEXT_USED`, "The text provided to compute the profile was trimmed for performance reasons. This action does not affect the accuracy of the output, as not all of the input text was required." Applies only when Arabic input text exceeds a threshold at which additional words do not contribute to the accuracy of the profile.
-
-     - returns: An initialized `Warning`.
-    */
-    public init(warningID: String, message: String) {
-        self.warningID = warningID
-        self.message = message
-    }
-}
-
-extension Warning: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case warningID = "warning_id"
         case message = "message"
-        static let allValues = [warningID, message]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        warningID = try container.decode(String.self, forKey: .warningID)
-        message = try container.decode(String.self, forKey: .message)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(warningID, forKey: .warningID)
-        try container.encode(message, forKey: .message)
     }
 
 }

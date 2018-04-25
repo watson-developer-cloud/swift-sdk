@@ -17,10 +17,15 @@
 import Foundation
 
 /** Content. */
-public struct Content {
+public struct Content: Encodable {
 
     /// An array of `ContentItem` objects that provides the text that is to be analyzed.
     public var contentItems: [ContentItem]
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case contentItems = "contentItems"
+    }
 
     /**
      Initialize a `Content` with member variables.
@@ -31,24 +36,6 @@ public struct Content {
     */
     public init(contentItems: [ContentItem]) {
         self.contentItems = contentItems
-    }
-}
-
-extension Content: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case contentItems = "contentItems"
-        static let allValues = [contentItems]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        contentItems = try container.decode([ContentItem].self, forKey: .contentItems)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(contentItems, forKey: .contentItems)
     }
 
 }

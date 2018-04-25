@@ -17,10 +17,10 @@
 import Foundation
 
 /**
-   Language Translator translates text from one language to another. The service offers multiple
-  domain-specific models that you can customize based on your unique terminology and language. Use
-  Language Translator to take news from across the globe and present it in your language,
-  communicate with your customers in their own language, and more.
+ IBM Watson Language Translator translates text from one language to another. The service offers multiple
+ domain-specific models that you can customize based on your unique terminology and language. Use Language Translator to
+ take news from across the globe and present it in your language, communicate with your customers in their own language,
+ and more.
  */
 public class LanguageTranslator {
 
@@ -79,12 +79,14 @@ public class LanguageTranslator {
     }
 
     /**
+     Translate.
+
      Translates the input text from the source language to the target language.
 
-     - parameter request: The translate request containing the text, with optional source, target, and model_id.
+     - parameter request: The translate request containing the text, and either a model ID or source and target language pair.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func translate(
         request: TranslateRequest,
         failure: ((Error) -> Void)? = nil,
@@ -119,12 +121,14 @@ public class LanguageTranslator {
     }
 
     /**
+     Identify language.
+
      Identifies the language of the input text.
 
      - parameter text: Input text in UTF-8 format.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func identify(
         text: String,
         failure: ((Error) -> Void)? = nil,
@@ -163,13 +167,14 @@ public class LanguageTranslator {
     }
 
     /**
-     Lists all languages that can be identified by the API.
+     List identifiable languages.
 
-     Lists all languages that the service can identify. Returns the two-letter code (for example, `en` for English or `es` for Spanish) and name of each language.
+     Lists the languages that the service can identify. Returns the language code (for example, `en` for English or `es`
+     for Spanish) and name of each language.
 
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func listIdentifiableLanguages(
         failure: ((Error) -> Void)? = nil,
         success: @escaping (IdentifiableLanguages) -> Void)
@@ -197,18 +202,24 @@ public class LanguageTranslator {
     }
 
     /**
-     Uploads a TMX glossary file on top of a domain to customize a translation model.
+     Create model.
 
-     Depending on the size of the file, training can range from minutes for a glossary to several hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded glossary and corpus files is limited to 250 MB.
+     Uploads a TMX glossary file on top of a domain to customize a translation model.  Depending on the size of the
+     file, training can range from minutes for a glossary to several hours for a large parallel corpus. Glossary files
+     must be less than 10 MB. The cumulative file size of all uploaded glossary and corpus files is limited to 250 MB.
 
-     - parameter baseModelID: Specifies the domain model that is used as the base for the training. To see current supported domain models, use the GET /v2/models parameter.
-     - parameter name: The model name. Valid characters are letters, numbers, -, and _. No spaces.
-     - parameter forcedGlossary: A TMX file with your customizations. The customizations in the file completely overwrite the domain data translation, including high frequency or high confidence phrase translations. You can upload only one glossary with a file size less than 10 MB per call.
+     - parameter baseModelID: The model ID of the model to use as the base for customization. To see available models, use the `List models`
+     method.
+     - parameter name: An optional model name that you can use to identify the model. Valid characters are letters, numbers, dashes,
+     underscores, spaces and apostrophes. The maximum length is 32 characters.
+     - parameter forcedGlossary: A TMX file with your customizations. The customizations in the file completely overwrite the domain translaton
+     data, including high frequency or high confidence phrase translations. You can upload only one glossary with a file
+     size less than 10 MB per call.
      - parameter parallelCorpus: A TMX file that contains entries that are treated as a parallel corpus instead of a glossary.
      - parameter monolingualCorpus: A UTF-8 encoded plain text file that is used to customize the target language model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func createModel(
         baseModelID: String,
         name: String? = nil,
@@ -265,12 +276,14 @@ public class LanguageTranslator {
     }
 
     /**
+     Delete model.
+
      Deletes a custom translation model.
 
-     - parameter modelID: The model identifier.
+     - parameter modelID: Model ID of the model to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func deleteModel(
         modelID: String,
         failure: ((Error) -> Void)? = nil,
@@ -304,12 +317,14 @@ public class LanguageTranslator {
     }
 
     /**
-     Get information about the given translation model, including training status.
+     Get model details.
 
-     - parameter modelID: Model ID to use.
+     Gets information about a translation model, including training status for custom models.
+
+     - parameter modelID: Model ID of the model to get.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func getModel(
         modelID: String,
         failure: ((Error) -> Void)? = nil,
@@ -343,14 +358,18 @@ public class LanguageTranslator {
     }
 
     /**
-     Lists available standard and custom models by source or target language.
+     List models.
 
-     - parameter source: Filter models by source language.
-     - parameter target: Filter models by target language.
-     - parameter defaultModels: Valid values are leaving it unset, `true`, and `false`. When `true`, it filters models to return the defaultModels model or models. When `false`, it returns the non-defaultModels model or models. If not set, it returns all models, defaultModels and non-defaultModels.
+     Lists available translation models.
+
+     - parameter source: Specify a language code to filter results by source language.
+     - parameter target: Specify a language code to filter results by target language.
+     - parameter defaultModels: If the default parameter isn't specified, the service will return all models (default and non-default) for each
+     language pair. To return only default models, set this to `true`. To return only non-default models, set this to
+     `false`.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func listModels(
         source: String? = nil,
         target: String? = nil,

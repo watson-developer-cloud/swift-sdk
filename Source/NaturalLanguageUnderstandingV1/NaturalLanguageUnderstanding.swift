@@ -155,6 +155,46 @@ public class NaturalLanguageUnderstanding {
     }
 
     /**
+     List models.
+
+     Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
+     you have created and linked to your Natural Language Understanding service.
+
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listModels(
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ListModelsResults) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v1/models",
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ListModelsResults>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
      Delete model.
 
      Deletes a custom model.
@@ -193,46 +233,6 @@ public class NaturalLanguageUnderstanding {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<DeleteModelResults>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     List models.
-
-     Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
-     you have created and linked to your Natural Language Understanding service.
-
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func listModels(
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListModelsResults) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/models",
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ListModelsResults>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

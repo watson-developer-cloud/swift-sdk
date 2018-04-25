@@ -138,7 +138,7 @@ public class LanguageTranslator {
     {
         // construct body
         // convert body parameter to NSData with UTF-8 encoding
-        guard let body = text.data(using: String.Encoding.utf8) else {
+        guard let body = text.data(using: .utf8) else {
             let message = "text could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedDescriptionKey: message]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)

@@ -17,7 +17,7 @@
 import Foundation
 
 /** IntentCollection. */
-public struct IntentCollection {
+public struct IntentCollection: Decodable {
 
     /// An array of objects describing the intents defined for the workspace.
     public var intents: [IntentExport]
@@ -25,38 +25,10 @@ public struct IntentCollection {
     /// The pagination data for the returned objects.
     public var pagination: Pagination
 
-    /**
-     Initialize a `IntentCollection` with member variables.
-
-     - parameter intents: An array of objects describing the intents defined for the workspace.
-     - parameter pagination: The pagination data for the returned objects.
-
-     - returns: An initialized `IntentCollection`.
-    */
-    public init(intents: [IntentExport], pagination: Pagination) {
-        self.intents = intents
-        self.pagination = pagination
-    }
-}
-
-extension IntentCollection: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case intents = "intents"
         case pagination = "pagination"
-        static let allValues = [intents, pagination]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        intents = try container.decode([IntentExport].self, forKey: .intents)
-        pagination = try container.decode(Pagination.self, forKey: .pagination)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(intents, forKey: .intents)
-        try container.encode(pagination, forKey: .pagination)
     }
 
 }

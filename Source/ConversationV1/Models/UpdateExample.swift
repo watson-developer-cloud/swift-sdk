@@ -17,10 +17,15 @@
 import Foundation
 
 /** UpdateExample. */
-public struct UpdateExample {
+public struct UpdateExample: Encodable {
 
     /// The text of the user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
     public var text: String?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+    }
 
     /**
      Initialize a `UpdateExample` with member variables.
@@ -31,24 +36,6 @@ public struct UpdateExample {
     */
     public init(text: String? = nil) {
         self.text = text
-    }
-}
-
-extension UpdateExample: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        static let allValues = [text]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
     }
 
 }

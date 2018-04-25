@@ -17,7 +17,7 @@
 import Foundation
 
 /** SynonymCollection. */
-public struct SynonymCollection {
+public struct SynonymCollection: Decodable {
 
     /// An array of synonyms.
     public var synonyms: [Synonym]
@@ -25,38 +25,10 @@ public struct SynonymCollection {
     /// The pagination data for the returned objects.
     public var pagination: Pagination
 
-    /**
-     Initialize a `SynonymCollection` with member variables.
-
-     - parameter synonyms: An array of synonyms.
-     - parameter pagination: The pagination data for the returned objects.
-
-     - returns: An initialized `SynonymCollection`.
-    */
-    public init(synonyms: [Synonym], pagination: Pagination) {
-        self.synonyms = synonyms
-        self.pagination = pagination
-    }
-}
-
-extension SynonymCollection: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case synonyms = "synonyms"
         case pagination = "pagination"
-        static let allValues = [synonyms, pagination]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        synonyms = try container.decode([Synonym].self, forKey: .synonyms)
-        pagination = try container.decode(Pagination.self, forKey: .pagination)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(synonyms, forKey: .synonyms)
-        try container.encode(pagination, forKey: .pagination)
     }
 
 }

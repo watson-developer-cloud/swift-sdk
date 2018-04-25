@@ -17,7 +17,7 @@
 import Foundation
 
 /** WorkspaceCollection. */
-public struct WorkspaceCollection {
+public struct WorkspaceCollection: Decodable {
 
     /// An array of objects describing the workspaces associated with the service instance.
     public var workspaces: [Workspace]
@@ -25,38 +25,10 @@ public struct WorkspaceCollection {
     /// An object defining the pagination data for the returned objects.
     public var pagination: Pagination
 
-    /**
-     Initialize a `WorkspaceCollection` with member variables.
-
-     - parameter workspaces: An array of objects describing the workspaces associated with the service instance.
-     - parameter pagination: An object defining the pagination data for the returned objects.
-
-     - returns: An initialized `WorkspaceCollection`.
-    */
-    public init(workspaces: [Workspace], pagination: Pagination) {
-        self.workspaces = workspaces
-        self.pagination = pagination
-    }
-}
-
-extension WorkspaceCollection: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case workspaces = "workspaces"
         case pagination = "pagination"
-        static let allValues = [workspaces, pagination]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        workspaces = try container.decode([Workspace].self, forKey: .workspaces)
-        pagination = try container.decode(Pagination.self, forKey: .pagination)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(workspaces, forKey: .workspaces)
-        try container.encode(pagination, forKey: .pagination)
     }
 
 }

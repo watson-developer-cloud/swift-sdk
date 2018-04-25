@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateValue. */
-public struct CreateValue {
+public struct CreateValue: Encodable {
 
     /// Specifies the type of value.
     public enum ValueType: String {
@@ -40,6 +40,15 @@ public struct CreateValue {
     /// Specifies the type of value.
     public var valueType: String?
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case value = "value"
+        case metadata = "metadata"
+        case synonyms = "synonyms"
+        case patterns = "patterns"
+        case valueType = "type"
+    }
+
     /**
      Initialize a `CreateValue` with member variables.
 
@@ -57,36 +66,6 @@ public struct CreateValue {
         self.synonyms = synonyms
         self.patterns = patterns
         self.valueType = valueType
-    }
-}
-
-extension CreateValue: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case value = "value"
-        case metadata = "metadata"
-        case synonyms = "synonyms"
-        case patterns = "patterns"
-        case valueType = "type"
-        static let allValues = [value, metadata, synonyms, patterns, valueType]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        value = try container.decode(String.self, forKey: .value)
-        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
-        synonyms = try container.decodeIfPresent([String].self, forKey: .synonyms)
-        patterns = try container.decodeIfPresent([String].self, forKey: .patterns)
-        valueType = try container.decodeIfPresent(String.self, forKey: .valueType)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(value, forKey: .value)
-        try container.encodeIfPresent(metadata, forKey: .metadata)
-        try container.encodeIfPresent(synonyms, forKey: .synonyms)
-        try container.encodeIfPresent(patterns, forKey: .patterns)
-        try container.encodeIfPresent(valueType, forKey: .valueType)
     }
 
 }

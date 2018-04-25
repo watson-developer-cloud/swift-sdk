@@ -17,7 +17,7 @@
 import Foundation
 
 /** A response from the Conversation service. */
-public struct MessageResponse {
+public struct MessageResponse: Decodable {
 
     /// The user input from the request.
     public var input: MessageInput?
@@ -40,31 +40,7 @@ public struct MessageResponse {
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
-    /**
-     Initialize a `MessageResponse` with member variables.
-
-     - parameter intents: An array of intents recognized in the user input, sorted in descending order of confidence.
-     - parameter entities: An array of entities identified in the user input.
-     - parameter context: State information for the conversation.
-     - parameter output: Output from the dialog, including the response to the user, the nodes that were triggered, and log messages.
-     - parameter input: The user input from the request.
-     - parameter alternateIntents: Whether to return more than one intent. A value of `true` indicates that all matching intents are returned.
-
-     - returns: An initialized `MessageResponse`.
-    */
-    public init(intents: [RuntimeIntent], entities: [RuntimeEntity], context: Context, output: OutputData, input: MessageInput? = nil, alternateIntents: Bool? = nil, additionalProperties: [String: JSON] = [:]) {
-        self.intents = intents
-        self.entities = entities
-        self.context = context
-        self.output = output
-        self.input = input
-        self.alternateIntents = alternateIntents
-        self.additionalProperties = additionalProperties
-    }
-}
-
-extension MessageResponse: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case input = "input"
         case intents = "intents"
@@ -85,18 +61,6 @@ extension MessageResponse: Codable {
         output = try container.decode(OutputData.self, forKey: .output)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(input, forKey: .input)
-        try container.encode(intents, forKey: .intents)
-        try container.encode(entities, forKey: .entities)
-        try container.encodeIfPresent(alternateIntents, forKey: .alternateIntents)
-        try container.encode(context, forKey: .context)
-        try container.encode(output, forKey: .output)
-        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
-        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

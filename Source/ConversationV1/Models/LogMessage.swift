@@ -17,7 +17,7 @@
 import Foundation
 
 /** Log message details. */
-public struct LogMessage {
+public struct LogMessage: Codable {
 
     /// The severity of the log message.
     public enum Level: String {
@@ -35,6 +35,13 @@ public struct LogMessage {
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case level = "level"
+        case msg = "msg"
+        static let allValues = [level, msg]
+    }
+
     /**
      Initialize a `LogMessage` with member variables.
 
@@ -47,15 +54,6 @@ public struct LogMessage {
         self.level = level
         self.msg = msg
         self.additionalProperties = additionalProperties
-    }
-}
-
-extension LogMessage: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case level = "level"
-        case msg = "msg"
-        static let allValues = [level, msg]
     }
 
     public init(from decoder: Decoder) throws {

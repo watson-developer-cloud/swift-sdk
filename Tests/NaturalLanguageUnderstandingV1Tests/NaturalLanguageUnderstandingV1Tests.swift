@@ -490,6 +490,6 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             XCTAssertNotNil(results.models)
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: 20)
     }
 }

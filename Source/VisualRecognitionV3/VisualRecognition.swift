@@ -17,15 +17,9 @@
 import Foundation
 
 /**
- **Important:** As of September 8, 2017, the beta period for Similarity Search is closed. For more information, see
- [Visual Recognition API – Similarity Search Update](https://www.ibm.com/blogs/bluemix/2017/08/visual-recognition-api-similarity-search-update).
-
  The IBM Watson Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces  in
  images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
  needs.
-
- **Tip:** To test calls to the **Custom classifiers** methods with the API explorer, provide your `api_key` from your
- IBM Cloud service instance.
  */
 public class VisualRecognition {
 
@@ -44,7 +38,7 @@ public class VisualRecognition {
 
      - parameter apiKey: The API key used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     in "YYYY-MM-DD" format.
      */
     public init(apiKey: String, version: String) {
         self.credentials = .apiKey(name: "api_key", key: apiKey, in: .query)
@@ -101,38 +95,26 @@ public class VisualRecognition {
 
      Classify images with built-in or custom classifiers.
 
-     - parameter imagesFile: An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB.
-        Include no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in
-        UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII
-        characters. You can also include images with the `url` parameter.
-    - parameter url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
-        pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
-        in the `imagesFile` parameter.
-    - parameter threshold: A floating point value that specifies the minimum score a class must have to be displayed
-        in the response. The default threshold for returning scores from a classifier is `0.5`. Set the threshold
-        to `0.0` to ignore the classification score and return all values.
-    - parameter owners: An array of the categories of classifiers to apply. Use `IBM` to classify against the `default`
-        general classifier, and use `me` to classify against your custom classifiers. To analyze the image against
-        both classifier categories, set the value to both `IBM` and `me`. The built-in `default` classifier is
-        used if both `classifierIDs` and `owners` parameters are empty. The `classifierIDs` parameter
-        overrides `owners`, so make sure that `classifierIDs` is empty.
-    - parameter classifierIDs: Specifies which classifiers to apply and overrides the `owners` parameter. You can
-        specify both custom and built-in classifiers. The built-in `default` classifier is used if both
-        `classifier_ids` and `owners` parameters are empty.  The following built-in classifier IDs
-        require no training:
-        - `default`: Returns classes from thousands of general tags.
-        - `food`: (Beta) Enhances specificity and accuracy for images of food items.
-        - `explicit`: (Beta) Evaluates whether the image might be pornographic.
-     - parameter acceptLanguage: Specifies the language of the output class names.  Can be `en` (English), `ar`
-        (Arabic), `de` (German), `es` (Spanish), `it` (Italian), `ja` (Japanese), or `ko` (Korean).  Classes for
-        which no translation is available are omitted.  The response might not be in the specified language under
-        these conditions:
-        - English is returned when the requested language is not supported.
-        - Classes are not returned when there is no translation for them.
-        - Custom classifiers returned with this method return tags in the language of the custom classifier.
+     - parameter imagesFile: An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images
+     and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII
+     characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an
+     image with the **url** parameter.
+     - parameter threshold: The minimum score a class must have to be displayed in the response. Set the threshold to `0.0` to ignore the
+     classification score and return all values.
+     - parameter owners: The categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use
+     `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set the
+     value to both `IBM` and `me`.   The built-in `default` classifier is used if both **classifier_ids** and **owners**
+     parameters are empty.  The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids**
+     is empty.
+     - parameter classifierIds: Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in classifier
+     IDs. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The
+     following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags.
+     - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether
+     the image might be pornographic.
+     - parameter imagesFileContentType: The content type of imagesFile.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func classify(
         imagesFile: URL? = nil,
         url: String? = nil,
@@ -188,19 +170,25 @@ public class VisualRecognition {
     /**
      Detect faces in images.
 
-     Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can
-     identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The
-     Detect faces method does not support general biometric facial recognition.
+     **Important:** On April 2, 2018, the identity information in the response to calls to the Face model was removed.
+     The identity information refers to the `name` of the person, `score`, and `type_hierarchy` knowledge graph. For
+     details about the enhanced Face model, see the [Release
+     notes](https://console.bluemix.net/docs/services/visual-recognition/release-notes.html#2april2018).  Analyze and
+     get data about faces in images. Responses can include estimated age and gender. This feature uses a built-in model,
+     so no training is necessary. The Detect faces method does not support general biometric facial recognition.
+     Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
+     recommended pixel density is 32X32 pixels per inch.
 
-     - parameter imagesFile: An image file (.jpg, .png) or .zip file with images. Include no more than 15 images. You
-        can also include images with the `url` parameter.  All faces are detected, but if there are more than 10 faces
-        in an image, age and gender confidence scores might return scores of 0.
-     - parameter url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
-        pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
-        in the `imagesFile` parameter.
+     - parameter imagesFile: An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a
+     maximum of 15 images in a request.  Encode the image and .zip file names in UTF-8 if they contain non-ASCII
+     characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an
+     image with the **url** parameter.
+     - parameter url: The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel density
+     is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a shortened
+     URL.  You can also include images with the **images_file** parameter.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func detectFaces(
         imagesFile: URL? = nil,
         url: String? = nil,
@@ -259,15 +247,16 @@ public class VisualRecognition {
      encounters non-ASCII characters.
 
      - parameter name: The name of the new classifier. Encode special characters in UTF-8.
-     - parameter positiveExamples: An array of positive examples, each with a name and a compressed
-        (.zip) file of images that depict the visual subject for a class within the new classifier. Include at least
-        10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number
-        of images is 10,000 images or 100 MB per .zip file.
-     - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual subject of any
-        of the classes of the new classifier. Must contain a minimum of 10 images.
+     - parameter classnamePositiveExamples: A .zip file of images that depict the visual subject of a class in the new classifier. You can include more than
+     one positive example file in a call.  Specify the parameter name by appending `_positive_examples` to the class
+     name. For example, `goldenretriever_positive_examples` creates the class **goldenretriever**.  Include at least 10
+     images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number of
+     images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file name in UTF-8.
+     - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
+     contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func createClassifier(
         name: String,
         positiveExamples: [PositiveExample],
@@ -322,7 +311,7 @@ public class VisualRecognition {
      - parameter classifierID: The ID of the classifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func deleteClassifier(
         classifierID: String,
         failure: ((Error) -> Void)? = nil,
@@ -367,7 +356,7 @@ public class VisualRecognition {
      - parameter classifierID: The ID of the classifier.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func getClassifier(
         classifierID: String,
         failure: ((Error) -> Void)? = nil,
@@ -405,14 +394,12 @@ public class VisualRecognition {
     }
 
     /**
-     Retrieve a list of custom classifiers.
+     Retrieve a list of classifiers.
 
-     - parameter owners: An array of owners. Must be "IBM", "me", or a combination of the two.
-     - parameter verbose: Specify `true` to return details about the classifiers.
-        Omit this parameter to return a brief list of classifiers.
+     - parameter verbose: Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of classifiers.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func listClassifiers(
         owners: [String]? = nil,
         verbose: Bool? = nil,
@@ -457,25 +444,27 @@ public class VisualRecognition {
      Update a classifier.
 
      Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
-     existing classes. You must supply at least one set of positive or negative examples. For details, see
-     [Updating custom classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
+     existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating
+     custom
+     classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
      Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
-     class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Important:** You can't
-     update a custom classifier with an API key for a Lite plan. To update a custom classifer on a Lite plan, create
-     another service instance on a Standard plan and re-create your custom classifier.  **Tip:** Don't make retraining
-     calls on a classifier until the status is ready. When you submit retraining requests in parallel, the last request
-     overwrites the previous requests. The retrained property shows the last time the classifier retraining finished.
+     class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Tip:** Don't make
+     retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the
+     last request overwrites the previous requests. The retrained property shows the last time the classifier retraining
+     finished.
 
      - parameter classifierID: The ID of the classifier.
-     - parameter positiveExamples: An array of positive examples, each with a name and a compressed
-        (.zip) file of images that depict the visual subject for a class within the new classifier. Include at least
-        10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number
-        of images is 10,000 images or 100 MB per .zip file.
-     - parameter negativeExamples: A compressed (.zip) file of images that do not depict the visual subject of any
-        of the classes of the new classifier. Must contain a minimum of 10 images.
+     - parameter classnamePositiveExamples: A .zip file of images that depict the visual subject of a class in the classifier. The positive examples create or
+     update classes in the classifier. You can include more than one positive example file in a call.  Specify the
+     parameter name by appending `_positive_examples` to the class name. For example,
+     `goldenretriever_positive_examples` creates the class `goldenretriever`.  Include at least 10 images in .jpg or
+     .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number of images is 10,000
+     images or 100 MB per .zip file.  Encode special characters in the file name in UTF-8.
+     - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
+     contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func updateClassifier(
         classifierID: String,
         positiveExamples: [PositiveExample]? = nil,

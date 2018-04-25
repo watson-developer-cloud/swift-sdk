@@ -82,11 +82,15 @@ public class Conversation {
     }
 
     /**
+     Get response to user input.
+
      Get a response to a user's input.    There is no rate limit for this operation.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter request: The message to be sent. This includes the user's input, along with optional intents, entities, and context from the last response.
-     - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that were visited during processing of the message.
+     - parameter request: The message to be sent. This includes the user's input, along with optional intents, entities, and context from the
+     last response.
+     - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that were visited during processing of
+     the message.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -149,8 +153,9 @@ public class Conversation {
 
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -218,7 +223,8 @@ public class Conversation {
      new workspace.    This operation is limited to 30 requests per 30 minutes. For more information, see **Rate
      limiting**.
 
-     - parameter properties: The content of the new workspace.    The maximum size for this data is 50MB. If you need to import a larger workspace, consider importing the workspace without intents and entities and then adding them separately.
+     - parameter properties: The content of the new workspace.    The maximum size for this data is 50MB. If you need to import a larger
+     workspace, consider importing the workspace without intents and entities and then adding them separately.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -270,7 +276,8 @@ public class Conversation {
      minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
+     information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -330,8 +337,14 @@ public class Conversation {
      limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter properties: Valid data defining the new and updated workspace content.    The maximum size for this data is 50MB. If you need to import a larger amount of workspace data, consider importing components such as intents and entities using separate operations.
-     - parameter append: Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements included in the new data completely replace the corresponding existing elements, including all subelements. For example, if the new data includes **entities** and **append**=`false`, all existing entities in the workspace are discarded and replaced with the new entities.    If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new data collide with existing elements, the update request fails.
+     - parameter properties: Valid data defining the new and updated workspace content.    The maximum size for this data is 50MB. If you need
+     to import a larger amount of workspace data, consider importing components such as intents and entities using
+     separate operations.
+     - parameter append: Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements
+     included in the new data completely replace the corresponding existing elements, including all subelements. For
+     example, if the new data includes **entities** and **append**=`false`, all existing entities in the workspace are
+     discarded and replaced with the new entities.    If **append**=`true`, existing elements are preserved, and the new
+     elements are added. If any elements in the new data collide with existing elements, the update request fails.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -441,11 +454,13 @@ public class Conversation {
      limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
+     information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -524,8 +539,11 @@ public class Conversation {
      limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter intent: The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
-     - parameter description: The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     - parameter intent: The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode
+     alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It
+     must be no longer than 128 characters.
+     - parameter description: The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must
+     be no longer than 128 characters.
      - parameter examples: An array of user input examples for the intent.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -588,7 +606,8 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
-     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
+     information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -650,7 +669,9 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
-     - parameter newIntent: The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
+     - parameter newIntent: The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode
+     alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It
+     must be no longer than 128 characters.
      - parameter newDescription: The description of the intent.
      - parameter newExamples: An array of user input examples for the intent.
      - parameter failure: A function executed if an error occurs.
@@ -765,8 +786,9 @@ public class Conversation {
      - parameter intent: The intent name.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -842,7 +864,9 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
-     - parameter text: The text of a user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
+     - parameter text: The text of a user input example. This string must conform to the following restrictions:  - It cannot contain
+     carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no
+     longer than 1024 characters.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -960,7 +984,9 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
      - parameter text: The text of the user input example.
-     - parameter newText: The text of the user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
+     - parameter newText: The text of the user input example. This string must conform to the following restrictions:  - It cannot contain
+     carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no
+     longer than 1024 characters.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1073,8 +1099,9 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1148,7 +1175,9 @@ public class Conversation {
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters  - It cannot consist of only whitespace characters  - It must be no longer than 1024 characters.
+     - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following restrictions:  - It
+     cannot contain carriage return, newline, or tab characters  - It cannot consist of only whitespace characters  - It
+     must be no longer than 1024 characters.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1371,11 +1400,13 @@ public class Conversation {
      limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
+     information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1513,7 +1544,8 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
-     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
+     information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1575,7 +1607,10 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
-     - parameter properties: The updated content of the entity. Any elements included in the new data will completely replace the equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless they are also included in the new data.) For example, if you update the values for an entity, the previously existing values are discarded and replaced with the new values specified in the update.
+     - parameter properties: The updated content of the entity. Any elements included in the new data will completely replace the equivalent
+     existing elements, including all subelements. (Previously existing subelements are not retained unless they are
+     also included in the new data.) For example, if you update the values for an entity, the previously existing values
+     are discarded and replaced with the new values specified in the update.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1683,11 +1718,13 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
-     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
+     information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1828,7 +1865,8 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
-     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
+     information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1892,7 +1930,10 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
-     - parameter properties: The updated content of the entity value.    Any elements included in the new data will completely replace the equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless they are also included in the new data.) For example, if you update the synonyms for an entity value, the previously existing synonyms are discarded and replaced with the new synonyms specified in the update.
+     - parameter properties: The updated content of the entity value.    Any elements included in the new data will completely replace the
+     equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless
+     they are also included in the new data.) For example, if you update the synonyms for an entity value, the
+     previously existing synonyms are discarded and replaced with the new synonyms specified in the update.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2006,8 +2047,9 @@ public class Conversation {
      - parameter value: The text of the entity value.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2085,7 +2127,9 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
-     - parameter synonym: The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     - parameter synonym: The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage
+     return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer
+     than 64 characters.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2207,7 +2251,9 @@ public class Conversation {
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter synonym: The text of the synonym.
-     - parameter newSynonym: The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     - parameter newSynonym: The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage
+     return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer
+     than 64 characters.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2323,8 +2369,9 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2511,7 +2558,10 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
-     - parameter properties: The updated content of the dialog node.    Any elements included in the new data will completely replace the equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless they are also included in the new data.) For example, if you update the actions for a dialog node, the previously existing actions are discarded and replaced with the new actions specified in the update.
+     - parameter properties: The updated content of the dialog node.    Any elements included in the new data will completely replace the
+     equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless
+     they are also included in the new data.) For example, if you update the actions for a dialog node, the previously
+     existing actions are discarded and replaced with the new actions specified in the update.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2619,10 +2669,12 @@ public class Conversation {
      information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
-     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. For more information, see the
+     [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2690,10 +2742,14 @@ public class Conversation {
      operation is limited to 40 requests per 30 minutes. If **cursor** is specified, the limit is 120 requests per
      minute. For more information, see **Rate limiting**.
 
-     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or `request.context.metadata.deployment`. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter
+     query that includes a value for `language`, as well as a value for `workspace_id` or
+     `request.context.metadata.deployment`. For more information, see the
+     [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter cursor: A token identifying the last object from the previous page of results.
+     - parameter cursor: A token identifying the page of results to retrieve.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */

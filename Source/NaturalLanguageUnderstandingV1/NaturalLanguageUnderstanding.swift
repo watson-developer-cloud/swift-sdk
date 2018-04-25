@@ -125,6 +125,11 @@ public class NaturalLanguageUnderstanding {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -134,9 +139,7 @@ public class NaturalLanguageUnderstanding {
             method: "POST",
             url: serviceURL + "/v1/analyze",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -165,6 +168,10 @@ public class NaturalLanguageUnderstanding {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DeleteModelResults) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -179,11 +186,8 @@ public class NaturalLanguageUnderstanding {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -209,6 +213,10 @@ public class NaturalLanguageUnderstanding {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ListModelsResults) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -218,11 +226,8 @@ public class NaturalLanguageUnderstanding {
             method: "GET",
             url: serviceURL + "/v1/models",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request

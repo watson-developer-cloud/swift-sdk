@@ -421,7 +421,6 @@ public class VisualRecognition {
      - parameter success: A function executed with the successful result.
      */
     public func listClassifiers(
-        owners: [String]? = nil,
         verbose: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifiers) -> Void)
@@ -433,10 +432,6 @@ public class VisualRecognition {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let owners = owners {
-            let list = owners.joined(separator: ",")
-            queryParameters.append(URLQueryItem(name: "owners", value: list))
-        }
         if let verbose = verbose {
             let queryParameter = URLQueryItem(name: "verbose", value: "\(verbose)")
             queryParameters.append(queryParameter)

@@ -17,7 +17,7 @@
 import Foundation
 
 /** ToneScore. */
-public struct ToneScore {
+public struct ToneScore: Decodable {
 
     /// The score for the tone. * **`2017-09-21`:** The score that is returned lies in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the tone is perceived in the content. * **`2016-05-19`:** The score that is returned lies in the range of 0 to 1. A score less than 0.5 indicates that the tone is unlikely to be perceived in the content; a score greater than 0.75 indicates a high likelihood that the tone is perceived.
     public var score: Double
@@ -28,43 +28,11 @@ public struct ToneScore {
     /// The user-visible, localized name of the tone.
     public var toneName: String
 
-    /**
-     Initialize a `ToneScore` with member variables.
-
-     - parameter score: The score for the tone. * **`2017-09-21`:** The score that is returned lies in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the tone is perceived in the content. * **`2016-05-19`:** The score that is returned lies in the range of 0 to 1. A score less than 0.5 indicates that the tone is unlikely to be perceived in the content; a score greater than 0.75 indicates a high likelihood that the tone is perceived.
-     - parameter toneID: The unique, non-localized identifier of the tone. * **`2017-09-21`:** The service can return results for the following tone IDs: `anger`, `fear`, `joy`, and `sadness` (emotional tones); `analytical`, `confident`, and `tentative` (language tones). The service returns results only for tones whose scores meet a minimum threshold of 0.5. * **`2016-05-19`:** The service can return results for the following tone IDs of the different categories: for the `emotion` category: `anger`, `disgust`, `fear`, `joy`, and `sadness`; for the `language` category: `analytical`, `confident`, and `tentative`; for the `social` category: `openness_big5`, `conscientiousness_big5`, `extraversion_big5`, `agreeableness_big5`, and `emotional_range_big5`. The service returns scores for all tones of a category, regardless of their values.
-     - parameter toneName: The user-visible, localized name of the tone.
-
-     - returns: An initialized `ToneScore`.
-    */
-    public init(score: Double, toneID: String, toneName: String) {
-        self.score = score
-        self.toneID = toneID
-        self.toneName = toneName
-    }
-}
-
-extension ToneScore: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case score = "score"
         case toneID = "tone_id"
         case toneName = "tone_name"
-        static let allValues = [score, toneID, toneName]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        score = try container.decode(Double.self, forKey: .score)
-        toneID = try container.decode(String.self, forKey: .toneID)
-        toneName = try container.decode(String.self, forKey: .toneName)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(score, forKey: .score)
-        try container.encode(toneID, forKey: .toneID)
-        try container.encode(toneName, forKey: .toneName)
     }
 
 }

@@ -17,13 +17,19 @@
 import Foundation
 
 /** Utterance. */
-public struct Utterance {
+public struct Utterance: Encodable {
 
     /// An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple sentences.
     public var text: String
 
     /// A string that identifies the user who contributed the utterance specified by the `text` parameter.
     public var user: String?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+        case user = "user"
+    }
 
     /**
      Initialize a `Utterance` with member variables.
@@ -36,27 +42,6 @@ public struct Utterance {
     public init(text: String, user: String? = nil) {
         self.text = text
         self.user = user
-    }
-}
-
-extension Utterance: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case user = "user"
-        static let allValues = [text, user]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decode(String.self, forKey: .text)
-        user = try container.decodeIfPresent(String.self, forKey: .user)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(text, forKey: .text)
-        try container.encodeIfPresent(user, forKey: .user)
     }
 
 }

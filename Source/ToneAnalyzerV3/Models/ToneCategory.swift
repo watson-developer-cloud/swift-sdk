@@ -17,7 +17,7 @@
 import Foundation
 
 /** ToneCategory. */
-public struct ToneCategory {
+public struct ToneCategory: Decodable {
 
     /// An array of `ToneScore` objects that provides the results for the tones of the category.
     public var tones: [ToneScore]
@@ -28,43 +28,11 @@ public struct ToneCategory {
     /// The user-visible, localized name of the category.
     public var categoryName: String
 
-    /**
-     Initialize a `ToneCategory` with member variables.
-
-     - parameter tones: An array of `ToneScore` objects that provides the results for the tones of the category.
-     - parameter categoryID: The unique, non-localized identifier of the category for the results. The service can return results for the following category IDs: `emotion_tone`, `language_tone`, and `social_tone`.
-     - parameter categoryName: The user-visible, localized name of the category.
-
-     - returns: An initialized `ToneCategory`.
-    */
-    public init(tones: [ToneScore], categoryID: String, categoryName: String) {
-        self.tones = tones
-        self.categoryID = categoryID
-        self.categoryName = categoryName
-    }
-}
-
-extension ToneCategory: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case tones = "tones"
         case categoryID = "category_id"
         case categoryName = "category_name"
-        static let allValues = [tones, categoryID, categoryName]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        tones = try container.decode([ToneScore].self, forKey: .tones)
-        categoryID = try container.decode(String.self, forKey: .categoryID)
-        categoryName = try container.decode(String.self, forKey: .categoryName)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(tones, forKey: .tones)
-        try container.encode(categoryID, forKey: .categoryID)
-        try container.encode(categoryName, forKey: .categoryName)
     }
 
 }

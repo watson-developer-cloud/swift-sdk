@@ -17,38 +17,14 @@
 import Foundation
 
 /** The text of the user input. */
-public struct MessageInput {
+public struct MessageInput: Decodable {
 
     /// The user's input.
     public var text: String?
 
-    /**
-     Initialize a `MessageInput` with member variables.
-
-     - parameter text: The user's input.
-
-     - returns: An initialized `MessageInput`.
-    */
-    public init(text: String? = nil) {
-        self.text = text
-    }
-}
-
-extension MessageInput: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
-        static let allValues = [text]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
     }
 
 }

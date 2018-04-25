@@ -17,7 +17,7 @@
 import Foundation
 
 /** State information for the conversation. To maintain state, include the context from the previous response. */
-public struct Context {
+public struct Context: Codable {
 
     /// The unique identifier of the conversation.
     public var conversationID: String?
@@ -27,6 +27,13 @@ public struct Context {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case conversationID = "conversation_id"
+        case system = "system"
+        static let allValues = [conversationID, system]
+    }
 
     /**
      Initialize a `Context` with member variables.
@@ -40,15 +47,6 @@ public struct Context {
         self.conversationID = conversationID
         self.system = system
         self.additionalProperties = additionalProperties
-    }
-}
-
-extension Context: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case conversationID = "conversation_id"
-        case system = "system"
-        static let allValues = [conversationID, system]
     }
 
     public init(from decoder: Decoder) throws {

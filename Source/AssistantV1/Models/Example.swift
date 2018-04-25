@@ -17,7 +17,7 @@
 import Foundation
 
 /** Example. */
-public struct Example {
+public struct Example: Decodable {
 
     /// The text of the user input example.
     public var exampleText: String
@@ -28,43 +28,11 @@ public struct Example {
     /// The timestamp for the last update to the example.
     public var updated: String?
 
-    /**
-     Initialize a `Example` with member variables.
-
-     - parameter exampleText: The text of the user input example.
-     - parameter created: The timestamp for creation of the example.
-     - parameter updated: The timestamp for the last update to the example.
-
-     - returns: An initialized `Example`.
-    */
-    public init(exampleText: String, created: String? = nil, updated: String? = nil) {
-        self.exampleText = exampleText
-        self.created = created
-        self.updated = updated
-    }
-}
-
-extension Example: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case exampleText = "text"
         case created = "created"
         case updated = "updated"
-        static let allValues = [exampleText, created, updated]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        exampleText = try container.decode(String.self, forKey: .exampleText)
-        created = try container.decodeIfPresent(String.self, forKey: .created)
-        updated = try container.decodeIfPresent(String.self, forKey: .updated)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(exampleText, forKey: .exampleText)
-        try container.encodeIfPresent(created, forKey: .created)
-        try container.encodeIfPresent(updated, forKey: .updated)
     }
 
 }

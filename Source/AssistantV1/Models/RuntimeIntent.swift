@@ -17,7 +17,7 @@
 import Foundation
 
 /** An intent identified in the user input. */
-public struct RuntimeIntent {
+public struct RuntimeIntent: Codable {
 
     /// The name of the recognized intent.
     public var intent: String
@@ -27,6 +27,13 @@ public struct RuntimeIntent {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case intent = "intent"
+        case confidence = "confidence"
+        static let allValues = [intent, confidence]
+    }
 
     /**
      Initialize a `RuntimeIntent` with member variables.
@@ -40,15 +47,6 @@ public struct RuntimeIntent {
         self.intent = intent
         self.confidence = confidence
         self.additionalProperties = additionalProperties
-    }
-}
-
-extension RuntimeIntent: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case intent = "intent"
-        case confidence = "confidence"
-        static let allValues = [intent, confidence]
     }
 
     public init(from decoder: Decoder) throws {

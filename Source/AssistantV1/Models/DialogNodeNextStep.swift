@@ -17,7 +17,7 @@
 import Foundation
 
 /** The next step to execute following this dialog node. */
-public struct DialogNodeNextStep {
+public struct DialogNodeNextStep: Codable {
 
     /// What happens after the dialog node completes. The valid values depend on the node type:  - The following values are valid for any node:    - `get_user_input`    - `skip_user_input`    - `jump_to`  - If the node is of type `event_handler` and its parent node is of type `slot` or `frame`, additional values are also valid:    - if **event_name**=`filled` and the type of the parent node is `slot`:      - `reprompt`      - `skip_all_slots`  - if **event_name**=`nomatch` and the type of the parent node is `slot`:      - `reprompt`      - `skip_slot`      - `skip_all_slots`  - if **event_name**=`generic` and the type of the parent node is `frame`:      - `reprompt`      - `skip_slot`      - `skip_all_slots`        If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
     public enum Behavior: String {
@@ -46,6 +46,13 @@ public struct DialogNodeNextStep {
     /// Which part of the dialog node to process next.
     public var selector: String?
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case behavior = "behavior"
+        case dialogNode = "dialog_node"
+        case selector = "selector"
+    }
+
     /**
      Initialize a `DialogNodeNextStep` with member variables.
 
@@ -59,30 +66,6 @@ public struct DialogNodeNextStep {
         self.behavior = behavior
         self.dialogNode = dialogNode
         self.selector = selector
-    }
-}
-
-extension DialogNodeNextStep: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case behavior = "behavior"
-        case dialogNode = "dialog_node"
-        case selector = "selector"
-        static let allValues = [behavior, dialogNode, selector]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        behavior = try container.decode(String.self, forKey: .behavior)
-        dialogNode = try container.decodeIfPresent(String.self, forKey: .dialogNode)
-        selector = try container.decodeIfPresent(String.self, forKey: .selector)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(behavior, forKey: .behavior)
-        try container.encodeIfPresent(dialogNode, forKey: .dialogNode)
-        try container.encodeIfPresent(selector, forKey: .selector)
     }
 
 }

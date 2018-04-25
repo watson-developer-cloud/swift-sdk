@@ -153,7 +153,7 @@ public class ToneAnalyzer {
             queryParameters.append(queryParameter)
         }
         if let tones = tones {
-            let queryParameter = URLQueryItem(name: "tones", value: "\(tones)")
+            let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
 

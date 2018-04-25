@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateVoiceModel. */
-public struct CreateVoiceModel {
+public struct CreateVoiceModel: Encodable {
 
     /// The language of the new custom voice model. Omit the parameter to use the the default language, `en-US`.
     public enum Language: String {
@@ -42,6 +42,13 @@ public struct CreateVoiceModel {
     /// A description of the new custom voice model. Specifying a description is recommended.
     public var description: String?
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case language = "language"
+        case description = "description"
+    }
+
     /**
      Initialize a `CreateVoiceModel` with member variables.
 
@@ -55,30 +62,6 @@ public struct CreateVoiceModel {
         self.name = name
         self.language = language
         self.description = description
-    }
-}
-
-extension CreateVoiceModel: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case language = "language"
-        case description = "description"
-        static let allValues = [name, language, description]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        language = try container.decodeIfPresent(String.self, forKey: .language)
-        description = try container.decodeIfPresent(String.self, forKey: .description)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encodeIfPresent(language, forKey: .language)
-        try container.encodeIfPresent(description, forKey: .description)
     }
 
 }

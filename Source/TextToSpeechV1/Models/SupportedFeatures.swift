@@ -17,7 +17,7 @@
 import Foundation
 
 /** SupportedFeatures. */
-public struct SupportedFeatures {
+public struct SupportedFeatures: Decodable {
 
     /// If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `customizable`.).
     public var customPronunciation: Bool
@@ -25,38 +25,10 @@ public struct SupportedFeatures {
     /// If `true`, the voice can be transformed by using the SSML &lt;voice-transformation&gt; element; if `false`, the voice cannot be transformed.
     public var voiceTransformation: Bool
 
-    /**
-     Initialize a `SupportedFeatures` with member variables.
-
-     - parameter customPronunciation: If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `customizable`.).
-     - parameter voiceTransformation: If `true`, the voice can be transformed by using the SSML &lt;voice-transformation&gt; element; if `false`, the voice cannot be transformed.
-
-     - returns: An initialized `SupportedFeatures`.
-    */
-    public init(customPronunciation: Bool, voiceTransformation: Bool) {
-        self.customPronunciation = customPronunciation
-        self.voiceTransformation = voiceTransformation
-    }
-}
-
-extension SupportedFeatures: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case customPronunciation = "custom_pronunciation"
         case voiceTransformation = "voice_transformation"
-        static let allValues = [customPronunciation, voiceTransformation]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        customPronunciation = try container.decode(Bool.self, forKey: .customPronunciation)
-        voiceTransformation = try container.decode(Bool.self, forKey: .voiceTransformation)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(customPronunciation, forKey: .customPronunciation)
-        try container.encode(voiceTransformation, forKey: .voiceTransformation)
     }
 
 }

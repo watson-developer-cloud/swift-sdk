@@ -17,38 +17,14 @@
 import Foundation
 
 /** Voices. */
-public struct Voices {
+public struct Voices: Decodable {
 
     /// A list of available voices.
     public var voices: [Voice]
 
-    /**
-     Initialize a `Voices` with member variables.
-
-     - parameter voices: A list of available voices.
-
-     - returns: An initialized `Voices`.
-    */
-    public init(voices: [Voice]) {
-        self.voices = voices
-    }
-}
-
-extension Voices: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case voices = "voices"
-        static let allValues = [voices]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        voices = try container.decode([Voice].self, forKey: .voices)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(voices, forKey: .voices)
     }
 
 }

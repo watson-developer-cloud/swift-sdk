@@ -17,38 +17,14 @@
 import Foundation
 
 /** Translation. */
-public struct Translation {
+public struct Translation: Decodable {
 
     /// Translation output in UTF-8.
     public var translationOutput: String
 
-    /**
-     Initialize a `Translation` with member variables.
-
-     - parameter translationOutput: Translation output in UTF-8.
-
-     - returns: An initialized `Translation`.
-    */
-    public init(translationOutput: String) {
-        self.translationOutput = translationOutput
-    }
-}
-
-extension Translation: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case translationOutput = "translation"
-        static let allValues = [translationOutput]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        translationOutput = try container.decode(String.self, forKey: .translationOutput)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(translationOutput, forKey: .translationOutput)
     }
 
 }

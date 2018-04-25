@@ -141,6 +141,14 @@ public class VisualRecognition {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = multipartFormData.contentType
+        if let acceptLanguage = acceptLanguage {
+            headers["Accept-Language"] = acceptLanguage
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -150,9 +158,7 @@ public class VisualRecognition {
             method: "POST",
             url: serviceURL + "/v3/classify",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -211,6 +217,11 @@ public class VisualRecognition {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = multipartFormData.contentType
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -220,9 +231,7 @@ public class VisualRecognition {
             method: "POST",
             url: serviceURL + "/v3/detect_faces",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -279,6 +288,11 @@ public class VisualRecognition {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = multipartFormData.contentType
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -288,9 +302,7 @@ public class VisualRecognition {
             method: "POST",
             url: serviceURL + "/v3/classifiers",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -317,6 +329,10 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -331,11 +347,8 @@ public class VisualRecognition {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -362,6 +375,10 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -376,11 +393,8 @@ public class VisualRecognition {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -406,6 +420,10 @@ public class VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifiers) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -423,11 +441,8 @@ public class VisualRecognition {
             method: "GET",
             url: serviceURL + "/v3/classifiers",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -487,6 +502,11 @@ public class VisualRecognition {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = multipartFormData.contentType
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -501,9 +521,7 @@ public class VisualRecognition {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )

@@ -17,50 +17,13 @@
 import Foundation
 
 /**
-   Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and
-  IBM Watson Natural Language Understanding will give you results for the features you request. The
-  service cleans HTML content before analysis by default, so the results can ignore most
-  advertisements and other unwanted content.
-
-  ### Concepts
-  Identify general concepts that are referenced or alluded to in your content. Concepts that are
-  detected typically have an associated link to a DBpedia resource.
-
-  ### Entities
-  Detect important people, places, geopolitical entities and other types of entities in your
-  content. Entity detection recognizes consecutive coreferences of each entity. For example,
-  analysis of the following text would count "Barack Obama" and "He" as the same entity:
-
-  "Barack Obama was the 44th President of the United States. He took office in January 2009."
-
-  ### Keywords
-  Determine the most important keywords in your content. Keyword phrases are organized by relevance
-  in the results.
-
-  ### Categories
-  Categorize your content into a hierarchical 5-level taxonomy. For example, "Leonardo DiCaprio won
-  an Oscar" returns "/art and entertainment/movies and tv/movies" as the most confident
-  classification.
-
-  ### Sentiment
-  Determine whether your content conveys postive or negative sentiment. Sentiment information can be
-  returned for detected entities, keywords, or user-specified target phrases found in the text.
-
-  ### Emotion
-  Detect anger, disgust, fear, joy, or sadness that is conveyed by your content. Emotion information
-  can be returned for detected entities, keywords, or user-specified target phrases found in the
-  text.
-
-  ### Relations
-  Recognize when two entities are related, and identify the type of relation.  For example, you can
-  identify an "awardedTo" relation between an award and its recipient.
-
-  ### Semantic Roles
-  Parse sentences into subject-action-object form, and identify entities and keywords that are
-  subjects or objects of an action.
-
-  ### Metadata
-  Get author information, publication date, and the title of your text/HTML content.
+ Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and IBM Watson Natural
+ Language Understanding will give you results for the features you request. The service cleans HTML content before
+ analysis by default, so the results can ignore most advertisements and other unwanted content.
+ You can create <a target="_blank"
+ href="https://www.ibm.com/watson/developercloud/doc/natural-language-understanding/customizing.html">custom models</a>
+ with Watson Knowledge Studio that can be used to detect custom entities and relations in Natural Language
+ Understanding.
  */
 public class NaturalLanguageUnderstanding {
 
@@ -80,7 +43,7 @@ public class NaturalLanguageUnderstanding {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
         self.credentials = .basicAuthentication(username: username, password: password)
@@ -128,12 +91,29 @@ public class NaturalLanguageUnderstanding {
     /**
      Analyze text, HTML, or a public webpage.
 
-     Analyzes text, HTML, or a public webpage with one or more text analysis features.
+     Analyzes text, HTML, or a public webpage with one or more text analysis features.  ### Concepts Identify general
+     concepts that are referenced or alluded to in your content. Concepts that are detected typically have an associated
+     link to a DBpedia resource.  ### Emotion Detect anger, disgust, fear, joy, or sadness that is conveyed by your
+     content. Emotion information can be returned for detected entities, keywords, or user-specified target phrases
+     found in the text.  ### Entities Detect important people, places, geopolitical entities and other types of entities
+     in your content. Entity detection recognizes consecutive coreferences of each entity. For example, analysis of the
+     following text would count \"Barack Obama\" and \"He\" as the same entity:  \"Barack Obama was the 44th President
+     of the United States. He took office in January 2009.\"  ### Keywords Determine the most important keywords in your
+     content. Keyword phrases are organized by relevance in the results.  ### Metadata Get author information,
+     publication date, and the title of your text/HTML content.  ### Relations Recognize when two entities are related,
+     and identify the type of relation.  For example, you can identify an \"awardedTo\" relation between an award and
+     its recipient.  ### Semantic Roles Parse sentences into subject-action-object form, and identify entities and
+     keywords that are subjects or objects of an action.  ### Sentiment Determine whether your content conveys postive
+     or negative sentiment. Sentiment information can be returned for detected entities, keywords, or user-specified
+     target phrases found in the text.   ### Categories Categorize your content into a hierarchical 5-level taxonomy.
+     For example, \"Leonardo DiCaprio won an Oscar\" returns \"/art and entertainment/movies and tv/movies\" as the most
+     confident classification.
 
-     - parameter parameters: An object containing request parameters. The `features` object and one of the `text`, `html`, or `url` attributes are required.
+     - parameter parameters: An object containing request parameters. The `features` object and one of the `text`, `html`, or `url` attributes
+     are required.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func analyze(
         parameters: Parameters,
         failure: ((Error) -> Void)? = nil,
@@ -176,10 +156,10 @@ public class NaturalLanguageUnderstanding {
 
      Deletes a custom model.
 
-     - parameter modelID: modelID of the model to delete.
+     - parameter modelID: model_id of the model to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func deleteModel(
         modelID: String,
         failure: ((Error) -> Void)? = nil,
@@ -219,11 +199,12 @@ public class NaturalLanguageUnderstanding {
     /**
      List models.
 
-     Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that you have created and linked to your Natural Language Understanding service.
+     Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
+     you have created and linked to your Natural Language Understanding service.
 
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func listModels(
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ListModelsResults) -> Void)

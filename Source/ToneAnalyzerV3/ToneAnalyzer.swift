@@ -201,6 +201,7 @@ public class ToneAnalyzer {
      */
     public func toneChat(
         utterances: [Utterance],
+        contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (UtteranceAnalyses) -> Void)
@@ -216,6 +217,9 @@ public class ToneAnalyzer {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
+        if let contentLanguage = contentLanguage {
+            headers["Content-Language"] = contentLanguage
+        }
         if let acceptLanguage = acceptLanguage {
             headers["Accept-Language"] = acceptLanguage
         }

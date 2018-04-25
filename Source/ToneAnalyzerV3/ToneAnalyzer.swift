@@ -134,6 +134,17 @@ public class ToneAnalyzer {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+        if let contentLanguage = contentLanguage {
+            headers["Content-Language"] = contentLanguage
+        }
+        if let acceptLanguage = acceptLanguage {
+            headers["Accept-Language"] = acceptLanguage
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -151,9 +162,7 @@ public class ToneAnalyzer {
             method: "POST",
             url: serviceURL + "/v3/tone",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -203,6 +212,14 @@ public class ToneAnalyzer {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+        if let acceptLanguage = acceptLanguage {
+            headers["Accept-Language"] = acceptLanguage
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -212,9 +229,7 @@ public class ToneAnalyzer {
             method: "POST",
             url: serviceURL + "/v3/tone_chat",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )

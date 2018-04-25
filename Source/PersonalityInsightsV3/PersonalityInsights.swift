@@ -145,6 +145,17 @@ public class PersonalityInsights {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+        if let contentLanguage = contentLanguage {
+            headers["Content-Language"] = contentLanguage
+        }
+        if let acceptLanguage = acceptLanguage {
+            headers["Accept-Language"] = acceptLanguage
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -162,9 +173,7 @@ public class PersonalityInsights {
             method: "POST",
             url: serviceURL + "/v3/profile",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -234,6 +243,17 @@ public class PersonalityInsights {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "text/plain"
+        if let contentLanguage = contentLanguage {
+            headers["Content-Language"] = contentLanguage
+        }
+        if let acceptLanguage = acceptLanguage {
+            headers["Accept-Language"] = acceptLanguage
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -251,9 +271,7 @@ public class PersonalityInsights {
             method: "POST",
             url: serviceURL + "/v3/profile",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "text/plain",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -323,6 +341,17 @@ public class PersonalityInsights {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "text/html"
+        if let contentLanguage = contentLanguage {
+            headers["Content-Language"] = contentLanguage
+        }
+        if let acceptLanguage = acceptLanguage {
+            headers["Accept-Language"] = acceptLanguage
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -340,9 +369,7 @@ public class PersonalityInsights {
             method: "POST",
             url: serviceURL + "/v3/profile",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "text/html",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -415,6 +442,17 @@ public class PersonalityInsights {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "text/csv"
+        headers["Content-Type"] = "application/json"
+        if let contentLanguage = contentLanguage {
+            headers["Content-Language"] = contentLanguage
+        }
+        if let acceptLanguage = acceptLanguage {
+            headers["Accept-Language"] = acceptLanguage
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -436,9 +474,7 @@ public class PersonalityInsights {
             method: "POST",
             url: serviceURL + "/v3/profile",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "text/csv",
-            contentType: "application/json",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -511,6 +547,17 @@ public class PersonalityInsights {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "text/csv"
+        headers["Content-Type"] = "text/plain"
+        if let contentLanguage = contentLanguage {
+            headers["Content-Language"] = contentLanguage
+        }
+        if let acceptLanguage = acceptLanguage {
+            headers["Accept-Language"] = acceptLanguage
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -532,9 +579,7 @@ public class PersonalityInsights {
             method: "POST",
             url: serviceURL + "/v3/profile",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "text/csv",
-            contentType: "text/plain",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -607,6 +652,17 @@ public class PersonalityInsights {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "text/csv"
+        headers["Content-Type"] = "text/html"
+        if let contentLanguage = contentLanguage {
+            headers["Content-Language"] = contentLanguage
+        }
+        if let acceptLanguage = acceptLanguage {
+            headers["Accept-Language"] = acceptLanguage
+        }
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
@@ -628,9 +684,7 @@ public class PersonalityInsights {
             method: "POST",
             url: serviceURL + "/v3/profile",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "text/csv",
-            contentType: "text/html",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )

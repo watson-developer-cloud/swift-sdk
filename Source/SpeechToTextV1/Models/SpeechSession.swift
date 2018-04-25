@@ -22,7 +22,7 @@ public struct SpeechSession: Decodable {
     /// URI for HTTP REST recognition requests.
     public var recognize: String
 
-    /// URI for WebSocket recognition requests. Needed only for working with the WebSocket interface.
+    /// URI for WebSocket recognition requests. **Note:** This field is needed only for working with the WebSocket interface.
     public var recognizeWS: String
 
     /// URI for HTTP REST results observers.

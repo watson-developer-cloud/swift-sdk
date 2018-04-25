@@ -98,15 +98,17 @@ public class LanguageTranslator {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/translate",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -144,15 +146,17 @@ public class LanguageTranslator {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "text/plain"
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/identify",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "text/plain",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -179,16 +183,16 @@ public class LanguageTranslator {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (IdentifiableLanguages) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v2/identifiable_languages",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -245,6 +249,11 @@ public class LanguageTranslator {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = multipartFormData.contentType
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "base_model_id", value: baseModelID))
@@ -258,9 +267,7 @@ public class LanguageTranslator {
             method: "POST",
             url: serviceURL + "/v2/models",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: multipartFormData.contentType,
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -289,6 +296,10 @@ public class LanguageTranslator {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DeleteModelResult) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v2/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -299,11 +310,7 @@ public class LanguageTranslator {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -330,6 +337,10 @@ public class LanguageTranslator {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslationModel) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v2/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -340,11 +351,7 @@ public class LanguageTranslator {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -377,6 +384,10 @@ public class LanguageTranslator {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslationModels) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let source = source {
@@ -397,11 +408,8 @@ public class LanguageTranslator {
             method: "GET",
             url: serviceURL + "/v2/models",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: nil,
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request

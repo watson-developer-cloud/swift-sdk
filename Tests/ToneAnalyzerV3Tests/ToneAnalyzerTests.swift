@@ -173,6 +173,7 @@ class ToneAnalyzerTests: XCTestCase {
     func testToneChat() {
         let expectation = self.expectation(description: "Tone chat.")
         toneAnalyzer.toneChat(utterances: utterances, acceptLanguage: "en", failure: failWithError) { analyses in
+            XCTAssert(!analyses.utterancesTone.isEmpty)
             expectation.fulfill()
         }
         waitForExpectations()

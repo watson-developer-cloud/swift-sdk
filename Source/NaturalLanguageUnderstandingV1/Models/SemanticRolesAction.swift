@@ -17,7 +17,7 @@
 import Foundation
 
 /** SemanticRolesAction. */
-public struct SemanticRolesAction {
+public struct SemanticRolesAction: Decodable {
 
     /// Analyzed text that corresponds to the action.
     public var text: String?
@@ -27,43 +27,11 @@ public struct SemanticRolesAction {
 
     public var verb: SemanticRolesVerb?
 
-    /**
-     Initialize a `SemanticRolesAction` with member variables.
-
-     - parameter text: Analyzed text that corresponds to the action.
-     - parameter normalized: normalized version of the action.
-     - parameter verb:
-
-     - returns: An initialized `SemanticRolesAction`.
-    */
-    public init(text: String? = nil, normalized: String? = nil, verb: SemanticRolesVerb? = nil) {
-        self.text = text
-        self.normalized = normalized
-        self.verb = verb
-    }
-}
-
-extension SemanticRolesAction: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
         case normalized = "normalized"
         case verb = "verb"
-        static let allValues = [text, normalized, verb]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        normalized = try container.decodeIfPresent(String.self, forKey: .normalized)
-        verb = try container.decodeIfPresent(SemanticRolesVerb.self, forKey: .verb)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(normalized, forKey: .normalized)
-        try container.encodeIfPresent(verb, forKey: .verb)
     }
 
 }

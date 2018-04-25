@@ -17,7 +17,7 @@
 import Foundation
 
 /** An object containing request parameters. */
-public struct Parameters {
+public struct Parameters: Encodable {
 
     /// The plain text to analyze.
     public var text: String?
@@ -49,6 +49,20 @@ public struct Parameters {
     /// Sets the maximum number of characters that are processed by the service.
     public var limitTextCharacters: Int?
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+        case html = "html"
+        case url = "url"
+        case features = "features"
+        case clean = "clean"
+        case xpath = "xpath"
+        case fallbackToRaw = "fallback_to_raw"
+        case returnAnalyzedText = "return_analyzed_text"
+        case language = "language"
+        case limitTextCharacters = "limit_text_characters"
+    }
+
     /**
      Initialize a `Parameters` with member variables.
 
@@ -76,51 +90,6 @@ public struct Parameters {
         self.returnAnalyzedText = returnAnalyzedText
         self.language = language
         self.limitTextCharacters = limitTextCharacters
-    }
-}
-
-extension Parameters: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case html = "html"
-        case url = "url"
-        case features = "features"
-        case clean = "clean"
-        case xpath = "xpath"
-        case fallbackToRaw = "fallback_to_raw"
-        case returnAnalyzedText = "return_analyzed_text"
-        case language = "language"
-        case limitTextCharacters = "limit_text_characters"
-        static let allValues = [text, html, url, features, clean, xpath, fallbackToRaw, returnAnalyzedText, language, limitTextCharacters]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        html = try container.decodeIfPresent(String.self, forKey: .html)
-        url = try container.decodeIfPresent(String.self, forKey: .url)
-        features = try container.decode(Features.self, forKey: .features)
-        clean = try container.decodeIfPresent(Bool.self, forKey: .clean)
-        xpath = try container.decodeIfPresent(String.self, forKey: .xpath)
-        fallbackToRaw = try container.decodeIfPresent(Bool.self, forKey: .fallbackToRaw)
-        returnAnalyzedText = try container.decodeIfPresent(Bool.self, forKey: .returnAnalyzedText)
-        language = try container.decodeIfPresent(String.self, forKey: .language)
-        limitTextCharacters = try container.decodeIfPresent(Int.self, forKey: .limitTextCharacters)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(html, forKey: .html)
-        try container.encodeIfPresent(url, forKey: .url)
-        try container.encode(features, forKey: .features)
-        try container.encodeIfPresent(clean, forKey: .clean)
-        try container.encodeIfPresent(xpath, forKey: .xpath)
-        try container.encodeIfPresent(fallbackToRaw, forKey: .fallbackToRaw)
-        try container.encodeIfPresent(returnAnalyzedText, forKey: .returnAnalyzedText)
-        try container.encodeIfPresent(language, forKey: .language)
-        try container.encodeIfPresent(limitTextCharacters, forKey: .limitTextCharacters)
     }
 
 }

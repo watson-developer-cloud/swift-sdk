@@ -17,7 +17,7 @@
 import Foundation
 
 /** Analysis features and options. */
-public struct Features {
+public struct Features: Encodable {
 
     /// Whether or not to return the concepts that are mentioned in the analyzed text.
     public var concepts: ConceptsOptions?
@@ -46,6 +46,19 @@ public struct Features {
     /// Whether or not to return the high level category the content is categorized as (i.e. news, art).
     public var categories: CategoriesOptions?
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case concepts = "concepts"
+        case emotion = "emotion"
+        case entities = "entities"
+        case keywords = "keywords"
+        case metadata = "metadata"
+        case relations = "relations"
+        case semanticRoles = "semantic_roles"
+        case sentiment = "sentiment"
+        case categories = "categories"
+    }
+
     /**
      Initialize a `Features` with member variables.
 
@@ -71,48 +84,6 @@ public struct Features {
         self.semanticRoles = semanticRoles
         self.sentiment = sentiment
         self.categories = categories
-    }
-}
-
-extension Features: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case concepts = "concepts"
-        case emotion = "emotion"
-        case entities = "entities"
-        case keywords = "keywords"
-        case metadata = "metadata"
-        case relations = "relations"
-        case semanticRoles = "semantic_roles"
-        case sentiment = "sentiment"
-        case categories = "categories"
-        static let allValues = [concepts, emotion, entities, keywords, metadata, relations, semanticRoles, sentiment, categories]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        concepts = try container.decodeIfPresent(ConceptsOptions.self, forKey: .concepts)
-        emotion = try container.decodeIfPresent(EmotionOptions.self, forKey: .emotion)
-        entities = try container.decodeIfPresent(EntitiesOptions.self, forKey: .entities)
-        keywords = try container.decodeIfPresent(KeywordsOptions.self, forKey: .keywords)
-        metadata = try container.decodeIfPresent(MetadataOptions.self, forKey: .metadata)
-        relations = try container.decodeIfPresent(RelationsOptions.self, forKey: .relations)
-        semanticRoles = try container.decodeIfPresent(SemanticRolesOptions.self, forKey: .semanticRoles)
-        sentiment = try container.decodeIfPresent(SentimentOptions.self, forKey: .sentiment)
-        categories = try container.decodeIfPresent(CategoriesOptions.self, forKey: .categories)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(concepts, forKey: .concepts)
-        try container.encodeIfPresent(emotion, forKey: .emotion)
-        try container.encodeIfPresent(entities, forKey: .entities)
-        try container.encodeIfPresent(keywords, forKey: .keywords)
-        try container.encodeIfPresent(metadata, forKey: .metadata)
-        try container.encodeIfPresent(relations, forKey: .relations)
-        try container.encodeIfPresent(semanticRoles, forKey: .semanticRoles)
-        try container.encodeIfPresent(sentiment, forKey: .sentiment)
-        try container.encodeIfPresent(categories, forKey: .categories)
     }
 
 }

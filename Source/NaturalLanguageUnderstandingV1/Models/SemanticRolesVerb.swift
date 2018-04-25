@@ -17,7 +17,7 @@
 import Foundation
 
 /** SemanticRolesVerb. */
-public struct SemanticRolesVerb {
+public struct SemanticRolesVerb: Decodable {
 
     /// The keyword text.
     public var text: String?
@@ -25,38 +25,10 @@ public struct SemanticRolesVerb {
     /// Verb tense.
     public var tense: String?
 
-    /**
-     Initialize a `SemanticRolesVerb` with member variables.
-
-     - parameter text: The keyword text.
-     - parameter tense: Verb tense.
-
-     - returns: An initialized `SemanticRolesVerb`.
-    */
-    public init(text: String? = nil, tense: String? = nil) {
-        self.text = text
-        self.tense = tense
-    }
-}
-
-extension SemanticRolesVerb: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
         case tense = "tense"
-        static let allValues = [text, tense]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        tense = try container.decodeIfPresent(String.self, forKey: .tense)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(tense, forKey: .tense)
     }
 
 }

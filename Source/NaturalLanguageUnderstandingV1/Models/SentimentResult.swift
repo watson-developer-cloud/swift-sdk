@@ -17,7 +17,7 @@
 import Foundation
 
 /** The sentiment of the content. */
-public struct SentimentResult {
+public struct SentimentResult: Decodable {
 
     /// The document level sentiment.
     public var document: DocumentSentimentResults?
@@ -25,38 +25,10 @@ public struct SentimentResult {
     /// The targeted sentiment to analyze.
     public var targets: [TargetedSentimentResults]?
 
-    /**
-     Initialize a `SentimentResult` with member variables.
-
-     - parameter document: The document level sentiment.
-     - parameter targets: The targeted sentiment to analyze.
-
-     - returns: An initialized `SentimentResult`.
-    */
-    public init(document: DocumentSentimentResults? = nil, targets: [TargetedSentimentResults]? = nil) {
-        self.document = document
-        self.targets = targets
-    }
-}
-
-extension SentimentResult: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case document = "document"
         case targets = "targets"
-        static let allValues = [document, targets]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        document = try container.decodeIfPresent(DocumentSentimentResults.self, forKey: .document)
-        targets = try container.decodeIfPresent([TargetedSentimentResults].self, forKey: .targets)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(document, forKey: .document)
-        try container.encodeIfPresent(targets, forKey: .targets)
     }
 
 }

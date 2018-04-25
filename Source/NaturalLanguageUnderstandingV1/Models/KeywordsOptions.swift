@@ -17,7 +17,7 @@
 import Foundation
 
 /** An option indicating whether or not important keywords from the analyzed content should be returned. */
-public struct KeywordsOptions {
+public struct KeywordsOptions: Encodable {
 
     /// Maximum number of keywords to return.
     public var limit: Int?
@@ -27,6 +27,13 @@ public struct KeywordsOptions {
 
     /// Set this to true to analyze emotion for detected keywords.
     public var emotion: Bool?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case limit = "limit"
+        case sentiment = "sentiment"
+        case emotion = "emotion"
+    }
 
     /**
      Initialize a `KeywordsOptions` with member variables.
@@ -41,30 +48,6 @@ public struct KeywordsOptions {
         self.limit = limit
         self.sentiment = sentiment
         self.emotion = emotion
-    }
-}
-
-extension KeywordsOptions: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case limit = "limit"
-        case sentiment = "sentiment"
-        case emotion = "emotion"
-        static let allValues = [limit, sentiment, emotion]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        limit = try container.decodeIfPresent(Int.self, forKey: .limit)
-        sentiment = try container.decodeIfPresent(Bool.self, forKey: .sentiment)
-        emotion = try container.decodeIfPresent(Bool.self, forKey: .emotion)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(limit, forKey: .limit)
-        try container.encodeIfPresent(sentiment, forKey: .sentiment)
-        try container.encodeIfPresent(emotion, forKey: .emotion)
     }
 
 }

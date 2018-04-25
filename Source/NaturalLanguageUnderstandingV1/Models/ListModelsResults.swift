@@ -17,37 +17,13 @@
 import Foundation
 
 /** Models available for Relations and Entities features. */
-public struct ListModelsResults {
+public struct ListModelsResults: Decodable {
 
     public var models: [Model]?
 
-    /**
-     Initialize a `ListModelsResults` with member variables.
-
-     - parameter models:
-
-     - returns: An initialized `ListModelsResults`.
-    */
-    public init(models: [Model]? = nil) {
-        self.models = models
-    }
-}
-
-extension ListModelsResults: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case models = "models"
-        static let allValues = [models]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        models = try container.decodeIfPresent([Model].self, forKey: .models)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(models, forKey: .models)
     }
 
 }

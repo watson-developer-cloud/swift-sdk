@@ -17,7 +17,7 @@
 import Foundation
 
 /** The hierarchical 5-level taxonomy the content is categorized into. */
-public struct CategoriesOptions {
+public struct CategoriesOptions: Encodable {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
@@ -29,14 +29,6 @@ public struct CategoriesOptions {
     */
     public init(additionalProperties: [String: JSON] = [:]) {
         self.additionalProperties = additionalProperties
-    }
-}
-
-extension CategoriesOptions: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
     }
 
     public func encode(to encoder: Encoder) throws {

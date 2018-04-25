@@ -17,38 +17,14 @@
 import Foundation
 
 /** RSS or ATOM feed found on the webpage. */
-public struct Feed {
+public struct Feed: Decodable {
 
     /// URL of the RSS or ATOM feed.
     public var link: String?
 
-    /**
-     Initialize a `Feed` with member variables.
-
-     - parameter link: URL of the RSS or ATOM feed.
-
-     - returns: An initialized `Feed`.
-    */
-    public init(link: String? = nil) {
-        self.link = link
-    }
-}
-
-extension Feed: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case link = "link"
-        static let allValues = [link]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        link = try container.decodeIfPresent(String.self, forKey: .link)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(link, forKey: .link)
     }
 
 }

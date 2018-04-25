@@ -17,7 +17,7 @@
 import Foundation
 
 /** The Authors, Publication Date, and Title of the document. Supports URL and HTML input types. */
-public struct MetadataOptions {
+public struct MetadataOptions: Encodable {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
@@ -29,14 +29,6 @@ public struct MetadataOptions {
     */
     public init(additionalProperties: [String: JSON] = [:]) {
         self.additionalProperties = additionalProperties
-    }
-}
-
-extension MetadataOptions: Codable {
-
-    public init(from decoder: Decoder) throws {
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
     }
 
     public func encode(to encoder: Encoder) throws {

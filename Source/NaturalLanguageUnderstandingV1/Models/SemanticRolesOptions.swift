@@ -17,7 +17,7 @@
 import Foundation
 
 /** An option specifying whether or not to identify the subjects, actions, and verbs in the analyzed content. */
-public struct SemanticRolesOptions {
+public struct SemanticRolesOptions: Encodable {
 
     /// Maximum number of semantic_roles results to return.
     public var limit: Int?
@@ -27,6 +27,13 @@ public struct SemanticRolesOptions {
 
     /// Set this to true to return entity information for subjects and objects.
     public var entities: Bool?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case limit = "limit"
+        case keywords = "keywords"
+        case entities = "entities"
+    }
 
     /**
      Initialize a `SemanticRolesOptions` with member variables.
@@ -41,30 +48,6 @@ public struct SemanticRolesOptions {
         self.limit = limit
         self.keywords = keywords
         self.entities = entities
-    }
-}
-
-extension SemanticRolesOptions: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case limit = "limit"
-        case keywords = "keywords"
-        case entities = "entities"
-        static let allValues = [limit, keywords, entities]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        limit = try container.decodeIfPresent(Int.self, forKey: .limit)
-        keywords = try container.decodeIfPresent(Bool.self, forKey: .keywords)
-        entities = try container.decodeIfPresent(Bool.self, forKey: .entities)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(limit, forKey: .limit)
-        try container.encodeIfPresent(keywords, forKey: .keywords)
-        try container.encodeIfPresent(entities, forKey: .entities)
     }
 
 }

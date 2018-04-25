@@ -17,38 +17,14 @@
 import Foundation
 
 /** An object containing the emotion results of a document. */
-public struct DocumentEmotionResults {
+public struct DocumentEmotionResults: Decodable {
 
     /// An object containing the emotion results for the document.
     public var emotion: EmotionScores?
 
-    /**
-     Initialize a `DocumentEmotionResults` with member variables.
-
-     - parameter emotion: An object containing the emotion results for the document.
-
-     - returns: An initialized `DocumentEmotionResults`.
-    */
-    public init(emotion: EmotionScores? = nil) {
-        self.emotion = emotion
-    }
-}
-
-extension DocumentEmotionResults: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case emotion = "emotion"
-        static let allValues = [emotion]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        emotion = try container.decodeIfPresent(EmotionScores.self, forKey: .emotion)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(emotion, forKey: .emotion)
     }
 
 }

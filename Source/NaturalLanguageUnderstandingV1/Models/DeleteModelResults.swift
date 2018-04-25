@@ -17,38 +17,14 @@
 import Foundation
 
 /** Information about the deleted model. */
-public struct DeleteModelResults {
+public struct DeleteModelResults: Decodable {
 
     /// model_id of the deleted model.
     public var deleted: String?
 
-    /**
-     Initialize a `DeleteModelResults` with member variables.
-
-     - parameter deleted: model_id of the deleted model.
-
-     - returns: An initialized `DeleteModelResults`.
-    */
-    public init(deleted: String? = nil) {
-        self.deleted = deleted
-    }
-}
-
-extension DeleteModelResults: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case deleted = "deleted"
-        static let allValues = [deleted]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        deleted = try container.decodeIfPresent(String.self, forKey: .deleted)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(deleted, forKey: .deleted)
     }
 
 }

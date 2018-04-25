@@ -17,45 +17,17 @@
 import Foundation
 
 /** SemanticRolesObject. */
-public struct SemanticRolesObject {
+public struct SemanticRolesObject: Decodable {
 
     /// Object text.
     public var text: String?
 
     public var keywords: [SemanticRolesKeyword]?
 
-    /**
-     Initialize a `SemanticRolesObject` with member variables.
-
-     - parameter text: Object text.
-     - parameter keywords:
-
-     - returns: An initialized `SemanticRolesObject`.
-    */
-    public init(text: String? = nil, keywords: [SemanticRolesKeyword]? = nil) {
-        self.text = text
-        self.keywords = keywords
-    }
-}
-
-extension SemanticRolesObject: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
         case keywords = "keywords"
-        static let allValues = [text, keywords]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        keywords = try container.decodeIfPresent([SemanticRolesKeyword].self, forKey: .keywords)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(keywords, forKey: .keywords)
     }
 
 }

@@ -17,7 +17,7 @@
 import Foundation
 
 /** An entity that corresponds with an argument in a relation. */
-public struct RelationEntity {
+public struct RelationEntity: Decodable {
 
     /// Text that corresponds to the entity.
     public var text: String?
@@ -25,38 +25,10 @@ public struct RelationEntity {
     /// Entity type.
     public var type: String?
 
-    /**
-     Initialize a `RelationEntity` with member variables.
-
-     - parameter text: Text that corresponds to the entity.
-     - parameter type: Entity type.
-
-     - returns: An initialized `RelationEntity`.
-    */
-    public init(text: String? = nil, type: String? = nil) {
-        self.text = text
-        self.type = type
-    }
-}
-
-extension RelationEntity: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
         case type = "type"
-        static let allValues = [text, type]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        type = try container.decodeIfPresent(String.self, forKey: .type)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(type, forKey: .type)
     }
 
 }

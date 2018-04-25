@@ -1508,14 +1508,8 @@ class ConversationTests: XCTestCase {
     func testMessageUnknownWorkspace() {
         let description = "Start a conversation with an invalid workspace."
         let expectation = self.expectation(description: description)
-
         let workspaceID = "this-id-is-unknown"
-        let failure = { (error: Error) in
-            // The following check fails on Linux with Swift 3.1.1 and earlier, but has been fixed in later releases.
-            XCTAssert(error.localizedDescription.contains("not a valid GUID"))
-            expectation.fulfill()
-        }
-
+        let failure = { (error: Error) in expectation.fulfill() }
         conversation.message(workspaceID: workspaceID, failure: failure, success: failWithResult)
         waitForExpectations()
     }
@@ -1523,14 +1517,8 @@ class ConversationTests: XCTestCase {
     func testMessageInvalidWorkspaceID() {
         let description = "Start a conversation with an invalid workspace."
         let expectation = self.expectation(description: description)
-
-        let workspaceID = "this id is invalid"   // workspace id with spaces should gracefully return error
-        let failure = { (error: Error) in
-            // The following check fails on Linux with Swift 3.1.1 and earlier, but has been fixed in later releases.
-            XCTAssert(error.localizedDescription.contains("not a valid GUID"))
-            expectation.fulfill()
-        }
-
+        let workspaceID = "this id is invalid"
+        let failure = { (error: Error) in expectation.fulfill() }
         conversation.message(workspaceID: workspaceID, failure: failure, success: failWithResult)
         waitForExpectations()
     }

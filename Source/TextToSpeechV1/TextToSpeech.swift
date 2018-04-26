@@ -18,24 +18,18 @@ import Foundation
 
 /**
  ### Service Overview
- The IBM Text to Speech service provides a Representational State Transfer (REST) Application Programming Interface
- (API) that uses IBM's speech-synthesis capabilities to synthesize text into natural-sounding speech in a variety of
- languages, dialects, and voices. The service currently synthesizes text from US English, UK English, French, German,
- Italian, Japanese, Spanish, or Brazilian Portuguese into audio spoken in a male or female voice (the service supports
- only a single gender for some languages). The audio is streamed back to the client with minimal delay.
+ The IBM&reg; Text to Speech service provides an API that uses IBM's speech-synthesis capabilities to synthesize text
+ into natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male or
+ female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay.
  ### API Overview
  The Text to Speech service consists of the following related endpoints:
- * `/v1/voices` provides information about the voices available for synthesized speech.
- * `/v1/synthesize` synthesizes written text to audio speech.
- * `/v1/pronunciation` returns the pronunciation for a specified word. The `/v1/pronunciation` method is currently beta
- functionality.
- * `/v1/customizations` and `/v1/customizations/{customization_id}` lets users create custom voice models, which are
- dictionaries of words and their translations for use in speech synthesis. All `/v1/customizations` methods are
- currently beta functionality.
- * `/v1/customizations/{customization_id}/words` and `/v1/customizations/{customization_id}/words/{word}` lets users
- manage the words in a custom voice model.
-
-
+ * **Voices** provides information about the voices available for synthesized speech.
+ * **Synthesis** synthesizes written text to audio speech.
+ * **Pronunciation** returns the pronunciation for a specified word. The **Get pronunciation** method is currently beta.
+ * **Custom models** and let users create custom voice models, which are dictionaries of words and their translations
+ for use in speech synthesis. All custom model methods are currently beta features.
+ * **Custom words** let users manage the words in a custom voice model. All custom word methods are currently beta
+ features.
  **Note about the Try It Out feature:** The `Try it out!` button lets you experiment with the methods of the API by
  making actual cURL calls to the service. The feature is **not** supported for use with the `POST /v1/synthesize`
  method. For examples of calls to this method, see the [Text to Speech API
@@ -54,13 +48,9 @@ import Foundation
  * **Word translations:** Many customization methods accept or return sounds-like or phonetic translations for words. A
  phonetic translation is based on the SSML format for representing the phonetic string of a word. Phonetic translations
  can use standard International Phonetic Alphabet (IPA) representation:
-
-  &lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;
-
-  or the proprietary IBM Symbolic Phonetic Representation (SPR):
-
-  &lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;
-
+ &lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;
+ or the proprietary IBM Symbolic Phonetic Representation (SPR):
+ &lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;
  For more information about customization and about sounds-like and phonetic translations, see [Understanding
  customization](https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html).
  * **GUIDs:** The pronunciation and customization methods accept or return a Globally Unique Identifier (GUID). For
@@ -70,29 +60,10 @@ import Foundation
  for speech synthesis. The WebSocket interface supports both plain text and SSML input, including the SSML &lt;mark&gt;
  element and word timings. See [The WebSocket
  interface](https://console.bluemix.net/docs/services/text-to-speech/websockets.html).
- * **Authentication:** You authenticate to the service by using your service credentials. You can use your credentials
- to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
- contact the service directly. See [Service credentials for Watson
- services](https://console.bluemix.net/docs/services/watson/getting-started-credentials.html) and [Tokens for
- authentication](https://console.bluemix.net/docs/services/watson/getting-started-tokens.html).
  * **Custom voice model ownership:** In all cases, you must use service credentials created for the instance of the
  service that owns a custom voice model to use the methods described in this documentation with that model. For more
  information, see [Ownership of custom voice
  models](https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#customOwner).
- * **Request Logging:** By default, all Watson services log requests and their results. Data is collected only to
- improve the Watson services. If you do not want to share your data, set the header parameter
- `X-Watson-Learning-Opt-Out` to `true` for each request. Data is collected for any request that omits this header. See
- [Controlling request logging for Watson
- services](https://console.bluemix.net/docs/services/watson/getting-started-logging.html).
-
- The service does not log data (words and translations) that are used to build custom language models; your training
- data is never used to improve the service's base models. The service does log data when a custom model is used with a
- synthesize request; you must set the `X-Watson-Learning-Opt-Out` request header to prevent logging for recognition
- requests. For more information, see [Request logging and data
- privacy](https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#customLogging).
-
- For more information about the service and its various interfaces, see [About Text to
- Speech](https://console.bluemix.net/docs/services/text-to-speech/index.html).
  */
 public class TextToSpeech {
 
@@ -155,23 +126,29 @@ public class TextToSpeech {
     }
 
     /**
-     Retrieves a specific voice available for speech synthesis.
+     Get a voice.
 
-     Lists information about the voice specified with the `voice` path parameter. Specify the `customization_id` query
-     parameter to obtain information for that custom voice model of the specified voice. Use the `GET /v1/voices` method
-     to see a list of all available voices.
+     Lists information about the specified voice. The information includes the name, language, gender, and other details
+     about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
+     voice.
 
-     - parameter voice: The voice for which information is to be returned. Retrieve available voices with the `GET /v1/voices` method.
-     - parameter customizationID: The GUID of a custom voice model for which information is to be returned. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to see information about the specified voice with no customization.
+     - parameter voice: The voice for which information is to be returned.
+     - parameter customizationID: The GUID of a custom voice model for which information is to be returned. You must make the request with service
+     credentials created for the instance of the service that owns the custom model. Omit the parameter to see
+     information about the specified voice with no customization.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func getVoice(
         voice: String,
         customizationID: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Voice) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let customizationID = customizationID {
@@ -189,10 +166,8 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -206,27 +181,28 @@ public class TextToSpeech {
     }
 
     /**
-     Retrieves all voices available for speech synthesis.
+     Get voices.
 
-     Lists information about all available voices. To see information about a specific voice, use the `GET
-     /v1/voices/{voice}` method.
+     Retrieves a list of all voices available for use with the service. The information includes the name, language,
+     gender, and other details about the voice.
 
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func listVoices(
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Voices) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/voices",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -240,26 +216,33 @@ public class TextToSpeech {
     }
 
     /**
-     Streaming speech synthesis of the text in the body parameter.
+     Synthesize audio.
 
-     Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. Identical to the
-     `GET` method but passes longer text in the body of the request, not with the URL. Text size is limited to 5 KB.
-     (For the `audio/l16` format, you can optionally specify `endianness=big-endian` or `endianness=little-endian`; the
-     default is little endian.)   If a request includes invalid query parameters, the service returns a `Warnings`
-     response header that provides messages about the invalid parameters. The warning includes a descriptive message and
-     a list of invalid argument strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query
-     arguments:\"` followed by a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the
-     warnings.   **Note about the Try It Out feature:** The `Try it out!` button is **not** supported for use with the
-     the `POST /v1/synthesize` method. For examples of calls to the method, see the [Text to Speech API
+     Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. You can pass a
+     maximum of 5 KB of text.  Use the `Accept` header or the `accept` query parameter to specify the requested format
+     (MIME type) of the response audio. By default, the service uses `audio/ogg;codecs=opus`. For detailed information
+     about the supported audio formats and sampling rates, see [Specifying an audio
+     format](https://console.bluemix.net/docs/services/text-to-speech/http.html#format).   If a request includes invalid
+     query parameters, the service returns a `Warnings` response header that provides messages about the invalid
+     parameters. The warning includes a descriptive message and a list of invalid argument strings. For example, a
+     message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by a list of the form
+     `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the warnings.  **Note about the Try It Out
+     feature:** The `Try it out!` button is **not** supported for use with the the `POST /v1/synthesize` method. For
+     examples of calls to the method, see the [Text to Speech API
      reference](http://www.ibm.com/watson/developercloud/text-to-speech/api/v1/).
 
      - parameter text: The text to synthesize.
-     - parameter accept: The type of the response: audio/basic, audio/flac, audio/l16;rate=nnnn, audio/ogg, audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/mp3, audio/mpeg, audio/mulaw;rate=nnnn, audio/wav, audio/webm, audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
-     - parameter voice: The voice to use for synthesis. Retrieve available voices with the `GET /v1/voices` method.
-     - parameter customizationID: The GUID of a custom voice model to use for the synthesis. If a custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to use the specified voice with no customization.
+     - parameter accept: The type of the response: audio/basic, audio/flac, audio/l16;rate=nnnn, audio/ogg, audio/ogg;codecs=opus,
+     audio/ogg;codecs=vorbis, audio/mp3, audio/mpeg, audio/mulaw;rate=nnnn, audio/wav, audio/webm,
+     audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
+     - parameter voice: The voice to use for synthesis.
+     - parameter customizationID: The GUID of a custom voice model to use for the synthesis. If a custom voice model is specified, it is guaranteed
+     to work only if it matches the language of the indicated voice. You must make the request with service credentials
+     created for the instance of the service that owns the custom model. Omit the parameter to use the specified voice
+     with no customization.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func synthesize(
         text: String,
         accept: String? = nil,
@@ -273,6 +256,13 @@ public class TextToSpeech {
         guard let body = try? JSONEncoder().encode(synthesizeRequest) else {
             failure?(RestError.serializationError)
             return
+        }
+
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Content-Type"] = "application/json"
+        if let accept = accept {
+            headers["Accept"] = accept
         }
 
         // construct query parameters
@@ -291,9 +281,7 @@ public class TextToSpeech {
             method: "POST",
             url: serviceURL + "/v1/synthesize",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: accept,
-            contentType: "application/json",
+            headerParameters: headers,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -339,20 +327,26 @@ public class TextToSpeech {
     }
 
     /**
-     Gets the pronunciation for a word.
+     Get pronunciation.
 
-     Returns the phonetic pronunciation for the word specified by the `text` parameter. You can request the
-     pronunciation for a specific format. You can also request the pronunciation for a specific voice to see the default
-     translation for the language of that voice or for a specific custom voice model to see the translation for that
-     voice model.   **Note:** This method is currently a beta release.
+     Returns the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format.
+     You can also request the pronunciation for a specific voice to see the default translation for the language of that
+     voice or for a specific custom voice model to see the translation for that voice model.  **Note:** This method is
+     currently a beta release.
 
      - parameter text: The word for which the pronunciation is requested.
-     - parameter voice: A voice that specifies the language in which the pronunciation is to be returned. All voices for the same language (for example, `en-US`) return the same translation. Retrieve available voices with the `GET /v1/voices` method.
-     - parameter format: The phoneme format in which to return the pronunciation. Omit the parameter to obtain the pronunciation in the default format.
-     - parameter customizationID: The GUID of a custom voice model for which the pronunciation is to be returned. The language of a specified custom model must match the language of the specified voice. If the word is not defined in the specified custom model, the service returns the default translation for the custom model's language. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to see the translation for the specified voice with no customization.
+     - parameter voice: A voice that specifies the language in which the pronunciation is to be returned. All voices for the same language
+     (for example, `en-US`) return the same translation.
+     - parameter format: The phoneme format in which to return the pronunciation. Omit the parameter to obtain the pronunciation in the
+     default format.
+     - parameter customizationID: The GUID of a custom voice model for which the pronunciation is to be returned. The language of a specified custom
+     model must match the language of the specified voice. If the word is not defined in the specified custom model, the
+     service returns the default translation for the custom model's language. You must make the request with service
+     credentials created for the instance of the service that owns the custom model. Omit the parameter to see the
+     translation for the specified voice with no customization.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func getPronunciation(
         text: String,
         voice: String? = nil,
@@ -361,6 +355,10 @@ public class TextToSpeech {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Pronunciation) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "text", value: text))
@@ -382,10 +380,8 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + "/v1/pronunciation",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -399,17 +395,18 @@ public class TextToSpeech {
     }
 
     /**
-     Creates a new custom voice model.
+     Create a custom model.
 
-     Creates a new empty custom voice model. The model is owned by the instance of the service whose credentials are
-     used to create it.   **Note:** This method is currently a beta release.
+     Creates a new empty custom voice model. You must specify a name for the new custom model; you can optionally
+     specify the language and a description of the new model. The model is owned by the instance of the service whose
+     credentials are used to create it.  **Note:** This method is currently a beta release.
 
      - parameter name: The name of the new custom voice model.
      - parameter language: The language of the new custom voice model. Omit the parameter to use the the default language, `en-US`.
      - parameter description: A description of the new custom voice model. Specifying a description is recommended.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func createVoiceModel(
         name: String,
         language: String? = nil,
@@ -424,15 +421,17 @@ public class TextToSpeech {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/customizations",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -447,20 +446,24 @@ public class TextToSpeech {
     }
 
     /**
-     Deletes a custom voice model.
+     Delete a custom model.
 
-     Deletes the custom voice model with the specified `customization_id`. You must use credentials for the instance of
-     the service that owns a model to delete it.   **Note:** This method is currently a beta release.
+     Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
+     model to delete it.  **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The GUID of the custom voice model that is to be deleted. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func deleteVoiceModel(
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -471,9 +474,7 @@ public class TextToSpeech {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -487,23 +488,27 @@ public class TextToSpeech {
     }
 
     /**
-     Queries the contents of a custom voice model.
+     List a custom model.
 
-     Lists all information about the custom voice model with the specified `customization_id`. In addition to metadata
-     such as the name and description of the voice model, the output includes the words in the model and their
-     translations as defined in the model. To see just the metadata for a voice model, use the `GET /v1/customizations`
-     method. You must use credentials for the instance of the service that owns a model to list information about it.
-     **Note:** This method is currently a beta release.
+     Lists all information about a specified custom voice model. In addition to metadata such as the name and
+     description of the voice model, the output includes the words and their translations as defined in the model. To
+     see just the metadata for a voice model, use the **List custom models** method.   **Note:** This method is
+     currently a beta release.
 
-     - parameter customizationID: The GUID of the custom voice model that is to be queried. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func getVoiceModel(
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (VoiceModel) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -514,10 +519,7 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -531,23 +533,28 @@ public class TextToSpeech {
     }
 
     /**
-     Lists all available custom voice models for a language or for all languages.
+     List custom models.
 
-     Lists metadata such as the name and description for the custom voice models that you own. Use the `language` query
-     parameter to list the voice models that you own for the specified language only. Omit the parameter to see all
-     voice models that you own for all languages. To see the words in addition to the metadata for a specific voice
-     model, use the `GET /v1/customizations/{customization_id}` method. You must use credentials for the instance of the
-     service that owns a model to list information about it.   **Note:** This method is currently a beta release.
+     Lists metadata such as the name and description for all custom voice models that are owned by an instance of the
+     service. Specify a language to list the voice models for that language only. To see the words in addition to the
+     metadata for a specific voice model, use the **List a custom model** method. You must use credentials for the
+     instance of the service that owns a model to list information about it.  **Note:** This method is currently a beta
+     release.
 
-     - parameter language: The language for which custom voice models that are owned by the requesting service credentials are to be returned. Omit the parameter to see all custom voice models that are owned by the requester.
+     - parameter language: The language for which custom voice models that are owned by the requesting service credentials are to be returned.
+     Omit the parameter to see all custom voice models that are owned by the requester.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func listVoiceModels(
         language: String? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (VoiceModels) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         if let language = language {
@@ -560,10 +567,8 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + "/v1/customizations",
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: queryParameters,
-            messageBody: nil
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -577,21 +582,23 @@ public class TextToSpeech {
     }
 
     /**
-     Updates information and words for a custom voice model.
+     Update a custom model.
 
-     Updates information for the custom voice model with the specified `customization_id`. You can update the metadata
-     such as the name and description of the voice model. You can also update the words in the model and their
-     translations. Adding a new translation for a word that already exists in a custom model overwrites the word's
-     existing translation. A custom model can contain no more than 20,000 entries. You must use credentials for the
-     instance of the service that owns a model to update it.   **Note:** This method is currently a beta release.
+     Updates information for the specified custom voice model. You can update metadata such as the name and description
+     of the voice model. You can also update the words in the model and their translations. Adding a new translation for
+     a word that already exists in a custom model overwrites the word's existing translation. A custom model can contain
+     no more than 20,000 entries. You must use credentials for the instance of the service that owns a model to update
+     it.  **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The GUID of the custom voice model that is to be updated. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
      - parameter name: A new name for the custom voice model.
      - parameter description: A new description for the custom voice model.
-     - parameter words: An array of words and their translations that are to be added or updated for the custom voice model. Pass an empty array to make no additions or updates.
+     - parameter words: An array of `Word` objects that provides the words and their translations that are to be added or updated for the
+     custom voice model. Pass an empty array to make no additions or updates.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func updateVoiceModel(
         customizationID: String,
         name: String? = nil,
@@ -607,6 +614,10 @@ public class TextToSpeech {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -617,9 +628,7 @@ public class TextToSpeech {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -634,20 +643,25 @@ public class TextToSpeech {
     }
 
     /**
-     Adds a word to a custom voice model.
+     Add a custom word.
 
-     Adds a single word and its translation to the custom voice model with the specified `customization_id`. Adding a
-     new translation for a word that already exists in a custom model overwrites the word's existing translation. A
-     custom model can contain no more than 20,000 entries. You must use credentials for the instance of the service that
-     owns a model to add a word to it.   **Note:** This method is currently a beta release.
+     Adds a single word and its translation to the specified custom voice model. Adding a new translation for a word
+     that already exists in a custom model overwrites the word's existing translation. A custom model can contain no
+     more than 20,000 entries.  **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The GUID of the custom voice model that is to be updated. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
      - parameter word: The word that is to be added or updated for the custom voice model.
-     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A sounds-like is one or more words that, when combined, sound like the word.
-     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
+     representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A sounds-like
+     is one or more words that, when combined, sound like the word.
+     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
+     for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
+     create multiple entries with different parts of speech for the same word. For more information, see [Working with
+     Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func addWord(
         customizationID: String,
         word: String,
@@ -663,6 +677,10 @@ public class TextToSpeech {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -673,9 +691,7 @@ public class TextToSpeech {
             method: "PUT",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -690,18 +706,22 @@ public class TextToSpeech {
     }
 
     /**
-     Adds one or more words to a custom voice model.
+     Add custom words.
 
-     Adds one or more words and their translations to the custom voice model with the specified `customization_id`.
-     Adding a new translation for a word that already exists in a custom model overwrites the word's existing
-     translation. A custom model can contain no more than 20,000 entries. You must use credentials for the instance of
-     the service that owns a model to add words to it.   **Note:** This method is currently a beta release.
+     Adds one or more words and their translations to the specified custom voice model. Adding a new translation for a
+     word that already exists in a custom model overwrites the word's existing translation. A custom model can contain
+     no more than 20,000 entries.  **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The GUID of the custom voice model that is to be updated. You must make the request with service credentials created for the instance of the service that owns the custom model.
-     - parameter words: An array of words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
+     - parameter words: **When adding words to a custom voice model,** an array of `Word` objects that provides one or more words that are
+     to be added or updated for the custom voice model and the translation for each specified word. **When listing words
+     from a custom voice model,** an array of `Word` objects that lists the words and their translations from the custom
+     voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters.
+     The array is empty if the custom model contains no words.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func addWords(
         customizationID: String,
         words: [Word],
@@ -715,6 +735,10 @@ public class TextToSpeech {
             return
         }
 
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Content-Type"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -725,9 +749,7 @@ public class TextToSpeech {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            contentType: "application/json",
-            queryItems: nil,
+            headerParameters: headers,
             messageBody: body
         )
 
@@ -742,23 +764,25 @@ public class TextToSpeech {
     }
 
     /**
-     Deletes a word from a custom voice model.
+     Delete a custom word.
 
-     Deletes a single word from the custom voice model with the specified `customization_id`. You must use credentials
-     for the instance of the service that owns a model to delete it.   **Note:** This method is currently a beta
-     release.
+     Deletes a single word from the specified custom voice model.  **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The GUID of the custom voice model from which to delete a word. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
      - parameter word: The word that is to be deleted from the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func deleteWord(
         customizationID: String,
         word: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -769,9 +793,7 @@ public class TextToSpeech {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -785,23 +807,27 @@ public class TextToSpeech {
     }
 
     /**
-     Queries details about a word in a custom voice model.
+     List a custom word.
 
-     Returns the translation for a single word from the custom model with the specified `customization_id`. The output
-     shows the translation as it is defined in the model. You must use credentials for the instance of the service that
-     owns a model to query information about its words.   **Note:** This method is currently a beta release.
+     Returns the translation for a single word from the specified custom model. The output shows the translation as it
+     is defined in the model.  **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The GUID of the custom voice model from which to query a word. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
      - parameter word: The word that is to be queried from the custom voice model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func getWord(
         customizationID: String,
         word: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Translation) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -812,10 +838,7 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request
@@ -829,22 +852,25 @@ public class TextToSpeech {
     }
 
     /**
-     Queries details about the words in a custom voice model.
+     List custom words.
 
-     Lists all of the words and their translations for the custom voice model with the specified `customization_id`. The
-     output shows the translations as they are defined in the model. You must use credentials for the instance of the
-     service that owns a model to query information about its words.   **Note:** This method is currently a beta
-     release.
+     Lists all of the words and their translations for the specified custom voice model. The output shows the
+     translations as they are defined in the model.  **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The GUID of the custom voice model that is to be queried. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
-    */
+     */
     public func listWords(
         customizationID: String,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Words) -> Void)
     {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -855,10 +881,7 @@ public class TextToSpeech {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: defaultHeaders,
-            acceptType: "application/json",
-            queryItems: nil,
-            messageBody: nil
+            headerParameters: headers
         )
 
         // execute REST request

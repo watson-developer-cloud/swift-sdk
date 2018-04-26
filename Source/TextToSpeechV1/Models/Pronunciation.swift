@@ -17,38 +17,14 @@
 import Foundation
 
 /** Pronunciation. */
-public struct Pronunciation {
+public struct Pronunciation: Decodable {
 
     /// The pronunciation of the requested text in the specified voice and format.
     public var pronunciation: String
 
-    /**
-     Initialize a `Pronunciation` with member variables.
-
-     - parameter pronunciation: The pronunciation of the requested text in the specified voice and format.
-
-     - returns: An initialized `Pronunciation`.
-    */
-    public init(pronunciation: String) {
-        self.pronunciation = pronunciation
-    }
-}
-
-extension Pronunciation: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case pronunciation = "pronunciation"
-        static let allValues = [pronunciation]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        pronunciation = try container.decode(String.self, forKey: .pronunciation)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(pronunciation, forKey: .pronunciation)
     }
 
 }

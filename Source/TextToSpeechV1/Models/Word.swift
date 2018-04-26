@@ -17,7 +17,7 @@
 import Foundation
 
 /** Word. */
-public struct Word {
+public struct Word: Codable {
 
     /// **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
     public enum PartOfSpeech: String {
@@ -49,6 +49,13 @@ public struct Word {
     /// **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
     public var partOfSpeech: String?
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case word = "word"
+        case translation = "translation"
+        case partOfSpeech = "part_of_speech"
+    }
+
     /**
      Initialize a `Word` with member variables.
 
@@ -62,30 +69,6 @@ public struct Word {
         self.word = word
         self.translation = translation
         self.partOfSpeech = partOfSpeech
-    }
-}
-
-extension Word: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case word = "word"
-        case translation = "translation"
-        case partOfSpeech = "part_of_speech"
-        static let allValues = [word, translation, partOfSpeech]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        word = try container.decode(String.self, forKey: .word)
-        translation = try container.decode(String.self, forKey: .translation)
-        partOfSpeech = try container.decodeIfPresent(String.self, forKey: .partOfSpeech)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(word, forKey: .word)
-        try container.encode(translation, forKey: .translation)
-        try container.encodeIfPresent(partOfSpeech, forKey: .partOfSpeech)
     }
 
 }

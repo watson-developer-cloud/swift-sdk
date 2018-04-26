@@ -17,38 +17,14 @@
 import Foundation
 
 /** VoiceModels. */
-public struct VoiceModels {
+public struct VoiceModels: Decodable {
 
     /// An array of `VoiceModel` objects that provides information about each available custom voice model. The array is empty if the requesting service credentials own no custom voice models (if no language is specified) or own no custom voice models for the specified language.
     public var customizations: [VoiceModel]
 
-    /**
-     Initialize a `VoiceModels` with member variables.
-
-     - parameter customizations: An array of `VoiceModel` objects that provides information about each available custom voice model. The array is empty if the requesting service credentials own no custom voice models (if no language is specified) or own no custom voice models for the specified language.
-
-     - returns: An initialized `VoiceModels`.
-    */
-    public init(customizations: [VoiceModel]) {
-        self.customizations = customizations
-    }
-}
-
-extension VoiceModels: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case customizations = "customizations"
-        static let allValues = [customizations]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        customizations = try container.decode([VoiceModel].self, forKey: .customizations)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(customizations, forKey: .customizations)
     }
 
 }

@@ -16,12 +16,13 @@
 
 import Foundation
 
+// MARK: - RestRequest
+
 internal struct RestRequest {
 
     internal static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
         let sdkVersion = "0.24.1"
-
         let operatingSystem: String = {
             #if os(iOS)
                 return "iOS"
@@ -37,12 +38,10 @@ internal struct RestRequest {
                 return "Unknown"
             #endif
         }()
-
         let operatingSystemVersion: String = {
             let os = ProcessInfo.processInfo.operatingSystemVersion
             return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
         }()
-
         return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
     }()
 
@@ -93,30 +92,42 @@ internal struct RestRequest {
 
 extension RestRequest {
 
+    /**
+     Execute this request. (This is the main response function and is called by many of the functions below.)
+
+     - parseServiceError: A function that can parse service-specific errors from the raw data response.
+     - completionHandler: The completion handler to call when the request is complete.
+     */
     internal func response(
         parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
+        // add authentication credentials to the request
         credentials.authenticate(request: self) { request, error in
 
+            // ensure there is no credentials error
             guard let request = request, error == nil else {
                 completionHandler(nil, nil, error)
                 return
             }
 
+            // create a task to execute the request
             let task = self.session.dataTask(with: request.urlRequest) { (data, response, error) in
 
+                // ensure there is no underlying error
                 guard error == nil else {
                     completionHandler(data, response as? HTTPURLResponse, error)
                     return
                 }
 
+                // ensure there is a valid http response
                 guard let response = response as? HTTPURLResponse else {
                     let error = RestError.noResponse
                     completionHandler(data, nil, error)
                     return
                 }
 
+                // ensure the status code is successful
                 guard (200..<300).contains(response.statusCode) else {
                     if let serviceError = parseServiceError?(response, data) {
                         completionHandler(data, response, serviceError)
@@ -128,18 +139,29 @@ extension RestRequest {
                     return
                 }
 
+                // execute completion handler with successful response
                 completionHandler(data, response, nil)
             }
 
+            // start the task
             task.resume()
         }
     }
 
+    /**
+     Execute this request and process the response body as raw data.
+
+     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - completionHandler: The completion handler to call when the request is complete.
+     */
     internal func responseData(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<Data>) -> Void)
     {
+        // execute the request
         response(parseServiceError: responseToError) { data, response, error in
+
+            // ensure there is no underlying error
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<Data>.failure(error!)
@@ -147,25 +169,38 @@ extension RestRequest {
                 completionHandler(dataResponse)
                 return
             }
+
+            // ensure there is data to parse
             guard let data = data else {
                 let result = RestResult<Data>.failure(RestError.noData)
                 let dataResponse = RestResponse(response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
+
+            // execute completion handler
             let result = RestResult.success(data)
             let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
 
+    /**
+     Execute this request and process the response body as a JSON object.
+
+     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - path: The path at which to decode the JSON object.
+     - completionHandler: The completion handler to call when the request is complete.
+     */
     internal func responseObject<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
+        // execute the request
         response(parseServiceError: responseToError) { data, response, error in
 
+            // ensure there is no underlying error
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<T>.failure(error!)
@@ -174,7 +209,7 @@ extension RestRequest {
                 return
             }
 
-            // ensure data is not nil
+            // ensure there is data to parse
             guard let data = data else {
                 let result = RestResult<T>.failure(RestError.noData)
                 let dataResponse = RestResponse(response: response, data: nil, result: result)
@@ -205,18 +240,26 @@ extension RestRequest {
                 result = .failure(error)
             }
 
-            // execute callback
+            // execute completion handler
             let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
 
+    /**
+     Execute this request and process the response body as a decodable value.
+
+     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - completionHandler: The completion handler to call when the request is complete.
+     */
     internal func responseObject<T: Decodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
+        // execute the request
         response(parseServiceError: responseToError) { data, response, error in
 
+            // ensure there is no underlying error
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<T>.failure(error!)
@@ -225,7 +268,7 @@ extension RestRequest {
                 return
             }
 
-            // ensure data is not nil
+            // ensure there is data to parse
             guard let data = data else {
                 let result = RestResult<T>.failure(RestError.noData)
                 let dataResponse = RestResponse(response: response, data: nil, result: result)
@@ -242,19 +285,28 @@ extension RestRequest {
                 result = .failure(error)
             }
 
-            // execute callback
+            // execute completion handler
             let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
 
+    /**
+     Execute this request and process the response body as a JSON array.
+
+     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - path: The path at which to decode the JSON array.
+     - completionHandler: The completion handler to call when the request is complete.
+     */
     internal func responseArray<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
     {
+        // execute the request
         response(parseServiceError: responseToError) { data, response, error in
 
+            // ensure there is no underlying error
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<[T]>.failure(error!)
@@ -263,7 +315,7 @@ extension RestRequest {
                 return
             }
 
-            // ensure data is not nil
+            // ensure there is data to parse
             guard let data = data else {
                 let result = RestResult<[T]>.failure(RestError.noData)
                 let dataResponse = RestResponse(response: response, data: nil, result: result)
@@ -295,18 +347,26 @@ extension RestRequest {
                 result = .failure(error)
             }
 
-            // execute callback
+            // execute completion handler
             let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
 
+    /**
+     Execute this request and process the response body as a string.
+
+     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - completionHandler: The completion handler to call when the request is complete.
+     */
     internal func responseString(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<String>) -> Void)
     {
+        // execute the request
         response(parseServiceError: responseToError) { data, response, error in
 
+            // ensure there is no underlying error
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<String>.failure(error!)
@@ -315,7 +375,7 @@ extension RestRequest {
                 return
             }
 
-            // ensure data is not nil
+            // ensure there is data to parse
             guard let data = data else {
                 let result = RestResult<String>.failure(RestError.noData)
                 let dataResponse = RestResponse(response: response, data: nil, result: result)
@@ -331,19 +391,27 @@ extension RestRequest {
                 return
             }
 
-            // execute callback
+            // execute completion handler
             let result = RestResult.success(string)
             let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
 
+    /**
+     Execute this request and ignore any response body.
+
+     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - completionHandler: The completion handler to call when the request is complete.
+     */
     internal func responseVoid(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<Void>) -> Void)
     {
+        // execute the request
         response(parseServiceError: responseToError) { data, response, error in
 
+            // ensure there is no underlying error
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<Void>.failure(error!)
@@ -352,41 +420,54 @@ extension RestRequest {
                 return
             }
 
-            // execute callback
+            // execute completion handler
             let result = RestResult<Void>.success(())
             let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
 
+    /**
+     Execute this request and save the response body to disk.
+
+     - to: The destination file where the response body should be saved.
+     - completionHandler: The completion handler to call when the request is complete.
+     */
     internal func download(
         to destination: URL,
         completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void)
     {
+        // add authentication credentials to the request
         credentials.authenticate(request: self) { request, error in
 
+            // ensure there is no credentials error
             guard let request = request, error == nil else {
                 completionHandler(nil, error)
                 return
             }
 
+            // create a task to execute the request
             let task = self.session.downloadTask(with: request.urlRequest) { (location, response, error) in
 
+                // ensure there is no underlying error
                 guard error == nil else {
                     completionHandler(response as? HTTPURLResponse, error)
                     return
                 }
 
+                // ensure there is a valid http response
                 guard let response = response as? HTTPURLResponse else {
                     completionHandler(nil, RestError.noResponse)
                     return
                 }
 
+                // ensure the response body was saved to a temporary location
                 guard let location = location else {
                     completionHandler(response, RestError.invalidFile)
                     return
                 }
 
+                // move the temporary file to the specified destination
                 do {
                     try FileManager.default.moveItem(at: location, to: destination)
                     completionHandler(response, nil)
@@ -395,6 +476,7 @@ extension RestRequest {
                 }
             }
 
+            // start the download task
             task.resume()
         }
     }

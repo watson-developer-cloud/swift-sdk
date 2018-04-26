@@ -97,34 +97,42 @@ extension RestRequest {
         parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
-        let task = session.dataTask(with: request) { (data, response, error) in
+        credentials.authenticate(request: self) { request, error in
 
-            guard error == nil else {
-                completionHandler(data, response as? HTTPURLResponse, error)
+            guard let request = request, error == nil else {
+                completionHandler(nil, nil, error)
                 return
             }
 
-            guard let response = response as? HTTPURLResponse else {
-                let error = RestError.noResponse
-                completionHandler(data, nil, error)
-                return
-            }
+            let task = self.session.dataTask(with: request.urlRequest) { (data, response, error) in
 
-            guard (200..<300).contains(response.statusCode) else {
-                if let serviceError = parseServiceError?(response, data) {
-                    completionHandler(data, response, serviceError)
-                } else {
-                    let genericMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
-                    let genericError = RestError.failure(response.statusCode, genericMessage)
-                    completionHandler(data, response, genericError)
+                guard error == nil else {
+                    completionHandler(data, response as? HTTPURLResponse, error)
+                    return
                 }
-                return
+
+                guard let response = response as? HTTPURLResponse else {
+                    let error = RestError.noResponse
+                    completionHandler(data, nil, error)
+                    return
+                }
+
+                guard (200..<300).contains(response.statusCode) else {
+                    if let serviceError = parseServiceError?(response, data) {
+                        completionHandler(data, response, serviceError)
+                    } else {
+                        let genericMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
+                        let genericError = RestError.failure(response.statusCode, genericMessage)
+                        completionHandler(data, response, genericError)
+                    }
+                    return
+                }
+
+                completionHandler(data, response, nil)
             }
 
-            // Success path
-            completionHandler(data, response, nil)
+            task.resume()
         }
-        task.resume()
     }
 
     internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {

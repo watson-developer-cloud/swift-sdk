@@ -221,7 +221,7 @@ class AuthenticationTests: XCTestCase {
             refreshToken: credentials.token!.refreshToken,
             tokenType: credentials.token!.tokenType,
             expiresIn: credentials.token!.expiresIn,
-            expiration: 0
+            expiration: Int(Date().timeIntervalSince1970)
         )
         credentials.token = token
 

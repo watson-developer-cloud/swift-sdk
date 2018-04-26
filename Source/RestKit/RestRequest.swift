@@ -135,8 +135,11 @@ extension RestRequest {
         }
     }
 
-    internal func responseData(completionHandler: @escaping (RestResponse<Data>) -> Void) {
-        response { data, response, error in
+    internal func responseData(
+        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (RestResponse<Data>) -> Void)
+    {
+        response(parseServiceError: responseToError) { data, response, error in
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<Data>.failure(error!)

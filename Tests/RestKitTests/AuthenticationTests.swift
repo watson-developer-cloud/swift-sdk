@@ -215,6 +215,8 @@ class AuthenticationTests: XCTestCase {
         }
         wait(for: [expectation2], timeout: 5)
 
+        sleep(1) // sleep for 1 second to make sure the unix time stamp increments
+
         // change the token's expiration date to force a refresh
         let token = IAMToken(
             accessToken: credentials.token!.accessToken,

@@ -97,8 +97,7 @@ public class ToneAnalyzer {
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
 
-     - parameter toneInput: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type
-     `ToneInput`.
+     - parameter toneInput: The content to be analyzed.
      - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
      the full document. If `true` (the default), the service returns results for each sentence.
      - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the
@@ -188,8 +187,7 @@ public class ToneAnalyzer {
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
 
-     - parameter text: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type
-     `ToneInput`.
+     - parameter text: The content to be analyzed.
      - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
      the full document. If `true` (the default), the service returns results for each sentence.
      - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the
@@ -279,8 +277,7 @@ public class ToneAnalyzer {
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
 
-     - parameter html: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type
-     `ToneInput`.
+     - parameter html: The content to be analyzed.
      - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
      the full document. If `true` (the default), the service returns results for each sentence.
      - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the

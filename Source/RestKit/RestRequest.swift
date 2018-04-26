@@ -46,62 +46,46 @@ internal struct RestRequest {
         return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
     }()
 
-    private let request: URLRequest
+    internal var method: String
+    internal var url: String
+    internal var credentials: AuthenticationMethod
+    internal var headerParameters: [String: String]
+    internal var queryItems: [URLQueryItem]
+    internal var messageBody: Data? = nil
     private let session = URLSession(configuration: URLSessionConfiguration.default)
 
     internal init(
         method: String,
         url: String,
-        credentials: Credentials,
+        credentials: AuthenticationMethod,
         headerParameters: [String: String],
         acceptType: String? = nil,
         contentType: String? = nil,
         queryItems: [URLQueryItem]? = nil,
         messageBody: Data? = nil)
     {
-        // create mutable copies
         var headerParameters = headerParameters
-        var queryItems = queryItems ?? []
+        if let acceptType = acceptType { headerParameters["Accept"] = acceptType }
+        if let contentType = contentType { headerParameters["Content-Type"] = contentType }
+        self.method = method
+        self.url = url
+        self.credentials = credentials
+        self.headerParameters = headerParameters
+        self.queryItems = queryItems ?? []
+        self.messageBody = messageBody
+    }
 
-        // set authentication credentials
-        switch credentials {
-        case .basicAuthentication(let username, let password):
-            let authData = (username + ":" + password).data(using: .utf8)!
-            let authString = authData.base64EncodedString()
-            headerParameters["Authorization"] = "Basic \(authString)"
-        case .apiKey(let name, let key, let location):
-            switch location {
-            case .header: headerParameters[name] = key
-            case .query: queryItems.append(URLQueryItem(name: name, value: key))
-            }
-        }
-
-        // construct url components
-        var urlComponents = URLComponents(string: url)!
-        if !queryItems.isEmpty {
-            urlComponents.queryItems = queryItems
-        }
-
-        // encode "+" to %2B (URLComponents does not do this)
-        urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-
-        // construct mutable request
-        let url = urlComponents.url!
-        var request = URLRequest(url: url)
+    private var urlRequest: URLRequest {
+        // we must explicitly encode "+" as "%2B" since URLComponents does not
+        var components = URLComponents(string: url)!
+        if !queryItems.isEmpty { components.queryItems = queryItems }
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        var request = URLRequest(url: components.url!)
         request.httpMethod = method
         request.httpBody = messageBody
-
-        // set headers
         request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
         headerParameters.forEach { (key, value) in request.setValue(value, forHTTPHeaderField: key) }
-        if let acceptType = acceptType {
-            request.setValue(acceptType, forHTTPHeaderField: "Accept")
-        }
-        if let contentType = contentType {
-            request.setValue(contentType, forHTTPHeaderField: "Content-Type")
-        }
-
-        self.request = request
+        return request
     }
 
     internal func response(

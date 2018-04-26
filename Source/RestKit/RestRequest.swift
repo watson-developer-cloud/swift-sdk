@@ -151,17 +151,17 @@ extension RestRequest {
     /**
      Execute this request and process the response body as a JSON object.
 
-     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - parseServiceError: A function that can parse service-specific errors from the raw data response.
      - path: The path at which to decode the JSON object.
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseObject<T: JSONDecodable>(
-        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
         // execute the request
-        responseData(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
@@ -212,15 +212,15 @@ extension RestRequest {
     /**
      Execute this request and process the response body as a decodable value.
 
-     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - parseServiceError: A function that can parse service-specific errors from the raw data response.
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseObject<T: Decodable>(
-        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<T>) -> Void)
+        parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
     {
         // execute the request
-        responseData(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
@@ -257,17 +257,17 @@ extension RestRequest {
     /**
      Execute this request and process the response body as a JSON array.
 
-     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - parseServiceError: A function that can parse service-specific errors from the raw data response.
      - path: The path at which to decode the JSON array.
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseArray<T: JSONDecodable>(
-        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
     {
         // execute the request
-        responseData(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
@@ -319,15 +319,15 @@ extension RestRequest {
     /**
      Execute this request and process the response body as a string.
 
-     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - parseServiceError: A function that can parse service-specific errors from the raw data response.
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseString(
-        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<String>) -> Void)
+        parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
     {
         // execute the request
-        responseData(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
@@ -364,15 +364,15 @@ extension RestRequest {
     /**
      Execute this request and ignore any response body.
 
-     - responseToError: A function that can parse service-specific errors from the raw data response.
+     - parseServiceError: A function that can parse service-specific errors from the raw data response.
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseVoid(
-        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (RestResponse<Void>) -> Void)
+        parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
     {
         // execute the request
-        responseData(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {

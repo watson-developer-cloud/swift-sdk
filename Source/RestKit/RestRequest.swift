@@ -158,30 +158,24 @@ extension RestRequest {
     internal func responseObject<T: JSONDecodable>(
         parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
-        completionHandler: @escaping (RestResponse<T>) -> Void)
+        completionHandler: @escaping (T?, HTTPURLResponse?, Error?) -> Void)
     {
         // execute the request
         responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<T>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
+                completionHandler(nil, response, error)
                 return
             }
 
             // ensure there is data to parse
             guard let data = data else {
-                let result = RestResult<T>.failure(RestError.noData)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
+                completionHandler(nil, response, RestError.noData)
                 return
             }
 
-            // parse json object
-            let result: RestResult<T>
+            // parse response body as a JSONobject
             do {
                 let json = try JSONWrapper(data: data)
                 let object: T
@@ -198,14 +192,10 @@ extension RestRequest {
                 } else {
                     object = try json.decode()
                 }
-                result = .success(object)
+                completionHandler(object, response, nil)
             } catch {
-                result = .failure(error)
+                completionHandler(nil, response, error)
             }
-
-            // execute completion handler
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
         }
     }
 
@@ -216,41 +206,31 @@ extension RestRequest {
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseObject<T: Decodable>(
-        completionHandler: @escaping (RestResponse<T>) -> Void)
         parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (T?, HTTPURLResponse?, Error?) -> Void)
     {
         // execute the request
         responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<T>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
+                completionHandler(nil, response, error)
                 return
             }
 
             // ensure there is data to parse
             guard let data = data else {
-                let result = RestResult<T>.failure(RestError.noData)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
+                completionHandler(nil, response, RestError.noData)
                 return
             }
 
-            // parse json object
-            let result: RestResult<T>
+            // parse response body as a decodable value
             do {
-                let object = try JSONDecoder().decode(T.self, from: data)
-                result = .success(object)
+                let value = try JSONDecoder().decode(T.self, from: data)
+                completionHandler(value, response, nil)
             } catch {
-                result = .failure(error)
+                completionHandler(nil, response, error)
             }
-
-            // execute completion handler
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
         }
     }
 
@@ -264,30 +244,24 @@ extension RestRequest {
     internal func responseArray<T: JSONDecodable>(
         parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         path: [JSONPathType]? = nil,
-        completionHandler: @escaping (RestResponse<[T]>) -> Void)
+        completionHandler: @escaping ([T]?, HTTPURLResponse?, Error?) -> Void)
     {
         // execute the request
         responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<[T]>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
+                completionHandler(nil, response, error)
                 return
             }
 
             // ensure there is data to parse
             guard let data = data else {
-                let result = RestResult<[T]>.failure(RestError.noData)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
+                completionHandler(nil, response, RestError.noData)
                 return
             }
 
             // parse json object
-            let result: RestResult<[T]>
             do {
                 let json = try JSONWrapper(data: data)
                 var array: [JSONWrapper]
@@ -305,14 +279,10 @@ extension RestRequest {
                     array = try json.getArray()
                 }
                 let objects: [T] = try array.map { json in try json.decode() }
-                result = .success(objects)
+                completionHandler(objects, response, nil)
             } catch {
-                result = .failure(error)
+                completionHandler(nil, response, error)
             }
-
-            // execute completion handler
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
         }
     }
 
@@ -323,41 +293,32 @@ extension RestRequest {
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseString(
-        completionHandler: @escaping (RestResponse<String>) -> Void)
         parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (String?, HTTPURLResponse?, Error?) -> Void)
     {
         // execute the request
         responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<String>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
+                completionHandler(nil, response, error)
                 return
             }
 
             // ensure there is data to parse
             guard let data = data else {
-                let result = RestResult<String>.failure(RestError.noData)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
+                completionHandler(nil, response, RestError.noData)
                 return
             }
 
             // parse data as a string
             guard let string = String(data: data, encoding: .utf8) else {
-                let result = RestResult<String>.failure(RestError.serializationError)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
+                completionHandler(nil, response, RestError.serializationError)
                 return
             }
 
             // execute completion handler
-            let result = RestResult.success(string)
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
+            completionHandler(string, response, nil)
         }
     }
 
@@ -368,25 +329,20 @@ extension RestRequest {
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseVoid(
-        completionHandler: @escaping (RestResponse<Void>) -> Void)
         parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void)
     {
         // execute the request
         responseData(parseServiceError: parseServiceError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<Void>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
+                completionHandler(response, error)
                 return
             }
 
             // execute completion handler
-            let result = RestResult<Void>.success(())
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
+            completionHandler(response, nil)
         }
     }
 

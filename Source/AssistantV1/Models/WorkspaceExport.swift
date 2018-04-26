@@ -17,7 +17,7 @@
 import Foundation
 
 /** WorkspaceExport. */
-public struct WorkspaceExport {
+public struct WorkspaceExport: Decodable {
 
     /// The current status of the workspace.
     public enum Status: String {
@@ -67,44 +67,7 @@ public struct WorkspaceExport {
     /// An array of objects describing the dialog nodes in the workspace.
     public var dialogNodes: [DialogNode]?
 
-    /**
-     Initialize a `WorkspaceExport` with member variables.
-
-     - parameter name: The name of the workspace.
-     - parameter description: The description of the workspace.
-     - parameter language: The language of the workspace.
-     - parameter metadata: Any metadata that is required by the workspace.
-     - parameter workspaceID: The workspace ID.
-     - parameter status: The current status of the workspace.
-     - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
-     - parameter created: The timestamp for creation of the workspace.
-     - parameter updated: The timestamp for the last update to the workspace.
-     - parameter intents: An array of intents.
-     - parameter entities: An array of entities.
-     - parameter counterexamples: An array of counterexamples.
-     - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
-
-     - returns: An initialized `WorkspaceExport`.
-    */
-    public init(name: String, description: String, language: String, metadata: [String: JSON], workspaceID: String, status: String, learningOptOut: Bool, created: String? = nil, updated: String? = nil, intents: [IntentExport]? = nil, entities: [EntityExport]? = nil, counterexamples: [Counterexample]? = nil, dialogNodes: [DialogNode]? = nil) {
-        self.name = name
-        self.description = description
-        self.language = language
-        self.metadata = metadata
-        self.workspaceID = workspaceID
-        self.status = status
-        self.learningOptOut = learningOptOut
-        self.created = created
-        self.updated = updated
-        self.intents = intents
-        self.entities = entities
-        self.counterexamples = counterexamples
-        self.dialogNodes = dialogNodes
-    }
-}
-
-extension WorkspaceExport: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
         case description = "description"
@@ -119,41 +82,6 @@ extension WorkspaceExport: Codable {
         case entities = "entities"
         case counterexamples = "counterexamples"
         case dialogNodes = "dialog_nodes"
-        static let allValues = [name, description, language, metadata, created, updated, workspaceID, status, learningOptOut, intents, entities, counterexamples, dialogNodes]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        description = try container.decode(String.self, forKey: .description)
-        language = try container.decode(String.self, forKey: .language)
-        metadata = try container.decode([String: JSON].self, forKey: .metadata)
-        created = try container.decodeIfPresent(String.self, forKey: .created)
-        updated = try container.decodeIfPresent(String.self, forKey: .updated)
-        workspaceID = try container.decode(String.self, forKey: .workspaceID)
-        status = try container.decode(String.self, forKey: .status)
-        learningOptOut = try container.decode(Bool.self, forKey: .learningOptOut)
-        intents = try container.decodeIfPresent([IntentExport].self, forKey: .intents)
-        entities = try container.decodeIfPresent([EntityExport].self, forKey: .entities)
-        counterexamples = try container.decodeIfPresent([Counterexample].self, forKey: .counterexamples)
-        dialogNodes = try container.decodeIfPresent([DialogNode].self, forKey: .dialogNodes)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encode(description, forKey: .description)
-        try container.encode(language, forKey: .language)
-        try container.encode(metadata, forKey: .metadata)
-        try container.encodeIfPresent(created, forKey: .created)
-        try container.encodeIfPresent(updated, forKey: .updated)
-        try container.encode(workspaceID, forKey: .workspaceID)
-        try container.encode(status, forKey: .status)
-        try container.encode(learningOptOut, forKey: .learningOptOut)
-        try container.encodeIfPresent(intents, forKey: .intents)
-        try container.encodeIfPresent(entities, forKey: .entities)
-        try container.encodeIfPresent(counterexamples, forKey: .counterexamples)
-        try container.encodeIfPresent(dialogNodes, forKey: .dialogNodes)
     }
 
 }

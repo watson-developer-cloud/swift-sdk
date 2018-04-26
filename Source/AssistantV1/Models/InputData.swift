@@ -17,10 +17,15 @@
 import Foundation
 
 /** The user input. */
-public struct InputData {
+public struct InputData: Codable {
 
     /// The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
     public var text: String
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+    }
 
     /**
      Initialize a `InputData` with member variables.
@@ -31,24 +36,6 @@ public struct InputData {
     */
     public init(text: String) {
         self.text = text
-    }
-}
-
-extension InputData: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        static let allValues = [text]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decode(String.self, forKey: .text)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(text, forKey: .text)
     }
 
 }

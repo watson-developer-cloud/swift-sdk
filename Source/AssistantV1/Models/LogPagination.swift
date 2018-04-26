@@ -17,7 +17,7 @@
 import Foundation
 
 /** The pagination data for the returned objects. */
-public struct LogPagination {
+public struct LogPagination: Decodable {
 
     /// The URL that will return the next page of results, if any.
     public var nextUrl: String?
@@ -25,38 +25,14 @@ public struct LogPagination {
     /// Reserved for future use.
     public var matched: Int?
 
-    /**
-     Initialize a `LogPagination` with member variables.
+    /// A token identifying the next page of results.
+    public var nextCursor: String?
 
-     - parameter nextUrl: The URL that will return the next page of results, if any.
-     - parameter matched: Reserved for future use.
-
-     - returns: An initialized `LogPagination`.
-    */
-    public init(nextUrl: String? = nil, matched: Int? = nil) {
-        self.nextUrl = nextUrl
-        self.matched = matched
-    }
-}
-
-extension LogPagination: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case nextUrl = "next_url"
         case matched = "matched"
-        static let allValues = [nextUrl, matched]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        nextUrl = try container.decodeIfPresent(String.self, forKey: .nextUrl)
-        matched = try container.decodeIfPresent(Int.self, forKey: .matched)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(nextUrl, forKey: .nextUrl)
-        try container.encodeIfPresent(matched, forKey: .matched)
+        case nextCursor = "next_cursor"
     }
 
 }

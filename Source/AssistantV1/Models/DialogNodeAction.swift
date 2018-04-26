@@ -17,7 +17,7 @@
 import Foundation
 
 /** DialogNodeAction. */
-public struct DialogNodeAction {
+public struct DialogNodeAction: Codable {
 
     /// The type of action to invoke.
     public enum ActionType: String {
@@ -40,6 +40,15 @@ public struct DialogNodeAction {
     /// The name of the context variable that the client application will use to pass in credentials for the action.
     public var credentials: String?
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case actionType = "type"
+        case parameters = "parameters"
+        case resultVariable = "result_variable"
+        case credentials = "credentials"
+    }
+
     /**
      Initialize a `DialogNodeAction` with member variables.
 
@@ -57,36 +66,6 @@ public struct DialogNodeAction {
         self.actionType = actionType
         self.parameters = parameters
         self.credentials = credentials
-    }
-}
-
-extension DialogNodeAction: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case actionType = "type"
-        case parameters = "parameters"
-        case resultVariable = "result_variable"
-        case credentials = "credentials"
-        static let allValues = [name, actionType, parameters, resultVariable, credentials]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        actionType = try container.decodeIfPresent(String.self, forKey: .actionType)
-        parameters = try container.decodeIfPresent([String: JSON].self, forKey: .parameters)
-        resultVariable = try container.decode(String.self, forKey: .resultVariable)
-        credentials = try container.decodeIfPresent(String.self, forKey: .credentials)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
-        try container.encodeIfPresent(actionType, forKey: .actionType)
-        try container.encodeIfPresent(parameters, forKey: .parameters)
-        try container.encode(resultVariable, forKey: .resultVariable)
-        try container.encodeIfPresent(credentials, forKey: .credentials)
     }
 
 }

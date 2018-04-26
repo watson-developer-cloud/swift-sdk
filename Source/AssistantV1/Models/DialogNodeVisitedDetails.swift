@@ -17,7 +17,7 @@
 import Foundation
 
 /** DialogNodeVisitedDetails. */
-public struct DialogNodeVisitedDetails {
+public struct DialogNodeVisitedDetails: Codable {
 
     /// A dialog node that was triggered during processing of the input message.
     public var dialogNode: String?
@@ -25,38 +25,29 @@ public struct DialogNodeVisitedDetails {
     /// The title of the dialog node.
     public var title: String?
 
+    /// The conditions that trigger the dialog node.
+    public var conditions: String?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case dialogNode = "dialog_node"
+        case title = "title"
+        case conditions = "conditions"
+    }
+
     /**
      Initialize a `DialogNodeVisitedDetails` with member variables.
 
      - parameter dialogNode: A dialog node that was triggered during processing of the input message.
      - parameter title: The title of the dialog node.
+     - parameter conditions: The conditions that trigger the dialog node.
 
      - returns: An initialized `DialogNodeVisitedDetails`.
     */
-    public init(dialogNode: String? = nil, title: String? = nil) {
+    public init(dialogNode: String? = nil, title: String? = nil, conditions: String? = nil) {
         self.dialogNode = dialogNode
         self.title = title
-    }
-}
-
-extension DialogNodeVisitedDetails: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case dialogNode = "dialog_node"
-        case title = "title"
-        static let allValues = [dialogNode, title]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        dialogNode = try container.decodeIfPresent(String.self, forKey: .dialogNode)
-        title = try container.decodeIfPresent(String.self, forKey: .title)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(dialogNode, forKey: .dialogNode)
-        try container.encodeIfPresent(title, forKey: .title)
+        self.conditions = conditions
     }
 
 }

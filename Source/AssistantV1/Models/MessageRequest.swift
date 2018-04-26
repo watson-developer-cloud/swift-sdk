@@ -16,8 +16,8 @@
 
 import Foundation
 
-/** A request formatted for the Assistant service. */
-public struct MessageRequest {
+/** A request formatted for the Watson Assistant service. */
+public struct MessageRequest: Codable {
 
     /// An input object that includes the input text.
     public var input: InputData?
@@ -36,6 +36,16 @@ public struct MessageRequest {
 
     /// System output. Include the output from the previous response to maintain intermediate information over multiple requests.
     public var output: OutputData?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case input = "input"
+        case alternateIntents = "alternate_intents"
+        case context = "context"
+        case entities = "entities"
+        case intents = "intents"
+        case output = "output"
+    }
 
     /**
      Initialize a `MessageRequest` with member variables.
@@ -56,39 +66,6 @@ public struct MessageRequest {
         self.entities = entities
         self.intents = intents
         self.output = output
-    }
-}
-
-extension MessageRequest: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case input = "input"
-        case alternateIntents = "alternate_intents"
-        case context = "context"
-        case entities = "entities"
-        case intents = "intents"
-        case output = "output"
-        static let allValues = [input, alternateIntents, context, entities, intents, output]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        input = try container.decodeIfPresent(InputData.self, forKey: .input)
-        alternateIntents = try container.decodeIfPresent(Bool.self, forKey: .alternateIntents)
-        context = try container.decodeIfPresent(Context.self, forKey: .context)
-        entities = try container.decodeIfPresent([RuntimeEntity].self, forKey: .entities)
-        intents = try container.decodeIfPresent([RuntimeIntent].self, forKey: .intents)
-        output = try container.decodeIfPresent(OutputData.self, forKey: .output)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(input, forKey: .input)
-        try container.encodeIfPresent(alternateIntents, forKey: .alternateIntents)
-        try container.encodeIfPresent(context, forKey: .context)
-        try container.encodeIfPresent(entities, forKey: .entities)
-        try container.encodeIfPresent(intents, forKey: .intents)
-        try container.encodeIfPresent(output, forKey: .output)
     }
 
 }

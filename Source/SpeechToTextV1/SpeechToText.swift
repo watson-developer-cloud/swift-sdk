@@ -171,7 +171,7 @@ public class SpeechToText {
      Retrieves information about a single specified language model that is available for use with the service. The
      information includes the name of the model and its minimum sampling rate in Hertz, among other things.
 
-     - parameter modelID: The identifier of the desired model in the form of its `name` from the output of the **Get models** method.
+     - parameter modelID: The identifier of the model in the form of its name from the output of the **Get models** method.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -236,9 +236,21 @@ public class SpeechToText {
      metadata for a pair of FLAC files follows. This first part of the request is sent as JSON; the remaining parts are
      the audio files for the request.
      `metadata=\"{\\\"part_content_type\\\":\\\"audio/flac\\\",\\\"data_parts_count\\\":2,\\\"inactivity_timeout\\\"=-1}\"`
-       **Note about the Try It Out feature:** The `Try it out!` button is **not** supported for use with the the `POST
-     /v1/recognize` method. For examples of calls to the method, see the [Speech to Text API
-     reference](http://www.ibm.com/watson/developercloud/speech-to-text/api/v1/).
+     ###Audio formats (content types)   The service accepts audio in the following formats (MIME types): *
+     `audio/basic` (Use only with narrowband models.) * `audio/flac` * `audio/l16` (Specify the sampling rate (`rate`)
+     and optionally the number of channels (`channels`) and endianness (`endianness`) of the audio.) * `audio/mp3` *
+     `audio/mpeg` * `audio/mulaw` (Specify the sampling rate (`rate`) of the audio.) * `audio/ogg` (The service
+     automatically detects the codec of the input audio.) * `audio/ogg;codecs=opus` * `audio/ogg;codecs=vorbis` *
+     `audio/wav` (Provide audio with a maximum of nine channels.) * `audio/webm` (The service automatically detects the
+     codec of the input audio.) * `audio/webm;codecs=opus` * `audio/webm;codecs=vorbis`   For information about the
+     supported audio formats, including specifying the sampling rate, channels, and endianness for the indicated
+     formats, see [Audio formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html). * **For
+     non-multipart requests,** use the `Content-Type` parameter to specify the audio format. * **For multipart
+     requests,** use the `Content-Type` parameter to indicate the content type of the payload, `multipart/form-data`,
+     and specify the audio format with the `part_content_type` field of the JSON metadata. Do not use
+     `multipart/form-data` for non-multipart requests.   **Note about the Try It Out feature:** The `Try it out!` button
+     is **not** supported for use with the the `POST /v1/recognize` method. For examples of calls to the method, see the
+     [Speech to Text API reference](http://www.ibm.com/watson/developercloud/speech-to-text/api/v1/).
 
      - parameter model: The identifier of the model that is to be used for the recognition request or, for the **Create a session** method,
      with the new session.
@@ -272,20 +284,20 @@ public class SpeechToText {
      - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      closed with a 400 error. Useful for stopping audio submission from a live microphone when a user simply walks away.
      Use `-1` for infinity.   **Do not use with MULTIPART recognition requests.**.
-     - parameter keywords: NON-MULTIPART ONLY: An array of keyword strings to spot in the audio. Each keyword string can include one or more
-     tokens. Keywords are spotted only in the final hypothesis, not in interim results. If you specify any keywords, you
-     must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an
-     empty array if you do not need to spot keywords.
-     - parameter keywordsThreshold: NON-MULTIPART ONLY: A confidence value that is the lower bound for spotting a keyword. A word is considered to
-     match a keyword if its confidence is greater than or equal to the threshold. Specify a probability between 0 and 1
-     inclusive. No keyword spotting is performed if you omit the parameter. If you specify a threshold, you must also
-     specify one or more keywords.
-     - parameter maxAlternatives: NON-MULTIPART ONLY: The maximum number of alternative transcripts to be returned. By default, a single
-     transcription is returned.
-     - parameter wordAlternativesThreshold: NON-MULTIPART ONLY: A confidence value that is the lower bound for identifying a hypothesis as a possible word
-     alternative (also known as \"Confusion Networks\"). An alternative word is considered if its confidence is greater
-     than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed
-     if you omit the parameter.
+     - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords are
+     spotted only in the final hypothesis, not in interim results. If you specify any keywords, you must also specify a
+     keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty array if you do
+     not need to spot keywords.   **Do not use with MULTIPART recognition requests.**.
+     - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
+     confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword
+     spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
+     keywords.   **Do not use with MULTIPART recognition requests.**.
+     - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single transcription is returned.
+     **Do not use with MULTIPART recognition requests.**.
+     - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also known
+     as \"Confusion Networks\"). An alternative word is considered if its confidence is greater than or equal to the
+     threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the
+     parameter.   **Do not use with MULTIPART recognition requests.**.
      - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence
      measures are returned.   **Do not use with MULTIPART recognition requests.**.
      - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are returned.   **Do not use with
@@ -554,7 +566,16 @@ public class SpeechToText {
      parameters as other HTTP and WebSocket recognition requests. The service imposes a data size limit of 100 MB. It
      automatically detects the endianness of the incoming audio and, for audio that includes multiple channels,
      downmixes the audio to one-channel mono during transcoding. (For the `audio/l16` format, you can specify the
-     endianness.).
+     endianness.)     ###Audio formats (content types)   Use the `Content-Type` parameter to specify the audio format
+     (MIME type) of the audio: * `audio/basic` (Use only with narrowband models.) * `audio/flac` * `audio/l16` (Specify
+     the sampling rate (`rate`) and optionally the number of channels (`channels`) and endianness (`endianness`) of the
+     audio.) * `audio/mp3` * `audio/mpeg` * `audio/mulaw` (Specify the sampling rate (`rate`) of the audio.) *
+     `audio/ogg` (The service automatically detects the codec of the input audio.) * `audio/ogg;codecs=opus` *
+     `audio/ogg;codecs=vorbis` * `audio/wav` (Provide audio with a maximum of nine channels.) * `audio/webm` (The
+     service automatically detects the codec of the input audio.) * `audio/webm;codecs=opus` *
+     `audio/webm;codecs=vorbis`   For information about the supported audio formats, including specifying the sampling
+     rate, channels, and endianness for the indicated formats, see [Audio
+     formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
 
      - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.
      - parameter contentType: The type of the input: audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg,
@@ -607,19 +628,20 @@ public class SpeechToText {
      - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      closed with a 400 error. Useful for stopping audio submission from a live microphone when a user simply walks away.
      Use `-1` for infinity.   **Do not use with MULTIPART recognition requests.**.
-     - parameter keywords: Array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords are
+     - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords are
      spotted only in the final hypothesis, not in interim results. If you specify any keywords, you must also specify a
      keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty array if you do
-     not need to spot keywords.
-     - parameter keywordsThreshold: Confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
+     not need to spot keywords.   **Do not use with MULTIPART recognition requests.**.
+     - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
      confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword
      spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     keywords.
-     - parameter maxAlternatives: Maximum number of alternative transcripts to be returned. By default, a single transcription is returned.
-     - parameter wordAlternativesThreshold: Confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also known as
-     \"Confusion Networks\"). An alternative word is considered if its confidence is greater than or equal to the
+     keywords.   **Do not use with MULTIPART recognition requests.**.
+     - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single transcription is returned.
+     **Do not use with MULTIPART recognition requests.**.
+     - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also known
+     as \"Confusion Networks\"). An alternative word is considered if its confidence is greater than or equal to the
      threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the
-     parameter.
+     parameter.   **Do not use with MULTIPART recognition requests.**.
      - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence
      measures are returned.   **Do not use with MULTIPART recognition requests.**.
      - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are returned.   **Do not use with
@@ -823,7 +845,7 @@ public class SpeechToText {
      remain available. Use the **Check jobs** method to request information about the most recent jobs associated with
      the calling user.
 
-     - parameter id: The ID of the job whose status is to be checked.
+     - parameter id: The ID of the asynchronous job.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -866,7 +888,7 @@ public class SpeechToText {
      its results are no longer available. The service automatically deletes a job and its results when the time to live
      for the results expires. You must submit the request with the service credentials of the user who created the job.
 
-     - parameter id: The ID of the job that is to be deleted.
+     - parameter id: The ID of the asynchronous job.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -907,7 +929,7 @@ public class SpeechToText {
 
      Creates a new custom language model for a specified base model. The custom language model can be used only with the
      base model for which it is created. The model is owned by the instance of the service whose credentials are used to
-     create it.
+     create it. You must pass a value of `application/json` with the `Content-Type` header.
 
      - parameter createLanguageModel: A `CreateLanguageModel` object that provides basic information about the new custom language model.
      - parameter failure: A function executed if an error occurs.
@@ -956,8 +978,9 @@ public class SpeechToText {
      language models for all languages. You must use credentials for the instance of the service that owns a model to
      list information about it.
 
-     - parameter language: The identifier of the language for which custom language models are to be returned (for example, `en-US`). Omit the
-     parameter to see all custom language models owned by the requesting service credentials.
+     - parameter language: The identifier of the language for which custom language or custom acoustic models are to be returned (for example,
+     `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the requesting service
+     credentials.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1093,7 +1116,7 @@ public class SpeechToText {
      instance of the service that owns a model to train it.   The training method is asynchronous. It can take on the
      order of minutes to complete depending on the amount of data on which the service is being trained and the current
      load on the service. The method returns an HTTP 200 response code to indicate that the training process has begun.
-      You can monitor the status of the training by using the **List a custom language model** method to poll the
+     You can monitor the status of the training by using the **List a custom language model** method to poll the
      model's status. Use a loop to check the status every 10 seconds. The method returns a `Customization` object that
      includes `status` and `progress` fields. A status of `available` means that the custom model is trained and ready
      to use. The service cannot accept subsequent training requests, or requests to add new corpora or words, until the
@@ -1110,7 +1133,7 @@ public class SpeechToText {
      model is not trained on new words extracted from corpora.
      - parameter customizationWeight: Specifies a customization weight for the custom language model. The customization weight tells the service how much
      weight to give to words from the custom language model compared to those from the base model for speech
-     recognition. Specify a value between 0.0 and 1.0. The default value is 0.3.   The default value yields the best
+     recognition. Specify a value between 0.0 and 1.0; the default is 0.3.   The default value yields the best
      performance in general. Assign a higher value if your audio makes frequent use of OOV words from the custom model.
      Use caution when setting the weight: a higher value can improve the accuracy of phrases from the custom model's
      domain, but it can negatively affect performance on non-domain phrases.   The value that you assign is used for all
@@ -1331,20 +1354,20 @@ public class SpeechToText {
      associated with the existing corpus from the model's words resource unless they were also added by another corpus
      or they have been modified in some way with the **Add custom words** or **Add a custom word** method.   The service
      limits the overall amount of data that you can add to a custom model to a maximum of 10 million total words from
-     all corpora combined. Also, you can add no more than 30 thousand new custom words to a model; this includes words
+     all corpora combined. Also, you can add no more than 30 thousand custom (OOV) words to a model; this includes words
      that the service extracts from corpora and words that you add directly.
 
      - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
      of the service that owns the custom model.
-     - parameter corpusName: The name of the corpus that is to be added to the custom language model. The name cannot contain spaces and cannot
-     be the string `user`, which is reserved by the service to denote custom words added or modified by the user. Use a
-     localized name that matches the language of the custom model.
+     - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name; use
+     a localized name that matches the language of the custom model; and do not use the name `user`, which is reserved
+     by the service to denote custom words added or modified by the user.
      - parameter corpusFile: A plain text file that contains the training data for the corpus. Encode the file in UTF-8 if it contains non-ASCII
      characters; the service assumes UTF-8 encoding if it encounters non-ASCII characters. With cURL, use the
      `--data-binary` option to upload the file for the request.
-     - parameter allowOverwrite: Indicates whether the specified corpus is to overwrite an existing corpus with the same name. If a corpus with the
-     same name already exists, the request fails unless `allow_overwrite` is set to `true`; by default, the parameter is
-     `false`. The parameter has no effect if a corpus with the same name does not already exist.
+     - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
+     name. If `false` (the default), the request fails if a corpus or audio resource with the same name already exists.
+     The parameter has no effect if a corpus or audio resource with the same name does not already exist.
      - parameter corpusFileContentType: The content type of corpusFile.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1412,7 +1435,9 @@ public class SpeechToText {
 
      - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
      of the service that owns the custom model.
-     - parameter corpusName: The name of the corpus about which information is to be listed.
+     - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name; use
+     a localized name that matches the language of the custom model; and do not use the name `user`, which is reserved
+     by the service to denote custom words added or modified by the user.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1460,7 +1485,9 @@ public class SpeechToText {
 
      - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
      of the service that owns the custom model.
-     - parameter corpusName: The name of the corpus that is to be deleted from the custom language model.
+     - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name; use
+     a localized name that matches the language of the custom model; and do not use the name `user`, which is reserved
+     by the service to denote custom words added or modified by the user.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1570,16 +1597,19 @@ public class SpeechToText {
 
      Adds one or more custom words to a custom language model. The service populates the words resource for a custom
      model with out-of-vocabulary (OOV) words found in each corpus added to the model. You can use this method to add
-     additional words or to modify existing words in the words resource. You must use credentials for the instance of
-     the service that owns a model to add or modify custom words for the model. Adding or modifying custom words does
-     not affect the custom model until you train the model for the new data by using the **Train a custom language
-     model** method.   You add custom words by providing a `Words` object, which is an array of `Word` objects, one per
-     word. You must use the object's word parameter to identify the word that is to be added. You can also provide one
-     or both of the optional `sounds_like` and `display_as` fields for each word. * The `sounds_like` field provides an
-     array of one or more pronunciations for the word. Use the parameter to specify how the word can be pronounced by
-     users. Use the parameter for words that are difficult to pronounce, foreign words, acronyms, and so on. For
-     example, you might specify that the word `IEEE` can sound like `i triple e`. You can specify a maximum of five
-     sounds-like pronunciations for a word. For information about pronunciation rules, see [Using the sounds_like
+     additional words or to modify existing words in the words resource. The words resource for a model can contain a
+     maximum of 30 thousand custom (OOV) words, including words that the service extracts from corpora and words that
+     you add directly.   You must use credentials for the instance of the service that owns a model to add or modify
+     custom words for the model. You must pass a value of `application/json` with the `Content-Type` header. Adding or
+     modifying custom words does not affect the custom model until you train the model for the new data by using the
+     **Train a custom language model** method.   You add custom words by providing a `Words` object, which is an array
+     of `Word` objects, one per word. You must use the object's word parameter to identify the word that is to be added.
+     You can also provide one or both of the optional `sounds_like` and `display_as` fields for each word. * The
+     `sounds_like` field provides an array of one or more pronunciations for the word. Use the parameter to specify how
+     the word can be pronounced by users. Use the parameter for words that are difficult to pronounce, foreign words,
+     acronyms, and so on. For example, you might specify that the word `IEEE` can sound like `i triple e`. You can
+     specify a maximum of five sounds-like pronunciations for a word. For information about pronunciation rules, see
+     [Using the sounds_like
      field](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#soundsLike). * The
      `display_as` field provides a different way of spelling the word in a transcript. Use the parameter when you want
      the word to appear different from its usual representation or from its spelling in corpora training data. For
@@ -1597,7 +1627,7 @@ public class SpeechToText {
      added to the custom model. The service cannot accept requests to add new corpora or words or to train the model
      until the existing request completes.   You can use the **List custom words** or **List a custom word** method to
      review the words that you add. Words with an invalid `sounds_like` field include an `error` field that describes
-     the problem. You can use other words methods to correct errors, eliminate typos, and modify how words are
+     the problem. You can use other words-related methods to correct errors, eliminate typos, and modify how words are
      pronounced as needed.
 
      - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
@@ -1653,17 +1683,19 @@ public class SpeechToText {
      Add a custom word.
 
      Adds a custom word to a custom language model. The service populates the words resource for a custom model with
-     out-of-vocabulary (OOV) words found in each corpus added to the model. You can use this method to add additional
-     words or to modify existing words in the words resource. You must use credentials for the instance of the service
-     that owns a model to add or modify a custom word for the model. Adding or modifying a custom word does not affect
-     the custom model until you train the model for the new data by using the **Train a custom language model** method.
-      Use the `word_name` parameter to specify the custom word that is to be added or modified. Use the `CustomWord`
-     object to provide one or both of the optional `sounds_like` and `display_as` fields for the word. * The
-     `sounds_like` field provides an array of one or more pronunciations for the word. Use the parameter to specify how
-     the word can be pronounced by users. Use the parameter for words that are difficult to pronounce, foreign words,
-     acronyms, and so on. For example, you might specify that the word `IEEE` can sound like `i triple e`. You can
-     specify a maximum of five sounds-like pronunciations for a word. For information about pronunciation rules, see
-     [Using the sounds_like
+     out-of-vocabulary (OOV) words found in each corpus added to the model. You can use this method to add a word or to
+     modify an existing word in the words resource. The words resource for a model can contain a maximum of 30 thousand
+     custom (OOV) words, including words that the service extracts from corpora and words that you add directly.   You
+     must use credentials for the instance of the service that owns a model to add or modify a custom word for the
+     model. You must pass a value of `application/json` with the `Content-Type` header. Adding or modifying a custom
+     word does not affect the custom model until you train the model for the new data by using the **Train a custom
+     language model** method.   Use the `word_name` parameter to specify the custom word that is to be added or
+     modified. Use the `CustomWord` object to provide one or both of the optional `sounds_like` and `display_as` fields
+     for the word. * The `sounds_like` field provides an array of one or more pronunciations for the word. Use the
+     parameter to specify how the word can be pronounced by users. Use the parameter for words that are difficult to
+     pronounce, foreign words, acronyms, and so on. For example, you might specify that the word `IEEE` can sound like
+     `i triple e`. You can specify a maximum of five sounds-like pronunciations for a word. For information about
+     pronunciation rules, see [Using the sounds_like
      field](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#soundsLike). * The
      `display_as` field provides a different way of spelling the word in a transcript. Use the parameter when you want
      the word to appear different from its usual representation or from its spelling in corpora training data. For
@@ -1676,8 +1708,8 @@ public class SpeechToText {
 
      - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
      of the service that owns the custom model.
-     - parameter wordName: The custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a -
-     (dash) or _ (underscore) to connect the tokens of compound words.
+     - parameter wordName: The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the
+     word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      - parameter word: **When specifying an array of one or more words,** you must specify the custom word that is to be added to or
      updated in the custom model. Do not include spaces in the word. Use a - (dash) or _ (underscore) to connect the
      tokens of compound words. **When adding or updating a single word directly,** omit this field.
@@ -1747,7 +1779,8 @@ public class SpeechToText {
 
      - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
      of the service that owns the custom model.
-     - parameter wordName: The custom word that is to be queried from the custom language model.
+     - parameter wordName: The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the
+     word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1795,7 +1828,8 @@ public class SpeechToText {
 
      - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
      of the service that owns the custom model.
-     - parameter wordName: The custom word that is to be deleted from the custom language model.
+     - parameter wordName: The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the
+     word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1837,7 +1871,7 @@ public class SpeechToText {
 
      Creates a new custom acoustic model for a specified base model. The custom acoustic model can be used only with the
      base model for which it is created. The model is owned by the instance of the service whose credentials are used to
-     create it.
+     create it. You must pass a value of `application/json` with the `Content-Type` header.
 
      - parameter name: A user-defined name for the new custom acoustic model. Use a name that is unique among all custom acoustic models
      that you own. Use a localized name that matches the language of the custom model. Use a name that describes the
@@ -1897,8 +1931,9 @@ public class SpeechToText {
      acoustic models for all languages. You must use credentials for the instance of the service that owns a model to
      list information about it.
 
-     - parameter language: The identifier of the language for which custom acoustic models are to be returned (for example, `en-US`). Omit the
-     parameter to see all custom acoustic models owned by the requesting service credentials.
+     - parameter language: The identifier of the language for which custom language or custom acoustic models are to be returned (for example,
+     `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the requesting service
+     credentials.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2265,47 +2300,60 @@ public class SpeechToText {
      to add an audio resource to it. Adding audio data does not affect the custom acoustic model until you train the
      model for the new data by using the **Train a custom acoustic model** method.   You can add individual audio files
      or an archive file that contains multiple audio files. Adding multiple audio files via a single archive file is
-     significantly more efficient than adding each file individually. * You can add an individual audio file in any
-     format that the service supports for speech recognition. Use the `Content-Type` header to specify the format of the
-     audio file. * You can add an archive file (**.zip** or **.tar.gz** file) that contains audio files in any format
-     that the service supports for speech recognition. All audio files added with the same archive file must have the
-     same audio format. Use the `Content-Type` header to specify the archive type, `application/zip` or
-     `application/gzip`. Use the `Contained-Content-Type` header to specify the format of the contained audio files; the
-     default format is `audio/wav`.   You can use this method to add any number of audio resources to a custom model by
-     calling the method once for each audio or archive file. But the addition of one audio resource must be fully
-     complete before you can add another. You must add a minimum of 10 minutes and a maximum of 50 hours of audio that
-     includes speech, not just silence, to a custom acoustic model before you can train it. No audio resource, audio- or
-     archive-type, can be larger than 100 MB.   The method is asynchronous. It can take several seconds to complete
-     depending on the duration of the audio and, in the case of an archive file, the total number of audio files being
-     processed. The service returns a 201 response code if the audio is valid. It then asynchronously analyzes the
-     contents of the audio file or files and automatically extracts information about the audio such as its length,
-     sampling rate, and encoding. You cannot submit requests to add additional audio resources to a custom acoustic
-     model, or to train the model, until the service's analysis of all audio files for the current request completes.
-     To determine the status of the service's analysis of the audio, use the **List an audio resource** method to poll
-     the status of the audio. The method accepts the GUID of the custom model and the name of the audio resource, and it
-     returns the status of the resource. Use a loop to check the status of the audio every few seconds until it becomes
-     `ok`.   **Note:** The sampling rate of an audio file must match the sampling rate of the base model for the custom
-     model: for broadband models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the
-     audio is higher than the minimum required rate, the service down-samples the audio to the appropriate rate. If the
-     sampling rate of the audio is lower than the minimum required rate, the service labels the audio file as `invalid`.
+     significantly more efficient than adding each file individually. You can add audio resources in any format that the
+     service supports for speech recognition.   You can use this method to add any number of audio resources to a custom
+     model by calling the method once for each audio or archive file. But the addition of one audio resource must be
+     fully complete before you can add another. You must add a minimum of 10 minutes and a maximum of 50 hours of audio
+     that includes speech, not just silence, to a custom acoustic model before you can train it. No audio resource,
+     audio- or archive-type, can be larger than 100 MB. To add an audio resource that has the same name as an existing
+     audio resource, set the `allow_overwrite` parameter to `true`; otherwise, the request fails.   The method is
+     asynchronous. It can take several seconds to complete depending on the duration of the audio and, in the case of an
+     archive file, the total number of audio files being processed. The service returns a 201 response code if the audio
+     is valid. It then asynchronously analyzes the contents of the audio file or files and automatically extracts
+     information about the audio such as its length, sampling rate, and encoding. You cannot submit requests to add
+     additional audio resources to a custom acoustic model, or to train the model, until the service's analysis of all
+     audio files for the current request completes.   To determine the status of the service's analysis of the audio,
+     use the **List an audio resource** method to poll the status of the audio. The method accepts the GUID of the
+     custom model and the name of the audio resource, and it returns the status of the resource. Use a loop to check the
+     status of the audio every few seconds until it becomes `ok`.     ###Content types for audio-type resources   You
+     can add an individual audio file in any format that the service supports for speech recognition. For an audio-type
+     resource, use the `Content-Type` parameter to specify the audio format (MIME type) of the audio file: *
+     `audio/basic` (Use only with narrowband models.) * `audio/flac` * `audio/l16` (Specify the sampling rate (`rate`)
+     and optionally the number of channels (`channels`) and endianness (`endianness`) of the audio.) * `audio/mp3` *
+     `audio/mpeg` * `audio/mulaw` (Specify the sampling rate (`rate`) of the audio.) * `audio/ogg` (The service
+     automatically detects the codec of the input audio.) * `audio/ogg;codecs=opus` * `audio/ogg;codecs=vorbis` *
+     `audio/wav` (Provide audio with a maximum of nine channels.) * `audio/webm` (The service automatically detects the
+     codec of the input audio.) * `audio/webm;codecs=opus` * `audio/webm;codecs=vorbis`   For information about the
+     supported audio formats, including specifying the sampling rate, channels, and endianness for the indicated
+     formats, see [Audio formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
+     **Note:** The sampling rate of an audio file must match the sampling rate of the base model for the custom model:
+     for broadband models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is
+     higher than the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling
+     rate of the audio is lower than the minimum required rate, the service labels the audio file as `invalid`.
+     ###Content types for archive-type resources   You can add an archive file (**.zip** or **.tar.gz** file) that
+     contains audio files in any format that the service supports for speech recognition. For an archive-type resource,
+     use the `Content-Type` parameter to specify the media type of the archive file: * `application/zip` for a **.zip**
+     file * `application/gzip` for a **.tar.gz** file.   All audio files contained in the archive must have the same
+     audio format. Use the `Contained-Content-Type` parameter to specify the format of the contained audio files. The
+     parameter accepts all of the audio formats supported for use with speech recognition and with the `Content-Type`
+     header, including the `rate`, `channels`, and `endianness` parameters that are used with some formats. The default
+     contained audio format is `audio/wav`.
 
      - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
      of the service that owns the custom model.
-     - parameter audioName: The name of the audio resource that is to be added to the custom acoustic model. The name cannot contain spaces.
-     Use a localized name that matches the language of the custom model.
+     - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include spaces
+     in the name; use a localized name that matches the language of the custom model.
      - parameter audioResource: The audio resource that is to be added to the custom acoustic model, an individual audio file or an archive file.
      - parameter contentType: The type of the input: application/zip, application/gzip, audio/basic, audio/flac, audio/l16, audio/mp3,
      audio/mpeg, audio/mulaw, audio/ogg, audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm,
      audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
-     - parameter containedContentType: For an archive-type resource that contains audio files whose format is not `audio/wav`, specifies the format of the
-     audio files. The header accepts all of the audio formats supported for use with speech recognition and with the
-     `Content-Type` header, including the `rate`, `channels`, and `endianness` parameters that are used with some
-     formats. For a complete list of supported audio formats, see [Audio
+     - parameter containedContentType: For an archive-type resource, specifies the format of the audio files contained in the archive file. The parameter
+     accepts all of the audio formats supported for use with speech recognition, including the `rate`, `channels`, and
+     `endianness` parameters that are used with some formats. For a complete list of supported audio formats, see [Audio
      formats](/docs/services/speech-to-text/input.html#formats).
-     - parameter allowOverwrite: Indicates whether the specified audio resource is to overwrite an existing resource with the same name. If a
-     resource with the same name already exists, the request fails unless `allow_overwrite` is set to `true`; by
-     default, the parameter is `false`. The parameter has no effect if a resource with the same name does not already
-     exist.
+     - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
+     name. If `false` (the default), the request fails if a corpus or audio resource with the same name already exists.
+     The parameter has no effect if a corpus or audio resource with the same name does not already exist.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2377,7 +2425,8 @@ public class SpeechToText {
 
      - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
      of the service that owns the custom model.
-     - parameter audioName: The name of the audio resource about which information is to be listed.
+     - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include spaces
+     in the name; use a localized name that matches the language of the custom model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2425,7 +2474,8 @@ public class SpeechToText {
 
      - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
      of the service that owns the custom model.
-     - parameter audioName: The name of the audio resource that is to be deleted from the custom acoustic model.
+     - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include spaces
+     in the name; use a localized name that matches the language of the custom model.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */

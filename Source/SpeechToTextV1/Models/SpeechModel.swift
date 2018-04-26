@@ -22,7 +22,7 @@ public struct SpeechModel: Decodable {
     /// The name of the model for use as an identifier in calls to the service (for example, `en-US_BroadbandModel`).
     public var name: String
 
-    /// The language identifier for the model (for example, `en-US`).
+    /// The language identifier of the model (for example, `en-US`).
     public var language: String
 
     /// The sampling rate (minimum acceptable rate for audio) used by the model in Hertz.

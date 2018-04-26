@@ -163,6 +163,8 @@
 		6836B9072091D23D006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
 		6836B9082091D23E006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
 		6836B9092091D240006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
+		6836B90B2091D6DB006DF944 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B90A2091D6DB006DF944 /* AuthenticationTests.swift */; };
+		6836B90C20924DE4006DF944 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* Credentials.swift */; };
 		683947D5202CF4F7007E3CF3 /* RelationArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AA202CF4F3007E3CF3 /* RelationArgument.swift */; };
 		683947D6202CF4F7007E3CF3 /* RelationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AB202CF4F3007E3CF3 /* RelationsResult.swift */; };
 		683947D7202CF4F7007E3CF3 /* SemanticRolesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AC202CF4F3007E3CF3 /* SemanticRolesObject.swift */; };
@@ -887,6 +889,7 @@
 		682CBD2B209051B90049EE9F /* SegmentSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentSettings.swift; sourceTree = "<group>"; };
 		682ED52E204F348100B17B06 /* WAVRepair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVRepair.swift; sourceTree = "<group>"; };
 		6836B8FD2091D1AF006DF944 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		6836B90A2091D6DB006DF944 /* AuthenticationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		683947AA202CF4F3007E3CF3 /* RelationArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationArgument.swift; sourceTree = "<group>"; };
 		683947AB202CF4F3007E3CF3 /* RelationsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationsResult.swift; sourceTree = "<group>"; };
 		683947AC202CF4F3007E3CF3 /* SemanticRolesObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemanticRolesObject.swift; sourceTree = "<group>"; };
@@ -1664,6 +1667,7 @@
 		682D30681F7D3BFD005562F9 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6836B90A2091D6DB006DF944 /* AuthenticationTests.swift */,
 				68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */,
 				68B213EE1F8429890052DC00 /* JSONValueTests.swift */,
 			);
@@ -3827,9 +3831,11 @@
 				68B213EF1F84298B0052DC00 /* CodableExtensionsTests.swift in Sources */,
 				68B213F01F84298B0052DC00 /* JSONValueTests.swift in Sources */,
 				68BC29031F8C38700042810E /* RestRequest.swift in Sources */,
+				6836B90C20924DE4006DF944 /* Credentials.swift in Sources */,
 				68BC28FE1F8C38700042810E /* CodableExtensions.swift in Sources */,
 				68BC29041F8C38700042810E /* RestToken.swift in Sources */,
 				68BC28FF1F8C38700042810E /* JSONWrapper.swift in Sources */,
+				6836B90B2091D6DB006DF944 /* AuthenticationTests.swift in Sources */,
 				68BC29021F8C38700042810E /* RestError.swift in Sources */,
 				68BC29051F8C38700042810E /* RestUtilities.swift in Sources */,
 				68BC29001F8C38700042810E /* JSON.swift in Sources */,

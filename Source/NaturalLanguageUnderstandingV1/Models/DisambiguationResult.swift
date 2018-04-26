@@ -17,7 +17,7 @@
 import Foundation
 
 /** Disambiguation information for the entity. */
-public struct DisambiguationResult {
+public struct DisambiguationResult: Decodable {
 
     /// Common entity name.
     public var name: String?
@@ -28,43 +28,11 @@ public struct DisambiguationResult {
     /// Entity subtype information.
     public var subtype: [String]?
 
-    /**
-     Initialize a `DisambiguationResult` with member variables.
-
-     - parameter name: Common entity name.
-     - parameter dbpediaResource: Link to the corresponding DBpedia resource.
-     - parameter subtype: Entity subtype information.
-
-     - returns: An initialized `DisambiguationResult`.
-    */
-    public init(name: String? = nil, dbpediaResource: String? = nil, subtype: [String]? = nil) {
-        self.name = name
-        self.dbpediaResource = dbpediaResource
-        self.subtype = subtype
-    }
-}
-
-extension DisambiguationResult: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
         case dbpediaResource = "dbpedia_resource"
         case subtype = "subtype"
-        static let allValues = [name, dbpediaResource, subtype]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decodeIfPresent(String.self, forKey: .name)
-        dbpediaResource = try container.decodeIfPresent(String.self, forKey: .dbpediaResource)
-        subtype = try container.decodeIfPresent([String].self, forKey: .subtype)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(name, forKey: .name)
-        try container.encodeIfPresent(dbpediaResource, forKey: .dbpediaResource)
-        try container.encodeIfPresent(subtype, forKey: .subtype)
     }
 
 }

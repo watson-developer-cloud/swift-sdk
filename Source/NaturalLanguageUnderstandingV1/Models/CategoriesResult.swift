@@ -17,7 +17,7 @@
 import Foundation
 
 /** The hierarchical 5-level taxonomy the content is categorized into. */
-public struct CategoriesResult {
+public struct CategoriesResult: Decodable {
 
     /// The path to the category through the taxonomy hierarchy.
     public var label: String?
@@ -25,38 +25,10 @@ public struct CategoriesResult {
     /// Confidence score for the category classification. Higher values indicate greater confidence.
     public var score: Double?
 
-    /**
-     Initialize a `CategoriesResult` with member variables.
-
-     - parameter label: The path to the category through the taxonomy hierarchy.
-     - parameter score: Confidence score for the category classification. Higher values indicate greater confidence.
-
-     - returns: An initialized `CategoriesResult`.
-    */
-    public init(label: String? = nil, score: Double? = nil) {
-        self.label = label
-        self.score = score
-    }
-}
-
-extension CategoriesResult: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case label = "label"
         case score = "score"
-        static let allValues = [label, score]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        label = try container.decodeIfPresent(String.self, forKey: .label)
-        score = try container.decodeIfPresent(Double.self, forKey: .score)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(label, forKey: .label)
-        try container.encodeIfPresent(score, forKey: .score)
     }
 
 }

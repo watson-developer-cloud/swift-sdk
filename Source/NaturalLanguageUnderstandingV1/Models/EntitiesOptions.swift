@@ -17,7 +17,7 @@
 import Foundation
 
 /** Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed content. */
-public struct EntitiesOptions {
+public struct EntitiesOptions: Encodable {
 
     /// Maximum number of entities to return.
     public var limit: Int?
@@ -33,6 +33,15 @@ public struct EntitiesOptions {
 
     /// Set this to true to analyze emotion for detected keywords.
     public var emotion: Bool?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case limit = "limit"
+        case mentions = "mentions"
+        case model = "model"
+        case sentiment = "sentiment"
+        case emotion = "emotion"
+    }
 
     /**
      Initialize a `EntitiesOptions` with member variables.
@@ -51,36 +60,6 @@ public struct EntitiesOptions {
         self.model = model
         self.sentiment = sentiment
         self.emotion = emotion
-    }
-}
-
-extension EntitiesOptions: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case limit = "limit"
-        case mentions = "mentions"
-        case model = "model"
-        case sentiment = "sentiment"
-        case emotion = "emotion"
-        static let allValues = [limit, mentions, model, sentiment, emotion]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        limit = try container.decodeIfPresent(Int.self, forKey: .limit)
-        mentions = try container.decodeIfPresent(Bool.self, forKey: .mentions)
-        model = try container.decodeIfPresent(String.self, forKey: .model)
-        sentiment = try container.decodeIfPresent(Bool.self, forKey: .sentiment)
-        emotion = try container.decodeIfPresent(Bool.self, forKey: .emotion)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(limit, forKey: .limit)
-        try container.encodeIfPresent(mentions, forKey: .mentions)
-        try container.encodeIfPresent(model, forKey: .model)
-        try container.encodeIfPresent(sentiment, forKey: .sentiment)
-        try container.encodeIfPresent(emotion, forKey: .emotion)
     }
 
 }

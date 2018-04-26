@@ -17,7 +17,7 @@
 import Foundation
 
 /** SemanticRolesEntity. */
-public struct SemanticRolesEntity {
+public struct SemanticRolesEntity: Decodable {
 
     /// Entity type.
     public var type: String?
@@ -25,38 +25,10 @@ public struct SemanticRolesEntity {
     /// The entity text.
     public var text: String?
 
-    /**
-     Initialize a `SemanticRolesEntity` with member variables.
-
-     - parameter type: Entity type.
-     - parameter text: The entity text.
-
-     - returns: An initialized `SemanticRolesEntity`.
-    */
-    public init(type: String? = nil, text: String? = nil) {
-        self.type = type
-        self.text = text
-    }
-}
-
-extension SemanticRolesEntity: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
         case text = "text"
-        static let allValues = [type, text]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        type = try container.decodeIfPresent(String.self, forKey: .type)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(type, forKey: .type)
-        try container.encodeIfPresent(text, forKey: .text)
     }
 
 }

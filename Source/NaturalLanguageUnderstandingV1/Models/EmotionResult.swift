@@ -17,7 +17,7 @@
 import Foundation
 
 /** The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be returned for detected entities, keywords, or user-specified target phrases found in the text. */
-public struct EmotionResult {
+public struct EmotionResult: Decodable {
 
     /// The returned emotion results across the document.
     public var document: DocumentEmotionResults?
@@ -25,38 +25,10 @@ public struct EmotionResult {
     /// The returned emotion results per specified target.
     public var targets: [TargetedEmotionResults]?
 
-    /**
-     Initialize a `EmotionResult` with member variables.
-
-     - parameter document: The returned emotion results across the document.
-     - parameter targets: The returned emotion results per specified target.
-
-     - returns: An initialized `EmotionResult`.
-    */
-    public init(document: DocumentEmotionResults? = nil, targets: [TargetedEmotionResults]? = nil) {
-        self.document = document
-        self.targets = targets
-    }
-}
-
-extension EmotionResult: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case document = "document"
         case targets = "targets"
-        static let allValues = [document, targets]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        document = try container.decodeIfPresent(DocumentEmotionResults.self, forKey: .document)
-        targets = try container.decodeIfPresent([TargetedEmotionResults].self, forKey: .targets)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(document, forKey: .document)
-        try container.encodeIfPresent(targets, forKey: .targets)
     }
 
 }

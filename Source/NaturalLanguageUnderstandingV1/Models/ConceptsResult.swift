@@ -17,7 +17,7 @@
 import Foundation
 
 /** The general concepts referenced or alluded to in the specified content. */
-public struct ConceptsResult {
+public struct ConceptsResult: Decodable {
 
     /// Name of the concept.
     public var text: String?
@@ -28,43 +28,11 @@ public struct ConceptsResult {
     /// Link to the corresponding DBpedia resource.
     public var dbpediaResource: String?
 
-    /**
-     Initialize a `ConceptsResult` with member variables.
-
-     - parameter text: Name of the concept.
-     - parameter relevance: Relevance score between 0 and 1. Higher scores indicate greater relevance.
-     - parameter dbpediaResource: Link to the corresponding DBpedia resource.
-
-     - returns: An initialized `ConceptsResult`.
-    */
-    public init(text: String? = nil, relevance: Double? = nil, dbpediaResource: String? = nil) {
-        self.text = text
-        self.relevance = relevance
-        self.dbpediaResource = dbpediaResource
-    }
-}
-
-extension ConceptsResult: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
         case relevance = "relevance"
         case dbpediaResource = "dbpedia_resource"
-        static let allValues = [text, relevance, dbpediaResource]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        relevance = try container.decodeIfPresent(Double.self, forKey: .relevance)
-        dbpediaResource = try container.decodeIfPresent(String.self, forKey: .dbpediaResource)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(relevance, forKey: .relevance)
-        try container.encodeIfPresent(dbpediaResource, forKey: .dbpediaResource)
     }
 
 }

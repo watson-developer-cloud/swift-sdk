@@ -17,7 +17,7 @@
 import Foundation
 
 /** An object containing the emotion results for the target. */
-public struct TargetedEmotionResults {
+public struct TargetedEmotionResults: Decodable {
 
     /// Targeted text.
     public var text: String?
@@ -25,38 +25,10 @@ public struct TargetedEmotionResults {
     /// An object containing the emotion results for the target.
     public var emotion: EmotionScores?
 
-    /**
-     Initialize a `TargetedEmotionResults` with member variables.
-
-     - parameter text: Targeted text.
-     - parameter emotion: An object containing the emotion results for the target.
-
-     - returns: An initialized `TargetedEmotionResults`.
-    */
-    public init(text: String? = nil, emotion: EmotionScores? = nil) {
-        self.text = text
-        self.emotion = emotion
-    }
-}
-
-extension TargetedEmotionResults: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
         case emotion = "emotion"
-        static let allValues = [text, emotion]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        text = try container.decodeIfPresent(String.self, forKey: .text)
-        emotion = try container.decodeIfPresent(EmotionScores.self, forKey: .emotion)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(text, forKey: .text)
-        try container.encodeIfPresent(emotion, forKey: .emotion)
     }
 
 }

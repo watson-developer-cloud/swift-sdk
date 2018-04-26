@@ -356,21 +356,44 @@ extension RestRequest {
         }
     }
 
-    internal func download(to destination: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
-        let task = session.downloadTask(with: request) { (source, response, error) in
-            guard let source = source else {
-                completionHandler(nil, RestError.invalidFile)
+    internal func download(
+        to destination: URL,
+        completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void)
+    {
+        credentials.authenticate(request: self) { request, error in
+
+            guard let request = request, error == nil else {
+                completionHandler(nil, error)
                 return
             }
-            let fileManager = FileManager.default
-            do {
-                try fileManager.moveItem(at: source, to: destination)
-            } catch {
-                completionHandler(nil, RestError.fileManagerError)
+
+            let task = self.session.downloadTask(with: request.urlRequest) { (location, response, error) in
+
+                guard error == nil else {
+                    completionHandler(response as? HTTPURLResponse, error)
+                    return
+                }
+
+                guard let response = response as? HTTPURLResponse else {
+                    completionHandler(nil, RestError.noResponse)
+                    return
+                }
+
+                guard let location = location else {
+                    completionHandler(response, RestError.invalidFile)
+                    return
+                }
+
+                do {
+                    try FileManager.default.moveItem(at: location, to: destination)
+                    completionHandler(response, nil)
+                } catch {
+                    completionHandler(response, RestError.fileManagerError)
+                }
             }
-            completionHandler(response as? HTTPURLResponse, error)
+
+            task.resume()
         }
-        task.resume()
     }
 }
 

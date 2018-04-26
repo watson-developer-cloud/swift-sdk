@@ -87,6 +87,11 @@ internal struct RestRequest {
         headerParameters.forEach { (key, value) in request.setValue(value, forHTTPHeaderField: key) }
         return request
     }
+}
+
+// MARK: - Response Functions
+
+extension RestRequest {
 
     internal func response(
         parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,

@@ -132,18 +132,18 @@ extension RestRequest {
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<Data>.failure(error!)
-                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                let dataResponse = RestResponse(response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
             guard let data = data else {
                 let result = RestResult<Data>.failure(RestError.noData)
-                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                let dataResponse = RestResponse(response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
             let result = RestResult.success(data)
-            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
@@ -158,7 +158,7 @@ extension RestRequest {
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<T>.failure(error!)
-                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                let dataResponse = RestResponse(response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
@@ -166,7 +166,7 @@ extension RestRequest {
             // ensure data is not nil
             guard let data = data else {
                 let result = RestResult<T>.failure(RestError.noData)
-                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                let dataResponse = RestResponse(response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
@@ -195,7 +195,7 @@ extension RestRequest {
             }
 
             // execute callback
-            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
@@ -209,7 +209,7 @@ extension RestRequest {
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<T>.failure(error!)
-                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                let dataResponse = RestResponse(response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
@@ -217,7 +217,7 @@ extension RestRequest {
             // ensure data is not nil
             guard let data = data else {
                 let result = RestResult<T>.failure(RestError.noData)
-                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                let dataResponse = RestResponse(response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
@@ -232,7 +232,7 @@ extension RestRequest {
             }
 
             // execute callback
-            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
@@ -247,7 +247,7 @@ extension RestRequest {
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<[T]>.failure(error!)
-                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                let dataResponse = RestResponse(response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
@@ -255,7 +255,7 @@ extension RestRequest {
             // ensure data is not nil
             guard let data = data else {
                 let result = RestResult<[T]>.failure(RestError.noData)
-                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                let dataResponse = RestResponse(response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
@@ -285,7 +285,7 @@ extension RestRequest {
             }
 
             // execute callback
-            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
@@ -299,7 +299,7 @@ extension RestRequest {
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<String>.failure(error!)
-                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                let dataResponse = RestResponse(response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
@@ -307,7 +307,7 @@ extension RestRequest {
             // ensure data is not nil
             guard let data = data else {
                 let result = RestResult<String>.failure(RestError.noData)
-                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                let dataResponse = RestResponse(response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
@@ -315,14 +315,14 @@ extension RestRequest {
             // parse data as a string
             guard let string = String(data: data, encoding: .utf8) else {
                 let result = RestResult<String>.failure(RestError.serializationError)
-                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                let dataResponse = RestResponse(response: response, data: nil, result: result)
                 completionHandler(dataResponse)
                 return
             }
 
             // execute callback
             let result = RestResult.success(string)
-            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
@@ -336,14 +336,14 @@ extension RestRequest {
             guard error == nil else {
                 // swiftlint:disable:next force_unwrapping
                 let result = RestResult<Void>.failure(error!)
-                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                let dataResponse = RestResponse(response: response, data: data, result: result)
                 completionHandler(dataResponse)
                 return
             }
 
             // execute callback
             let result = RestResult<Void>.success(())
-            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            let dataResponse = RestResponse(response: response, data: data, result: result)
             completionHandler(dataResponse)
         }
     }
@@ -367,7 +367,6 @@ extension RestRequest {
 }
 
 internal struct RestResponse<T> {
-    internal let request: URLRequest?
     internal let response: HTTPURLResponse?
     internal let data: Data?
     internal let result: RestResult<T>

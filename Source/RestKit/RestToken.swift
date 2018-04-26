@@ -27,7 +27,7 @@ internal class RestToken {
     internal var retries = 0
 
     private var tokenURL: String
-    private var credentials: Credentials
+    private var credentials: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.RestKit"
 
     /**
@@ -36,7 +36,7 @@ internal class RestToken {
      - parameter tokenURL: The URL that shall be used to obtain a token.
      - parameter credentials: The credentials that shall be used to obtain a token.
      */
-    internal init(tokenURL: String, credentials: Credentials) {
+    internal init(tokenURL: String, credentials: AuthenticationMethod) {
         self.tokenURL = tokenURL
         self.credentials = credentials
     }

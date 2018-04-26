@@ -148,6 +148,7 @@
 		6823CEF11F8EA0F700A388EC /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9C1F8EA0AD00A388EC /* Workspace.swift */; };
 		6823CEF21F8EA0F700A388EC /* WorkspaceCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEAD1F8EA0B000A388EC /* WorkspaceCollection.swift */; };
 		6823CEF31F8EA0F700A388EC /* WorkspaceExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE9A1F8EA0AC00A388EC /* WorkspaceExport.swift */; };
+		682CBD2C209051BA0049EE9F /* SegmentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682CBD2B209051B90049EE9F /* SegmentSettings.swift */; };
 		682ED52F204F348100B17B06 /* WAVRepair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682ED52E204F348100B17B06 /* WAVRepair.swift */; };
 		6832BBEE2009CE8800BA50A8 /* SpeechToText+Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */; };
 		683947D5202CF4F7007E3CF3 /* RelationArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AA202CF4F3007E3CF3 /* RelationArgument.swift */; };
@@ -872,6 +873,7 @@
 		6823CEBC1F8EA0B200A388EC /* DialogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogNode.swift; sourceTree = "<group>"; };
 		6823CEBD1F8EA0B300A388EC /* CounterexampleCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterexampleCollection.swift; sourceTree = "<group>"; };
 		6823CEBE1F8EA0B300A388EC /* CreateDialogNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDialogNode.swift; sourceTree = "<group>"; };
+		682CBD2B209051B90049EE9F /* SegmentSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentSettings.swift; sourceTree = "<group>"; };
 		682ED52E204F348100B17B06 /* WAVRepair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVRepair.swift; sourceTree = "<group>"; };
 		683947AA202CF4F3007E3CF3 /* RelationArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationArgument.swift; sourceTree = "<group>"; };
 		683947AB202CF4F3007E3CF3 /* RelationsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationsResult.swift; sourceTree = "<group>"; };
@@ -1747,6 +1749,7 @@
 				68AF8ECE206968CC00D552E3 /* QueryResponse.swift */,
 				68AF8ECD206968CC00D552E3 /* QueryResult.swift */,
 				68AE2FD120697C2800330836 /* QueryResultMetadata.swift */,
+				682CBD2B209051B90049EE9F /* SegmentSettings.swift */,
 				68AF8EE7206968CC00D552E3 /* Term.swift */,
 				68AF8EB3206968CC00D552E3 /* TestDocument.swift */,
 				683955042077E613009E1C8A /* Timeslice.swift */,
@@ -3602,6 +3605,7 @@
 				68AF8F592069690300D552E3 /* NluEnrichmentSentiment.swift in Sources */,
 				68AF8F6F2069690300D552E3 /* Histogram.swift in Sources */,
 				68AF8F962069690300D552E3 /* DiskUsage.swift in Sources */,
+				682CBD2C209051BA0049EE9F /* SegmentSettings.swift in Sources */,
 				68BC288F1F8C35010042810E /* JSONWrapper.swift in Sources */,
 				68AF8F752069690300D552E3 /* QueryRelationsRelationship.swift in Sources */,
 				68AF8F932069690300D552E3 /* QueryEntitiesEntity.swift in Sources */,

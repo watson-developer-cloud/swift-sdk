@@ -17,7 +17,7 @@
 import Foundation
 
 /** An output object that includes the response to the user, the nodes that were hit, and messages from the log. */
-public struct OutputData {
+public struct OutputData: Codable {
 
     /// An array of up to 50 messages logged with the request.
     public var logMessages: [LogMessage]
@@ -33,6 +33,15 @@ public struct OutputData {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case logMessages = "log_messages"
+        case text = "text"
+        case nodesVisited = "nodes_visited"
+        case nodesVisitedDetails = "nodes_visited_details"
+        static let allValues = [logMessages, text, nodesVisited, nodesVisitedDetails]
+    }
 
     /**
      Initialize a `OutputData` with member variables.
@@ -50,17 +59,6 @@ public struct OutputData {
         self.nodesVisited = nodesVisited
         self.nodesVisitedDetails = nodesVisitedDetails
         self.additionalProperties = additionalProperties
-    }
-}
-
-extension OutputData: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case logMessages = "log_messages"
-        case text = "text"
-        case nodesVisited = "nodes_visited"
-        case nodesVisitedDetails = "nodes_visited_details"
-        static let allValues = [logMessages, text, nodesVisited, nodesVisitedDetails]
     }
 
     public init(from decoder: Decoder) throws {

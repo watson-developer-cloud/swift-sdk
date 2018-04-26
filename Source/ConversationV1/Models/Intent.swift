@@ -17,7 +17,7 @@
 import Foundation
 
 /** Intent. */
-public struct Intent {
+public struct Intent: Decodable {
 
     /// The name of the intent.
     public var intentName: String
@@ -31,48 +31,12 @@ public struct Intent {
     /// The description of the intent.
     public var description: String?
 
-    /**
-     Initialize a `Intent` with member variables.
-
-     - parameter intentName: The name of the intent.
-     - parameter created: The timestamp for creation of the intent.
-     - parameter updated: The timestamp for the last update to the intent.
-     - parameter description: The description of the intent.
-
-     - returns: An initialized `Intent`.
-    */
-    public init(intentName: String, created: String? = nil, updated: String? = nil, description: String? = nil) {
-        self.intentName = intentName
-        self.created = created
-        self.updated = updated
-        self.description = description
-    }
-}
-
-extension Intent: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case intentName = "intent"
         case created = "created"
         case updated = "updated"
         case description = "description"
-        static let allValues = [intentName, created, updated, description]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        intentName = try container.decode(String.self, forKey: .intentName)
-        created = try container.decodeIfPresent(String.self, forKey: .created)
-        updated = try container.decodeIfPresent(String.self, forKey: .updated)
-        description = try container.decodeIfPresent(String.self, forKey: .description)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(intentName, forKey: .intentName)
-        try container.encodeIfPresent(created, forKey: .created)
-        try container.encodeIfPresent(updated, forKey: .updated)
-        try container.encodeIfPresent(description, forKey: .description)
     }
 
 }

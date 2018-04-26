@@ -17,7 +17,7 @@
 import Foundation
 
 /** LogExport. */
-public struct LogExport {
+public struct LogExport: Decodable {
 
     /// A request received by the workspace, including the user input and context.
     public var request: MessageRequest
@@ -40,32 +40,7 @@ public struct LogExport {
     /// The language of the workspace where the message request was made.
     public var language: String
 
-    /**
-     Initialize a `LogExport` with member variables.
-
-     - parameter request: A request received by the workspace, including the user input and context.
-     - parameter response: The response sent by the workspace, including the output text, detected intents and entities, and context.
-     - parameter logID: A unique identifier for the logged event.
-     - parameter requestTimestamp: The timestamp for receipt of the message.
-     - parameter responseTimestamp: The timestamp for the system response to the message.
-     - parameter workspaceID: The unique identifier of the workspace where the request was made.
-     - parameter language: The language of the workspace where the message request was made.
-
-     - returns: An initialized `LogExport`.
-    */
-    public init(request: MessageRequest, response: MessageResponse, logID: String, requestTimestamp: String, responseTimestamp: String, workspaceID: String, language: String) {
-        self.request = request
-        self.response = response
-        self.logID = logID
-        self.requestTimestamp = requestTimestamp
-        self.responseTimestamp = responseTimestamp
-        self.workspaceID = workspaceID
-        self.language = language
-    }
-}
-
-extension LogExport: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case request = "request"
         case response = "response"
@@ -74,29 +49,6 @@ extension LogExport: Codable {
         case responseTimestamp = "response_timestamp"
         case workspaceID = "workspace_id"
         case language = "language"
-        static let allValues = [request, response, logID, requestTimestamp, responseTimestamp, workspaceID, language]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        request = try container.decode(MessageRequest.self, forKey: .request)
-        response = try container.decode(MessageResponse.self, forKey: .response)
-        logID = try container.decode(String.self, forKey: .logID)
-        requestTimestamp = try container.decode(String.self, forKey: .requestTimestamp)
-        responseTimestamp = try container.decode(String.self, forKey: .responseTimestamp)
-        workspaceID = try container.decode(String.self, forKey: .workspaceID)
-        language = try container.decode(String.self, forKey: .language)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(request, forKey: .request)
-        try container.encode(response, forKey: .response)
-        try container.encode(logID, forKey: .logID)
-        try container.encode(requestTimestamp, forKey: .requestTimestamp)
-        try container.encode(responseTimestamp, forKey: .responseTimestamp)
-        try container.encode(workspaceID, forKey: .workspaceID)
-        try container.encode(language, forKey: .language)
     }
 
 }

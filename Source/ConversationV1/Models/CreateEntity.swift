@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateEntity. */
-public struct CreateEntity {
+public struct CreateEntity: Encodable {
 
     /// The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
     public var entity: String
@@ -33,6 +33,15 @@ public struct CreateEntity {
 
     /// Whether to use fuzzy matching for the entity.
     public var fuzzyMatch: Bool?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case entity = "entity"
+        case description = "description"
+        case metadata = "metadata"
+        case values = "values"
+        case fuzzyMatch = "fuzzy_match"
+    }
 
     /**
      Initialize a `CreateEntity` with member variables.
@@ -51,36 +60,6 @@ public struct CreateEntity {
         self.metadata = metadata
         self.values = values
         self.fuzzyMatch = fuzzyMatch
-    }
-}
-
-extension CreateEntity: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case entity = "entity"
-        case description = "description"
-        case metadata = "metadata"
-        case values = "values"
-        case fuzzyMatch = "fuzzy_match"
-        static let allValues = [entity, description, metadata, values, fuzzyMatch]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        entity = try container.decode(String.self, forKey: .entity)
-        description = try container.decodeIfPresent(String.self, forKey: .description)
-        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
-        values = try container.decodeIfPresent([CreateValue].self, forKey: .values)
-        fuzzyMatch = try container.decodeIfPresent(Bool.self, forKey: .fuzzyMatch)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(entity, forKey: .entity)
-        try container.encodeIfPresent(description, forKey: .description)
-        try container.encodeIfPresent(metadata, forKey: .metadata)
-        try container.encodeIfPresent(values, forKey: .values)
-        try container.encodeIfPresent(fuzzyMatch, forKey: .fuzzyMatch)
     }
 
 }

@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateDialogNode. */
-public struct UpdateDialogNode {
+public struct UpdateDialogNode: Encodable {
 
     /// How the dialog node is processed.
     public enum NodeType: String {
@@ -113,6 +113,27 @@ public struct UpdateDialogNode {
     /// Whether the user can digress to top-level nodes while filling out slots.
     public var digressOutSlots: String?
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case dialogNode = "dialog_node"
+        case description = "description"
+        case conditions = "conditions"
+        case parent = "parent"
+        case previousSibling = "previous_sibling"
+        case output = "output"
+        case context = "context"
+        case metadata = "metadata"
+        case nextStep = "next_step"
+        case title = "title"
+        case nodeType = "type"
+        case eventName = "event_name"
+        case variable = "variable"
+        case actions = "actions"
+        case digressIn = "digress_in"
+        case digressOut = "digress_out"
+        case digressOutSlots = "digress_out_slots"
+    }
+
     /**
      Initialize a `UpdateDialogNode` with member variables.
 
@@ -154,72 +175,6 @@ public struct UpdateDialogNode {
         self.digressIn = digressIn
         self.digressOut = digressOut
         self.digressOutSlots = digressOutSlots
-    }
-}
-
-extension UpdateDialogNode: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case dialogNode = "dialog_node"
-        case description = "description"
-        case conditions = "conditions"
-        case parent = "parent"
-        case previousSibling = "previous_sibling"
-        case output = "output"
-        case context = "context"
-        case metadata = "metadata"
-        case nextStep = "next_step"
-        case title = "title"
-        case nodeType = "type"
-        case eventName = "event_name"
-        case variable = "variable"
-        case actions = "actions"
-        case digressIn = "digress_in"
-        case digressOut = "digress_out"
-        case digressOutSlots = "digress_out_slots"
-        static let allValues = [dialogNode, description, conditions, parent, previousSibling, output, context, metadata, nextStep, title, nodeType, eventName, variable, actions, digressIn, digressOut, digressOutSlots]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        dialogNode = try container.decodeIfPresent(String.self, forKey: .dialogNode)
-        description = try container.decodeIfPresent(String.self, forKey: .description)
-        conditions = try container.decodeIfPresent(String.self, forKey: .conditions)
-        parent = try container.decodeIfPresent(String.self, forKey: .parent)
-        previousSibling = try container.decodeIfPresent(String.self, forKey: .previousSibling)
-        output = try container.decodeIfPresent([String: JSON].self, forKey: .output)
-        context = try container.decodeIfPresent([String: JSON].self, forKey: .context)
-        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
-        nextStep = try container.decodeIfPresent(DialogNodeNextStep.self, forKey: .nextStep)
-        title = try container.decodeIfPresent(String.self, forKey: .title)
-        nodeType = try container.decodeIfPresent(String.self, forKey: .nodeType)
-        eventName = try container.decodeIfPresent(String.self, forKey: .eventName)
-        variable = try container.decodeIfPresent(String.self, forKey: .variable)
-        actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
-        digressIn = try container.decodeIfPresent(String.self, forKey: .digressIn)
-        digressOut = try container.decodeIfPresent(String.self, forKey: .digressOut)
-        digressOutSlots = try container.decodeIfPresent(String.self, forKey: .digressOutSlots)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(dialogNode, forKey: .dialogNode)
-        try container.encodeIfPresent(description, forKey: .description)
-        try container.encodeIfPresent(conditions, forKey: .conditions)
-        try container.encodeIfPresent(parent, forKey: .parent)
-        try container.encodeIfPresent(previousSibling, forKey: .previousSibling)
-        try container.encodeIfPresent(output, forKey: .output)
-        try container.encodeIfPresent(context, forKey: .context)
-        try container.encodeIfPresent(metadata, forKey: .metadata)
-        try container.encodeIfPresent(nextStep, forKey: .nextStep)
-        try container.encodeIfPresent(title, forKey: .title)
-        try container.encodeIfPresent(nodeType, forKey: .nodeType)
-        try container.encodeIfPresent(eventName, forKey: .eventName)
-        try container.encodeIfPresent(variable, forKey: .variable)
-        try container.encodeIfPresent(actions, forKey: .actions)
-        try container.encodeIfPresent(digressIn, forKey: .digressIn)
-        try container.encodeIfPresent(digressOut, forKey: .digressOut)
-        try container.encodeIfPresent(digressOutSlots, forKey: .digressOutSlots)
     }
 
 }

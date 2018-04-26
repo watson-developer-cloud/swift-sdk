@@ -17,13 +17,19 @@
 import Foundation
 
 /** CaptureGroup. */
-public struct CaptureGroup {
+public struct CaptureGroup: Codable {
 
     /// A recognized capture group for the entity.
     public var group: String
 
     /// Zero-based character offsets that indicate where the entity value begins and ends in the input text.
     public var location: [Int]?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case group = "group"
+        case location = "location"
+    }
 
     /**
      Initialize a `CaptureGroup` with member variables.
@@ -36,27 +42,6 @@ public struct CaptureGroup {
     public init(group: String, location: [Int]? = nil) {
         self.group = group
         self.location = location
-    }
-}
-
-extension CaptureGroup: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case group = "group"
-        case location = "location"
-        static let allValues = [group, location]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        group = try container.decode(String.self, forKey: .group)
-        location = try container.decodeIfPresent([Int].self, forKey: .location)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(group, forKey: .group)
-        try container.encodeIfPresent(location, forKey: .location)
     }
 
 }

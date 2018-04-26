@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateIntent. */
-public struct CreateIntent {
+public struct CreateIntent: Encodable {
 
     /// The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
     public var intent: String
@@ -27,6 +27,13 @@ public struct CreateIntent {
 
     /// An array of user input examples for the intent.
     public var examples: [CreateExample]?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case intent = "intent"
+        case description = "description"
+        case examples = "examples"
+    }
 
     /**
      Initialize a `CreateIntent` with member variables.
@@ -41,30 +48,6 @@ public struct CreateIntent {
         self.intent = intent
         self.description = description
         self.examples = examples
-    }
-}
-
-extension CreateIntent: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case intent = "intent"
-        case description = "description"
-        case examples = "examples"
-        static let allValues = [intent, description, examples]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        intent = try container.decode(String.self, forKey: .intent)
-        description = try container.decodeIfPresent(String.self, forKey: .description)
-        examples = try container.decodeIfPresent([CreateExample].self, forKey: .examples)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(intent, forKey: .intent)
-        try container.encodeIfPresent(description, forKey: .description)
-        try container.encodeIfPresent(examples, forKey: .examples)
     }
 
 }

@@ -17,7 +17,7 @@
 import Foundation
 
 /** A term from the request that was identified as an entity. */
-public struct RuntimeEntity {
+public struct RuntimeEntity: Codable {
 
     /// An entity detected in the input.
     public var entity: String
@@ -40,6 +40,17 @@ public struct RuntimeEntity {
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case entity = "entity"
+        case location = "location"
+        case value = "value"
+        case confidence = "confidence"
+        case metadata = "metadata"
+        case groups = "groups"
+        static let allValues = [entity, location, value, confidence, metadata, groups]
+    }
+
     /**
      Initialize a `RuntimeEntity` with member variables.
 
@@ -60,19 +71,6 @@ public struct RuntimeEntity {
         self.metadata = metadata
         self.groups = groups
         self.additionalProperties = additionalProperties
-    }
-}
-
-extension RuntimeEntity: Codable {
-
-    private enum CodingKeys: String, CodingKey {
-        case entity = "entity"
-        case location = "location"
-        case value = "value"
-        case confidence = "confidence"
-        case metadata = "metadata"
-        case groups = "groups"
-        static let allValues = [entity, location, value, confidence, metadata, groups]
     }
 
     public init(from decoder: Decoder) throws {

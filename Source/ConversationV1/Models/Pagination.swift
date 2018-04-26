@@ -17,7 +17,7 @@
 import Foundation
 
 /** The pagination data for the returned objects. */
-public struct Pagination {
+public struct Pagination: Decodable {
 
     /// The URL that will return the same page of results.
     public var refreshUrl: String
@@ -31,48 +31,20 @@ public struct Pagination {
     /// Reserved for future use.
     public var matched: Int?
 
-    /**
-     Initialize a `Pagination` with member variables.
+    /// A token identifying the current page of results.
+    public var refreshCursor: String?
 
-     - parameter refreshUrl: The URL that will return the same page of results.
-     - parameter nextUrl: The URL that will return the next page of results.
-     - parameter total: Reserved for future use.
-     - parameter matched: Reserved for future use.
+    /// A token identifying the next page of results.
+    public var nextCursor: String?
 
-     - returns: An initialized `Pagination`.
-    */
-    public init(refreshUrl: String, nextUrl: String? = nil, total: Int? = nil, matched: Int? = nil) {
-        self.refreshUrl = refreshUrl
-        self.nextUrl = nextUrl
-        self.total = total
-        self.matched = matched
-    }
-}
-
-extension Pagination: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case refreshUrl = "refresh_url"
         case nextUrl = "next_url"
         case total = "total"
         case matched = "matched"
-        static let allValues = [refreshUrl, nextUrl, total, matched]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        refreshUrl = try container.decode(String.self, forKey: .refreshUrl)
-        nextUrl = try container.decodeIfPresent(String.self, forKey: .nextUrl)
-        total = try container.decodeIfPresent(Int.self, forKey: .total)
-        matched = try container.decodeIfPresent(Int.self, forKey: .matched)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(refreshUrl, forKey: .refreshUrl)
-        try container.encodeIfPresent(nextUrl, forKey: .nextUrl)
-        try container.encodeIfPresent(total, forKey: .total)
-        try container.encodeIfPresent(matched, forKey: .matched)
+        case refreshCursor = "refresh_cursor"
+        case nextCursor = "next_cursor"
     }
 
 }

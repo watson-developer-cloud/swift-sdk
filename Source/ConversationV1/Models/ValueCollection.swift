@@ -17,7 +17,7 @@
 import Foundation
 
 /** ValueCollection. */
-public struct ValueCollection {
+public struct ValueCollection: Decodable {
 
     /// An array of entity values.
     public var values: [ValueExport]
@@ -25,38 +25,10 @@ public struct ValueCollection {
     /// An object defining the pagination data for the returned objects.
     public var pagination: Pagination
 
-    /**
-     Initialize a `ValueCollection` with member variables.
-
-     - parameter values: An array of entity values.
-     - parameter pagination: An object defining the pagination data for the returned objects.
-
-     - returns: An initialized `ValueCollection`.
-    */
-    public init(values: [ValueExport], pagination: Pagination) {
-        self.values = values
-        self.pagination = pagination
-    }
-}
-
-extension ValueCollection: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case values = "values"
         case pagination = "pagination"
-        static let allValues = [values, pagination]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        values = try container.decode([ValueExport].self, forKey: .values)
-        pagination = try container.decode(Pagination.self, forKey: .pagination)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(values, forKey: .values)
-        try container.encode(pagination, forKey: .pagination)
     }
 
 }

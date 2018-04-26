@@ -400,14 +400,3 @@ extension RestRequest {
         }
     }
 }
-
-internal struct RestResponse<T> {
-    internal let response: HTTPURLResponse?
-    internal let data: Data?
-    internal let result: RestResult<T>
-}
-
-internal enum RestResult<T> {
-    case success(T)
-    case failure(Error)
-}

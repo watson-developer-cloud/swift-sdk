@@ -93,12 +93,12 @@ internal struct RestRequest {
 extension RestRequest {
 
     /**
-     Execute this request. (This is the main response function and is called by many of the functions below.)
+     Execute this request and process the response body as raw data.
 
      - parseServiceError: A function that can parse service-specific errors from the raw data response.
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func response(
+    internal func responseData(
         parseServiceError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
@@ -149,43 +149,6 @@ extension RestRequest {
     }
 
     /**
-     Execute this request and process the response body as raw data.
-
-     - responseToError: A function that can parse service-specific errors from the raw data response.
-     - completionHandler: The completion handler to call when the request is complete.
-     */
-    internal func responseData(
-        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
-        completionHandler: @escaping (RestResponse<Data>) -> Void)
-    {
-        // execute the request
-        response(parseServiceError: responseToError) { data, response, error in
-
-            // ensure there is no underlying error
-            guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<Data>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-
-            // ensure there is data to parse
-            guard let data = data else {
-                let result = RestResult<Data>.failure(RestError.noData)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-
-            // execute completion handler
-            let result = RestResult.success(data)
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
-        }
-    }
-
-    /**
      Execute this request and process the response body as a JSON object.
 
      - responseToError: A function that can parse service-specific errors from the raw data response.
@@ -198,7 +161,7 @@ extension RestRequest {
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
         // execute the request
-        response(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: responseToError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
@@ -257,7 +220,7 @@ extension RestRequest {
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
         // execute the request
-        response(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: responseToError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
@@ -304,7 +267,7 @@ extension RestRequest {
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
     {
         // execute the request
-        response(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: responseToError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
@@ -364,7 +327,7 @@ extension RestRequest {
         completionHandler: @escaping (RestResponse<String>) -> Void)
     {
         // execute the request
-        response(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: responseToError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {
@@ -409,7 +372,7 @@ extension RestRequest {
         completionHandler: @escaping (RestResponse<Void>) -> Void)
     {
         // execute the request
-        response(parseServiceError: responseToError) { data, response, error in
+        responseData(parseServiceError: responseToError) { data, response, error in
 
             // ensure there is no underlying error
             guard error == nil else {

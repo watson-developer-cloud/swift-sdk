@@ -57,13 +57,13 @@ internal struct RestRequest {
         method: String,
         url: String,
         credentials: AuthenticationMethod,
-        headerParameters: [String: String],
+        headerParameters: [String: String]? = nil,
         acceptType: String? = nil,
         contentType: String? = nil,
         queryItems: [URLQueryItem]? = nil,
         messageBody: Data? = nil)
     {
-        var headerParameters = headerParameters
+        var headerParameters = headerParameters ?? [:]
         if let acceptType = acceptType { headerParameters["Accept"] = acceptType }
         if let contentType = contentType { headerParameters["Content-Type"] = contentType }
         self.method = method

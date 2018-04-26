@@ -176,7 +176,7 @@ internal class IAMAuthentication: AuthenticationMethod {
         let request = RestRequest(
             method: "POST",
             url: url,
-            credentials: BasicAuthentication(username: "iam", password: "token"),
+            credentials: BasicAuthentication(username: "bx", password: "bx"),
             headerParameters: headerParameters,
             messageBody: form.joined(separator: "&").data(using: .utf8)
         )

@@ -44,64 +44,15 @@ internal class RestToken {
     /**
      Refresh the authentication token.
 
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed after a new token is retrieved.
+     - parameter completionHandler: The completion handler to call when the request is complete.
      */
-    internal func refreshToken(
-        failure: ((Error) -> Void)? = nil,
-        success: (() -> Void)? = nil)
-    {
-        let request = RestRequest(
-            method: "GET",
-            url: tokenURL,
-            credentials: credentials,
-            headerParameters: [:])
-
-        request.responseString(responseToError: responseToError) { response in
-            switch response.result {
-            case .success(let token):
-                self.token = token
-                success?()
-            case .failure(let error):
-                failure?(error)
-            }
+    internal func refreshToken(completionHandler: @escaping (Error?) -> Void) {
+        let request = RestRequest(method: "GET", url: tokenURL, credentials: credentials)
+        request.responseString { token, response, error in
+            guard error == nil else { completionHandler(error); return }
+            guard let token = token else { completionHandler(RestError.noData); return }
+            self.token = token
+            completionHandler(nil)
         }
     }
-
-    /**
-     Returns an NSError if the response/data represents an error. Otherwise, returns nil.
-
-     - parameter response: an http response from the token url
-     - parameter data: raw body data from the token url response
-     */
-    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-
-        // fail if no response from token url
-        guard let response = response else {
-            let description = "Token authentication failed. No response from token url."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            return NSError(domain: domain, code: 400, userInfo: userInfo)
-        }
-
-        // succeed if status code indicates success
-        if (200..<300).contains(response.statusCode) {
-            return nil
-        }
-
-        // default error description
-        let code = response.statusCode
-        var userInfo = [NSLocalizedDescriptionKey: "Token authentication failed."]
-
-        // update error description, if available
-        if let data = data {
-            do {
-                let json = try JSONWrapper(data: data)
-                let description = try json.getString(at: "description")
-                userInfo[NSLocalizedDescriptionKey] = description
-            } catch { /* no need to catch -- falls back to default description */ }
-        }
-
-        return NSError(domain: domain, code: code, userInfo: userInfo)
-    }
-
 }

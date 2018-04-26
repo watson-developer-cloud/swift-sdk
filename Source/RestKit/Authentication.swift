@@ -158,14 +158,9 @@ internal class IAMAuthentication: AuthenticationMethod {
             headerParameters: headerParameters,
             messageBody: form.joined(separator: "&").data(using: .utf8)
         )
-        request.responseObject { (response: RestResponse<IAMToken>) in
-            switch response.result {
-            case .success(let token):
-                self.token = token
-                completionHandler(token, nil)
-            case .failure(let error):
-                completionHandler(nil, error)
-            }
+        request.responseObject { (token: IAMToken?, response: HTTPURLResponse?, error: Error?) in
+            guard let token = token, error == nil else { completionHandler(nil, error); return }
+            completionHandler(token, nil)
         }
     }
 
@@ -180,14 +175,9 @@ internal class IAMAuthentication: AuthenticationMethod {
             headerParameters: headerParameters,
             messageBody: form.joined(separator: "&").data(using: .utf8)
         )
-        request.responseObject { (response: RestResponse<IAMToken>) in
-            switch response.result {
-            case .success(let token):
-                self.token = token
-                completionHandler(token, nil)
-            case .failure(let error):
-                completionHandler(nil, error)
-            }
+        request.responseObject { (token: IAMToken?, response: HTTPURLResponse?, error: Error?) in
+            guard let token = token, error == nil else { completionHandler(nil, error); return }
+            completionHandler(token, nil)
         }
     }
 }

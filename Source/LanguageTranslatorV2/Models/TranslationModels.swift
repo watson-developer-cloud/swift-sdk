@@ -17,38 +17,14 @@
 import Foundation
 
 /** The response type for listing existing translation models. */
-public struct TranslationModels {
+public struct TranslationModels: Decodable {
 
     /// An array of available models.
     public var models: [TranslationModel]
 
-    /**
-     Initialize a `TranslationModels` with member variables.
-
-     - parameter models: An array of available models.
-
-     - returns: An initialized `TranslationModels`.
-    */
-    public init(models: [TranslationModel]) {
-        self.models = models
-    }
-}
-
-extension TranslationModels: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case models = "models"
-        static let allValues = [models]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        models = try container.decode([TranslationModel].self, forKey: .models)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(models, forKey: .models)
     }
 
 }

@@ -17,38 +17,14 @@
 import Foundation
 
 /** DeleteModelResult. */
-public struct DeleteModelResult {
+public struct DeleteModelResult: Decodable {
 
     /// "OK" indicates that the model was successfully deleted.
     public var status: String
 
-    /**
-     Initialize a `DeleteModelResult` with member variables.
-
-     - parameter status: "OK" indicates that the model was successfully deleted.
-
-     - returns: An initialized `DeleteModelResult`.
-    */
-    public init(status: String) {
-        self.status = status
-    }
-}
-
-extension DeleteModelResult: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case status = "status"
-        static let allValues = [status]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        status = try container.decode(String.self, forKey: .status)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(status, forKey: .status)
     }
 
 }

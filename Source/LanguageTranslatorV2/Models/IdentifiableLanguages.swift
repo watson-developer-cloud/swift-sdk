@@ -17,38 +17,14 @@
 import Foundation
 
 /** IdentifiableLanguages. */
-public struct IdentifiableLanguages {
+public struct IdentifiableLanguages: Decodable {
 
     /// A list of all languages that the service can identify.
     public var languages: [IdentifiableLanguage]
 
-    /**
-     Initialize a `IdentifiableLanguages` with member variables.
-
-     - parameter languages: A list of all languages that the service can identify.
-
-     - returns: An initialized `IdentifiableLanguages`.
-    */
-    public init(languages: [IdentifiableLanguage]) {
-        self.languages = languages
-    }
-}
-
-extension IdentifiableLanguages: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case languages = "languages"
-        static let allValues = [languages]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        languages = try container.decode([IdentifiableLanguage].self, forKey: .languages)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(languages, forKey: .languages)
     }
 
 }

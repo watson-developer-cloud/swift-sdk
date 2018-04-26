@@ -377,13 +377,3 @@ internal enum RestResult<T> {
     case success(T)
     case failure(Error)
 }
-
-internal enum Credentials {
-    case basicAuthentication(username: String, password: String)
-    case apiKey(name: String, key: String, in: APIKeyLocation)
-
-    internal enum APIKeyLocation {
-        case header
-        case query
-    }
-}

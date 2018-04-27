@@ -109,7 +109,6 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let settings = RecognitionSettings(contentType: format)
         speechToText.recognize(audio: file, settings: settings, failure: failWithError) { results in
-            print(results)
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
             XCTAssertEqual(results.results!.count, 1)
@@ -159,7 +158,6 @@ class SpeechToTextRecognizeTests: XCTestCase {
         settings.smartFormatting = true
 
         speechToText.recognize(audio: file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
-            print(results)
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
             if results.results!.last?.finalResults == true {

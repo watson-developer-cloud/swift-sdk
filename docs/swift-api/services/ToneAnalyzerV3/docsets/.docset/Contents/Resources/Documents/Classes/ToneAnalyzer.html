@@ -100,38 +100,11 @@
 
                 </div>
               </div>
-            <p>### Service Overview
-The IBM Watson Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written text.
+            <p>The IBM Watson Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written text.
 The service can analyze tone at both the document and sentence levels. You can use the service to understand how your
 written communications are perceived and then to improve the tone of your communications. Businesses can use the
 service to learn the tone of their customers&rsquo; communications and to respond to each customer appropriately, or to
 understand and improve their customer conversations.</p>
-<h3 id='api-usage' class='heading'>API Usage</h3>
-
-<p>The following information provides details about using the service to analyze tone:</p>
-
-<ul>
-<li><strong>The tone method:</strong> The service offers <code>GET</code> and <code>POST /v3/tone</code> methods that use the general purpose endpoint to
-analyze the tone of input content. The methods accept content in JSON, plain text, or HTML format.</li>
-<li><strong>The tone_chat method:</strong> The service offers a <code>POST /v3/tone_chat</code> method that uses the customer engagement endpoint
-to analyze the tone of customer service and customer support conversations. The method accepts content in JSON format.</li>
-<li><strong>Authentication:</strong> You authenticate to the service by using your service credentials. You can use your credentials
-to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
-contact the service directly. See <a href="https://console.bluemix.net/docs/services/watson/getting-started-credentials.html">Service credentials for Watson
-services</a> and <a href="https://console.bluemix.net/docs/services/watson/getting-started-tokens.html">Tokens for
-authentication</a>.</li>
-<li><strong>Request Logging:</strong> By default, all Watson services log requests and their results. Data is collected only to
-improve the Watson services. If you do not want to share your data, set the header parameter
-<code>X-Watson-Learning-Opt-Out</code> to <code>true</code> for each request. Data is collected for any request that omits this header. See
-<a href="https://console.bluemix.net/docs/services/watson/getting-started-logging.html">Controlling request logging for Watson
-services</a>.</li>
-</ul>
-
-<p>For more information about the service, see <a href="https://console.bluemix.net/docs/services/tone-analyzer/index.html">About Tone
-Analyzer</a>.</p>
-
-<p><strong>Note:</strong> Method descriptions apply to the latest version of the interface, <code>2017-09-21</code>. Where necessary, parameters
-and models describe differences between versions <code>2017-09-21</code> and <code>2016-05-19</code>.</p>
 
           </section>
           <section class="section task-group-section">
@@ -265,9 +238,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SS11contentTypeSbSg9sentencesSaySSGSg5tonesSSSg0F8LanguageAN06acceptJ0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/tone(toneInput:contentType:sentences:tones:contentLanguage:acceptLanguage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SS11contentTypeSbSg9sentencesSaySSGSg5tonesSSSg0F8LanguageAN06acceptJ0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(toneInput:contentType:sentences:tones:contentLanguage:acceptLanguage:failure:success:)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -275,21 +248,18 @@ in <q>YYYY-MM-DD</q> format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Analyze general purpose tone.</p>
-<pre class="highlight swift"><code> <span class="kt">Uses</span> <span class="n">the</span> <span class="n">general</span> <span class="n">purpose</span> <span class="n">endpoint</span> <span class="n">to</span> <span class="n">analyze</span> <span class="n">the</span> <span class="n">tone</span> <span class="n">of</span> <span class="n">your</span> <span class="n">input</span> <span class="n">content</span><span class="o">.</span> <span class="kt">The</span> <span class="n">service</span> <span class="n">analyzes</span> <span class="n">the</span> <span class="n">content</span> <span class="k">for</span>
-</code></pre>
+                        <p>Analyze general tone.</p>
 
-<p>emotional and language tones. The method always analyzes the tone of the full document; by default, it also
+<p>Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
+emotional and language tones. The method always analyzes the tone of the full document; by default, it also
 analyzes the tone of each individual sentence of the content.   You can submit no more than 128 KB of total input
 content and no more than 1000 individual sentences in JSON, plain text, or HTML format. The service analyzes the
 first 1000 sentences for document-level analysis and only the first 100 sentences for sentence-level analysis.
-Use the <code>POST</code> request method to analyze larger amounts of content in any of the available formats. Use the <code>GET</code>
-request method to analyze smaller quantities of plain text content.   Per the JSON specification, the default
-character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default encoding
-for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content type of
-plain text or HTML, include the <code>charset</code> parameter to indicate the character encoding of the input text; for
-example: <code>Content-Type: text/plain;charset=utf-8</code>. For <code>text/html</code>, the service removes HTML tags and analyzes only
-the textual content.</p>
+Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
+HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
+set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
+character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>. For <code>text/html</code>, the
+service removes HTML tags and analyzes only the textual content.</p>
 
                       </div>
                       <div class="declaration">
@@ -298,7 +268,6 @@ the textual content.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
     <span class="nv">toneInput</span><span class="p">:</span> <span class="kt"><a href="../Structs/ToneInput.html">ToneInput</a></span><span class="p">,</span>
-    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -320,19 +289,7 @@ the textual content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type <code><a href="../Structs/ToneInput.html">ToneInput</a></code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The type of the input: application/json, text/plain, or text/html. A character encoding can be specified by including a <code>charset</code> parameter. For example, &lsquo;text/plain;charset=utf-8&rsquo;.</p>
+                                  <p>The content to be analyzed.</p>
                                 </div>
                               </td>
                             </tr>
@@ -344,7 +301,8 @@ the textual content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of the full document. If <code>true</code> (the default), the service returns results for each sentence.</p>
+                                  <p>Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
+the full document. If <code>true</code> (the default), the service returns results for each sentence.</p>
                                 </div>
                               </td>
                             </tr>
@@ -356,7 +314,11 @@ the textual content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the parameter no longer affects the response.   <strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service is to return its analysis of the input; the indicated tones apply both to the full document and to individual sentences of the document. You can specify one or more of the valid values. Omit the parameter to request results for all three tones.</p>
+                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the
+parameter no longer affects the response.   <strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service
+is to return its analysis of the input; the indicated tones apply both to the full document and to individual
+sentences of the document. You can specify one or more of the valid values. Omit the parameter to request results
+for all three tones.</p>
                                 </div>
                               </td>
                             </tr>
@@ -368,7 +330,10 @@ the textual content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: English or French. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do not submit content that contains both languages. You can specify any combination of languages for <code>contentLanguage</code> and <code>Accept-Language</code>. * <strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>. * <strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</p>
+                                  <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do not
+submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>. * <strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>. * <strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -380,7 +345,9 @@ the textual content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for <code>Content-Language</code> and <code>acceptLanguage</code>.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -417,9 +384,301 @@ the textual content.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C8toneChatySayAA9UtteranceVG10utterances_SSSg14acceptLanguageys5Error_pcSg7failureyAA0F8AnalysesVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/toneChat(utterances:acceptLanguage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C8toneChatySayAA9UtteranceVG10utterances_SSSg14acceptLanguageys5Error_pcSg7failureyAA0F8AnalysesVc7successtF">toneChat(utterances:acceptLanguage:failure:success:)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(text:sentences:tones:contentLanguage:acceptLanguage:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(text:sentences:tones:contentLanguage:acceptLanguage:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Analyze general tone.</p>
+
+<p>Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
+emotional and language tones. The method always analyzes the tone of the full document; by default, it also
+analyzes the tone of each individual sentence of the content.   You can submit no more than 128 KB of total input
+content and no more than 1000 individual sentences in JSON, plain text, or HTML format. The service analyzes the
+first 1000 sentences for document-level analysis and only the first 100 sentences for sentence-level analysis.
+Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
+HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
+set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
+character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>. For <code>text/html</code>, the
+service removes HTML tags and analyzes only the textual content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content to be analyzed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sentences</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
+the full document. If <code>true</code> (the default), the service returns results for each sentence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tones</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the
+parameter no longer affects the response.   <strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service
+is to return its analysis of the input; the indicated tones apply both to the full document and to individual
+sentences of the document. You can specify one or more of the valid values. Omit the parameter to request results
+for all three tones.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do not
+submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>. * <strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>. * <strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(html:sentences:tones:contentLanguage:acceptLanguage:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(html:sentences:tones:contentLanguage:acceptLanguage:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Analyze general tone.</p>
+
+<p>Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
+emotional and language tones. The method always analyzes the tone of the full document; by default, it also
+analyzes the tone of each individual sentence of the content.   You can submit no more than 128 KB of total input
+content and no more than 1000 individual sentences in JSON, plain text, or HTML format. The service analyzes the
+first 1000 sentences for document-level analysis and only the first 100 sentences for sentence-level analysis.
+Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
+HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
+set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
+character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>. For <code>text/html</code>, the
+service removes HTML tags and analyzes only the textual content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
+    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>html</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content to be analyzed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sentences</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
+the full document. If <code>true</code> (the default), the service returns results for each sentence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tones</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the
+parameter no longer affects the response.   <strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service
+is to return its analysis of the input; the indicated tones apply both to the full document and to individual
+sentences of the document. You can specify one or more of the valid values. Omit the parameter to request results
+for all three tones.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do not
+submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>. * <strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>. * <strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV30aB0C8toneChatySayAA9UtteranceVG10utterances_SSSg15contentLanguageAI06acceptI0ys5Error_pcSg7failureyAA0F8AnalysesVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/toneChat(utterances:contentLanguage:acceptLanguage:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C8toneChatySayAA9UtteranceVG10utterances_SSSg15contentLanguageAI06acceptI0ys5Error_pcSg7failureyAA0F8AnalysesVc7successtF">toneChat(utterances:contentLanguage:acceptLanguage:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -428,10 +687,9 @@ the textual content.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Analyze customer engagement tone.</p>
-<pre class="highlight swift"><code> <span class="kt">Use</span> <span class="n">the</span> <span class="n">customer</span> <span class="n">engagement</span> <span class="n">endpoint</span> <span class="n">to</span> <span class="n">analyze</span> <span class="n">the</span> <span class="n">tone</span> <span class="n">of</span> <span class="n">customer</span> <span class="n">service</span> <span class="n">and</span> <span class="n">customer</span> <span class="n">support</span> <span class="n">conversations</span><span class="o">.</span>
-</code></pre>
 
-<p>For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones:
+<p>Use the customer engagement endpoint to analyze the tone of customer service and customer support conversations.
+For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones:
 sad, frustrated, satisfied, excited, polite, impolite, and sympathetic.   If you submit more than 50 utterances,
 the service returns a warning for the overall content and analyzes only the first 50 utterances. If you submit a
 single utterance that contains more than 500 characters, the service returns an error for that utterance and does
@@ -445,6 +703,7 @@ specification, the default character encoding for JSON content is effectively al
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toneChat</span><span class="p">(</span>
     <span class="nv">utterances</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Utterance.html">Utterance</a></span><span class="p">],</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/UtteranceAnalyses.html">UtteranceAnalyses</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -470,12 +729,29 @@ specification, the default character encoding for JSON content is effectively al
                             <tr>
                               <td>
                                 <code>
+                                <em>contentLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do not
+submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>. * <strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>. * <strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>acceptLanguage</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -514,7 +790,7 @@ specification, the default character encoding for JSON content is effectively al
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -410,10 +410,409 @@
 	{
   "warnings": [
     {
-      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/RecognitionSettings.swift",
-      "line": 103,
-      "symbol": "RecognitionSettings.toJSONObject()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "line": 24,
+      "symbol": "AcousticModel.Status.pending",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "line": 25,
+      "symbol": "AcousticModel.Status.ready",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "line": 26,
+      "symbol": "AcousticModel.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "line": 27,
+      "symbol": "AcousticModel.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "line": 28,
+      "symbol": "AcousticModel.Status.upgrading",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "line": 29,
+      "symbol": "AcousticModel.Status.failed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioDetails.swift",
+      "line": 24,
+      "symbol": "AudioDetails.ModelType.audio",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioDetails.swift",
+      "line": 25,
+      "symbol": "AudioDetails.ModelType.archive",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioDetails.swift",
+      "line": 30,
+      "symbol": "AudioDetails.Compression.zip",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioDetails.swift",
+      "line": 31,
+      "symbol": "AudioDetails.Compression.gzip",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioListing.swift",
+      "line": 24,
+      "symbol": "AudioListing.Status.ok",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioListing.swift",
+      "line": 25,
+      "symbol": "AudioListing.Status.beingProcessed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioListing.swift",
+      "line": 26,
+      "symbol": "AudioListing.Status.invalid",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioResource.swift",
+      "line": 24,
+      "symbol": "AudioResource.Status.ok",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioResource.swift",
+      "line": 25,
+      "symbol": "AudioResource.Status.beingProcessed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/AudioResource.swift",
+      "line": 26,
+      "symbol": "AudioResource.Status.invalid",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/Corpus.swift",
+      "line": 24,
+      "symbol": "Corpus.Status.analyzed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/Corpus.swift",
+      "line": 25,
+      "symbol": "Corpus.Status.beingProcessed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/Corpus.swift",
+      "line": 26,
+      "symbol": "Corpus.Status.undetermined",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 24,
+      "symbol": "CreateAcousticModel.BaseModelName.arArBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 25,
+      "symbol": "CreateAcousticModel.BaseModelName.enGbBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 26,
+      "symbol": "CreateAcousticModel.BaseModelName.enGbNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 27,
+      "symbol": "CreateAcousticModel.BaseModelName.enUsBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 28,
+      "symbol": "CreateAcousticModel.BaseModelName.enUsNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 29,
+      "symbol": "CreateAcousticModel.BaseModelName.esEsBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 30,
+      "symbol": "CreateAcousticModel.BaseModelName.esEsNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 31,
+      "symbol": "CreateAcousticModel.BaseModelName.frFrBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 32,
+      "symbol": "CreateAcousticModel.BaseModelName.jaJpBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 33,
+      "symbol": "CreateAcousticModel.BaseModelName.jaJpNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 34,
+      "symbol": "CreateAcousticModel.BaseModelName.koKrBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 35,
+      "symbol": "CreateAcousticModel.BaseModelName.koKrNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 36,
+      "symbol": "CreateAcousticModel.BaseModelName.ptBrBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 37,
+      "symbol": "CreateAcousticModel.BaseModelName.ptBrNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 38,
+      "symbol": "CreateAcousticModel.BaseModelName.zhCnBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
+      "line": 39,
+      "symbol": "CreateAcousticModel.BaseModelName.zhCnNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 24,
+      "symbol": "CreateLanguageModel.BaseModelName.enGbBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 25,
+      "symbol": "CreateLanguageModel.BaseModelName.enGbNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 26,
+      "symbol": "CreateLanguageModel.BaseModelName.enUsBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 27,
+      "symbol": "CreateLanguageModel.BaseModelName.enUsNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 28,
+      "symbol": "CreateLanguageModel.BaseModelName.esEsBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 29,
+      "symbol": "CreateLanguageModel.BaseModelName.esEsNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 30,
+      "symbol": "CreateLanguageModel.BaseModelName.frFrBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 31,
+      "symbol": "CreateLanguageModel.BaseModelName.jaJpBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 32,
+      "symbol": "CreateLanguageModel.BaseModelName.jaJpNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 33,
+      "symbol": "CreateLanguageModel.BaseModelName.koKrBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 34,
+      "symbol": "CreateLanguageModel.BaseModelName.koKrNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "line": 24,
+      "symbol": "LanguageModel.Status.pending",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "line": 25,
+      "symbol": "LanguageModel.Status.ready",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "line": 26,
+      "symbol": "LanguageModel.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "line": 27,
+      "symbol": "LanguageModel.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "line": 28,
+      "symbol": "LanguageModel.Status.upgrading",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "line": 29,
+      "symbol": "LanguageModel.Status.failed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/RecognitionJob.swift",
+      "line": 24,
+      "symbol": "RecognitionJob.Status.waiting",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/RecognitionJob.swift",
+      "line": 25,
+      "symbol": "RecognitionJob.Status.processing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/RecognitionJob.swift",
+      "line": 26,
+      "symbol": "RecognitionJob.Status.completed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/RecognitionJob.swift",
+      "line": 27,
+      "symbol": "RecognitionJob.Status.failed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/RegisterStatus.swift",
+      "line": 24,
+      "symbol": "RegisterStatus.Status.created",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/glennrfisher/Projects/swift-sdk/Source/SpeechToTextV1/Models/RegisterStatus.swift",
+      "line": 25,
+      "symbol": "RegisterStatus.Status.alreadyCreated",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     }
   ],

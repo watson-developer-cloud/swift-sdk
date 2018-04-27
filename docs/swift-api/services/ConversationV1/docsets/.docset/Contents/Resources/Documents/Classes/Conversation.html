@@ -446,7 +446,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get a response to a user&rsquo;s input.    There is no rate limit for this operation.</p>
+                        <p>Get response to user input.</p>
+
+<p>Get a response to a user&rsquo;s input.    There is no rate limit for this operation.</p>
 
                       </div>
                       <div class="declaration">
@@ -486,7 +488,8 @@ in <q>YYYY-MM-DD</q> format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The message to be sent. This includes the user&rsquo;s input, along with optional intents, entities, and context from the last response.</p>
+                                  <p>The message to be sent. This includes the user&rsquo;s input, along with optional intents, entities, and context from the
+last response.</p>
                                 </div>
                               </td>
                             </tr>
@@ -498,7 +501,8 @@ in <q>YYYY-MM-DD</q> format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether to include additional diagnostic information about the dialog nodes that were visited during processing of the message.</p>
+                                  <p>Whether to include additional diagnostic information about the dialog nodes that were visited during processing of
+the message.</p>
                                 </div>
                               </td>
                             </tr>
@@ -602,7 +606,8 @@ per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -614,7 +619,7 @@ per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -703,7 +708,8 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The content of the new workspace.    The maximum size for this data is 50MB. If you need to import a larger workspace, consider importing the workspace without intents and entities and then adding them separately.</p>
+                                  <p>The content of the new workspace.    The maximum size for this data is 50MB. If you need to import a larger
+workspace, consider importing the workspace without intents and entities and then adding them separately.</p>
                                 </div>
                               </td>
                             </tr>
@@ -794,7 +800,8 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
+                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only
+information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -897,7 +904,9 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Valid data defining the new and updated workspace content.    The maximum size for this data is 50MB. If you need to import a larger amount of workspace data, consider importing components such as intents and entities using separate operations.</p>
+                                  <p>Valid data defining the new and updated workspace content.    The maximum size for this data is 50MB. If you need
+to import a larger amount of workspace data, consider importing components such as intents and entities using
+separate operations.</p>
                                 </div>
                               </td>
                             </tr>
@@ -909,7 +918,11 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether the new data is to be appended to the existing data in the workspace. If <strong>append</strong>=<code>false</code>, elements included in the new data completely replace the corresponding existing elements, including all subelements. For example, if the new data includes <strong>entities</strong> and <strong>append</strong>=<code>false</code>, all existing entities in the workspace are discarded and replaced with the new entities.    If <strong>append</strong>=<code>true</code>, existing elements are preserved, and the new elements are added. If any elements in the new data collide with existing elements, the update request fails.</p>
+                                  <p>Whether the new data is to be appended to the existing data in the workspace. If <strong>append</strong>=<code>false</code>, elements
+included in the new data completely replace the corresponding existing elements, including all subelements. For
+example, if the new data includes <strong>entities</strong> and <strong>append</strong>=<code>false</code>, all existing entities in the workspace are
+discarded and replaced with the new entities.    If <strong>append</strong>=<code>true</code>, existing elements are preserved, and the new
+elements are added. If any elements in the new data collide with existing elements, the update request fails.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1080,7 +1093,8 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
+                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only
+information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1116,7 +1130,8 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1128,7 +1143,7 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1231,7 +1246,9 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix <code>sys-</code>.  - It must be no longer than 128 characters.</p>
+                                  <p>The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode
+alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix <code>sys-</code>.  - It
+must be no longer than 128 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1243,7 +1260,8 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.</p>
+                                  <p>The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must
+be no longer than 128 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1359,7 +1377,8 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
+                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only
+information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1476,7 +1495,9 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix <code>sys-</code>.  - It must be no longer than 128 characters.</p>
+                                  <p>The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode
+alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix <code>sys-</code>.  - It
+must be no longer than 128 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1719,7 +1740,8 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1731,7 +1753,7 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1845,7 +1867,9 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The text of a user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.</p>
+                                  <p>The text of a user input example. This string must conform to the following restrictions:  - It cannot contain
+carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no
+longer than 1024 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2075,7 +2099,9 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The text of the user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.</p>
+                                  <p>The text of the user input example. This string must conform to the following restrictions:  - It cannot contain
+carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no
+longer than 1024 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2294,7 +2320,8 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2306,7 +2333,7 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2407,7 +2434,9 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                               </td>
                               <td>
                                 <div>
-                                  <p>The text of a user input marked as irrelevant input. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters  - It cannot consist of only whitespace characters  - It must be no longer than 1024 characters.</p>
+                                  <p>The text of a user input marked as irrelevant input. This string must conform to the following restrictions:  - It
+cannot contain carriage return, newline, or tab characters  - It cannot consist of only whitespace characters  - It
+must be no longer than 1024 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2795,7 +2824,8 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
+                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only
+information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2831,7 +2861,8 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2843,7 +2874,7 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3048,7 +3079,8 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
+                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only
+information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3163,7 +3195,10 @@ limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The updated content of the entity. Any elements included in the new data will completely replace the equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless they are also included in the new data.) For example, if you update the values for an entity, the previously existing values are discarded and replaced with the new values specified in the update.</p>
+                                  <p>The updated content of the entity. Any elements included in the new data will completely replace the equivalent
+existing elements, including all subelements. (Previously existing subelements are not retained unless they are
+also included in the new data.) For example, if you update the values for an entity, the previously existing values
+are discarded and replaced with the new values specified in the update.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3359,7 +3394,8 @@ see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
+                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only
+information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3395,7 +3431,8 @@ see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3407,7 +3444,7 @@ see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3637,7 +3674,8 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
+                                  <p>Whether to include all element content in the returned data. If <strong>export</strong>=<code>false</code>, the returned data includes only
+information about the element itself. If <strong>export</strong>=<code>true</code>, all content, including subelements, is included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3765,7 +3803,10 @@ see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The updated content of the entity value.    Any elements included in the new data will completely replace the equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless they are also included in the new data.) For example, if you update the synonyms for an entity value, the previously existing synonyms are discarded and replaced with the new synonyms specified in the update.</p>
+                                  <p>The updated content of the entity value.    Any elements included in the new data will completely replace the
+equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless
+they are also included in the new data.) For example, if you update the synonyms for an entity value, the
+previously existing synonyms are discarded and replaced with the new synonyms specified in the update.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4010,7 +4051,8 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4022,7 +4064,7 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4149,7 +4191,9 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
+                                  <p>The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage
+return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer
+than 64 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4405,7 +4449,9 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
+                                  <p>The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage
+return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer
+than 64 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4637,7 +4683,8 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4649,7 +4696,7 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4954,7 +5001,10 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The updated content of the dialog node.    Any elements included in the new data will completely replace the equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless they are also included in the new data.) For example, if you update the actions for a dialog node, the previously existing actions are discarded and replaced with the new actions specified in the update.</p>
+                                  <p>The updated content of the dialog node.    Any elements included in the new data will completely replace the
+equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless
+they are also included in the new data.) For example, if you update the actions for a dialog node, the previously
+existing actions are discarded and replaced with the new actions specified in the update.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5136,7 +5186,8 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5148,7 +5199,8 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A cacheable parameter that limits the results to those matching the specified filter. For more information, see the <a href="https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax">documentation</a>.</p>
+                                  <p>A cacheable parameter that limits the results to those matching the specified filter. For more information, see the
+<a href="https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5172,7 +5224,7 @@ information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5252,7 +5304,10 @@ minute. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter query that includes a value for <code>language</code>, as well as a value for <code>workspace_id</code> or <code>request.context.metadata.deployment</code>. For more information, see the <a href="https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax">documentation</a>.</p>
+                                  <p>A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter
+query that includes a value for <code>language</code>, as well as a value for <code>workspace_id</code> or
+<code>request.context.metadata.deployment</code>. For more information, see the
+<a href="https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5264,7 +5319,8 @@ minute. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
+                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</code>, and <code>workspace_id</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5288,7 +5344,7 @@ minute. For more information, see <strong>Rate limiting</strong>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A token identifying the last object from the previous page of results.</p>
+                                  <p>A token identifying the page of results to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5327,7 +5383,7 @@ minute. For more information, see <strong>Rate limiting</strong>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

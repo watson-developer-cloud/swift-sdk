@@ -102,7 +102,7 @@
             <h1>Profile</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Profile</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Profile</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
 
                 </div>
               </div>
@@ -180,7 +180,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The number of words that were found in the input.</p>
+                        <p>The number of words from the input that were used to produce the profile.</p>
 
                       </div>
                       <div class="declaration">
@@ -234,7 +234,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Detailed results for the Big Five personality characteristics (dimensions and facets) inferred from the input text.</p>
+                        <p>A recursive array of <code><a href="../Structs/Trait.html">Trait</a></code> objects that provides detailed results for the Big Five personality characteristics (dimensions and facets) inferred from the input text.</p>
 
                       </div>
                       <div class="declaration">
@@ -242,33 +242,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">personality</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Trait.html">Trait</a></span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:21PersonalityInsightsV37ProfileV6valuesSayAA5TraitVGvp"></a>
-                    <a name="//apple_ref/swift/Property/values" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV37ProfileV6valuesSayAA5TraitVGvp">values</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Detailed results for the Needs characteristics inferred from the input text.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">values</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Trait.html">Trait</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -288,7 +261,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Detailed results for the Values characteristics inferred from the input text.</p>
+                        <p>Detailed results for the Needs characteristics inferred from the input text.</p>
 
                       </div>
                       <div class="declaration">
@@ -296,6 +269,33 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">needs</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Trait.html">Trait</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV37ProfileV6valuesSayAA5TraitVGvp"></a>
+                    <a name="//apple_ref/swift/Property/values" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV37ProfileV6valuesSayAA5TraitVGvp">values</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Detailed results for the Values characteristics inferred from the input text.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">values</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Trait.html">Trait</a></span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -342,7 +342,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If the <code>consumption_preferences</code> query parameter is <code>true</code>, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category.</p>
+                        <p>If the <strong>consumption_preferences</strong> parameter is <code>true</code>, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category.</p>
 
                       </div>
                       <div class="declaration">
@@ -383,214 +383,12 @@
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:21PersonalityInsightsV37ProfileVACSS17processedLanguage_Si9wordCountSayAA5TraitVG11personalityAH6valuesAH5needsSayAA7WarningVG8warningsSSSg0gH7MessageSayAA8BehaviorVGSg8behaviorSayAA30ConsumptionPreferencesCategoryVGSg011consumptionS0tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(processedLanguage:wordCount:personality:values:needs:warnings:wordCountMessage:behavior:consumptionPreferences:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV37ProfileVACSS17processedLanguage_Si9wordCountSayAA5TraitVG11personalityAH6valuesAH5needsSayAA7WarningVG8warningsSSSg0gH7MessageSayAA8BehaviorVGSg8behaviorSayAA30ConsumptionPreferencesCategoryVGSg011consumptionS0tcfc">init(processedLanguage:wordCount:personality:values:needs:warnings:wordCountMessage:behavior:consumptionPreferences:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Initialize a <code>Profile</code> with member variables.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">processedLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">wordCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">personality</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Trait.html">Trait</a></span><span class="p">],</span> <span class="nv">values</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Trait.html">Trait</a></span><span class="p">],</span> <span class="nv">needs</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Trait.html">Trait</a></span><span class="p">],</span> <span class="nv">warnings</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Warning.html">Warning</a></span><span class="p">],</span> <span class="nv">wordCountMessage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">behavior</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Behavior.html">Behavior</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ConsumptionPreferencesCategory.html">ConsumptionPreferencesCategory</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>processedLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The language model that was used to process the input.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>wordCount</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The number of words that were found in the input.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>personality</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Detailed results for the Big Five personality characteristics (dimensions and facets) inferred from the input text.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>values</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Detailed results for the Needs characteristics inferred from the input text.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>needs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Detailed results for the Values characteristics inferred from the input text.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>warnings</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Warning messages associated with the input text submitted with the request. The array is empty if the input generated no warnings.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>wordCountMessage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>When guidance is appropriate, a string that provides a message that indicates the number of words found and where that value falls in the range of required or suggested number of words.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>behavior</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>For JSON content that is timestamped, detailed results about the social behavior disclosed by the input in terms of temporal characteristics. The results include information about the distribution of the content over the days of the week and the hours of the day.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>consumptionPreferences</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>If the <code>consumption_preferences</code> query parameter is <code>true</code>, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An initialized <code>Profile</code>.</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s9DecodablePxs7Decoder_p4from_tKcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s9DecodablePxs7Decoder_p4from_tKcfc">init(from:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">from</span> <span class="nv">decoder</span><span class="p">:</span> <span class="kt">Decoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s9EncodableP6encodeys7Encoder_p2to_tKF"></a>
-                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s9EncodableP6encodeys7Encoder_p2to_tKF">encode(to:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -106,41 +106,17 @@
 
                 </div>
               </div>
-            <h3 id='service-overview' class='heading'>Service Overview</h3>
-
-<p>The IBM Watson Personality Insights service provides a Representational State Transfer (REST) Application Programming
-Interface (API) that enables applications to derive insights from social media, enterprise data, or other digital
-communications. The service uses linguistic analytics to infer individuals&rsquo; intrinsic personality characteristics,
-including Big Five, Needs, and Values, from digital communications such as email, text messages, tweets, and forum
-posts. The service can automatically infer, from potentially noisy social media, portraits of individuals that reflect
-their personality characteristics. The service can report consumption preferences based on the results of its analysis,
-and for JSON content that is timestamped, it can report temporal behavior.</p>
-<h3 id='api-usage' class='heading'>API Usage</h3>
-
-<p>The following information provides details about using the service to obtain a personality profile:</p>
-
-<ul>
-<li><strong>The profile method:</strong> The service offers a single <code>/v3/profile</code> method that accepts up to 20 MB of input data and
-produces results in JSON or CSV format. The service accepts input in Arabic, English, Japanese, Korean, or Spanish and
-can produce output in a variety of languages.</li>
-<li><strong>Authentication:</strong> You authenticate to the service by using your service credentials. You can use your credentials
-to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
-contact the service directly. See <a href="https://console.bluemix.net/docs/services/watson/getting-started-credentials.html">Service credentials for Watson
-services</a> and <a href="https://console.bluemix.net/docs/services/watson/getting-started-tokens.html">Tokens for
-authentication</a>.</li>
-<li><strong>Request Logging:</strong> By default, all Watson services log requests and their results. Data is collected only to
-improve the Watson services. If you do not want to share your data, set the header parameter
-<code>X-Watson-Learning-Opt-Out</code> to <code>true</code> for each request. Data is collected for any request that omits this header. See
-<a href="https://console.bluemix.net/docs/services/watson/getting-started-logging.html">Controlling request logging for Watson
-services</a>.</li>
-</ul>
-
-<p>For more information about the service, see <a href="https://console.bluemix.net/docs/services/personality-insights/index.html">About Personality
-Insights</a>. For information about calling the
-service and the responses it can generate, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html">Requesting a
-profile</a>, <a href="https://console.bluemix.net/docs/services/personality-insights/output.html">Understanding a JSON
-profile</a>, and <a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">Understanding a CSV
-profile</a>.</p>
+            <p>The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data,
+or other digital communications. The service uses linguistic analytics to infer individuals&rsquo; intrinsic personality
+characteristics, including Big Five, Needs, and Values, from digital communications such as email, text messages,
+tweets, and forum posts.
+The service can automatically infer, from potentially noisy social media, portraits of individuals that reflect their
+personality characteristics. The service can infer consumption preferences based on the results of its analysis and,
+for JSON content that is timestamped, can report temporal behavior.
+For information about the meaning of the models that the service uses to describe personality characteristics, see
+<a href="https://console.bluemix.net/docs/services/personality-insights/models.html">Personality models</a>. For information about
+the meaning of the consumption preferences, see <a href="https://console.bluemix.net/docs/services/personality-insights/preferences.html">Consumption
+preferences</a>.</p>
 
           </section>
           <section class="section task-group-section">
@@ -284,13 +260,23 @@ in <q>YYYY-MM-DD</q> format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Generates a personality profile based on input text.</p>
+                        <p>Get profile.</p>
 
-<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
-much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. Accepts input in
-Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
-HTML, or JSON content, and receive results in JSON or CSV format.</p>
+<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
+content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
+sufficient input</a>. The
+service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
+languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
+default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
+parameter; CSV output includes a fixed number of columns and optional headers.   Per the JSON specification, the
+default character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default
+encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content
+type of plain text or HTML, include the <code>charset</code> parameter to indicate the character encoding of the input text;
+for example: <code>Content-Type: text/plain;charset=utf-8</code>.   For detailed information about calling the service and the
+responses it can generate, see (Requesting a
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/input.html">https://console.bluemix.net/docs/services/personality-insights/input.html</a>], (Understanding a JSON
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output.html">https://console.bluemix.net/docs/services/personality-insights/output.html</a>], and (Understanding a CSV
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">https://console.bluemix.net/docs/services/personality-insights/output-csv.html</a>].</p>
 
                       </div>
                       <div class="declaration">
@@ -320,7 +306,9 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
+<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>.
+For JSON input, provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -332,7 +320,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>contentLanguage</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>contentLanguage</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>contentLanguage</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>contentLanguage</code> and <code>Accept-Language</code>.</p>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.   The effect of the
+<strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong> is <code>text/plain</code> or
+<code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When <strong>Content-Type</strong> is
+<code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code> parameter of a
+<code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this parameter to base
+the language on the specification of the content items. You can specify any combination of languages for
+<strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -344,7 +339,9 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
+and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -356,7 +353,8 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
+                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
+scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -368,7 +366,8 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
+                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences are
+returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -415,13 +414,23 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Generates a personality profile based on input text.</p>
+                        <p>Get profile.</p>
 
-<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
-much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. Accepts input in
-Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
-HTML, or JSON content, and receive results in JSON or CSV format.</p>
+<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
+content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
+sufficient input</a>. The
+service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
+languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
+default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
+parameter; CSV output includes a fixed number of columns and optional headers.   Per the JSON specification, the
+default character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default
+encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content
+type of plain text or HTML, include the <code>charset</code> parameter to indicate the character encoding of the input text;
+for example: <code>Content-Type: text/plain;charset=utf-8</code>.   For detailed information about calling the service and the
+responses it can generate, see (Requesting a
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/input.html">https://console.bluemix.net/docs/services/personality-insights/input.html</a>], (Understanding a JSON
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output.html">https://console.bluemix.net/docs/services/personality-insights/output.html</a>], and (Understanding a CSV
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">https://console.bluemix.net/docs/services/personality-insights/output-csv.html</a>].</p>
 
                       </div>
                       <div class="declaration">
@@ -446,12 +455,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>content</em>
+                                <em>text</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
+<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>.
+For JSON input, provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -463,7 +474,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>contentLanguage</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>contentLanguage</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>contentLanguage</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>contentLanguage</code> and <code>Accept-Language</code>.</p>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.   The effect of the
+<strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong> is <code>text/plain</code> or
+<code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When <strong>Content-Type</strong> is
+<code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code> parameter of a
+<code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this parameter to base
+the language on the specification of the content items. You can specify any combination of languages for
+<strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -475,7 +493,9 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
+and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -487,7 +507,8 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
+                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
+scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -499,7 +520,8 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
+                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences are
+returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -546,13 +568,23 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Generates a personality profile based on input text.</p>
+                        <p>Get profile.</p>
 
-<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
-much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. Accepts input in
-Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
-HTML, or JSON content, and receive results in JSON or CSV format.</p>
+<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
+content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
+sufficient input</a>. The
+service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
+languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
+default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
+parameter; CSV output includes a fixed number of columns and optional headers.   Per the JSON specification, the
+default character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default
+encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content
+type of plain text or HTML, include the <code>charset</code> parameter to indicate the character encoding of the input text;
+for example: <code>Content-Type: text/plain;charset=utf-8</code>.   For detailed information about calling the service and the
+responses it can generate, see (Requesting a
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/input.html">https://console.bluemix.net/docs/services/personality-insights/input.html</a>], (Understanding a JSON
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output.html">https://console.bluemix.net/docs/services/personality-insights/output.html</a>], and (Understanding a CSV
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">https://console.bluemix.net/docs/services/personality-insights/output-csv.html</a>].</p>
 
                       </div>
                       <div class="declaration">
@@ -577,12 +609,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>content</em>
+                                <em>html</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
+<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>.
+For JSON input, provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -594,7 +628,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>contentLanguage</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>contentLanguage</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>contentLanguage</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>contentLanguage</code> and <code>Accept-Language</code>.</p>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.   The effect of the
+<strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong> is <code>text/plain</code> or
+<code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When <strong>Content-Type</strong> is
+<code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code> parameter of a
+<code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this parameter to base
+the language on the specification of the content items. You can specify any combination of languages for
+<strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -606,7 +647,9 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
+and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -618,7 +661,8 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
+                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
+scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -630,7 +674,8 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
+                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences are
+returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -677,13 +722,23 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Generates a personality profile based on input text.</p>
+                        <p>Get profile. as csv</p>
 
-<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
-much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. Accepts input in
-Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
-HTML, or JSON content, and receive results in JSON or CSV format.</p>
+<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
+content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
+sufficient input</a>. The
+service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
+languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
+default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
+parameter; CSV output includes a fixed number of columns and optional headers.   Per the JSON specification, the
+default character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default
+encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content
+type of plain text or HTML, include the <code>charset</code> parameter to indicate the character encoding of the input text;
+for example: <code>Content-Type: text/plain;charset=utf-8</code>.   For detailed information about calling the service and the
+responses it can generate, see (Requesting a
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/input.html">https://console.bluemix.net/docs/services/personality-insights/input.html</a>], (Understanding a JSON
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output.html">https://console.bluemix.net/docs/services/personality-insights/output.html</a>], and (Understanding a CSV
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">https://console.bluemix.net/docs/services/personality-insights/output-csv.html</a>].</p>
 
                       </div>
                       <div class="declaration">
@@ -714,7 +769,9 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
+<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>.
+For JSON input, provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -726,7 +783,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>Content-Language</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>Content-Language</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>Content-Language</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>Content-Language</code> and <code>Accept-Language</code>.</p>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.   The effect of the
+<strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong> is <code>text/plain</code> or
+<code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When <strong>Content-Type</strong> is
+<code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code> parameter of a
+<code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this parameter to base
+the language on the specification of the content items. You can specify any combination of languages for
+<strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -738,7 +802,9 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
+and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -750,19 +816,8 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>csvHeaders</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>If <code>true</code>, column labels are returned with a CSV response; if <code>false</code> (the default), they are not. Applies only when the <code>Accept</code> header is set to <code>text/csv</code>.</p>
+                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
+scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -774,7 +829,21 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
+                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences are
+returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>csvHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
+Applies only when the <strong>Accept</strong> parameter is set to <code>text/csv</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -821,13 +890,23 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Generates a personality profile based on input text.</p>
+                        <p>Get profile. as csv</p>
 
-<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
-much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. Accepts input in
-Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
-HTML, or JSON content, and receive results in JSON or CSV format.</p>
+<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
+content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
+sufficient input</a>. The
+service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
+languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
+default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
+parameter; CSV output includes a fixed number of columns and optional headers.   Per the JSON specification, the
+default character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default
+encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content
+type of plain text or HTML, include the <code>charset</code> parameter to indicate the character encoding of the input text;
+for example: <code>Content-Type: text/plain;charset=utf-8</code>.   For detailed information about calling the service and the
+responses it can generate, see (Requesting a
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/input.html">https://console.bluemix.net/docs/services/personality-insights/input.html</a>], (Understanding a JSON
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output.html">https://console.bluemix.net/docs/services/personality-insights/output.html</a>], and (Understanding a CSV
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">https://console.bluemix.net/docs/services/personality-insights/output-csv.html</a>].</p>
 
                       </div>
                       <div class="declaration">
@@ -853,12 +932,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>content</em>
+                                <em>text</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
+<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>.
+For JSON input, provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -870,7 +951,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>Content-Language</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>Content-Language</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>Content-Language</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>Content-Language</code> and <code>Accept-Language</code>.</p>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.   The effect of the
+<strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong> is <code>text/plain</code> or
+<code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When <strong>Content-Type</strong> is
+<code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code> parameter of a
+<code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this parameter to base
+the language on the specification of the content items. You can specify any combination of languages for
+<strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -882,7 +970,9 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
+and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -894,19 +984,8 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>csvHeaders</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>If <code>true</code>, column labels are returned with a CSV response; if <code>false</code> (the default), they are not. Applies only when the <code>Accept</code> header is set to <code>text/csv</code>.</p>
+                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
+scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -918,7 +997,21 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
+                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences are
+returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>csvHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
+Applies only when the <strong>Accept</strong> parameter is set to <code>text/csv</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -965,13 +1058,23 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Generates a personality profile based on input text.</p>
+                        <p>Get profile. as csv</p>
 
-<p>Derives personality insights for up to 20 MB of input content written by an author, though the service requires
-much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. Accepts input in
-Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text,
-HTML, or JSON content, and receive results in JSON or CSV format.</p>
+<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
+content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
+sufficient input</a>. The
+service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
+languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
+default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
+parameter; CSV output includes a fixed number of columns and optional headers.   Per the JSON specification, the
+default character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default
+encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content
+type of plain text or HTML, include the <code>charset</code> parameter to indicate the character encoding of the input text;
+for example: <code>Content-Type: text/plain;charset=utf-8</code>.   For detailed information about calling the service and the
+responses it can generate, see (Requesting a
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/input.html">https://console.bluemix.net/docs/services/personality-insights/input.html</a>], (Understanding a JSON
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output.html">https://console.bluemix.net/docs/services/personality-insights/output.html</a>], and (Understanding a CSV
+profile)[<a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">https://console.bluemix.net/docs/services/personality-insights/output-csv.html</a>].</p>
 
                       </div>
                       <div class="declaration">
@@ -997,12 +1100,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>content</em>
+                                <em>html</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. A JSON request must conform to the <code><a href="../Structs/Content.html">Content</a></code> model.</p>
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
+<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>.
+For JSON input, provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1014,7 +1119,14 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The effect of the <code>Content-Language</code> header depends on the <code>Content-Type</code> header. When <code>Content-Type</code> is <code>text/plain</code> or <code>text/html</code>, <code>Content-Language</code> is the only way to specify the language. When <code>Content-Type</code> is <code>application/json</code>, <code>Content-Language</code> overrides a language specified with the <code>language</code> parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for <code>Content-Language</code> and <code>Accept-Language</code>.</p>
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.   The effect of the
+<strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong> is <code>text/plain</code> or
+<code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When <strong>Content-Type</strong> is
+<code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code> parameter of a
+<code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this parameter to base
+the language on the specification of the content items. You can specify any combination of languages for
+<strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1026,7 +1138,9 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input and response content.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
+and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1038,19 +1152,8 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If <code>false</code> (the default), only normalized percentiles are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>csvHeaders</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>If <code>true</code>, column labels are returned with a CSV response; if <code>false</code> (the default), they are not. Applies only when the <code>Accept</code> header is set to <code>text/csv</code>.</p>
+                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
+scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1062,7 +1165,21 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If <code>true</code>, information about consumption preferences is returned with the results; if <code>false</code> (the default), the response does not include the information.</p>
+                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences are
+returned.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>csvHeaders</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
+Applies only when the <strong>Accept</strong> parameter is set to <code>text/csv</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1101,7 +1218,7 @@ HTML, or JSON content, and receive results in JSON or CSV format.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

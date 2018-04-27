@@ -309,6 +309,9 @@
                 <a href="../Structs/QueryResultMetadata.html">QueryResultMetadata</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SegmentSettings.html">SegmentSettings</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Term.html">Term</a>
               </li>
               <li class="nav-group-task">
@@ -1070,7 +1073,14 @@ metadata and information to the configuration.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Input an object that enables you to customize how your content is ingested and what enrichments are added to your data.   <code>name</code> is required and must be unique within the current <code>environment</code>. All other properties are optional.  If the input configuration contains the <code>configuration_id</code>, <code>created</code>, or <code>updated</code> properties, then they will be ignored and overridden by the system (an error is not returned so that the overridden fields do not need to be removed when copying a configuration).   The configuration can contain unrecognized JSON fields. Any such fields will be ignored and will not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration.</p>
+                                  <p>Input an object that enables you to customize how your content is ingested and what enrichments are added to your
+data.   <code>name</code> is required and must be unique within the current <code>environment</code>. All other properties are optional.
+If the input configuration contains the <code>configuration_id</code>, <code>created</code>, or <code>updated</code> properties, then they will be
+ignored and overridden by the system (an error is not returned so that the overridden fields do not need to be
+removed when copying a configuration).   The configuration can contain unrecognized JSON fields. Any such fields
+will be ignored and will not generate an error. This makes it easier to use newer configuration files with older
+versions of the API and the service. It also makes it possible for the tooling to add additional metadata and
+information to the configuration.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1349,7 +1359,15 @@ This means that already submitted documents will not see any updates made to the
                               </td>
                               <td>
                                 <div>
-                                  <p>Input an object that enables you to update and customize how your data is ingested and what enrichments are added to your data.  The <code>name</code> parameter is required and must be unique within the current <code>environment</code>. All other properties are optional, but if they are omitted  the default values replace the current value of each omitted property.  If the input configuration contains the <code>configuration_id</code>, <code>created</code>, or <code>updated</code> properties, they are ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be removed when updating a configuration.   The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration.</p>
+                                  <p>Input an object that enables you to update and customize how your data is ingested and what enrichments are added
+to your data.  The <code>name</code> parameter is required and must be unique within the current <code>environment</code>. All other
+properties are optional, but if they are omitted  the default values replace the current value of each omitted
+property.  If the input configuration contains the <code>configuration_id</code>, <code>created</code>, or <code>updated</code> properties, they are
+ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be
+removed when updating a configuration.   The configuration can contain unrecognized JSON fields. Any such fields
+are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions
+of the API and the service. It also makes it possible for the tooling to add additional metadata and information to
+the configuration.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1534,7 +1552,10 @@ help you understand how the document was processed. The document is not added to
                               </td>
                               <td>
                                 <div>
-                                  <p>The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the <code>configuration_id</code> is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected. See the <code>GET /configurations/{configuration_id}</code> operation for an example configuration.</p>
+                                  <p>The configuration to use to process the document. If this part is provided, then the provided configuration is used
+to process the document. If the <code>configuration_id</code> is also provided (both are present at the same time), then
+request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are
+rejected. See the <code>GET /configurations/{configuration_id}</code> operation for an example configuration.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1546,7 +1567,8 @@ help you understand how the document was processed. The document is not added to
                               </td>
                               <td>
                                 <div>
-                                  <p>Specify to only run the input document through the given step instead of running the input document through the entire ingestion workflow. Valid values are <code>convert</code>, <code>enrich</code>, and <code>normalize</code>.</p>
+                                  <p>Specify to only run the input document through the given step instead of running the input document through the
+entire ingestion workflow. Valid values are <code>convert</code>, <code>enrich</code>, and <code>normalize</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1558,7 +1580,8 @@ help you understand how the document was processed. The document is not added to
                               </td>
                               <td>
                                 <div>
-                                  <p>The ID of the configuration to use to process the document. If the <code>configuration</code> form part is also provided (both are present at the same time), then request will be rejected.</p>
+                                  <p>The ID of the configuration to use to process the document. If the <code>configuration</code> form part is also provided (both
+are present at the same time), then request will be rejected.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1570,7 +1593,8 @@ help you understand how the document was processed. The document is not added to
                               </td>
                               <td>
                                 <div>
-                                  <p>The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected.</p>
+                                  <p>The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
+megabytes is rejected.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1582,7 +1606,9 @@ help you understand how the document was processed. The document is not added to
                               </td>
                               <td>
                                 <div>
-                                  <p>If you&rsquo;re using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,   \&quot;Subject\&quot;: \&quot;Apples\&quot; }</code>.</p>
+                                  <p>If you&rsquo;re using the Data Crawler to upload your documents, you can test a document against the type of metadata
+that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB
+are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,   \&quot;Subject\&quot;: \&quot;Apples\&quot; }</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2294,6 +2320,14 @@ with empty expansion arrays is returned.</p>
 <p>Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
 <code>500</code>. The current expansion list is replaced with the uploaded content.</p>
 
+<ul>
+<li>uni-directional.   To create a bi-directional expansion specify an <code>expanded_terms</code> array. When found in a query,
+all items in the <code>expanded_terms</code> array are then expanded to the other items in the same array.   To create a
+uni-directional expansion, specify both an array of <code>input_terms</code> and an array of <code>expanded_terms</code>. When items in
+the <code>input_terms</code> array are present in a query, they are expanded using the items listed in the <code>expanded_terms</code>
+array.</li>
+</ul>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -2344,7 +2378,9 @@ with empty expansion arrays is returned.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of query expansion definitions.    Each object in the <code>expansions</code> array represents a term or set of terms that will be expanded into other terms. Each expansion object can be configured so that all terms are expanded to all other terms in the object - bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.   To create a bi-directional expansion specify an <code>expanded_terms</code> array. When found in a query, all items in the <code>expanded_terms</code> array are then expanded to the other items in the same array.   To create a uni-directional expansion, specify both an array of <code>input_terms</code> and an array of <code>expanded_terms</code>. When items in the <code>input_terms</code> array are present in a query, they are expanded using the items listed in the <code>expanded_terms</code> array.</p>
+                                  <p>An array of query expansion definitions.    Each object in the <code>expansions</code> array represents a term or set of terms
+that will be expanded into other terms. Each expansion object can be configured so that all terms are expanded to
+all other terms in the object - bi-directional, or a set list of terms can be expanded into a second list of terms</p>
                                 </div>
                               </td>
                             </tr>
@@ -2545,7 +2581,8 @@ and <code>,</code>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected.</p>
+                                  <p>The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
+megabytes is rejected.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2557,7 +2594,9 @@ and <code>,</code>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If you&rsquo;re using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,   \&quot;Subject\&quot;: \&quot;Apples\&quot; }</code>.</p>
+                                  <p>If you&rsquo;re using the Data Crawler to upload your documents, you can test a document against the type of metadata
+that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB
+are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,   \&quot;Subject\&quot;: \&quot;Apples\&quot; }</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2788,7 +2827,8 @@ when the document was ingested. Use the query API to retrieve the actual documen
                               </td>
                               <td>
                                 <div>
-                                  <p>The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected.</p>
+                                  <p>The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
+megabytes is rejected.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2800,7 +2840,9 @@ when the document was ingested. Use the query API to retrieve the actual documen
                               </td>
                               <td>
                                 <div>
-                                  <p>If you&rsquo;re using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,   \&quot;Subject\&quot;: \&quot;Apples\&quot; }</code>.</p>
+                                  <p>If you&rsquo;re using the Data Crawler to upload your documents, you can test a document against the type of metadata
+that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB
+are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,   \&quot;Subject\&quot;: \&quot;Apples\&quot; }</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3033,7 +3075,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A cacheable query that limits the documents returned to exclude any documents that don&rsquo;t mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.</p>
+                                  <p>A cacheable query that limits the documents returned to exclude any documents that don&rsquo;t mention the query content.
+Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the
+data set.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3045,7 +3089,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
+                                  <p>A query search returns all documents in your data set with full enrichments and full text, but with the most
+relevant documents listed first. Use a query search when you want to find the most relevant search results. You
+cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3057,7 +3103,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
+                                  <p>A natural language query that returns relevant documents by utilizing training data and natural language
+understanding. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3081,7 +3128,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.</p>
+                                  <p>An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
+useful for building applications, because you can use them to build lists, tables, and time series. For a full list
+of possible aggregrations, see the Query reference.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3117,7 +3166,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.</p>
+                                  <p>The number of query results to skip at the beginning. For example, if the total number of results that are returned
+is 10, and the offset is 8, it returns the last two results.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3129,7 +3179,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with <code>-</code> for descending or <code>+</code> for ascending. Ascending is the default sort direction if no prefix is specified.</p>
+                                  <p>A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+prefixing the field with <code>-</code> for descending or <code>+</code> for ascending. Ascending is the default sort direction if no
+prefix is specified.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3141,7 +3193,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When true a highlight field is returned for each result which contains the fields that match the query with <code>&lt;em&gt;&lt;/em&gt;</code> tags around the matching query terms. Defaults to false.</p>
+                                  <p>When true a highlight field is returned for each result which contains the fields that match the query with
+<code>&lt;em&gt;&lt;/em&gt;</code> tags around the matching query terms. Defaults to false.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3153,7 +3206,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.</p>
+                                  <p>A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level
+fields are included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3165,7 +3219,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is <code>10</code>. The maximum is <code>100</code>.</p>
+                                  <p>The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
+The default is <code>10</code>. The maximum is <code>100</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3177,7 +3232,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The approximate number of characters that any one passage will have. The default is <code>400</code>. The minimum is <code>50</code>. The maximum is <code>2000</code>.</p>
+                                  <p>The approximate number of characters that any one passage will have. The default is <code>400</code>. The minimum is <code>50</code>. The
+maximum is <code>2000</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3189,7 +3245,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When <code>true</code> and used with a Watson Discovery News collection, duplicate results (based on the contents of the <code>title</code> field) are removed. Duplicate comparison is limited to the current query only, <code>offset</code> is not considered. Defaults to <code>false</code>. This parameter is currently Beta functionality.</p>
+                                  <p>When <code>true</code> and used with a Watson Discovery News collection, duplicate results (based on the contents of the
+<code>title</code> field) are removed. Duplicate comparison is limited to the current query only, <code>offset</code> is not considered.
+Defaults to <code>false</code>. This parameter is currently Beta functionality.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3201,7 +3259,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, <code>offset</code> is not considered. This parameter is currently Beta functionality.</p>
+                                  <p>When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
+comparison is limited to the current query only, <code>offset</code> is not considered. This parameter is currently Beta
+functionality.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3213,7 +3273,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When <code>true</code>, results are returned based on their similarity to the document IDs specified in the <code>similar.document_ids</code> parameter. The default is <code>false</code>.</p>
+                                  <p>When <code>true</code>, results are returned based on their similarity to the document IDs specified in the
+<code>similar.document_ids</code> parameter. The default is <code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3225,7 +3286,10 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of document IDs that will be used to find similar documents.   <strong>Note:</strong> If the <code>natural_language_query</code> parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as <code>filter</code> and <code>query</code> are subsequently applied and reduce the query scope.</p>
+                                  <p>A comma-separated list of document IDs that will be used to find similar documents.   <strong>Note:</strong> If the
+<code>natural_language_query</code> parameter is also specified, it will be used to expand the scope of the document
+similarity search to include the natural language query. Other query parameters, such as <code>filter</code> and <code>query</code> are
+subsequently applied and reduce the query scope.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3237,7 +3301,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.</p>
+                                  <p>A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If
+not specified, the entire document is used for comparison.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3357,7 +3422,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A cacheable query that limits the documents returned to exclude any documents that don&rsquo;t mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.</p>
+                                  <p>A cacheable query that limits the documents returned to exclude any documents that don&rsquo;t mention the query content.
+Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the
+data set.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3369,7 +3436,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
+                                  <p>A query search returns all documents in your data set with full enrichments and full text, but with the most
+relevant documents listed first. Use a query search when you want to find the most relevant search results. You
+cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3381,7 +3450,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
+                                  <p>A natural language query that returns relevant documents by utilizing training data and natural language
+understanding. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3405,7 +3475,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.</p>
+                                  <p>An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
+useful for building applications, because you can use them to build lists, tables, and time series. For a full list
+of possible aggregrations, see the Query reference.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3441,7 +3513,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.</p>
+                                  <p>The number of query results to skip at the beginning. For example, if the total number of results that are returned
+is 10, and the offset is 8, it returns the last two results.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3453,7 +3526,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with <code>-</code> for descending or <code>+</code> for ascending. Ascending is the default sort direction if no prefix is specified.</p>
+                                  <p>A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+prefixing the field with <code>-</code> for descending or <code>+</code> for ascending. Ascending is the default sort direction if no
+prefix is specified.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3465,7 +3540,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When true a highlight field is returned for each result which contains the fields that match the query with <code>&lt;em&gt;&lt;/em&gt;</code> tags around the matching query terms. Defaults to false.</p>
+                                  <p>When true a highlight field is returned for each result which contains the fields that match the query with
+<code>&lt;em&gt;&lt;/em&gt;</code> tags around the matching query terms. Defaults to false.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3477,7 +3553,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.</p>
+                                  <p>A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level
+fields are included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3489,7 +3566,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is <code>10</code>. The maximum is <code>100</code>.</p>
+                                  <p>The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
+The default is <code>10</code>. The maximum is <code>100</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3501,7 +3579,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The approximate number of characters that any one passage will have. The default is <code>400</code>. The minimum is <code>50</code>. The maximum is <code>2000</code>.</p>
+                                  <p>The approximate number of characters that any one passage will have. The default is <code>400</code>. The minimum is <code>50</code>. The
+maximum is <code>2000</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3513,7 +3592,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, <code>offset</code> is not considered. This parameter is currently Beta functionality.</p>
+                                  <p>When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
+comparison is limited to the current query only, <code>offset</code> is not considered. This parameter is currently Beta
+functionality.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3525,7 +3606,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When <code>true</code>, results are returned based on their similarity to the document IDs specified in the <code>similar.document_ids</code> parameter. The default is <code>false</code>.</p>
+                                  <p>When <code>true</code>, results are returned based on their similarity to the document IDs specified in the
+<code>similar.document_ids</code> parameter. The default is <code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3537,7 +3619,10 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of document IDs that will be used to find similar documents.   <strong>Note:</strong> If the <code>natural_language_query</code> parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as <code>filter</code> and <code>query</code> are subsequently applied and reduce the query scope.</p>
+                                  <p>A comma-separated list of document IDs that will be used to find similar documents.   <strong>Note:</strong> If the
+<code>natural_language_query</code> parameter is also specified, it will be used to expand the scope of the document
+similarity search to include the natural language query. Other query parameters, such as <code>filter</code> and <code>query</code> are
+subsequently applied and reduce the query scope.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3549,7 +3634,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.</p>
+                                  <p>A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If
+not specified, the entire document is used for comparison.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3664,7 +3750,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A cacheable query that limits the documents returned to exclude any documents that don&rsquo;t mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.</p>
+                                  <p>A cacheable query that limits the documents returned to exclude any documents that don&rsquo;t mention the query content.
+Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the
+data set.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3676,7 +3764,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
+                                  <p>A query search returns all documents in your data set with full enrichments and full text, but with the most
+relevant documents listed first. Use a query search when you want to find the most relevant search results. You
+cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3688,7 +3778,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
+                                  <p>A natural language query that returns relevant documents by utilizing training data and natural language
+understanding. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3700,7 +3791,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.</p>
+                                  <p>An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
+useful for building applications, because you can use them to build lists, tables, and time series. For a full list
+of possible aggregrations, see the Query reference.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3736,7 +3829,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.</p>
+                                  <p>The number of query results to skip at the beginning. For example, if the total number of results that are returned
+is 10, and the offset is 8, it returns the last two results.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3748,7 +3842,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with <code>-</code> for descending or <code>+</code> for ascending. Ascending is the default sort direction if no prefix is specified.</p>
+                                  <p>A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+prefixing the field with <code>-</code> for descending or <code>+</code> for ascending. Ascending is the default sort direction if no
+prefix is specified.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3760,7 +3856,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When true a highlight field is returned for each result which contains the fields that match the query with <code>&lt;em&gt;&lt;/em&gt;</code> tags around the matching query terms. Defaults to false.</p>
+                                  <p>When true a highlight field is returned for each result which contains the fields that match the query with
+<code>&lt;em&gt;&lt;/em&gt;</code> tags around the matching query terms. Defaults to false.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3772,7 +3869,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When <code>true</code> and used with a Watson Discovery News collection, duplicate results (based on the contents of the <code>title</code> field) are removed. Duplicate comparison is limited to the current query only, <code>offset</code> is not considered. Defaults to <code>false</code>. This parameter is currently Beta functionality.</p>
+                                  <p>When <code>true</code> and used with a Watson Discovery News collection, duplicate results (based on the contents of the
+<code>title</code> field) are removed. Duplicate comparison is limited to the current query only, <code>offset</code> is not considered.
+Defaults to <code>false</code>. This parameter is currently Beta functionality.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3784,7 +3883,9 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, <code>offset</code> is not considered. This parameter is currently Beta functionality.</p>
+                                  <p>When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
+comparison is limited to the current query only, <code>offset</code> is not considered. This parameter is currently Beta
+functionality.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3796,7 +3897,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When <code>true</code>, results are returned based on their similarity to the document IDs specified in the <code>similar.document_ids</code> parameter. The default is <code>false</code>.</p>
+                                  <p>When <code>true</code>, results are returned based on their similarity to the document IDs specified in the
+<code>similar.document_ids</code> parameter. The default is <code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3808,7 +3910,10 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of document IDs that will be used to find similar documents.   <strong>Note:</strong> If the <code>natural_language_query</code> parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as <code>filter</code> and <code>query</code> are subsequently applied and reduce the query scope.</p>
+                                  <p>A comma-separated list of document IDs that will be used to find similar documents.   <strong>Note:</strong> If the
+<code>natural_language_query</code> parameter is also specified, it will be used to expand the scope of the document
+similarity search to include the natural language query. Other query parameters, such as <code>filter</code> and <code>query</code> are
+subsequently applied and reduce the query scope.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3820,7 +3925,8 @@ details.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.</p>
+                                  <p>A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If
+not specified, the entire document is used for comparison.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3936,7 +4042,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A cacheable query that limits the documents returned to exclude any documents that don&rsquo;t mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.</p>
+                                  <p>A cacheable query that limits the documents returned to exclude any documents that don&rsquo;t mention the query content.
+Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the
+data set.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3948,7 +4056,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
+                                  <p>A query search returns all documents in your data set with full enrichments and full text, but with the most
+relevant documents listed first. Use a query search when you want to find the most relevant search results. You
+cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3960,7 +4070,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
+                                  <p>A natural language query that returns relevant documents by utilizing training data and natural language
+understanding. You cannot use <code>natural_language_query</code> and <code>query</code> at the same time.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3972,7 +4083,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.</p>
+                                  <p>An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
+useful for building applications, because you can use them to build lists, tables, and time series. For a full list
+of possible aggregrations, see the Query reference.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4008,7 +4121,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.</p>
+                                  <p>The number of query results to skip at the beginning. For example, if the total number of results that are returned
+is 10, and the offset is 8, it returns the last two results.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4020,7 +4134,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with <code>-</code> for descending or <code>+</code> for ascending. Ascending is the default sort direction if no prefix is specified.</p>
+                                  <p>A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+prefixing the field with <code>-</code> for descending or <code>+</code> for ascending. Ascending is the default sort direction if no
+prefix is specified.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4032,7 +4148,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When true a highlight field is returned for each result which contains the fields that match the query with <code>&lt;em&gt;&lt;/em&gt;</code> tags around the matching query terms. Defaults to false.</p>
+                                  <p>When true a highlight field is returned for each result which contains the fields that match the query with
+<code>&lt;em&gt;&lt;/em&gt;</code> tags around the matching query terms. Defaults to false.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4044,7 +4161,9 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, <code>offset</code> is not considered. This parameter is currently Beta functionality.</p>
+                                  <p>When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
+comparison is limited to the current query only, <code>offset</code> is not considered. This parameter is currently Beta
+functionality.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4056,7 +4175,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When <code>true</code>, results are returned based on their similarity to the document IDs specified in the <code>similar.document_ids</code> parameter. The default is <code>false</code>.</p>
+                                  <p>When <code>true</code>, results are returned based on their similarity to the document IDs specified in the
+<code>similar.document_ids</code> parameter. The default is <code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4068,7 +4188,10 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of document IDs that will be used to find similar documents.   <strong>Note:</strong> If the <code>natural_language_query</code> parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as <code>filter</code> and <code>query</code> are subsequently applied and reduce the query scope.</p>
+                                  <p>A comma-separated list of document IDs that will be used to find similar documents.   <strong>Note:</strong> If the
+<code>natural_language_query</code> parameter is also specified, it will be used to expand the scope of the document
+similarity search to include the natural language query. Other query parameters, such as <code>filter</code> and <code>query</code> are
+subsequently applied and reduce the query scope.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4080,7 +4203,8 @@ language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.</p>
+                                  <p>A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If
+not specified, the entire document is used for comparison.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5417,7 +5541,7 @@ more details.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -196,50 +196,13 @@
 
                 </div>
               </div>
-            <p>Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and
-IBM Watson Natural Language Understanding will give you results for the features you request. The
-service cleans HTML content before analysis by default, so the results can ignore most
-advertisements and other unwanted content.</p>
-<h3 id='concepts' class='heading'>Concepts</h3>
-
-<p>Identify general concepts that are referenced or alluded to in your content. Concepts that are
-detected typically have an associated link to a DBpedia resource.</p>
-<h3 id='entities' class='heading'>Entities</h3>
-
-<p>Detect important people, places, geopolitical entities and other types of entities in your
-content. Entity detection recognizes consecutive coreferences of each entity. For example,
-analysis of the following text would count <q>Barack Obama</q> and <q>He</q> as the same entity:</p>
-
-<p><q>Barack Obama was the 44th President of the United States. He took office in January 2009.</q></p>
-<h3 id='keywords' class='heading'>Keywords</h3>
-
-<p>Determine the most important keywords in your content. Keyword phrases are organized by relevance
-in the results.</p>
-<h3 id='categories' class='heading'>Categories</h3>
-
-<p>Categorize your content into a hierarchical 5-level taxonomy. For example, <q>Leonardo DiCaprio won
-an Oscar</q> returns <q>/art and entertainment/movies and tv/movies</q> as the most confident
-classification.</p>
-<h3 id='sentiment' class='heading'>Sentiment</h3>
-
-<p>Determine whether your content conveys postive or negative sentiment. Sentiment information can be
-returned for detected entities, keywords, or user-specified target phrases found in the text.</p>
-<h3 id='emotion' class='heading'>Emotion</h3>
-
-<p>Detect anger, disgust, fear, joy, or sadness that is conveyed by your content. Emotion information
-can be returned for detected entities, keywords, or user-specified target phrases found in the
-text.</p>
-<h3 id='relations' class='heading'>Relations</h3>
-
-<p>Recognize when two entities are related, and identify the type of relation.  For example, you can
-identify an <q>awardedTo</q> relation between an award and its recipient.</p>
-<h3 id='semantic-roles' class='heading'>Semantic Roles</h3>
-
-<p>Parse sentences into subject-action-object form, and identify entities and keywords that are
-subjects or objects of an action.</p>
-<h3 id='metadata' class='heading'>Metadata</h3>
-
-<p>Get author information, publication date, and the title of your text/HTML content.</p>
+            <p>Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and IBM Watson Natural
+Language Understanding will give you results for the features you request. The service cleans HTML content before
+analysis by default, so the results can ignore most advertisements and other unwanted content.
+You can create <a target="_blank"
+href="https://www.ibm.com/watson/developercloud/doc/natural-language-understanding/customizing.html">custom models</a>
+with Watson Knowledge Studio that can be used to detect custom entities and relations in Natural Language
+Understanding.</p>
 
           </section>
           <section class="section task-group-section">
@@ -385,7 +348,23 @@ in <q>YYYY-MM-DD</q> format.</p>
                       <div class="abstract">
                         <p>Analyze text, HTML, or a public webpage.</p>
 
-<p>Analyzes text, HTML, or a public webpage with one or more text analysis features.</p>
+<p>Analyzes text, HTML, or a public webpage with one or more text analysis features.  ### Concepts Identify general
+concepts that are referenced or alluded to in your content. Concepts that are detected typically have an associated
+link to a DBpedia resource.  ### Emotion Detect anger, disgust, fear, joy, or sadness that is conveyed by your
+content. Emotion information can be returned for detected entities, keywords, or user-specified target phrases
+found in the text.  ### Entities Detect important people, places, geopolitical entities and other types of entities
+in your content. Entity detection recognizes consecutive coreferences of each entity. For example, analysis of the
+following text would count \<q>Barack Obama\</q> and \<q>He\</q> as the same entity:  \<q>Barack Obama was the 44th President
+of the United States. He took office in January 2009.\</q>  ### Keywords Determine the most important keywords in your
+content. Keyword phrases are organized by relevance in the results.  ### Metadata Get author information,
+publication date, and the title of your text/HTML content.  ### Relations Recognize when two entities are related,
+and identify the type of relation.  For example, you can identify an \<q>awardedTo\</q> relation between an award and
+its recipient.  ### Semantic Roles Parse sentences into subject-action-object form, and identify entities and
+keywords that are subjects or objects of an action.  ### Sentiment Determine whether your content conveys postive
+or negative sentiment. Sentiment information can be returned for detected entities, keywords, or user-specified
+target phrases found in the text.   ### Categories Categorize your content into a hierarchical 5-level taxonomy.
+For example, \<q>Leonardo DiCaprio won an Oscar\</q> returns \<q>/art and entertainment/movies and tv/movies\</q> as the most
+confident classification.</p>
 
                       </div>
                       <div class="declaration">
@@ -411,7 +390,8 @@ in <q>YYYY-MM-DD</q> format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An object containing request parameters. The <code>features</code> object and one of the <code>text</code>, <code>html</code>, or <code>url</code> attributes are required.</p>
+                                  <p>An object containing request parameters. The <code>features</code> object and one of the <code>text</code>, <code>html</code>, or <code>url</code> attributes
+are required.</p>
                                 </div>
                               </td>
                             </tr>
@@ -486,7 +466,7 @@ in <q>YYYY-MM-DD</q> format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>modelID of the model to delete.</p>
+                                  <p>model_id of the model to delete.</p>
                                 </div>
                               </td>
                             </tr>
@@ -535,7 +515,8 @@ in <q>YYYY-MM-DD</q> format.</p>
                       <div class="abstract">
                         <p>List models.</p>
 
-<p>Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that you have created and linked to your Natural Language Understanding service.</p>
+<p>Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
+you have created and linked to your Natural Language Understanding service.</p>
 
                       </div>
                       <div class="declaration">
@@ -587,7 +568,7 @@ in <q>YYYY-MM-DD</q> format.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

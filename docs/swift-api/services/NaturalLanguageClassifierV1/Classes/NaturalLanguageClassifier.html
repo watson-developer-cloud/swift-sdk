@@ -54,6 +54,9 @@
                 <a href="../Structs/Classification.html">Classification</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ClassificationCollection.html">ClassificationCollection</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ClassifiedClass.html">ClassifiedClass</a>
               </li>
               <li class="nav-group-task">
@@ -66,7 +69,13 @@
                 <a href="../Structs/ClassifierList.html">ClassifierList</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ClassifyCollectionInput.html">ClassifyCollectionInput</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ClassifyInput.html">ClassifyInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionItem.html">CollectionItem</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs.html#/s:27NaturalLanguageClassifierV111JSONWrapperV">JSONWrapper</a>
@@ -85,9 +94,9 @@
 
                 </div>
               </div>
-            <p>IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching
-predefined classes for short text input. You create and train a classifier to connect predefined
-classes to example texts so that the service can apply those classes to new inputs.</p>
+            <p>IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching predefined classes
+for short text input. You create and train a classifier to connect predefined classes to example texts so that the
+service can apply those classes to new inputs.</p>
 
           </section>
           <section class="section task-group-section">
@@ -218,9 +227,10 @@ classes to example texts so that the service can apply those classes to new inpu
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Classify.</p>
+                        <p>Classify a phrase.</p>
 
-<p>Returns label information for the input. The status must be <code>Available</code> before you can use the classifier to classify text. Use <code>Get information about a classifier</code> to retrieve the status.</p>
+<p>Returns label information for the input. The status must be <code>Available</code> before you can use the classifier to
+classify text.</p>
 
                       </div>
                       <div class="declaration">
@@ -296,6 +306,95 @@ classes to example texts so that the service can apply those classes to new inpu
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C18classifyCollectionySS12classifierID_SayAA13ClassifyInputVG10collectionys5Error_pcSg7failureyAA014ClassificationF0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/classifyCollection(classifierID:collection:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C18classifyCollectionySS12classifierID_SayAA13ClassifyInputVG10collectionys5Error_pcSg7failureyAA014ClassificationF0Vc7successtF">classifyCollection(classifierID:collection:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Classify multiple phrases.</p>
+
+<p>Returns label information for multiple phrases. The status must be <code>Available</code> before you can use the classifier to
+classify text.  Note that classifying Japanese texts is a beta feature.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classifyCollection</span><span class="p">(</span>
+    <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">collection</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ClassifyInput.html">ClassifyInput</a></span><span class="p">],</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassificationCollection.html">ClassificationCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifierID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Classifier ID to use.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collection</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The submitted phrases.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:27NaturalLanguageClassifierV10abC0C06createC0y10Foundation3URLV8metadata_AG12trainingDatays5Error_pcSg7failureyAA0C0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/createClassifier(metadata:trainingData:failure:success:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C06createC0y10Foundation3URLV8metadata_AG12trainingDatays5Error_pcSg7failureyAA0C0Vc7successtF">createClassifier(metadata:trainingData:failure:success:)</a>
@@ -335,7 +434,10 @@ classes to example texts so that the service can apply those classes to new inpu
                               </td>
                               <td>
                                 <div>
-                                  <p>Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier. For details, see the <a href="https://www.ibm.com/watson/developercloud/natural-language-classifier/api/v1/#create_classifier">API reference</a>.</p>
+                                  <p>Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the
+classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.
+Supported languages are English (<code>en</code>), Arabic (<code>ar</code>), French (<code>fr</code>), German, (<code>de</code>), Italian (<code>it</code>), Japanese
+(<code>ja</code>), Korean (<code>ko</code>), Brazilian Portuguese (<code>pt</code>), and Spanish (<code>es</code>).</p>
                                 </div>
                               </td>
                             </tr>
@@ -347,7 +449,9 @@ classes to example texts so that the service can apply those classes to new inpu
                               </td>
                               <td>
                                 <div>
-                                  <p>Training data in CSV format. Each text value must have at least one class. The data can include up to 15,000 records. For details, see <a href="https://www.ibm.com/watson/developercloud/doc/natural-language-classifier/using-your-data.html">Using your own data</a>.</p>
+                                  <p>Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000
+records. For details, see <a href="https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html">Data
+preparation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -596,7 +700,7 @@ classes to example texts so that the service can apply those classes to new inpu
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -100,10 +100,10 @@
 
                 </div>
               </div>
-            <p>Language Translator translates text from one language to another. The service offers multiple
-domain-specific models that you can customize based on your unique terminology and language. Use
-Language Translator to take news from across the globe and present it in your language,
-communicate with your customers in their own language, and more.</p>
+            <p>IBM Watson Language Translator translates text from one language to another. The service offers multiple
+domain-specific models that you can customize based on your unique terminology and language. Use Language Translator to
+take news from across the globe and present it in your language, communicate with your customers in their own language,
+and more.</p>
 
           </section>
           <section class="section task-group-section">
@@ -234,7 +234,9 @@ communicate with your customers in their own language, and more.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Translates the input text from the source language to the target language.</p>
+                        <p>Translate.</p>
+
+<p>Translates the input text from the source language to the target language.</p>
 
                       </div>
                       <div class="declaration">
@@ -260,7 +262,7 @@ communicate with your customers in their own language, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The translate request containing the text, with optional source, target, and model_id.</p>
+                                  <p>The translate request containing the text, and either a model ID or source and target language pair.</p>
                                 </div>
                               </td>
                             </tr>
@@ -307,7 +309,9 @@ communicate with your customers in their own language, and more.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Identifies the language of the input text.</p>
+                        <p>Identify language.</p>
+
+<p>Identifies the language of the input text.</p>
 
                       </div>
                       <div class="declaration">
@@ -380,9 +384,10 @@ communicate with your customers in their own language, and more.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Lists all languages that can be identified by the API.</p>
+                        <p>List identifiable languages.</p>
 
-<p>Lists all languages that the service can identify. Returns the two-letter code (for example, <code>en</code> for English or <code>es</code> for Spanish) and name of each language.</p>
+<p>Lists the languages that the service can identify. Returns the language code (for example, <code>en</code> for English or <code>es</code>
+for Spanish) and name of each language.</p>
 
                       </div>
                       <div class="declaration">
@@ -442,9 +447,11 @@ communicate with your customers in their own language, and more.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Uploads a TMX glossary file on top of a domain to customize a translation model.</p>
+                        <p>Create model.</p>
 
-<p>Depending on the size of the file, training can range from minutes for a glossary to several hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded glossary and corpus files is limited to 250 MB.</p>
+<p>Uploads a TMX glossary file on top of a domain to customize a translation model.  Depending on the size of the
+file, training can range from minutes for a glossary to several hours for a large parallel corpus. Glossary files
+must be less than 10 MB. The cumulative file size of all uploaded glossary and corpus files is limited to 250 MB.</p>
 
                       </div>
                       <div class="declaration">
@@ -474,7 +481,8 @@ communicate with your customers in their own language, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Specifies the domain model that is used as the base for the training. To see current supported domain models, use the GET /v2/models parameter.</p>
+                                  <p>The model ID of the model to use as the base for customization. To see available models, use the <code>List models</code>
+method.</p>
                                 </div>
                               </td>
                             </tr>
@@ -486,7 +494,8 @@ communicate with your customers in their own language, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The model name. Valid characters are letters, numbers, -, and _. No spaces.</p>
+                                  <p>An optional model name that you can use to identify the model. Valid characters are letters, numbers, dashes,
+underscores, spaces and apostrophes. The maximum length is 32 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -498,7 +507,9 @@ communicate with your customers in their own language, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A TMX file with your customizations. The customizations in the file completely overwrite the domain data translation, including high frequency or high confidence phrase translations. You can upload only one glossary with a file size less than 10 MB per call.</p>
+                                  <p>A TMX file with your customizations. The customizations in the file completely overwrite the domain translaton
+data, including high frequency or high confidence phrase translations. You can upload only one glossary with a file
+size less than 10 MB per call.</p>
                                 </div>
                               </td>
                             </tr>
@@ -569,7 +580,9 @@ communicate with your customers in their own language, and more.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Deletes a custom translation model.</p>
+                        <p>Delete model.</p>
+
+<p>Deletes a custom translation model.</p>
 
                       </div>
                       <div class="declaration">
@@ -595,7 +608,7 @@ communicate with your customers in their own language, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The model identifier.</p>
+                                  <p>Model ID of the model to delete.</p>
                                 </div>
                               </td>
                             </tr>
@@ -642,7 +655,9 @@ communicate with your customers in their own language, and more.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get information about the given translation model, including training status.</p>
+                        <p>Get model details.</p>
+
+<p>Gets information about a translation model, including training status for custom models.</p>
 
                       </div>
                       <div class="declaration">
@@ -668,7 +683,7 @@ communicate with your customers in their own language, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Model ID to use.</p>
+                                  <p>Model ID of the model to get.</p>
                                 </div>
                               </td>
                             </tr>
@@ -715,7 +730,9 @@ communicate with your customers in their own language, and more.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Lists available standard and custom models by source or target language.</p>
+                        <p>List models.</p>
+
+<p>Lists available translation models.</p>
 
                       </div>
                       <div class="declaration">
@@ -743,7 +760,7 @@ communicate with your customers in their own language, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Filter models by source language.</p>
+                                  <p>Specify a language code to filter results by source language.</p>
                                 </div>
                               </td>
                             </tr>
@@ -755,7 +772,7 @@ communicate with your customers in their own language, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Filter models by target language.</p>
+                                  <p>Specify a language code to filter results by target language.</p>
                                 </div>
                               </td>
                             </tr>
@@ -767,7 +784,9 @@ communicate with your customers in their own language, and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Valid values are leaving it unset, <code>true</code>, and <code>false</code>. When <code>true</code>, it filters models to return the defaultModels model or models. When <code>false</code>, it returns the non-defaultModels model or models. If not set, it returns all models, defaultModels and non-defaultModels.</p>
+                                  <p>If the default parameter isn&rsquo;t specified, the service will return all models (default and non-default) for each
+language pair. To return only default models, set this to <code>true</code>. To return only non-default models, set this to
+<code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -806,7 +825,7 @@ communicate with your customers in their own language, and more.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

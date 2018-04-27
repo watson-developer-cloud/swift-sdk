@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AudioListing Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/AudioListing" class="dashAnchor"></a>
+    <a title="AudioListing Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        AudioListing Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/SpeechToText.html">SpeechToText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SpeechToTextSession.html">SpeechToTextSession</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RestError.html">RestError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AcousticModel.html">AcousticModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AcousticModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AcousticModels.html">AcousticModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioDetails.html">AudioDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioDetails/ModelType.html">– ModelType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioDetails/Compression.html">– Compression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListing.html">AudioListing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListing/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResource.html">AudioResource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResource/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResources.html">AudioResources</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Corpora.html">Corpora</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Corpus.html">Corpus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Corpus/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateAcousticModel.html">CreateAcousticModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateAcousticModel/BaseModelName.html">– BaseModelName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateLanguageModel.html">CreateLanguageModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateLanguageModel/BaseModelName.html">– BaseModelName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CustomWord.html">CustomWord</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CustomWords.html">CustomWords</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:14SpeechToTextV111JSONWrapperV">JSONWrapper</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KeywordResult.html">KeywordResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LanguageModel.html">LanguageModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LanguageModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LanguageModels.html">LanguageModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognitionJob.html">RecognitionJob</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognitionJob/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognitionJobs.html">RecognitionJobs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognitionSettings.html">RecognitionSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RegisterStatus.html">RegisterStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RegisterStatus/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerLabelsResult.html">SpeakerLabelsResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechModel.html">SpeechModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechModels.html">SpeechModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionAlternative.html">SpeechRecognitionAlternative</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResult.html">SpeechRecognitionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResultsAccumulator.html">SpeechRecognitionResultsAccumulator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechSession.html">SpeechSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Word.html">Word</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordAlternativeResult.html">WordAlternativeResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordAlternativeResults.html">WordAlternativeResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordConfidence.html">WordConfidence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordError.html">WordError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordTimestamp.html">WordTimestamp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Words.html">Words</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>AudioListing</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AudioListing</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                </div>
+              </div>
+            <p>AudioListing.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV112AudioListingV6StatusO"></a>
+                    <a name="//apple_ref/swift/Enum/Status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV112AudioListingV6StatusO">Status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For an audio-type resource,** the status of the resource: * <code>ok</code> indicates that the service has successfully analyzed the audio data. The data can be used to train the custom model. * <code>being_processed</code> indicates that the service is still analyzing the audio data. The service cannot accept requests to add new audio resources or to train the custom model until its analysis is complete. * <code>invalid</code> indicates that the audio data is not valid for training the custom model (possibly because it has the wrong format or sampling rate, or because it is corrupted).   Omitted for an archive-type resource.</p>
+
+                        <a href="../Structs/AudioListing/Status.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Status</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV112AudioListingV8durationSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/duration" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV112AudioListingV8durationSdSgvp">duration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For an audio-type resource,**  the total seconds of audio in the resource. Omitted for an archive-type resource.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">duration</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV112AudioListingV4nameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV112AudioListingV4nameSSSgvp">name</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For an audio-type resource,** the name of the resource. Omitted for an archive-type resource.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV112AudioListingV7detailsAA0E7DetailsVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/details" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV112AudioListingV7detailsAA0E7DetailsVSgvp">details</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For an audio-type resource,** an <code><a href="../Structs/AudioDetails.html">AudioDetails</a></code> object that provides detailed information about the resource. The object is empty until the service finishes processing the audio. Omitted for an archive-type resource.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">details</span><span class="p">:</span> <span class="kt"><a href="../Structs/AudioDetails.html">AudioDetails</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV112AudioListingV6statusSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV112AudioListingV6statusSSSgvp">status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For an audio-type resource,** the status of the resource: * <code>ok</code> indicates that the service has successfully analyzed the audio data. The data can be used to train the custom model. * <code>being_processed</code> indicates that the service is still analyzing the audio data. The service cannot accept requests to add new audio resources or to train the custom model until its analysis is complete. * <code>invalid</code> indicates that the audio data is not valid for training the custom model (possibly because it has the wrong format or sampling rate, or because it is corrupted).   Omitted for an archive-type resource.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">status</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV112AudioListingV9containerAA0E8ResourceVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/container" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV112AudioListingV9containerAA0E8ResourceVSgvp">container</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For an archive-type resource,** an object of type <code><a href="../Structs/AudioResource.html">AudioResource</a></code> that provides information about the resource. Omitted for an audio-type resource.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">container</span><span class="p">:</span> <span class="kt"><a href="../Structs/AudioResource.html">AudioResource</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV112AudioListingV5audioSayAA0E8ResourceVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/audio" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV112AudioListingV5audioSayAA0E8ResourceVGSgvp">audio</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For an archive-type resource,** an array of <code><a href="../Structs/AudioResource.html">AudioResource</a></code> objects that provides information about the audio-type resources that are contained in the resource. Omitted for an audio-type resource.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">audio</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/AudioResource.html">AudioResource</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

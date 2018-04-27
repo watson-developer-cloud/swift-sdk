@@ -297,7 +297,7 @@
             <h1>MessageResponse</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageResponse</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageResponse</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
 
                 </div>
               </div>
@@ -499,120 +499,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ConversationV115MessageResponseVACSayAA13RuntimeIntentVG7intents_SayAA0E6EntityVG8entitiesAA7ContextV7contextAA10OutputDataV6outputAA0C5InputVSg5inputSbSg16alternateIntentss10DictionaryVySSAA4JSONOG20additionalPropertiestcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(intents:entities:context:output:input:alternateIntents:additionalProperties:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ConversationV115MessageResponseVACSayAA13RuntimeIntentVG7intents_SayAA0E6EntityVG8entitiesAA7ContextV7contextAA10OutputDataV6outputAA0C5InputVSg5inputSbSg16alternateIntentss10DictionaryVySSAA4JSONOG20additionalPropertiestcfc">init(intents:entities:context:output:input:alternateIntents:additionalProperties:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Initialize a <code>MessageResponse</code> with member variables.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">intents</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeIntent.html">RuntimeIntent</a></span><span class="p">],</span> <span class="nv">entities</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeEntity.html">RuntimeEntity</a></span><span class="p">],</span> <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/Context.html">Context</a></span><span class="p">,</span> <span class="nv">output</span><span class="p">:</span> <span class="kt"><a href="../Structs/OutputData.html">OutputData</a></span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageInput.html">MessageInput</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">alternateIntents</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">additionalProperties</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]</span> <span class="o">=</span> <span class="p">[:])</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>intents</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of intents recognized in the user input, sorted in descending order of confidence.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>entities</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of entities identified in the user input.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>context</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>State information for the conversation.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>output</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Output from the dialog, including the response to the user, the nodes that were triggered, and log messages.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>input</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The user input from the request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>alternateIntents</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Whether to return more than one intent. A value of <code>true</code> indicates that all matching intents are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An initialized <code>MessageResponse</code>.</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:s9DecodablePxs7Decoder_p4from_tKcfc"></a>
                     <a name="//apple_ref/swift/Method/init(from:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:s9DecodablePxs7Decoder_p4from_tKcfc">init(from:)</a>
@@ -636,38 +522,12 @@
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s9EncodableP6encodeys7Encoder_p2to_tKF"></a>
-                    <a name="//apple_ref/swift/Method/encode(to:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s9EncodableP6encodeys7Encoder_p2to_tKF">encode(to:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">encode</span><span class="p">(</span><span class="n">to</span> <span class="nv">encoder</span><span class="p">:</span> <span class="kt">Encoder</span><span class="p">)</span> <span class="k">throws</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-09)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

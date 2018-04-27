@@ -1,6 +1,22 @@
 Change Log
 ==========
 
+## Version 0.25.0
+_2018-04-26_
+
+This release regenerates all services except for Visual Recognition. It includes considerable updates to the function documentation and model serialization/deserialization, although they should not be breaking changes for users.
+
+This release also includes the following new features and bug fixes:
+
+- Discovery: Adds support for document segmentation
+- Natural Language Classifier: Adds support for `classifyCollection`
+- Speech to Text: Adds acoustic model customization
+- Speech to Text: Adds enums for `BaseModelName`
+- Tone Analyzer: Fixes a bug with the `tones` list for the `tone` function
+- Tone Analyzer: Adds `contentLanguage` parameter to `toneChat`
+- Tone Analyzer: Adds plain-text and HTML variants of the `tone` function
+- Tone Analyzer: Removes unused `content-type` parameter from the JSON variant of the `tone` function
+
 ## Version 0.24.1
 _2018-04-21_
 

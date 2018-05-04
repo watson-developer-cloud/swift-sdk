@@ -70,7 +70,7 @@ import Foundation
 public class SpeechToText {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    public var serviceURL = URL(string: "https://stream.watsonplatform.net/speech-to-text/api")
 
     /// The URL that shall be used to obtain a token.
     public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
@@ -146,11 +146,13 @@ public class SpeechToText {
         // construct header parameters
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/models",
+            url: serviceURL.appendingPathComponent("/v1/models", isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -190,9 +192,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -412,11 +415,13 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/recognize",
+            url: serviceURL.appendingPathComponent("/v1/recognize", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -483,11 +488,13 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "user_secret", value: userSecret)
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/register_callback",
+            url: serviceURL.appendingPathComponent("/v1/register_callback", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -525,11 +532,13 @@ public class SpeechToText {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "callback_url", value: callbackUrl))
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/unregister_callback",
+            url: serviceURL.appendingPathComponent("/v1/unregister_callback", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -774,11 +783,13 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/recognitions",
+            url: serviceURL.appendingPathComponent("/v1/recognitions", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -815,11 +826,13 @@ public class SpeechToText {
         // construct header parameters
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/recognitions",
+            url: serviceURL.appendingPathComponent("/v1/recognitions", isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -864,9 +877,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -907,9 +921,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -950,11 +965,13 @@ public class SpeechToText {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/customizations",
+            url: serviceURL.appendingPathComponent("/v1/customizations", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -999,11 +1016,13 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "language", value: language)
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/customizations",
+            url: serviceURL.appendingPathComponent("/v1/customizations", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1045,9 +1064,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -1089,9 +1109,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -1170,9 +1191,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1216,9 +1238,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -1267,9 +1290,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -1311,9 +1335,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -1407,9 +1432,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1457,9 +1483,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -1507,9 +1534,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -1574,9 +1602,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1661,9 +1690,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -1753,9 +1783,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -1800,9 +1831,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -1849,9 +1881,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -1903,11 +1936,13 @@ public class SpeechToText {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/acoustic_customizations",
+            url: serviceURL.appendingPathComponent("/v1/acoustic_customizations", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -1952,11 +1987,13 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "language", value: language)
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/acoustic_customizations",
+            url: serviceURL.appendingPathComponent("/v1/acoustic_customizations", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1998,9 +2035,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -2042,9 +2080,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -2116,9 +2155,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2162,9 +2202,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -2228,9 +2269,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2275,9 +2317,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -2391,9 +2434,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2446,9 +2490,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -2495,9 +2540,10 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )

@@ -342,10 +342,12 @@ extension VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
+        guard let serviceURL = serviceURL else { return }
+        
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model",
+            url: serviceURL.appendingPathComponent("/v3/classifiers/\(classifierID)/core_ml_model", isDirectory: false),
             credentials: credentials,
             headerParameters: defaultHeaders,
             acceptType: "application/octet-stream",

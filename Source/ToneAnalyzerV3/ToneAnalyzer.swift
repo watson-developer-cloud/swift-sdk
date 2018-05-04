@@ -26,7 +26,7 @@ import Foundation
 public class ToneAnalyzer {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/tone-analyzer/api"
+    public var serviceURL = URL(string: "https://gateway.watsonplatform.net/tone-analyzer/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -152,11 +152,13 @@ public class ToneAnalyzer {
             let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/tone",
+            url: serviceURL.appendingPathComponent("/v3/tone", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -242,11 +244,13 @@ public class ToneAnalyzer {
             let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/tone",
+            url: serviceURL.appendingPathComponent("/v3/tone", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -332,11 +336,13 @@ public class ToneAnalyzer {
             let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/tone",
+            url: serviceURL.appendingPathComponent("/v3/tone", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -403,11 +409,13 @@ public class ToneAnalyzer {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/tone_chat",
+            url: serviceURL.appendingPathComponent("/v3/tone_chat", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,

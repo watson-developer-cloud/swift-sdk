@@ -24,7 +24,7 @@ import Foundation
 public class NaturalLanguageClassifier {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/natural-language-classifier/api"
+    public var serviceURL = URL(string: "https://gateway.watsonplatform.net/natural-language-classifier/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -113,9 +113,10 @@ public class NaturalLanguageClassifier {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -166,9 +167,10 @@ public class NaturalLanguageClassifier {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -218,11 +220,13 @@ public class NaturalLanguageClassifier {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = multipartFormData.contentType
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/classifiers",
+            url: serviceURL.appendingPathComponent("/v1/classifiers", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -260,9 +264,10 @@ public class NaturalLanguageClassifier {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -301,9 +306,10 @@ public class NaturalLanguageClassifier {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -333,11 +339,13 @@ public class NaturalLanguageClassifier {
         // construct header parameters
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/classifiers",
+            url: serviceURL.appendingPathComponent("/v1/classifiers", isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )

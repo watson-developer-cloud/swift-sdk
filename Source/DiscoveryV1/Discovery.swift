@@ -25,7 +25,7 @@ import Foundation
 public class Discovery {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/discovery/api"
+    public var serviceURL = URL(string: "https://gateway.watsonplatform.net/discovery/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -117,11 +117,13 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/environments",
+            url: serviceURL.appendingPathComponent("/v1/environments", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -163,11 +165,13 @@ public class Discovery {
             let queryParameter = URLQueryItem(name: "name", value: name)
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/environments",
+            url: serviceURL.appendingPathComponent("/v1/environments", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -209,9 +213,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -268,9 +273,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -313,9 +319,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -362,9 +369,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -429,9 +437,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -482,9 +491,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -528,9 +538,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -597,9 +608,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -649,9 +661,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -749,9 +762,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -803,9 +817,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -856,9 +871,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -902,9 +918,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -962,9 +979,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1009,9 +1027,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1057,9 +1076,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1106,9 +1126,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1172,9 +1193,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1222,9 +1244,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1306,9 +1329,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1359,9 +1383,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1436,9 +1461,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1488,9 +1514,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1668,9 +1695,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1842,9 +1870,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1996,9 +2025,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2144,9 +2174,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2202,9 +2233,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2261,9 +2293,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2308,9 +2341,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2368,9 +2402,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2415,9 +2450,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2463,9 +2499,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2511,9 +2548,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2559,9 +2597,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2621,9 +2660,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2672,9 +2712,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2734,9 +2775,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2785,9 +2827,10 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters

@@ -25,7 +25,7 @@ import Foundation
 public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/language-translator/api"
+    public var serviceURL = URL(string: "https://gateway.watsonplatform.net/language-translator/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -102,11 +102,13 @@ public class LanguageTranslator {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v2/translate",
+            url: serviceURL.appendingPathComponent("/v2/translate", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -150,11 +152,13 @@ public class LanguageTranslator {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "text/plain"
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v2/identify",
+            url: serviceURL.appendingPathComponent("/v2/identify", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -186,11 +190,13 @@ public class LanguageTranslator {
         // construct header parameters
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v2/identifiable_languages",
+            url: serviceURL.appendingPathComponent("/v2/identifiable_languages", isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -261,11 +267,13 @@ public class LanguageTranslator {
             let queryParameter = URLQueryItem(name: "name", value: name)
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v2/models",
+            url: serviceURL.appendingPathComponent("/v2/models", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -306,9 +314,10 @@ public class LanguageTranslator {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -347,9 +356,10 @@ public class LanguageTranslator {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -402,11 +412,13 @@ public class LanguageTranslator {
             let queryParameter = URLQueryItem(name: "default", value: "\(defaultModels)")
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v2/models",
+            url: serviceURL.appendingPathComponent("/v2/models", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters

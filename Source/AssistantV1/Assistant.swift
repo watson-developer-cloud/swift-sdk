@@ -23,7 +23,7 @@ import Foundation
 public class Assistant {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/assistant/api"
+    public var serviceURL = URL(string: "https://gateway.watsonplatform.net/assistant/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -125,9 +125,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -195,11 +196,13 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
-
+        
+        guard let serviceURL = serviceURL else { return }
+        
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/workspaces",
+            url: serviceURL.appendingPathComponent("/v1/workspaces", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -246,11 +249,13 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/workspaces",
+            url: serviceURL.appendingPathComponent("/v1/workspaces", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -310,9 +315,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -379,9 +385,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -427,9 +434,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -513,9 +521,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -577,9 +586,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -641,9 +651,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -707,9 +718,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -757,9 +769,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -837,9 +850,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -898,9 +912,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -956,9 +971,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1019,9 +1035,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1071,9 +1088,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1149,9 +1167,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1208,9 +1227,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1264,9 +1284,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1323,9 +1344,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1373,9 +1395,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1459,9 +1482,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1515,9 +1539,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1579,9 +1604,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1641,9 +1667,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1691,9 +1718,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1778,9 +1806,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1836,9 +1865,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -1901,9 +1931,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -1965,9 +1996,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2017,9 +2049,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2099,9 +2132,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2162,9 +2196,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2222,9 +2257,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2287,9 +2323,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2341,9 +2378,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2419,9 +2457,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2475,9 +2514,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2531,9 +2571,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2592,9 +2633,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -2642,9 +2684,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2716,9 +2759,10 @@ public class Assistant {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -2780,11 +2824,13 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "cursor", value: cursor)
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/logs",
+            url: serviceURL.appendingPathComponent("/v1/logs", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters

@@ -28,7 +28,7 @@ import Foundation
 public class NaturalLanguageUnderstanding {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/natural-language-understanding/api"
+    public var serviceURL = URL(string: "https://gateway.watsonplatform.net/natural-language-understanding/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -133,11 +133,13 @@ public class NaturalLanguageUnderstanding {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/analyze",
+            url: serviceURL.appendingPathComponent("/v1/analyze", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -182,9 +184,10 @@ public class NaturalLanguageUnderstanding {
             failure?(RestError.encodingError)
             return
         }
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -220,11 +223,13 @@ public class NaturalLanguageUnderstanding {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/models",
+            url: serviceURL.appendingPathComponent("/v1/models", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters

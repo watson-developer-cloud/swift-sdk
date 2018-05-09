@@ -113,8 +113,8 @@ extension SpeechToText {
         // set urls
         guard let serviceURL = serviceURL else { return }
         session.serviceURL = "\(serviceURL)"
-        session.tokenURL = tokenURL
-        session.websocketsURL = websocketsURL
+        session.tokenURL = "\(tokenURL)"
+        session.websocketsURL = "\(websocketsURL)"
 
         // set headers
         session.defaultHeaders = defaultHeaders
@@ -204,8 +204,8 @@ extension SpeechToText {
         // set urls
         guard let serviceURL = serviceURL else { return }
         session.serviceURL = "\(serviceURL)"
-        session.tokenURL = tokenURL
-        session.websocketsURL = websocketsURL
+        session.tokenURL = "\(tokenURL)"
+        session.websocketsURL = "\(websocketsURL)"
 
         // set headers
         session.defaultHeaders = defaultHeaders

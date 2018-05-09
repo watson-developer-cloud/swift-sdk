@@ -107,11 +107,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     /** Load a file used when creating a classifier. */
     func loadClassifierFile(name: String, withExtension: String) -> URL? {
-        #if os(iOS)
+        #if os(Linux)
+            let url = URL(fileURLWithPath: "Tests/NaturalLanguageClassifierV1Tests/" + name + "." + withExtension)
+        #else
             let bundle = Bundle(for: type(of: self))
             guard let url = bundle.url(forResource: name, withExtension: withExtension) else { return nil }
-        #else
-            let url = URL(fileURLWithPath: "Tests/NaturalLanguageClassifierV1Tests/" + name + "." + withExtension)
         #endif
         return url
     }

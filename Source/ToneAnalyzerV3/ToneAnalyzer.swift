@@ -317,7 +317,7 @@ public class ToneAnalyzer {
         // construct header parameters
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
-        headers["Content-Type"] = "text/plain"
+        headers["Content-Type"] = "text/html"
         if let contentLanguage = contentLanguage {
             headers["Content-Language"] = contentLanguage
         }

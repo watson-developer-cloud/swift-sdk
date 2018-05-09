@@ -96,7 +96,17 @@ class VisualRecognitionTests: XCTestCase {
     /** Load image files with class examples and test images. */
     func loadImageFiles() {
 
-        #if os(iOS)
+        #if os(Linux)
+            let examplesBaseball =  URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/baseball.zip")
+            let examplesCars =      URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/cars.zip")
+            let examplesTrucks =    URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/trucks.zip")
+            let faces =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/faces.zip")
+            let face1 =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/face1.jpg")
+            let car =               URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/car.png")
+            let carz =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/carz.zip")
+            let obama =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/obama.jpg")
+            let sign =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/sign.jpg")
+        #else
             let bundle = Bundle(for: type(of: self))
             guard
                 let examplesBaseball =  bundle.url(forResource: "baseball", withExtension: "zip"),
@@ -108,20 +118,10 @@ class VisualRecognitionTests: XCTestCase {
                 let carz =              bundle.url(forResource: "carz", withExtension: "zip"),
                 let obama =             bundle.url(forResource: "obama", withExtension: "jpg"),
                 let sign =              bundle.url(forResource: "sign", withExtension: "jpg")
-                else {
-                    XCTFail("Unable to locate sample image files.")
-                    return
+            else {
+                XCTFail("Unable to locate sample image files.")
+                return
             }
-        #else
-            let examplesBaseball =  URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/baseball.zip")
-            let examplesCars =      URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/cars.zip")
-            let examplesTrucks =    URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/trucks.zip")
-            let faces =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/faces.zip")
-            let face1 =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/face1.jpg")
-            let car =               URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/car.png")
-            let carz =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/carz.zip")
-            let obama =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/obama.jpg")
-            let sign =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/sign.jpg")
         #endif
 
         self.examplesBaseball = examplesBaseball
@@ -176,13 +176,13 @@ class VisualRecognitionTests: XCTestCase {
     /** Load file used when adding metadata to an image. */
     func loadMetadataFile(withName name: String, withExtension: String) -> URL? {
 
-        #if os(iOS)
+        #if os(Linux)
+            let url = URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/"+name+"."+withExtension)
+        #else
             let bundle = Bundle(for: type(of: self))
             guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
                 return nil
             }
-        #else
-            let url = URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/"+name+"."+withExtension)
         #endif
 
         return url

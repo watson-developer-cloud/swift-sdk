@@ -33,13 +33,13 @@ import AVFoundation
 public class SpeechToTextSession {
 
     /// The base URL of the Speech to Text service.
-    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    public var serviceURL = URL(string: "https://stream.watsonplatform.net/speech-to-text/api")
 
     /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+    public var tokenURL = URL(string: "https://stream.watsonplatform.net/authorization/api/v1/token")
 
     /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    public var websocketsURL = URL(string: "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -88,8 +88,9 @@ public class SpeechToTextSession {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )!
+        guard let tokenURL = tokenURL, let serviceURL = serviceURL else { return }
         let restToken = RestToken(
-            tokenURL: tokenURL + "?url=" + serviceURL,
+            tokenURL: tokenURL.appendingPathComponent("?url=\(serviceURL)", isDirectory: false),
             credentials: credentials
         )
         var socket = SpeechToTextSocket(

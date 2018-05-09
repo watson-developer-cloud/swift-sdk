@@ -111,7 +111,8 @@ extension SpeechToText {
         )
 
         // set urls
-        session.serviceURL = serviceURL
+        guard let serviceURL = serviceURL else { return }
+        session.serviceURL = "\(serviceURL)"
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
 
@@ -201,7 +202,8 @@ extension SpeechToText {
         )
 
         // set urls
-        session.serviceURL = serviceURL
+        guard let serviceURL = serviceURL else { return }
+        session.serviceURL = "\(serviceURL)"
         session.tokenURL = tokenURL
         session.websocketsURL = websocketsURL
 

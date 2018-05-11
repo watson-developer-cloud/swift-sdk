@@ -123,6 +123,41 @@ public class LanguageTranslator {
     }
 
     /**
+     List identifiable languages.
+
+     Lists the languages that the service can identify. Returns the language code (for example, `en` for English or `es`
+     for Spanish) and name of each language.
+
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listIdentifiableLanguages(
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (IdentifiableLanguages) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v2/identifiable_languages",
+            credentials: credentials,
+            headerParameters: headers
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<IdentifiableLanguages>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
      Identify language.
 
      Identifies the language of the input text.
@@ -171,33 +206,56 @@ public class LanguageTranslator {
     }
 
     /**
-     List identifiable languages.
+     List models.
 
-     Lists the languages that the service can identify. Returns the language code (for example, `en` for English or `es`
-     for Spanish) and name of each language.
+     Lists available translation models.
 
+     - parameter source: Specify a language code to filter results by source language.
+     - parameter target: Specify a language code to filter results by target language.
+     - parameter defaultModels: If the default parameter isn't specified, the service will return all models (default and non-default) for each
+     language pair. To return only default models, set this to `true`. To return only non-default models, set this to
+     `false`.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func listIdentifiableLanguages(
+    public func listModels(
+        source: String? = nil,
+        target: String? = nil,
+        defaultModels: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (IdentifiableLanguages) -> Void)
+        success: @escaping (TranslationModels) -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
 
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let source = source {
+            let queryParameter = URLQueryItem(name: "source", value: source)
+            queryParameters.append(queryParameter)
+        }
+        if let target = target {
+            let queryParameter = URLQueryItem(name: "target", value: target)
+            queryParameters.append(queryParameter)
+        }
+        if let defaultModels = defaultModels {
+            let queryParameter = URLQueryItem(name: "default", value: "\(defaultModels)")
+            queryParameters.append(queryParameter)
+        }
+
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v2/identifiable_languages",
+            url: serviceURL + "/v2/models",
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headers,
+            queryItems: queryParameters
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<IdentifiableLanguages>) in
+            (response: RestResponse<TranslationModels>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -357,64 +415,6 @@ public class LanguageTranslator {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<TranslationModel>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     List models.
-
-     Lists available translation models.
-
-     - parameter source: Specify a language code to filter results by source language.
-     - parameter target: Specify a language code to filter results by target language.
-     - parameter defaultModels: If the default parameter isn't specified, the service will return all models (default and non-default) for each
-     language pair. To return only default models, set this to `true`. To return only non-default models, set this to
-     `false`.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func listModels(
-        source: String? = nil,
-        target: String? = nil,
-        defaultModels: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslationModels) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        if let source = source {
-            let queryParameter = URLQueryItem(name: "source", value: source)
-            queryParameters.append(queryParameter)
-        }
-        if let target = target {
-            let queryParameter = URLQueryItem(name: "target", value: target)
-            queryParameters.append(queryParameter)
-        }
-        if let defaultModels = defaultModels {
-            let queryParameter = URLQueryItem(name: "default", value: "\(defaultModels)")
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v2/models",
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<TranslationModels>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

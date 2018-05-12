@@ -32,7 +32,7 @@ SCHEMES=(
 # Dependencies
 ####################
 
-brew update
+brew update > /dev/null
 brew outdated carthage || brew upgrade carthage
 carthage bootstrap --platform iOS
 

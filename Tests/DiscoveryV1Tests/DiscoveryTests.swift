@@ -27,7 +27,7 @@ class DiscoveryTests: XCTestCase {
     private let newsEnvironmentID = "system"
     private let newsCollectionID = "news-en"
     private var documentURL: URL!
-    private let timeout: TimeInterval = 10.0
+    private let timeout: TimeInterval = 20.0
 
     // MARK: - Test Configuration
 

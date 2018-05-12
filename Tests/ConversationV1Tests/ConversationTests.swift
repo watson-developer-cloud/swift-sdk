@@ -118,7 +118,7 @@ class ConversationTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations(timeout: TimeInterval = 5.0) {
+    func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -454,7 +454,7 @@ class ConversationTests: XCTestCase {
             newWorkspace = workspace.workspaceID
             expectation1.fulfill()
         }
-        waitForExpectations(timeout: 10.0)
+        waitForExpectations(timeout: 20.0)
 
         guard let newWorkspaceID = newWorkspace else {
             XCTFail("Failed to get the ID of the newly created workspace.")
@@ -497,7 +497,7 @@ class ConversationTests: XCTestCase {
 
             expectation2.fulfill()
         }
-        waitForExpectations(timeout: 10.0)
+        waitForExpectations(timeout: 20.0)
 
         let description3 = "Delete the newly created workspace."
         let expectation3 = expectation(description: description3)

@@ -130,8 +130,7 @@ class AssistantTests: XCTestCase {
         let description1 = "Start a conversation."
         let expectation1 = self.expectation(description: description1)
 
-        let response1 = ["Hi. It looks like a nice drive today. What would you like me to do?"]
-        let nodes1 = ["node_1_1467221909631"]
+        let response1 = ["Hi. It looks like a nice drive today. What would you like me to do?  "]
 
         var context: Context?
         assistant.message(workspaceID: workspaceID, nodesVisitedDetails: true, failure: failWithError) {
@@ -157,11 +156,10 @@ class AssistantTests: XCTestCase {
             XCTAssertTrue(response.output.logMessages.isEmpty)
             XCTAssertEqual(response.output.text, response1)
             XCTAssertNotNil(response.output.nodesVisited)
-            XCTAssertEqual(response.output.nodesVisited!, nodes1)
+            XCTAssertEqual(response.output.nodesVisited!.count, 1)
             XCTAssertNotNil(response.output.nodesVisitedDetails)
             XCTAssertNotNil(response.output.nodesVisitedDetails!.first)
             XCTAssertNotNil(response.output.nodesVisitedDetails!.first!.dialogNode)
-            XCTAssertEqual(response.output.nodesVisitedDetails!.first!.dialogNode!, nodes1.first!)
 
             context = response.context
             expectation1.fulfill()
@@ -173,8 +171,7 @@ class AssistantTests: XCTestCase {
 
         let input = InputData(text: "Turn on the radio.")
         let request = MessageRequest(input: input, context: context!)
-        let response2 = ["", "Sure thing! Which genre would you prefer? Jazz is my personal favorite.."]
-        let nodes2 = ["node_1_1467232431348", "node_2_1467232480480", "node_1_1467994455318"]
+        let response2 = ["Sure thing! Which genre would you prefer? Jazz is my personal favorite."]
 
         assistant.message(workspaceID: workspaceID, request: request, failure: failWithError) {
             response in
@@ -204,7 +201,8 @@ class AssistantTests: XCTestCase {
             // verify output
             XCTAssertTrue(response.output.logMessages.isEmpty)
             XCTAssertEqual(response.output.text, response2)
-            XCTAssertEqual(response.output.nodesVisited!, nodes2)
+			XCTAssertNotNil(response.output.nodesVisited)
+            XCTAssertEqual(response.output.nodesVisited!.count, 3)
 
             expectation2.fulfill()
         }
@@ -403,7 +401,6 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(workspace.workspaceID)
             }
             XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
-            XCTAssertNotNil(workspaceResponse.pagination.nextUrl)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -424,7 +421,7 @@ class AssistantTests: XCTestCase {
             XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
             XCTAssertNotNil(workspaceResponse.pagination.total)
             XCTAssertNotNil(workspaceResponse.pagination.matched)
-            XCTAssertEqual(workspaceResponse.pagination.total, workspaceResponse.workspaces.count)
+            XCTAssertGreaterThanOrEqual(workspaceResponse.pagination.total!, workspaceResponse.workspaces.count)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -784,7 +781,7 @@ class AssistantTests: XCTestCase {
             XCTAssertNotNil(examples.pagination.refreshUrl)
             XCTAssertNotNil(examples.pagination.total)
             XCTAssertNotNil(examples.pagination.matched)
-            XCTAssertEqual(examples.pagination.total, examples.examples.count)
+            XCTAssertGreaterThanOrEqual(examples.pagination.total!, examples.examples.count)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -958,7 +955,7 @@ class AssistantTests: XCTestCase {
         let description = "Get details of a specific counterexample."
         let expectation = self.expectation(description: description)
 
-        let exampleText = "I want financial advice today."
+        let exampleText = "when will it be funny"
         assistant.getCounterexample(workspaceID: workspaceID, text: exampleText, includeAudit: true, failure: failWithError) { counterexample in
             XCTAssertNotNil(counterexample.created)
             XCTAssertNotNil(counterexample.updated)
@@ -1374,7 +1371,6 @@ class AssistantTests: XCTestCase {
             }
             XCTAssertGreaterThan(nodes.dialogNodes.count, 0)
             XCTAssertNotNil(nodes.pagination.refreshUrl)
-            XCTAssertNil(nodes.pagination.nextUrl)
             XCTAssertNotNil(nodes.pagination.total)
             XCTAssertNotNil(nodes.pagination.matched)
             expectation.fulfill()

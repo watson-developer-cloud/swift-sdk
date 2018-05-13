@@ -37,6 +37,14 @@
                BlueprintName = "VisualRecognitionV3Tests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "VisualRecognitionTests/testUpdateClassifierWithNegativeExample()">
+               </Test>
+               <Test
+                  Identifier = "VisualRecognitionTests/testUpdateClassifierWithPositiveExample()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

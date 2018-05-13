@@ -25,7 +25,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
 
     private var visualRecognition: VisualRecognition!
     private let timeout: TimeInterval = 30.0
-    private let classifierID = "demo"
+    private let classifierID = Credentials.VisualRecognitionClassifierID
 
     /** Set up for each test by instantiating the service. */
     override func setUp() {
@@ -37,7 +37,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
     /** Instantiate Visual Recognition */
     func instantiateVisualRecognition() {
         let apiKey = Credentials.VisualRecognitionAPIKey
-        let version = "2016-11-04"
+        let version = "2018-03-19"
         visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"

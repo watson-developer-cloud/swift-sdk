@@ -1200,7 +1200,7 @@
 		CA45954820A62FBE0060BF9B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CA45954920A630080060BF9B /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = .github/CONTRIBUTING.md; sourceTree = "<group>"; };
 		CE6B98D31DF09D4B004CD6B5 /* face1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face1.jpg; sourceTree = "<group>"; };
-		CE6B98DB1DF22638004CD6B5 /* metadata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = metadata.txt; path = Tests/VisualRecognitionV3Tests/metadata.txt; sourceTree = SOURCE_ROOT; };
+		CE6B98DB1DF22638004CD6B5 /* metadata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = metadata.txt; sourceTree = "<group>"; };
 		CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trained_meta.txt; sourceTree = "<group>"; };
 		CE75BAA81DDE5F2F006EBB51 /* KennedySpeech.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = KennedySpeech.html; sourceTree = "<group>"; };
 		CE7BEE351E09E358000367FE /* KennedySpeech.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = KennedySpeech.html; sourceTree = "<group>"; };
@@ -2108,39 +2108,30 @@
 		7AAA9A4F1CEE6089002C9564 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7AAD66471DCA5D730010481E /* Classes */,
-				7AAD664B1DCA5D730010481E /* Images */,
+				7AAD66471DCA5D730010481E /* Resources */,
 				68FBD8211FE0873900878788 /* VisualRecognition+CoreMLTests.swift */,
-				CE6B98DB1DF22638004CD6B5 /* metadata.txt */,
 				689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */,
 				7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		7AAD66471DCA5D730010481E /* Classes */ = {
+		7AAD66471DCA5D730010481E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				7AAD66481DCA5D730010481E /* baseball.zip */,
-				7AAD66491DCA5D730010481E /* cars.zip */,
-				7AAD664A1DCA5D730010481E /* trucks.zip */,
-			);
-			name = Classes;
-			path = Tests/VisualRecognitionV3Tests/Classes;
-			sourceTree = SOURCE_ROOT;
-		};
-		7AAD664B1DCA5D730010481E /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				CE6B98D31DF09D4B004CD6B5 /* face1.jpg */,
 				7AAD664C1DCA5D730010481E /* car.png */,
+				7AAD66491DCA5D730010481E /* cars.zip */,
 				CA151FA0200EE0CF00DBA44F /* carz.zip */,
+				CE6B98D31DF09D4B004CD6B5 /* face1.jpg */,
 				7AAD664D1DCA5D730010481E /* faces.zip */,
+				CE6B98DB1DF22638004CD6B5 /* metadata.txt */,
 				7AAD664E1DCA5D730010481E /* obama.jpg */,
 				7AAD664F1DCA5D730010481E /* sign.jpg */,
+				7AAD664A1DCA5D730010481E /* trucks.zip */,
 			);
-			name = Images;
-			path = Tests/VisualRecognitionV3Tests/Images;
+			name = Resources;
+			path = Tests/VisualRecognitionV3Tests/Resources;
 			sourceTree = SOURCE_ROOT;
 		};
 		7AB445181D3E643B00E8748A /* ConversationV1 */ = {

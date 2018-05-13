@@ -22,8 +22,10 @@ import VisualRecognitionV3
 
 class VisualRecognitionTests: XCTestCase {
 
+    private static let timeout: TimeInterval = 45.0
+
     private var visualRecognition: VisualRecognition!
-    private var classifierID = Credentials.VisualRecognitionClassifierID
+    private let classifierID = Credentials.VisualRecognitionClassifierID
 
     static var allTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] {
         return [
@@ -117,7 +119,7 @@ class VisualRecognitionTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations(timeout: TimeInterval = 45.0) {
+    func waitForExpectations(timeout: TimeInterval = timeout) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -130,11 +132,9 @@ class VisualRecognitionTests: XCTestCase {
         let expectation = self.expectation(description: "Retrieve a list of user-trained classifiers.")
 
         visualRecognition.listClassifiers(verbose: true, failure: failWithError) { classifiers in
-            for classifier in classifiers.classifiers {
-                if classifier.classifierID == self.classifierID {
-                    expectation.fulfill()
-                    return
-                }
+            for classifier in classifiers.classifiers where classifier.classifierID == self.classifierID {
+                expectation.fulfill()
+                return
             }
             XCTFail("Could not retrieve the trained classifier.")
         }
@@ -272,18 +272,18 @@ class VisualRecognitionTests: XCTestCase {
             return
         }
 
-        defer {
+        addTeardownBlock {
             // allow zip files to propagate through object storage, so that
             // they will be deleted when the service deletes the classifier
             // (otherwise they remain and dramatically slow down the tests)
             sleep(15) // wait 15 seconds
 
-            let expectation = self.expectation(description: "Delete the new classifier.")
+            let teardownExpectation = self.expectation(description: "Delete the new classifier.")
 
-            visualRecognition.deleteClassifier(classifierID: newClassifierID, failure: failWithError) {
-                expectation.fulfill()
+            self.visualRecognition.deleteClassifier(classifierID: newClassifierID, failure: nil) {
+                teardownExpectation.fulfill()
             }
-            waitForExpectations()
+            self.wait(for: [teardownExpectation], timeout: VisualRecognitionTests.timeout)
         }
 
         var trained = false
@@ -373,18 +373,18 @@ class VisualRecognitionTests: XCTestCase {
             return
         }
 
-        defer {
+        addTeardownBlock {
             // allow zip files to propagate through object storage, so that
             // they will be deleted when the service deletes the classifier
             // (otherwise they remain and dramatically slow down the tests)
             sleep(15) // wait 15 seconds
 
-            let expectation = self.expectation(description: "Delete the new classifier.")
+            let teardownExpectation = self.expectation(description: "Delete the new classifier.")
 
-            visualRecognition.deleteClassifier(classifierID: newClassifierID, failure: failWithError) {
-                expectation.fulfill()
+            self.visualRecognition.deleteClassifier(classifierID: newClassifierID, failure: nil) {
+                teardownExpectation.fulfill()
             }
-            waitForExpectations()
+            self.wait(for: [teardownExpectation], timeout: VisualRecognitionTests.timeout)
         }
 
         var trained = false

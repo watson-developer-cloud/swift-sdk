@@ -54,16 +54,16 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     func load(forResource resource: String, ofType ext: String) -> String? {
-        #if os(iOS)
+        #if os(Linux)
+            let file = URL(fileURLWithPath: "Tests/PersonalityInsightsV3Tests/" + resource + "." + ext).path
+            return try? String(contentsOfFile: file, encoding: .utf8)
+        #else
             let bundle = Bundle(for: type(of: self))
             guard let file = bundle.path(forResource: resource, ofType: ext) else {
                 XCTFail("Unable to locate \(resource).\(ext) file.")
                 return nil
             }
             return try? String(contentsOfFile: file)
-        #else
-            let file = URL(fileURLWithPath: "Tests/PersonalityInsightsV3Tests/" + resource + "." + ext).path
-            return try? String(contentsOfFile: file, encoding: .utf8)
         #endif
     }
 

@@ -500,7 +500,6 @@ public class TextToSpeech {
     }
 
     /**
-<<<<<<< HEAD
      Delete a custom model.
 
      Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
@@ -594,8 +593,7 @@ public class TextToSpeech {
     }
 
     /**
-=======
->>>>>>> 812d52c778874bf3b056d5f5a323c051606b2138
+     
      List custom models.
 
      Lists metadata such as the name and description for all custom voice models that are owned by an instance of the
@@ -786,13 +784,8 @@ public class TextToSpeech {
         // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
-<<<<<<< HEAD
             method: "PUT",
             url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
-=======
-            method: "DELETE",
-            url: serviceURL + encodedPath,
->>>>>>> 812d52c778874bf3b056d5f5a323c051606b2138
             credentials: credentials,
             headerParameters: headers
         )
@@ -960,13 +953,8 @@ public class TextToSpeech {
         // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
-<<<<<<< HEAD
             method: "DELETE",
             url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
-=======
-            method: "PUT",
-            url: serviceURL + encodedPath,
->>>>>>> 812d52c778874bf3b056d5f5a323c051606b2138
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -1060,13 +1048,8 @@ public class TextToSpeech {
         // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
-<<<<<<< HEAD
             method: "GET",
             url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
-=======
-            method: "DELETE",
-            url: serviceURL + encodedPath,
->>>>>>> 812d52c778874bf3b056d5f5a323c051606b2138
             credentials: credentials,
             headerParameters: headers
         )

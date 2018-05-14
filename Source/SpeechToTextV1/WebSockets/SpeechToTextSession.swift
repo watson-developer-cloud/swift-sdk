@@ -83,12 +83,12 @@ public class SpeechToTextSession {
 
     private lazy var socket: SpeechToTextSocket = {
         let url = SpeechToTextSocket.buildURL(
-            url: websocketsURL,
+            url: "\(websocketsURL)",
             model: model,
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )!
-        guard let tokenURL = tokenURL, let serviceURL = serviceURL else { return nil }
+        guard let tokenURL = tokenURL, let serviceURL = serviceURL else { return SpeechToTextSocket(url: nil, restToken: nil, defaultHeaders: nil) }
         let restToken = RestToken(
             tokenURL: tokenURL.appendingPathComponent("?url=\(serviceURL)", isDirectory: false),
             credentials: credentials

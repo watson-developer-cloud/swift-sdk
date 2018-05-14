@@ -361,13 +361,8 @@ public class NaturalLanguageClassifier {
             return
         }
         let request = RestRequest(
-<<<<<<< HEAD
             method: "GET",
             url: serviceURL.appendingPathComponent("/v1/classifiers", isDirectory: false),
-=======
-            method: "DELETE",
-            url: serviceURL + encodedPath,
->>>>>>> 812d52c778874bf3b056d5f5a323c051606b2138
             credentials: credentials,
             headerParameters: headers
         )

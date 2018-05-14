@@ -89,101 +89,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
     }
-
-<<<<<<< HEAD
-    /** Load image files with class examples and test images. */
-    func loadImageFiles() {
-
-        #if os(Linux)
-            let examplesBaseball =  URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/baseball.zip")
-            let examplesCars =      URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/cars.zip")
-            let examplesTrucks =    URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Classes/trucks.zip")
-            let faces =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/faces.zip")
-            let face1 =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/face1.jpg")
-            let car =               URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/car.png")
-            let carz =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/carz.zip")
-            let obama =             URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/obama.jpg")
-            let sign =              URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Images/sign.jpg")
-        #else
-            let bundle = Bundle(for: type(of: self))
-            guard
-                let examplesBaseball =  bundle.url(forResource: "baseball", withExtension: "zip"),
-                let examplesCars =      bundle.url(forResource: "cars", withExtension: "zip"),
-                let examplesTrucks =    bundle.url(forResource: "trucks", withExtension: "zip"),
-                let faces =             bundle.url(forResource: "faces", withExtension: "zip"),
-                let face1 =             bundle.url(forResource: "face1", withExtension: "jpg"),
-                let car =               bundle.url(forResource: "car", withExtension: "png"),
-                let carz =              bundle.url(forResource: "carz", withExtension: "zip"),
-                let obama =             bundle.url(forResource: "obama", withExtension: "jpg"),
-                let sign =              bundle.url(forResource: "sign", withExtension: "jpg")
-            else {
-                XCTFail("Unable to locate sample image files.")
-                return
-            }
-        #endif
-
-        self.examplesBaseball = examplesBaseball
-        self.examplesCars = examplesCars
-        self.examplesTrucks = examplesTrucks
-        self.faces = faces
-        self.face1 = face1
-        self.car = car
-        self.carz = carz
-        self.obama = obama
-        self.sign = sign
-    }
-
-    /** Look up the trained classifier. */
-    func lookupClassifier() {
-        let expectation = self.expectation(description: "Look up the trained classifier.")
-        let failure = { (error: Error) in XCTFail("Failed to locate the trained classifier.") }
-        visualRecognition.listClassifiers(verbose: true, failure: failure) { classifiers in
-            for classifier in classifiers.classifiers where classifier.name == self.classifierName {
-                XCTAssert(classifier.status == "ready", "Wait for training to complete.")
-                self.classifierID = classifier.classifierID
-                expectation.fulfill()
-                return
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-        XCTAssertNotNil(classifierID, "The trained classifier could not be found. Run `trainClassifier` to set it up.")
-    }
-
-    /** Train a classifier for the test suite. */
-    func trainClassifier() {
-        let expectation = self.expectation(description: "Train a classifier for the test suite.")
-        let car = PositiveExample(name: "car", examples: examplesCars)
-        let failure = { (error: Error) in
-            XCTFail("Could not train classifier for test suite: \(error)")
-            expectation.fulfill()
-        }
-        visualRecognition.createClassifier(
-            name: classifierName,
-            positiveExamples: [car],
-            negativeExamples: examplesTrucks,
-            failure: failure)
-        {
-            _ in
-            XCTFail("Training the classifier for the test suite. Wait ~10 seconds for training to complete.")
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Load file used when adding metadata to an image. */
-    func loadMetadataFile(withName name: String, withExtension: String) -> URL? {
-
-        #if os(Linux)
-            let url = URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/"+name+"."+withExtension)
-        #else
-            let bundle = Bundle(for: type(of: self))
-            guard let url = bundle.url(forResource: name, withExtension: withExtension) else {
-                return nil
-            }
-        #endif
-
-=======
+    
     func loadResource(name: String, ext: String) -> URL {
         #if os(Linux)
         return URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Resources/" + name + "." + ext)
@@ -193,7 +99,6 @@ class VisualRecognitionTests: XCTestCase {
             XCTFail("Unable to locate sample image files.")
             assert(false)
         }
->>>>>>> 812d52c778874bf3b056d5f5a323c051606b2138
         return url
         #endif
     }

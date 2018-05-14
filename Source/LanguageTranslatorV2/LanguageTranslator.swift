@@ -444,7 +444,6 @@ public class LanguageTranslator {
         }
     }
 
-<<<<<<< HEAD
     /**
      List models.
 
@@ -507,6 +506,4 @@ public class LanguageTranslator {
         }
     }
 
-=======
->>>>>>> 812d52c778874bf3b056d5f5a323c051606b2138
 }

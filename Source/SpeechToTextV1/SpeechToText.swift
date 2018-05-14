@@ -147,6 +147,8 @@ public class SpeechToText {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -192,6 +194,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -416,6 +420,8 @@ public class SpeechToText {
             queryParameters.append(queryParameter)
         }
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -489,6 +495,8 @@ public class SpeechToText {
             queryParameters.append(queryParameter)
         }
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -533,6 +541,8 @@ public class SpeechToText {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "callback_url", value: callbackUrl))
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -784,6 +794,8 @@ public class SpeechToText {
             queryParameters.append(queryParameter)
         }
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -827,6 +839,8 @@ public class SpeechToText {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -877,6 +891,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -921,6 +937,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -966,6 +984,8 @@ public class SpeechToText {
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -1017,6 +1037,8 @@ public class SpeechToText {
             queryParameters.append(queryParameter)
         }
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -1064,6 +1086,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -1109,6 +1133,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -1191,6 +1217,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -1238,6 +1266,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -1290,6 +1320,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -1335,6 +1367,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -1432,6 +1466,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -1483,6 +1519,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -1534,6 +1572,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -1602,6 +1642,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -1690,6 +1732,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -1783,6 +1827,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
@@ -1831,6 +1877,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -1881,6 +1929,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -1937,6 +1987,8 @@ public class SpeechToText {
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -1988,6 +2040,8 @@ public class SpeechToText {
             queryParameters.append(queryParameter)
         }
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -2035,6 +2089,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -2080,6 +2136,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -2155,6 +2213,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -2202,6 +2262,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -2269,6 +2331,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -2317,6 +2381,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -2434,6 +2500,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -2490,6 +2558,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -2540,6 +2610,8 @@ public class SpeechToText {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",

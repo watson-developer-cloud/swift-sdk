@@ -118,6 +118,8 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -166,6 +168,8 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -213,6 +217,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -273,6 +279,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
@@ -319,6 +327,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -369,6 +379,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -437,6 +449,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -491,6 +505,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -538,6 +554,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -608,6 +626,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
@@ -661,6 +681,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -762,6 +784,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -817,6 +841,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -871,6 +897,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -918,6 +946,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -979,6 +1009,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
@@ -1027,6 +1059,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -1076,6 +1110,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -1126,6 +1162,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -1193,6 +1231,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -1244,6 +1284,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -1329,6 +1371,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -1383,6 +1427,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -1461,6 +1507,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -1514,6 +1562,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -1695,6 +1745,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -1870,6 +1922,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -2025,6 +2079,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -2174,6 +2230,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -2233,6 +2291,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -2293,6 +2353,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -2341,6 +2403,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -2402,6 +2466,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -2450,6 +2516,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -2499,6 +2567,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -2548,6 +2618,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -2597,6 +2669,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
@@ -2660,6 +2734,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
@@ -2712,6 +2788,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -2775,6 +2853,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "PUT",
@@ -2827,6 +2907,8 @@ public class Discovery {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",

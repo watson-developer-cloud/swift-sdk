@@ -134,6 +134,8 @@ public class NaturalLanguageUnderstanding {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
@@ -183,6 +185,8 @@ public class NaturalLanguageUnderstanding {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
@@ -224,6 +228,8 @@ public class NaturalLanguageUnderstanding {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request

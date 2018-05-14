@@ -134,7 +134,7 @@ let toneAnalyzer = ToneAnalyzer(
     password: "your-password-here",
     version: "yyyy-mm-dd"
 )
-toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
+toneAnalyzer.serviceURL = URL(string: "https://gateway-fra.watsonplatform.net/tone-analyzer/api")
 ```
 
 ## Custom Headers
@@ -374,7 +374,7 @@ let password = "your-password-here"
 let languageTranslator = LanguageTranslator(username: username, password: password)
 
 // set the serviceURL property to use the legacy Language Translation service
-// languageTranslator.serviceURL = "https://gateway.watsonplatform.net/language-translation/api"
+// languageTranslator.serviceURL = URL(string: "https://gateway.watsonplatform.net/language-translation/api")
 
 let failure = { (error: Error) in print(error) }
 let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")

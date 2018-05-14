@@ -88,7 +88,7 @@ public class SpeechToTextSession {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )!
-        guard let tokenURL = tokenURL, let serviceURL = serviceURL else { return }
+        guard let tokenURL = tokenURL, let serviceURL = serviceURL else { return nil }
         let restToken = RestToken(
             tokenURL: tokenURL.appendingPathComponent("?url=\(serviceURL)", isDirectory: false),
             credentials: credentials

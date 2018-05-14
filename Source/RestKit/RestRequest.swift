@@ -51,7 +51,7 @@ internal struct RestRequest {
 
     internal init(
         method: String,
-        url: String,
+        url: URL,
         credentials: Credentials,
         headerParameters: [String: String],
         acceptType: String? = nil,
@@ -75,16 +75,16 @@ internal struct RestRequest {
             case .query: queryItems.append(URLQueryItem(name: name, value: key))
             }
         }
-
+        
         // construct url components
-        var urlComponents = URLComponents(string: url)!
+        var urlComponents = URLComponents(string: "\(url)")!
         if !queryItems.isEmpty {
             urlComponents.queryItems = queryItems
         }
-
+        
         // encode "+" to %2B (URLComponents does not do this)
         urlComponents.percentEncodedQuery = urlComponents.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-
+        
         // construct mutable request
         let url = urlComponents.url!
         var request = URLRequest(url: url)

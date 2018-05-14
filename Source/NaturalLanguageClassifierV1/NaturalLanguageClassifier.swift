@@ -24,7 +24,7 @@ import Foundation
 public class NaturalLanguageClassifier {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/natural-language-classifier/api"
+    public var serviceURL = URL(string: "https://gateway.watsonplatform.net/natural-language-classifier/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -113,9 +113,12 @@ public class NaturalLanguageClassifier {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -166,9 +169,12 @@ public class NaturalLanguageClassifier {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -218,11 +224,15 @@ public class NaturalLanguageClassifier {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = multipartFormData.contentType
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/classifiers",
+            url: serviceURL.appendingPathComponent("/v1/classifiers", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -255,9 +265,17 @@ public class NaturalLanguageClassifier {
         headers["Accept"] = "application/json"
 
         // construct REST request
+        let path = "/v1/classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v1/classifiers",
+            method: "DELETE",
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -296,9 +314,12 @@ public class NaturalLanguageClassifier {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -328,6 +349,10 @@ public class NaturalLanguageClassifier {
         // construct header parameters
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
@@ -336,8 +361,8 @@ public class NaturalLanguageClassifier {
             return
         }
         let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
+            method: "GET",
+            url: serviceURL.appendingPathComponent("/v1/classifiers", isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )

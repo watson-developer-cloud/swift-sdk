@@ -32,7 +32,7 @@ import Foundation
 public class PersonalityInsights {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
+    public var serviceURL = URL(string: "https://gateway.watsonplatform.net/personality-insights/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -167,11 +167,15 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/profile",
+            url: serviceURL.appendingPathComponent("/v3/profile", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -265,11 +269,15 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/profile",
+            url: serviceURL.appendingPathComponent("/v3/profile", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -363,11 +371,13 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
             queryParameters.append(queryParameter)
         }
+        
+        guard let serviceURL = serviceURL else { return}
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/profile",
+            url: serviceURL.appendingPathComponent("/v3/profile", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -468,11 +478,15 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/profile",
+            url: serviceURL.appendingPathComponent("/v3/profile", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -573,11 +587,15 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/profile",
+            url: serviceURL.appendingPathComponent("/v3/profile", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -678,11 +696,15 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/profile",
+            url: serviceURL.appendingPathComponent("/v3/profile", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,

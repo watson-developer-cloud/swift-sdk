@@ -25,7 +25,7 @@ import Foundation
 public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/language-translator/api"
+    public var serviceURL = URL(string: "https://gateway.watsonplatform.net/language-translator/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -102,11 +102,15 @@ public class LanguageTranslator {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v2/translate",
+            url: serviceURL.appendingPathComponent("/v2/translate", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -185,11 +189,15 @@ public class LanguageTranslator {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "text/plain"
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v2/identify",
+            url: serviceURL.appendingPathComponent("/v2/identify", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -228,6 +236,10 @@ public class LanguageTranslator {
         // construct header parameters
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -247,7 +259,7 @@ public class LanguageTranslator {
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v2/models",
+            url: serviceURL.appendingPathComponent("/v2/identifiable_languages", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -319,11 +331,15 @@ public class LanguageTranslator {
             let queryParameter = URLQueryItem(name: "name", value: name)
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v2/models",
+            url: serviceURL.appendingPathComponent("/v2/models", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -364,9 +380,12 @@ public class LanguageTranslator {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -405,9 +424,12 @@ public class LanguageTranslator {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -415,6 +437,68 @@ public class LanguageTranslator {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<TranslationModel>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List models.
+
+     Lists available translation models.
+
+     - parameter source: Specify a language code to filter results by source language.
+     - parameter target: Specify a language code to filter results by target language.
+     - parameter defaultModels: If the default parameter isn't specified, the service will return all models (default and non-default) for each
+     language pair. To return only default models, set this to `true`. To return only non-default models, set this to
+     `false`.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listModels(
+        source: String? = nil,
+        target: String? = nil,
+        defaultModels: Bool? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (TranslationModels) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let source = source {
+            let queryParameter = URLQueryItem(name: "source", value: source)
+            queryParameters.append(queryParameter)
+        }
+        if let target = target {
+            let queryParameter = URLQueryItem(name: "target", value: target)
+            queryParameters.append(queryParameter)
+        }
+        if let defaultModels = defaultModels {
+            let queryParameter = URLQueryItem(name: "default", value: "\(defaultModels)")
+            queryParameters.append(queryParameter)
+        }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL.appendingPathComponent("/v2/models", isDirectory: false),
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<TranslationModels>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

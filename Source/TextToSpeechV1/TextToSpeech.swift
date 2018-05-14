@@ -68,7 +68,7 @@ import Foundation
 public class TextToSpeech {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
+    public var serviceURL = URL(string: "https://stream.watsonplatform.net/text-to-speech/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -197,9 +197,12 @@ public class TextToSpeech {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -208,6 +211,45 @@ public class TextToSpeech {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Voice>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Get voices.
+
+     Retrieves a list of all voices available for use with the service. The information includes the name, language,
+     gender, and other details about the voice.
+
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listVoices(
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Voices) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL.appendingPathComponent("/v1/voices", isDirectory: false),
+            credentials: credentials,
+            headerParameters: headers
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Voices>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -275,11 +317,15 @@ public class TextToSpeech {
             let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/synthesize",
+            url: serviceURL.appendingPathComponent("/v1/synthesize", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -374,11 +420,15 @@ public class TextToSpeech {
             let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/pronunciation",
+            url: serviceURL.appendingPathComponent("/v1/pronounciation", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -425,11 +475,15 @@ public class TextToSpeech {
         var headers = defaultHeaders
         headers["Accept"] = "application/json"
         headers["Content-Type"] = "application/json"
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v1/customizations",
+            url: serviceURL.appendingPathComponent("/v1/customization", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -446,6 +500,100 @@ public class TextToSpeech {
     }
 
     /**
+     Delete a custom model.
+
+     Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
+     model to delete it.  **Note:** This method is currently a beta release.
+
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteVoiceModel(
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+
+        // construct REST request
+        let path = "/v1/customizations/\(customizationID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
+            credentials: credentials,
+            headerParameters: headers
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List a custom model.
+
+     Lists all information about a specified custom voice model. In addition to metadata such as the name and
+     description of the voice model, the output includes the words and their translations as defined in the model. To
+     see just the metadata for a voice model, use the **List custom models** method.   **Note:** This method is
+     currently a beta release.
+
+     - parameter customizationID: The GUID of the custom voice model. You must make the request with service credentials created for the instance of
+     the service that owns the custom model.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func getVoiceModel(
+        customizationID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (VoiceModel) -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct REST request
+        let path = "/v1/customizations/\(customizationID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
+            credentials: credentials,
+            headerParameters: headers
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<VoiceModel>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     
      List custom models.
 
      Lists metadata such as the name and description for all custom voice models that are owned by an instance of the
@@ -474,11 +622,15 @@ public class TextToSpeech {
             let queryParameter = URLQueryItem(name: "language", value: language)
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v1/customizations",
+            url: serviceURL.appendingPathComponent("/v1/customizations", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -537,9 +689,12 @@ public class TextToSpeech {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -625,9 +780,12 @@ public class TextToSpeech {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
+            method: "PUT",
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -682,9 +840,12 @@ public class TextToSpeech {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -788,9 +949,12 @@ public class TextToSpeech {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
-            method: "PUT",
-            url: serviceURL + encodedPath,
+            method: "DELETE",
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             messageBody: body
@@ -834,9 +998,12 @@ public class TextToSpeech {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )
@@ -877,9 +1044,12 @@ public class TextToSpeech {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
+            method: "GET",
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers
         )

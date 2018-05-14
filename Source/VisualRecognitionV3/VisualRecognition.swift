@@ -24,7 +24,7 @@ import Foundation
 public class VisualRecognition {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
+    public var serviceURL = URL(string: "https://gateway-a.watsonplatform.net/visual-recognition/api")
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -159,10 +159,14 @@ public class VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
+        
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/classify",
+            url: serviceURL.appendingPathComponent("/v3/classify", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -231,11 +235,15 @@ public class VisualRecognition {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/detect_faces",
+            url: serviceURL.appendingPathComponent("/v3/detect_faces", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -302,11 +310,15 @@ public class VisualRecognition {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + "/v3/classifiers",
+            url: serviceURL.appendingPathComponent("/v3/classifiers", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,
@@ -349,9 +361,12 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -395,9 +410,12 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -436,11 +454,15 @@ public class VisualRecognition {
             let queryParameter = URLQueryItem(name: "verbose", value: "\(verbose)")
             queryParameters.append(queryParameter)
         }
+        
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
-            url: serviceURL + "/v3/classifiers",
+            url: serviceURL.appendingPathComponent("/v3/classifiers", isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -518,9 +540,12 @@ public class VisualRecognition {
             failure?(RestError.encodingError)
             return
         }
+        
+        // This is unwrapping the URL, which has been determined to contain a hardcoded URL at the beginning of this file.
+        guard let serviceURL = serviceURL else { return }
         let request = RestRequest(
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceURL.appendingPathComponent(encodedPath, isDirectory: false),
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters,

@@ -89,7 +89,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
     }
-
+    
     func loadResource(name: String, ext: String) -> URL {
         #if os(Linux)
         return URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Resources/" + name + "." + ext)

@@ -17,7 +17,7 @@
 import Foundation
 
 /** Information about a classifier. */
-public struct Classifier {
+public struct Classifier: Decodable {
 
     /// The training status of classifier.
     public enum Status: String {
@@ -39,88 +39,36 @@ public struct Classifier {
     /// The training status of classifier.
     public var status: String?
 
+    /// Whether the classifier can be downloaded as a Core ML model after the training status is `ready`.
+    public var coreMlEnabled: Bool
+
     /// If classifier training has failed, this field may explain why.
     public var explanation: String?
 
-    /// Date and time in Coordinated Universal Time that the classifier was created.
+    /// Date and time in Coordinated Universal Time (UTC) that the classifier was created.
     public var created: String?
 
     /// Array of classes that define a classifier.
     public var classes: [Class]?
 
-    /// Date and time in Coordinated Universal Time that the classifier was updated. Returned when verbose=`true`. Might not be returned by some requests.
+    /// Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Returned when verbose=`true`. Might not be returned by some requests. Identical to `updated` and retained for backward compatibility.
     public var retrained: String?
 
-    /// If the classifier is CoreML Enabled.
-    public let coreMLEnabled: Bool?
+    /// Date and time in Coordinated Universal Time (UTC) that the classifier was most recently updated. The field matches either `retrained` or `created`.  Returned when verbose=`true`. Might not be returned by some requests.
+    public var updated: String?
 
-    /**
-     Initialize a `Classifier` with member variables.
-
-     - parameter classifierID: ID of a classifier identified in the image.
-     - parameter name: Name of the classifier.
-     - parameter owner: Unique ID of the account who owns the classifier. Returned when verbose=`true`. Might not be returned by some requests.
-     - parameter status: The training status of classifier.
-     - parameter explanation: If classifier training has failed, this field may explain why.
-     - parameter created: Date and time in Coordinated Universal Time that the classifier was created.
-     - parameter classes: Array of classes that define a classifier.
-     - parameter retrained: Date and time in Coordinated Universal Time that the classifier was updated. Returned when verbose=`true`. Might not be returned by some requests.
-     - parameter coreMLEnabled: If the classifier is CoreML Enabled.
-
-     - returns: An initialized `Classifier`.
-    */
-    public init(classifierID: String, name: String, owner: String? = nil, status: String? = nil, explanation: String? = nil, created: String? = nil, classes: [Class]? = nil, retrained: String? = nil, coreMLEnabled: Bool? = nil) {
-        self.classifierID = classifierID
-        self.name = name
-        self.owner = owner
-        self.status = status
-        self.explanation = explanation
-        self.created = created
-        self.classes = classes
-        self.retrained = retrained
-        self.coreMLEnabled = coreMLEnabled
-    }
-}
-
-extension Classifier: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case classifierID = "classifier_id"
         case name = "name"
         case owner = "owner"
         case status = "status"
+        case coreMlEnabled = "core_ml_enabled"
         case explanation = "explanation"
         case created = "created"
         case classes = "classes"
         case retrained = "retrained"
-        case coreMLEnabled = "core_ml_enabled"
-        static let allValues = [classifierID, name, owner, status, explanation, created, classes, retrained, coreMLEnabled]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        classifierID = try container.decode(String.self, forKey: .classifierID)
-        name = try container.decode(String.self, forKey: .name)
-        owner = try container.decodeIfPresent(String.self, forKey: .owner)
-        status = try container.decodeIfPresent(String.self, forKey: .status)
-        explanation = try container.decodeIfPresent(String.self, forKey: .explanation)
-        created = try container.decodeIfPresent(String.self, forKey: .created)
-        classes = try container.decodeIfPresent([Class].self, forKey: .classes)
-        retrained = try container.decodeIfPresent(String.self, forKey: .retrained)
-        coreMLEnabled = try container.decodeIfPresent(Bool.self, forKey: .coreMLEnabled)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(classifierID, forKey: .classifierID)
-        try container.encode(name, forKey: .name)
-        try container.encodeIfPresent(owner, forKey: .owner)
-        try container.encodeIfPresent(status, forKey: .status)
-        try container.encodeIfPresent(explanation, forKey: .explanation)
-        try container.encodeIfPresent(created, forKey: .created)
-        try container.encodeIfPresent(classes, forKey: .classes)
-        try container.encodeIfPresent(retrained, forKey: .retrained)
-        try container.encodeIfPresent(coreMLEnabled, forKey: .coreMLEnabled)
+        case updated = "updated"
     }
 
 }

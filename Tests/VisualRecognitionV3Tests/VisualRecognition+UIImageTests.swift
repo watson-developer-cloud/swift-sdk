@@ -47,7 +47,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
     func instantiateVisualRecognition() {
         let apiKey = Credentials.VisualRecognitionAPIKey
-        let version = "2018-02-19"
+        let version = "2018-03-19"
         visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
@@ -124,26 +124,21 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
             // verify the age
             let age = face?.faces.first?.age
-            XCTAssertGreaterThanOrEqual(age!.min!, 45)
+            XCTAssertGreaterThanOrEqual(age!.min!, 40)
             XCTAssertLessThanOrEqual(age!.max!, 54)
             XCTAssertGreaterThanOrEqual(age!.score!, 0.25)
 
             // verify the face location
             let location = face?.faces.first?.faceLocation
-            XCTAssertEqual(location?.height, 229)
-            XCTAssertEqual(location?.left, 213)
-            XCTAssertEqual(location?.top, 66)
-            XCTAssertEqual(location?.width, 189)
+            XCTAssertEqual(location?.height, 174)
+            XCTAssertEqual(location?.left, 219)
+            XCTAssertEqual(location?.top, 78)
+            XCTAssertEqual(location?.width, 143)
 
             // verify the gender
             let gender = face?.faces.first?.gender
             XCTAssertEqual(gender!.gender, "MALE")
             XCTAssertGreaterThanOrEqual(gender!.score!, 0.75)
-
-            // verify the identity
-            let identity = face?.faces.first?.identity
-            XCTAssertEqual(identity!.name, "Barack Obama")
-            XCTAssertGreaterThanOrEqual(identity!.score!, 0.75)
 
             expectation.fulfill()
         }

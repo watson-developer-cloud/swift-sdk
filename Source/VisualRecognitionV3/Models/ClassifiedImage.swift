@@ -17,7 +17,7 @@
 import Foundation
 
 /** Classifier results for one image. */
-public struct ClassifiedImage {
+public struct ClassifiedImage: Decodable {
 
     /// Source of the image before any redirects. Not returned when the image is uploaded.
     public var sourceUrl: String?
@@ -32,53 +32,13 @@ public struct ClassifiedImage {
 
     public var classifiers: [ClassifierResult]
 
-    /**
-     Initialize a `ClassifiedImage` with member variables.
-
-     - parameter classifiers:
-     - parameter sourceUrl: Source of the image before any redirects. Not returned when the image is uploaded.
-     - parameter resolvedUrl: Fully resolved URL of the image after redirects are followed. Not returned when the image is uploaded.
-     - parameter image: Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.
-     - parameter error:
-
-     - returns: An initialized `ClassifiedImage`.
-    */
-    public init(classifiers: [ClassifierResult], sourceUrl: String? = nil, resolvedUrl: String? = nil, image: String? = nil, error: ErrorInfo? = nil) {
-        self.classifiers = classifiers
-        self.sourceUrl = sourceUrl
-        self.resolvedUrl = resolvedUrl
-        self.image = image
-        self.error = error
-    }
-}
-
-extension ClassifiedImage: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case sourceUrl = "source_url"
         case resolvedUrl = "resolved_url"
         case image = "image"
         case error = "error"
         case classifiers = "classifiers"
-        static let allValues = [sourceUrl, resolvedUrl, image, error, classifiers]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        sourceUrl = try container.decodeIfPresent(String.self, forKey: .sourceUrl)
-        resolvedUrl = try container.decodeIfPresent(String.self, forKey: .resolvedUrl)
-        image = try container.decodeIfPresent(String.self, forKey: .image)
-        error = try container.decodeIfPresent(ErrorInfo.self, forKey: .error)
-        classifiers = try container.decode([ClassifierResult].self, forKey: .classifiers)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(sourceUrl, forKey: .sourceUrl)
-        try container.encodeIfPresent(resolvedUrl, forKey: .resolvedUrl)
-        try container.encodeIfPresent(image, forKey: .image)
-        try container.encodeIfPresent(error, forKey: .error)
-        try container.encode(classifiers, forKey: .classifiers)
     }
 
 }

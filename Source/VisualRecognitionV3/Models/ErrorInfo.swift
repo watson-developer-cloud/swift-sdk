@@ -17,7 +17,7 @@
 import Foundation
 
 /** Information about what might have caused a failure, such as an image that is too large. Not returned when there is no error. */
-public struct ErrorInfo {
+public struct ErrorInfo: Decodable {
 
     /// HTTP status code.
     public var code: Int
@@ -28,43 +28,11 @@ public struct ErrorInfo {
     /// Codified error string. For example, `limit_exceeded`.
     public var errorID: String
 
-    /**
-     Initialize a `ErrorInfo` with member variables.
-
-     - parameter code: HTTP status code.
-     - parameter description: Human-readable error description. For example, `File size limit exceeded`.
-     - parameter errorID: Codified error string. For example, `limit_exceeded`.
-
-     - returns: An initialized `ErrorInfo`.
-    */
-    public init(code: Int, description: String, errorID: String) {
-        self.code = code
-        self.description = description
-        self.errorID = errorID
-    }
-}
-
-extension ErrorInfo: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case code = "code"
         case description = "description"
         case errorID = "error_id"
-        static let allValues = [code, description, errorID]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        code = try container.decode(Int.self, forKey: .code)
-        description = try container.decode(String.self, forKey: .description)
-        errorID = try container.decode(String.self, forKey: .errorID)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(code, forKey: .code)
-        try container.encode(description, forKey: .description)
-        try container.encode(errorID, forKey: .errorID)
     }
 
 }

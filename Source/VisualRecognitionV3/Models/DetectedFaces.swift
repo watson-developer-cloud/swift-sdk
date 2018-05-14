@@ -17,7 +17,7 @@
 import Foundation
 
 /** DetectedFaces. */
-public struct DetectedFaces {
+public struct DetectedFaces: Decodable {
 
     /// Number of images processed for the API call.
     public var imagesProcessed: Int?
@@ -28,43 +28,11 @@ public struct DetectedFaces {
     /// Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.
     public var warnings: [WarningInfo]?
 
-    /**
-     Initialize a `DetectedFaces` with member variables.
-
-     - parameter images: The array of images.
-     - parameter imagesProcessed: Number of images processed for the API call.
-     - parameter warnings: Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.
-
-     - returns: An initialized `DetectedFaces`.
-    */
-    public init(images: [ImageWithFaces], imagesProcessed: Int? = nil, warnings: [WarningInfo]? = nil) {
-        self.images = images
-        self.imagesProcessed = imagesProcessed
-        self.warnings = warnings
-    }
-}
-
-extension DetectedFaces: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case imagesProcessed = "images_processed"
         case images = "images"
         case warnings = "warnings"
-        static let allValues = [imagesProcessed, images, warnings]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        imagesProcessed = try container.decodeIfPresent(Int.self, forKey: .imagesProcessed)
-        images = try container.decode([ImageWithFaces].self, forKey: .images)
-        warnings = try container.decodeIfPresent([WarningInfo].self, forKey: .warnings)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(imagesProcessed, forKey: .imagesProcessed)
-        try container.encode(images, forKey: .images)
-        try container.encodeIfPresent(warnings, forKey: .warnings)
     }
 
 }

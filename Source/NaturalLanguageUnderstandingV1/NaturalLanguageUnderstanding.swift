@@ -157,18 +157,17 @@ public class NaturalLanguageUnderstanding {
     }
 
     /**
-     Delete model.
+     List models.
 
-     Deletes a custom model.
+     Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
+     you have created and linked to your Natural Language Understanding service.
 
-     - parameter modelID: model_id of the model to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func deleteModel(
-        modelID: String,
+    public func listModels(
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteModelResults) -> Void)
+        success: @escaping (ListModelsResults) -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
@@ -195,7 +194,7 @@ public class NaturalLanguageUnderstanding {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeleteModelResults>) in
+            (response: RestResponse<ListModelsResults>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -204,17 +203,18 @@ public class NaturalLanguageUnderstanding {
     }
 
     /**
-     List models.
+     Delete model.
 
-     Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
-     you have created and linked to your Natural Language Understanding service.
+     Deletes a custom model.
 
+     - parameter modelID: model_id of the model to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func listModels(
+    public func deleteModel(
+        modelID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListModelsResults) -> Void)
+        success: @escaping (DeleteModelResults) -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
@@ -227,9 +227,19 @@ public class NaturalLanguageUnderstanding {
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
+        let path = "/v1/models/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
+<<<<<<< HEAD
             method: "GET",
             url: serviceURL.appendingPathComponent("/v1/models", isDirectory: false),
+=======
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+>>>>>>> 812d52c778874bf3b056d5f5a323c051606b2138
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
@@ -237,7 +247,7 @@ public class NaturalLanguageUnderstanding {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ListModelsResults>) in
+            (response: RestResponse<DeleteModelResults>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

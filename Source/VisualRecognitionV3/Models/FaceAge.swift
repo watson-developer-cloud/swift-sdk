@@ -16,8 +16,8 @@
 
 import Foundation
 
-/** Provides age information about a face. If there are more than 10 faces in an image, the response might return the confidence score `0g. */
-public struct FaceAge {
+/** Provides age information about a face. */
+public struct FaceAge: Decodable {
 
     /// Estimated minimum age.
     public var min: Int?
@@ -25,46 +25,14 @@ public struct FaceAge {
     /// Estimated maximum age.
     public var max: Int?
 
-    /// Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
+    /// Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the property.
     public var score: Double?
 
-    /**
-     Initialize a `FaceAge` with member variables.
-
-     - parameter min: Estimated minimum age.
-     - parameter max: Estimated maximum age.
-     - parameter score: Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
-
-     - returns: An initialized `FaceAge`.
-    */
-    public init(min: Int? = nil, max: Int? = nil, score: Double? = nil) {
-        self.min = min
-        self.max = max
-        self.score = score
-    }
-}
-
-extension FaceAge: Codable {
-
+    // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case min = "min"
         case max = "max"
         case score = "score"
-        static let allValues = [min, max, score]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        min = try container.decodeIfPresent(Int.self, forKey: .min)
-        max = try container.decodeIfPresent(Int.self, forKey: .max)
-        score = try container.decodeIfPresent(Double.self, forKey: .score)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(min, forKey: .min)
-        try container.encodeIfPresent(max, forKey: .max)
-        try container.encodeIfPresent(score, forKey: .score)
     }
 
 }

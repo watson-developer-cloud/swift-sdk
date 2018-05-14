@@ -243,16 +243,16 @@ public class NaturalLanguageClassifier {
     }
 
     /**
-     Delete classifier.
+     List classifiers.
 
-     - parameter classifierID: Classifier ID to delete.
+     Returns an empty array if no classifiers are available.
+
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func deleteClassifier(
-        classifierID: String,
+    public func listClassifiers(
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        success: @escaping (ClassifierList) -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
@@ -273,10 +273,10 @@ public class NaturalLanguageClassifier {
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<ClassifierList>) in
             switch response.result {
-            case .success: success()
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
@@ -325,16 +325,16 @@ public class NaturalLanguageClassifier {
     }
 
     /**
-     List classifiers.
+     Delete classifier.
 
-     Returns an empty array if no classifiers are available.
-
+     - parameter classifierID: Classifier ID to delete.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func listClassifiers(
+    public func deleteClassifier(
+        classifierID: String,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifierList) -> Void)
+        success: @escaping () -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
@@ -343,18 +343,28 @@ public class NaturalLanguageClassifier {
         guard let serviceURL = serviceURL else { return }
 
         // construct REST request
+        let path = "/v1/classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
         let request = RestRequest(
+<<<<<<< HEAD
             method: "GET",
             url: serviceURL.appendingPathComponent("/v1/classifiers", isDirectory: false),
+=======
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+>>>>>>> 812d52c778874bf3b056d5f5a323c051606b2138
             credentials: credentials,
             headerParameters: headers
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<ClassifierList>) in
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
             switch response.result {
-            case .success(let retval): success(retval)
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }

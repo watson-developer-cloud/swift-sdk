@@ -24,6 +24,8 @@ internal class MultipartFormData {
     private let boundary: String
     private var bodyParts = [BodyPart]()
 
+    // Strings in Swift use Unicode internally, so encoding a string using a Unicode encoding will always succeed.
+    // swiftlint:disable force_unwrapping
     private var initialBoundary: Data {
         let boundary = "--\(self.boundary)\r\n"
         return boundary.data(using: .utf8, allowLossyConversion: false)!
@@ -38,6 +40,7 @@ internal class MultipartFormData {
         let boundary = "\r\n--\(self.boundary)--\r\n"
         return boundary.data(using: .utf8, allowLossyConversion: false)!
     }
+    // swiftlint:enable force_unwrapping
 
     internal init() {
         self.boundary = "watson-apis.boundary.bd0b4c6e3b9c2126"

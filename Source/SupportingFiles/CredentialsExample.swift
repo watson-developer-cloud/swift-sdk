@@ -15,8 +15,12 @@
  **/
 
 struct Credentials {
+    static let AssistantUsername = "your-username-here"
+    static let AssistantPassword = "your-password-here"
+    static let AssistantWorkspace = "cogntive-car-sample-workspace"
     static let ConversationUsername = "your-username-here"
     static let ConversationPassword = "your-password-here"
+    static let ConversationWorkspace = "cogntive-car-sample-workspace"
     static let DiscoveryUsername = "your-username-here"
     static let DiscoveryPassword = "your-password-here"
     static let LanguageTranslatorUsername = "your-username-here"
@@ -34,4 +38,5 @@ struct Credentials {
     static let ToneAnalyzerUsername = "your-username-here"
     static let ToneAnalyzerPassword = "your-password-here"
     static let VisualRecognitionAPIKey = "your-api-key-here"
+    static let VisualRecognitionClassifierID = "carsvstrucks-classifier"
 }

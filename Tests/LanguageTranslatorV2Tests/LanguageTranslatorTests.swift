@@ -88,7 +88,7 @@ class LanguageTranslatorTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations(timeout: TimeInterval = 10.0) {
+    func waitForExpectations(timeout: TimeInterval = 20.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

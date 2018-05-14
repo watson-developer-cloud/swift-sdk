@@ -66,16 +66,16 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     }
 
     func loadHTML() {
-        #if os(iOS)
+        #if os(Linux)
+            let file = URL(fileURLWithPath: "Tests/NaturalLanguageUnderstandingV1Tests/testArticle.html").path
+            html = try! String(contentsOfFile: file, encoding: .utf8)
+        #else
             let bundle = Bundle(for: type(of: self))
             guard let file = bundle.path(forResource: "testArticle", ofType: "html") else {
                 XCTFail("Unable to locate testArticle.html")
                 return
             }
-            html = try! String(contentsOfFile: file)
-        #else
-            let file = URL(fileURLWithPath: "Tests/NaturalLanguageUnderstandingV1Tests/testArticle.html").path
-            html = try! String(contentsOfFile: file, encoding: .utf8)
+        html = try! String(contentsOfFile: file)
         #endif
     }
 

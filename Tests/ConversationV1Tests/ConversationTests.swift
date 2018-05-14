@@ -201,7 +201,7 @@ class ConversationTests: XCTestCase {
             // verify output
             XCTAssertTrue(response.output.logMessages.isEmpty)
             XCTAssertEqual(response.output.text, response2)
-			XCTAssertNotNil(response.output.nodesVisited)
+            XCTAssertNotNil(response.output.nodesVisited)
             XCTAssertEqual(response.output.nodesVisited!.count, 3)
 
             expectation2.fulfill()

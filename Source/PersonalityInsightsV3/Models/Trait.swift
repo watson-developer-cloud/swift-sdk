@@ -19,7 +19,7 @@ import Foundation
 /** Trait. */
 public struct Trait: Decodable {
 
-    /// The category of the characteristic: * `personality` for Big Five personality characteristics * `needs` for Needs * `values` for Values.
+    /// The category of the characteristic: `personality` for Big Five personality characteristics, `needs` for Needs, and `values` for Values.
     public enum Category: String {
         case personality = "personality"
         case needs = "needs"
@@ -32,7 +32,7 @@ public struct Trait: Decodable {
     /// The user-visible, localized name of the characteristic.
     public var name: String
 
-    /// The category of the characteristic: * `personality` for Big Five personality characteristics * `needs` for Needs * `values` for Values.
+    /// The category of the characteristic: `personality` for Big Five personality characteristics, `needs` for Needs, and `values` for Values.
     public var category: String
 
     /// The normalized percentile score for the characteristic. The range is 0 to 1. For example, if the percentage for Openness is 0.60, the author scored in the 60th percentile; the author is more open than 59 percent of the population and less open than 39 percent of the population.

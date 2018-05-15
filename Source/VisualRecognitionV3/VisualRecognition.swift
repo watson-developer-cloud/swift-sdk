@@ -29,16 +29,16 @@ public class VisualRecognition {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let credentials: Credentials
-    internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
-    internal let version: String
+    private let credentials: Credentials
+    private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
+    private let version: String
 
     /**
      Create a `VisualRecognition` object.
 
      - parameter apiKey: The API key used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
-     in "YYYY-MM-DD" format.
+       in "YYYY-MM-DD" format.
      */
     public init(apiKey: String, version: String) {
         self.credentials = .apiKey(name: "api_key", key: apiKey, in: .query)
@@ -69,24 +69,12 @@ public class VisualRecognition {
             return nil  // RestKit will generate error for this case
         }
 
+        let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let code = response?.statusCode ?? 400
-            let errorID = (try? json.getString(at: "error_id")) ?? (try? json.getString(at: "error", "error_id"))
-            let error = try? json.getString(at: "error")
-            let status = try? json.getString(at: "status")
-            let html = try? json.getString(at: "Error")
-            let message = errorID ?? error ?? status ?? html ?? "Unknown error."
-            let description = (try? json.getString(at: "description")) ?? (try? json.getString(at: "error", "description"))
-            let statusInfo = try? json.getString(at: "statusInfo")
-            let reason = description ?? statusInfo ?? "Please use the status code to refer to the documentation."
-            let userInfo = [
-                NSLocalizedDescriptionKey: message,
-                NSLocalizedFailureReasonErrorKey: reason,
-            ]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
-            return nil
+            return NSError(domain: domain, code: code, userInfo: nil)
         }
     }
 
@@ -118,16 +106,19 @@ public class VisualRecognition {
      - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether
      the image might be pornographic.
      - parameter imagesFileContentType: The content type of imagesFile.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func classify(
         imagesFile: URL? = nil,
+        acceptLanguage: String? = nil,
         url: String? = nil,
         threshold: Double? = nil,
         owners: [String]? = nil,
-        classifierIDs: [String]? = nil,
-        acceptLanguage: String? = nil,
+        classifierIds: [String]? = nil,
+        imagesFileContentType: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
@@ -136,23 +127,48 @@ public class VisualRecognition {
         if let imagesFile = imagesFile {
             multipartFormData.append(imagesFile, withName: "images_file")
         }
-        let parameters = Parameters(url: url, threshold: threshold, owners: owners, classifierIDs: classifierIDs)
-        guard let parametersData = try? JSONEncoder().encode(parameters) else {
-            failure?(RestError.encodingError)
-            return
+        if let url = url {
+            guard let urlData = url.data(using: .utf8) else {
+                failure?(RestError.serializationError)
+                return
+            }
+            multipartFormData.append(urlData, withName: "url")
         }
-        multipartFormData.append(parametersData, withName: "parameters")
+        if let threshold = threshold {
+            guard let thresholdData = "\(threshold)".data(using: .utf8) else {
+                failure?(RestError.serializationError)
+                return
+            }
+            multipartFormData.append(thresholdData, withName: "threshold")
+        }
+        if let owners = owners {
+            guard let ownersData = owners.joined(separator: ",").data(using: .utf8) else {
+                failure?(RestError.serializationError)
+                return
+            }
+            multipartFormData.append(ownersData, withName: "owners")
+        }
+        if let classifierIds = classifierIds {
+            guard let classifierIdsData = classifierIds.joined(separator: ",").data(using: .utf8) else {
+                failure?(RestError.serializationError)
+                return
+            }
+            multipartFormData.append(classifierIdsData, withName: "classifier_ids")
+        }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
         if let acceptLanguage = acceptLanguage {
-            headers["Accept-Language"] = acceptLanguage
+            headerParameters["Accept-Language"] = acceptLanguage
         }
 
         // construct query parameters
@@ -164,7 +180,7 @@ public class VisualRecognition {
             method: "POST",
             url: serviceURL + "/v3/classify",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -198,25 +214,30 @@ public class VisualRecognition {
      - parameter url: The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel density
      is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a shortened
      URL.  You can also include images with the **images_file** parameter.
+     - parameter imagesFileContentType: The content type of imagesFile.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func detectFaces(
         imagesFile: URL? = nil,
         url: String? = nil,
+        imagesFileContentType: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DetectedFaces) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         if let imagesFile = imagesFile {
-            multipartFormData.append(imagesFile, withName: "images_file", mimeType: "application/octet-stream")
+            multipartFormData.append(imagesFile, withName: "images_file")
         }
         if let url = url {
-            let parameters = Parameters(url: url, threshold: nil, owners: nil, classifierIDs: nil)
-            if let parametersData = try? JSONEncoder().encode(parameters) {
-                multipartFormData.append(parametersData, withName: "parameters")
+            guard let urlData = url.data(using: .utf8) else {
+                failure?(RestError.serializationError)
+                return
             }
+            multipartFormData.append(urlData, withName: "url")
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -224,9 +245,12 @@ public class VisualRecognition {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -237,7 +261,7 @@ public class VisualRecognition {
             method: "POST",
             url: serviceURL + "/v3/detect_faces",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -269,23 +293,26 @@ public class VisualRecognition {
      images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file name in UTF-8.
      - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
      contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func createClassifier(
         name: String,
-        positiveExamples: [PositiveExample],
+        classnamePositiveExamples: URL,
         negativeExamples: URL? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        let nameData = name.data(using: String.Encoding.utf8)!
-        multipartFormData.append(nameData, withName: "name")
-        positiveExamples.forEach { example in
-            multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
+        guard let nameData = name.data(using: .utf8) else {
+            failure?(RestError.serializationError)
+            return
         }
+        multipartFormData.append(nameData, withName: "name")
+        multipartFormData.append(classnamePositiveExamples, withName: "classname_positive_examples")
         if let negativeExamples = negativeExamples {
             multipartFormData.append(negativeExamples, withName: "negative_examples")
         }
@@ -295,9 +322,12 @@ public class VisualRecognition {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -308,7 +338,190 @@ public class VisualRecognition {
             method: "POST",
             url: serviceURL + "/v3/classifiers",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Classifier>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Retrieve a list of classifiers.
+
+     - parameter verbose: Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of classifiers.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listClassifiers(
+        verbose: Bool? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Classifiers) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let verbose = verbose {
+            let queryParameter = URLQueryItem(name: "verbose", value: "\(verbose)")
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + "/v3/classifiers",
+            credentials: credentials,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Classifiers>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Retrieve classifier details.
+
+     Retrieve information about a custom classifier.
+
+     - parameter classifierID: The ID of the classifier.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func getClassifier(
+        classifierID: String,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Classifier) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v3/classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "GET",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Classifier>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Update a classifier.
+
+     Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
+     existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating
+     custom
+     classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
+      Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
+     class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Tip:** Don't make
+     retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the
+     last request overwrites the previous requests. The retrained property shows the last time the classifier retraining
+     finished.
+
+     - parameter classifierID: The ID of the classifier.
+     - parameter classnamePositiveExamples: A .zip file of images that depict the visual subject of a class in the classifier. The positive examples create or
+     update classes in the classifier. You can include more than one positive example file in a call.  Specify the
+     parameter name by appending `_positive_examples` to the class name. For example,
+     `goldenretriever_positive_examples` creates the class `goldenretriever`.  Include at least 10 images in .jpg or
+     .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number of images is 10,000
+     images or 100 MB per .zip file.  Encode special characters in the file name in UTF-8.
+     - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
+     contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func updateClassifier(
+        classifierID: String,
+        classnamePositiveExamples: URL? = nil,
+        negativeExamples: URL? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Classifier) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let classnamePositiveExamples = classnamePositiveExamples {
+            multipartFormData.append(classnamePositiveExamples, withName: "classname_positive_examples")
+        }
+        if let negativeExamples = negativeExamples {
+            multipartFormData.append(negativeExamples, withName: "negative_examples")
+        }
+        guard let body = try? multipartFormData.toData() else {
+            failure?(RestError.encodingError)
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v3/classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "POST",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -327,17 +540,22 @@ public class VisualRecognition {
      Delete a classifier.
 
      - parameter classifierID: The ID of the classifier.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteClassifier(
         classifierID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -353,7 +571,7 @@ public class VisualRecognition {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -368,29 +586,35 @@ public class VisualRecognition {
     }
 
     /**
-     Retrieve classifier details.
+     Retrieve a Core ML model of a classifier.
 
-     Retrieve information about a custom classifier.
+     Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>\"core_ml_enabled\": true</tt> in
+     the classifier details.
 
      - parameter classifierID: The ID of the classifier.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func getClassifier(
+    public func getCoreMlModel(
         classifierID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (Classifier) -> Void)
+        success: @escaping (URL) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/octet-stream"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let path = "/v3/classifiers/\(classifierID)"
+        let path = "/v3/classifiers/\(classifierID)/core_ml_model"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             failure?(RestError.encodingError)
             return
@@ -399,137 +623,13 @@ public class VisualRecognition {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Classifier>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Retrieve a list of classifiers.
-
-     - parameter verbose: Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of classifiers.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func listClassifiers(
-        verbose: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Classifiers) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let verbose = verbose {
-            let queryParameter = URLQueryItem(name: "verbose", value: "\(verbose)")
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/classifiers",
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Classifiers>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Update a classifier.
-
-     Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
-     existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating
-     custom
-     classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
-     Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
-     class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Tip:** Don't make
-     retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the
-     last request overwrites the previous requests. The retrained property shows the last time the classifier retraining
-     finished.
-
-     - parameter classifierID: The ID of the classifier.
-     - parameter classnamePositiveExamples: A .zip file of images that depict the visual subject of a class in the classifier. The positive examples create or
-     update classes in the classifier. You can include more than one positive example file in a call.  Specify the
-     parameter name by appending `_positive_examples` to the class name. For example,
-     `goldenretriever_positive_examples` creates the class `goldenretriever`.  Include at least 10 images in .jpg or
-     .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number of images is 10,000
-     images or 100 MB per .zip file.  Encode special characters in the file name in UTF-8.
-     - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
-     contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func updateClassifier(
-        classifierID: String,
-        positiveExamples: [PositiveExample]? = nil,
-        negativeExamples: URL? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Classifier) -> Void)
-    {
-        // construct body
-        let multipartFormData = MultipartFormData()
-        if let positiveExamples = positiveExamples {
-            positiveExamples.forEach { example in
-                multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
-            }
-        }
-        if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples")
-        }
-        guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
-            return
-        }
-
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v3/classifiers/\(classifierID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + encodedPath,
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Classifier>) in
+            (response: RestResponse<URL>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

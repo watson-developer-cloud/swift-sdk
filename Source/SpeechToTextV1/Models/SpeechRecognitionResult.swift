@@ -25,7 +25,7 @@ public struct SpeechRecognitionResult: Decodable {
     /// An array of alternative transcripts. The `alternatives` array can include additional requested output such as word confidence or timestamps.
     public var alternatives: [SpeechRecognitionAlternative]
 
-    /// A dictionary (or associative array) whose keys are the strings specified for `keywords` if both that parameter and `keywords_threshold` are specified. A keyword for which no matches are found is omitted from the array. You can spot a maximum of 1000 keywords. The array is omitted if no keywords are found.
+    /// A dictionary (or associative array) whose keys are the strings specified for `keywords` if both that parameter and `keywords_threshold` are specified. A keyword for which no matches are found is omitted from the array. The array is omitted if no matches are found for any keywords.
     public var keywordsResult: [String: [KeywordResult]]?
 
     /// An array of alternative hypotheses found for words of the input audio if a `word_alternatives_threshold` is specified.

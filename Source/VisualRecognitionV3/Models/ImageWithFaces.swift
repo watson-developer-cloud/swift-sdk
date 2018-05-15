@@ -16,10 +16,10 @@
 
 import Foundation
 
-/** ImageWithFaces. */
+/** Information about faces in the image. */
 public struct ImageWithFaces: Decodable {
 
-    /// An array of the faces detected in the images.
+    /// Faces detected in the images.
     public var faces: [Face]
 
     /// Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.

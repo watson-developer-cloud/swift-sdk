@@ -67,14 +67,12 @@ public class LanguageTranslator {
             return nil  // RestKit will generate error for this case
         }
 
+        let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error_message")
-            let userInfo = [NSLocalizedDescriptionKey: message]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
-            return nil
+            return NSError(domain: domain, code: code, userInfo: nil)
         }
     }
 
@@ -84,11 +82,13 @@ public class LanguageTranslator {
      Translates the input text from the source language to the target language.
 
      - parameter request: The translate request containing the text, and either a model ID or source and target language pair.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func translate(
         request: TranslateRequest,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslationResult) -> Void)
     {
@@ -99,16 +99,19 @@ public class LanguageTranslator {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/translate",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             messageBody: body
         )
 
@@ -128,23 +131,28 @@ public class LanguageTranslator {
      Lists the languages that the service can identify. Returns the language code (for example, `en` for English or `es`
      for Spanish) and name of each language.
 
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listIdentifiableLanguages(
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (IdentifiableLanguages) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v2/identifiable_languages",
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -163,11 +171,13 @@ public class LanguageTranslator {
      Identifies the language of the input text.
 
      - parameter text: Input text in UTF-8 format.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func identify(
         text: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (IdentifiedLanguages) -> Void)
     {
@@ -182,16 +192,19 @@ public class LanguageTranslator {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "text/plain"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "text/plain"
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/identify",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             messageBody: body
         )
 
@@ -215,6 +228,7 @@ public class LanguageTranslator {
      - parameter defaultModels: If the default parameter isn't specified, the service will return all models (default and non-default) for each
      language pair. To return only default models, set this to `true`. To return only non-default models, set this to
      `false`.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -222,12 +236,16 @@ public class LanguageTranslator {
         source: String? = nil,
         target: String? = nil,
         defaultModels: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslationModels) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -249,7 +267,7 @@ public class LanguageTranslator {
             method: "GET",
             url: serviceURL + "/v2/models",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -279,6 +297,7 @@ public class LanguageTranslator {
      size less than 10 MB per call.
      - parameter parallelCorpus: A TMX file that contains entries that are treated as a parallel corpus instead of a glossary.
      - parameter monolingualCorpus: A UTF-8 encoded plain text file that is used to customize the target language model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -288,6 +307,7 @@ public class LanguageTranslator {
         forcedGlossary: URL? = nil,
         parallelCorpus: URL? = nil,
         monolingualCorpus: URL? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslationModel) -> Void)
     {
@@ -308,9 +328,12 @@ public class LanguageTranslator {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -325,7 +348,7 @@ public class LanguageTranslator {
             method: "POST",
             url: serviceURL + "/v2/models",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -346,17 +369,22 @@ public class LanguageTranslator {
      Deletes a custom translation model.
 
      - parameter modelID: Model ID of the model to delete.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteModel(
         modelID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DeleteModelResult) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v2/models/\(modelID)"
@@ -368,7 +396,7 @@ public class LanguageTranslator {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -387,17 +415,22 @@ public class LanguageTranslator {
      Gets information about a translation model, including training status for custom models.
 
      - parameter modelID: Model ID of the model to get.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getModel(
         modelID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TranslationModel) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v2/models/\(modelID)"
@@ -409,7 +442,7 @@ public class LanguageTranslator {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request

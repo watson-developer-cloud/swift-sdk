@@ -17,11 +17,12 @@
 import Foundation
 
 /**
- The IBM Watson Speech to Text service provides an API that enables you to add IBM's speech recognition capabilities to
+ The IBM&reg; Speech to Text service provides an API that enables you to add IBM's speech recognition capabilities to
  your applications. The service transcribes speech from various languages and audio formats to text with low latency.
  For most languages, the service supports two sampling rates, broadband and narrowband. The service returns all JSON
- response content in the UTF-8 character set.
-
+ response content in the UTF-8 character set. For more information about the service, see the [IBM&reg; Cloud
+ documentation](https://console.bluemix.net/docs/services/speech-to-text/getting-started.html).
+ ### API Overview
  The Speech to Text service provides the following endpoints:
  * **Models** includes methods that return information about the language models that are available for speech
  recognition.
@@ -46,12 +47,12 @@ import Foundation
  * **Custom audio resources** provides an interface for managing the audio resources associated with a custom acoustic
  model. You add audio resources that closely match the acoustic characteristics of the audio that you want to
  transcribe. You can add, list, and delete audio resources from a custom acoustic model.
-
  ### Usage guidelines for customization
  The following information pertains to methods of the customization interface:
- * Language model customization and acoustic model customization are available only for a limited set of languages. They
- are generally available for production use for some languages but are beta offerings for other languages. For a
- complete list of supported languages and the status of their availability, see [Language support for
+ * Language model customization is not available for all languages; it is generally available for production use for all
+ languages for which it is available. Acoustic model customization is beta functionality that is available for all
+ languages supported by the service. For a complete list of supported languages and the status of their availability,
+ see [Language support for
  customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
  * In all cases, you must use service credentials created for the instance of the service that owns a custom model to
  use the methods described in this documentation with that model. For more information, see [Ownership of custom
@@ -63,7 +64,6 @@ import Foundation
  * Each custom model is identified by a customization ID, which is a Globally Unique Identifier (GUID). A GUID is a
  hexadecimal string that has the same format as Watson service credentials: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`. You
  specify a custom model's GUID with the appropriate customization parameter of methods that support customization.
-
  For more information about using the service's customization interface, see [The customization
  interface](https://console.bluemix.net/docs/services/speech-to-text/custom.html).
  */
@@ -72,17 +72,11 @@ public class SpeechToText {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
-    /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-
-    /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let credentials: Credentials
-    internal let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
+    private let credentials: Credentials
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
      Create a `SpeechToText` object.
@@ -118,15 +112,12 @@ public class SpeechToText {
             return nil  // RestKit will generate error for this case
         }
 
+        let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let code = response?.statusCode ?? 400
-            let error = try json.getString(at: "error")
-            let codeDescription = (try? json.getString(at: "code_description")) ?? ""
-            let userInfo = [NSLocalizedDescriptionKey: error, NSLocalizedRecoverySuggestionErrorKey: codeDescription]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
-            return nil
+            return NSError(domain: domain, code: code, userInfo: nil)
         }
     }
 
@@ -136,23 +127,28 @@ public class SpeechToText {
      Retrieves a list of all language models that are available for use with the service. The information includes the
      name of the model and its minimum sampling rate in Hertz, among other things.
 
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listModels(
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechModels) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/models",
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -172,17 +168,22 @@ public class SpeechToText {
      information includes the name of the model and its minimum sampling rate in Hertz, among other things.
 
      - parameter modelID: The identifier of the model in the form of its name from the output of the **Get models** method.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getModel(
         modelID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechModel) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/models/\(modelID)"
@@ -194,7 +195,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -214,119 +215,100 @@ public class SpeechToText {
      results; to enable interim results, use session-based requests or the WebSocket API. The service imposes a data
      size limit of 100 MB. It automatically detects the endianness of the incoming audio and, for audio that includes
      multiple channels, downmixes the audio to one-channel mono during transcoding. (For the `audio/l16` format, you can
-     specify the endianness.)   ###Streaming mode   For requests to transcribe live audio as it becomes available or to
-     transcribe multiple audio files with multipart requests, you must set the `Transfer-Encoding` header to `chunked`
-     to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the service
-     receives no data chunk for 30 seconds and the service has no audio to transcribe for 30 seconds. The server also
-     closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio (not
-     processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.   ###Non-multipart
-     requests   For non-multipart requests, you specify all parameters of the request as a collection of request headers
-     and query parameters, and you provide the audio as the body of the request. This is the recommended means of
-     submitting a recognition request. Use the following parameters: * **Required:** `Content-Type` and `audio` *
-     **Optional:** `Transfer-Encoding`, `model`, `customization_id`, `acoustic_customization_id`, `base_model_version`,
-     `customization_weight`, `inactivity_timeout`, `keywords`, `keywords_threshold`, `max_alternatives`,
-     `word_alternatives_threshold`, `word_confidence`, `timestamps`, `profanity_filter`, `smart_formatting`, and
-     `speaker_labels`     ###Multipart requests   For multipart requests, you specify a few parameters of the request as
-     request headers and query parameters, but you specify most parameters as multipart form data in the form of JSON
-     metadata, in which only `part_content_type` is required. You then specify the audio files for the request as
-     subsequent parts of the form data. Use this approach with browsers that do not support JavaScript or when the
-     parameters of the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. Use the
-     following parameters: * **Required:** `Content-Type`, `metadata`, and `upload` * **Optional:** `Transfer-Encoding`,
-     `model`, `customization_id`, `acoustic_customization_id`, and `base_model_version`   An example of the multipart
-     metadata for a pair of FLAC files follows. This first part of the request is sent as JSON; the remaining parts are
-     the audio files for the request.
-     `metadata=\"{\\\"part_content_type\\\":\\\"audio/flac\\\",\\\"data_parts_count\\\":2,\\\"inactivity_timeout\\\"=-1}\"`
-     ###Audio formats (content types)   The service accepts audio in the following formats (MIME types): *
-     `audio/basic` (Use only with narrowband models.) * `audio/flac` * `audio/l16` (Specify the sampling rate (`rate`)
-     and optionally the number of channels (`channels`) and endianness (`endianness`) of the audio.) * `audio/mp3` *
-     `audio/mpeg` * `audio/mulaw` (Specify the sampling rate (`rate`) of the audio.) * `audio/ogg` (The service
-     automatically detects the codec of the input audio.) * `audio/ogg;codecs=opus` * `audio/ogg;codecs=vorbis` *
-     `audio/wav` (Provide audio with a maximum of nine channels.) * `audio/webm` (The service automatically detects the
-     codec of the input audio.) * `audio/webm;codecs=opus` * `audio/webm;codecs=vorbis`   For information about the
-     supported audio formats, including specifying the sampling rate, channels, and endianness for the indicated
-     formats, see [Audio formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html). * **For
-     non-multipart requests,** use the `Content-Type` parameter to specify the audio format. * **For multipart
-     requests,** use the `Content-Type` parameter to indicate the content type of the payload, `multipart/form-data`,
-     and specify the audio format with the `part_content_type` field of the JSON metadata. Do not use
-     `multipart/form-data` for non-multipart requests.   **Note about the Try It Out feature:** The `Try it out!` button
-     is **not** supported for use with the the `POST /v1/recognize` method. For examples of calls to the method, see the
-     [Speech to Text API reference](http://www.ibm.com/watson/developercloud/speech-to-text/api/v1/).
+     specify the endianness.)   ### Streaming mode   For requests to transcribe live audio as it becomes available, you
+     must set the `Transfer-Encoding` header to `chunked` to use streaming mode. In streaming mode, the server closes
+     the connection (status code 408) if the service receives no data chunk for 30 seconds and the service has no audio
+     to transcribe for 30 seconds. The server also closes the connection (status code 400) if no speech is detected for
+     `inactivity_timeout` seconds of audio (not processing time); use the `inactivity_timeout` parameter to change the
+     default of 30 seconds.   ### Audio formats (content types)   Use the `Content-Type` header to specify the audio
+     format (MIME type) of the audio. The service accepts the following formats: * `audio/basic` (Use only with
+     narrowband models.) * `audio/flac` * `audio/l16` (Specify the sampling rate (`rate`) and optionally the number of
+     channels (`channels`) and endianness (`endianness`) of the audio.) * `audio/mp3` * `audio/mpeg` * `audio/mulaw`
+     (Specify the sampling rate (`rate`) of the audio.) * `audio/ogg` (The service automatically detects the codec of
+     the input audio.) * `audio/ogg;codecs=opus` * `audio/ogg;codecs=vorbis` * `audio/wav` (Provide audio with a maximum
+     of nine channels.) * `audio/webm` (The service automatically detects the codec of the input audio.) *
+     `audio/webm;codecs=opus` * `audio/webm;codecs=vorbis`   For information about the supported audio formats,
+     including specifying the sampling rate, channels, and endianness for the indicated formats, see [Audio
+     formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).   ### Multipart speech
+     recognition   The method also supports multipart recognition requests. With multipart requests, you pass all audio
+     data as multipart form data. You specify some parameters as request headers and query parameters, but you pass JSON
+     metadata as form data to control most aspects of the transcription.   The multipart approach is intended for use
+     with browsers for which JavaScript is disabled or when the parameters used with the request are greater than the 8
+     KB limit imposed by most HTTP servers and proxies. You can encounter this limit, for example, if you want to spot a
+     very large number of keywords.   For information about submitting a multipart request, see [Submitting multipart
+     requests as form data](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
 
+     - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.
+     - parameter contentType: The type of the input: audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg,
+     audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm, audio/webm;codecs=opus, or
+     audio/webm;codecs=vorbis.
      - parameter model: The identifier of the model that is to be used for the recognition request or, for the **Create a session** method,
      with the new session.
-     - parameter customizationID: The GUID of a custom language model that is to be used with the recognition request or, for the **Create a
-     session** method, with the new session. The base model of the specified custom language model must match the model
-     specified with the `model` parameter. You must make the request with service credentials created for the instance
-     of the service that owns the custom model. By default, no custom language model is used.
-     - parameter acousticCustomizationID: The GUID of a custom acoustic model that is to be used with the recognition request or, for the **Create a
-     session** method, with the new session. The base model of the specified custom acoustic model must match the model
-     specified with the `model` parameter. You must make the request with service credentials created for the instance
-     of the service that owns the custom model. By default, no custom acoustic model is used.
+     - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for the
+     **Create a session** method, with the new session. The base model of the specified custom language model must match
+     the model specified with the `model` parameter. You must make the request with service credentials created for the
+     instance of the service that owns the custom model. By default, no custom language model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for the
+     **Create a session** method, with the new session. The base model of the specified custom acoustic model must match
+     the model specified with the `model` parameter. You must make the request with service credentials created for the
+     instance of the service that owns the custom model. By default, no custom acoustic model is used.
      - parameter baseModelVersion: The version of the specified base model that is to be used with recognition request or, for the **Create a
      session** method, with the new session. Multiple versions of a base model can exist when a model is updated for
      internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for a
      new base model. The default value depends on whether the parameter is used with or without a custom model. For more
      information, see [Base model version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
-     - parameter customizationWeight: If you specify the GUID of a custom language model with the recognition request or, for sessions, with the **Create
-     a session** method, the customization weight tells the service how much weight to give to words from the custom
-     language model compared to those from the base model for the current request.   Specify a value between 0.0 and
-     1.0. Unless a different customization weight was specified for the custom model when it was trained, the default
-     value is 0.3. A customization weight that you specify overrides a weight that was specified when the custom model
-     was trained.   The default value yields the best performance in general. Assign a higher value if your audio makes
-     frequent use of OOV words from the custom model. Use caution when setting the weight: a higher value can improve
-     the accuracy of phrases from the custom model's domain, but it can negatively affect performance on non-domain
-     phrases.   **Do not use with MULTIPART recognition requests.**.
-     - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.   **Required for NON-MULTIPART
-     recognition requests. Do not use with MULTIPART recognition requests.**.
-     - parameter contentType: The type of the input: audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg,
-     audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm, audio/webm;codecs=opus,
-     audio/webm;codecs=vorbis, or multipart/form-data.
+     - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the recognition request or, for
+     sessions, with the **Create a session** method, the customization weight tells the service how much weight to give
+     to words from the custom language model compared to those from the base model for the current request.   Specify a
+     value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model when it was
+     trained, the default value is 0.3. A customization weight that you specify overrides a weight that was specified
+     when the custom model was trained.   The default value yields the best performance in general. Assign a higher
+     value if your audio makes frequent use of OOV words from the custom model. Use caution when setting the weight: a
+     higher value can improve the accuracy of phrases from the custom model's domain, but it can negatively affect
+     performance on non-domain phrases.
      - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      closed with a 400 error. Useful for stopping audio submission from a live microphone when a user simply walks away.
-     Use `-1` for infinity.   **Do not use with MULTIPART recognition requests.**.
+     Use `-1` for infinity.
      - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords are
      spotted only in the final hypothesis, not in interim results. If you specify any keywords, you must also specify a
      keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty array if you do
-     not need to spot keywords.   **Do not use with MULTIPART recognition requests.**.
+     not need to spot keywords.
      - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
      confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword
      spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     keywords.   **Do not use with MULTIPART recognition requests.**.
+     keywords.
      - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single transcription is returned.
-     **Do not use with MULTIPART recognition requests.**.
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also known
      as \"Confusion Networks\"). An alternative word is considered if its confidence is greater than or equal to the
      threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the
-     parameter.   **Do not use with MULTIPART recognition requests.**.
+     parameter.
      - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence
-     measures are returned.   **Do not use with MULTIPART recognition requests.**.
-     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are returned.   **Do not use with
-     MULTIPART recognition requests.**.
+     measures are returned.
+     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are returned.
      - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate
      words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
-     English transcription only.   **Do not use with MULTIPART recognition requests.**.
+     English transcription only.
      - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and Internet
      addresses into more readable, conventional representations in the final transcript of a recognition request. By
-     default, no smart formatting is performed. Applies to US English transcription only.   **Do not use with MULTIPART
-     recognition requests.**.
+     default, no smart formatting is performed. Applies to US English transcription only.
      - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which participants in a
      multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
      `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.   To determine
      whether a language model supports speaker labels, use the **Get models** method and check that the attribute
      `speaker_labels` is set to `true`. You can also refer to [Speaker
-     labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).   **Do not use with
-     MULTIPART recognition requests.**.
+     labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func recognizeSessionless(
+        audio: Data,
+        contentType: String,
         model: String? = nil,
         customizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
-        audio: Data? = nil,
-        contentType: String? = nil,
         inactivityTimeout: Int? = nil,
         keywords: [String]? = nil,
         keywordsThreshold: Double? = nil,
@@ -337,6 +319,7 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechRecognitionResults) -> Void)
     {
@@ -344,11 +327,12 @@ public class SpeechToText {
         let body = audio
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        if let contentType = contentType {
-            headers["Content-Type"] = contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
         }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = contentType
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -418,7 +402,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + "/v1/recognize",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -463,18 +447,23 @@ public class SpeechToText {
      `X-Callback-Signature` header. The service includes the header during URL verification and with every notification
      sent to the callback URL. It calculates the signature over the payload of the notification. If you omit the
      parameter, the service does not send the header.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func registerCallback(
         callbackUrl: String,
         userSecret: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (RegisterStatus) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -489,7 +478,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + "/v1/register_callback",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -510,17 +499,22 @@ public class SpeechToText {
      asynchronous interface. Once unregistered, the URL can no longer be used with asynchronous recognition requests.
 
      - parameter callbackUrl: The callback URL that is to be unregistered.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func unregisterCallback(
         callbackUrl: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -531,7 +525,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + "/v1/unregister_callback",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -566,7 +560,7 @@ public class SpeechToText {
      parameters as other HTTP and WebSocket recognition requests. The service imposes a data size limit of 100 MB. It
      automatically detects the endianness of the incoming audio and, for audio that includes multiple channels,
      downmixes the audio to one-channel mono during transcoding. (For the `audio/l16` format, you can specify the
-     endianness.)     ###Audio formats (content types)   Use the `Content-Type` parameter to specify the audio format
+     endianness.)   ### Audio formats (content types)   Use the `Content-Type` parameter to specify the audio format
      (MIME type) of the audio: * `audio/basic` (Use only with narrowband models.) * `audio/flac` * `audio/l16` (Specify
      the sampling rate (`rate`) and optionally the number of channels (`channels`) and endianness (`endianness`) of the
      audio.) * `audio/mp3` * `audio/mpeg` * `audio/mulaw` (Specify the sampling rate (`rate`) of the audio.) *
@@ -603,63 +597,60 @@ public class SpeechToText {
      - parameter resultsTtl: The number of minutes for which the results are to be available after the job has finished. If not delivered via a
      callback, the results must be retrieved within this time. Omit the parameter to use a time to live of one week. The
      parameter is valid with or without a callback URL.
-     - parameter customizationID: The GUID of a custom language model that is to be used with the recognition request or, for the **Create a
-     session** method, with the new session. The base model of the specified custom language model must match the model
-     specified with the `model` parameter. You must make the request with service credentials created for the instance
-     of the service that owns the custom model. By default, no custom language model is used.
-     - parameter acousticCustomizationID: The GUID of a custom acoustic model that is to be used with the recognition request or, for the **Create a
-     session** method, with the new session. The base model of the specified custom acoustic model must match the model
-     specified with the `model` parameter. You must make the request with service credentials created for the instance
-     of the service that owns the custom model. By default, no custom acoustic model is used.
+     - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for the
+     **Create a session** method, with the new session. The base model of the specified custom language model must match
+     the model specified with the `model` parameter. You must make the request with service credentials created for the
+     instance of the service that owns the custom model. By default, no custom language model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for the
+     **Create a session** method, with the new session. The base model of the specified custom acoustic model must match
+     the model specified with the `model` parameter. You must make the request with service credentials created for the
+     instance of the service that owns the custom model. By default, no custom acoustic model is used.
      - parameter baseModelVersion: The version of the specified base model that is to be used with recognition request or, for the **Create a
      session** method, with the new session. Multiple versions of a base model can exist when a model is updated for
      internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for a
      new base model. The default value depends on whether the parameter is used with or without a custom model. For more
      information, see [Base model version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
-     - parameter customizationWeight: If you specify the GUID of a custom language model with the recognition request or, for sessions, with the **Create
-     a session** method, the customization weight tells the service how much weight to give to words from the custom
-     language model compared to those from the base model for the current request.   Specify a value between 0.0 and
-     1.0. Unless a different customization weight was specified for the custom model when it was trained, the default
-     value is 0.3. A customization weight that you specify overrides a weight that was specified when the custom model
-     was trained.   The default value yields the best performance in general. Assign a higher value if your audio makes
-     frequent use of OOV words from the custom model. Use caution when setting the weight: a higher value can improve
-     the accuracy of phrases from the custom model's domain, but it can negatively affect performance on non-domain
-     phrases.   **Do not use with MULTIPART recognition requests.**.
+     - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the recognition request or, for
+     sessions, with the **Create a session** method, the customization weight tells the service how much weight to give
+     to words from the custom language model compared to those from the base model for the current request.   Specify a
+     value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model when it was
+     trained, the default value is 0.3. A customization weight that you specify overrides a weight that was specified
+     when the custom model was trained.   The default value yields the best performance in general. Assign a higher
+     value if your audio makes frequent use of OOV words from the custom model. Use caution when setting the weight: a
+     higher value can improve the accuracy of phrases from the custom model's domain, but it can negatively affect
+     performance on non-domain phrases.
      - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      closed with a 400 error. Useful for stopping audio submission from a live microphone when a user simply walks away.
-     Use `-1` for infinity.   **Do not use with MULTIPART recognition requests.**.
+     Use `-1` for infinity.
      - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords are
      spotted only in the final hypothesis, not in interim results. If you specify any keywords, you must also specify a
      keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty array if you do
-     not need to spot keywords.   **Do not use with MULTIPART recognition requests.**.
+     not need to spot keywords.
      - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
      confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword
      spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     keywords.   **Do not use with MULTIPART recognition requests.**.
+     keywords.
      - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single transcription is returned.
-     **Do not use with MULTIPART recognition requests.**.
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also known
      as \"Confusion Networks\"). An alternative word is considered if its confidence is greater than or equal to the
      threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the
-     parameter.   **Do not use with MULTIPART recognition requests.**.
+     parameter.
      - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence
-     measures are returned.   **Do not use with MULTIPART recognition requests.**.
-     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are returned.   **Do not use with
-     MULTIPART recognition requests.**.
+     measures are returned.
+     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are returned.
      - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate
      words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
-     English transcription only.   **Do not use with MULTIPART recognition requests.**.
+     English transcription only.
      - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and Internet
      addresses into more readable, conventional representations in the final transcript of a recognition request. By
-     default, no smart formatting is performed. Applies to US English transcription only.   **Do not use with MULTIPART
-     recognition requests.**.
+     default, no smart formatting is performed. Applies to US English transcription only.
      - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which participants in a
      multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
      `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.   To determine
      whether a language model supports speaker labels, use the **Get models** method and check that the attribute
      `speaker_labels` is set to `true`. You can also refer to [Speaker
-     labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).   **Do not use with
-     MULTIPART recognition requests.**.
+     labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -685,6 +676,7 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (RecognitionJob) -> Void)
     {
@@ -692,9 +684,12 @@ public class SpeechToText {
         let body = audio
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = contentType
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -780,7 +775,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + "/v1/recognitions",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -805,23 +800,28 @@ public class SpeechToText {
      remain available until you delete them with the **Delete a job** method or until the job's time to live expires,
      whichever comes first.
 
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func checkJobs(
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (RecognitionJobs) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/recognitions",
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -846,17 +846,22 @@ public class SpeechToText {
      the calling user.
 
      - parameter id: The ID of the asynchronous job.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func checkJob(
         id: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (RecognitionJob) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/recognitions/\(id)"
@@ -868,7 +873,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -889,17 +894,22 @@ public class SpeechToText {
      for the results expires. You must submit the request with the service credentials of the user who created the job.
 
      - parameter id: The ID of the asynchronous job.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteJob(
         id: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/recognitions/\(id)"
@@ -911,7 +921,7 @@ public class SpeechToText {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -932,11 +942,13 @@ public class SpeechToText {
      create it. You must pass a value of `application/json` with the `Content-Type` header.
 
      - parameter createLanguageModel: A `CreateLanguageModel` object that provides basic information about the new custom language model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func createLanguageModel(
         createLanguageModel: CreateLanguageModel,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (LanguageModel) -> Void)
     {
@@ -947,16 +959,19 @@ public class SpeechToText {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/customizations",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             messageBody: body
         )
 
@@ -981,17 +996,22 @@ public class SpeechToText {
      - parameter language: The identifier of the language for which custom language or custom acoustic models are to be returned (for example,
      `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the requesting service
      credentials.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listLanguageModels(
         language: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (LanguageModels) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1005,7 +1025,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + "/v1/customizations",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1025,19 +1045,24 @@ public class SpeechToText {
      Lists information about a specified custom language model. You must use credentials for the instance of the service
      that owns a model to list information about it.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getLanguageModel(
         customizationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (LanguageModel) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
@@ -1049,7 +1074,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -1069,19 +1094,24 @@ public class SpeechToText {
      corpus to the model, is currently being processed. You must use credentials for the instance of the service that
      owns a model to delete it.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteLanguageModel(
         customizationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
@@ -1093,7 +1123,7 @@ public class SpeechToText {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -1116,7 +1146,7 @@ public class SpeechToText {
      instance of the service that owns a model to train it.   The training method is asynchronous. It can take on the
      order of minutes to complete depending on the amount of data on which the service is being trained and the current
      load on the service. The method returns an HTTP 200 response code to indicate that the training process has begun.
-     You can monitor the status of the training by using the **List a custom language model** method to poll the
+      You can monitor the status of the training by using the **List a custom language model** method to poll the
      model's status. Use a loop to check the status every 10 seconds. The method returns a `Customization` object that
      includes `status` and `progress` fields. A status of `available` means that the custom model is trained and ready
      to use. The service cannot accept subsequent training requests, or requests to add new corpora or words, until the
@@ -1125,8 +1155,8 @@ public class SpeechToText {
      words to the model. * No training data (corpora or words) have been added to the custom model. * One or more words
      that were added to the custom model have invalid sounds-like pronunciations that you must fix.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter wordTypeToAdd: The type of words from the custom language model's words resource on which to train the model: * `all` (the
      default) trains the model on all new words, regardless of whether they were extracted from corpora or were added or
      modified by the user. * `user` trains the model only on new words that were added or modified by the user; the
@@ -1139,6 +1169,7 @@ public class SpeechToText {
      domain, but it can negatively affect performance on non-domain phrases.   The value that you assign is used for all
      recognition requests that use the model. You can override it for any recognition request by specifying a
      customization weight for that request.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1146,12 +1177,16 @@ public class SpeechToText {
         customizationID: String,
         wordTypeToAdd: String? = nil,
         customizationWeight: Double? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1174,7 +1209,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1196,19 +1231,24 @@ public class SpeechToText {
      are preserved, but the model's words resource is removed and must be re-created. You must use credentials for the
      instance of the service that owns a model to reset it.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func resetLanguageModel(
         customizationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/reset"
@@ -1220,7 +1260,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -1247,19 +1287,24 @@ public class SpeechToText {
      subsequent requests for the model until the upgrade completes.   For more information, see [Upgrading custom
      models](https://console.bluemix.net/docs/services/speech-to-text/custom-upgrade.html).
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func upgradeLanguageModel(
         customizationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/upgrade_model"
@@ -1271,7 +1316,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -1291,19 +1336,24 @@ public class SpeechToText {
      words and out-of-vocabulary (OOV) words, name, and status of each corpus. You must use credentials for the instance
      of the service that owns a model to list its corpora.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listCorpora(
         customizationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Corpora) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora"
@@ -1315,7 +1365,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -1357,8 +1407,8 @@ public class SpeechToText {
      all corpora combined. Also, you can add no more than 30 thousand custom (OOV) words to a model; this includes words
      that the service extracts from corpora and words that you add directly.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name; use
      a localized name that matches the language of the custom model; and do not use the name `user`, which is reserved
      by the service to denote custom words added or modified by the user.
@@ -1369,6 +1419,7 @@ public class SpeechToText {
      name. If `false` (the default), the request fails if a corpus or audio resource with the same name already exists.
      The parameter has no effect if a corpus or audio resource with the same name does not already exist.
      - parameter corpusFileContentType: The content type of corpusFile.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1378,6 +1429,7 @@ public class SpeechToText {
         corpusFile: URL,
         allowOverwrite: Bool? = nil,
         corpusFileContentType: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
@@ -1390,9 +1442,12 @@ public class SpeechToText {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1411,7 +1466,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1433,23 +1488,28 @@ public class SpeechToText {
      and out-of-vocabulary (OOV) words, name, and status of the corpus. You must use credentials for the instance of the
      service that owns a model to list its corpora.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name; use
      a localized name that matches the language of the custom model; and do not use the name `user`, which is reserved
      by the service to denote custom words added or modified by the user.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getCorpus(
         customizationID: String,
         corpusName: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Corpus) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora/\(corpusName)"
@@ -1461,7 +1521,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -1483,23 +1543,28 @@ public class SpeechToText {
      corpus does not affect the custom model until you train the model with the **Train a custom language model**
      method. You must use credentials for the instance of the service that owns a model to delete its corpora.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name; use
      a localized name that matches the language of the custom model; and do not use the name `user`, which is reserved
      by the service to denote custom words added or modified by the user.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteCorpus(
         customizationID: String,
         corpusName: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora/\(corpusName)"
@@ -1511,7 +1576,7 @@ public class SpeechToText {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -1533,8 +1598,8 @@ public class SpeechToText {
      default, words are listed in ascending alphabetical order. You must use credentials for the instance of the service
      that owns a model to query information about its words.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter wordType: The type of words to be listed from the custom language model's words resource: * `all` (the default) shows all
      words. * `user` shows only custom words that were added or modified by the user. * `corpora` shows only OOV that
      were extracted from corpora.
@@ -1543,6 +1608,7 @@ public class SpeechToText {
      default, words are sorted in ascending alphabetical order. For alphabetical ordering, the lexicographical
      precedence is numeric values, uppercase letters, and lowercase letters. For count ordering, values with the same
      count are ordered alphabetically. With cURL, URL encode the `+` symbol as `%2B`.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1550,12 +1616,16 @@ public class SpeechToText {
         customizationID: String,
         wordType: String? = nil,
         sort: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Words) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1578,7 +1648,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1630,16 +1700,18 @@ public class SpeechToText {
      the problem. You can use other words-related methods to correct errors, eliminate typos, and modify how words are
      pronounced as needed.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter words: An array of objects that provides information about each custom word that is to be added to or updated in the
      custom language model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func addWords(
         customizationID: String,
         words: [CustomWord],
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
@@ -1651,9 +1723,12 @@ public class SpeechToText {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
@@ -1665,7 +1740,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             messageBody: body
         )
 
@@ -1706,8 +1781,8 @@ public class SpeechToText {
      existing data for the word. If the service encounters an error, it does not add the word to the words resource. Use
      the **List a custom word** method to review the word that you add.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter wordName: The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the
      word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      - parameter word: **When specifying an array of one or more words,** you must specify the custom word that is to be added to or
@@ -1723,6 +1798,7 @@ public class SpeechToText {
      - parameter displayAs: An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the
      word to have a spelling that is different from its usual representation or from its spelling in corpora training
      data.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1732,6 +1808,7 @@ public class SpeechToText {
         word: String? = nil,
         soundsLike: [String]? = nil,
         displayAs: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
@@ -1743,9 +1820,12 @@ public class SpeechToText {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
@@ -1757,7 +1837,7 @@ public class SpeechToText {
             method: "PUT",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             messageBody: body
         )
 
@@ -1777,22 +1857,27 @@ public class SpeechToText {
      Lists information about a custom word from a custom language model. You must use credentials for the instance of
      the service that owns a model to query information about its words.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter wordName: The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the
      word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getWord(
         customizationID: String,
         wordName: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Word) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
@@ -1804,7 +1889,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -1826,22 +1911,27 @@ public class SpeechToText {
      does not affect the custom model until you train the model with the **Train a custom language model** method. You
      must use credentials for the instance of the service that owns a model to delete its words.
 
-     - parameter customizationID: The GUID of the custom language model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter wordName: The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the
      word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteWord(
         customizationID: String,
         wordName: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
@@ -1853,7 +1943,7 @@ public class SpeechToText {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -1882,6 +1972,7 @@ public class SpeechToText {
      customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
      - parameter description: A description of the new custom acoustic model. Use a localized description that matches the language of the custom
      model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1889,6 +1980,7 @@ public class SpeechToText {
         name: String,
         baseModelName: String,
         description: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (AcousticModel) -> Void)
     {
@@ -1900,16 +1992,19 @@ public class SpeechToText {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/acoustic_customizations",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             messageBody: body
         )
 
@@ -1934,17 +2029,22 @@ public class SpeechToText {
      - parameter language: The identifier of the language for which custom language or custom acoustic models are to be returned (for example,
      `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the requesting service
      credentials.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listAcousticModels(
         language: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (AcousticModels) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1958,7 +2058,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + "/v1/acoustic_customizations",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1978,19 +2078,24 @@ public class SpeechToText {
      Lists information about a specified custom acoustic model. You must use credentials for the instance of the service
      that owns a model to list information about it.
 
-     - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getAcousticModel(
         customizationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (AcousticModel) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)"
@@ -2002,7 +2107,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -2022,19 +2127,24 @@ public class SpeechToText {
      audio resource to the model, is currently being processed. You must use credentials for the instance of the service
      that owns a model to delete it.
 
-     - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteAcousticModel(
         customizationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)"
@@ -2046,7 +2156,7 @@ public class SpeechToText {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -2085,23 +2195,28 @@ public class SpeechToText {
      another training request or a request to add audio resources to the model. * The custom model contains less than 10
      minutes or more than 50 hours of audio data. * One or more of the custom model's audio resources is invalid.
 
-     - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
-     - parameter customLanguageModelID: The GUID of a custom language model that is to be used during training of the custom acoustic model. Specify a
-     custom language model that has been trained with verbatim transcriptions of the audio resources or that contains
-     words that are relevant to the contents of the audio resources.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter customLanguageModelID: The customization ID (GUID) of a custom language model that is to be used during training of the custom acoustic
+     model. Specify a custom language model that has been trained with verbatim transcriptions of the audio resources or
+     that contains words that are relevant to the contents of the audio resources.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func trainAcousticModel(
         customizationID: String,
         customLanguageModelID: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2120,7 +2235,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2142,19 +2257,24 @@ public class SpeechToText {
      are preserved, but the model's audio resources are removed and must be re-created. You must use credentials for the
      instance of the service that owns a model to reset it.
 
-     - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func resetAcousticModel(
         customizationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/reset"
@@ -2166,7 +2286,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -2198,22 +2318,27 @@ public class SpeechToText {
      information, see [Upgrading custom
      models](https://console.bluemix.net/docs/services/speech-to-text/custom-upgrade.html).
 
-     - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
-     - parameter customLanguageModelID: If the custom acoustic model was trained with a custom language model, the GUID of that custom language model. The
-     custom language model must be upgraded before the custom acoustic model can be upgraded.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter customLanguageModelID: If the custom acoustic model was trained with a custom language model, the customization ID (GUID) of that custom
+     language model. The custom language model must be upgraded before the custom acoustic model can be upgraded.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func upgradeAcousticModel(
         customizationID: String,
         customLanguageModelID: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2232,7 +2357,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2255,19 +2380,24 @@ public class SpeechToText {
      to the custom acoustic model. You must use credentials for the instance of the service that owns a model to list
      its audio resources.
 
-     - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listAudio(
         customizationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (AudioResources) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio"
@@ -2279,7 +2409,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -2315,8 +2445,8 @@ public class SpeechToText {
      audio files for the current request completes.   To determine the status of the service's analysis of the audio,
      use the **List an audio resource** method to poll the status of the audio. The method accepts the GUID of the
      custom model and the name of the audio resource, and it returns the status of the resource. Use a loop to check the
-     status of the audio every few seconds until it becomes `ok`.     ###Content types for audio-type resources   You
-     can add an individual audio file in any format that the service supports for speech recognition. For an audio-type
+     status of the audio every few seconds until it becomes `ok`.   ### Content types for audio-type resources   You can
+     add an individual audio file in any format that the service supports for speech recognition. For an audio-type
      resource, use the `Content-Type` parameter to specify the audio format (MIME type) of the audio file: *
      `audio/basic` (Use only with narrowband models.) * `audio/flac` * `audio/l16` (Specify the sampling rate (`rate`)
      and optionally the number of channels (`channels`) and endianness (`endianness`) of the audio.) * `audio/mp3` *
@@ -2329,18 +2459,18 @@ public class SpeechToText {
      **Note:** The sampling rate of an audio file must match the sampling rate of the base model for the custom model:
      for broadband models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is
      higher than the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling
-     rate of the audio is lower than the minimum required rate, the service labels the audio file as `invalid`.
-     ###Content types for archive-type resources   You can add an archive file (**.zip** or **.tar.gz** file) that
-     contains audio files in any format that the service supports for speech recognition. For an archive-type resource,
-     use the `Content-Type` parameter to specify the media type of the archive file: * `application/zip` for a **.zip**
-     file * `application/gzip` for a **.tar.gz** file.   All audio files contained in the archive must have the same
-     audio format. Use the `Contained-Content-Type` parameter to specify the format of the contained audio files. The
+     rate of the audio is lower than the minimum required rate, the service labels the audio file as `invalid`.   ###
+     Content types for archive-type resources   You can add an archive file (**.zip** or **.tar.gz** file) that contains
+     audio files in any format that the service supports for speech recognition. For an archive-type resource, use the
+     `Content-Type` parameter to specify the media type of the archive file: * `application/zip` for a **.zip** file *
+     `application/gzip` for a **.tar.gz** file.   All audio files contained in the archive must have the same audio
+     format. Use the `Contained-Content-Type` parameter to specify the format of the contained audio files. The
      parameter accepts all of the audio formats supported for use with speech recognition and with the `Content-Type`
      header, including the `rate`, `channels`, and `endianness` parameters that are used with some formats. The default
      contained audio format is `audio/wav`.
 
-     - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include spaces
      in the name; use a localized name that matches the language of the custom model.
      - parameter audioResource: The audio resource that is to be added to the custom acoustic model, an individual audio file or an archive file.
@@ -2354,28 +2484,36 @@ public class SpeechToText {
      - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
      name. If `false` (the default), the request fails if a corpus or audio resource with the same name already exists.
      The parameter has no effect if a corpus or audio resource with the same name does not already exist.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func addAudio(
         customizationID: String,
         audioName: String,
-        audioResource: Data,
+        audioResource: [Data],
         contentType: String,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct body
-        let body = audioResource
+        guard let body = try? JSONEncoder().encode(audioResource) else {
+            failure?(RestError.serializationError)
+            return
+        }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = contentType
         if let containedContentType = containedContentType {
-            headers["Contained-Content-Type"] = containedContentType
+            headerParameters["Contained-Content-Type"] = containedContentType
         }
 
         // construct query parameters
@@ -2395,7 +2533,7 @@ public class SpeechToText {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2423,22 +2561,27 @@ public class SpeechToText {
      response to a request to add it to the custom model. You must use credentials for the instance of the service that
      owns a model to list its audio resources.
 
-     - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include spaces
      in the name; use a localized name that matches the language of the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getAudio(
         customizationID: String,
         audioName: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (AudioListing) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio/\(audioName)"
@@ -2450,7 +2593,7 @@ public class SpeechToText {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -2472,22 +2615,27 @@ public class SpeechToText {
      by using the **Train a custom acoustic model** method. You must use credentials for the instance of the service
      that owns a model to delete its audio resources.
 
-     - parameter customizationID: The GUID of the custom acoustic model. You must make the request with service credentials created for the instance
-     of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     created for the instance of the service that owns the custom model.
      - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include spaces
      in the name; use a localized name that matches the language of the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteAudio(
         customizationID: String,
         audioName: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio/\(audioName)"
@@ -2499,7 +2647,7 @@ public class SpeechToText {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request

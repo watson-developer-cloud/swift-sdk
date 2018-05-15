@@ -16,7 +16,7 @@
 
 import Foundation
 
-/** Classifier results for one image. */
+/** Results for one image. */
 public struct ClassifiedImage: Decodable {
 
     /// Source of the image before any redirects. Not returned when the image is uploaded.
@@ -30,6 +30,7 @@ public struct ClassifiedImage: Decodable {
 
     public var error: ErrorInfo?
 
+    /// The classifiers.
     public var classifiers: [ClassifierResult]
 
     // Map each property name to the key that shall be used for encoding/decoding.

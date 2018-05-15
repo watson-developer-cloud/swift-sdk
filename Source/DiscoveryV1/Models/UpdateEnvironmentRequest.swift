@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateEnvironmentRequest. */
-internal struct UpdateEnvironmentRequest: Encodable {
+public struct UpdateEnvironmentRequest: Encodable {
 
     /// Name that identifies the environment.
     public var name: String?

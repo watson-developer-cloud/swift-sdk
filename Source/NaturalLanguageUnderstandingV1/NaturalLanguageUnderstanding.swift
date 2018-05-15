@@ -43,7 +43,7 @@ public class NaturalLanguageUnderstanding {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
-     in "YYYY-MM-DD" format.
+       in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
         self.credentials = .basicAuthentication(username: username, password: password)
@@ -74,17 +74,12 @@ public class NaturalLanguageUnderstanding {
             return nil  // RestKit will generate error for this case
         }
 
+        let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error")
-            var userInfo = [NSLocalizedDescriptionKey: message]
-            if let description = try? json.getString(at: "description") {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
-            return nil
+            return NSError(domain: domain, code: code, userInfo: nil)
         }
     }
 
@@ -111,11 +106,13 @@ public class NaturalLanguageUnderstanding {
 
      - parameter parameters: An object containing request parameters. The `features` object and one of the `text`, `html`, or `url` attributes
      are required.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func analyze(
         parameters: Parameters,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (AnalysisResults) -> Void)
     {
@@ -126,9 +123,12 @@ public class NaturalLanguageUnderstanding {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -139,7 +139,7 @@ public class NaturalLanguageUnderstanding {
             method: "POST",
             url: serviceURL + "/v1/analyze",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -160,16 +160,21 @@ public class NaturalLanguageUnderstanding {
      Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
      you have created and linked to your Natural Language Understanding service.
 
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listModels(
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ListModelsResults) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -180,7 +185,7 @@ public class NaturalLanguageUnderstanding {
             method: "GET",
             url: serviceURL + "/v1/models",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -200,17 +205,22 @@ public class NaturalLanguageUnderstanding {
      Deletes a custom model.
 
      - parameter modelID: model_id of the model to delete.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteModel(
         modelID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteModelResults) -> Void)
+        success: @escaping (InlineResponse200) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -226,13 +236,13 @@ public class NaturalLanguageUnderstanding {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeleteModelResults>) in
+            (response: RestResponse<InlineResponse200>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

@@ -24,17 +24,17 @@ internal struct RestRequest {
 
         let operatingSystem: String = {
             #if os(iOS)
-                return "iOS"
+            return "iOS"
             #elseif os(watchOS)
-                return "watchOS"
+            return "watchOS"
             #elseif os(tvOS)
-                return "tvOS"
+            return "tvOS"
             #elseif os(macOS)
-                return "macOS"
+            return "macOS"
             #elseif os(Linux)
-                return "Linux"
+            return "Linux"
             #else
-                return "Unknown"
+            return "Unknown"
             #endif
         }()
 

@@ -16,9 +16,10 @@
 
 import Foundation
 
-/** List of classifiers. */
+/** A container for the list of classifiers. */
 public struct Classifiers: Decodable {
 
+    /// List of classifiers.
     public var classifiers: [Classifier]
 
     // Map each property name to the key that shall be used for encoding/decoding.

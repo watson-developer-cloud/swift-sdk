@@ -40,7 +40,7 @@ public class Discovery {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
-     in "YYYY-MM-DD" format.
+       in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
         self.credentials = .basicAuthentication(username: username, password: password)
@@ -71,27 +71,26 @@ public class Discovery {
             return nil  // RestKit will generate error for this case
         }
 
+        let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error")
-            let description = (try? json.getString(at: "description")) ?? ""
-            let userInfo = [NSLocalizedDescriptionKey: message, NSLocalizedRecoverySuggestionErrorKey: description]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
-            return nil
+            return NSError(domain: domain, code: code, userInfo: nil)
         }
     }
 
     /**
-     Add an environment.
+     Create an environment.
 
-     Creates a new environment.  You can create only one environment per service instance. An attempt to create another
+     Creates a new environment for private data. An environment must be created before collections can be created.
+     **Note**: You can create only one environment for private data per service instance. An attempt to create another
      environment results in an error.
 
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
      - parameter size: **Deprecated**: Size of the environment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -99,6 +98,7 @@ public class Discovery {
         name: String,
         description: String? = nil,
         size: Int? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
     {
@@ -110,9 +110,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -123,7 +126,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + "/v1/environments",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -144,17 +147,22 @@ public class Discovery {
      List existing environments for the service instance.
 
      - parameter name: Show only the environment with the given name.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listEnvironments(
         name: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ListEnvironmentsResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -169,7 +177,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + "/v1/environments",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -187,17 +195,22 @@ public class Discovery {
      Get environment info.
 
      - parameter environmentID: The ID of the environment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getEnvironment(
         environmentID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -213,7 +226,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -236,6 +249,7 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -243,6 +257,7 @@ public class Discovery {
         environmentID: String,
         name: String? = nil,
         description: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
     {
@@ -254,9 +269,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -272,7 +290,7 @@ public class Discovery {
             method: "PUT",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -291,17 +309,22 @@ public class Discovery {
      Delete environment.
 
      - parameter environmentID: The ID of the environment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteEnvironment(
         environmentID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DeleteEnvironmentResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -317,7 +340,7 @@ public class Discovery {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -332,24 +355,29 @@ public class Discovery {
     }
 
     /**
-     List fields in specified collections.
+     List fields across collections.
 
      Gets a list of the unique fields (and their types) stored in the indexes of the specified collections.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listFields(
         environmentID: String,
         collectionIds: [String],
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ListCollectionFieldsResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -366,7 +394,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -399,12 +427,14 @@ public class Discovery {
      will be ignored and will not generate an error. This makes it easier to use newer configuration files with older
      versions of the API and the service. It also makes it possible for the tooling to add additional metadata and
      information to the configuration.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func createConfiguration(
         environmentID: String,
         configuration: Configuration,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Configuration) -> Void)
     {
@@ -415,9 +445,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -433,7 +466,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -455,18 +488,23 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter name: Find configurations with the given name.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listConfigurations(
         environmentID: String,
         name: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ListConfigurationsResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -486,7 +524,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -505,18 +543,23 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter configurationID: The ID of the configuration.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getConfiguration(
         environmentID: String,
         configurationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Configuration) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -532,7 +575,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -566,6 +609,7 @@ public class Discovery {
      are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions
      of the API and the service. It also makes it possible for the tooling to add additional metadata and information to
      the configuration.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -573,6 +617,7 @@ public class Discovery {
         environmentID: String,
         configurationID: String,
         configuration: Configuration,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Configuration) -> Void)
     {
@@ -583,9 +628,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -601,7 +649,7 @@ public class Discovery {
             method: "PUT",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -626,18 +674,23 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter configurationID: The ID of the configuration.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteConfiguration(
         environmentID: String,
         configurationID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DeleteConfigurationResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -653,7 +706,7 @@ public class Discovery {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -688,6 +741,7 @@ public class Discovery {
      that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB
      are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```.
      - parameter fileContentType: The content type of file.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -699,6 +753,7 @@ public class Discovery {
         file: URL? = nil,
         metadata: String? = nil,
         fileContentType: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TestDocument) -> Void)
     {
@@ -727,9 +782,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -753,7 +811,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -773,12 +831,14 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter properties: Input an object that allows you to add a collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func createCollection(
         environmentID: String,
         properties: CreateCollectionRequest,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Collection) -> Void)
     {
@@ -789,9 +849,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -807,7 +870,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -829,18 +892,23 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter name: Find collections with the given name.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listCollections(
         environmentID: String,
         name: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ListCollectionsResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -860,7 +928,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -879,18 +947,23 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getCollection(
         environmentID: String,
         collectionID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Collection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -906,7 +979,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -928,6 +1001,7 @@ public class Discovery {
      - parameter name: The name of the collection.
      - parameter description: A description of the collection.
      - parameter configurationID: The ID of the configuration in which the collection is to be updated.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -937,6 +1011,7 @@ public class Discovery {
         name: String,
         description: String? = nil,
         configurationID: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Collection) -> Void)
     {
@@ -948,9 +1023,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -966,7 +1044,7 @@ public class Discovery {
             method: "PUT",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -986,18 +1064,23 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteCollection(
         environmentID: String,
         collectionID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DeleteCollectionResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1013,7 +1096,7 @@ public class Discovery {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1028,24 +1111,29 @@ public class Discovery {
     }
 
     /**
-     List unique fields.
+     List collection fields.
 
      Gets a list of the unique fields (and their types) stored in the index.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listCollectionFields(
         environmentID: String,
         collectionID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ListCollectionFieldsResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1061,7 +1149,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1076,25 +1164,30 @@ public class Discovery {
     }
 
     /**
-     List current expansions.
+     Get the expansion list.
 
      Returns the current expansion list for the specified collection. If an expansion list is not specified, an object
      with empty expansion arrays is returned.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listExpansions(
         environmentID: String,
         collectionID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Expansions) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1110,7 +1203,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1125,7 +1218,7 @@ public class Discovery {
     }
 
     /**
-     Set the expansion list.
+     Create or update expansion list.
 
      Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
      `500`. The current expansion list is replaced with the uploaded content.
@@ -1140,6 +1233,7 @@ public class Discovery {
      uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`. When items in
      the `input_terms` array are present in a query, they are expanded using the items listed in the `expanded_terms`
      array.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1147,6 +1241,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         expansions: [Expansion],
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Expansions) -> Void)
     {
@@ -1158,9 +1253,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1176,7 +1274,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1192,25 +1290,30 @@ public class Discovery {
     }
 
     /**
-     Delete the expansions list.
+     Delete the expansion list.
 
      Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion
      for a collection.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteExpansions(
         environmentID: String,
         collectionID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1226,7 +1329,7 @@ public class Discovery {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1262,6 +1365,7 @@ public class Discovery {
      that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB
      are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```.
      - parameter fileContentType: The content type of file.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1271,6 +1375,7 @@ public class Discovery {
         file: URL? = nil,
         metadata: String? = nil,
         fileContentType: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentAccepted) -> Void)
     {
@@ -1292,9 +1397,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1310,7 +1418,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1335,6 +1443,7 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter documentID: The ID of the document.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1342,12 +1451,16 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         documentID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentStatus) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1363,7 +1476,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1391,6 +1504,7 @@ public class Discovery {
      that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB
      are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```.
      - parameter fileContentType: The content type of file.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1401,6 +1515,7 @@ public class Discovery {
         file: URL? = nil,
         metadata: String? = nil,
         fileContentType: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DocumentAccepted) -> Void)
     {
@@ -1422,9 +1537,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1440,7 +1558,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1464,6 +1582,7 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter documentID: The ID of the document.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1471,12 +1590,16 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         documentID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DeleteDocumentResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1492,7 +1615,7 @@ public class Discovery {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1507,10 +1630,11 @@ public class Discovery {
     }
 
     /**
-     Query documents.
+     Query your collection.
 
-     See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more
-     details.
+     After your content is uploaded and enriched by the Discovery service, you can build queries to search your content.
+     For details, see the [Discovery service
+     documentation](https://console.bluemix.net/docs/services/discovery/using.html).
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
@@ -1555,6 +1679,7 @@ public class Discovery {
      subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If
      not specified, the entire document is used for comparison.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1579,12 +1704,16 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1672,7 +1801,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1734,6 +1863,7 @@ public class Discovery {
      subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If
      not specified, the entire document is used for comparison.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1757,12 +1887,16 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryNoticesResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1846,7 +1980,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1902,6 +2036,7 @@ public class Discovery {
      subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If
      not specified, the entire document is used for comparison.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1922,12 +2057,16 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2000,7 +2139,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2055,6 +2194,7 @@ public class Discovery {
      subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If
      not specified, the entire document is used for comparison.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2074,12 +2214,16 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryNoticesResponse) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2148,7 +2292,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2171,6 +2315,7 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter entityQuery: An object specifying the entities to query, which functions to perform, and any additional constraints.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2178,6 +2323,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         entityQuery: QueryEntities,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryEntitiesResponse) -> Void)
     {
@@ -2188,9 +2334,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2206,7 +2355,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2230,6 +2379,7 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter relationshipQuery: An object that describes the relationships to be queried and any query constraints (such as filters).
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2237,6 +2387,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         relationshipQuery: QueryRelations,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryRelationsResponse) -> Void)
     {
@@ -2247,9 +2398,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2265,7 +2419,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2281,22 +2435,29 @@ public class Discovery {
     }
 
     /**
-     Lists the training data for this collection.
+     List training data.
+
+     Lists the training data for the specified collection.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listTrainingData(
         environmentID: String,
         collectionID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TrainingDataSet) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2312,7 +2473,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2327,6 +2488,8 @@ public class Discovery {
     }
 
     /**
+     Add query to training data.
+
      Adds a query to the training data for this collection. The query can contain a filter and natural language query.
 
      - parameter environmentID: The ID of the environment.
@@ -2334,6 +2497,7 @@ public class Discovery {
      - parameter naturalLanguageQuery:
      - parameter filter:
      - parameter examples:
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2343,6 +2507,7 @@ public class Discovery {
         naturalLanguageQuery: String? = nil,
         filter: String? = nil,
         examples: [TrainingExample]? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TrainingQuery) -> Void)
     {
@@ -2354,9 +2519,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2372,7 +2540,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2388,22 +2556,29 @@ public class Discovery {
     }
 
     /**
-     Clears all training data for this collection.
+     Delete all training data.
+
+     Deletes all training data from a collection.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteAllTrainingData(
         environmentID: String,
         collectionID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2419,7 +2594,7 @@ public class Discovery {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2434,11 +2609,14 @@ public class Discovery {
     }
 
     /**
-     Shows details for a specific training data query, including the query string and all examples.
+     Get details about a query.
+
+     Gets details for a specific training data query, including the query string and all examples.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2446,12 +2624,16 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         queryID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TrainingQuery) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2467,7 +2649,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2482,11 +2664,14 @@ public class Discovery {
     }
 
     /**
-     Removes the training data and all associated examples from the training data set.
+     Delete a training data query.
+
+     Removes the training data query and all associated examples from the training data set.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2494,12 +2679,16 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         queryID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2515,7 +2704,7 @@ public class Discovery {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2530,11 +2719,14 @@ public class Discovery {
     }
 
     /**
+     List examples for a training data query.
+
      List all examples for this training data query.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2542,12 +2734,16 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         queryID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TrainingExampleList) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2563,7 +2759,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2578,7 +2774,9 @@ public class Discovery {
     }
 
     /**
-     Adds a new example to this training data query.
+     Add example to training data query.
+
+     Adds a example to this training data query.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
@@ -2586,6 +2784,7 @@ public class Discovery {
      - parameter documentID:
      - parameter crossReference:
      - parameter relevance:
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2596,6 +2795,7 @@ public class Discovery {
         documentID: String? = nil,
         crossReference: String? = nil,
         relevance: Int? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TrainingExample) -> Void)
     {
@@ -2607,9 +2807,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2625,7 +2828,7 @@ public class Discovery {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2641,12 +2844,15 @@ public class Discovery {
     }
 
     /**
-     Removes the example with the given ID for the training data query.
+     Delete example for training data query.
+
+     Deletes the example document with the given ID from the training data query.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
      - parameter exampleID: The ID of the document as it is indexed.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2655,12 +2861,16 @@ public class Discovery {
         collectionID: String,
         queryID: String,
         exampleID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2676,7 +2886,7 @@ public class Discovery {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2691,7 +2901,9 @@ public class Discovery {
     }
 
     /**
-     Changes the label or cross reference query for this training example.
+     Change label or cross reference for example.
+
+     Changes the label or cross reference query for this training data example.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
@@ -2699,6 +2911,7 @@ public class Discovery {
      - parameter exampleID: The ID of the document as it is indexed.
      - parameter crossReference:
      - parameter relevance:
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2709,6 +2922,7 @@ public class Discovery {
         exampleID: String,
         crossReference: String? = nil,
         relevance: Int? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TrainingExample) -> Void)
     {
@@ -2720,9 +2934,12 @@ public class Discovery {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2738,7 +2955,7 @@ public class Discovery {
             method: "PUT",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2754,12 +2971,15 @@ public class Discovery {
     }
 
     /**
+     Get details for training data example.
+
      Gets the details for this training example.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
      - parameter exampleID: The ID of the document as it is indexed.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2768,12 +2988,16 @@ public class Discovery {
         collectionID: String,
         queryID: String,
         exampleID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TrainingExample) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2789,7 +3013,7 @@ public class Discovery {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2798,6 +3022,56 @@ public class Discovery {
             (response: RestResponse<TrainingExample>) in
             switch response.result {
             case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete labeled data.
+
+     Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+     the customer ID.   You associate a customer ID with data by passing the **X-Watson-Metadata** header with a request
+     that passes data. For more information about personal data and customer IDs, see [Information
+     security](https://console.bluemix.net/docs/services/discovery/information-security.html).
+
+     - parameter customerID: The customer ID for which all data is to be deleted.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteUserData(
+        customerID: String,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/user_data",
+            credentials: credentials,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }

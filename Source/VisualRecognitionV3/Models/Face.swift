@@ -16,7 +16,7 @@
 
 import Foundation
 
-/** Provides information about the face. */
+/** Information about the face. */
 public struct Face: Decodable {
 
     public var age: FaceAge?

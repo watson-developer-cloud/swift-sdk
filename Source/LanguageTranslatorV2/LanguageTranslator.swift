@@ -94,8 +94,8 @@ public class LanguageTranslator {
 
         let code = response?.statusCode ?? 400
         do {
-            let json = try JSONWrapper(data: data)
-            let message = try json.getString(at: "error_message")
+            let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            let message = json["error_message"] ?? JSON.null
             let userInfo = [NSLocalizedDescriptionKey: message]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {

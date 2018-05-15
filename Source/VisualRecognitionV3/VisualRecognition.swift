@@ -103,14 +103,14 @@ public class VisualRecognition {
 
         let code = response?.statusCode ?? 400
         do {
-            let json = try JSONWrapper(data: data)
-            let errorID = (try? json.getString(at: "error_id")) ?? (try? json.getString(at: "error", "error_id"))
-            let error = try? json.getString(at: "error")
-            let status = try? json.getString(at: "status")
-            let html = try? json.getString(at: "Error")
+            let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            let errorID = (json["error_id"] ?? JSON.null) ?? (json["error"] ?? JSON.null)
+            let error = json["error"] ?? JSON.null
+            let status = json["status"] ?? JSON.null
+            let html = json["Error"] ?? JSON.null
             let message = errorID ?? error ?? status ?? html ?? "Unknown error."
-            let description = (try? json.getString(at: "description")) ?? (try? json.getString(at: "error", "description"))
-            let statusInfo = try? json.getString(at: "statusInfo")
+            let description = (json["description"] ?? JSON.null) ?? (json["error"] ?? JSON.null)
+            let statusInfo = json["statusInfo"] ?? JSON.null
             let reason = description ?? statusInfo ?? "Please use the status code to refer to the documentation."
             let userInfo = [
                 NSLocalizedDescriptionKey: message,

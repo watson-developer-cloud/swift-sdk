@@ -134,9 +134,9 @@ public class SpeechToText {
 
         let code = response?.statusCode ?? 400
         do {
-            let json = try JSONWrapper(data: data)
-            let error = try json.getString(at: "error")
-            let codeDescription = (try? json.getString(at: "code_description")) ?? ""
+            let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            let error = json["error"] ?? JSON.null
+            let codeDescription = json["code_description"] ?? JSON.null
             let userInfo = [NSLocalizedDescriptionKey: error, NSLocalizedRecoverySuggestionErrorKey: codeDescription]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {

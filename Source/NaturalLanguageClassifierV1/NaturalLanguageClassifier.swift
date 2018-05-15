@@ -68,9 +68,9 @@ public class NaturalLanguageClassifier {
 
         let code = response?.statusCode ?? 400
         do {
-            let json = try JSONWrapper(data: data)
-            let error = try? json.getString(at: "error")
-            let description = try? json.getString(at: "description")
+            let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            let error = json["error"] ?? JSON.null
+            let description = json["description"] ?? JSON.null
             let userInfo = [NSLocalizedDescriptionKey: error ?? "", NSLocalizedFailureReasonErrorKey: description ?? ""]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {

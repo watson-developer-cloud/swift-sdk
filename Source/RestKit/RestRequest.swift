@@ -59,8 +59,6 @@ internal struct RestRequest {
         url: String,
         authMethod: AuthenticationMethod,
         headerParameters: [String: String],
-        acceptType: String? = nil,
-        contentType: String? = nil,
         queryItems: [URLQueryItem]? = nil,
         messageBody: Data? = nil)
     {

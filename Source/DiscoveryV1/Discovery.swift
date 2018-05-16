@@ -74,7 +74,11 @@ public class Discovery {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            return NSError(domain: domain, code: code, userInfo: nil)
+            let code = response?.statusCode ?? 400
+            let message = try json.getString(at: "error")
+            let description = (try? json.getString(at: "description")) ?? ""
+            let userInfo = [NSLocalizedDescriptionKey: message, NSLocalizedRecoverySuggestionErrorKey: description]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }

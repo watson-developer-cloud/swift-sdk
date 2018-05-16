@@ -227,7 +227,6 @@
 		689A169B203C88C7002CFC66 /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A168B203C88C6002CFC66 /* Classifier.swift */; };
 		689A169C203C88C7002CFC66 /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A168C203C88C7002CFC66 /* Face.swift */; };
 		689A169D203C88C7002CFC66 /* ClassifiedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A168D203C88C7002CFC66 /* ClassifiedImages.swift */; };
-		689A169F203C89A6002CFC66 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A169E203C89A6002CFC66 /* Parameters.swift */; };
 		689A16A1203C89F5002CFC66 /* PositiveExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A0203C89F5002CFC66 /* PositiveExample.swift */; };
 		689A16A3203C9337002CFC66 /* VisualRecognition+UIImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */; };
 		689A16A5203C9358002CFC66 /* VisualRecognition+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A4203C9358002CFC66 /* VisualRecognition+UIImage.swift */; };
@@ -943,7 +942,6 @@
 		689A168B203C88C6002CFC66 /* Classifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 		689A168C203C88C7002CFC66 /* Face.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		689A168D203C88C7002CFC66 /* ClassifiedImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedImages.swift; sourceTree = "<group>"; };
-		689A169E203C89A6002CFC66 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		689A16A0203C89F5002CFC66 /* PositiveExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveExample.swift; sourceTree = "<group>"; };
 		689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VisualRecognition+UIImageTests.swift"; path = "Tests/VisualRecognitionV3Tests/VisualRecognition+UIImageTests.swift"; sourceTree = SOURCE_ROOT; };
 		689A16A4203C9358002CFC66 /* VisualRecognition+UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VisualRecognition+UIImage.swift"; sourceTree = "<group>"; };
@@ -2098,7 +2096,6 @@
 				689A167E203C88C6002CFC66 /* FaceIdentity.swift */,
 				689A1680203C88C6002CFC66 /* FaceLocation.swift */,
 				689A1681203C88C6002CFC66 /* ImageWithFaces.swift */,
-				689A169E203C89A6002CFC66 /* Parameters.swift */,
 				689A16A0203C89F5002CFC66 /* PositiveExample.swift */,
 				689A1688203C88C6002CFC66 /* WarningInfo.swift */,
 			);
@@ -3836,7 +3833,6 @@
 				68BC28FB1F8C350A0042810E /* RestRequest.swift in Sources */,
 				689A1699203C88C7002CFC66 /* ClassifierResult.swift in Sources */,
 				68BC28FD1F8C350A0042810E /* RestUtilities.swift in Sources */,
-				689A169F203C89A6002CFC66 /* Parameters.swift in Sources */,
 				689A1694203C88C7002CFC66 /* ClassifiedImage.swift in Sources */,
 				68BC28FA1F8C350A0042810E /* RestError.swift in Sources */,
 				689A168E203C88C7002CFC66 /* FaceIdentity.swift in Sources */,

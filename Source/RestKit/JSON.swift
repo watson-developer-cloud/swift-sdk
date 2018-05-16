@@ -34,6 +34,9 @@ public enum JSON: Equatable, Codable {
     /// A number value, represented as a double.
     case double(Double)
 
+    /// A date value.
+    case date(Date)
+
     /// An array value.
     case array([JSON])
 
@@ -90,6 +93,7 @@ public enum JSON: Equatable, Codable {
         else if let string = try? container.decode(String.self) { self = .string(string) }
         else if let int = try? container.decode(Int.self) { self = .int(int) }
         else if let double = try? container.decode(Double.self) { self = .double(double) }
+        else if let date = try? container.decode(Date.self) { self = .date(date) }
         // swiftlint:enable statement_position
         else {
             let description = "Failed to decode a JSON value from the given single value container."
@@ -132,6 +136,9 @@ public enum JSON: Equatable, Codable {
         case .double(let double):
             var container = encoder.singleValueContainer()
             try container.encode(double)
+        case .date(let date):
+            var container = encoder.singleValueContainer()
+            try container.encode(date)
         case .array(let array):
             var container = encoder.unkeyedContainer()
             try array.forEach { try container.encode($0) }
@@ -156,6 +163,7 @@ public enum JSON: Equatable, Codable {
         case (.string(let x), .string(let y)): return x == y   //swiftlint:disable:this identifier_name
         case (.int(let x), .int(let y)): return x == y         //swiftlint:disable:this identifier_name
         case (.double(let x), .double(let y)): return x == y   //swiftlint:disable:this identifier_name
+        case (.date(let x), .date(let y)): return x == y       //swiftlint:disable:this identifier_name
         case (.array(let x), .array(let y)): return x == y     //swiftlint:disable:this identifier_name
         case (.object(let x), .object(let y)): return x == y   //swiftlint:disable:this identifier_name
         default: return false

@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import Reachability
 
 internal struct RestRequest {
 
@@ -48,6 +49,7 @@ internal struct RestRequest {
 
     private let request: URLRequest
     private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private let reachability = Reachability()!
 
     internal init(
         method: String,
@@ -59,6 +61,14 @@ internal struct RestRequest {
         queryItems: [URLQueryItem]? = nil,
         messageBody: Data? = nil)
     {
+        
+        do {
+            // start the reachability notifier
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+        
         // create mutable copies
         var headerParameters = headerParameters
         var queryItems = queryItems ?? []
@@ -360,20 +370,35 @@ internal struct RestRequest {
     }
 
     internal func download(to destination: URL, completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) {
-        let task = session.downloadTask(with: request) { (source, response, error) in
-            guard let source = source else {
-                completionHandler(nil, RestError.invalidFile)
-                return
+        // add reachability to determine the network connection when downloading
+        // do the download task if it's reachable
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                print("Reachable via WiFi")
+            } else {
+                print("Reachable via Cellular")
             }
-            let fileManager = FileManager.default
-            do {
-                try fileManager.moveItem(at: source, to: destination)
-            } catch {
-                completionHandler(nil, RestError.fileManagerError)
+        
+            let task = self.session.downloadTask(with: self.request) { (source, response, error) in
+                guard let source = source else {
+                    completionHandler(nil, RestError.invalidFile)
+                    return
+                }
+                let fileManager = FileManager.default
+                do {
+                    try fileManager.moveItem(at: source, to: destination)
+                } catch {
+                    completionHandler(nil, RestError.fileManagerError)
+                }
+                completionHandler(response as? HTTPURLResponse, error)
             }
-            completionHandler(response as? HTTPURLResponse, error)
+            task.resume()
         }
-        task.resume()
+        
+        // don't do the download task if it isn't reachable
+        reachability.whenUnreachable = { _ in
+            print("Not reachable")
+        }
     }
 }
 

@@ -27,8 +27,8 @@ class NaturalLanguageClassifierTests: XCTestCase {
     // and `weather_data_train.csv` files. Be sure to update the `trainedClassifierId` property below!
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!
-    private let trainedClassifierId = "235069x378-nlc-511"
-    private let trainedClassifierName = "swift-sdk-test-classifier"
+    private let trainedClassifierId = "51233dx385-nlc-374"
+    private let trainedClassifierName = "swift-sdk-test-classifier - DO NOT DELETE"
     private let temporaryClassifierName = "swift-sdk-temporary-classifier"
 
     private var metadataFile: URL!

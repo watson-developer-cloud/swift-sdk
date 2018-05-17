@@ -20,7 +20,7 @@ internal struct RestRequest {
 
     internal static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
-        let sdkVersion = "0.25.0"
+        let sdkVersion = "0.26.0"
 
         let operatingSystem: String = {
             #if os(iOS)

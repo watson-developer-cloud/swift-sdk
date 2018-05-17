@@ -560,6 +560,7 @@
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
+		CAF9A5C420ACED3E006C86B7 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */; };
 		CE6B98D41DF09D4B004CD6B5 /* face1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98D31DF09D4B004CD6B5 /* face1.jpg */; };
 		CE6B98DC1DF22638004CD6B5 /* metadata.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98DB1DF22638004CD6B5 /* metadata.txt */; };
 		CE75BAA91DDE5F2F006EBB51 /* KennedySpeech.html in Resources */ = {isa = PBXBuildFile; fileRef = CE75BAA81DDE5F2F006EBB51 /* KennedySpeech.html */; };
@@ -1197,6 +1198,7 @@
 		CA151FA0200EE0CF00DBA44F /* carz.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = carz.zip; sourceTree = "<group>"; };
 		CA45954820A62FBE0060BF9B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CA45954920A630080060BF9B /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = .github/CONTRIBUTING.md; sourceTree = "<group>"; };
+		CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		CE6B98D31DF09D4B004CD6B5 /* face1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face1.jpg; sourceTree = "<group>"; };
 		CE6B98DB1DF22638004CD6B5 /* metadata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = metadata.txt; sourceTree = "<group>"; };
 		CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trained_meta.txt; sourceTree = "<group>"; };
@@ -1787,6 +1789,7 @@
 				7A0F97301C232CB5004C01C0 /* Frameworks */,
 				7A0F95B41C23288E004C01C0 /* Products */,
 				CA45954820A62FBE0060BF9B /* README.md */,
+				CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */,
 				CA45954920A630080060BF9B /* CONTRIBUTING.md */,
 			);
 			sourceTree = "<group>";
@@ -2993,6 +2996,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF9A5C420ACED3E006C86B7 /* CHANGELOG.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

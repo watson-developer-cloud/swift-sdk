@@ -93,7 +93,7 @@ Add the following to your `Package.swift` file to identify the Swift SDK as a de
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.23.1")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.26.0")
 ]
 ```
 
@@ -146,6 +146,8 @@ We have exposed a `defaultHeaders` public property in each class to allow users 
 let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
 naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 ```
+
+Each service method also accepts an optional `headers` parameter which is a dictionary of request headers to be sent with the request.
 
 ## Sample Applications
 

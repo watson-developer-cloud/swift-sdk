@@ -363,7 +363,7 @@
             <h1>NormalizationOperation</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NormalizationOperation</span><span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NormalizationOperation</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
 
                 </div>
               </div>
@@ -399,7 +399,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Operation</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Operation</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -419,12 +419,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Identifies what type of operation to perform.
-<strong>copy</strong> - Copies the value of the <code>source_field</code> to the <code>destination_field</code> field. If the <code>destination_field</code> already exists, then the value of the <code>source_field</code> overwrites the original value of the <code>destination_field</code>.
-<strong>move</strong> - Renames (moves) the <code>source_field</code> to the <code>destination_field</code>. If the <code>destination_field</code> already exists, then the value of the <code>source_field</code> overwrites the original value of the <code>destination_field</code>. Rename is identical to copy, except that the <code>source_field</code> is removed after the value has been copied to the <code>destination_field</code> (it is the same as a <em>copy</em> followed by a <em>remove</em>).
-<strong>merge</strong> - Merges the value of the <code>source_field</code> with the value of the <code>destination_field</code>. The <code>destination_field</code> is converted into an array if it is not already an array, and the value of the <code>source_field</code> is appended to the array. This operation removes the <code>source_field</code> after the merge. If the <code>source_field</code> does not exist in the current document, then the <code>destination_field</code> is still converted into an array (if it is not an array already). This is ensures the type for <code>destination_field</code> is consistent across all documents.
-<strong>remove</strong> - Deletes the <code>source_field</code> field. The <code>destination_field</code> is ignored for this operation.
-<strong>remove_nulls</strong> - Removes all nested null (blank) leif values from the JSON tree. <code>source_field</code> and <code>destination_field</code> are ignored by this operation because <em>remove_nulls</em> operates on the entire JSON tree. Typically, <code>remove_nulls</code> is invoked as the last normalization operation (if it is inoked at all, it can be time-expensive).</p>
+                        <p>Identifies what type of operation to perform.</p>
 
                       </div>
                       <div class="declaration">
@@ -528,15 +523,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Identifies what type of operation to perform.
-
-<ul>
-<li><strong>copy</strong> - Copies the value of the <code>source_field</code> to the <code>destination_field</code> field. If the <code>destination_field</code> already exists, then the value of the <code>source_field</code> overwrites the original value of the <code>destination_field</code>.</li>
-<li><strong>move</strong> - Renames (moves) the <code>source_field</code> to the <code>destination_field</code>. If the <code>destination_field</code> already exists, then the value of the <code>source_field</code> overwrites the original value of the <code>destination_field</code>. Rename is identical to copy, except that the <code>source_field</code> is removed after the value has been copied to the <code>destination_field</code> (it is the same as a <em>copy</em> followed by a <em>remove</em>).</li>
-<li><strong>merge</strong> - Merges the value of the <code>source_field</code> with the value of the <code>destination_field</code>. The <code>destination_field</code> is converted into an array if it is not already an array, and the value of the <code>source_field</code> is appended to the array. This operation removes the <code>source_field</code> after the merge. If the <code>source_field</code> does not exist in the current document, then the <code>destination_field</code> is still converted into an array (if it is not an array already). This is ensures the type for <code>destination_field</code> is consistent across all documents.</li>
-<li><strong>remove</strong> - Deletes the <code>source_field</code> field. The <code>destination_field</code> is ignored for this operation.</li>
-<li><strong>remove_nulls</strong> - Removes all nested null (blank) leif values from the JSON tree. <code>source_field</code> and <code>destination_field</code> are ignored by this operation because <em>remove_nulls</em> operates on the entire JSON tree. Typically, <code>remove_nulls</code> is invoked as the last normalization operation (if it is inoked at all, it can be time-expensive).</li>
-</ul></p>
+                                  <p>Identifies what type of operation to perform.</p>
                                 </div>
                               </td>
                             </tr>
@@ -579,8 +566,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

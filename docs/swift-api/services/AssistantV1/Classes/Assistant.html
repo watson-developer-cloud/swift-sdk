@@ -328,7 +328,7 @@ to create conversation flows between your apps and your users.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/assistant/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -355,7 +355,7 @@ to create conversation flows between your apps and your users.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -436,9 +436,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C7messageySS11workspaceID_AA14MessageRequestVSg7requestSbSg19nodesVisitedDetailsys5Error_pcSg7failureyAA0F8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/message(workspaceID:request:nodesVisitedDetails:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C7messageySS11workspaceID_AA14MessageRequestVSg7requestSbSg19nodesVisitedDetailsys5Error_pcSg7failureyAA0F8ResponseVc7successtF">message(workspaceID:request:nodesVisitedDetails:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C7messageySS11workspaceID_AA14MessageRequestVSg7requestSbSg19nodesVisitedDetailss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/message(workspaceID:request:nodesVisitedDetails:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C7messageySS11workspaceID_AA14MessageRequestVSg7requestSbSg19nodesVisitedDetailss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F8ResponseVc7successtF">message(workspaceID:request:nodesVisitedDetails:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -459,6 +459,7 @@ in <q>YYYY-MM-DD</q> format.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageRequest.html">MessageRequest</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">nodesVisitedDetails</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MessageResponse.html">MessageResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -509,6 +510,18 @@ the message.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -539,9 +552,9 @@ the message.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C14listWorkspacesySiSg9pageLimit_SbSg12includeCountSSSg4sortAI6cursorAG0G5Auditys5Error_pcSg7failureyAA19WorkspaceCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listWorkspaces(pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C14listWorkspacesySiSg9pageLimit_SbSg12includeCountSSSg4sortAI6cursorAG0G5Auditys5Error_pcSg7failureyAA19WorkspaceCollectionVc7successtF">listWorkspaces(pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C14listWorkspacesySiSg9pageLimit_SbSg12includeCountSSSg4sortAI6cursorAG0G5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA19WorkspaceCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listWorkspaces(pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C14listWorkspacesySiSg9pageLimit_SbSg12includeCountSSSg4sortAI6cursorAG0G5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA19WorkspaceCollectionVc7successtF">listWorkspaces(pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -565,6 +578,7 @@ requests per 30 minutes. For more information, see <strong>Rate limiting</strong
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/WorkspaceCollection.html">WorkspaceCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -638,6 +652,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -668,9 +694,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C15createWorkspaceyAA06CreateD0VSg10properties_ys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createWorkspace(properties:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C15createWorkspaceyAA06CreateD0VSg10properties_ys5Error_pcSg7failureyAA0D0Vc7successtF">createWorkspace(properties:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C15createWorkspaceyAA06CreateD0VSg10properties_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createWorkspace(properties:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C15createWorkspaceyAA06CreateD0VSg10properties_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createWorkspace(properties:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -691,6 +717,7 @@ limiting</strong>.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createWorkspace</span><span class="p">(</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/CreateWorkspace.html">CreateWorkspace</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Workspace.html">Workspace</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -716,6 +743,18 @@ workspace, consider importing the workspace without intents and entities and the
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -746,9 +785,9 @@ workspace, consider importing the workspace without intents and entities and the
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12getWorkspaceySS11workspaceID_SbSg6exportAF12includeAuditys5Error_pcSg7failureyAA0D6ExportVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getWorkspace(workspaceID:export:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12getWorkspaceySS11workspaceID_SbSg6exportAF12includeAuditys5Error_pcSg7failureyAA0D6ExportVc7successtF">getWorkspace(workspaceID:export:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12getWorkspaceySS11workspaceID_SbSg6exportAF12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D6ExportVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getWorkspace(workspaceID:export:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12getWorkspaceySS11workspaceID_SbSg6exportAF12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D6ExportVc7successtF">getWorkspace(workspaceID:export:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -771,6 +810,7 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/WorkspaceExport.html">WorkspaceExport</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -820,6 +860,18 @@ information about the element itself. If <strong>export</strong>=<code>true</cod
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -850,9 +902,9 @@ information about the element itself. If <strong>export</strong>=<code>true</cod
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C15updateWorkspaceySS11workspaceID_AA06UpdateD0VSg10propertiesSbSg6appendys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateWorkspace(workspaceID:properties:append:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C15updateWorkspaceySS11workspaceID_AA06UpdateD0VSg10propertiesSbSg6appendys5Error_pcSg7failureyAA0D0Vc7successtF">updateWorkspace(workspaceID:properties:append:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C15updateWorkspaceySS11workspaceID_AA06UpdateD0VSg10propertiesSbSg6appends10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateWorkspace(workspaceID:properties:append:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C15updateWorkspaceySS11workspaceID_AA06UpdateD0VSg10propertiesSbSg6appends10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">updateWorkspace(workspaceID:properties:append:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -875,6 +927,7 @@ limiting</strong>.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/UpdateWorkspace.html">UpdateWorkspace</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">append</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Workspace.html">Workspace</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -929,6 +982,18 @@ elements are added. If any elements in the new data collide with existing elemen
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -959,9 +1024,9 @@ elements are added. If any elements in the new data collide with existing elemen
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C15deleteWorkspaceySS11workspaceID_ys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteWorkspace(workspaceID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C15deleteWorkspaceySS11workspaceID_ys5Error_pcSg7failureyyc7successtF">deleteWorkspace(workspaceID:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C15deleteWorkspaceySS11workspaceID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteWorkspace(workspaceID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C15deleteWorkspaceySS11workspaceID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteWorkspace(workspaceID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -981,6 +1046,7 @@ information, see <strong>Rate limiting</strong>.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteWorkspace</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1005,6 +1071,18 @@ information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1035,9 +1113,9 @@ information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C11listIntentsySS11workspaceID_SbSg6exportSiSg9pageLimitAF12includeCountSSSg4sortAK6cursorAF0J5Auditys5Error_pcSg7failureyAA16IntentCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listIntents(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C11listIntentsySS11workspaceID_SbSg6exportSiSg9pageLimitAF12includeCountSSSg4sortAK6cursorAF0J5Auditys5Error_pcSg7failureyAA16IntentCollectionVc7successtF">listIntents(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C11listIntentsySS11workspaceID_SbSg6exportSiSg9pageLimitAF12includeCountSSSg4sortAK6cursorAF0J5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA16IntentCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listIntents(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C11listIntentsySS11workspaceID_SbSg6exportSiSg9pageLimitAF12includeCountSSSg4sortAK6cursorAF0J5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA16IntentCollectionVc7successtF">listIntents(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1064,6 +1142,7 @@ limiting</strong>.</p>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IntentCollection.html">IntentCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1162,6 +1241,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1192,9 +1283,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12createIntentySS11workspaceID_SS6intentSSSg11descriptionSayAA13CreateExampleVGSg8examplesys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createIntent(workspaceID:intent:description:examples:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12createIntentySS11workspaceID_SS6intentSSSg11descriptionSayAA13CreateExampleVGSg8examplesys5Error_pcSg7failureyAA0D0Vc7successtF">createIntent(workspaceID:intent:description:examples:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12createIntentySS11workspaceID_SS6intentSSSg11descriptionSayAA13CreateExampleVGSg8exampless10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createIntent(workspaceID:intent:description:examples:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12createIntentySS11workspaceID_SS6intentSSSg11descriptionSayAA13CreateExampleVGSg8exampless10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createIntent(workspaceID:intent:description:examples:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1217,6 +1308,7 @@ limiting</strong>.</p>
     <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">examples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CreateExample.html">CreateExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Intent.html">Intent</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1280,6 +1372,18 @@ be no longer than 128 characters.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1310,9 +1414,9 @@ be no longer than 128 characters.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C9getIntentySS11workspaceID_SS6intentSbSg6exportAG12includeAuditys5Error_pcSg7failureyAA0D6ExportVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getIntent(workspaceID:intent:export:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C9getIntentySS11workspaceID_SS6intentSbSg6exportAG12includeAuditys5Error_pcSg7failureyAA0D6ExportVc7successtF">getIntent(workspaceID:intent:export:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C9getIntentySS11workspaceID_SS6intentSbSg6exportAG12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D6ExportVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getIntent(workspaceID:intent:export:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C9getIntentySS11workspaceID_SS6intentSbSg6exportAG12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D6ExportVc7successtF">getIntent(workspaceID:intent:export:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1336,6 +1440,7 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IntentExport.html">IntentExport</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1397,6 +1502,18 @@ information about the element itself. If <strong>export</strong>=<code>true</cod
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1427,9 +1544,9 @@ information about the element itself. If <strong>export</strong>=<code>true</cod
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12updateIntentySS11workspaceID_SS6intentSSSg03newD0AG0H11DescriptionSayAA13CreateExampleVGSg0H8Examplesys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateIntent(workspaceID:intent:newIntent:newDescription:newExamples:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12updateIntentySS11workspaceID_SS6intentSSSg03newD0AG0H11DescriptionSayAA13CreateExampleVGSg0H8Examplesys5Error_pcSg7failureyAA0D0Vc7successtF">updateIntent(workspaceID:intent:newIntent:newDescription:newExamples:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12updateIntentySS11workspaceID_SS6intentSSSg03newD0AG0H11DescriptionSayAA13CreateExampleVGSg0H8Exampless10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateIntent(workspaceID:intent:newIntent:newDescription:newExamples:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12updateIntentySS11workspaceID_SS6intentSSSg03newD0AG0H11DescriptionSayAA13CreateExampleVGSg0H8Exampless10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">updateIntent(workspaceID:intent:newIntent:newDescription:newExamples:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1454,6 +1571,7 @@ limiting</strong>.</p>
     <span class="nv">newIntent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">newDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">newExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CreateExample.html">CreateExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Intent.html">Intent</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1528,6 +1646,18 @@ must be no longer than 128 characters.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1558,9 +1688,9 @@ must be no longer than 128 characters.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12deleteIntentySS11workspaceID_SS6intentys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteIntent(workspaceID:intent:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12deleteIntentySS11workspaceID_SS6intentys5Error_pcSg7failureyyc7successtF">deleteIntent(workspaceID:intent:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12deleteIntentySS11workspaceID_SS6intents10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteIntent(workspaceID:intent:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12deleteIntentySS11workspaceID_SS6intents10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteIntent(workspaceID:intent:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1581,6 +1711,7 @@ information, see <strong>Rate limiting</strong>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteIntent</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1617,6 +1748,18 @@ information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1647,9 +1790,9 @@ information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12listExamplesySS11workspaceID_SS6intentSiSg9pageLimitSbSg12includeCountSSSg4sortAK6cursorAI0J5Auditys5Error_pcSg7failureyAA17ExampleCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listExamples(workspaceID:intent:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12listExamplesySS11workspaceID_SS6intentSiSg9pageLimitSbSg12includeCountSSSg4sortAK6cursorAI0J5Auditys5Error_pcSg7failureyAA17ExampleCollectionVc7successtF">listExamples(workspaceID:intent:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12listExamplesySS11workspaceID_SS6intentSiSg9pageLimitSbSg12includeCountSSSg4sortAK6cursorAI0J5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA17ExampleCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listExamples(workspaceID:intent:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12listExamplesySS11workspaceID_SS6intentSiSg9pageLimitSbSg12includeCountSSSg4sortAK6cursorAI0J5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA17ExampleCollectionVc7successtF">listExamples(workspaceID:intent:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1675,6 +1818,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ExampleCollection.html">ExampleCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1772,6 +1916,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1802,9 +1958,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C13createExampleySS11workspaceID_SS6intentSS4textys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createExample(workspaceID:intent:text:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C13createExampleySS11workspaceID_SS6intentSS4textys5Error_pcSg7failureyAA0D0Vc7successtF">createExample(workspaceID:intent:text:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C13createExampleySS11workspaceID_SS6intentSS4texts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createExample(workspaceID:intent:text:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C13createExampleySS11workspaceID_SS6intentSS4texts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createExample(workspaceID:intent:text:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1826,6 +1982,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Example.html">Example</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1876,6 +2033,18 @@ longer than 1024 characters.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1906,9 +2075,9 @@ longer than 1024 characters.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C10getExampleySS11workspaceID_SS6intentSS4textSbSg12includeAuditys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getExample(workspaceID:intent:text:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C10getExampleySS11workspaceID_SS6intentSS4textSbSg12includeAuditys5Error_pcSg7failureyAA0D0Vc7successtF">getExample(workspaceID:intent:text:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C10getExampleySS11workspaceID_SS6intentSS4textSbSg12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getExample(workspaceID:intent:text:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C10getExampleySS11workspaceID_SS6intentSS4textSbSg12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">getExample(workspaceID:intent:text:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1931,6 +2100,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Example.html">Example</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1991,6 +2161,18 @@ information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2021,9 +2203,9 @@ information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C13updateExampleySS11workspaceID_SS6intentSS4textSSSg7newTextys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateExample(workspaceID:intent:text:newText:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C13updateExampleySS11workspaceID_SS6intentSS4textSSSg7newTextys5Error_pcSg7failureyAA0D0Vc7successtF">updateExample(workspaceID:intent:text:newText:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C13updateExampleySS11workspaceID_SS6intentSS4textSSSg7newTexts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateExample(workspaceID:intent:text:newText:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C13updateExampleySS11workspaceID_SS6intentSS4textSSSg7newTexts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">updateExample(workspaceID:intent:text:newText:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2046,6 +2228,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">newText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Example.html">Example</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2108,6 +2291,18 @@ longer than 1024 characters.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2138,9 +2333,9 @@ longer than 1024 characters.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C13deleteExampleySS11workspaceID_SS6intentSS4textys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteExample(workspaceID:intent:text:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C13deleteExampleySS11workspaceID_SS6intentSS4textys5Error_pcSg7failureyyc7successtF">deleteExample(workspaceID:intent:text:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C13deleteExampleySS11workspaceID_SS6intentSS4texts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteExample(workspaceID:intent:text:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C13deleteExampleySS11workspaceID_SS6intentSS4texts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteExample(workspaceID:intent:text:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2162,6 +2357,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2210,6 +2406,18 @@ information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2240,9 +2448,9 @@ information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C19listCounterexamplesySS11workspaceID_SiSg9pageLimitSbSg12includeCountSSSg4sortAJ6cursorAH0I5Auditys5Error_pcSg7failureyAA24CounterexampleCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listCounterexamples(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C19listCounterexamplesySS11workspaceID_SiSg9pageLimitSbSg12includeCountSSSg4sortAJ6cursorAH0I5Auditys5Error_pcSg7failureyAA24CounterexampleCollectionVc7successtF">listCounterexamples(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C19listCounterexamplesySS11workspaceID_SiSg9pageLimitSbSg12includeCountSSSg4sortAJ6cursorAH0I5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA24CounterexampleCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listCounterexamples(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C19listCounterexamplesySS11workspaceID_SiSg9pageLimitSbSg12includeCountSSSg4sortAJ6cursorAH0I5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA24CounterexampleCollectionVc7successtF">listCounterexamples(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2253,7 +2461,7 @@ information, see <strong>Rate limiting</strong>.</p>
                         <p>List counterexamples.</p>
 
 <p>List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
-This operation is limited to 2500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+ This operation is limited to 2500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2267,6 +2475,7 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/CounterexampleCollection.html">CounterexampleCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2352,6 +2561,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2382,9 +2603,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C20createCounterexampleySS11workspaceID_SS4textys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createCounterexample(workspaceID:text:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C20createCounterexampleySS11workspaceID_SS4textys5Error_pcSg7failureyAA0D0Vc7successtF">createCounterexample(workspaceID:text:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C20createCounterexampleySS11workspaceID_SS4texts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createCounterexample(workspaceID:text:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C20createCounterexampleySS11workspaceID_SS4texts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createCounterexample(workspaceID:text:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2405,6 +2626,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCounterexample</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Counterexample.html">Counterexample</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2443,6 +2665,18 @@ must be no longer than 1024 characters.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2473,9 +2707,9 @@ must be no longer than 1024 characters.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C17getCounterexampleySS11workspaceID_SS4textSbSg12includeAuditys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getCounterexample(workspaceID:text:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C17getCounterexampleySS11workspaceID_SS4textSbSg12includeAuditys5Error_pcSg7failureyAA0D0Vc7successtF">getCounterexample(workspaceID:text:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C17getCounterexampleySS11workspaceID_SS4textSbSg12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getCounterexample(workspaceID:text:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C17getCounterexampleySS11workspaceID_SS4textSbSg12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">getCounterexample(workspaceID:text:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2497,6 +2731,7 @@ This operation is limited to 6000 requests per 5 minutes. For more information, 
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Counterexample.html">Counterexample</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2545,6 +2780,18 @@ This operation is limited to 6000 requests per 5 minutes. For more information, 
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2575,9 +2822,9 @@ This operation is limited to 6000 requests per 5 minutes. For more information, 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C20updateCounterexampleySS11workspaceID_SS4textSSSg7newTextys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateCounterexample(workspaceID:text:newText:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C20updateCounterexampleySS11workspaceID_SS4textSSSg7newTextys5Error_pcSg7failureyAA0D0Vc7successtF">updateCounterexample(workspaceID:text:newText:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C20updateCounterexampleySS11workspaceID_SS4textSSSg7newTexts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateCounterexample(workspaceID:text:newText:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C20updateCounterexampleySS11workspaceID_SS4textSSSg7newTexts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">updateCounterexample(workspaceID:text:newText:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2599,6 +2846,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">newText</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Counterexample.html">Counterexample</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2647,6 +2895,18 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2677,9 +2937,9 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C20deleteCounterexampleySS11workspaceID_SS4textys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteCounterexample(workspaceID:text:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C20deleteCounterexampleySS11workspaceID_SS4textys5Error_pcSg7failureyyc7successtF">deleteCounterexample(workspaceID:text:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C20deleteCounterexampleySS11workspaceID_SS4texts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteCounterexample(workspaceID:text:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C20deleteCounterexampleySS11workspaceID_SS4texts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteCounterexample(workspaceID:text:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2690,7 +2950,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                         <p>Delete counterexample.</p>
 
 <p>Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+ This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2700,6 +2960,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCounterexample</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2736,6 +2997,18 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2766,9 +3039,9 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12listEntitiesySS11workspaceID_SbSg6exportSiSg9pageLimitAF12includeCountSSSg4sortAK6cursorAF0J5Auditys5Error_pcSg7failureyAA16EntityCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listEntities(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12listEntitiesySS11workspaceID_SbSg6exportSiSg9pageLimitAF12includeCountSSSg4sortAK6cursorAF0J5Auditys5Error_pcSg7failureyAA16EntityCollectionVc7successtF">listEntities(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12listEntitiesySS11workspaceID_SbSg6exportSiSg9pageLimitAF12includeCountSSSg4sortAK6cursorAF0J5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA16EntityCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listEntities(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12listEntitiesySS11workspaceID_SbSg6exportSiSg9pageLimitAF12includeCountSSSg4sortAK6cursorAF0J5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA16EntityCollectionVc7successtF">listEntities(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2795,6 +3068,7 @@ limiting</strong>.</p>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EntityCollection.html">EntityCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2893,6 +3167,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2923,9 +3209,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12createEntityySS11workspaceID_AA06CreateD0V10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createEntity(workspaceID:properties:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12createEntityySS11workspaceID_AA06CreateD0V10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF">createEntity(workspaceID:properties:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12createEntityySS11workspaceID_AA06CreateD0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createEntity(workspaceID:properties:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12createEntityySS11workspaceID_AA06CreateD0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createEntity(workspaceID:properties:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2946,6 +3232,7 @@ limiting</strong>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createEntity</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/CreateEntity.html">CreateEntity</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Entity.html">Entity</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2982,6 +3269,18 @@ limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3012,9 +3311,9 @@ limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C9getEntityySS11workspaceID_SS6entitySbSg6exportAG12includeAuditys5Error_pcSg7failureyAA0D6ExportVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getEntity(workspaceID:entity:export:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C9getEntityySS11workspaceID_SS6entitySbSg6exportAG12includeAuditys5Error_pcSg7failureyAA0D6ExportVc7successtF">getEntity(workspaceID:entity:export:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C9getEntityySS11workspaceID_SS6entitySbSg6exportAG12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D6ExportVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getEntity(workspaceID:entity:export:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C9getEntityySS11workspaceID_SS6entitySbSg6exportAG12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D6ExportVc7successtF">getEntity(workspaceID:entity:export:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3038,6 +3337,7 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/EntityExport.html">EntityExport</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3099,6 +3399,18 @@ information about the element itself. If <strong>export</strong>=<code>true</cod
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3129,9 +3441,9 @@ information about the element itself. If <strong>export</strong>=<code>true</cod
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12updateEntityySS11workspaceID_SS6entityAA06UpdateD0V10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateEntity(workspaceID:entity:properties:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12updateEntityySS11workspaceID_SS6entityAA06UpdateD0V10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF">updateEntity(workspaceID:entity:properties:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12updateEntityySS11workspaceID_SS6entityAA06UpdateD0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateEntity(workspaceID:entity:properties:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12updateEntityySS11workspaceID_SS6entityAA06UpdateD0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">updateEntity(workspaceID:entity:properties:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3154,6 +3466,7 @@ limiting</strong>.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/UpdateEntity.html">UpdateEntity</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Entity.html">Entity</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3205,6 +3518,18 @@ are discarded and replaced with the new values specified in the update.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3235,9 +3560,9 @@ are discarded and replaced with the new values specified in the update.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12deleteEntityySS11workspaceID_SS6entityys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteEntity(workspaceID:entity:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12deleteEntityySS11workspaceID_SS6entityys5Error_pcSg7failureyyc7successtF">deleteEntity(workspaceID:entity:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12deleteEntityySS11workspaceID_SS6entitys10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteEntity(workspaceID:entity:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12deleteEntityySS11workspaceID_SS6entitys10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteEntity(workspaceID:entity:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3258,6 +3583,7 @@ information, see <strong>Rate limiting</strong>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteEntity</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3294,6 +3620,18 @@ information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3324,9 +3662,9 @@ information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C10listValuesySS11workspaceID_SS6entitySbSg6exportSiSg9pageLimitAG12includeCountSSSg4sortAL6cursorAG0K5Auditys5Error_pcSg7failureyAA15ValueCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listValues(workspaceID:entity:export:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C10listValuesySS11workspaceID_SS6entitySbSg6exportSiSg9pageLimitAG12includeCountSSSg4sortAL6cursorAG0K5Auditys5Error_pcSg7failureyAA15ValueCollectionVc7successtF">listValues(workspaceID:entity:export:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C10listValuesySS11workspaceID_SS6entitySbSg6exportSiSg9pageLimitAG12includeCountSSSg4sortAL6cursorAG0K5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA15ValueCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listValues(workspaceID:entity:export:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C10listValuesySS11workspaceID_SS6entitySbSg6exportSiSg9pageLimitAG12includeCountSSSg4sortAL6cursorAG0K5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA15ValueCollectionVc7successtF">listValues(workspaceID:entity:export:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3353,6 +3691,7 @@ see <strong>Rate limiting</strong>.</p>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ValueCollection.html">ValueCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3463,6 +3802,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3493,9 +3844,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C11createValueySS11workspaceID_SS6entityAA06CreateD0V10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createValue(workspaceID:entity:properties:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C11createValueySS11workspaceID_SS6entityAA06CreateD0V10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF">createValue(workspaceID:entity:properties:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C11createValueySS11workspaceID_SS6entityAA06CreateD0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createValue(workspaceID:entity:properties:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C11createValueySS11workspaceID_SS6entityAA06CreateD0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createValue(workspaceID:entity:properties:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3517,6 +3868,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/CreateValue.html">CreateValue</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Value.html">Value</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3565,6 +3917,18 @@ information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3595,9 +3959,9 @@ information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C8getValueySS11workspaceID_SS6entitySS5valueSbSg6exportAH12includeAuditys5Error_pcSg7failureyAA0D6ExportVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getValue(workspaceID:entity:value:export:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C8getValueySS11workspaceID_SS6entitySS5valueSbSg6exportAH12includeAuditys5Error_pcSg7failureyAA0D6ExportVc7successtF">getValue(workspaceID:entity:value:export:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C8getValueySS11workspaceID_SS6entitySS5valueSbSg6exportAH12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D6ExportVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getValue(workspaceID:entity:value:export:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C8getValueySS11workspaceID_SS6entitySS5valueSbSg6exportAH12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D6ExportVc7successtF">getValue(workspaceID:entity:value:export:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3621,6 +3985,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ValueExport.html">ValueExport</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3694,6 +4059,18 @@ information about the element itself. If <strong>export</strong>=<code>true</cod
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3724,9 +4101,9 @@ information about the element itself. If <strong>export</strong>=<code>true</cod
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C11updateValueySS11workspaceID_SS6entitySS5valueAA06UpdateD0V10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateValue(workspaceID:entity:value:properties:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C11updateValueySS11workspaceID_SS6entitySS5valueAA06UpdateD0V10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF">updateValue(workspaceID:entity:value:properties:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C11updateValueySS11workspaceID_SS6entitySS5valueAA06UpdateD0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateValue(workspaceID:entity:value:properties:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C11updateValueySS11workspaceID_SS6entitySS5valueAA06UpdateD0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">updateValue(workspaceID:entity:value:properties:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3750,6 +4127,7 @@ see <strong>Rate limiting</strong>.</p>
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/UpdateValue.html">UpdateValue</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Value.html">Value</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3813,6 +4191,18 @@ previously existing synonyms are discarded and replaced with the new synonyms sp
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3843,9 +4233,9 @@ previously existing synonyms are discarded and replaced with the new synonyms sp
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C11deleteValueySS11workspaceID_SS6entitySS5valueys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteValue(workspaceID:entity:value:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C11deleteValueySS11workspaceID_SS6entitySS5valueys5Error_pcSg7failureyyc7successtF">deleteValue(workspaceID:entity:value:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C11deleteValueySS11workspaceID_SS6entitySS5values10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteValue(workspaceID:entity:value:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C11deleteValueySS11workspaceID_SS6entitySS5values10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteValue(workspaceID:entity:value:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3867,6 +4257,7 @@ see <strong>Rate limiting</strong>.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3915,6 +4306,18 @@ see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3945,9 +4348,9 @@ see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12listSynonymsySS11workspaceID_SS6entitySS5valueSiSg9pageLimitSbSg12includeCountSSSg4sortAL6cursorAJ0K5Auditys5Error_pcSg7failureyAA17SynonymCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listSynonyms(workspaceID:entity:value:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12listSynonymsySS11workspaceID_SS6entitySS5valueSiSg9pageLimitSbSg12includeCountSSSg4sortAL6cursorAJ0K5Auditys5Error_pcSg7failureyAA17SynonymCollectionVc7successtF">listSynonyms(workspaceID:entity:value:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C12listSynonymsySS11workspaceID_SS6entitySS5valueSiSg9pageLimitSbSg12includeCountSSSg4sortAL6cursorAJ0K5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA17SynonymCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listSynonyms(workspaceID:entity:value:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12listSynonymsySS11workspaceID_SS6entitySS5valueSiSg9pageLimitSbSg12includeCountSSSg4sortAL6cursorAJ0K5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA17SynonymCollectionVc7successtF">listSynonyms(workspaceID:entity:value:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3974,6 +4377,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SynonymCollection.html">SynonymCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4083,6 +4487,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4113,9 +4529,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C13createSynonymySS11workspaceID_SS6entitySS5valueSS7synonymys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createSynonym(workspaceID:entity:value:synonym:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C13createSynonymySS11workspaceID_SS6entitySS5valueSS7synonymys5Error_pcSg7failureyAA0D0Vc7successtF">createSynonym(workspaceID:entity:value:synonym:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C13createSynonymySS11workspaceID_SS6entitySS5valueSS7synonyms10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createSynonym(workspaceID:entity:value:synonym:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C13createSynonymySS11workspaceID_SS6entitySS5valueSS7synonyms10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createSynonym(workspaceID:entity:value:synonym:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4138,6 +4554,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">synonym</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Synonym.html">Synonym</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4200,6 +4617,18 @@ than 64 characters.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4230,9 +4659,9 @@ than 64 characters.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C10getSynonymySS11workspaceID_SS6entitySS5valueSS7synonymSbSg12includeAuditys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getSynonym(workspaceID:entity:value:synonym:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C10getSynonymySS11workspaceID_SS6entitySS5valueSS7synonymSbSg12includeAuditys5Error_pcSg7failureyAA0D0Vc7successtF">getSynonym(workspaceID:entity:value:synonym:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C10getSynonymySS11workspaceID_SS6entitySS5valueSS7synonymSbSg12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getSynonym(workspaceID:entity:value:synonym:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C10getSynonymySS11workspaceID_SS6entitySS5valueSS7synonymSbSg12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">getSynonym(workspaceID:entity:value:synonym:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4256,6 +4685,7 @@ For more information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">synonym</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Synonym.html">Synonym</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4328,6 +4758,18 @@ For more information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4358,9 +4800,9 @@ For more information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C13updateSynonymySS11workspaceID_SS6entitySS5valueSS7synonymSSSg03newD0ys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateSynonym(workspaceID:entity:value:synonym:newSynonym:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C13updateSynonymySS11workspaceID_SS6entitySS5valueSS7synonymSSSg03newD0ys5Error_pcSg7failureyAA0D0Vc7successtF">updateSynonym(workspaceID:entity:value:synonym:newSynonym:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C13updateSynonymySS11workspaceID_SS6entitySS5valueSS7synonymSSSg03newD0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateSynonym(workspaceID:entity:value:synonym:newSynonym:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C13updateSynonymySS11workspaceID_SS6entitySS5valueSS7synonymSSSg03newD0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">updateSynonym(workspaceID:entity:value:synonym:newSynonym:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4384,6 +4826,7 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">synonym</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">newSynonym</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Synonym.html">Synonym</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4458,6 +4901,18 @@ than 64 characters.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4488,9 +4943,9 @@ than 64 characters.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C13deleteSynonymySS11workspaceID_SS6entitySS5valueSS7synonymys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteSynonym(workspaceID:entity:value:synonym:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C13deleteSynonymySS11workspaceID_SS6entitySS5valueSS7synonymys5Error_pcSg7failureyyc7successtF">deleteSynonym(workspaceID:entity:value:synonym:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C13deleteSynonymySS11workspaceID_SS6entitySS5valueSS7synonyms10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteSynonym(workspaceID:entity:value:synonym:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C13deleteSynonymySS11workspaceID_SS6entitySS5valueSS7synonyms10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteSynonym(workspaceID:entity:value:synonym:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4513,6 +4968,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">synonym</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4573,6 +5029,18 @@ information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4603,9 +5071,9 @@ information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C15listDialogNodesySS11workspaceID_SiSg9pageLimitSbSg12includeCountSSSg4sortAJ6cursorAH0J5Auditys5Error_pcSg7failureyAA0D14NodeCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listDialogNodes(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C15listDialogNodesySS11workspaceID_SiSg9pageLimitSbSg12includeCountSSSg4sortAJ6cursorAH0J5Auditys5Error_pcSg7failureyAA0D14NodeCollectionVc7successtF">listDialogNodes(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C15listDialogNodesySS11workspaceID_SiSg9pageLimitSbSg12includeCountSSSg4sortAJ6cursorAH0J5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D14NodeCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listDialogNodes(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C15listDialogNodesySS11workspaceID_SiSg9pageLimitSbSg12includeCountSSSg4sortAJ6cursorAH0J5Audits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D14NodeCollectionVc7successtF">listDialogNodes(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4630,6 +5098,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DialogNodeCollection.html">DialogNodeCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4715,6 +5184,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4745,9 +5226,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C16createDialogNodeySS11workspaceID_AA06CreatedE0V10propertiesys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createDialogNode(workspaceID:properties:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C16createDialogNodeySS11workspaceID_AA06CreatedE0V10propertiesys5Error_pcSg7failureyAA0dE0Vc7successtF">createDialogNode(workspaceID:properties:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C16createDialogNodeySS11workspaceID_AA06CreatedE0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createDialogNode(workspaceID:properties:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C16createDialogNodeySS11workspaceID_AA06CreatedE0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF">createDialogNode(workspaceID:properties:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4768,6 +5249,7 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createDialogNode</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/CreateDialogNode.html">CreateDialogNode</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DialogNode.html">DialogNode</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4804,6 +5286,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4834,9 +5328,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C13getDialogNodeySS11workspaceID_SS06dialogE0SbSg12includeAuditys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getDialogNode(workspaceID:dialogNode:includeAudit:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C13getDialogNodeySS11workspaceID_SS06dialogE0SbSg12includeAuditys5Error_pcSg7failureyAA0dE0Vc7successtF">getDialogNode(workspaceID:dialogNode:includeAudit:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C13getDialogNodeySS11workspaceID_SS06dialogE0SbSg12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getDialogNode(workspaceID:dialogNode:includeAudit:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C13getDialogNodeySS11workspaceID_SS06dialogE0SbSg12includeAudits10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF">getDialogNode(workspaceID:dialogNode:includeAudit:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4858,6 +5352,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">dialogNode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DialogNode.html">DialogNode</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4906,6 +5401,18 @@ information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4936,9 +5443,9 @@ information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C16updateDialogNodeySS11workspaceID_SS06dialogE0AA06UpdatedE0V10propertiesys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateDialogNode(workspaceID:dialogNode:properties:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C16updateDialogNodeySS11workspaceID_SS06dialogE0AA06UpdatedE0V10propertiesys5Error_pcSg7failureyAA0dE0Vc7successtF">updateDialogNode(workspaceID:dialogNode:properties:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C16updateDialogNodeySS11workspaceID_SS06dialogE0AA06UpdatedE0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateDialogNode(workspaceID:dialogNode:properties:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C16updateDialogNodeySS11workspaceID_SS06dialogE0AA06UpdatedE0V10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF">updateDialogNode(workspaceID:dialogNode:properties:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4960,6 +5467,7 @@ minutes. For more information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">dialogNode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/UpdateDialogNode.html">UpdateDialogNode</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DialogNode.html">DialogNode</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5011,6 +5519,18 @@ existing actions are discarded and replaced with the new actions specified in th
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -5041,9 +5561,9 @@ existing actions are discarded and replaced with the new actions specified in th
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C16deleteDialogNodeySS11workspaceID_SS06dialogE0ys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteDialogNode(workspaceID:dialogNode:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C16deleteDialogNodeySS11workspaceID_SS06dialogE0ys5Error_pcSg7failureyyc7successtF">deleteDialogNode(workspaceID:dialogNode:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C16deleteDialogNodeySS11workspaceID_SS06dialogE0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteDialogNode(workspaceID:dialogNode:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C16deleteDialogNodeySS11workspaceID_SS06dialogE0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteDialogNode(workspaceID:dialogNode:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5064,6 +5584,7 @@ information, see <strong>Rate limiting</strong>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteDialogNode</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">dialogNode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5100,6 +5621,18 @@ information, see <strong>Rate limiting</strong>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -5130,9 +5663,9 @@ information, see <strong>Rate limiting</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C8listLogsySS11workspaceID_SSSg4sortAF6filterSiSg9pageLimitAF6cursorys5Error_pcSg7failureyAA13LogCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listLogs(workspaceID:sort:filter:pageLimit:cursor:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C8listLogsySS11workspaceID_SSSg4sortAF6filterSiSg9pageLimitAF6cursorys5Error_pcSg7failureyAA13LogCollectionVc7successtF">listLogs(workspaceID:sort:filter:pageLimit:cursor:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C8listLogsySS11workspaceID_SSSg4sortAF6filterSiSg9pageLimitAF6cursors10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA13LogCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listLogs(workspaceID:sort:filter:pageLimit:cursor:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C8listLogsySS11workspaceID_SSSg4sortAF6filterSiSg9pageLimitAF6cursors10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA13LogCollectionVc7successtF">listLogs(workspaceID:sort:filter:pageLimit:cursor:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5157,6 +5690,7 @@ information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">filter</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/LogCollection.html">LogCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5231,6 +5765,18 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -5261,9 +5807,9 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C11listAllLogsySS6filter_SSSg4sortSiSg9pageLimitAF6cursorys5Error_pcSg7failureyAA13LogCollectionVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listAllLogs(filter:sort:pageLimit:cursor:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C11listAllLogsySS6filter_SSSg4sortSiSg9pageLimitAF6cursorys5Error_pcSg7failureyAA13LogCollectionVc7successtF">listAllLogs(filter:sort:pageLimit:cursor:failure:success:)</a>
+                    <a name="/s:11AssistantV10A0C11listAllLogsySS6filter_SSSg4sortSiSg9pageLimitAF6cursors10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA13LogCollectionVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listAllLogs(filter:sort:pageLimit:cursor:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C11listAllLogsySS6filter_SSSg4sortSiSg9pageLimitAF6cursors10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA13LogCollectionVc7successtF">listAllLogs(filter:sort:pageLimit:cursor:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5287,6 +5833,7 @@ minute. For more information, see <strong>Rate limiting</strong>.</p>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/LogCollection.html">LogCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5351,6 +5898,109 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV10A0C14deleteUserDataySS10customerID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C14deleteUserDataySS10customerID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteUserData(customerID:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete labeled data.</p>
+
+<p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+the customer ID.   You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request
+that passes data. For more information about personal data and customer IDs, see <a href="https://console.bluemix.net/docs/services/conversation/information-security.html">Information
+security</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteUserData</span><span class="p">(</span>
+    <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customer ID for which all data is to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -5383,8 +6033,8 @@ sign (<code>-</code>). Supported values are <code>name</code>, <code>updated</co
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

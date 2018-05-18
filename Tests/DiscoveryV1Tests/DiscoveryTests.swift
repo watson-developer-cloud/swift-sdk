@@ -136,22 +136,26 @@ class DiscoveryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
-        addTeardownBlock {
-            let teardownExpectation = self.expectation(description: "deleteEnvironment")
-            let failure = { (error: Error) in XCTFail("Failed to cleanup the test environment: \(error.localizedDescription)") }
-            self.discovery.deleteEnvironment(environmentID: environment.environmentID!, failure: failure) {
-                _ in
-                teardownExpectation.fulfill()
-            }
-            self.wait(for: [teardownExpectation], timeout: self.timeout)
-        }
         return environment
     }
 
-    func createTestConfiguration(environment: Environment) -> Configuration {
+    func lookupOrCreateTestConfiguration(environmentID: String) -> Configuration {
+        var configuration: Configuration!
+        let expectation = self.expectation(description: "listConfigurations")
+        let failure = { (error: Error) in XCTFail("Failed to lookup Configuration: \(error.localizedDescription)") }
+        discovery.listConfigurations(environmentID: environmentID, failure: failure) {
+            response in
+            let existingTestConfiguration = response.configurations?.first { $0.name.starts(with: "swift-sdk-test-") }
+            configuration = existingTestConfiguration ?? self.createTestConfiguration(environmentID: environmentID)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: timeout)
+        return configuration
+    }
+
+    func createTestConfiguration(environmentID: String) -> Configuration {
         var configuration: Configuration!
         let expectation = self.expectation(description: "createConfiguration")
-        let environmentID = environment.environmentID!
         let name = "swift-sdk-test-" + UUID().uuidString
         let description = "A configuration created while testing the Swift SDK. Safe to delete."
         let properties = Configuration(name: name, description: description)
@@ -162,27 +166,30 @@ class DiscoveryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
-        addTeardownBlock {
-            let teardownExpectation = self.expectation(description: "deleteConfiguration")
-            let configurationID = configuration.configurationID!
-            let failure = { (error: Error) in XCTFail("Failed to cleanup the test configuration: \(error.localizedDescription)") }
-            self.discovery.deleteConfiguration(environmentID: environmentID, configurationID: configurationID, failure: failure) {
-                _ in
-                teardownExpectation.fulfill()
-            }
-            self.wait(for: [teardownExpectation], timeout: self.timeout)
-        }
         return configuration
     }
 
-    func createTestCollection(environment: Environment, configuration: Configuration) -> DiscoveryV1.Collection {
+    func lookupOrCreateTestCollection(environmentID: String, configurationID: String) -> DiscoveryV1.Collection {
+        var collection: DiscoveryV1.Collection!
+        let expectation = self.expectation(description: "listCollections")
+        let failure = { (error: Error) in XCTFail("Failed to lookup Collection: \(error.localizedDescription)") }
+        discovery.listCollections(environmentID: environmentID, failure: failure) {
+            response in
+            let existingTestCollection = response.collections?.first { $0.name?.starts(with: "swift-sdk-test-") ?? false }
+            collection = existingTestCollection ?? self.createTestCollection(environmentID: environmentID, configurationID: configurationID)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: timeout)
+        return collection
+    }
+
+    func createTestCollection(environmentID: String, configurationID: String) -> DiscoveryV1.Collection {
         var collection: DiscoveryV1.Collection!
         let expectation = self.expectation(description: "createCollection")
-        let environmentID = environment.environmentID!
         let properties = CreateCollectionRequest(
             name: "swift-sdk-test-" + UUID().uuidString,
             description: "A collection created while testing the Swift SDK. Safe to delete.",
-            configurationID: configuration.configurationID!,
+            configurationID: configurationID,
             language: "en"
         )
         discovery.createCollection(environmentID: environmentID, properties: properties, failure: failWithError) {
@@ -191,16 +198,6 @@ class DiscoveryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
-        addTeardownBlock {
-            let teardownExpectation = self.expectation(description: "deleteCollection")
-            let collectionID = collection.collectionID!
-            let failure = { (error: Error) in XCTFail("Failed to cleanup the test collection: \(error.localizedDescription)") }
-            self.discovery.deleteCollection(environmentID: environmentID, collectionID: collectionID, failure: failure) {
-                _ in
-                teardownExpectation.fulfill()
-            }
-            self.wait(for: [teardownExpectation], timeout: self.timeout)
-        }
         return collection
     }
 
@@ -221,16 +218,6 @@ class DiscoveryTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
-        addTeardownBlock {
-            let teardownExpectation = self.expectation(description: "deleteDocument")
-            let documentID = documentAccepted.documentID!
-            let failure = { (error: Error) in XCTFail("Failed to cleanup the test document: \(error.localizedDescription)") }
-            self.discovery.deleteDocument(environmentID: environmentID, collectionID: collectionID, documentID: documentID, failure: failure) {
-                _ in
-                teardownExpectation.fulfill()
-            }
-            self.wait(for: [teardownExpectation], timeout: self.timeout)
-        }
         return documentAccepted
     }
 
@@ -338,8 +325,8 @@ class DiscoveryTests: XCTestCase {
 
     func testListFields() {
         let expectation = self.expectation(description: "listFields")
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         _ = addTestDocument(environment: environment, collection: collection)
         sleep(10) // wait for document to be ingested
         let environmentID = environment.environmentID!
@@ -359,7 +346,7 @@ class DiscoveryTests: XCTestCase {
 
     func testListConfigurations() {
         let expectation = self.expectation(description: "listConfigurations")
-        let configuration = createTestConfiguration(environment: environment)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
         discovery.listConfigurations(environmentID: environment.environmentID!, failure: failWithError) {
             response in
             XCTAssertNotNil(response.configurations)
@@ -372,7 +359,7 @@ class DiscoveryTests: XCTestCase {
 
     func testListConfigurationsByName() {
         let expectation = self.expectation(description: "listConfigurations")
-        let configuration = createTestConfiguration(environment: environment)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
         let name = configuration.name
         discovery.listConfigurations(environmentID: environment.environmentID!, name: name, failure: failWithError) {
             response in
@@ -437,7 +424,7 @@ class DiscoveryTests: XCTestCase {
     func testConfigurationInEnvironment() {
         let expectation = self.expectation(description: "testConfigurationInEnvironment")
         let environmentID = environment.environmentID!
-        let configuration = createTestConfiguration(environment: environment)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
         discovery.testConfigurationInEnvironment(
             environmentID: environmentID,
             configurationID: configuration.configurationID,
@@ -464,8 +451,8 @@ class DiscoveryTests: XCTestCase {
     func testListCollections() {
         let expectation = self.expectation(description: "listCollections")
         let environmentID = environment.environmentID!
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         discovery.listCollections(environmentID: environmentID, failure: failWithError) {
             response in
             XCTAssertNotNil(response.collections)
@@ -479,8 +466,8 @@ class DiscoveryTests: XCTestCase {
     func testListCollectionsByName() {
         let expectation = self.expectation(description: "listCollections")
         let environmentID = environment.environmentID!
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         discovery.listCollections(environmentID: environmentID, name: collection.name!, failure: failWithError) {
             response in
             XCTAssertNotNil(response.collections)
@@ -495,7 +482,7 @@ class DiscoveryTests: XCTestCase {
         let expectation1 = self.expectation(description: "createCollection")
         var collection: DiscoveryV1.Collection!
         let environmentID = environment.environmentID!
-        let configuration = createTestConfiguration(environment: environment)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
         let properties = CreateCollectionRequest(
             name: "swift-sdk-test-" + UUID().uuidString,
             description: "A collection created while testing the Swift SDK. Safe to delete.",
@@ -550,8 +537,8 @@ class DiscoveryTests: XCTestCase {
 
     func testListCollectionFields() {
         let expectation = self.expectation(description: "listFields")
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         _ = addTestDocument(environment: environment, collection: collection)
         sleep(10) // wait for document to be ingested
         let environmentID = environment.environmentID!
@@ -568,8 +555,8 @@ class DiscoveryTests: XCTestCase {
     }
 
     func testExpansionsCRUD() {
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let environmentID = environment.environmentID!
         let collectionID = collection.collectionID!
 
@@ -609,8 +596,8 @@ class DiscoveryTests: XCTestCase {
     // MARK: - Documents
 
     func testDocumentsCRUD() {
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let environmentID = environment.environmentID!
         let collectionID = collection.collectionID!
 
@@ -1083,8 +1070,8 @@ class DiscoveryTests: XCTestCase {
     func testQueryNotices() {
         let expectation = self.expectation(description: "queryNotices")
         let environmentID = environment.environmentID!
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let collectionID = collection.collectionID!
         discovery.queryNotices(environmentID: environmentID, collectionID: collectionID, failure: failWithError) {
             response in
@@ -1098,8 +1085,8 @@ class DiscoveryTests: XCTestCase {
     func testFederatedQuery() {
         let expectation = self.expectation(description: "federatedQuery")
         let environmentID = environment.environmentID!
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let collectionID = collection.collectionID!
         discovery.federatedQuery(environmentID: environmentID, collectionIds: [collectionID], failure: failWithError) {
             response in
@@ -1113,8 +1100,8 @@ class DiscoveryTests: XCTestCase {
     func testFederatedQueryNotices() {
         let expectation = self.expectation(description: "federatedQuery")
         let environmentID = environment.environmentID!
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let collectionID = collection.collectionID!
         discovery.federatedQueryNotices(environmentID: environmentID, collectionIds: [collectionID], failure: failWithError) {
             response in
@@ -1130,8 +1117,8 @@ class DiscoveryTests: XCTestCase {
     func testListTrainingData() {
         let expectation = self.expectation(description: "listTrainingData")
         let environmentID = environment.environmentID!
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let collectionID = collection.collectionID!
         discovery.listTrainingData(environmentID: environmentID, collectionID: collectionID, failure: failWithError) {
             response in
@@ -1143,8 +1130,8 @@ class DiscoveryTests: XCTestCase {
     }
 
     func testTrainingDataCRUD() {
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let document = addTestDocument(environment: environment, collection: collection)
         let environmentID = environment.environmentID!
         let collectionID = collection.collectionID!
@@ -1194,8 +1181,8 @@ class DiscoveryTests: XCTestCase {
 
     func testDeleteAllTrainingData() {
         let expectation = self.expectation(description: "deleteAllTrainingData")
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let environmentID = environment.environmentID!
         let collectionID = collection.collectionID!
         discovery.deleteAllTrainingData(environmentID: environmentID, collectionID: collectionID, failure: failWithError) {
@@ -1207,8 +1194,8 @@ class DiscoveryTests: XCTestCase {
     // MARK: - Training Examples
 
     func testListTrainingExamples() {
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let document = addTestDocument(environment: environment, collection: collection)
         let environmentID = environment.environmentID!
         let collectionID = collection.collectionID!
@@ -1244,8 +1231,8 @@ class DiscoveryTests: XCTestCase {
     }
 
     func testTrainingExamplesCRUD() {
-        let configuration = createTestConfiguration(environment: environment)
-        let collection = createTestCollection(environment: environment, configuration: configuration)
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environment.environmentID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environment.environmentID!, configurationID: configuration.configurationID!)
         let document = addTestDocument(environment: environment, collection: collection)
         let environmentID = environment.environmentID!
         let collectionID = collection.collectionID!

@@ -59,6 +59,20 @@ class SpeechToTextTests: XCTestCase {
 
     // MARK: - State Management
 
+    func lookupOrCreateTestLanguageModel() -> LanguageModel {
+        var languageModel: LanguageModel!
+        let expectation = self.expectation(description: "listLanguageModels")
+        let failure = { (error: Error) in XCTFail("Failed to lookup languageModel: \(error.localizedDescription)") }
+        speechToText.listLanguageModels(failure: failure) {
+            response in
+            let existingLanguageModel = response.customizations.first { $0.name == "swift-test-model" }
+            languageModel = existingLanguageModel ?? self.createTestLanguageModel()
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: timeout)
+        return languageModel
+    }
+
     func createTestLanguageModel() -> LanguageModel {
         var languageModel: LanguageModel!
         let expectation = self.expectation(description: "createLanguageModel")
@@ -70,15 +84,21 @@ class SpeechToTextTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
-        addTeardownBlock {
-            let teardownExpectation = self.expectation(description: "deleteLanguageModel")
-            let failure = { (error: Error) in XCTFail("Failed to cleanup the test language model: \(error.localizedDescription)") }
-            self.speechToText.deleteLanguageModel(customizationID: languageModel.customizationID, failure: failure) {
-                teardownExpectation.fulfill()
-            }
-            self.wait(for: [teardownExpectation], timeout: self.timeout)
-        }
         return languageModel
+    }
+
+    func lookupOrCreateTestAcousticModel() -> AcousticModel {
+        var acousticModel: AcousticModel!
+        let expectation = self.expectation(description: "listAcousticModels")
+        let failure = { (error: Error) in XCTFail("Failed to lookup acousticModel: \(error.localizedDescription)") }
+        speechToText.listAcousticModels(failure: failure) {
+            response in
+            let existingAcousticModel = response.customizations.first { $0.name == "swift-test-model" }
+            acousticModel = existingAcousticModel ?? self.createTestAcousticModel()
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: timeout)
+        return acousticModel
     }
 
     func createTestAcousticModel() -> AcousticModel {
@@ -91,14 +111,6 @@ class SpeechToTextTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
-        addTeardownBlock {
-            let teardownExpectation = self.expectation(description: "deleteAcousticModel")
-            let failure = { (error: Error) in XCTFail("Failed to cleanup the test acoustic model: \(error.localizedDescription)") }
-            self.speechToText.deleteAcousticModel(customizationID: acousticModel.customizationID, failure: failure) {
-                teardownExpectation.fulfill()
-            }
-            self.wait(for: [teardownExpectation], timeout: self.timeout)
-        }
         return acousticModel
     }
 
@@ -376,8 +388,8 @@ class SpeechToTextTests: XCTestCase {
 
     func testCustomCorpora() {
 
-        // create a language model (will be deleted in test teardown)
-        let languageModel = createTestLanguageModel()
+        // create or reuse an existing language model
+        let languageModel = lookupOrCreateTestLanguageModel()
 
         // add a corpus to the language model
         let expectation1 = self.expectation(description: "addCorpus")
@@ -421,8 +433,8 @@ class SpeechToTextTests: XCTestCase {
 
     func testCustomWords() {
 
-        // create a language model (will be deleted in test teardown)
-        let languageModel = createTestLanguageModel()
+        // create or reuse and existing language model
+        let languageModel = lookupOrCreateTestLanguageModel()
 
         // add an array of words
         let expectation2 = self.expectation(description: "addWords")
@@ -550,8 +562,8 @@ class SpeechToTextTests: XCTestCase {
 
     func testCustomAudioResources() {
 
-        // create an acoustic model (will be deleted in test teardown)
-        let acousticModel = createTestAcousticModel()
+        // create or reuse and existing acoustic model
+        let acousticModel = lookupOrCreateTestAcousticModel()
 
         // add audio resource to acoustic model
         let expectation1 = self.expectation(description: "addAudio")

@@ -65,12 +65,11 @@ class SpeechToTextTests: XCTestCase {
         let failure = { (error: Error) in XCTFail("Failed to lookup languageModel: \(error.localizedDescription)") }
         speechToText.listLanguageModels(failure: failure) {
             response in
-            let existingLanguageModel = response.customizations.first { $0.name == "swift-test-model" }
-            languageModel = existingLanguageModel ?? self.createTestLanguageModel()
+            languageModel = response.customizations.first { $0.name == "swift-test-model" }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
-        return languageModel
+        return languageModel ?? self.createTestLanguageModel()
     }
 
     func createTestLanguageModel() -> LanguageModel {
@@ -90,15 +89,15 @@ class SpeechToTextTests: XCTestCase {
     func lookupOrCreateTestAcousticModel() -> AcousticModel {
         var acousticModel: AcousticModel!
         let expectation = self.expectation(description: "listAcousticModels")
-        let failure = { (error: Error) in XCTFail("Failed to lookup acousticModel: \(error.localizedDescription)") }
+        let failure = { (error: Error) in
+            XCTFail("Failed to lookup acousticModel: \(error.localizedDescription)") }
         speechToText.listAcousticModels(failure: failure) {
             response in
-            let existingAcousticModel = response.customizations.first { $0.name == "swift-test-model" }
-            acousticModel = existingAcousticModel ?? self.createTestAcousticModel()
+            acousticModel = response.customizations.first { $0.name == "swift-test-model" }
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
-        return acousticModel
+        return acousticModel ?? self.createTestAcousticModel()
     }
 
     func createTestAcousticModel() -> AcousticModel {

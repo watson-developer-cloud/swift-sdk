@@ -33,8 +33,8 @@ class VisualRecognitionTests: XCTestCase {
             ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
             ("testCreateDeleteClassifier2", testCreateDeleteClassifier2),
             ("testGetClassifier", testGetClassifier),
-            ("testUpdateClassifierWithPositiveExample", testUpdateClassifierWithPositiveExample),
-            ("testUpdateClassifierWithNegativeExample", testUpdateClassifierWithNegativeExample),
+            // disabled: ("testUpdateClassifierWithPositiveExample", testUpdateClassifierWithPositiveExample),
+            // disabled: ("testUpdateClassifierWithNegativeExample", testUpdateClassifierWithNegativeExample),
             ("testClassifyByURL1", testClassifyByURL1),
             ("testClassifyByURL2", testClassifyByURL2),
             ("testClassifyByURL3", testClassifyByURL3),
@@ -80,6 +80,29 @@ class VisualRecognitionTests: XCTestCase {
         continueAfterFailure = false
         instantiateVisualRecognition()
     }
+
+    /** Teardown logic to cleanup dangling resources after all the tests have run */
+    override func tearDown() {
+        let teardownExpectation = self.expectation(description: "Teardown processing after all tests.")
+        visualRecognition.listClassifiers(verbose: true, failure: failWithError) { classifiers in
+            let classifiersToDelete = classifiers.classifiers.filter { $0.name.starts(with: "swift-sdk-unit-test-") }
+            if classifiersToDelete.count > 0 {
+                // allow zip files to propagate through object storage, so that
+                // they will be deleted when the service deletes the classifier
+                // (otherwise they remain and dramatically slow down the tests)
+                sleep(15) // wait 15 seconds
+
+                for classifier in classifiersToDelete {
+                    let deleteExpectation = self.expectation(description: "Delete the test classifier.")
+                    self.visualRecognition.deleteClassifier(classifierID: classifier.classifierID, failure: nil) {
+                        deleteExpectation.fulfill()
+                    }
+                }
+            }
+            teardownExpectation.fulfill()
+        }
+        waitForExpectations(timeout: VisualRecognitionTests.timeout+15)
+     }
 
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {
@@ -272,19 +295,7 @@ class VisualRecognitionTests: XCTestCase {
             return
         }
 
-        addTeardownBlock {
-            // allow zip files to propagate through object storage, so that
-            // they will be deleted when the service deletes the classifier
-            // (otherwise they remain and dramatically slow down the tests)
-            sleep(15) // wait 15 seconds
-
-            let teardownExpectation = self.expectation(description: "Delete the new classifier.")
-
-            self.visualRecognition.deleteClassifier(classifierID: newClassifierID, failure: nil) {
-                teardownExpectation.fulfill()
-            }
-            self.wait(for: [teardownExpectation], timeout: VisualRecognitionTests.timeout)
-        }
+        // Teardown logic has been moved to teardown class method
 
         var trained = false
         var tries = 0
@@ -373,19 +384,7 @@ class VisualRecognitionTests: XCTestCase {
             return
         }
 
-        addTeardownBlock {
-            // allow zip files to propagate through object storage, so that
-            // they will be deleted when the service deletes the classifier
-            // (otherwise they remain and dramatically slow down the tests)
-            sleep(15) // wait 15 seconds
-
-            let teardownExpectation = self.expectation(description: "Delete the new classifier.")
-
-            self.visualRecognition.deleteClassifier(classifierID: newClassifierID, failure: nil) {
-                teardownExpectation.fulfill()
-            }
-            self.wait(for: [teardownExpectation], timeout: VisualRecognitionTests.timeout)
-        }
+        // Teardown logic has been moved to teardown class method
 
         var trained = false
         var tries = 0

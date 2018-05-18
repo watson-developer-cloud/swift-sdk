@@ -92,20 +92,17 @@ class VisualRecognitionTests: XCTestCase {
                 // (otherwise they remain and dramatically slow down the tests)
                 sleep(15) // wait 15 seconds
 
-                var deleteExpectations: [XCTestExpectation] = []
                 for classifier in classifiersToDelete {
                     let deleteExpectation = self.expectation(description: "Delete the test classifier.")
-                    deleteExpectations.append(deleteExpectation)
                     self.visualRecognition.deleteClassifier(classifierID: classifier.classifierID, failure: nil) {
                         deleteExpectation.fulfill()
                     }
                 }
-                self.wait(for: deleteExpectations, timeout: VisualRecognitionTests.timeout)
             }
             teardownExpectation.fulfill()
         }
-        self.wait(for: [teardownExpectation], timeout: VisualRecognitionTests.timeout)
-    }
+        waitForExpectations(timeout: VisualRecognitionTests.timeout+15)
+     }
 
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {

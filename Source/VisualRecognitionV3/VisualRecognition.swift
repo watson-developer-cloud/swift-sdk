@@ -324,16 +324,16 @@ public class VisualRecognition {
     }
 
     /**
-     Delete a classifier.
+     Retrieve a list of classifiers.
 
-     - parameter classifierID: The ID of the classifier.
+     - parameter verbose: Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of classifiers.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func deleteClassifier(
-        classifierID: String,
+    public func listClassifiers(
+        verbose: Bool? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        success: @escaping (Classifiers) -> Void)
     {
         // construct header parameters
         var headers = defaultHeaders
@@ -342,26 +342,25 @@ public class VisualRecognition {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let verbose = verbose {
+            let queryParameter = URLQueryItem(name: "verbose", value: "\(verbose)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
-        let path = "/v3/classifiers/\(classifierID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
-            return
-        }
         let request = RestRequest(
-            method: "DELETE",
-            url: serviceURL + encodedPath,
+            method: "GET",
+            url: serviceURL + "/v3/classifiers",
             credentials: credentials,
             headerParameters: headers,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
-            (response: RestResponse) in
+        request.responseObject(responseToError: responseToError) {
+            (response: RestResponse<Classifiers>) in
             switch response.result {
-            case .success: success()
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }
@@ -406,49 +405,6 @@ public class VisualRecognition {
         // execute REST request
         request.responseObject(responseToError: responseToError) {
             (response: RestResponse<Classifier>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Retrieve a list of classifiers.
-
-     - parameter verbose: Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of classifiers.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func listClassifiers(
-        verbose: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Classifiers) -> Void)
-    {
-        // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let verbose = verbose {
-            let queryParameter = URLQueryItem(name: "verbose", value: "\(verbose)")
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            method: "GET",
-            url: serviceURL + "/v3/classifiers",
-            credentials: credentials,
-            headerParameters: headers,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Classifiers>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
@@ -532,6 +488,50 @@ public class VisualRecognition {
             (response: RestResponse<Classifier>) in
             switch response.result {
             case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete a classifier.
+
+     - parameter classifierID: The ID of the classifier.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteClassifier(
+        classifierID: String,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headers = defaultHeaders
+        headers["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v3/classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            credentials: credentials,
+            headerParameters: headers,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }

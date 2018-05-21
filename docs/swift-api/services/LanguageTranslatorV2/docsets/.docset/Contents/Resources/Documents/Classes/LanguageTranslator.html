@@ -129,7 +129,7 @@ and more.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/language-translator/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -156,7 +156,7 @@ and more.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -224,9 +224,9 @@ and more.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C9translateyAA16TranslateRequestV7request_ys5Error_pcSg7failureyAA17TranslationResultVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/translate(request:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C9translateyAA16TranslateRequestV7request_ys5Error_pcSg7failureyAA17TranslationResultVc7successtF">translate(request:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C9translateyAA16TranslateRequestV7request_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA17TranslationResultVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/translate(request:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C9translateyAA16TranslateRequestV7request_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA17TranslationResultVc7successtF">translate(request:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -245,6 +245,7 @@ and more.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">translate</span><span class="p">(</span>
     <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Structs/TranslateRequest.html">TranslateRequest</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationResult.html">TranslationResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -269,6 +270,18 @@ and more.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -299,9 +312,85 @@ and more.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C8identifyySS4text_ys5Error_pcSg7failureyAA19IdentifiedLanguagesVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/identify(text:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C8identifyySS4text_ys5Error_pcSg7failureyAA19IdentifiedLanguagesVc7successtF">identify(text:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C25listIdentifiableLanguagesys10DictionaryVyS2SGSg7headers_ys5Error_pcSg7failureyAA0eF0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listIdentifiableLanguages(headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C25listIdentifiableLanguagesys10DictionaryVyS2SGSg7headers_ys5Error_pcSg7failureyAA0eF0Vc7successtF">listIdentifiableLanguages(headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List identifiable languages.</p>
+
+<p>Lists the languages that the service can identify. Returns the language code (for example, <code>en</code> for English or <code>es</code>
+for Spanish) and name of each language.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listIdentifiableLanguages</span><span class="p">(</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IdentifiableLanguages.html">IdentifiableLanguages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:20LanguageTranslatorV20aB0C8identifyySS4text_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA19IdentifiedLanguagesVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/identify(text:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C8identifyySS4text_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA19IdentifiedLanguagesVc7successtF">identify(text:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -320,6 +409,7 @@ and more.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">identify</span><span class="p">(</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IdentifiedLanguages.html">IdentifiedLanguages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -344,6 +434,18 @@ and more.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -374,9 +476,9 @@ and more.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C25listIdentifiableLanguagesyys5Error_pcSg7failure_yAA0eF0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listIdentifiableLanguages(failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C25listIdentifiableLanguagesyys5Error_pcSg7failure_yAA0eF0Vc7successtF">listIdentifiableLanguages(failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C10listModelsySSSg6source_AE6targetSbSg07defaultE0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA011TranslationE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listModels(source:target:defaultModels:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C10listModelsySSSg6source_AE6targetSbSg07defaultE0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA011TranslationE0Vc7successtF">listModels(source:target:defaultModels:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -384,19 +486,22 @@ and more.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>List identifiable languages.</p>
+                        <p>List models.</p>
 
-<p>Lists the languages that the service can identify. Returns the language code (for example, <code>en</code> for English or <code>es</code>
-for Spanish) and name of each language.</p>
+<p>Lists available translation models.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listIdentifiableLanguages</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listModels</span><span class="p">(</span>
+    <span class="nv">source</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">defaultModels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IdentifiableLanguages.html">IdentifiableLanguages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModels.html">TranslationModels</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -407,6 +512,56 @@ for Spanish) and name of each language.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>source</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify a language code to filter results by source language.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>target</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify a language code to filter results by target language.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>defaultModels</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If the default parameter isn&rsquo;t specified, the service will return all models (default and non-default) for each
+language pair. To return only default models, set this to <code>true</code>. To return only non-default models, set this to
+<code>false</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -437,9 +592,9 @@ for Spanish) and name of each language.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C11createModelySS04baseE2ID_SSSg4name10Foundation3URLVSg14forcedGlossaryAK14parallelCorpusAK011monolingualN0ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createModel(baseModelID:name:forcedGlossary:parallelCorpus:monolingualCorpus:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C11createModelySS04baseE2ID_SSSg4name10Foundation3URLVSg14forcedGlossaryAK14parallelCorpusAK011monolingualN0ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF">createModel(baseModelID:name:forcedGlossary:parallelCorpus:monolingualCorpus:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C11createModelySS04baseE2ID_SSSg4name10Foundation3URLVSg14forcedGlossaryAK14parallelCorpusAK011monolingualN0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA011TranslationE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createModel(baseModelID:name:forcedGlossary:parallelCorpus:monolingualCorpus:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C11createModelySS04baseE2ID_SSSg4name10Foundation3URLVSg14forcedGlossaryAK14parallelCorpusAK011monolingualN0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA011TranslationE0Vc7successtF">createModel(baseModelID:name:forcedGlossary:parallelCorpus:monolingualCorpus:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -464,6 +619,7 @@ must be less than 10 MB. The cumulative file size of all uploaded glossary and c
     <span class="nv">forcedGlossary</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">parallelCorpus</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">monolingualCorpus</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModel.html">TranslationModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -540,6 +696,18 @@ size less than 10 MB per call.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -570,9 +738,9 @@ size less than 10 MB per call.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C11deleteModelySS7modelID_ys5Error_pcSg7failureyAA06DeleteE6ResultVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteModel(modelID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C11deleteModelySS7modelID_ys5Error_pcSg7failureyAA06DeleteE6ResultVc7successtF">deleteModel(modelID:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C11deleteModelySS7modelID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteE6ResultVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteModel(modelID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C11deleteModelySS7modelID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteE6ResultVc7successtF">deleteModel(modelID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -591,6 +759,7 @@ size less than 10 MB per call.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteModel</span><span class="p">(</span>
     <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeleteModelResult.html">DeleteModelResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -615,6 +784,18 @@ size less than 10 MB per call.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -645,9 +826,9 @@ size less than 10 MB per call.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C8getModelySS7modelID_ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getModel(modelID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C8getModelySS7modelID_ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF">getModel(modelID:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV20aB0C8getModelySS7modelID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA011TranslationE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getModel(modelID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C8getModelySS7modelID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA011TranslationE0Vc7successtF">getModel(modelID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -666,6 +847,7 @@ size less than 10 MB per call.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getModel</span><span class="p">(</span>
     <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModel.html">TranslationModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -690,103 +872,12 @@ size less than 10 MB per call.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>headers</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:20LanguageTranslatorV20aB0C10listModelsySSSg6source_AE6targetSbSg07defaultE0ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listModels(source:target:defaultModels:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV20aB0C10listModelsySSSg6source_AE6targetSbSg07defaultE0ys5Error_pcSg7failureyAA011TranslationE0Vc7successtF">listModels(source:target:defaultModels:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List models.</p>
-
-<p>Lists available translation models.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listModels</span><span class="p">(</span>
-    <span class="nv">source</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="n">defaultModels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModels.html">TranslationModels</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>source</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Specify a language code to filter results by source language.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>target</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Specify a language code to filter results by target language.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>defaultModels</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>If the default parameter isn&rsquo;t specified, the service will return all models (default and non-default) for each
-language pair. To return only default models, set this to <code>true</code>. To return only non-default models, set this to
-<code>false</code>.</p>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -825,8 +916,8 @@ language pair. To return only default models, set this to <code>true</code>. To 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

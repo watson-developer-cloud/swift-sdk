@@ -116,23 +116,21 @@
 
 <p>The IBM&reg; Text to Speech service provides an API that uses IBM&rsquo;s speech-synthesis capabilities to synthesize text
 into natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male or
-female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay.</p>
+female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay. For more
+information about the service, see the <a href="https://console.bluemix.net/docs/services/text-to-speech/getting-started.html">IBM&reg; Cloud
+documentation</a>.</p>
 <h3 id='api-overview' class='heading'>API Overview</h3>
 
-<p>The Text to Speech service consists of the following related endpoints:</p>
+<p>The Text to Speech service provides the following endpoints:</p>
 
 <ul>
 <li><strong>Voices</strong> provides information about the voices available for synthesized speech.</li>
 <li><strong>Synthesis</strong> synthesizes written text to audio speech.</li>
-<li><strong>Pronunciation</strong> returns the pronunciation for a specified word. The <strong>Get pronunciation</strong> method is currently beta.</li>
+<li><strong>Pronunciation</strong> returns the pronunciation for a specified word. Currently a beta feature.</li>
 <li><strong>Custom models</strong> and let users create custom voice models, which are dictionaries of words and their translations
 for use in speech synthesis. All custom model methods are currently beta features.</li>
 <li><strong>Custom words</strong> let users manage the words in a custom voice model. All custom word methods are currently beta
 features.
-<strong>Note about the Try It Out feature:</strong> The <code>Try it out!</code> button lets you experiment with the methods of the API by
-making actual cURL calls to the service. The feature is <strong>not</strong> supported for use with the <code>POST /v1/synthesize</code>
-method. For examples of calls to this method, see the <a href="http://www.ibm.com/watson/developercloud/text-to-speech/api/v1/">Text to Speech API
-reference</a>.
 ### API Usage
 The following information provides details about using the service to synthesize audio:</li>
 <li><strong>Audio formats:</strong> The service supports a number of audio formats (MIME types). For more information about audio
@@ -152,13 +150,13 @@ or the proprietary IBM Symbolic Phonetic Representation (SPR):
 &lt;phoneme alphabet=<q>ibm</q> ph=<q>1gAstroEntxrYFXs</q>&gt;&lt;/phoneme&gt;
 For more information about customization and about sounds-like and phonetic translations, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding
 customization</a>.</li>
-<li><strong>GUIDs:</strong> The pronunciation and customization methods accept or return a Globally Unique Identifier (GUID). For
-example, customization IDs (specified with the <code>customization_id</code> parameter) and service credentials are GUIDs. GUIDs
-are hexadecimal strings that have the format <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>.</li>
 <li><strong>WebSocket interface:</strong> The service also offers a WebSocket interface as an alternative to its HTTP REST interface
 for speech synthesis. The WebSocket interface supports both plain text and SSML input, including the SSML &lt;mark&gt;
 element and word timings. See <a href="https://console.bluemix.net/docs/services/text-to-speech/websockets.html">The WebSocket
 interface</a>.</li>
+<li><strong>GUIDs:</strong> The pronunciation and customization methods accept or return a Globally Unique Identifier (GUID). For
+example, customization IDs (specified with the <code>customization_id</code> parameter) and service credentials are GUIDs. GUIDs
+are hexadecimal strings that have the format <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>.</li>
 <li><strong>Custom voice model ownership:</strong> In all cases, you must use service credentials created for the instance of the
 service that owns a custom voice model to use the methods described in this documentation with that model. For more
 information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#customOwner">Ownership of custom voice
@@ -189,7 +187,7 @@ models</a>.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://stream.watsonplatform.net/text-to-speech/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -216,7 +214,7 @@ models</a>.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -284,9 +282,85 @@ models</a>.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8getVoiceySS5voice_SSSg15customizationIDys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getVoice(voice:customizationID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8getVoiceySS5voice_SSSg15customizationIDys5Error_pcSg7failureyAA0F0Vc7successtF">getVoice(voice:customizationID:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C10listVoicesys10DictionaryVyS2SGSg7headers_ys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listVoices(headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10listVoicesys10DictionaryVyS2SGSg7headers_ys5Error_pcSg7failureyAA0F0Vc7successtF">listVoices(headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List voices.</p>
+
+<p>Lists all voices available for use with the service. The information includes the name, language, gender, and other
+details about the voice.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVoices</span><span class="p">(</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Voices.html">Voices</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C8getVoiceySS5voice_SSSg15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getVoice(voice:customizationID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C8getVoiceySS5voice_SSSg15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF">getVoice(voice:customizationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -296,7 +370,7 @@ models</a>.</li>
                       <div class="abstract">
                         <p>Get a voice.</p>
 
-<p>Lists information about the specified voice. The information includes the name, language, gender, and other details
+<p>Gets information about the specified voice. The information includes the name, language, gender, and other details
 about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
 voice.</p>
 
@@ -308,6 +382,7 @@ voice.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVoice</span><span class="p">(</span>
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Voice.html">Voice</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -337,9 +412,21 @@ voice.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The GUID of a custom voice model for which information is to be returned. You must make the request with service
-credentials created for the instance of the service that owns the custom model. Omit the parameter to see
-information about the specified voice with no customization.</p>
+                                  <p>The customization ID (GUID) of a custom voice model for which information is to be returned. You must make the
+request with service credentials created for the instance of the service that owns the custom model. Omit the
+parameter to see information about the specified voice with no customization.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -376,72 +463,9 @@ information about the specified voice with no customization.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10listVoicesyys5Error_pcSg7failure_yAA0F0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listVoices(failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10listVoicesyys5Error_pcSg7failure_yAA0F0Vc7successtF">listVoices(failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get voices.</p>
-
-<p>Retrieves a list of all voices available for use with the service. The information includes the name, language,
-gender, and other details about the voice.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVoices</span><span class="p">(</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Voices.html">Voices</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14TextToSpeechV10abC0C10synthesizeySS4text_SSSg6acceptAF5voiceAF15customizationIDys5Error_pcSg7failurey10Foundation4DataVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/synthesize(text:accept:voice:customizationID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10synthesizeySS4text_SSSg6acceptAF5voiceAF15customizationIDys5Error_pcSg7failurey10Foundation4DataVc7successtF">synthesize(text:accept:voice:customizationID:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C10synthesizeySS4text_SSSg6acceptAF5voiceAF15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failurey10Foundation4DataVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/synthesize(text:accept:voice:customizationID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10synthesizeySS4text_SSSg6acceptAF5voiceAF15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failurey10Foundation4DataVc7successtF">synthesize(text:accept:voice:customizationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -474,6 +498,7 @@ reference</a>.</p>
     <span class="nv">accept</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -529,10 +554,22 @@ audio/webm;codecs=opus, or audio/webm;codecs=vorbis.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The GUID of a custom voice model to use for the synthesis. If a custom voice model is specified, it is guaranteed
-to work only if it matches the language of the indicated voice. You must make the request with service credentials
-created for the instance of the service that owns the custom model. Omit the parameter to use the specified voice
-with no customization.</p>
+                                  <p>The customization ID (GUID) of a custom voice model to use for the synthesis. If a custom voice model is specified,
+it is guaranteed to work only if it matches the language of the indicated voice. You must make the request with
+service credentials created for the instance of the service that owns the custom model. Omit the parameter to use
+the specified voice with no customization.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -569,9 +606,9 @@ with no customization.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16getPronunciationySS4text_SSSg5voiceAF6formatAF15customizationIDys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getPronunciation(text:voice:format:customizationID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16getPronunciationySS4text_SSSg5voiceAF6formatAF15customizationIDys5Error_pcSg7failureyAA0F0Vc7successtF">getPronunciation(text:voice:format:customizationID:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C16getPronunciationySS4text_SSSg5voiceAF6formatAF15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getPronunciation(text:voice:format:customizationID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16getPronunciationySS4text_SSSg5voiceAF6formatAF15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF">getPronunciation(text:voice:format:customizationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -581,7 +618,7 @@ with no customization.</p>
                       <div class="abstract">
                         <p>Get pronunciation.</p>
 
-<p>Returns the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format.
+<p>Gets the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format.
 You can also request the pronunciation for a specific voice to see the default translation for the language of that
 voice or for a specific custom voice model to see the translation for that voice model.  <strong>Note:</strong> This method is
 currently a beta release.</p>
@@ -596,6 +633,7 @@ currently a beta release.</p>
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Pronunciation.html">Pronunciation</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -651,11 +689,23 @@ default format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The GUID of a custom voice model for which the pronunciation is to be returned. The language of a specified custom
-model must match the language of the specified voice. If the word is not defined in the specified custom model, the
-service returns the default translation for the custom model&rsquo;s language. You must make the request with service
-credentials created for the instance of the service that owns the custom model. Omit the parameter to see the
-translation for the specified voice with no customization.</p>
+                                  <p>The customization ID (GUID) of a custom voice model for which the pronunciation is to be returned. The language of
+a specified custom model must match the language of the specified voice. If the word is not defined in the
+specified custom model, the service returns the default translation for the custom model&rsquo;s language. You must make
+the request with service credentials created for the instance of the service that owns the custom model. Omit the
+parameter to see the translation for the specified voice with no customization.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -692,9 +742,9 @@ translation for the specified voice with no customization.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16createVoiceModelySS4name_SSSg8languageAF11descriptionys5Error_pcSg7failureyAA0fG0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createVoiceModel(name:language:description:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16createVoiceModelySS4name_SSSg8languageAF11descriptionys5Error_pcSg7failureyAA0fG0Vc7successtF">createVoiceModel(name:language:description:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C16createVoiceModelySS4name_SSSg8languageAF11descriptions10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createVoiceModel(name:language:description:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16createVoiceModelySS4name_SSSg8languageAF11descriptions10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF">createVoiceModel(name:language:description:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -717,6 +767,7 @@ credentials are used to create it.  <strong>Note:</strong> This method is curren
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -765,77 +816,12 @@ credentials are used to create it.  <strong>Note:</strong> This method is curren
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>headers</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14TextToSpeechV10abC0C16deleteVoiceModelySS15customizationID_ys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteVoiceModel(customizationID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16deleteVoiceModelySS15customizationID_ys5Error_pcSg7failureyyc7successtF">deleteVoiceModel(customizationID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Delete a custom model.</p>
-
-<p>Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
-model to delete it.  <strong>Note:</strong> This method is currently a beta release.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteVoiceModel</span><span class="p">(</span>
-    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>customizationID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-the service that owns the custom model.</p>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -872,88 +858,9 @@ the service that owns the custom model.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C13getVoiceModelySS15customizationID_ys5Error_pcSg7failureyAA0fG0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getVoiceModel(customizationID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C13getVoiceModelySS15customizationID_ys5Error_pcSg7failureyAA0fG0Vc7successtF">getVoiceModel(customizationID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List a custom model.</p>
-
-<p>Lists all information about a specified custom voice model. In addition to metadata such as the name and
-description of the voice model, the output includes the words and their translations as defined in the model. To
-see just the metadata for a voice model, use the <strong>List custom models</strong> method.   <strong>Note:</strong> This method is
-currently a beta release.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVoiceModel</span><span class="p">(</span>
-    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>customizationID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-the service that owns the custom model.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14TextToSpeechV10abC0C15listVoiceModelsySSSg8language_ys5Error_pcSg7failureyAA0fG0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listVoiceModels(language:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C15listVoiceModelsySSSg8language_ys5Error_pcSg7failureyAA0fG0Vc7successtF">listVoiceModels(language:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C15listVoiceModelsySSSg8language_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listVoiceModels(language:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C15listVoiceModelsySSSg8language_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF">listVoiceModels(language:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -976,6 +883,7 @@ release.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVoiceModels</span><span class="p">(</span>
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/VoiceModels.html">VoiceModels</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1001,6 +909,18 @@ Omit the parameter to see all custom voice models that are owned by the requeste
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1031,9 +951,9 @@ Omit the parameter to see all custom voice models that are owned by the requeste
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16updateVoiceModelySS15customizationID_SSSg4nameAF11descriptionSayAA4WordVGSg5wordsys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateVoiceModel(customizationID:name:description:words:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16updateVoiceModelySS15customizationID_SSSg4nameAF11descriptionSayAA4WordVGSg5wordsys5Error_pcSg7failureyyc7successtF">updateVoiceModel(customizationID:name:description:words:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C16updateVoiceModelySS15customizationID_SSSg4nameAF11descriptionSayAA4WordVGSg5wordss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateVoiceModel(customizationID:name:description:words:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16updateVoiceModelySS15customizationID_SSSg4nameAF11descriptionSayAA4WordVGSg5wordss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">updateVoiceModel(customizationID:name:description:words:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1059,6 +979,7 @@ it.  <strong>Note:</strong> This method is currently a beta release.</p>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Word.html">Word</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1076,8 +997,8 @@ it.  <strong>Note:</strong> This method is currently a beta release.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1121,6 +1042,18 @@ custom voice model. Pass an empty array to make no additions or updates.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1151,9 +1084,389 @@ custom voice model. Pass an empty array to make no additions or updates.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C7addWordySS15customizationID_SS4wordSS11translationSSSg06partOfC0ys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/addWord(customizationID:word:translation:partOfSpeech:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C7addWordySS15customizationID_SS4wordSS11translationSSSg06partOfC0ys5Error_pcSg7failureyyc7successtF">addWord(customizationID:word:translation:partOfSpeech:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C13getVoiceModelySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getVoiceModel(customizationID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C13getVoiceModelySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF">getVoiceModel(customizationID:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a custom model.</p>
+
+<p>Gets all information about a specified custom voice model. In addition to metadata such as the name and description
+of the voice model, the output includes the words and their translations as defined in the model. To see just the
+metadata for a voice model, use the <strong>List custom models</strong> method.   <strong>Note:</strong> This method is currently a beta
+release.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVoiceModel</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C16deleteVoiceModelySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteVoiceModel(customizationID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16deleteVoiceModelySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteVoiceModel(customizationID:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a custom model.</p>
+
+<p>Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
+model to delete it.  <strong>Note:</strong> This method is currently a beta release.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteVoiceModel</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C8addWordsySS15customizationID_SayAA4WordVG5wordss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/addWords(customizationID:words:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C8addWordsySS15customizationID_SayAA4WordVG5wordss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">addWords(customizationID:words:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add custom words.</p>
+
+<p>Adds one or more words and their translations to the specified custom voice model. Adding a new translation for a
+word that already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain
+no more than 20,000 entries.  <strong>Note:</strong> This method is currently a beta release.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addWords</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Word.html">Word</a></span><span class="p">],</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>words</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><strong>When adding words to a custom voice model,</strong> an array of <code><a href="../Structs/Word.html">Word</a></code> objects that provides one or more words that are
+to be added or updated for the custom voice model and the translation for each specified word. <strong>When listing words
+from a custom voice model,</strong> an array of <code><a href="../Structs/Word.html">Word</a></code> objects that lists the words and their translations from the custom
+voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters.
+The array is empty if the custom model contains no words.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C9listWordsySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listWords(customizationID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C9listWordsySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF">listWords(customizationID:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List custom words.</p>
+
+<p>Lists all of the words and their translations for the specified custom voice model. The output shows the
+translations as they are defined in the model.  <strong>Note:</strong> This method is currently a beta release.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listWords</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Words.html">Words</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C7addWordySS15customizationID_SS4wordSS11translationSSSg06partOfC0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/addWord(customizationID:word:translation:partOfSpeech:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C7addWordySS15customizationID_SS4wordSS11translationSSSg06partOfC0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">addWord(customizationID:word:translation:partOfSpeech:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1177,6 +1490,7 @@ more than 20,000 entries.  <strong>Note:</strong> This method is currently a bet
     <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">translation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">partOfSpeech</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1194,8 +1508,8 @@ more than 20,000 entries.  <strong>Note:</strong> This method is currently a bet
                               </td>
                               <td>
                                 <div>
-                                  <p>The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1243,6 +1557,18 @@ Japanese entries</a>.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1273,9 +1599,9 @@ Japanese entries</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8addWordsySS15customizationID_SayAA4WordVG5wordsys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/addWords(customizationID:words:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8addWordsySS15customizationID_SayAA4WordVG5wordsys5Error_pcSg7failureyyc7successtF">addWords(customizationID:words:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C7getWordySS15customizationID_SS4words10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA11TranslationVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getWord(customizationID:word:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C7getWordySS15customizationID_SS4words10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA11TranslationVc7successtF">getWord(customizationID:word:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1283,22 +1609,22 @@ Japanese entries</a>.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Add custom words.</p>
+                        <p>Get a custom word.</p>
 
-<p>Adds one or more words and their translations to the specified custom voice model. Adding a new translation for a
-word that already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain
-no more than 20,000 entries.  <strong>Note:</strong> This method is currently a beta release.</p>
+<p>Gets the translation for a single word from the specified custom model. The output shows the translation as it is
+defined in the model.  <strong>Note:</strong> This method is currently a beta release.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addWords</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getWord</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Word.html">Word</a></span><span class="p">],</span>
+    <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Translation.html">Translation</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1314,24 +1640,32 @@ no more than 20,000 entries.  <strong>Note:</strong> This method is currently a 
                               </td>
                               <td>
                                 <div>
-                                  <p>The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>words</em>
+                                <em>word</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p><strong>When adding words to a custom voice model,</strong> an array of <code><a href="../Structs/Word.html">Word</a></code> objects that provides one or more words that are
-to be added or updated for the custom voice model and the translation for each specified word. <strong>When listing words
-from a custom voice model,</strong> an array of <code><a href="../Structs/Word.html">Word</a></code> objects that lists the words and their translations from the custom
-voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters.
-The array is empty if the custom model contains no words.</p>
+                                  <p>The word that is to be queried from the custom voice model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1368,9 +1702,9 @@ The array is empty if the custom model contains no words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10deleteWordySS15customizationID_SS4wordys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteWord(customizationID:word:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10deleteWordySS15customizationID_SS4wordys5Error_pcSg7failureyyc7successtF">deleteWord(customizationID:word:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C10deleteWordySS15customizationID_SS4words10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteWord(customizationID:word:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10deleteWordySS15customizationID_SS4words10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteWord(customizationID:word:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1390,6 +1724,7 @@ The array is empty if the custom model contains no words.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteWord</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1407,8 +1742,8 @@ The array is empty if the custom model contains no words.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1427,167 +1762,12 @@ the service that owns the custom model.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>headers</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14TextToSpeechV10abC0C7getWordySS15customizationID_SS4wordys5Error_pcSg7failureyAA11TranslationVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getWord(customizationID:word:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C7getWordySS15customizationID_SS4wordys5Error_pcSg7failureyAA11TranslationVc7successtF">getWord(customizationID:word:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List a custom word.</p>
-
-<p>Returns the translation for a single word from the specified custom model. The output shows the translation as it
-is defined in the model.  <strong>Note:</strong> This method is currently a beta release.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getWord</span><span class="p">(</span>
-    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Translation.html">Translation</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>customizationID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-the service that owns the custom model.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>word</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The word that is to be queried from the custom voice model.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14TextToSpeechV10abC0C9listWordsySS15customizationID_ys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listWords(customizationID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C9listWordsySS15customizationID_ys5Error_pcSg7failureyAA0F0Vc7successtF">listWords(customizationID:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List custom words.</p>
-
-<p>Lists all of the words and their translations for the specified custom voice model. The output shows the
-translations as they are defined in the model.  <strong>Note:</strong> This method is currently a beta release.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listWords</span><span class="p">(</span>
-    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Words.html">Words</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>customizationID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The GUID of the custom voice model. You must make the request with service credentials created for the instance of
-the service that owns the custom model.</p>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1626,8 +1806,8 @@ the service that owns the custom model.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -16,7 +16,7 @@
 
 import Foundation
 
-/** Provides information about the gender of the face. */
+/** Information about the gender of the face. */
 public struct FaceGender: Decodable {
 
     /// Gender identified by the face. For example, `MALE` or `FEMALE`.

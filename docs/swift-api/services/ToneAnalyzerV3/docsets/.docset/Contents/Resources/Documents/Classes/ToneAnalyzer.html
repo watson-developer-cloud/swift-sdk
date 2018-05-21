@@ -104,7 +104,9 @@
 The service can analyze tone at both the document and sentence levels. You can use the service to understand how your
 written communications are perceived and then to improve the tone of your communications. Businesses can use the
 service to learn the tone of their customers&rsquo; communications and to respond to each customer appropriately, or to
-understand and improve their customer conversations.</p>
+understand and improve their customer conversations.
+<strong>Note:</strong> Request logging is disabled for the Tone Analyzer service. The service neither logs nor retains data from
+requests and responses, regardless of whether the <code>X-Watson-Learning-Opt-Out</code> request header is set.</p>
 
           </section>
           <section class="section task-group-section">
@@ -130,7 +132,7 @@ understand and improve their customer conversations.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/tone-analyzer/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -157,7 +159,7 @@ understand and improve their customer conversations.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -238,9 +240,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:failure:success:)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -272,6 +274,7 @@ service removes HTML tags and analyzes only the textual content.</p>
     <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -354,6 +357,18 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -384,9 +399,9 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/tone(text:sentences:tones:contentLanguage:acceptLanguage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(text:sentences:tones:contentLanguage:acceptLanguage:failure:success:)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -418,6 +433,7 @@ service removes HTML tags and analyzes only the textual content.</p>
     <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -500,6 +516,18 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -530,9 +558,9 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/tone(html:sentences:tones:contentLanguage:acceptLanguage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0ys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(html:sentences:tones:contentLanguage:acceptLanguage:failure:success:)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -564,6 +592,7 @@ service removes HTML tags and analyzes only the textual content.</p>
     <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -646,6 +675,18 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -676,9 +717,9 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C8toneChatySayAA9UtteranceVG10utterances_SSSg15contentLanguageAI06acceptI0ys5Error_pcSg7failureyAA0F8AnalysesVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/toneChat(utterances:contentLanguage:acceptLanguage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C8toneChatySayAA9UtteranceVG10utterances_SSSg15contentLanguageAI06acceptI0ys5Error_pcSg7failureyAA0F8AnalysesVc7successtF">toneChat(utterances:contentLanguage:acceptLanguage:failure:success:)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C8toneChatySayAA9UtteranceVG10utterances_SSSg15contentLanguageAI06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F8AnalysesVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/toneChat(utterances:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C8toneChatySayAA9UtteranceVG10utterances_SSSg15contentLanguageAI06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F8AnalysesVc7successtF">toneChat(utterances:contentLanguage:acceptLanguage:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -705,6 +746,7 @@ specification, the default character encoding for JSON content is effectively al
     <span class="nv">utterances</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Utterance.html">Utterance</a></span><span class="p">],</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/UtteranceAnalyses.html">UtteranceAnalyses</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -758,6 +800,18 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -790,8 +844,8 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

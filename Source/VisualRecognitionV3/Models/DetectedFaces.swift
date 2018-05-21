@@ -16,13 +16,13 @@
 
 import Foundation
 
-/** DetectedFaces. */
+/** Results for all faces. */
 public struct DetectedFaces: Decodable {
 
     /// Number of images processed for the API call.
     public var imagesProcessed: Int?
 
-    /// The array of images.
+    /// The images.
     public var images: [ImageWithFaces]
 
     /// Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.

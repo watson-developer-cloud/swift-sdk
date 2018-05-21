@@ -16,16 +16,16 @@
 
 import Foundation
 
-/** Classify results for multiple images. */
+/** Results for all images. */
 public struct ClassifiedImages: Decodable {
 
-    /// The number of custom classes identified in the images.
+    /// Number of custom classes identified in the images.
     public var customClasses: Int?
 
     /// Number of images processed for the API call.
     public var imagesProcessed: Int?
 
-    /// The array of classified images.
+    /// Classified images.
     public var images: [ClassifiedImage]
 
     /// Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.

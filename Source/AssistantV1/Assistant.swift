@@ -38,7 +38,7 @@ public class Assistant {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
-     in "YYYY-MM-DD" format.
+       in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
         self.credentials = .basicAuthentication(username: username, password: password)
@@ -69,14 +69,14 @@ public class Assistant {
             return nil  // RestKit will generate error for this case
         }
 
+        let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             let userInfo = [NSLocalizedDescriptionKey: message]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
-            return nil
+            return NSError(domain: domain, code: code, userInfo: nil)
         }
     }
 
@@ -90,6 +90,7 @@ public class Assistant {
      last response.
      - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that were visited during processing of
      the message.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -97,6 +98,7 @@ public class Assistant {
         workspaceID: String,
         request: MessageRequest? = nil,
         nodesVisitedDetails: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (MessageResponse) -> Void)
     {
@@ -107,9 +109,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -129,7 +134,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -156,6 +161,7 @@ public class Assistant {
      sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -165,12 +171,16 @@ public class Assistant {
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (WorkspaceCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -201,7 +211,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + "/v1/workspaces",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -224,11 +234,13 @@ public class Assistant {
 
      - parameter properties: The content of the new workspace.    The maximum size for this data is 50MB. If you need to import a larger
      workspace, consider importing the workspace without intents and entities and then adding them separately.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func createWorkspace(
         properties: CreateWorkspace? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Workspace) -> Void)
     {
@@ -239,9 +251,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -252,7 +267,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + "/v1/workspaces",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -278,6 +293,7 @@ public class Assistant {
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
      information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -285,12 +301,16 @@ public class Assistant {
         workspaceID: String,
         export: Bool? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (WorkspaceExport) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -314,7 +334,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -344,6 +364,7 @@ public class Assistant {
      example, if the new data includes **entities** and **append**=`false`, all existing entities in the workspace are
      discarded and replaced with the new entities.    If **append**=`true`, existing elements are preserved, and the new
      elements are added. If any elements in the new data collide with existing elements, the update request fails.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -351,6 +372,7 @@ public class Assistant {
         workspaceID: String,
         properties: UpdateWorkspace? = nil,
         append: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Workspace) -> Void)
     {
@@ -361,9 +383,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -383,7 +408,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -405,17 +430,22 @@ public class Assistant {
      information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteWorkspace(
         workspaceID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -431,7 +461,7 @@ public class Assistant {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -461,6 +491,7 @@ public class Assistant {
      sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -472,12 +503,16 @@ public class Assistant {
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (IntentCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -517,7 +552,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -544,6 +579,7 @@ public class Assistant {
      - parameter description: The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must
      be no longer than 128 characters.
      - parameter examples: An array of user input examples for the intent.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -552,6 +588,7 @@ public class Assistant {
         intent: String,
         description: String? = nil,
         examples: [CreateExample]? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Intent) -> Void)
     {
@@ -563,9 +600,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -581,7 +621,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -608,6 +648,7 @@ public class Assistant {
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
      information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -616,12 +657,16 @@ public class Assistant {
         intent: String,
         export: Bool? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (IntentExport) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -645,7 +690,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -673,6 +718,7 @@ public class Assistant {
      must be no longer than 128 characters.
      - parameter newDescription: The description of the intent.
      - parameter newExamples: An array of user input examples for the intent.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -682,6 +728,7 @@ public class Assistant {
         newIntent: String? = nil,
         newDescription: String? = nil,
         newExamples: [CreateExample]? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Intent) -> Void)
     {
@@ -693,9 +740,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -711,7 +761,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -734,18 +784,23 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteIntent(
         workspaceID: String,
         intent: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -761,7 +816,7 @@ public class Assistant {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -789,6 +844,7 @@ public class Assistant {
      sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -800,12 +856,16 @@ public class Assistant {
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ExampleCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -841,7 +901,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -866,6 +926,7 @@ public class Assistant {
      - parameter text: The text of a user input example. This string must conform to the following restrictions:  - It cannot contain
      carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no
      longer than 1024 characters.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -873,6 +934,7 @@ public class Assistant {
         workspaceID: String,
         intent: String,
         text: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Example) -> Void)
     {
@@ -884,9 +946,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -902,7 +967,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -927,6 +992,7 @@ public class Assistant {
      - parameter intent: The intent name.
      - parameter text: The text of the user input example.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -935,12 +1001,16 @@ public class Assistant {
         intent: String,
         text: String,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Example) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -960,7 +1030,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -986,6 +1056,7 @@ public class Assistant {
      - parameter newText: The text of the user input example. This string must conform to the following restrictions:  - It cannot contain
      carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no
      longer than 1024 characters.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -994,6 +1065,7 @@ public class Assistant {
         intent: String,
         text: String,
         newText: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Example) -> Void)
     {
@@ -1005,9 +1077,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1023,7 +1098,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1047,6 +1122,7 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
      - parameter text: The text of the user input example.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1054,12 +1130,16 @@ public class Assistant {
         workspaceID: String,
         intent: String,
         text: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1075,7 +1155,7 @@ public class Assistant {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1093,7 +1173,7 @@ public class Assistant {
      List counterexamples.
 
      List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
-     This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
+      This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
@@ -1102,6 +1182,7 @@ public class Assistant {
      sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1112,12 +1193,16 @@ public class Assistant {
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (CounterexampleCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1153,7 +1238,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1177,12 +1262,14 @@ public class Assistant {
      - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following restrictions:  - It
      cannot contain carriage return, newline, or tab characters  - It cannot consist of only whitespace characters  - It
      must be no longer than 1024 characters.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func createCounterexample(
         workspaceID: String,
         text: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Counterexample) -> Void)
     {
@@ -1194,9 +1281,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1212,7 +1302,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1236,6 +1326,7 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1243,12 +1334,16 @@ public class Assistant {
         workspaceID: String,
         text: String,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Counterexample) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1268,7 +1363,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1291,6 +1386,7 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
      - parameter newText: The text of a user input counterexample.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1298,6 +1394,7 @@ public class Assistant {
         workspaceID: String,
         text: String,
         newText: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Counterexample) -> Void)
     {
@@ -1309,9 +1406,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1327,7 +1427,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1346,22 +1446,27 @@ public class Assistant {
      Delete counterexample.
 
      Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteCounterexample(
         workspaceID: String,
         text: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1377,7 +1482,7 @@ public class Assistant {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1407,6 +1512,7 @@ public class Assistant {
      sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1418,12 +1524,16 @@ public class Assistant {
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (EntityCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1463,7 +1573,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1485,12 +1595,14 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter properties: The content of the new entity.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func createEntity(
         workspaceID: String,
         properties: CreateEntity,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Entity) -> Void)
     {
@@ -1501,9 +1613,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1519,7 +1634,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1546,6 +1661,7 @@ public class Assistant {
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
      information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1554,12 +1670,16 @@ public class Assistant {
         entity: String,
         export: Bool? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (EntityExport) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1583,7 +1703,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1610,6 +1730,7 @@ public class Assistant {
      existing elements, including all subelements. (Previously existing subelements are not retained unless they are
      also included in the new data.) For example, if you update the values for an entity, the previously existing values
      are discarded and replaced with the new values specified in the update.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1617,6 +1738,7 @@ public class Assistant {
         workspaceID: String,
         entity: String,
         properties: UpdateEntity,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Entity) -> Void)
     {
@@ -1627,9 +1749,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1645,7 +1770,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1668,18 +1793,23 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteEntity(
         workspaceID: String,
         entity: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1695,7 +1825,7 @@ public class Assistant {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1725,6 +1855,7 @@ public class Assistant {
      sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1737,12 +1868,16 @@ public class Assistant {
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ValueCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1782,7 +1917,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1805,6 +1940,7 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
      - parameter properties: The new entity value.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1812,6 +1948,7 @@ public class Assistant {
         workspaceID: String,
         entity: String,
         properties: CreateValue,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
@@ -1822,9 +1959,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1840,7 +1980,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1867,6 +2007,7 @@ public class Assistant {
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only
      information about the element itself. If **export**=`true`, all content, including subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1876,12 +2017,16 @@ public class Assistant {
         value: String,
         export: Bool? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ValueExport) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1905,7 +2050,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -1933,6 +2078,7 @@ public class Assistant {
      equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless
      they are also included in the new data.) For example, if you update the synonyms for an entity value, the
      previously existing synonyms are discarded and replaced with the new synonyms specified in the update.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -1941,6 +2087,7 @@ public class Assistant {
         entity: String,
         value: String,
         properties: UpdateValue,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
@@ -1951,9 +2098,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1969,7 +2119,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -1993,6 +2143,7 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2000,12 +2151,16 @@ public class Assistant {
         workspaceID: String,
         entity: String,
         value: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2021,7 +2176,7 @@ public class Assistant {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2050,6 +2205,7 @@ public class Assistant {
      sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2062,12 +2218,16 @@ public class Assistant {
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SynonymCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2103,7 +2263,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2129,6 +2289,7 @@ public class Assistant {
      - parameter synonym: The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage
      return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer
      than 64 characters.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2137,6 +2298,7 @@ public class Assistant {
         entity: String,
         value: String,
         synonym: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Synonym) -> Void)
     {
@@ -2148,9 +2310,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2166,7 +2331,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2192,6 +2357,7 @@ public class Assistant {
      - parameter value: The text of the entity value.
      - parameter synonym: The text of the synonym.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2201,12 +2367,16 @@ public class Assistant {
         value: String,
         synonym: String,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Synonym) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2226,7 +2396,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2253,6 +2423,7 @@ public class Assistant {
      - parameter newSynonym: The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage
      return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer
      than 64 characters.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2262,6 +2433,7 @@ public class Assistant {
         value: String,
         synonym: String,
         newSynonym: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Synonym) -> Void)
     {
@@ -2273,9 +2445,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2291,7 +2466,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2316,6 +2491,7 @@ public class Assistant {
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter synonym: The text of the synonym.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2324,12 +2500,16 @@ public class Assistant {
         entity: String,
         value: String,
         synonym: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2345,7 +2525,7 @@ public class Assistant {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2372,6 +2552,7 @@ public class Assistant {
      sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2382,12 +2563,16 @@ public class Assistant {
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogNodeCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2423,7 +2608,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2445,12 +2630,14 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter properties: A CreateDialogNode object defining the content of the new dialog node.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func createDialogNode(
         workspaceID: String,
         properties: CreateDialogNode,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogNode) -> Void)
     {
@@ -2461,9 +2648,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2479,7 +2669,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2503,6 +2693,7 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2510,12 +2701,16 @@ public class Assistant {
         workspaceID: String,
         dialogNode: String,
         includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogNode) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2535,7 +2730,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2561,6 +2756,7 @@ public class Assistant {
      equivalent existing elements, including all subelements. (Previously existing subelements are not retained unless
      they are also included in the new data.) For example, if you update the actions for a dialog node, the previously
      existing actions are discarded and replaced with the new actions specified in the update.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2568,6 +2764,7 @@ public class Assistant {
         workspaceID: String,
         dialogNode: String,
         properties: UpdateDialogNode,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogNode) -> Void)
     {
@@ -2578,9 +2775,12 @@ public class Assistant {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2596,7 +2796,7 @@ public class Assistant {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -2619,18 +2819,23 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteDialogNode(
         workspaceID: String,
         dialogNode: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2646,7 +2851,7 @@ public class Assistant {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2674,6 +2879,7 @@ public class Assistant {
      [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter cursor: A token identifying the page of results to retrieve.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2683,12 +2889,16 @@ public class Assistant {
         filter: String? = nil,
         pageLimit: Int? = nil,
         cursor: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (LogCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2720,7 +2930,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2749,6 +2959,7 @@ public class Assistant {
      sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter cursor: A token identifying the page of results to retrieve.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -2757,12 +2968,16 @@ public class Assistant {
         sort: String? = nil,
         pageLimit: Int? = nil,
         cursor: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (LogCollection) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2786,7 +3001,7 @@ public class Assistant {
             method: "GET",
             url: serviceURL + "/v1/logs",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
@@ -2795,6 +3010,56 @@ public class Assistant {
             (response: RestResponse<LogCollection>) in
             switch response.result {
             case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete labeled data.
+
+     Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+     the customer ID.   You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request
+     that passes data. For more information about personal data and customer IDs, see [Information
+     security](https://console.bluemix.net/docs/services/conversation/information-security.html).
+
+     - parameter customerID: The customer ID for which all data is to be deleted.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteUserData(
+        customerID: String,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/user_data",
+            credentials: credentials,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }

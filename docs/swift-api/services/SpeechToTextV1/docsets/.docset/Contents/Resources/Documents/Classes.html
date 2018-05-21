@@ -10,6 +10,7 @@
     
   </head>
   <body>
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
@@ -210,6 +211,90 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:14SpeechToTextV10abC0C"></a>
+                    <a name="//apple_ref/swift/Class/SpeechToText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C">SpeechToText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The IBM Speech to Text service provides an API that enables you to add IBM&rsquo;s speech recognition capabilities to
+your applications. The service transcribes speech from various languages and audio formats to text with low latency.
+For most languages, the service supports two sampling rates, broadband and narrowband. The service returns all JSON
+response content in the UTF-8 character set. For more information about the service, see the <a href="https://console.bluemix.net/docs/services/speech-to-text/getting-started.html">IBM Cloud
+documentation</a>.</p>
+<h3 id='api-overview' class='heading'>API Overview</h3>
+
+<p>The Speech to Text service provides the following endpoints:</p>
+
+<ul>
+<li><strong>Models</strong> includes methods that return information about the language models that are available for speech
+recognition.</li>
+<li><strong>WebSockets</strong> includes a single method that establishes a persistent connection with the service over the WebSocket
+protocol.</li>
+<li><strong>Sessionless</strong> includes a method that provides a simple means of transcribing audio without the overhead of
+establishing and maintaining a session.</li>
+<li><strong>Sessions</strong> provides methods that allow a client to maintain a long, multi-turn exchange, or session, with the
+service or to establish multiple parallel conversations with a particular instance of the service.</li>
+<li><strong>Asynchronous</strong> provides a non-blocking interface for transcribing audio. You can register a callback URL to be
+notified of job status and, optionally, results, or you can poll the service to learn job status and retrieve results
+manually.</li>
+<li><strong>Custom language models</strong> provides an interface for creating and managing custom language models. The interface lets
+you expand the vocabulary of a base model with domain-specific terminology.</li>
+<li><strong>Custom corpora</strong> provides an interface for managing the corpora associated with a custom language model. You add
+corpora to extract out-of-vocabulary (OOV) words from the corpora into the custom language model&rsquo;s vocabulary. You can
+add, list, and delete corpora from a custom language model.</li>
+<li><strong>Custom words</strong> provides an interface for managing individual words in a custom language model. You can add, modify,
+list, and delete words from a custom language model.</li>
+<li><strong>Custom acoustic models</strong> provides an interface for creating and managing custom acoustic models. The interface lets
+you adapt a base model for the audio characteristics of your environment and speakers.</li>
+<li><strong>Custom audio resources</strong> provides an interface for managing the audio resources associated with a custom acoustic
+model. You add audio resources that closely match the acoustic characteristics of the audio that you want to
+transcribe. You can add, list, and delete audio resources from a custom acoustic model.
+### Usage guidelines for customization
+The following information pertains to methods of the customization interface:</li>
+<li>Language model customization is not available for all languages; it is generally available for production use for all
+languages for which it is available. Acoustic model customization is beta functionality that is available for all
+languages supported by the service. For a complete list of supported languages and the status of their availability,
+see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport">Language support for
+customization</a>.</li>
+<li>In all cases, you must use service credentials created for the instance of the service that owns a custom model to
+use the methods described in this documentation with that model. For more information, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#customOwner">Ownership of custom
+language models</a>.</li>
+<li>How the service handles request logging for the customization interface depends on the request. The service does not
+log data that are used to build custom models. But it does log data when a custom model is used with a recognition
+request. For more information, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#customLogging">Request logging and data
+privacy</a>.</li>
+<li>Each custom model is identified by a customization ID, which is a Globally Unique Identifier (GUID). A GUID is a
+hexadecimal string that has the same format as Watson service credentials: <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>. You
+specify a custom model&rsquo;s GUID with the appropriate customization parameter of methods that support customization.
+For more information about using the service&rsquo;s customization interface, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html">The customization
+interface</a>.</li>
+</ul>
+
+                        <a href="Classes/SpeechToText.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SpeechToText</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:14SpeechToTextV10abC7SessionC"></a>
                     <a name="//apple_ref/swift/Class/SpeechToTextSession" class="dashAnchor"></a>
                     <a class="token" href="#/s:14SpeechToTextV10abC7SessionC">SpeechToTextSession</a>
@@ -244,97 +329,11 @@ and customizability of the session.</p>
                 </li>
               </ul>
             </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14SpeechToTextV10abC0C"></a>
-                    <a name="//apple_ref/swift/Class/SpeechToText" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C">SpeechToText</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The IBM Watson Speech to Text service provides an API that enables you to add IBM&rsquo;s speech recognition capabilities to
-your applications. The service transcribes speech from various languages and audio formats to text with low latency.
-For most languages, the service supports two sampling rates, broadband and narrowband. The service returns all JSON
-response content in the UTF-8 character set.</p>
-
-<p>The Speech to Text service provides the following endpoints:</p>
-
-<ul>
-<li><strong>Models</strong> includes methods that return information about the language models that are available for speech
-recognition.</li>
-<li><strong>WebSockets</strong> includes a single method that establishes a persistent connection with the service over the WebSocket
-protocol.</li>
-<li><strong>Sessionless</strong> includes a method that provides a simple means of transcribing audio without the overhead of
-establishing and maintaining a session.</li>
-<li><strong>Sessions</strong> provides methods that allow a client to maintain a long, multi-turn exchange, or session, with the
-service or to establish multiple parallel conversations with a particular instance of the service.</li>
-<li><strong>Asynchronous</strong> provides a non-blocking interface for transcribing audio. You can register a callback URL to be
-notified of job status and, optionally, results, or you can poll the service to learn job status and retrieve results
-manually.</li>
-<li><strong>Custom language models</strong> provides an interface for creating and managing custom language models. The interface lets
-you expand the vocabulary of a base model with domain-specific terminology.</li>
-<li><strong>Custom corpora</strong> provides an interface for managing the corpora associated with a custom language model. You add
-corpora to extract out-of-vocabulary (OOV) words from the corpora into the custom language model&rsquo;s vocabulary. You can
-add, list, and delete corpora from a custom language model.</li>
-<li><strong>Custom words</strong> provides an interface for managing individual words in a custom language model. You can add, modify,
-list, and delete words from a custom language model.</li>
-<li><strong>Custom acoustic models</strong> provides an interface for creating and managing custom acoustic models. The interface lets
-you adapt a base model for the audio characteristics of your environment and speakers.</li>
-<li><strong>Custom audio resources</strong> provides an interface for managing the audio resources associated with a custom acoustic
-model. You add audio resources that closely match the acoustic characteristics of the audio that you want to
-transcribe. You can add, list, and delete audio resources from a custom acoustic model.</li>
-</ul>
-<h3 id='usage-guidelines-for-customization' class='heading'>Usage guidelines for customization</h3>
-
-<p>The following information pertains to methods of the customization interface:</p>
-
-<ul>
-<li>Language model customization and acoustic model customization are available only for a limited set of languages. They
-are generally available for production use for some languages but are beta offerings for other languages. For a
-complete list of supported languages and the status of their availability, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport">Language support for
-customization</a>.</li>
-<li>In all cases, you must use service credentials created for the instance of the service that owns a custom model to
-use the methods described in this documentation with that model. For more information, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#customOwner">Ownership of custom
-language models</a>.</li>
-<li>How the service handles request logging for the customization interface depends on the request. The service does not
-log data that are used to build custom models. But it does log data when a custom model is used with a recognition
-request. For more information, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#customLogging">Request logging and data
-privacy</a>.</li>
-<li>Each custom model is identified by a customization ID, which is a Globally Unique Identifier (GUID). A GUID is a
-hexadecimal string that has the same format as Watson service credentials: <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>. You
-specify a custom model&rsquo;s GUID with the appropriate customization parameter of methods that support customization.</li>
-</ul>
-
-<p>For more information about using the service&rsquo;s customization interface, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html">The customization
-interface</a>.</p>
-
-                        <a href="Classes/SpeechToText.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SpeechToText</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

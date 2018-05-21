@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## Version 0.26.0
+_2018-05-17_
+
+This release regenerates all services. It includes updates to the documentation and some minor new service features.
+
+This release includes the following new features and bug fixes:
+
+- Adds a `headers`  parameter to all service methods that can be used to pass request headers to be sent with the request.
+- Adds a `deleteUserData` method in some services to allow deletion of data associated with a specified `customer_id`.
+
 ## Version 0.25.0
 _2018-04-26_
 

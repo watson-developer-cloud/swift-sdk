@@ -16,7 +16,7 @@
 
 import Foundation
 
-/** Provides age information about a face. */
+/** Age information about a face. */
 public struct FaceAge: Decodable {
 
     /// Estimated minimum age.

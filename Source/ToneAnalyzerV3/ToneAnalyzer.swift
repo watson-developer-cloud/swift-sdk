@@ -22,6 +22,8 @@ import Foundation
  written communications are perceived and then to improve the tone of your communications. Businesses can use the
  service to learn the tone of their customers' communications and to respond to each customer appropriately, or to
  understand and improve their customer conversations.
+ **Note:** Request logging is disabled for the Tone Analyzer service. The service neither logs nor retains data from
+ requests and responses, regardless of whether the `X-Watson-Learning-Opt-Out` request header is set.
  */
 public class ToneAnalyzer {
 
@@ -41,7 +43,7 @@ public class ToneAnalyzer {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
-     in "YYYY-MM-DD" format.
+       in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
         self.credentials = .basicAuthentication(username: username, password: password)
@@ -72,14 +74,14 @@ public class ToneAnalyzer {
             return nil  // RestKit will generate error for this case
         }
 
+        let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let code = response?.statusCode ?? 400
             let message = try json.getString(at: "error")
             let userInfo = [NSLocalizedDescriptionKey: message]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
-            return nil
+            return NSError(domain: domain, code: code, userInfo: nil)
         }
     }
 
@@ -112,6 +114,7 @@ public class ToneAnalyzer {
      - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
      language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language** and
      **Accept-Language**.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -121,6 +124,7 @@ public class ToneAnalyzer {
         tones: [String]? = nil,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ToneAnalysis) -> Void)
     {
@@ -131,14 +135,17 @@ public class ToneAnalyzer {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
         if let contentLanguage = contentLanguage {
-            headers["Content-Language"] = contentLanguage
+            headerParameters["Content-Language"] = contentLanguage
         }
         if let acceptLanguage = acceptLanguage {
-            headers["Accept-Language"] = acceptLanguage
+            headerParameters["Accept-Language"] = acceptLanguage
         }
 
         // construct query parameters
@@ -158,7 +165,7 @@ public class ToneAnalyzer {
             method: "POST",
             url: serviceURL + "/v3/tone",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -202,6 +209,7 @@ public class ToneAnalyzer {
      - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
      language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language** and
      **Accept-Language**.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -211,6 +219,7 @@ public class ToneAnalyzer {
         tones: [String]? = nil,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ToneAnalysis) -> Void)
     {
@@ -221,14 +230,17 @@ public class ToneAnalyzer {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "text/plain"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "text/plain"
         if let contentLanguage = contentLanguage {
-            headers["Content-Language"] = contentLanguage
+            headerParameters["Content-Language"] = contentLanguage
         }
         if let acceptLanguage = acceptLanguage {
-            headers["Accept-Language"] = acceptLanguage
+            headerParameters["Accept-Language"] = acceptLanguage
         }
 
         // construct query parameters
@@ -248,7 +260,7 @@ public class ToneAnalyzer {
             method: "POST",
             url: serviceURL + "/v3/tone",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -292,6 +304,7 @@ public class ToneAnalyzer {
      - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
      language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language** and
      **Accept-Language**.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -301,6 +314,7 @@ public class ToneAnalyzer {
         tones: [String]? = nil,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ToneAnalysis) -> Void)
     {
@@ -311,14 +325,17 @@ public class ToneAnalyzer {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "text/plain"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "text/html"
         if let contentLanguage = contentLanguage {
-            headers["Content-Language"] = contentLanguage
+            headerParameters["Content-Language"] = contentLanguage
         }
         if let acceptLanguage = acceptLanguage {
-            headers["Accept-Language"] = acceptLanguage
+            headerParameters["Accept-Language"] = acceptLanguage
         }
 
         // construct query parameters
@@ -338,7 +355,7 @@ public class ToneAnalyzer {
             method: "POST",
             url: serviceURL + "/v3/tone",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
@@ -372,6 +389,7 @@ public class ToneAnalyzer {
      - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
      language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language** and
      **Accept-Language**.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
@@ -379,6 +397,7 @@ public class ToneAnalyzer {
         utterances: [Utterance],
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (UtteranceAnalyses) -> Void)
     {
@@ -390,14 +409,17 @@ public class ToneAnalyzer {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
         if let contentLanguage = contentLanguage {
-            headers["Content-Language"] = contentLanguage
+            headerParameters["Content-Language"] = contentLanguage
         }
         if let acceptLanguage = acceptLanguage {
-            headers["Accept-Language"] = acceptLanguage
+            headerParameters["Accept-Language"] = acceptLanguage
         }
 
         // construct query parameters
@@ -409,7 +431,7 @@ public class ToneAnalyzer {
             method: "POST",
             url: serviceURL + "/v3/tone_chat",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )

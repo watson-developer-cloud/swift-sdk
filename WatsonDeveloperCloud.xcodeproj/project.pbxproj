@@ -227,7 +227,6 @@
 		689A169B203C88C7002CFC66 /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A168B203C88C6002CFC66 /* Classifier.swift */; };
 		689A169C203C88C7002CFC66 /* Face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A168C203C88C7002CFC66 /* Face.swift */; };
 		689A169D203C88C7002CFC66 /* ClassifiedImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A168D203C88C7002CFC66 /* ClassifiedImages.swift */; };
-		689A169F203C89A6002CFC66 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A169E203C89A6002CFC66 /* Parameters.swift */; };
 		689A16A1203C89F5002CFC66 /* PositiveExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A0203C89F5002CFC66 /* PositiveExample.swift */; };
 		689A16A3203C9337002CFC66 /* VisualRecognition+UIImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */; };
 		689A16A5203C9358002CFC66 /* VisualRecognition+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A16A4203C9358002CFC66 /* VisualRecognition+UIImage.swift */; };
@@ -561,6 +560,7 @@
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
+		CAF9A5C420ACED3E006C86B7 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */; };
 		CE6B98D41DF09D4B004CD6B5 /* face1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98D31DF09D4B004CD6B5 /* face1.jpg */; };
 		CE6B98DC1DF22638004CD6B5 /* metadata.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98DB1DF22638004CD6B5 /* metadata.txt */; };
 		CE75BAA91DDE5F2F006EBB51 /* KennedySpeech.html in Resources */ = {isa = PBXBuildFile; fileRef = CE75BAA81DDE5F2F006EBB51 /* KennedySpeech.html */; };
@@ -943,7 +943,6 @@
 		689A168B203C88C6002CFC66 /* Classifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 		689A168C203C88C7002CFC66 /* Face.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Face.swift; sourceTree = "<group>"; };
 		689A168D203C88C7002CFC66 /* ClassifiedImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifiedImages.swift; sourceTree = "<group>"; };
-		689A169E203C89A6002CFC66 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		689A16A0203C89F5002CFC66 /* PositiveExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PositiveExample.swift; sourceTree = "<group>"; };
 		689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "VisualRecognition+UIImageTests.swift"; path = "Tests/VisualRecognitionV3Tests/VisualRecognition+UIImageTests.swift"; sourceTree = SOURCE_ROOT; };
 		689A16A4203C9358002CFC66 /* VisualRecognition+UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VisualRecognition+UIImage.swift"; sourceTree = "<group>"; };
@@ -1199,6 +1198,7 @@
 		CA151FA0200EE0CF00DBA44F /* carz.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = carz.zip; sourceTree = "<group>"; };
 		CA45954820A62FBE0060BF9B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CA45954920A630080060BF9B /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = .github/CONTRIBUTING.md; sourceTree = "<group>"; };
+		CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		CE6B98D31DF09D4B004CD6B5 /* face1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face1.jpg; sourceTree = "<group>"; };
 		CE6B98DB1DF22638004CD6B5 /* metadata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = metadata.txt; sourceTree = "<group>"; };
 		CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trained_meta.txt; sourceTree = "<group>"; };
@@ -1789,6 +1789,7 @@
 				7A0F97301C232CB5004C01C0 /* Frameworks */,
 				7A0F95B41C23288E004C01C0 /* Products */,
 				CA45954820A62FBE0060BF9B /* README.md */,
+				CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */,
 				CA45954920A630080060BF9B /* CONTRIBUTING.md */,
 			);
 			sourceTree = "<group>";
@@ -2098,7 +2099,6 @@
 				689A167E203C88C6002CFC66 /* FaceIdentity.swift */,
 				689A1680203C88C6002CFC66 /* FaceLocation.swift */,
 				689A1681203C88C6002CFC66 /* ImageWithFaces.swift */,
-				689A169E203C89A6002CFC66 /* Parameters.swift */,
 				689A16A0203C89F5002CFC66 /* PositiveExample.swift */,
 				689A1688203C88C6002CFC66 /* WarningInfo.swift */,
 			);
@@ -2996,6 +2996,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF9A5C420ACED3E006C86B7 /* CHANGELOG.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3836,7 +3837,6 @@
 				68BC28FB1F8C350A0042810E /* RestRequest.swift in Sources */,
 				689A1699203C88C7002CFC66 /* ClassifierResult.swift in Sources */,
 				68BC28FD1F8C350A0042810E /* RestUtilities.swift in Sources */,
-				689A169F203C89A6002CFC66 /* Parameters.swift in Sources */,
 				689A1694203C88C7002CFC66 /* ClassifiedImage.swift in Sources */,
 				68BC28FA1F8C350A0042810E /* RestError.swift in Sources */,
 				689A168E203C88C7002CFC66 /* FaceIdentity.swift in Sources */,

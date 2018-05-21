@@ -66,15 +66,15 @@ public class NaturalLanguageClassifier {
             return nil  // RestKit will generate error for this case
         }
 
+        let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let code = response?.statusCode ?? 400
             let error = try? json.getString(at: "error")
             let description = try? json.getString(at: "description")
             let userInfo = [NSLocalizedDescriptionKey: error ?? "", NSLocalizedFailureReasonErrorKey: description ?? ""]
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
-            return nil
+            return NSError(domain: domain, code: code, userInfo: nil)
         }
     }
 
@@ -86,12 +86,14 @@ public class NaturalLanguageClassifier {
 
      - parameter classifierID: Classifier ID to use.
      - parameter text: The submitted phrase.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func classify(
         classifierID: String,
         text: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classification) -> Void)
     {
@@ -103,9 +105,12 @@ public class NaturalLanguageClassifier {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify"
@@ -117,7 +122,7 @@ public class NaturalLanguageClassifier {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             messageBody: body
         )
 
@@ -139,12 +144,14 @@ public class NaturalLanguageClassifier {
 
      - parameter classifierID: Classifier ID to use.
      - parameter collection: The submitted phrases.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func classifyCollection(
         classifierID: String,
         collection: [ClassifyInput],
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassificationCollection) -> Void)
     {
@@ -156,9 +163,12 @@ public class NaturalLanguageClassifier {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify_collection"
@@ -170,7 +180,7 @@ public class NaturalLanguageClassifier {
             method: "POST",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             messageBody: body
         )
 
@@ -196,12 +206,14 @@ public class NaturalLanguageClassifier {
      - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000
      records. For details, see [Data
      preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func createClassifier(
         metadata: URL,
         trainingData: URL,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
@@ -215,16 +227,19 @@ public class NaturalLanguageClassifier {
         }
 
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
-        headers["Content-Type"] = multipartFormData.contentType
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
 
         // construct REST request
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/classifiers",
             credentials: credentials,
-            headerParameters: headers,
+            headerParameters: headerParameters,
             messageBody: body
         )
 
@@ -243,23 +258,28 @@ public class NaturalLanguageClassifier {
 
      Returns an empty array if no classifiers are available.
 
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listClassifiers(
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifierList) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/classifiers",
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -278,17 +298,22 @@ public class NaturalLanguageClassifier {
      Returns status and other information about a classifier.
 
      - parameter classifierID: Classifier ID to query.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func getClassifier(
         classifierID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Classifier) -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
@@ -300,7 +325,7 @@ public class NaturalLanguageClassifier {
             method: "GET",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request
@@ -317,17 +342,22 @@ public class NaturalLanguageClassifier {
      Delete classifier.
 
      - parameter classifierID: Classifier ID to delete.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func deleteClassifier(
         classifierID: String,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
     {
         // construct header parameters
-        var headers = defaultHeaders
-        headers["Accept"] = "application/json"
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
 
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
@@ -339,7 +369,7 @@ public class NaturalLanguageClassifier {
             method: "DELETE",
             url: serviceURL + encodedPath,
             credentials: credentials,
-            headerParameters: headers
+            headerParameters: headerParameters
         )
 
         // execute REST request

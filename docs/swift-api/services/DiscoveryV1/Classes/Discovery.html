@@ -396,7 +396,7 @@ filtering of results.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway.watsonplatform.net/discovery/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -423,7 +423,7 @@ filtering of results.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -504,9 +504,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17createEnvironmentySS4name_SSSg11descriptionSiSg4sizeys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createEnvironment(name:description:size:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17createEnvironmentySS4name_SSSg11descriptionSiSg4sizeys5Error_pcSg7failureyAA0D0Vc7successtF">createEnvironment(name:description:size:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C17createEnvironmentySS4name_SSSg11descriptionSiSg4sizes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createEnvironment(name:description:size:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17createEnvironmentySS4name_SSSg11descriptionSiSg4sizes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createEnvironment(name:description:size:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -514,9 +514,10 @@ in <q>YYYY-MM-DD</q> format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Add an environment.</p>
+                        <p>Create an environment.</p>
 
-<p>Creates a new environment.  You can create only one environment per service instance. An attempt to create another
+<p>Creates a new environment for private data. An environment must be created before collections can be created.
+<strong>Note</strong>: You can create only one environment for private data per service instance. An attempt to create another
 environment results in an error.</p>
 
                       </div>
@@ -528,6 +529,7 @@ environment results in an error.</p>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">size</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -576,6 +578,18 @@ environment results in an error.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -606,9 +620,9 @@ environment results in an error.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16listEnvironmentsySSSg4name_ys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listEnvironments(name:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16listEnvironmentsySSSg4name_ys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF">listEnvironments(name:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C16listEnvironmentsySSSg4name_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listEnvironments(name:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16listEnvironmentsySSSg4name_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF">listEnvironments(name:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -627,6 +641,7 @@ environment results in an error.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listEnvironments</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ListEnvironmentsResponse.html">ListEnvironmentsResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -651,6 +666,18 @@ environment results in an error.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -681,9 +708,9 @@ environment results in an error.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14getEnvironmentySS13environmentID_ys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getEnvironment(environmentID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14getEnvironmentySS13environmentID_ys5Error_pcSg7failureyAA0D0Vc7successtF">getEnvironment(environmentID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C14getEnvironmentySS13environmentID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getEnvironment(environmentID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14getEnvironmentySS13environmentID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">getEnvironment(environmentID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -700,6 +727,7 @@ environment results in an error.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEnvironment</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -724,6 +752,18 @@ environment results in an error.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -754,9 +794,9 @@ environment results in an error.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17updateEnvironmentySS13environmentID_SSSg4nameAF11descriptionys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateEnvironment(environmentID:name:description:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17updateEnvironmentySS13environmentID_SSSg4nameAF11descriptionys5Error_pcSg7failureyAA0D0Vc7successtF">updateEnvironment(environmentID:name:description:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C17updateEnvironmentySS13environmentID_SSSg4nameAF11descriptions10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateEnvironment(environmentID:name:description:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17updateEnvironmentySS13environmentID_SSSg4nameAF11descriptions10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">updateEnvironment(environmentID:name:description:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -778,6 +818,7 @@ environment results in an error.</p>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -826,6 +867,18 @@ environment results in an error.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -856,9 +909,9 @@ environment results in an error.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17deleteEnvironmentySS13environmentID_ys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteEnvironment(environmentID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17deleteEnvironmentySS13environmentID_ys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF">deleteEnvironment(environmentID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C17deleteEnvironmentySS13environmentID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteEnvironment(environmentID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17deleteEnvironmentySS13environmentID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF">deleteEnvironment(environmentID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -875,6 +928,7 @@ environment results in an error.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteEnvironment</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeleteEnvironmentResponse.html">DeleteEnvironmentResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -899,6 +953,18 @@ environment results in an error.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -929,9 +995,9 @@ environment results in an error.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C10listFieldsySS13environmentID_SaySSG13collectionIdsys5Error_pcSg7failureyAA014ListCollectionD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listFields(environmentID:collectionIds:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C10listFieldsySS13environmentID_SaySSG13collectionIdsys5Error_pcSg7failureyAA014ListCollectionD8ResponseVc7successtF">listFields(environmentID:collectionIds:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C10listFieldsySS13environmentID_SaySSG13collectionIdss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA014ListCollectionD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listFields(environmentID:collectionIds:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C10listFieldsySS13environmentID_SaySSG13collectionIdss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA014ListCollectionD8ResponseVc7successtF">listFields(environmentID:collectionIds:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -939,7 +1005,7 @@ environment results in an error.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>List fields in specified collections.</p>
+                        <p>List fields across collections.</p>
 
 <p>Gets a list of the unique fields (and their types) stored in the indexes of the specified collections.</p>
 
@@ -951,6 +1017,7 @@ environment results in an error.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listFields</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionIds</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ListCollectionFieldsResponse.html">ListCollectionFieldsResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -987,6 +1054,18 @@ environment results in an error.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1017,9 +1096,9 @@ environment results in an error.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C19createConfigurationySS13environmentID_AA0D0V13configurationys5Error_pcSg7failureyAGc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createConfiguration(environmentID:configuration:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C19createConfigurationySS13environmentID_AA0D0V13configurationys5Error_pcSg7failureyAGc7successtF">createConfiguration(environmentID:configuration:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C19createConfigurationySS13environmentID_AA0D0V13configurations10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAGc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createConfiguration(environmentID:configuration:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C19createConfigurationySS13environmentID_AA0D0V13configurations10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAGc7successtF">createConfiguration(environmentID:configuration:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1044,6 +1123,7 @@ metadata and information to the configuration.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createConfiguration</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/Configuration.html">Configuration</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Configuration.html">Configuration</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1087,6 +1167,18 @@ information to the configuration.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1117,9 +1209,9 @@ information to the configuration.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C18listConfigurationsySS13environmentID_SSSg4nameys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listConfigurations(environmentID:name:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C18listConfigurationsySS13environmentID_SSSg4nameys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF">listConfigurations(environmentID:name:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C18listConfigurationsySS13environmentID_SSSg4names10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listConfigurations(environmentID:name:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C18listConfigurationsySS13environmentID_SSSg4names10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF">listConfigurations(environmentID:name:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1139,6 +1231,7 @@ information to the configuration.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listConfigurations</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ListConfigurationsResponse.html">ListConfigurationsResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1175,6 +1268,18 @@ information to the configuration.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1205,9 +1310,9 @@ information to the configuration.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16getConfigurationySS13environmentID_SS013configurationF0ys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getConfiguration(environmentID:configurationID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16getConfigurationySS13environmentID_SS013configurationF0ys5Error_pcSg7failureyAA0D0Vc7successtF">getConfiguration(environmentID:configurationID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C16getConfigurationySS13environmentID_SS013configurationF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getConfiguration(environmentID:configurationID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16getConfigurationySS13environmentID_SS013configurationF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">getConfiguration(environmentID:configurationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1225,6 +1330,7 @@ information to the configuration.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getConfiguration</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Configuration.html">Configuration</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1261,6 +1367,18 @@ information to the configuration.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1291,9 +1409,9 @@ information to the configuration.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C19updateConfigurationySS13environmentID_SS013configurationF0AA0D0V0G0ys5Error_pcSg7failureyAHc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateConfiguration(environmentID:configurationID:configuration:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C19updateConfigurationySS13environmentID_SS013configurationF0AA0D0V0G0ys5Error_pcSg7failureyAHc7successtF">updateConfiguration(environmentID:configurationID:configuration:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C19updateConfigurationySS13environmentID_SS013configurationF0AA0D0V0G0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAHc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateConfiguration(environmentID:configurationID:configuration:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C19updateConfigurationySS13environmentID_SS013configurationF0AA0D0V0G0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAHc7successtF">updateConfiguration(environmentID:configurationID:configuration:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1318,6 +1436,7 @@ This means that already submitted documents will not see any updates made to the
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/Configuration.html">Configuration</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Configuration.html">Configuration</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1374,6 +1493,18 @@ the configuration.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1404,9 +1535,9 @@ the configuration.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C19deleteConfigurationySS13environmentID_SS013configurationF0ys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteConfiguration(environmentID:configurationID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C19deleteConfigurationySS13environmentID_SS013configurationF0ys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF">deleteConfiguration(environmentID:configurationID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C19deleteConfigurationySS13environmentID_SS013configurationF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteConfiguration(environmentID:configurationID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C19deleteConfigurationySS13environmentID_SS013configurationF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF">deleteConfiguration(environmentID:configurationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1429,6 +1560,7 @@ configuration as it existed at the time the document was submitted.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteConfiguration</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeleteConfigurationResponse.html">DeleteConfigurationResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1465,6 +1597,18 @@ configuration as it existed at the time the document was submitted.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1495,9 +1639,9 @@ configuration as it existed at the time the document was submitted.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C30testConfigurationInEnvironmentySS13environmentID_SSSg13configurationAF4stepAF0iH010Foundation3URLVSg4fileAF8metadataAF0M11ContentTypeys5Error_pcSg7failureyAA12TestDocumentVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/testConfigurationInEnvironment(environmentID:configuration:step:configurationID:file:metadata:fileContentType:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C30testConfigurationInEnvironmentySS13environmentID_SSSg13configurationAF4stepAF0iH010Foundation3URLVSg4fileAF8metadataAF0M11ContentTypeys5Error_pcSg7failureyAA12TestDocumentVc7successtF">testConfigurationInEnvironment(environmentID:configuration:step:configurationID:file:metadata:fileContentType:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C30testConfigurationInEnvironmentySS13environmentID_SSSg13configurationAF4stepAF0iH010Foundation3URLVSg4fileAF8metadataAF0M11ContentTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA12TestDocumentVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/testConfigurationInEnvironment(environmentID:configuration:step:configurationID:file:metadata:fileContentType:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C30testConfigurationInEnvironmentySS13environmentID_SSSg13configurationAF4stepAF0iH010Foundation3URLVSg4fileAF8metadataAF0M11ContentTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA12TestDocumentVc7successtF">testConfigurationInEnvironment(environmentID:configuration:step:configurationID:file:metadata:fileContentType:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1523,6 +1667,7 @@ help you understand how the document was processed. The document is not added to
     <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TestDocument.html">TestDocument</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1627,6 +1772,18 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1657,9 +1814,9 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16createCollectionySS13environmentID_AA06CreateD7RequestV10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createCollection(environmentID:properties:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16createCollectionySS13environmentID_AA06CreateD7RequestV10propertiesys5Error_pcSg7failureyAA0D0Vc7successtF">createCollection(environmentID:properties:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C16createCollectionySS13environmentID_AA06CreateD7RequestV10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createCollection(environmentID:properties:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16createCollectionySS13environmentID_AA06CreateD7RequestV10propertiess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createCollection(environmentID:properties:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1677,6 +1834,7 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCollection</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">properties</span><span class="p">:</span> <span class="kt"><a href="../Structs/CreateCollectionRequest.html">CreateCollectionRequest</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Collection.html">Collection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1713,6 +1871,18 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1743,9 +1913,9 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C15listCollectionsySS13environmentID_SSSg4nameys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listCollections(environmentID:name:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C15listCollectionsySS13environmentID_SSSg4nameys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF">listCollections(environmentID:name:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C15listCollectionsySS13environmentID_SSSg4names10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listCollections(environmentID:name:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C15listCollectionsySS13environmentID_SSSg4names10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA04ListD8ResponseVc7successtF">listCollections(environmentID:name:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1765,6 +1935,7 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCollections</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ListCollectionsResponse.html">ListCollectionsResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1801,6 +1972,18 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1831,9 +2014,9 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C13getCollectionySS13environmentID_SS010collectionF0ys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getCollection(environmentID:collectionID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C13getCollectionySS13environmentID_SS010collectionF0ys5Error_pcSg7failureyAA0D0Vc7successtF">getCollection(environmentID:collectionID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C13getCollectionySS13environmentID_SS010collectionF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getCollection(environmentID:collectionID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C13getCollectionySS13environmentID_SS010collectionF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">getCollection(environmentID:collectionID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1851,6 +2034,7 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCollection</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Collection.html">Collection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1887,6 +2071,18 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -1917,9 +2113,9 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16updateCollectionySS13environmentID_SS010collectionF0SS4nameSSSg11descriptionAH013configurationF0ys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateCollection(environmentID:collectionID:name:description:configurationID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16updateCollectionySS13environmentID_SS010collectionF0SS4nameSSSg11descriptionAH013configurationF0ys5Error_pcSg7failureyAA0D0Vc7successtF">updateCollection(environmentID:collectionID:name:description:configurationID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C16updateCollectionySS13environmentID_SS010collectionF0SS4nameSSSg11descriptionAH013configurationF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateCollection(environmentID:collectionID:name:description:configurationID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16updateCollectionySS13environmentID_SS010collectionF0SS4nameSSSg11descriptionAH013configurationF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">updateCollection(environmentID:collectionID:name:description:configurationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1940,6 +2136,7 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Collection.html">Collection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2012,6 +2209,18 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2042,9 +2251,9 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16deleteCollectionySS13environmentID_SS010collectionF0ys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteCollection(environmentID:collectionID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16deleteCollectionySS13environmentID_SS010collectionF0ys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF">deleteCollection(environmentID:collectionID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C16deleteCollectionySS13environmentID_SS010collectionF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteCollection(environmentID:collectionID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16deleteCollectionySS13environmentID_SS010collectionF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF">deleteCollection(environmentID:collectionID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2062,6 +2271,7 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCollection</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeleteCollectionResponse.html">DeleteCollectionResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2098,6 +2308,18 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2128,9 +2350,9 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C20listCollectionFieldsySS13environmentID_SS010collectionG0ys5Error_pcSg7failureyAA04ListdE8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listCollectionFields(environmentID:collectionID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C20listCollectionFieldsySS13environmentID_SS010collectionG0ys5Error_pcSg7failureyAA04ListdE8ResponseVc7successtF">listCollectionFields(environmentID:collectionID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C20listCollectionFieldsySS13environmentID_SS010collectionG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA04ListdE8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listCollectionFields(environmentID:collectionID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C20listCollectionFieldsySS13environmentID_SS010collectionG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA04ListdE8ResponseVc7successtF">listCollectionFields(environmentID:collectionID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2138,7 +2360,7 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>List unique fields.</p>
+                        <p>List collection fields.</p>
 
 <p>Gets a list of the unique fields (and their types) stored in the index.</p>
 
@@ -2150,6 +2372,7 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCollectionFields</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ListCollectionFieldsResponse.html">ListCollectionFieldsResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2186,6 +2409,18 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2216,9 +2451,9 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14listExpansionsySS13environmentID_SS010collectionF0ys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listExpansions(environmentID:collectionID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14listExpansionsySS13environmentID_SS010collectionF0ys5Error_pcSg7failureyAA0D0Vc7successtF">listExpansions(environmentID:collectionID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C14listExpansionsySS13environmentID_SS010collectionF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listExpansions(environmentID:collectionID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14listExpansionsySS13environmentID_SS010collectionF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">listExpansions(environmentID:collectionID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2226,7 +2461,7 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>List current expansions.</p>
+                        <p>Get the expansion list.</p>
 
 <p>Returns the current expansion list for the specified collection. If an expansion list is not specified, an object
 with empty expansion arrays is returned.</p>
@@ -2239,6 +2474,7 @@ with empty expansion arrays is returned.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listExpansions</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Expansions.html">Expansions</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2275,6 +2511,18 @@ with empty expansion arrays is returned.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2305,9 +2553,9 @@ with empty expansion arrays is returned.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16createExpansionsySS13environmentID_SS010collectionF0SayAA9ExpansionVG10expansionsys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createExpansions(environmentID:collectionID:expansions:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16createExpansionsySS13environmentID_SS010collectionF0SayAA9ExpansionVG10expansionsys5Error_pcSg7failureyAA0D0Vc7successtF">createExpansions(environmentID:collectionID:expansions:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C16createExpansionsySS13environmentID_SS010collectionF0SayAA9ExpansionVG10expansionss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createExpansions(environmentID:collectionID:expansions:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16createExpansionsySS13environmentID_SS010collectionF0SayAA9ExpansionVG10expansionss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createExpansions(environmentID:collectionID:expansions:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2315,7 +2563,7 @@ with empty expansion arrays is returned.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Set the expansion list.</p>
+                        <p>Create or update expansion list.</p>
 
 <p>Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
 <code>500</code>. The current expansion list is replaced with the uploaded content.</p>
@@ -2337,6 +2585,7 @@ array.</li>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">expansions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Expansion.html">Expansion</a></span><span class="p">],</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Expansions.html">Expansions</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2387,6 +2636,18 @@ all other terms in the object - bi-directional, or a set list of terms can be ex
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2417,9 +2678,9 @@ all other terms in the object - bi-directional, or a set list of terms can be ex
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16deleteExpansionsySS13environmentID_SS010collectionF0ys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteExpansions(environmentID:collectionID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16deleteExpansionsySS13environmentID_SS010collectionF0ys5Error_pcSg7failureyyc7successtF">deleteExpansions(environmentID:collectionID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C16deleteExpansionsySS13environmentID_SS010collectionF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteExpansions(environmentID:collectionID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16deleteExpansionsySS13environmentID_SS010collectionF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteExpansions(environmentID:collectionID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2427,7 +2688,7 @@ all other terms in the object - bi-directional, or a set list of terms can be ex
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Delete the expansions list.</p>
+                        <p>Delete the expansion list.</p>
 
 <p>Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion
 for a collection.</p>
@@ -2440,6 +2701,7 @@ for a collection.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteExpansions</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2476,6 +2738,18 @@ for a collection.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2506,9 +2780,9 @@ for a collection.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C11addDocumentySS13environmentID_SS010collectionF010Foundation3URLVSg4fileSSSg8metadataAL0J11ContentTypeys5Error_pcSg7failureyAA0D8AcceptedVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/addDocument(environmentID:collectionID:file:metadata:fileContentType:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C11addDocumentySS13environmentID_SS010collectionF010Foundation3URLVSg4fileSSSg8metadataAL0J11ContentTypeys5Error_pcSg7failureyAA0D8AcceptedVc7successtF">addDocument(environmentID:collectionID:file:metadata:fileContentType:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C11addDocumentySS13environmentID_SS010collectionF010Foundation3URLVSg4fileSSSg8metadataAL0J11ContentTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D8AcceptedVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/addDocument(environmentID:collectionID:file:metadata:fileContentType:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C11addDocumentySS13environmentID_SS010collectionF010Foundation3URLVSg4fileSSSg8metadataAL0J11ContentTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D8AcceptedVc7successtF">addDocument(environmentID:collectionID:file:metadata:fileContentType:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2540,6 +2814,7 @@ and <code>,</code>.</p>
     <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DocumentAccepted.html">DocumentAccepted</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2615,6 +2890,18 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2645,9 +2932,9 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17getDocumentStatusySS13environmentID_SS010collectionG0SS08documentG0ys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getDocumentStatus(environmentID:collectionID:documentID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17getDocumentStatusySS13environmentID_SS010collectionG0SS08documentG0ys5Error_pcSg7failureyAA0dE0Vc7successtF">getDocumentStatus(environmentID:collectionID:documentID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C17getDocumentStatusySS13environmentID_SS010collectionG0SS08documentG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getDocumentStatus(environmentID:collectionID:documentID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17getDocumentStatusySS13environmentID_SS010collectionG0SS08documentG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF">getDocumentStatus(environmentID:collectionID:documentID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2670,6 +2957,7 @@ when the document was ingested. Use the query API to retrieve the actual documen
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DocumentStatus.html">DocumentStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2718,6 +3006,18 @@ when the document was ingested. Use the query API to retrieve the actual documen
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2748,9 +3048,9 @@ when the document was ingested. Use the query API to retrieve the actual documen
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14updateDocumentySS13environmentID_SS010collectionF0SS08documentF010Foundation3URLVSg4fileSSSg8metadataAM0K11ContentTypeys5Error_pcSg7failureyAA0D8AcceptedVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateDocument(environmentID:collectionID:documentID:file:metadata:fileContentType:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14updateDocumentySS13environmentID_SS010collectionF0SS08documentF010Foundation3URLVSg4fileSSSg8metadataAM0K11ContentTypeys5Error_pcSg7failureyAA0D8AcceptedVc7successtF">updateDocument(environmentID:collectionID:documentID:file:metadata:fileContentType:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C14updateDocumentySS13environmentID_SS010collectionF0SS08documentF010Foundation3URLVSg4fileSSSg8metadataAM0K11ContentTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D8AcceptedVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateDocument(environmentID:collectionID:documentID:file:metadata:fileContentType:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14updateDocumentySS13environmentID_SS010collectionF0SS08documentF010Foundation3URLVSg4fileSSSg8metadataAM0K11ContentTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D8AcceptedVc7successtF">updateDocument(environmentID:collectionID:documentID:file:metadata:fileContentType:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2774,6 +3074,7 @@ when the document was ingested. Use the query API to retrieve the actual documen
     <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DocumentAccepted.html">DocumentAccepted</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2861,6 +3162,18 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2891,9 +3204,9 @@ are rejected. Example:  <code>{   \&quot;Creator\&quot;: \&quot;Johnny Appleseed
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14deleteDocumentySS13environmentID_SS010collectionF0SS08documentF0ys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteDocument(environmentID:collectionID:documentID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14deleteDocumentySS13environmentID_SS010collectionF0SS08documentF0ys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF">deleteDocument(environmentID:collectionID:documentID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C14deleteDocumentySS13environmentID_SS010collectionF0SS08documentF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteDocument(environmentID:collectionID:documentID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14deleteDocumentySS13environmentID_SS010collectionF0SS08documentF0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06DeleteD8ResponseVc7successtF">deleteDocument(environmentID:collectionID:documentID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2915,6 +3228,7 @@ status code <code>200</code>) with the status set to &lsquo;deleted&rsquo;.</p>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeleteDocumentResponse.html">DeleteDocumentResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2963,6 +3277,18 @@ status code <code>200</code>) with the status set to &lsquo;deleted&rsquo;.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -2993,9 +3319,9 @@ status code <code>200</code>) with the status set to &lsquo;deleted&rsquo;.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C5queryySS13environmentID_SS010collectionE0SSSg6filterAgdG20naturalLanguageQuerySbSg8passagesAG11aggregationSiSg5countSaySSGSg12returnFieldsAM6offsetAP4sortAJ9highlightAP0kO0AM0K5CountAM0K10CharactersAJ11deduplicateAG0U5FieldAJ7similarAP0W11DocumentIdsAP0wO0ys5Error_pcSg7failureyAA0J8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/query(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:similar:similarDocumentIds:similarFields:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C5queryySS13environmentID_SS010collectionE0SSSg6filterAgdG20naturalLanguageQuerySbSg8passagesAG11aggregationSiSg5countSaySSGSg12returnFieldsAM6offsetAP4sortAJ9highlightAP0kO0AM0K5CountAM0K10CharactersAJ11deduplicateAG0U5FieldAJ7similarAP0W11DocumentIdsAP0wO0ys5Error_pcSg7failureyAA0J8ResponseVc7successtF">query(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:similar:similarDocumentIds:similarFields:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C5queryySS13environmentID_SS010collectionE0SSSg6filterAgdG20naturalLanguageQuerySbSg8passagesAG11aggregationSiSg5countSaySSGSg12returnFieldsAM6offsetAP4sortAJ9highlightAP0kO0AM0K5CountAM0K10CharactersAJ11deduplicateAG0U5FieldAJ7similarAP0W11DocumentIdsAP0wO0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0J8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/query(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:similar:similarDocumentIds:similarFields:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C5queryySS13environmentID_SS010collectionE0SSSg6filterAgdG20naturalLanguageQuerySbSg8passagesAG11aggregationSiSg5countSaySSGSg12returnFieldsAM6offsetAP4sortAJ9highlightAP0kO0AM0K5CountAM0K10CharactersAJ11deduplicateAG0U5FieldAJ7similarAP0W11DocumentIdsAP0wO0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0J8ResponseVc7successtF">query(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:similar:similarDocumentIds:similarFields:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3003,10 +3329,11 @@ status code <code>200</code>) with the status set to &lsquo;deleted&rsquo;.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Query documents.</p>
+                        <p>Query your collection.</p>
 
-<p>See the <a href="https://console.bluemix.net/docs/services/discovery/using.html">Discovery service documentation</a> for more
-details.</p>
+<p>After your content is uploaded and enriched by the Discovery service, you can build queries to search your content.
+For details, see the <a href="https://console.bluemix.net/docs/services/discovery/using.html">Discovery service
+documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -3034,6 +3361,7 @@ details.</p>
     <span class="nv">similar</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarDocumentIds</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarFields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/QueryResponse.html">QueryResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3309,6 +3637,18 @@ not specified, the entire document is used for comparison.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3339,9 +3679,9 @@ not specified, the entire document is used for comparison.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C12queryNoticesySS13environmentID_SS010collectionF0SSSg6filterAG0C0AG20naturalLanguageQuerySbSg8passagesAG11aggregationSiSg5countSaySSGSg12returnFieldsAN6offsetAQ4sortAK9highlightAQ0lP0AN0L5CountAN0L10CharactersAG16deduplicateFieldAK7similarAQ0X11DocumentIdsAQ0xP0ys5Error_pcSg7failureyAA0kD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/queryNotices(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicateField:similar:similarDocumentIds:similarFields:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C12queryNoticesySS13environmentID_SS010collectionF0SSSg6filterAG0C0AG20naturalLanguageQuerySbSg8passagesAG11aggregationSiSg5countSaySSGSg12returnFieldsAN6offsetAQ4sortAK9highlightAQ0lP0AN0L5CountAN0L10CharactersAG16deduplicateFieldAK7similarAQ0X11DocumentIdsAQ0xP0ys5Error_pcSg7failureyAA0kD8ResponseVc7successtF">queryNotices(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicateField:similar:similarDocumentIds:similarFields:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C12queryNoticesySS13environmentID_SS010collectionF0SSSg6filterAG0C0AG20naturalLanguageQuerySbSg8passagesAG11aggregationSiSg5countSaySSGSg12returnFieldsAN6offsetAQ4sortAK9highlightAQ0lP0AN0L5CountAN0L10CharactersAG16deduplicateFieldAK7similarAQ0X11DocumentIdsAQ0xP0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0kD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/queryNotices(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicateField:similar:similarDocumentIds:similarFields:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C12queryNoticesySS13environmentID_SS010collectionF0SSSg6filterAG0C0AG20naturalLanguageQuerySbSg8passagesAG11aggregationSiSg5countSaySSGSg12returnFieldsAN6offsetAQ4sortAK9highlightAQ0lP0AN0L5CountAN0L10CharactersAG16deduplicateFieldAK7similarAQ0X11DocumentIdsAQ0xP0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0kD8ResponseVc7successtF">queryNotices(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicateField:similar:similarDocumentIds:similarFields:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3381,6 +3721,7 @@ language.</p>
     <span class="nv">similar</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarDocumentIds</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarFields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/QueryNoticesResponse.html">QueryNoticesResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3642,6 +3983,18 @@ not specified, the entire document is used for comparison.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3672,9 +4025,9 @@ not specified, the entire document is used for comparison.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14federatedQueryySS13environmentID_SaySSG13collectionIdsSSSg6filterAH5queryAH015naturalLanguageD0AH11aggregationSiSg5countAFSg12returnFieldsAM6offsetAO4sortSbSg9highlightAS11deduplicateAH0T5FieldAS7similarAO0v8DocumentH0AO0vP0ys5Error_pcSg7failureyAA0D8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/federatedQuery(environmentID:collectionIds:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicate:deduplicateField:similar:similarDocumentIds:similarFields:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14federatedQueryySS13environmentID_SaySSG13collectionIdsSSSg6filterAH5queryAH015naturalLanguageD0AH11aggregationSiSg5countAFSg12returnFieldsAM6offsetAO4sortSbSg9highlightAS11deduplicateAH0T5FieldAS7similarAO0v8DocumentH0AO0vP0ys5Error_pcSg7failureyAA0D8ResponseVc7successtF">federatedQuery(environmentID:collectionIds:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicate:deduplicateField:similar:similarDocumentIds:similarFields:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C14federatedQueryySS13environmentID_SaySSG13collectionIdsSSSg6filterAH5queryAH015naturalLanguageD0AH11aggregationSiSg5countAFSg12returnFieldsAM6offsetAO4sortSbSg9highlightAS11deduplicateAH0T5FieldAS7similarAO0v8DocumentH0AO0vP0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/federatedQuery(environmentID:collectionIds:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicate:deduplicateField:similar:similarDocumentIds:similarFields:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14federatedQueryySS13environmentID_SaySSG13collectionIdsSSSg6filterAH5queryAH015naturalLanguageD0AH11aggregationSiSg5countAFSg12returnFieldsAM6offsetAO4sortSbSg9highlightAS11deduplicateAH0T5FieldAS7similarAO0v8DocumentH0AO0vP0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D8ResponseVc7successtF">federatedQuery(environmentID:collectionIds:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicate:deduplicateField:similar:similarDocumentIds:similarFields:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3709,6 +4062,7 @@ details.</p>
     <span class="nv">similar</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarDocumentIds</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarFields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/QueryResponse.html">QueryResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3933,6 +4287,18 @@ not specified, the entire document is used for comparison.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -3963,9 +4329,9 @@ not specified, the entire document is used for comparison.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21federatedQueryNoticesySS13environmentID_SaySSG13collectionIdsSSSg6filterAH5queryAH015naturalLanguageD0AH11aggregationSiSg5countAFSg12returnFieldsAM6offsetAO4sortSbSg9highlightAH16deduplicateFieldAS7similarAO0w8DocumentI0AO0wQ0ys5Error_pcSg7failureyAA0dE8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/federatedQueryNotices(environmentID:collectionIds:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicateField:similar:similarDocumentIds:similarFields:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21federatedQueryNoticesySS13environmentID_SaySSG13collectionIdsSSSg6filterAH5queryAH015naturalLanguageD0AH11aggregationSiSg5countAFSg12returnFieldsAM6offsetAO4sortSbSg9highlightAH16deduplicateFieldAS7similarAO0w8DocumentI0AO0wQ0ys5Error_pcSg7failureyAA0dE8ResponseVc7successtF">federatedQueryNotices(environmentID:collectionIds:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicateField:similar:similarDocumentIds:similarFields:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C21federatedQueryNoticesySS13environmentID_SaySSG13collectionIdsSSSg6filterAH5queryAH015naturalLanguageD0AH11aggregationSiSg5countAFSg12returnFieldsAM6offsetAO4sortSbSg9highlightAH16deduplicateFieldAS7similarAO0w8DocumentI0AO0wQ0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/federatedQueryNotices(environmentID:collectionIds:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicateField:similar:similarDocumentIds:similarFields:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21federatedQueryNoticesySS13environmentID_SaySSG13collectionIdsSSSg6filterAH5queryAH015naturalLanguageD0AH11aggregationSiSg5countAFSg12returnFieldsAM6offsetAO4sortSbSg9highlightAH16deduplicateFieldAS7similarAO0w8DocumentI0AO0wQ0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE8ResponseVc7successtF">federatedQueryNotices(environmentID:collectionIds:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicateField:similar:similarDocumentIds:similarFields:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4001,6 +4367,7 @@ language.</p>
     <span class="nv">similar</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarDocumentIds</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarFields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/QueryNoticesResponse.html">QueryNoticesResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4211,6 +4578,18 @@ not specified, the entire document is used for comparison.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4241,9 +4620,9 @@ not specified, the entire document is used for comparison.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C13queryEntitiesySS13environmentID_SS010collectionF0AA05QueryD0V06entityH0ys5Error_pcSg7failureyAA0hD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/queryEntities(environmentID:collectionID:entityQuery:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C13queryEntitiesySS13environmentID_SS010collectionF0AA05QueryD0V06entityH0ys5Error_pcSg7failureyAA0hD8ResponseVc7successtF">queryEntities(environmentID:collectionID:entityQuery:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C13queryEntitiesySS13environmentID_SS010collectionF0AA05QueryD0V06entityH0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0hD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/queryEntities(environmentID:collectionID:entityQuery:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C13queryEntitiesySS13environmentID_SS010collectionF0AA05QueryD0V06entityH0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0hD8ResponseVc7successtF">queryEntities(environmentID:collectionID:entityQuery:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4265,6 +4644,7 @@ more details.</p>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">entityQuery</span><span class="p">:</span> <span class="kt"><a href="../Structs/QueryEntities.html">QueryEntities</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/QueryEntitiesResponse.html">QueryEntitiesResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4313,6 +4693,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4343,9 +4735,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14queryRelationsySS13environmentID_SS010collectionF0AA05QueryD0V012relationshipH0ys5Error_pcSg7failureyAA0hD8ResponseVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/queryRelations(environmentID:collectionID:relationshipQuery:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14queryRelationsySS13environmentID_SS010collectionF0AA05QueryD0V012relationshipH0ys5Error_pcSg7failureyAA0hD8ResponseVc7successtF">queryRelations(environmentID:collectionID:relationshipQuery:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C14queryRelationsySS13environmentID_SS010collectionF0AA05QueryD0V012relationshipH0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0hD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/queryRelations(environmentID:collectionID:relationshipQuery:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14queryRelationsySS13environmentID_SS010collectionF0AA05QueryD0V012relationshipH0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0hD8ResponseVc7successtF">queryRelations(environmentID:collectionID:relationshipQuery:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4367,6 +4759,7 @@ more details.</p>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">relationshipQuery</span><span class="p">:</span> <span class="kt"><a href="../Structs/QueryRelations.html">QueryRelations</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/QueryRelationsResponse.html">QueryRelationsResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4415,6 +4808,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4445,9 +4850,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16listTrainingDataySS13environmentID_SS010collectionG0ys5Error_pcSg7failureyAA0dE3SetVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listTrainingData(environmentID:collectionID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16listTrainingDataySS13environmentID_SS010collectionG0ys5Error_pcSg7failureyAA0dE3SetVc7successtF">listTrainingData(environmentID:collectionID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C16listTrainingDataySS13environmentID_SS010collectionG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE3SetVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listTrainingData(environmentID:collectionID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16listTrainingDataySS13environmentID_SS010collectionG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE3SetVc7successtF">listTrainingData(environmentID:collectionID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4455,7 +4860,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Lists the training data for this collection.</p>
+                        <p>List training data.</p>
+
+<p>Lists the training data for the specified collection.</p>
 
                       </div>
                       <div class="declaration">
@@ -4465,6 +4872,7 @@ more details.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listTrainingData</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TrainingDataSet.html">TrainingDataSet</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4501,6 +4909,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4531,9 +4951,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C15addTrainingDataySS13environmentID_SS010collectionG0SSSg20naturalLanguageQueryAG6filterSayAA0D7ExampleVGSg8examplesys5Error_pcSg7failureyAA0dK0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/addTrainingData(environmentID:collectionID:naturalLanguageQuery:filter:examples:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C15addTrainingDataySS13environmentID_SS010collectionG0SSSg20naturalLanguageQueryAG6filterSayAA0D7ExampleVGSg8examplesys5Error_pcSg7failureyAA0dK0Vc7successtF">addTrainingData(environmentID:collectionID:naturalLanguageQuery:filter:examples:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C15addTrainingDataySS13environmentID_SS010collectionG0SSSg20naturalLanguageQueryAG6filterSayAA0D7ExampleVGSg8exampless10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dK0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/addTrainingData(environmentID:collectionID:naturalLanguageQuery:filter:examples:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C15addTrainingDataySS13environmentID_SS010collectionG0SSSg20naturalLanguageQueryAG6filterSayAA0D7ExampleVGSg8exampless10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dK0Vc7successtF">addTrainingData(environmentID:collectionID:naturalLanguageQuery:filter:examples:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4541,7 +4961,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Adds a query to the training data for this collection. The query can contain a filter and natural language query.</p>
+                        <p>Add query to training data.</p>
+
+<p>Adds a query to the training data for this collection. The query can contain a filter and natural language query.</p>
 
                       </div>
                       <div class="declaration">
@@ -4554,6 +4976,7 @@ more details.</p>
     <span class="nv">naturalLanguageQuery</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">filter</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">examples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TrainingExample.html">TrainingExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TrainingQuery.html">TrainingQuery</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4626,6 +5049,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4656,9 +5091,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21deleteAllTrainingDataySS13environmentID_SS010collectionH0ys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteAllTrainingData(environmentID:collectionID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21deleteAllTrainingDataySS13environmentID_SS010collectionH0ys5Error_pcSg7failureyyc7successtF">deleteAllTrainingData(environmentID:collectionID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C21deleteAllTrainingDataySS13environmentID_SS010collectionH0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteAllTrainingData(environmentID:collectionID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21deleteAllTrainingDataySS13environmentID_SS010collectionH0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteAllTrainingData(environmentID:collectionID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4666,7 +5101,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Clears all training data for this collection.</p>
+                        <p>Delete all training data.</p>
+
+<p>Deletes all training data from a collection.</p>
 
                       </div>
                       <div class="declaration">
@@ -4676,6 +5113,7 @@ more details.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteAllTrainingData</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4712,6 +5150,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4742,9 +5192,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C15getTrainingDataySS13environmentID_SS010collectionG0SS05queryG0ys5Error_pcSg7failureyAA0D5QueryVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getTrainingData(environmentID:collectionID:queryID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C15getTrainingDataySS13environmentID_SS010collectionG0SS05queryG0ys5Error_pcSg7failureyAA0D5QueryVc7successtF">getTrainingData(environmentID:collectionID:queryID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C15getTrainingDataySS13environmentID_SS010collectionG0SS05queryG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D5QueryVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getTrainingData(environmentID:collectionID:queryID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C15getTrainingDataySS13environmentID_SS010collectionG0SS05queryG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D5QueryVc7successtF">getTrainingData(environmentID:collectionID:queryID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4752,7 +5202,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Shows details for a specific training data query, including the query string and all examples.</p>
+                        <p>Get details about a query.</p>
+
+<p>Gets details for a specific training data query, including the query string and all examples.</p>
 
                       </div>
                       <div class="declaration">
@@ -4763,6 +5215,7 @@ more details.</p>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">queryID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TrainingQuery.html">TrainingQuery</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4811,6 +5264,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4841,9 +5306,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C18deleteTrainingDataySS13environmentID_SS010collectionG0SS05queryG0ys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteTrainingData(environmentID:collectionID:queryID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C18deleteTrainingDataySS13environmentID_SS010collectionG0SS05queryG0ys5Error_pcSg7failureyyc7successtF">deleteTrainingData(environmentID:collectionID:queryID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C18deleteTrainingDataySS13environmentID_SS010collectionG0SS05queryG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteTrainingData(environmentID:collectionID:queryID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C18deleteTrainingDataySS13environmentID_SS010collectionG0SS05queryG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteTrainingData(environmentID:collectionID:queryID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4851,7 +5316,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Removes the training data and all associated examples from the training data set.</p>
+                        <p>Delete a training data query.</p>
+
+<p>Removes the training data query and all associated examples from the training data set.</p>
 
                       </div>
                       <div class="declaration">
@@ -4862,6 +5329,7 @@ more details.</p>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">queryID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4910,6 +5378,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -4940,9 +5420,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C20listTrainingExamplesySS13environmentID_SS010collectionG0SS05queryG0ys5Error_pcSg7failureyAA0D11ExampleListVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listTrainingExamples(environmentID:collectionID:queryID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C20listTrainingExamplesySS13environmentID_SS010collectionG0SS05queryG0ys5Error_pcSg7failureyAA0D11ExampleListVc7successtF">listTrainingExamples(environmentID:collectionID:queryID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C20listTrainingExamplesySS13environmentID_SS010collectionG0SS05queryG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D11ExampleListVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listTrainingExamples(environmentID:collectionID:queryID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C20listTrainingExamplesySS13environmentID_SS010collectionG0SS05queryG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D11ExampleListVc7successtF">listTrainingExamples(environmentID:collectionID:queryID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4950,7 +5430,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>List all examples for this training data query.</p>
+                        <p>List examples for a training data query.</p>
+
+<p>List all examples for this training data query.</p>
 
                       </div>
                       <div class="declaration">
@@ -4961,6 +5443,7 @@ more details.</p>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">queryID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TrainingExampleList.html">TrainingExampleList</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5009,6 +5492,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -5039,9 +5534,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21createTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SSSg08documentG0AH14crossReferenceSiSg9relevanceys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createTrainingExample(environmentID:collectionID:queryID:documentID:crossReference:relevance:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21createTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SSSg08documentG0AH14crossReferenceSiSg9relevanceys5Error_pcSg7failureyAA0dE0Vc7successtF">createTrainingExample(environmentID:collectionID:queryID:documentID:crossReference:relevance:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C21createTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SSSg08documentG0AH14crossReferenceSiSg9relevances10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createTrainingExample(environmentID:collectionID:queryID:documentID:crossReference:relevance:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21createTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SSSg08documentG0AH14crossReferenceSiSg9relevances10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF">createTrainingExample(environmentID:collectionID:queryID:documentID:crossReference:relevance:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5049,7 +5544,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Adds a new example to this training data query.</p>
+                        <p>Add example to training data query.</p>
+
+<p>Adds a example to this training data query.</p>
 
                       </div>
                       <div class="declaration">
@@ -5063,6 +5560,7 @@ more details.</p>
     <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">crossReference</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">relevance</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TrainingExample.html">TrainingExample</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5147,6 +5645,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -5177,9 +5687,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21deleteTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0ys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteTrainingExample(environmentID:collectionID:queryID:exampleID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21deleteTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0ys5Error_pcSg7failureyyc7successtF">deleteTrainingExample(environmentID:collectionID:queryID:exampleID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C21deleteTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteTrainingExample(environmentID:collectionID:queryID:exampleID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21deleteTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteTrainingExample(environmentID:collectionID:queryID:exampleID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5187,7 +5697,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Removes the example with the given ID for the training data query.</p>
+                        <p>Delete example for training data query.</p>
+
+<p>Deletes the example document with the given ID from the training data query.</p>
 
                       </div>
                       <div class="declaration">
@@ -5199,6 +5711,7 @@ more details.</p>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">queryID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">exampleID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5259,6 +5772,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -5289,9 +5814,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21updateTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0SSSg14crossReferenceSiSg9relevanceys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateTrainingExample(environmentID:collectionID:queryID:exampleID:crossReference:relevance:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21updateTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0SSSg14crossReferenceSiSg9relevanceys5Error_pcSg7failureyAA0dE0Vc7successtF">updateTrainingExample(environmentID:collectionID:queryID:exampleID:crossReference:relevance:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C21updateTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0SSSg14crossReferenceSiSg9relevances10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateTrainingExample(environmentID:collectionID:queryID:exampleID:crossReference:relevance:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21updateTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0SSSg14crossReferenceSiSg9relevances10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF">updateTrainingExample(environmentID:collectionID:queryID:exampleID:crossReference:relevance:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5299,7 +5824,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Changes the label or cross reference query for this training example.</p>
+                        <p>Change label or cross reference for example.</p>
+
+<p>Changes the label or cross reference query for this training data example.</p>
 
                       </div>
                       <div class="declaration">
@@ -5313,6 +5840,7 @@ more details.</p>
     <span class="nv">exampleID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">crossReference</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">relevance</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TrainingExample.html">TrainingExample</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5397,6 +5925,18 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -5427,9 +5967,9 @@ more details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C18getTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0ys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getTrainingExample(environmentID:collectionID:queryID:exampleID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C18getTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0ys5Error_pcSg7failureyAA0dE0Vc7successtF">getTrainingExample(environmentID:collectionID:queryID:exampleID:failure:success:)</a>
+                    <a name="/s:11DiscoveryV10A0C18getTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getTrainingExample(environmentID:collectionID:queryID:exampleID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C18getTrainingExampleySS13environmentID_SS010collectionG0SS05queryG0SS07exampleG0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0dE0Vc7successtF">getTrainingExample(environmentID:collectionID:queryID:exampleID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5437,7 +5977,9 @@ more details.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Gets the details for this training example.</p>
+                        <p>Get details for training data example.</p>
+
+<p>Gets the details for this training example.</p>
 
                       </div>
                       <div class="declaration">
@@ -5449,6 +5991,7 @@ more details.</p>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">queryID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">exampleID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TrainingExample.html">TrainingExample</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5509,6 +6052,109 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C14deleteUserDataySS10customerID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14deleteUserDataySS10customerID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteUserData(customerID:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete labeled data.</p>
+
+<p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+the customer ID.   You associate a customer ID with data by passing the <strong>X-Watson-Metadata</strong> header with a request
+that passes data. For more information about personal data and customer IDs, see <a href="https://console.bluemix.net/docs/services/discovery/information-security.html">Information
+security</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteUserData</span><span class="p">(</span>
+    <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customer ID for which all data is to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>failure</em>
                                 </code>
                               </td>
@@ -5541,8 +6187,8 @@ more details.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

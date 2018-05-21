@@ -16,7 +16,7 @@
 
 import Foundation
 
-/** Provides information about the face. */
+/** Information about the face. */
 public struct Face: Decodable {
 
     public var age: FaceAge?
@@ -24,6 +24,8 @@ public struct Face: Decodable {
     public var gender: FaceGender?
 
     public var faceLocation: FaceLocation?
+
+    public var identity: FaceIdentity?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

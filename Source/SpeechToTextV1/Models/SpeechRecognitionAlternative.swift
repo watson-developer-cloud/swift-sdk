@@ -22,13 +22,13 @@ public struct SpeechRecognitionAlternative: Decodable {
     /// A transcription of the audio.
     public var transcript: String
 
-    /// A score that indicates the service's confidence in the transcript in the range of 0 to 1. Available only for the best alternative and only in results marked as final.
+    /// A score that indicates the service's confidence in the transcript in the range of 0 to 1. Returned only for the best alternative and only with results marked as final.
     public var confidence: Double?
 
-    /// Time alignments for each word from the transcript as a list of lists. Each inner list consists of three elements: the word followed by its start and end time in seconds. Example: `[["hello",0.0,1.2],["world",1.2,2.5]]`. Available only for the best alternative.
+    /// Time alignments for each word from the transcript as a list of lists. Each inner list consists of three elements: the word followed by its start and end time in seconds. Example: `[["hello",0.0,1.2],["world",1.2,2.5]]`. Returned only for the best alternative.
     public var timestamps: [WordTimestamp]?
 
-    /// A confidence score for each word of the transcript as a list of lists. Each inner list consists of two elements: the word and its confidence score in the range of 0 to 1. Example: `[["hello",0.95],["world",0.866]]`. Available only for the best alternative and only in results marked as final.
+    /// A confidence score for each word of the transcript as a list of lists. Each inner list consists of two elements: the word and its confidence score in the range of 0 to 1. Example: `[["hello",0.95],["world",0.866]]`. Returned only for the best alternative and only with results marked as final.
     public var wordConfidence: [WordConfidence]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

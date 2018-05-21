@@ -39,6 +39,7 @@ public struct CreateDialogNode: Encodable {
         case generic = "generic"
         case nomatch = "nomatch"
         case nomatchResponsesDepleted = "nomatch_responses_depleted"
+        case digressionReturnPrompt = "digression_return_prompt"
     }
 
     /// Whether this top-level dialog node can be digressed into.

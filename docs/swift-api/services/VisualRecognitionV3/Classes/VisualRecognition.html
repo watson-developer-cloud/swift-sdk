@@ -121,15 +121,9 @@
 
                 </div>
               </div>
-            <p><strong>Important:</strong> As of September 8, 2017, the beta period for Similarity Search is closed. For more information, see
-<a href="https://www.ibm.com/blogs/bluemix/2017/08/visual-recognition-api-similarity-search-update">Visual Recognition API – Similarity Search Update</a>.</p>
-
-<p>The IBM Watson Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces  in
+            <p>The IBM Watson Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces  in
 images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
 needs.</p>
-
-<p><strong>Tip:</strong> To test calls to the <strong>Custom classifiers</strong> methods with the API explorer, provide your <code>api_key</code> from your
-IBM Cloud service instance.</p>
 
           </section>
           <section class="section task-group-section">
@@ -155,7 +149,7 @@ IBM Cloud service instance.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway-a.watsonplatform.net/visual-recognition/api"</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -182,7 +176,7 @@ IBM Cloud service instance.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]()</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
                       </div>
@@ -251,9 +245,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C8classifyy10Foundation3URLVSg10imagesFile_SSSg3urlSdSg9thresholdSaySSGSg6ownersAO13classifierIDsAJ14acceptLanguageys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/classify(imagesFile:url:threshold:owners:classifierIDs:acceptLanguage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classifyy10Foundation3URLVSg10imagesFile_SSSg3urlSdSg9thresholdSaySSGSg6ownersAO13classifierIDsAJ14acceptLanguageys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF">classify(imagesFile:url:threshold:owners:classifierIDs:acceptLanguage:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C8classifyy10Foundation3URLVSg10imagesFile_SSSg3urlSdSg9thresholdSaySSGSg6ownersAO13classifierIDsAJ14acceptLanguages10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/classify(imagesFile:url:threshold:owners:classifierIDs:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classifyy10Foundation3URLVSg10imagesFile_SSSg3urlSdSg9thresholdSaySSGSg6ownersAO13classifierIDsAJ14acceptLanguages10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF">classify(imagesFile:url:threshold:owners:classifierIDs:acceptLanguage:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -264,6 +258,11 @@ in <q>YYYY-MM-DD</q> format.</p>
                         <p>Classify images.</p>
 
 <p>Classify images with built-in or custom classifiers.</p>
+
+<ul>
+<li><code>food</code>: (Beta) Enhances specificity and accuracy for images of food items. - <code>explicit</code>: (Beta) Evaluates whether
+the image might be pornographic.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -277,6 +276,7 @@ in <q>YYYY-MM-DD</q> format.</p>
     <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -294,75 +294,10 @@ in <q>YYYY-MM-DD</q> format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB.
-Include no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in
-UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII
-characters. You can also include images with the <code>url</code> parameter.
-
-<ul>
-<li><code>default</code>: Returns classes from thousands of general tags.</li>
-<li><code>food</code>: (Beta) Enhances specificity and accuracy for images of food items.</li>
-<li><code>explicit</code>: (Beta) Evaluates whether the image might be pornographic.</li>
-</ul></p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>url</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
-pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
-in the <code>imagesFile</code> parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>threshold</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A floating point value that specifies the minimum score a class must have to be displayed
-in the response. The default threshold for returning scores from a classifier is <code>0.5</code>. Set the threshold
-to <code>0.0</code> to ignore the classification score and return all values.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>owners</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of the categories of classifiers to apply. Use <code>IBM</code> to classify against the <code>default</code>
-general classifier, and use <code>me</code> to classify against your custom classifiers. To analyze the image against
-both classifier categories, set the value to both <code>IBM</code> and <code>me</code>. The built-in <code>default</code> classifier is
-used if both <code>classifierIDs</code> and <code>owners</code> parameters are empty. The <code>classifierIDs</code> parameter
-overrides <code>owners</code>, so make sure that <code>classifierIDs</code> is empty.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>classifierIDs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Specifies which classifiers to apply and overrides the <code>owners</code> parameter. You can
-specify both custom and built-in classifiers. The built-in <code>default</code> classifier is used if both
-<code>classifier_ids</code> and <code>owners</code> parameters are empty.  The following built-in classifier IDs
-require no training:</p>
+                                  <p>An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images
+and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII
+characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an
+image with the <strong>url</strong> parameter.</p>
                                 </div>
                               </td>
                             </tr>
@@ -374,16 +309,90 @@ require no training:</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Specifies the language of the output class names.  Can be <code>en</code> (English), <code>ar</code>
-(Arabic), <code>de</code> (German), <code>es</code> (Spanish), <code>it</code> (Italian), <code>ja</code> (Japanese), or <code>ko</code> (Korean).  Classes for
-which no translation is available are omitted.  The response might not be in the specified language under
-these conditions:
-
-<ul>
-<li>English is returned when the requested language is not supported.</li>
-<li>Classes are not returned when there is no translation for them.</li>
-<li>Custom classifiers returned with this method return tags in the language of the custom classifier.</li>
-</ul></p>
+                                  <p>The language of the output class names. The full set of languages is supported only for the built-in <code>default</code>
+classifier ID. The class names of custom classifiers are not translated.  The response might not be in the
+specified language when the requested language is not supported or when there is no translation for the class name.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32
+pixels per inch, and the maximum image size is 10 MB.  You can also include images with the <strong>images_file</strong>
+parameter.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>threshold</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The minimum score a class must have to be displayed in the response. Set the threshold to <code>0.0</code> to ignore the
+classification score and return all values.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>owners</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The categories of classifiers to apply. Use <code>IBM</code> to classify against the <code>default</code> general classifier, and use
+<code>me</code> to classify against your custom classifiers. To analyze the image against both classifier categories, set the
+value to both <code>IBM</code> and <code>me</code>.   The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and <strong>owners</strong>
+parameters are empty.  The <strong>classifier_ids</strong> parameter overrides <strong>owners</strong>, so make sure that <strong>classifier_ids</strong>
+is empty.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifierIDs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Which classifiers to apply. Overrides the <strong>owners</strong> parameter. You can specify both custom and built-in classifier
+IDs. The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and <strong>owners</strong> parameters are empty.  The
+following built-in classifier IDs require no training: - <code>default</code>: Returns classes from thousands of general tags.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>imagesFileContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of imagesFile.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -420,9 +429,9 @@ these conditions:
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C11detectFacesy10Foundation3URLVSg10imagesFile_SSSg3urlys5Error_pcSg7failureyAA08DetectedE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/detectFaces(imagesFile:url:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFacesy10Foundation3URLVSg10imagesFile_SSSg3urlys5Error_pcSg7failureyAA08DetectedE0Vc7successtF">detectFaces(imagesFile:url:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C11detectFacesy10Foundation3URLVSg10imagesFile_SSSg3urls10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA08DetectedE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/detectFaces(imagesFile:url:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFacesy10Foundation3URLVSg10imagesFile_SSSg3urls10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA08DetectedE0Vc7successtF">detectFaces(imagesFile:url:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -432,9 +441,14 @@ these conditions:
                       <div class="abstract">
                         <p>Detect faces in images.</p>
 
-<p>Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can
-identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The
-Detect faces method does not support general biometric facial recognition.</p>
+<p><strong>Important:</strong> On April 2, 2018, the identity information in the response to calls to the Face model was removed.
+The identity information refers to the <code>name</code> of the person, <code>score</code>, and <code>type_hierarchy</code> knowledge graph. For
+details about the enhanced Face model, see the <a href="https://console.bluemix.net/docs/services/visual-recognition/release-notes.html#2april2018">Release
+notes</a>.  Analyze and
+get data about faces in images. Responses can include estimated age and gender. This feature uses a built-in model,
+so no training is necessary. The Detect faces method does not support general biometric facial recognition.
+Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
+recommended pixel density is 32X32 pixels per inch.</p>
 
                       </div>
                       <div class="declaration">
@@ -444,6 +458,7 @@ Detect faces method does not support general biometric facial recognition.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
     <span class="nv">imagesFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -461,9 +476,10 @@ Detect faces method does not support general biometric facial recognition.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An image file (.jpg, .png) or .zip file with images. Include no more than 15 images. You
-can also include images with the <code>url</code> parameter.  All faces are detected, but if there are more than 10 faces
-in an image, age and gender confidence scores might return scores of 0.</p>
+                                  <p>An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a
+maximum of 15 images in a request.  Encode the image and .zip file names in UTF-8 if they contain non-ASCII
+characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an
+image with the <strong>url</strong> parameter.</p>
                                 </div>
                               </td>
                             </tr>
@@ -475,9 +491,21 @@ in an image, age and gender confidence scores might return scores of 0.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
-pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
-in the <code>imagesFile</code> parameter.</p>
+                                  <p>The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel density
+is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a shortened
+URL.  You can also include images with the <strong>images_file</strong> parameter.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -514,9 +542,9 @@ in the <code>imagesFile</code> parameter.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16createClassifierySS4name_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeJ0ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/createClassifier(name:positiveExamples:negativeExamples:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16createClassifierySS4name_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeJ0ys5Error_pcSg7failureyAA0E0Vc7successtF">createClassifier(name:positiveExamples:negativeExamples:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C16createClassifierySS4name_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeJ0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createClassifier(name:positiveExamples:negativeExamples:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16createClassifierySS4name_SayAA15PositiveExampleVG16positiveExamples10Foundation3URLVSg08negativeJ0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF">createClassifier(name:positiveExamples:negativeExamples:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -541,6 +569,7 @@ encounters non-ASCII characters.</p>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">],</span>
     <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -585,8 +614,20 @@ of images is 10,000 images or 100 MB per .zip file.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A compressed (.zip) file of images that do not depict the visual subject of any
-of the classes of the new classifier. Must contain a minimum of 10 images.</p>
+                                  <p>A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
+contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -623,9 +664,9 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16deleteClassifierySS12classifierID_ys5Error_pcSg7failureyyc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/deleteClassifier(classifierID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteClassifierySS12classifierID_ys5Error_pcSg7failureyyc7successtF">deleteClassifier(classifierID:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiersySaySSGSg6owners_SbSg7verboses10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/listClassifiers(owners:verbose:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiersySaySSGSg6owners_SbSg7verboses10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF">listClassifiers(owners:verbose:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -633,17 +674,19 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Delete a classifier.</p>
+                        <p>Retrieve a list of classifiers.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
-    <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassifiers</span><span class="p">(</span>
+    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">verbose</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifiers.html">Classifiers</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -654,12 +697,36 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>classifierID</em>
+                                <em>owners</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The ID of the classifier.</p>
+                                  <p>Unused. This parameter will be removed in a future release.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>verbose</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specify <code>true</code> to return details about the classifiers. Omit this parameter to return a brief list of classifiers.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -696,9 +763,9 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C13getClassifierySS12classifierID_ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/getClassifier(classifierID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getClassifierySS12classifierID_ys5Error_pcSg7failureyAA0E0Vc7successtF">getClassifier(classifierID:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C13getClassifierySS12classifierID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getClassifier(classifierID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getClassifierySS12classifierID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF">getClassifier(classifierID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -717,6 +784,7 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -741,87 +809,12 @@ of the classes of the new classifier. Must contain a minimum of 10 images.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>headers</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiersySaySSGSg6owners_SbSg7verboseys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/listClassifiers(owners:verbose:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiersySaySSGSg6owners_SbSg7verboseys5Error_pcSg7failureyAA0E0Vc7successtF">listClassifiers(owners:verbose:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Retrieve a list of custom classifiers.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassifiers</span><span class="p">(</span>
-    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">verbose</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifiers.html">Classifiers</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>owners</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of owners. Must be <q>IBM</q>, <q>me</q>, or a combination of the two.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>verbose</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Specify <code>true</code> to return details about the classifiers.
-Omit this parameter to return a brief list of classifiers.</p>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -858,9 +851,9 @@ Omit this parameter to return a brief list of classifiers.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16updateClassifierySS12classifierID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0ys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/updateClassifier(classifierID:positiveExamples:negativeExamples:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateClassifierySS12classifierID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0ys5Error_pcSg7failureyAA0E0Vc7successtF">updateClassifier(classifierID:positiveExamples:negativeExamples:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C16updateClassifierySS12classifierID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/updateClassifier(classifierID:positiveExamples:negativeExamples:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateClassifierySS12classifierID_SayAA15PositiveExampleVGSg16positiveExamples10Foundation3URLVSg08negativeK0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF">updateClassifier(classifierID:positiveExamples:negativeExamples:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -871,14 +864,14 @@ Omit this parameter to return a brief list of classifiers.</p>
                         <p>Update a classifier.</p>
 
 <p>Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
-existing classes. You must supply at least one set of positive or negative examples. For details, see
-<a href="https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers">Updating custom classifiers</a>.
-Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
-class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  <strong>Important:</strong> You can&rsquo;t
-update a custom classifier with an API key for a Lite plan. To update a custom classifer on a Lite plan, create
-another service instance on a Standard plan and re-create your custom classifier.  <strong>Tip:</strong> Don&rsquo;t make retraining
-calls on a classifier until the status is ready. When you submit retraining requests in parallel, the last request
-overwrites the previous requests. The retrained property shows the last time the classifier retraining finished.</p>
+existing classes. You must supply at least one set of positive or negative examples. For details, see <a href="https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers">Updating
+custom
+classifiers</a>.
+ Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
+class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  <strong>Tip:</strong> Don&rsquo;t make
+retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the
+last request overwrites the previous requests. The retrained property shows the last time the classifier retraining
+finished.</p>
 
                       </div>
                       <div class="declaration">
@@ -889,6 +882,7 @@ overwrites the previous requests. The retrained property shows the last time the
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -933,179 +927,20 @@ of images is 10,000 images or 100 MB per .zip file.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A compressed (.zip) file of images that do not depict the visual subject of any
-of the classes of the new classifier. Must contain a minimum of 10 images.</p>
+                                  <p>A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
+contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>headers</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C8classifyySo7UIImageC5image_SdSg9thresholdSaySSGSg6ownersAK13classifierIDsSSSg14acceptLanguageys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/classify(image:threshold:owners:classifierIDs:acceptLanguage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classifyySo7UIImageC5image_SdSg9thresholdSaySSGSg6ownersAK13classifierIDsSSSg14acceptLanguageys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF">classify(image:threshold:owners:classifierIDs:acceptLanguage:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Classify images.</p>
-
-<p>Classify images with built-in or custom classifiers.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
-    <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
-    <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>image</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An image to classify. Since the service limits images to 10MB, the image will be compressed.
-For greater control over the image&rsquo;s compression, you should compress the image yourself, save it to a file,
-and call the other <code>classify</code> method.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>url</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
-pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
-in the <code>imagesFile</code> parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>threshold</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A floating point value that specifies the minimum score a class must have to be displayed
-in the response. The default threshold for returning scores from a classifier is <code>0.5</code>. Set the threshold
-to <code>0.0</code> to ignore the classification score and return all values.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>owners</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of the categories of classifiers to apply. Use <code>IBM</code> to classify against the <code>default</code>
-general classifier, and use <code>me</code> to classify against your custom classifiers. To analyze the image against
-both classifier categories, set the value to both <code>IBM</code> and <code>me</code>. The built-in <code>default</code> classifier is
-used if both <code>classifierIDs</code> and <code>owners</code> parameters are empty. The <code>classifierIDs</code> parameter
-overrides <code>owners</code>, so make sure that <code>classifierIDs</code> is empty.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>classifierIDs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Specifies which classifiers to apply and overrides the <code>owners</code> parameter. You can
-specify both custom and built-in classifiers. The built-in <code>default</code> classifier is used if both
-<code>classifier_ids</code> and <code>owners</code> parameters are empty.  The following built-in classifier IDs
-require no training:
-
-<ul>
-<li><code>default</code>: Returns classes from thousands of general tags.</li>
-<li><code>food</code>: (Beta) Enhances specificity and accuracy for images of food items.</li>
-<li><code>explicit</code>: (Beta) Evaluates whether the image might be pornographic.</li>
-</ul></p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Specifies the language of the output class names.  Can be <code>en</code> (English), <code>ar</code>
-(Arabic), <code>de</code> (German), <code>es</code> (Spanish), <code>it</code> (Italian), <code>ja</code> (Japanese), or <code>ko</code> (Korean).  Classes for
-which no translation is available are omitted.  The response might not be in the specified language under
-these conditions:
-
-<ul>
-<li>English is returned when the requested language is not supported.</li>
-<li>Classes are not returned when there is no translation for them.</li>
-<li>Custom classifiers returned with this method return tags in the language of the custom classifier.</li>
-</ul></p>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1142,9 +977,9 @@ these conditions:
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C11detectFacesySo7UIImageC5image_ys5Error_pcSg7failureyAA08DetectedE0Vc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/detectFaces(image:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFacesySo7UIImageC5image_ys5Error_pcSg7failureyAA08DetectedE0Vc7successtF">detectFaces(image:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C16deleteClassifierySS12classifierID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/deleteClassifier(classifierID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteClassifierySS12classifierID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteClassifier(classifierID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1152,27 +987,18 @@ these conditions:
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Detect faces in images.</p>
-
-<p>Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can
-identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The
-Detect faces method does not support general biometric facial recognition.</p>
-
-<ul>
-<li>url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
-pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
-in the <code>imagesFile</code> parameter.</li>
-</ul>
+                        <p>Delete a classifier.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
-    <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
+    <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1183,14 +1009,113 @@ in the <code>imagesFile</code> parameter.</li>
                             <tr>
                               <td>
                                 <code>
-                                <em>imagesFile</em>
+                                <em>classifierID</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>An image file (.jpg, .png) or .zip file with images. Include no more than 15 images. You
-can also include images with the <code>url</code> parameter.  All faces are detected, but if there are more than 10 faces
-in an image, age and gender confidence scores might return scores of 0.</p>
+                                  <p>The ID of the classifier.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV30aB0C14getCoreMlModelySS12classifierID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failurey10Foundation3URLVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getCoreMlModel(classifierID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14getCoreMlModelySS12classifierID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failurey10Foundation3URLVc7successtF">getCoreMlModel(classifierID:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Retrieve a Core ML model of a classifier.</p>
+
+<p>Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>\<q>core_ml_enabled\</q>: true</tt> in
+the classifier details.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCoreMlModel</span><span class="p">(</span>
+    <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifierID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the classifier.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1539,11 +1464,267 @@ built-in classifier.</p>
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV30aB0C8classifyySo7UIImageC5image_SdSg9thresholdSaySSGSg6ownersAK13classifierIDsSSSg14acceptLanguageys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/classify(image:threshold:owners:classifierIDs:acceptLanguage:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classifyySo7UIImageC5image_SdSg9thresholdSaySSGSg6ownersAK13classifierIDsSSSg14acceptLanguageys5Error_pcSg7failureyAA16ClassifiedImagesVc7successtF">classify(image:threshold:owners:classifierIDs:acceptLanguage:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Classify images.</p>
+
+<p>Classify images with built-in or custom classifiers.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
+    <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
+    <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>image</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An image to classify. Since the service limits images to 10MB, the image will be compressed.
+For greater control over the image&rsquo;s compression, you should compress the image yourself, save it to a file,
+and call the other <code>classify</code> method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
+pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
+in the <code>imagesFile</code> parameter.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>threshold</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A floating point value that specifies the minimum score a class must have to be displayed
+in the response. The default threshold for returning scores from a classifier is <code>0.5</code>. Set the threshold
+to <code>0.0</code> to ignore the classification score and return all values.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>owners</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of the categories of classifiers to apply. Use <code>IBM</code> to classify against the <code>default</code>
+general classifier, and use <code>me</code> to classify against your custom classifiers. To analyze the image against
+both classifier categories, set the value to both <code>IBM</code> and <code>me</code>. The built-in <code>default</code> classifier is
+used if both <code>classifierIDs</code> and <code>owners</code> parameters are empty. The <code>classifierIDs</code> parameter
+overrides <code>owners</code>, so make sure that <code>classifierIDs</code> is empty.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>classifierIDs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specifies which classifiers to apply and overrides the <code>owners</code> parameter. You can
+specify both custom and built-in classifiers. The built-in <code>default</code> classifier is used if both
+<code>classifier_ids</code> and <code>owners</code> parameters are empty.  The following built-in classifier IDs
+require no training:
+
+<ul>
+<li><code>default</code>: Returns classes from thousands of general tags.</li>
+<li><code>food</code>: (Beta) Enhances specificity and accuracy for images of food items.</li>
+<li><code>explicit</code>: (Beta) Evaluates whether the image might be pornographic.</li>
+</ul></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specifies the language of the output class names.  Can be <code>en</code> (English), <code>ar</code>
+(Arabic), <code>de</code> (German), <code>es</code> (Spanish), <code>it</code> (Italian), <code>ja</code> (Japanese), or <code>ko</code> (Korean).  Classes for
+which no translation is available are omitted.  The response might not be in the specified language under
+these conditions:
+
+<ul>
+<li>English is returned when the requested language is not supported.</li>
+<li>Classes are not returned when there is no translation for them.</li>
+<li>Custom classifiers returned with this method return tags in the language of the custom classifier.</li>
+</ul></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV30aB0C11detectFacesySo7UIImageC5image_ys5Error_pcSg7failureyAA08DetectedE0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/detectFaces(image:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFacesySo7UIImageC5image_ys5Error_pcSg7failureyAA08DetectedE0Vc7successtF">detectFaces(image:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Detect faces in images.</p>
+
+<p>Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can
+identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The
+Detect faces method does not support general biometric facial recognition.</p>
+
+<ul>
+<li>url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
+pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
+in the <code>imagesFile</code> parameter.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
+    <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>imagesFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An image file (.jpg, .png) or .zip file with images. Include no more than 15 images. You
+can also include images with the <code>url</code> parameter.  All faces are detected, but if there are more than 10 faces
+in an image, age and gender confidence scores might return scores of 0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-04-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

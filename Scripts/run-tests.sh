@@ -13,10 +13,8 @@ DESTINATION="OS=11.3,name=iPhone 7"
 # the exit code of each build command
 EXIT_CODES=()
 
-# the schemes to build
-cd ..
+# the schemes to build, which must be invoked from the root directory of the project
 SCHEMES=$(xcodebuild -list | awk 'schemes { if (NF>0) { print $1 } } /Schemes:$/ { schemes = 1 }')
-for scheme in ${SCHEMES[@]}; do echo $scheme; done
 
 ####################
 # Dependencies
@@ -38,7 +36,7 @@ brew outdated swiftlint || brew upgrade swiftlint
 set -o pipefail
 
 # build each scheme
-for SCHEME in ${SCHEMES[@]}; do
+for SCHEME in ${SCHEMES}; do
 	xcodebuild -scheme "$SCHEME" -destination "$DESTINATION" test | xcpretty
 	EXIT_CODES+=($?)
 done

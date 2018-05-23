@@ -48,16 +48,16 @@ internal struct RestRequest {
 
     internal var method: String
     internal var url: String
-    internal var credentials: AuthenticationMethod
+    internal var authMethod: AuthenticationMethod
     internal var headerParameters: [String: String]
     internal var queryItems: [URLQueryItem]
-    internal var messageBody: Data? = nil
+    internal var messageBody: Data?
     private let session = URLSession(configuration: URLSessionConfiguration.default)
 
     internal init(
         method: String,
         url: String,
-        credentials: AuthenticationMethod,
+        authMethod: AuthenticationMethod,
         headerParameters: [String: String],
         acceptType: String? = nil,
         contentType: String? = nil,
@@ -69,7 +69,7 @@ internal struct RestRequest {
         if let contentType = contentType { headerParameters["Content-Type"] = contentType }
         self.method = method
         self.url = url
-        self.credentials = credentials
+        self.authMethod = authMethod
         self.headerParameters = headerParameters
         self.queryItems = queryItems ?? []
         self.messageBody = messageBody
@@ -104,7 +104,7 @@ extension RestRequest {
         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
         // add authentication credentials to the request
-        credentials.authenticate(request: self) { request, error in
+        authMethod.authenticate(request: self) { request, error in
 
             // ensure there is no credentials error
             guard let request = request, error == nil else {
@@ -439,7 +439,7 @@ extension RestRequest {
         completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void)
     {
         // add authentication credentials to the request
-        credentials.authenticate(request: self) { request, error in
+        authMethod.authenticate(request: self) { request, error in
 
             // ensure there is no credentials error
             guard let request = request, error == nil else {

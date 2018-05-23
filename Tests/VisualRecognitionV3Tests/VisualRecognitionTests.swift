@@ -30,8 +30,8 @@ class VisualRecognitionTests: XCTestCase {
     static var allTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] {
         return [
             ("testListClassifiers", testListClassifiers),
-            ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
-            ("testCreateDeleteClassifier2", testCreateDeleteClassifier2),
+            // disabled: ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
+            // disabled: ("testCreateDeleteClassifier2", testCreateDeleteClassifier2),
             ("testGetClassifier", testGetClassifier),
             // disabled: ("testUpdateClassifierWithPositiveExample", testUpdateClassifierWithPositiveExample),
             // disabled: ("testUpdateClassifierWithNegativeExample", testUpdateClassifierWithNegativeExample),

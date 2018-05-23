@@ -2113,7 +2113,8 @@
 				689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */,
 				7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/VisualRecognitionV3Tests;
 			sourceTree = "<group>";
 		};
 		7AAD66471DCA5D730010481E /* Resources */ = {

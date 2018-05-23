@@ -116,9 +116,13 @@ internal class IAMAuthentication: AuthenticationMethod {
     private let url: String
     private var token: IAMToken?
 
-    internal init(apiKey: String, url: String = "https://iam.ng.bluemix.net/identity/token") {
+    internal init(apiKey: String, url: String? = nil) {
         self.apiKey = apiKey
-        self.url = url
+        if let url = url {
+            self.url = url
+        } else {
+            self.url = "https://iam.ng.bluemix.net/identity/token"
+        }
         self.token = nil
     }
 
@@ -154,7 +158,7 @@ internal class IAMAuthentication: AuthenticationMethod {
         let request = RestRequest(
             method: "POST",
             url: url,
-            credentials: BasicAuthentication(username: "bx", password: "bx"),
+            authMethod: BasicAuthentication(username: "bx", password: "bx"),
             headerParameters: headerParameters,
             messageBody: form.joined(separator: "&").data(using: .utf8)
         )
@@ -176,7 +180,7 @@ internal class IAMAuthentication: AuthenticationMethod {
         let request = RestRequest(
             method: "POST",
             url: url,
-            credentials: BasicAuthentication(username: "bx", password: "bx"),
+            authMethod: BasicAuthentication(username: "bx", password: "bx"),
             headerParameters: headerParameters,
             messageBody: form.joined(separator: "&").data(using: .utf8)
         )

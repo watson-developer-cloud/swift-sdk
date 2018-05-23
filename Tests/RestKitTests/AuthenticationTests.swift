@@ -33,15 +33,15 @@ class AuthenticationTests: XCTestCase {
     var request = RestRequest(
         method: "GET",
         url: "http://www.example.com",
-        credentials: NoAuthentication(),
+        authMethod: NoAuthentication(),
         headerParameters: ["x-custom-header": "value"],
         queryItems: [URLQueryItem(name: "name", value: "value")],
         messageBody: "hello-world".data(using: .utf8)
     )
 
     func testNoAuthentication() {
-        request.credentials = NoAuthentication()
-        request.credentials.authenticate(request: request) { request, error in
+        request.authMethod = NoAuthentication()
+        request.authMethod.authenticate(request: request) { request, error in
             guard let request = request, error == nil else { XCTFail(error!.localizedDescription); return }
             XCTAssertEqual(self.request.method, request.method)
             XCTAssertEqual(self.request.url, request.url)
@@ -53,8 +53,8 @@ class AuthenticationTests: XCTestCase {
 
     func testBasicAuthentication() {
         let authentication = "Basic dXNlcm5hbWU6cGFzc3dvcmQ="
-        request.credentials = BasicAuthentication(username: "username", password: "password")
-        request.credentials.authenticate(request: request) { request, error in
+        request.authMethod = BasicAuthentication(username: "username", password: "password")
+        request.authMethod.authenticate(request: request) { request, error in
             guard let request = request, error == nil else { XCTFail(error!.localizedDescription); return }
             XCTAssertEqual(self.request.method, request.method)
             XCTAssertEqual(self.request.url, request.url)
@@ -66,8 +66,8 @@ class AuthenticationTests: XCTestCase {
     }
 
     func testAPIKeyAuthenticationHeader() {
-        request.credentials = APIKeyAuthentication(name: "foo", key: "bar", location: .header)
-        request.credentials.authenticate(request: request) { request, error in
+        request.authMethod = APIKeyAuthentication(name: "foo", key: "bar", location: .header)
+        request.authMethod.authenticate(request: request) { request, error in
             guard let request = request, error == nil else { XCTFail(error!.localizedDescription); return }
             XCTAssertEqual(self.request.method, request.method)
             XCTAssertEqual(self.request.url, request.url)
@@ -79,8 +79,8 @@ class AuthenticationTests: XCTestCase {
     }
 
     func testAPIKeyAuthenticationQuery() {
-        request.credentials = APIKeyAuthentication(name: "foo", key: "bar", location: .query)
-        request.credentials.authenticate(request: request) { request, error in
+        request.authMethod = APIKeyAuthentication(name: "foo", key: "bar", location: .query)
+        request.authMethod.authenticate(request: request) { request, error in
             guard let request = request, error == nil else { XCTFail(error!.localizedDescription); return }
             XCTAssertEqual(self.request.method, request.method)
             XCTAssertEqual(self.request.url, request.url)
@@ -93,8 +93,8 @@ class AuthenticationTests: XCTestCase {
     }
 
     func testIAMAccessToken() {
-        request.credentials = IAMAccessToken(accessToken: "access-token")
-        request.credentials.authenticate(request: request) { request, error in
+        request.authMethod = IAMAccessToken(accessToken: "access-token")
+        request.authMethod.authenticate(request: request) { request, error in
             guard let request = request, error == nil else { XCTFail(error!.localizedDescription); return }
             XCTAssertEqual(self.request.method, request.method)
             XCTAssertEqual(self.request.url, request.url)
@@ -187,13 +187,13 @@ class AuthenticationTests: XCTestCase {
 
         /**
 
-        let credentials = IAMAuthentication(apiKey: Credentials.IAMAPIKey, url: Credentials.IAMURL)
+        let authMethod = IAMAuthentication(apiKey: Credentials.IAMAPIKey, url: Credentials.IAMURL)
         var authorizationHeader: String! // save initial authorization header (it should stay the same until refreshed)
-        request.credentials = credentials
+        request.authMethod = authMethod
 
         // request initial iam token
         let expectation1 = self.expectation(description: "request initial iam token")
-        request.credentials.authenticate(request: request) { request, error in
+        request.authMethod.authenticate(request: request) { request, error in
             guard let request = request, error == nil else { XCTFail(error!.localizedDescription); return }
             XCTAssertEqual(self.request.method, request.method)
             XCTAssertEqual(self.request.url, request.url)
@@ -208,7 +208,7 @@ class AuthenticationTests: XCTestCase {
 
         // use the same iam token
         let expectation2 = self.expectation(description: "use the same iam token")
-        request.credentials.authenticate(request: request) { request, error in
+        request.authMethod.authenticate(request: request) { request, error in
             guard let request = request, error == nil else { XCTFail(error!.localizedDescription); return }
             XCTAssertEqual(request.headerParameters["Authorization"]!, authorizationHeader)
             expectation2.fulfill()
@@ -219,17 +219,17 @@ class AuthenticationTests: XCTestCase {
 
         // change the token's expiration date to force a refresh
         let token = IAMToken(
-            accessToken: credentials.token!.accessToken,
-            refreshToken: credentials.token!.refreshToken,
-            tokenType: credentials.token!.tokenType,
-            expiresIn: credentials.token!.expiresIn,
+            accessToken: authMethod.token!.accessToken,
+            refreshToken: authMethod.token!.refreshToken,
+            tokenType: authMethod.token!.tokenType,
+            expiresIn: authMethod.token!.expiresIn,
             expiration: Int(Date().timeIntervalSince1970)
         )
-        credentials.token = token
+        authMethod.token = token
 
         // refresh the iam token
         let expectation3 = self.expectation(description: "refresh the iam token")
-        request.credentials.authenticate(request: request) { request, error in
+        request.authMethod.authenticate(request: request) { request, error in
             guard let request = request, error == nil else { XCTFail(error!.localizedDescription); return }
             XCTAssertTrue(request.headerParameters["Authorization"]!.starts(with: "Bearer "))
             XCTAssertNotEqual(request.headerParameters["Authorization"]!, authorizationHeader)

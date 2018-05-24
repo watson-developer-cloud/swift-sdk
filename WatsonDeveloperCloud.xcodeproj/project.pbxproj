@@ -475,7 +475,6 @@
 		68F7FF01207D458900E84DBF /* WordAlternativeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEE2207D458600E84DBF /* WordAlternativeResults.swift */; };
 		68F7FF02207D458900E84DBF /* SpeechModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEE3207D458600E84DBF /* SpeechModel.swift */; };
 		68F7FF03207D458900E84DBF /* AcousticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEE4207D458600E84DBF /* AcousticModel.swift */; };
-		68F7FF04207D458900E84DBF /* SpeechSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEE5207D458600E84DBF /* SpeechSession.swift */; };
 		68F7FF05207D458900E84DBF /* RecognitionJob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEE6207D458600E84DBF /* RecognitionJob.swift */; };
 		68F7FF06207D458900E84DBF /* AudioDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEE7207D458600E84DBF /* AudioDetails.swift */; };
 		68F7FF07207D458900E84DBF /* RecognitionJobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F7FEE8207D458600E84DBF /* RecognitionJobs.swift */; };
@@ -1106,7 +1105,6 @@
 		68F7FEE2207D458600E84DBF /* WordAlternativeResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordAlternativeResults.swift; sourceTree = "<group>"; };
 		68F7FEE3207D458600E84DBF /* SpeechModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechModel.swift; sourceTree = "<group>"; };
 		68F7FEE4207D458600E84DBF /* AcousticModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcousticModel.swift; sourceTree = "<group>"; };
-		68F7FEE5207D458600E84DBF /* SpeechSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechSession.swift; sourceTree = "<group>"; };
 		68F7FEE6207D458600E84DBF /* RecognitionJob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionJob.swift; sourceTree = "<group>"; };
 		68F7FEE7207D458600E84DBF /* AudioDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioDetails.swift; sourceTree = "<group>"; };
 		68F7FEE8207D458600E84DBF /* RecognitionJobs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionJobs.swift; sourceTree = "<group>"; };
@@ -2050,7 +2048,6 @@
 				68F7FEE9207D458600E84DBF /* SpeechRecognitionAlternative.swift */,
 				68F7FEEA207D458600E84DBF /* SpeechRecognitionResult.swift */,
 				68F7FEF7207D458800E84DBF /* SpeechRecognitionResults.swift */,
-				68F7FEE5207D458600E84DBF /* SpeechSession.swift */,
 				68F7FEF9207D458800E84DBF /* SupportedFeatures.swift */,
 				68F7FEDE207D458500E84DBF /* Word.swift */,
 				68F7FEED207D458700E84DBF /* WordAlternativeResult.swift */,
@@ -3950,7 +3947,6 @@
 				68BC28D91F8C35070042810E /* MultipartFormData.swift in Sources */,
 				68F7FF07207D458900E84DBF /* RecognitionJobs.swift in Sources */,
 				68F7FEFF207D458900E84DBF /* LanguageModel.swift in Sources */,
-				68F7FF04207D458900E84DBF /* SpeechSession.swift in Sources */,
 				7A9EC80A1D79B75100507725 /* SpeechToTextEncoder.swift in Sources */,
 				68BC28DA1F8C35070042810E /* RestError.swift in Sources */,
 				68BC28D61F8C35070042810E /* CodableExtensions.swift in Sources */,

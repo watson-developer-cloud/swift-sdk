@@ -92,9 +92,9 @@ extension SpeechToText {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechRecognitionResults) -> Void)
     {
-        // extract credentials
-        guard case let .basicAuthentication(username, password) = credentials else {
-            let failureReason = "Invalid credentials format."
+        // extract authMethod
+        guard let basicAuth = authMethod as? BasicAuthentication else {
+            let failureReason = "Invalid authenticaion method type."
             let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -103,8 +103,8 @@ extension SpeechToText {
 
         // create session
         let session = SpeechToTextSession(
-            username: username,
-            password: password,
+            username: basicAuth.username,
+            password: basicAuth.password,
             model: model,
             customizationID: customizationID,
             learningOptOut: learningOptOut
@@ -182,9 +182,9 @@ extension SpeechToText {
         var settings = settings
         settings.contentType = compress ? "audio/ogg;codecs=opus" : "audio/l16;rate=16000;channels=1"
 
-        // extract credentials
-        guard case let .basicAuthentication(username, password) = credentials else {
-            let failureReason = "Invalid credentials format."
+        // extract authMethod
+        guard let basicAuth = authMethod as? BasicAuthentication else {
+            let failureReason = "Invalid authenticaion method format."
             let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
             failure?(error)
@@ -193,8 +193,8 @@ extension SpeechToText {
 
         // create session
         let session = SpeechToTextSession(
-            username: username,
-            password: password,
+            username: basicAuth.username,
+            password: basicAuth.password,
             model: model,
             customizationID: customizationID,
             learningOptOut: learningOptOut

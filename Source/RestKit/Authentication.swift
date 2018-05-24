@@ -45,8 +45,8 @@ internal class NoAuthentication: AuthenticationMethod {
 /** Authenticate with basic authentication. */
 internal class BasicAuthentication: AuthenticationMethod {
 
-    private let username: String
-    private let password: String
+    let username: String
+    let password: String
 
     init(username: String, password: String) {
         self.username = username

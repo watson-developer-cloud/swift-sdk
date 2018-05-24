@@ -20,6 +20,7 @@ import Foundation
  The IBM Watson Conversation service combines machine learning, natural language understanding, and integrated dialog
  tools to create conversation flows between your apps and your users.
  */
+@available(*, deprecated, message: "The IBM Watson Conversation service has been renamed to Assistant. Please use the `Assistant` class instead of `Conversation`. The `Conversation` class will be removed in a future release.")
 public class Conversation {
 
     /// The base URL to use when contacting the service.
@@ -103,7 +104,9 @@ public class Conversation {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            return NSError(domain: domain, code: code, userInfo: nil)
+            let message = try json.getString(at: "error")
+            let userInfo = [NSLocalizedDescriptionKey: message]
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }

@@ -17,7 +17,7 @@
 import Foundation
 
 /** KeywordResult. */
-public struct KeywordResult {
+public struct KeywordResult: Decodable {
 
     /// A specified keyword normalized to the spoken phrase that matched in the audio input.
     public var normalizedText: String

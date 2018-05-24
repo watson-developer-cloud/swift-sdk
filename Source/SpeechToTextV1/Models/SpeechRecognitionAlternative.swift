@@ -26,10 +26,10 @@ public struct SpeechRecognitionAlternative: Decodable {
     public var confidence: Double?
 
     /// Time alignments for each word from the transcript as a list of lists. Each inner list consists of three elements: the word followed by its start and end time in seconds. Example: `[["hello",0.0,1.2],["world",1.2,2.5]]`. Returned only for the best alternative.
-    public var timestamps: [String]?
+    public var timestamps: [WordTimestamp]?
 
     /// A confidence score for each word of the transcript as a list of lists. Each inner list consists of two elements: the word and its confidence score in the range of 0 to 1. Example: `[["hello",0.95],["world",0.866]]`. Returned only for the best alternative and only with results marked as final.
-    public var wordConfidence: [String]?
+    public var wordConfidence: [WordConfidence]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

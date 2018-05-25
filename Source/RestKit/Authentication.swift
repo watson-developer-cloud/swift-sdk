@@ -121,7 +121,7 @@ internal class IAMAuthentication: AuthenticationMethod {
         if let url = url {
             self.url = url
         } else {
-            self.url = "https://iam.ng.bluemix.net/identity/token"
+            self.url = "https://iam.bluemix.net/identity/token"
         }
         self.token = nil
     }

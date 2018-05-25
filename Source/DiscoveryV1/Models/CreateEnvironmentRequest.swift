@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateEnvironmentRequest. */
-internal struct CreateEnvironmentRequest: Encodable {
+public struct CreateEnvironmentRequest: Encodable {
 
     /// Name that identifies the environment.
     public var name: String

@@ -33,7 +33,7 @@ public class NaturalLanguageUnderstanding {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let credentials: Credentials
+    private var authMethod: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1"
     private let version: String
 
@@ -46,8 +46,39 @@ public class NaturalLanguageUnderstanding {
        in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
-        self.credentials = .basicAuthentication(username: username, password: password)
+        self.authMethod = BasicAuthentication(username: username, password: password)
         self.version = version
+    }
+
+    /**
+     Create a `NaturalLanguageUnderstanding` object.
+
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
+     - parameter iamUrl: The URL for the IAM service.
+     */
+    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+        self.version = version
+        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+    }
+
+    /**
+     Create a `NaturalLanguageUnderstanding` object.
+
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     - parameter accessToken: An access token for the service.
+     */
+    public init(version: String, accessToken: String) {
+        self.version = version
+        self.authMethod = IAMAccessToken(accessToken: accessToken)
+    }
+
+    public func accessToken(_ newToken: String) {
+        if self.authMethod is IAMAccessToken {
+            self.authMethod = IAMAccessToken(accessToken: newToken)
+        }
     }
 
     /**
@@ -77,12 +108,7 @@ public class NaturalLanguageUnderstanding {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let message = try json.getString(at: "error")
-            var userInfo = [NSLocalizedDescriptionKey: message]
-            if let description = try? json.getString(at: "description") {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }
@@ -143,7 +169,7 @@ public class NaturalLanguageUnderstanding {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/analyze",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -189,7 +215,7 @@ public class NaturalLanguageUnderstanding {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/models",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -218,7 +244,7 @@ public class NaturalLanguageUnderstanding {
         modelID: String,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteModelResults) -> Void)
+        success: @escaping (InlineResponse200) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -240,14 +266,14 @@ public class NaturalLanguageUnderstanding {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeleteModelResults>) in
+            (response: RestResponse<InlineResponse200>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

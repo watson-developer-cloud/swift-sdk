@@ -17,72 +17,55 @@
 import Foundation
 
 /**
- The IBM Speech to Text service provides an API that enables you to add IBM's speech recognition capabilities to
- your applications. The service transcribes speech from various languages and audio formats to text with low latency.
- For most languages, the service supports two sampling rates, broadband and narrowband. The service returns all JSON
- response content in the UTF-8 character set. For more information about the service, see the [IBM Cloud
- documentation](https://console.bluemix.net/docs/services/speech-to-text/getting-started.html).
- ### API Overview
- The Speech to Text service provides the following endpoints:
- * **Models** includes methods that return information about the language models that are available for speech
- recognition.
- * **WebSockets** includes a single method that establishes a persistent connection with the service over the WebSocket
- protocol.
- * **Sessionless** includes a method that provides a simple means of transcribing audio without the overhead of
- establishing and maintaining a session.
- * **Sessions** provides methods that allow a client to maintain a long, multi-turn exchange, or session, with the
- service or to establish multiple parallel conversations with a particular instance of the service.
- * **Asynchronous** provides a non-blocking interface for transcribing audio. You can register a callback URL to be
- notified of job status and, optionally, results, or you can poll the service to learn job status and retrieve results
- manually.
- * **Custom language models** provides an interface for creating and managing custom language models. The interface lets
- you expand the vocabulary of a base model with domain-specific terminology.
- * **Custom corpora** provides an interface for managing the corpora associated with a custom language model. You add
- corpora to extract out-of-vocabulary (OOV) words from the corpora into the custom language model's vocabulary. You can
- add, list, and delete corpora from a custom language model.
- * **Custom words** provides an interface for managing individual words in a custom language model. You can add, modify,
- list, and delete words from a custom language model.
- * **Custom acoustic models** provides an interface for creating and managing custom acoustic models. The interface lets
- you adapt a base model for the audio characteristics of your environment and speakers.
- * **Custom audio resources** provides an interface for managing the audio resources associated with a custom acoustic
- model. You add audio resources that closely match the acoustic characteristics of the audio that you want to
- transcribe. You can add, list, and delete audio resources from a custom acoustic model.
- ### Usage guidelines for customization
- The following information pertains to methods of the customization interface:
- * Language model customization is not available for all languages; it is generally available for production use for all
- languages for which it is available. Acoustic model customization is beta functionality that is available for all
- languages supported by the service. For a complete list of supported languages and the status of their availability,
- see [Language support for
- customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
- * In all cases, you must use service credentials created for the instance of the service that owns a custom model to
- use the methods described in this documentation with that model. For more information, see [Ownership of custom
- language models](https://console.bluemix.net/docs/services/speech-to-text/custom.html#customOwner).
- * How the service handles request logging for the customization interface depends on the request. The service does not
- log data that are used to build custom models. But it does log data when a custom model is used with a recognition
- request. For more information, see [Request logging and data
- privacy](https://console.bluemix.net/docs/services/speech-to-text/custom.html#customLogging).
- * Each custom model is identified by a customization ID, which is a Globally Unique Identifier (GUID). A GUID is a
- hexadecimal string that has the same format as Watson service credentials: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`. You
- specify a custom model's GUID with the appropriate customization parameter of methods that support customization.
- For more information about using the service's customization interface, see [The customization
+ The IBM&reg; Speech to Text service provides an API that uses IBM's speech-recognition capabilities to produce
+ transcripts of spoken audio. The service can transcribe speech from various languages and audio formats. It addition to
+ basic transcription, the service can produce detailed information about many aspects of the audio. For most languages,
+ the service supports two sampling rates, broadband and narrowband. It returns all JSON response content in the UTF-8
+ character set. For more information about the service, see the [IBM&reg; Cloud
+ documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html).
+ ### API usage guidelines
+ * **Audio formats:** The service accepts audio in many formats (MIME types). See [Audio
+ formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
+ * **HTTP interfaces:** The service provides three HTTP interfaces for speech recognition. The sessionless interface
+ includes a single synchronous method. The session-based interface includes multiple synchronous methods for maintaining
+ a long, multi-turn exchange with the service. And the asynchronous interface provides multiple methods that use
+ registered callbacks and polling for non-blocking recognition. See [The HTTP REST
+ interface](https://console.bluemix.net/docs/services/speech-to-text/http.html) and [The asynchronous HTTP
+ interface](https://console.bluemix.net/docs/services/speech-to-text/async.html).
+ * **WebSocket interface:** The service also offers a WebSocket interface for speech recognition. The WebSocket
+ interface provides a full-duplex, low-latency communication channel. Clients send requests and audio to the service and
+ receive results over a single connection in an asynchronous fashion. See [The WebSocket
+ interface](https://console.bluemix.net/docs/services/speech-to-text/websockets.html).
+ * **Customization:** Use language model customization to expand the vocabulary of a base model with domain-specific
+ terminology. Use acoustic model customization to adapt a base model for the acoustic characteristics of your audio.
+ Language model customization is generally available for production use by most supported languages; acoustic model
+ customization is beta functionality that is available for all supported languages. See [The customization
  interface](https://console.bluemix.net/docs/services/speech-to-text/custom.html).
+ * **Customization IDs:** Many methods accept a customization ID to identify a custom language or custom acoustic model.
+ Customization IDs are Globally Unique Identifiers (GUIDs). They are hexadecimal strings that have the format
+ `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.
+ * **`X-Watson-Learning-Opt-Out`:** By default, all Watson services log requests and their results. Logging is done only
+ to improve the services for future users. The logged data is not shared or made public. To prevent IBM from accessing
+ your data for general service improvements, set the `X-Watson-Learning-Opt-Out` request header to `true` for all
+ requests. You must set the header on each request that you do not want IBM to access for general service improvements.
+   Methods of the customization interface do not log corpora, words, and audio resources that you use to build custom
+ models. Your training data is never used to improve the service's base models. However, the service does log such data
+ when a custom model is used with a recognition request. You must set the `X-Watson-Learning-Opt-Out` request header to
+ `true` to prevent IBM from accessing the data to improve the service.
+ * **`X-Watson-Metadata`**: This header allows you to associate a customer ID with data that is passed with a request.
+ If necessary, you can use the **Delete labeled data** method to delete the data for a customer ID. See [Information
+ security](https://console.bluemix.net/docs/services/speech-to-text/information-security.html).
  */
 public class SpeechToText {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
-    /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-
-    /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let credentials: Credentials
-    internal let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
+    private var authMethod: AuthenticationMethod
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
      Create a `SpeechToText` object.
@@ -91,7 +74,32 @@ public class SpeechToText {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.credentials = .basicAuthentication(username: username, password: password)
+        self.authMethod = BasicAuthentication(username: username, password: password)
+    }
+
+    /**
+     Create a `SpeechToText` object.
+
+     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
+     - parameter iamUrl: The URL for the IAM service.
+     */
+    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+    }
+
+    /**
+     Create a `SpeechToText` object.
+
+     - parameter accessToken: An access token for the service.
+     */
+    public init(version: String, accessToken: String) {
+        self.authMethod = IAMAccessToken(accessToken: accessToken)
+    }
+
+    public func accessToken(_ newToken: String) {
+        if self.authMethod is IAMAccessToken {
+            self.authMethod = IAMAccessToken(accessToken: newToken)
+        }
     }
 
     /**
@@ -121,10 +129,7 @@ public class SpeechToText {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let error = try json.getString(at: "error")
-            let codeDescription = (try? json.getString(at: "code_description")) ?? ""
-            let userInfo = [NSLocalizedDescriptionKey: error, NSLocalizedRecoverySuggestionErrorKey: codeDescription]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }
@@ -156,7 +161,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/models",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -203,7 +208,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -297,9 +302,10 @@ public class SpeechToText {
      - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate
      words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
      English transcription only.
-     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and Internet
-     addresses into more readable, conventional representations in the final transcript of a recognition request. By
-     default, no smart formatting is performed. Applies to US English transcription only.
+     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet
+     addresses into more readable, conventional representations in the final transcript of a recognition request. For US
+     English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is
+     performed. Applies to US English and Spanish transcription only.
      - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which participants in a
      multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
      `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.   To determine
@@ -311,13 +317,13 @@ public class SpeechToText {
      - parameter success: A function executed with the successful result.
      */
     public func recognizeSessionless(
+        audio: Data,
+        contentType: String,
         model: String? = nil,
         customizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
-        audio: Data? = nil,
-        contentType: String? = nil,
         inactivityTimeout: Int? = nil,
         keywords: [String]? = nil,
         keywordsThreshold: Double? = nil,
@@ -410,7 +416,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/recognize",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -486,7 +492,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/register_callback",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -533,7 +539,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/unregister_callback",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -563,9 +569,9 @@ public class SpeechToText {
      a callback URL. In both cases, you can include the `results_ttl` parameter to specify how long the results are to
      remain available after the job is complete. For detailed usage information about the two approaches, including
      callback notifications, see [Creating a
-     job](https://console.bluemix.net/docs/services/speech-to-text/async.html#create). Note that using the HTTPS **Check
-     a job** method to retrieve results is more secure than receiving them via callback notification over HTTP because
-     it provides confidentiality in addition to authentication and data integrity.   The method supports the same basic
+     job](https://console.bluemix.net/docs/services/speech-to-text/async.html#create). Using the HTTPS **Check a job**
+     method to retrieve results is more secure than receiving them via callback notification over HTTP because it
+     provides confidentiality in addition to authentication and data integrity.   The method supports the same basic
      parameters as other HTTP and WebSocket recognition requests. The service imposes a data size limit of 100 MB. It
      automatically detects the endianness of the incoming audio and, for audio that includes multiple channels,
      downmixes the audio to one-channel mono during transcoding. (For the `audio/l16` format, you can specify the
@@ -650,9 +656,10 @@ public class SpeechToText {
      - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate
      words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
      English transcription only.
-     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and Internet
-     addresses into more readable, conventional representations in the final transcript of a recognition request. By
-     default, no smart formatting is performed. Applies to US English transcription only.
+     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet
+     addresses into more readable, conventional representations in the final transcript of a recognition request. For US
+     English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is
+     performed. Applies to US English and Spanish transcription only.
      - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which participants in a
      multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
      `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.   To determine
@@ -783,7 +790,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/recognitions",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -829,7 +836,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/recognitions",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -881,7 +888,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -929,7 +936,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -979,7 +986,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/customizations",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -1033,7 +1040,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/customizations",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1082,7 +1089,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -1131,7 +1138,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -1217,7 +1224,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1268,7 +1275,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -1324,7 +1331,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -1373,7 +1380,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -1392,12 +1399,12 @@ public class SpeechToText {
 
      Adds a single corpus text file of new training data to a custom language model. Use multiple requests to submit
      multiple corpus text files. You must use credentials for the instance of the service that owns a model to add a
-     corpus to it. Note that adding a corpus does not affect the custom language model until you train the model for the
-     new data by using the **Train a custom language model** method.   Submit a plain text file that contains sample
-     sentences from the domain of interest to enable the service to extract words in context. The more sentences you add
-     that represent the context in which speakers use words from the domain, the better the service's recognition
-     accuracy. For guidelines about adding a corpus text file and for information about how the service parses a corpus
-     file, see [Preparing a corpus text
+     corpus to it. Adding a corpus does not affect the custom language model until you train the model for the new data
+     by using the **Train a custom language model** method.   Submit a plain text file that contains sample sentences
+     from the domain of interest to enable the service to extract words in context. The more sentences you add that
+     represent the context in which speakers use words from the domain, the better the service's recognition accuracy.
+     For guidelines about adding a corpus text file and for information about how the service parses a corpus file, see
+     [Preparing a corpus text
      file](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#prepareCorpus).   The call
      returns an HTTP 201 response code if the corpus is valid. The service then asynchronously processes the contents of
      the corpus and automatically extracts new words that it finds. This can take on the order of a minute or two to
@@ -1474,7 +1481,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1529,7 +1536,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -1584,7 +1591,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -1656,7 +1663,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1748,7 +1755,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -1792,11 +1799,12 @@ public class SpeechToText {
 
      - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
      created for the instance of the service that owns the custom model.
-     - parameter wordName: The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the
-     word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
-     - parameter word: **When specifying an array of one or more words,** you must specify the custom word that is to be added to or
-     updated in the custom model. Do not include spaces in the word. Use a - (dash) or _ (underscore) to connect the
-     tokens of compound words. **When adding or updating a single word directly,** omit this field.
+     - parameter wordName: The custom word for the custom language model. When you add or update a custom word with the **Add a custom word**
+     method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound
+     words.
+     - parameter word: For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the
+     custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
+     compound words.   Omit this field for the **Add a custom word** method.
      - parameter soundsLike: An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
      foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service's base
      vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the word.
@@ -1845,7 +1853,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "PUT",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -1868,8 +1876,9 @@ public class SpeechToText {
 
      - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
      created for the instance of the service that owns the custom model.
-     - parameter wordName: The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the
-     word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     - parameter wordName: The custom word for the custom language model. When you add or update a custom word with the **Add a custom word**
+     method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound
+     words.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1897,7 +1906,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -1922,8 +1931,9 @@ public class SpeechToText {
 
      - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
      created for the instance of the service that owns the custom model.
-     - parameter wordName: The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the
-     word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     - parameter wordName: The custom word for the custom language model. When you add or update a custom word with the **Add a custom word**
+     method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound
+     words.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1951,7 +1961,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -2012,7 +2022,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/acoustic_customizations",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -2066,7 +2076,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/acoustic_customizations",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2115,7 +2125,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -2164,7 +2174,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -2243,7 +2253,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2294,7 +2304,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -2365,7 +2375,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2417,7 +2427,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -2500,7 +2510,7 @@ public class SpeechToText {
     public func addAudio(
         customizationID: String,
         audioName: String,
-        audioResource: Data,
+        audioResource: [Data],
         contentType: String,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
@@ -2509,7 +2519,10 @@ public class SpeechToText {
         success: @escaping () -> Void)
     {
         // construct body
-        let body = audioResource
+        guard let body = try? JSONEncoder().encode(audioResource) else {
+            failure?(RestError.serializationError)
+            return
+        }
 
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2538,7 +2551,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2598,7 +2611,7 @@ public class SpeechToText {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -2652,8 +2665,59 @@ public class SpeechToText {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete labeled data.
+
+     Deletes all data that is associated with a specified customer ID. The method deletes all data for the customer ID,
+     regardless of the method by which the information was added. The method has no effect if no data is associated with
+     the customer ID. You must issue the request with credentials for the same instance of the service that was used to
+     associate the customer ID with the data.   You associate a customer ID with data by passing the `X-Watson-Metadata`
+     header with a request that passes the data. For more information about customer IDs and about using this method,
+     see [Information security](https://console.bluemix.net/docs/services/speech-to-text/information-security.html).
+
+     - parameter customerID: The customer ID for which all data is to be deleted.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteUserData(
+        customerID: String,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v1/user_data",
+            authMethod: authMethod,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
         )
 
         // execute REST request

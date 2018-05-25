@@ -28,6 +28,7 @@ public struct ClassifiedImage: Decodable {
     /// Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.
     public var image: String?
 
+    /// Information about what might have caused a failure, such as an image that is too large. Not returned when there is no error.
     public var error: ErrorInfo?
 
     /// The classifiers.

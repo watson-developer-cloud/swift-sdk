@@ -29,7 +29,7 @@ public class NaturalLanguageClassifier {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let credentials: Credentials
+    private var authMethod: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1"
 
     /**
@@ -39,7 +39,7 @@ public class NaturalLanguageClassifier {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.credentials = .basicAuthentication(username: username, password: password)
+        self.authMethod = BasicAuthentication(username: username, password: password)
     }
 
     /**
@@ -69,10 +69,7 @@ public class NaturalLanguageClassifier {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let error = try? json.getString(at: "error")
-            let description = try? json.getString(at: "description")
-            let userInfo = [NSLocalizedDescriptionKey: error ?? "", NSLocalizedFailureReasonErrorKey: description ?? ""]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }
@@ -121,7 +118,7 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -179,7 +176,7 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -238,7 +235,7 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/classifiers",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -278,7 +275,7 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/classifiers",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -324,7 +321,7 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -368,7 +365,7 @@ public class NaturalLanguageClassifier {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 

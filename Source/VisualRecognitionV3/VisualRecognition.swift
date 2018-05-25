@@ -24,14 +24,14 @@ import Foundation
 public class VisualRecognition {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
+    public var serviceURL = "https://gateway.watsonplatform.net/visual-recognition/api"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let credentials: Credentials
-    internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
-    internal let version: String
+    private var authMethod: AuthenticationMethod
+    private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
+    private let version: String
 
     /**
      Create a `VisualRecognition` object.
@@ -41,8 +41,39 @@ public class VisualRecognition {
        in "YYYY-MM-DD" format.
      */
     public init(apiKey: String, version: String) {
-        self.credentials = .apiKey(name: "api_key", key: apiKey, in: .query)
+        self.authMethod = APIKeyAuthentication(name: "api_key", key: apiKey, location: .query)
         self.version = version
+    }
+
+    /**
+     Create a `VisualRecognition` object.
+
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
+     - parameter iamUrl: The URL for the IAM service.
+     */
+    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+        self.version = version
+        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+    }
+
+    /**
+     Create a `VisualRecognition` object.
+
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     - parameter accessToken: An access token for the service.
+     */
+    public init(version: String, accessToken: String) {
+        self.version = version
+        self.authMethod = IAMAccessToken(accessToken: accessToken)
+    }
+
+    public func accessToken(_ newToken: String) {
+        if self.authMethod is IAMAccessToken {
+            self.authMethod = IAMAccessToken(accessToken: newToken)
+        }
     }
 
     /**
@@ -72,19 +103,7 @@ public class VisualRecognition {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONWrapper(data: data)
-            let errorID = (try? json.getString(at: "error_id")) ?? (try? json.getString(at: "error", "error_id"))
-            let error = try? json.getString(at: "error")
-            let status = try? json.getString(at: "status")
-            let html = try? json.getString(at: "Error")
-            let message = errorID ?? error ?? status ?? html ?? "Unknown error."
-            let description = (try? json.getString(at: "description")) ?? (try? json.getString(at: "error", "description"))
-            let statusInfo = try? json.getString(at: "statusInfo")
-            let reason = description ?? statusInfo ?? "Please use the status code to refer to the documentation."
-            let userInfo = [
-                NSLocalizedDescriptionKey: message,
-                NSLocalizedFailureReasonErrorKey: reason,
-            ]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }
@@ -112,7 +131,7 @@ public class VisualRecognition {
      value to both `IBM` and `me`.   The built-in `default` classifier is used if both **classifier_ids** and **owners**
      parameters are empty.  The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids**
      is empty.
-     - parameter classifierIDs: Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in classifier
+     - parameter classifierIds: Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in classifier
      IDs. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The
      following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags.
      - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether
@@ -124,11 +143,12 @@ public class VisualRecognition {
      */
     public func classify(
         imagesFile: URL? = nil,
+        acceptLanguage: String? = nil,
         url: String? = nil,
         threshold: Double? = nil,
         owners: [String]? = nil,
-        classifierIDs: [String]? = nil,
-        acceptLanguage: String? = nil,
+        classifierIds: [String]? = nil,
+        imagesFileContentType: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
@@ -159,12 +179,12 @@ public class VisualRecognition {
             }
             multipartFormData.append(ownersData, withName: "owners")
         }
-        if let classifierIDs = classifierIDs {
-            guard let classifierIDsData = classifierIDs.joined(separator: ",").data(using: .utf8) else {
+        if let classifierIds = classifierIds {
+            guard let classifierIdsData = classifierIds.joined(separator: ",").data(using: .utf8) else {
                 failure?(RestError.serializationError)
                 return
             }
-            multipartFormData.append(classifierIDsData, withName: "classifier_ids")
+            multipartFormData.append(classifierIdsData, withName: "classifier_ids")
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -190,7 +210,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classify",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -225,6 +245,7 @@ public class VisualRecognition {
      - parameter url: The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel density
      is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a shortened
      URL.  You can also include images with the **images_file** parameter.
+     - parameter imagesFileContentType: The content type of imagesFile.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -232,6 +253,7 @@ public class VisualRecognition {
     public func detectFaces(
         imagesFile: URL? = nil,
         url: String? = nil,
+        imagesFileContentType: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DetectedFaces) -> Void)
@@ -239,7 +261,7 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         if let imagesFile = imagesFile {
-            multipartFormData.append(imagesFile, withName: "images_file", mimeType: "application/octet-stream")
+            multipartFormData.append(imagesFile, withName: "images_file")
         }
         if let url = url {
             guard let urlData = url.data(using: .utf8) else {
@@ -269,7 +291,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/detect_faces",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -295,10 +317,11 @@ public class VisualRecognition {
      encounters non-ASCII characters.
 
      - parameter name: The name of the new classifier. Encode special characters in UTF-8.
-     - parameter positiveExamples: An array of positive examples, each with a name and a compressed
-        (.zip) file of images that depict the visual subject for a class within the new classifier. Include at least
-        10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number
-        of images is 10,000 images or 100 MB per .zip file.
+     - parameter classnamePositiveExamples: A .zip file of images that depict the visual subject of a class in the new classifier. You can include more than
+     one positive example file in a call.  Specify the parameter name by appending `_positive_examples` to the class
+     name. For example, `goldenretriever_positive_examples` creates the class **goldenretriever**.  Include at least 10
+     images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number of
+     images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file name in UTF-8.
      - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
      contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -307,7 +330,7 @@ public class VisualRecognition {
      */
     public func createClassifier(
         name: String,
-        positiveExamples: [PositiveExample],
+        classnamePositiveExamples: URL,
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -320,9 +343,7 @@ public class VisualRecognition {
             return
         }
         multipartFormData.append(nameData, withName: "name")
-        positiveExamples.forEach { example in
-            multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
-        }
+        multipartFormData.append(classnamePositiveExamples, withName: "classname_positive_examples")
         if let negativeExamples = negativeExamples {
             multipartFormData.append(negativeExamples, withName: "negative_examples")
         }
@@ -347,7 +368,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classifiers",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -366,14 +387,12 @@ public class VisualRecognition {
     /**
      Retrieve a list of classifiers.
 
-     - parameter owners: Unused. This parameter will be removed in a future release.
      - parameter verbose: Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of classifiers.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listClassifiers(
-        owners: [String]? = nil,
         verbose: Bool? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -398,7 +417,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/classifiers",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -449,7 +468,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -478,10 +497,12 @@ public class VisualRecognition {
      finished.
 
      - parameter classifierID: The ID of the classifier.
-     - parameter positiveExamples: An array of positive examples, each with a name and a compressed
-     (.zip) file of images that depict the visual subject for a class within the new classifier. Include at least
-     10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number
-     of images is 10,000 images or 100 MB per .zip file.
+     - parameter classnamePositiveExamples: A .zip file of images that depict the visual subject of a class in the classifier. The positive examples create or
+     update classes in the classifier. You can include more than one positive example file in a call.  Specify the
+     parameter name by appending `_positive_examples` to the class name. For example,
+     `goldenretriever_positive_examples` creates the class `goldenretriever`.  Include at least 10 images in .jpg or
+     .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number of images is 10,000
+     images or 100 MB per .zip file.  Encode special characters in the file name in UTF-8.
      - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
      contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -490,7 +511,7 @@ public class VisualRecognition {
      */
     public func updateClassifier(
         classifierID: String,
-        positiveExamples: [PositiveExample]? = nil,
+        classnamePositiveExamples: URL? = nil,
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -498,10 +519,8 @@ public class VisualRecognition {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        if let positiveExamples = positiveExamples {
-            positiveExamples.forEach { example in
-                multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
-            }
+        if let classnamePositiveExamples = classnamePositiveExamples {
+            multipartFormData.append(classnamePositiveExamples, withName: "classname_positive_examples")
         }
         if let negativeExamples = negativeExamples {
             multipartFormData.append(negativeExamples, withName: "negative_examples")
@@ -532,7 +551,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -582,7 +601,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -634,7 +653,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -644,6 +663,56 @@ public class VisualRecognition {
             (response: RestResponse<URL>) in
             switch response.result {
             case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete labeled data.
+
+     Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+     the customer ID.   You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request
+     that passes data. For more information about personal data and customer IDs, see [Information
+     security](https://console.bluemix.net/docs/services/visual-recognition/information-security.html).
+
+     - parameter customerID: The customer ID for which all data is to be deleted.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteUserData(
+        customerID: String,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v3/user_data",
+            authMethod: authMethod,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }

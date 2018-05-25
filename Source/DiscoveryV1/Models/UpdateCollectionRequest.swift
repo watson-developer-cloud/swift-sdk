@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateCollectionRequest. */
-internal struct UpdateCollectionRequest: Encodable {
+public struct UpdateCollectionRequest: Encodable {
 
     /// The name of the collection.
     public var name: String

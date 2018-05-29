@@ -41,6 +41,13 @@
       "symbol": "SemanticRolesSubject.keywords",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
+      "line": 78,
+      "symbol": "NaturalLanguageUnderstanding.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"

@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "line": 78,
+      "symbol": "ToneAnalyzer.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
 }

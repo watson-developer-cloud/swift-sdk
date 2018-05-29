@@ -2,13 +2,6 @@
 	{
   "warnings": [
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/ClassifiedImage.swift",
-      "line": 31,
-      "symbol": "ClassifiedImage.error",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
       "line": 24,
       "symbol": "Classifier.Status.ready",
@@ -38,37 +31,16 @@
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Face.swift",
-      "line": 22,
-      "symbol": "Face.age",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Face.swift",
-      "line": 24,
-      "symbol": "Face.gender",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Face.swift",
-      "line": 26,
-      "symbol": "Face.faceLocation",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Face.swift",
-      "line": 28,
+      "line": 31,
       "symbol": "Face.identity",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/ImageWithFaces.swift",
-      "line": 34,
-      "symbol": "ImageWithFaces.error",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/VisualRecognition.swift",
+      "line": 74,
+      "symbol": "VisualRecognition.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }
   ],
@@ -76,7 +48,13 @@
 },
 	{
   "warnings": [
-
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "line": 78,
+      "symbol": "ToneAnalyzer.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
 },
@@ -388,6 +366,13 @@
       "line": 40,
       "symbol": "Word.PartOfSpeech.hoka",
       "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/TextToSpeech.swift",
+      "line": 97,
+      "symbol": "TextToSpeech.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }
   ],
@@ -800,6 +785,13 @@
       "symbol": "RegisterStatus.Status.alreadyCreated",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/SpeechToText.swift",
+      "line": 105,
+      "symbol": "SpeechToText.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
@@ -938,6 +930,13 @@
       "symbol": "Warning.WarningID.partialTextUsed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
+      "line": 84,
+      "symbol": "PersonalityInsights.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
@@ -985,6 +984,13 @@
       "symbol": "SemanticRolesSubject.keywords",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
+      "line": 78,
+      "symbol": "NaturalLanguageUnderstanding.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
@@ -1031,6 +1037,13 @@
 },
 	{
   "warnings": [
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/LanguageTranslator.swift",
+      "line": 65,
+      "symbol": "LanguageTranslator.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
       "line": 24,
@@ -1106,6 +1119,13 @@
 },
 	{
   "warnings": [
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/DiscoveryV1/Discovery.swift",
+      "line": 75,
+      "symbol": "Discovery.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/DiscoveryV1/Models/Calculation.swift",
       "line": 25,
@@ -2064,6 +2084,13 @@
 	{
   "warnings": [
     {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Conversation.swift",
+      "line": 74,
+      "symbol": "Conversation.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 24,
       "symbol": "CreateDialogNode.NodeType.standard",
@@ -2768,6 +2795,13 @@
 },
 	{
   "warnings": [
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV1/Assistant.swift",
+      "line": 73,
+      "symbol": "Assistant.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
       "line": 24,

@@ -1,6 +1,13 @@
 {
   "warnings": [
     {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/LanguageTranslator.swift",
+      "line": 65,
+      "symbol": "LanguageTranslator.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
       "line": 24,
       "symbol": "TranslationModel.Status.uploading",

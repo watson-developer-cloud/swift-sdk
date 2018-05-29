@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+## Version 0.27.0
+_2018-05-28_
+
+This release regenerates all services. It includes updates to the documentation and some minor new service features.
+
+This release includes the following new features and bug fixes:
+
+- Adds support for IAM authentication, using either an IAM API Key or an access_token obtained using the service API Key
+
 ## Version 0.26.0
 _2018-05-17_
 

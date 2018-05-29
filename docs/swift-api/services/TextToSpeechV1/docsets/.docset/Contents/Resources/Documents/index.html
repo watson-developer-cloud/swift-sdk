@@ -215,14 +215,47 @@
 <li>Copy the service&rsquo;s <code>username</code> and <code>password</code> (or <code>api_key</code> for Visual Recognition).</li>
 </ol></li>
 </ol>
-
-<p>You will need to provide these service credentials in your mobile application. For example:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">textToSpeech</span> <span class="o">=</span> <span class="kt">TextToSpeech</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">)</span>
 </code></pre>
 
 <p>Note that service credentials are different from your IBM Cloud username and password.</p>
 
 <p>See <a href="https://console.bluemix.net/docs/services/watson/index.html">Getting started with Watson and IBM Cloud</a> for details.</p>
+<h2 id='authentication' class='heading'>Authentication</h2>
+
+<p>There are three ways to authenticate with IBM Cloud through the SDK: using a <code>username</code> and <code>password</code>, using an <code>api_key</code>, and with IAM.</p>
+
+<p>See above for the steps to obtain the credentials for your service.</p>
+
+<p>In your code, you pass these values in the service constructor when instantiating your service. Here are some examples:</p>
+<h3 id='username-and-password' class='heading'>Username and Password</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">)</span>
+</code></pre>
+<h3 id='api-key' class='heading'>API Key</h3>
+
+<p><em>Note: This version of instantiation only works with Visual Recognition, as it&rsquo;s the only service that uses an API key.</em></p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">visualRecognition</span> <span class="o">=</span> <span class="kt">VisualRecognition</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="s">"your-apiKey-here"</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">)</span>
+</code></pre>
+<h3 id='using-iam' class='heading'>Using IAM</h3>
+
+<p>When authenticating with IAM, you have the option of supplying:</p>
+
+<ul>
+<li>the IAM API key and, optionally, the IAM service URL. The IAM service URL defaults to &lsquo;<a href="https://iam.bluemix.net/identity/token">https://iam.bluemix.net/identity/token</a>&rsquo;.</li>
+<li>an access token for the service.</li>
+</ul>
+
+<p>If you supply an IAM API key, the SDK will request and refresh access tokens on your behalf.
+If you supply only the IAM access token, you are responsible for refreshing the access token as needed.</p>
+<h4 id='supplying-the-iam-api-key' class='heading'>Supplying the IAM API key</h4>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="s">"your-apikey-here"</span><span class="p">)</span>
+</code></pre>
+<h4 id='supplying-the-accesstoken' class='heading'>Supplying the accessToken</h4>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">,</span> <span class="nv">accessToken</span><span class="p">:</span> <span class="s">"your-accessToken-here"</span><span class="p">)</span>
+</code></pre>
+<h4 id='updating-the-accesstoken' class='heading'>Updating the accessToken</h4>
+<pre class="highlight swift"><code><span class="n">discovery</span><span class="o">.</span><span class="nf">accessToken</span><span class="p">(</span><span class="s">"new-accessToken-here"</span><span class="p">)</span>
+</code></pre>
 <h2 id='custom-service-urls' class='heading'>Custom Service URLs</h2>
 
 <p>You can set a custom service URL by modifying the <code>serviceURL</code> property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.</p>
@@ -439,17 +472,12 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 
 <p>The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.</p>
 
-<p>Note that the Language Translator service was formerly known as Language Translation. It is recommended to <a href="https://console.bluemix.net/docs/services/language-translator/migrating.html">migrate</a> to Language Translator, however, existing Language Translation service instances are currently supported by the <code>LanguageTranslatorV2</code> framework. To use a legacy Language Translation service, set the <code>serviceURL</code> property before executing the first API call to the service.</p>
-
 <p>The following example demonstrates how to use the Language Translator service:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">LanguageTranslatorV2</span>
 
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
 <span class="k">let</span> <span class="nv">languageTranslator</span> <span class="o">=</span> <span class="kt">LanguageTranslator</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
-
-<span class="c1">// set the serviceURL property to use the legacy Language Translation service</span>
-<span class="c1">// languageTranslator.serviceURL = "https://gateway.watsonplatform.net/language-translation/api"</span>
 
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">TranslateRequest</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="s">"Hello"</span><span class="p">],</span> <span class="nv">source</span><span class="p">:</span> <span class="s">"en"</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="s">"es"</span><span class="p">)</span>
@@ -900,7 +928,7 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

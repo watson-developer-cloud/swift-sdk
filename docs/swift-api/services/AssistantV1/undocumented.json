@@ -1,6 +1,13 @@
 {
   "warnings": [
     {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV1/Assistant.swift",
+      "line": 73,
+      "symbol": "Assistant.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV1/Models/CreateDialogNode.swift",
       "line": 24,
       "symbol": "CreateDialogNode.NodeType.standard",

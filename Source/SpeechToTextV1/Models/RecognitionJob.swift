@@ -36,19 +36,19 @@ public struct RecognitionJob: Decodable {
     /// The date and time in Coordinated Universal Time (UTC) at which the job was created. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
     public var created: String
 
-    /// The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). **Note:** This field is returned only when you list information about a specific or all existing jobs.
+    /// The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). This field is returned only by the **Check jobs** and **Check a job** methods.
     public var updated: String?
 
-    /// The URL to use to request information about the job with the **Check a job** method. **Note:** This field is returned only when you create a new job.
+    /// The URL to use to request information about the job with the **Check a job** method. This field is returned only by the **Create a job** method.
     public var url: String?
 
-    /// The user token associated with a job that was created with a callback URL and a user token. **Note:** This field can be returned only when you list information about all existing jobs.
+    /// The user token associated with a job that was created with a callback URL and a user token. This field can be returned only by the **Check jobs** method.
     public var userToken: String?
 
-    /// If the status is `completed`, the results of the recognition request as an array that includes a single instance of a `SpeechRecognitionResults` object. **Note:** This field can be returned only when you list information about a specific existing job.
+    /// If the status is `completed`, the results of the recognition request as an array that includes a single instance of a `SpeechRecognitionResults` object. This field is returned only by the **Check a job** method.
     public var results: [SpeechRecognitionResults]?
 
-    /// An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter 'user_token', query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. **Note:** This field can be returned only when you create a new job.
+    /// An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter 'user_token', query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. This field can be returned only by the **Create a job** method.
     public var warnings: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

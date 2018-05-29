@@ -90,7 +90,7 @@ public class SpeechToTextSession {
         )!
         let restToken = RestToken(
             tokenURL: tokenURL + "?url=" + serviceURL,
-            credentials: credentials
+            authMethod: authMethod
         )
         var socket = SpeechToTextSocket(
             url: url,
@@ -112,7 +112,7 @@ public class SpeechToTextSession {
     private var compress: Bool = true
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
-    private let credentials: Credentials
+    private let authMethod: AuthenticationMethod
     private let model: String?
     private let customizationID: String?
     private let learningOptOut: Bool?
@@ -130,7 +130,7 @@ public class SpeechToTextSession {
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      */
     public init(username: String, password: String, model: String? = nil, customizationID: String? = nil, learningOptOut: Bool? = nil) {
-        self.credentials = .basicAuthentication(username: username, password: password)
+        self.authMethod = BasicAuthentication(username: username, password: password)
         self.model = model
         self.customizationID = customizationID
         self.learningOptOut = learningOptOut

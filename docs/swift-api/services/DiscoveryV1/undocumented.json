@@ -1,6 +1,13 @@
 {
   "warnings": [
     {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/DiscoveryV1/Discovery.swift",
+      "line": 75,
+      "symbol": "Discovery.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/DiscoveryV1/Models/Calculation.swift",
       "line": 25,
       "symbol": "Calculation.results",

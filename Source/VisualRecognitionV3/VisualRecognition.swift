@@ -24,12 +24,12 @@ import Foundation
 public class VisualRecognition {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
+    public var serviceURL = "https://gateway.watsonplatform.net/visual-recognition/api"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let credentials: Credentials
+    internal var authMethod: AuthenticationMethod
     internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     internal let version: String
 
@@ -41,8 +41,40 @@ public class VisualRecognition {
        in "YYYY-MM-DD" format.
      */
     public init(apiKey: String, version: String) {
-        self.credentials = .apiKey(name: "api_key", key: apiKey, in: .query)
+        self.authMethod = APIKeyAuthentication(name: "api_key", key: apiKey, location: .query)
         self.version = version
+        self.serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
+    }
+
+    /**
+     Create a `VisualRecognition` object.
+
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
+     - parameter iamUrl: The URL for the IAM service.
+     */
+    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+        self.version = version
+        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+    }
+
+    /**
+     Create a `VisualRecognition` object.
+
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     - parameter accessToken: An access token for the service.
+     */
+    public init(version: String, accessToken: String) {
+        self.version = version
+        self.authMethod = IAMAccessToken(accessToken: accessToken)
+    }
+
+    public func accessToken(_ newToken: String) {
+        if self.authMethod is IAMAccessToken {
+            self.authMethod = IAMAccessToken(accessToken: newToken)
+        }
     }
 
     /**
@@ -190,7 +222,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classify",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -269,7 +301,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/detect_faces",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -347,7 +379,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v3/classifiers",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -398,7 +430,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v3/classifiers",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -449,7 +481,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -532,7 +564,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -582,7 +614,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -634,7 +666,7 @@ public class VisualRecognition {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -644,6 +676,56 @@ public class VisualRecognition {
             (response: RestResponse<URL>) in
             switch response.result {
             case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete labeled data.
+
+     Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+     the customer ID.   You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request
+     that passes data. For more information about personal data and customer IDs, see [Information
+     security](https://console.bluemix.net/docs/services/visual-recognition/information-security.html).
+
+     - parameter customerID: The customer ID for which all data is to be deleted.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteUserData(
+        customerID: String,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping () -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
+
+        // construct REST request
+        let request = RestRequest(
+            method: "DELETE",
+            url: serviceURL + "/v3/user_data",
+            authMethod: authMethod,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseVoid(responseToError: responseToError) {
+            (response: RestResponse) in
+            switch response.result {
+            case .success: success()
             case .failure(let error): failure?(error)
             }
         }

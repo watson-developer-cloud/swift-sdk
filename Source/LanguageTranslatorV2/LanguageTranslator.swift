@@ -30,7 +30,7 @@ public class LanguageTranslator {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let credentials: Credentials
+    private var authMethod: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.LanguageTranslatorV2"
 
     /**
@@ -40,7 +40,32 @@ public class LanguageTranslator {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.credentials = .basicAuthentication(username: username, password: password)
+        self.authMethod = BasicAuthentication(username: username, password: password)
+    }
+
+    /**
+     Create a `LanguageTranslator` object.
+
+     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
+     - parameter iamUrl: The URL for the IAM service.
+     */
+    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+    }
+
+    /**
+     Create a `LanguageTranslator` object.
+
+     - parameter accessToken: An access token for the service.
+     */
+    public init(version: String, accessToken: String) {
+        self.authMethod = IAMAccessToken(accessToken: accessToken)
+    }
+
+    public func accessToken(_ newToken: String) {
+        if self.authMethod is IAMAccessToken {
+            self.authMethod = IAMAccessToken(accessToken: newToken)
+        }
     }
 
     /**
@@ -112,7 +137,7 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/translate",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -153,7 +178,7 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v2/identifiable_languages",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -205,7 +230,7 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/identify",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -268,7 +293,7 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v2/models",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -349,7 +374,7 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v2/models",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -397,7 +422,7 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
@@ -443,7 +468,7 @@ public class LanguageTranslator {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters
         )
 

@@ -40,7 +40,7 @@ public struct Voice: Decodable {
     /// Describes the additional service features supported with the voice.
     public var supportedFeatures: SupportedFeatures
 
-    /// Returns information about a specified custom voice model. **Note:** This field is returned only when you list information about a specific voice and specify the GUID of a custom voice model that is based on that voice.
+    /// Returns information about a specified custom voice model. This field is returned only by the **Get a voice** method and only when you specify the customization ID of a custom voice model.
     public var customization: VoiceModel?
 
     // Map each property name to the key that shall be used for encoding/decoding.

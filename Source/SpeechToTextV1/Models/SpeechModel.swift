@@ -37,7 +37,7 @@ public struct SpeechModel: Decodable {
     /// Brief description of the model.
     public var description: String
 
-    /// The URI for the model for use with the **Create a session** method. (Returned only for requests for a single model with the **Get a model** method.).
+    /// The URI for the model for use with the **Create a session** method. This field is returned only by the **Get a model** method.
     public var sessions: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

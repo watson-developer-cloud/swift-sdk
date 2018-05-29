@@ -132,6 +132,13 @@
       "symbol": "Warning.WarningID.partialTextUsed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
+      "line": 84,
+      "symbol": "PersonalityInsights.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"

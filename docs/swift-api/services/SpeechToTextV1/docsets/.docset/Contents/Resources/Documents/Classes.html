@@ -168,9 +168,6 @@
                 <a href="Structs/SpeechRecognitionResultsAccumulator.html">SpeechRecognitionResultsAccumulator</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/SpeechSession.html">SpeechSession</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/SupportedFeatures.html">SupportedFeatures</a>
               </li>
               <li class="nav-group-task">
@@ -221,58 +218,46 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The IBM Speech to Text service provides an API that enables you to add IBM&rsquo;s speech recognition capabilities to
-your applications. The service transcribes speech from various languages and audio formats to text with low latency.
-For most languages, the service supports two sampling rates, broadband and narrowband. The service returns all JSON
-response content in the UTF-8 character set. For more information about the service, see the <a href="https://console.bluemix.net/docs/services/speech-to-text/getting-started.html">IBM Cloud
+                        <p>The IBM&reg; Speech to Text service provides an API that uses IBM&rsquo;s speech-recognition capabilities to produce
+transcripts of spoken audio. The service can transcribe speech from various languages and audio formats. It addition to
+basic transcription, the service can produce detailed information about many aspects of the audio. For most languages,
+the service supports two sampling rates, broadband and narrowband. It returns all JSON response content in the UTF-8
+character set. For more information about the service, see the <a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">IBM&reg; Cloud
 documentation</a>.</p>
-<h3 id='api-overview' class='heading'>API Overview</h3>
-
-<p>The Speech to Text service provides the following endpoints:</p>
+<h3 id='api-usage-guidelines' class='heading'>API usage guidelines</h3>
 
 <ul>
-<li><strong>Models</strong> includes methods that return information about the language models that are available for speech
-recognition.</li>
-<li><strong>WebSockets</strong> includes a single method that establishes a persistent connection with the service over the WebSocket
-protocol.</li>
-<li><strong>Sessionless</strong> includes a method that provides a simple means of transcribing audio without the overhead of
-establishing and maintaining a session.</li>
-<li><strong>Sessions</strong> provides methods that allow a client to maintain a long, multi-turn exchange, or session, with the
-service or to establish multiple parallel conversations with a particular instance of the service.</li>
-<li><strong>Asynchronous</strong> provides a non-blocking interface for transcribing audio. You can register a callback URL to be
-notified of job status and, optionally, results, or you can poll the service to learn job status and retrieve results
-manually.</li>
-<li><strong>Custom language models</strong> provides an interface for creating and managing custom language models. The interface lets
-you expand the vocabulary of a base model with domain-specific terminology.</li>
-<li><strong>Custom corpora</strong> provides an interface for managing the corpora associated with a custom language model. You add
-corpora to extract out-of-vocabulary (OOV) words from the corpora into the custom language model&rsquo;s vocabulary. You can
-add, list, and delete corpora from a custom language model.</li>
-<li><strong>Custom words</strong> provides an interface for managing individual words in a custom language model. You can add, modify,
-list, and delete words from a custom language model.</li>
-<li><strong>Custom acoustic models</strong> provides an interface for creating and managing custom acoustic models. The interface lets
-you adapt a base model for the audio characteristics of your environment and speakers.</li>
-<li><strong>Custom audio resources</strong> provides an interface for managing the audio resources associated with a custom acoustic
-model. You add audio resources that closely match the acoustic characteristics of the audio that you want to
-transcribe. You can add, list, and delete audio resources from a custom acoustic model.
-### Usage guidelines for customization
-The following information pertains to methods of the customization interface:</li>
-<li>Language model customization is not available for all languages; it is generally available for production use for all
-languages for which it is available. Acoustic model customization is beta functionality that is available for all
-languages supported by the service. For a complete list of supported languages and the status of their availability,
-see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport">Language support for
-customization</a>.</li>
-<li>In all cases, you must use service credentials created for the instance of the service that owns a custom model to
-use the methods described in this documentation with that model. For more information, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#customOwner">Ownership of custom
-language models</a>.</li>
-<li>How the service handles request logging for the customization interface depends on the request. The service does not
-log data that are used to build custom models. But it does log data when a custom model is used with a recognition
-request. For more information, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#customLogging">Request logging and data
-privacy</a>.</li>
-<li>Each custom model is identified by a customization ID, which is a Globally Unique Identifier (GUID). A GUID is a
-hexadecimal string that has the same format as Watson service credentials: <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>. You
-specify a custom model&rsquo;s GUID with the appropriate customization parameter of methods that support customization.
-For more information about using the service&rsquo;s customization interface, see <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html">The customization
+<li><strong>Audio formats:</strong> The service accepts audio in many formats (MIME types). See <a href="https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html">Audio
+formats</a>.</li>
+<li><strong>HTTP interfaces:</strong> The service provides three HTTP interfaces for speech recognition. The sessionless interface
+includes a single synchronous method. The session-based interface includes multiple synchronous methods for maintaining
+a long, multi-turn exchange with the service. And the asynchronous interface provides multiple methods that use
+registered callbacks and polling for non-blocking recognition. See <a href="https://console.bluemix.net/docs/services/speech-to-text/http.html">The HTTP REST
+interface</a> and <a href="https://console.bluemix.net/docs/services/speech-to-text/async.html">The asynchronous HTTP
 interface</a>.</li>
+<li><strong>WebSocket interface:</strong> The service also offers a WebSocket interface for speech recognition. The WebSocket
+interface provides a full-duplex, low-latency communication channel. Clients send requests and audio to the service and
+receive results over a single connection in an asynchronous fashion. See <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html">The WebSocket
+interface</a>.</li>
+<li><strong>Customization:</strong> Use language model customization to expand the vocabulary of a base model with domain-specific
+terminology. Use acoustic model customization to adapt a base model for the acoustic characteristics of your audio.
+Language model customization is generally available for production use by most supported languages; acoustic model
+customization is beta functionality that is available for all supported languages. See <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html">The customization
+interface</a>.</li>
+<li><strong>Customization IDs:</strong> Many methods accept a customization ID to identify a custom language or custom acoustic model.
+Customization IDs are Globally Unique Identifiers (GUIDs). They are hexadecimal strings that have the format
+<code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>.</li>
+<li><strong><code>X-Watson-Learning-Opt-Out</code>:</strong> By default, all Watson services log requests and their results. Logging is done only
+to improve the services for future users. The logged data is not shared or made public. To prevent IBM from accessing
+your data for general service improvements, set the <code>X-Watson-Learning-Opt-Out</code> request header to <code>true</code> for all
+requests. You must set the header on each request that you do not want IBM to access for general service improvements.
+Methods of the customization interface do not log corpora, words, and audio resources that you use to build custom
+models. Your training data is never used to improve the service&rsquo;s base models. However, the service does log such data
+when a custom model is used with a recognition request. You must set the <code>X-Watson-Learning-Opt-Out</code> request header to
+<code>true</code> to prevent IBM from accessing the data to improve the service.</li>
+<li><strong><code>X-Watson-Metadata</code></strong>: This header allows you to associate a customer ID with data that is passed with a request.
+If necessary, you can use the <strong>Delete labeled data</strong> method to delete the data for a customer ID. See <a href="https://console.bluemix.net/docs/services/speech-to-text/information-security.html">Information
+security</a>.</li>
 </ul>
 
                         <a href="Classes/SpeechToText.html" class="slightly-smaller">See more</a>
@@ -332,7 +317,7 @@ and customizability of the session.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -30,7 +30,7 @@ public class Discovery {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let credentials: Credentials
+    private var authMethod: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.DiscoveryV1"
     private let version: String
 
@@ -43,8 +43,39 @@ public class Discovery {
        in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
-        self.credentials = .basicAuthentication(username: username, password: password)
+        self.authMethod = BasicAuthentication(username: username, password: password)
         self.version = version
+    }
+
+    /**
+     Create a `Discovery` object.
+
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
+     - parameter iamUrl: The URL for the IAM service.
+     */
+    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+        self.version = version
+        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+    }
+
+    /**
+     Create a `Discovery` object.
+
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     - parameter accessToken: An access token for the service.
+     */
+    public init(version: String, accessToken: String) {
+        self.version = version
+        self.authMethod = IAMAccessToken(accessToken: accessToken)
+    }
+
+    public func accessToken(_ newToken: String) {
+        if self.authMethod is IAMAccessToken {
+            self.authMethod = IAMAccessToken(accessToken: newToken)
+        }
     }
 
     /**
@@ -129,7 +160,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + "/v1/environments",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -180,7 +211,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + "/v1/environments",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -229,7 +260,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -293,7 +324,7 @@ public class Discovery {
         let request = RestRequest(
             method: "PUT",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -343,7 +374,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -397,7 +428,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -469,7 +500,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -527,7 +558,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -578,7 +609,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -652,7 +683,7 @@ public class Discovery {
         let request = RestRequest(
             method: "PUT",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -709,7 +740,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -814,7 +845,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -873,7 +904,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -931,7 +962,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -982,7 +1013,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1047,7 +1078,7 @@ public class Discovery {
         let request = RestRequest(
             method: "PUT",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1099,7 +1130,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1152,7 +1183,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1206,7 +1237,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1277,7 +1308,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1332,7 +1363,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1421,7 +1452,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1479,7 +1510,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1561,7 +1592,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1618,7 +1649,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1804,7 +1835,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1983,7 +2014,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2142,7 +2173,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2295,7 +2326,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2358,7 +2389,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2422,7 +2453,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2476,7 +2507,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2543,7 +2574,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2597,7 +2628,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2652,7 +2683,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2707,7 +2738,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2762,7 +2793,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2831,7 +2862,7 @@ public class Discovery {
         let request = RestRequest(
             method: "POST",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2889,7 +2920,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2958,7 +2989,7 @@ public class Discovery {
         let request = RestRequest(
             method: "PUT",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -3016,7 +3047,7 @@ public class Discovery {
         let request = RestRequest(
             method: "GET",
             url: serviceURL + encodedPath,
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3066,7 +3097,7 @@ public class Discovery {
         let request = RestRequest(
             method: "DELETE",
             url: serviceURL + "/v1/user_data",
-            credentials: credentials,
+            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )

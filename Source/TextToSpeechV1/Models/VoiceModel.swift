@@ -19,7 +19,7 @@ import Foundation
 /** VoiceModel. */
 public struct VoiceModel: Decodable {
 
-    /// The customization ID (GUID) of the custom voice model. **Note:** When you create a new custom voice model, the service returns only the GUID of the new custom model; it does not return the other fields of this object.
+    /// The customization ID (GUID) of the custom voice model. The **Create a custom model** method returns only this field. It does not not return the other fields of this object.
     public var customizationID: String
 
     /// The name of the custom voice model.
@@ -40,7 +40,7 @@ public struct VoiceModel: Decodable {
     /// The description of the custom voice model.
     public var description: String?
 
-    /// An array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words. **Note:** This field is returned only when you list information about a specific custom voice model.
+    /// An array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words. This field is returned only by the **Get a voice** method and only when you specify the customization ID of a custom voice model.
     public var words: [Word]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

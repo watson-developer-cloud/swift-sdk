@@ -112,8 +112,6 @@ Follow these steps to create a service instance and obtain its credentials:
     1. Click "Service Credentials" on the left side of the page.
     2. Copy the service's `username` and `password` (or `api_key` for Visual Recognition).
 
-You will need to provide these service credentials in your mobile application. For example:
-
 ```swift
 let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-password-here")
 ```
@@ -121,6 +119,52 @@ let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-
 Note that service credentials are different from your IBM Cloud username and password.
 
 See [Getting started with Watson and IBM Cloud](https://console.bluemix.net/docs/services/watson/index.html) for details.
+
+
+## Authentication
+
+There are three ways to authenticate with IBM Cloud through the SDK: using a `username` and `password`, using an `api_key`, and with IAM.
+
+See above for the steps to obtain the credentials for your service.
+
+In your code, you pass these values in the service constructor when instantiating your service. Here are some examples:
+
+### Username and Password
+
+```swift
+let discovery = Discovery(username: "your-username-here", password: "your-password-here", version: "your-version-here")
+```
+
+### API Key
+
+_Note: This version of instantiation only works with Visual Recognition, as it's the only service that uses an API key._
+
+```swift
+let visualRecognition = VisualRecognition(apiKey: "your-apiKey-here", version: "your-version-here")
+```
+
+### Using IAM
+
+When authenticating with IAM, you have the option of supplying:
+- the IAM API key and, optionally, the IAM service URL. The IAM service URL defaults to 'https://iam.bluemix.net/identity/token'.
+- an access token for the service.
+
+If you supply an IAM API key, the SDK will request and refresh access tokens on your behalf.
+If you supply only the IAM access token, you are responsible for refreshing the access token as needed.
+
+#### Supplying the IAM API key
+```swift
+let discovery = Discovery(version: "your-version-here", apiKey: "your-apikey-here")
+```
+
+#### Supplying the accessToken
+```swift
+let discovery = Discovery(version: "your-version-here", accessToken: "your-accessToken-here")
+```
+#### Updating the accessToken
+```swift
+discovery.accessToken("new-accessToken-here")
+```
 
 ## Custom Service URLs
 

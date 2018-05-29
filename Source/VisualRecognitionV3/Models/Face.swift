@@ -19,10 +19,13 @@ import Foundation
 /** Information about the face. */
 public struct Face: Decodable {
 
+    /// Age information about a face.
     public var age: FaceAge?
 
+    /// Information about the gender of the face.
     public var gender: FaceGender?
 
+    /// The location of the bounding box around the face.
     public var faceLocation: FaceLocation?
 
     public var identity: FaceIdentity?

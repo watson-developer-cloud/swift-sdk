@@ -1,1 +1,2 @@
 github "daltoniam/Starscream" ~> 3.0
+github "ashleymills/Reachability.swift"

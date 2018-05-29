@@ -307,6 +307,13 @@
       "symbol": "Word.PartOfSpeech.hoka",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/TextToSpeech.swift",
+      "line": 97,
+      "symbol": "TextToSpeech.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"

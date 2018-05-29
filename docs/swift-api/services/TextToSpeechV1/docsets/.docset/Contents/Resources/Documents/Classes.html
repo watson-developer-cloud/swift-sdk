@@ -130,50 +130,40 @@
 <p>The IBM&reg; Text to Speech service provides an API that uses IBM&rsquo;s speech-synthesis capabilities to synthesize text
 into natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male or
 female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay. For more
-information about the service, see the <a href="https://console.bluemix.net/docs/services/text-to-speech/getting-started.html">IBM&reg; Cloud
+information about the service, see the <a href="https://console.bluemix.net/docs/services/text-to-speech/index.html">IBM&reg; Cloud
 documentation</a>.</p>
-<h3 id='api-overview' class='heading'>API Overview</h3>
-
-<p>The Text to Speech service provides the following endpoints:</p>
+<h3 id='api-usage-guidelines' class='heading'>API usage guidelines</h3>
 
 <ul>
-<li><strong>Voices</strong> provides information about the voices available for synthesized speech.</li>
-<li><strong>Synthesis</strong> synthesizes written text to audio speech.</li>
-<li><strong>Pronunciation</strong> returns the pronunciation for a specified word. Currently a beta feature.</li>
-<li><strong>Custom models</strong> and let users create custom voice models, which are dictionaries of words and their translations
-for use in speech synthesis. All custom model methods are currently beta features.</li>
-<li><strong>Custom words</strong> let users manage the words in a custom voice model. All custom word methods are currently beta
-features.
-### API Usage
-The following information provides details about using the service to synthesize audio:</li>
-<li><strong>Audio formats:</strong> The service supports a number of audio formats (MIME types). For more information about audio
-formats and sampling rates, including links to a number of Internet sites that provide technical and usage details
-about the different formats, see <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#format">Specifying an audio
+<li><strong>Audio formats:</strong> The service can produce audio in many formats (MIME types). See <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#format">Specifying an audio
 format</a>.</li>
-<li><strong>SSML:</strong> Many methods refer to the Speech Synthesis Markup Language (SSML), an XML-based markup language that
-provides annotations of text for speech-synthesis applications; for example, many methods accept or produce
-translations that use an SSML-based phoneme format. See <a href="https://console.bluemix.net/docs/services/text-to-speech/SSML.html">Using
+<li><strong>SSML:</strong> Many methods refer to the Speech Synthesis Markup Language (SSML). SSML is an XML-based markup language
+that provides text annotation for speech-synthesis applications. See <a href="https://console.bluemix.net/docs/services/text-to-speech/SSML.html">Using
 SSML</a> and <a href="https://console.bluemix.net/docs/services/text-to-speech/SPRs.html">Using IBM
 SPR</a>.</li>
-<li><strong>Word translations:</strong> Many customization methods accept or return sounds-like or phonetic translations for words. A
-phonetic translation is based on the SSML format for representing the phonetic string of a word. Phonetic translations
-can use standard International Phonetic Alphabet (IPA) representation:
+<li><strong>Word translations:</strong> Many customization methods accept sounds-like or phonetic translations for words. Phonetic
+translations are based on the SSML phoneme format for representing a word. You can specify them in standard
+International Phonetic Alphabet (IPA) representation
 &lt;phoneme alphabet=<q>ipa</q> ph=<q>t&#601;m&#712;&#593;to</q>&gt;&lt;/phoneme&gt;
-or the proprietary IBM Symbolic Phonetic Representation (SPR):
+or in the proprietary IBM Symbolic Phonetic Representation (SPR)
 &lt;phoneme alphabet=<q>ibm</q> ph=<q>1gAstroEntxrYFXs</q>&gt;&lt;/phoneme&gt;
-For more information about customization and about sounds-like and phonetic translations, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding
-customization</a>.</li>
-<li><strong>WebSocket interface:</strong> The service also offers a WebSocket interface as an alternative to its HTTP REST interface
-for speech synthesis. The WebSocket interface supports both plain text and SSML input, including the SSML &lt;mark&gt;
-element and word timings. See <a href="https://console.bluemix.net/docs/services/text-to-speech/websockets.html">The WebSocket
+See <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</li>
+<li><strong>WebSocket interface:</strong> The service also offers a WebSocket interface for speech synthesis. The WebSocket interface
+supports both plain text and SSML input, including the SSML &lt;mark&gt; element and word timings. See <a href="https://console.bluemix.net/docs/services/text-to-speech/websockets.html">The WebSocket
 interface</a>.</li>
-<li><strong>GUIDs:</strong> The pronunciation and customization methods accept or return a Globally Unique Identifier (GUID). For
-example, customization IDs (specified with the <code>customization_id</code> parameter) and service credentials are GUIDs. GUIDs
-are hexadecimal strings that have the format <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>.</li>
-<li><strong>Custom voice model ownership:</strong> In all cases, you must use service credentials created for the instance of the
-service that owns a custom voice model to use the methods described in this documentation with that model. For more
-information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#customOwner">Ownership of custom voice
-models</a>.</li>
+<li><strong>Customization IDs:</strong> Many methods accept a customization ID, which is a Globally Unique Identifier (GUID).
+Customization IDs are hexadecimal strings that have the format <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>.</li>
+<li><strong><code>X-Watson-Learning-Opt-Out</code>:</strong> By default, all Watson services log requests and their results. Logging is done only
+to improve the services for future users. The logged data is not shared or made public. To prevent IBM from accessing
+your data for general service improvements, set the <code>X-Watson-Learning-Opt-Out</code> request header to <code>true</code> for all
+requests. You must set the header on each request that you do not want IBM to access for general service improvements.
+Methods of the customization interface do not log words and translations that you use to build custom voice models.
+Your training data is never used to improve the service&rsquo;s base models. However, the service does log such data when a
+custom model is used with a synthesize request. You must set the <code>X-Watson-Learning-Opt-Out</code> request header to <code>true</code>
+to prevent IBM from accessing the data to improve the service.</li>
+<li><strong><code>X-Watson-Metadata</code>:</strong> This header allows you to associate a customer ID with data that is passed with a request.
+If necessary, you can use the <strong>Delete labeled data</strong> method to delete the data for a customer ID. See <a href="https://console.bluemix.net/docs/services/text-to-speech/information-security.html">Information
+security</a>.</li>
 </ul>
 
                         <a href="Classes/TextToSpeech.html" class="slightly-smaller">See more</a>
@@ -194,7 +184,7 @@ models</a>.</li>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

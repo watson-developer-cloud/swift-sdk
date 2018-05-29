@@ -168,9 +168,6 @@
                 <a href="../Structs/SpeechRecognitionResultsAccumulator.html">SpeechRecognitionResultsAccumulator</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/SpeechSession.html">SpeechSession</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
               </li>
               <li class="nav-group-task">
@@ -336,7 +333,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>). <strong>Note:</strong> This field is returned only when you list information about a specific or all existing jobs.</p>
+                        <p>The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>). This field is returned only by the <strong>Check jobs</strong> and <strong>Check a job</strong> methods.</p>
 
                       </div>
                       <div class="declaration">
@@ -363,7 +360,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The URL to use to request information about the job with the <strong>Check a job</strong> method. <strong>Note:</strong> This field is returned only when you create a new job.</p>
+                        <p>The URL to use to request information about the job with the <strong>Check a job</strong> method. This field is returned only by the <strong>Create a job</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -390,7 +387,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The user token associated with a job that was created with a callback URL and a user token. <strong>Note:</strong> This field can be returned only when you list information about all existing jobs.</p>
+                        <p>The user token associated with a job that was created with a callback URL and a user token. This field can be returned only by the <strong>Check jobs</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -417,7 +414,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If the status is <code>completed</code>, the results of the recognition request as an array that includes a single instance of a <code><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></code> object. <strong>Note:</strong> This field can be returned only when you list information about a specific existing job.</p>
+                        <p>If the status is <code>completed</code>, the results of the recognition request as an array that includes a single instance of a <code><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></code> object. This field is returned only by the <strong>Check a job</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -444,7 +441,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, <code>&quot;unexpected query parameter &#39;user_token&#39;, query parameter &#39;callback_url&#39; was not specified&quot;</code>. The request succeeds despite the warnings. <strong>Note:</strong> This field can be returned only when you create a new job.</p>
+                        <p>An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, <code>&quot;unexpected query parameter &#39;user_token&#39;, query parameter &#39;callback_url&#39; was not specified&quot;</code>. The request succeeds despite the warnings. This field can be returned only by the <strong>Create a job</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -463,7 +460,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-18)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

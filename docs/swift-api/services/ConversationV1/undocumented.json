@@ -1,6 +1,13 @@
 {
   "warnings": [
     {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Conversation.swift",
+      "line": 74,
+      "symbol": "Conversation.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 24,
       "symbol": "CreateDialogNode.NodeType.standard",

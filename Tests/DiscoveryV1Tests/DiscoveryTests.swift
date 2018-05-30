@@ -38,11 +38,19 @@ class DiscoveryTests: XCTestCase {
         environment = lookupOrCreateTestEnvironment()
         documentURL = loadDocument(name: "KennedySpeech", ext: "html")
     }
+    
+    /** Generate today's date. */
+    func generateDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 
     func instantiateDiscovery() -> Discovery {
         let username = Credentials.DiscoveryUsername
         let password = Credentials.DiscoveryPassword
-        let version = "2017-11-07"
+        let version = generateDate()
         let discovery = Discovery(username: username, password: password, version: version)
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         discovery.defaultHeaders["X-Watson-Test"] = "true"

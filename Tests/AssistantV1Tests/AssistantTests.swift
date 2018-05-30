@@ -91,12 +91,20 @@ class AssistantTests: XCTestCase {
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
         ]
     }
-
+    
+    /** Generate today's date. */
+    func generateDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
+    
     /** Instantiate Assistant. */
     func instantiateAssistant() {
         let username = Credentials.AssistantUsername
         let password = Credentials.AssistantPassword
-        let version = "2018-02-16"
+        let version = generateDate()
         assistant = Assistant(username: username, password: password, version: version)
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         assistant.defaultHeaders["X-Watson-Test"] = "true"

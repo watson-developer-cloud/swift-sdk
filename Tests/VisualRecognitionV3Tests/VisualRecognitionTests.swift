@@ -80,11 +80,19 @@ class VisualRecognitionTests: XCTestCase {
         continueAfterFailure = false
         instantiateVisualRecognition()
     }
+    
+    /** Generate today's date. */
+    func generateDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {
         let apiKey = Credentials.VisualRecognitionAPIKey
-        let version = "2018-03-19"
+        let version = generateDate()
         visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"

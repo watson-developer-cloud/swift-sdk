@@ -61,9 +61,11 @@ class JSONTests: XCTestCase {
     func testEquality() {
         // date values
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let stringDate = "2018-05-30"
-        let stringDate2 = "2018-04-25"
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        let stringDate = "2018-05-17T18:45:32.189Z"
+        let stringDate2 = "2017-04-16T15:45:32.189Z"
         let date = dateFormatter.date(from: stringDate)
         let date2 = dateFormatter.date(from: stringDate2)
 
@@ -73,7 +75,7 @@ class JSONTests: XCTestCase {
         XCTAssertEqual(JSON.string("hello"), JSON.string("hello"))
         XCTAssertEqual(JSON.int(1), JSON.int(1))
         XCTAssertEqual(JSON.double(0.5), JSON.double(0.5))
-        XCTAssertEqual(JSON.date(date), JSON.date(date))
+        XCTAssertEqual(JSON.date(date!), JSON.date(date!))
         XCTAssertEqual(JSON.array([JSON.int(1), JSON.int(2)]),
                        JSON.array([JSON.int(1), JSON.int(2)]))
         XCTAssertEqual(JSON.object(["x": JSON.int(1), "y": JSON.int(2)]),
@@ -85,7 +87,7 @@ class JSONTests: XCTestCase {
         XCTAssertNotEqual(JSON.int(1), JSON.int(2))
         XCTAssertNotEqual(JSON.double(3.14), JSON.double(2.72))
         XCTAssertNotEqual(JSON.double(3.14), JSON.double(2.72))
-        XCTAssertNotEqual(JSON.date(date), JSON.date(date2))
+        XCTAssertNotEqual(JSON.date(date!), JSON.date(date2!))
         XCTAssertNotEqual(JSON.array([JSON.int(1), JSON.int(2)]),
                           JSON.array([JSON.int(2), JSON.int(1)]))
         XCTAssertNotEqual(JSON.object(["x": JSON.int(1), "y": JSON.int(2)]),
@@ -96,7 +98,7 @@ class JSONTests: XCTestCase {
         XCTAssertNotEqual(JSON.boolean(true), JSON.string("true"))
         XCTAssertNotEqual(JSON.string("true"), JSON.int(1))
         XCTAssertNotEqual(JSON.int(1), JSON.double(1.0))
-        XCTAssertNotEqual(JSON.string("true"), JSON.date(date))
+        XCTAssertNotEqual(JSON.string("true"), JSON.date(date!))
         XCTAssertNotEqual(JSON.double(1.0), JSON.array([JSON.double(1.0)]))
         XCTAssertNotEqual(JSON.array([JSON.double(1.0)]),
                           JSON.object(["x": JSON.double(1.0)]))
@@ -136,14 +138,16 @@ class JSONTests: XCTestCase {
 
     func testEncodeDate() {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let stringDate = "2018-05-30"
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        let stringDate = "2018-05-17T18:45:32.189Z"
         let date = dateFormatter.date(from: stringDate)
 
-        let object: [String: JSON] = ["key": .date(date)]
+        let object: [String: JSON] = ["key": .date(date!)]
         let data = try! JSONEncoder().encode(object)
         let json = String(data: data, encoding: .utf8)!
-        let expected = "{\"key\":2018-05-30}"
+        let expected = "{\"key\":\"17 May 2018 at 19:45\"}"
         XCTAssertEqual(json.sorted(), expected.sorted())
     }
 
@@ -249,14 +253,16 @@ class JSONTests: XCTestCase {
 
     func testDecodeDate() {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let stringDate = "2018-05-30"
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        let stringDate = "2018-05-17T18:45:32.189Z"
         let date = dateFormatter.date(from: stringDate)
 
-        let json = "{ \"key\": 2018-05-30 }"
+        let json = "{ \"key\": \"17 May 2018 at 19:45\" }"
         let data = json.data(using: .utf8)!
         let object = try! JSONDecoder().decode([String: JSON].self, from: data)
-        XCTAssertEqual(object["key"], .date(date))
+        XCTAssertEqual(object["key"], JSON.date(date!))
     }
 
     func testDecodeString() {

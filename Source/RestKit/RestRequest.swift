@@ -59,14 +59,9 @@ internal struct RestRequest {
         url: String,
         authMethod: AuthenticationMethod,
         headerParameters: [String: String],
-        acceptType: String? = nil,
-        contentType: String? = nil,
         queryItems: [URLQueryItem]? = nil,
         messageBody: Data? = nil)
     {
-        var headerParameters = headerParameters
-        if let acceptType = acceptType { headerParameters["Accept"] = acceptType }
-        if let contentType = contentType { headerParameters["Content-Type"] = contentType }
         self.method = method
         self.url = url
         self.authMethod = authMethod

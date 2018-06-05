@@ -137,7 +137,7 @@ let discovery = Discovery(username: "your-username-here", password: "your-passwo
 
 ### API Key
 
-_Note: This version of instantiation only works with Visual Recognition, as it's the only service that uses an API key._
+_Note: This type of authentication only works with Visual Recognition, and for instances created before May 23, 2018. Newer instances of Visual Recognition use IAM._
 
 ```swift
 let visualRecognition = VisualRecognition(apiKey: "your-apiKey-here", version: "your-version-here")
@@ -827,13 +827,18 @@ import VisualRecognitionV3
 
 let apiKey = "your-apikey-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
-let visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
+let visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
 
 let url = "your-image-url"
 let failure = { (error: Error) in print(error) }
 visualRecognition.classify(image: url, failure: failure) { classifiedImages in
     print(classifiedImages)
 }
+```
+
+Note: a different initializer is used for authentication with instances created before May 23, 2018:
+```swift
+let visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
 ```
 
 ### Using Core ML

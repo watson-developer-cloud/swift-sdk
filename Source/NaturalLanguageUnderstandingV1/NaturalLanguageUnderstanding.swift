@@ -108,9 +108,11 @@ public class NaturalLanguageUnderstanding {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            let message = json["error"] ?? JSON.null
-            var userInfo = [NSLocalizedDescriptionKey: message]
-            if let description = json["description"] {
+            var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
+            if case let .some(.string(description)) = json["description"] {
                 userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
             }
             return NSError(domain: domain, code: code, userInfo: userInfo)

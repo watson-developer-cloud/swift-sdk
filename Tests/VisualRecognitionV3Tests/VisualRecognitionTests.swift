@@ -1059,6 +1059,23 @@ class VisualRecognitionTests: XCTestCase {
 
     // MARK: - Negative Tests
 
+    /** Invalid API Key. */
+    func testAuthenticationError() {
+        let apiKey = "let-me-in-let-me-in"
+        let version = "2018-03-19"
+        visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
+        visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
+        visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
+
+        let expectation = self.expectation(description: "Invalid API Key")
+        let failure = { (error: Error) in
+            expectation.fulfill()
+        }
+
+        visualRecognition.getClassifier(classifierID: "foo-bar-baz", failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+
     /** Test creating a classifier with a single image for positive examples. */
     func testCreateClassifierWithInvalidPositiveExamples() {
         let expectation = self.expectation(description: "Create classifier with invalid positive example.")
@@ -1097,6 +1114,17 @@ class VisualRecognitionTests: XCTestCase {
 
         let invalidImageURL = "invalid-image-url"
         visualRecognition.detectFaces(url: invalidImageURL, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+
+    /** Get information about an unknown classifier. */
+    func testGetUnknownClassifier() {
+        let expectation = self.expectation(description: "Get information about an unknown classifier.")
+        let failure = { (error: Error) in
+            expectation.fulfill()
+        }
+
+        visualRecognition.getClassifier(classifierID: "foo-bar-baz", failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

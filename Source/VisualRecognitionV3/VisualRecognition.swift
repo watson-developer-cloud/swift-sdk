@@ -104,18 +104,31 @@ public class VisualRecognition {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            let errorID = (json["error_id"] ?? JSON.null) ?? (json["error"] ?? JSON.null)
-            let error = json["error"] ?? JSON.null
-            let status = json["status"] ?? JSON.null
-            let html = json["Error"] ?? JSON.null
-            let message = errorID ?? error ?? status ?? html ?? "Unknown error."
-            let description = (json["description"] ?? JSON.null) ?? (json["error"] ?? JSON.null)
-            let statusInfo = json["statusInfo"] ?? JSON.null
-            let reason = description ?? statusInfo ?? "Please use the status code to refer to the documentation."
-            let userInfo = [
-                NSLocalizedDescriptionKey: message,
-                NSLocalizedFailureReasonErrorKey: reason,
-            ]
+            var userInfo: [String: Any] = [:]
+            if code == 403 {
+                // ErrorAuthentication
+                if case let .some(.string(status)) = json["status"],
+                    case let .some(.string(statusInfo)) = json["statusInfo"] {
+                    userInfo[NSLocalizedDescriptionKey] = "\(status): \(statusInfo)"
+                }
+            } else if code == 404 {
+                // "error": ErrorInfo
+                if case let .some(.object(errorObj)) = json["error"],
+                    case let .some(.string(message)) = errorObj["description"],
+                    case let .some(.string(errorID)) = errorObj["error_id"] {
+                    userInfo[NSLocalizedDescriptionKey] = "\(message) (error_id = \(errorID))"
+                }
+            } else if code == 413 {
+                // ErrorHTML
+                if case let .some(.string(message)) = json["Error"] {
+                    userInfo[NSLocalizedDescriptionKey] = message
+                }
+            } else {
+                // ErrorResponse
+                if case let .some(.string(message)) = json["error"] {
+                    userInfo[NSLocalizedDescriptionKey] = message
+                }
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)

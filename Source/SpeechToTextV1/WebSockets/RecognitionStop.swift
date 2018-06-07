@@ -17,13 +17,9 @@
 import Foundation
 
 /** Signals the end of an audio transmission to Speech to Text. */
-internal struct RecognitionStop: JSONEncodable {
+internal struct RecognitionStop: Encodable {
 
     /// The action to perform. Must be `stop` to end the request.
     private let action = "stop"
 
-    /** Serialize a `RecognitionStop` model to JSON. */
-    internal func toJSONObject() -> Any {
-        return ["action": action]
-    }
 }

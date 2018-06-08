@@ -68,10 +68,14 @@ public class NaturalLanguageClassifier {
 
         let code = response?.statusCode ?? 400
         do {
-            let json = try JSONWrapper(data: data)
-            let error = try? json.getString(at: "error")
-            let description = try? json.getString(at: "description")
-            let userInfo = [NSLocalizedDescriptionKey: error ?? "", NSLocalizedFailureReasonErrorKey: description ?? ""]
+            let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
+            if case let .some(.string(description)) = json["description"] {
+                userInfo[NSLocalizedFailureReasonErrorKey] = description
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)

@@ -128,7 +128,8 @@ internal class SpeechToTextSocket: WebSocketDelegate {
 
     internal func writeStop() {
         guard state != .disconnected else { return }
-        guard let stop = try? RecognitionStop().toJSON().serializeString() else { return }
+        guard let data = try? JSONEncoder().encode(RecognitionStop()) else { return }
+        guard let stop = String(data: data, encoding: .utf8) else { return }
         queue.addOperation {
             self.socket.write(string: stop)
         }

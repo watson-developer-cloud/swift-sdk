@@ -185,67 +185,6 @@ extension RestRequest {
      Execute this request and process the response body as a JSON object.
 
      - responseToError: A function that can parse service-specific errors from the raw data response.
-     - path: The path at which to decode the JSON object.
-     - completionHandler: The completion handler to call when the request is complete.
-     */
-    internal func responseObject<T: JSONDecodable>(
-        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
-        path: [JSONPathType]? = nil,
-        completionHandler: @escaping (RestResponse<T>) -> Void)
-    {
-        // execute the request
-        response(parseServiceError: responseToError) { data, response, error in
-
-            // ensure there is no underlying error
-            guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<T>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-
-            // ensure there is data to parse
-            guard let data = data else {
-                let result = RestResult<T>.failure(RestError.noData)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-
-            // parse json object
-            let result: RestResult<T>
-            do {
-                let json = try JSONWrapper(data: data)
-                let object: T
-                if let path = path {
-                    switch path.count {
-                    case 0: object = try json.decode()
-                    case 1: object = try json.decode(at: path[0])
-                    case 2: object = try json.decode(at: path[0], path[1])
-                    case 3: object = try json.decode(at: path[0], path[1], path[2])
-                    case 4: object = try json.decode(at: path[0], path[1], path[2], path[3])
-                    case 5: object = try json.decode(at: path[0], path[1], path[2], path[3], path[4])
-                    default: throw JSONWrapper.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
-                    }
-                } else {
-                    object = try json.decode()
-                }
-                result = .success(object)
-            } catch {
-                result = .failure(error)
-            }
-
-            // execute completion handler
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
-        }
-    }
-
-    /**
-     Execute this request and process the response body as a decodable value.
-
-     - responseToError: A function that can parse service-specific errors from the raw data response.
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseObject<T: Decodable>(
@@ -291,12 +230,10 @@ extension RestRequest {
      Execute this request and process the response body as a JSON array.
 
      - responseToError: A function that can parse service-specific errors from the raw data response.
-     - path: The path at which to decode the JSON array.
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func responseArray<T: JSONDecodable>(
+    internal func responseArray<T: Decodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
-        path: [JSONPathType]? = nil,
         completionHandler: @escaping (RestResponse<[T]>) -> Void)
     {
         // execute the request
@@ -322,23 +259,8 @@ extension RestRequest {
             // parse json object
             let result: RestResult<[T]>
             do {
-                let json = try JSONWrapper(data: data)
-                var array: [JSONWrapper]
-                if let path = path {
-                    switch path.count {
-                    case 0: array = try json.getArray()
-                    case 1: array = try json.getArray(at: path[0])
-                    case 2: array = try json.getArray(at: path[0], path[1])
-                    case 3: array = try json.getArray(at: path[0], path[1], path[2])
-                    case 4: array = try json.getArray(at: path[0], path[1], path[2], path[3])
-                    case 5: array = try json.getArray(at: path[0], path[1], path[2], path[3], path[4])
-                    default: throw JSONWrapper.Error.keyNotFound(key: "ExhaustedVariadicParameterEncoding")
-                    }
-                } else {
-                    array = try json.getArray()
-                }
-                let objects: [T] = try array.map { json in try json.decode() }
-                result = .success(objects)
+                let json = try JSONDecoder().decode([T].self, from: data)
+                result = .success(json)
             } catch {
                 result = .failure(error)
             }

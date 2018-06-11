@@ -19,13 +19,19 @@ import Foundation
 /** Usage information. */
 public struct Usage: Decodable {
 
-    /// Number of features used in the API call.
+    /**
+     Number of features used in the API call.
+     */
     public var features: Int?
 
-    /// Number of text characters processed.
+    /**
+     Number of text characters processed.
+     */
     public var textCharacters: Int?
 
-    /// Number of 10,000-character units processed.
+    /**
+     Number of 10,000-character units processed.
+     */
     public var textUnits: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.

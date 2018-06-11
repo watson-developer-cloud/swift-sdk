@@ -19,7 +19,10 @@ import Foundation
 /** Corpora. */
 public struct Corpora: Decodable {
 
-    /// Information about corpora of the custom model. The array is empty if the custom model has no corpora.
+    /**
+     An array of objects that provides information about the corpora for the custom model. The array is empty if the
+     custom model has no corpora.
+     */
     public var corpora: [Corpus]
 
     // Map each property name to the key that shall be used for encoding/decoding.

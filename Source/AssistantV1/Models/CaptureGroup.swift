@@ -19,10 +19,14 @@ import Foundation
 /** CaptureGroup. */
 public struct CaptureGroup: Codable {
 
-    /// A recognized capture group for the entity.
+    /**
+     A recognized capture group for the entity.
+     */
     public var group: String
 
-    /// Zero-based character offsets that indicate where the entity value begins and ends in the input text.
+    /**
+     Zero-based character offsets that indicate where the entity value begins and ends in the input text.
+     */
     public var location: [Int]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -39,7 +43,11 @@ public struct CaptureGroup: Codable {
 
      - returns: An initialized `CaptureGroup`.
     */
-    public init(group: String, location: [Int]? = nil) {
+    public init(
+        group: String,
+        location: [Int]? = nil
+    )
+    {
         self.group = group
         self.location = location
     }

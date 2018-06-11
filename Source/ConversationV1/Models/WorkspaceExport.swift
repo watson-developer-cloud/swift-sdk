@@ -19,7 +19,9 @@ import Foundation
 /** WorkspaceExport. */
 public struct WorkspaceExport: Decodable {
 
-    /// The current status of the workspace.
+    /**
+     The current status of the workspace.
+     */
     public enum Status: String {
         case nonExistent = "Non Existent"
         case training = "Training"
@@ -28,43 +30,70 @@ public struct WorkspaceExport: Decodable {
         case unavailable = "Unavailable"
     }
 
-    /// The name of the workspace.
+    /**
+     The name of the workspace.
+     */
     public var name: String
 
-    /// The description of the workspace.
+    /**
+     The description of the workspace.
+     */
     public var description: String
 
-    /// The language of the workspace.
+    /**
+     The language of the workspace.
+     */
     public var language: String
 
-    /// Any metadata that is required by the workspace.
+    /**
+     Any metadata that is required by the workspace.
+     */
     public var metadata: [String: JSON]
 
-    /// The timestamp for creation of the workspace.
+    /**
+     The timestamp for creation of the workspace.
+     */
     public var created: String?
 
-    /// The timestamp for the last update to the workspace.
+    /**
+     The timestamp for the last update to the workspace.
+     */
     public var updated: String?
 
-    /// The workspace ID.
+    /**
+     The workspace ID.
+     */
     public var workspaceID: String
 
-    /// The current status of the workspace.
+    /**
+     The current status of the workspace.
+     */
     public var status: String
 
-    /// Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+    /**
+     Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that
+     workspace training data is not to be used.
+     */
     public var learningOptOut: Bool
 
-    /// An array of intents.
+    /**
+     An array of intents.
+     */
     public var intents: [IntentExport]?
 
-    /// An array of entities.
+    /**
+     An array of entities.
+     */
     public var entities: [EntityExport]?
 
-    /// An array of counterexamples.
+    /**
+     An array of counterexamples.
+     */
     public var counterexamples: [Counterexample]?
 
-    /// An array of objects describing the dialog nodes in the workspace.
+    /**
+     An array of objects describing the dialog nodes in the workspace.
+     */
     public var dialogNodes: [DialogNode]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

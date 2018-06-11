@@ -19,10 +19,14 @@ import Foundation
 /** IdentifiedLanguage. */
 public struct IdentifiedLanguage: Decodable {
 
-    /// The language code for an identified language.
+    /**
+     The language code for an identified language.
+     */
     public var language: String
 
-    /// The confidence score for the identified language.
+    /**
+     The confidence score for the identified language.
+     */
     public var confidence: Double
 
     // Map each property name to the key that shall be used for encoding/decoding.

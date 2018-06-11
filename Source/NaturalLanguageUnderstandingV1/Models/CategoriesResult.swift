@@ -19,10 +19,14 @@ import Foundation
 /** The hierarchical 5-level taxonomy the content is categorized into. */
 public struct CategoriesResult: Decodable {
 
-    /// The path to the category through the taxonomy hierarchy.
+    /**
+     The path to the category through the taxonomy hierarchy.
+     */
     public var label: String?
 
-    /// Confidence score for the category classification. Higher values indicate greater confidence.
+    /**
+     Confidence score for the category classification. Higher values indicate greater confidence.
+     */
     public var score: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.

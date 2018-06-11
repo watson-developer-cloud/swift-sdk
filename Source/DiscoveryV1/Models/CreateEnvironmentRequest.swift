@@ -17,15 +17,21 @@
 import Foundation
 
 /** CreateEnvironmentRequest. */
-internal struct CreateEnvironmentRequest: Encodable {
+public struct CreateEnvironmentRequest: Encodable {
 
-    /// Name that identifies the environment.
+    /**
+     Name that identifies the environment.
+     */
     public var name: String
 
-    /// Description of the environment.
+    /**
+     Description of the environment.
+     */
     public var description: String?
 
-    /// **Deprecated**: Size of the environment.
+    /**
+     **Deprecated**: Size of the environment.
+     */
     public var size: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -44,7 +50,12 @@ internal struct CreateEnvironmentRequest: Encodable {
 
      - returns: An initialized `CreateEnvironmentRequest`.
     */
-    public init(name: String, description: String? = nil, size: Int? = nil) {
+    public init(
+        name: String,
+        description: String? = nil,
+        size: Int? = nil
+    )
+    {
         self.name = name
         self.description = description
         self.size = size

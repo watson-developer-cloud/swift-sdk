@@ -19,7 +19,9 @@ import Foundation
 /** FeatureSentimentResults. */
 public struct FeatureSentimentResults: Decodable {
 
-    /// Sentiment score from -1 (negative) to 1 (positive).
+    /**
+     Sentiment score from -1 (negative) to 1 (positive).
+     */
     public var score: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.

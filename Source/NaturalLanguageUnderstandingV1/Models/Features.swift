@@ -19,31 +19,50 @@ import Foundation
 /** Analysis features and options. */
 public struct Features: Encodable {
 
-    /// Whether or not to return the concepts that are mentioned in the analyzed text.
+    /**
+     Whether or not to return the concepts that are mentioned in the analyzed text.
+     */
     public var concepts: ConceptsOptions?
 
-    /// Whether or not to extract the emotions implied in the analyzed text.
+    /**
+     Whether or not to extract the emotions implied in the analyzed text.
+     */
     public var emotion: EmotionOptions?
 
-    /// Whether or not to extract detected entity objects from the analyzed text.
+    /**
+     Whether or not to extract detected entity objects from the analyzed text.
+     */
     public var entities: EntitiesOptions?
 
-    /// Whether or not to return the keywords in the analyzed text.
+    /**
+     Whether or not to return the keywords in the analyzed text.
+     */
     public var keywords: KeywordsOptions?
 
-    /// Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is only available for URL and HTML input.
+    /**
+     Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is
+     only available for URL and HTML input.
+     */
     public var metadata: MetadataOptions?
 
-    /// Whether or not to return the relationships between detected entities in the analyzed text.
+    /**
+     Whether or not to return the relationships between detected entities in the analyzed text.
+     */
     public var relations: RelationsOptions?
 
-    /// Whether or not to return the subject-action-object relations from the analyzed text.
+    /**
+     Whether or not to return the subject-action-object relations from the analyzed text.
+     */
     public var semanticRoles: SemanticRolesOptions?
 
-    /// Whether or not to return the overall sentiment of the analyzed text.
+    /**
+     Whether or not to return the overall sentiment of the analyzed text.
+     */
     public var sentiment: SentimentOptions?
 
-    /// Whether or not to return the high level category the content is categorized as (i.e. news, art).
+    /**
+     Whether or not to return the high level category the content is categorized as (i.e. news, art).
+     */
     public var categories: CategoriesOptions?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -66,7 +85,8 @@ public struct Features: Encodable {
      - parameter emotion: Whether or not to extract the emotions implied in the analyzed text.
      - parameter entities: Whether or not to extract detected entity objects from the analyzed text.
      - parameter keywords: Whether or not to return the keywords in the analyzed text.
-     - parameter metadata: Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is only available for URL and HTML input.
+     - parameter metadata: Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is
+       only available for URL and HTML input.
      - parameter relations: Whether or not to return the relationships between detected entities in the analyzed text.
      - parameter semanticRoles: Whether or not to return the subject-action-object relations from the analyzed text.
      - parameter sentiment: Whether or not to return the overall sentiment of the analyzed text.
@@ -74,7 +94,18 @@ public struct Features: Encodable {
 
      - returns: An initialized `Features`.
     */
-    public init(concepts: ConceptsOptions? = nil, emotion: EmotionOptions? = nil, entities: EntitiesOptions? = nil, keywords: KeywordsOptions? = nil, metadata: MetadataOptions? = nil, relations: RelationsOptions? = nil, semanticRoles: SemanticRolesOptions? = nil, sentiment: SentimentOptions? = nil, categories: CategoriesOptions? = nil) {
+    public init(
+        concepts: ConceptsOptions? = nil,
+        emotion: EmotionOptions? = nil,
+        entities: EntitiesOptions? = nil,
+        keywords: KeywordsOptions? = nil,
+        metadata: MetadataOptions? = nil,
+        relations: RelationsOptions? = nil,
+        semanticRoles: SemanticRolesOptions? = nil,
+        sentiment: SentimentOptions? = nil,
+        categories: CategoriesOptions? = nil
+    )
+    {
         self.concepts = concepts
         self.emotion = emotion
         self.entities = entities

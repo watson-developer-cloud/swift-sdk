@@ -19,7 +19,9 @@ import Foundation
 /** ListConfigurationsResponse. */
 public struct ListConfigurationsResponse: Decodable {
 
-    /// An array of Configurations that are available for the service instance.
+    /**
+     An array of Configurations that are available for the service instance.
+     */
     public var configurations: [Configuration]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

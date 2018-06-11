@@ -19,13 +19,22 @@ import Foundation
 /** UpdateIntent. */
 public struct UpdateIntent: Encodable {
 
-    /// The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
+    /**
+     The name of the intent. This string must conform to the following restrictions:
+     - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
+     - It cannot begin with the reserved prefix `sys-`.
+     - It must be no longer than 128 characters.
+     */
     public var intent: String?
 
-    /// The description of the intent.
+    /**
+     The description of the intent.
+     */
     public var description: String?
 
-    /// An array of user input examples for the intent.
+    /**
+     An array of user input examples for the intent.
+     */
     public var examples: [CreateExample]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -38,13 +47,21 @@ public struct UpdateIntent: Encodable {
     /**
      Initialize a `UpdateIntent` with member variables.
 
-     - parameter intent: The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
+     - parameter intent: The name of the intent. This string must conform to the following restrictions:
+       - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
+       - It cannot begin with the reserved prefix `sys-`.
+       - It must be no longer than 128 characters.
      - parameter description: The description of the intent.
      - parameter examples: An array of user input examples for the intent.
 
      - returns: An initialized `UpdateIntent`.
     */
-    public init(intent: String? = nil, description: String? = nil, examples: [CreateExample]? = nil) {
+    public init(
+        intent: String? = nil,
+        description: String? = nil,
+        examples: [CreateExample]? = nil
+    )
+    {
         self.intent = intent
         self.description = description
         self.examples = examples

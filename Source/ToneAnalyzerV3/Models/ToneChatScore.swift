@@ -19,13 +19,22 @@ import Foundation
 /** ToneChatScore. */
 public struct ToneChatScore: Decodable {
 
-    /// The score for the tone in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the tone is perceived in the utterance.
+    /**
+     The score for the tone in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the
+     tone is perceived in the utterance.
+     */
     public var score: Double
 
-    /// The unique, non-localized identifier of the tone for the results. The service can return results for the following tone IDs: `sad`, `frustrated`, `satisfied`, `excited`, `polite`, `impolite`, and `sympathetic`. The service returns results only for tones whose scores meet a minimum threshold of 0.5.
+    /**
+     The unique, non-localized identifier of the tone for the results. The service can return results for the following
+     tone IDs: `sad`, `frustrated`, `satisfied`, `excited`, `polite`, `impolite`, and `sympathetic`. The service returns
+     results only for tones whose scores meet a minimum threshold of 0.5.
+     */
     public var toneID: String
 
-    /// The user-visible, localized name of the tone.
+    /**
+     The user-visible, localized name of the tone.
+     */
     public var toneName: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,19 +19,29 @@ import Foundation
 /** QueryResult. */
 public struct QueryResult: Decodable {
 
-    /// The unique identifier of the document.
+    /**
+     The unique identifier of the document.
+     */
     public var id: String?
 
-    /// *Deprecated* This field is now part of the `result_metadata` object.
+    /**
+     *Deprecated* This field is now part of the `result_metadata` object.
+     */
     public var score: Double?
 
-    /// Metadata of the document.
+    /**
+     Metadata of the document.
+     */
     public var metadata: [String: JSON]?
 
-    /// The collection ID of the collection containing the document for this result.
+    /**
+     The collection ID of the collection containing the document for this result.
+     */
     public var collectionID: String?
 
-    /// Metadata of the query result.
+    /**
+     Metadata of the query result.
+     */
     public var resultMetadata: QueryResultMetadata?
 
     /// Additional properties associated with this model.

@@ -19,25 +19,37 @@ import Foundation
 /** DialogNodeAction. */
 public struct DialogNodeAction: Codable {
 
-    /// The type of action to invoke.
+    /**
+     The type of action to invoke.
+     */
     public enum ActionType: String {
         case client = "client"
         case server = "server"
     }
 
-    /// The name of the action.
+    /**
+     The name of the action.
+     */
     public var name: String
 
-    /// The type of action to invoke.
+    /**
+     The type of action to invoke.
+     */
     public var actionType: String?
 
-    /// A map of key/value pairs to be provided to the action.
+    /**
+     A map of key/value pairs to be provided to the action.
+     */
     public var parameters: [String: JSON]?
 
-    /// The location in the dialog context where the result of the action is stored.
+    /**
+     The location in the dialog context where the result of the action is stored.
+     */
     public var resultVariable: String
 
-    /// The name of the context variable that the client application will use to pass in credentials for the action.
+    /**
+     The name of the context variable that the client application will use to pass in credentials for the action.
+     */
     public var credentials: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -60,7 +72,14 @@ public struct DialogNodeAction: Codable {
 
      - returns: An initialized `DialogNodeAction`.
     */
-    public init(name: String, resultVariable: String, actionType: String? = nil, parameters: [String: JSON]? = nil, credentials: String? = nil) {
+    public init(
+        name: String,
+        resultVariable: String,
+        actionType: String? = nil,
+        parameters: [String: JSON]? = nil,
+        credentials: String? = nil
+    )
+    {
         self.name = name
         self.resultVariable = resultVariable
         self.actionType = actionType

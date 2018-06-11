@@ -19,10 +19,14 @@ import Foundation
 /** ExampleCollection. */
 public struct ExampleCollection: Decodable {
 
-    /// An array of objects describing the examples defined for the intent.
+    /**
+     An array of objects describing the examples defined for the intent.
+     */
     public var examples: [Example]
 
-    /// The pagination data for the returned objects.
+    /**
+     The pagination data for the returned objects.
+     */
     public var pagination: Pagination
 
     // Map each property name to the key that shall be used for encoding/decoding.

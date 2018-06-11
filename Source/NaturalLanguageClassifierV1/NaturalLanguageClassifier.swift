@@ -17,9 +17,9 @@
 import Foundation
 
 /**
- IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching predefined classes
- for short text input. You create and train a classifier to connect predefined classes to example texts so that the
- service can apply those classes to new inputs.
+ IBM Watson&trade; Natural Language Classifier uses machine learning algorithms to return the top matching predefined
+ classes for short text input. You create and train a classifier to connect predefined classes to example texts so that
+ the service can apply those classes to new inputs.
  */
 public class NaturalLanguageClassifier {
 
@@ -69,14 +69,7 @@ public class NaturalLanguageClassifier {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedFailureReasonErrorKey] = description
-            }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }
@@ -144,7 +137,8 @@ public class NaturalLanguageClassifier {
      Classify multiple phrases.
 
      Returns label information for multiple phrases. The status must be `Available` before you can use the classifier to
-     classify text.  Note that classifying Japanese texts is a beta feature.
+     classify text.
+     Note that classifying Japanese texts is a beta feature.
 
      - parameter classifierID: Classifier ID to use.
      - parameter collection: The submitted phrases.
@@ -204,12 +198,12 @@ public class NaturalLanguageClassifier {
      Sends data to create and train a classifier and returns information about the new classifier.
 
      - parameter metadata: Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the
-     classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.
-     Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese
-     (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
+       classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.
+       Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese
+       (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
      - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000
-     records. For details, see [Data
-     preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
+       records. For details, see [Data
+       preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.

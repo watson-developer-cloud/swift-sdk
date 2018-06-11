@@ -19,10 +19,14 @@ import Foundation
 /** IntentCollection. */
 public struct IntentCollection: Decodable {
 
-    /// An array of objects describing the intents defined for the workspace.
+    /**
+     An array of objects describing the intents defined for the workspace.
+     */
     public var intents: [IntentExport]
 
-    /// The pagination data for the returned objects.
+    /**
+     The pagination data for the returned objects.
+     */
     public var pagination: Pagination
 
     // Map each property name to the key that shall be used for encoding/decoding.

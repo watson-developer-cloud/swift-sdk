@@ -19,44 +19,71 @@ import Foundation
 /** A collection for storing documents. */
 public struct Collection: Decodable {
 
-    /// The status of the collection.
+    /**
+     The status of the collection.
+     */
     public enum Status: String {
         case active = "active"
         case pending = "pending"
         case maintenance = "maintenance"
     }
 
-    /// The unique identifier of the collection.
+    /**
+     The unique identifier of the collection.
+     */
     public var collectionID: String?
 
-    /// The name of the collection.
+    /**
+     The name of the collection.
+     */
     public var name: String?
 
-    /// The description of the collection.
+    /**
+     The description of the collection.
+     */
     public var description: String?
 
-    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'.
+    /**
+     The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'.
+     */
     public var created: String?
 
-    /// The timestamp of when the collection was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    /**
+     The timestamp of when the collection was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     */
     public var updated: String?
 
-    /// The status of the collection.
+    /**
+     The status of the collection.
+     */
     public var status: String?
 
-    /// The unique identifier of the collection's configuration.
+    /**
+     The unique identifier of the collection's configuration.
+     */
     public var configurationID: String?
 
-    /// The language of the documents stored in the collection. Permitted values include `en` (English), `de` (German), and `es` (Spanish).
+    /**
+     The language of the documents stored in the collection. Permitted values include `en` (English), `de` (German), and
+     `es` (Spanish).
+     */
     public var language: String?
 
-    /// The object providing information about the documents in the collection. Present only when retrieving details of a collection.
+    /**
+     The object providing information about the documents in the collection. Present only when retrieving details of a
+     collection.
+     */
     public var documentCounts: DocumentCounts?
 
-    /// The object providing information about the disk usage of the collection. Present only when retrieving details of a collection.
+    /**
+     The object providing information about the disk usage of the collection. Present only when retrieving details of a
+     collection.
+     */
     public var diskUsage: CollectionDiskUsage?
 
-    /// Provides information about the status of relevance training for collection.
+    /**
+     Provides information about the status of relevance training for collection.
+     */
     public var trainingStatus: TrainingStatus?
 
     // Map each property name to the key that shall be used for encoding/decoding.

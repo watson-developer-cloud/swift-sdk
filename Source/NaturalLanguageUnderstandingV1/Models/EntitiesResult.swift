@@ -19,28 +19,44 @@ import Foundation
 /** The important people, places, geopolitical entities and other types of entities in your content. */
 public struct EntitiesResult: Decodable {
 
-    /// Entity type.
+    /**
+     Entity type.
+     */
     public var type: String?
 
-    /// The name of the entity.
+    /**
+     The name of the entity.
+     */
     public var text: String?
 
-    /// Relevance score from 0 to 1. Higher values indicate greater relevance.
+    /**
+     Relevance score from 0 to 1. Higher values indicate greater relevance.
+     */
     public var relevance: Double?
 
-    /// Entity mentions and locations.
+    /**
+     Entity mentions and locations.
+     */
     public var mentions: [EntityMention]?
 
-    /// How many times the entity was mentioned in the text.
+    /**
+     How many times the entity was mentioned in the text.
+     */
     public var count: Int?
 
-    /// Emotion analysis results for the entity, enabled with the "emotion" option.
+    /**
+     Emotion analysis results for the entity, enabled with the "emotion" option.
+     */
     public var emotion: EmotionScores?
 
-    /// Sentiment analysis results for the entity, enabled with the "sentiment" option.
+    /**
+     Sentiment analysis results for the entity, enabled with the "sentiment" option.
+     */
     public var sentiment: FeatureSentimentResults?
 
-    /// Disambiguation information for the entity.
+    /**
+     Disambiguation information for the entity.
+     */
     public var disambiguation: DisambiguationResult?
 
     // Map each property name to the key that shall be used for encoding/decoding.

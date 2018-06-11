@@ -19,31 +19,52 @@ import Foundation
 /** UpdateWorkspace. */
 public struct UpdateWorkspace: Encodable {
 
-    /// The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 64 characters.
+    /**
+     The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
+     no longer than 64 characters.
+     */
     public var name: String?
 
-    /// The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+    /**
+     The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
+     must be no longer than 128 characters.
+     */
     public var description: String?
 
-    /// The language of the workspace.
+    /**
+     The language of the workspace.
+     */
     public var language: String?
 
-    /// An array of objects defining the intents for the workspace.
+    /**
+     An array of objects defining the intents for the workspace.
+     */
     public var intents: [CreateIntent]?
 
-    /// An array of objects defining the entities for the workspace.
+    /**
+     An array of objects defining the entities for the workspace.
+     */
     public var entities: [CreateEntity]?
 
-    /// An array of objects defining the nodes in the workspace dialog.
+    /**
+     An array of objects defining the nodes in the workspace dialog.
+     */
     public var dialogNodes: [CreateDialogNode]?
 
-    /// An array of objects defining input examples that have been marked as irrelevant input.
+    /**
+     An array of objects defining input examples that have been marked as irrelevant input.
+     */
     public var counterexamples: [CreateCounterexample]?
 
-    /// Any metadata related to the workspace.
+    /**
+     Any metadata related to the workspace.
+     */
     public var metadata: [String: JSON]?
 
-    /// Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+    /**
+     Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that
+     workspace training data is not to be used.
+     */
     public var learningOptOut: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -62,19 +83,33 @@ public struct UpdateWorkspace: Encodable {
     /**
      Initialize a `UpdateWorkspace` with member variables.
 
-     - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 64 characters.
-     - parameter description: The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
+       no longer than 64 characters.
+     - parameter description: The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
+       must be no longer than 128 characters.
      - parameter language: The language of the workspace.
      - parameter intents: An array of objects defining the intents for the workspace.
      - parameter entities: An array of objects defining the entities for the workspace.
      - parameter dialogNodes: An array of objects defining the nodes in the workspace dialog.
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant input.
      - parameter metadata: Any metadata related to the workspace.
-     - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+     - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates
+       that workspace training data is not to be used.
 
      - returns: An initialized `UpdateWorkspace`.
     */
-    public init(name: String? = nil, description: String? = nil, language: String? = nil, intents: [CreateIntent]? = nil, entities: [CreateEntity]? = nil, dialogNodes: [CreateDialogNode]? = nil, counterexamples: [CreateCounterexample]? = nil, metadata: [String: JSON]? = nil, learningOptOut: Bool? = nil) {
+    public init(
+        name: String? = nil,
+        description: String? = nil,
+        language: String? = nil,
+        intents: [CreateIntent]? = nil,
+        entities: [CreateEntity]? = nil,
+        dialogNodes: [CreateDialogNode]? = nil,
+        counterexamples: [CreateCounterexample]? = nil,
+        metadata: [String: JSON]? = nil,
+        learningOptOut: Bool? = nil
+    )
+    {
         self.name = name
         self.description = description
         self.language = language

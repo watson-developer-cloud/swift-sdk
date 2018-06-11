@@ -19,10 +19,14 @@ import Foundation
 /** An object containing the emotion results for the target. */
 public struct TargetedEmotionResults: Decodable {
 
-    /// Targeted text.
+    /**
+     Targeted text.
+     */
     public var text: String?
 
-    /// An object containing the emotion results for the target.
+    /**
+     An object containing the emotion results for the target.
+     */
     public var emotion: EmotionScores?
 
     // Map each property name to the key that shall be used for encoding/decoding.

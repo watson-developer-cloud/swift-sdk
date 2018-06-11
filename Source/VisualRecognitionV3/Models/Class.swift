@@ -19,7 +19,9 @@ import Foundation
 /** A category within a classifier. */
 public struct Class: Decodable {
 
-    /// The name of the class.
+    /**
+     The name of the class.
+     */
     public var className: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

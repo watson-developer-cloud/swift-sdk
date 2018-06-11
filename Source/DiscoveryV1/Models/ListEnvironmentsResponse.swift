@@ -19,7 +19,9 @@ import Foundation
 /** ListEnvironmentsResponse. */
 public struct ListEnvironmentsResponse: Decodable {
 
-    /// An array of [environments] that are available for the service instance.
+    /**
+     An array of [environments] that are available for the service instance.
+     */
     public var environments: [Environment]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,13 +19,19 @@ import Foundation
 /** Example. */
 public struct Example: Decodable {
 
-    /// The text of the user input example.
+    /**
+     The text of the user input example.
+     */
     public var exampleText: String
 
-    /// The timestamp for creation of the example.
+    /**
+     The timestamp for creation of the example.
+     */
     public var created: String?
 
-    /// The timestamp for the last update to the example.
+    /**
+     The timestamp for the last update to the example.
+     */
     public var updated: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,16 +19,24 @@ import Foundation
 /** Entity description and location within evidence field. */
 public struct QueryEvidenceEntity: Decodable {
 
-    /// The entity type for this entity. Possible types vary based on model used.
+    /**
+     The entity type for this entity. Possible types vary based on model used.
+     */
     public var type: String?
 
-    /// The original text of this entity as found in the evidence field.
+    /**
+     The original text of this entity as found in the evidence field.
+     */
     public var text: String?
 
-    /// The start location of the entity text in the identified field. This value is inclusive.
+    /**
+     The start location of the entity text in the identified field. This value is inclusive.
+     */
     public var startOffset: Int?
 
-    /// The end location of the entity text in the identified field. This value is exclusive.
+    /**
+     The end location of the entity text in the identified field. This value is exclusive.
+     */
     public var endOffset: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,10 +19,14 @@ import Foundation
 /** Options which are specific to a particular enrichment. */
 public struct EnrichmentOptions: Codable {
 
-    /// An object representing the enrichment features that will be applied to the specified field.
+    /**
+     An object representing the enrichment features that will be applied to the specified field.
+     */
     public var features: NluEnrichmentFeatures?
 
-    /// *For use with `elements` enrichments only.* The element extraction model to use. Models available are: `contract`.
+    /**
+     *For use with `elements` enrichments only.* The element extraction model to use. Models available are: `contract`.
+     */
     public var model: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -35,11 +39,16 @@ public struct EnrichmentOptions: Codable {
      Initialize a `EnrichmentOptions` with member variables.
 
      - parameter features: An object representing the enrichment features that will be applied to the specified field.
-     - parameter model: *For use with `elements` enrichments only.* The element extraction model to use. Models available are: `contract`.
+     - parameter model: *For use with `elements` enrichments only.* The element extraction model to use. Models available are:
+       `contract`.
 
      - returns: An initialized `EnrichmentOptions`.
     */
-    public init(features: NluEnrichmentFeatures? = nil, model: String? = nil) {
+    public init(
+        features: NluEnrichmentFeatures? = nil,
+        model: String? = nil
+    )
+    {
         self.features = features
         self.model = model
     }

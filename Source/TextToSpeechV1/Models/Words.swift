@@ -19,7 +19,13 @@ import Foundation
 /** Words. */
 public struct Words: Codable {
 
-    /// The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be added or updated for the custom voice model and the word's translation.   The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+    /**
+     The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be added
+     or updated for the custom voice model and the word's translation.
+     The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation
+     from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before
+     lowercase letters. The array is empty if the custom model contains no words.
+     */
     public var words: [Word]
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -30,11 +36,18 @@ public struct Words: Codable {
     /**
      Initialize a `Words` with member variables.
 
-     - parameter words: The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be added or updated for the custom voice model and the word's translation.   The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+     - parameter words: The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be
+       added or updated for the custom voice model and the word's translation.
+       The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation
+       from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before
+       lowercase letters. The array is empty if the custom model contains no words.
 
      - returns: An initialized `Words`.
     */
-    public init(words: [Word]) {
+    public init(
+        words: [Word]
+    )
+    {
         self.words = words
     }
 

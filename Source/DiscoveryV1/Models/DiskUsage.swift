@@ -19,22 +19,34 @@ import Foundation
 /** Summary of the disk usage statistics for the environment. */
 public struct DiskUsage: Decodable {
 
-    /// Number of bytes used on the environment's disk capacity.
+    /**
+     Number of bytes used on the environment's disk capacity.
+     */
     public var usedBytes: Int?
 
-    /// Total number of bytes available in the environment's disk capacity.
+    /**
+     Total number of bytes available in the environment's disk capacity.
+     */
     public var maximumAllowedBytes: Int?
 
-    /// **Deprecated**: Total number of bytes available in the environment's disk capacity.
+    /**
+     **Deprecated**: Total number of bytes available in the environment's disk capacity.
+     */
     public var totalBytes: Int?
 
-    /// **Deprecated**: Amount of disk capacity used, in KB or GB format.
+    /**
+     **Deprecated**: Amount of disk capacity used, in KB or GB format.
+     */
     public var used: String?
 
-    /// **Deprecated**: Total amount of the environment's disk capacity, in KB or GB format.
+    /**
+     **Deprecated**: Total amount of the environment's disk capacity, in KB or GB format.
+     */
     public var total: String?
 
-    /// **Deprecated**: Percentage of the environment's disk capacity that is being used.
+    /**
+     **Deprecated**: Percentage of the environment's disk capacity that is being used.
+     */
     public var percentUsed: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.

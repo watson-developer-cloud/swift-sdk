@@ -17,7 +17,7 @@
 import Foundation
 
 /** TrainingExamplePatch. */
-internal struct TrainingExamplePatch: Encodable {
+public struct TrainingExamplePatch: Encodable {
 
     public var crossReference: String?
 
@@ -37,7 +37,11 @@ internal struct TrainingExamplePatch: Encodable {
 
      - returns: An initialized `TrainingExamplePatch`.
     */
-    public init(crossReference: String? = nil, relevance: Int? = nil) {
+    public init(
+        crossReference: String? = nil,
+        relevance: Int? = nil
+    )
+    {
         self.crossReference = crossReference
         self.relevance = relevance
     }

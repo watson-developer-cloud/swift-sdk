@@ -33,7 +33,10 @@ public struct WordSettings: Codable {
 
      - returns: An initialized `WordSettings`.
     */
-    public init(heading: WordHeadingDetection? = nil) {
+    public init(
+        heading: WordHeadingDetection? = nil
+    )
+    {
         self.heading = heading
     }
 

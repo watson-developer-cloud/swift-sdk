@@ -19,10 +19,14 @@ import Foundation
 /** EntityMention. */
 public struct EntityMention: Decodable {
 
-    /// Entity mention text.
+    /**
+     Entity mention text.
+     */
     public var text: String?
 
-    /// Character offsets indicating the beginning and end of the mention in the analyzed text.
+    /**
+     Character offsets indicating the beginning and end of the mention in the analyzed text.
+     */
     public var location: [Int]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

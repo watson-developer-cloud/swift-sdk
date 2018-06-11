@@ -19,18 +19,26 @@ import Foundation
 /** Filter. */
 public struct Filter: Decodable {
 
-    /// The type of aggregation command used. For example: term, filter, max, min, etc.
+    /**
+     The type of aggregation command used. For example: term, filter, max, min, etc.
+     */
     public var type: String?
 
     public var results: [AggregationResult]?
 
-    /// Number of matching results.
+    /**
+     Number of matching results.
+     */
     public var matchingResults: Int?
 
-    /// Aggregations returned by the Discovery service.
+    /**
+     Aggregations returned by the Discovery service.
+     */
     public var aggregations: [QueryAggregation]?
 
-    /// The match the aggregated results queried for.
+    /**
+     The match the aggregated results queried for.
+     */
     public var match: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

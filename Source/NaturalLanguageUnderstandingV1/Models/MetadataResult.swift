@@ -19,19 +19,29 @@ import Foundation
 /** The Authors, Publication Date, and Title of the document. Supports URL and HTML input types. */
 public struct MetadataResult: Decodable {
 
-    /// The authors of the document.
+    /**
+     The authors of the document.
+     */
     public var authors: [Author]?
 
-    /// The publication date in the format ISO 8601.
+    /**
+     The publication date in the format ISO 8601.
+     */
     public var publicationDate: String?
 
-    /// The title of the document.
+    /**
+     The title of the document.
+     */
     public var title: String?
 
-    /// URL of a prominent image on the webpage.
+    /**
+     URL of a prominent image on the webpage.
+     */
     public var image: String?
 
-    /// RSS/ATOM feeds found on the webpage.
+    /**
+     RSS/ATOM feeds found on the webpage.
+     */
     public var feeds: [Feed]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

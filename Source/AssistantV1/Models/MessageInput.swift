@@ -19,7 +19,9 @@ import Foundation
 /** The text of the user input. */
 public struct MessageInput: Decodable {
 
-    /// The user's input.
+    /**
+     The user's input.
+     */
     public var text: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

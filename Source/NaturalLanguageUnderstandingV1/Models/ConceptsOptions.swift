@@ -19,7 +19,9 @@ import Foundation
 /** Whether or not to analyze content for general concepts that are referenced or alluded to. */
 public struct ConceptsOptions: Encodable {
 
-    /// Maximum number of concepts to return.
+    /**
+     Maximum number of concepts to return.
+     */
     public var limit: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -34,7 +36,10 @@ public struct ConceptsOptions: Encodable {
 
      - returns: An initialized `ConceptsOptions`.
     */
-    public init(limit: Int? = nil) {
+    public init(
+        limit: Int? = nil
+    )
+    {
         self.limit = limit
     }
 

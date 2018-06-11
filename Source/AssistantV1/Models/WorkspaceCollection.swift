@@ -19,10 +19,14 @@ import Foundation
 /** WorkspaceCollection. */
 public struct WorkspaceCollection: Decodable {
 
-    /// An array of objects describing the workspaces associated with the service instance.
+    /**
+     An array of objects describing the workspaces associated with the service instance.
+     */
     public var workspaces: [Workspace]
 
-    /// An object defining the pagination data for the returned objects.
+    /**
+     An object defining the pagination data for the returned objects.
+     */
     public var pagination: Pagination
 
     // Map each property name to the key that shall be used for encoding/decoding.

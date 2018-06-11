@@ -19,13 +19,19 @@ import Foundation
 /** QueryRelationsFilter. */
 public struct QueryRelationsFilter: Encodable {
 
-    /// A list of relation types to include or exclude from the query.
+    /**
+     A list of relation types to include or exclude from the query.
+     */
     public var relationTypes: QueryFilterType?
 
-    /// A list of entity types to include or exclude from the query.
+    /**
+     A list of entity types to include or exclude from the query.
+     */
     public var entityTypes: QueryFilterType?
 
-    /// A comma-separated list of document IDs to include in the query.
+    /**
+     A comma-separated list of document IDs to include in the query.
+     */
     public var documentIds: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -44,7 +50,12 @@ public struct QueryRelationsFilter: Encodable {
 
      - returns: An initialized `QueryRelationsFilter`.
     */
-    public init(relationTypes: QueryFilterType? = nil, entityTypes: QueryFilterType? = nil, documentIds: [String]? = nil) {
+    public init(
+        relationTypes: QueryFilterType? = nil,
+        entityTypes: QueryFilterType? = nil,
+        documentIds: [String]? = nil
+    )
+    {
         self.relationTypes = relationTypes
         self.entityTypes = entityTypes
         self.documentIds = documentIds

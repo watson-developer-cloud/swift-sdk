@@ -17,7 +17,7 @@
 import Foundation
 
 /** NewTrainingQuery. */
-internal struct NewTrainingQuery: Encodable {
+public struct NewTrainingQuery: Encodable {
 
     public var naturalLanguageQuery: String?
 
@@ -41,7 +41,12 @@ internal struct NewTrainingQuery: Encodable {
 
      - returns: An initialized `NewTrainingQuery`.
     */
-    public init(naturalLanguageQuery: String? = nil, filter: String? = nil, examples: [TrainingExample]? = nil) {
+    public init(
+        naturalLanguageQuery: String? = nil,
+        filter: String? = nil,
+        examples: [TrainingExample]? = nil
+    )
+    {
         self.naturalLanguageQuery = naturalLanguageQuery
         self.filter = filter
         self.examples = examples

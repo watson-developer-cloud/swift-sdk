@@ -21,10 +21,14 @@ public struct RelationArgument: Decodable {
 
     public var entities: [RelationEntity]?
 
-    /// Character offsets indicating the beginning and end of the mention in the analyzed text.
+    /**
+     Character offsets indicating the beginning and end of the mention in the analyzed text.
+     */
     public var location: [Int]?
 
-    /// Text that corresponds to the argument.
+    /**
+     Text that corresponds to the argument.
+     */
     public var text: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

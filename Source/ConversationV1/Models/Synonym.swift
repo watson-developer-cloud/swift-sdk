@@ -19,13 +19,19 @@ import Foundation
 /** Synonym. */
 public struct Synonym: Decodable {
 
-    /// The text of the synonym.
+    /**
+     The text of the synonym.
+     */
     public var synonymText: String
 
-    /// The timestamp for creation of the synonym.
+    /**
+     The timestamp for creation of the synonym.
+     */
     public var created: String?
 
-    /// The timestamp for the most recent update to the synonym.
+    /**
+     The timestamp for the most recent update to the synonym.
+     */
     public var updated: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

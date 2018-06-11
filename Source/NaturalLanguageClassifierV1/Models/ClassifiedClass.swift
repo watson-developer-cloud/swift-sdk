@@ -19,10 +19,15 @@ import Foundation
 /** Class and confidence. */
 public struct ClassifiedClass: Decodable {
 
-    /// A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher confidences.
+    /**
+     A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher
+     confidences.
+     */
     public var confidence: Double?
 
-    /// Class label.
+    /**
+     Class label.
+     */
     public var className: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

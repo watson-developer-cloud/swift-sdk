@@ -19,10 +19,14 @@ import Foundation
 /** An object specifying the emotion detection enrichment and related parameters. */
 public struct NluEnrichmentEmotion: Codable {
 
-    /// When `true`, emotion detection is performed on the entire field.
+    /**
+     When `true`, emotion detection is performed on the entire field.
+     */
     public var document: Bool?
 
-    /// A comma-separated list of target strings that will have any associated emotions detected.
+    /**
+     A comma-separated list of target strings that will have any associated emotions detected.
+     */
     public var targets: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -39,7 +43,11 @@ public struct NluEnrichmentEmotion: Codable {
 
      - returns: An initialized `NluEnrichmentEmotion`.
     */
-    public init(document: Bool? = nil, targets: [String]? = nil) {
+    public init(
+        document: Bool? = nil,
+        targets: [String]? = nil
+    )
+    {
         self.document = document
         self.targets = targets
     }

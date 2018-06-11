@@ -19,22 +19,41 @@ import Foundation
 /** SentenceAnalysis. */
 public struct SentenceAnalysis: Decodable {
 
-    /// The unique identifier of a sentence of the input content. The first sentence has ID 0, and the ID of each subsequent sentence is incremented by one.
+    /**
+     The unique identifier of a sentence of the input content. The first sentence has ID 0, and the ID of each
+     subsequent sentence is incremented by one.
+     */
     public var sentenceID: Int
 
-    /// The text of the input sentence.
+    /**
+     The text of the input sentence.
+     */
     public var text: String
 
-    /// **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying tone of the sentence. The array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that meets this threshold. **`2016-05-19`:** Not returned.
+    /**
+     **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying
+     tone of the sentence. The array includes results for any tone whose score is at least 0.5. The array is empty if no
+     tone has a score that meets this threshold. **`2016-05-19`:** Not returned.
+     */
     public var tones: [ToneScore]?
 
-    /// **`2017-09-21`:** Not returned. **`2016-05-19`:** An array of `ToneCategory` objects that provides the results of the tone analysis for the sentence. The service returns results only for the tones specified with the `tones` parameter of the request.
+    /**
+     **`2017-09-21`:** Not returned. **`2016-05-19`:** An array of `ToneCategory` objects that provides the results of
+     the tone analysis for the sentence. The service returns results only for the tones specified with the `tones`
+     parameter of the request.
+     */
     public var toneCategories: [ToneCategory]?
 
-    /// **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the first character of the sentence in the overall input content.
+    /**
+     **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the first character of the sentence in the overall
+     input content.
+     */
     public var inputFrom: Int?
 
-    /// **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the last character of the sentence in the overall input content.
+    /**
+     **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the last character of the sentence in the overall
+     input content.
+     */
     public var inputTo: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,13 +19,19 @@ import Foundation
 /** WordAlternativeResults. */
 public struct WordAlternativeResults: Decodable {
 
-    /// The start time in seconds of the word from the input audio that corresponds to the word alternatives.
+    /**
+     The start time in seconds of the word from the input audio that corresponds to the word alternatives.
+     */
     public var startTime: Double
 
-    /// The end time in seconds of the word from the input audio that corresponds to the word alternatives.
+    /**
+     The end time in seconds of the word from the input audio that corresponds to the word alternatives.
+     */
     public var endTime: Double
 
-    /// An array of alternative hypotheses for a word from the input audio.
+    /**
+     An array of alternative hypotheses for a word from the input audio.
+     */
     public var alternatives: [WordAlternativeResult]
 
     // Map each property name to the key that shall be used for encoding/decoding.

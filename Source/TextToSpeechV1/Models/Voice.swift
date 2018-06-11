@@ -19,28 +19,46 @@ import Foundation
 /** Voice. */
 public struct Voice: Decodable {
 
-    /// The URI of the voice.
+    /**
+     The URI of the voice.
+     */
     public var url: String
 
-    /// The gender of the voice: `male` or `female`.
+    /**
+     The gender of the voice: `male` or `female`.
+     */
     public var gender: String
 
-    /// The name of the voice. Use this as the voice identifier in all requests.
+    /**
+     The name of the voice. Use this as the voice identifier in all requests.
+     */
     public var name: String
 
-    /// The language and region of the voice (for example, `en-US`).
+    /**
+     The language and region of the voice (for example, `en-US`).
+     */
     public var language: String
 
-    /// A textual description of the voice.
+    /**
+     A textual description of the voice.
+     */
     public var description: String
 
-    /// If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `custom_pronunciation`; maintained for backward compatibility.).
+    /**
+     If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as
+     `custom_pronunciation`; maintained for backward compatibility.).
+     */
     public var customizable: Bool
 
-    /// Describes the additional service features supported with the voice.
+    /**
+     Describes the additional service features supported with the voice.
+     */
     public var supportedFeatures: SupportedFeatures
 
-    /// Returns information about a specified custom voice model. This field is returned only by the **Get a voice** method and only when you specify the customization ID of a custom voice model.
+    /**
+     Returns information about a specified custom voice model. This field is returned only by the **Get a voice** method
+     and only when you specify the customization ID of a custom voice model.
+     */
     public var customization: VoiceModel?
 
     // Map each property name to the key that shall be used for encoding/decoding.

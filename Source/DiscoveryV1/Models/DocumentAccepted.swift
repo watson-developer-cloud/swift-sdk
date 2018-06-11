@@ -19,18 +19,26 @@ import Foundation
 /** DocumentAccepted. */
 public struct DocumentAccepted: Decodable {
 
-    /// Status of the document in the ingestion process.
+    /**
+     Status of the document in the ingestion process.
+     */
     public enum Status: String {
         case processing = "processing"
     }
 
-    /// The unique identifier of the ingested document.
+    /**
+     The unique identifier of the ingested document.
+     */
     public var documentID: String?
 
-    /// Status of the document in the ingestion process.
+    /**
+     Status of the document in the ingestion process.
+     */
     public var status: String?
 
-    /// Array of notices produced by the document-ingestion process.
+    /**
+     Array of notices produced by the document-ingestion process.
+     */
     public var notices: [Notice]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

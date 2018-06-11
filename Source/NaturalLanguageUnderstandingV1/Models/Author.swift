@@ -19,7 +19,9 @@ import Foundation
 /** The author of the analyzed content. */
 public struct Author: Decodable {
 
-    /// Name of the author.
+    /**
+     Name of the author.
+     */
     public var name: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

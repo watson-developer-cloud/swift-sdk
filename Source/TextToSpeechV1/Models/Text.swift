@@ -19,7 +19,9 @@ import Foundation
 /** Text. */
 public struct Text: Encodable {
 
-    /// The text to synthesize.
+    /**
+     The text to synthesize.
+     */
     public var text: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -34,7 +36,10 @@ public struct Text: Encodable {
 
      - returns: An initialized `Text`.
     */
-    public init(text: String) {
+    public init(
+        text: String
+    )
+    {
         self.text = text
     }
 

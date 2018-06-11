@@ -19,13 +19,19 @@ import Foundation
 /** An option indicating whether or not important keywords from the analyzed content should be returned. */
 public struct KeywordsOptions: Encodable {
 
-    /// Maximum number of keywords to return.
+    /**
+     Maximum number of keywords to return.
+     */
     public var limit: Int?
 
-    /// Set this to true to return sentiment information for detected keywords.
+    /**
+     Set this to true to return sentiment information for detected keywords.
+     */
     public var sentiment: Bool?
 
-    /// Set this to true to analyze emotion for detected keywords.
+    /**
+     Set this to true to analyze emotion for detected keywords.
+     */
     public var emotion: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -44,7 +50,12 @@ public struct KeywordsOptions: Encodable {
 
      - returns: An initialized `KeywordsOptions`.
     */
-    public init(limit: Int? = nil, sentiment: Bool? = nil, emotion: Bool? = nil) {
+    public init(
+        limit: Int? = nil,
+        sentiment: Bool? = nil,
+        emotion: Bool? = nil
+    )
+    {
         self.limit = limit
         self.sentiment = sentiment
         self.emotion = emotion

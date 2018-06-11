@@ -19,22 +19,35 @@ import Foundation
 /** TestDocument. */
 public struct TestDocument: Decodable {
 
-    /// The unique identifier for the configuration.
+    /**
+     The unique identifier for the configuration.
+     */
     public var configurationID: String?
 
-    /// Status of the preview operation.
+    /**
+     Status of the preview operation.
+     */
     public var status: String?
 
-    /// The number of 10-kB chunks of field data that were enriched. This can be used to estimate the cost of running a real ingestion.
+    /**
+     The number of 10-kB chunks of field data that were enriched. This can be used to estimate the cost of running a
+     real ingestion.
+     */
     public var enrichedFieldUnits: Int?
 
-    /// Format of the test document.
+    /**
+     Format of the test document.
+     */
     public var originalMediaType: String?
 
-    /// An array of objects that describe each step in the preview process.
+    /**
+     An array of objects that describe each step in the preview process.
+     */
     public var snapshots: [DocumentSnapshot]?
 
-    /// An array of notice messages about the preview operation.
+    /**
+     An array of notice messages about the preview operation.
+     */
     public var notices: [Notice]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

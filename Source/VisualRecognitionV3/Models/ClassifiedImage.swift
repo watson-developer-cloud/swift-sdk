@@ -19,19 +19,30 @@ import Foundation
 /** Results for one image. */
 public struct ClassifiedImage: Decodable {
 
-    /// Source of the image before any redirects. Not returned when the image is uploaded.
+    /**
+     Source of the image before any redirects. Not returned when the image is uploaded.
+     */
     public var sourceUrl: String?
 
-    /// Fully resolved URL of the image after redirects are followed. Not returned when the image is uploaded.
+    /**
+     Fully resolved URL of the image after redirects are followed. Not returned when the image is uploaded.
+     */
     public var resolvedUrl: String?
 
-    /// Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.
+    /**
+     Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.
+     */
     public var image: String?
 
-    /// Information about what might have caused a failure, such as an image that is too large. Not returned when there is no error.
+    /**
+     Information about what might have caused a failure, such as an image that is too large. Not returned when there is
+     no error.
+     */
     public var error: ErrorInfo?
 
-    /// The classifiers.
+    /**
+     The classifiers.
+     */
     public var classifiers: [ClassifierResult]
 
     // Map each property name to the key that shall be used for encoding/decoding.

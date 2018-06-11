@@ -19,16 +19,24 @@ import Foundation
 /** The object containing the actions and the objects the actions act upon. */
 public struct SemanticRolesResult: Decodable {
 
-    /// Sentence from the source that contains the subject, action, and object.
+    /**
+     Sentence from the source that contains the subject, action, and object.
+     */
     public var sentence: String?
 
-    /// The extracted subject from the sentence.
+    /**
+     The extracted subject from the sentence.
+     */
     public var subject: SemanticRolesSubject?
 
-    /// The extracted action from the sentence.
+    /**
+     The extracted action from the sentence.
+     */
     public var action: SemanticRolesAction?
 
-    /// The extracted object from the sentence.
+    /**
+     The extracted object from the sentence.
+     */
     public var object: SemanticRolesObject?
 
     // Map each property name to the key that shall be used for encoding/decoding.

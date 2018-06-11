@@ -19,10 +19,14 @@ import Foundation
 /** Information about something that went wrong. */
 public struct WarningInfo: Decodable {
 
-    /// Codified warning string, such as `limit_reached`.
+    /**
+     Codified warning string, such as `limit_reached`.
+     */
     public var warningID: String
 
-    /// Information about the error.
+    /**
+     Information about the error.
+     */
     public var description: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

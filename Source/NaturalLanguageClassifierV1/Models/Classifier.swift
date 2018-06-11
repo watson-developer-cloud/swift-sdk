@@ -19,7 +19,9 @@ import Foundation
 /** A classifier for natural language phrases. */
 public struct Classifier: Decodable {
 
-    /// The state of the classifier.
+    /**
+     The state of the classifier.
+     */
     public enum Status: String {
         case nonExistent = "Non Existent"
         case training = "Training"
@@ -28,25 +30,39 @@ public struct Classifier: Decodable {
         case unavailable = "Unavailable"
     }
 
-    /// User-supplied name for the classifier.
+    /**
+     User-supplied name for the classifier.
+     */
     public var name: String?
 
-    /// Link to the classifier.
+    /**
+     Link to the classifier.
+     */
     public var url: String
 
-    /// The state of the classifier.
+    /**
+     The state of the classifier.
+     */
     public var status: String?
 
-    /// Unique identifier for this classifier.
+    /**
+     Unique identifier for this classifier.
+     */
     public var classifierID: String
 
-    /// Date and time (UTC) the classifier was created.
+    /**
+     Date and time (UTC) the classifier was created.
+     */
     public var created: String?
 
-    /// Additional detail about the status.
+    /**
+     Additional detail about the status.
+     */
     public var statusDescription: String?
 
-    /// The language used for the classifier.
+    /**
+     The language used for the classifier.
+     */
     public var language: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

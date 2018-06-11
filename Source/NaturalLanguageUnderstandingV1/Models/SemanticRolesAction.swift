@@ -19,10 +19,14 @@ import Foundation
 /** SemanticRolesAction. */
 public struct SemanticRolesAction: Decodable {
 
-    /// Analyzed text that corresponds to the action.
+    /**
+     Analyzed text that corresponds to the action.
+     */
     public var text: String?
 
-    /// normalized version of the action.
+    /**
+     normalized version of the action.
+     */
     public var normalized: String?
 
     public var verb: SemanticRolesVerb?

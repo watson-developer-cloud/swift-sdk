@@ -19,7 +19,9 @@ import Foundation
 /** Translation. */
 public struct Translation: Decodable {
 
-    /// Translation output in UTF-8.
+    /**
+     Translation output in UTF-8.
+     */
     public var translationOutput: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

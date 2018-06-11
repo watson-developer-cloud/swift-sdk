@@ -19,7 +19,10 @@ import Foundation
 /** Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`. */
 public struct QueryEntitiesContext: Encodable {
 
-    /// Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+    /**
+     Entity text to provide context for the queried entity and rank based on that association. For example, if you
+     wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     */
     public var text: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -30,11 +33,15 @@ public struct QueryEntitiesContext: Encodable {
     /**
      Initialize a `QueryEntitiesContext` with member variables.
 
-     - parameter text: Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     - parameter text: Entity text to provide context for the queried entity and rank based on that association. For example, if you
+       wanted to query the city of London in England your query would look for `London` with the context of `England`.
 
      - returns: An initialized `QueryEntitiesContext`.
     */
-    public init(text: String? = nil) {
+    public init(
+        text: String? = nil
+    )
+    {
         self.text = text
     }
 

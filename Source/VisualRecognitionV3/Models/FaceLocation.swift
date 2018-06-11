@@ -19,16 +19,24 @@ import Foundation
 /** The location of the bounding box around the face. */
 public struct FaceLocation: Decodable {
 
-    /// Width in pixels of face region.
+    /**
+     Width in pixels of face region.
+     */
     public var width: Double
 
-    /// Height in pixels of face region.
+    /**
+     Height in pixels of face region.
+     */
     public var height: Double
 
-    /// X-position of top-left pixel of face region.
+    /**
+     X-position of top-left pixel of face region.
+     */
     public var left: Double
 
-    /// Y-position of top-left pixel of face region.
+    /**
+     Y-position of top-left pixel of face region.
+     */
     public var top: Double
 
     // Map each property name to the key that shall be used for encoding/decoding.

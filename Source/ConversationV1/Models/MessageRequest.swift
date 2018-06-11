@@ -19,22 +19,38 @@ import Foundation
 /** A request formatted for the Conversation service. */
 public struct MessageRequest: Codable {
 
-    /// An input object that includes the input text.
+    /**
+     An input object that includes the input text.
+     */
     public var input: InputData?
 
-    /// Whether to return more than one intent. Set to `true` to return all matching intents.
+    /**
+     Whether to return more than one intent. Set to `true` to return all matching intents.
+     */
     public var alternateIntents: Bool?
 
-    /// State information for the conversation. Continue a conversation by including the context object from the previous response.
+    /**
+     State information for the conversation. Continue a conversation by including the context object from the previous
+     response.
+     */
     public var context: Context?
 
-    /// Entities to use when evaluating the message. Include entities from the previous response to continue using those entities rather than detecting entities in the new input.
+    /**
+     Entities to use when evaluating the message. Include entities from the previous response to continue using those
+     entities rather than detecting entities in the new input.
+     */
     public var entities: [RuntimeEntity]?
 
-    /// Intents to use when evaluating the user input. Include intents from the previous response to continue using those intents rather than trying to recognize intents in the new input.
+    /**
+     Intents to use when evaluating the user input. Include intents from the previous response to continue using those
+     intents rather than trying to recognize intents in the new input.
+     */
     public var intents: [RuntimeIntent]?
 
-    /// System output. Include the output from the previous response to maintain intermediate information over multiple requests.
+    /**
+     System output. Include the output from the previous response to maintain intermediate information over multiple
+     requests.
+     */
     public var output: OutputData?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -52,14 +68,26 @@ public struct MessageRequest: Codable {
 
      - parameter input: An input object that includes the input text.
      - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching intents.
-     - parameter context: State information for the conversation. Continue a conversation by including the context object from the previous response.
-     - parameter entities: Entities to use when evaluating the message. Include entities from the previous response to continue using those entities rather than detecting entities in the new input.
-     - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response to continue using those intents rather than trying to recognize intents in the new input.
-     - parameter output: System output. Include the output from the previous response to maintain intermediate information over multiple requests.
+     - parameter context: State information for the conversation. Continue a conversation by including the context object from the previous
+       response.
+     - parameter entities: Entities to use when evaluating the message. Include entities from the previous response to continue using those
+       entities rather than detecting entities in the new input.
+     - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response to continue using those
+       intents rather than trying to recognize intents in the new input.
+     - parameter output: System output. Include the output from the previous response to maintain intermediate information over multiple
+       requests.
 
      - returns: An initialized `MessageRequest`.
     */
-    public init(input: InputData? = nil, alternateIntents: Bool? = nil, context: Context? = nil, entities: [RuntimeEntity]? = nil, intents: [RuntimeIntent]? = nil, output: OutputData? = nil) {
+    public init(
+        input: InputData? = nil,
+        alternateIntents: Bool? = nil,
+        context: Context? = nil,
+        entities: [RuntimeEntity]? = nil,
+        intents: [RuntimeIntent]? = nil,
+        output: OutputData? = nil
+    )
+    {
         self.input = input
         self.alternateIntents = alternateIntents
         self.context = context

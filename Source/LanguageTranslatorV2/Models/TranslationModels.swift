@@ -19,7 +19,9 @@ import Foundation
 /** The response type for listing existing translation models. */
 public struct TranslationModels: Decodable {
 
-    /// An array of available models.
+    /**
+     An array of available models.
+     */
     public var models: [TranslationModel]
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,10 +19,14 @@ import Foundation
 /** SynonymCollection. */
 public struct SynonymCollection: Decodable {
 
-    /// An array of synonyms.
+    /**
+     An array of synonyms.
+     */
     public var synonyms: [Synonym]
 
-    /// The pagination data for the returned objects.
+    /**
+     The pagination data for the returned objects.
+     */
     public var pagination: Pagination
 
     // Map each property name to the key that shall be used for encoding/decoding.

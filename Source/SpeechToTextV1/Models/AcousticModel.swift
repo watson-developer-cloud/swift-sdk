@@ -19,7 +19,16 @@ import Foundation
 /** AcousticModel. */
 public struct AcousticModel: Decodable {
 
-    /// The current status of the custom acoustic model: * `pending` indicates that the model was created but is waiting either for training data to be added or for the service to finish analyzing added data. * `ready` indicates that the model contains data and is ready to be trained. * `training` indicates that the model is currently being trained. * `available` indicates that the model is trained and ready to use. * `upgrading` indicates that the model is currently being upgraded. * `failed` indicates that training of the model failed.
+    /**
+     The current status of the custom acoustic model:
+     * `pending` indicates that the model was created but is waiting either for training data to be added or for the
+     service to finish analyzing added data.
+     * `ready` indicates that the model contains data and is ready to be trained.
+     * `training` indicates that the model is currently being trained.
+     * `available` indicates that the model is trained and ready to use.
+     * `upgrading` indicates that the model is currently being upgraded.
+     * `failed` indicates that training of the model failed.
+     */
     public enum Status: String {
         case pending = "pending"
         case ready = "ready"
@@ -29,37 +38,73 @@ public struct AcousticModel: Decodable {
         case failed = "failed"
     }
 
-    /// The customization ID (GUID) of the custom acoustic model. The **Create a custom acoustic model** method returns only this field of the object; it does not return the other fields.
+    /**
+     The customization ID (GUID) of the custom acoustic model. The **Create a custom acoustic model** method returns
+     only this field of the object; it does not return the other fields.
+     */
     public var customizationID: String
 
-    /// The date and time in Coordinated Universal Time (UTC) at which the custom acoustic model was created. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+    /**
+     The date and time in Coordinated Universal Time (UTC) at which the custom acoustic model was created. The value is
+     provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+     */
     public var created: String?
 
-    /// The language identifier of the custom acoustic model (for example, `en-US`).
+    /**
+     The language identifier of the custom acoustic model (for example, `en-US`).
+     */
     public var language: String?
 
-    /// A list of the available versions of the custom acoustic model. Each element of the array indicates a version of the base model with which the custom model can be used. Multiple versions exist only if the custom model has been upgraded; otherwise, only a single version is shown.
+    /**
+     A list of the available versions of the custom acoustic model. Each element of the array indicates a version of the
+     base model with which the custom model can be used. Multiple versions exist only if the custom model has been
+     upgraded; otherwise, only a single version is shown.
+     */
     public var versions: [String]?
 
-    /// The GUID of the service credentials for the instance of the service that owns the custom acoustic model.
+    /**
+     The GUID of the service credentials for the instance of the service that owns the custom acoustic model.
+     */
     public var owner: String?
 
-    /// The name of the custom acoustic model.
+    /**
+     The name of the custom acoustic model.
+     */
     public var name: String?
 
-    /// The description of the custom acoustic model.
+    /**
+     The description of the custom acoustic model.
+     */
     public var description: String?
 
-    /// The name of the language model for which the custom acoustic model was created.
+    /**
+     The name of the language model for which the custom acoustic model was created.
+     */
     public var baseModelName: String?
 
-    /// The current status of the custom acoustic model: * `pending` indicates that the model was created but is waiting either for training data to be added or for the service to finish analyzing added data. * `ready` indicates that the model contains data and is ready to be trained. * `training` indicates that the model is currently being trained. * `available` indicates that the model is trained and ready to use. * `upgrading` indicates that the model is currently being upgraded. * `failed` indicates that training of the model failed.
+    /**
+     The current status of the custom acoustic model:
+     * `pending` indicates that the model was created but is waiting either for training data to be added or for the
+     service to finish analyzing added data.
+     * `ready` indicates that the model contains data and is ready to be trained.
+     * `training` indicates that the model is currently being trained.
+     * `available` indicates that the model is trained and ready to use.
+     * `upgrading` indicates that the model is currently being upgraded.
+     * `failed` indicates that training of the model failed.
+     */
     public var status: String?
 
-    /// A percentage that indicates the progress of the custom acoustic model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training. The field changes from `0` to `100` when training is complete.
+    /**
+     A percentage that indicates the progress of the custom acoustic model's current training. A value of `100` means
+     that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the
+     training. The field changes from `0` to `100` when training is complete.
+     */
     public var progress: Int?
 
-    /// If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters'] detected`, where `parameters` is a list that includes a quoted string for each unknown parameter.
+    /**
+     If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters']
+     detected`, where `parameters` is a list that includes a quoted string for each unknown parameter.
+     */
     public var warnings: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

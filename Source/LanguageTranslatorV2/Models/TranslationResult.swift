@@ -19,13 +19,19 @@ import Foundation
 /** TranslationResult. */
 public struct TranslationResult: Decodable {
 
-    /// Number of words in the input text.
+    /**
+     Number of words in the input text.
+     */
     public var wordCount: Int
 
-    /// Number of characters in the input text.
+    /**
+     Number of characters in the input text.
+     */
     public var characterCount: Int
 
-    /// List of translation output in UTF-8, corresponding to the input text entries.
+    /**
+     List of translation output in UTF-8, corresponding to the input text entries.
+     */
     public var translations: [Translation]
 
     // Map each property name to the key that shall be used for encoding/decoding.

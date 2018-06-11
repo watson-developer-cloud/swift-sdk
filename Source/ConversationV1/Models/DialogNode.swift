@@ -19,7 +19,9 @@ import Foundation
 /** DialogNode. */
 public struct DialogNode: Decodable {
 
-    /// How the dialog node is processed.
+    /**
+     How the dialog node is processed.
+     */
     public enum NodeType: String {
         case standard = "standard"
         case eventHandler = "event_handler"
@@ -29,7 +31,9 @@ public struct DialogNode: Decodable {
         case folder = "folder"
     }
 
-    /// How an `event_handler` node is processed.
+    /**
+     How an `event_handler` node is processed.
+     */
     public enum EventName: String {
         case focus = "focus"
         case input = "input"
@@ -42,82 +46,127 @@ public struct DialogNode: Decodable {
         case digressionReturnPrompt = "digression_return_prompt"
     }
 
-    /// Whether this top-level dialog node can be digressed into.
+    /**
+     Whether this top-level dialog node can be digressed into.
+     */
     public enum DigressIn: String {
         case notAvailable = "not_available"
         case returns = "returns"
         case doesNotReturn = "does_not_return"
     }
 
-    /// Whether this dialog node can be returned to after a digression.
+    /**
+     Whether this dialog node can be returned to after a digression.
+     */
     public enum DigressOut: String {
         case returning = "allow_returning"
         case all = "allow_all"
         case allNeverReturn = "allow_all_never_return"
     }
 
-    /// Whether the user can digress to top-level nodes while filling out slots.
+    /**
+     Whether the user can digress to top-level nodes while filling out slots.
+     */
     public enum DigressOutSlots: String {
         case notAllowed = "not_allowed"
         case allowReturning = "allow_returning"
         case allowAll = "allow_all"
     }
 
-    /// The dialog node ID.
+    /**
+     The dialog node ID.
+     */
     public var dialogNodeID: String
 
-    /// The description of the dialog node.
+    /**
+     The description of the dialog node.
+     */
     public var description: String?
 
-    /// The condition that triggers the dialog node.
+    /**
+     The condition that triggers the dialog node.
+     */
     public var conditions: String?
 
-    /// The ID of the parent dialog node. This property is not returned if the dialog node has no parent.
+    /**
+     The ID of the parent dialog node. This property is not returned if the dialog node has no parent.
+     */
     public var parent: String?
 
-    /// The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous sibling.
+    /**
+     The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous
+     sibling.
+     */
     public var previousSibling: String?
 
-    /// The output of the dialog node.
+    /**
+     The output of the dialog node.
+     */
     public var output: [String: JSON]?
 
-    /// The context (if defined) for the dialog node.
+    /**
+     The context (if defined) for the dialog node.
+     */
     public var context: [String: JSON]?
 
-    /// Any metadata for the dialog node.
+    /**
+     Any metadata for the dialog node.
+     */
     public var metadata: [String: JSON]?
 
-    /// The next step to execute following this dialog node.
+    /**
+     The next step to execute following this dialog node.
+     */
     public var nextStep: DialogNodeNextStep?
 
-    /// The timestamp for creation of the dialog node.
+    /**
+     The timestamp for creation of the dialog node.
+     */
     public var created: String?
 
-    /// The timestamp for the most recent update to the dialog node.
+    /**
+     The timestamp for the most recent update to the dialog node.
+     */
     public var updated: String?
 
-    /// The actions for the dialog node.
+    /**
+     The actions for the dialog node.
+     */
     public var actions: [DialogNodeAction]?
 
-    /// The alias used to identify the dialog node.
+    /**
+     The alias used to identify the dialog node.
+     */
     public var title: String?
 
-    /// How the dialog node is processed.
+    /**
+     How the dialog node is processed.
+     */
     public var nodeType: String?
 
-    /// How an `event_handler` node is processed.
+    /**
+     How an `event_handler` node is processed.
+     */
     public var eventName: String?
 
-    /// The location in the dialog context where output is stored.
+    /**
+     The location in the dialog context where output is stored.
+     */
     public var variable: String?
 
-    /// Whether this top-level dialog node can be digressed into.
+    /**
+     Whether this top-level dialog node can be digressed into.
+     */
     public var digressIn: String?
 
-    /// Whether this dialog node can be returned to after a digression.
+    /**
+     Whether this dialog node can be returned to after a digression.
+     */
     public var digressOut: String?
 
-    /// Whether the user can digress to top-level nodes while filling out slots.
+    /**
+     Whether the user can digress to top-level nodes while filling out slots.
+     */
     public var digressOutSlots: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

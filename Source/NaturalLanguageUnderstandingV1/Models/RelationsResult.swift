@@ -19,16 +19,24 @@ import Foundation
 /** The relations between entities found in the content. */
 public struct RelationsResult: Decodable {
 
-    /// Confidence score for the relation. Higher values indicate greater confidence.
+    /**
+     Confidence score for the relation. Higher values indicate greater confidence.
+     */
     public var score: Double?
 
-    /// The sentence that contains the relation.
+    /**
+     The sentence that contains the relation.
+     */
     public var sentence: String?
 
-    /// The type of the relation.
+    /**
+     The type of the relation.
+     */
     public var type: String?
 
-    /// The extracted relation objects from the text.
+    /**
+     The extracted relation objects from the text.
+     */
     public var arguments: [RelationArgument]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,7 +19,9 @@ import Foundation
 /** Status information about a submitted document. */
 public struct DocumentStatus: Decodable {
 
-    /// Status of the document in the ingestion process.
+    /**
+     Status of the document in the ingestion process.
+     */
     public enum Status: String {
         case available = "available"
         case availableWithNotices = "available with notices"
@@ -27,7 +29,9 @@ public struct DocumentStatus: Decodable {
         case processing = "processing"
     }
 
-    /// The type of the original source file.
+    /**
+     The type of the original source file.
+     */
     public enum FileType: String {
         case pdf = "pdf"
         case html = "html"
@@ -35,34 +39,54 @@ public struct DocumentStatus: Decodable {
         case json = "json"
     }
 
-    /// The unique identifier of the document.
+    /**
+     The unique identifier of the document.
+     */
     public var documentID: String
 
-    /// The unique identifier for the configuration.
+    /**
+     The unique identifier for the configuration.
+     */
     public var configurationID: String?
 
-    /// The creation date of the document in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    /**
+     The creation date of the document in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     */
     public var created: String?
 
-    /// Date of the most recent document update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    /**
+     Date of the most recent document update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     */
     public var updated: String?
 
-    /// Status of the document in the ingestion process.
+    /**
+     Status of the document in the ingestion process.
+     */
     public var status: String
 
-    /// Description of the document status.
+    /**
+     Description of the document status.
+     */
     public var statusDescription: String
 
-    /// Name of the original source file (if available).
+    /**
+     Name of the original source file (if available).
+     */
     public var filename: String?
 
-    /// The type of the original source file.
+    /**
+     The type of the original source file.
+     */
     public var fileType: String?
 
-    /// The SHA-1 hash of the original source file (formatted as a hexadecimal string).
+    /**
+     The SHA-1 hash of the original source file (formatted as a hexadecimal string).
+     */
     public var sha1: String?
 
-    /// Array of notices produced by the document-ingestion process.
+    /**
+     Array of notices produced by the document-ingestion process.
+     */
     public var notices: [Notice]
 
     // Map each property name to the key that shall be used for encoding/decoding.

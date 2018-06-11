@@ -19,28 +19,45 @@ import Foundation
 /** A custom configuration for the environment. */
 public struct Configuration: Codable {
 
-    /// The unique identifier of the configuration.
+    /**
+     The unique identifier of the configuration.
+     */
     public var configurationID: String?
 
-    /// The name of the configuration.
+    /**
+     The name of the configuration.
+     */
     public var name: String
 
-    /// The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    /**
+     The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     */
     public var created: String?
 
-    /// The timestamp of when the configuration was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    /**
+     The timestamp of when the configuration was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     */
     public var updated: String?
 
-    /// The description of the configuration, if available.
+    /**
+     The description of the configuration, if available.
+     */
     public var description: String?
 
-    /// The document conversion settings for the configuration.
+    /**
+     The document conversion settings for the configuration.
+     */
     public var conversions: Conversions?
 
-    /// An array of document enrichment settings for the configuration.
+    /**
+     An array of document enrichment settings for the configuration.
+     */
     public var enrichments: [Enrichment]?
 
-    /// Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.
+    /**
+     Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
+     executed in the order that they appear in the array.
+     */
     public var normalizations: [NormalizationOperation]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -65,11 +82,22 @@ public struct Configuration: Codable {
      - parameter description: The description of the configuration, if available.
      - parameter conversions: The document conversion settings for the configuration.
      - parameter enrichments: An array of document enrichment settings for the configuration.
-     - parameter normalizations: Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.
+     - parameter normalizations: Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
+       executed in the order that they appear in the array.
 
      - returns: An initialized `Configuration`.
     */
-    public init(name: String, configurationID: String? = nil, created: String? = nil, updated: String? = nil, description: String? = nil, conversions: Conversions? = nil, enrichments: [Enrichment]? = nil, normalizations: [NormalizationOperation]? = nil) {
+    public init(
+        name: String,
+        configurationID: String? = nil,
+        created: String? = nil,
+        updated: String? = nil,
+        description: String? = nil,
+        conversions: Conversions? = nil,
+        enrichments: [Enrichment]? = nil,
+        normalizations: [NormalizationOperation]? = nil
+    )
+    {
         self.name = name
         self.configurationID = configurationID
         self.created = created

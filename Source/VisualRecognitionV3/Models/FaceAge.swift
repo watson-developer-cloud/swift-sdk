@@ -19,13 +19,20 @@ import Foundation
 /** Age information about a face. */
 public struct FaceAge: Decodable {
 
-    /// Estimated minimum age.
+    /**
+     Estimated minimum age.
+     */
     public var min: Int?
 
-    /// Estimated maximum age.
+    /**
+     Estimated maximum age.
+     */
     public var max: Int?
 
-    /// Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the property.
+    /**
+     Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the
+     property.
+     */
     public var score: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.

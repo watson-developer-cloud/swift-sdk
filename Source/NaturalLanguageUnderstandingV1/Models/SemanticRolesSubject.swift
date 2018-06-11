@@ -19,7 +19,9 @@ import Foundation
 /** SemanticRolesSubject. */
 public struct SemanticRolesSubject: Decodable {
 
-    /// Text that corresponds to the subject role.
+    /**
+     Text that corresponds to the subject role.
+     */
     public var text: String?
 
     public var entities: [SemanticRolesEntity]?

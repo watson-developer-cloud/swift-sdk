@@ -19,13 +19,19 @@ import Foundation
 /** Classifier and score combination. */
 public struct ClassifierResult: Decodable {
 
-    /// Name of the classifier.
+    /**
+     Name of the classifier.
+     */
     public var name: String
 
-    /// ID of a classifier identified in the image.
+    /**
+     ID of a classifier identified in the image.
+     */
     public var classifierID: String
 
-    /// Classes within the classifier.
+    /**
+     Classes within the classifier.
+     */
     public var classes: [ClassResult]
 
     // Map each property name to the key that shall be used for encoding/decoding.

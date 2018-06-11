@@ -19,13 +19,19 @@ import Foundation
 /** Object containing Entity query response information. */
 public struct QueryEntitiesResponseItem: Decodable {
 
-    /// Entity text content.
+    /**
+     Entity text content.
+     */
     public var text: String?
 
-    /// The type of the result entity.
+    /**
+     The type of the result entity.
+     */
     public var type: String?
 
-    /// List of different evidentiary items to support the result.
+    /**
+     List of different evidentiary items to support the result.
+     */
     public var evidence: [QueryEvidence]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

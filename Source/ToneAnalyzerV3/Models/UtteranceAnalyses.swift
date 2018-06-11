@@ -19,10 +19,15 @@ import Foundation
 /** UtteranceAnalyses. */
 public struct UtteranceAnalyses: Decodable {
 
-    /// An array of `UtteranceAnalysis` objects that provides the results for each utterance of the input.
+    /**
+     An array of `UtteranceAnalysis` objects that provides the results for each utterance of the input.
+     */
     public var utterancesTone: [UtteranceAnalysis]
 
-    /// **`2017-09-21`:** A warning message if the content contains more than 50 utterances. The service analyzes only the first 50 utterances. **`2016-05-19`:** Not returned.
+    /**
+     **`2017-09-21`:** A warning message if the content contains more than 50 utterances. The service analyzes only the
+     first 50 utterances. **`2016-05-19`:** Not returned.
+     */
     public var warning: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

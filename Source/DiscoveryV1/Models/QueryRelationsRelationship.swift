@@ -19,16 +19,24 @@ import Foundation
 /** QueryRelationsRelationship. */
 public struct QueryRelationsRelationship: Decodable {
 
-    /// The identified relationship type.
+    /**
+     The identified relationship type.
+     */
     public var type: String?
 
-    /// The number of times the relationship is mentioned.
+    /**
+     The number of times the relationship is mentioned.
+     */
     public var frequency: Int?
 
-    /// Information about the relationship.
+    /**
+     Information about the relationship.
+     */
     public var arguments: [QueryRelationsArgument]?
 
-    /// List of different evidentiary items to support the result.
+    /**
+     List of different evidentiary items to support the result.
+     */
     public var evidence: [QueryEvidence]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

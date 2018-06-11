@@ -108,14 +108,7 @@ public class NaturalLanguageUnderstanding {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }
@@ -124,26 +117,37 @@ public class NaturalLanguageUnderstanding {
     /**
      Analyze text, HTML, or a public webpage.
 
-     Analyzes text, HTML, or a public webpage with one or more text analysis features.  ### Concepts Identify general
-     concepts that are referenced or alluded to in your content. Concepts that are detected typically have an associated
-     link to a DBpedia resource.  ### Emotion Detect anger, disgust, fear, joy, or sadness that is conveyed by your
-     content. Emotion information can be returned for detected entities, keywords, or user-specified target phrases
-     found in the text.  ### Entities Detect important people, places, geopolitical entities and other types of entities
-     in your content. Entity detection recognizes consecutive coreferences of each entity. For example, analysis of the
-     following text would count \"Barack Obama\" and \"He\" as the same entity:  \"Barack Obama was the 44th President
-     of the United States. He took office in January 2009.\"  ### Keywords Determine the most important keywords in your
-     content. Keyword phrases are organized by relevance in the results.  ### Metadata Get author information,
-     publication date, and the title of your text/HTML content.  ### Relations Recognize when two entities are related,
-     and identify the type of relation.  For example, you can identify an \"awardedTo\" relation between an award and
-     its recipient.  ### Semantic Roles Parse sentences into subject-action-object form, and identify entities and
-     keywords that are subjects or objects of an action.  ### Sentiment Determine whether your content conveys postive
-     or negative sentiment. Sentiment information can be returned for detected entities, keywords, or user-specified
-     target phrases found in the text.   ### Categories Categorize your content into a hierarchical 5-level taxonomy.
-     For example, \"Leonardo DiCaprio won an Oscar\" returns \"/art and entertainment/movies and tv/movies\" as the most
-     confident classification.
+     Analyzes text, HTML, or a public webpage with one or more text analysis features.
+     ### Concepts
+     Identify general concepts that are referenced or alluded to in your content. Concepts that are detected typically
+     have an associated link to a DBpedia resource.
+     ### Emotion
+     Detect anger, disgust, fear, joy, or sadness that is conveyed by your content. Emotion information can be returned
+     for detected entities, keywords, or user-specified target phrases found in the text.
+     ### Entities
+     Detect important people, places, geopolitical entities and other types of entities in your content. Entity
+     detection recognizes consecutive coreferences of each entity. For example, analysis of the following text would
+     count \"Barack Obama\" and \"He\" as the same entity:
+     \"Barack Obama was the 44th President of the United States. He took office in January 2009.\"
+     ### Keywords
+     Determine the most important keywords in your content. Keyword phrases are organized by relevance in the results.
+     ### Metadata
+     Get author information, publication date, and the title of your text/HTML content.
+     ### Relations
+     Recognize when two entities are related, and identify the type of relation.  For example, you can identify an
+     \"awardedTo\" relation between an award and its recipient.
+     ### Semantic Roles
+     Parse sentences into subject-action-object form, and identify entities and keywords that are subjects or objects of
+     an action.
+     ### Sentiment
+     Determine whether your content conveys postive or negative sentiment. Sentiment information can be returned for
+     detected entities, keywords, or user-specified target phrases found in the text.
+     ### Categories
+     Categorize your content into a hierarchical 5-level taxonomy. For example, \"Leonardo DiCaprio won an Oscar\"
+     returns \"/art and entertainment/movies and tv/movies\" as the most confident classification.
 
      - parameter parameters: An object containing request parameters. The `features` object and one of the `text`, `html`, or `url` attributes
-     are required.
+       are required.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -251,7 +255,7 @@ public class NaturalLanguageUnderstanding {
         modelID: String,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteModelResults) -> Void)
+        success: @escaping (InlineResponse200) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -280,7 +284,7 @@ public class NaturalLanguageUnderstanding {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<DeleteModelResults>) in
+            (response: RestResponse<InlineResponse200>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

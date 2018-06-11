@@ -19,7 +19,12 @@ import Foundation
 /** UpdateExample. */
 public struct UpdateExample: Encodable {
 
-    /// The text of the user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
+    /**
+     The text of the user input example. This string must conform to the following restrictions:
+     - It cannot contain carriage return, newline, or tab characters.
+     - It cannot consist of only whitespace characters.
+     - It must be no longer than 1024 characters.
+     */
     public var text: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -30,11 +35,17 @@ public struct UpdateExample: Encodable {
     /**
      Initialize a `UpdateExample` with member variables.
 
-     - parameter text: The text of the user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
+     - parameter text: The text of the user input example. This string must conform to the following restrictions:
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
+       - It must be no longer than 1024 characters.
 
      - returns: An initialized `UpdateExample`.
     */
-    public init(text: String? = nil) {
+    public init(
+        text: String? = nil
+    )
+    {
         self.text = text
     }
 

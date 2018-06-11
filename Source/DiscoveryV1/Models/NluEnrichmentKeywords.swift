@@ -19,13 +19,19 @@ import Foundation
 /** An object specifying the Keyword enrichment and related parameters. */
 public struct NluEnrichmentKeywords: Codable {
 
-    /// When `true`, sentiment analysis of keywords will be performed on the specified field.
+    /**
+     When `true`, sentiment analysis of keywords will be performed on the specified field.
+     */
     public var sentiment: Bool?
 
-    /// When `true`, emotion detection of keywords will be performed on the specified field.
+    /**
+     When `true`, emotion detection of keywords will be performed on the specified field.
+     */
     public var emotion: Bool?
 
-    /// The maximum number of keywords to extract for each instance of the specified field.
+    /**
+     The maximum number of keywords to extract for each instance of the specified field.
+     */
     public var limit: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -44,7 +50,12 @@ public struct NluEnrichmentKeywords: Codable {
 
      - returns: An initialized `NluEnrichmentKeywords`.
     */
-    public init(sentiment: Bool? = nil, emotion: Bool? = nil, limit: Int? = nil) {
+    public init(
+        sentiment: Bool? = nil,
+        emotion: Bool? = nil,
+        limit: Int? = nil
+    )
+    {
         self.sentiment = sentiment
         self.emotion = emotion
         self.limit = limit

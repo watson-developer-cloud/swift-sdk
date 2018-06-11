@@ -19,7 +19,9 @@ import Foundation
 /** UpdateCounterexample. */
 public struct UpdateCounterexample: Encodable {
 
-    /// The text of a user input counterexample.
+    /**
+     The text of a user input counterexample.
+     */
     public var text: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -34,7 +36,10 @@ public struct UpdateCounterexample: Encodable {
 
      - returns: An initialized `UpdateCounterexample`.
     */
-    public init(text: String? = nil) {
+    public init(
+        text: String? = nil
+    )
+    {
         self.text = text
     }
 

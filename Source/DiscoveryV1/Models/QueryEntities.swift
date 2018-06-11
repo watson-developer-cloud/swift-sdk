@@ -19,19 +19,31 @@ import Foundation
 /** QueryEntities. */
 public struct QueryEntities: Encodable {
 
-    /// The entity query feature to perform. Supported features are `disambiguate` and `similar_entities`.
+    /**
+     The entity query feature to perform. Supported features are `disambiguate` and `similar_entities`.
+     */
     public var feature: String?
 
-    /// A text string that appears within the entity text field.
+    /**
+     A text string that appears within the entity text field.
+     */
     public var entity: QueryEntitiesEntity?
 
-    /// Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+    /**
+     Entity text to provide context for the queried entity and rank based on that association. For example, if you
+     wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     */
     public var context: QueryEntitiesContext?
 
-    /// The number of results to return. The default is `10`. The maximum is `1000`.
+    /**
+     The number of results to return. The default is `10`. The maximum is `1000`.
+     */
     public var count: Int?
 
-    /// The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items per query is 10,000.
+    /**
+     The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
+     per query is 10,000.
+     */
     public var evidenceCount: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -48,13 +60,22 @@ public struct QueryEntities: Encodable {
 
      - parameter feature: The entity query feature to perform. Supported features are `disambiguate` and `similar_entities`.
      - parameter entity: A text string that appears within the entity text field.
-     - parameter context: Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     - parameter context: Entity text to provide context for the queried entity and rank based on that association. For example, if you
+       wanted to query the city of London in England your query would look for `London` with the context of `England`.
      - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
-     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items per query is 10,000.
+     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
+       per query is 10,000.
 
      - returns: An initialized `QueryEntities`.
     */
-    public init(feature: String? = nil, entity: QueryEntitiesEntity? = nil, context: QueryEntitiesContext? = nil, count: Int? = nil, evidenceCount: Int? = nil) {
+    public init(
+        feature: String? = nil,
+        entity: QueryEntitiesEntity? = nil,
+        context: QueryEntitiesContext? = nil,
+        count: Int? = nil,
+        evidenceCount: Int? = nil
+    )
+    {
         self.feature = feature
         self.entity = entity
         self.context = context

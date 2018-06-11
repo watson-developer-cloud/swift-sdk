@@ -19,13 +19,19 @@ import Foundation
 /** Response from the classifier for multiple phrases. */
 public struct ClassificationCollection: Decodable {
 
-    /// Unique identifier for this classifier.
+    /**
+     Unique identifier for this classifier.
+     */
     public var classifierID: String?
 
-    /// Link to the classifier.
+    /**
+     Link to the classifier.
+     */
     public var url: String?
 
-    /// An array of classifier responses for each submitted phrase.
+    /**
+     An array of classifier responses for each submitted phrase.
+     */
     public var collection: [CollectionItem]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

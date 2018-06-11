@@ -19,7 +19,9 @@ import Foundation
 /** DeleteModelResult. */
 public struct DeleteModelResult: Decodable {
 
-    /// "OK" indicates that the model was successfully deleted.
+    /**
+     "OK" indicates that the model was successfully deleted.
+     */
     public var status: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

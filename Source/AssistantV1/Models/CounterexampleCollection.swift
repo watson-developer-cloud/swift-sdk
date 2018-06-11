@@ -19,10 +19,14 @@ import Foundation
 /** CounterexampleCollection. */
 public struct CounterexampleCollection: Decodable {
 
-    /// An array of objects describing the examples marked as irrelevant input.
+    /**
+     An array of objects describing the examples marked as irrelevant input.
+     */
     public var counterexamples: [Counterexample]
 
-    /// The pagination data for the returned objects.
+    /**
+     The pagination data for the returned objects.
+     */
     public var pagination: Pagination
 
     // Map each property name to the key that shall be used for encoding/decoding.

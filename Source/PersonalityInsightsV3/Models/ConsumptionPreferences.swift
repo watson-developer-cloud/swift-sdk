@@ -19,13 +19,25 @@ import Foundation
 /** ConsumptionPreferences. */
 public struct ConsumptionPreferences: Decodable {
 
-    /// The unique, non-localized identifier of the consumption preference to which the results pertain. IDs have the form `consumption_preferences_{preference}`.
+    /**
+     The unique, non-localized identifier of the consumption preference to which the results pertain. IDs have the form
+     `consumption_preferences_{preference}`.
+     */
     public var consumptionPreferenceID: String
 
-    /// The user-visible, localized name of the consumption preference.
+    /**
+     The user-visible, localized name of the consumption preference.
+     */
     public var name: String
 
-    /// The score for the consumption preference: * `0.0`: Unlikely * `0.5`: Neutral * `1.0`: Likely   The scores for some preferences are binary and do not allow a neutral value. The score is an indication of preference based on the results inferred from the input text, not a normalized percentile.
+    /**
+     The score for the consumption preference:
+     * `0.0`: Unlikely
+     * `0.5`: Neutral
+     * `1.0`: Likely
+     The scores for some preferences are binary and do not allow a neutral value. The score is an indication of
+     preference based on the results inferred from the input text, not a normalized percentile.
+     */
     public var score: Double
 
     // Map each property name to the key that shall be used for encoding/decoding.

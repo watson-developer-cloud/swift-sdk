@@ -27,7 +27,10 @@ public struct NluEnrichmentCategories: Codable {
 
      - returns: An initialized `NluEnrichmentCategories`.
     */
-    public init(additionalProperties: [String: JSON] = [:]) {
+    public init(
+        additionalProperties: [String: JSON] = [:]
+    )
+    {
         self.additionalProperties = additionalProperties
     }
 

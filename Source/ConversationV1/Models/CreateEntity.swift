@@ -19,19 +19,33 @@ import Foundation
 /** CreateEntity. */
 public struct CreateEntity: Encodable {
 
-    /// The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
+    /**
+     The name of the entity. This string must conform to the following restrictions:
+     - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+     - It cannot begin with the reserved prefix `sys-`.
+     - It must be no longer than 64 characters.
+     */
     public var entity: String
 
-    /// The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+    /**
+     The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must
+     be no longer than 128 characters.
+     */
     public var description: String?
 
-    /// Any metadata related to the value.
+    /**
+     Any metadata related to the value.
+     */
     public var metadata: [String: JSON]?
 
-    /// An array of objects describing the entity values.
+    /**
+     An array of objects describing the entity values.
+     */
     public var values: [CreateValue]?
 
-    /// Whether to use fuzzy matching for the entity.
+    /**
+     Whether to use fuzzy matching for the entity.
+     */
     public var fuzzyMatch: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -46,15 +60,26 @@ public struct CreateEntity: Encodable {
     /**
      Initialize a `CreateEntity` with member variables.
 
-     - parameter entity: The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
-     - parameter description: The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     - parameter entity: The name of the entity. This string must conform to the following restrictions:
+       - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+       - It cannot begin with the reserved prefix `sys-`.
+       - It must be no longer than 64 characters.
+     - parameter description: The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
+       must be no longer than 128 characters.
      - parameter metadata: Any metadata related to the value.
      - parameter values: An array of objects describing the entity values.
      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
 
      - returns: An initialized `CreateEntity`.
     */
-    public init(entity: String, description: String? = nil, metadata: [String: JSON]? = nil, values: [CreateValue]? = nil, fuzzyMatch: Bool? = nil) {
+    public init(
+        entity: String,
+        description: String? = nil,
+        metadata: [String: JSON]? = nil,
+        values: [CreateValue]? = nil,
+        fuzzyMatch: Bool? = nil
+    )
+    {
         self.entity = entity
         self.description = description
         self.metadata = metadata

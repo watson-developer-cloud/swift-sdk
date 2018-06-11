@@ -19,7 +19,10 @@ import Foundation
 /** The user input. */
 public struct InputData: Codable {
 
-    /// The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
+    /**
+     The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must be
+     no longer than 2048 characters.
+     */
     public var text: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -30,11 +33,15 @@ public struct InputData: Codable {
     /**
      Initialize a `InputData` with member variables.
 
-     - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
+     - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must
+       be no longer than 2048 characters.
 
      - returns: An initialized `InputData`.
     */
-    public init(text: String) {
+    public init(
+        text: String
+    )
+    {
         self.text = text
     }
 

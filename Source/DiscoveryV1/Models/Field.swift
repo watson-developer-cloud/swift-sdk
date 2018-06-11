@@ -19,7 +19,9 @@ import Foundation
 /** Field. */
 public struct Field: Decodable {
 
-    /// The type of the field.
+    /**
+     The type of the field.
+     */
     public enum FieldType: String {
         case nested = "nested"
         case string = "string"
@@ -34,10 +36,14 @@ public struct Field: Decodable {
         case binary = "binary"
     }
 
-    /// The name of the field.
+    /**
+     The name of the field.
+     */
     public var fieldName: String?
 
-    /// The type of the field.
+    /**
+     The type of the field.
+     */
     public var fieldType: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

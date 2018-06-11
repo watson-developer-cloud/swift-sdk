@@ -19,10 +19,14 @@ import Foundation
 /** SemanticRolesEntity. */
 public struct SemanticRolesEntity: Decodable {
 
-    /// Entity type.
+    /**
+     Entity type.
+     */
     public var type: String?
 
-    /// The entity text.
+    /**
+     The entity text.
+     */
     public var text: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

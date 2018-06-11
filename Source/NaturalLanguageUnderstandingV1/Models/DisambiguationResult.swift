@@ -19,13 +19,19 @@ import Foundation
 /** Disambiguation information for the entity. */
 public struct DisambiguationResult: Decodable {
 
-    /// Common entity name.
+    /**
+     Common entity name.
+     */
     public var name: String?
 
-    /// Link to the corresponding DBpedia resource.
+    /**
+     Link to the corresponding DBpedia resource.
+     */
     public var dbpediaResource: String?
 
-    /// Entity subtype information.
+    /**
+     Entity subtype information.
+     */
     public var subtype: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

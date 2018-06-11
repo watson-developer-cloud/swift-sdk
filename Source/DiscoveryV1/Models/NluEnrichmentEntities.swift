@@ -19,25 +19,41 @@ import Foundation
 /** An object speficying the Entities enrichment and related parameters. */
 public struct NluEnrichmentEntities: Codable {
 
-    /// When `true`, sentiment analysis of entities will be performed on the specified field.
+    /**
+     When `true`, sentiment analysis of entities will be performed on the specified field.
+     */
     public var sentiment: Bool?
 
-    /// When `true`, emotion detection of entities will be performed on the specified field.
+    /**
+     When `true`, emotion detection of entities will be performed on the specified field.
+     */
     public var emotion: Bool?
 
-    /// The maximum number of entities to extract for each instance of the specified field.
+    /**
+     The maximum number of entities to extract for each instance of the specified field.
+     */
     public var limit: Int?
 
-    /// When `true`, the number of mentions of each identified entity is recorded. The default is `false`.
+    /**
+     When `true`, the number of mentions of each identified entity is recorded. The default is `false`.
+     */
     public var mentions: Bool?
 
-    /// When `true`, the types of mentions for each idetifieid entity is recorded. The default is `false`.
+    /**
+     When `true`, the types of mentions for each idetifieid entity is recorded. The default is `false`.
+     */
     public var mentionTypes: Bool?
 
-    /// When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is `false`.
+    /**
+     When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is
+     `false`.
+     */
     public var sentenceLocation: Bool?
 
-    /// The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
+    /**
+     The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio, the
+     public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
+     */
     public var model: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -59,12 +75,23 @@ public struct NluEnrichmentEntities: Codable {
      - parameter limit: The maximum number of entities to extract for each instance of the specified field.
      - parameter mentions: When `true`, the number of mentions of each identified entity is recorded. The default is `false`.
      - parameter mentionTypes: When `true`, the types of mentions for each idetifieid entity is recorded. The default is `false`.
-     - parameter sentenceLocation: When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is `false`.
-     - parameter model: The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
+     - parameter sentenceLocation: When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is
+       `false`.
+     - parameter model: The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio,
+       the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
 
      - returns: An initialized `NluEnrichmentEntities`.
     */
-    public init(sentiment: Bool? = nil, emotion: Bool? = nil, limit: Int? = nil, mentions: Bool? = nil, mentionTypes: Bool? = nil, sentenceLocation: Bool? = nil, model: String? = nil) {
+    public init(
+        sentiment: Bool? = nil,
+        emotion: Bool? = nil,
+        limit: Int? = nil,
+        mentions: Bool? = nil,
+        mentionTypes: Bool? = nil,
+        sentenceLocation: Bool? = nil,
+        model: String? = nil
+    )
+    {
         self.sentiment = sentiment
         self.emotion = emotion
         self.limit = limit

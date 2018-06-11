@@ -19,10 +19,14 @@ import Foundation
 /** SemanticRolesVerb. */
 public struct SemanticRolesVerb: Decodable {
 
-    /// The keyword text.
+    /**
+     The keyword text.
+     */
     public var text: String?
 
-    /// Verb tense.
+    /**
+     Verb tense.
+     */
     public var tense: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

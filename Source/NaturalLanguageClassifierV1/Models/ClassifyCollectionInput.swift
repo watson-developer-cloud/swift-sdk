@@ -19,7 +19,9 @@ import Foundation
 /** Request payload to classify. */
 public struct ClassifyCollectionInput: Encodable {
 
-    /// The submitted phrases.
+    /**
+     The submitted phrases.
+     */
     public var collection: [ClassifyInput]
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -34,7 +36,10 @@ public struct ClassifyCollectionInput: Encodable {
 
      - returns: An initialized `ClassifyCollectionInput`.
     */
-    public init(collection: [ClassifyInput]) {
+    public init(
+        collection: [ClassifyInput]
+    )
+    {
         self.collection = collection
     }
 

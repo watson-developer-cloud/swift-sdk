@@ -19,16 +19,26 @@ import Foundation
 /** RegisterStatus. */
 public struct RegisterStatus: Decodable {
 
-    /// The current status of the job: * `created` if the callback URL was successfully white-listed as a result of the call. * `already created` if the URL was already white-listed.
+    /**
+     The current status of the job:
+     * `created` if the callback URL was successfully white-listed as a result of the call.
+     * `already created` if the URL was already white-listed.
+     */
     public enum Status: String {
         case created = "created"
         case alreadyCreated = "already created"
     }
 
-    /// The current status of the job: * `created` if the callback URL was successfully white-listed as a result of the call. * `already created` if the URL was already white-listed.
+    /**
+     The current status of the job:
+     * `created` if the callback URL was successfully white-listed as a result of the call.
+     * `already created` if the URL was already white-listed.
+     */
     public var status: String
 
-    /// The callback URL that is successfully registered.
+    /**
+     The callback URL that is successfully registered.
+     */
     public var url: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

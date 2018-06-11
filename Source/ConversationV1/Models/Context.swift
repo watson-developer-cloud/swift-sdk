@@ -19,10 +19,14 @@ import Foundation
 /** State information for the conversation. To maintain state, include the context from the previous response. */
 public struct Context: Codable {
 
-    /// The unique identifier of the conversation.
+    /**
+     The unique identifier of the conversation.
+     */
     public var conversationID: String?
 
-    /// For internal use only.
+    /**
+     For internal use only.
+     */
     public var system: SystemResponse?
 
     /// Additional properties associated with this model.
@@ -43,7 +47,12 @@ public struct Context: Codable {
 
      - returns: An initialized `Context`.
     */
-    public init(conversationID: String? = nil, system: SystemResponse? = nil, additionalProperties: [String: JSON] = [:]) {
+    public init(
+        conversationID: String? = nil,
+        system: SystemResponse? = nil,
+        additionalProperties: [String: JSON] = [:]
+    )
+    {
         self.conversationID = conversationID
         self.system = system
         self.additionalProperties = additionalProperties

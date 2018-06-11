@@ -19,7 +19,9 @@ import Foundation
 /** RSS or ATOM feed found on the webpage. */
 public struct Feed: Decodable {
 
-    /// URL of the RSS or ATOM feed.
+    /**
+     URL of the RSS or ATOM feed.
+     */
     public var link: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

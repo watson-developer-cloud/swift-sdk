@@ -19,7 +19,9 @@ import Foundation
 /** IdentifiableLanguages. */
 public struct IdentifiableLanguages: Decodable {
 
-    /// A list of all languages that the service can identify.
+    /**
+     A list of all languages that the service can identify.
+     */
     public var languages: [IdentifiableLanguage]
 
     // Map each property name to the key that shall be used for encoding/decoding.

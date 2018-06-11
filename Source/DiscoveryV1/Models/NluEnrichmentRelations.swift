@@ -19,7 +19,11 @@ import Foundation
 /** An object specifying the relations enrichment and related parameters. */
 public struct NluEnrichmentRelations: Codable {
 
-    /// *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge Graph `en-news`, the default is`en-news`.
+    /**
+     *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship
+     extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge
+     Graph `en-news`, the default is`en-news`.
+     */
     public var model: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -30,11 +34,16 @@ public struct NluEnrichmentRelations: Codable {
     /**
      Initialize a `NluEnrichmentRelations` with member variables.
 
-     - parameter model: *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge Graph `en-news`, the default is`en-news`.
+     - parameter model: *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship
+       extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge
+       Graph `en-news`, the default is`en-news`.
 
      - returns: An initialized `NluEnrichmentRelations`.
     */
-    public init(model: String? = nil) {
+    public init(
+        model: String? = nil
+    )
+    {
         self.model = model
     }
 

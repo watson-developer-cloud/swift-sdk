@@ -19,15 +19,21 @@ import Foundation
 /** DeleteDocumentResponse. */
 public struct DeleteDocumentResponse: Decodable {
 
-    /// Status of the document. A deleted document has the status deleted.
+    /**
+     Status of the document. A deleted document has the status deleted.
+     */
     public enum Status: String {
         case deleted = "deleted"
     }
 
-    /// The unique identifier of the document.
+    /**
+     The unique identifier of the document.
+     */
     public var documentID: String?
 
-    /// Status of the document. A deleted document has the status deleted.
+    /**
+     Status of the document. A deleted document has the status deleted.
+     */
     public var status: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,7 +19,9 @@ import Foundation
 /** List of available classifiers. */
 public struct ClassifierList: Decodable {
 
-    /// The classifiers available to the user. Returns an empty array if no classifiers are available.
+    /**
+     The classifiers available to the user. Returns an empty array if no classifiers are available.
+     */
     public var classifiers: [Classifier]
 
     // Map each property name to the key that shall be used for encoding/decoding.

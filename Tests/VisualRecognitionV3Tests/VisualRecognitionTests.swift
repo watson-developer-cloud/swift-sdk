@@ -30,6 +30,7 @@ class VisualRecognitionTests: XCTestCase {
     static var allTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] {
         return [
             ("testListClassifiers", testListClassifiers),
+            ("testListClassifiersVerbose", testListClassifiersVerbose),
             // disabled: ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
             // disabled: ("testCreateDeleteClassifier2", testCreateDeleteClassifier2),
             ("testGetClassifier", testGetClassifier),
@@ -129,6 +130,20 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Retrieve a list of user-trained classifiers. */
     func testListClassifiers() {
+        let expectation = self.expectation(description: "Retrieve a list of user-trained classifiers.")
+
+        visualRecognition.listClassifiers(failure: failWithError) { classifiers in
+            for classifier in classifiers.classifiers where classifier.classifierID == self.classifierID {
+                expectation.fulfill()
+                return
+            }
+            XCTFail("Could not retrieve the trained classifier.")
+        }
+        waitForExpectations()
+    }
+
+    /** Retrieve a verbose list of user-trained classifiers. */
+    func testListClassifiersVerbose() {
         let expectation = self.expectation(description: "Retrieve a list of user-trained classifiers.")
 
         visualRecognition.listClassifiers(verbose: true, failure: failWithError) { classifiers in

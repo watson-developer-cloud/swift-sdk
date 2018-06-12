@@ -99,9 +99,6 @@
                 <a href="../Structs/ImageWithFaces.html">ImageWithFaces</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:19VisualRecognitionV311JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/PositiveExample.html">PositiveExample</a>
               </li>
               <li class="nav-group-task">
@@ -121,8 +118,8 @@
 
                 </div>
               </div>
-            <p>The IBM Watson Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces  in
-images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
+            <p>The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces
+in images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
 needs.</p>
 
           </section>
@@ -416,11 +413,6 @@ in <q>YYYY-MM-DD</q> format.</p>
 
 <p>Classify images with built-in or custom classifiers.</p>
 
-<ul>
-<li><code>food</code>: (Beta) Enhances specificity and accuracy for images of food items. - <code>explicit</code>: (Beta) Evaluates whether
-the image might be pornographic.</li>
-</ul>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -453,8 +445,8 @@ the image might be pornographic.</li>
                                 <div>
                                   <p>An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images
 and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII
-characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an
-image with the <strong>url</strong> parameter.</p>
+characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+You can also include an image with the <strong>url</strong> parameter.</p>
                                 </div>
                               </td>
                             </tr>
@@ -467,8 +459,9 @@ image with the <strong>url</strong> parameter.</p>
                               <td>
                                 <div>
                                   <p>The language of the output class names. The full set of languages is supported only for the built-in <code>default</code>
-classifier ID. The class names of custom classifiers are not translated.  The response might not be in the
-specified language when the requested language is not supported or when there is no translation for the class name.</p>
+classifier ID. The class names of custom classifiers are not translated.
+The response might not be in the specified language when the requested language is not supported or when there is
+no translation for the class name.</p>
                                 </div>
                               </td>
                             </tr>
@@ -481,8 +474,8 @@ specified language when the requested language is not supported or when there is
                               <td>
                                 <div>
                                   <p>The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32
-pixels per inch, and the maximum image size is 10 MB.  You can also include images with the <strong>images_file</strong>
-parameter.</p>
+pixels per inch, and the maximum image size is 10 MB.
+You can also include images with the <strong>images_file</strong> parameter.</p>
                                 </div>
                               </td>
                             </tr>
@@ -508,10 +501,10 @@ classification score and return all values.</p>
                               <td>
                                 <div>
                                   <p>The categories of classifiers to apply. Use <code>IBM</code> to classify against the <code>default</code> general classifier, and use
-<code>me</code> to classify against your custom classifiers. To analyze the image against both classifier categories, set the
-value to both <code>IBM</code> and <code>me</code>.   The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and <strong>owners</strong>
-parameters are empty.  The <strong>classifier_ids</strong> parameter overrides <strong>owners</strong>, so make sure that <strong>classifier_ids</strong>
-is empty.</p>
+<code>me</code> to classify against your custom classifiers. To analyze the image against both classifier categories, set
+the value to both <code>IBM</code> and <code>me</code>.
+The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and <strong>owners</strong> parameters are empty.
+The <strong>classifier_ids</strong> parameter overrides <strong>owners</strong>, so make sure that <strong>classifier_ids</strong> is empty.</p>
                                 </div>
                               </td>
                             </tr>
@@ -523,9 +516,16 @@ is empty.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Which classifiers to apply. Overrides the <strong>owners</strong> parameter. You can specify both custom and built-in classifier
-IDs. The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and <strong>owners</strong> parameters are empty.  The
-following built-in classifier IDs require no training: - <code>default</code>: Returns classes from thousands of general tags.</p>
+                                  <p>Which classifiers to apply. Overrides the <strong>owners</strong> parameter. You can specify both custom and built-in
+classifier IDs. The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and <strong>owners</strong> parameters
+are empty.
+The following built-in classifier IDs require no training:
+
+<ul>
+<li><code>default</code>: Returns classes from thousands of general tags.</li>
+<li><code>food</code>: (Beta) Enhances specificity and accuracy for images of food items.</li>
+<li><code>explicit</code>: (Beta) Evaluates whether the image might be pornographic.</li>
+</ul></p>
                                 </div>
                               </td>
                             </tr>
@@ -601,9 +601,10 @@ following built-in classifier IDs require no training: - <code>default</code>: R
 <p><strong>Important:</strong> On April 2, 2018, the identity information in the response to calls to the Face model was removed.
 The identity information refers to the <code>name</code> of the person, <code>score</code>, and <code>type_hierarchy</code> knowledge graph. For
 details about the enhanced Face model, see the <a href="https://console.bluemix.net/docs/services/visual-recognition/release-notes.html#2april2018">Release
-notes</a>.  Analyze and
-get data about faces in images. Responses can include estimated age and gender. This feature uses a built-in model,
-so no training is necessary. The Detect faces method does not support general biometric facial recognition.
+notes</a>.
+Analyze and get data about faces in images. Responses can include estimated age and gender. This feature uses a
+built-in model, so no training is necessary. The Detect faces method does not support general biometric facial
+recognition.
 Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
 recommended pixel density is 32X32 pixels per inch.</p>
 
@@ -634,9 +635,10 @@ recommended pixel density is 32X32 pixels per inch.</p>
                               <td>
                                 <div>
                                   <p>An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a
-maximum of 15 images in a request.  Encode the image and .zip file names in UTF-8 if they contain non-ASCII
-characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an
-image with the <strong>url</strong> parameter.</p>
+maximum of 15 images in a request.
+Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8
+encoding if it encounters non-ASCII characters.
+You can also include an image with the <strong>url</strong> parameter.</p>
                                 </div>
                               </td>
                             </tr>
@@ -648,9 +650,22 @@ image with the <strong>url</strong> parameter.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel density
-is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a shortened
-URL.  You can also include images with the <strong>images_file</strong> parameter.</p>
+                                  <p>The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel
+density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a
+shortened URL.
+You can also include images with the <strong>images_file</strong> parameter.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>imagesFileContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of imagesFile.</p>
                                 </div>
                               </td>
                             </tr>
@@ -713,9 +728,9 @@ URL.  You can also include images with the <strong>images_file</strong> paramete
 
 <p>Train a new multi-faceted classifier on the uploaded image data. Create your custom classifier with positive or
 negative examples. Include at least two sets of examples, either two positive example files or one positive and one
-negative file. You can upload a maximum of 256 MB per call.  Encode all names in UTF-8 if they contain non-ASCII
-characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it
-encounters non-ASCII characters.</p>
+negative file. You can upload a maximum of 256 MB per call.
+Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
+names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.</p>
 
                       </div>
                       <div class="declaration">
@@ -756,10 +771,12 @@ encounters non-ASCII characters.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of positive examples, each with a name and a compressed
-(.zip) file of images that depict the visual subject for a class within the new classifier. Include at least
-10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number
-of images is 10,000 images or 100 MB per .zip file.</p>
+                                  <p>An array of of positive examples, each with a name and a compressed
+(.zip) file of images that depict the visual subject of a class in the new classifier. You can include more than
+one positive example file in a call.
+Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+maximum number of images is 10,000 images or 100 MB per .zip file.
+Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
                             </tr>
@@ -772,7 +789,8 @@ of images is 10,000 images or 100 MB per .zip file.</p>
                               <td>
                                 <div>
                                   <p>A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
-contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.</p>
+contain a minimum of 10 images.
+Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
                             </tr>
@@ -871,7 +889,8 @@ contain a minimum of 10 images.  Encode special characters in the file name in U
                               </td>
                               <td>
                                 <div>
-                                  <p>Specify <code>true</code> to return details about the classifiers. Omit this parameter to return a brief list of classifiers.</p>
+                                  <p>Specify <code>true</code> to return details about the classifiers. Omit this parameter to return a brief list of
+classifiers.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1024,11 +1043,11 @@ contain a minimum of 10 images.  Encode special characters in the file name in U
 existing classes. You must supply at least one set of positive or negative examples. For details, see <a href="https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers">Updating
 custom
 classifiers</a>.
- Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
-class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  <strong>Tip:</strong> Don&rsquo;t make
-retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the
-last request overwrites the previous requests. The retrained property shows the last time the classifier retraining
-finished.</p>
+Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
+names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+<strong>Tip:</strong> Don&rsquo;t make retraining calls on a classifier until the status is ready. When you submit retraining requests
+in parallel, the last request overwrites the previous requests. The retrained property shows the last time the
+classifier retraining finished.</p>
 
                       </div>
                       <div class="declaration">
@@ -1070,9 +1089,11 @@ finished.</p>
                               <td>
                                 <div>
                                   <p>An array of positive examples, each with a name and a compressed
-(.zip) file of images that depict the visual subject for a class within the new classifier. Include at least
-10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The maximum number
-of images is 10,000 images or 100 MB per .zip file.</p>
+(.zip) file of images that depict the visual subject of a class in the classifier. The positive examples create
+or update classes in the classifier. You can include more than one positive example file in a call.
+Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+maximum number of images is 10,000 images or 100 MB per .zip file.
+Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1085,7 +1106,8 @@ of images is 10,000 images or 100 MB per .zip file.</p>
                               <td>
                                 <div>
                                   <p>A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
-contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.</p>
+contain a minimum of 10 images.
+Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1322,8 +1344,9 @@ the classifier details.</p>
                         <p>Delete labeled data.</p>
 
 <p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
-the customer ID.   You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request
-that passes data. For more information about personal data and customer IDs, see <a href="https://console.bluemix.net/docs/services/visual-recognition/information-security.html">Information
+the customer ID.
+You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes data.
+For more information about personal data and customer IDs, see <a href="https://console.bluemix.net/docs/services/visual-recognition/information-security.html">Information
 security</a>.</p>
 
                       </div>
@@ -1971,7 +1994,7 @@ in an image, age and gender confidence scores might return scores of 0.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

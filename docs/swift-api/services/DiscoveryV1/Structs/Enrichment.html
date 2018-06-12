@@ -180,9 +180,6 @@
                 <a href="../Structs/IndexCapacity.html">IndexCapacity</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:11DiscoveryV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/ListCollectionFieldsResponse.html">ListCollectionFieldsResponse</a>
               </li>
               <li class="nav-group-task">
@@ -413,7 +410,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an existing field. For example, if <code>text</code> is a top-level field with no sub-fields, <code>text.foo</code> is a valid destination but <code>text.foo.bar</code> is not.</p>
+                        <p>Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an existing
+field. For example, if <code>text</code> is a top-level field with no sub-fields, <code>text.foo</code> is a valid destination but
+<code>text.foo.bar</code> is not.</p>
 
                       </div>
                       <div class="declaration">
@@ -494,7 +493,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Name of the enrichment service to call. Current options are <code>natural_language_understanding</code> and <code>elements</code>.   When using <code>natual_language_understanding</code>, the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Natural Language Understanding Options.   When using <code>elements</code> the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Element Classification options. Additionally, when using the <code>elements</code> enrichment the configuration specified and files ingested must meet all the criteria specified in <a href="https://console.bluemix.net/docs/services/discovery/element-classification.html">the documentation</a>     Previous API versions also supported <code>alchemy_language</code>.</p>
+                        <p>Name of the enrichment service to call. Current options are <code>natural_language_understanding</code> and <code>elements</code>.
+ When using <code>natual_language_understanding</code>, the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Natural Language Understanding
+Options.
+ When using <code>elements</code> the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Element Classification options. Additionally, when using
+the <code>elements</code> enrichment the configuration specified and files ingested must meet all the criteria specified in
+<a href="https://console.bluemix.net/docs/services/discovery/element-classification.html">the documentation</a>
+ Previous API versions also supported <code>alchemy_language</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -521,7 +526,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If true, then most errors generated during the enrichment process will be treated as warnings and will not cause the document to fail processing.</p>
+                        <p>If true, then most errors generated during the enrichment process will be treated as warnings and will not cause
+the document to fail processing.</p>
 
                       </div>
                       <div class="declaration">
@@ -582,7 +588,15 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">destinationField</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">sourceField</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">enrichmentName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">ignoreDownstreamErrors</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="kt"><a href="../Structs/EnrichmentOptions.html">EnrichmentOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">destinationField</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">sourceField</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">enrichmentName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">ignoreDownstreamErrors</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">options</span><span class="p">:</span> <span class="kt"><a href="../Structs/EnrichmentOptions.html">EnrichmentOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -598,7 +612,9 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an existing field. For example, if <code>text</code> is a top-level field with no sub-fields, <code>text.foo</code> is a valid destination but <code>text.foo.bar</code> is not.</p>
+                                  <p>Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an
+existing field. For example, if <code>text</code> is a top-level field with no sub-fields, <code>text.foo</code> is a valid destination
+but <code>text.foo.bar</code> is not.</p>
                                 </div>
                               </td>
                             </tr>
@@ -622,7 +638,13 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Name of the enrichment service to call. Current options are <code>natural_language_understanding</code> and <code>elements</code>.   When using <code>natual_language_understanding</code>, the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Natural Language Understanding Options.   When using <code>elements</code> the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Element Classification options. Additionally, when using the <code>elements</code> enrichment the configuration specified and files ingested must meet all the criteria specified in <a href="https://console.bluemix.net/docs/services/discovery/element-classification.html">the documentation</a>     Previous API versions also supported <code>alchemy_language</code>.</p>
+                                  <p>Name of the enrichment service to call. Current options are <code>natural_language_understanding</code> and <code>elements</code>.
+When using <code>natual_language_understanding</code>, the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Natural Language Understanding
+Options.
+When using <code>elements</code> the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Element Classification options. Additionally, when using
+the <code>elements</code> enrichment the configuration specified and files ingested must meet all the criteria specified in
+<a href="https://console.bluemix.net/docs/services/discovery/element-classification.html">the documentation</a>
+Previous API versions also supported <code>alchemy_language</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -658,7 +680,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>If true, then most errors generated during the enrichment process will be treated as warnings and will not cause the document to fail processing.</p>
+                                  <p>If true, then most errors generated during the enrichment process will be treated as warnings and will not cause
+the document to fail processing.</p>
                                 </div>
                               </td>
                             </tr>
@@ -689,7 +712,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

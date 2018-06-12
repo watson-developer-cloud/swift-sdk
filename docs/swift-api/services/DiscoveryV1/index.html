@@ -179,9 +179,6 @@
                 <a href="Structs/IndexCapacity.html">IndexCapacity</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs.html#/s:11DiscoveryV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/ListCollectionFieldsResponse.html">ListCollectionFieldsResponse</a>
               </li>
               <li class="nav-group-task">
@@ -400,7 +397,8 @@
 <ul>
 <li><a href="#assistant">Assistant</a></li>
 <li><a href="#discovery">Discovery</a></li>
-<li><a href="#language-translator">Language Translator</a></li>
+<li><a href="#language-translator-v2">Language Translator V2</a></li>
+<li><a href="#language-translator-v3">Language Translator V3</a></li>
 <li><a href="#natural-language-classifier">Natural Language Classifier</a></li>
 <li><a href="#natural-language-understanding">Natural Language Understanding</a></li>
 <li><a href="#personality-insights">Personality Insights</a></li>
@@ -445,7 +443,7 @@
 
 <p>Add the following to your <code>Package.swift</code> file to identify the Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with <code>swift build</code>.</p>
 <pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.26.0"</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.28.0"</span><span class="p">)</span>
 <span class="p">]</span>
 </code></pre>
 <h2 id='service-instances' class='heading'>Service Instances</h2>
@@ -488,7 +486,7 @@
 </code></pre>
 <h3 id='api-key' class='heading'>API Key</h3>
 
-<p><em>Note: This version of instantiation only works with Visual Recognition, as it&rsquo;s the only service that uses an API key.</em></p>
+<p><em>Note: This type of authentication only works with Visual Recognition, and for instances created before May 23, 2018. Newer instances of Visual Recognition use IAM.</em></p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">visualRecognition</span> <span class="o">=</span> <span class="kt">VisualRecognition</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="s">"your-apiKey-here"</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">)</span>
 </code></pre>
 <h3 id='using-iam' class='heading'>Using IAM</h3>
@@ -723,7 +721,12 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <li><a href="https://console.bluemix.net/docs/services/discovery/index.html">IBM Discovery - Documentation</a></li>
 <li><a href="https://discovery-news-demo.ng.bluemix.net/">IBM Discovery - Demo</a></li>
 </ul>
-<h2 id='language-translator' class='heading'>Language Translator</h2>
+<h2 id='language-translator-v2' class='heading'>Language Translator V2</h2>
+
+<p><strong>Deprecation Notice</strong>:
+The IBM Watson Language Translator V2 service has been deprecated and replaced by the IBM Watson Language Translator V3 service.
+Please use the <code>LanguageTranslatorV3</code> class instead of <code>LanguageTranslator</code>.
+The <code>LanguageTranslator</code> class will be removed in a future release.</p>
 
 <p>The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.</p>
 
@@ -733,6 +736,25 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
 <span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
 <span class="k">let</span> <span class="nv">languageTranslator</span> <span class="o">=</span> <span class="kt">LanguageTranslator</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">TranslateRequest</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="s">"Hello"</span><span class="p">],</span> <span class="nv">source</span><span class="p">:</span> <span class="s">"en"</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="s">"es"</span><span class="p">)</span>
+<span class="n">languageTranslator</span><span class="o">.</span><span class="nf">translate</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">translation</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='language-translator-v3' class='heading'>Language Translator V3</h2>
+
+<p>The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.</p>
+
+<p>The following example demonstrates how to use the Language Translator service:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">LanguageTranslatorV3</span>
+
+<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"yyyy-mm-dd"</span> <span class="c1">// use today's date for the most recent version</span>
+<span class="k">let</span> <span class="nv">languageTranslator</span> <span class="o">=</span> <span class="kt">LanguageTranslator</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">TranslateRequest</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="s">"Hello"</span><span class="p">],</span> <span class="nv">source</span><span class="p">:</span> <span class="s">"en"</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="s">"es"</span><span class="p">)</span>
@@ -1124,13 +1146,17 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 
 <span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-apikey-here"</span>
 <span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
-<span class="k">let</span> <span class="nv">visualRecognition</span> <span class="o">=</span> <span class="kt">VisualRecognition</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">visualRecognition</span> <span class="o">=</span> <span class="kt">VisualRecognition</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="s">"your-image-url"</span>
 <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
 <span class="n">visualRecognition</span><span class="o">.</span><span class="nf">classify</span><span class="p">(</span><span class="nv">image</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">classifiedImages</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">classifiedImages</span><span class="p">)</span>
 <span class="p">}</span>
+</code></pre>
+
+<p>Note: a different initializer is used for authentication with instances created before May 23, 2018:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">visualRecognition</span> <span class="o">=</span> <span class="kt">VisualRecognition</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
 </code></pre>
 <h3 id='using-core-ml' class='heading'>Using Core ML</h3>
 
@@ -1183,7 +1209,7 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -171,9 +171,6 @@
                 <a href="../Structs/IntentExport.html">IntentExport</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:14ConversationV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/LogCollection.html">LogCollection</a>
               </li>
               <li class="nav-group-task">
@@ -348,7 +345,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
+                        <p>The text of the entity value. This string must conform to the following restrictions:</p>
+
+<ul>
+<li>It cannot contain carriage return, newline, or tab characters.</li>
+<li>It cannot consist of only whitespace characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -402,7 +405,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by <strong>type</strong>), but not both. A synonym must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
+                        <p>An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by
+<strong>type</strong>), but not both. A synonym must conform to the following restrictions:</p>
+
+<ul>
+<li>It cannot contain carriage return, newline, or tab characters.</li>
+<li>It cannot consist of only whitespace characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -429,7 +439,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by <strong>type</strong>), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the <a href="https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
+                        <p>An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by <strong>type</strong>),
+but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to
+specify a pattern, see the
+<a href="https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -490,7 +503,13 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">synonyms</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">patterns</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">valueType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">synonyms</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">patterns</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">valueType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -506,7 +525,13 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
+                                  <p>The text of the entity value. This string must conform to the following restrictions:
+
+<ul>
+<li>It cannot contain carriage return, newline, or tab characters.</li>
+<li>It cannot consist of only whitespace characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul></p>
                                 </div>
                               </td>
                             </tr>
@@ -530,7 +555,14 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by <strong>type</strong>), but not both. A synonym must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.</p>
+                                  <p>An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated
+by <strong>type</strong>), but not both. A synonym must conform to the following restrictions:
+
+<ul>
+<li>It cannot contain carriage return, newline, or tab characters.</li>
+<li>It cannot consist of only whitespace characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul></p>
                                 </div>
                               </td>
                             </tr>
@@ -542,7 +574,10 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by <strong>type</strong>), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the <a href="https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
+                                  <p>An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
+<strong>type</strong>), but not both. A pattern is a regular expression no longer than 128 characters. For more information
+about how to specify a pattern, see the
+<a href="https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -573,7 +608,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

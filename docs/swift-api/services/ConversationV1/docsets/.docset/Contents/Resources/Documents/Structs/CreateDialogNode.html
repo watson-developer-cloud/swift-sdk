@@ -171,9 +171,6 @@
                 <a href="../Structs/IntentExport.html">IntentExport</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:14ConversationV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/LogCollection.html">LogCollection</a>
               </li>
               <li class="nav-group-task">
@@ -460,7 +457,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.</p>
+                        <p>The dialog node ID. This string must conform to the following restrictions:</p>
+
+<ul>
+<li>It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.</li>
+<li>It must be no longer than 1024 characters.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -487,7 +489,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.</p>
+                        <p>The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it
+must be no longer than 128 characters.</p>
 
                       </div>
                       <div class="declaration">
@@ -514,7 +517,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.</p>
+                        <p>The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
+characters, and it must be no longer than 2048 characters.</p>
 
                       </div>
                       <div class="declaration">
@@ -595,7 +599,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The output of the dialog node. For more information about how to specify dialog node output, see the <a href="https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
+                        <p>The output of the dialog node. For more information about how to specify dialog node output, see the
+<a href="https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -730,7 +735,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.</p>
+                        <p>The alias used to identify the dialog node. This string must conform to the following restrictions:</p>
+
+<ul>
+<li>It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -926,7 +936,25 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">dialogNode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">conditions</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">parent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">previousSibling</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">output</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">context</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">nextStep</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNodeAction.html">DialogNodeAction</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">nodeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">eventName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">variable</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">digressIn</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">digressOut</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">digressOutSlots</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">dialogNode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">conditions</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">parent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">previousSibling</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">output</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">context</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt"><a href="../Enums/JSON.html">JSON</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">nextStep</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNodeAction.html">DialogNodeAction</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">nodeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">eventName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">variable</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">digressIn</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">digressOut</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">digressOutSlots</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -942,7 +970,12 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.</p>
+                                  <p>The dialog node ID. This string must conform to the following restrictions:
+
+<ul>
+<li>It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.</li>
+<li>It must be no longer than 1024 characters.</li>
+</ul></p>
                                 </div>
                               </td>
                             </tr>
@@ -954,7 +987,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.</p>
+                                  <p>The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
+it must be no longer than 128 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -966,7 +1000,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.</p>
+                                  <p>The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
+characters, and it must be no longer than 2048 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1002,7 +1037,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The output of the dialog node. For more information about how to specify dialog node output, see the <a href="https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
+                                  <p>The output of the dialog node. For more information about how to specify dialog node output, see the
+<a href="https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1062,7 +1098,12 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.</p>
+                                  <p>The alias used to identify the dialog node. This string must conform to the following restrictions:
+
+<ul>
+<li>It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul></p>
                                 </div>
                               </td>
                             </tr>
@@ -1153,7 +1194,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

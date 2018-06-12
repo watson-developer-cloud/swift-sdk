@@ -54,9 +54,6 @@
                 <a href="../Structs/DocumentAnalysis.html">DocumentAnalysis</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:14ToneAnalyzerV311JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/SentenceAnalysis.html">SentenceAnalysis</a>
               </li>
               <li class="nav-group-task">
@@ -100,9 +97,9 @@
 
                 </div>
               </div>
-            <p>The IBM Watson Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written text.
-The service can analyze tone at both the document and sentence levels. You can use the service to understand how your
-written communications are perceived and then to improve the tone of your communications. Businesses can use the
+            <p>The IBM Watson&trade; Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written
+text. The service can analyze tone at both the document and sentence levels. You can use the service to understand how
+your written communications are perceived and then to improve the tone of your communications. Businesses can use the
 service to learn the tone of their customers&rsquo; communications and to respond to each customer appropriately, or to
 understand and improve their customer conversations.
 <strong>Note:</strong> Request logging is disabled for the Tone Analyzer service. The service neither logs nor retains data from
@@ -411,9 +408,10 @@ in <q>YYYY-MM-DD</q> format.</p>
 
 <p>Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
 emotional and language tones. The method always analyzes the tone of the full document; by default, it also
-analyzes the tone of each individual sentence of the content.   You can submit no more than 128 KB of total input
-content and no more than 1000 individual sentences in JSON, plain text, or HTML format. The service analyzes the
-first 1000 sentences for document-level analysis and only the first 100 sentences for sentence-level analysis.
+analyzes the tone of each individual sentence of the content.
+You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
+text, or HTML format. The service analyzes the first 1000 sentences for document-level analysis and only the first
+100 sentences for sentence-level analysis.
 Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
 HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
 set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
@@ -449,7 +447,7 @@ service removes HTML tags and analyzes only the textual content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The content to be analyzed.</p>
+                                  <p>JSON input that contains the content to be analyzed.</p>
                                 </div>
                               </td>
                             </tr>
@@ -475,10 +473,10 @@ the full document. If <code>true</code> (the default), the service returns resul
                               <td>
                                 <div>
                                   <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the
-parameter no longer affects the response.   <strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service
-is to return its analysis of the input; the indicated tones apply both to the full document and to individual
-sentences of the document. You can specify one or more of the valid values. Omit the parameter to request results
-for all three tones.</p>
+parameter no longer affects the response.
+<strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service is to return its analysis of the input;
+the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+one or more of the valid values. Omit the parameter to request results for all three tones.</p>
                                 </div>
                               </td>
                             </tr>
@@ -491,9 +489,14 @@ for all three tones.</p>
                               <td>
                                 <div>
                                   <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do not
-submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>. * <strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>. * <strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</p>
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do
+not submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>.
+
+<ul>
+<li><strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>.</li>
+<li><strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</li>
+</ul></p>
                                 </div>
                               </td>
                             </tr>
@@ -506,8 +509,8 @@ submit content that contains both languages. You can use different languages for
                               <td>
                                 <div>
                                   <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>.</p>
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong>
+and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -570,14 +573,20 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
 
 <p>Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
 emotional and language tones. The method always analyzes the tone of the full document; by default, it also
-analyzes the tone of each individual sentence of the content.   You can submit no more than 128 KB of total input
-content and no more than 1000 individual sentences in JSON, plain text, or HTML format. The service analyzes the
-first 1000 sentences for document-level analysis and only the first 100 sentences for sentence-level analysis.
+analyzes the tone of each individual sentence of the content.
+You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
+text, or HTML format. The service analyzes the first 1000 sentences for document-level analysis and only the first
+100 sentences for sentence-level analysis.
 Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
 HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
 set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
 character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>. For <code>text/html</code>, the
 service removes HTML tags and analyzes only the textual content.</p>
+
+<ul>
+<li><strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>.</li>
+<li><strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -608,7 +617,7 @@ service removes HTML tags and analyzes only the textual content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The content to be analyzed.</p>
+                                  <p>plain text input that contains the content to be analyzed.</p>
                                 </div>
                               </td>
                             </tr>
@@ -634,10 +643,10 @@ the full document. If <code>true</code> (the default), the service returns resul
                               <td>
                                 <div>
                                   <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the
-parameter no longer affects the response.   <strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service
-is to return its analysis of the input; the indicated tones apply both to the full document and to individual
-sentences of the document. You can specify one or more of the valid values. Omit the parameter to request results
-for all three tones.</p>
+parameter no longer affects the response.
+<strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service is to return its analysis of the input;
+the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+one or more of the valid values. Omit the parameter to request results for all three tones.</p>
                                 </div>
                               </td>
                             </tr>
@@ -650,9 +659,9 @@ for all three tones.</p>
                               <td>
                                 <div>
                                   <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do not
-submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>. * <strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>. * <strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</p>
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do
+not submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -665,8 +674,8 @@ submit content that contains both languages. You can use different languages for
                               <td>
                                 <div>
                                   <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>.</p>
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong>
+and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -729,14 +738,20 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
 
 <p>Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
 emotional and language tones. The method always analyzes the tone of the full document; by default, it also
-analyzes the tone of each individual sentence of the content.   You can submit no more than 128 KB of total input
-content and no more than 1000 individual sentences in JSON, plain text, or HTML format. The service analyzes the
-first 1000 sentences for document-level analysis and only the first 100 sentences for sentence-level analysis.
+analyzes the tone of each individual sentence of the content.
+You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
+text, or HTML format. The service analyzes the first 1000 sentences for document-level analysis and only the first
+100 sentences for sentence-level analysis.
 Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
 HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
 set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
 character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>. For <code>text/html</code>, the
 service removes HTML tags and analyzes only the textual content.</p>
+
+<ul>
+<li><strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>.</li>
+<li><strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -767,7 +782,7 @@ service removes HTML tags and analyzes only the textual content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The content to be analyzed.</p>
+                                  <p>HTML input that contains the content to be analyzed.</p>
                                 </div>
                               </td>
                             </tr>
@@ -793,10 +808,10 @@ the full document. If <code>true</code> (the default), the service returns resul
                               <td>
                                 <div>
                                   <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the
-parameter no longer affects the response.   <strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service
-is to return its analysis of the input; the indicated tones apply both to the full document and to individual
-sentences of the document. You can specify one or more of the valid values. Omit the parameter to request results
-for all three tones.</p>
+parameter no longer affects the response.
+<strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service is to return its analysis of the input;
+the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+one or more of the valid values. Omit the parameter to request results for all three tones.</p>
                                 </div>
                               </td>
                             </tr>
@@ -809,9 +824,9 @@ for all three tones.</p>
                               <td>
                                 <div>
                                   <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do not
-submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>. * <strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>. * <strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</p>
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do
+not submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -824,8 +839,8 @@ submit content that contains both languages. You can use different languages for
                               <td>
                                 <div>
                                   <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>.</p>
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong>
+and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -888,11 +903,12 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
 
 <p>Use the customer engagement endpoint to analyze the tone of customer service and customer support conversations.
 For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones:
-sad, frustrated, satisfied, excited, polite, impolite, and sympathetic.   If you submit more than 50 utterances,
-the service returns a warning for the overall content and analyzes only the first 50 utterances. If you submit a
-single utterance that contains more than 500 characters, the service returns an error for that utterance and does
-not analyze the utterance. The request fails if all utterances have more than 500 characters.   Per the JSON
-specification, the default character encoding for JSON content is effectively always UTF-8.</p>
+sad, frustrated, satisfied, excited, polite, impolite, and sympathetic.
+If you submit more than 50 utterances, the service returns a warning for the overall content and analyzes only the
+first 50 utterances. If you submit a single utterance that contains more than 500 characters, the service returns
+an error for that utterance and does not analyze the utterance. The request fails if all utterances have more than
+500 characters.
+Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8.</p>
 
                       </div>
                       <div class="declaration">
@@ -934,9 +950,14 @@ specification, the default character encoding for JSON content is effectively al
                               <td>
                                 <div>
                                   <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do not
-submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>. * <strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>. * <strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</p>
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do
+not submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
+<strong>Accept-Language</strong>.
+
+<ul>
+<li><strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>.</li>
+<li><strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</li>
+</ul></p>
                                 </div>
                               </td>
                             </tr>
@@ -949,8 +970,8 @@ submit content that contains both languages. You can use different languages for
                               <td>
                                 <div>
                                   <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>.</p>
+language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong>
+and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1001,7 +1022,7 @@ language; for example, <code>en-US</code> is interpreted as <code>en</code>. You
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

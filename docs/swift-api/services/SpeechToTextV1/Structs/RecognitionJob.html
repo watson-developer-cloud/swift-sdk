@@ -114,9 +114,6 @@
                 <a href="../Structs/CustomWords.html">CustomWords</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:14SpeechToTextV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/KeywordResult.html">KeywordResult</a>
               </li>
               <li class="nav-group-task">
@@ -224,7 +221,18 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current status of the job: * <code>waiting</code>: The service is preparing the job for processing. The service returns this status when the job is initially created or when it is waiting for capacity to process the job. The job remains in this state until the service has the capacity to begin processing it. * <code>processing</code>: The service is actively processing the job. * <code>completed</code>: The service has finished processing the job. If the job specified a callback URL and the event <code>recognitions.completed_with_results</code>, the service sent the results with the callback notification; otherwise, you must retrieve the results by checking the individual job. * <code>failed</code>: The job failed.</p>
+                        <p>The current status of the job:</p>
+
+<ul>
+<li><code>waiting</code>: The service is preparing the job for processing. The service returns this status when the job is
+initially created or when it is waiting for capacity to process the job. The job remains in this state until the
+service has the capacity to begin processing it.</li>
+<li><code>processing</code>: The service is actively processing the job.</li>
+<li><code>completed</code>: The service has finished processing the job. If the job specified a callback URL and the event
+<code>recognitions.completed_with_results</code>, the service sent the results with the callback notification; otherwise, you
+must retrieve the results by checking the individual job.</li>
+<li><code>failed</code>: The job failed.</li>
+</ul>
 
                         <a href="../Structs/RecognitionJob/Status.html" class="slightly-smaller">See more</a>
                       </div>
@@ -279,7 +287,18 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The current status of the job: * <code>waiting</code>: The service is preparing the job for processing. The service returns this status when the job is initially created or when it is waiting for capacity to process the job. The job remains in this state until the service has the capacity to begin processing it. * <code>processing</code>: The service is actively processing the job. * <code>completed</code>: The service has finished processing the job. If the job specified a callback URL and the event <code>recognitions.completed_with_results</code>, the service sent the results with the callback notification; otherwise, you must retrieve the results by checking the individual job. * <code>failed</code>: The job failed.</p>
+                        <p>The current status of the job:</p>
+
+<ul>
+<li><code>waiting</code>: The service is preparing the job for processing. The service returns this status when the job is
+initially created or when it is waiting for capacity to process the job. The job remains in this state until the
+service has the capacity to begin processing it.</li>
+<li><code>processing</code>: The service is actively processing the job.</li>
+<li><code>completed</code>: The service has finished processing the job. If the job specified a callback URL and the event
+<code>recognitions.completed_with_results</code>, the service sent the results with the callback notification; otherwise, you
+must retrieve the results by checking the individual job.</li>
+<li><code>failed</code>: The job failed.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -306,7 +325,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The date and time in Coordinated Universal Time (UTC) at which the job was created. The value is provided in full ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>).</p>
+                        <p>The date and time in Coordinated Universal Time (UTC) at which the job was created. The value is provided in full
+ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>).</p>
 
                       </div>
                       <div class="declaration">
@@ -333,7 +353,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>). This field is returned only by the <strong>Check jobs</strong> and <strong>Check a job</strong> methods.</p>
+                        <p>The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value
+is provided in full ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>). This field is returned only by the <strong>Check jobs</strong>
+and <strong>Check a job</strong> methods.</p>
 
                       </div>
                       <div class="declaration">
@@ -360,7 +382,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The URL to use to request information about the job with the <strong>Check a job</strong> method. This field is returned only by the <strong>Create a job</strong> method.</p>
+                        <p>The URL to use to request information about the job with the <strong>Check a job</strong> method. This field is returned only by
+the <strong>Create a job</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -387,7 +410,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The user token associated with a job that was created with a callback URL and a user token. This field can be returned only by the <strong>Check jobs</strong> method.</p>
+                        <p>The user token associated with a job that was created with a callback URL and a user token. This field can be
+returned only by the <strong>Check jobs</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -414,7 +438,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If the status is <code>completed</code>, the results of the recognition request as an array that includes a single instance of a <code><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></code> object. This field is returned only by the <strong>Check a job</strong> method.</p>
+                        <p>If the status is <code>completed</code>, the results of the recognition request as an array that includes a single instance of
+a <code><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></code> object. This field is returned only by the <strong>Check a job</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -441,7 +466,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, <code>&quot;unexpected query parameter &#39;user_token&#39;, query parameter &#39;callback_url&#39; was not specified&quot;</code>. The request succeeds despite the warnings. This field can be returned only by the <strong>Create a job</strong> method.</p>
+                        <p>An array of warning messages about invalid parameters included with the request. Each warning includes a
+descriptive message and a list of invalid argument strings, for example, <code>&quot;unexpected query parameter &#39;user_token&#39;,
+query parameter &#39;callback_url&#39; was not specified&quot;</code>. The request succeeds despite the warnings. This field can be
+returned only by the <strong>Create a job</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -460,7 +488,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

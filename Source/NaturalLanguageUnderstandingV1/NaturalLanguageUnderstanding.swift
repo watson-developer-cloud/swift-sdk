@@ -108,7 +108,14 @@ public class NaturalLanguageUnderstanding {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            return NSError(domain: domain, code: code, userInfo: nil)
+            var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
+            if case let .some(.string(description)) = json["description"] {
+                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
+            }
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }
@@ -255,7 +262,7 @@ public class NaturalLanguageUnderstanding {
         modelID: String,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (InlineResponse200) -> Void)
+        success: @escaping (DeleteModelResults) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -284,7 +291,7 @@ public class NaturalLanguageUnderstanding {
 
         // execute REST request
         request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<InlineResponse200>) in
+            (response: RestResponse<DeleteModelResults>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

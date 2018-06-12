@@ -61,11 +61,17 @@ public class SpeechToText {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
+    /// The URL that shall be used to obtain a token.
+    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+
+    /// The URL that shall be used to stream audio for transcription.
+    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
+    internal var authMethod: AuthenticationMethod
+    internal let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
      Create a `SpeechToText` object.
@@ -129,7 +135,14 @@ public class SpeechToText {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            return NSError(domain: domain, code: code, userInfo: nil)
+            var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
+            if case let .some(.string(description)) = json["code_description"] {
+                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
+            }
+            return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }
@@ -332,13 +345,13 @@ public class SpeechToText {
      - parameter success: A function executed with the successful result.
      */
     public func recognizeSessionless(
-        audio: Data,
-        contentType: String,
         model: String? = nil,
         customizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
+        audio: Data? = nil,
+        contentType: String? = nil,
         inactivityTimeout: Int? = nil,
         keywords: [String]? = nil,
         keywordsThreshold: Double? = nil,
@@ -1480,6 +1493,7 @@ public class SpeechToText {
      - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
        name. If `false` (the default), the request fails if a corpus or audio resource with the same name already
        exists. The parameter has no effect if a corpus or audio resource with the same name does not already exist.
+     - parameter corpusFileContentType: The content type of corpusFile.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1489,6 +1503,7 @@ public class SpeechToText {
         corpusName: String,
         corpusFile: URL,
         allowOverwrite: Bool? = nil,
+        corpusFileContentType: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
@@ -2576,7 +2591,7 @@ public class SpeechToText {
     public func addAudio(
         customizationID: String,
         audioName: String,
-        audioResource: [Data],
+        audioResource: Data,
         contentType: String,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
@@ -2585,10 +2600,7 @@ public class SpeechToText {
         success: @escaping () -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(audioResource) else {
-            failure?(RestError.serializationError)
-            return
-        }
+        let body = audioResource
 
         // construct header parameters
         var headerParameters = defaultHeaders

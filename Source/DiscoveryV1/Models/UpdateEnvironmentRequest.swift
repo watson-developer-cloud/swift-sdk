@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateEnvironmentRequest. */
-public struct UpdateEnvironmentRequest: Encodable {
+internal struct UpdateEnvironmentRequest: Encodable {
 
     /**
      Name that identifies the environment.

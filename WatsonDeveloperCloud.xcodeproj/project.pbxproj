@@ -2347,7 +2347,8 @@
 				CA28817420CB095100FC992C /* glossary.tmx */,
 				CA28817520CB095100FC992C /* LanguageTranslatorTests.swift */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/LanguageTranslatorV3Tests;
 			sourceTree = "<group>";
 		};
 		CAD2685320CAF28A002BA2C4 /* LanguageTranslatorV3 */ = {

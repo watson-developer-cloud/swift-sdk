@@ -133,8 +133,7 @@ class LanguageTranslatorTests: XCTestCase {
     }
 
     func testCreateDeleteModel() {
-        let creationExpectation = self.expectation(description: "Create a custom language model.")
-        let deletionExpectation = self.expectation(description: "Delete the custom language model.")
+        let expectation = self.expectation(description: "Create and delete a custom language model.")
 
         #if os(Linux)
             let glossary = URL(fileURLWithPath: "Tests/LanguageTranslatorV2Tests/glossary.tmx")
@@ -146,17 +145,25 @@ class LanguageTranslatorTests: XCTestCase {
             }
         #endif
 
+        let failure = { (error: Error) in
+            if error.localizedDescription.contains("does not permit customization") {
+                expectation.fulfill()
+            } else {
+                XCTFail(error.localizedDescription)
+
+            }
+        }
+
         languageTranslator.createModel(
             baseModelID: "en-es",
             name: "custom-english-to-spanish-model",
             forcedGlossary: glossary,
-            failure: failWithError)
+            failure: failure)
         {
             model in
             XCTAssertNotEqual(model.modelID, "")
-            creationExpectation.fulfill()
             self.languageTranslator.deleteModel(modelID: model.modelID, failure: self.failWithError) { _ in
-                deletionExpectation.fulfill()
+                expectation.fulfill()
             }
         }
         waitForExpectations()
@@ -173,7 +180,7 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testTranslateStringWithModelID() {
         let expectation = self.expectation(description: "Translate text string using model id.")
-        let request = TranslateRequest(text: ["Hello"], modelID: "en-es-conversational")
+        let request = TranslateRequest(text: ["Hello"], modelID: "en-es")
         languageTranslator.translate(request: request, failure: failWithError) {
             translation in
             XCTAssertEqual(translation.wordCount, 1)

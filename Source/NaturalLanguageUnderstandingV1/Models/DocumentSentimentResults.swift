@@ -19,10 +19,14 @@ import Foundation
 /** DocumentSentimentResults. */
 public struct DocumentSentimentResults: Decodable {
 
-    /// Indicates whether the sentiment is positive, neutral, or negative.
+    /**
+     Indicates whether the sentiment is positive, neutral, or negative.
+     */
     public var label: String?
 
-    /// Sentiment score from -1 (negative) to 1 (positive).
+    /**
+     Sentiment score from -1 (negative) to 1 (positive).
+     */
     public var score: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.

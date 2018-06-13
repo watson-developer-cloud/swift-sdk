@@ -19,7 +19,10 @@ import Foundation
 /** Pronunciation. */
 public struct Pronunciation: Decodable {
 
-    /// The pronunciation of the specified text in the requested voice and format. If a custom voice model is specified, the pronunciation also reflects that custom voice.
+    /**
+     The pronunciation of the specified text in the requested voice and format. If a custom voice model is specified,
+     the pronunciation also reflects that custom voice.
+     */
     public var pronunciation: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

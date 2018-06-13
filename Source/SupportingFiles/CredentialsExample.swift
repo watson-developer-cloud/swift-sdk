@@ -25,6 +25,8 @@ struct Credentials {
     static let DiscoveryPassword = "your-password-here"
     static let LanguageTranslatorUsername = "your-username-here"
     static let LanguageTranslatorPassword = "your-password-here"
+    static let LanguageTranslatorV3Username = "your-username-here"
+    static let LanguageTranslatorV3Password = "your-password-here"
     static let NaturalLanguageClassifierUsername = "your-username-here"
     static let NaturalLanguageClassifierPassword = "your-password-here"
     static let NaturalLanguageUnderstandingUsername = "your-username-here"

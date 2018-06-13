@@ -19,13 +19,19 @@ import Foundation
 /** The pagination data for the returned objects. */
 public struct LogPagination: Decodable {
 
-    /// The URL that will return the next page of results, if any.
+    /**
+     The URL that will return the next page of results, if any.
+     */
     public var nextUrl: String?
 
-    /// Reserved for future use.
+    /**
+     Reserved for future use.
+     */
     public var matched: Int?
 
-    /// A token identifying the next page of results.
+    /**
+     A token identifying the next page of results.
+     */
     public var nextCursor: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

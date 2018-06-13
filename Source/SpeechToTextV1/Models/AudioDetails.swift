@@ -19,28 +19,56 @@ import Foundation
 /** AudioDetails. */
 public struct AudioDetails: Decodable {
 
-    /// The type of the audio resource: * `audio` for an individual audio file * `archive` for an archive (**.zip** or **.tar.gz**) file that contains audio files.
+    /**
+     The type of the audio resource:
+     * `audio` for an individual audio file
+     * `archive` for an archive (**.zip** or **.tar.gz**) file that contains audio files
+     * `undetermined` for a resource that the service cannot validate (for example, if the user mistakenly passes a file
+     that does not contain audio, such as a JPEG file).
+     */
     public enum ModelType: String {
         case audio = "audio"
         case archive = "archive"
+        case undetermined = "undetermined"
     }
 
-    /// **For an archive-type resource,** the format of the compressed archive: * `zip` for a **.zip** file * `gzip` for a **.tar.gz** file   Omitted for an audio-type resource.
+    /**
+     **For an archive-type resource,** the format of the compressed archive:
+     * `zip` for a **.zip** file
+     * `gzip` for a **.tar.gz** file
+     Omitted for an audio-type resource.
+     */
     public enum Compression: String {
         case zip = "zip"
         case gzip = "gzip"
     }
 
-    /// The type of the audio resource: * `audio` for an individual audio file * `archive` for an archive (**.zip** or **.tar.gz**) file that contains audio files.
+    /**
+     The type of the audio resource:
+     * `audio` for an individual audio file
+     * `archive` for an archive (**.zip** or **.tar.gz**) file that contains audio files
+     * `undetermined` for a resource that the service cannot validate (for example, if the user mistakenly passes a file
+     that does not contain audio, such as a JPEG file).
+     */
     public var type: String?
 
-    /// **For an audio-type resource,** the codec in which the audio is encoded. Omitted for an archive-type resource.
+    /**
+     **For an audio-type resource,** the codec in which the audio is encoded. Omitted for an archive-type resource.
+     */
     public var codec: String?
 
-    /// **For an audio-type resource,** the sampling rate of the audio in Hertz (samples per second). Omitted for an archive-type resource.
+    /**
+     **For an audio-type resource,** the sampling rate of the audio in Hertz (samples per second). Omitted for an
+     archive-type resource.
+     */
     public var frequency: Int?
 
-    /// **For an archive-type resource,** the format of the compressed archive: * `zip` for a **.zip** file * `gzip` for a **.tar.gz** file   Omitted for an audio-type resource.
+    /**
+     **For an archive-type resource,** the format of the compressed archive:
+     * `zip` for a **.zip** file
+     * `gzip` for a **.tar.gz** file
+     Omitted for an audio-type resource.
+     */
     public var compression: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

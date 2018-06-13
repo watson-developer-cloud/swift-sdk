@@ -19,25 +19,39 @@ import Foundation
 /** LogExport. */
 public struct LogExport: Decodable {
 
-    /// A request received by the workspace, including the user input and context.
+    /**
+     A request received by the workspace, including the user input and context.
+     */
     public var request: MessageRequest
 
-    /// The response sent by the workspace, including the output text, detected intents and entities, and context.
+    /**
+     The response sent by the workspace, including the output text, detected intents and entities, and context.
+     */
     public var response: MessageResponse
 
-    /// A unique identifier for the logged event.
+    /**
+     A unique identifier for the logged event.
+     */
     public var logID: String
 
-    /// The timestamp for receipt of the message.
+    /**
+     The timestamp for receipt of the message.
+     */
     public var requestTimestamp: String
 
-    /// The timestamp for the system response to the message.
+    /**
+     The timestamp for the system response to the message.
+     */
     public var responseTimestamp: String
 
-    /// The unique identifier of the workspace where the request was made.
+    /**
+     The unique identifier of the workspace where the request was made.
+     */
     public var workspaceID: String
 
-    /// The language of the workspace where the message request was made.
+    /**
+     The language of the workspace where the message request was made.
+     */
     public var language: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,15 +19,21 @@ import Foundation
 /** DeleteCollectionResponse. */
 public struct DeleteCollectionResponse: Decodable {
 
-    /// The status of the collection. The status of a successful deletion operation is `deleted`.
+    /**
+     The status of the collection. The status of a successful deletion operation is `deleted`.
+     */
     public enum Status: String {
         case deleted = "deleted"
     }
 
-    /// The unique identifier of the collection that is being deleted.
+    /**
+     The unique identifier of the collection that is being deleted.
+     */
     public var collectionID: String
 
-    /// The status of the collection. The status of a successful deletion operation is `deleted`.
+    /**
+     The status of the collection. The status of a successful deletion operation is `deleted`.
+     */
     public var status: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

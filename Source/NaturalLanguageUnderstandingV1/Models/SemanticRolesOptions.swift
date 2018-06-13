@@ -19,13 +19,19 @@ import Foundation
 /** An option specifying whether or not to identify the subjects, actions, and verbs in the analyzed content. */
 public struct SemanticRolesOptions: Encodable {
 
-    /// Maximum number of semantic_roles results to return.
+    /**
+     Maximum number of semantic_roles results to return.
+     */
     public var limit: Int?
 
-    /// Set this to true to return keyword information for subjects and objects.
+    /**
+     Set this to true to return keyword information for subjects and objects.
+     */
     public var keywords: Bool?
 
-    /// Set this to true to return entity information for subjects and objects.
+    /**
+     Set this to true to return entity information for subjects and objects.
+     */
     public var entities: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -44,7 +50,12 @@ public struct SemanticRolesOptions: Encodable {
 
      - returns: An initialized `SemanticRolesOptions`.
     */
-    public init(limit: Int? = nil, keywords: Bool? = nil, entities: Bool? = nil) {
+    public init(
+        limit: Int? = nil,
+        keywords: Bool? = nil,
+        entities: Bool? = nil
+    )
+    {
         self.limit = limit
         self.keywords = keywords
         self.entities = entities

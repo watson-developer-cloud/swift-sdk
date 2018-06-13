@@ -19,7 +19,9 @@ import Foundation
 /** An option specifying if the relationships found between entities in the analyzed content should be returned. */
 public struct RelationsOptions: Encodable {
 
-    /// Enter a custom model ID to override the default model.
+    /**
+     Enter a custom model ID to override the default model.
+     */
     public var model: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -34,7 +36,10 @@ public struct RelationsOptions: Encodable {
 
      - returns: An initialized `RelationsOptions`.
     */
-    public init(model: String? = nil) {
+    public init(
+        model: String? = nil
+    )
+    {
         self.model = model
     }
 

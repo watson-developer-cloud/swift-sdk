@@ -19,16 +19,24 @@ import Foundation
 /** The most important keywords in the content, organized by relevance. */
 public struct KeywordsResult: Decodable {
 
-    /// Relevance score from 0 to 1. Higher values indicate greater relevance.
+    /**
+     Relevance score from 0 to 1. Higher values indicate greater relevance.
+     */
     public var relevance: Double?
 
-    /// The keyword text.
+    /**
+     The keyword text.
+     */
     public var text: String?
 
-    /// Emotion analysis results for the keyword, enabled with the "emotion" option.
+    /**
+     Emotion analysis results for the keyword, enabled with the "emotion" option.
+     */
     public var emotion: EmotionScores?
 
-    /// Sentiment analysis results for the keyword, enabled with the "sentiment" option.
+    /**
+     Sentiment analysis results for the keyword, enabled with the "sentiment" option.
+     */
     public var sentiment: FeatureSentimentResults?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,10 +19,14 @@ import Foundation
 /** Whether or not to return emotion analysis of the content. */
 public struct EmotionOptions: Encodable {
 
-    /// Set this to false to hide document-level emotion results.
+    /**
+     Set this to false to hide document-level emotion results.
+     */
     public var document: Bool?
 
-    /// Emotion results will be returned for each target string that is found in the document.
+    /**
+     Emotion results will be returned for each target string that is found in the document.
+     */
     public var targets: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -39,7 +43,11 @@ public struct EmotionOptions: Encodable {
 
      - returns: An initialized `EmotionOptions`.
     */
-    public init(document: Bool? = nil, targets: [String]? = nil) {
+    public init(
+        document: Bool? = nil,
+        targets: [String]? = nil
+    )
+    {
         self.document = document
         self.targets = targets
     }

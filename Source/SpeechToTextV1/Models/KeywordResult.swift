@@ -19,16 +19,24 @@ import Foundation
 /** KeywordResult. */
 public struct KeywordResult: Decodable {
 
-    /// A specified keyword normalized to the spoken phrase that matched in the audio input.
+    /**
+     A specified keyword normalized to the spoken phrase that matched in the audio input.
+     */
     public var normalizedText: String
 
-    /// The start time in seconds of the keyword match.
+    /**
+     The start time in seconds of the keyword match.
+     */
     public var startTime: Double
 
-    /// The end time in seconds of the keyword match.
+    /**
+     The end time in seconds of the keyword match.
+     */
     public var endTime: Double
 
-    /// A confidence score for the keyword match in the range of 0 to 1.
+    /**
+     A confidence score for the keyword match in the range of 0 to 1.
+     */
     public var confidence: Double
 
     // Map each property name to the key that shall be used for encoding/decoding.

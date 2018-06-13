@@ -19,7 +19,11 @@ import Foundation
 /** VoiceModels. */
 public struct VoiceModels: Decodable {
 
-    /// An array of `VoiceModel` objects that provides information about each available custom voice model. The array is empty if the requesting service credentials own no custom voice models (if no language is specified) or own no custom voice models for the specified language.
+    /**
+     An array of `VoiceModel` objects that provides information about each available custom voice model. The array is
+     empty if the requesting service credentials own no custom voice models (if no language is specified) or own no
+     custom voice models for the specified language.
+     */
     public var customizations: [VoiceModel]
 
     // Map each property name to the key that shall be used for encoding/decoding.

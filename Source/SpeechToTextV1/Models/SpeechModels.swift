@@ -19,7 +19,9 @@ import Foundation
 /** SpeechModels. */
 public struct SpeechModels: Decodable {
 
-    /// Information about each available model.
+    /**
+     An array of objects that provides information about each available model.
+     */
     public var models: [SpeechModel]
 
     // Map each property name to the key that shall be used for encoding/decoding.

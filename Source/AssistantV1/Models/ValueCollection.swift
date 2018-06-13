@@ -19,10 +19,14 @@ import Foundation
 /** ValueCollection. */
 public struct ValueCollection: Decodable {
 
-    /// An array of entity values.
+    /**
+     An array of entity values.
+     */
     public var values: [ValueExport]
 
-    /// An object defining the pagination data for the returned objects.
+    /**
+     An object defining the pagination data for the returned objects.
+     */
     public var pagination: Pagination
 
     // Map each property name to the key that shall be used for encoding/decoding.

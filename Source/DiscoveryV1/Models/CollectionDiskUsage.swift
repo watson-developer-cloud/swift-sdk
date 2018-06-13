@@ -19,7 +19,9 @@ import Foundation
 /** Summary of the disk usage statistics for this collection. */
 public struct CollectionDiskUsage: Decodable {
 
-    /// Number of bytes used by the collection.
+    /**
+     Number of bytes used by the collection.
+     */
     public var usedBytes: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,13 +19,23 @@ import Foundation
 /** ContentItem. */
 public struct ContentItem: Encodable {
 
-    /// The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
+    /**
+     The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
+     analyzed; plain text is processed as submitted.
+     */
     public enum Contenttype: String {
         case plain = "text/plain"
         case html = "text/html"
     }
 
-    /// The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the **Content-Type** parameter overrides the value of this parameter; any content items that specify a different language are ignored. Omit the **Content-Type** parameter to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.
+    /**
+     The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en`
+     (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A
+     language specified with the **Content-Type** parameter overrides the value of this parameter; any content items
+     that specify a different language are ignored. Omit the **Content-Type** parameter to base the language on the most
+     prevalent specification among the content items; again, content items that specify a different language are
+     ignored. You can specify any combination of languages for the input and response content.
+     */
     public enum Language: String {
         case ar = "ar"
         case en = "en"
@@ -34,31 +44,59 @@ public struct ContentItem: Encodable {
         case ko = "ko"
     }
 
-    /// The content that is to be analyzed. The service supports up to 20 MB of content for all `ContentItem` objects combined.
+    /**
+     The content that is to be analyzed. The service supports up to 20 MB of content for all `ContentItem` objects
+     combined.
+     */
     public var content: String
 
-    /// A unique identifier for this content item.
+    /**
+     A unique identifier for this content item.
+     */
     public var id: String?
 
-    /// A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+    /**
+     A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch
+     (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     */
     public var created: Int?
 
-    /// A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+    /**
+     A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX
+     Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     */
     public var updated: Int?
 
-    /// The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
+    /**
+     The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
+     analyzed; plain text is processed as submitted.
+     */
     public var contenttype: String?
 
-    /// The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the **Content-Type** parameter overrides the value of this parameter; any content items that specify a different language are ignored. Omit the **Content-Type** parameter to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.
+    /**
+     The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en`
+     (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A
+     language specified with the **Content-Type** parameter overrides the value of this parameter; any content items
+     that specify a different language are ignored. Omit the **Content-Type** parameter to base the language on the most
+     prevalent specification among the content items; again, content items that specify a different language are
+     ignored. You can specify any combination of languages for the input and response content.
+     */
     public var language: String?
 
-    /// The unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.
+    /**
+     The unique ID of the parent content item for this item. Used to identify hierarchical relationships between
+     posts/replies, messages/replies, and so on.
+     */
     public var parentid: String?
 
-    /// Indicates whether this content item is a reply to another content item.
+    /**
+     Indicates whether this content item is a reply to another content item.
+     */
     public var reply: Bool?
 
-    /// Indicates whether this content item is a forwarded/copied version of another content item.
+    /**
+     Indicates whether this content item is a forwarded/copied version of another content item.
+     */
     public var forward: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -77,19 +115,40 @@ public struct ContentItem: Encodable {
     /**
      Initialize a `ContentItem` with member variables.
 
-     - parameter content: The content that is to be analyzed. The service supports up to 20 MB of content for all `ContentItem` objects combined.
+     - parameter content: The content that is to be analyzed. The service supports up to 20 MB of content for all `ContentItem` objects
+       combined.
      - parameter id: A unique identifier for this content item.
-     - parameter created: A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
-     - parameter updated: A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
-     - parameter contenttype: The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
-     - parameter language: The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the **Content-Type** parameter overrides the value of this parameter; any content items that specify a different language are ignored. Omit the **Content-Type** parameter to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.
-     - parameter parentid: The unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.
+     - parameter created: A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch
+       (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     - parameter updated: A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX
+       Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     - parameter contenttype: The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
+       analyzed; plain text is processed as submitted.
+     - parameter language: The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is
+       `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as
+       `en`. A language specified with the **Content-Type** parameter overrides the value of this parameter; any content
+       items that specify a different language are ignored. Omit the **Content-Type** parameter to base the language on
+       the most prevalent specification among the content items; again, content items that specify a different language
+       are ignored. You can specify any combination of languages for the input and response content.
+     - parameter parentid: The unique ID of the parent content item for this item. Used to identify hierarchical relationships between
+       posts/replies, messages/replies, and so on.
      - parameter reply: Indicates whether this content item is a reply to another content item.
      - parameter forward: Indicates whether this content item is a forwarded/copied version of another content item.
 
      - returns: An initialized `ContentItem`.
     */
-    public init(content: String, id: String? = nil, created: Int? = nil, updated: Int? = nil, contenttype: String? = nil, language: String? = nil, parentid: String? = nil, reply: Bool? = nil, forward: Bool? = nil) {
+    public init(
+        content: String,
+        id: String? = nil,
+        created: Int? = nil,
+        updated: Int? = nil,
+        contenttype: String? = nil,
+        language: String? = nil,
+        parentid: String? = nil,
+        reply: Bool? = nil,
+        forward: Bool? = nil
+    )
+    {
         self.content = content
         self.id = id
         self.created = created

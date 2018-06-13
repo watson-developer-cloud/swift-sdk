@@ -19,19 +19,29 @@ import Foundation
 /** IntentExport. */
 public struct IntentExport: Decodable {
 
-    /// The name of the intent.
+    /**
+     The name of the intent.
+     */
     public var intentName: String
 
-    /// The timestamp for creation of the intent.
+    /**
+     The timestamp for creation of the intent.
+     */
     public var created: String?
 
-    /// The timestamp for the last update to the intent.
+    /**
+     The timestamp for the last update to the intent.
+     */
     public var updated: String?
 
-    /// The description of the intent.
+    /**
+     The description of the intent.
+     */
     public var description: String?
 
-    /// An array of objects describing the user input examples for the intent.
+    /**
+     An array of objects describing the user input examples for the intent.
+     */
     public var examples: [Example]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -114,9 +114,6 @@
                 <a href="../Structs/CustomWords.html">CustomWords</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:14SpeechToTextV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/KeywordResult.html">KeywordResult</a>
               </li>
               <li class="nav-group-task">
@@ -224,7 +221,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>For the <strong>Add custom words</strong> method, you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to connect the tokens of compound words.   Omit this field for the <strong>Add a custom word</strong> method.</p>
+                        <p>For the <strong>Add custom words</strong> method, you must specify the custom word that is to be added to or updated in the
+custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to connect the tokens of
+compound words.
+Omit this field for the <strong>Add a custom word</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -251,7 +251,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service&rsquo;s base vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the word. For a word that is in the service&rsquo;s base vocabulary, use the parameter to specify additional pronunciations for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a pronunciation can include at most 40 characters not including spaces.</p>
+                        <p>An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
+foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service&rsquo;s base
+vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the word.
+For a word that is in the service&rsquo;s base vocabulary, use the parameter to specify additional pronunciations for the
+word. You cannot override the default pronunciation of a word; pronunciations you add augment the pronunciation
+from the base vocabulary. A word can have at most five sounds-like pronunciations, and a pronunciation can include
+at most 40 characters not including spaces.</p>
 
                       </div>
                       <div class="declaration">
@@ -278,7 +284,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the word to have a spelling that is different from its usual representation or from its spelling in corpora training data.</p>
+                        <p>An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the
+word to have a spelling that is different from its usual representation or from its spelling in corpora training
+data.</p>
 
                       </div>
                       <div class="declaration">
@@ -312,7 +320,11 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">soundsLike</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">displayAs</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">soundsLike</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">displayAs</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -328,7 +340,10 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>For the <strong>Add custom words</strong> method, you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to connect the tokens of compound words.   Omit this field for the <strong>Add a custom word</strong> method.</p>
+                                  <p>For the <strong>Add custom words</strong> method, you must specify the custom word that is to be added to or updated in the
+custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to connect the tokens of
+compound words.
+Omit this field for the <strong>Add a custom word</strong> method.</p>
                                 </div>
                               </td>
                             </tr>
@@ -340,7 +355,13 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service&rsquo;s base vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the word. For a word that is in the service&rsquo;s base vocabulary, use the parameter to specify additional pronunciations for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a pronunciation can include at most 40 characters not including spaces.</p>
+                                  <p>An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
+foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service&rsquo;s base
+vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the
+word. For a word that is in the service&rsquo;s base vocabulary, use the parameter to specify additional pronunciations
+for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
+pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a
+pronunciation can include at most 40 characters not including spaces.</p>
                                 </div>
                               </td>
                             </tr>
@@ -352,7 +373,9 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the word to have a spelling that is different from its usual representation or from its spelling in corpora training data.</p>
+                                  <p>An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the
+word to have a spelling that is different from its usual representation or from its spelling in corpora training
+data.</p>
                                 </div>
                               </td>
                             </tr>
@@ -371,7 +394,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

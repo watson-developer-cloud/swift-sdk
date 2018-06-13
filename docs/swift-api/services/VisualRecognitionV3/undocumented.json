@@ -2,37 +2,30 @@
   "warnings": [
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
-      "line": 24,
+      "line": 26,
       "symbol": "Classifier.Status.ready",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
-      "line": 25,
+      "line": 27,
       "symbol": "Classifier.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
-      "line": 26,
+      "line": 28,
       "symbol": "Classifier.Status.retraining",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
-      "line": 27,
+      "line": 29,
       "symbol": "Classifier.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/VisualRecognitionV3/Models/Face.swift",
-      "line": 31,
-      "symbol": "Face.identity",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {

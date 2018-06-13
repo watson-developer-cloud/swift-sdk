@@ -19,10 +19,14 @@ import Foundation
 /** Summary of the document usage statistics for the environment. */
 public struct EnvironmentDocuments: Decodable {
 
-    /// Number of documents indexed for the environment.
+    /**
+     Number of documents indexed for the environment.
+     */
     public var indexed: Int?
 
-    /// Total number of documents allowed in the environment's capacity.
+    /**
+     Total number of documents allowed in the environment's capacity.
+     */
     public var maximumAllowed: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.

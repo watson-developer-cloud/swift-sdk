@@ -19,16 +19,24 @@ import Foundation
 /** Details about the resource usage and capacity of the environment. */
 public struct IndexCapacity: Decodable {
 
-    /// Summary of the document usage statistics for the environment.
+    /**
+     Summary of the document usage statistics for the environment.
+     */
     public var documents: EnvironmentDocuments?
 
-    /// Summary of the disk usage of the environment.
+    /**
+     Summary of the disk usage of the environment.
+     */
     public var diskUsage: DiskUsage?
 
-    /// Summary of the collection usage in the environment.
+    /**
+     Summary of the collection usage in the environment.
+     */
     public var collections: CollectionUsage?
 
-    /// **Deprecated**: Summary of the memory usage of the environment.
+    /**
+     **Deprecated**: Summary of the memory usage of the environment.
+     */
     public var memoryUsage: MemoryUsage?
 
     // Map each property name to the key that shall be used for encoding/decoding.

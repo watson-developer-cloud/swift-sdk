@@ -19,18 +19,26 @@ import Foundation
 /** DeleteConfigurationResponse. */
 public struct DeleteConfigurationResponse: Decodable {
 
-    /// Status of the configuration. A deleted configuration has the status deleted.
+    /**
+     Status of the configuration. A deleted configuration has the status deleted.
+     */
     public enum Status: String {
         case deleted = "deleted"
     }
 
-    /// The unique identifier for the configuration.
+    /**
+     The unique identifier for the configuration.
+     */
     public var configurationID: String
 
-    /// Status of the configuration. A deleted configuration has the status deleted.
+    /**
+     Status of the configuration. A deleted configuration has the status deleted.
+     */
     public var status: String
 
-    /// An array of notice messages, if any.
+    /**
+     An array of notice messages, if any.
+     */
     public var notices: [Notice]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

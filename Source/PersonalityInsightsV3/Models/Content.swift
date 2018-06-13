@@ -19,7 +19,9 @@ import Foundation
 /** Content. */
 public struct Content: Encodable {
 
-    /// An array of `ContentItem` objects that provides the text that is to be analyzed.
+    /**
+     An array of `ContentItem` objects that provides the text that is to be analyzed.
+     */
     public var contentItems: [ContentItem]
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -34,7 +36,10 @@ public struct Content: Encodable {
 
      - returns: An initialized `Content`.
     */
-    public init(contentItems: [ContentItem]) {
+    public init(
+        contentItems: [ContentItem]
+    )
+    {
         self.contentItems = contentItems
     }
 

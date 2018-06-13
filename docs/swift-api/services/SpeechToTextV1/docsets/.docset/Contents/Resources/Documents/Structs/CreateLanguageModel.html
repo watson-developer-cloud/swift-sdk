@@ -114,9 +114,6 @@
                 <a href="../Structs/CustomWords.html">CustomWords</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:14SpeechToTextV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/KeywordResult.html">KeywordResult</a>
               </li>
               <li class="nav-group-task">
@@ -224,7 +221,11 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The name of the base language model that is to be customized by the new custom language model. The new custom model can be used only with the base model that it customizes. To determine whether a base model supports language model customization, request information about the base model and check that the attribute <code>custom_language_model</code> is set to <code>true</code>, or refer to <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport">Language support for customization</a>.</p>
+                        <p>The name of the base language model that is to be customized by the new custom language model. The new custom model
+can be used only with the base model that it customizes. To determine whether a base model supports language model
+customization, request information about the base model and check that the attribute <code>custom_language_model</code> is set
+to <code>true</code>, or refer to <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport">Language support for
+customization</a>.</p>
 
                         <a href="../Structs/CreateLanguageModel/BaseModelName.html" class="slightly-smaller">See more</a>
                       </div>
@@ -252,7 +253,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A user-defined name for the new custom language model. Use a name that is unique among all custom language models that you own. Use a localized name that matches the language of the custom model. Use a name that describes the domain of the custom model, such as <code>Medical custom model</code> or <code>Legal custom model</code>.</p>
+                        <p>A user-defined name for the new custom language model. Use a name that is unique among all custom language models
+that you own. Use a localized name that matches the language of the custom model. Use a name that describes the
+domain of the custom model, such as <code>Medical custom model</code> or <code>Legal custom model</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -279,7 +282,11 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The name of the base language model that is to be customized by the new custom language model. The new custom model can be used only with the base model that it customizes. To determine whether a base model supports language model customization, request information about the base model and check that the attribute <code>custom_language_model</code> is set to <code>true</code>, or refer to <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport">Language support for customization</a>.</p>
+                        <p>The name of the base language model that is to be customized by the new custom language model. The new custom model
+can be used only with the base model that it customizes. To determine whether a base model supports language model
+customization, request information about the base model and check that the attribute <code>custom_language_model</code> is set
+to <code>true</code>, or refer to <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport">Language support for
+customization</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -306,7 +313,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The dialect of the specified language that is to be used with the custom language model. The parameter is meaningful only for Spanish models, for which the service creates a custom language model that is suited for speech in one of the following dialects: * <code>es-ES</code> for Castilian Spanish (the default) * <code>es-LA</code> for Latin American Spanish * <code>es-US</code> for North American (Mexican) Spanish   A specified dialect must be valid for the base model. By default, the dialect matches the language of the base model; for example, <code>en-US</code> for either of the US English language models.</p>
+                        <p>The dialect of the specified language that is to be used with the custom language model. The parameter is
+meaningful only for Spanish models, for which the service creates a custom language model that is suited for speech
+in one of the following dialects:</p>
+
+<ul>
+<li><code>es-ES</code> for Castilian Spanish (the default)</li>
+<li><code>es-LA</code> for Latin American Spanish</li>
+<li><code>es-US</code> for North American (Mexican) Spanish
+A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
+model; for example, <code>en-US</code> for either of the US English language models.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -333,7 +350,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A description of the new custom language model. Use a localized description that matches the language of the custom model.</p>
+                        <p>A description of the new custom language model. Use a localized description that matches the language of the custom
+model.</p>
 
                       </div>
                       <div class="declaration">
@@ -367,7 +385,12 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">baseModelName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">dialect</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">baseModelName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">dialect</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -383,7 +406,9 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>A user-defined name for the new custom language model. Use a name that is unique among all custom language models that you own. Use a localized name that matches the language of the custom model. Use a name that describes the domain of the custom model, such as <code>Medical custom model</code> or <code>Legal custom model</code>.</p>
+                                  <p>A user-defined name for the new custom language model. Use a name that is unique among all custom language models
+that you own. Use a localized name that matches the language of the custom model. Use a name that describes the
+domain of the custom model, such as <code>Medical custom model</code> or <code>Legal custom model</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -395,7 +420,11 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The name of the base language model that is to be customized by the new custom language model. The new custom model can be used only with the base model that it customizes. To determine whether a base model supports language model customization, request information about the base model and check that the attribute <code>custom_language_model</code> is set to <code>true</code>, or refer to <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport">Language support for customization</a>.</p>
+                                  <p>The name of the base language model that is to be customized by the new custom language model. The new custom
+model can be used only with the base model that it customizes. To determine whether a base model supports
+language model customization, request information about the base model and check that the attribute
+<code>custom_language_model</code> is set to <code>true</code>, or refer to <a href="https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport">Language support for
+customization</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -407,7 +436,17 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The dialect of the specified language that is to be used with the custom language model. The parameter is meaningful only for Spanish models, for which the service creates a custom language model that is suited for speech in one of the following dialects: * <code>es-ES</code> for Castilian Spanish (the default) * <code>es-LA</code> for Latin American Spanish * <code>es-US</code> for North American (Mexican) Spanish   A specified dialect must be valid for the base model. By default, the dialect matches the language of the base model; for example, <code>en-US</code> for either of the US English language models.</p>
+                                  <p>The dialect of the specified language that is to be used with the custom language model. The parameter is
+meaningful only for Spanish models, for which the service creates a custom language model that is suited for
+speech in one of the following dialects:
+
+<ul>
+<li><code>es-ES</code> for Castilian Spanish (the default)</li>
+<li><code>es-LA</code> for Latin American Spanish</li>
+<li><code>es-US</code> for North American (Mexican) Spanish
+A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
+model; for example, <code>en-US</code> for either of the US English language models.</li>
+</ul></p>
                                 </div>
                               </td>
                             </tr>
@@ -419,7 +458,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>A description of the new custom language model. Use a localized description that matches the language of the custom model.</p>
+                                  <p>A description of the new custom language model. Use a localized description that matches the language of the
+custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -438,7 +478,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

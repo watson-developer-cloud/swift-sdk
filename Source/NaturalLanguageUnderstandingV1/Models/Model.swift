@@ -19,16 +19,24 @@ import Foundation
 /** Model. */
 public struct Model: Decodable {
 
-    /// Shows as available if the model is ready for use.
+    /**
+     Shows as available if the model is ready for use.
+     */
     public var status: String?
 
-    /// Unique model ID.
+    /**
+     Unique model ID.
+     */
     public var modelID: String?
 
-    /// ISO 639-1 code indicating the language of the model.
+    /**
+     ISO 639-1 code indicating the language of the model.
+     */
     public var language: String?
 
-    /// Model description.
+    /**
+     Model description.
+     */
     public var description: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

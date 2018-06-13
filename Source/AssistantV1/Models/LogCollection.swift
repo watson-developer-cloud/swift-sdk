@@ -19,10 +19,14 @@ import Foundation
 /** LogCollection. */
 public struct LogCollection: Decodable {
 
-    /// An array of objects describing log events.
+    /**
+     An array of objects describing log events.
+     */
     public var logs: [LogExport]
 
-    /// The pagination data for the returned objects.
+    /**
+     The pagination data for the returned objects.
+     */
     public var pagination: LogPagination
 
     // Map each property name to the key that shall be used for encoding/decoding.

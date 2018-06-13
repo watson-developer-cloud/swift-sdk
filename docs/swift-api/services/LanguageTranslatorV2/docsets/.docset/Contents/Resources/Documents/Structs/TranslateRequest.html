@@ -66,9 +66,6 @@
                 <a href="../Structs/IdentifiedLanguages.html">IdentifiedLanguages</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:20LanguageTranslatorV211JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/TranslateRequest.html">TranslateRequest</a>
               </li>
               <li class="nav-group-task">
@@ -146,7 +143,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Model ID of the translation model to use. If this is specified, the <strong>source</strong> and <strong>target</strong> parameters will be ignored. The method requires either a model ID or both the <strong>source</strong> and <strong>target</strong> parameters.</p>
+                        <p>Model ID of the translation model to use. If this is specified, the <strong>source</strong> and <strong>target</strong> parameters will be
+ignored. The method requires either a model ID or both the <strong>source</strong> and <strong>target</strong> parameters.</p>
 
                       </div>
                       <div class="declaration">
@@ -173,7 +171,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Language code of the source text language. Use with <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6targetSSSgvp">target</a></code> as an alternative way to select a translation model. When <code>source</code> and <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6targetSSSgvp">target</a></code> are set, and a model ID is not set, the system chooses a default model for the language pair (usually the model based on the news domain).</p>
+                        <p>Language code of the source text language. Use with <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6targetSSSgvp">target</a></code> as an alternative way to select a translation model.
+When <code>source</code> and <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6targetSSSgvp">target</a></code> are set, and a model ID is not set, the system chooses a default model for the language
+pair (usually the model based on the news domain).</p>
 
                       </div>
                       <div class="declaration">
@@ -200,7 +200,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Language code of the translation target language. Use with source as an alternative way to select a translation model.</p>
+                        <p>Language code of the translation target language. Use with source as an alternative way to select a translation
+model.</p>
 
                       </div>
                       <div class="declaration">
@@ -234,7 +235,12 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">source</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -262,7 +268,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Model ID of the translation model to use. If this is specified, the <strong>source</strong> and <strong>target</strong> parameters will be ignored. The method requires either a model ID or both the <strong>source</strong> and <strong>target</strong> parameters.</p>
+                                  <p>Model ID of the translation model to use. If this is specified, the <strong>source</strong> and <strong>target</strong> parameters will be
+ignored. The method requires either a model ID or both the <strong>source</strong> and <strong>target</strong> parameters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -274,7 +281,9 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Language code of the source text language. Use with <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6targetSSSgvp">target</a></code> as an alternative way to select a translation model. When <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6sourceSSSgvp">source</a></code> and <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6targetSSSgvp">target</a></code> are set, and a model ID is not set, the system chooses a default model for the language pair (usually the model based on the news domain).</p>
+                                  <p>Language code of the source text language. Use with <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6targetSSSgvp">target</a></code> as an alternative way to select a translation model.
+When <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6sourceSSSgvp">source</a></code> and <code><a href="../Structs/TranslateRequest.html#/s:20LanguageTranslatorV216TranslateRequestV6targetSSSgvp">target</a></code> are set, and a model ID is not set, the system chooses a default model for the
+language pair (usually the model based on the news domain).</p>
                                 </div>
                               </td>
                             </tr>
@@ -286,7 +295,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Language code of the translation target language. Use with source as an alternative way to select a translation model.</p>
+                                  <p>Language code of the translation target language. Use with source as an alternative way to select a translation
+model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -305,7 +315,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

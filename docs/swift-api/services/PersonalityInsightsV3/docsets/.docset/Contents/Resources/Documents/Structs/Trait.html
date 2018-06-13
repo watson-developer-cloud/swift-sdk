@@ -72,9 +72,6 @@
                 <a href="../Structs/ContentItem/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:21PersonalityInsightsV311JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Profile.html">Profile</a>
               </li>
               <li class="nav-group-task">
@@ -125,7 +122,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The category of the characteristic: <code>personality</code> for Big Five personality characteristics, <code>needs</code> for Needs, and <code>values</code> for Values.</p>
+                        <p>The category of the characteristic: <code>personality</code> for Big Five personality characteristics, <code>needs</code> for Needs, and
+<code>values</code> for Values.</p>
 
                         <a href="../Structs/Trait/Category.html" class="slightly-smaller">See more</a>
                       </div>
@@ -153,7 +151,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form * <code>big5_{characteristic}</code> for Big Five personality dimensions * <code>facet_{characteristic}</code> for Big Five personality facets * <code>need_{characteristic}</code> for Needs  *<code>value_{characteristic}</code> for Values.</p>
+                        <p>The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form</p>
+
+<ul>
+<li><code>big5_{characteristic}</code> for Big Five personality dimensions</li>
+<li><code>facet_{characteristic}</code> for Big Five personality facets</li>
+<li><code>need_{characteristic}</code> for Needs
+*<code>value_{characteristic}</code> for Values.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -207,7 +212,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The category of the characteristic: <code>personality</code> for Big Five personality characteristics, <code>needs</code> for Needs, and <code>values</code> for Values.</p>
+                        <p>The category of the characteristic: <code>personality</code> for Big Five personality characteristics, <code>needs</code> for Needs, and
+<code>values</code> for Values.</p>
 
                       </div>
                       <div class="declaration">
@@ -234,7 +240,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The normalized percentile score for the characteristic. The range is 0 to 1. For example, if the percentage for Openness is 0.60, the author scored in the 60th percentile; the author is more open than 59 percent of the population and less open than 39 percent of the population.</p>
+                        <p>The normalized percentile score for the characteristic. The range is 0 to 1. For example, if the percentage for
+Openness is 0.60, the author scored in the 60th percentile; the author is more open than 59 percent of the
+population and less open than 39 percent of the population.</p>
 
                       </div>
                       <div class="declaration">
@@ -261,7 +269,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The raw score for the characteristic. The range is 0 to 1. A higher score generally indicates a greater likelihood that the author has that characteristic, but raw scores must be considered in aggregate: The range of values in practice might be much smaller than 0 to 1, so an individual score must be considered in the context of the overall scores and their range.   The raw score is computed based on the input and the service model; it is not normalized or compared with a sample population. The raw score enables comparison of the results against a different sampling population and with a custom normalization approach.</p>
+                        <p>The raw score for the characteristic. The range is 0 to 1. A higher score generally indicates a greater likelihood
+that the author has that characteristic, but raw scores must be considered in aggregate: The range of values in
+practice might be much smaller than 0 to 1, so an individual score must be considered in the context of the overall
+scores and their range.
+The raw score is computed based on the input and the service model; it is not normalized or compared with a sample
+population. The raw score enables comparison of the results against a different sampling population and with a
+custom normalization approach.</p>
 
                       </div>
                       <div class="declaration">
@@ -288,7 +302,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p><code>2017-10-13</code><strong>: Indicates whether the characteristic is meaningful for the input language. The field is always <code>true</code> for all characteristics of English, Spanish, and Japanese input. The field is <code>false</code> for the subset of characteristics of Arabic and Korean input for which the service&rsquo;s models are unable to generate meaningful results. **<code>2016-10-19</code></strong>: Not returned.</p>
+                        <p><strong><code>2017-10-13</code></strong>: Indicates whether the characteristic is meaningful for the input language. The field is always
+<code>true</code> for all characteristics of English, Spanish, and Japanese input. The field is <code>false</code> for the subset of
+characteristics of Arabic and Korean input for which the service&rsquo;s models are unable to generate meaningful
+results. <strong><code>2016-10-19</code></strong>: Not returned.</p>
 
                       </div>
                       <div class="declaration">
@@ -315,7 +332,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>For <code>personality</code> (Big Five) dimensions, more detailed results for the facets of each dimension as inferred from the input text.</p>
+                        <p>For <code>personality</code> (Big Five) dimensions, more detailed results for the facets of each dimension as inferred from
+the input text.</p>
 
                       </div>
                       <div class="declaration">
@@ -334,7 +352,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -9,70 +9,70 @@
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 24,
+      "line": 26,
       "symbol": "TranslationModel.Status.uploading",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 25,
+      "line": 27,
       "symbol": "TranslationModel.Status.uploaded",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 26,
+      "line": 28,
       "symbol": "TranslationModel.Status.dispatching",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 27,
+      "line": 29,
       "symbol": "TranslationModel.Status.queued",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 28,
+      "line": 30,
       "symbol": "TranslationModel.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 29,
+      "line": 31,
       "symbol": "TranslationModel.Status.trained",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 30,
+      "line": 32,
       "symbol": "TranslationModel.Status.publishing",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 31,
+      "line": 33,
       "symbol": "TranslationModel.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 32,
+      "line": 34,
       "symbol": "TranslationModel.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/LanguageTranslatorV2/Models/TranslationModel.swift",
-      "line": 33,
+      "line": 35,
       "symbol": "TranslationModel.Status.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"

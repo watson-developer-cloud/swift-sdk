@@ -19,38 +19,58 @@ import Foundation
 /** Details about an environment. */
 public struct Environment: Decodable {
 
-    /// Status of the environment.
+    /**
+     Status of the environment.
+     */
     public enum Status: String {
         case active = "active"
         case pending = "pending"
         case maintenance = "maintenance"
     }
 
-    /// Unique identifier for the environment.
+    /**
+     Unique identifier for the environment.
+     */
     public var environmentID: String?
 
-    /// Name that identifies the environment.
+    /**
+     Name that identifies the environment.
+     */
     public var name: String?
 
-    /// Description of the environment.
+    /**
+     Description of the environment.
+     */
     public var description: String?
 
-    /// Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    /**
+     Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     */
     public var created: String?
 
-    /// Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    /**
+     Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     */
     public var updated: String?
 
-    /// Status of the environment.
+    /**
+     Status of the environment.
+     */
     public var status: String?
 
-    /// If true, then the environment contains read-only collections which are maintained by IBM.
+    /**
+     If true, then the environment contains read-only collections which are maintained by IBM.
+     */
     public var readOnly: Bool?
 
-    /// **Deprecated**: Size of the environment.
+    /**
+     **Deprecated**: Size of the environment.
+     */
     public var size: Int?
 
-    /// Details about the resource usage and capacity of the environment.
+    /**
+     Details about the resource usage and capacity of the environment.
+     */
     public var indexCapacity: IndexCapacity?
 
     // Map each property name to the key that shall be used for encoding/decoding.

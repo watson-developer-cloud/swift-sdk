@@ -19,10 +19,14 @@ import Foundation
 /** An intent identified in the user input. */
 public struct RuntimeIntent: Codable {
 
-    /// The name of the recognized intent.
+    /**
+     The name of the recognized intent.
+     */
     public var intent: String
 
-    /// A decimal percentage that represents Watson's confidence in the intent.
+    /**
+     A decimal percentage that represents Watson's confidence in the intent.
+     */
     public var confidence: Double
 
     /// Additional properties associated with this model.
@@ -43,7 +47,12 @@ public struct RuntimeIntent: Codable {
 
      - returns: An initialized `RuntimeIntent`.
     */
-    public init(intent: String, confidence: Double, additionalProperties: [String: JSON] = [:]) {
+    public init(
+        intent: String,
+        confidence: Double,
+        additionalProperties: [String: JSON] = [:]
+    )
+    {
         self.intent = intent
         self.confidence = confidence
         self.additionalProperties = additionalProperties

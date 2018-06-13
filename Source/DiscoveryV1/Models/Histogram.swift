@@ -19,21 +19,31 @@ import Foundation
 /** Histogram. */
 public struct Histogram: Decodable {
 
-    /// The type of aggregation command used. For example: term, filter, max, min, etc.
+    /**
+     The type of aggregation command used. For example: term, filter, max, min, etc.
+     */
     public var type: String?
 
     public var results: [AggregationResult]?
 
-    /// Number of matching results.
+    /**
+     Number of matching results.
+     */
     public var matchingResults: Int?
 
-    /// Aggregations returned by the Discovery service.
+    /**
+     Aggregations returned by the Discovery service.
+     */
     public var aggregations: [QueryAggregation]?
 
-    /// The field where the aggregation is located in the document.
+    /**
+     The field where the aggregation is located in the document.
+     */
     public var field: String?
 
-    /// Interval of the aggregation. (For 'histogram' type).
+    /**
+     Interval of the aggregation. (For 'histogram' type).
+     */
     public var interval: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.

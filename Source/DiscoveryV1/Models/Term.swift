@@ -19,18 +19,26 @@ import Foundation
 /** Term. */
 public struct Term: Decodable {
 
-    /// The type of aggregation command used. For example: term, filter, max, min, etc.
+    /**
+     The type of aggregation command used. For example: term, filter, max, min, etc.
+     */
     public var type: String?
 
     public var results: [AggregationResult]?
 
-    /// Number of matching results.
+    /**
+     Number of matching results.
+     */
     public var matchingResults: Int?
 
-    /// Aggregations returned by the Discovery service.
+    /**
+     Aggregations returned by the Discovery service.
+     */
     public var aggregations: [QueryAggregation]?
 
-    /// The field where the aggregation is located in the document.
+    /**
+     The field where the aggregation is located in the document.
+     */
     public var field: String?
 
     public var count: Int?

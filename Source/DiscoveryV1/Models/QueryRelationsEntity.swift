@@ -19,13 +19,19 @@ import Foundation
 /** QueryRelationsEntity. */
 public struct QueryRelationsEntity: Encodable {
 
-    /// Entity text content.
+    /**
+     Entity text content.
+     */
     public var text: String?
 
-    /// The type of the specified entity.
+    /**
+     The type of the specified entity.
+     */
     public var type: String?
 
-    /// If false, implicit querying is performed. The default is `false`.
+    /**
+     If false, implicit querying is performed. The default is `false`.
+     */
     public var exact: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -44,7 +50,12 @@ public struct QueryRelationsEntity: Encodable {
 
      - returns: An initialized `QueryRelationsEntity`.
     */
-    public init(text: String? = nil, type: String? = nil, exact: Bool? = nil) {
+    public init(
+        text: String? = nil,
+        type: String? = nil,
+        exact: Bool? = nil
+    )
+    {
         self.text = text
         self.type = type
         self.exact = exact

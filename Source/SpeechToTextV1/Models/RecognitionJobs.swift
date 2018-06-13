@@ -19,7 +19,10 @@ import Foundation
 /** RecognitionJobs. */
 public struct RecognitionJobs: Decodable {
 
-    /// An array of objects that provides the status for each of the user's current jobs. The array is empty if the user has no current jobs.
+    /**
+     An array of objects that provides the status for each of the user's current jobs. The array is empty if the user
+     has no current jobs.
+     */
     public var recognitions: [RecognitionJob]
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,22 +19,34 @@ import Foundation
 /** A response from the Conversation service. */
 public struct MessageResponse: Decodable {
 
-    /// The user input from the request.
+    /**
+     The user input from the request.
+     */
     public var input: MessageInput?
 
-    /// An array of intents recognized in the user input, sorted in descending order of confidence.
+    /**
+     An array of intents recognized in the user input, sorted in descending order of confidence.
+     */
     public var intents: [RuntimeIntent]
 
-    /// An array of entities identified in the user input.
+    /**
+     An array of entities identified in the user input.
+     */
     public var entities: [RuntimeEntity]
 
-    /// Whether to return more than one intent. A value of `true` indicates that all matching intents are returned.
+    /**
+     Whether to return more than one intent. A value of `true` indicates that all matching intents are returned.
+     */
     public var alternateIntents: Bool?
 
-    /// State information for the conversation.
+    /**
+     State information for the conversation.
+     */
     public var context: Context
 
-    /// Output from the dialog, including the response to the user, the nodes that were triggered, and log messages.
+    /**
+     Output from the dialog, including the response to the user, the nodes that were triggered, and log messages.
+     */
     public var output: OutputData
 
     /// Additional properties associated with this model.

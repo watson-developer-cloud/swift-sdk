@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmx version="1.4">
+  <header creationtool="mktmx" creationtoolversion="0.1"
+	segtype="sentence" o-tmf="mktmx" adminlang="EN"
+	srclang="en" datatype="rtf" o-encoding="UTF-8"
+	creationdate= "20010414T1523Z"/>
+  <body>
+    <tu tuid="1">
+      <tuv xml:lang="en">
+        <seg>International Business Machines</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>International Business Machines</seg>
+      </tuv>
+    </tu>
+	<tu tuid="2">
+      <tuv xml:lang="en">
+        <seg>patent</seg>
+      </tuv>
+      <tuv xml:lang="fr">
+        <seg>brevent</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

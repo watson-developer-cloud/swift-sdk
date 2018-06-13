@@ -19,7 +19,9 @@ import Foundation
 /** ToneInput. */
 public struct ToneInput: Encodable {
 
-    /// The input content that the service is to analyze.
+    /**
+     The input content that the service is to analyze.
+     */
     public var text: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -34,7 +36,10 @@ public struct ToneInput: Encodable {
 
      - returns: An initialized `ToneInput`.
     */
-    public init(text: String) {
+    public init(
+        text: String
+    )
+    {
         self.text = text
     }
 

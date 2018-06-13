@@ -19,19 +19,29 @@ import Foundation
 /** Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed content. */
 public struct EntitiesOptions: Encodable {
 
-    /// Maximum number of entities to return.
+    /**
+     Maximum number of entities to return.
+     */
     public var limit: Int?
 
-    /// Set this to true to return locations of entity mentions.
+    /**
+     Set this to true to return locations of entity mentions.
+     */
     public var mentions: Bool?
 
-    /// Enter a custom model ID to override the standard entity detection model.
+    /**
+     Enter a custom model ID to override the standard entity detection model.
+     */
     public var model: String?
 
-    /// Set this to true to return sentiment information for detected entities.
+    /**
+     Set this to true to return sentiment information for detected entities.
+     */
     public var sentiment: Bool?
 
-    /// Set this to true to analyze emotion for detected keywords.
+    /**
+     Set this to true to analyze emotion for detected keywords.
+     */
     public var emotion: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -54,7 +64,14 @@ public struct EntitiesOptions: Encodable {
 
      - returns: An initialized `EntitiesOptions`.
     */
-    public init(limit: Int? = nil, mentions: Bool? = nil, model: String? = nil, sentiment: Bool? = nil, emotion: Bool? = nil) {
+    public init(
+        limit: Int? = nil,
+        mentions: Bool? = nil,
+        model: String? = nil,
+        sentiment: Bool? = nil,
+        emotion: Bool? = nil
+    )
+    {
         self.limit = limit
         self.mentions = mentions
         self.model = model

@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## Version 0.28.0
+_2018-06-12_
+
+This release regenerates all services. It includes updates to the documentation and some minor new service features.
+
+This release includes the following new features and bug fixes:
+
+- Adds support for the new Language Translator V3 service and deprecates Language Translator V2
+- Fix for issue 833
+
 ## Version 0.27.0
 _2018-05-28_
 

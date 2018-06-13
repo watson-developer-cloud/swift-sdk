@@ -19,7 +19,9 @@ import Foundation
 /** Voices. */
 public struct Voices: Decodable {
 
-    /// A list of available voices.
+    /**
+     A list of available voices.
+     */
     public var voices: [Voice]
 
     // Map each property name to the key that shall be used for encoding/decoding.

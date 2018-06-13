@@ -19,16 +19,26 @@ import Foundation
 /** Results for all images. */
 public struct ClassifiedImages: Decodable {
 
-    /// Number of custom classes identified in the images.
+    /**
+     Number of custom classes identified in the images.
+     */
     public var customClasses: Int?
 
-    /// Number of images processed for the API call.
+    /**
+     Number of images processed for the API call.
+     */
     public var imagesProcessed: Int?
 
-    /// Classified images.
+    /**
+     Classified images.
+     */
     public var images: [ClassifiedImage]
 
-    /// Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.
+    /**
+     Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file
+     and a list of image URLs will still complete, but does not return the expected output. Not returned when there is
+     no warning.
+     */
     public var warnings: [WarningInfo]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

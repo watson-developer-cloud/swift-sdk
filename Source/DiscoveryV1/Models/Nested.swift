@@ -19,18 +19,26 @@ import Foundation
 /** Nested. */
 public struct Nested: Decodable {
 
-    /// The type of aggregation command used. For example: term, filter, max, min, etc.
+    /**
+     The type of aggregation command used. For example: term, filter, max, min, etc.
+     */
     public var type: String?
 
     public var results: [AggregationResult]?
 
-    /// Number of matching results.
+    /**
+     Number of matching results.
+     */
     public var matchingResults: Int?
 
-    /// Aggregations returned by the Discovery service.
+    /**
+     Aggregations returned by the Discovery service.
+     */
     public var aggregations: [QueryAggregation]?
 
-    /// The area of the results the aggregation was restricted to.
+    /**
+     The area of the results the aggregation was restricted to.
+     */
     public var path: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

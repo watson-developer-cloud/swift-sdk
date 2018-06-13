@@ -19,13 +19,19 @@ import Foundation
 /** DocumentCounts. */
 public struct DocumentCounts: Decodable {
 
-    /// The total number of available documents in the collection.
+    /**
+     The total number of available documents in the collection.
+     */
     public var available: Int?
 
-    /// The number of documents in the collection that are currently being processed.
+    /**
+     The number of documents in the collection that are currently being processed.
+     */
     public var processing: Int?
 
-    /// The number of documents in the collection that failed to be ingested.
+    /**
+     The number of documents in the collection that failed to be ingested.
+     */
     public var failed: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.

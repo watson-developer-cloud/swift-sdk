@@ -19,16 +19,26 @@ import Foundation
 /** Behavior. */
 public struct Behavior: Decodable {
 
-    /// The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form `behavior_{value}`.
+    /**
+     The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form
+     `behavior_{value}`.
+     */
     public var traitID: String
 
-    /// The user-visible, localized name of the characteristic.
+    /**
+     The user-visible, localized name of the characteristic.
+     */
     public var name: String
 
-    /// The category of the characteristic: `behavior` for temporal data.
+    /**
+     The category of the characteristic: `behavior` for temporal data.
+     */
     public var category: String
 
-    /// For JSON content that is timestamped, the percentage of timestamped input data that occurred during that day of the week or hour of the day. The range is 0 to 1.
+    /**
+     For JSON content that is timestamped, the percentage of timestamped input data that occurred during that day of the
+     week or hour of the day. The range is 0 to 1.
+     */
     public var percentage: Double
 
     // Map each property name to the key that shall be used for encoding/decoding.

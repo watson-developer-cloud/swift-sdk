@@ -19,10 +19,15 @@ import Foundation
 /** SupportedFeatures. */
 public struct SupportedFeatures: Decodable {
 
-    /// If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `customizable`.).
+    /**
+     If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `customizable`.).
+     */
     public var customPronunciation: Bool
 
-    /// If `true`, the voice can be transformed by using the SSML &lt;voice-transformation&gt; element; if `false`, the voice cannot be transformed.
+    /**
+     If `true`, the voice can be transformed by using the SSML &lt;voice-transformation&gt; element; if `false`, the
+     voice cannot be transformed.
+     */
     public var voiceTransformation: Bool
 
     // Map each property name to the key that shall be used for encoding/decoding.

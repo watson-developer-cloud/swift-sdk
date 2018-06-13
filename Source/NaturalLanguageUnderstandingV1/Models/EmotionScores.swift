@@ -19,19 +19,29 @@ import Foundation
 /** EmotionScores. */
 public struct EmotionScores: Decodable {
 
-    /// Anger score from 0 to 1. A higher score means that the text is more likely to convey anger.
+    /**
+     Anger score from 0 to 1. A higher score means that the text is more likely to convey anger.
+     */
     public var anger: Double?
 
-    /// Disgust score from 0 to 1. A higher score means that the text is more likely to convey disgust.
+    /**
+     Disgust score from 0 to 1. A higher score means that the text is more likely to convey disgust.
+     */
     public var disgust: Double?
 
-    /// Fear score from 0 to 1. A higher score means that the text is more likely to convey fear.
+    /**
+     Fear score from 0 to 1. A higher score means that the text is more likely to convey fear.
+     */
     public var fear: Double?
 
-    /// Joy score from 0 to 1. A higher score means that the text is more likely to convey joy.
+    /**
+     Joy score from 0 to 1. A higher score means that the text is more likely to convey joy.
+     */
     public var joy: Double?
 
-    /// Sadness score from 0 to 1. A higher score means that the text is more likely to convey sadness.
+    /**
+     Sadness score from 0 to 1. A higher score means that the text is more likely to convey sadness.
+     */
     public var sadness: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.

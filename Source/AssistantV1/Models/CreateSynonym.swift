@@ -19,7 +19,12 @@ import Foundation
 /** CreateSynonym. */
 public struct CreateSynonym: Encodable {
 
-    /// The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+    /**
+     The text of the synonym. This string must conform to the following restrictions:
+     - It cannot contain carriage return, newline, or tab characters.
+     - It cannot consist of only whitespace characters.
+     - It must be no longer than 64 characters.
+     */
     public var synonym: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -30,11 +35,17 @@ public struct CreateSynonym: Encodable {
     /**
      Initialize a `CreateSynonym` with member variables.
 
-     - parameter synonym: The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     - parameter synonym: The text of the synonym. This string must conform to the following restrictions:
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
+       - It must be no longer than 64 characters.
 
      - returns: An initialized `CreateSynonym`.
     */
-    public init(synonym: String) {
+    public init(
+        synonym: String
+    )
+    {
         self.synonym = synonym
     }
 

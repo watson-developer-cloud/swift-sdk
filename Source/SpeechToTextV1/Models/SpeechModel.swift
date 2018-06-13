@@ -19,25 +19,40 @@ import Foundation
 /** SpeechModel. */
 public struct SpeechModel: Decodable {
 
-    /// The name of the model for use as an identifier in calls to the service (for example, `en-US_BroadbandModel`).
+    /**
+     The name of the model for use as an identifier in calls to the service (for example, `en-US_BroadbandModel`).
+     */
     public var name: String
 
-    /// The language identifier of the model (for example, `en-US`).
+    /**
+     The language identifier of the model (for example, `en-US`).
+     */
     public var language: String
 
-    /// The sampling rate (minimum acceptable rate for audio) used by the model in Hertz.
+    /**
+     The sampling rate (minimum acceptable rate for audio) used by the model in Hertz.
+     */
     public var rate: Int
 
-    /// The URI for the model.
+    /**
+     The URI for the model.
+     */
     public var url: String
 
-    /// Describes the additional service features supported with the model.
+    /**
+     Describes the additional service features supported with the model.
+     */
     public var supportedFeatures: SupportedFeatures
 
-    /// Brief description of the model.
+    /**
+     Brief description of the model.
+     */
     public var description: String
 
-    /// The URI for the model for use with the **Create a session** method. This field is returned only by the **Get a model** method.
+    /**
+     The URI for the model for use with the **Create a session** method. This field is returned only by the **Get a
+     model** method.
+     */
     public var sessions: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

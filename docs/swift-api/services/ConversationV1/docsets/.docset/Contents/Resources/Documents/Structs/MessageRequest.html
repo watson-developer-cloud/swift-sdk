@@ -171,9 +171,6 @@
                 <a href="../Structs/IntentExport.html">IntentExport</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:14ConversationV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/LogCollection.html">LogCollection</a>
               </li>
               <li class="nav-group-task">
@@ -374,7 +371,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>State information for the conversation. Continue a conversation by including the context object from the previous response.</p>
+                        <p>State information for the conversation. Continue a conversation by including the context object from the previous
+response.</p>
 
                       </div>
                       <div class="declaration">
@@ -401,7 +399,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Entities to use when evaluating the message. Include entities from the previous response to continue using those entities rather than detecting entities in the new input.</p>
+                        <p>Entities to use when evaluating the message. Include entities from the previous response to continue using those
+entities rather than detecting entities in the new input.</p>
 
                       </div>
                       <div class="declaration">
@@ -428,7 +427,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Intents to use when evaluating the user input. Include intents from the previous response to continue using those intents rather than trying to recognize intents in the new input.</p>
+                        <p>Intents to use when evaluating the user input. Include intents from the previous response to continue using those
+intents rather than trying to recognize intents in the new input.</p>
 
                       </div>
                       <div class="declaration">
@@ -455,7 +455,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>System output. Include the output from the previous response to maintain intermediate information over multiple requests.</p>
+                        <p>System output. Include the output from the previous response to maintain intermediate information over multiple
+requests.</p>
 
                       </div>
                       <div class="declaration">
@@ -489,7 +490,14 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/InputData.html">InputData</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">alternateIntents</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/Context.html">Context</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">entities</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeEntity.html">RuntimeEntity</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">intents</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeIntent.html">RuntimeIntent</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">output</span><span class="p">:</span> <span class="kt"><a href="../Structs/OutputData.html">OutputData</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/InputData.html">InputData</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">alternateIntents</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/Context.html">Context</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">entities</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeEntity.html">RuntimeEntity</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">intents</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeIntent.html">RuntimeIntent</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">output</span><span class="p">:</span> <span class="kt"><a href="../Structs/OutputData.html">OutputData</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -529,7 +537,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>State information for the conversation. Continue a conversation by including the context object from the previous response.</p>
+                                  <p>State information for the conversation. Continue a conversation by including the context object from the previous
+response.</p>
                                 </div>
                               </td>
                             </tr>
@@ -541,7 +550,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Entities to use when evaluating the message. Include entities from the previous response to continue using those entities rather than detecting entities in the new input.</p>
+                                  <p>Entities to use when evaluating the message. Include entities from the previous response to continue using those
+entities rather than detecting entities in the new input.</p>
                                 </div>
                               </td>
                             </tr>
@@ -553,7 +563,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>Intents to use when evaluating the user input. Include intents from the previous response to continue using those intents rather than trying to recognize intents in the new input.</p>
+                                  <p>Intents to use when evaluating the user input. Include intents from the previous response to continue using those
+intents rather than trying to recognize intents in the new input.</p>
                                 </div>
                               </td>
                             </tr>
@@ -565,7 +576,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>System output. Include the output from the previous response to maintain intermediate information over multiple requests.</p>
+                                  <p>System output. Include the output from the previous response to maintain intermediate information over multiple
+requests.</p>
                                 </div>
                               </td>
                             </tr>
@@ -584,7 +596,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

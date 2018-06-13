@@ -19,13 +19,19 @@ import Foundation
 /** Information about what might have caused a failure, such as an image that is too large. Not returned when there is no error. */
 public struct ErrorInfo: Decodable {
 
-    /// HTTP status code.
+    /**
+     HTTP status code.
+     */
     public var code: Int
 
-    /// Human-readable error description. For example, `File size limit exceeded`.
+    /**
+     Human-readable error description. For example, `File size limit exceeded`.
+     */
     public var description: String
 
-    /// Codified error string. For example, `limit_exceeded`.
+    /**
+     Codified error string. For example, `limit_exceeded`.
+     */
     public var errorID: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

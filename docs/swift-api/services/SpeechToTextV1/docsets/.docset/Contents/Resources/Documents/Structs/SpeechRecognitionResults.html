@@ -114,9 +114,6 @@
                 <a href="../Structs/CustomWords.html">CustomWords</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:14SpeechToTextV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/KeywordResult.html">KeywordResult</a>
               </li>
               <li class="nav-group-task">
@@ -224,7 +221,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array that can include interim and final results (interim results are returned only if supported by the method). Final results are guaranteed not to change; interim results might be replaced by further interim results and final results. The service periodically sends updates to the results list; the <code>result_index</code> is set to the lowest index in the array that has changed; it is incremented for new results.</p>
+                        <p>An array that can include interim and final results (interim results are returned only if supported by the method).
+Final results are guaranteed not to change; interim results might be replaced by further interim results and final
+results. The service periodically sends updates to the results list; the <code>result_index</code> is set to the lowest index
+in the array that has changed; it is incremented for new results.</p>
 
                       </div>
                       <div class="declaration">
@@ -251,7 +251,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An index that indicates a change point in the <code><a href="../Structs/SpeechRecognitionResults.html#/s:14SpeechToTextV10A18RecognitionResultsV7resultsSayAA0aE6ResultVGSgvp">results</a></code> array. The service increments the index only for additional results that it sends for new audio for the same request.</p>
+                        <p>An index that indicates a change point in the <code><a href="../Structs/SpeechRecognitionResults.html#/s:14SpeechToTextV10A18RecognitionResultsV7resultsSayAA0aE6ResultVGSgvp">results</a></code> array. The service increments the index only for additional
+results that it sends for new audio for the same request.</p>
 
                       </div>
                       <div class="declaration">
@@ -278,7 +279,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array that identifies which words were spoken by which speakers in a multi-person exchange. Returned in the response only if <code>speaker_labels</code> is <code>true</code>. When interim results are also requested for methods that support them, it is possible for a <code>SpeechRecognitionResults</code> object to include only the <code>speaker_labels</code> field.</p>
+                        <p>An array that identifies which words were spoken by which speakers in a multi-person exchange. Returned in the
+response only if <code>speaker_labels</code> is <code>true</code>. When interim results are also requested for methods that support them,
+it is possible for a <code>SpeechRecognitionResults</code> object to include only the <code>speaker_labels</code> field.</p>
 
                       </div>
                       <div class="declaration">
@@ -305,7 +308,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of warning messages associated with the request: * Warnings for invalid parameters or fields can include a descriptive message and a list of invalid argument strings, for example, <code>&quot;Unknown arguments:&quot;</code> or <code>&quot;Unknown url query arguments:&quot;</code> followed by a list of the form <code>&quot;invalid_arg_1, invalid_arg_2.&quot;</code> * The following warning is returned if the request passes a custom model that is based on an older version of a base model for which an updated version is available: <code>&quot;Using previous version of base model, because your custom model has been built with it. Please note that this version will be supported only for a limited time. Consider updating your custom model to the new base model. If you do not do that you will be automatically switched to base model when you used the non-updated custom model.&quot;</code>  In both cases, the request succeeds despite the warnings.</p>
+                        <p>An array of warning messages associated with the request:</p>
+
+<ul>
+<li>Warnings for invalid parameters or fields can include a descriptive message and a list of invalid argument
+strings, for example, <code>&quot;Unknown arguments:&quot;</code> or <code>&quot;Unknown url query arguments:&quot;</code> followed by a list of the form
+<code>&quot;invalid_arg_1, invalid_arg_2.&quot;</code></li>
+<li>The following warning is returned if the request passes a custom model that is based on an older version of a
+base model for which an updated version is available: <code>&quot;Using previous version of base model, because your custom
+model has been built with it. Please note that this version will be supported only for a limited time. Consider
+updating your custom model to the new base model. If you do not do that you will be automatically switched to base
+model when you used the non-updated custom model.&quot;</code>
+In both cases, the request succeeds despite the warnings.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -324,7 +339,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -19,10 +19,14 @@ import Foundation
 /** TargetedSentimentResults. */
 public struct TargetedSentimentResults: Decodable {
 
-    /// Targeted text.
+    /**
+     Targeted text.
+     */
     public var text: String?
 
-    /// Sentiment score from -1 (negative) to 1 (positive).
+    /**
+     Sentiment score from -1 (negative) to 1 (positive).
+     */
     public var score: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.

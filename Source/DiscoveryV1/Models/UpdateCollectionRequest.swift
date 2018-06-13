@@ -19,13 +19,19 @@ import Foundation
 /** UpdateCollectionRequest. */
 internal struct UpdateCollectionRequest: Encodable {
 
-    /// The name of the collection.
+    /**
+     The name of the collection.
+     */
     public var name: String
 
-    /// A description of the collection.
+    /**
+     A description of the collection.
+     */
     public var description: String?
 
-    /// The ID of the configuration in which the collection is to be updated.
+    /**
+     The ID of the configuration in which the collection is to be updated.
+     */
     public var configurationID: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -44,7 +50,12 @@ internal struct UpdateCollectionRequest: Encodable {
 
      - returns: An initialized `UpdateCollectionRequest`.
     */
-    public init(name: String, description: String? = nil, configurationID: String? = nil) {
+    public init(
+        name: String,
+        description: String? = nil,
+        configurationID: String? = nil
+    )
+    {
         self.name = name
         self.description = description
         self.configurationID = configurationID

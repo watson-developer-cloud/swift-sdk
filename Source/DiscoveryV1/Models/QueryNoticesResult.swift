@@ -19,7 +19,9 @@ import Foundation
 /** QueryNoticesResult. */
 public struct QueryNoticesResult: Decodable {
 
-    /// The type of the original source file.
+    /**
+     The type of the original source file.
+     */
     public enum FileType: String {
         case pdf = "pdf"
         case html = "html"
@@ -27,34 +29,55 @@ public struct QueryNoticesResult: Decodable {
         case json = "json"
     }
 
-    /// The unique identifier of the document.
+    /**
+     The unique identifier of the document.
+     */
     public var id: String?
 
-    /// *Deprecated* This field is now part of the `result_metadata` object.
+    /**
+     *Deprecated* This field is now part of the `result_metadata` object.
+     */
     public var score: Double?
 
-    /// Metadata of the document.
+    /**
+     Metadata of the document.
+     */
     public var metadata: [String: JSON]?
 
-    /// The collection ID of the collection containing the document for this result.
+    /**
+     The collection ID of the collection containing the document for this result.
+     */
     public var collectionID: String?
 
-    /// Metadata of the query result.
+    /**
+     Metadata of the query result.
+     */
     public var resultMetadata: QueryResultMetadata?
 
-    /// The internal status code returned by the ingestion subsystem indicating the overall result of ingesting the source document.
+    /**
+     The internal status code returned by the ingestion subsystem indicating the overall result of ingesting the source
+     document.
+     */
     public var code: Int?
 
-    /// Name of the original source file (if available).
+    /**
+     Name of the original source file (if available).
+     */
     public var filename: String?
 
-    /// The type of the original source file.
+    /**
+     The type of the original source file.
+     */
     public var fileType: String?
 
-    /// The SHA-1 hash of the original source file (formatted as a hexadecimal string).
+    /**
+     The SHA-1 hash of the original source file (formatted as a hexadecimal string).
+     */
     public var sha1: String?
 
-    /// Array of notices for the document.
+    /**
+     Array of notices for the document.
+     */
     public var notices: [Notice]?
 
     /// Additional properties associated with this model.

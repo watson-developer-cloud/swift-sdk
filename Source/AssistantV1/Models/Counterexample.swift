@@ -19,13 +19,19 @@ import Foundation
 /** Counterexample. */
 public struct Counterexample: Decodable {
 
-    /// The text of the counterexample.
+    /**
+     The text of the counterexample.
+     */
     public var text: String
 
-    /// The timestamp for creation of the counterexample.
+    /**
+     The timestamp for creation of the counterexample.
+     */
     public var created: String?
 
-    /// The timestamp for the last update to the counterexample.
+    /**
+     The timestamp for the last update to the counterexample.
+     */
     public var updated: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

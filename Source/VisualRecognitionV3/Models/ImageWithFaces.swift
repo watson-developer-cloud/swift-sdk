@@ -19,19 +19,30 @@ import Foundation
 /** Information about faces in the image. */
 public struct ImageWithFaces: Decodable {
 
-    /// Faces detected in the images.
+    /**
+     Faces detected in the images.
+     */
     public var faces: [Face]
 
-    /// Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.
+    /**
+     Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.
+     */
     public var image: String?
 
-    /// Source of the image before any redirects. Not returned when the image is uploaded.
+    /**
+     Source of the image before any redirects. Not returned when the image is uploaded.
+     */
     public var sourceUrl: String?
 
-    /// Fully resolved URL of the image after redirects are followed. Not returned when the image is uploaded.
+    /**
+     Fully resolved URL of the image after redirects are followed. Not returned when the image is uploaded.
+     */
     public var resolvedUrl: String?
 
-    /// Information about what might have caused a failure, such as an image that is too large. Not returned when there is no error.
+    /**
+     Information about what might have caused a failure, such as an image that is too large. Not returned when there is
+     no error.
+     */
     public var error: ErrorInfo?
 
     // Map each property name to the key that shall be used for encoding/decoding.

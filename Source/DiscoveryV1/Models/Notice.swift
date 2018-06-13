@@ -19,31 +19,48 @@ import Foundation
 /** A notice produced for the collection. */
 public struct Notice: Decodable {
 
-    /// Severity level of the notice.
+    /**
+     Severity level of the notice.
+     */
     public enum Severity: String {
         case warning = "warning"
         case error = "error"
     }
 
-    /// Identifies the notice. Many notices might have the same ID. This field exists so that user applications can programmatically identify a notice and take automatic corrective action.
+    /**
+     Identifies the notice. Many notices might have the same ID. This field exists so that user applications can
+     programmatically identify a notice and take automatic corrective action.
+     */
     public var noticeID: String?
 
-    /// The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+    /**
+     The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     */
     public var created: String?
 
-    /// Unique identifier of the document.
+    /**
+     Unique identifier of the document.
+     */
     public var documentID: String?
 
-    /// Unique identifier of the query used for relevance training.
+    /**
+     Unique identifier of the query used for relevance training.
+     */
     public var queryID: String?
 
-    /// Severity level of the notice.
+    /**
+     Severity level of the notice.
+     */
     public var severity: String?
 
-    /// Ingestion or training step in which the notice occurred.
+    /**
+     Ingestion or training step in which the notice occurred.
+     */
     public var step: String?
 
-    /// The description of the notice.
+    /**
+     The description of the notice.
+     */
     public var description: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

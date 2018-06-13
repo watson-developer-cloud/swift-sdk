@@ -19,10 +19,14 @@ import Foundation
 /** An array of dialog nodes. */
 public struct DialogNodeCollection: Decodable {
 
-    /// An array of objects describing the dialog nodes defined for the workspace.
+    /**
+     An array of objects describing the dialog nodes defined for the workspace.
+     */
     public var dialogNodes: [DialogNode]
 
-    /// The pagination data for the returned objects.
+    /**
+     The pagination data for the returned objects.
+     */
     public var pagination: Pagination
 
     // Map each property name to the key that shall be used for encoding/decoding.

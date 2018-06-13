@@ -72,9 +72,6 @@
                 <a href="../Structs/ContentItem/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:21PersonalityInsightsV311JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Profile.html">Profile</a>
               </li>
               <li class="nav-group-task">
@@ -125,7 +122,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.</p>
+                        <p>The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
+analyzed; plain text is processed as submitted.</p>
 
                         <a href="../Structs/ContentItem/Contenttype.html" class="slightly-smaller">See more</a>
                       </div>
@@ -153,7 +151,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is <code>en</code> (English). Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. A language specified with the <strong>Content-Type</strong> parameter overrides the value of this parameter; any content items that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.</p>
+                        <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is <code>en</code>
+(English). Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. A
+language specified with the <strong>Content-Type</strong> parameter overrides the value of this parameter; any content items
+that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter to base the language on the most
+prevalent specification among the content items; again, content items that specify a different language are
+ignored. You can specify any combination of languages for the input and response content.</p>
 
                         <a href="../Structs/ContentItem/Language.html" class="slightly-smaller">See more</a>
                       </div>
@@ -181,7 +184,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The content that is to be analyzed. The service supports up to 20 MB of content for all <code>ContentItem</code> objects combined.</p>
+                        <p>The content that is to be analyzed. The service supports up to 20 MB of content for all <code>ContentItem</code> objects
+combined.</p>
 
                       </div>
                       <div class="declaration">
@@ -235,7 +239,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
+                        <p>A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch
+(January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
 
                       </div>
                       <div class="declaration">
@@ -262,7 +267,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
+                        <p>A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX
+Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
 
                       </div>
                       <div class="declaration">
@@ -289,7 +295,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.</p>
+                        <p>The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
+analyzed; plain text is processed as submitted.</p>
 
                       </div>
                       <div class="declaration">
@@ -316,7 +323,12 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is <code>en</code> (English). Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. A language specified with the <strong>Content-Type</strong> parameter overrides the value of this parameter; any content items that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.</p>
+                        <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is <code>en</code>
+(English). Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. A
+language specified with the <strong>Content-Type</strong> parameter overrides the value of this parameter; any content items
+that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter to base the language on the most
+prevalent specification among the content items; again, content items that specify a different language are
+ignored. You can specify any combination of languages for the input and response content.</p>
 
                       </div>
                       <div class="declaration">
@@ -343,7 +355,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.</p>
+                        <p>The unique ID of the parent content item for this item. Used to identify hierarchical relationships between
+posts/replies, messages/replies, and so on.</p>
 
                       </div>
                       <div class="declaration">
@@ -431,7 +444,17 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">content</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">created</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">updated</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">contenttype</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">parentid</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">reply</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">forward</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">content</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">created</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">updated</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contenttype</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">parentid</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">reply</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">forward</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -447,7 +470,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The content that is to be analyzed. The service supports up to 20 MB of content for all <code>ContentItem</code> objects combined.</p>
+                                  <p>The content that is to be analyzed. The service supports up to 20 MB of content for all <code>ContentItem</code> objects
+combined.</p>
                                 </div>
                               </td>
                             </tr>
@@ -471,7 +495,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
+                                  <p>A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch
+(January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
                                 </div>
                               </td>
                             </tr>
@@ -483,7 +508,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
+                                  <p>A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX
+Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
                                 </div>
                               </td>
                             </tr>
@@ -495,7 +521,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.</p>
+                                  <p>The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
+analyzed; plain text is processed as submitted.</p>
                                 </div>
                               </td>
                             </tr>
@@ -507,7 +534,12 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is <code>en</code> (English). Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. A language specified with the <strong>Content-Type</strong> parameter overrides the value of this parameter; any content items that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.</p>
+                                  <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is
+<code>en</code> (English). Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as
+<code>en</code>. A language specified with the <strong>Content-Type</strong> parameter overrides the value of this parameter; any content
+items that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter to base the language on
+the most prevalent specification among the content items; again, content items that specify a different language
+are ignored. You can specify any combination of languages for the input and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -519,7 +551,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.</p>
+                                  <p>The unique ID of the parent content item for this item. Used to identify hierarchical relationships between
+posts/replies, messages/replies, and so on.</p>
                                 </div>
                               </td>
                             </tr>
@@ -562,7 +595,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

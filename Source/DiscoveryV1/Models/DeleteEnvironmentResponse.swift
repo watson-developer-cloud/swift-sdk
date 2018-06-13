@@ -19,15 +19,21 @@ import Foundation
 /** DeleteEnvironmentResponse. */
 public struct DeleteEnvironmentResponse: Decodable {
 
-    /// Status of the environment.
+    /**
+     Status of the environment.
+     */
     public enum Status: String {
         case deleted = "deleted"
     }
 
-    /// The unique identifier for the environment.
+    /**
+     The unique identifier for the environment.
+     */
     public var environmentID: String
 
-    /// Status of the environment.
+    /**
+     Status of the environment.
+     */
     public var status: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

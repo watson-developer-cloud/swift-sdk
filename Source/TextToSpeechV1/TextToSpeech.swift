@@ -189,8 +189,8 @@ public class TextToSpeech {
 
      - parameter voice: The voice for which information is to be returned.
      - parameter customizationID: The customization ID (GUID) of a custom voice model for which information is to be returned. You must make the
-     request with service credentials created for the instance of the service that owns the custom model. Omit the
-     parameter to see information about the specified voice with no customization.
+       request with service credentials created for the instance of the service that owns the custom model. Omit the
+       parameter to see information about the specified voice with no customization.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -247,22 +247,23 @@ public class TextToSpeech {
      maximum of 5 KB of text.  Use the `Accept` header or the `accept` query parameter to specify the requested format
      (MIME type) of the response audio. By default, the service uses `audio/ogg;codecs=opus`. For detailed information
      about the supported audio formats and sampling rates, see [Specifying an audio
-     format](https://console.bluemix.net/docs/services/text-to-speech/http.html#format). Specify a value of
-     `application/json` for the `Content-Type` header.   If a request includes invalid query parameters, the service
-     returns a `Warnings` response header that provides messages about the invalid parameters. The warning includes a
-     descriptive message and a list of invalid argument strings. For example, a message such as `\"Unknown arguments:\"`
-     or `\"Unknown url query arguments:\"` followed by a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The
-     request succeeds despite the warnings.
+     format](https://console.bluemix.net/docs/services/text-to-speech/http.html#format).
+     If a request includes invalid query parameters, the service returns a `Warnings` response header that provides
+     messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument
+     strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by
+     a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the warnings.
 
      - parameter text: The text to synthesize.
-     - parameter accept: The type of the response: audio/basic, audio/flac, audio/l16;rate=nnnn, audio/ogg, audio/ogg;codecs=opus,
-     audio/ogg;codecs=vorbis, audio/mp3, audio/mpeg, audio/mulaw;rate=nnnn, audio/wav, audio/webm,
-     audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
+     - parameter accept: The requested audio format (MIME type) of the audio. You can use the `Accept` header or the `accept` query
+       parameter to specify the audio format. (For the `audio/l16` format, you can optionally specify
+       `endianness=big-endian` or `endianness=little-endian`; the default is little endian.) For detailed information
+       about the supported audio formats and sampling rates, see [Specifying an audio
+       format](https://console.bluemix.net/docs/services/text-to-speech/http.html#format).
      - parameter voice: The voice to use for synthesis.
-     - parameter customizationID: The customization ID (GUID) of a custom voice model to use for the synthesis. If a custom voice model is specified,
-     it is guaranteed to work only if it matches the language of the indicated voice. You must make the request with
-     service credentials created for the instance of the service that owns the custom model. Omit the parameter to use
-     the specified voice with no customization.
+     - parameter customizationID: The customization ID (GUID) of a custom voice model to use for the synthesis. If a custom voice model is
+       specified, it is guaranteed to work only if it matches the language of the indicated voice. You must make the
+       request with service credentials created for the instance of the service that owns the custom model. Omit the
+       parameter to use the specified voice with no customization.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -359,19 +360,19 @@ public class TextToSpeech {
 
      Gets the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format.
      You can also request the pronunciation for a specific voice to see the default translation for the language of that
-     voice or for a specific custom voice model to see the translation for that voice model.  **Note:** This method is
-     currently a beta release.
+     voice or for a specific custom voice model to see the translation for that voice model.
+     **Note:** This method is currently a beta release.
 
      - parameter text: The word for which the pronunciation is requested.
-     - parameter voice: A voice that specifies the language in which the pronunciation is to be returned. All voices for the same language
-     (for example, `en-US`) return the same translation.
+     - parameter voice: A voice that specifies the language in which the pronunciation is to be returned. All voices for the same
+       language (for example, `en-US`) return the same translation.
      - parameter format: The phoneme format in which to return the pronunciation. Omit the parameter to obtain the pronunciation in the
-     default format.
-     - parameter customizationID: The customization ID (GUID) of a custom voice model for which the pronunciation is to be returned. The language of
-     a specified custom model must match the language of the specified voice. If the word is not defined in the
-     specified custom model, the service returns the default translation for the custom model's language. You must make
-     the request with service credentials created for the instance of the service that owns the custom model. Omit the
-     parameter to see the translation for the specified voice with no customization.
+       default format.
+     - parameter customizationID: The customization ID (GUID) of a custom voice model for which the pronunciation is to be returned. The language
+       of a specified custom model must match the language of the specified voice. If the word is not defined in the
+       specified custom model, the service returns the default translation for the custom model's language. You must
+       make the request with service credentials created for the instance of the service that owns the custom model.
+       Omit the parameter to see the translation for the specified voice with no customization.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -431,8 +432,8 @@ public class TextToSpeech {
      Create a custom model.
 
      Creates a new empty custom voice model. You must specify a name for the new custom model. You can optionally
-     specify the language and a description for the new model. Specify a value of `application/json` for the
-     `Content-Type` header. The model is owned by the instance of the service whose credentials are used to create it.
+     specify the language and a description for the new model. The model is owned by the instance of the service whose
+     credentials are used to create it.
      **Note:** This method is currently a beta release.
 
      - parameter name: The name of the new custom voice model.
@@ -490,11 +491,11 @@ public class TextToSpeech {
      Lists metadata such as the name and description for all custom voice models that are owned by an instance of the
      service. Specify a language to list the voice models for that language only. To see the words in addition to the
      metadata for a specific voice model, use the **List a custom model** method. You must use credentials for the
-     instance of the service that owns a model to list information about it.  **Note:** This method is currently a beta
-     release.
+     instance of the service that owns a model to list information about it.
+     **Note:** This method is currently a beta release.
 
-     - parameter language: The language for which custom voice models that are owned by the requesting service credentials are to be returned.
-     Omit the parameter to see all custom voice models that are owned by the requester.
+     - parameter language: The language for which custom voice models that are owned by the requesting service credentials are to be
+       returned. Omit the parameter to see all custom voice models that are owned by the requester.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -544,16 +545,16 @@ public class TextToSpeech {
      Updates information for the specified custom voice model. You can update metadata such as the name and description
      of the voice model. You can also update the words in the model and their translations. Adding a new translation for
      a word that already exists in a custom model overwrites the word's existing translation. A custom model can contain
-     no more than 20,000 entries. Specify a value of `application/json` for the `Content-Type` header. You must use
-     credentials for the instance of the service that owns a model to update it.  **Note:** This method is currently a
-     beta release.
+     no more than 20,000 entries. You must use credentials for the instance of the service that owns a model to update
+     it.
+     **Note:** This method is currently a beta release.
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-     for the instance of the service that owns the custom model.
+       for the instance of the service that owns the custom model.
      - parameter name: A new name for the custom voice model.
      - parameter description: A new description for the custom voice model.
      - parameter words: An array of `Word` objects that provides the words and their translations that are to be added or updated for the
-     custom voice model. Pass an empty array to make no additions or updates.
+       custom voice model. Pass an empty array to make no additions or updates.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -611,11 +612,11 @@ public class TextToSpeech {
 
      Gets all information about a specified custom voice model. In addition to metadata such as the name and description
      of the voice model, the output includes the words and their translations as defined in the model. To see just the
-     metadata for a voice model, use the **List custom models** method.   **Note:** This method is currently a beta
-     release.
+     metadata for a voice model, use the **List custom models** method.
+     **Note:** This method is currently a beta release.
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-     for the instance of the service that owns the custom model.
+       for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -660,10 +661,11 @@ public class TextToSpeech {
      Delete a custom model.
 
      Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
-     model to delete it.  **Note:** This method is currently a beta release.
+     model to delete it.
+     **Note:** This method is currently a beta release.
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-     for the instance of the service that owns the custom model.
+       for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -708,17 +710,17 @@ public class TextToSpeech {
 
      Adds one or more words and their translations to the specified custom voice model. Adding a new translation for a
      word that already exists in a custom model overwrites the word's existing translation. A custom model can contain
-     no more than 20,000 entries. Specify a value of `application/json` for the `Content-Type` header. You must use
-     credentials for the instance of the service that owns a model to add words to it.   **Note:** This method is
-     currently a beta release.
+     no more than 20,000 entries. You must use credentials for the instance of the service that owns a model to add
+     words to it.
+     **Note:** This method is currently a beta release.
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-     for the instance of the service that owns the custom model.
-     - parameter words: The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be added
-     or updated for the custom voice model and the word's translation.   The **List custom words** method returns an
-     array of `Word` objects. Each object shows a word and its translation from the custom voice model. The words are
-     listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the
-     custom model contains no words.
+       for the instance of the service that owns the custom model.
+     - parameter words: The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be
+       added or updated for the custom voice model and the word's translation.
+       The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation
+       from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before
+       lowercase letters. The array is empty if the custom model contains no words.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -774,10 +776,11 @@ public class TextToSpeech {
 
      Lists all of the words and their translations for the specified custom voice model. The output shows the
      translations as they are defined in the model. You must use credentials for the instance of the service that owns a
-     model to list its words.  **Note:** This method is currently a beta release.
+     model to list its words.
+     **Note:** This method is currently a beta release.
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-     for the instance of the service that owns the custom model.
+       for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -823,20 +826,21 @@ public class TextToSpeech {
 
      Adds a single word and its translation to the specified custom voice model. Adding a new translation for a word
      that already exists in a custom model overwrites the word's existing translation. A custom model can contain no
-     more than 20,000 entries. Specify a value of `application/json` for the `Content-Type` header. You must use
-     credentials for the instance of the service that owns a model to add a word to it.   **Note:** This method is
-     currently a beta release.
+     more than 20,000 entries. You must use credentials for the instance of the service that owns a model to add a word
+     to it.
+     **Note:** This method is currently a beta release.
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-     for the instance of the service that owns the custom model.
+       for the instance of the service that owns the custom model.
      - parameter word: The word that is to be added or updated for the custom voice model.
      - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
-     representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A sounds-like
-     is one or more words that, when combined, sound like the word.
+       representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A
+       sounds-like is one or more words that, when combined, sound like the word.
      - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
-     for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
-     create multiple entries with different parts of speech for the same word. For more information, see [Working with
-     Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+       for the word. You can create only a single entry, with or without a single part of speech, for any word; you
+       cannot create multiple entries with different parts of speech for the same word. For more information, see
+       [Working with Japanese
+       entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -893,10 +897,10 @@ public class TextToSpeech {
 
      Gets the translation for a single word from the specified custom model. The output shows the translation as it is
      defined in the model. You must use credentials for the instance of the service that owns a model to list its words.
-       **Note:** This method is currently a beta release.
+     **Note:** This method is currently a beta release.
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-     for the instance of the service that owns the custom model.
+       for the instance of the service that owns the custom model.
      - parameter word: The word that is to be queried from the custom voice model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -943,10 +947,11 @@ public class TextToSpeech {
      Delete a custom word.
 
      Deletes a single word from the specified custom voice model. You must use credentials for the instance of the
-     service that owns a model to delete its words.   **Note:** This method is currently a beta release.
+     service that owns a model to delete its words.
+     **Note:** This method is currently a beta release.
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-     for the instance of the service that owns the custom model.
+       for the instance of the service that owns the custom model.
      - parameter word: The word that is to be deleted from the custom voice model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -994,9 +999,10 @@ public class TextToSpeech {
      Deletes all data that is associated with a specified customer ID. The method deletes all data for the customer ID,
      regardless of the method by which the information was added. The method has no effect if no data is associated with
      the customer ID. You must issue the request with credentials for the same instance of the service that was used to
-     associate the customer ID with the data.   You associate a customer ID with data by passing the `X-Watson-Metadata`
-     header with a request that passes the data. For more information about customer IDs and about using this method,
-     see [Information security](https://console.bluemix.net/docs/services/text-to-speech/information-security.html).
+     associate the customer ID with the data.
+     You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes the
+     data. For more information about customer IDs and about using this method, see [Information
+     security](https://console.bluemix.net/docs/services/text-to-speech/information-security.html).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

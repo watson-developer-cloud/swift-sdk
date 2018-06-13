@@ -19,7 +19,9 @@ import Foundation
 /** Request payload to classify. */
 public struct ClassifyInput: Encodable {
 
-    /// The submitted phrase.
+    /**
+     The submitted phrase.
+     */
     public var text: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -34,7 +36,10 @@ public struct ClassifyInput: Encodable {
 
      - returns: An initialized `ClassifyInput`.
     */
-    public init(text: String) {
+    public init(
+        text: String
+    )
+    {
         self.text = text
     }
 

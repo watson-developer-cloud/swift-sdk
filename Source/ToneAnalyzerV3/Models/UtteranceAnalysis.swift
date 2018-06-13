@@ -19,16 +19,28 @@ import Foundation
 /** UtteranceAnalysis. */
 public struct UtteranceAnalysis: Decodable {
 
-    /// The unique identifier of the utterance. The first utterance has ID 0, and the ID of each subsequent utterance is incremented by one.
+    /**
+     The unique identifier of the utterance. The first utterance has ID 0, and the ID of each subsequent utterance is
+     incremented by one.
+     */
     public var utteranceID: Int
 
-    /// The text of the utterance.
+    /**
+     The text of the utterance.
+     */
     public var utteranceText: String
 
-    /// An array of `ToneChatScore` objects that provides results for the most prevalent tones of the utterance. The array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that meets this threshold.
+    /**
+     An array of `ToneChatScore` objects that provides results for the most prevalent tones of the utterance. The array
+     includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that meets
+     this threshold.
+     */
     public var tones: [ToneChatScore]
 
-    /// **`2017-09-21`:** An error message if the utterance contains more than 500 characters. The service does not analyze the utterance. **`2016-05-19`:** Not returned.
+    /**
+     **`2017-09-21`:** An error message if the utterance contains more than 500 characters. The service does not analyze
+     the utterance. **`2016-05-19`:** Not returned.
+     */
     public var error: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

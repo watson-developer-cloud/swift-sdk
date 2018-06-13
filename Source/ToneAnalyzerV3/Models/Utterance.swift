@@ -19,10 +19,15 @@ import Foundation
 /** Utterance. */
 public struct Utterance: Encodable {
 
-    /// An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple sentences.
+    /**
+     An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple
+     sentences.
+     */
     public var text: String
 
-    /// A string that identifies the user who contributed the utterance specified by the `text` parameter.
+    /**
+     A string that identifies the user who contributed the utterance specified by the `text` parameter.
+     */
     public var user: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -34,12 +39,17 @@ public struct Utterance: Encodable {
     /**
      Initialize a `Utterance` with member variables.
 
-     - parameter text: An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple sentences.
+     - parameter text: An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple
+       sentences.
      - parameter user: A string that identifies the user who contributed the utterance specified by the `text` parameter.
 
      - returns: An initialized `Utterance`.
     */
-    public init(text: String, user: String? = nil) {
+    public init(
+        text: String,
+        user: String? = nil
+    )
+    {
         self.text = text
         self.user = user
     }

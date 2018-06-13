@@ -19,19 +19,29 @@ import Foundation
 /** Description of evidence location supporting Knoweldge Graph query result. */
 public struct QueryEvidence: Decodable {
 
-    /// The docuemnt ID (as indexed in Discovery) of the evidence location.
+    /**
+     The docuemnt ID (as indexed in Discovery) of the evidence location.
+     */
     public var documentID: String?
 
-    /// The field of the document where the supporting evidence was identified.
+    /**
+     The field of the document where the supporting evidence was identified.
+     */
     public var field: String?
 
-    /// The start location of the evidence in the identified field. This value is inclusive.
+    /**
+     The start location of the evidence in the identified field. This value is inclusive.
+     */
     public var startOffset: Int?
 
-    /// The end location of the evidence in the identified field. This value is inclusive.
+    /**
+     The end location of the evidence in the identified field. This value is inclusive.
+     */
     public var endOffset: Int?
 
-    /// An array of entity objects that show evidence of the result.
+    /**
+     An array of entity objects that show evidence of the result.
+     */
     public var entities: [QueryEvidenceEntity]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

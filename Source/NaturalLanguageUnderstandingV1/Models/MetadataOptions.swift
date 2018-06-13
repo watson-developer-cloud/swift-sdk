@@ -27,7 +27,10 @@ public struct MetadataOptions: Encodable {
 
      - returns: An initialized `MetadataOptions`.
     */
-    public init(additionalProperties: [String: JSON] = [:]) {
+    public init(
+        additionalProperties: [String: JSON] = [:]
+    )
+    {
         self.additionalProperties = additionalProperties
     }
 

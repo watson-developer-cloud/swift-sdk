@@ -19,31 +19,47 @@ import Foundation
 /** Value. */
 public struct Value: Decodable {
 
-    /// Specifies the type of value.
+    /**
+     Specifies the type of value.
+     */
     public enum ValueType: String {
         case synonyms = "synonyms"
         case patterns = "patterns"
     }
 
-    /// The text of the entity value.
+    /**
+     The text of the entity value.
+     */
     public var valueText: String
 
-    /// Any metadata related to the entity value.
+    /**
+     Any metadata related to the entity value.
+     */
     public var metadata: [String: JSON]?
 
-    /// The timestamp for creation of the entity value.
+    /**
+     The timestamp for creation of the entity value.
+     */
     public var created: String?
 
-    /// The timestamp for the last update to the entity value.
+    /**
+     The timestamp for the last update to the entity value.
+     */
     public var updated: String?
 
-    /// An array containing any synonyms for the entity value.
+    /**
+     An array containing any synonyms for the entity value.
+     */
     public var synonyms: [String]?
 
-    /// An array containing any patterns for the entity value.
+    /**
+     An array containing any patterns for the entity value.
+     */
     public var patterns: [String]?
 
-    /// Specifies the type of value.
+    /**
+     Specifies the type of value.
+     */
     public var valueType: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

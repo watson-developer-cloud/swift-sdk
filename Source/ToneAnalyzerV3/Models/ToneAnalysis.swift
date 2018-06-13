@@ -19,10 +19,16 @@ import Foundation
 /** ToneAnalysis. */
 public struct ToneAnalysis: Decodable {
 
-    /// An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
+    /**
+     An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
+     */
     public var documentTone: DocumentAnalysis
 
-    /// An array of `SentenceAnalysis` objects that provides the results of the analysis for the individual sentences of the input content. The service returns results only for the first 100 sentences of the input. The field is omitted if the `sentences` parameter of the request is set to `false`.
+    /**
+     An array of `SentenceAnalysis` objects that provides the results of the analysis for the individual sentences of
+     the input content. The service returns results only for the first 100 sentences of the input. The field is omitted
+     if the `sentences` parameter of the request is set to `false`.
+     */
     public var sentencesTone: [SentenceAnalysis]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

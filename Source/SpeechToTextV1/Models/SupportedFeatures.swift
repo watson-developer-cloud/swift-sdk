@@ -19,10 +19,15 @@ import Foundation
 /** SupportedFeatures. */
 public struct SupportedFeatures: Decodable {
 
-    /// Indicates whether the customization interface can be used to create a custom language model based on the language model.
+    /**
+     Indicates whether the customization interface can be used to create a custom language model based on the language
+     model.
+     */
     public var customLanguageModel: Bool
 
-    /// Indicates whether the `speaker_labels` parameter can be used with the language model.
+    /**
+     Indicates whether the `speaker_labels` parameter can be used with the language model.
+     */
     public var speakerLabels: Bool
 
     // Map each property name to the key that shall be used for encoding/decoding.

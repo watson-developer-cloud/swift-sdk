@@ -19,7 +19,9 @@ import Foundation
 /** Metadata of a query result. */
 public struct QueryResultMetadata: Decodable {
 
-    /// The confidence score of the result's analysis. A higher score indicating greater confidence.
+    /**
+     The confidence score of the result's analysis. A higher score indicating greater confidence.
+     */
     public var score: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.

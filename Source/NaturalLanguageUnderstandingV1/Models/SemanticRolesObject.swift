@@ -19,7 +19,9 @@ import Foundation
 /** SemanticRolesObject. */
 public struct SemanticRolesObject: Decodable {
 
-    /// Object text.
+    /**
+     Object text.
+     */
     public var text: String?
 
     public var keywords: [SemanticRolesKeyword]?

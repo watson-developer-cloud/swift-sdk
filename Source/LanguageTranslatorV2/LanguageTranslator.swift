@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- IBM Watson Language Translator translates text from one language to another. The service offers multiple
+ IBM Watson&trade; Language Translator translates text from one language to another. The service offers multiple
  domain-specific models that you can customize based on your unique terminology and language. Use Language Translator to
  take news from across the globe and present it in your language, communicate with your customers in their own language,
  and more.
@@ -255,8 +255,8 @@ public class LanguageTranslator {
      - parameter source: Specify a language code to filter results by source language.
      - parameter target: Specify a language code to filter results by target language.
      - parameter defaultModels: If the default parameter isn't specified, the service will return all models (default and non-default) for each
-     language pair. To return only default models, set this to `true`. To return only non-default models, set this to
-     `false`.
+       language pair. To return only default models, set this to `true`. To return only non-default models, set this to
+       `false`.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -313,17 +313,18 @@ public class LanguageTranslator {
     /**
      Create model.
 
-     Uploads a TMX glossary file on top of a domain to customize a translation model.  Depending on the size of the
-     file, training can range from minutes for a glossary to several hours for a large parallel corpus. Glossary files
-     must be less than 10 MB. The cumulative file size of all uploaded glossary and corpus files is limited to 250 MB.
+     Uploads a TMX glossary file on top of a domain to customize a translation model.
+     Depending on the size of the file, training can range from minutes for a glossary to several hours for a large
+     parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded glossary and
+     corpus files is limited to 250 MB.
 
      - parameter baseModelID: The model ID of the model to use as the base for customization. To see available models, use the `List models`
-     method.
+       method.
      - parameter name: An optional model name that you can use to identify the model. Valid characters are letters, numbers, dashes,
-     underscores, spaces and apostrophes. The maximum length is 32 characters.
+       underscores, spaces and apostrophes. The maximum length is 32 characters.
      - parameter forcedGlossary: A TMX file with your customizations. The customizations in the file completely overwrite the domain translaton
-     data, including high frequency or high confidence phrase translations. You can upload only one glossary with a file
-     size less than 10 MB per call.
+       data, including high frequency or high confidence phrase translations. You can upload only one glossary with a
+       file size less than 10 MB per call.
      - parameter parallelCorpus: A TMX file that contains entries that are treated as a parallel corpus instead of a glossary.
      - parameter monolingualCorpus: A UTF-8 encoded plain text file that is used to customize the target language model.
      - parameter headers: A dictionary of request headers to be sent with this request.

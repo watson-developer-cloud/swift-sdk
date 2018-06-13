@@ -19,10 +19,14 @@ import Foundation
 /** An option specifying if sentiment of detected entities, keywords, or phrases should be returned. */
 public struct SentimentOptions: Encodable {
 
-    /// Set this to false to hide document-level sentiment results.
+    /**
+     Set this to false to hide document-level sentiment results.
+     */
     public var document: Bool?
 
-    /// Sentiment results will be returned for each target string that is found in the document.
+    /**
+     Sentiment results will be returned for each target string that is found in the document.
+     */
     public var targets: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -39,7 +43,11 @@ public struct SentimentOptions: Encodable {
 
      - returns: An initialized `SentimentOptions`.
     */
-    public init(document: Bool? = nil, targets: [String]? = nil) {
+    public init(
+        document: Bool? = nil,
+        targets: [String]? = nil
+    )
+    {
         self.document = document
         self.targets = targets
     }

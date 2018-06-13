@@ -19,18 +19,26 @@ import Foundation
 /** TopHits. */
 public struct TopHits: Decodable {
 
-    /// The type of aggregation command used. For example: term, filter, max, min, etc.
+    /**
+     The type of aggregation command used. For example: term, filter, max, min, etc.
+     */
     public var type: String?
 
     public var results: [AggregationResult]?
 
-    /// Number of matching results.
+    /**
+     Number of matching results.
+     */
     public var matchingResults: Int?
 
-    /// Aggregations returned by the Discovery service.
+    /**
+     Aggregations returned by the Discovery service.
+     */
     public var aggregations: [QueryAggregation]?
 
-    /// Number of top hits returned by the aggregation.
+    /**
+     Number of top hits returned by the aggregation.
+     */
     public var size: Int?
 
     public var hits: TopHitsResults?

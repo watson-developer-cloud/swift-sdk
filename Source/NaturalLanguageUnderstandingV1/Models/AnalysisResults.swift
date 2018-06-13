@@ -19,43 +19,69 @@ import Foundation
 /** Results of the analysis, organized by feature. */
 public struct AnalysisResults: Decodable {
 
-    /// Language used to analyze the text.
+    /**
+     Language used to analyze the text.
+     */
     public var language: String?
 
-    /// Text that was used in the analysis.
+    /**
+     Text that was used in the analysis.
+     */
     public var analyzedText: String?
 
-    /// URL that was used to retrieve HTML content.
+    /**
+     URL that was used to retrieve HTML content.
+     */
     public var retrievedUrl: String?
 
-    /// API usage information for the request.
+    /**
+     API usage information for the request.
+     */
     public var usage: Usage?
 
-    /// The general concepts referenced or alluded to in the specified content.
+    /**
+     The general concepts referenced or alluded to in the specified content.
+     */
     public var concepts: [ConceptsResult]?
 
-    /// The important entities in the specified content.
+    /**
+     The important entities in the specified content.
+     */
     public var entities: [EntitiesResult]?
 
-    /// The important keywords in content organized by relevance.
+    /**
+     The important keywords in content organized by relevance.
+     */
     public var keywords: [KeywordsResult]?
 
-    /// The hierarchical 5-level taxonomy the content is categorized into.
+    /**
+     The hierarchical 5-level taxonomy the content is categorized into.
+     */
     public var categories: [CategoriesResult]?
 
-    /// The anger, disgust, fear, joy, or sadness conveyed by the content.
+    /**
+     The anger, disgust, fear, joy, or sadness conveyed by the content.
+     */
     public var emotion: EmotionResult?
 
-    /// The metadata holds author information, publication date and the title of the text/HTML content.
+    /**
+     The metadata holds author information, publication date and the title of the text/HTML content.
+     */
     public var metadata: MetadataResult?
 
-    /// The relationships between entities in the content.
+    /**
+     The relationships between entities in the content.
+     */
     public var relations: [RelationsResult]?
 
-    /// The subjects of actions and the objects the actions act upon.
+    /**
+     The subjects of actions and the objects the actions act upon.
+     */
     public var semanticRoles: [SemanticRolesResult]?
 
-    /// The sentiment of the content.
+    /**
+     The sentiment of the content.
+     */
     public var sentiment: SentimentResult?
 
     // Map each property name to the key that shall be used for encoding/decoding.

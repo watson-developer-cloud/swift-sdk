@@ -19,24 +19,38 @@ import Foundation
 /** Timeslice. */
 public struct Timeslice: Decodable {
 
-    /// The type of aggregation command used. For example: term, filter, max, min, etc.
+    /**
+     The type of aggregation command used. For example: term, filter, max, min, etc.
+     */
     public var type: String?
 
     public var results: [AggregationResult]?
 
-    /// Number of matching results.
+    /**
+     Number of matching results.
+     */
     public var matchingResults: Int?
 
-    /// Aggregations returned by the Discovery service.
+    /**
+     Aggregations returned by the Discovery service.
+     */
     public var aggregations: [QueryAggregation]?
 
-    /// The field where the aggregation is located in the document.
+    /**
+     The field where the aggregation is located in the document.
+     */
     public var field: String?
 
-    /// Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days, week/weeks, month/months, and year/years.
+    /**
+     Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days,
+     week/weeks, month/months, and year/years.
+     */
     public var interval: String?
 
-    /// Used to inducate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
+    /**
+     Used to inducate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints
+     within a time series.
+     */
     public var anomaly: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.

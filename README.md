@@ -37,7 +37,8 @@ There are many resources to help you build your first cognitive application with
 
 * [Assistant](#assistant)
 * [Discovery](#discovery)
-* [Language Translator](#language-translator)
+* [Language Translator V2](#language-translator-v2)
+* [Language Translator V3](#language-translator-v3)
 * [Natural Language Classifier](#natural-language-classifier)
 * [Natural Language Understanding](#natural-language-understanding)
 * [Personality Insights](#personality-insights)
@@ -93,7 +94,7 @@ Add the following to your `Package.swift` file to identify the Swift SDK as a de
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.26.0")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.28.0")
 ]
 ```
 
@@ -404,7 +405,7 @@ The following links provide more information about the IBM Discovery service:
 * [IBM Discovery - Documentation](https://console.bluemix.net/docs/services/discovery/index.html)
 * [IBM Discovery - Demo](https://discovery-news-demo.ng.bluemix.net/)
 
-## Language Translator
+## Language Translator V2
 
 The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 
@@ -416,6 +417,28 @@ import LanguageTranslatorV2
 let username = "your-username-here"
 let password = "your-password-here"
 let languageTranslator = LanguageTranslator(username: username, password: password)
+
+let failure = { (error: Error) in print(error) }
+let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")
+languageTranslator.translate(request: request, failure: failure) {
+    translation in
+    print(translation)
+}
+```
+
+## Language Translator V3
+
+The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
+
+The following example demonstrates how to use the Language Translator service:
+
+```swift
+import LanguageTranslatorV3
+
+let username = "your-username-here"
+let password = "your-password-here"
+let version = "yyyy-mm-dd" // use today's date for the most recent version
+let languageTranslator = LanguageTranslator(username: username, password: password, version: version)
 
 let failure = { (error: Error) in print(error) }
 let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")

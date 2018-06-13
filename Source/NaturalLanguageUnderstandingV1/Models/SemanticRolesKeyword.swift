@@ -19,7 +19,9 @@ import Foundation
 /** SemanticRolesKeyword. */
 public struct SemanticRolesKeyword: Decodable {
 
-    /// The keyword text.
+    /**
+     The keyword text.
+     */
     public var text: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

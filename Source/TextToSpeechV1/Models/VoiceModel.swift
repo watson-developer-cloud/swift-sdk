@@ -19,28 +19,51 @@ import Foundation
 /** VoiceModel. */
 public struct VoiceModel: Decodable {
 
-    /// The customization ID (GUID) of the custom voice model. The **Create a custom model** method returns only this field. It does not not return the other fields of this object.
+    /**
+     The customization ID (GUID) of the custom voice model. The **Create a custom model** method returns only this
+     field. It does not not return the other fields of this object.
+     */
     public var customizationID: String
 
-    /// The name of the custom voice model.
+    /**
+     The name of the custom voice model.
+     */
     public var name: String?
 
-    /// The language identifier of the custom voice model (for example, `en-US`).
+    /**
+     The language identifier of the custom voice model (for example, `en-US`).
+     */
     public var language: String?
 
-    /// The GUID of the service credentials for the instance of the service that owns the custom voice model.
+    /**
+     The GUID of the service credentials for the instance of the service that owns the custom voice model.
+     */
     public var owner: String?
 
-    /// The date and time in Coordinated Universal Time (UTC) at which the custom voice model was created. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+    /**
+     The date and time in Coordinated Universal Time (UTC) at which the custom voice model was created. The value is
+     provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+     */
     public var created: String?
 
-    /// The date and time in Coordinated Universal Time (UTC) at which the custom voice model was last modified. Equals `created` when a new voice model is first added but has yet to be updated. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+    /**
+     The date and time in Coordinated Universal Time (UTC) at which the custom voice model was last modified. Equals
+     `created` when a new voice model is first added but has yet to be updated. The value is provided in full ISO 8601
+     format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+     */
     public var lastModified: String?
 
-    /// The description of the custom voice model.
+    /**
+     The description of the custom voice model.
+     */
     public var description: String?
 
-    /// An array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words. This field is returned only by the **Get a voice** method and only when you specify the customization ID of a custom voice model.
+    /**
+     An array of `Word` objects that lists the words and their translations from the custom voice model. The words are
+     listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the
+     custom model contains no words. This field is returned only by the **Get a voice** method and only when you specify
+     the customization ID of a custom voice model.
+     */
     public var words: [Word]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

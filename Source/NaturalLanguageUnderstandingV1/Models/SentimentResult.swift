@@ -19,10 +19,14 @@ import Foundation
 /** The sentiment of the content. */
 public struct SentimentResult: Decodable {
 
-    /// The document level sentiment.
+    /**
+     The document level sentiment.
+     */
     public var document: DocumentSentimentResults?
 
-    /// The targeted sentiment to analyze.
+    /**
+     The targeted sentiment to analyze.
+     */
     public var targets: [TargetedSentimentResults]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

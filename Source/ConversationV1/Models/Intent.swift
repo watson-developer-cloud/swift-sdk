@@ -19,16 +19,24 @@ import Foundation
 /** Intent. */
 public struct Intent: Decodable {
 
-    /// The name of the intent.
+    /**
+     The name of the intent.
+     */
     public var intentName: String
 
-    /// The timestamp for creation of the intent.
+    /**
+     The timestamp for creation of the intent.
+     */
     public var created: String?
 
-    /// The timestamp for the last update to the intent.
+    /**
+     The timestamp for the last update to the intent.
+     */
     public var updated: String?
 
-    /// The description of the intent.
+    /**
+     The description of the intent.
+     */
     public var description: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

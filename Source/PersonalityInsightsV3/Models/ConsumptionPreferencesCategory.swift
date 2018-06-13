@@ -19,13 +19,20 @@ import Foundation
 /** ConsumptionPreferencesCategory. */
 public struct ConsumptionPreferencesCategory: Decodable {
 
-    /// The unique, non-localized identifier of the consumption preferences category to which the results pertain. IDs have the form `consumption_preferences_{category}`.
+    /**
+     The unique, non-localized identifier of the consumption preferences category to which the results pertain. IDs have
+     the form `consumption_preferences_{category}`.
+     */
     public var consumptionPreferenceCategoryID: String
 
-    /// The user-visible name of the consumption preferences category.
+    /**
+     The user-visible name of the consumption preferences category.
+     */
     public var name: String
 
-    /// Detailed results inferred from the input text for the individual preferences of the category.
+    /**
+     Detailed results inferred from the input text for the individual preferences of the category.
+     */
     public var consumptionPreferences: [ConsumptionPreferences]
 
     // Map each property name to the key that shall be used for encoding/decoding.

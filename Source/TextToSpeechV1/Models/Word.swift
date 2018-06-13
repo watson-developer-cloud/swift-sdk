@@ -19,7 +19,12 @@ import Foundation
 /** Word. */
 public struct Word: Codable {
 
-    /// **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+    /**
+     **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
+     for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
+     create multiple entries with different parts of speech for the same word. For more information, see [Working with
+     Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     */
     public enum PartOfSpeech: String {
         case josi = "Josi"
         case mesi = "Mesi"
@@ -40,13 +45,24 @@ public struct Word: Codable {
         case hoka = "Hoka"
     }
 
-    /// A word from the custom voice model.
+    /**
+     A word from the custom voice model.
+     */
     public var word: String
 
-    /// The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation consists of one or more words that, when combined, sound like the word.
+    /**
+     The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
+     representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation
+     consists of one or more words that, when combined, sound like the word.
+     */
     public var translation: String
 
-    /// **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+    /**
+     **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
+     for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
+     create multiple entries with different parts of speech for the same word. For more information, see [Working with
+     Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     */
     public var partOfSpeech: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -60,12 +76,23 @@ public struct Word: Codable {
      Initialize a `Word` with member variables.
 
      - parameter word: A word from the custom voice model.
-     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation consists of one or more words that, when combined, sound like the word.
-     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
+       representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation
+       consists of one or more words that, when combined, sound like the word.
+     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
+       for the word. You can create only a single entry, with or without a single part of speech, for any word; you
+       cannot create multiple entries with different parts of speech for the same word. For more information, see
+       [Working with Japanese
+       entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
 
      - returns: An initialized `Word`.
     */
-    public init(word: String, translation: String, partOfSpeech: String? = nil) {
+    public init(
+        word: String,
+        translation: String,
+        partOfSpeech: String? = nil
+    )
+    {
         self.word = word
         self.translation = translation
         self.partOfSpeech = partOfSpeech

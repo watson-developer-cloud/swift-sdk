@@ -19,25 +19,39 @@ import Foundation
 /** NluEnrichmentFeatures. */
 public struct NluEnrichmentFeatures: Codable {
 
-    /// An object specifying the Keyword enrichment and related parameters.
+    /**
+     An object specifying the Keyword enrichment and related parameters.
+     */
     public var keywords: NluEnrichmentKeywords?
 
-    /// An object speficying the Entities enrichment and related parameters.
+    /**
+     An object speficying the Entities enrichment and related parameters.
+     */
     public var entities: NluEnrichmentEntities?
 
-    /// An object specifying the sentiment extraction enrichment and related parameters.
+    /**
+     An object specifying the sentiment extraction enrichment and related parameters.
+     */
     public var sentiment: NluEnrichmentSentiment?
 
-    /// An object specifying the emotion detection enrichment and related parameters.
+    /**
+     An object specifying the emotion detection enrichment and related parameters.
+     */
     public var emotion: NluEnrichmentEmotion?
 
-    /// An object specifying the categories enrichment and related parameters.
+    /**
+     An object specifying the categories enrichment and related parameters.
+     */
     public var categories: NluEnrichmentCategories?
 
-    /// An object specifiying the semantic roles enrichment and related parameters.
+    /**
+     An object specifiying the semantic roles enrichment and related parameters.
+     */
     public var semanticRoles: NluEnrichmentSemanticRoles?
 
-    /// An object specifying the relations enrichment and related parameters.
+    /**
+     An object specifying the relations enrichment and related parameters.
+     */
     public var relations: NluEnrichmentRelations?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -64,7 +78,16 @@ public struct NluEnrichmentFeatures: Codable {
 
      - returns: An initialized `NluEnrichmentFeatures`.
     */
-    public init(keywords: NluEnrichmentKeywords? = nil, entities: NluEnrichmentEntities? = nil, sentiment: NluEnrichmentSentiment? = nil, emotion: NluEnrichmentEmotion? = nil, categories: NluEnrichmentCategories? = nil, semanticRoles: NluEnrichmentSemanticRoles? = nil, relations: NluEnrichmentRelations? = nil) {
+    public init(
+        keywords: NluEnrichmentKeywords? = nil,
+        entities: NluEnrichmentEntities? = nil,
+        sentiment: NluEnrichmentSentiment? = nil,
+        emotion: NluEnrichmentEmotion? = nil,
+        categories: NluEnrichmentCategories? = nil,
+        semanticRoles: NluEnrichmentSemanticRoles? = nil,
+        relations: NluEnrichmentRelations? = nil
+    )
+    {
         self.keywords = keywords
         self.entities = entities
         self.sentiment = sentiment

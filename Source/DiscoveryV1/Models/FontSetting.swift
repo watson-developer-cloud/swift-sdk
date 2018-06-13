@@ -53,7 +53,15 @@ public struct FontSetting: Codable {
 
      - returns: An initialized `FontSetting`.
     */
-    public init(level: Int? = nil, minSize: Int? = nil, maxSize: Int? = nil, bold: Bool? = nil, italic: Bool? = nil, name: String? = nil) {
+    public init(
+        level: Int? = nil,
+        minSize: Int? = nil,
+        maxSize: Int? = nil,
+        bold: Bool? = nil,
+        italic: Bool? = nil,
+        name: String? = nil
+    )
+    {
         self.level = level
         self.minSize = minSize
         self.maxSize = maxSize

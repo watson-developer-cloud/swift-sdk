@@ -19,7 +19,11 @@ import Foundation
 /** AcousticModels. */
 public struct AcousticModels: Decodable {
 
-    /// An array of objects that provides information about each available custom acoustic model. The array is empty if the requesting service credentials own no custom acoustic models (if no language is specified) or own no custom acoustic models for the specified language.
+    /**
+     An array of objects that provides information about each available custom acoustic model. The array is empty if the
+     requesting service credentials own no custom acoustic models (if no language is specified) or own no custom
+     acoustic models for the specified language.
+     */
     public var customizations: [AcousticModel]
 
     // Map each property name to the key that shall be used for encoding/decoding.

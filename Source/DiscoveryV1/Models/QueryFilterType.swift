@@ -19,10 +19,14 @@ import Foundation
 /** QueryFilterType. */
 public struct QueryFilterType: Encodable {
 
-    /// A comma-separated list of types to exclude.
+    /**
+     A comma-separated list of types to exclude.
+     */
     public var exclude: [String]?
 
-    /// A comma-separated list of types to include. All other types are excluded.
+    /**
+     A comma-separated list of types to include. All other types are excluded.
+     */
     public var include: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -39,7 +43,11 @@ public struct QueryFilterType: Encodable {
 
      - returns: An initialized `QueryFilterType`.
     */
-    public init(exclude: [String]? = nil, include: [String]? = nil) {
+    public init(
+        exclude: [String]? = nil,
+        include: [String]? = nil
+    )
+    {
         self.exclude = exclude
         self.include = include
     }

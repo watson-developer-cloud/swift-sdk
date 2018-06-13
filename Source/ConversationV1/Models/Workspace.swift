@@ -19,28 +19,45 @@ import Foundation
 /** Workspace. */
 public struct Workspace: Decodable {
 
-    /// The name of the workspace.
+    /**
+     The name of the workspace.
+     */
     public var name: String
 
-    /// The language of the workspace.
+    /**
+     The language of the workspace.
+     */
     public var language: String
 
-    /// The timestamp for creation of the workspace.
+    /**
+     The timestamp for creation of the workspace.
+     */
     public var created: String?
 
-    /// The timestamp for the last update to the workspace.
+    /**
+     The timestamp for the last update to the workspace.
+     */
     public var updated: String?
 
-    /// The workspace ID.
+    /**
+     The workspace ID.
+     */
     public var workspaceID: String
 
-    /// The description of the workspace.
+    /**
+     The description of the workspace.
+     */
     public var description: String?
 
-    /// Any metadata related to the workspace.
+    /**
+     Any metadata related to the workspace.
+     */
     public var metadata: [String: JSON]?
 
-    /// Whether training data from the workspace (including artifacts such as intents and entities) can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+    /**
+     Whether training data from the workspace (including artifacts such as intents and entities) can be used by IBM for
+     general service improvements. `true` indicates that workspace training data is not to be used.
+     */
     public var learningOptOut: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.

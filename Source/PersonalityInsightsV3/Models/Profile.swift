@@ -19,7 +19,9 @@ import Foundation
 /** Profile. */
 public struct Profile: Decodable {
 
-    /// The language model that was used to process the input.
+    /**
+     The language model that was used to process the input.
+     */
     public enum ProcessedLanguage: String {
         case ar = "ar"
         case en = "en"
@@ -28,31 +30,56 @@ public struct Profile: Decodable {
         case ko = "ko"
     }
 
-    /// The language model that was used to process the input.
+    /**
+     The language model that was used to process the input.
+     */
     public var processedLanguage: String
 
-    /// The number of words from the input that were used to produce the profile.
+    /**
+     The number of words from the input that were used to produce the profile.
+     */
     public var wordCount: Int
 
-    /// When guidance is appropriate, a string that provides a message that indicates the number of words found and where that value falls in the range of required or suggested number of words.
+    /**
+     When guidance is appropriate, a string that provides a message that indicates the number of words found and where
+     that value falls in the range of required or suggested number of words.
+     */
     public var wordCountMessage: String?
 
-    /// A recursive array of `Trait` objects that provides detailed results for the Big Five personality characteristics (dimensions and facets) inferred from the input text.
+    /**
+     A recursive array of `Trait` objects that provides detailed results for the Big Five personality characteristics
+     (dimensions and facets) inferred from the input text.
+     */
     public var personality: [Trait]
 
-    /// Detailed results for the Needs characteristics inferred from the input text.
+    /**
+     Detailed results for the Needs characteristics inferred from the input text.
+     */
     public var needs: [Trait]
 
-    /// Detailed results for the Values characteristics inferred from the input text.
+    /**
+     Detailed results for the Values characteristics inferred from the input text.
+     */
     public var values: [Trait]
 
-    /// For JSON content that is timestamped, detailed results about the social behavior disclosed by the input in terms of temporal characteristics. The results include information about the distribution of the content over the days of the week and the hours of the day.
+    /**
+     For JSON content that is timestamped, detailed results about the social behavior disclosed by the input in terms of
+     temporal characteristics. The results include information about the distribution of the content over the days of
+     the week and the hours of the day.
+     */
     public var behavior: [Behavior]?
 
-    /// If the **consumption_preferences** parameter is `true`, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category.
+    /**
+     If the **consumption_preferences** parameter is `true`, detailed results for each category of consumption
+     preferences. Each element of the array provides information inferred from the input text for the individual
+     preferences of that category.
+     */
     public var consumptionPreferences: [ConsumptionPreferencesCategory]?
 
-    /// Warning messages associated with the input text submitted with the request. The array is empty if the input generated no warnings.
+    /**
+     Warning messages associated with the input text submitted with the request. The array is empty if the input
+     generated no warnings.
+     */
     public var warnings: [Warning]
 
     // Map each property name to the key that shall be used for encoding/decoding.

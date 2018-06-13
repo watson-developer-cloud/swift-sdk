@@ -19,19 +19,29 @@ import Foundation
 /** Response from the classifier for a phrase. */
 public struct Classification: Decodable {
 
-    /// Unique identifier for this classifier.
+    /**
+     Unique identifier for this classifier.
+     */
     public var classifierID: String?
 
-    /// Link to the classifier.
+    /**
+     Link to the classifier.
+     */
     public var url: String?
 
-    /// The submitted phrase.
+    /**
+     The submitted phrase.
+     */
     public var text: String?
 
-    /// The class with the highest confidence.
+    /**
+     The class with the highest confidence.
+     */
     public var topClass: String?
 
-    /// An array of up to ten class-confidence pairs sorted in descending order of confidence.
+    /**
+     An array of up to ten class-confidence pairs sorted in descending order of confidence.
+     */
     public var classes: [ClassifiedClass]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

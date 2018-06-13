@@ -19,10 +19,14 @@ import Foundation
 /** An entity that corresponds with an argument in a relation. */
 public struct RelationEntity: Decodable {
 
-    /// Text that corresponds to the entity.
+    /**
+     Text that corresponds to the entity.
+     */
     public var text: String?
 
-    /// Entity type.
+    /**
+     Entity type.
+     */
     public var type: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

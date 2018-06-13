@@ -19,7 +19,10 @@ import Foundation
 /** Words. */
 public struct Words: Decodable {
 
-    /// Information about each word in the custom model's words resource. The array is empty if the custom model has no words.
+    /**
+     An array of objects that provides information about each word in the custom model's words resource. The array is
+     empty if the custom model has no words.
+     */
     public var words: [Word]
 
     // Map each property name to the key that shall be used for encoding/decoding.

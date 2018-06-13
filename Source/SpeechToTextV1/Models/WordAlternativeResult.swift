@@ -19,10 +19,14 @@ import Foundation
 /** WordAlternativeResult. */
 public struct WordAlternativeResult: Decodable {
 
-    /// A confidence score for the word alternative hypothesis in the range of 0 to 1.
+    /**
+     A confidence score for the word alternative hypothesis in the range of 0 to 1.
+     */
     public var confidence: Double
 
-    /// An alternative hypothesis for a word from the input audio.
+    /**
+     An alternative hypothesis for a word from the input audio.
+     */
     public var word: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -19,7 +19,9 @@ import Foundation
 /** ListCollectionsResponse. */
 public struct ListCollectionsResponse: Decodable {
 
-    /// An array containing information about each collection in the environment.
+    /**
+     An array containing information about each collection in the environment.
+     */
     public var collections: [Collection]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

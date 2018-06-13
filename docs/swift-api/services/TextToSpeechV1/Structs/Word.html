@@ -57,9 +57,6 @@
                 <a href="../Structs/CreateVoiceModel/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs.html#/s:14TextToSpeechV111JSONWrapperV">JSONWrapper</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Pronunciation.html">Pronunciation</a>
               </li>
               <li class="nav-group-task">
@@ -131,7 +128,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes">Working with Japanese entries</a>.</p>
+                        <p><strong>Japanese only.</strong> The part of speech for the word. The service uses the value to produce the correct intonation
+for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
+create multiple entries with different parts of speech for the same word. For more information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes">Working with
+Japanese entries</a>.</p>
 
                         <a href="../Structs/Word/PartOfSpeech.html" class="slightly-smaller">See more</a>
                       </div>
@@ -186,7 +186,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation consists of one or more words that, when combined, sound like the word.</p>
+                        <p>The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
+representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation
+consists of one or more words that, when combined, sound like the word.</p>
 
                       </div>
                       <div class="declaration">
@@ -213,7 +215,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes">Working with Japanese entries</a>.</p>
+                        <p><strong>Japanese only.</strong> The part of speech for the word. The service uses the value to produce the correct intonation
+for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
+create multiple entries with different parts of speech for the same word. For more information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes">Working with
+Japanese entries</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -247,7 +252,11 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">translation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">partOfSpeech</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">translation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">partOfSpeech</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -275,7 +284,9 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation consists of one or more words that, when combined, sound like the word.</p>
+                                  <p>The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
+representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation
+consists of one or more words that, when combined, sound like the word.</p>
                                 </div>
                               </td>
                             </tr>
@@ -287,7 +298,11 @@
                               </td>
                               <td>
                                 <div>
-                                  <p><strong>Japanese only.</strong> The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes">Working with Japanese entries</a>.</p>
+                                  <p><strong>Japanese only.</strong> The part of speech for the word. The service uses the value to produce the correct intonation
+for the word. You can create only a single entry, with or without a single part of speech, for any word; you
+cannot create multiple entries with different parts of speech for the same word. For more information, see
+<a href="https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes">Working with Japanese
+entries</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -306,7 +321,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-05-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

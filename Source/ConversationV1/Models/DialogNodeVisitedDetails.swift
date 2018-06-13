@@ -19,13 +19,19 @@ import Foundation
 /** DialogNodeVisitedDetails. */
 public struct DialogNodeVisitedDetails: Codable {
 
-    /// A dialog node that was triggered during processing of the input message.
+    /**
+     A dialog node that was triggered during processing of the input message.
+     */
     public var dialogNode: String?
 
-    /// The title of the dialog node.
+    /**
+     The title of the dialog node.
+     */
     public var title: String?
 
-    /// The conditions that trigger the dialog node.
+    /**
+     The conditions that trigger the dialog node.
+     */
     public var conditions: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -44,7 +50,12 @@ public struct DialogNodeVisitedDetails: Codable {
 
      - returns: An initialized `DialogNodeVisitedDetails`.
     */
-    public init(dialogNode: String? = nil, title: String? = nil, conditions: String? = nil) {
+    public init(
+        dialogNode: String? = nil,
+        title: String? = nil,
+        conditions: String? = nil
+    )
+    {
         self.dialogNode = dialogNode
         self.title = title
         self.conditions = conditions

@@ -19,22 +19,34 @@ import Foundation
 /** Entity. */
 public struct Entity: Decodable {
 
-    /// The name of the entity.
+    /**
+     The name of the entity.
+     */
     public var entityName: String
 
-    /// The timestamp for creation of the entity.
+    /**
+     The timestamp for creation of the entity.
+     */
     public var created: String?
 
-    /// The timestamp for the last update to the entity.
+    /**
+     The timestamp for the last update to the entity.
+     */
     public var updated: String?
 
-    /// The description of the entity.
+    /**
+     The description of the entity.
+     */
     public var description: String?
 
-    /// Any metadata related to the entity.
+    /**
+     Any metadata related to the entity.
+     */
     public var metadata: [String: JSON]?
 
-    /// Whether fuzzy matching is used for the entity.
+    /**
+     Whether fuzzy matching is used for the entity.
+     */
     public var fuzzyMatch: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.

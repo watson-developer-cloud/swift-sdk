@@ -19,13 +19,20 @@ import Foundation
 /** ToneCategory. */
 public struct ToneCategory: Decodable {
 
-    /// An array of `ToneScore` objects that provides the results for the tones of the category.
+    /**
+     An array of `ToneScore` objects that provides the results for the tones of the category.
+     */
     public var tones: [ToneScore]
 
-    /// The unique, non-localized identifier of the category for the results. The service can return results for the following category IDs: `emotion_tone`, `language_tone`, and `social_tone`.
+    /**
+     The unique, non-localized identifier of the category for the results. The service can return results for the
+     following category IDs: `emotion_tone`, `language_tone`, and `social_tone`.
+     */
     public var categoryID: String
 
-    /// The user-visible, localized name of the category.
+    /**
+     The user-visible, localized name of the category.
+     */
     public var categoryName: String
 
     // Map each property name to the key that shall be used for encoding/decoding.

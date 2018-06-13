@@ -19,10 +19,14 @@ import Foundation
 /** TopHitsResults. */
 public struct TopHitsResults: Decodable {
 
-    /// Number of matching results.
+    /**
+     Number of matching results.
+     */
     public var matchingResults: Int?
 
-    /// Top results returned by the aggregation.
+    /**
+     Top results returned by the aggregation.
+     */
     public var hits: [QueryResult]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

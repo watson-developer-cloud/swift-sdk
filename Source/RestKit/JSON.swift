@@ -88,12 +88,15 @@ public enum JSON: Equatable, Codable {
     /// Decode a JSON value from the single value container.
     private init(from container: SingleValueDecodingContainer) throws {
         // swiftlint:disable statement_position
+        // The order in which we attempt to decode is important!
+        // E.g. attempt int before date, or some ints will be mistaken for dates
+        // E.g. attempt date before string, or a datestring will be mistaken for a string
         if container.decodeNil() { self = .null }
         else if let boolean = try? container.decode(Bool.self) { self = .boolean(boolean) }
-        else if let string = try? container.decode(String.self) { self = .string(string) }
         else if let int = try? container.decode(Int.self) { self = .int(int) }
         else if let double = try? container.decode(Double.self) { self = .double(double) }
         else if let date = try? container.decode(Date.self) { self = .date(date) }
+        else if let string = try? container.decode(String.self) { self = .string(string) }
         // swiftlint:enable statement_position
         else {
             let description = "Failed to decode a JSON value from the given single value container."
@@ -102,18 +105,42 @@ public enum JSON: Equatable, Codable {
         }
     }
 
+    public static func encoder() -> JSONEncoder {
+        let encoder = JSONEncoder()
+        do {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            encoder.dateEncodingStrategy = .formatted(formatter)
+        }
+        return encoder
+    }
+
+    public static func decoder() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        do {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            decoder.dateDecodingStrategy = .formatted(formatter)
+        }
+        return decoder
+    }
+
     /// Initialize a JSON value from an encodable type.
     public init<T: Encodable>(from value: T) throws {
-        let encoder = JSONEncoder()
-        let decoder = JSONDecoder()
+        let encoder = JSON.encoder()
+        let decoder = JSON.decoder()
         let data = try encoder.encode(value)
         self = try decoder.decode(JSON.self, from: data)
     }
 
     /// Convert this JSON value to a decodable type.
     public func toValue<T: Decodable>(_ type: T.Type) throws -> T {
-        let encoder = JSONEncoder()
-        let decoder = JSONDecoder()
+        let encoder = JSON.encoder()
+        let decoder = JSON.decoder()
         let data = try encoder.encode(self)
         return try decoder.decode(T.self, from: data)
     }

@@ -138,17 +138,14 @@ class JSONTests: XCTestCase {
 
     func testEncodeDate() {
         let dateFormatter = DateFormatter()
-        dateFormatter.calendar = Calendar(identifier: .iso8601)
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-        let stringDate = "2018-05-17T18:45:32.189Z"
-        let date = dateFormatter.date(from: stringDate)
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+        let expected = "2018-05-17T18:45:32.189Z"
+        let date = dateFormatter.date(from: expected)
 
         let object: [String: JSON] = ["key": .date(date!)]
-        let data = try! JSONEncoder().encode(object)
+        let data = try! JSON.encoder().encode(object)
         let json = String(data: data, encoding: .utf8)!
-        let expected = "{\"key\":\"17 May 2018 at 19:45\"}"
-        XCTAssertEqual(json.sorted(), expected.sorted())
+        XCTAssertTrue(json.contains(expected))
     }
 
     func testEncodeString() {
@@ -254,15 +251,15 @@ class JSONTests: XCTestCase {
     func testDecodeDate() {
         let dateFormatter = DateFormatter()
         dateFormatter.calendar = Calendar(identifier: .iso8601)
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        //dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
         let stringDate = "2018-05-17T18:45:32.189Z"
-        let date = dateFormatter.date(from: stringDate)
+        let expected = dateFormatter.date(from: stringDate)!
 
-        let json = "{ \"key\": \"17 May 2018 at 19:45\" }"
+        let json = "{ \"key\": \"\(stringDate)\" }"
         let data = json.data(using: .utf8)!
-        let object = try! JSONDecoder().decode([String: JSON].self, from: data)
-        XCTAssertEqual(object["key"], JSON.date(date!))
+        let object = try! JSON.decoder().decode([String: JSON].self, from: data)
+        XCTAssertEqual(object["key"], .date(expected))
     }
 
     func testDecodeString() {

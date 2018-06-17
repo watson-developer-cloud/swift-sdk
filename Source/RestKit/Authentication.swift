@@ -115,6 +115,7 @@ internal class IAMAuthentication: AuthenticationMethod {
     private let apiKey: String
     private let url: String
     private var token: IAMToken?
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
 
     internal init(apiKey: String, url: String? = nil) {
         self.apiKey = apiKey
@@ -124,6 +125,11 @@ internal class IAMAuthentication: AuthenticationMethod {
             self.url = "https://iam.bluemix.net/identity/token"
         }
         self.token = nil
+    }
+
+    internal func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+        let genericMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
+        return RestError.failure(response.statusCode, genericMessage)
     }
 
     internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
@@ -156,9 +162,11 @@ internal class IAMAuthentication: AuthenticationMethod {
         let headerParameters = ["Content-Type": "application/x-www-form-urlencoded", "Accept": "application/json"]
         let form = ["grant_type=urn:ibm:params:oauth:grant-type:apikey", "apikey=\(apiKey)", "response_type=cloud_iam"]
         let request = RestRequest(
+            session: session,
+            authMethod: BasicAuthentication(username: "bx", password: "bx"),
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: url,
-            authMethod: BasicAuthentication(username: "bx", password: "bx"),
             headerParameters: headerParameters,
             messageBody: form.joined(separator: "&").data(using: .utf8)
         )
@@ -178,9 +186,11 @@ internal class IAMAuthentication: AuthenticationMethod {
         let headerParameters = ["Content-Type": "application/x-www-form-urlencoded", "Accept": "application/json"]
         let form = ["grant_type=refresh_token", "refresh_token=\(token.refreshToken)"]
         let request = RestRequest(
+            session: session,
+            authMethod: BasicAuthentication(username: "bx", password: "bx"),
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: url,
-            authMethod: BasicAuthentication(username: "bx", password: "bx"),
             headerParameters: headerParameters,
             messageBody: form.joined(separator: "&").data(using: .utf8)
         )

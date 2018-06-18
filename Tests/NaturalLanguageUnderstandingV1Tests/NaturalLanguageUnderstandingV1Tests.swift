@@ -55,12 +55,20 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testListModels", testListModels),
         ]
     }
+    
+    /** Generate today's date. */
+    func generateDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 
     /** Instantiate Natural Language Understanding instance. */
     func instantiateNaturalLanguageUnderstanding() {
         let username = Credentials.NaturalLanguageUnderstandingUsername
         let password = Credentials.NaturalLanguageUnderstandingPassword
-        naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: "2016-05-17")
+        naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: generateDate())
         naturalLanguageUnderstanding.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         naturalLanguageUnderstanding.defaultHeaders["X-Watson-Test"] = "true"
     }

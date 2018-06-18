@@ -91,12 +91,20 @@ class ConversationTests: XCTestCase {
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
         ]
     }
+    
+    /** Generate today's date. */
+    func generateDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 
     /** Instantiate Conversation. */
     func instantiateConversation() {
         let username = Credentials.ConversationUsername
         let password = Credentials.ConversationPassword
-        let version = "2018-02-16"
+        let version = generateDate()
         conversation = Conversation(username: username, password: password, version: version)
         conversation.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         conversation.defaultHeaders["X-Watson-Test"] = "true"

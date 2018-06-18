@@ -73,11 +73,19 @@ class VisualRecognitionWithIAMTests: XCTestCase {
     }
 
     // MARK: - Positive Tests
+    
+    /** Generate today's date. */
+    func generateDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 
     /** Access service using IAM API Key credentials  */
     func testAccessWithAPIKey() {
         let apiKey = IAMCredentials.VisualRecognitionAPIKey
-        let version = "2018-03-19"
+        let version = generateDate()
         let visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
@@ -123,7 +131,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
         // Pass the access token as the credentials when instantiating the service
 
-        let version = "2018-03-19"
+        let version = generateDate()
         let visualRecognition = VisualRecognition(version: version, accessToken: accessToken)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"

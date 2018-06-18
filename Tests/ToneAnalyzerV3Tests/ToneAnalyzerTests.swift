@@ -58,12 +58,20 @@ class ToneAnalyzerTests: XCTestCase {
         continueAfterFailure = false
         instantiateToneAnalyzer()
     }
+    
+    /** Generate today's date. */
+    func generateDate() -> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 
     /** Instantiate Tone Analyzer. */
     func instantiateToneAnalyzer() {
         let username = Credentials.ToneAnalyzerUsername
         let password = Credentials.ToneAnalyzerPassword
-        toneAnalyzer = ToneAnalyzer(username: username, password: password, version: "2017-09-21")
+        toneAnalyzer = ToneAnalyzer(username: username, password: password, version: generateDate())
         toneAnalyzer.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         toneAnalyzer.defaultHeaders["X-Watson-Test"] = "true"
     }

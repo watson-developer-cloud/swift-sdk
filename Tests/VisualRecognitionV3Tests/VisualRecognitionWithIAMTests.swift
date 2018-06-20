@@ -60,7 +60,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                         tokenInfo = json
                     }
-                } catch let error as NSError {
+                } catch {
                     print(error.localizedDescription)
                 }
             }

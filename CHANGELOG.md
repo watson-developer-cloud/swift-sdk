@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.28.1
+_2018-06-21_
+
+This release regenerates just the NLC service to add support for IAM authentication.
+
 ## Version 0.28.0
 _2018-06-12_
 

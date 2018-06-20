@@ -43,6 +43,31 @@ public class NaturalLanguageClassifier {
     }
 
     /**
+     Create a `NaturalLanguageClassifier` object.
+
+     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
+     - parameter iamUrl: The URL for the IAM service.
+     */
+    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+    }
+
+    /**
+     Create a `NaturalLanguageClassifier` object.
+
+     - parameter accessToken: An access token for the service.
+     */
+    public init(version: String, accessToken: String) {
+        self.authMethod = IAMAccessToken(accessToken: accessToken)
+    }
+
+    public func accessToken(_ newToken: String) {
+        if self.authMethod is IAMAccessToken {
+            self.authMethod = IAMAccessToken(accessToken: newToken)
+        }
+    }
+
+    /**
      If the response or data represents an error returned by the Natural Language Classifier service,
      then return NSError with information about the error that occured. Otherwise, return nil.
 
@@ -69,14 +94,7 @@ public class NaturalLanguageClassifier {
         let code = response?.statusCode ?? 400
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedFailureReasonErrorKey] = description
-            }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
         }

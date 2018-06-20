@@ -34,6 +34,13 @@
       "symbol": "Classifier.Status.unavailable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift",
+      "line": 64,
+      "symbol": "NaturalLanguageClassifier.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
     }
   ],
   "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"

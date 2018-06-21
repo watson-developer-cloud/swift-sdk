@@ -105,7 +105,7 @@ public enum JSON: Equatable, Codable {
         }
     }
 
-    public static func encoder() -> JSONEncoder {
+    public static var encoder: JSONEncoder {
         let encoder = JSONEncoder()
         do {
             let formatter = DateFormatter()
@@ -117,7 +117,7 @@ public enum JSON: Equatable, Codable {
         return encoder
     }
 
-    public static func decoder() -> JSONDecoder {
+    public static var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         do {
             let formatter = DateFormatter()
@@ -131,16 +131,16 @@ public enum JSON: Equatable, Codable {
 
     /// Initialize a JSON value from an encodable type.
     public init<T: Encodable>(from value: T) throws {
-        let encoder = JSON.encoder()
-        let decoder = JSON.decoder()
+        let encoder = JSON.encoder
+        let decoder = JSON.decoder
         let data = try encoder.encode(value)
         self = try decoder.decode(JSON.self, from: data)
     }
 
     /// Convert this JSON value to a decodable type.
     public func toValue<T: Decodable>(_ type: T.Type) throws -> T {
-        let encoder = JSON.encoder()
-        let decoder = JSON.decoder()
+        let encoder = JSON.encoder
+        let decoder = JSON.decoder
         let data = try encoder.encode(self)
         return try decoder.decode(T.self, from: data)
     }

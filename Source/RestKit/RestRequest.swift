@@ -214,7 +214,7 @@ extension RestRequest {
             // parse json object
             let result: RestResult<T>
             do {
-                let object = try JSON.decoder().decode(T.self, from: data)
+                let object = try JSON.decoder.decode(T.self, from: data)
                 result = .success(object)
             } catch {
                 result = .failure(error)
@@ -259,7 +259,7 @@ extension RestRequest {
             // parse json object
             let result: RestResult<[T]>
             do {
-                let json = try JSON.decoder().decode([T].self, from: data)
+                let json = try JSON.decoder.decode([T].self, from: data)
                 result = .success(json)
             } catch {
                 result = .failure(error)

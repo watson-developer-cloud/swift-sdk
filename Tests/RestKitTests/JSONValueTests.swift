@@ -318,11 +318,17 @@ class JSONTests: XCTestCase {
         dateFormatter.calendar = Calendar(identifier: .iso8601)
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
         let stringDate = "2018-05-17T18:45:32.189Z"
-        let expected = dateFormatter.date(from: stringDate)!
+        guard let expected = dateFormatter.date(from: stringDate) else {
+            XCTFail("Failed to construct expected date")
+            return
+        }
 
         let json = "{ \"key\": \"\(stringDate)\" }"
         let data = json.data(using: .utf8)!
-        let object = try! JSON.decoder.decode([String: JSON].self, from: data)
+        guard let object = try? JSON.decoder.decode([String: JSON].self, from: data) else {
+            XCTFail("Failed to decode object with date value")
+            return
+        }
         XCTAssertEqual(object["key"], .date(expected))
     }
 

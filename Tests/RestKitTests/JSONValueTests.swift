@@ -32,6 +32,7 @@ class JSONTests: XCTestCase {
         ("testEncodeBool", testEncodeBool),
         ("testEncodeInt", testEncodeInt),
         ("testEncodeDouble", testEncodeDouble),
+        ("testEncodeDate", testEncodeDate),
         ("testEncodeString", testEncodeString),
         ("testEncodeArray", testEncodeArray),
         ("testEncodeTopLevelArray", testEncodeTopLevelArray),
@@ -45,6 +46,7 @@ class JSONTests: XCTestCase {
         ("testDecodeBool", testDecodeBool),
         ("testDecodeInt", testDecodeInt),
         ("testDecodeDouble", testDecodeDouble),
+        ("testDecodeDate", testDecodeDate),
         ("testDecodeString", testDecodeString),
         ("testDecodeArray", testDecodeArray),
         ("testDecodeTopLevelArray", testDecodeTopLevelArray),
@@ -57,12 +59,29 @@ class JSONTests: XCTestCase {
     ]
 
     func testEquality() {
+        // date values
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        let stringDate = "2018-05-17T18:45:32.189Z"
+        guard let date = dateFormatter.date(from: stringDate) else {
+            XCTFail("Failed to construct date")
+            return
+        }
+        let stringDate2 = "2017-04-16T15:45:32.189Z"
+        guard let date2 = dateFormatter.date(from: stringDate2) else {
+            XCTFail("Failed to construct date2")
+            return
+        }
+
         // equal values
         XCTAssertEqual(JSON.null, JSON.null)
         XCTAssertEqual(JSON.boolean(true), JSON.boolean(true))
         XCTAssertEqual(JSON.string("hello"), JSON.string("hello"))
         XCTAssertEqual(JSON.int(1), JSON.int(1))
         XCTAssertEqual(JSON.double(0.5), JSON.double(0.5))
+        XCTAssertEqual(JSON.date(date), JSON.date(date))
         XCTAssertEqual(JSON.array([JSON.int(1), JSON.int(2)]),
                        JSON.array([JSON.int(1), JSON.int(2)]))
         XCTAssertEqual(JSON.object(["x": JSON.int(1), "y": JSON.int(2)]),
@@ -74,6 +93,7 @@ class JSONTests: XCTestCase {
         XCTAssertNotEqual(JSON.int(1), JSON.int(2))
         XCTAssertNotEqual(JSON.double(3.14), JSON.double(2.72))
         XCTAssertNotEqual(JSON.double(3.14), JSON.double(2.72))
+        XCTAssertNotEqual(JSON.date(date), JSON.date(date2))
         XCTAssertNotEqual(JSON.array([JSON.int(1), JSON.int(2)]),
                           JSON.array([JSON.int(2), JSON.int(1)]))
         XCTAssertNotEqual(JSON.object(["x": JSON.int(1), "y": JSON.int(2)]),
@@ -84,6 +104,7 @@ class JSONTests: XCTestCase {
         XCTAssertNotEqual(JSON.boolean(true), JSON.string("true"))
         XCTAssertNotEqual(JSON.string("true"), JSON.int(1))
         XCTAssertNotEqual(JSON.int(1), JSON.double(1.0))
+        XCTAssertNotEqual(JSON.string("true"), JSON.date(date))
         XCTAssertNotEqual(JSON.double(1.0), JSON.array([JSON.double(1.0)]))
         XCTAssertNotEqual(JSON.array([JSON.double(1.0)]),
                           JSON.object(["x": JSON.double(1.0)]))
@@ -91,7 +112,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeNull() {
         let object: [String: JSON] = ["key": .null]
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with null value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{\"key\":null}"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -99,7 +124,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeBool() {
         let object: [String: JSON] = ["key": .boolean(true)]
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with boolean value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{\"key\":true}"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -107,7 +136,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeInt() {
         let object: [String: JSON] = ["key": .int(1)]
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with int value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{\"key\":1}"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -115,15 +148,42 @@ class JSONTests: XCTestCase {
 
     func testEncodeDouble() {
         let object: [String: JSON] = ["key": .double(0.5)]
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with double value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{\"key\":0.5}"
         XCTAssertEqual(json.sorted(), expected.sorted())
     }
 
+    func testEncodeDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+        let expected = "2018-05-17T18:45:32.189Z"
+        guard let date = dateFormatter.date(from: expected) else {
+            XCTFail("Failed to construct expected date")
+            return
+        }
+
+        let object: [String: JSON] = ["key": .date(date)]
+        guard let data = try? JSON.encoder.encode(object) else {
+            XCTFail("Failed to encode object with date value")
+            return
+        }
+        // encoding with utf8 is always safe
+        let json = String(data: data, encoding: .utf8)!
+        XCTAssertTrue(json.contains(expected))
+    }
+
     func testEncodeString() {
         let object: [String: JSON] = ["key": .string("this is a string")]
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with string value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{\"key\":\"this is a string\"}"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -131,7 +191,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeArray() {
         let object: [String: JSON] = ["key": .array([.null, .boolean(true), .int(1), .double(0.5), .string("this is a string")])]
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with array value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{\"key\":[null,true,1,0.5,\"this is a string\"]}"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -139,7 +203,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeTopLevelArray() {
         let array: [JSON] = [.null, .boolean(true), .int(1), .double(0.5), .string("this is a string")]
-        let data = try! JSONEncoder().encode(array)
+        guard let data = try? JSONEncoder().encode(array) else {
+            XCTFail("Failed to encode object with array value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "[null,true,1,0.5,\"this is a string\"]"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -147,7 +215,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeNestedArrays() {
         let array: [JSON] = [.array([.int(1), .int(2), .int(3)]), .array([.int(4), .int(5), .int(6)])]
-        let data = try! JSONEncoder().encode(array)
+        guard let data = try? JSONEncoder().encode(array) else {
+            XCTFail("Failed to encode object with nested array value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "[[1,2,3],[4,5,6]]"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -155,7 +227,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeArrayOfObjects() {
         let array: [JSON] = [.object(["x": .int(1)]), .object(["y": .int(2)]), .object(["z": .int(3)])]
-        let data = try! JSONEncoder().encode(array)
+        guard let data = try? JSONEncoder().encode(array) else {
+            XCTFail("Failed to encode object with array of objects value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "[{\"x\":1},{\"y\":2},{\"z\":3}]"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -163,7 +239,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeObject() {
         let object: [String: JSON] = ["key": .object(["null": .null, "bool": .boolean(true), "int": .int(1), "double": .double(0.5), "string": .string("this is a string")])]
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with object value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{\"key\":{\"bool\":true,\"double\":0.5,\"string\":\"this is a string\",\"int\":1,\"null\":null}}"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -171,7 +251,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeEmptyObject() {
         let object = [String: JSON]()
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with empty value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{}"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -179,7 +263,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeNested() {
         let object: [String: JSON] = ["key": .object(["array": .array([.int(1), .int(2), .int(3)]), "object": .object(["x": .int(1), "y": .int(2), "z": .int(3)])])]
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with nested value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{\"key\":{\"array\":[1,2,3],\"object\":{\"y\":2,\"x\":1,\"z\":3}}}"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -187,7 +275,11 @@ class JSONTests: XCTestCase {
 
     func testEncodeDeeplyNested() {
         let object: [String: JSON] = ["key1": .object(["key2": .object(["key3": .object(["key4": .array([.int(1), .int(2), .int(3)])])])])]
-        let data = try! JSONEncoder().encode(object)
+        guard let data = try? JSONEncoder().encode(object) else {
+            XCTFail("Failed to encode object with deeply nested value")
+            return
+        }
+        // encoding with utf8 is always safe
         let json = String(data: data, encoding: .utf8)!
         let expected = "{\"key1\":{\"key2\":{\"key3\":{\"key4\":[1,2,3]}}}}"
         XCTAssertEqual(json.sorted(), expected.sorted())
@@ -219,6 +311,25 @@ class JSONTests: XCTestCase {
         let data = json.data(using: .utf8)!
         let object = try! JSONDecoder().decode([String: JSON].self, from: data)
         XCTAssertEqual(object["key"], .double(0.5))
+    }
+
+    func testDecodeDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .iso8601)
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+        let stringDate = "2018-05-17T18:45:32.189Z"
+        guard let expected = dateFormatter.date(from: stringDate) else {
+            XCTFail("Failed to construct expected date")
+            return
+        }
+
+        let json = "{ \"key\": \"\(stringDate)\" }"
+        let data = json.data(using: .utf8)!
+        guard let object = try? JSON.decoder.decode([String: JSON].self, from: data) else {
+            XCTFail("Failed to decode object with date value")
+            return
+        }
+        XCTAssertEqual(object["key"], .date(expected))
     }
 
     func testDecodeString() {

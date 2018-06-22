@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateVoiceModel. */
-public struct UpdateVoiceModel: Encodable {
+internal struct UpdateVoiceModel: Encodable {
 
     /**
      A new name for the custom voice model.

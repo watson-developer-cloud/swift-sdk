@@ -17,7 +17,7 @@
 import Foundation
 
 /** CustomWords. */
-public struct CustomWords: Encodable {
+internal struct CustomWords: Encodable {
 
     /**
      An array of objects that provides information about each custom word that is to be added to or updated in the

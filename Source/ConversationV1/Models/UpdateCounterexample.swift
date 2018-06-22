@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateCounterexample. */
-public struct UpdateCounterexample: Encodable {
+internal struct UpdateCounterexample: Encodable {
 
     /**
      The text of a user input counterexample.

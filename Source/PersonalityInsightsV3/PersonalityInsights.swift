@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+// swiftlint:disable file_length
 
 import Foundation
 
@@ -39,6 +40,7 @@ public class PersonalityInsights {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
     private var authMethod: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV3"
     private let version: String
@@ -91,36 +93,15 @@ public class PersonalityInsights {
      If the response or data represents an error returned by the Personality Insights service,
      then return NSError with information about the error that occured. Otherwise, return nil.
 
-     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
+     - parameter response: the URL response returned from the service.
      */
-    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
-        // First check http status code in response
-        if let response = response {
-            if (200..<300).contains(response.statusCode) {
-                return nil
-            }
-        }
-
-        // ensure data is not nil
-        guard let data = data else {
-            if let code = response?.statusCode {
-                return NSError(domain: domain, code: code, userInfo: nil)
-            }
-            return nil  // RestKit will generate error for this case
-        }
-
-        let code = response?.statusCode ?? 400
+        let code = response.statusCode
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(help)) = json["help"] {
-                userInfo[NSLocalizedFailureReasonErrorKey] = help
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -150,6 +131,8 @@ public class PersonalityInsights {
        [Providing sufficient
        input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
        provide an object of type `Content`.
+     - parameter contentType: The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
+       'text/html;charset=utf-8'.
      - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
        are treated as their parent language; for example, `en-US` is interpreted as `en`.
        The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**
@@ -163,6 +146,8 @@ public class PersonalityInsights {
        and response content.
      - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
        scores are not compared with a sample population. By default, only normalized percentiles are returned.
+     - parameter csvHeaders: Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
+       Applies only when the **Accept** parameter is set to `text/csv`.
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
        are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -171,9 +156,11 @@ public class PersonalityInsights {
      */
     public func profile(
         content: Content,
+        contentType: String,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -191,7 +178,7 @@ public class PersonalityInsights {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
+        headerParameters["Content-Type"] = contentType
         if let contentLanguage = contentLanguage {
             headerParameters["Content-Language"] = contentLanguage
         }
@@ -206,108 +193,8 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
             queryParameters.append(queryParameter)
         }
-        if let consumptionPreferences = consumptionPreferences {
-            let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Profile>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Get profile.
-
-     Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
-     content, but it requires much less text to produce an accurate profile; for more information, see [Providing
-     sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). The
-     service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
-     languages. You can provide plain text, HTML, or JSON input by specifying the **Content-Type** parameter; the
-     default is `text/plain`. Request a JSON or comma-separated values (CSV) response by specifying the **Accept**
-     parameter; CSV output includes a fixed number of columns and optional headers.
-     Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-     HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-     set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
-     character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`.
-     For detailed information about calling the service and the responses it can generate, see [Requesting a
-     profile](https://console.bluemix.net/docs/services/personality-insights/input.html), [Understanding a JSON
-     profile](https://console.bluemix.net/docs/services/personality-insights/output.html), and [Understanding a CSV
-     profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
-
-     - parameter text: A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-     [Providing sufficient
-     input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
-     provide an object of type `Content`.
-     - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-     are treated as their parent language; for example, `en-US` is interpreted as `en`.
-     The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**
-     is `text/plain` or `text/html`, **Content-Language** is the only way to specify the language. When
-     **Content-Type** is `application/json`, **Content-Language** overrides a language specified with the `language`
-     parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this
-     parameter to base the language on the specification of the content items. You can specify any combination of
-     languages for **Content-Language** and **Accept-Language**.
-     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
-     language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input
-     and response content.
-     - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-     scores are not compared with a sample population. By default, only normalized percentiles are returned.
-     - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-     are returned.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func profile(
-        text: String,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
-        // construct body
-        guard let body = text.data(using: .utf8) else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "text/plain"
-        if let contentLanguage = contentLanguage {
-            headerParameters["Content-Language"] = contentLanguage
-        }
-        if let acceptLanguage = acceptLanguage {
-            headerParameters["Accept-Language"] = acceptLanguage
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let rawScores = rawScores {
-            let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
+        if let csvHeaders = csvHeaders {
+            let queryParameter = URLQueryItem(name: "csv_headers", value: "\(csvHeaders)")
             queryParameters.append(queryParameter)
         }
         if let consumptionPreferences = consumptionPreferences {
@@ -317,120 +204,18 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
-            (response: RestResponse<Profile>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Get profile.
-
-     Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
-     content, but it requires much less text to produce an accurate profile; for more information, see [Providing
-     sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). The
-     service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
-     languages. You can provide plain text, HTML, or JSON input by specifying the **Content-Type** parameter; the
-     default is `text/plain`. Request a JSON or comma-separated values (CSV) response by specifying the **Accept**
-     parameter; CSV output includes a fixed number of columns and optional headers.
-     Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-     HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-     set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
-     character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`.
-     For detailed information about calling the service and the responses it can generate, see [Requesting a
-     profile](https://console.bluemix.net/docs/services/personality-insights/input.html), [Understanding a JSON
-     profile](https://console.bluemix.net/docs/services/personality-insights/output.html), and [Understanding a CSV
-     profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
-
-     - parameter html: A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-     [Providing sufficient
-     input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
-     provide an object of type `Content`.
-      - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-     are treated as their parent language; for example, `en-US` is interpreted as `en`.
-     The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**
-     is `text/plain` or `text/html`, **Content-Language** is the only way to specify the language. When
-     **Content-Type** is `application/json`, **Content-Language** overrides a language specified with the `language`
-     parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this
-     parameter to base the language on the specification of the content items. You can specify any combination of
-     languages for **Content-Language** and **Accept-Language**.
-     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
-     language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input
-     and response content.
-     - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-     scores are not compared with a sample population. By default, only normalized percentiles are returned.
-     - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-     are returned.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func profile(
-        html: String,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
-        // construct body
-        guard let body = html.data(using: .utf8) else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "text/html"
-        if let contentLanguage = contentLanguage {
-            headerParameters["Content-Language"] = contentLanguage
-        }
-        if let acceptLanguage = acceptLanguage {
-            headerParameters["Accept-Language"] = acceptLanguage
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let rawScores = rawScores {
-            let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
-            queryParameters.append(queryParameter)
-        }
-        if let consumptionPreferences = consumptionPreferences {
-            let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<Profile>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -462,6 +247,8 @@ public class PersonalityInsights {
        [Providing sufficient
        input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
        provide an object of type `Content`.
+     - parameter contentType: The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
+       'text/html;charset=utf-8'.
      - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
        are treated as their parent language; for example, `en-US` is interpreted as `en`.
        The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**
@@ -485,6 +272,7 @@ public class PersonalityInsights {
      */
     public func profileAsCsv(
         content: Content,
+        contentType: String,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         rawScores: Bool? = nil,
@@ -492,7 +280,7 @@ public class PersonalityInsights {
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
+        success: @escaping (URL) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(content) else {
@@ -506,7 +294,7 @@ public class PersonalityInsights {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "text/csv"
-        headerParameters["Content-Type"] = "application/json"
+        headerParameters["Content-Type"] = contentType
         if let contentLanguage = contentLanguage {
             headerParameters["Content-Language"] = contentLanguage
         }
@@ -532,240 +320,19 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseString(responseToError: responseToError) {
-            (response: RestResponse<String>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Get profile as csv.
-
-     Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
-     content, but it requires much less text to produce an accurate profile; for more information, see [Providing
-     sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). The
-     service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
-     languages. You can provide plain text, HTML, or JSON input by specifying the **Content-Type** parameter; the
-     default is `text/plain`. Request a JSON or comma-separated values (CSV) response by specifying the **Accept**
-     parameter; CSV output includes a fixed number of columns and optional headers.
-     Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-     HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-     set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
-     character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`.
-     For detailed information about calling the service and the responses it can generate, see [Requesting a
-     profile](https://console.bluemix.net/docs/services/personality-insights/input.html), [Understanding a JSON
-     profile](https://console.bluemix.net/docs/services/personality-insights/output.html), and [Understanding a CSV
-     profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
-
-     - parameter text: A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-     [Providing sufficient
-     input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
-     provide an object of type `Content`.
-     - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-     are treated as their parent language; for example, `en-US` is interpreted as `en`.
-     The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**
-     is `text/plain` or `text/html`, **Content-Language** is the only way to specify the language. When
-     **Content-Type** is `application/json`, **Content-Language** overrides a language specified with the `language`
-     parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this
-     parameter to base the language on the specification of the content items. You can specify any combination of
-     languages for **Content-Language** and **Accept-Language**.
-     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
-     language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input
-     and response content.
-     - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-     scores are not compared with a sample population. By default, only normalized percentiles are returned.
-     - parameter csvHeaders: Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
-     Applies only when the **Accept** parameter is set to `text/csv`.
-     - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-     are returned.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func profileAsCsv(
-        text: String,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        csvHeaders: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
-    {
-        // construct body
-        guard let body = text.data(using: .utf8) else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-        headerParameters["Accept"] = "text/csv"
-        headerParameters["Content-Type"] = "text/plain"
-        if let contentLanguage = contentLanguage {
-            headerParameters["Content-Language"] = contentLanguage
-        }
-        if let acceptLanguage = acceptLanguage {
-            headerParameters["Accept-Language"] = acceptLanguage
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let rawScores = rawScores {
-            let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
-            queryParameters.append(queryParameter)
-        }
-        if let csvHeaders = csvHeaders {
-            let queryParameter = URLQueryItem(name: "csv_headers", value: "\(csvHeaders)")
-            queryParameters.append(queryParameter)
-        }
-        if let consumptionPreferences = consumptionPreferences {
-            let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseString(responseToError: responseToError) {
-            (response: RestResponse<String>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-
-    /**
-     Get profile as csv.
-
-     Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
-     content, but it requires much less text to produce an accurate profile; for more information, see [Providing
-     sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). The
-     service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
-     languages. You can provide plain text, HTML, or JSON input by specifying the **Content-Type** parameter; the
-     default is `text/plain`. Request a JSON or comma-separated values (CSV) response by specifying the **Accept**
-     parameter; CSV output includes a fixed number of columns and optional headers.
-     Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-     HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-     set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
-     character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`.
-     For detailed information about calling the service and the responses it can generate, see [Requesting a
-     profile](https://console.bluemix.net/docs/services/personality-insights/input.html), [Understanding a JSON
-     profile](https://console.bluemix.net/docs/services/personality-insights/output.html), and [Understanding a CSV
-     profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
-
-     - parameter html: A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-     [Providing sufficient
-     input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
-     provide an object of type `Content`.
-     - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-     are treated as their parent language; for example, `en-US` is interpreted as `en`.
-     The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**
-     is `text/plain` or `text/html`, **Content-Language** is the only way to specify the language. When
-     **Content-Type** is `application/json`, **Content-Language** overrides a language specified with the `language`
-     parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this
-     parameter to base the language on the specification of the content items. You can specify any combination of
-     languages for **Content-Language** and **Accept-Language**.
-     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
-     language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input
-     and response content.
-     - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-     scores are not compared with a sample population. By default, only normalized percentiles are returned.
-     - parameter csvHeaders: Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
-     Applies only when the **Accept** parameter is set to `text/csv`.
-     - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-     are returned.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func profileAsCsv(
-        html: String,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        csvHeaders: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
-    {
-        // construct body
-        guard let body = html.data(using: .utf8) else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-        headerParameters["Accept"] = "text/csv"
-        headerParameters["Content-Type"] = "text/html"
-        if let contentLanguage = contentLanguage {
-            headerParameters["Content-Language"] = contentLanguage
-        }
-        if let acceptLanguage = acceptLanguage {
-            headerParameters["Accept-Language"] = acceptLanguage
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let rawScores = rawScores {
-            let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
-            queryParameters.append(queryParameter)
-        }
-        if let csvHeaders = csvHeaders {
-            let queryParameter = URLQueryItem(name: "csv_headers", value: "\(csvHeaders)")
-            queryParameters.append(queryParameter)
-        }
-        if let consumptionPreferences = consumptionPreferences {
-            let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            method: "POST",
-            url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseString(responseToError: responseToError) {
-            (response: RestResponse<String>) in
+        request.responseObject {
+            (response: RestResponse<URL>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

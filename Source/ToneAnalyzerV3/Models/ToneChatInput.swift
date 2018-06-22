@@ -17,7 +17,7 @@
 import Foundation
 
 /** ToneChatInput. */
-public struct ToneChatInput: Encodable {
+internal struct ToneChatInput: Encodable {
 
     /**
      An array of `Utterance` objects that provides the input content that the service is to analyze.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateSynonym. */
-public struct CreateSynonym: Encodable {
+internal struct CreateSynonym: Encodable {
 
     /**
      The text of the synonym. This string must conform to the following restrictions:

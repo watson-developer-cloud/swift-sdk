@@ -34,9 +34,6 @@ public struct Face: Decodable {
      */
     public var faceLocation: FaceLocation?
 
-    /** deprecated */
-    public var identity: FaceIdentity?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case age = "age"

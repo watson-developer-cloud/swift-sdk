@@ -17,7 +17,7 @@
 import Foundation
 
 /** Text. */
-public struct Text: Encodable {
+internal struct Text: Encodable {
 
     /**
      The text to synthesize.

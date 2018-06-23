@@ -150,9 +150,8 @@ class SpeechToTextTests: XCTestCase {
 
     // MARK: - Wait Functions
 
-    func waitUntil(condition: () -> Bool) {
+    func waitUntil(maxRetries: Int = 5, condition: () -> Bool) {
         let sleepTime: UInt32 = 5
-        let maxRetries = 5
         for retry in 1 ... maxRetries {
             if !condition() && retry < maxRetries {
                 sleep(sleepTime)
@@ -163,7 +162,7 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func waitUntil(_ languageModel: LanguageModel, is status: String) {
-        waitUntil {
+        waitUntil(maxRetries: 12) {
             var hasDesiredStatus = false
             let expectation = self.expectation(description: "getLanguageModel")
             let failure = { (error: Error) in if !error.localizedDescription.contains("locked") { XCTFail(error.localizedDescription) }}

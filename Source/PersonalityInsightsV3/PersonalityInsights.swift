@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+// swiftlint:disable file_length
 
 import Foundation
 
@@ -39,6 +40,7 @@ public class PersonalityInsights {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
     private var authMethod: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV3"
     private let version: String
@@ -91,27 +93,12 @@ public class PersonalityInsights {
      If the response or data represents an error returned by the Personality Insights service,
      then return NSError with information about the error that occured. Otherwise, return nil.
 
-     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
+     - parameter response: the URL response returned from the service.
      */
-    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
-        // First check http status code in response
-        if let response = response {
-            if (200..<300).contains(response.statusCode) {
-                return nil
-            }
-        }
-
-        // ensure data is not nil
-        guard let data = data else {
-            if let code = response?.statusCode {
-                return NSError(domain: domain, code: code, userInfo: nil)
-            }
-            return nil  // RestKit will generate error for this case
-        }
-
-        let code = response?.statusCode ?? 400
+        let code = response.statusCode
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
@@ -213,16 +200,18 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<Profile>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -317,16 +306,18 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<Profile>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -358,7 +349,7 @@ public class PersonalityInsights {
      [Providing sufficient
      input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
      provide an object of type `Content`.
-      - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
+     - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
      are treated as their parent language; for example, `en-US` is interpreted as `en`.
      The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**
      is `text/plain` or `text/html`, **Content-Language** is the only way to specify the language. When
@@ -421,16 +412,18 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<Profile>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -532,16 +525,18 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseString(responseToError: responseToError) {
+        request.responseString {
             (response: RestResponse<String>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -643,16 +638,18 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseString(responseToError: responseToError) {
+        request.responseString {
             (response: RestResponse<String>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -660,7 +657,6 @@ public class PersonalityInsights {
             }
         }
     }
-
 
     /**
      Get profile as csv.
@@ -755,16 +751,18 @@ public class PersonalityInsights {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseString(responseToError: responseToError) {
+        request.responseString {
             (response: RestResponse<String>) in
             switch response.result {
             case .success(let retval): success(retval)

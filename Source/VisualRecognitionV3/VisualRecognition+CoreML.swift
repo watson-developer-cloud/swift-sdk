@@ -348,9 +348,11 @@ extension VisualRecognition {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )

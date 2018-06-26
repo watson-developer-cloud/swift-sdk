@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+// swiftlint:disable file_length
 
 import Foundation
 
@@ -33,6 +34,7 @@ public class NaturalLanguageUnderstanding {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
     private var authMethod: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1"
     private let version: String
@@ -85,27 +87,12 @@ public class NaturalLanguageUnderstanding {
      If the response or data represents an error returned by the Natural Language Understanding service,
      then return NSError with information about the error that occured. Otherwise, return nil.
 
-     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
+     - parameter response: the URL response returned from the service.
      */
-    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
-        // First check http status code in response
-        if let response = response {
-            if (200..<300).contains(response.statusCode) {
-                return nil
-            }
-        }
-
-        // ensure data is not nil
-        guard let data = data else {
-            if let code = response?.statusCode {
-                return NSError(domain: domain, code: code, userInfo: nil)
-            }
-            return nil  // RestKit will generate error for this case
-        }
-
-        let code = response?.statusCode ?? 400
+        let code = response.statusCode
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
@@ -185,16 +172,18 @@ public class NaturalLanguageUnderstanding {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/analyze",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<AnalysisResults>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -231,15 +220,17 @@ public class NaturalLanguageUnderstanding {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/models",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<ListModelsResults>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -282,15 +273,17 @@ public class NaturalLanguageUnderstanding {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<DeleteModelResults>) in
             switch response.result {
             case .success(let retval): success(retval)

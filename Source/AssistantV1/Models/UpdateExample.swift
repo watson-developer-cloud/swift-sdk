@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateExample. */
-public struct UpdateExample: Encodable {
+internal struct UpdateExample: Encodable {
 
     /**
      The text of the user input example. This string must conform to the following restrictions:

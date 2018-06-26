@@ -29,6 +29,7 @@ internal class RestToken {
     private var tokenURL: String
     private var authMethod: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.RestKit"
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
 
     /**
      Create a `RestToken`.
@@ -52,12 +53,14 @@ internal class RestToken {
         success: (() -> Void)? = nil)
     {
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: tokenURL,
-            authMethod: authMethod,
             headerParameters: [:])
 
-        request.responseString(responseToError: responseToError) { response in
+        request.responseString { response in
             switch response.result {
             case .success(let token):
                 self.token = token
@@ -74,32 +77,19 @@ internal class RestToken {
      - parameter response: an http response from the token url
      - parameter data: raw body data from the token url response
      */
-    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
-
-        // fail if no response from token url
-        guard let response = response else {
-            let description = "Token authentication failed. No response from token url."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            return NSError(domain: domain, code: 400, userInfo: userInfo)
-        }
-
-        // succeed if status code indicates success
-        if (200..<300).contains(response.statusCode) {
-            return nil
-        }
+    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> NSError {
 
         // default error description
         let code = response.statusCode
         var userInfo = [NSLocalizedDescriptionKey: "Token authentication failed."]
 
         // update error description, if available
-        if let data = data {
-            do {
-                let json = try JSON.decoder.decode([String: JSON].self, from: data)
-                let description = json["description"] ?? JSON.null
-                userInfo[NSLocalizedDescriptionKey] = "\(description)"
-            } catch { /* no need to catch -- falls back to default description */ }
-        }
+        do {
+            let json = try JSON.decoder.decode([String: JSON].self, from: data)
+            if case let .some(.string(description)) = json["description"] {
+                userInfo[NSLocalizedDescriptionKey] = description
+            }
+        } catch { /* no need to catch -- falls back to default description */ }
 
         return NSError(domain: domain, code: code, userInfo: userInfo)
     }

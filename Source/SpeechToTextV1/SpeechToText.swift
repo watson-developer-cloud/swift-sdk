@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+// swiftlint:disable file_length
 
 import Foundation
 
@@ -70,6 +71,7 @@ public class SpeechToText {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
+    internal let session = URLSession(configuration: URLSessionConfiguration.default)
     internal var authMethod: AuthenticationMethod
     internal let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
@@ -112,27 +114,12 @@ public class SpeechToText {
      If the response or data represents an error returned by the Speech to Text service,
      then return NSError with information about the error that occured. Otherwise, return nil.
 
-     - parameter response: the URL response returned from the service.
      - parameter data: Raw data returned from the service that may represent an error.
+     - parameter response: the URL response returned from the service.
      */
-    private func responseToError(response: HTTPURLResponse?, data: Data?) -> NSError? {
+    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
-        // First check http status code in response
-        if let response = response {
-            if (200..<300).contains(response.statusCode) {
-                return nil
-            }
-        }
-
-        // ensure data is not nil
-        guard let data = data else {
-            if let code = response?.statusCode {
-                return NSError(domain: domain, code: code, userInfo: nil)
-            }
-            return nil  // RestKit will generate error for this case
-        }
-
-        let code = response?.statusCode ?? 400
+        let code = response.statusCode
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
@@ -172,14 +159,16 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/models",
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<SpeechModels>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -219,14 +208,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<SpeechModel>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -280,9 +271,7 @@ public class SpeechToText {
      data](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
 
      - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.
-     - parameter contentType: The type of the input: audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg,
-       audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm, audio/webm;codecs=opus, or
-       audio/webm;codecs=vorbis.
+     - parameter contentType: The type of the input.
      - parameter model: The identifier of the model that is to be used for the recognition request or, for the **Create a session**
        method, with the new session.
      - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for
@@ -442,16 +431,18 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/recognize",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<SpeechRecognitionResults>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -520,15 +511,17 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/register_callback",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<RegisterStatus>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -567,15 +560,17 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/unregister_callback",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -634,9 +629,7 @@ public class SpeechToText {
      formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
 
      - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.
-     - parameter contentType: The type of the input: audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg,
-       audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm, audio/webm;codecs=opus, or
-       audio/webm;codecs=vorbis.
+     - parameter contentType: The type of the input.
      - parameter model: The identifier of the model that is to be used for the recognition request or, for the **Create a session**
        method, with the new session.
      - parameter callbackUrl: A URL to which callback notifications are to be sent. The URL must already be successfully white-listed by using
@@ -840,16 +833,18 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/recognitions",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<RecognitionJob>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -886,14 +881,16 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/recognitions",
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<RecognitionJobs>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -938,14 +935,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<RecognitionJob>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -986,14 +985,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -1036,15 +1037,17 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/customizations",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<LanguageModel>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -1090,15 +1093,17 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/customizations",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<LanguageModels>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -1139,14 +1144,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<LanguageModel>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -1188,14 +1195,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -1278,15 +1287,17 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -1329,14 +1340,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -1387,14 +1400,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -1436,14 +1451,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<Corpora>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -1538,16 +1555,18 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -1593,14 +1612,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<Corpus>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -1648,14 +1669,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -1721,15 +1744,17 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<Words>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -1814,15 +1839,17 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -1913,15 +1940,17 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -1966,14 +1995,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<Word>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -2021,14 +2052,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -2082,15 +2115,17 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/acoustic_customizations",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<AcousticModel>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -2136,15 +2171,17 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/acoustic_customizations",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<AcousticModels>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -2185,14 +2222,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<AcousticModel>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -2234,14 +2273,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -2316,15 +2357,17 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -2367,14 +2410,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -2440,15 +2485,17 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -2492,14 +2539,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<AudioResources>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -2574,9 +2623,7 @@ public class SpeechToText {
      - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
        spaces in the name; use a localized name that matches the language of the custom model.
      - parameter audioResource: The audio resource that is to be added to the custom acoustic model, an individual audio file or an archive file.
-     - parameter contentType: The type of the input: application/zip, application/gzip, audio/basic, audio/flac, audio/l16, audio/mp3,
-       audio/mpeg, audio/mulaw, audio/ogg, audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm,
-       audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
+     - parameter contentType: The type of the input.
      - parameter containedContentType: For an archive-type resource, specifies the format of the audio files contained in the archive file. The
        parameter accepts all of the audio formats supported for use with speech recognition, including the `rate`,
        `channels`, and `endianness` parameters that are used with some formats. For a complete list of supported audio
@@ -2627,16 +2674,18 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -2691,14 +2740,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseObject(responseToError: responseToError) {
+        request.responseObject {
             (response: RestResponse<AudioListing>) in
             switch response.result {
             case .success(let retval): success(retval)
@@ -2745,14 +2796,16 @@ public class SpeechToText {
             return
         }
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
-            authMethod: authMethod,
             headerParameters: headerParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
@@ -2796,15 +2849,17 @@ public class SpeechToText {
 
         // construct REST request
         let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + "/v1/user_data",
-            authMethod: authMethod,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
 
         // execute REST request
-        request.responseVoid(responseToError: responseToError) {
+        request.responseVoid {
             (response: RestResponse) in
             switch response.result {
             case .success: success()

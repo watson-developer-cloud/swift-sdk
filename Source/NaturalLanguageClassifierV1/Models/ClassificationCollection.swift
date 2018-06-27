@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Response from the classifier for multiple phrases. */
+/**
+ Response from the classifier for multiple phrases.
+ */
 public struct ClassificationCollection: Decodable {
 
     /**

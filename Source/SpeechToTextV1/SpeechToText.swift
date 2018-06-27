@@ -62,18 +62,12 @@ public class SpeechToText {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
-    /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-
-    /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let session = URLSession(configuration: URLSessionConfiguration.default)
-    internal var authMethod: AuthenticationMethod
-    internal let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private var authMethod: AuthenticationMethod
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
      Create a `SpeechToText` object.
@@ -123,12 +117,6 @@ public class SpeechToText {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["code_description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -183,7 +171,8 @@ public class SpeechToText {
      Gets information for a single specified language model that is available for use with the service. The information
      includes the name of the model and its minimum sampling rate in Hertz, among other things.
 
-     - parameter modelID: The identifier of the model in the form of its name from the output of the **Get models** method.
+     - parameter modelID: The identifier of the model in the form of its name from the output of the **Get models**
+       method.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -272,60 +261,66 @@ public class SpeechToText {
 
      - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.
      - parameter contentType: The type of the input.
-     - parameter model: The identifier of the model that is to be used for the recognition request or, for the **Create a session**
-       method, with the new session.
-     - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for
-       the **Create a session** method, with the new session. The base model of the specified custom language model must
-       match the model specified with the `model` parameter. You must make the request with service credentials created
-       for the instance of the service that owns the custom model. By default, no custom language model is used.
-     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for
-       the **Create a session** method, with the new session. The base model of the specified custom acoustic model must
-       match the model specified with the `model` parameter. You must make the request with service credentials created
-       for the instance of the service that owns the custom model. By default, no custom acoustic model is used.
-     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition request or, for the **Create a
-       session** method, with the new session. Multiple versions of a base model can exist when a model is updated for
-       internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for
-       a new base model. The default value depends on whether the parameter is used with or without a custom model. For
-       more information, see [Base model
+     - parameter model: The identifier of the model that is to be used for the recognition request or, for the
+       **Create a session** method, with the new session.
+     - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the
+       recognition request or, for the **Create a session** method, with the new session. The base model of the
+       specified custom language model must match the model specified with the `model` parameter. You must make the
+       request with service credentials created for the instance of the service that owns the custom model. By default,
+       no custom language model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
+       with the recognition request or, for the **Create a session** method, with the new session. The base model of the
+       specified custom acoustic model must match the model specified with the `model` parameter. You must make the
+       request with service credentials created for the instance of the service that owns the custom model. By default,
+       no custom acoustic model is used.
+     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition request
+       or, for the **Create a session** method, with the new session. Multiple versions of a base model can exist when a
+       model is updated for internal improvements. The parameter is intended primarily for use with custom models that
+       have been upgraded for a new base model. The default value depends on whether the parameter is used with or
+       without a custom model. For more information, see [Base model
        version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
-     - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the recognition request or, for
-       sessions, with the **Create a session** method, the customization weight tells the service how much weight to
-       give to words from the custom language model compared to those from the base model for the current request.
+     - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the
+       recognition request or, for sessions, with the **Create a session** method, the customization weight tells the
+       service how much weight to give to words from the custom language model compared to those from the base model for
+       the current request.
        Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model
        when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that
        was specified when the custom model was trained.
        The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
        of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
        of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
-     - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
-       closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-       simply walks away. Use `-1` for infinity.
-     - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords
-       are spotted only in the final results, not in interim hypotheses. If you specify any keywords, you must also
-       specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty
-       array if you do not need to spot keywords.
-     - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
-       confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword
-       spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-       keywords.
-     - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single transcription is returned.
-     - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
-       known as \"Confusion Networks\"). An alternative word is considered if its confidence is greater than or equal to
-       the threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the
+     - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in
+       submitted audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
+       from a live microphone when a user simply walks away. Use `-1` for infinity.
+     - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or
+       more tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
+       keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter
+       or specify an empty array if you do not need to spot keywords.
+     - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is
+       considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
+       between 0 and 1 inclusive. No keyword spotting is performed if you omit the parameter. If you specify a
+       threshold, you must also specify one or more keywords.
+     - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single
+       transcription is returned.
+     - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
+       a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
+       confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No
+       alternative words are computed if you omit the parameter.
+     - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By
+       default, no word confidence measures are returned.
+     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are
+       returned.
+     - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword
+       results by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return
+       results with no censoring. Applies to US English transcription only.
+     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers,
+       currency values, and internet addresses into more readable, conventional representations in the final transcript
+       of a recognition request. For US English, also converts certain keyword strings to punctuation symbols. By
+       default, no smart formatting is performed. Applies to US English and Spanish transcription only.
+     - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which
+       participants in a multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to
+       `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the
        parameter.
-     - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence
-       measures are returned.
-     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are returned.
-     - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate
-       words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
-       English transcription only.
-     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet
-       addresses into more readable, conventional representations in the final transcript of a recognition request. For
-       US English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is
-       performed. Applies to US English and Spanish transcription only.
-     - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which participants in a
-       multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-       `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
         To determine whether a language model supports speaker labels, use the **Get models** method and check that the
        attribute `speaker_labels` is set to `true`. You can also refer to [Speaker
        labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
@@ -334,13 +329,13 @@ public class SpeechToText {
      - parameter success: A function executed with the successful result.
      */
     public func recognizeSessionless(
+        audio: Data,
+        contentType: String,
         model: String? = nil,
         customizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
-        audio: Data? = nil,
-        contentType: String? = nil,
         inactivityTimeout: Int? = nil,
         keywords: [String]? = nil,
         keywordsThreshold: Double? = nil,
@@ -476,13 +471,14 @@ public class SpeechToText {
      You can register a maximum of 20 callback URLS in a one-hour span of time. For more information, see [Registering a
      callback URL](https://console.bluemix.net/docs/services/speech-to-text/async.html#register).
 
-     - parameter callbackUrl: An HTTP or HTTPS URL to which callback notifications are to be sent. To be white-listed, the URL must
-       successfully echo the challenge string during URL verification. During verification, the client can also check
-       the signature that the service sends in the `X-Callback-Signature` header to verify the origin of the request.
-     - parameter userSecret: A user-specified string that the service uses to generate the HMAC-SHA1 signature that it sends via the
-       `X-Callback-Signature` header. The service includes the header during URL verification and with every
-       notification sent to the callback URL. It calculates the signature over the payload of the notification. If you
-       omit the parameter, the service does not send the header.
+     - parameter callbackUrl: An HTTP or HTTPS URL to which callback notifications are to be sent. To be white-listed,
+       the URL must successfully echo the challenge string during URL verification. During verification, the client can
+       also check the signature that the service sends in the `X-Callback-Signature` header to verify the origin of the
+       request.
+     - parameter userSecret: A user-specified string that the service uses to generate the HMAC-SHA1 signature that it
+       sends via the `X-Callback-Signature` header. The service includes the header during URL verification and with
+       every notification sent to the callback URL. It calculates the signature over the payload of the notification. If
+       you omit the parameter, the service does not send the header.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -630,15 +626,15 @@ public class SpeechToText {
 
      - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.
      - parameter contentType: The type of the input.
-     - parameter model: The identifier of the model that is to be used for the recognition request or, for the **Create a session**
-       method, with the new session.
-     - parameter callbackUrl: A URL to which callback notifications are to be sent. The URL must already be successfully white-listed by using
-       the **Register a callback** method. You can include the same callback URL with any number of job creation
-       requests. Omit the parameter to poll the service for job completion and results.
+     - parameter model: The identifier of the model that is to be used for the recognition request or, for the
+       **Create a session** method, with the new session.
+     - parameter callbackUrl: A URL to which callback notifications are to be sent. The URL must already be
+       successfully white-listed by using the **Register a callback** method. You can include the same callback URL with
+       any number of job creation requests. Omit the parameter to poll the service for job completion and results.
        Use the `user_token` parameter to specify a unique user-specified string with each job to differentiate the
        callback notifications for the jobs.
-     - parameter events: If the job includes a callback URL, a comma-separated list of notification events to which to subscribe. Valid
-       events are
+     - parameter events: If the job includes a callback URL, a comma-separated list of notification events to which to
+       subscribe. Valid events are
        * `recognitions.started` generates a callback notification when the service begins to process the job.
        * `recognitions.completed` generates a callback notification when the job is complete. You must use the **Check a
        job** method to retrieve the results before they time out or are deleted.
@@ -650,64 +646,70 @@ public class SpeechToText {
        `recognitions.failed`. The `recognitions.completed` and `recognitions.completed_with_results` events are
        incompatible; you can specify only of the two events. If the job does not include a callback URL, omit the
        parameter.
-     - parameter userToken: If the job includes a callback URL, a user-specified string that the service is to include with each callback
-       notification for the job; the token allows the user to maintain an internal mapping between jobs and notification
-       events. If the job does not include a callback URL, omit the parameter.
-     - parameter resultsTtl: The number of minutes for which the results are to be available after the job has finished. If not delivered via
-       a callback, the results must be retrieved within this time. Omit the parameter to use a time to live of one week.
-       The parameter is valid with or without a callback URL.
-     - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for
-       the **Create a session** method, with the new session. The base model of the specified custom language model must
-       match the model specified with the `model` parameter. You must make the request with service credentials created
-       for the instance of the service that owns the custom model. By default, no custom language model is used.
-     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for
-       the **Create a session** method, with the new session. The base model of the specified custom acoustic model must
-       match the model specified with the `model` parameter. You must make the request with service credentials created
-       for the instance of the service that owns the custom model. By default, no custom acoustic model is used.
-     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition request or, for the **Create a
-       session** method, with the new session. Multiple versions of a base model can exist when a model is updated for
-       internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for
-       a new base model. The default value depends on whether the parameter is used with or without a custom model. For
-       more information, see [Base model
+     - parameter userToken: If the job includes a callback URL, a user-specified string that the service is to include
+       with each callback notification for the job; the token allows the user to maintain an internal mapping between
+       jobs and notification events. If the job does not include a callback URL, omit the parameter.
+     - parameter resultsTtl: The number of minutes for which the results are to be available after the job has
+       finished. If not delivered via a callback, the results must be retrieved within this time. Omit the parameter to
+       use a time to live of one week. The parameter is valid with or without a callback URL.
+     - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the
+       recognition request or, for the **Create a session** method, with the new session. The base model of the
+       specified custom language model must match the model specified with the `model` parameter. You must make the
+       request with service credentials created for the instance of the service that owns the custom model. By default,
+       no custom language model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
+       with the recognition request or, for the **Create a session** method, with the new session. The base model of the
+       specified custom acoustic model must match the model specified with the `model` parameter. You must make the
+       request with service credentials created for the instance of the service that owns the custom model. By default,
+       no custom acoustic model is used.
+     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition request
+       or, for the **Create a session** method, with the new session. Multiple versions of a base model can exist when a
+       model is updated for internal improvements. The parameter is intended primarily for use with custom models that
+       have been upgraded for a new base model. The default value depends on whether the parameter is used with or
+       without a custom model. For more information, see [Base model
        version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
-     - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the recognition request or, for
-       sessions, with the **Create a session** method, the customization weight tells the service how much weight to
-       give to words from the custom language model compared to those from the base model for the current request.
+     - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the
+       recognition request or, for sessions, with the **Create a session** method, the customization weight tells the
+       service how much weight to give to words from the custom language model compared to those from the base model for
+       the current request.
        Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model
        when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that
        was specified when the custom model was trained.
        The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
        of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
        of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
-     - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
-       closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-       simply walks away. Use `-1` for infinity.
-     - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords
-       are spotted only in the final results, not in interim hypotheses. If you specify any keywords, you must also
-       specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty
-       array if you do not need to spot keywords.
-     - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
-       confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword
-       spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-       keywords.
-     - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single transcription is returned.
-     - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
-       known as \"Confusion Networks\"). An alternative word is considered if its confidence is greater than or equal to
-       the threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the
+     - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in
+       submitted audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
+       from a live microphone when a user simply walks away. Use `-1` for infinity.
+     - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or
+       more tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
+       keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter
+       or specify an empty array if you do not need to spot keywords.
+     - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is
+       considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
+       between 0 and 1 inclusive. No keyword spotting is performed if you omit the parameter. If you specify a
+       threshold, you must also specify one or more keywords.
+     - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single
+       transcription is returned.
+     - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
+       a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
+       confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No
+       alternative words are computed if you omit the parameter.
+     - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By
+       default, no word confidence measures are returned.
+     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are
+       returned.
+     - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword
+       results by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return
+       results with no censoring. Applies to US English transcription only.
+     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers,
+       currency values, and internet addresses into more readable, conventional representations in the final transcript
+       of a recognition request. For US English, also converts certain keyword strings to punctuation symbols. By
+       default, no smart formatting is performed. Applies to US English and Spanish transcription only.
+     - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which
+       participants in a multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to
+       `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the
        parameter.
-     - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence
-       measures are returned.
-     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are returned.
-     - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate
-       words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
-       English transcription only.
-     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet
-       addresses into more readable, conventional representations in the final transcript of a recognition request. For
-       US English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is
-       performed. Applies to US English and Spanish transcription only.
-     - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which participants in a
-       multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-       `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
         To determine whether a language model supports speaker labels, use the **Get models** method and check that the
        attribute `speaker_labels` is set to `true`. You can also refer to [Speaker
        labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
@@ -1010,7 +1012,8 @@ public class SpeechToText {
      base model for which it is created. The model is owned by the instance of the service whose credentials are used to
      create it.
 
-     - parameter createLanguageModel: A `CreateLanguageModel` object that provides basic information about the new custom language model.
+     - parameter createLanguageModel: A `CreateLanguageModel` object that provides basic information about the new
+       custom language model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1064,9 +1067,9 @@ public class SpeechToText {
      language models for all languages. You must use credentials for the instance of the service that owns a model to
      list information about it.
 
-     - parameter language: The identifier of the language for which custom language or custom acoustic models are to be returned (for
-       example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
-       requesting service credentials.
+     - parameter language: The identifier of the language for which custom language or custom acoustic models are to
+       be returned (for example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned
+       by the requesting service credentials.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1118,8 +1121,8 @@ public class SpeechToText {
      Gets information about a specified custom language model. You must use credentials for the instance of the service
      that owns a model to list information about it.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1169,8 +1172,8 @@ public class SpeechToText {
      corpus to the model, is currently being processed. You must use credentials for the instance of the service that
      owns a model to delete it.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1235,16 +1238,17 @@ public class SpeechToText {
      * No training data (corpora or words) have been added to the custom model.
      * One or more words that were added to the custom model have invalid sounds-like pronunciations that you must fix.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter wordTypeToAdd: The type of words from the custom language model's words resource on which to train the model:
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter wordTypeToAdd: The type of words from the custom language model's words resource on which to train
+       the model:
        * `all` (the default) trains the model on all new words, regardless of whether they were extracted from corpora
        or were added or modified by the user.
        * `user` trains the model only on new words that were added or modified by the user; the model is not trained on
        new words extracted from corpora.
-     - parameter customizationWeight: Specifies a customization weight for the custom language model. The customization weight tells the service how
-       much weight to give to words from the custom language model compared to those from the base model for speech
-       recognition. Specify a value between 0.0 and 1.0; the default is 0.3.
+     - parameter customizationWeight: Specifies a customization weight for the custom language model. The
+       customization weight tells the service how much weight to give to words from the custom language model compared
+       to those from the base model for speech recognition. Specify a value between 0.0 and 1.0; the default is 0.3.
        The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
        of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
        of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
@@ -1314,8 +1318,8 @@ public class SpeechToText {
      are preserved, but the model's words resource is removed and must be re-created. You must use credentials for the
      instance of the service that owns a model to reset it.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1374,8 +1378,8 @@ public class SpeechToText {
      For more information, see [Upgrading custom
      models](https://console.bluemix.net/docs/services/speech-to-text/custom-upgrade.html).
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1425,8 +1429,8 @@ public class SpeechToText {
      words and out-of-vocabulary (OOV) words, name, and status of each corpus. You must use credentials for the instance
      of the service that owns a model to list its corpora.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1499,18 +1503,18 @@ public class SpeechToText {
      words from all corpora combined. Also, you can add no more than 30 thousand custom (OOV) words to a model; this
      includes words that the service extracts from corpora and words that you add directly.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name;
-       use a localized name that matches the language of the custom model; and do not use the name `user`, which is
-       reserved by the service to denote custom words added or modified by the user.
-     - parameter corpusFile: A plain text file that contains the training data for the corpus. Encode the file in UTF-8 if it contains
-       non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII characters. With cURL, use
-       the `--data-binary` option to upload the file for the request.
-     - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
-       name. If `false` (the default), the request fails if a corpus or audio resource with the same name already
-       exists. The parameter has no effect if a corpus or audio resource with the same name does not already exist.
-     - parameter corpusFileContentType: The content type of corpusFile.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not
+       include spaces in the name; use a localized name that matches the language of the custom model; and do not use
+       the name `user`, which is reserved by the service to denote custom words added or modified by the user.
+     - parameter corpusFile: A plain text file that contains the training data for the corpus. Encode the file in
+       UTF-8 if it contains non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII
+       characters. With cURL, use the `--data-binary` option to upload the file for the request.
+     - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or
+       audio resource with the same name. If `false` (the default), the request fails if a corpus or audio resource with
+       the same name already exists. The parameter has no effect if a corpus or audio resource with the same name does
+       not already exist.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1520,7 +1524,6 @@ public class SpeechToText {
         corpusName: String,
         corpusFile: URL,
         allowOverwrite: Bool? = nil,
-        corpusFileContentType: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)
@@ -1582,11 +1585,11 @@ public class SpeechToText {
      and out-of-vocabulary (OOV) words, name, and status of the corpus. You must use credentials for the instance of the
      service that owns a model to list its corpora.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name;
-       use a localized name that matches the language of the custom model; and do not use the name `user`, which is
-       reserved by the service to denote custom words added or modified by the user.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not
+       include spaces in the name; use a localized name that matches the language of the custom model; and do not use
+       the name `user`, which is reserved by the service to denote custom words added or modified by the user.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1639,11 +1642,11 @@ public class SpeechToText {
      corpus does not affect the custom model until you train the model with the **Train a custom language model**
      method. You must use credentials for the instance of the service that owns a model to delete its corpora.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name;
-       use a localized name that matches the language of the custom model; and do not use the name `user`, which is
-       reserved by the service to denote custom words added or modified by the user.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter corpusName: The name of the corpus for the custom language model. When adding a corpus, do not
+       include spaces in the name; use a localized name that matches the language of the custom model; and do not use
+       the name `user`, which is reserved by the service to denote custom words added or modified by the user.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1696,15 +1699,15 @@ public class SpeechToText {
      default, words are listed in ascending alphabetical order. You must use credentials for the instance of the service
      that owns a model to query information about its words.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter wordType: The type of words to be listed from the custom language model's words resource:
        * `all` (the default) shows all words.
        * `user` shows only custom words that were added or modified by the user.
        * `corpora` shows only OOV that were extracted from corpora.
-     - parameter sort: Indicates the order in which the words are to be listed, `alphabetical` or by `count`. You can prepend an
-       optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or descending
-       order. By default, words are sorted in ascending alphabetical order. For alphabetical ordering, the
+     - parameter sort: Indicates the order in which the words are to be listed, `alphabetical` or by `count`. You can
+       prepend an optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or
+       descending order. By default, words are sorted in ascending alphabetical order. For alphabetical ordering, the
        lexicographical precedence is numeric values, uppercase letters, and lowercase letters. For count ordering,
        values with the same count are ordered alphabetically. With cURL, URL encode the `+` symbol as `%2B`.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -1802,10 +1805,10 @@ public class SpeechToText {
      an invalid `sounds_like` field include an `error` field that describes the problem. You can use other words-related
      methods to correct errors, eliminate typos, and modify how words are pronounced as needed.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter words: An array of objects that provides information about each custom word that is to be added to or updated in the
-       custom language model.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter words: An array of objects that provides information about each custom word that is to be added to or
+       updated in the custom language model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1885,25 +1888,25 @@ public class SpeechToText {
      overwrites the existing data for the word. If the service encounters an error, it does not add the word to the
      words resource. Use the **List a custom word** method to review the word that you add.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter wordName: The custom word for the custom language model. When you add or update a custom word with the **Add a custom
-       word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
-       compound words.
-     - parameter word: For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the
-       custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
-       compound words.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter wordName: The custom word for the custom language model. When you add or update a custom word with
+       the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to
+       connect the tokens of compound words.
+     - parameter word: For the **Add custom words** method, you must specify the custom word that is to be added to or
+       updated in the custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect
+       the tokens of compound words.
        Omit this field for the **Add a custom word** method.
-     - parameter soundsLike: An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
-       foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service's base
-       vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the
-       word. For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations
-       for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
-       pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a
-       pronunciation can include at most 40 characters not including spaces.
-     - parameter displayAs: An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the
-       word to have a spelling that is different from its usual representation or from its spelling in corpora training
-       data.
+     - parameter soundsLike: An array of sounds-like pronunciations for the custom word. Specify how words that are
+       difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users. For a word that is not in
+       the service's base vocabulary, omit the parameter to have the service automatically generate a sounds-like
+       pronunciation for the word. For a word that is in the service's base vocabulary, use the parameter to specify
+       additional pronunciations for the word. You cannot override the default pronunciation of a word; pronunciations
+       you add augment the pronunciation from the base vocabulary. A word can have at most five sounds-like
+       pronunciations, and a pronunciation can include at most 40 characters not including spaces.
+     - parameter displayAs: An alternative spelling for the custom word when it appears in a transcript. Use the
+       parameter when you want the word to have a spelling that is different from its usual representation or from its
+       spelling in corpora training data.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1965,11 +1968,11 @@ public class SpeechToText {
      Gets information about a custom word from a custom language model. You must use credentials for the instance of the
      service that owns a model to query information about its words.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter wordName: The custom word for the custom language model. When you add or update a custom word with the **Add a custom
-       word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
-       compound words.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter wordName: The custom word for the custom language model. When you add or update a custom word with
+       the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to
+       connect the tokens of compound words.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2022,11 +2025,11 @@ public class SpeechToText {
      does not affect the custom model until you train the model with the **Train a custom language model** method. You
      must use credentials for the instance of the service that owns a model to delete its words.
 
-     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter wordName: The custom word for the custom language model. When you add or update a custom word with the **Add a custom
-       word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
-       compound words.
+     - parameter customizationID: The customization ID (GUID) of the custom language model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter wordName: The custom word for the custom language model. When you add or update a custom word with
+       the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to
+       connect the tokens of compound words.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2077,15 +2080,16 @@ public class SpeechToText {
      base model for which it is created. The model is owned by the instance of the service whose credentials are used to
      create it.
 
-     - parameter name: A user-defined name for the new custom acoustic model. Use a name that is unique among all custom acoustic models
-       that you own. Use a localized name that matches the language of the custom model. Use a name that describes the
-       acoustic environment of the custom model, such as `Mobile custom model` or `Noisy car custom model`.
-     - parameter baseModelName: The name of the base language model that is to be customized by the new custom acoustic model. The new custom
-       model can be used only with the base model that it customizes. To determine whether a base model supports
-       acoustic model customization, refer to [Language support for
+     - parameter name: A user-defined name for the new custom acoustic model. Use a name that is unique among all
+       custom acoustic models that you own. Use a localized name that matches the language of the custom model. Use a
+       name that describes the acoustic environment of the custom model, such as `Mobile custom model` or `Noisy car
+       custom model`.
+     - parameter baseModelName: The name of the base language model that is to be customized by the new custom
+       acoustic model. The new custom model can be used only with the base model that it customizes. To determine
+       whether a base model supports acoustic model customization, refer to [Language support for
        customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
-     - parameter description: A description of the new custom acoustic model. Use a localized description that matches the language of the
-       custom model.
+     - parameter description: A description of the new custom acoustic model. Use a localized description that matches
+       the language of the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2142,9 +2146,9 @@ public class SpeechToText {
      acoustic models for all languages. You must use credentials for the instance of the service that owns a model to
      list information about it.
 
-     - parameter language: The identifier of the language for which custom language or custom acoustic models are to be returned (for
-       example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
-       requesting service credentials.
+     - parameter language: The identifier of the language for which custom language or custom acoustic models are to
+       be returned (for example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned
+       by the requesting service credentials.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2196,8 +2200,8 @@ public class SpeechToText {
      Gets information about a specified custom acoustic model. You must use credentials for the instance of the service
      that owns a model to list information about it.
 
-     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2247,8 +2251,8 @@ public class SpeechToText {
      audio resource to the model, is currently being processed. You must use credentials for the instance of the service
      that owns a model to delete it.
 
-     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2320,11 +2324,12 @@ public class SpeechToText {
      * The custom model contains less than 10 minutes or more than 50 hours of audio data.
      * One or more of the custom model's audio resources is invalid.
 
-     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter customLanguageModelID: The customization ID (GUID) of a custom language model that is to be used during training of the custom acoustic
-       model. Specify a custom language model that has been trained with verbatim transcriptions of the audio resources
-       or that contains words that are relevant to the contents of the audio resources.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter customLanguageModelID: The customization ID (GUID) of a custom language model that is to be used
+       during training of the custom acoustic model. Specify a custom language model that has been trained with verbatim
+       transcriptions of the audio resources or that contains words that are relevant to the contents of the audio
+       resources.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2384,8 +2389,8 @@ public class SpeechToText {
      are preserved, but the model's audio resources are removed and must be re-created. You must use credentials for the
      instance of the service that owns a model to reset it.
 
-     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2449,10 +2454,11 @@ public class SpeechToText {
      For more information, see [Upgrading custom
      models](https://console.bluemix.net/docs/services/speech-to-text/custom-upgrade.html).
 
-     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter customLanguageModelID: If the custom acoustic model was trained with a custom language model, the customization ID (GUID) of that custom
-       language model. The custom language model must be upgraded before the custom acoustic model can be upgraded.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter customLanguageModelID: If the custom acoustic model was trained with a custom language model, the
+       customization ID (GUID) of that custom language model. The custom language model must be upgraded before the
+       custom acoustic model can be upgraded.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2513,8 +2519,8 @@ public class SpeechToText {
      to the custom acoustic model. You must use credentials for the instance of the service that owns a model to list
      its audio resources.
 
-     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2618,19 +2624,21 @@ public class SpeechToText {
      supported for use with speech recognition and with the `Content-Type` header, including the `rate`, `channels`, and
      `endianness` parameters that are used with some formats. The default contained audio format is `audio/wav`.
 
-     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
-       spaces in the name; use a localized name that matches the language of the custom model.
-     - parameter audioResource: The audio resource that is to be added to the custom acoustic model, an individual audio file or an archive file.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio
+       resource, do not include spaces in the name; use a localized name that matches the language of the custom model.
+     - parameter audioResource: The audio resource that is to be added to the custom acoustic model, an individual
+       audio file or an archive file.
      - parameter contentType: The type of the input.
-     - parameter containedContentType: For an archive-type resource, specifies the format of the audio files contained in the archive file. The
-       parameter accepts all of the audio formats supported for use with speech recognition, including the `rate`,
-       `channels`, and `endianness` parameters that are used with some formats. For a complete list of supported audio
-       formats, see [Audio formats](/docs/services/speech-to-text/input.html#formats).
-     - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
-       name. If `false` (the default), the request fails if a corpus or audio resource with the same name already
-       exists. The parameter has no effect if a corpus or audio resource with the same name does not already exist.
+     - parameter containedContentType: For an archive-type resource, specifies the format of the audio files contained
+       in the archive file. The parameter accepts all of the audio formats supported for use with speech recognition,
+       including the `rate`, `channels`, and `endianness` parameters that are used with some formats. For a complete
+       list of supported audio formats, see [Audio formats](/docs/services/speech-to-text/input.html#formats).
+     - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or
+       audio resource with the same name. If `false` (the default), the request fails if a corpus or audio resource with
+       the same name already exists. The parameter has no effect if a corpus or audio resource with the same name does
+       not already exist.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2638,7 +2646,7 @@ public class SpeechToText {
     public func addAudio(
         customizationID: String,
         audioName: String,
-        audioResource: Data,
+        audioResource: [Data],
         contentType: String,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
@@ -2647,7 +2655,10 @@ public class SpeechToText {
         success: @escaping () -> Void)
     {
         // construct body
-        let body = audioResource
+        guard let body = try? JSONEncoder().encode(audioResource) else {
+            failure?(RestError.serializationError)
+            return
+        }
 
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2711,10 +2722,10 @@ public class SpeechToText {
      `container` field.
      You must use credentials for the instance of the service that owns a model to list its audio resources.
 
-     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
-       spaces in the name; use a localized name that matches the language of the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio
+       resource, do not include spaces in the name; use a localized name that matches the language of the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2767,10 +2778,10 @@ public class SpeechToText {
      by using the **Train a custom acoustic model** method. You must use credentials for the instance of the service
      that owns a model to delete its audio resources.
 
-     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-       created for the instance of the service that owns the custom model.
-     - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
-       spaces in the name; use a localized name that matches the language of the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom acoustic model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter audioName: The name of the audio resource for the custom acoustic model. When adding an audio
+       resource, do not include spaces in the name; use a localized name that matches the language of the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An option indicating whether or not important keywords from the analyzed content should be returned. */
+/**
+ An option indicating whether or not important keywords from the analyzed content should be returned.
+ */
 public struct KeywordsOptions: Encodable {
 
     /**

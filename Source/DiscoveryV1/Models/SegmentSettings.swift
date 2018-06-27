@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A list of Document Segmentation settings. */
+/**
+ A list of Document Segmentation settings.
+ */
 public struct SegmentSettings: Codable {
 
     /**
@@ -39,7 +41,8 @@ public struct SegmentSettings: Codable {
      Initialize a `SegmentSettings` with member variables.
 
      - parameter enabled: Enables/disables the Document Segmentation feature.
-     - parameter selectorTags: Defines the heading level that splits into document segments. Valid values are h1, h2, h3, h4, h5, h6.
+     - parameter selectorTags: Defines the heading level that splits into document segments. Valid values are h1, h2,
+       h3, h4, h5, h6.
 
      - returns: An initialized `SegmentSettings`.
     */

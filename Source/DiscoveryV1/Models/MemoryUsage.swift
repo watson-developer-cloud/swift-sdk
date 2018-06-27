@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** **Deprecated**: Summary of the memory usage statistics for this environment. */
+/**
+ **Deprecated**: Summary of the memory usage statistics for this environment.
+ */
 public struct MemoryUsage: Decodable {
 
     /**

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Analysis features and options. */
+/**
+ Analysis features and options.
+ */
 public struct Features: Encodable {
 
     /**
@@ -85,12 +87,14 @@ public struct Features: Encodable {
      - parameter emotion: Whether or not to extract the emotions implied in the analyzed text.
      - parameter entities: Whether or not to extract detected entity objects from the analyzed text.
      - parameter keywords: Whether or not to return the keywords in the analyzed text.
-     - parameter metadata: Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is
-       only available for URL and HTML input.
-     - parameter relations: Whether or not to return the relationships between detected entities in the analyzed text.
+     - parameter metadata: Whether or not the author, publication date, and title of the analyzed text should be
+       returned. This parameter is only available for URL and HTML input.
+     - parameter relations: Whether or not to return the relationships between detected entities in the analyzed
+       text.
      - parameter semanticRoles: Whether or not to return the subject-action-object relations from the analyzed text.
      - parameter sentiment: Whether or not to return the overall sentiment of the analyzed text.
-     - parameter categories: Whether or not to return the high level category the content is categorized as (i.e. news, art).
+     - parameter categories: Whether or not to return the high level category the content is categorized as (i.e.
+       news, art).
 
      - returns: An initialized `Features`.
     */

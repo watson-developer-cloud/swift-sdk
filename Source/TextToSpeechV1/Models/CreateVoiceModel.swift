@@ -61,7 +61,8 @@ internal struct CreateVoiceModel: Encodable {
      Initialize a `CreateVoiceModel` with member variables.
 
      - parameter name: The name of the new custom voice model.
-     - parameter language: The language of the new custom voice model. Omit the parameter to use the the default language, `en-US`.
+     - parameter language: The language of the new custom voice model. Omit the parameter to use the the default
+       language, `en-US`.
      - parameter description: A description of the new custom voice model. Specifying a description is recommended.
 
      - returns: An initialized `CreateVoiceModel`.

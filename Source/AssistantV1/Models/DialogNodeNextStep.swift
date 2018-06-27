@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The next step to execute following this dialog node. */
+/**
+ The next step to execute following this dialog node.
+ */
 public struct DialogNodeNextStep: Codable {
 
     /**
@@ -121,7 +123,8 @@ public struct DialogNodeNextStep: Codable {
            - `skip_slot`
            - `skip_all_slots`
        If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
-     - parameter dialogNode: The ID of the dialog node to process next. This parameter is required if **behavior**=`jump_to`.
+     - parameter dialogNode: The ID of the dialog node to process next. This parameter is required if
+       **behavior**=`jump_to`.
      - parameter selector: Which part of the dialog node to process next.
 
      - returns: An initialized `DialogNodeNextStep`.

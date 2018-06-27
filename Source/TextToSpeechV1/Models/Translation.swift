@@ -69,13 +69,13 @@ public struct Translation: Codable {
     /**
      Initialize a `Translation` with member variables.
 
-     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
-       representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A
-       sounds-like is one or more words that, when combined, sound like the word.
-     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
-       for the word. You can create only a single entry, with or without a single part of speech, for any word; you
-       cannot create multiple entries with different parts of speech for the same word. For more information, see
-       [Working with Japanese
+     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based
+       on the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR
+       translation. A sounds-like is one or more words that, when combined, sound like the word.
+     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to
+       produce the correct intonation for the word. You can create only a single entry, with or without a single part of
+       speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
+       more information, see [Working with Japanese
        entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
 
      - returns: An initialized `Translation`.

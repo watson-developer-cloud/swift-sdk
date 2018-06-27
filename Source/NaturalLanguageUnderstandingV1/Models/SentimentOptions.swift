@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An option specifying if sentiment of detected entities, keywords, or phrases should be returned. */
+/**
+ An option specifying if sentiment of detected entities, keywords, or phrases should be returned.
+ */
 public struct SentimentOptions: Encodable {
 
     /**

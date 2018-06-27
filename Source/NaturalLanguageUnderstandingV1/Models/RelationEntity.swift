@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An entity that corresponds with an argument in a relation. */
+/**
+ An entity that corresponds with an argument in a relation.
+ */
 public struct RelationEntity: Decodable {
 
     /**

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The user input. */
+/**
+ The user input.
+ */
 public struct InputData: Codable {
 
     /**
@@ -33,8 +35,8 @@ public struct InputData: Codable {
     /**
      Initialize a `InputData` with member variables.
 
-     - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must
-       be no longer than 2048 characters.
+     - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
+       characters, and it must be no longer than 2048 characters.
 
      - returns: An initialized `InputData`.
     */

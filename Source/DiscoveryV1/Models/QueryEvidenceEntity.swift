@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Entity description and location within evidence field. */
+/**
+ Entity description and location within evidence field.
+ */
 public struct QueryEvidenceEntity: Decodable {
 
     /**

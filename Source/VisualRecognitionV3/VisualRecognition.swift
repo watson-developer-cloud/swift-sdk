@@ -30,10 +30,10 @@ public class VisualRecognition {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let session = URLSession(configuration: URLSessionConfiguration.default)
-    internal var authMethod: AuthenticationMethod
-    internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
-    internal let version: String
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private var authMethod: AuthenticationMethod
+    private let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
+    private let version: String
 
     /**
      Create a `VisualRecognition` object.
@@ -45,7 +45,6 @@ public class VisualRecognition {
     public init(apiKey: String, version: String) {
         self.authMethod = APIKeyAuthentication(name: "api_key", key: apiKey, location: .query)
         self.version = version
-        self.serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
     }
 
     /**
@@ -86,36 +85,12 @@ public class VisualRecognition {
      - parameter data: Raw data returned from the service that may represent an error.
      - parameter response: the URL response returned from the service.
      */
-    internal func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
         let code = response.statusCode
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if code == 403 {
-                // ErrorAuthentication
-                if case let .some(.string(status)) = json["status"],
-                    case let .some(.string(statusInfo)) = json["statusInfo"] {
-                    userInfo[NSLocalizedDescriptionKey] = "\(status): \(statusInfo)"
-                }
-            } else if code == 404 {
-                // "error": ErrorInfo
-                if case let .some(.object(errorObj)) = json["error"],
-                    case let .some(.string(message)) = errorObj["description"],
-                    case let .some(.string(errorID)) = errorObj["error_id"] {
-                    userInfo[NSLocalizedDescriptionKey] = "\(message) (error_id = \(errorID))"
-                }
-            } else if code == 413 {
-                // ErrorHTML
-                if case let .some(.string(message)) = json["Error"] {
-                    userInfo[NSLocalizedDescriptionKey] = message
-                }
-            } else {
-                // ErrorResponse
-                if case let .some(.string(message)) = json["error"] {
-                    userInfo[NSLocalizedDescriptionKey] = message
-                }
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -127,27 +102,27 @@ public class VisualRecognition {
 
      Classify images with built-in or custom classifiers.
 
-     - parameter imagesFile: An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images
-       and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII
-       characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+     - parameter imagesFile: An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include
+       no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they
+       contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
        You can also include an image with the **url** parameter.
-     - parameter acceptLanguage: The language of the output class names. The full set of languages is supported only for the built-in `default`
-       classifier ID. The class names of custom classifiers are not translated.
+     - parameter acceptLanguage: The language of the output class names. The full set of languages is supported only
+       for the built-in `default` classifier ID. The class names of custom classifiers are not translated.
        The response might not be in the specified language when the requested language is not supported or when there is
        no translation for the class name.
-     - parameter url: The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32
-       pixels per inch, and the maximum image size is 10 MB.
+     - parameter url: The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel
+       density is 32X32 pixels per inch, and the maximum image size is 10 MB.
        You can also include images with the **images_file** parameter.
-     - parameter threshold: The minimum score a class must have to be displayed in the response. Set the threshold to `0.0` to ignore the
-       classification score and return all values.
-     - parameter owners: The categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use
-       `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set
-       the value to both `IBM` and `me`.
+     - parameter threshold: The minimum score a class must have to be displayed in the response. Set the threshold to
+       `0.0` to ignore the classification score and return all values.
+     - parameter owners: The categories of classifiers to apply. Use `IBM` to classify against the `default` general
+       classifier, and use `me` to classify against your custom classifiers. To analyze the image against both
+       classifier categories, set the value to both `IBM` and `me`.
        The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.
        The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty.
-     - parameter classifierIDs: Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in
-       classifier IDs. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters
-       are empty.
+     - parameter classifierIds: Which classifiers to apply. Overrides the **owners** parameter. You can specify both
+       custom and built-in classifier IDs. The built-in `default` classifier is used if both **classifier_ids** and
+       **owners** parameters are empty.
        The following built-in classifier IDs require no training:
        - `default`: Returns classes from thousands of general tags.
        - `food`: (Beta) Enhances specificity and accuracy for images of food items.
@@ -159,11 +134,12 @@ public class VisualRecognition {
      */
     public func classify(
         imagesFile: URL? = nil,
+        acceptLanguage: String? = nil,
         url: String? = nil,
         threshold: Double? = nil,
         owners: [String]? = nil,
-        classifierIDs: [String]? = nil,
-        acceptLanguage: String? = nil,
+        classifierIds: [String]? = nil,
+        imagesFileContentType: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
@@ -194,12 +170,12 @@ public class VisualRecognition {
             }
             multipartFormData.append(ownersData, withName: "owners")
         }
-        if let classifierIDs = classifierIDs {
-            guard let classifierIDsData = classifierIDs.joined(separator: ",").data(using: .utf8) else {
+        if let classifierIds = classifierIds {
+            guard let classifierIdsData = classifierIds.joined(separator: ",").data(using: .utf8) else {
                 failure?(RestError.serializationError)
                 return
             }
-            multipartFormData.append(classifierIDsData, withName: "classifier_ids")
+            multipartFormData.append(classifierIdsData, withName: "classifier_ids")
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -256,14 +232,14 @@ public class VisualRecognition {
      Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
      recommended pixel density is 32X32 pixels per inch.
 
-     - parameter imagesFile: An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a
-       maximum of 15 images in a request.
+     - parameter imagesFile: An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to
+       100 MB. You can include a maximum of 15 images in a request.
        Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8
        encoding if it encounters non-ASCII characters.
        You can also include an image with the **url** parameter.
-     - parameter url: The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel
-       density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a
-       shortened URL.
+     - parameter url: The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum
+       recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed,
+       so you can use a shortened URL.
        You can also include images with the **images_file** parameter.
      - parameter imagesFileContentType: The content type of imagesFile.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -273,6 +249,7 @@ public class VisualRecognition {
     public func detectFaces(
         imagesFile: URL? = nil,
         url: String? = nil,
+        imagesFileContentType: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DetectedFaces) -> Void)
@@ -280,7 +257,7 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         if let imagesFile = imagesFile {
-            multipartFormData.append(imagesFile, withName: "images_file", mimeType: "application/octet-stream")
+            multipartFormData.append(imagesFile, withName: "images_file")
         }
         if let url = url {
             guard let urlData = url.data(using: .utf8) else {
@@ -338,14 +315,15 @@ public class VisualRecognition {
      names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
 
      - parameter name: The name of the new classifier. Encode special characters in UTF-8.
-     - parameter positiveExamples: An array of of positive examples, each with a name and a compressed
-     (.zip) file of images that depict the visual subject of a class in the new classifier. You can include more than
-       one positive example file in a call.
+     - parameter classnamePositiveExamples: A .zip file of images that depict the visual subject of a class in the new
+       classifier. You can include more than one positive example file in a call.
+       Specify the parameter name by appending `_positive_examples` to the class name. For example,
+       `goldenretriever_positive_examples` creates the class **goldenretriever**.
        Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
        maximum number of images is 10,000 images or 100 MB per .zip file.
        Encode special characters in the file name in UTF-8.
-     - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
-       contain a minimum of 10 images.
+     - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes
+       of the new classifier. Must contain a minimum of 10 images.
        Encode special characters in the file name in UTF-8.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -353,7 +331,7 @@ public class VisualRecognition {
      */
     public func createClassifier(
         name: String,
-        positiveExamples: [PositiveExample],
+        classnamePositiveExamples: URL,
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -366,9 +344,7 @@ public class VisualRecognition {
             return
         }
         multipartFormData.append(nameData, withName: "name")
-        positiveExamples.forEach { example in
-            multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
-        }
+        multipartFormData.append(classnamePositiveExamples, withName: "classname_positive_examples")
         if let negativeExamples = negativeExamples {
             multipartFormData.append(negativeExamples, withName: "negative_examples")
         }
@@ -414,15 +390,13 @@ public class VisualRecognition {
     /**
      Retrieve a list of classifiers.
 
-     - parameter owners: Unused. This parameter will be removed in a future release.
-     - parameter verbose: Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of
-       classifiers.
+     - parameter verbose: Specify `true` to return details about the classifiers. Omit this parameter to return a
+       brief list of classifiers.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func listClassifiers(
-        owners: [String]? = nil,
         verbose: Bool? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -531,14 +505,16 @@ public class VisualRecognition {
      classifier retraining finished.
 
      - parameter classifierID: The ID of the classifier.
-     - parameter positiveExamples: An array of positive examples, each with a name and a compressed
-     (.zip) file of images that depict the visual subject of a class in the classifier. The positive examples create
-       or update classes in the classifier. You can include more than one positive example file in a call.
+     - parameter classnamePositiveExamples: A .zip file of images that depict the visual subject of a class in the
+       classifier. The positive examples create or update classes in the classifier. You can include more than one
+       positive example file in a call.
+       Specify the parameter name by appending `_positive_examples` to the class name. For example,
+       `goldenretriever_positive_examples` creates the class `goldenretriever`.
        Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
        maximum number of images is 10,000 images or 100 MB per .zip file.
        Encode special characters in the file name in UTF-8.
-     - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
-       contain a minimum of 10 images.
+     - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes
+       of the new classifier. Must contain a minimum of 10 images.
        Encode special characters in the file name in UTF-8.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -546,7 +522,7 @@ public class VisualRecognition {
      */
     public func updateClassifier(
         classifierID: String,
-        positiveExamples: [PositiveExample]? = nil,
+        classnamePositiveExamples: URL? = nil,
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
@@ -554,10 +530,8 @@ public class VisualRecognition {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        if let positiveExamples = positiveExamples {
-            positiveExamples.forEach { example in
-                multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
-            }
+        if let classnamePositiveExamples = classnamePositiveExamples {
+            multipartFormData.append(classnamePositiveExamples, withName: "classname_positive_examples")
         }
         if let negativeExamples = negativeExamples {
             multipartFormData.append(negativeExamples, withName: "negative_examples")

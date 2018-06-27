@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** State information for the conversation. To maintain state, include the context from the previous response. */
+/**
+ State information for the conversation. To maintain state, include the context from the previous response.
+ */
 public struct Context: Codable {
 
     /**

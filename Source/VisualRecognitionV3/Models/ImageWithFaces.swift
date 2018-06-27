@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Information about faces in the image. */
+/**
+ Information about faces in the image.
+ */
 public struct ImageWithFaces: Decodable {
 
     /**

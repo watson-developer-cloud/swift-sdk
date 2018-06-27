@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A collection for storing documents. */
+/**
+ A collection for storing documents.
+ */
 public struct Collection: Decodable {
 
     /**

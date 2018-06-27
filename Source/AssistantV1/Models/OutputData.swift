@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An output object that includes the response to the user, the nodes that were hit, and messages from the log. */
+/**
+ An output object that includes the response to the user, the nodes that were hit, and messages from the log.
+ */
 public struct OutputData: Codable {
 
     /**
@@ -59,11 +61,12 @@ public struct OutputData: Codable {
 
      - parameter logMessages: An array of up to 50 messages logged with the request.
      - parameter text: An array of responses to the user.
-     - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in which they were visited. This
-       information is useful for debugging and for tracing the path taken through the node tree.
-     - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes that were triggered during
-       processing of the input message. Included only if **nodes_visited_details** is set to `true` in the message
-       request.
+     - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in
+       which they were visited. This information is useful for debugging and for tracing the path taken through the node
+       tree.
+     - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes
+       that were triggered during processing of the input message. Included only if **nodes_visited_details** is set to
+       `true` in the message request.
 
      - returns: An initialized `OutputData`.
     */

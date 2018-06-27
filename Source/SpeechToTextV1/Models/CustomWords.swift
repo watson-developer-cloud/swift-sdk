@@ -33,8 +33,8 @@ internal struct CustomWords: Encodable {
     /**
      Initialize a `CustomWords` with member variables.
 
-     - parameter words: An array of objects that provides information about each custom word that is to be added to or updated in the
-       custom language model.
+     - parameter words: An array of objects that provides information about each custom word that is to be added to
+       or updated in the custom language model.
 
      - returns: An initialized `CustomWords`.
     */

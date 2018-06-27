@@ -52,8 +52,8 @@ public struct CreateIntent: Encodable {
        - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
        - It cannot begin with the reserved prefix `sys-`.
        - It must be no longer than 128 characters.
-     - parameter description: The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it
-       must be no longer than 128 characters.
+     - parameter description: The description of the intent. This string cannot contain carriage return, newline, or
+       tab characters, and it must be no longer than 128 characters.
      - parameter examples: An array of user input examples for the intent.
 
      - returns: An initialized `CreateIntent`.

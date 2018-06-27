@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A list of HTML conversion settings. */
+/**
+ A list of HTML conversion settings.
+ */
 public struct HtmlSettings: Codable {
 
     public var excludeTagsCompletely: [String]?

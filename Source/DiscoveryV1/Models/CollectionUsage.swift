@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Summary of the collection usage in the environment. */
+/**
+ Summary of the collection usage in the environment.
+ */
 public struct CollectionUsage: Decodable {
 
     /**

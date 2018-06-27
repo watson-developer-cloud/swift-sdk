@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The object containing the actions and the objects the actions act upon. */
+/**
+ The object containing the actions and the objects the actions act upon.
+ */
 public struct SemanticRolesResult: Decodable {
 
     /**

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Status information about a submitted document. */
+/**
+ Status information about a submitted document.
+ */
 public struct DocumentStatus: Decodable {
 
     /**

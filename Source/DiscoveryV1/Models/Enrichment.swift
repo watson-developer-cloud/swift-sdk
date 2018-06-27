@@ -77,11 +77,12 @@ public struct Enrichment: Codable {
     /**
      Initialize a `Enrichment` with member variables.
 
-     - parameter destinationField: Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an
-       existing field. For example, if `text` is a top-level field with no sub-fields, `text.foo` is a valid destination
-       but `text.foo.bar` is not.
+     - parameter destinationField: Field where enrichments will be stored. This field must already exist or be at
+       most 1 level deeper than an existing field. For example, if `text` is a top-level field with no sub-fields,
+       `text.foo` is a valid destination but `text.foo.bar` is not.
      - parameter sourceField: Field to be enriched.
-     - parameter enrichmentName: Name of the enrichment service to call. Current options are `natural_language_understanding` and `elements`.
+     - parameter enrichmentName: Name of the enrichment service to call. Current options are
+       `natural_language_understanding` and `elements`.
         When using `natual_language_understanding`, the `options` object must contain Natural Language Understanding
        Options.
         When using `elements` the `options` object must contain Element Classification options. Additionally, when using
@@ -89,9 +90,10 @@ public struct Enrichment: Codable {
        [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
         Previous API versions also supported `alchemy_language`.
      - parameter description: Describes what the enrichment step does.
-     - parameter overwrite: Indicates that the enrichments will overwrite the destination_field field if it already exists.
-     - parameter ignoreDownstreamErrors: If true, then most errors generated during the enrichment process will be treated as warnings and will not cause
-       the document to fail processing.
+     - parameter overwrite: Indicates that the enrichments will overwrite the destination_field field if it already
+       exists.
+     - parameter ignoreDownstreamErrors: If true, then most errors generated during the enrichment process will be
+       treated as warnings and will not cause the document to fail processing.
      - parameter options: A list of options specific to the enrichment.
 
      - returns: An initialized `Enrichment`.

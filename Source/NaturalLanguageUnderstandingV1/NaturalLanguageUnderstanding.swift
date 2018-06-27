@@ -96,12 +96,6 @@ public class NaturalLanguageUnderstanding {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -140,8 +134,8 @@ public class NaturalLanguageUnderstanding {
      Categorize your content into a hierarchical 5-level taxonomy. For example, \"Leonardo DiCaprio won an Oscar\"
      returns \"/art and entertainment/movies and tv/movies\" as the most confident classification.
 
-     - parameter parameters: An object containing request parameters. The `features` object and one of the `text`, `html`, or `url` attributes
-       are required.
+     - parameter parameters: An object containing request parameters. The `features` object and one of the `text`,
+       `html`, or `url` attributes are required.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -253,7 +247,7 @@ public class NaturalLanguageUnderstanding {
         modelID: String,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteModelResults) -> Void)
+        success: @escaping (InlineResponse200) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -284,7 +278,7 @@ public class NaturalLanguageUnderstanding {
 
         // execute REST request
         request.responseObject {
-            (response: RestResponse<DeleteModelResults>) in
+            (response: RestResponse<InlineResponse200>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

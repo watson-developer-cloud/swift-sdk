@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Object containing Entity query response information. */
+/**
+ Object containing Entity query response information.
+ */
 public struct QueryEntitiesResponseItem: Decodable {
 
     /**

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** List of available classifiers. */
+/**
+ List of available classifiers.
+ */
 public struct ClassifierList: Decodable {
 
     /**

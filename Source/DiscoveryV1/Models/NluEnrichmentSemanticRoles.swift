@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An object specifiying the semantic roles enrichment and related parameters. */
+/**
+ An object specifiying the semantic roles enrichment and related parameters.
+ */
 public struct NluEnrichmentSemanticRoles: Codable {
 
     /**
@@ -46,7 +48,8 @@ public struct NluEnrichmentSemanticRoles: Codable {
 
      - parameter entities: When `true` entities are extracted from the identified sentence parts.
      - parameter keywords: When `true`, keywords are extracted from the identified sentence parts.
-     - parameter limit: The maximum number of semantic roles enrichments to extact from each instance of the specified field.
+     - parameter limit: The maximum number of semantic roles enrichments to extact from each instance of the
+       specified field.
 
      - returns: An initialized `NluEnrichmentSemanticRoles`.
     */

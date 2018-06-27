@@ -47,8 +47,8 @@ internal struct UpdateVoiceModel: Encodable {
 
      - parameter name: A new name for the custom voice model.
      - parameter description: A new description for the custom voice model.
-     - parameter words: An array of `Word` objects that provides the words and their translations that are to be added or updated for the
-       custom voice model. Pass an empty array to make no additions or updates.
+     - parameter words: An array of `Word` objects that provides the words and their translations that are to be
+       added or updated for the custom voice model. Pass an empty array to make no additions or updates.
 
      - returns: An initialized `UpdateVoiceModel`.
     */

@@ -54,14 +54,16 @@ public struct TranslateRequest: Encodable {
     /**
      Initialize a `TranslateRequest` with member variables.
 
-     - parameter text: Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the response.
-     - parameter modelID: Model ID of the translation model to use. If this is specified, the **source** and **target** parameters will be
-       ignored. The method requires either a model ID or both the **source** and **target** parameters.
-     - parameter source: Language code of the source text language. Use with `target` as an alternative way to select a translation model.
-       When `source` and `target` are set, and a model ID is not set, the system chooses a default model for the
-       language pair (usually the model based on the news domain).
-     - parameter target: Language code of the translation target language. Use with source as an alternative way to select a translation
-       model.
+     - parameter text: Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the
+       response.
+     - parameter modelID: Model ID of the translation model to use. If this is specified, the **source** and
+       **target** parameters will be ignored. The method requires either a model ID or both the **source** and
+       **target** parameters.
+     - parameter source: Language code of the source text language. Use with `target` as an alternative way to select
+       a translation model. When `source` and `target` are set, and a model ID is not set, the system chooses a default
+       model for the language pair (usually the model based on the news domain).
+     - parameter target: Language code of the translation target language. Use with source as an alternative way to
+       select a translation model.
 
      - returns: An initialized `TranslateRequest`.
     */

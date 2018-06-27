@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Usage information. */
+/**
+ Usage information.
+ */
 public struct Usage: Decodable {
 
     /**

@@ -68,7 +68,8 @@ public struct DialogNodeAction: Codable {
      - parameter resultVariable: The location in the dialog context where the result of the action is stored.
      - parameter actionType: The type of action to invoke.
      - parameter parameters: A map of key/value pairs to be provided to the action.
-     - parameter credentials: The name of the context variable that the client application will use to pass in credentials for the action.
+     - parameter credentials: The name of the context variable that the client application will use to pass in
+       credentials for the action.
 
      - returns: An initialized `DialogNodeAction`.
     */

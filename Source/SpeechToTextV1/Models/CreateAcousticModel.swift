@@ -75,15 +75,16 @@ internal struct CreateAcousticModel: Encodable {
     /**
      Initialize a `CreateAcousticModel` with member variables.
 
-     - parameter name: A user-defined name for the new custom acoustic model. Use a name that is unique among all custom acoustic models
-       that you own. Use a localized name that matches the language of the custom model. Use a name that describes the
-       acoustic environment of the custom model, such as `Mobile custom model` or `Noisy car custom model`.
-     - parameter baseModelName: The name of the base language model that is to be customized by the new custom acoustic model. The new custom
-       model can be used only with the base model that it customizes. To determine whether a base model supports
-       acoustic model customization, refer to [Language support for
+     - parameter name: A user-defined name for the new custom acoustic model. Use a name that is unique among all
+       custom acoustic models that you own. Use a localized name that matches the language of the custom model. Use a
+       name that describes the acoustic environment of the custom model, such as `Mobile custom model` or `Noisy car
+       custom model`.
+     - parameter baseModelName: The name of the base language model that is to be customized by the new custom
+       acoustic model. The new custom model can be used only with the base model that it customizes. To determine
+       whether a base model supports acoustic model customization, refer to [Language support for
        customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
-     - parameter description: A description of the new custom acoustic model. Use a localized description that matches the language of the
-       custom model.
+     - parameter description: A description of the new custom acoustic model. Use a localized description that
+       matches the language of the custom model.
 
      - returns: An initialized `CreateAcousticModel`.
     */

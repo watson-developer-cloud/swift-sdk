@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Information about the face. */
+/**
+ Information about the face.
+ */
 public struct Face: Decodable {
 
     /**

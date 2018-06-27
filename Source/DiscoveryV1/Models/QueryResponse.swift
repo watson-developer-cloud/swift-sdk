@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A response containing the documents and aggregations for the query. */
+/**
+ A response containing the documents and aggregations for the query.
+ */
 public struct QueryResponse: Decodable {
 
     public var matchingResults: Int?

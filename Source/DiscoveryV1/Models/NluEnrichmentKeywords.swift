@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An object specifying the Keyword enrichment and related parameters. */
+/**
+ An object specifying the Keyword enrichment and related parameters.
+ */
 public struct NluEnrichmentKeywords: Codable {
 
     /**

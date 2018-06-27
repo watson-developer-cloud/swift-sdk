@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The query expansion definitions for the specified collection. */
+/**
+ The query expansion definitions for the specified collection.
+ */
 public struct Expansions: Codable {
 
     /**

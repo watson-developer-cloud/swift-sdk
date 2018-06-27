@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A classifier for natural language phrases. */
+/**
+ A classifier for natural language phrases.
+ */
 public struct Classifier: Decodable {
 
     /**

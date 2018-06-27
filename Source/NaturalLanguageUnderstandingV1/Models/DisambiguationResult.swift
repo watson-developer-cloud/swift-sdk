@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Disambiguation information for the entity. */
+/**
+ Disambiguation information for the entity.
+ */
 public struct DisambiguationResult: Decodable {
 
     /**

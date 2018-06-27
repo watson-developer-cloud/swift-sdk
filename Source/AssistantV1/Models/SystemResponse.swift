@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** For internal use only. */
+/**
+ For internal use only.
+ */
 public struct SystemResponse: Codable {
 
     /// Additional properties associated with this model.

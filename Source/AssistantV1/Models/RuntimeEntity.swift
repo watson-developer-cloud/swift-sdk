@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A term from the request that was identified as an entity. */
+/**
+ A term from the request that was identified as an entity.
+ */
 public struct RuntimeEntity: Codable {
 
     /**
@@ -68,8 +70,8 @@ public struct RuntimeEntity: Codable {
      Initialize a `RuntimeEntity` with member variables.
 
      - parameter entity: An entity detected in the input.
-     - parameter location: An array of zero-based character offsets that indicate where the detected entity values begin and end in the
-       input text.
+     - parameter location: An array of zero-based character offsets that indicate where the detected entity values
+       begin and end in the input text.
      - parameter value: The term in the input text that was recognized as an entity value.
      - parameter confidence: A decimal percentage that represents Watson's confidence in the entity.
      - parameter metadata: Any metadata for the entity.

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Class and confidence. */
+/**
+ Class and confidence.
+ */
 public struct ClassifiedClass: Decodable {
 
     /**

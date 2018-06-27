@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Summary of the disk usage statistics for this collection. */
+/**
+ Summary of the disk usage statistics for this collection.
+ */
 public struct CollectionDiskUsage: Decodable {
 
     /**

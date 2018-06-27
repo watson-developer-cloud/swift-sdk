@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An object containing request parameters. */
+/**
+ An object containing request parameters.
+ */
 public struct Parameters: Encodable {
 
     /**

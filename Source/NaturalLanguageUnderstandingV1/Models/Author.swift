@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The author of the analyzed content. */
+/**
+ The author of the analyzed content.
+ */
 public struct Author: Decodable {
 
     /**

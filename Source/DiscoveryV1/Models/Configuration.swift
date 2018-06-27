@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A custom configuration for the environment. */
+/**
+ A custom configuration for the environment.
+ */
 public struct Configuration: Codable {
 
     /**
@@ -78,12 +80,13 @@ public struct Configuration: Codable {
      - parameter name: The name of the configuration.
      - parameter configurationID: The unique identifier of the configuration.
      - parameter created: The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-     - parameter updated: The timestamp of when the configuration was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     - parameter updated: The timestamp of when the configuration was last updated in the format
+       yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      - parameter description: The description of the configuration, if available.
      - parameter conversions: The document conversion settings for the configuration.
      - parameter enrichments: An array of document enrichment settings for the configuration.
-     - parameter normalizations: Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
-       executed in the order that they appear in the array.
+     - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
+       normalized form. Operations are executed in the order that they appear in the array.
 
      - returns: An initialized `Configuration`.
     */

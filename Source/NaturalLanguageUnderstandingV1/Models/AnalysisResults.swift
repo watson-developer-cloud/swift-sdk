@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Results of the analysis, organized by feature. */
+/**
+ Results of the analysis, organized by feature.
+ */
 public struct AnalysisResults: Decodable {
 
     /**

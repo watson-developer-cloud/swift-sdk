@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Description of evidence location supporting Knoweldge Graph query result. */
+/**
+ Description of evidence location supporting Knoweldge Graph query result.
+ */
 public struct QueryEvidence: Decodable {
 
     /**

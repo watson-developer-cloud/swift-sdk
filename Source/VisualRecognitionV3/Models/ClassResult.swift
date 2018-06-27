@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Result of a class within a classifier. */
+/**
+ Result of a class within a classifier.
+ */
 public struct ClassResult: Decodable {
 
     /**

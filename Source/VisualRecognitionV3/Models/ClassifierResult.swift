@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Classifier and score combination. */
+/**
+ Classifier and score combination.
+ */
 public struct ClassifierResult: Decodable {
 
     /**

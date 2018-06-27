@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Request payload to classify. */
+/**
+ Request payload to classify.
+ */
 public struct ClassifyInput: Encodable {
 
     /**

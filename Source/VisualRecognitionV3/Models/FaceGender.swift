@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Information about the gender of the face. */
+/**
+ Information about the gender of the face.
+ */
 public struct FaceGender: Decodable {
 
     /**

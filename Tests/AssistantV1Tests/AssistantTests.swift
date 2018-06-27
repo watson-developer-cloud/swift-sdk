@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-// swiftlint:disable function_body_length force_try force_unwrapping superfluous_disable_command
+// swiftlint:disable function_body_length force_try force_unwrapping file_length
 
 import XCTest
 import Foundation
@@ -444,7 +444,9 @@ class AssistantTests: XCTestCase {
         let workspaceDialogNode = CreateDialogNode(dialogNode: "DialogNode1", description: "description of DialogNode1")
         let workspaceCounterexample = CreateCounterexample(text: "This is a counterexample")
 
-        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent], entities: [workspaceEntity], dialogNodes: [workspaceDialogNode], counterexamples: [workspaceCounterexample], metadata: workspaceMetadata)
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent],
+                                                  entities: [workspaceEntity], dialogNodes: [workspaceDialogNode], counterexamples: [workspaceCounterexample],
+                                                  metadata: workspaceMetadata)
         assistant.createWorkspace(properties: createWorkspaceBody, failure: failWithError) { workspace in
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
@@ -732,7 +734,8 @@ class AssistantTests: XCTestCase {
         let updatedIntentName = "updated-name-for-\(newIntentName)"
         let updatedIntentDescription = "updated-description-for-\(newIntentName)"
         let updatedExample1 = CreateExample(text: "updated example for \(newIntentName)")
-        assistant.updateIntent(workspaceID: workspaceID, intent: newIntentName, newIntent: updatedIntentName, newDescription: updatedIntentDescription, newExamples: [updatedExample1], failure: failWithError) { intent in
+        assistant.updateIntent(workspaceID: workspaceID, intent: newIntentName, newIntent: updatedIntentName, newDescription: updatedIntentDescription,
+                               newExamples: [updatedExample1], failure: failWithError) { intent in
             XCTAssertEqual(intent.intentName, updatedIntentName)
             XCTAssertEqual(intent.description, updatedIntentDescription)
             expectation2.fulfill()

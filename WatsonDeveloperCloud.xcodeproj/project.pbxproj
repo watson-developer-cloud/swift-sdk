@@ -574,6 +574,8 @@
 		CA28818020CB099D00FC992C /* TranslationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28816620CB090700FC992C /* TranslationModels.swift */; };
 		CA28818120CB099D00FC992C /* TranslateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28816720CB090700FC992C /* TranslateRequest.swift */; };
 		CA28818220CB099D00FC992C /* IdentifiableLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28816820CB090700FC992C /* IdentifiableLanguages.swift */; };
+		CA35CD4720E3234900FACB2B /* ToneContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA35CD4620E3234800FACB2B /* ToneContent.swift */; };
+		CA35CD4920E3237400FACB2B /* ProfileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA35CD4820E3237400FACB2B /* ProfileContent.swift */; };
 		CAD2685B20CAF28B002BA2C4 /* LanguageTranslatorV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD2685220CAF28A002BA2C4 /* LanguageTranslatorV3.framework */; };
 		CAD2686E20CAF919002BA2C4 /* LanguageTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2686A20CAF919002BA2C4 /* LanguageTranslator.swift */; };
 		CAD2687320CB00F2002BA2C4 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
@@ -1241,6 +1243,8 @@
 		CA28816820CB090700FC992C /* IdentifiableLanguages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableLanguages.swift; sourceTree = "<group>"; };
 		CA28817420CB095100FC992C /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = glossary.tmx; path = Tests/LanguageTranslatorV3Tests/glossary.tmx; sourceTree = SOURCE_ROOT; };
 		CA28817520CB095100FC992C /* LanguageTranslatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageTranslatorTests.swift; path = Tests/LanguageTranslatorV3Tests/LanguageTranslatorTests.swift; sourceTree = SOURCE_ROOT; };
+		CA35CD4620E3234800FACB2B /* ToneContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneContent.swift; sourceTree = "<group>"; };
+		CA35CD4820E3237400FACB2B /* ProfileContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileContent.swift; sourceTree = "<group>"; };
 		CA45954820A62FBE0060BF9B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CA45954920A630080060BF9B /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = .github/CONTRIBUTING.md; sourceTree = "<group>"; };
 		CAD2685220CAF28A002BA2C4 /* LanguageTranslatorV3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LanguageTranslatorV3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2001,6 +2005,7 @@
 				689A16AA203C9946002CFC66 /* Content.swift */,
 				689A16A6203C9945002CFC66 /* ContentItem.swift */,
 				689A16A9203C9945002CFC66 /* Profile.swift */,
+				CA35CD4820E3237400FACB2B /* ProfileContent.swift */,
 				689A16AB203C9946002CFC66 /* Trait.swift */,
 				689A16A8203C9945002CFC66 /* Warning.swift */,
 			);
@@ -2306,6 +2311,7 @@
 				B1F21DF41CE2461800393146 /* ToneCategory.swift */,
 				68D09C18200D61870087ADE5 /* ToneChatInput.swift */,
 				68D09C1A200D61870087ADE5 /* ToneChatScore.swift */,
+				CA35CD4620E3234800FACB2B /* ToneContent.swift */,
 				68D09C1C200D61870087ADE5 /* ToneInput.swift */,
 				B1F21DF51CE2461800393146 /* ToneScore.swift */,
 				68D09C1D200D61870087ADE5 /* Utterance.swift */,
@@ -3973,6 +3979,7 @@
 				68BC28C21F8C35050042810E /* RestError.swift in Sources */,
 				689A16B4203C9946002CFC66 /* ConsumptionPreferences.swift in Sources */,
 				68BC28C51F8C35050042810E /* RestUtilities.swift in Sources */,
+				CA35CD4920E3237400FACB2B /* ProfileContent.swift in Sources */,
 				689A16AF203C9946002CFC66 /* ConsumptionPreferencesCategory.swift in Sources */,
 				689A16B2203C9946002CFC66 /* Content.swift in Sources */,
 				68BC28C31F8C35050042810E /* RestRequest.swift in Sources */,
@@ -4066,6 +4073,7 @@
 				68D09C21200D61870087ADE5 /* ToneChatScore.swift in Sources */,
 				7AAAF4101CEE9D5300B74848 /* SentenceAnalysis.swift in Sources */,
 				68BC28E81F8C35080042810E /* JSON.swift in Sources */,
+				CA35CD4720E3234900FACB2B /* ToneContent.swift in Sources */,
 				68D09C25200D61870087ADE5 /* DocumentAnalysis.swift in Sources */,
 				7AAAF4131CEE9D5300B74848 /* ToneScore.swift in Sources */,
 				68BC28E61F8C35080042810E /* CodableExtensions.swift in Sources */,

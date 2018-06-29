@@ -43,6 +43,9 @@
                 <a href="../Enums/JSON.html">JSON</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/ProfileContent.html">ProfileContent</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/RestError.html">RestError</a>
               </li>
             </ul>
@@ -409,9 +412,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:21PersonalityInsightsV30aB0C7profileyAA7ContentV7content_SSSg0F8LanguageAH06acceptG0SbSg9rawScoresAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/profile(content:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileyAA7ContentV7content_SSSg0F8LanguageAH06acceptG0SbSg9rawScoresAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF">profile(content:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)</a>
+                    <a name="/s:21PersonalityInsightsV30aB0C7profileyAA14ProfileContentO0dF0_SSSg15contentLanguageAH06acceptH0SbSg9rawScoresAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profile(profileContent:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileyAA14ProfileContentO0dF0_SSSg15contentLanguageAH06acceptH0SbSg9rawScoresAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0E0Vc7successtF">profile(profileContent:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -443,7 +446,7 @@ profile</a>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profile</span><span class="p">(</span>
-    <span class="nv">content</span><span class="p">:</span> <span class="kt"><a href="../Structs/Content.html">Content</a></span><span class="p">,</span>
+    <span class="nv">profileContent</span><span class="p">:</span> <span class="kt"><a href="../Enums/ProfileContent.html">ProfileContent</a></span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -461,13 +464,13 @@ profile</a>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>content</em>
+                                <em>profileContent</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text;
+for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
 input</a>. For JSON input,
 provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
                                 </div>
@@ -481,8 +484,8 @@ provide an object of type <code><a href="../Structs/Content.html">Content</a></c
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean,
+or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.
 The effect of the <strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong>
 is <code>text/plain</code> or <code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When
 <strong>Content-Type</strong> is <code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code>
@@ -500,9 +503,9 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
-and response content.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any
+combination of languages for the input and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -514,8 +517,9 @@ and response content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
+                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each
+characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are
+returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -527,8 +531,8 @@ scores are not compared with a sample population. By default, only normalized pe
                               </td>
                               <td>
                                 <div>
-                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-are returned.</p>
+                                  <p>Indicates whether consumption preferences are returned with the results. By
+default, no consumption preferences are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -577,345 +581,9 @@ are returned.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:21PersonalityInsightsV30aB0C7profileySS4text_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/profile(text:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileySS4text_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF">profile(text:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get profile.</p>
-
-<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
-content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
-sufficient input</a>. The
-service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
-languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
-default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
-parameter; CSV output includes a fixed number of columns and optional headers.
-Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
-character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>.
-For detailed information about calling the service and the responses it can generate, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html">Requesting a
-profile</a>, <a href="https://console.bluemix.net/docs/services/personality-insights/output.html">Understanding a JSON
-profile</a>, and <a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">Understanding a CSV
-profile</a>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profile</span><span class="p">(</span>
-    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Profile.html">Profile</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>text</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. For JSON input,
-provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.
-The effect of the <strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong>
-is <code>text/plain</code> or <code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When
-<strong>Content-Type</strong> is <code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code>
-parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this
-parameter to base the language on the specification of the content items. You can specify any combination of
-languages for <strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
-and response content.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>rawScores</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>consumptionPreferences</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A dictionary of request headers to be sent with this request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:21PersonalityInsightsV30aB0C7profileySS4html_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/profile(html:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileySS4html_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF">profile(html:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get profile.</p>
-
-<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
-content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
-sufficient input</a>. The
-service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
-languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
-default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
-parameter; CSV output includes a fixed number of columns and optional headers.
-Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
-character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>.
-For detailed information about calling the service and the responses it can generate, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html">Requesting a
-profile</a>, <a href="https://console.bluemix.net/docs/services/personality-insights/output.html">Understanding a JSON
-profile</a>, and <a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">Understanding a CSV
-profile</a>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profile</span><span class="p">(</span>
-    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Profile.html">Profile</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>html</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. For JSON input,
-provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.
-The effect of the <strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong>
-is <code>text/plain</code> or <code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When
-<strong>Content-Type</strong> is <code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code>
-parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this
-parameter to base the language on the specification of the content items. You can specify any combination of
-languages for <strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
-and response content.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>rawScores</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>consumptionPreferences</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A dictionary of request headers to be sent with this request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvyAA7ContentV7content_SSSg0H8LanguageAH06acceptI0SbSg9rawScoresAK10csvHeadersAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/profileAsCsv(content:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvyAA7ContentV7content_SSSg0H8LanguageAH06acceptI0SbSg9rawScoresAK10csvHeadersAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF">profileAsCsv(content:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)</a>
+                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvyAA14ProfileContentO0dH0_SSSg15contentLanguageAH06acceptJ0SbSg9rawScoresAK10csvHeadersAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profileAsCsv(profileContent:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvyAA14ProfileContentO0dH0_SSSg15contentLanguageAH06acceptJ0SbSg9rawScoresAK10csvHeadersAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF">profileAsCsv(profileContent:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -947,7 +615,7 @@ profile</a>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profileAsCsv</span><span class="p">(</span>
-    <span class="nv">content</span><span class="p">:</span> <span class="kt"><a href="../Structs/Content.html">Content</a></span><span class="p">,</span>
+    <span class="nv">profileContent</span><span class="p">:</span> <span class="kt"><a href="../Enums/ProfileContent.html">ProfileContent</a></span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -966,13 +634,13 @@ profile</a>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>content</em>
+                                <em>profileContent</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
+                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text;
+for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
 input</a>. For JSON input,
 provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
                                 </div>
@@ -986,8 +654,8 @@ provide an object of type <code><a href="../Structs/Content.html">Content</a></c
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.
+                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean,
+or Spanish. Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.
 The effect of the <strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong>
 is <code>text/plain</code> or <code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When
 <strong>Content-Type</strong> is <code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code>
@@ -1005,9 +673,9 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
-and response content.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any
+combination of languages for the input and response content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1019,8 +687,9 @@ and response content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
+                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each
+characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are
+returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1032,8 +701,8 @@ scores are not compared with a sample population. By default, only normalized pe
                               </td>
                               <td>
                                 <div>
-                                  <p>Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
-Applies only when the <strong>Accept</strong> parameter is set to <code>text/csv</code>.</p>
+                                  <p>Indicates whether column labels are returned with a CSV response. By default, no column
+labels are returned. Applies only when the <strong>Accept</strong> parameter is set to <code>text/csv</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1045,372 +714,8 @@ Applies only when the <strong>Accept</strong> parameter is set to <code>text/csv
                               </td>
                               <td>
                                 <div>
-                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A dictionary of request headers to be sent with this request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4text_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/profileAsCsv(text:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4text_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF">profileAsCsv(text:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get profile as csv.</p>
-
-<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
-content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
-sufficient input</a>. The
-service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
-languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
-default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
-parameter; CSV output includes a fixed number of columns and optional headers.
-Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
-character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>.
-For detailed information about calling the service and the responses it can generate, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html">Requesting a
-profile</a>, <a href="https://console.bluemix.net/docs/services/personality-insights/output.html">Understanding a JSON
-profile</a>, and <a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">Understanding a CSV
-profile</a>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profileAsCsv</span><span class="p">(</span>
-    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">csvHeaders</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>text</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. For JSON input,
-provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.
-The effect of the <strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong>
-is <code>text/plain</code> or <code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When
-<strong>Content-Type</strong> is <code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code>
-parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this
-parameter to base the language on the specification of the content items. You can specify any combination of
-languages for <strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
-and response content.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>rawScores</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>csvHeaders</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
-Applies only when the <strong>Accept</strong> parameter is set to <code>text/csv</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>consumptionPreferences</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A dictionary of request headers to be sent with this request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4html_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/profileAsCsv(html:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4html_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF">profileAsCsv(html:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Get profile as csv.</p>
-
-<p>Generates a personality profile for the author of the input text. The service accepts a maximum of 20 MB of input
-content, but it requires much less text to produce an accurate profile; for more information, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing
-sufficient input</a>. The
-service analyzes text in Arabic, English, Japanese, Korean, or Spanish and returns its results in a variety of
-languages. You can provide plain text, HTML, or JSON input by specifying the <strong>Content-Type</strong> parameter; the
-default is <code>text/plain</code>. Request a JSON or comma-separated values (CSV) response by specifying the <strong>Accept</strong>
-parameter; CSV output includes a fixed number of columns and optional headers.
-Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
-character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>.
-For detailed information about calling the service and the responses it can generate, see <a href="https://console.bluemix.net/docs/services/personality-insights/input.html">Requesting a
-profile</a>, <a href="https://console.bluemix.net/docs/services/personality-insights/output.html">Understanding a JSON
-profile</a>, and <a href="https://console.bluemix.net/docs/services/personality-insights/output-csv.html">Understanding a CSV
-profile</a>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profileAsCsv</span><span class="p">(</span>
-    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">csvHeaders</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>html</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient
-input</a>. For JSON input,
-provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
-are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>.
-The effect of the <strong>Content-Language</strong> parameter depends on the <strong>Content-Type</strong> parameter. When <strong>Content-Type</strong>
-is <code>text/plain</code> or <code>text/html</code>, <strong>Content-Language</strong> is the only way to specify the language. When
-<strong>Content-Type</strong> is <code>application/json</code>, <strong>Content-Language</strong> overrides a language specified with the <code>language</code>
-parameter of a <code><a href="../Structs/ContentItem.html">ContentItem</a></code> object, and content items that specify a different language are ignored; omit this
-parameter to base the language on the specification of the content items. You can specify any combination of
-languages for <strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can specify any combination of languages for the input
-and response content.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>rawScores</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
-scores are not compared with a sample population. By default, only normalized percentiles are returned.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>csvHeaders</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
-Applies only when the <strong>Accept</strong> parameter is set to <code>text/csv</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>consumptionPreferences</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
-are returned.</p>
+                                  <p>Indicates whether consumption preferences are returned with the results. By
+default, no consumption preferences are returned.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1458,10 +763,227 @@ are returned.</p>
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV30aB0C7profileyAA7ContentV7content_SSSg0F8LanguageAH06acceptG0SbSg9rawScoresAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profile(content:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileyAA7ContentV7content_SSSg0F8LanguageAH06acceptG0SbSg9rawScoresAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF">profile(content:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profile</span><span class="p">(</span>
+    <span class="nv">content</span><span class="p">:</span> <span class="kt"><a href="../Structs/Content.html">Content</a></span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Profile.html">Profile</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV30aB0C7profileySS4text_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profile(text:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileySS4text_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF">profile(text:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profile</span><span class="p">(</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Profile.html">Profile</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV30aB0C7profileySS4html_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profile(html:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C7profileySS4html_SSSg15contentLanguageAF06acceptG0SbSg9rawScoresAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA7ProfileVc7successtF">profile(html:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profile</span><span class="p">(</span>
+    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Profile.html">Profile</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvyAA7ContentV7content_SSSg0H8LanguageAH06acceptI0SbSg9rawScoresAK10csvHeadersAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profileAsCsv(content:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvyAA7ContentV7content_SSSg0H8LanguageAH06acceptI0SbSg9rawScoresAK10csvHeadersAK22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF">profileAsCsv(content:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profileAsCsv</span><span class="p">(</span>
+    <span class="nv">content</span><span class="p">:</span> <span class="kt"><a href="../Structs/Content.html">Content</a></span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">csvHeaders</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4text_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profileAsCsv(text:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4text_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF">profileAsCsv(text:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profileAsCsv</span><span class="p">(</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">csvHeaders</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4html_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/profileAsCsv(html:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV30aB0C12profileAsCsvySS4html_SSSg15contentLanguageAF06acceptI0SbSg9rawScoresAI10csvHeadersAI22consumptionPreferencess10DictionaryVyS2SGSg7headersys5Error_pcSg7failureySSc7successtF">profileAsCsv(html:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">profileAsCsv</span><span class="p">(</span>
+    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rawScores</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">csvHeaders</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">consumptionPreferences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

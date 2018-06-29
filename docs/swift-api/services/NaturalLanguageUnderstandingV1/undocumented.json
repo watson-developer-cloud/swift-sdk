@@ -2,7 +2,7 @@
   "warnings": [
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/ListModelsResults.swift",
-      "line": 22,
+      "line": 24,
       "symbol": "ListModelsResults.models",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -44,9 +44,23 @@
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
-      "line": 78,
+      "line": 80,
       "symbol": "NaturalLanguageUnderstanding.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 108,
+      "symbol": "JSON.encoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 120,
+      "symbol": "JSON.decoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     }
   ],

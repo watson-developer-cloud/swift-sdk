@@ -43,6 +43,9 @@
                 <a href="../Enums/JSON.html">JSON</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/ProfileContent.html">ProfileContent</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/RestError.html">RestError</a>
               </li>
             </ul>
@@ -470,8 +473,8 @@ posts/replies, messages/replies, and so on.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The content that is to be analyzed. The service supports up to 20 MB of content for all <code>ContentItem</code> objects
-combined.</p>
+                                  <p>The content that is to be analyzed. The service supports up to 20 MB of content for all
+<code>ContentItem</code> objects combined.</p>
                                 </div>
                               </td>
                             </tr>
@@ -495,8 +498,9 @@ combined.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch
-(January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
+                                  <p>A timestamp that identifies when this content was created. Specify a value in milliseconds
+since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior
+data.</p>
                                 </div>
                               </td>
                             </tr>
@@ -508,8 +512,9 @@ combined.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX
-Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
+                                  <p>A timestamp that identifies when this content was last updated. Specify a value in
+milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal
+behavior data.</p>
                                 </div>
                               </td>
                             </tr>
@@ -521,8 +526,8 @@ Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include tem
                               </td>
                               <td>
                                 <div>
-                                  <p>The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
-analyzed; plain text is processed as submitted.</p>
+                                  <p>The MIME type of the content. The default is plain text. The tags are stripped from
+HTML content before it is analyzed; plain text is processed as submitted.</p>
                                 </div>
                               </td>
                             </tr>
@@ -534,12 +539,13 @@ analyzed; plain text is processed as submitted.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is
-<code>en</code> (English). Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as
-<code>en</code>. A language specified with the <strong>Content-Type</strong> parameter overrides the value of this parameter; any content
-items that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter to base the language on
-the most prevalent specification among the content items; again, content items that specify a different language
-are ignored. You can specify any combination of languages for the input and response content.</p>
+                                  <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content
+item. The default is <code>en</code> (English). Regional variants are treated as their parent language; for example, <code>en-US</code>
+is interpreted as <code>en</code>. A language specified with the <strong>Content-Type</strong> parameter overrides the value of this
+parameter; any content items that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter
+to base the language on the most prevalent specification among the content items; again, content items that
+specify a different language are ignored. You can specify any combination of languages for the input and response
+content.</p>
                                 </div>
                               </td>
                             </tr>
@@ -551,8 +557,8 @@ are ignored. You can specify any combination of languages for the input and resp
                               </td>
                               <td>
                                 <div>
-                                  <p>The unique ID of the parent content item for this item. Used to identify hierarchical relationships between
-posts/replies, messages/replies, and so on.</p>
+                                  <p>The unique ID of the parent content item for this item. Used to identify hierarchical
+relationships between posts/replies, messages/replies, and so on.</p>
                                 </div>
                               </td>
                             </tr>
@@ -595,7 +601,7 @@ posts/replies, messages/replies, and so on.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

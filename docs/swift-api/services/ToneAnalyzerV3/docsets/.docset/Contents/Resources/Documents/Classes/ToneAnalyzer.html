@@ -45,6 +45,9 @@
               <li class="nav-group-task">
                 <a href="../Enums/RestError.html">RestError</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ToneContent.html">ToneContent</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -61,9 +64,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ToneCategory.html">ToneCategory</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ToneChatInput.html">ToneChatInput</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ToneChatScore.html">ToneChatScore</a>
@@ -394,9 +394,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneyAA0A7ContentO0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(toneContent:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneyAA0A7ContentO0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(toneContent:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -424,7 +424,7 @@ service removes HTML tags and analyzes only the textual content.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
-    <span class="nv">toneInput</span><span class="p">:</span> <span class="kt"><a href="../Structs/ToneInput.html">ToneInput</a></span><span class="p">,</span>
+    <span class="nv">toneContent</span><span class="p">:</span> <span class="kt"><a href="../Enums/ToneContent.html">ToneContent</a></span><span class="p">,</span>
     <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -442,12 +442,13 @@ service removes HTML tags and analyzes only the textual content.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>toneInput</em>
+                                <em>toneContent</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>JSON input that contains the content to be analyzed.</p>
+                                  <p>JSON, plain text, or HTML input that contains the content to be analyzed. For JSON
+input, provide an object of type <code><a href="../Structs/ToneInput.html">ToneInput</a></code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -459,8 +460,9 @@ service removes HTML tags and analyzes only the textual content.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
-the full document. If <code>true</code> (the default), the service returns results for each sentence.</p>
+                                  <p>Indicates whether the service is to return an analysis of each individual sentence in
+addition to its analysis of the full document. If <code>true</code> (the default), the service returns results for each
+sentence.</p>
                                 </div>
                               </td>
                             </tr>
@@ -472,8 +474,8 @@ the full document. If <code>true</code> (the default), the service returns resul
                               </td>
                               <td>
                                 <div>
-                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the
-parameter no longer affects the response.
+                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for
+backward-compatibility, but the parameter no longer affects the response.
 <strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service is to return its analysis of the input;
 the indicated tones apply both to the full document and to individual sentences of the document. You can specify
 one or more of the valid values. Omit the parameter to request results for all three tones.</p>
@@ -488,10 +490,10 @@ one or more of the valid values. Omit the parameter to request results for all t
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do
-not submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>.
+                                  <p>The language of the input text for the request: English or French. Regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match
+the specified language. Do not submit content that contains both languages. You can use different languages for
+<strong>Content-Language</strong> and <strong>Accept-Language</strong>.
 
 <ul>
 <li><strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>.</li>
@@ -508,339 +510,9 @@ not submit content that contains both languages. You can use different languages
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong>
-and <strong>Accept-Language</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A dictionary of request headers to be sent with this request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Analyze general tone.</p>
-
-<p>Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
-emotional and language tones. The method always analyzes the tone of the full document; by default, it also
-analyzes the tone of each individual sentence of the content.
-You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
-text, or HTML format. The service analyzes the first 1000 sentences for document-level analysis and only the first
-100 sentences for sentence-level analysis.
-Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
-character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>. For <code>text/html</code>, the
-service removes HTML tags and analyzes only the textual content.</p>
-
-<ul>
-<li><strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>.</li>
-<li><strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
-    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>text</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>plain text input that contains the content to be analyzed.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sentences</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
-the full document. If <code>true</code> (the default), the service returns results for each sentence.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>tones</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the
-parameter no longer affects the response.
-<strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service is to return its analysis of the input;
-the indicated tones apply both to the full document and to individual sentences of the document. You can specify
-one or more of the valid values. Omit the parameter to request results for all three tones.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do
-not submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong>
-and <strong>Accept-Language</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A dictionary of request headers to be sent with this request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>failure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
-                    <a name="//apple_ref/swift/Method/tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Analyze general tone.</p>
-
-<p>Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
-emotional and language tones. The method always analyzes the tone of the full document; by default, it also
-analyzes the tone of each individual sentence of the content.
-You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
-text, or HTML format. The service analyzes the first 1000 sentences for document-level analysis and only the first
-100 sentences for sentence-level analysis.
-Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
-character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>. For <code>text/html</code>, the
-service removes HTML tags and analyzes only the textual content.</p>
-
-<ul>
-<li><strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>.</li>
-<li><strong><code>2016-05-19</code>:</strong> Accepts only <code>en</code>.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
-    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>html</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>HTML input that contains the content to be analyzed.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sentences</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
-the full document. If <code>true</code> (the default), the service returns results for each sentence.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>tones</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for backward-compatibility, but the
-parameter no longer affects the response.
-<strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service is to return its analysis of the input;
-the indicated tones apply both to the full document and to individual sentences of the document. You can specify
-one or more of the valid values. Omit the parameter to request results for all three tones.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do
-not submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong>
-and <strong>Accept-Language</strong>.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different
+languages for <strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -937,7 +609,8 @@ Per the JSON specification, the default character encoding for JSON content is e
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of <code><a href="../Structs/Utterance.html">Utterance</a></code> objects that provides the input content that the service is to analyze.</p>
+                                  <p>An array of <code><a href="../Structs/Utterance.html">Utterance</a></code> objects that provides the input content that the service is to
+analyze.</p>
                                 </div>
                               </td>
                             </tr>
@@ -949,10 +622,10 @@ Per the JSON specification, the default character encoding for JSON content is e
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the input text for the request: English or French. Regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match the specified language. Do
-not submit content that contains both languages. You can use different languages for <strong>Content-Language</strong> and
-<strong>Accept-Language</strong>.
+                                  <p>The language of the input text for the request: English or French. Regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. The input content must match
+the specified language. Do not submit content that contains both languages. You can use different languages for
+<strong>Content-Language</strong> and <strong>Accept-Language</strong>.
 
 <ul>
 <li><strong><code>2017-09-21</code>:</strong> Accepts <code>en</code> or <code>fr</code>.</li>
@@ -969,9 +642,9 @@ not submit content that contains both languages. You can use different languages
                               </td>
                               <td>
                                 <div>
-                                  <p>The desired language of the response. For two-character arguments, regional variants are treated as their parent
-language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different languages for <strong>Content-Language</strong>
-and <strong>Accept-Language</strong>.</p>
+                                  <p>The desired language of the response. For two-character arguments, regional variants
+are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. You can use different
+languages for <strong>Content-Language</strong> and <strong>Accept-Language</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1019,10 +692,119 @@ and <strong>Accept-Language</strong>.</p>
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneyAA0A5InputV0dE0_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAM06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
+    <span class="nv">toneInput</span><span class="p">:</span> <span class="kt"><a href="../Structs/ToneInput.html">ToneInput</a></span><span class="p">,</span>
+    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4text_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneySS4html_SbSg9sentencesSaySSGSg5tonesSSSg15contentLanguageAK06acceptI0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0A8AnalysisVc7successtF">tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
+    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

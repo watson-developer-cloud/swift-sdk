@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Text Structure Reference</title>
+    <title>ProfileContent Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/Text" class="dashAnchor"></a>
-    <a title="Text Structure Reference"></a>
+    <a name="//apple_ref/swift/Enum/ProfileContent" class="dashAnchor"></a>
+    <a title="ProfileContent Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a></p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        Text Structure Reference
+        ProfileContent Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -32,7 +32,7 @@
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Classes/TextToSpeech.html">TextToSpeech</a>
+                <a href="../Classes/PersonalityInsights.html">PersonalityInsights</a>
               </li>
             </ul>
           </li>
@@ -43,6 +43,9 @@
                 <a href="../Enums/JSON.html">JSON</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/ProfileContent.html">ProfileContent</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/RestError.html">RestError</a>
               </li>
             </ul>
@@ -51,49 +54,43 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/CreateVoiceModel.html">CreateVoiceModel</a>
+                <a href="../Structs/Behavior.html">Behavior</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CreateVoiceModel/Language.html">– Language</a>
+                <a href="../Structs/ConsumptionPreferences.html">ConsumptionPreferences</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Pronunciation.html">Pronunciation</a>
+                <a href="../Structs/ConsumptionPreferencesCategory.html">ConsumptionPreferencesCategory</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
+                <a href="../Structs/Content.html">Content</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Text.html">Text</a>
+                <a href="../Structs/ContentItem.html">ContentItem</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Translation.html">Translation</a>
+                <a href="../Structs/ContentItem/Contenttype.html">– Contenttype</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Translation/PartOfSpeech.html">– PartOfSpeech</a>
+                <a href="../Structs/ContentItem/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/UpdateVoiceModel.html">UpdateVoiceModel</a>
+                <a href="../Structs/Profile.html">Profile</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Voice.html">Voice</a>
+                <a href="../Structs/Profile/ProcessedLanguage.html">– ProcessedLanguage</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/VoiceModel.html">VoiceModel</a>
+                <a href="../Structs/Trait.html">Trait</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/VoiceModels.html">VoiceModels</a>
+                <a href="../Structs/Trait/Category.html">– Category</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Voices.html">Voices</a>
+                <a href="../Structs/Warning.html">Warning</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Word.html">Word</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/Word/PartOfSpeech.html">– PartOfSpeech</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/Words.html">Words</a>
+                <a href="../Structs/Warning/WarningID.html">– WarningID</a>
               </li>
             </ul>
           </li>
@@ -102,14 +99,16 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Text</h1>
+            <h1>ProfileContent</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Text</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ProfileContent</span></code></pre>
 
                 </div>
               </div>
-            <p>Text.</p>
+            <p>A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
+<a href="https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient">Providing sufficient input</a>. For
+JSON input, provide an object of type <code><a href="../Structs/Content.html">Content</a></code>.</p>
 
           </section>
           <section class="section task-group-section">
@@ -118,9 +117,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10A0V4textSSvp"></a>
-                    <a name="//apple_ref/swift/Property/text" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10A0V4textSSvp">text</a>
+                    <a name="/s:21PersonalityInsightsV314ProfileContentO7contentAcA0E0VcACmF"></a>
+                    <a name="//apple_ref/swift/Element/content" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV314ProfileContentO7contentAcA0E0VcACmF">content</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -128,14 +127,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The text to synthesize.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">content</span><span class="p">(</span><span class="kt"><a href="../Structs/Content.html">Content</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -145,9 +144,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10A0VACSS4text_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(text:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10A0VACSS4text_tcfc">init(text:)</a>
+                    <a name="/s:21PersonalityInsightsV314ProfileContentO4htmlACSScACmF"></a>
+                    <a name="//apple_ref/swift/Element/html" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV314ProfileContentO4htmlACSScACmF">html</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -155,41 +154,43 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initialize a <code>Text</code> with member variables.</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
-    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span>
-<span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">html</span><span class="p">(</span><span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>text</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The text to synthesize.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV314ProfileContentO4textACSScACmF"></a>
+                    <a name="//apple_ref/swift/Element/text" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV314ProfileContentO4textACSScACmF">text</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
                       </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An initialized <code>Text</code>.</p>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">text</span><span class="p">(</span><span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -199,7 +200,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

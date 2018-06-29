@@ -1,6 +1,20 @@
 {
   "warnings": [
     {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 108,
+      "symbol": "JSON.encoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 120,
+      "symbol": "JSON.decoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
       "line": 33,
       "symbol": "AcousticModel.Status.pending",
@@ -137,118 +151,6 @@
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/Corpus.swift",
       "line": 33,
       "symbol": "Corpus.Status.undetermined",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 29,
-      "symbol": "CreateAcousticModel.BaseModelName.arArBroadbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 30,
-      "symbol": "CreateAcousticModel.BaseModelName.enGbBroadbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 31,
-      "symbol": "CreateAcousticModel.BaseModelName.enGbNarrowbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 32,
-      "symbol": "CreateAcousticModel.BaseModelName.enUsBroadbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 33,
-      "symbol": "CreateAcousticModel.BaseModelName.enUsNarrowbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 34,
-      "symbol": "CreateAcousticModel.BaseModelName.esEsBroadbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 35,
-      "symbol": "CreateAcousticModel.BaseModelName.esEsNarrowbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 36,
-      "symbol": "CreateAcousticModel.BaseModelName.frFrBroadbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 37,
-      "symbol": "CreateAcousticModel.BaseModelName.jaJpBroadbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 38,
-      "symbol": "CreateAcousticModel.BaseModelName.jaJpNarrowbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 39,
-      "symbol": "CreateAcousticModel.BaseModelName.koKrBroadbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 40,
-      "symbol": "CreateAcousticModel.BaseModelName.koKrNarrowbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 41,
-      "symbol": "CreateAcousticModel.BaseModelName.ptBrBroadbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 42,
-      "symbol": "CreateAcousticModel.BaseModelName.ptBrNarrowbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 43,
-      "symbol": "CreateAcousticModel.BaseModelName.zhCnBroadbandmodel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/Models/CreateAcousticModel.swift",
-      "line": 44,
-      "symbol": "CreateAcousticModel.BaseModelName.zhCnNarrowbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -415,7 +317,7 @@
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SpeechToTextV1/SpeechToText.swift",
-      "line": 105,
+      "line": 107,
       "symbol": "SpeechToText.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

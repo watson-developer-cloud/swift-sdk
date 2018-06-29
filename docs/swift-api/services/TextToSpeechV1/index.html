@@ -50,28 +50,16 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/CreateVoiceModel.html">CreateVoiceModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/CreateVoiceModel/Language.html">– Language</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/Pronunciation.html">Pronunciation</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SupportedFeatures.html">SupportedFeatures</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/Text.html">Text</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/Translation.html">Translation</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Translation/PartOfSpeech.html">– PartOfSpeech</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/UpdateVoiceModel.html">UpdateVoiceModel</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Voice.html">Voice</a>
@@ -125,6 +113,7 @@
 <h3 id='general' class='heading'>General</h3>
 
 <ul>
+<li><a href="#before-you-begin">Before you begin</a></li>
 <li><a href="#requirements">Requirements</a></li>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#service-instances">Service Instances</a></li>
@@ -151,6 +140,11 @@
 <li><a href="#text-to-speech">Text to Speech</a></li>
 <li><a href="#tone-analyzer">Tone Analyzer</a></li>
 <li><a href="#visual-recognition">Visual Recognition</a></li>
+</ul>
+<h2 id='before-you-begin' class='heading'>Before you begin</h2>
+
+<ul>
+<li>You need an <a href="http://console.bluemix.net/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-Swift">IBM Cloud</a> account.</li>
 </ul>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
@@ -188,7 +182,7 @@
 
 <p>Add the following to your <code>Package.swift</code> file to identify the Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with <code>swift build</code>.</p>
 <pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.28.0"</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.29.0"</span><span class="p">)</span>
 <span class="p">]</span>
 </code></pre>
 <h2 id='service-instances' class='heading'>Service Instances</h2>
@@ -467,28 +461,11 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
 <li><a href="https://discovery-news-demo.ng.bluemix.net/">IBM Discovery - Demo</a></li>
 </ul>
 <h2 id='language-translator-v2' class='heading'>Language Translator V2</h2>
+<h3 id='deprecation-notice' class='heading'>Deprecation notice</h3>
 
-<p><strong>Deprecation Notice</strong>:
-The IBM Watson Language Translator V2 service has been deprecated and replaced by the IBM Watson Language Translator V3 service.
-Please use the <code>LanguageTranslatorV3</code> class instead of <code>LanguageTranslator</code>.
-The <code>LanguageTranslator</code> class will be removed in a future release.</p>
-
-<p>The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.</p>
-
-<p>The following example demonstrates how to use the Language Translator service:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">LanguageTranslatorV2</span>
-
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">languageTranslator</span> <span class="o">=</span> <span class="kt">LanguageTranslator</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
-
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">TranslateRequest</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="s">"Hello"</span><span class="p">],</span> <span class="nv">source</span><span class="p">:</span> <span class="s">"en"</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="s">"es"</span><span class="p">)</span>
-<span class="n">languageTranslator</span><span class="o">.</span><span class="nf">translate</span><span class="p">(</span><span class="nv">request</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">translation</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre>
+<p>Language Translator v3 is now available. The v2 Language Translator API will no longer be available after July 31, 2018.
+To take advantage of the latest service enhancements, migrate to the v3 API.
+View the <a href="https://console.bluemix.net/docs/services/language-translator/migrating.html">Migrating to Language Translator v3</a> page for more information.</p>
 <h2 id='language-translator-v3' class='heading'>Language Translator V3</h2>
 
 <p>The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.</p>
@@ -954,7 +931,7 @@ The <code>LanguageTranslator</code> class will be removed in a future release.</
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

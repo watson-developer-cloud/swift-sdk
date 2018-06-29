@@ -98,7 +98,7 @@ Add the following to your `Package.swift` file to identify the Swift SDK as a de
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.28.1")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.29.0")
 ]
 ```
 
@@ -411,24 +411,11 @@ The following links provide more information about the IBM Discovery service:
 
 ## Language Translator V2
 
-The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
+### Deprecation notice
+Language Translator v3 is now available. The v2 Language Translator API will no longer be available after July 31, 2018.
+To take advantage of the latest service enhancements, migrate to the v3 API.
+View the [Migrating to Language Translator v3](https://console.bluemix.net/docs/services/language-translator/migrating.html) page for more information.
 
-The following example demonstrates how to use the Language Translator service:
-
-```swift
-import LanguageTranslatorV2
-
-let username = "your-username-here"
-let password = "your-password-here"
-let languageTranslator = LanguageTranslator(username: username, password: password)
-
-let failure = { (error: Error) in print(error) }
-let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")
-languageTranslator.translate(request: request, failure: failure) {
-    translation in
-    print(translation)
-}
-```
 
 ## Language Translator V3
 

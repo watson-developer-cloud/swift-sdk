@@ -2,7 +2,7 @@
   "warnings": [
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Conversation.swift",
-      "line": 74,
+      "line": 76,
       "symbol": "Conversation.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -373,91 +373,91 @@
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 44,
+      "line": 46,
       "symbol": "DialogNodeNextStep.Behavior.getUserInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 45,
+      "line": 47,
       "symbol": "DialogNodeNextStep.Behavior.skipUserInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 46,
+      "line": 48,
       "symbol": "DialogNodeNextStep.Behavior.jumpTo",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 47,
+      "line": 49,
       "symbol": "DialogNodeNextStep.Behavior.reprompt",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 48,
+      "line": 50,
       "symbol": "DialogNodeNextStep.Behavior.skipSlot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 49,
+      "line": 51,
       "symbol": "DialogNodeNextStep.Behavior.skipAllSlots",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 56,
+      "line": 58,
       "symbol": "DialogNodeNextStep.Selector.condition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 57,
+      "line": 59,
       "symbol": "DialogNodeNextStep.Selector.client",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 58,
+      "line": 60,
       "symbol": "DialogNodeNextStep.Selector.userInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
-      "line": 59,
+      "line": 61,
       "symbol": "DialogNodeNextStep.Selector.body",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
-      "line": 26,
+      "line": 28,
       "symbol": "LogMessage.Level.info",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
-      "line": 27,
+      "line": 29,
       "symbol": "LogMessage.Level.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
-      "line": 28,
+      "line": 30,
       "symbol": "LogMessage.Level.warn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -705,6 +705,20 @@
       "line": 30,
       "symbol": "WorkspaceExport.Status.unavailable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 108,
+      "symbol": "JSON.encoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 120,
+      "symbol": "JSON.decoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     }
   ],

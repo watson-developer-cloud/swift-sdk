@@ -96,12 +96,6 @@
                 <a href="../Structs/Corpus/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CreateAcousticModel.html">CreateAcousticModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateAcousticModel/BaseModelName.html">– BaseModelName</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/CreateLanguageModel.html">CreateLanguageModel</a>
               </li>
               <li class="nav-group-task">
@@ -109,9 +103,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CustomWord.html">CustomWord</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CustomWords.html">CustomWords</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/KeywordResult.html">KeywordResult</a>
@@ -340,9 +331,9 @@ data.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>For the <strong>Add custom words</strong> method, you must specify the custom word that is to be added to or updated in the
-custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to connect the tokens of
-compound words.
+                                  <p>For the <strong>Add custom words</strong> method, you must specify the custom word that is to be added to
+or updated in the custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to
+connect the tokens of compound words.
 Omit this field for the <strong>Add a custom word</strong> method.</p>
                                 </div>
                               </td>
@@ -355,13 +346,13 @@ Omit this field for the <strong>Add a custom word</strong> method.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
-foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service&rsquo;s base
-vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the
-word. For a word that is in the service&rsquo;s base vocabulary, use the parameter to specify additional pronunciations
-for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
-pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a
-pronunciation can include at most 40 characters not including spaces.</p>
+                                  <p>An array of sounds-like pronunciations for the custom word. Specify how words that are
+difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users. For a word that is not in
+the service&rsquo;s base vocabulary, omit the parameter to have the service automatically generate a sounds-like
+pronunciation for the word. For a word that is in the service&rsquo;s base vocabulary, use the parameter to specify
+additional pronunciations for the word. You cannot override the default pronunciation of a word; pronunciations
+you add augment the pronunciation from the base vocabulary. A word can have at most five sounds-like
+pronunciations, and a pronunciation can include at most 40 characters not including spaces.</p>
                                 </div>
                               </td>
                             </tr>
@@ -373,9 +364,9 @@ pronunciation can include at most 40 characters not including spaces.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the
-word to have a spelling that is different from its usual representation or from its spelling in corpora training
-data.</p>
+                                  <p>An alternative spelling for the custom word when it appears in a transcript. Use the
+parameter when you want the word to have a spelling that is different from its usual representation or from its
+spelling in corpora training data.</p>
                                 </div>
                               </td>
                             </tr>
@@ -394,7 +385,7 @@ data.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

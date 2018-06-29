@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## Version 0.29.0
+_2018-06-29_
+
+This release regenerates all services with generator updates for error handling and multi-consumes operations.
+
+The release also adds a deprecation notice for the Language Translator v2 service.  Users are encouraged to migrate
+to the new Language Translator v3 service.
+
+This release should be fully compatible with the previous SDK release.
+
 ## Version 0.28.1
 _2018-06-21_
 

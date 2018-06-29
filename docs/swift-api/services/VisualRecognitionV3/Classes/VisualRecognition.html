@@ -443,9 +443,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images
-and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII
-characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+                                  <p>An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include
+no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they
+contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
 You can also include an image with the <strong>url</strong> parameter.</p>
                                 </div>
                               </td>
@@ -458,8 +458,8 @@ You can also include an image with the <strong>url</strong> parameter.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the output class names. The full set of languages is supported only for the built-in <code>default</code>
-classifier ID. The class names of custom classifiers are not translated.
+                                  <p>The language of the output class names. The full set of languages is supported only
+for the built-in <code>default</code> classifier ID. The class names of custom classifiers are not translated.
 The response might not be in the specified language when the requested language is not supported or when there is
 no translation for the class name.</p>
                                 </div>
@@ -473,8 +473,8 @@ no translation for the class name.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32
-pixels per inch, and the maximum image size is 10 MB.
+                                  <p>The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel
+density is 32X32 pixels per inch, and the maximum image size is 10 MB.
 You can also include images with the <strong>images_file</strong> parameter.</p>
                                 </div>
                               </td>
@@ -487,8 +487,8 @@ You can also include images with the <strong>images_file</strong> parameter.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The minimum score a class must have to be displayed in the response. Set the threshold to <code>0.0</code> to ignore the
-classification score and return all values.</p>
+                                  <p>The minimum score a class must have to be displayed in the response. Set the threshold to
+<code>0.0</code> to ignore the classification score and return all values.</p>
                                 </div>
                               </td>
                             </tr>
@@ -500,9 +500,9 @@ classification score and return all values.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The categories of classifiers to apply. Use <code>IBM</code> to classify against the <code>default</code> general classifier, and use
-<code>me</code> to classify against your custom classifiers. To analyze the image against both classifier categories, set
-the value to both <code>IBM</code> and <code>me</code>.
+                                  <p>The categories of classifiers to apply. Use <code>IBM</code> to classify against the <code>default</code> general
+classifier, and use <code>me</code> to classify against your custom classifiers. To analyze the image against both
+classifier categories, set the value to both <code>IBM</code> and <code>me</code>.
 The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and <strong>owners</strong> parameters are empty.
 The <strong>classifier_ids</strong> parameter overrides <strong>owners</strong>, so make sure that <strong>classifier_ids</strong> is empty.</p>
                                 </div>
@@ -516,9 +516,9 @@ The <strong>classifier_ids</strong> parameter overrides <strong>owners</strong>,
                               </td>
                               <td>
                                 <div>
-                                  <p>Which classifiers to apply. Overrides the <strong>owners</strong> parameter. You can specify both custom and built-in
-classifier IDs. The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and <strong>owners</strong> parameters
-are empty.
+                                  <p>Which classifiers to apply. Overrides the <strong>owners</strong> parameter. You can specify both
+custom and built-in classifier IDs. The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and
+<strong>owners</strong> parameters are empty.
 The following built-in classifier IDs require no training:
 
 <ul>
@@ -634,8 +634,8 @@ recommended pixel density is 32X32 pixels per inch.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a
-maximum of 15 images in a request.
+                                  <p>An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to
+100 MB. You can include a maximum of 15 images in a request.
 Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8
 encoding if it encounters non-ASCII characters.
 You can also include an image with the <strong>url</strong> parameter.</p>
@@ -650,9 +650,9 @@ You can also include an image with the <strong>url</strong> parameter.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel
-density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a
-shortened URL.
+                                  <p>The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum
+recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed,
+so you can use a shortened URL.
 You can also include images with the <strong>images_file</strong> parameter.</p>
                                 </div>
                               </td>
@@ -771,11 +771,11 @@ names). The service assumes UTF-8 encoding if it encounters non-ASCII characters
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of of positive examples, each with a name and a compressed
-(.zip) file of images that depict the visual subject of a class in the new classifier. You can include more than
-one positive example file in a call.
-Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
-maximum number of images is 10,000 images or 100 MB per .zip file.
+                                  <p>An array of of positive examples, each with a name and a compressed (.zip) file
+of images that depict the visual subject of a class in the new classifier. You can include more than one
+positive example file in a call.
+Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels.
+The maximum number of images is 10,000 images or 100 MB per .zip file.
 Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
@@ -788,8 +788,8 @@ Encode special characters in the file name in UTF-8.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
-contain a minimum of 10 images.
+                                  <p>A .zip file of images that do not depict the visual subject of any of the classes
+of the new classifier. Must contain a minimum of 10 images.
 Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
@@ -889,8 +889,8 @@ Encode special characters in the file name in UTF-8.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Specify <code>true</code> to return details about the classifiers. Omit this parameter to return a brief list of
-classifiers.</p>
+                                  <p>Specify <code>true</code> to return details about the classifiers. Omit this parameter to return a
+brief list of classifiers.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1088,11 +1088,11 @@ classifier retraining finished.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of positive examples, each with a name and a compressed
-(.zip) file of images that depict the visual subject of a class in the classifier. The positive examples create
+                                  <p>An array of positive examples, each with a name and a compressed (.zip) file
+of images that depict the visual subject of a class in the classifier. The positive examples create
 or update classes in the classifier. You can include more than one positive example file in a call.
-Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
-maximum number of images is 10,000 images or 100 MB per .zip file.
+Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels.
+The maximum number of images is 10,000 images or 100 MB per .zip file.
 Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
@@ -1105,8 +1105,8 @@ Encode special characters in the file name in UTF-8.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
-contain a minimum of 10 images.
+                                  <p>A .zip file of images that do not depict the visual subject of any of the classes
+of the new classifier. Must contain a minimum of 10 images.
 Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
@@ -1994,7 +1994,7 @@ in an image, age and gender confidence scores might return scores of 0.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

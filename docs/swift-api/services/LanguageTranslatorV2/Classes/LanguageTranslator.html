@@ -93,11 +93,17 @@
             <h1>LanguageTranslator</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">LanguageTranslator</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "Language Translator v3 is now available. The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API.")</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">LanguageTranslator</span></code></pre>
 
                 </div>
               </div>
-            <p>IBM Watson&trade; Language Translator translates text from one language to another. The service offers multiple
+            <hr>
+
+<p>Language Translator v3 is <a href="https://www.ibm.com/watson/developercloud/language-translator/api/v3/">available</a>. See the</p>
+<h2 id='a-href-https-console-bluemix-net-docs-services-language-translator-migrating-html-migration-guide-a' class='heading'><a href="https://console.bluemix.net/docs/services/language-translator/migrating.html">migration guide</a>.</h2>
+
+<p>IBM Watson&trade; Language Translator translates text from one language to another. The service offers multiple
 domain-specific models that you can customize based on your unique terminology and language. Use Language Translator to
 take news from across the globe and present it in your language, communicate with your customers in their own language,
 and more.</p>
@@ -391,7 +397,8 @@ and more.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The translate request containing the text, and either a model ID or source and target language pair.</p>
+                                  <p>The translate request containing the text, and either a model ID or source and target
+language pair.</p>
                                 </div>
                               </td>
                             </tr>
@@ -669,9 +676,9 @@ for Spanish) and name of each language.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>If the default parameter isn&rsquo;t specified, the service will return all models (default and non-default) for each
-language pair. To return only default models, set this to <code>true</code>. To return only non-default models, set this to
-<code>false</code>.</p>
+                                  <p>If the default parameter isn&rsquo;t specified, the service will return all models (default
+and non-default) for each language pair. To return only default models, set this to <code>true</code>. To return only
+non-default models, set this to <code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -766,8 +773,8 @@ corpus files is limited to 250 MB.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The model ID of the model to use as the base for customization. To see available models, use the <code>List models</code>
-method.</p>
+                                  <p>The model ID of the model to use as the base for customization. To see available models,
+use the <code>List models</code> method.</p>
                                 </div>
                               </td>
                             </tr>
@@ -779,8 +786,8 @@ method.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An optional model name that you can use to identify the model. Valid characters are letters, numbers, dashes,
-underscores, spaces and apostrophes. The maximum length is 32 characters.</p>
+                                  <p>An optional model name that you can use to identify the model. Valid characters are letters,
+numbers, dashes, underscores, spaces and apostrophes. The maximum length is 32 characters.</p>
                                 </div>
                               </td>
                             </tr>
@@ -792,9 +799,9 @@ underscores, spaces and apostrophes. The maximum length is 32 characters.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A TMX file with your customizations. The customizations in the file completely overwrite the domain translaton
-data, including high frequency or high confidence phrase translations. You can upload only one glossary with a
-file size less than 10 MB per call.</p>
+                                  <p>A TMX file with your customizations. The customizations in the file completely
+overwrite the domain translaton data, including high frequency or high confidence phrase translations. You can
+upload only one glossary with a file size less than 10 MB per call.</p>
                                 </div>
                               </td>
                             </tr>
@@ -806,7 +813,8 @@ file size less than 10 MB per call.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A TMX file that contains entries that are treated as a parallel corpus instead of a glossary.</p>
+                                  <p>A TMX file that contains entries that are treated as a parallel corpus instead of a
+glossary.</p>
                                 </div>
                               </td>
                             </tr>
@@ -818,7 +826,8 @@ file size less than 10 MB per call.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A UTF-8 encoded plain text file that is used to customize the target language model.</p>
+                                  <p>A UTF-8 encoded plain text file that is used to customize the target language
+model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1045,7 +1054,7 @@ file size less than 10 MB per call.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-12)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-29)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

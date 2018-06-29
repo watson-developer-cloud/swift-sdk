@@ -21,6 +21,7 @@ There are many resources to help you build your first cognitive application with
 
 ### General
 
+* [Before you begin](#before-you-begin)
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Service Instances](#service-instances)
@@ -47,6 +48,9 @@ There are many resources to help you build your first cognitive application with
 * [Tone Analyzer](#tone-analyzer)
 * [Visual Recognition](#visual-recognition)
 
+## Before you begin
+* You need an [IBM Cloud][ibm-cloud-onboarding] account.
+ 
 ## Requirements
 
 - iOS 8.0+
@@ -917,3 +921,5 @@ The following links provide more information about the IBM Watson Visual Recogni
 * [IBM Watson Visual Recognition - Service Page](https://www.ibm.com/watson/services/visual-recognition/)
 * [IBM Watson Visual Recognition - Documentation](https://console.bluemix.net/docs/services/visual-recognition/index.html)
 * [IBM Watson Visual Recognition - Demo](https://visual-recognition-demo.ng.bluemix.net/)
+
+[ibm-cloud-onboarding]: http://console.bluemix.net/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-Swift

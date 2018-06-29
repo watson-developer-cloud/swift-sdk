@@ -98,7 +98,7 @@ Add the following to your `Package.swift` file to identify the Swift SDK as a de
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.28.1")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.29.0")
 ]
 ```
 

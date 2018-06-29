@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Metadata of a query result. */
+/**
+ Metadata of a query result.
+ */
 public struct QueryResultMetadata: Decodable {
 
     /**

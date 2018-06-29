@@ -16,7 +16,10 @@
 
 import Foundation
 
-/** The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be returned for detected entities, keywords, or user-specified target phrases found in the text. */
+/**
+ The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be returned
+ for detected entities, keywords, or user-specified target phrases found in the text.
+ */
 public struct EmotionResult: Decodable {
 
     /**

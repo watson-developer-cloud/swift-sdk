@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Details about an environment. */
+/**
+ Details about an environment.
+ */
 public struct Environment: Decodable {
 
     /**

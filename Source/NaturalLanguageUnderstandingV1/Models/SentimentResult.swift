@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The sentiment of the content. */
+/**
+ The sentiment of the content.
+ */
 public struct SentimentResult: Decodable {
 
     /**

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Log message details. */
+/**
+ Log message details.
+ */
 public struct LogMessage: Codable {
 
     /**

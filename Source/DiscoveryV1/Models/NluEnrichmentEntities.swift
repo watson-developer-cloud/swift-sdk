@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An object speficying the Entities enrichment and related parameters. */
+/**
+ An object speficying the Entities enrichment and related parameters.
+ */
 public struct NluEnrichmentEntities: Codable {
 
     /**
@@ -73,12 +75,14 @@ public struct NluEnrichmentEntities: Codable {
      - parameter sentiment: When `true`, sentiment analysis of entities will be performed on the specified field.
      - parameter emotion: When `true`, emotion detection of entities will be performed on the specified field.
      - parameter limit: The maximum number of entities to extract for each instance of the specified field.
-     - parameter mentions: When `true`, the number of mentions of each identified entity is recorded. The default is `false`.
-     - parameter mentionTypes: When `true`, the types of mentions for each idetifieid entity is recorded. The default is `false`.
-     - parameter sentenceLocation: When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is
+     - parameter mentions: When `true`, the number of mentions of each identified entity is recorded. The default is
        `false`.
-     - parameter model: The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio,
-       the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
+     - parameter mentionTypes: When `true`, the types of mentions for each idetifieid entity is recorded. The default
+       is `false`.
+     - parameter sentenceLocation: When `true`, a list of sentence locations for each instance of each identified
+       entity is recorded. The default is `false`.
+     - parameter model: The enrichement model to use with entity extraction. May be a custom model provided by Watson
+       Knowledge Studio, the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
 
      - returns: An initialized `NluEnrichmentEntities`.
     */

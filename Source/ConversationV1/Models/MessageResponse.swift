@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A response from the Conversation service. */
+/**
+ A response from the Conversation service.
+ */
 public struct MessageResponse: Decodable {
 
     /**

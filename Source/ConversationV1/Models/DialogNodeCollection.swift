@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An array of dialog nodes. */
+/**
+ An array of dialog nodes.
+ */
 public struct DialogNodeCollection: Decodable {
 
     /**

@@ -107,7 +107,8 @@ public class LanguageTranslator {
 
      Translates the input text from the source language to the target language.
 
-     - parameter request: The translate request containing the text, and either a model ID or source and target language pair.
+     - parameter request: The translate request containing the text, and either a model ID or source and target
+       language pair.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -272,9 +273,10 @@ public class LanguageTranslator {
 
      - parameter source: Specify a language code to filter results by source language.
      - parameter target: Specify a language code to filter results by target language.
-     - parameter defaultModels: If the default parameter isn't specified, the service will return all models (default and non-default) for each
-       language pair. To return only default models, set this to `true`. To return only non-default models, set this to
-       `false`. There is exactly one default model per language pair, the IBM provided base model.
+     - parameter defaultModels: If the default parameter isn't specified, the service will return all models (default
+       and non-default) for each language pair. To return only default models, set this to `true`. To return only
+       non-default models, set this to `false`. There is exactly one default model per language pair, the IBM provided
+       base model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -345,17 +347,18 @@ public class LanguageTranslator {
      parallel sentences</b> in your corpus.
      You can have a <b>maxium of 10 custom models per language pair</b>.
 
-     - parameter baseModelID: The model ID of the model to use as the base for customization. To see available models, use the `List models`
-       method. Usually all IBM provided models are customizable. In addition, all your models that have been created via
-       parallel corpus customization, can be further customized with a forced glossary.
-     - parameter name: An optional model name that you can use to identify the model. Valid characters are letters, numbers, dashes,
-       underscores, spaces and apostrophes. The maximum length is 32 characters.
-     - parameter forcedGlossary: A TMX file with your customizations. The customizations in the file completely overwrite the domain translaton
-       data, including high frequency or high confidence phrase translations. You can upload only one glossary with a
-       file size less than 10 MB per call. A forced glossary should contain single words or short phrases.
-     - parameter parallelCorpus: A TMX file with parallel sentences for source and target language. You can upload multiple parallel_corpus files
-       in one request. All uploaded parallel_corpus files combined, your parallel corpus must contain at least 5,000
-       parallel sentences to train successfully.
+     - parameter baseModelID: The model ID of the model to use as the base for customization. To see available models,
+       use the `List models` method. Usually all IBM provided models are customizable. In addition, all your models that
+       have been created via parallel corpus customization, can be further customized with a forced glossary.
+     - parameter name: An optional model name that you can use to identify the model. Valid characters are letters,
+       numbers, dashes, underscores, spaces and apostrophes. The maximum length is 32 characters.
+     - parameter forcedGlossary: A TMX file with your customizations. The customizations in the file completely
+       overwrite the domain translaton data, including high frequency or high confidence phrase translations. You can
+       upload only one glossary with a file size less than 10 MB per call. A forced glossary should contain single words
+       or short phrases.
+     - parameter parallelCorpus: A TMX file with parallel sentences for source and target language. You can upload
+       multiple parallel_corpus files in one request. All uploaded parallel_corpus files combined, your parallel corpus
+       must contain at least 5,000 parallel sentences to train successfully.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.

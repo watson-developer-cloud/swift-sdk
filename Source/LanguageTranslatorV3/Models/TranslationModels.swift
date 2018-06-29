@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The response type for listing existing translation models. */
+/**
+ The response type for listing existing translation models.
+ */
 public struct TranslationModels: Decodable {
 
     /**

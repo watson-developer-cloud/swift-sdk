@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An option specifying whether or not to identify the subjects, actions, and verbs in the analyzed content. */
+/**
+ An option specifying whether or not to identify the subjects, actions, and verbs in the analyzed content.
+ */
 public struct SemanticRolesOptions: Encodable {
 
     /**

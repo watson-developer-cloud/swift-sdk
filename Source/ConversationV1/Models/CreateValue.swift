@@ -79,14 +79,14 @@ public struct CreateValue: Encodable {
        - It cannot consist of only whitespace characters.
        - It must be no longer than 64 characters.
      - parameter metadata: Any metadata related to the entity value.
-     - parameter synonyms: An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated
-       by **type**), but not both. A synonym must conform to the following restrictions:
+     - parameter synonyms: An array containing any synonyms for the entity value. You can provide either synonyms or
+       patterns (as indicated by **type**), but not both. A synonym must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
        - It must be no longer than 64 characters.
-     - parameter patterns: An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
-       **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more information
-       about how to specify a pattern, see the
+     - parameter patterns: An array of patterns for the entity value. You can provide either synonyms or patterns (as
+       indicated by **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more
+       information about how to specify a pattern, see the
        [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
      - parameter valueType: Specifies the type of value.
 

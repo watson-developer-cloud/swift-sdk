@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The text of the user input. */
+/**
+ The text of the user input.
+ */
 public struct MessageInput: Decodable {
 
     /**

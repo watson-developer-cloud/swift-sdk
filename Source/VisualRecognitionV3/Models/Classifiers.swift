@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A container for the list of classifiers. */
+/**
+ A container for the list of classifiers.
+ */
 public struct Classifiers: Decodable {
 
     /**

@@ -40,6 +40,7 @@ internal struct RestRequest {
             #endif
         }()
         let operatingSystemVersion: String = {
+            // swiftlint:disable:next identifier_name
             let os = ProcessInfo.processInfo.operatingSystemVersion
             return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
         }()

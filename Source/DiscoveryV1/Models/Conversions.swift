@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Document conversion settings. */
+/**
+ Document conversion settings.
+ */
 public struct Conversions: Codable {
 
     /**
@@ -61,8 +63,8 @@ public struct Conversions: Codable {
      - parameter word: A list of Word conversion settings.
      - parameter html: A list of HTML conversion settings.
      - parameter segment: A list of Document Segmentation settings.
-     - parameter jsonNormalizations: Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
-       executed in the order that they appear in the array.
+     - parameter jsonNormalizations: Defines operations that can be used to transform the final output JSON into a
+       normalized form. Operations are executed in the order that they appear in the array.
 
      - returns: An initialized `Conversions`.
     */

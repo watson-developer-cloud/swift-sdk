@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Results for all images. */
+/**
+ Results for all images.
+ */
 public struct ClassifiedImages: Decodable {
 
     /**

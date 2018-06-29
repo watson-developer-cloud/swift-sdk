@@ -64,8 +64,8 @@ public struct UpdateEntity: Encodable {
        - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
        - It cannot begin with the reserved prefix `sys-`.
        - It must be no longer than 64 characters.
-     - parameter description: The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
-       must be no longer than 128 characters.
+     - parameter description: The description of the entity. This string cannot contain carriage return, newline, or
+       tab characters, and it must be no longer than 128 characters.
      - parameter metadata: Any metadata related to the entity.
      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
      - parameter values: An array of entity values.

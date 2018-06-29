@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Information about a classifier. */
+/**
+ Information about a classifier.
+ */
 public struct Classifier: Decodable {
 
     /**

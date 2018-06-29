@@ -58,13 +58,15 @@ public struct QueryEntities: Encodable {
     /**
      Initialize a `QueryEntities` with member variables.
 
-     - parameter feature: The entity query feature to perform. Supported features are `disambiguate` and `similar_entities`.
+     - parameter feature: The entity query feature to perform. Supported features are `disambiguate` and
+       `similar_entities`.
      - parameter entity: A text string that appears within the entity text field.
-     - parameter context: Entity text to provide context for the queried entity and rank based on that association. For example, if you
-       wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     - parameter context: Entity text to provide context for the queried entity and rank based on that association.
+       For example, if you wanted to query the city of London in England your query would look for `London` with the
+       context of `England`.
      - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
-     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
-       per query is 10,000.
+     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The
+       maximum number of evidence items per query is 10,000.
 
      - returns: An initialized `QueryEntities`.
     */

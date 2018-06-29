@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** RSS or ATOM feed found on the webpage. */
+/**
+ RSS or ATOM feed found on the webpage.
+ */
 public struct Feed: Decodable {
 
     /**

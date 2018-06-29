@@ -39,9 +39,10 @@ public struct Utterance: Encodable {
     /**
      Initialize a `Utterance` with member variables.
 
-     - parameter text: An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple
-       sentences.
-     - parameter user: A string that identifies the user who contributed the utterance specified by the `text` parameter.
+     - parameter text: An utterance contributed by a user in the conversation that is to be analyzed. The utterance
+       can contain multiple sentences.
+     - parameter user: A string that identifies the user who contributed the utterance specified by the `text`
+       parameter.
 
      - returns: An initialized `Utterance`.
     */

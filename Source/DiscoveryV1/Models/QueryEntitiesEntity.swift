@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A text string that appears within the entity text field. */
+/**
+ A text string that appears within the entity text field.
+ */
 public struct QueryEntitiesEntity: Codable {
 
     /**

@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-// swiftlint:disable function_body_length force_try force_unwrapping superfluous_disable_command
+// swiftlint:disable function_body_length force_try force_unwrapping file_length
 
 import XCTest
 import Foundation
@@ -206,7 +206,10 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testAnalyzeTextForEmotions() {
         let description = "Analyze text for emotions."
         let expectation = self.expectation(description: description)
-        let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- because entrepreneurs need to access information in order to invent; young people need a global education in order to thrive; independent media needs to check the abuses of power."
+        let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. "
+                 + "I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- "
+                 + "because entrepreneurs need to access information in order to invent; young people need a global education "
+                 + "in order to thrive; independent media needs to check the abuses of power."
         let emotion = EmotionOptions(targets: ["democracy", "entrepreneurs", "media", "economies"])
         let features = Features(emotion: emotion)
         let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
@@ -244,7 +247,10 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testAnalyzeTextForEmotionsWithoutTargets() {
         let description = "Analyze text for emotions without targets."
         let expectation = self.expectation(description: description)
-        let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- because entrepreneurs need to access information in order to invent; young people need a global education in order to thrive; independent media needs to check the abuses of power."
+        let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. "
+                 + "I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- "
+                 + "because entrepreneurs need to access information in order to invent; young people need a global education "
+                 + "in order to thrive; independent media needs to check the abuses of power."
         let features = Features(emotion: EmotionOptions())
         let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
         naturalLanguageUnderstanding.analyze(parameters: parameters, failure: failWithError) {

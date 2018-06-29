@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The hierarchical 5-level taxonomy the content is categorized into. */
+/**
+ The hierarchical 5-level taxonomy the content is categorized into.
+ */
 public struct CategoriesResult: Decodable {
 
     /**

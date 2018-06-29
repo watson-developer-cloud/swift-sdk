@@ -140,8 +140,8 @@ public class NaturalLanguageUnderstanding {
      Categorize your content into a hierarchical 5-level taxonomy. For example, \"Leonardo DiCaprio won an Oscar\"
      returns \"/art and entertainment/movies and tv/movies\" as the most confident classification.
 
-     - parameter parameters: An object containing request parameters. The `features` object and one of the `text`, `html`, or `url` attributes
-       are required.
+     - parameter parameters: An object containing request parameters. The `features` object and one of the `text`,
+       `html`, or `url` attributes are required.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.

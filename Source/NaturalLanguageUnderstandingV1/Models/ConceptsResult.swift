@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The general concepts referenced or alluded to in the specified content. */
+/**
+ The general concepts referenced or alluded to in the specified content.
+ */
 public struct ConceptsResult: Decodable {
 
     /**

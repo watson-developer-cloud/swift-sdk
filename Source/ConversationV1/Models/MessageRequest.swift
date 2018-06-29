@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A request formatted for the Conversation service. */
+/**
+ A request formatted for the Conversation service.
+ */
 public struct MessageRequest: Codable {
 
     /**
@@ -67,15 +69,16 @@ public struct MessageRequest: Codable {
      Initialize a `MessageRequest` with member variables.
 
      - parameter input: An input object that includes the input text.
-     - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching intents.
-     - parameter context: State information for the conversation. Continue a conversation by including the context object from the previous
-       response.
-     - parameter entities: Entities to use when evaluating the message. Include entities from the previous response to continue using those
-       entities rather than detecting entities in the new input.
-     - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response to continue using those
-       intents rather than trying to recognize intents in the new input.
-     - parameter output: System output. Include the output from the previous response to maintain intermediate information over multiple
-       requests.
+     - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
+       intents.
+     - parameter context: State information for the conversation. Continue a conversation by including the context
+       object from the previous response.
+     - parameter entities: Entities to use when evaluating the message. Include entities from the previous response
+       to continue using those entities rather than detecting entities in the new input.
+     - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response
+       to continue using those intents rather than trying to recognize intents in the new input.
+     - parameter output: System output. Include the output from the previous response to maintain intermediate
+       information over multiple requests.
 
      - returns: An initialized `MessageRequest`.
     */

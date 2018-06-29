@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A respresentation of a relationship query. */
+/**
+ A respresentation of a relationship query.
+ */
 public struct QueryRelations: Encodable {
 
     /**
@@ -75,14 +77,15 @@ public struct QueryRelations: Encodable {
      Initialize a `QueryRelations` with member variables.
 
      - parameter entities: An array of entities to find relationships for.
-     - parameter context: Entity text to provide context for the queried entity and rank based on that association. For example, if you
-       wanted to query the city of London in England your query would look for `London` with the context of `England`.
-     - parameter sort: The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique
-       times each entity is identified. The default is `score`.
+     - parameter context: Entity text to provide context for the queried entity and rank based on that association.
+       For example, if you wanted to query the city of London in England your query would look for `London` with the
+       context of `England`.
+     - parameter sort: The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the
+       number of unique times each entity is identified. The default is `score`.
      - parameter filter: Filters to apply to the relationship query.
      - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
-     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
-       per query is 10,000.
+     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The
+       maximum number of evidence items per query is 10,000.
 
      - returns: An initialized `QueryRelations`.
     */

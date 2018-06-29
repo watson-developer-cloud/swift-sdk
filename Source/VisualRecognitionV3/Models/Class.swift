@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A category within a classifier. */
+/**
+ A category within a classifier.
+ */
 public struct Class: Decodable {
 
     /**

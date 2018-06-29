@@ -192,18 +192,19 @@ public struct UpdateDialogNode: Encodable {
      - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
        - It must be no longer than 1024 characters.
-     - parameter description: The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
-       it must be no longer than 128 characters.
-     - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
-       characters, and it must be no longer than 2048 characters.
+     - parameter description: The description of the dialog node. This string cannot contain carriage return,
+       newline, or tab characters, and it must be no longer than 128 characters.
+     - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage
+       return, newline, or tab characters, and it must be no longer than 2048 characters.
      - parameter parent: The ID of the parent dialog node.
      - parameter previousSibling: The ID of the previous sibling dialog node.
-     - parameter output: The output of the dialog node. For more information about how to specify dialog node output, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
+       see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to be executed in dialog processing.
-     - parameter title: The alias used to identify the dialog node. This string must conform to the following restrictions:
+     - parameter title: The alias used to identify the dialog node. This string must conform to the following
+       restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
        - It must be no longer than 64 characters.
      - parameter nodeType: How the dialog node is processed.

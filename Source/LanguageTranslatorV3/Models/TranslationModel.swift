@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Response payload for models. */
+/**
+ Response payload for models.
+ */
 public struct TranslationModel: Decodable {
 
     /**

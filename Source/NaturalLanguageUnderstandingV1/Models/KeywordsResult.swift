@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The most important keywords in the content, organized by relevance. */
+/**
+ The most important keywords in the content, organized by relevance.
+ */
 public struct KeywordsResult: Decodable {
 
     /**

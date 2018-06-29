@@ -120,29 +120,31 @@ public class ToneAnalyzer {
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
 
-     - parameter toneInput: A `ToneInput` object that contains the content to be analyzed.
-     - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
-       the full document. If `true` (the default), the service returns results for each sentence.
-     - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the
-       parameter no longer affects the response.
+     - parameter toneContent: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON
+       input, provide an object of type `ToneInput`.
+     - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in
+       addition to its analysis of the full document. If `true` (the default), the service returns results for each
+       sentence.
+     - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for
+       backward-compatibility, but the parameter no longer affects the response.
        **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input;
        the indicated tones apply both to the full document and to individual sentences of the document. You can specify
        one or more of the valid values. Omit the parameter to request results for all three tones.
-     - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants are treated as their parent
-       language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do
-       not submit content that contains both languages. You can use different languages for **Content-Language** and
-       **Accept-Language**.
+     - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants
+       are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match
+       the specified language. Do not submit content that contains both languages. You can use different languages for
+       **Content-Language** and **Accept-Language**.
        * **`2017-09-21`:** Accepts `en` or `fr`.
        * **`2016-05-19`:** Accepts only `en`.
-     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
-       language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language**
-       and **Accept-Language**.
+     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants
+       are treated as their parent language; for example, `en-US` is interpreted as `en`. You can use different
+       languages for **Content-Language** and **Accept-Language**.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func tone(
-        toneInput: ToneInput,
+        toneContent: ToneContent,
         sentences: Bool? = nil,
         tones: [String]? = nil,
         contentLanguage: String? = nil,
@@ -152,7 +154,7 @@ public class ToneAnalyzer {
         success: @escaping (ToneAnalysis) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(toneInput) else {
+        guard let body = toneContent.content else {
             failure?(RestError.serializationError)
             return
         }
@@ -163,207 +165,7 @@ public class ToneAnalyzer {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
-        if let contentLanguage = contentLanguage {
-            headerParameters["Content-Language"] = contentLanguage
-        }
-        if let acceptLanguage = acceptLanguage {
-            headerParameters["Accept-Language"] = acceptLanguage
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let sentences = sentences {
-            let queryParameter = URLQueryItem(name: "sentences", value: "\(sentences)")
-            queryParameters.append(queryParameter)
-        }
-        if let tones = tones {
-            let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            session: session,
-            authMethod: authMethod,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceURL + "/v3/tone",
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject {
-            (response: RestResponse<ToneAnalysis>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Analyze general tone.
-
-     Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
-     emotional and language tones. The method always analyzes the tone of the full document; by default, it also
-     analyzes the tone of each individual sentence of the content.
-     You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
-     text, or HTML format. The service analyzes the first 1000 sentences for document-level analysis and only the first
-     100 sentences for sentence-level analysis.
-     Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-     HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-     set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
-     character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
-     service removes HTML tags and analyzes only the textual content.
-
-     - parameter text: plain text input that contains the content to be analyzed.
-     - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
-     the full document. If `true` (the default), the service returns results for each sentence.
-     - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the
-     parameter no longer affects the response.
-     **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input;
-     the indicated tones apply both to the full document and to individual sentences of the document. You can specify
-     one or more of the valid values. Omit the parameter to request results for all three tones.
-     - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants are treated as their parent
-     language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do
-     not submit content that contains both languages. You can use different languages for **Content-Language** and
-     **Accept-Language**.
-     * **`2017-09-21`:** Accepts `en` or `fr`.
-     * **`2016-05-19`:** Accepts only `en`.
-     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
-     language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language**
-     and **Accept-Language**.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func tone(
-        text: String,
-        sentences: Bool? = nil,
-        tones: [String]? = nil,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ToneAnalysis) -> Void)
-    {
-        // construct body
-        guard let body = text.data(using: .utf8) else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "text/plain"
-        if let contentLanguage = contentLanguage {
-            headerParameters["Content-Language"] = contentLanguage
-        }
-        if let acceptLanguage = acceptLanguage {
-            headerParameters["Accept-Language"] = acceptLanguage
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let sentences = sentences {
-            let queryParameter = URLQueryItem(name: "sentences", value: "\(sentences)")
-            queryParameters.append(queryParameter)
-        }
-        if let tones = tones {
-            let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let request = RestRequest(
-            session: session,
-            authMethod: authMethod,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceURL + "/v3/tone",
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject {
-            (response: RestResponse<ToneAnalysis>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-    /**
-     Analyze general tone.
-
-     Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
-     emotional and language tones. The method always analyzes the tone of the full document; by default, it also
-     analyzes the tone of each individual sentence of the content.
-     You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
-     text, or HTML format. The service analyzes the first 1000 sentences for document-level analysis and only the first
-     100 sentences for sentence-level analysis.
-     Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
-     HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
-     set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
-     character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
-     service removes HTML tags and analyzes only the textual content.
-
-     - parameter html: HTML input that contains the content to be analyzed.
-     - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
-     the full document. If `true` (the default), the service returns results for each sentence.
-     - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the
-     parameter no longer affects the response.
-     **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input;
-     the indicated tones apply both to the full document and to individual sentences of the document. You can specify
-     one or more of the valid values. Omit the parameter to request results for all three tones.
-     - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants are treated as their parent
-     language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do
-     not submit content that contains both languages. You can use different languages for **Content-Language** and
-     **Accept-Language**.
-     * **`2017-09-21`:** Accepts `en` or `fr`.
-     * **`2016-05-19`:** Accepts only `en`.
-     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
-     language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language**
-     and **Accept-Language**.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
-     */
-    public func tone(
-        html: String,
-        sentences: Bool? = nil,
-        tones: [String]? = nil,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ToneAnalysis) -> Void)
-    {
-        // construct body
-        guard let body = html.data(using: .utf8) else {
-            failure?(RestError.serializationError)
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "text/html"
+        headerParameters["Content-Type"] = toneContent.contentType
         if let contentLanguage = contentLanguage {
             headerParameters["Content-Language"] = contentLanguage
         }
@@ -417,16 +219,17 @@ public class ToneAnalyzer {
      500 characters.
      Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8.
 
-     - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to analyze.
-     - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants are treated as their parent
-       language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do
-       not submit content that contains both languages. You can use different languages for **Content-Language** and
-       **Accept-Language**.
+     - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
+       analyze.
+     - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants
+       are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match
+       the specified language. Do not submit content that contains both languages. You can use different languages for
+       **Content-Language** and **Accept-Language**.
        * **`2017-09-21`:** Accepts `en` or `fr`.
        * **`2016-05-19`:** Accepts only `en`.
-     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants are treated as their parent
-       language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language**
-       and **Accept-Language**.
+     - parameter acceptLanguage: The desired language of the response. For two-character arguments, regional variants
+       are treated as their parent language; for example, `en-US` is interpreted as `en`. You can use different
+       languages for **Content-Language** and **Accept-Language**.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -484,6 +287,55 @@ public class ToneAnalyzer {
             case .failure(let error): failure?(error)
             }
         }
+    }
+
+}
+
+extension ToneAnalyzer {
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the tone method that accepts a toneContent parameter.  This method will be removed in a future release.")
+    public func tone(
+        toneInput: ToneInput,
+        sentences: Bool? = nil,
+        tones: [String]? = nil,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ToneAnalysis) -> Void)
+    {
+        tone(toneContent: .toneInput(toneInput), sentences: sentences, tones: tones, contentLanguage: contentLanguage,
+             acceptLanguage: acceptLanguage, headers: headers, failure: failure, success: success)
+    }
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the tone method that accepts a toneContent parameter.  This method will be removed in a future release.")
+    public func tone(
+        text: String,
+        sentences: Bool? = nil,
+        tones: [String]? = nil,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ToneAnalysis) -> Void)
+    {
+        tone(toneContent: .text(text), sentences: sentences, tones: tones, contentLanguage: contentLanguage,
+             acceptLanguage: acceptLanguage, headers: headers, failure: failure, success: success)
+    }
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the tone method that accepts a toneContent parameter.  This method will be removed in a future release.")
+    public func tone(
+        html: String,
+        sentences: Bool? = nil,
+        tones: [String]? = nil,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ToneAnalysis) -> Void)
+    {
+        tone(toneContent: .html(html), sentences: sentences, tones: tones, contentLanguage: contentLanguage,
+             acceptLanguage: acceptLanguage, headers: headers, failure: failure, success: success)
     }
 
 }

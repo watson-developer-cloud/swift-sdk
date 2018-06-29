@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An intent identified in the user input. */
+/**
+ An intent identified in the user input.
+ */
 public struct RuntimeIntent: Codable {
 
     /**

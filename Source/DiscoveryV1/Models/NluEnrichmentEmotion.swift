@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An object specifying the emotion detection enrichment and related parameters. */
+/**
+ An object specifying the emotion detection enrichment and related parameters.
+ */
 public struct NluEnrichmentEmotion: Codable {
 
     /**

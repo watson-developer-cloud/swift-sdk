@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Summary of the document usage statistics for the environment. */
+/**
+ Summary of the document usage statistics for the environment.
+ */
 public struct EnvironmentDocuments: Decodable {
 
     /**

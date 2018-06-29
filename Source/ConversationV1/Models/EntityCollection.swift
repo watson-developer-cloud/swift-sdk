@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An array of entities. */
+/**
+ An array of entities.
+ */
 public struct EntityCollection: Decodable {
 
     /**

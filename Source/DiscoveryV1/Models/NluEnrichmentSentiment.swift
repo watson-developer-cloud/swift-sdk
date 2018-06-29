@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An object specifying the sentiment extraction enrichment and related parameters. */
+/**
+ An object specifying the sentiment extraction enrichment and related parameters.
+ */
 public struct NluEnrichmentSentiment: Codable {
 
     /**

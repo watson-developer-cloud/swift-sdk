@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A notice produced for the collection. */
+/**
+ A notice produced for the collection.
+ */
 public struct Notice: Decodable {
 
     /**

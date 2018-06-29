@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** An option specifying if the relationships found between entities in the analyzed content should be returned. */
+/**
+ An option specifying if the relationships found between entities in the analyzed content should be returned.
+ */
 public struct RelationsOptions: Encodable {
 
     /**

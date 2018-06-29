@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Options which are specific to a particular enrichment. */
+/**
+ Options which are specific to a particular enrichment.
+ */
 public struct EnrichmentOptions: Codable {
 
     /**
@@ -38,9 +40,10 @@ public struct EnrichmentOptions: Codable {
     /**
      Initialize a `EnrichmentOptions` with member variables.
 
-     - parameter features: An object representing the enrichment features that will be applied to the specified field.
-     - parameter model: *For use with `elements` enrichments only.* The element extraction model to use. Models available are:
-       `contract`.
+     - parameter features: An object representing the enrichment features that will be applied to the specified
+       field.
+     - parameter model: *For use with `elements` enrichments only.* The element extraction model to use. Models
+       available are: `contract`.
 
      - returns: An initialized `EnrichmentOptions`.
     */

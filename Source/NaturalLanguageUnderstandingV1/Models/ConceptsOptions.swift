@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Whether or not to analyze content for general concepts that are referenced or alluded to. */
+/**
+ Whether or not to analyze content for general concepts that are referenced or alluded to.
+ */
 public struct ConceptsOptions: Encodable {
 
     /**

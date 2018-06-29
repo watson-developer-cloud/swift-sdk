@@ -16,7 +16,10 @@
 
 import Foundation
 
-/** Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`. */
+/**
+ Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to
+ query the city of London in England your query would look for `London` with the context of `England`.
+ */
 public struct QueryEntitiesContext: Encodable {
 
     /**
@@ -33,8 +36,9 @@ public struct QueryEntitiesContext: Encodable {
     /**
      Initialize a `QueryEntitiesContext` with member variables.
 
-     - parameter text: Entity text to provide context for the queried entity and rank based on that association. For example, if you
-       wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     - parameter text: Entity text to provide context for the queried entity and rank based on that association. For
+       example, if you wanted to query the city of London in England your query would look for `London` with the context
+       of `England`.
 
      - returns: An initialized `QueryEntitiesContext`.
     */

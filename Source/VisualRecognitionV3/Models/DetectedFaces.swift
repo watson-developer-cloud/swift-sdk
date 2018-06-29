@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Results for all faces. */
+/**
+ Results for all faces.
+ */
 public struct DetectedFaces: Decodable {
 
     /**

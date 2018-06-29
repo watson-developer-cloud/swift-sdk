@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A response from the Watson Assistant service. */
+/**
+ A response from the Watson Assistant service.
+ */
 public struct MessageResponse: Decodable {
 
     /**

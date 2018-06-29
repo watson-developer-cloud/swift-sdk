@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The important people, places, geopolitical entities and other types of entities in your content. */
+/**
+ The important people, places, geopolitical entities and other types of entities in your content.
+ */
 public struct EntitiesResult: Decodable {
 
     /**

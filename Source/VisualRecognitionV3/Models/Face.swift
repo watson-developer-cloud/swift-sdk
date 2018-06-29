@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Information about the face. */
+/**
+ Information about the face.
+ */
 public struct Face: Decodable {
 
     /**
@@ -33,6 +35,9 @@ public struct Face: Decodable {
      The location of the bounding box around the face.
      */
     public var faceLocation: FaceLocation?
+
+    /** deprecated */
+    public var identity: FaceIdentity?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

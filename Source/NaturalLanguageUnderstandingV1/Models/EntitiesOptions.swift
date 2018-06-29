@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed content. */
+/**
+ Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed content.
+ */
 public struct EntitiesOptions: Encodable {
 
     /**

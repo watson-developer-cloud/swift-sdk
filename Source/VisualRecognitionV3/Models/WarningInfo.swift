@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Information about something that went wrong. */
+/**
+ Information about something that went wrong.
+ */
 public struct WarningInfo: Decodable {
 
     /**

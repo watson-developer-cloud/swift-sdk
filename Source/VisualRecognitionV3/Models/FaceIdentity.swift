@@ -22,7 +22,8 @@ public struct FaceIdentity {
     /// Name of the person.
     public var name: String
 
-    /// Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
+    /// Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the
+    /// class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
     public var score: Double?
 
     /// Knowledge graph of the property. For example, `People/Leaders/Presidents/USA/Barack Obama`. Included only if identified.
@@ -32,8 +33,10 @@ public struct FaceIdentity {
      Initialize a `FaceIdentity` with member variables.
 
      - parameter name: Name of the person.
-     - parameter score: Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
-     - parameter typeHierarchy: Knowledge graph of the property. For example, `People/Leaders/Presidents/USA/Barack Obama`. Included only if identified.
+     - parameter score: Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood
+       that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
+     - parameter typeHierarchy: Knowledge graph of the property. For example, `People/Leaders/Presidents/USA/Barack Obama`.
+       Included only if identified.
 
      - returns: An initialized `FaceIdentity`.
     */

@@ -177,9 +177,9 @@ public class TextToSpeech {
      voice. To list information about all available voices, use the **List voices** method.
 
      - parameter voice: The voice for which information is to be returned.
-     - parameter customizationID: The customization ID (GUID) of a custom voice model for which information is to be returned. You must make the
-       request with service credentials created for the instance of the service that owns the custom model. Omit the
-       parameter to see information about the specified voice with no customization.
+     - parameter customizationID: The customization ID (GUID) of a custom voice model for which information is to be
+       returned. You must make the request with service credentials created for the instance of the service that owns
+       the custom model. Omit the parameter to see information about the specified voice with no customization.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -245,16 +245,16 @@ public class TextToSpeech {
      a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the warnings.
 
      - parameter text: The text to synthesize.
-     - parameter accept: The requested audio format (MIME type) of the audio. You can use the `Accept` header or the `accept` query
-       parameter to specify the audio format. (For the `audio/l16` format, you can optionally specify
+     - parameter accept: The requested audio format (MIME type) of the audio. You can use the `Accept` header or the
+       `accept` query parameter to specify the audio format. (For the `audio/l16` format, you can optionally specify
        `endianness=big-endian` or `endianness=little-endian`; the default is little endian.) For detailed information
        about the supported audio formats and sampling rates, see [Specifying an audio
        format](https://console.bluemix.net/docs/services/text-to-speech/http.html#format).
      - parameter voice: The voice to use for synthesis.
-     - parameter customizationID: The customization ID (GUID) of a custom voice model to use for the synthesis. If a custom voice model is
-       specified, it is guaranteed to work only if it matches the language of the indicated voice. You must make the
-       request with service credentials created for the instance of the service that owns the custom model. Omit the
-       parameter to use the specified voice with no customization.
+     - parameter customizationID: The customization ID (GUID) of a custom voice model to use for the synthesis. If a
+       custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice.
+       You must make the request with service credentials created for the instance of the service that owns the custom
+       model. Omit the parameter to use the specified voice with no customization.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -354,15 +354,15 @@ public class TextToSpeech {
      **Note:** This method is currently a beta release.
 
      - parameter text: The word for which the pronunciation is requested.
-     - parameter voice: A voice that specifies the language in which the pronunciation is to be returned. All voices for the same
-       language (for example, `en-US`) return the same translation.
-     - parameter format: The phoneme format in which to return the pronunciation. Omit the parameter to obtain the pronunciation in the
-       default format.
-     - parameter customizationID: The customization ID (GUID) of a custom voice model for which the pronunciation is to be returned. The language
-       of a specified custom model must match the language of the specified voice. If the word is not defined in the
-       specified custom model, the service returns the default translation for the custom model's language. You must
-       make the request with service credentials created for the instance of the service that owns the custom model.
-       Omit the parameter to see the translation for the specified voice with no customization.
+     - parameter voice: A voice that specifies the language in which the pronunciation is to be returned. All voices
+       for the same language (for example, `en-US`) return the same translation.
+     - parameter format: The phoneme format in which to return the pronunciation. Omit the parameter to obtain the
+       pronunciation in the default format.
+     - parameter customizationID: The customization ID (GUID) of a custom voice model for which the pronunciation is
+       to be returned. The language of a specified custom model must match the language of the specified voice. If the
+       word is not defined in the specified custom model, the service returns the default translation for the custom
+       model's language. You must make the request with service credentials created for the instance of the service that
+       owns the custom model. Omit the parameter to see the translation for the specified voice with no customization.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -429,7 +429,8 @@ public class TextToSpeech {
      **Note:** This method is currently a beta release.
 
      - parameter name: The name of the new custom voice model.
-     - parameter language: The language of the new custom voice model. Omit the parameter to use the the default language, `en-US`.
+     - parameter language: The language of the new custom voice model. Omit the parameter to use the the default
+       language, `en-US`.
      - parameter description: A description of the new custom voice model. Specifying a description is recommended.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -488,8 +489,9 @@ public class TextToSpeech {
      instance of the service that owns a model to list information about it.
      **Note:** This method is currently a beta release.
 
-     - parameter language: The language for which custom voice models that are owned by the requesting service credentials are to be
-       returned. Omit the parameter to see all custom voice models that are owned by the requester.
+     - parameter language: The language for which custom voice models that are owned by the requesting service
+       credentials are to be returned. Omit the parameter to see all custom voice models that are owned by the
+       requester.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -545,12 +547,12 @@ public class TextToSpeech {
      it.
      **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-       for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter name: A new name for the custom voice model.
      - parameter description: A new description for the custom voice model.
-     - parameter words: An array of `Word` objects that provides the words and their translations that are to be added or updated for the
-       custom voice model. Pass an empty array to make no additions or updates.
+     - parameter words: An array of `Word` objects that provides the words and their translations that are to be added
+       or updated for the custom voice model. Pass an empty array to make no additions or updates.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -613,8 +615,8 @@ public class TextToSpeech {
      metadata for a voice model, use the **List custom models** method.
      **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-       for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -664,8 +666,8 @@ public class TextToSpeech {
      model to delete it.
      **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-       for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -716,10 +718,10 @@ public class TextToSpeech {
      words to it.
      **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-       for the instance of the service that owns the custom model.
-     - parameter words: The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be
-       added or updated for the custom voice model and the word's translation.
+     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
+     - parameter words: The **Add custom words** method accepts an array of `Word` objects. Each object provides a
+       word that is to be added or updated for the custom voice model and the word's translation.
        The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation
        from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before
        lowercase letters. The array is empty if the custom model contains no words.
@@ -783,8 +785,8 @@ public class TextToSpeech {
      model to list its words.
      **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-       for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -836,16 +838,16 @@ public class TextToSpeech {
      to it.
      **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-       for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter word: The word that is to be added or updated for the custom voice model.
-     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
-       representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A
-       sounds-like is one or more words that, when combined, sound like the word.
-     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
-       for the word. You can create only a single entry, with or without a single part of speech, for any word; you
-       cannot create multiple entries with different parts of speech for the same word. For more information, see
-       [Working with Japanese
+     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on
+       the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR
+       translation. A sounds-like is one or more words that, when combined, sound like the word.
+     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to
+       produce the correct intonation for the word. You can create only a single entry, with or without a single part of
+       speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
+       more information, see [Working with Japanese
        entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -907,8 +909,8 @@ public class TextToSpeech {
      defined in the model. You must use credentials for the instance of the service that owns a model to list its words.
      **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-       for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter word: The word that is to be queried from the custom voice model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -960,8 +962,8 @@ public class TextToSpeech {
      service that owns a model to delete its words.
      **Note:** This method is currently a beta release.
 
-     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
-       for the instance of the service that owns the custom model.
+     - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
+       with service credentials created for the instance of the service that owns the custom model.
      - parameter word: The word that is to be deleted from the custom voice model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.

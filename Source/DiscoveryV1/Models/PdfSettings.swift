@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** A list of PDF conversion settings. */
+/**
+ A list of PDF conversion settings.
+ */
 public struct PdfSettings: Codable {
 
     public var heading: PdfHeadingDetection?

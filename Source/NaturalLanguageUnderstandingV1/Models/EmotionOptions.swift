@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Whether or not to return emotion analysis of the content. */
+/**
+ Whether or not to return emotion analysis of the content.
+ */
 public struct EmotionOptions: Encodable {
 
     /**

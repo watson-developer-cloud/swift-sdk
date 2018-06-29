@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The relations between entities found in the content. */
+/**
+ The relations between entities found in the content.
+ */
 public struct RelationsResult: Decodable {
 
     /**

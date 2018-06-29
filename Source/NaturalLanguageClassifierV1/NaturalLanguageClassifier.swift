@@ -220,12 +220,13 @@ public class NaturalLanguageClassifier {
 
      Sends data to create and train a classifier and returns information about the new classifier.
 
-     - parameter metadata: Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the
-       classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.
+     - parameter metadata: Metadata in JSON format. The metadata identifies the language of the data, and an optional
+       name to identify the classifier. Specify the language with the 2-letter primary language code as assigned in ISO
+       standard 639.
        Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese
        (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
-     - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000
-       records. For details, see [Data
+     - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can
+       include up to 20,000 records. For details, see [Data
        preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.

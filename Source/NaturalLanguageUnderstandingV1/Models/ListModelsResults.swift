@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Models available for Relations and Entities features. */
+/**
+ Models available for Relations and Entities features.
+ */
 public struct ListModelsResults: Decodable {
 
     public var models: [Model]?

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** The pagination data for the returned objects. */
+/**
+ The pagination data for the returned objects.
+ */
 public struct Pagination: Decodable {
 
     /**

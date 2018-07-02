@@ -1075,7 +1075,10 @@ class DiscoveryTests: XCTestCase {
         discovery.queryNotices(environmentID: environmentID, collectionID: collectionID, failure: failWithError) {
             response in
             XCTAssertNotNil(response.matchingResults)
-            XCTAssertEqual(response.matchingResults!, 0)
+            if let matchingResults = response.matchingResults, matchingResults > 0 {
+                XCTAssertNotNil(response.results)
+                XCTAssertEqual(matchingResults, response.results?.count)
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1107,7 +1110,10 @@ class DiscoveryTests: XCTestCase {
         discovery.federatedQueryNotices(environmentID: environmentID, collectionIds: [collectionID], failure: failWithError) {
             response in
             XCTAssertNotNil(response.matchingResults)
-            XCTAssertEqual(response.matchingResults!, 0)
+            if let matchingResults = response.matchingResults, matchingResults > 0 {
+                XCTAssertNotNil(response.results)
+                XCTAssertEqual(matchingResults, response.results?.count)
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)

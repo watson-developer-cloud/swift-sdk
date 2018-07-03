@@ -76,12 +76,15 @@ internal struct RestRequest {
         self.messageBody = messageBody
     }
 
-    private var urlRequest: URLRequest {
-        // we must explicitly encode "+" as "%2B" since URLComponents does not
-        var components = URLComponents(string: url)!
+    private var urlRequest: URLRequest? {
+        guard var components = URLComponents(string: url) else {
+            return nil
+        }
         if !queryItems.isEmpty { components.queryItems = queryItems }
-        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
-        var request = URLRequest(url: components.url!)
+        guard let urlWithQuery = components.url else {
+            return nil
+        }
+        var request = URLRequest(url: urlWithQuery)
         request.httpMethod = method
         request.httpBody = messageBody
         request.setValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
@@ -111,8 +114,14 @@ extension RestRequest {
                 return
             }
 
+            // ensure there is no credentials error
+            guard let urlRequest = request.urlRequest else {
+                completionHandler(nil, nil, RestError.badURL)
+                return
+            }
+
             // create a task to execute the request
-            let task = self.session.dataTask(with: request.urlRequest) { (data, response, error) in
+            let task = self.session.dataTask(with: urlRequest) { (data, response, error) in
 
                 // ensure there is no underlying error
                 guard error == nil else {
@@ -316,8 +325,14 @@ extension RestRequest {
                 return
             }
 
+            // ensure there is no credentials error
+            guard let urlRequest = request.urlRequest else {
+                completionHandler(nil, RestError.badURL)
+                return
+            }
+
             // create a task to execute the request
-            let task = self.session.downloadTask(with: request.urlRequest) { (location, response, error) in
+            let task = self.session.downloadTask(with: urlRequest) { (location, response, error) in
 
                 // ensure there is no underlying error
                 guard error == nil else {

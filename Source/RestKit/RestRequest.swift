@@ -81,6 +81,8 @@ internal struct RestRequest {
             return nil
         }
         if !queryItems.isEmpty { components.queryItems = queryItems }
+        // we must explicitly encode "+" as "%2B" since URLComponents does not
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         guard let urlWithQuery = components.url else {
             return nil
         }

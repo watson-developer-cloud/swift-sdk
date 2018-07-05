@@ -39,6 +39,9 @@ public enum RestError: Error {
     /// Failed to load the given file.
     case invalidFile
 
+    /// The request failed because the URL was malformed.
+    case badURL
+
     /// An HTTP error with a status code and description.
     case failure(Int, String)
 

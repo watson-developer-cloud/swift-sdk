@@ -31,7 +31,7 @@ class AssistantTests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-        instantiateAssistant()
+        assistant = instantiateAssistant()
     }
 
     static var allTests: [(String, (AssistantTests) -> () throws -> Void)] {
@@ -93,13 +93,14 @@ class AssistantTests: XCTestCase {
     }
 
     /** Instantiate Assistant. */
-    func instantiateAssistant() {
+    func instantiateAssistant() -> Assistant {
         let username = Credentials.AssistantUsername
         let password = Credentials.AssistantPassword
         let version = "2018-02-16"
-        assistant = Assistant(username: username, password: password, version: version)
+        let assistant = Assistant(username: username, password: password, version: version)
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         assistant.defaultHeaders["X-Watson-Test"] = "true"
+        return assistant
     }
 
     /** Fail false negatives. */
@@ -1519,6 +1520,24 @@ class AssistantTests: XCTestCase {
         let workspaceID = "this id is invalid"
         let failure = { (error: Error) in expectation.fulfill() }
         assistant.message(workspaceID: workspaceID, failure: failure, success: failWithResult)
+        waitForExpectations()
+    }
+
+    func testInvalidServiceURL() {
+        let description = "Start a conversation with an invalid workspace."
+        let expectation = self.expectation(description: description)
+        let assistant = instantiateAssistant()
+        assistant.serviceURL = "this is broken"
+        let failure = { (error: Error) in
+            switch error {
+            case RestError.badURL:
+                break
+            default:
+                XCTFail("Unexpected error response")
+            }
+            expectation.fulfill()
+        }
+        assistant.listWorkspaces(failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

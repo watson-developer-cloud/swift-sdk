@@ -119,14 +119,17 @@ internal class BasicAuthentication: AuthenticationMethod {
             url: tokenURL,
             headerParameters: [:])
 
-         request.responseString { response in
-            switch response.result {
-            case .success(let token):
-                self.token = token
-                completionHandler(token, nil)
-            case .failure(let error):
+        request.response { (response: WatsonResponse<String>?, error) in
+            guard error == nil else {
                 completionHandler(nil, error)
+                return
             }
+            guard let token = response?.result else {
+                completionHandler(nil, RestError.noData)
+                return
+            }
+            self.token = token
+            completionHandler(token, nil)
         }
     }
 
@@ -284,14 +287,12 @@ internal class IAMAuthentication: AuthenticationMethod {
             headerParameters: headerParameters,
             messageBody: form.joined(separator: "&").data(using: .utf8)
         )
-        request.responseObject { (response: RestResponse<IAMToken>) in
-            switch response.result {
-            case .success(let token):
-                self.token = token
-                completionHandler(token, nil)
-            case .failure(let error):
+        request.responseObject { (response: WatsonResponse<IAMToken>?, error) in
+            guard let token = response?.result, error == nil else {
                 completionHandler(nil, error)
+                return
             }
+            completionHandler(token, nil)
         }
     }
 
@@ -308,14 +309,12 @@ internal class IAMAuthentication: AuthenticationMethod {
             headerParameters: headerParameters,
             messageBody: form.joined(separator: "&").data(using: .utf8)
         )
-        request.responseObject { (response: RestResponse<IAMToken>) in
-            switch response.result {
-            case .success(let token):
-                self.token = token
-                completionHandler(token, nil)
-            case .failure(let error):
+        request.responseObject { (response: WatsonResponse<IAMToken>?, error) in
+            guard let token = response?.result, error == nil else {
                 completionHandler(nil, error)
+                return
             }
+            completionHandler(token, nil)
         }
     }
 }

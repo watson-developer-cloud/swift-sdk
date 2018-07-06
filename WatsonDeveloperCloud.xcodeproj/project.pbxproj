@@ -564,6 +564,7 @@
 		CA28818220CB099D00FC992C /* IdentifiableLanguages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28816820CB090700FC992C /* IdentifiableLanguages.swift */; };
 		CA35CD4720E3234900FACB2B /* ToneContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA35CD4620E3234800FACB2B /* ToneContent.swift */; };
 		CA35CD4920E3237400FACB2B /* ProfileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA35CD4820E3237400FACB2B /* ProfileContent.swift */; };
+		CA35CD4C20EF11EF00FACB2B /* WatsonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA35CD4A20EF0A1100FACB2B /* WatsonResponse.swift */; };
 		CAD2685B20CAF28B002BA2C4 /* LanguageTranslatorV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD2685220CAF28A002BA2C4 /* LanguageTranslatorV3.framework */; };
 		CAD2686E20CAF919002BA2C4 /* LanguageTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2686A20CAF919002BA2C4 /* LanguageTranslator.swift */; };
 		CAD2687320CB00F2002BA2C4 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
@@ -1231,6 +1232,7 @@
 		CA28817520CB095100FC992C /* LanguageTranslatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageTranslatorTests.swift; path = Tests/LanguageTranslatorV3Tests/LanguageTranslatorTests.swift; sourceTree = SOURCE_ROOT; };
 		CA35CD4620E3234800FACB2B /* ToneContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneContent.swift; sourceTree = "<group>"; };
 		CA35CD4820E3237400FACB2B /* ProfileContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileContent.swift; sourceTree = "<group>"; };
+		CA35CD4A20EF0A1100FACB2B /* WatsonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatsonResponse.swift; sourceTree = "<group>"; };
 		CA45954820A62FBE0060BF9B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CA45954920A630080060BF9B /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CONTRIBUTING.md; path = .github/CONTRIBUTING.md; sourceTree = "<group>"; };
 		CAD2685220CAF28A002BA2C4 /* LanguageTranslatorV3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LanguageTranslatorV3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1926,6 +1928,7 @@
 				681BA1B41F7DCB1E006633A3 /* RestError.swift */,
 				7A61174F1CB5988B009A4DA1 /* RestRequest.swift */,
 				7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */,
+				CA35CD4A20EF0A1100FACB2B /* WatsonResponse.swift */,
 				682D30681F7D3BFD005562F9 /* Tests */,
 			);
 			name = RestKit;
@@ -3984,6 +3987,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA35CD4C20EF11EF00FACB2B /* WatsonResponse.swift in Sources */,
 				68BC29011F8C38700042810E /* MultipartFormData.swift in Sources */,
 				68B213EF1F84298B0052DC00 /* CodableExtensionsTests.swift in Sources */,
 				68B213F01F84298B0052DC00 /* JSONValueTests.swift in Sources */,

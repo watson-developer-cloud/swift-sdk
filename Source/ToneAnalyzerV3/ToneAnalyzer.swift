@@ -96,9 +96,6 @@ public class ToneAnalyzer {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -140,8 +137,7 @@ public class ToneAnalyzer {
        are treated as their parent language; for example, `en-US` is interpreted as `en`. You can use different
        languages for **Content-Language** and **Accept-Language**.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func tone(
         toneContent: ToneContent,
@@ -150,12 +146,11 @@ public class ToneAnalyzer {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ToneAnalysis) -> Void)
+        completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, Error?) -> Void)
     {
         // construct body
         guard let body = toneContent.content else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -198,13 +193,7 @@ public class ToneAnalyzer {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ToneAnalysis>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -231,21 +220,19 @@ public class ToneAnalyzer {
        are treated as their parent language; for example, `en-US` is interpreted as `en`. You can use different
        languages for **Content-Language** and **Accept-Language**.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func toneChat(
         utterances: [Utterance],
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (UtteranceAnalyses) -> Void)
+        completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, Error?) -> Void)
     {
         // construct body
         let toneChatRequest = ToneChatInput(utterances: utterances)
         guard let body = try? JSONEncoder().encode(toneChatRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -280,62 +267,7 @@ public class ToneAnalyzer {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<UtteranceAnalyses>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
-    }
-
-}
-
-extension ToneAnalyzer {
-
-    @available(*, deprecated, message: "This method has been deprecated in favor of the tone method that accepts a toneContent parameter.  This method will be removed in a future release.")
-    public func tone(
-        toneInput: ToneInput,
-        sentences: Bool? = nil,
-        tones: [String]? = nil,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ToneAnalysis) -> Void)
-    {
-        tone(toneContent: .toneInput(toneInput), sentences: sentences, tones: tones, contentLanguage: contentLanguage,
-             acceptLanguage: acceptLanguage, headers: headers, failure: failure, success: success)
-    }
-
-    @available(*, deprecated, message: "This method has been deprecated in favor of the tone method that accepts a toneContent parameter.  This method will be removed in a future release.")
-    public func tone(
-        text: String,
-        sentences: Bool? = nil,
-        tones: [String]? = nil,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ToneAnalysis) -> Void)
-    {
-        tone(toneContent: .text(text), sentences: sentences, tones: tones, contentLanguage: contentLanguage,
-             acceptLanguage: acceptLanguage, headers: headers, failure: failure, success: success)
-    }
-
-    @available(*, deprecated, message: "This method has been deprecated in favor of the tone method that accepts a toneContent parameter.  This method will be removed in a future release.")
-    public func tone(
-        html: String,
-        sentences: Bool? = nil,
-        tones: [String]? = nil,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ToneAnalysis) -> Void)
-    {
-        tone(toneContent: .html(html), sentences: sentences, tones: tones, contentLanguage: contentLanguage,
-             acceptLanguage: acceptLanguage, headers: headers, failure: failure, success: success)
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

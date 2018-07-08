@@ -31,6 +31,9 @@ class PersonalityInsightsTests: XCTestCase {
             ("testProfileText", testProfileText),
             ("testProfileHTML", testProfileHTML),
             ("testProfileContent", testProfileContent),
+            ("testProfileAsCsvText", testProfileAsCsvText),
+            ("testProfileAsCsvContent", testProfileAsCsvContent),
+            ("testProfileAsCsvText", testProfileAsCsvText),
             ("testNeedsAndConsumptionPreferences", testNeedsAndConsumptionPreferences),
             ("testProfileWithShortText", testProfileWithShortText),
         ]
@@ -46,9 +49,17 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     func instantiatePersonalityInsights() {
-        let username = Credentials.PersonalityInsightsV3Username
-        let password = Credentials.PersonalityInsightsV3Password
-        personalityInsights = PersonalityInsights(username: username, password: password, version: "2016-10-20")
+        let version = "2016-10-20"
+        if let apiKey = Credentials.PersonalityInsightsV3APIKey {
+            personalityInsights = PersonalityInsights(version: version, apiKey: apiKey)
+        } else {
+            let username = Credentials.PersonalityInsightsV3Username
+            let password = Credentials.PersonalityInsightsV3Password
+            personalityInsights = PersonalityInsights(username: username, password: password, version: version)
+        }
+        if let url = Credentials.PersonalityInsightsV3URL {
+            personalityInsights.serviceURL = url
+        }
         personalityInsights.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         personalityInsights.defaultHeaders["X-Watson-Test"] = "true"
     }

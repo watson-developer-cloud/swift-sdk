@@ -58,9 +58,17 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
 
     /** Instantiate Natural Language Understanding instance. */
     func instantiateNaturalLanguageUnderstanding() {
-        let username = Credentials.NaturalLanguageUnderstandingUsername
-        let password = Credentials.NaturalLanguageUnderstandingPassword
-        naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: "2016-05-17")
+        let version = "2016-05-17"
+        if let apiKey = Credentials.NaturalLanguageUnderstandingAPIKey {
+            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: version, apiKey: apiKey)
+        } else {
+            let username = Credentials.NaturalLanguageUnderstandingUsername
+            let password = Credentials.NaturalLanguageUnderstandingPassword
+            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
+        }
+        if let url = Credentials.NaturalLanguageUnderstandingURL {
+            naturalLanguageUnderstanding.serviceURL = url
+        }
         naturalLanguageUnderstanding.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         naturalLanguageUnderstanding.defaultHeaders["X-Watson-Test"] = "true"
     }

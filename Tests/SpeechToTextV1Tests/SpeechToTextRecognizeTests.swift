@@ -37,9 +37,18 @@ class SpeechToTextRecognizeTests: XCTestCase {
     }
 
     func instantiateSpeechToText() {
-        let username = Credentials.SpeechToTextUsername
-        let password = Credentials.SpeechToTextPassword
-        speechToText = SpeechToText(username: username, password: password)
+        if let apiKey = Credentials.SpeechToTextAPIKey {
+            speechToText = SpeechToText(apiKey: apiKey)
+        } else {
+            let username = Credentials.SpeechToTextUsername
+            let password = Credentials.SpeechToTextPassword
+            speechToText = SpeechToText(username: username, password: password)
+        }
+        if let url = Credentials.SpeechToTextURL {
+            speechToText.serviceURL = url
+            let wsUrl = url.replacingOccurrences(of: "https", with: "wss").appending("/v1/recognize")
+            speechToText.websocketsURL = wsUrl
+        }
         speechToText.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         speechToText.defaultHeaders["X-Watson-Test"] = "true"
     }

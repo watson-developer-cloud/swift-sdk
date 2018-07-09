@@ -29,9 +29,9 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     internal var onDisconnect: (() -> Void)?
 
     private let url: URL
-    private let restToken: RestToken
-    private let maxTokenRefreshes: Int
-    private var tokenRefreshes: Int
+    private let authMethod: AuthenticationMethod
+    private let maxConnectAttempts: Int
+    private var connectAttempts: Int
     private let defaultHeaders: [String: String]
 
     private var socket: WebSocket
@@ -39,16 +39,16 @@ internal class SpeechToTextSocket: WebSocketDelegate {
 
     internal init(
         url: URL,
-        restToken: RestToken,
+        authMethod: AuthenticationMethod,
         defaultHeaders: [String: String])
     {
         var request = URLRequest(url: url)
         request.timeoutInterval = 30
         self.socket = WebSocket(request: request)
         self.url = url
-        self.restToken = restToken
-        self.maxTokenRefreshes = 1
-        self.tokenRefreshes = 0
+        self.authMethod = authMethod
+        self.maxConnectAttempts = 1
+        self.connectAttempts = 0
         self.defaultHeaders = defaultHeaders
         self.queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
@@ -70,7 +70,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         state = .connecting
 
         // restrict the number of retries
-        guard tokenRefreshes <= maxTokenRefreshes else {
+        guard connectAttempts <= maxConnectAttempts else {
             let failureReason = "Invalid HTTP upgrade. Check credentials?"
             let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: "WebSocket", code: 400, userInfo: userInfo)
@@ -78,28 +78,25 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             return
         }
 
-        // refresh token, if necessary
-        guard let token = restToken.token else {
-            restToken.refreshToken(failure: onError) {
-                self.tokenRefreshes += 1
-                self.connect()
-            }
-            return
-        }
-
         // create request with headers
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
         request.addValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
-        request.addValue(token, forHTTPHeaderField: "X-Watson-Authorization-Token")
         for (key, value) in defaultHeaders {
             request.addValue(value, forHTTPHeaderField: key)
         }
 
-        // initialize socket and connect
-        socket = WebSocket(request: request)
-        socket.delegate = self
-        socket.connect()
+        authMethod.authenticate(request: request) {
+            request, error in
+            if let request = request {
+                // initialize socket and connect
+                self.socket = WebSocket(request: request)
+                self.socket.delegate = self
+                self.socket.connect()
+            } else {
+                self.onError?(error ?? RestError.failure(400, "Token Manager error"))
+            }
+        }
     }
 
     internal func writeStart(settings: RecognitionSettings) {
@@ -172,7 +169,9 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             queryParameters.append(URLQueryItem(name: "x-watson-learning-opt-out", value: value))
         }
         var urlComponents = URLComponents(string: url)
-        urlComponents?.queryItems = queryParameters
+        if !queryParameters.isEmpty {
+            urlComponents?.queryItems = queryParameters
+        }
         return urlComponents?.url
     }
 
@@ -194,19 +193,17 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     }
 
     private func isAuthenticationFailure(error: Error) -> Bool {
-        let error = error as NSError
-
-        guard let description = error.userInfo[NSLocalizedDescriptionKey] as? String else {
-            return false
+        if let error = error as? WSError {
+            let matchesCode = (error.code == 400)
+            let matchesDescription = (error.message == "Invalid HTTP upgrade")
+            return matchesCode && matchesDescription
         }
 
+        let error = error as NSError
         let matchesDomain = (error.domain == "WebSocket")
         let matchesCode = (error.code == 400)
-        let matchesDescription = (description == "Invalid HTTP upgrade")
-        if matchesDomain && matchesCode && matchesDescription {
-            return true
-        }
-        return false
+        let matchesDescription = (error.localizedDescription == "Invalid HTTP upgrade")
+        return matchesDomain && matchesCode && matchesDescription
     }
 
     private func isNormalDisconnect(error: Error) -> Bool {
@@ -216,7 +213,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
 
     internal func websocketDidConnect(socket: WebSocketClient) {
         state = .connected
-        tokenRefreshes = 0
+        connectAttempts = 0
         queue.isSuspended = false
         results = SpeechRecognitionResults()
         onConnect?()
@@ -252,10 +249,12 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             return
         }
         if isAuthenticationFailure(error: error) {
-            restToken.refreshToken(failure: onError) {
-                self.tokenRefreshes += 1
-                self.connect()
+            if let basicAuth = authMethod as? BasicAuthentication {
+                // Clear the token to force a refresh (new token fetch)
+                basicAuth.token = nil
             }
+            self.connectAttempts += 1
+            self.connect()
             return
         }
         onError?(error)

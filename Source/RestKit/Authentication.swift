@@ -30,14 +30,26 @@ internal protocol AuthenticationMethod {
      Authenticate a `RestRequest`.
 
      - parameter request: The request that should be authenticated.
-     - parameter completionHandler: The completion handler to execute when the authenticated `RestRequest`.
+     - parameter completionHandler: The completion handler to execute with the authenticated `RestRequest`.
      */
     func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void)
+
+    /**
+     Authenticate a `URLRequest`.
+
+     - parameter request: The request that should be authenticated.
+     - parameter completionHandler: The completion handler to execute with the authenticated `URLRequest`.
+     */
+    func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void)
 }
 
 /** No authentication. */
 internal class NoAuthentication: AuthenticationMethod {
     internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
+        completionHandler(request, nil)
+    }
+
+    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
         completionHandler(request, nil)
     }
 }
@@ -47,10 +59,13 @@ internal class BasicAuthentication: AuthenticationMethod {
 
     let username: String
     let password: String
+    var tokenURL: String?
+    var token: String?
 
-    init(username: String, password: String) {
+    init(username: String, password: String, tokenURL: String? = nil) {
         self.username = username
         self.password = password
+        self.tokenURL = tokenURL
     }
 
     internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
@@ -62,6 +77,79 @@ internal class BasicAuthentication: AuthenticationMethod {
         let string = "Basic \(data.base64EncodedString())"
         request.headerParameters["Authorization"] = string
         completionHandler(request, nil)
+    }
+
+    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
+        var request = request
+        getToken {
+            token, error in
+            if let token = token {
+                request.addValue(token, forHTTPHeaderField: "X-Watson-Authorization-Token")
+                completionHandler(request, nil)
+            } else {
+                completionHandler(nil, error ?? RestError.failure(400, "Token Manager error"))
+            }
+        }
+    }
+
+    private func getToken(completionHandler: @escaping (String?, Error?) -> Void) {
+        // request a new access token if not present
+        guard let token = token else {
+            requestToken(completionHandler: completionHandler)
+            return
+        }
+
+        // use the existing, valid access token
+        completionHandler(token, nil)
+    }
+
+    private func requestToken(completionHandler: @escaping (String?, Error?) -> Void) {
+
+        guard let tokenURL = tokenURL else {
+            completionHandler(nil, RestError.failure(400, "Websocket authentication requires tokenURL"))
+            return
+        }
+
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let request = RestRequest(
+            session: session,
+            authMethod: self,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: tokenURL,
+            headerParameters: [:])
+
+         request.responseString { response in
+            switch response.result {
+            case .success(let token):
+                self.token = token
+                completionHandler(token, nil)
+            case .failure(let error):
+                completionHandler(nil, error)
+            }
+        }
+    }
+
+    /**
+     Returns an NSError if the response/data represents an error. Otherwise, returns nil.
+
+     - parameter response: an http response from the token url
+     - parameter data: raw body data from the token url response
+     */
+    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+        // default error description
+        let code = response.statusCode
+        var message = "Token authentication failed."
+
+        // update error description, if available
+        do {
+            let json = try JSON.decoder.decode([String: JSON].self, from: data)
+            if case let .some(.string(description)) = json["description"] {
+                message = description
+            }
+        } catch { /* no need to catch -- falls back to default description */ }
+
+        return RestError.failure(code, message)
     }
 }
 
@@ -91,6 +179,11 @@ internal class APIKeyAuthentication: AuthenticationMethod {
         }
         completionHandler(request, nil)
     }
+
+    // Dummy method
+    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
+        completionHandler(request, nil)
+    }
 }
 
 /** Authenticate with a static IAM access token. */
@@ -105,6 +198,12 @@ internal class IAMAccessToken: AuthenticationMethod {
     internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
         var request = request
         request.headerParameters["Authorization"] = "Bearer \(accessToken)"
+        completionHandler(request, nil)
+    }
+
+    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
+        var request = request
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         completionHandler(request, nil)
     }
 }
@@ -135,9 +234,24 @@ internal class IAMAuthentication: AuthenticationMethod {
     internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
         var request = request
         getToken { token, error in
-            guard error == nil else { completionHandler(nil, error); return }
-            if let token = token { request.headerParameters["Authorization"] = "Bearer \(token.accessToken)" }
-            completionHandler(request, nil)
+            if let token = token {
+                request.headerParameters["Authorization"] = "Bearer \(token.accessToken)"
+                completionHandler(request, nil)
+            } else {
+                completionHandler(nil, error ?? RestError.failure(400, "Token Manager error"))
+            }
+        }
+    }
+
+    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
+        var request = request
+        getToken { token, error in
+            if let token = token {
+                request.addValue("Bearer \(token.accessToken)", forHTTPHeaderField: "Authorization")
+                completionHandler(request, nil)
+            } else {
+                completionHandler(nil, error ?? RestError.failure(400, "Token Manager error"))
+            }
         }
     }
 

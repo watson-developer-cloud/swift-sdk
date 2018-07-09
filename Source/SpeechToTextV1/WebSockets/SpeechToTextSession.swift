@@ -88,13 +88,9 @@ public class SpeechToTextSession {
             customizationID: customizationID,
             learningOptOut: learningOptOut
         )!
-        let restToken = RestToken(
-            tokenURL: tokenURL + "?url=" + serviceURL,
-            authMethod: authMethod
-        )
         var socket = SpeechToTextSocket(
             url: url,
-            restToken: restToken,
+            authMethod: authMethod,
             defaultHeaders: self.defaultHeaders
         )
         socket.onDisconnect = { [weak self] in
@@ -117,20 +113,8 @@ public class SpeechToTextSession {
     private let customizationID: String?
     private let learningOptOut: Bool?
 
-    /**
-     Create a `SpeechToTextSession` object.
-
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
-     - parameter model: The language and sample rate of the audio. For supported models, visit
-        https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
-     - parameter customizationID: The GUID of a custom language model that is to be used with the
-        request. The base language model of the specified custom language model must match the
-        model specified with the `model` parameter. By default, no custom model is used.
-     - parameter learningOptOut: If `true`, then this request will not be logged for training.
-     */
-    public init(username: String, password: String, model: String? = nil, customizationID: String? = nil, learningOptOut: Bool? = nil) {
-        self.authMethod = BasicAuthentication(username: username, password: password)
+    internal init(authMethod: AuthenticationMethod, model: String? = nil, customizationID: String? = nil, learningOptOut: Bool? = nil) {
+        self.authMethod = authMethod
         self.model = model
         self.customizationID = customizationID
         self.learningOptOut = learningOptOut
@@ -145,11 +129,49 @@ public class SpeechToTextSession {
     }
 
     /**
+     Create a `SpeechToTextSession` object.
+
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     - parameter model: The language and sample rate of the audio. For supported models, visit
+        https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
+     - parameter customizationID: The GUID of a custom language model that is to be used with the
+        request. The base language model of the specified custom language model must match the
+        model specified with the `model` parameter. By default, no custom model is used.
+     - parameter learningOptOut: If `true`, then this request will not be logged for training.
+     */
+    public convenience init(username: String, password: String, model: String? = nil, customizationID: String? = nil, learningOptOut: Bool? = nil) {
+        let authMethod = BasicAuthentication(username: username, password: password)
+        self.init(authMethod: authMethod, model: model, customizationID: customizationID, learningOptOut: learningOptOut)
+    }
+
+    /**
+     Create a `SpeechToTextSession` object.
+
+     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
+     - parameter iamUrl: The URL for the IAM service.
+     - parameter model: The language and sample rate of the audio. For supported models, visit
+     https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
+     - parameter customizationID: The GUID of a custom language model that is to be used with the
+     request. The base language model of the specified custom language model must match the
+     model specified with the `model` parameter. By default, no custom model is used.
+     - parameter learningOptOut: If `true`, then this request will not be logged for training.
+     */
+    public convenience init(apiKey: String, iamUrl: String? = nil, model: String? = nil, customizationID: String? = nil, learningOptOut: Bool? = nil) {
+        let authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        self.init(authMethod: authMethod, model: model, customizationID: customizationID, learningOptOut: learningOptOut)
+    }
+
+    /**
      Connect to the Speech to Text service.
 
      If set, the `onConnect()` callback will be invoked after the session connects to the service.
      */
     public func connect() {
+        // Make sure that the tokenURL is set in the authMethod, if needed
+        if let basicAuth = authMethod as? BasicAuthentication {
+            basicAuth.tokenURL = tokenURL + "?url=" + serviceURL
+        }
         socket.connect()
     }
 

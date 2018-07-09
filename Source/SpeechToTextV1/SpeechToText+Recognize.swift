@@ -92,19 +92,9 @@ extension SpeechToText {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechRecognitionResults) -> Void)
     {
-        // extract authMethod
-        guard let basicAuth = authMethod as? BasicAuthentication else {
-            let failureReason = "Invalid authenticaion method type."
-            let userInfo = [NSLocalizedDescriptionKey: failureReason]
-            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-            failure?(error)
-            return
-        }
-
-        // create session
+        // create SpeechToTextSession
         let session = SpeechToTextSession(
-            username: basicAuth.username,
-            password: basicAuth.password,
+            authMethod: authMethod,
             model: model,
             customizationID: customizationID,
             learningOptOut: learningOptOut

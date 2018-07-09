@@ -89,15 +89,24 @@ class AssistantTests: XCTestCase {
             // ("testListLogs", testListLogs), // temporarily disabled due to server-side bug
             ("testMessageUnknownWorkspace", testMessageUnknownWorkspace),
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
+            ("testInvalidServiceURL", testInvalidServiceURL),
         ]
     }
 
     /** Instantiate Assistant. */
     func instantiateAssistant() -> Assistant {
-        let username = Credentials.AssistantUsername
-        let password = Credentials.AssistantPassword
+        let assistant: Assistant
         let version = "2018-02-16"
-        let assistant = Assistant(username: username, password: password, version: version)
+        if let apiKey = Credentials.AssistantAPIKey {
+            assistant = Assistant(version: version, apiKey: apiKey)
+        } else {
+            let username = Credentials.AssistantUsername
+            let password = Credentials.AssistantPassword
+            assistant = Assistant(username: username, password: password, version: version)
+        }
+        if let url = Credentials.AssistantURL {
+            assistant.serviceURL = url
+        }
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         assistant.defaultHeaders["X-Watson-Test"] = "true"
         return assistant

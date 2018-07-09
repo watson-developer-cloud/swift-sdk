@@ -24,6 +24,7 @@ class SpeechToTextTests: XCTestCase {
 
     private var speechToText: SpeechToText!
     private let timeout: TimeInterval = 10.0
+    private let litePlanMessage = "This feature is not available for the Bluemix Lite plan."
 
     // MARK: - Test Configuration
 
@@ -34,9 +35,16 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func instantiateSpeechToText() {
-        let username = Credentials.SpeechToTextUsername
-        let password = Credentials.SpeechToTextPassword
-        speechToText = SpeechToText(username: username, password: password)
+        if let apiKey = Credentials.SpeechToTextAPIKey {
+            speechToText = SpeechToText(apiKey: apiKey)
+        } else {
+            let username = Credentials.SpeechToTextUsername
+            let password = Credentials.SpeechToTextPassword
+            speechToText = SpeechToText(username: username, password: password)
+        }
+        if let url = Credentials.SpeechToTextURL {
+            speechToText.serviceURL = url
+        }
         speechToText.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         speechToText.defaultHeaders["X-Watson-Test"] = "true"
     }
@@ -59,10 +67,10 @@ class SpeechToTextTests: XCTestCase {
 
     // MARK: - State Management
 
-    func lookupOrCreateTestLanguageModel() -> LanguageModel {
-        var languageModel: LanguageModel!
+    func lookupOrCreateTestLanguageModel() -> LanguageModel? {
+        var languageModel: LanguageModel?
         let expectation = self.expectation(description: "listLanguageModels")
-        let failure = { (error: Error) in XCTFail("Failed to lookup languageModel: \(error.localizedDescription)") }
+        let failure = failureExceptLitePlan(expectation: expectation, message: "Failed to lookup languageModel")
         speechToText.listLanguageModels(failure: failure) {
             response in
             languageModel = response.customizations.first { $0.name == "swift-test-model" }
@@ -72,11 +80,11 @@ class SpeechToTextTests: XCTestCase {
         return languageModel ?? self.createTestLanguageModel()
     }
 
-    func createTestLanguageModel() -> LanguageModel {
-        var languageModel: LanguageModel!
+    func createTestLanguageModel() -> LanguageModel? {
+        var languageModel: LanguageModel?
         let expectation = self.expectation(description: "createLanguageModel")
         let options = CreateLanguageModel(name: "swift-test-model", baseModelName: "en-US_BroadbandModel")
-        let failure = { (error: Error) in XCTFail(error.localizedDescription) }
+        let failure = failureExceptLitePlan(expectation: expectation)
         speechToText.createLanguageModel(createLanguageModel: options, failure: failure) {
             model in
             languageModel = model
@@ -86,11 +94,10 @@ class SpeechToTextTests: XCTestCase {
         return languageModel
     }
 
-    func lookupOrCreateTestAcousticModel() -> AcousticModel {
-        var acousticModel: AcousticModel!
+    func lookupOrCreateTestAcousticModel() -> AcousticModel? {
+        var acousticModel: AcousticModel?
         let expectation = self.expectation(description: "listAcousticModels")
-        let failure = { (error: Error) in
-            XCTFail("Failed to lookup acousticModel: \(error.localizedDescription)") }
+        let failure = failureExceptLitePlan(expectation: expectation, message: "Failed to lookup acousticModel")
         speechToText.listAcousticModels(failure: failure) {
             response in
             acousticModel = response.customizations.first { $0.name == "swift-test-model" }
@@ -100,10 +107,10 @@ class SpeechToTextTests: XCTestCase {
         return acousticModel ?? self.createTestAcousticModel()
     }
 
-    func createTestAcousticModel() -> AcousticModel {
-        var acousticModel: AcousticModel!
+    func createTestAcousticModel() -> AcousticModel? {
+        var acousticModel: AcousticModel?
         let expectation = self.expectation(description: "createAcousticModel")
-        let failure = { (error: Error) in XCTFail(error.localizedDescription) }
+        let failure = failureExceptLitePlan(expectation: expectation)
         speechToText.createAcousticModel(name: "swift-test-model", baseModelName: "en-US_BroadbandModel", failure: failure) {
             model in
             acousticModel = model
@@ -217,6 +224,16 @@ class SpeechToTextTests: XCTestCase {
         XCTFail("Negative test returned a result.")
     }
 
+    func failureExceptLitePlan(expectation: XCTestExpectation,
+                               message: String = "Positive test failed with error") -> ((Error) -> Void) {
+        return { (error: Error) in
+            if !error.localizedDescription.contains(self.litePlanMessage) {
+                XCTFail("\(message): \(error)")
+            }
+            expectation.fulfill()
+        }
+    }
+
     // MARK: - Models
 
     func testListModels() {
@@ -320,11 +337,17 @@ class SpeechToTextTests: XCTestCase {
         let expectation1 = self.expectation(description: "createLanguageModel")
         let createLanguageModel = CreateLanguageModel(name: "swift-test-model", baseModelName: "en-US_BroadbandModel", description: "Test model")
         var languageModel: LanguageModel!
-        speechToText.createLanguageModel(createLanguageModel: createLanguageModel, failure: failWithError) { model in
+        speechToText.createLanguageModel(createLanguageModel: createLanguageModel,
+                                         failure: failureExceptLitePlan(expectation: expectation1)) { model in
             languageModel = model
             expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: timeout)
+
+        // If the create request failed, skip the rest of the test.
+        guard languageModel != nil else {
+            return
+        }
 
         // list the language models
         let expectation2 = self.expectation(description: "listLanguageModels")
@@ -387,7 +410,9 @@ class SpeechToTextTests: XCTestCase {
     func testCustomCorpora() {
 
         // create or reuse an existing language model
-        let languageModel = lookupOrCreateTestLanguageModel()
+        guard let languageModel = lookupOrCreateTestLanguageModel() else {
+            return
+        }
 
         // add a corpus to the language model
         let expectation1 = self.expectation(description: "addCorpus")
@@ -432,7 +457,9 @@ class SpeechToTextTests: XCTestCase {
     func testCustomWords() {
 
         // create or reuse and existing language model
-        let languageModel = lookupOrCreateTestLanguageModel()
+        guard let languageModel = lookupOrCreateTestLanguageModel() else {
+            return
+        }
 
         // add an array of words
         let expectation2 = self.expectation(description: "addWords")
@@ -491,12 +518,18 @@ class SpeechToTextTests: XCTestCase {
         // create an acoustic model
         let expectation1 = self.expectation(description: "createAcousticModel")
         var acousticModel: AcousticModel!
-        speechToText.createAcousticModel(name: "swift-test-model", baseModelName: "en-US_BroadbandModel", description: "test", failure: failWithError) {
+        speechToText.createAcousticModel(name: "swift-test-model", baseModelName: "en-US_BroadbandModel", description: "test",
+                                         failure: failureExceptLitePlan(expectation: expectation1)) {
             model in
             acousticModel = model
             expectation1.fulfill()
         }
         wait(for: [expectation1], timeout: timeout)
+
+        // If the create request failed, skip the rest of the test.
+        guard acousticModel != nil else {
+            return
+        }
 
         // list acoustic models
         let expectation2 = self.expectation(description: "listAcousticModels")
@@ -561,7 +594,9 @@ class SpeechToTextTests: XCTestCase {
     func testCustomAudioResources() {
 
         // create or reuse and existing acoustic model
-        let acousticModel = lookupOrCreateTestAcousticModel()
+        guard let acousticModel = lookupOrCreateTestAcousticModel() else {
+            return
+        }
 
         // add audio resource to acoustic model
         let expectation1 = self.expectation(description: "addAudio")

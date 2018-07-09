@@ -40,6 +40,7 @@ class TextToSpeechTests: XCTestCase {
         "ja-JP_EmiVoice",
         "pt-BR_IsabelaVoice",
     ]
+    private let litePlanMessage = "This feature is not available for the Bluemix Lite plan."
 
     static var allTests: [(String, (TextToSpeechTests) -> () throws -> Void)] {
         return [
@@ -81,9 +82,16 @@ class TextToSpeechTests: XCTestCase {
 
     /** Instantiate Text to Speech instance. */
     func instantiateTextToSpeech() {
-        let username = Credentials.TextToSpeechUsername
-        let password = Credentials.TextToSpeechPassword
-        textToSpeech = TextToSpeech(username: username, password: password)
+        if let apiKey = Credentials.TextToSpeechAPIKey {
+            textToSpeech = TextToSpeech(apiKey: apiKey)
+        } else {
+            let username = Credentials.TextToSpeechUsername
+            let password = Credentials.TextToSpeechPassword
+            textToSpeech = TextToSpeech(username: username, password: password)
+        }
+        if let url = Credentials.TextToSpeechURL {
+            textToSpeech.serviceURL = url
+        }
         textToSpeech.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         textToSpeech.defaultHeaders["X-Watson-Test"] = "true"
     }
@@ -92,7 +100,7 @@ class TextToSpeechTests: XCTestCase {
     func deleteCustomizations() {
         let description = "Delete all customizations."
         let expectation = self.expectation(description: description)
-        textToSpeech.listVoiceModels(failure: failWithError) { voiceModels in
+        textToSpeech.listVoiceModels(failure: failExceptLitePlan(expectation: expectation)) { voiceModels in
             for voiceModel in voiceModels.customizations {
                 self.textToSpeech.deleteVoiceModel(customizationID: voiceModel.customizationID) { }
             }
@@ -116,6 +124,17 @@ class TextToSpeechTests: XCTestCase {
         XCTFail("Negative test returned a result.")
     }
 
+    /** Fail unless error is due to Lite Plan */
+    func failExceptLitePlan(expectation: XCTestExpectation,
+                            message: String = "Positive test failed with error") -> ((Error) -> Void) {
+        return { (error: Error) in
+            if !error.localizedDescription.contains(self.litePlanMessage) {
+                XCTFail("\(message): \(error)")
+            }
+            expectation.fulfill()
+        }
+    }
+
     /** Wait for expectations. */
     func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
@@ -127,7 +146,7 @@ class TextToSpeechTests: XCTestCase {
 
     func testListVoices() {
         let expectation = self.expectation(description: "List voices")
-        textToSpeech.listVoices(failure: failWithError) { response in
+        textToSpeech.listVoices(failure: failExceptLitePlan(expectation: expectation)) { response in
             XCTAssertGreaterThanOrEqual(response.voices.count, self.allVoices.count)
             expectation.fulfill()
         }
@@ -196,7 +215,7 @@ class TextToSpeechTests: XCTestCase {
 
     func testListVoiceModels() {
         let expectation = self.expectation(description: "List voice models")
-        textToSpeech.listVoiceModels(failure: failWithError) { customizations in
+        textToSpeech.listVoiceModels(failure: failExceptLitePlan(expectation: expectation)) { customizations in
             XCTAssertEqual(customizations.customizations.count, 0)
             expectation.fulfill()
         }
@@ -207,12 +226,17 @@ class TextToSpeechTests: XCTestCase {
         let expectation1 = self.expectation(description: "Create voice model")
         let name = "Swift SDK Test Custom Voice Model"
         var voiceModel: VoiceModel!
-        textToSpeech.createVoiceModel(name: name, failure: failWithError) { response in
+        textToSpeech.createVoiceModel(name: name, failure: failExceptLitePlan(expectation: expectation1)) { response in
             XCTAssert(!response.customizationID.isEmpty)
             voiceModel = response
             expectation1.fulfill()
         }
         waitForExpectations()
+
+        // If the create request failed, skip the rest of the test.
+        guard voiceModel != nil else {
+            return
+        }
 
         let expectation2 = self.expectation(description: "Get voice model")
         let customizationID = voiceModel.customizationID
@@ -255,12 +279,18 @@ class TextToSpeechTests: XCTestCase {
     func testWordsCRUD() {
         let expectation1 = self.expectation(description: "Create voice model")
         var voiceModel: VoiceModel!
-        textToSpeech.createVoiceModel(name: "Swift SDK Test Custom Voice Model", failure: failWithError) { response in
+        textToSpeech.createVoiceModel(name: "Swift SDK Test Custom Voice Model",
+                                      failure: failExceptLitePlan(expectation: expectation1)) { response in
             XCTAssert(!response.customizationID.isEmpty)
             voiceModel = response
             expectation1.fulfill()
         }
         waitForExpectations()
+
+        // If the create request failed, skip the rest of the test.
+        guard voiceModel != nil else {
+            return
+        }
 
         let expectation2 = self.expectation(description: "Add words")
         let customizationID = voiceModel.customizationID

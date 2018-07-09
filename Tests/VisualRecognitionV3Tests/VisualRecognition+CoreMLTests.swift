@@ -36,9 +36,16 @@ class VisualRecognitionCoreMLTests: XCTestCase {
 
     /** Instantiate Visual Recognition */
     func instantiateVisualRecognition() {
-        let apiKey = Credentials.VisualRecognitionAPIKey
         let version = "2018-03-19"
-        visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
+        if let apiKey = Credentials.VisualRecognitionAPIKey {
+            visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
+        } else {
+            let apiKey = Credentials.VisualRecognitionLegacyAPIKey
+            visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
+        }
+        if let url = Credentials.VisualRecognitionURL {
+            visualRecognition.serviceURL = url
+        }
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
     }

@@ -41,9 +41,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
 
     /** Instantiate Text to Speech instance. */
     func instantiateTextToSpeech() {
-        let username = Credentials.TextToSpeechUsername
-        let password = Credentials.TextToSpeechPassword
-        textToSpeech = TextToSpeech(username: username, password: password)
+        if let apiKey = Credentials.TextToSpeechAPIKey {
+            textToSpeech = TextToSpeech(apiKey: apiKey)
+        } else {
+            let username = Credentials.TextToSpeechUsername
+            let password = Credentials.TextToSpeechPassword
+            textToSpeech = TextToSpeech(username: username, password: password)
+        }
+        if let url = Credentials.TextToSpeechURL {
+            textToSpeech.serviceURL = url
+        }
         textToSpeech.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         textToSpeech.defaultHeaders["X-Watson-Test"] = "true"
     }

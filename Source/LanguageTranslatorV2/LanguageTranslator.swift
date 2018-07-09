@@ -57,7 +57,7 @@ public class LanguageTranslator {
      - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
      - parameter iamUrl: The URL for the IAM service.
      */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+    public init(apiKey: String, iamUrl: String? = nil) {
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
     }
 
@@ -66,7 +66,7 @@ public class LanguageTranslator {
 
      - parameter accessToken: An access token for the service.
      */
-    public init(version: String, accessToken: String) {
+    public init(accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
     }
 

@@ -52,9 +52,17 @@ class LanguageTranslatorTests: XCTestCase {
 
     /** Instantiate Language Translator. */
     func instantiateLanguageTranslator() {
-        let username = Credentials.LanguageTranslatorV3Username
-        let password = Credentials.LanguageTranslatorV3Password
-        languageTranslator = LanguageTranslator(username: username, password: password, version: "2018-06-11")
+        let version = "2018-06-11"
+        if let apiKey = Credentials.LanguageTranslatorV3APIKey {
+            languageTranslator = LanguageTranslator(version: version, apiKey: apiKey)
+        } else {
+            let username = Credentials.LanguageTranslatorV3Username
+            let password = Credentials.LanguageTranslatorV3Password
+            languageTranslator = LanguageTranslator(username: username, password: password, version: version)
+        }
+        if let url = Credentials.LanguageTranslatorV3URL {
+            languageTranslator.serviceURL = url
+        }
         languageTranslator.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         languageTranslator.defaultHeaders["X-Watson-Test"] = "true"
     }

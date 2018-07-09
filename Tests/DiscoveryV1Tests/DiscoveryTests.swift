@@ -27,7 +27,7 @@ class DiscoveryTests: XCTestCase {
     private let newsEnvironmentID = "system"
     private let newsCollectionID = "news-en"
     private var documentURL: URL!
-    private let timeout: TimeInterval = 20.0
+    private let timeout: TimeInterval = 30.0
 
     // MARK: - Test Configuration
 
@@ -40,10 +40,18 @@ class DiscoveryTests: XCTestCase {
     }
 
     func instantiateDiscovery() -> Discovery {
-        let username = Credentials.DiscoveryUsername
-        let password = Credentials.DiscoveryPassword
+        let discovery: Discovery
         let version = "2017-11-07"
-        let discovery = Discovery(username: username, password: password, version: version)
+        if let apiKey = Credentials.DiscoveryAPIKey {
+            discovery = Discovery(version: version, apiKey: apiKey)
+        } else {
+            let username = Credentials.DiscoveryUsername
+            let password = Credentials.DiscoveryPassword
+            discovery = Discovery(username: username, password: password, version: version)
+        }
+        if let url = Credentials.DiscoveryURL {
+            discovery.serviceURL = url
+        }
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         discovery.defaultHeaders["X-Watson-Test"] = "true"
         return discovery
@@ -273,9 +281,13 @@ class DiscoveryTests: XCTestCase {
         let expectation1 = self.expectation(description: "createEnvironment")
         let name = "swift-sdk-test-" + UUID().uuidString
         let description = "An environment created while testing the Swift SDK. Safe to delete."
-        let message = "Cannot provision more than one environment"
+        let message1 = "Cannot provision more than one environment"
+        let message2 = "Only one free environment is allowed"
         let failure = { (error: Error) in
-            error.localizedDescription.contains(message) ? expectation1.fulfill() : self.failWithError(error: error)
+            if !(error.localizedDescription.contains(message1) || error.localizedDescription.contains(message2)) {
+                self.failWithError(error: error)
+            }
+            expectation1.fulfill()
         }
         var environment: Environment!
         discovery.createEnvironment(name: name, description: description, size: 0, failure: failure) {
@@ -1140,7 +1152,7 @@ class DiscoveryTests: XCTestCase {
     func testTrainingDataCRUD() {
         let environmentID = environment.environmentID!
         let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
-        let collection = createTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!)
         let document = addTestDocument(environment: environment, collection: collection)
         let collectionID = collection.collectionID!
         let documentID = document.documentID!
@@ -1212,7 +1224,7 @@ class DiscoveryTests: XCTestCase {
     func testListTrainingExamples() {
         let environmentID = environment.environmentID!
         let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
-        let collection = createTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!)
         let document = addTestDocument(environment: environment, collection: collection)
         let collectionID = collection.collectionID!
         let documentID = document.documentID!
@@ -1257,7 +1269,7 @@ class DiscoveryTests: XCTestCase {
     func testTrainingExamplesCRUD() {
         let environmentID = environment.environmentID!
         let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
-        let collection = createTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!)
+        let collection = lookupOrCreateTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!)
         let document = addTestDocument(environment: environment, collection: collection)
         let collectionID = collection.collectionID!
         let documentID = document.documentID!

@@ -63,9 +63,16 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     /** Instantiate Natural Langauge Classifier instance. */
     func instantiateNaturalLanguageClassifier() {
-        let username = Credentials.NaturalLanguageClassifierUsername
-        let password = Credentials.NaturalLanguageClassifierPassword
-        naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
+        if let apiKey = Credentials.NaturalLanguageClassifierAPIKey {
+            naturalLanguageClassifier = NaturalLanguageClassifier(apiKey: apiKey)
+        } else {
+            let username = Credentials.NaturalLanguageClassifierUsername
+            let password = Credentials.NaturalLanguageClassifierPassword
+            naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
+        }
+        if let url = Credentials.NaturalLanguageClassifierURL {
+            naturalLanguageClassifier.serviceURL = url
+        }
         naturalLanguageClassifier.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         naturalLanguageClassifier.defaultHeaders["X-Watson-Test"] = "true"
     }

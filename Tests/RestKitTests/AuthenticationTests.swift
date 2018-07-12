@@ -194,7 +194,7 @@ class AuthenticationTests: XCTestCase {
 
         /**
 
-        let authMethod = IAMAuthentication(apiKey: Credentials.IAMAPIKey, url: Credentials.IAMURL)
+        let authMethod = IAMAuthentication(apiKey: WatsonCredentials.IAMAPIKey, url: WatsonCredentials.IAMURL)
         var authorizationHeader: String! // save initial authorization header (it should stay the same until refreshed)
         request.authMethod = authMethod
 

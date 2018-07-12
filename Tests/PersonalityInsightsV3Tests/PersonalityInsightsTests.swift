@@ -50,14 +50,14 @@ class PersonalityInsightsTests: XCTestCase {
 
     func instantiatePersonalityInsights() {
         let version = "2016-10-20"
-        if let apiKey = Credentials.PersonalityInsightsV3APIKey {
+        if let apiKey = WatsonCredentials.PersonalityInsightsV3APIKey {
             personalityInsights = PersonalityInsights(version: version, apiKey: apiKey)
         } else {
-            let username = Credentials.PersonalityInsightsV3Username
-            let password = Credentials.PersonalityInsightsV3Password
+            let username = WatsonCredentials.PersonalityInsightsV3Username
+            let password = WatsonCredentials.PersonalityInsightsV3Password
             personalityInsights = PersonalityInsights(username: username, password: password, version: version)
         }
-        if let url = Credentials.PersonalityInsightsV3URL {
+        if let url = WatsonCredentials.PersonalityInsightsV3URL {
             personalityInsights.serviceURL = url
         }
         personalityInsights.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"

@@ -37,14 +37,14 @@ class SpeechToTextRecognizeTests: XCTestCase {
     }
 
     func instantiateSpeechToText() {
-        if let apiKey = Credentials.SpeechToTextAPIKey {
+        if let apiKey = WatsonCredentials.SpeechToTextAPIKey {
             speechToText = SpeechToText(apiKey: apiKey)
         } else {
-            let username = Credentials.SpeechToTextUsername
-            let password = Credentials.SpeechToTextPassword
+            let username = WatsonCredentials.SpeechToTextUsername
+            let password = WatsonCredentials.SpeechToTextPassword
             speechToText = SpeechToText(username: username, password: password)
         }
-        if let url = Credentials.SpeechToTextURL {
+        if let url = WatsonCredentials.SpeechToTextURL {
             speechToText.serviceURL = url
             let wsUrl = url.replacingOccurrences(of: "https", with: "wss").appending("/v1/recognize")
             speechToText.websocketsURL = wsUrl

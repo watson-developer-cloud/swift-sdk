@@ -42,14 +42,14 @@ class DiscoveryTests: XCTestCase {
     func instantiateDiscovery() -> Discovery {
         let discovery: Discovery
         let version = "2017-11-07"
-        if let apiKey = Credentials.DiscoveryAPIKey {
+        if let apiKey = WatsonCredentials.DiscoveryAPIKey {
             discovery = Discovery(version: version, apiKey: apiKey)
         } else {
-            let username = Credentials.DiscoveryUsername
-            let password = Credentials.DiscoveryPassword
+            let username = WatsonCredentials.DiscoveryUsername
+            let password = WatsonCredentials.DiscoveryPassword
             discovery = Discovery(username: username, password: password, version: version)
         }
-        if let url = Credentials.DiscoveryURL {
+        if let url = WatsonCredentials.DiscoveryURL {
             discovery.serviceURL = url
         }
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"

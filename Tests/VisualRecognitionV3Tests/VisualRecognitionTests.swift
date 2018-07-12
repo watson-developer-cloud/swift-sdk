@@ -50,9 +50,11 @@ class VisualRecognitionTests: XCTestCase {
             ("testDetectFacesByURL", testDetectFacesByURL),
             ("testDetectFacesByImage1", testDetectFacesByImage1),
             ("testDetectFacesByImage2", testDetectFacesByImage2),
+            ("testAuthenticationError", testAuthenticationError),
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
             ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL),
+            ("testGetUnknownClassifier", testGetUnknownClassifier),
         ]
     }
 

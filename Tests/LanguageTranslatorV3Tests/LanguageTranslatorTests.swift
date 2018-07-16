@@ -52,7 +52,7 @@ class LanguageTranslatorTests: XCTestCase {
 
     /** Instantiate Language Translator. */
     func instantiateLanguageTranslator() {
-        let version = "2018-06-11"
+        let version = "2018-07-16"
         if let apiKey = WatsonCredentials.LanguageTranslatorV3APIKey {
             languageTranslator = LanguageTranslator(version: version, apiKey: apiKey)
         } else {

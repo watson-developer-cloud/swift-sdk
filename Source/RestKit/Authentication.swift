@@ -119,7 +119,7 @@ internal class BasicAuthentication: AuthenticationMethod {
             url: tokenURL,
             headerParameters: [:])
 
-         request.responseString { response in
+        request.responseString { response in
             switch response.result {
             case .success(let token):
                 self.token = token

@@ -93,12 +93,6 @@ public class Discovery {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -274,8 +268,8 @@ public class Discovery {
     /**
      Update an environment.
 
-     Updates an environment. The environment's `name` and  `description` parameters can be changed. You must specify a
-     `name` for the environment.
+     Updates an environment. The environment's **name** and  **description** parameters can be changed. You must specify
+     a **name** for the environment.
 
      - parameter environmentID: The ID of the environment.
      - parameter name: Name that identifies the environment.
@@ -449,7 +443,7 @@ public class Discovery {
      Add configuration.
 
      Creates a new configuration.
-     If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they are
+     If the input configuration contains the **configuration_id**, **created**, or **updated** properties, then they are
      ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be
      removed when copying a configuration.
      The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error.
@@ -459,10 +453,10 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter configuration: Input an object that enables you to customize how your content is ingested and what
        enrichments are added to your data.
-       `name` is required and must be unique within the current `environment`. All other properties are optional.
-       If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they will be
-       ignored and overridden by the system (an error is not returned so that the overridden fields do not need to be
-       removed when copying a configuration).
+       **name** is required and must be unique within the current **environment**. All other properties are optional.
+       If the input configuration contains the **configuration_id**, **created**, or **updated** properties, then they
+       will be ignored and overridden by the system (an error is not returned so that the overridden fields do not need
+       to be removed when copying a configuration).
        The configuration can contain unrecognized JSON fields. Any such fields will be ignored and will not generate an
        error. This makes it easier to use newer configuration files with older versions of the API and the service. It
        also makes it possible for the tooling to add additional metadata and information to the configuration.
@@ -639,9 +633,9 @@ public class Discovery {
 
      Replaces an existing configuration.
        * Completely replaces the original configuration.
-       * The `configuration_id`, `updated`, and `created` fields are accepted in the request, but they are ignored, and
-     an error is not generated. It is also acceptable for users to submit an updated configuration with none of the
-     three properties.
+       * The **configuration_id**, **updated**, and **created** fields are accepted in the request, but they are
+     ignored, and an error is not generated. It is also acceptable for users to submit an updated configuration with
+     none of the three properties.
        * Documents are processed with a snapshot of the configuration as it was at the time the document was submitted
      to be ingested. This means that already submitted documents will not see any updates made to the configuration.
 
@@ -649,11 +643,11 @@ public class Discovery {
      - parameter configurationID: The ID of the configuration.
      - parameter configuration: Input an object that enables you to update and customize how your data is ingested and
        what enrichments are added to your data.
-       The `name` parameter is required and must be unique within the current `environment`. All other properties are
-       optional, but if they are omitted  the default values replace the current value of each omitted property.
-       If the input configuration contains the `configuration_id`, `created`, or `updated` properties, they are ignored
-       and overridden by the system, and an error is not returned so that the overridden fields do not need to be
-       removed when updating a configuration.
+       The **name** parameter is required and must be unique within the current **environment**. All other properties
+       are optional, but if they are omitted  the default values replace the current value of each omitted property.
+       If the input configuration contains the **configuration_id**, **created**, or **updated** properties, they are
+       ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to
+       be removed when updating a configuration.
        The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error.
        This makes it easier to use newer configuration files with older versions of the API and the service. It also
        makes it possible for the tooling to add additional metadata and information to the configuration.
@@ -780,14 +774,14 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter configuration: The configuration to use to process the document. If this part is provided, then the
-       provided configuration is used to process the document. If the `configuration_id` is also provided (both are
+       provided configuration is used to process the document. If the **configuration_id** is also provided (both are
        present at the same time), then request is rejected. The maximum supported configuration size is 1 MB.
        Configuration parts larger than 1 MB are rejected.
        See the `GET /configurations/{configuration_id}` operation for an example configuration.
      - parameter step: Specify to only run the input document through the given step instead of running the input
        document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
-     - parameter configurationID: The ID of the configuration to use to process the document. If the `configuration`
-       form part is also provided (both are present at the same time), then request will be rejected.
+     - parameter configurationID: The ID of the configuration to use to process the document. If the **configuration**
+       form part is also provided (both are present at the same time), then the request will be rejected.
      - parameter file: The content of the document to ingest. The maximum supported file size is 50 megabytes. Files
        larger than 50 megabytes is rejected.
      - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against
@@ -1300,14 +1294,15 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter expansions: An array of query expansion definitions.
-        Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms.
-       Each expansion object can be configured so that all terms are expanded to all other terms in the object -
-       bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.
-        To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the
-       `expanded_terms` array are then expanded to the other items in the same array.
-        To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`.
-       When items in the `input_terms` array are present in a query, they are expanded using the items listed in the
-       `expanded_terms` array.
+        Each object in the **expansions** array represents a term or set of terms that will be expanded into other
+       terms. Each expansion object can be configured as bidirectional or unidirectional. Bidirectional means that all
+       terms are expanded to all other terms in the object. Unidirectional means that a set list of terms can be
+       expanded into a second list of terms.
+        To create a bi-directional expansion specify an **expanded_terms** array. When found in a query, all items in
+       the **expanded_terms** array are then expanded to the other items in the same array.
+        To create a uni-directional expansion, specify both an array of **input_terms** and an array of
+       **expanded_terms**. When items in the **input_terms** array are present in a query, they are expanded using the
+       items listed in the **expanded_terms** array.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1426,12 +1421,12 @@ public class Discovery {
      Add a document.
 
      Add a document to a collection with optional metadata.
-       * The `version` query parameter is still required.
+       * The **version** query parameter is still required.
        * Returns immediately after the system has accepted the document for processing.
        * The user must provide document content, metadata, or both. If the request is missing both document content and
      metadata, it is rejected.
-       * The user can set the `Content-Type` parameter on the `file` part to indicate the media type of the document. If
-     the `Content-Type` parameter is missing or is one of the generic media types (for example,
+       * The user can set the **Content-Type** parameter on the **file** part to indicate the media type of the
+     document. If the **Content-Type** parameter is missing or is one of the generic media types (for example,
      `application/octet-stream`), then the service attempts to automatically detect the document's media type.
        * The following field names are reserved and will be filtered out if present after normalization: `id`, `score`,
      `highlight`, and any field with the prefix of: `_`, `+`, or `-`
@@ -1740,9 +1735,10 @@ public class Discovery {
        sense of concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use `natural_language_query` and `query` at the same time.
+       results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
+       time.
      - parameter passages: A passages query that returns the most relevant passages from the results.
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
@@ -1763,18 +1759,18 @@ public class Discovery {
      - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
        is `400`. The minimum is `50`. The maximum is `2000`.
      - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based
-       on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only,
-       `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
+       on the contents of the **title** field) are removed. Duplicate comparison is limited to the current query only;
+       **offset** is not considered. This parameter is currently Beta functionality.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
-       returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This
+       returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
-       the `similar.document_ids` parameter. The default is `false`.
+       the **similar.document_ids** parameter.
      - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
        documents.
-       **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-       document similarity search to include the natural language query. Other query parameters, such as `filter` and
-       `query` are subsequently applied and reduce the query scope.
+       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+       the document similarity search to include the natural language query. Other query parameters, such as **filter**
+       and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -1930,9 +1926,10 @@ public class Discovery {
        sense of concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use `natural_language_query` and `query` at the same time.
+       results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
+       time.
      - parameter passages: A passages query that returns the most relevant passages from the results.
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
@@ -1953,15 +1950,15 @@ public class Discovery {
      - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
        is `400`. The minimum is `50`. The maximum is `2000`.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
-       returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This
+       returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
-       the `similar.document_ids` parameter. The default is `false`.
+       the **similar.document_ids** parameter.
      - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
        documents.
-       **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-       document similarity search to include the natural language query. Other query parameters, such as `filter` and
-       `query` are subsequently applied and reduce the query scope.
+       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+       the document similarity search to include the natural language query. Other query parameters, such as **filter**
+       and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -2110,9 +2107,10 @@ public class Discovery {
        sense of concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use `natural_language_query` and `query` at the same time.
+       results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
+       time.
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
@@ -2126,20 +2124,27 @@ public class Discovery {
      - parameter highlight: When true a highlight field is returned for each result which contains the fields that
        match the query with `<em></em>` tags around the matching query terms. Defaults to false.
      - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based
-       on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only,
-       `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
+       on the contents of the **title** field) are removed. Duplicate comparison is limited to the current query only;
+       **offset** is not considered. This parameter is currently Beta functionality.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
-       returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This
+       returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
-       the `similar.document_ids` parameter. The default is `false`.
+       the **similar.document_ids** parameter.
      - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
        documents.
-       **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-       document similarity search to include the natural language query. Other query parameters, such as `filter` and
-       `query` are subsequently applied and reduce the query scope.
+       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+       the document similarity search to include the natural language query. Other query parameters, such as **filter**
+       and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
+     - parameter passages: A passages query that returns the most relevant passages from the results.
+     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not
+       specified, then all top-level fields are included.
+     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
+       requested total is not found. The default is `10`. The maximum is `100`.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
+       is `400`. The minimum is `50`. The maximum is `2000`.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2161,6 +2166,10 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        passages: Bool? = nil,
+        passagesFields: [String]? = nil,
+        passagesCount: Int? = nil,
+        passagesCharacters: Int? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryResponse) -> Void)
@@ -2232,6 +2241,22 @@ public class Discovery {
             let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
+        if let passages = passages {
+            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesFields = passagesFields {
+            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCount = passagesCount {
+            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCharacters = passagesCharacters {
+            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/environments/\(environmentID)/query"
@@ -2274,9 +2299,10 @@ public class Discovery {
        sense of concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use `natural_language_query` and `query` at the same time.
+       results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
+       time.
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
@@ -2290,15 +2316,15 @@ public class Discovery {
      - parameter highlight: When true a highlight field is returned for each result which contains the fields that
        match the query with `<em></em>` tags around the matching query terms. Defaults to false.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
-       returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This
+       returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
-       the `similar.document_ids` parameter. The default is `false`.
+       the **similar.document_ids** parameter.
      - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
        documents.
-       **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-       document similarity search to include the natural language query. Other query parameters, such as `filter` and
-       `query` are subsequently applied and reduce the query scope.
+       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+       the document similarity search to include the natural language query. Other query parameters, such as **filter**
+       and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3210,6 +3236,317 @@ public class Discovery {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List credentials.
+
+     List all the source credentials that have been created for this service instance.
+      **Note:**  All credentials are sent over an encrypted connection and encrypted at rest.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listCredentials(
+        environmentID: String,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CredentialsList) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<CredentialsList>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Create credentials.
+
+     Creates a set of credentials to connect to a remote source. Created credentials are used in a configuration to
+     associate a collection with the remote source.
+     **Note:** All credentials are sent over an encrypted connection and encrypted at rest.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter sourceType: The source that this credentials object connects to.
+       -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
+       -  `salesforce` indicates the credentials are used to connect to Salesforce.
+       -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     - parameter credentialDetails: Object containing details of the stored credentials.
+       Obtain credentials for your source from the administrator of the source.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func createCredentials(
+        environmentID: String,
+        sourceType: String? = nil,
+        credentialDetails: CredentialDetails? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Credentials) -> Void)
+    {
+        // construct body
+        let createCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
+        guard let body = try? JSONEncoder().encode(createCredentialsRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<Credentials>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     View Credentials.
+
+     Returns details about the specified credentials.
+      **Note:** Secure credential information such as a password or SSH key is never returned and must be obtained from
+     the source system.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter credentialID: The unique identifier for a set of source credentials.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func getCredentials(
+        environmentID: String,
+        credentialID: String,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Credentials) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<Credentials>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Update credentials.
+
+     Updates an existing set of source credentials.
+     **Note:** All credentials are sent over an encrypted connection and encrypted at rest.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter credentialID: The unique identifier for a set of source credentials.
+     - parameter sourceType: The source that this credentials object connects to.
+       -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
+       -  `salesforce` indicates the credentials are used to connect to Salesforce.
+       -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     - parameter credentialDetails: Object containing details of the stored credentials.
+       Obtain credentials for your source from the administrator of the source.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func updateCredentials(
+        environmentID: String,
+        credentialID: String,
+        sourceType: String? = nil,
+        credentialDetails: CredentialDetails? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Credentials) -> Void)
+    {
+        // construct body
+        let updateCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
+        guard let body = try? JSONEncoder().encode(updateCredentialsRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "PUT",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<Credentials>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Delete credentials.
+
+     Deletes a set of stored credentials from your Discovery instance.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter credentialID: The unique identifier for a set of source credentials.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func deleteCredentials(
+        environmentID: String,
+        credentialID: String,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (DeleteCredentials) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<DeleteCredentials>) in
+            switch response.result {
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }

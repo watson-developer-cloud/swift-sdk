@@ -17,34 +17,31 @@
 import Foundation
 
 /**
- A response containing the documents and aggregations for the query.
+ Object returned after credentials are deleted.
  */
-public struct QueryResponse: Decodable {
-
-    public var matchingResults: Int?
-
-    public var results: [QueryResult]?
-
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+public struct DeleteCredentials: Decodable {
 
     /**
-     The session token for this query. The session token can be used to add events associated with this query to the
-     query and event log.
+     The status of the deletion request.
      */
-    public var sessionToken: String?
+    public enum Status: String {
+        case deleted = "deleted"
+    }
+
+    /**
+     The unique identifier of the credentials that have been deleted.
+     */
+    public var credentialID: String?
+
+    /**
+     The status of the deletion request.
+     */
+    public var status: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
-        case sessionToken = "session_token"
+        case credentialID = "credential_id"
+        case status = "status"
     }
 
 }

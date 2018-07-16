@@ -16,35 +16,17 @@
 
 import Foundation
 
-/**
- A response containing the documents and aggregations for the query.
- */
-public struct QueryResponse: Decodable {
-
-    public var matchingResults: Int?
-
-    public var results: [QueryResult]?
-
-    public var aggregations: [QueryAggregation]?
-
-    public var passages: [QueryPassages]?
-
-    public var duplicatesRemoved: Int?
+/** CredentialsList. */
+public struct CredentialsList: Decodable {
 
     /**
-     The session token for this query. The session token can be used to add events associated with this query to the
-     query and event log.
+     An array of credential definitions that were created for this instance.
      */
-    public var sessionToken: String?
+    public var credentials: [Credentials]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case matchingResults = "matching_results"
-        case results = "results"
-        case aggregations = "aggregations"
-        case passages = "passages"
-        case duplicatesRemoved = "duplicates_removed"
-        case sessionToken = "session_token"
+        case credentials = "credentials"
     }
 
 }

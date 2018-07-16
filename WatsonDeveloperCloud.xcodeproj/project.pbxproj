@@ -574,6 +574,17 @@
 		CAD2687820CB00F2002BA2C4 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
 		CAD2687A20CB00F2002BA2C4 /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
 		CAD2687D20CB0196002BA2C4 /* LanguageTranslatorV3.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD2687B20CB0195002BA2C4 /* LanguageTranslatorV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CADA959820FCD66600B5BD84 /* SourceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA958D20FCD66400B5BD84 /* SourceSchedule.swift */; };
+		CADA959920FCD66600B5BD84 /* DeleteCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA958E20FCD66400B5BD84 /* DeleteCredentials.swift */; };
+		CADA959A20FCD66600B5BD84 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA958F20FCD66500B5BD84 /* Source.swift */; };
+		CADA959B20FCD66600B5BD84 /* CredentialsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA959020FCD66500B5BD84 /* CredentialsList.swift */; };
+		CADA959C20FCD66600B5BD84 /* SourceOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA959120FCD66500B5BD84 /* SourceOptions.swift */; };
+		CADA959D20FCD66600B5BD84 /* SourceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA959220FCD66500B5BD84 /* SourceStatus.swift */; };
+		CADA959E20FCD66600B5BD84 /* SourceOptionsSiteColl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA959320FCD66500B5BD84 /* SourceOptionsSiteColl.swift */; };
+		CADA959F20FCD66600B5BD84 /* CredentialDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA959420FCD66500B5BD84 /* CredentialDetails.swift */; };
+		CADA95A020FCD66600B5BD84 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA959520FCD66500B5BD84 /* Credentials.swift */; };
+		CADA95A120FCD66600B5BD84 /* SourceOptionsObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA959620FCD66600B5BD84 /* SourceOptionsObject.swift */; };
+		CADA95A220FCD66600B5BD84 /* SourceOptionsFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA959720FCD66600B5BD84 /* SourceOptionsFolder.swift */; };
 		CAF9A5C420ACED3E006C86B7 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */; };
 		CAF9A5CB20B75B3A006C86B7 /* VisualRecognitionWithIAMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */; };
 		CE6B98D41DF09D4B004CD6B5 /* face1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98D31DF09D4B004CD6B5 /* face1.jpg */; };
@@ -1237,6 +1248,17 @@
 		CAD2685A20CAF28A002BA2C4 /* LanguageTranslatorV3Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageTranslatorV3Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD2686A20CAF919002BA2C4 /* LanguageTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTranslator.swift; sourceTree = "<group>"; };
 		CAD2687B20CB0195002BA2C4 /* LanguageTranslatorV3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LanguageTranslatorV3.h; path = Source/SupportingFiles/LanguageTranslatorV3.h; sourceTree = "<group>"; };
+		CADA958D20FCD66400B5BD84 /* SourceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceSchedule.swift; sourceTree = "<group>"; };
+		CADA958E20FCD66400B5BD84 /* DeleteCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCredentials.swift; sourceTree = "<group>"; };
+		CADA958F20FCD66500B5BD84 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
+		CADA959020FCD66500B5BD84 /* CredentialsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsList.swift; sourceTree = "<group>"; };
+		CADA959120FCD66500B5BD84 /* SourceOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptions.swift; sourceTree = "<group>"; };
+		CADA959220FCD66500B5BD84 /* SourceStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceStatus.swift; sourceTree = "<group>"; };
+		CADA959320FCD66500B5BD84 /* SourceOptionsSiteColl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptionsSiteColl.swift; sourceTree = "<group>"; };
+		CADA959420FCD66500B5BD84 /* CredentialDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialDetails.swift; sourceTree = "<group>"; };
+		CADA959520FCD66500B5BD84 /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		CADA959620FCD66600B5BD84 /* SourceOptionsObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptionsObject.swift; sourceTree = "<group>"; };
+		CADA959720FCD66600B5BD84 /* SourceOptionsFolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptionsFolder.swift; sourceTree = "<group>"; };
 		CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionWithIAMTests.swift; sourceTree = "<group>"; };
 		CE6B98D31DF09D4B004CD6B5 /* face1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face1.jpg; sourceTree = "<group>"; };
@@ -1742,8 +1764,12 @@
 				68AF8EC5206968CC00D552E3 /* Conversions.swift */,
 				68AF8EF3206968CC00D552E3 /* CreateCollectionRequest.swift */,
 				68AF8EB0206968CC00D552E3 /* CreateEnvironmentRequest.swift */,
+				CADA959420FCD66500B5BD84 /* CredentialDetails.swift */,
+				CADA959520FCD66500B5BD84 /* Credentials.swift */,
+				CADA959020FCD66500B5BD84 /* CredentialsList.swift */,
 				68AF8EDF206968CC00D552E3 /* DeleteCollectionResponse.swift */,
 				68AF8EE3206968CC00D552E3 /* DeleteConfigurationResponse.swift */,
+				CADA958E20FCD66400B5BD84 /* DeleteCredentials.swift */,
 				68AF8EFB206968CC00D552E3 /* DeleteDocumentResponse.swift */,
 				68AF8EC8206968CC00D552E3 /* DeleteEnvironmentResponse.swift */,
 				68AF8EF2206968CC00D552E3 /* DiskUsage.swift */,
@@ -1805,6 +1831,13 @@
 				68AF8ECD206968CC00D552E3 /* QueryResult.swift */,
 				68AE2FD120697C2800330836 /* QueryResultMetadata.swift */,
 				682CBD2B209051B90049EE9F /* SegmentSettings.swift */,
+				CADA958F20FCD66500B5BD84 /* Source.swift */,
+				CADA959120FCD66500B5BD84 /* SourceOptions.swift */,
+				CADA959720FCD66600B5BD84 /* SourceOptionsFolder.swift */,
+				CADA959620FCD66600B5BD84 /* SourceOptionsObject.swift */,
+				CADA959320FCD66500B5BD84 /* SourceOptionsSiteColl.swift */,
+				CADA958D20FCD66400B5BD84 /* SourceSchedule.swift */,
+				CADA959220FCD66500B5BD84 /* SourceStatus.swift */,
 				68AF8EE7206968CC00D552E3 /* Term.swift */,
 				68AF8EB3206968CC00D552E3 /* TestDocument.swift */,
 				683955042077E613009E1C8A /* Timeslice.swift */,
@@ -3774,8 +3807,10 @@
 				68AF8F532069690300D552E3 /* QueryEntitiesResponseItem.swift in Sources */,
 				68AF8F7E2069690300D552E3 /* QueryNoticesResult.swift in Sources */,
 				68AF8F992069690300D552E3 /* ListEnvironmentsResponse.swift in Sources */,
+				CADA959D20FCD66600B5BD84 /* SourceStatus.swift in Sources */,
 				683955062077E613009E1C8A /* TopHits.swift in Sources */,
 				68AF8F5C2069690300D552E3 /* NluEnrichmentFeatures.swift in Sources */,
+				CADA95A220FCD66600B5BD84 /* SourceOptionsFolder.swift in Sources */,
 				68AF8F592069690300D552E3 /* NluEnrichmentSentiment.swift in Sources */,
 				68AF8F6F2069690300D552E3 /* Histogram.swift in Sources */,
 				68AF8F962069690300D552E3 /* DiskUsage.swift in Sources */,
@@ -3787,18 +3822,23 @@
 				68AF8F862069690300D552E3 /* Expansion.swift in Sources */,
 				68AF8F5E2069690300D552E3 /* Collection.swift in Sources */,
 				68AF8F562069690300D552E3 /* EnrichmentOptions.swift in Sources */,
+				CADA95A020FCD66600B5BD84 /* Credentials.swift in Sources */,
 				68AF8F722069690300D552E3 /* QueryResponse.swift in Sources */,
+				CADA959A20FCD66600B5BD84 /* Source.swift in Sources */,
 				68AF8F792069690300D552E3 /* Calculation.swift in Sources */,
 				68AF8F882069690300D552E3 /* QueryFilterType.swift in Sources */,
 				68AF8F682069690300D552E3 /* FontSetting.swift in Sources */,
 				68AF8F632069690300D552E3 /* TrainingExampleList.swift in Sources */,
 				68AF8F702069690300D552E3 /* QueryEvidence.swift in Sources */,
+				CADA959820FCD66600B5BD84 /* SourceSchedule.swift in Sources */,
+				CADA959F20FCD66600B5BD84 /* CredentialDetails.swift in Sources */,
 				68AF8F522069690300D552E3 /* ListCollectionFieldsResponse.swift in Sources */,
 				68AF8F782069690300D552E3 /* QueryEvidenceEntity.swift in Sources */,
 				68BF6A5A206999BB00B6BD30 /* QueryAggregation.swift in Sources */,
 				68D97E2B206989010087432F /* GenericQueryAggregation.swift in Sources */,
 				68AF8F8C2069690300D552E3 /* AggregationResult.swift in Sources */,
 				68AF8F6A2069690300D552E3 /* TrainingDataSet.swift in Sources */,
+				CADA959920FCD66600B5BD84 /* DeleteCredentials.swift in Sources */,
 				68AF8F972069690300D552E3 /* CreateCollectionRequest.swift in Sources */,
 				68AF8F712069690300D552E3 /* QueryResult.swift in Sources */,
 				68AF8F742069690300D552E3 /* Notice.swift in Sources */,
@@ -3809,6 +3849,7 @@
 				68AF8F652069690300D552E3 /* NewTrainingQuery.swift in Sources */,
 				68AF8F552069690300D552E3 /* IndexCapacity.swift in Sources */,
 				68AF8F572069690300D552E3 /* TestDocument.swift in Sources */,
+				CADA959B20FCD66600B5BD84 /* CredentialsList.swift in Sources */,
 				68AF8F852069690300D552E3 /* XPathPatterns.swift in Sources */,
 				683955072077E613009E1C8A /* Filter.swift in Sources */,
 				68AF8F872069690300D552E3 /* DeleteConfigurationResponse.swift in Sources */,
@@ -3824,11 +3865,13 @@
 				68AF8F952069690300D552E3 /* QueryEntitiesContext.swift in Sources */,
 				68AF8F612069690300D552E3 /* MemoryUsage.swift in Sources */,
 				68AF8F502069690300D552E3 /* NluEnrichmentSemanticRoles.swift in Sources */,
+				CADA95A120FCD66600B5BD84 /* SourceOptionsObject.swift in Sources */,
 				68AF8F812069690300D552E3 /* WordStyle.swift in Sources */,
 				68AF8F7B2069690300D552E3 /* Enrichment.swift in Sources */,
 				68AF8F542069690300D552E3 /* CreateEnvironmentRequest.swift in Sources */,
 				68BC28931F8C35010042810E /* RestRequest.swift in Sources */,
 				68AF8F622069690300D552E3 /* NluEnrichmentKeywords.swift in Sources */,
+				CADA959E20FCD66600B5BD84 /* SourceOptionsSiteColl.swift in Sources */,
 				68AF8F802069690300D552E3 /* TrainingExamplePatch.swift in Sources */,
 				68AF8F602069690300D552E3 /* QueryRelations.swift in Sources */,
 				68AF8F5F2069690300D552E3 /* Environment.swift in Sources */,
@@ -3845,6 +3888,7 @@
 				68AF8F922069690300D552E3 /* QueryEntities.swift in Sources */,
 				68AF8F6C2069690300D552E3 /* DeleteEnvironmentResponse.swift in Sources */,
 				68AF8F9B2069690300D552E3 /* WordSettings.swift in Sources */,
+				CADA959C20FCD66600B5BD84 /* SourceOptions.swift in Sources */,
 				68AF8F7F2069690300D552E3 /* TrainingExample.swift in Sources */,
 				68AF8F9E2069690300D552E3 /* NluEnrichmentCategories.swift in Sources */,
 				68AF8F692069690300D552E3 /* Conversions.swift in Sources */,

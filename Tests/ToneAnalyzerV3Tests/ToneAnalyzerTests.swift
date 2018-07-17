@@ -76,21 +76,6 @@ class ToneAnalyzerTests: XCTestCase {
         toneAnalyzer.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
-    /** Fail false positives. */
-    func failWithResult<T>(result: T) {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Fail false positives. */
-    func failWithResult() {
-        XCTFail("Negative test returned a result.")
-    }
-
     /** Wait for expectations. */
     func waitForExpectations(timeout: TimeInterval = 5.0) {
         waitForExpectations(timeout: timeout) { error in
@@ -102,8 +87,12 @@ class ToneAnalyzerTests: XCTestCase {
 
     func testGetToneJSON() {
         let expectation = self.expectation(description: "Get tone.")
-        toneAnalyzer.tone(toneInput: ToneInput(text: text), failure: failWithError) {
-            toneAnalysis in
+        toneAnalyzer.tone(toneContent: .toneInput(ToneInput(text: text))) {
+            response, error in
+            guard let toneAnalysis = response?.result else {
+                XCTFail("Positive test failed with error: \(error!)")
+                return
+            }
             XCTAssertNotNil(toneAnalysis.documentTone.tones)
             XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
             XCTAssertNotNil(toneAnalysis.sentencesTone)
@@ -122,8 +111,12 @@ class ToneAnalyzerTests: XCTestCase {
 
     func testGetTonePlainText() {
         let expectation = self.expectation(description: "Get tone.")
-        toneAnalyzer.tone(text: text, failure: failWithError) {
-            toneAnalysis in
+        toneAnalyzer.tone(toneContent: .text(text)) {
+            response, error in
+            guard let toneAnalysis = response?.result else {
+                XCTFail("Positive test failed with error: \(error!)")
+                return
+            }
             XCTAssertNotNil(toneAnalysis.documentTone.tones)
             XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
             XCTAssertNotNil(toneAnalysis.sentencesTone)
@@ -143,8 +136,12 @@ class ToneAnalyzerTests: XCTestCase {
     func testGetToneHTML() {
         let expectation = self.expectation(description: "Get tone.")
         let html = "<!DOCTYPE html><html><body><p>\(text)</p></body></html>"
-        toneAnalyzer.tone(html: html, failure: failWithError) {
-            toneAnalysis in
+        toneAnalyzer.tone(toneContent: .html(html)) {
+            response, error in
+            guard let toneAnalysis = response?.result else {
+                XCTFail("Positive test failed with error: \(error!)")
+                return
+            }
             XCTAssertNotNil(toneAnalysis.documentTone.tones)
             XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
             XCTAssertNotNil(toneAnalysis.sentencesTone)
@@ -163,13 +160,16 @@ class ToneAnalyzerTests: XCTestCase {
     func testGetToneCustom() {
         let expectation = self.expectation(description: "Get tone with custom parameters.")
         toneAnalyzer.tone(
-            toneInput: ToneInput(text: text),
+            toneContent: .toneInput(ToneInput(text: text)),
             sentences: false,
             contentLanguage: "en",
-            acceptLanguage: "en",
-            failure: failWithError)
+            acceptLanguage: "en")
         {
-            toneAnalysis in
+            response, error in
+            guard let toneAnalysis = response?.result else {
+                XCTFail("Positive test failed with error: \(error!)")
+                return
+            }
             XCTAssertNotNil(toneAnalysis.documentTone.tones)
             XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
             XCTAssertNil(toneAnalysis.sentencesTone)
@@ -180,7 +180,12 @@ class ToneAnalyzerTests: XCTestCase {
 
     func testToneChat() {
         let expectation = self.expectation(description: "Tone chat.")
-        toneAnalyzer.toneChat(utterances: utterances, acceptLanguage: "en", failure: failWithError) { analyses in
+        toneAnalyzer.toneChat(utterances: utterances, acceptLanguage: "en") {
+            response, error in
+            guard let analyses = response?.result else {
+                XCTFail("Positive test failed with error: \(error!)")
+                return
+            }
             XCTAssert(!analyses.utterancesTone.isEmpty)
             expectation.fulfill()
         }
@@ -191,15 +196,25 @@ class ToneAnalyzerTests: XCTestCase {
 
     func testGetToneEmptyString() {
         let expectation = self.expectation(description: "Get tone with an empty string.")
-        let failure = { (error: Error) in expectation.fulfill() }
-        toneAnalyzer.tone(toneInput: ToneInput(text: ""), failure: failure, success: failWithResult)
+        toneAnalyzer.tone(toneContent: .toneInput(ToneInput(text: ""))) {
+            _, error in
+            if error == nil {
+                XCTFail("Negative test did not return error.")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testToneChatEmptyArray() {
         let expectation = self.expectation(description: "Tone chat with an empty array.")
-        let failure = { (error: Error) in expectation.fulfill() }
-        toneAnalyzer.toneChat(utterances: [], acceptLanguage: "en", failure: failure, success: failWithResult)
+        toneAnalyzer.toneChat(utterances: [], acceptLanguage: "en") {
+            _, error in
+            if error == nil {
+                XCTFail("Negative test did not return error.")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 }

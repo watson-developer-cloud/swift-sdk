@@ -100,11 +100,11 @@ internal struct RestRequest {
 extension RestRequest {
 
     /**
-     Execute this request. (This is the main response function and is called by many of the functions below.)
+     Execute this request. (This is called by many of the functions below.)
 
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func response(
+    internal func execute(
         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
         // add authentication credentials to the request
@@ -165,33 +165,44 @@ extension RestRequest {
 
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func responseData(
-        completionHandler: @escaping (RestResponse<Data>) -> Void)
+    internal func response<T>(
+        completionHandler: @escaping (WatsonResponse<T>?, Error?) -> Void)
     {
         // execute the request
-        response { data, response, error in
+        execute { data, response, error in
 
             // ensure there is no underlying error
-            guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<Data>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
+            guard let response = response, error == nil else {
+                completionHandler(nil, error ?? RestError.noResponse)
                 return
             }
+
+            var watsonResponse = WatsonResponse<T>(response: response)
 
             // ensure there is data to parse
             guard let data = data else {
-                let result = RestResult<Data>.failure(RestError.noData)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
+                completionHandler(watsonResponse, RestError.noData)
                 return
             }
 
+            switch watsonResponse.result {
+            case is Data?:
+                // pass thru the raw data
+                watsonResponse.result = data as? T
+            case is String?:
+                // parse data as a string
+                guard let string = String(data: data, encoding: .utf8) else {
+                    completionHandler(watsonResponse, RestError.serializationError)
+                    return
+                }
+                watsonResponse.result = string as? T
+            default:
+                // no other supported types
+                watsonResponse.result = nil
+            }
+
             // execute completion handler
-            let result = RestResult.success(data)
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
+            completionHandler(watsonResponse, nil)
         }
     }
 
@@ -201,83 +212,32 @@ extension RestRequest {
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseObject<T: Decodable>(
-        completionHandler: @escaping (RestResponse<T>) -> Void)
+        completionHandler: @escaping (WatsonResponse<T>?, Error?) -> Void)
     {
         // execute the request
-        response { data, response, error in
+        execute { data, response, error in
 
             // ensure there is no underlying error
-            guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<T>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
+            guard let response = response, error == nil else {
+                completionHandler(nil, error ?? RestError.noResponse)
                 return
             }
+
+            var watsonResponse = WatsonResponse<T>(response: response)
 
             // ensure there is data to parse
             guard let data = data else {
-                let result = RestResult<T>.failure(RestError.noData)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
+                completionHandler(watsonResponse, RestError.noData)
                 return
             }
 
-            // parse json object
-            let result: RestResult<T>
+            // parse response body as a JSONobject
             do {
-                let object = try JSON.decoder.decode(T.self, from: data)
-                result = .success(object)
+                watsonResponse.result = try JSON.decoder.decode(T.self, from: data)
+                completionHandler(watsonResponse, nil)
             } catch {
-                result = .failure(error)
+                completionHandler(nil, error)
             }
-
-            // execute completion handler
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
-        }
-    }
-
-    /**
-     Execute this request and process the response body as a string.
-
-     - completionHandler: The completion handler to call when the request is complete.
-     */
-    internal func responseString(
-        completionHandler: @escaping (RestResponse<String>) -> Void)
-    {
-        // execute the request
-        response { data, response, error in
-
-            // ensure there is no underlying error
-            guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<String>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-
-            // ensure there is data to parse
-            guard let data = data else {
-                let result = RestResult<String>.failure(RestError.noData)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-
-            // parse data as a string
-            guard let string = String(data: data, encoding: .utf8) else {
-                let result = RestResult<String>.failure(RestError.serializationError)
-                let dataResponse = RestResponse(response: response, data: nil, result: result)
-                completionHandler(dataResponse)
-                return
-            }
-
-            // execute completion handler
-            let result = RestResult.success(string)
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
         }
     }
 
@@ -287,24 +247,21 @@ extension RestRequest {
      - completionHandler: The completion handler to call when the request is complete.
      */
     internal func responseVoid(
-        completionHandler: @escaping (RestResponse<Void>) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // execute the request
-        response { data, response, error in
+        execute { data, response, error in
 
             // ensure there is no underlying error
-            guard error == nil else {
-                // swiftlint:disable:next force_unwrapping
-                let result = RestResult<Void>.failure(error!)
-                let dataResponse = RestResponse(response: response, data: data, result: result)
-                completionHandler(dataResponse)
+            guard let response = response, error == nil else {
+                completionHandler(nil, error ?? RestError.noResponse)
                 return
             }
 
+            let watsonResponse = WatsonResponse<Void>(response: response)
+
             // execute completion handler
-            let result = RestResult<Void>.success(())
-            let dataResponse = RestResponse(response: response, data: data, result: result)
-            completionHandler(dataResponse)
+            completionHandler(watsonResponse, nil)
         }
     }
 
@@ -367,15 +324,4 @@ extension RestRequest {
             task.resume()
         }
     }
-}
-
-internal struct RestResponse<T> {
-    internal let response: HTTPURLResponse?
-    internal let data: Data?
-    internal let result: RestResult<T>
-}
-
-internal enum RestResult<T> {
-    case success(T)
-    case failure(Error)
 }

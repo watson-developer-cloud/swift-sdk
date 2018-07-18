@@ -151,6 +151,37 @@ class VisualRecognitionUIImageTests: XCTestCase {
         }
         waitForExpectations()
     }
+
+    func testClassifyWithLocalModel() {
+        if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
+            // update the local model
+            let expectation1 = self.expectation(description: "updateLocalModel")
+            visualRecognition.updateLocalModel(classifierID: classifierID, failure: failWithError) {
+                expectation1.fulfill()
+            }
+            waitForExpectations()
+
+            // classify using the local model
+            let expectation2 = self.expectation(description: "classifyWithLocalModel")
+            let image = UIImage(named: "car", in: Bundle(for: type(of: self)), compatibleWith: nil)!
+            visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], threshold: 0.1, failure: failWithError) {
+                classifiedImages in
+                print(classifiedImages)
+                expectation2.fulfill()
+            }
+            waitForExpectations()
+
+            // delete the local model
+            do {
+                try visualRecognition.deleteLocalModel(classifierID: classifierID)
+            } catch {
+                XCTFail("Failed to delete the local model: \(error)")
+            }
+
+        } else {
+            XCTFail("Core ML required iOS 11+")
+        }
+    }
 }
 
 #endif

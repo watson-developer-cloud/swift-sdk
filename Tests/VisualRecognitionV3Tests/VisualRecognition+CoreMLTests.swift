@@ -112,7 +112,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
     }
 
     func testClassifyWithLocalModel() {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *) {
 
             // update the local model
             let expectation1 = self.expectation(description: "updateLocalModel")
@@ -123,8 +123,9 @@ class VisualRecognitionCoreMLTests: XCTestCase {
 
             // classify using the local model
             let expectation2 = self.expectation(description: "classifyWithLocalModel")
-            let image = UIImage(named: "car", in: Bundle(for: type(of: self)), compatibleWith: nil)!
-            visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], threshold: 0.1, failure: failWithError) {
+            let bundle = Bundle(for: type(of: self))
+            let image = bundle.url(forResource: "car", withExtension: "png")!
+            visualRecognition.classifyWithLocalModel(imagesFile: image, classifierIDs: [classifierID], threshold: 0.1, failure: failWithError) {
                 classifiedImages in
                 print(classifiedImages)
                 expectation2.fulfill()

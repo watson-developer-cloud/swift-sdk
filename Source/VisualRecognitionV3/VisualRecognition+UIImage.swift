@@ -135,6 +135,42 @@ extension VisualRecognition {
     }
 
     /**
+     Classify an image using a Core ML model from the local filesystem.
+
+     - parameter image: The image to classify.
+     - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
+     built-in classifier.
+     - parameter threshold: The minimum score a class must have to be displayed in the response.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
+    @available(iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+    public func classifyWithLocalModel(
+        image: UIImage,
+        classifierIDs: [String] = ["default"],
+        threshold: Double? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifiedImages) -> Void)
+    {
+        // save image to disk
+        let file: URL
+        do {
+            file = try saveToDisk(image: image)
+        } catch {
+            failure?(error)
+            return
+        }
+
+        // delete image after service call
+        let deleteFile = { try? FileManager.default.removeItem(at: file) }
+        let failureWithDelete = { (error: Error) in deleteFile(); failure?(error) }
+        let successWithDelete = { (classifiedImages: ClassifiedImages) in deleteFile(); success(classifiedImages) }
+
+        self.classifyWithLocalModel(imagesFile: file, classifierIDs: classifierIDs, threshold: threshold,
+                                    failure: failureWithDelete, success: successWithDelete)
+    }
+
+    /**
      Save an image to a temporary location on disk.
      The image will be compressed in an attempt to stay under the service's 10MB image size restriction.
      */

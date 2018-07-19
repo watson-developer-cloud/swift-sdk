@@ -31,6 +31,12 @@ public struct QueryResponse: Decodable {
 
     public var duplicatesRemoved: Int?
 
+    /**
+     The session token for this query. The session token can be used to add events associated with this query to the
+     query and event log.
+     */
+    public var sessionToken: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case matchingResults = "matching_results"
@@ -38,6 +44,7 @@ public struct QueryResponse: Decodable {
         case aggregations = "aggregations"
         case passages = "passages"
         case duplicatesRemoved = "duplicates_removed"
+        case sessionToken = "session_token"
     }
 
 }

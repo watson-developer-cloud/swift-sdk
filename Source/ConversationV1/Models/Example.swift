@@ -34,11 +34,17 @@ public struct Example: Decodable {
      */
     public var updated: String?
 
+    /**
+     An array of contextual entity mentions.
+     */
+    public var mentions: [Mentions]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case exampleText = "text"
         case created = "created"
         case updated = "updated"
+        case mentions = "mentions"
     }
 
 }

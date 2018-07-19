@@ -1,0 +1,64 @@
+/**
+ * Copyright IBM Corporation 2018
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
+
+import Foundation
+
+/** WorkspaceSystemSettings. */
+public struct WorkspaceSystemSettings: Codable {
+
+    /**
+     Workspace settings related to the Watson Assistant tool.
+     */
+    public var tooling: WorkspaceSystemSettingsTooling?
+
+    /**
+     Reserved for future use.
+     */
+    public var disambiguation: [String: JSON]?
+
+    /**
+     For internal use only.
+     */
+    public var humanAgentAssist: [String: JSON]?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case tooling = "tooling"
+        case disambiguation = "disambiguation"
+        case humanAgentAssist = "human_agent_assist"
+    }
+
+    /**
+     Initialize a `WorkspaceSystemSettings` with member variables.
+
+     - parameter tooling: Workspace settings related to the Watson Assistant tool.
+     - parameter disambiguation: Reserved for future use.
+     - parameter humanAgentAssist: For internal use only.
+
+     - returns: An initialized `WorkspaceSystemSettings`.
+    */
+    public init(
+        tooling: WorkspaceSystemSettingsTooling? = nil,
+        disambiguation: [String: JSON]? = nil,
+        humanAgentAssist: [String: JSON]? = nil
+    )
+    {
+        self.tooling = tooling
+        self.disambiguation = disambiguation
+        self.humanAgentAssist = humanAgentAssist
+    }
+
+}

@@ -77,6 +77,11 @@ public struct WorkspaceExport: Decodable {
     public var learningOptOut: Bool
 
     /**
+     Global settings for the workspace.
+     */
+    public var systemSettings: WorkspaceSystemSettings?
+
+    /**
      An array of intents.
      */
     public var intents: [IntentExport]?
@@ -107,6 +112,7 @@ public struct WorkspaceExport: Decodable {
         case workspaceID = "workspace_id"
         case status = "status"
         case learningOptOut = "learning_opt_out"
+        case systemSettings = "system_settings"
         case intents = "intents"
         case entities = "entities"
         case counterexamples = "counterexamples"

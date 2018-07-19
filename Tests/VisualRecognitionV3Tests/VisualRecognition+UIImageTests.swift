@@ -26,6 +26,7 @@ import VisualRecognitionV3
 class VisualRecognitionUIImageTests: XCTestCase {
 
     private var visualRecognition: VisualRecognition!
+    private let classifierID = Credentials.VisualRecognitionClassifierID
 
     private var car: UIImage {
         let bundle = Bundle(for: type(of: self))

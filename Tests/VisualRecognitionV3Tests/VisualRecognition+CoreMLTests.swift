@@ -125,7 +125,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             let expectation2 = self.expectation(description: "classifyWithLocalModel")
             let bundle = Bundle(for: type(of: self))
             let image = bundle.url(forResource: "car", withExtension: "png")!
-            visualRecognition.classifyWithLocalModel(imagesFile: image, classifierIDs: [classifierID], threshold: 0.1, failure: failWithError) {
+            visualRecognition.classifyWithLocalModel(imageFile: image, classifierIDs: [classifierID], threshold: 0.1, failure: failWithError) {
                 classifiedImages in
                 print(classifiedImages)
                 expectation2.fulfill()

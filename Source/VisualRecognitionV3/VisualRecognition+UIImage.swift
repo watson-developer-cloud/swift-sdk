@@ -152,22 +152,17 @@ extension VisualRecognition {
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
-        // save image to disk
-        let file: URL
-        do {
-            file = try saveToDisk(image: image)
-        } catch {
+        // convert UIImage to Data
+        guard let imageData = UIImagePNGRepresentation(image) else {
+            let description = "Failed to convert image from UIImage to Data."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
             failure?(error)
             return
         }
 
-        // delete image after service call
-        let deleteFile = { try? FileManager.default.removeItem(at: file) }
-        let failureWithDelete = { (error: Error) in deleteFile(); failure?(error) }
-        let successWithDelete = { (classifiedImages: ClassifiedImages) in deleteFile(); success(classifiedImages) }
-
-        self.classifyWithLocalModel(imagesFile: file, classifierIDs: classifierIDs, threshold: threshold,
-                                    failure: failureWithDelete, success: successWithDelete)
+        self.classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold,
+                                    failure: failure, success: success)
     }
 
     /**

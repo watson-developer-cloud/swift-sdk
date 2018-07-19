@@ -102,6 +102,12 @@ public class PersonalityInsights {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
+            if case let .some(.string(help)) = json["help"] {
+                userInfo[NSLocalizedFailureReasonErrorKey] = help
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -145,8 +151,6 @@ public class PersonalityInsights {
      - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each
        characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are
        returned.
-     - parameter csvHeaders: Indicates whether column labels are returned with a CSV response. By default, no column
-       labels are returned. Applies only when the **Accept** parameter is set to `text/csv`.
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -157,7 +161,6 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         rawScores: Bool? = nil,
-        csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Profile>?, Error?) -> Void)
@@ -187,10 +190,6 @@ public class PersonalityInsights {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let rawScores = rawScores {
             let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
-            queryParameters.append(queryParameter)
-        }
-        if let csvHeaders = csvHeaders {
-            let queryParameter = URLQueryItem(name: "csv_headers", value: "\(csvHeaders)")
             queryParameters.append(queryParameter)
         }
         if let consumptionPreferences = consumptionPreferences {
@@ -320,4 +319,106 @@ public class PersonalityInsights {
         request.responseObject(completionHandler: completionHandler)
     }
 
+}
+
+extension PersonalityInsights {
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the profile method that accepts a profileContent parameter.  This method will be removed in a future release.")
+    public func profile(
+        content: Content,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        rawScores: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
+    {
+        profile(profileContent: .content(content), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
+                rawScores: rawScores, consumptionPreferences: consumptionPreferences, headers: headers,
+                failure: failure, success: success)
+    }
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the profile method that accepts a profileContent parameter.  This method will be removed in a future release.")
+    public func profile(
+        text: String,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        rawScores: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
+    {
+        profile(profileContent: .text(text), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
+                rawScores: rawScores, consumptionPreferences: consumptionPreferences, headers: headers,
+                failure: failure, success: success)
+    }
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the profile method that accepts a profileContent parameter.  This method will be removed in a future release.")
+    public func profile(
+        html: String,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        rawScores: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (Profile) -> Void)
+    {
+        profile(profileContent: .html(html), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
+                rawScores: rawScores, consumptionPreferences: consumptionPreferences, headers: headers,
+                failure: failure, success: success)
+    }
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the profileAsCsv method that accepts a profileContent parameter.  This method will be removed in a future release.")
+    public func profileAsCsv(
+        content: Content,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (String) -> Void)
+    {
+        profileAsCsv(profileContent: .content(content), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
+                     rawScores: rawScores, csvHeaders: csvHeaders, consumptionPreferences: consumptionPreferences, headers: headers,
+                     failure: failure, success: success)
+    }
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the profileAsCsv method that accepts a profileContent parameter.  This method will be removed in a future release.")
+    public func profileAsCsv(
+        text: String,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (String) -> Void)
+    {
+        profileAsCsv(profileContent: .text(text), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
+                     rawScores: rawScores, csvHeaders: csvHeaders, consumptionPreferences: consumptionPreferences, headers: headers,
+                     failure: failure, success: success)
+    }
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the profileAsCsv method that accepts a profileContent parameter.  This method will be removed in a future release.")
+    public func profileAsCsv(
+        html: String,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (String) -> Void)
+    {
+        profileAsCsv(profileContent: .html(html), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
+                     rawScores: rawScores, csvHeaders: csvHeaders, consumptionPreferences: consumptionPreferences, headers: headers,
+                     failure: failure, success: success)
+    }
 }

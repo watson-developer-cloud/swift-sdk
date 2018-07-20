@@ -27,9 +27,15 @@ public struct CreateExample: Encodable {
      */
     public var text: String
 
+    /**
+     An array of contextual entity mentions.
+     */
+    public var mentions: [Mentions]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
+        case mentions = "mentions"
     }
 
     /**
@@ -39,14 +45,17 @@ public struct CreateExample: Encodable {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
        - It must be no longer than 1024 characters.
+     - parameter mentions: An array of contextual entity mentions.
 
      - returns: An initialized `CreateExample`.
     */
     public init(
-        text: String
+        text: String,
+        mentions: [Mentions]? = nil
     )
     {
         self.text = text
+        self.mentions = mentions
     }
 
 }

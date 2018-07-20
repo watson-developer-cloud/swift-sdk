@@ -50,7 +50,7 @@ public class NaturalLanguageClassifier {
      - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
      - parameter iamUrl: The URL for the IAM service.
      */
-    public init(apiKey: String, iamUrl: String? = nil) {
+    public init(version: String, apiKey: String, iamUrl: String? = nil) {
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
     }
 
@@ -59,7 +59,7 @@ public class NaturalLanguageClassifier {
 
      - parameter accessToken: An access token for the service.
      */
-    public init(accessToken: String) {
+    public init(version: String, accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
     }
 
@@ -103,20 +103,18 @@ public class NaturalLanguageClassifier {
      - parameter classifierID: Classifier ID to use.
      - parameter text: The submitted phrase.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classify(
         classifierID: String,
         text: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Classification) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classification>?, Error?) -> Void)
     {
         // construct body
         let classifyRequest = ClassifyInput(text: text)
         guard let body = try? JSONEncoder().encode(classifyRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -131,7 +129,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -145,13 +143,7 @@ public class NaturalLanguageClassifier {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Classification>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -164,20 +156,18 @@ public class NaturalLanguageClassifier {
      - parameter classifierID: Classifier ID to use.
      - parameter collection: The submitted phrases.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classifyCollection(
         classifierID: String,
         collection: [ClassifyInput],
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassificationCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassificationCollection>?, Error?) -> Void)
     {
         // construct body
         let classifyCollectionRequest = ClassifyCollectionInput(collection: collection)
         guard let body = try? JSONEncoder().encode(classifyCollectionRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -192,7 +182,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify_collection"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -206,13 +196,7 @@ public class NaturalLanguageClassifier {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ClassificationCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -229,22 +213,20 @@ public class NaturalLanguageClassifier {
        include up to 20,000 records. For details, see [Data
        preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createClassifier(
         metadata: URL,
         trainingData: URL,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Classifier) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         multipartFormData.append(metadata, withName: "training_metadata")
         multipartFormData.append(trainingData, withName: "training_data")
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
 
@@ -268,13 +250,7 @@ public class NaturalLanguageClassifier {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Classifier>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -283,13 +259,11 @@ public class NaturalLanguageClassifier {
      Returns an empty array if no classifiers are available.
 
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listClassifiers(
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifierList) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifierList>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -309,13 +283,7 @@ public class NaturalLanguageClassifier {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ClassifierList>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -325,14 +293,12 @@ public class NaturalLanguageClassifier {
 
      - parameter classifierID: Classifier ID to query.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Classifier) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -344,7 +310,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -357,13 +323,7 @@ public class NaturalLanguageClassifier {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Classifier>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -371,14 +331,12 @@ public class NaturalLanguageClassifier {
 
      - parameter classifierID: Classifier ID to delete.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -390,7 +348,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -403,13 +361,7 @@ public class NaturalLanguageClassifier {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
 }

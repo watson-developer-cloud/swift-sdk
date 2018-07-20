@@ -22,7 +22,7 @@ import Foundation
 public struct DiskUsage: Decodable {
 
     /**
-     Number of bytes used on the environment's disk capacity.
+     Number of bytes within the environment's disk capacity that are currently used to store data.
      */
     public var usedBytes: Int?
 

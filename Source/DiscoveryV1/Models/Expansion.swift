@@ -28,7 +28,7 @@ public struct Expansion: Codable {
     public var inputTerms: [String]?
 
     /**
-     A list of terms that this expansion will be expanded to. If specified without `input_terms`, it also functions as
+     A list of terms that this expansion will be expanded to. If specified without **input_terms**, it also functions as
      the input term list.
      */
     public var expandedTerms: [String]
@@ -43,7 +43,7 @@ public struct Expansion: Codable {
      Initialize a `Expansion` with member variables.
 
      - parameter expandedTerms: A list of terms that this expansion will be expanded to. If specified without
-       `input_terms`, it also functions as the input term list.
+       **input_terms**, it also functions as the input term list.
      - parameter inputTerms: A list of terms that will be expanded for this expansion. If specified, only the items
        in this list are expanded.
 

@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- A request formatted for the Conversation service.
+ A message request formatted for the Conversation service.
  */
 public struct MessageRequest: Codable {
 

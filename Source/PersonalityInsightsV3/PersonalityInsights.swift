@@ -154,8 +154,7 @@ public class PersonalityInsights {
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func profile(
         profileContent: ProfileContent,
@@ -164,12 +163,11 @@ public class PersonalityInsights {
         rawScores: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
+        completionHandler: @escaping (WatsonResponse<Profile>?, Error?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -212,13 +210,7 @@ public class PersonalityInsights {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Profile>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -263,8 +255,7 @@ public class PersonalityInsights {
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func profileAsCsv(
         profileContent: ProfileContent,
@@ -274,12 +265,11 @@ public class PersonalityInsights {
         csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
+        completionHandler: @escaping (WatsonResponse<URL>?, Error?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -326,13 +316,7 @@ public class PersonalityInsights {
         )
 
         // execute REST request
-        request.responseString {
-            (response: RestResponse<String>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

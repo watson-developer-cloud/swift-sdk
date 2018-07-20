@@ -548,6 +548,41 @@
 		7AC97FC71D8308690046124C /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81B1D79B76100507725 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
+		92AEE15C2101136D00BF0FCF /* DialogNodeOutputOptionsElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1502101136A00BF0FCF /* DialogNodeOutputOptionsElement.swift */; };
+		92AEE15D2101136D00BF0FCF /* DialogNodeOutputTextValuesElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1512101136B00BF0FCF /* DialogNodeOutputTextValuesElement.swift */; };
+		92AEE15E2101136D00BF0FCF /* Mentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1522101136B00BF0FCF /* Mentions.swift */; };
+		92AEE15F2101136D00BF0FCF /* DialogNodeOutputGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1532101136B00BF0FCF /* DialogNodeOutputGeneric.swift */; };
+		92AEE1602101136D00BF0FCF /* WorkspaceSystemSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1542101136C00BF0FCF /* WorkspaceSystemSettings.swift */; };
+		92AEE1612101136D00BF0FCF /* EntityMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1552101136C00BF0FCF /* EntityMention.swift */; };
+		92AEE1622101136D00BF0FCF /* DialogNodeOutputOptionsElementValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1562101136C00BF0FCF /* DialogNodeOutputOptionsElementValue.swift */; };
+		92AEE1632101136D00BF0FCF /* DialogNodeOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1572101136C00BF0FCF /* DialogNodeOutput.swift */; };
+		92AEE1642101136D00BF0FCF /* DialogNodeOutputModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1582101136C00BF0FCF /* DialogNodeOutputModifiers.swift */; };
+		92AEE1652101136D00BF0FCF /* EntityMentionCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1592101136D00BF0FCF /* EntityMentionCollection.swift */; };
+		92AEE1662101136D00BF0FCF /* DialogRuntimeResponseGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE15A2101136D00BF0FCF /* DialogRuntimeResponseGeneric.swift */; };
+		92AEE1672101136D00BF0FCF /* WorkspaceSystemSettingsTooling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE15B2101136D00BF0FCF /* WorkspaceSystemSettingsTooling.swift */; };
+		92AEE1742101139B00BF0FCF /* EntityMention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1682101138E00BF0FCF /* EntityMention.swift */; };
+		92AEE1752101139B00BF0FCF /* WorkspaceSystemSettingsTooling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1692101138E00BF0FCF /* WorkspaceSystemSettingsTooling.swift */; };
+		92AEE1762101139B00BF0FCF /* DialogNodeOutputGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE16A2101138E00BF0FCF /* DialogNodeOutputGeneric.swift */; };
+		92AEE1772101139B00BF0FCF /* EntityMentionCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE16B2101138E00BF0FCF /* EntityMentionCollection.swift */; };
+		92AEE1782101139B00BF0FCF /* Mentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE16C2101138E00BF0FCF /* Mentions.swift */; };
+		92AEE1792101139B00BF0FCF /* DialogNodeOutputModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE16D2101138E00BF0FCF /* DialogNodeOutputModifiers.swift */; };
+		92AEE17A2101139B00BF0FCF /* DialogNodeOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE16E2101138E00BF0FCF /* DialogNodeOutput.swift */; };
+		92AEE17B2101139B00BF0FCF /* DialogNodeOutputOptionsElementValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE16F2101138F00BF0FCF /* DialogNodeOutputOptionsElementValue.swift */; };
+		92AEE17C2101139B00BF0FCF /* DialogNodeOutputOptionsElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1702101139A00BF0FCF /* DialogNodeOutputOptionsElement.swift */; };
+		92AEE17D2101139B00BF0FCF /* DialogNodeOutputTextValuesElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1712101139A00BF0FCF /* DialogNodeOutputTextValuesElement.swift */; };
+		92AEE17E2101139B00BF0FCF /* DialogRuntimeResponseGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1722101139B00BF0FCF /* DialogRuntimeResponseGeneric.swift */; };
+		92AEE17F2101139B00BF0FCF /* WorkspaceSystemSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE1732101139B00BF0FCF /* WorkspaceSystemSettings.swift */; };
+		92AEE18B210113A800BF0FCF /* SourceOptionsFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE180210113A700BF0FCF /* SourceOptionsFolder.swift */; };
+		92AEE18C210113A800BF0FCF /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE181210113A700BF0FCF /* Source.swift */; };
+		92AEE18D210113A800BF0FCF /* CredentialDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE182210113A800BF0FCF /* CredentialDetails.swift */; };
+		92AEE18E210113A800BF0FCF /* CredentialsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE183210113A800BF0FCF /* CredentialsList.swift */; };
+		92AEE18F210113A800BF0FCF /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE184210113A800BF0FCF /* Credentials.swift */; };
+		92AEE190210113A800BF0FCF /* SourceOptionsObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE185210113A800BF0FCF /* SourceOptionsObject.swift */; };
+		92AEE191210113A800BF0FCF /* SourceOptionsSiteColl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE186210113A800BF0FCF /* SourceOptionsSiteColl.swift */; };
+		92AEE192210113A800BF0FCF /* SourceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE187210113A800BF0FCF /* SourceStatus.swift */; };
+		92AEE193210113A800BF0FCF /* SourceOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE188210113A800BF0FCF /* SourceOptions.swift */; };
+		92AEE194210113A800BF0FCF /* DeleteCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE189210113A800BF0FCF /* DeleteCredentials.swift */; };
+		92AEE195210113A800BF0FCF /* SourceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AEE18A210113A800BF0FCF /* SourceSchedule.swift */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
 		CA28815D20CB07D600FC992C /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* Credentials.swift */; };
 		CA28817620CB095100FC992C /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA28817420CB095100FC992C /* glossary.tmx */; };
@@ -1223,6 +1258,41 @@
 		7AB445241D3E647A00E8748A /* ConversationV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB4452D1D3E647A00E8748A /* ConversationV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
+		92AEE1502101136A00BF0FCF /* DialogNodeOutputOptionsElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputOptionsElement.swift; sourceTree = "<group>"; };
+		92AEE1512101136B00BF0FCF /* DialogNodeOutputTextValuesElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputTextValuesElement.swift; sourceTree = "<group>"; };
+		92AEE1522101136B00BF0FCF /* Mentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mentions.swift; sourceTree = "<group>"; };
+		92AEE1532101136B00BF0FCF /* DialogNodeOutputGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputGeneric.swift; sourceTree = "<group>"; };
+		92AEE1542101136C00BF0FCF /* WorkspaceSystemSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSystemSettings.swift; sourceTree = "<group>"; };
+		92AEE1552101136C00BF0FCF /* EntityMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityMention.swift; sourceTree = "<group>"; };
+		92AEE1562101136C00BF0FCF /* DialogNodeOutputOptionsElementValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputOptionsElementValue.swift; sourceTree = "<group>"; };
+		92AEE1572101136C00BF0FCF /* DialogNodeOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutput.swift; sourceTree = "<group>"; };
+		92AEE1582101136C00BF0FCF /* DialogNodeOutputModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputModifiers.swift; sourceTree = "<group>"; };
+		92AEE1592101136D00BF0FCF /* EntityMentionCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityMentionCollection.swift; sourceTree = "<group>"; };
+		92AEE15A2101136D00BF0FCF /* DialogRuntimeResponseGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogRuntimeResponseGeneric.swift; sourceTree = "<group>"; };
+		92AEE15B2101136D00BF0FCF /* WorkspaceSystemSettingsTooling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSystemSettingsTooling.swift; sourceTree = "<group>"; };
+		92AEE1682101138E00BF0FCF /* EntityMention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityMention.swift; sourceTree = "<group>"; };
+		92AEE1692101138E00BF0FCF /* WorkspaceSystemSettingsTooling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSystemSettingsTooling.swift; sourceTree = "<group>"; };
+		92AEE16A2101138E00BF0FCF /* DialogNodeOutputGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputGeneric.swift; sourceTree = "<group>"; };
+		92AEE16B2101138E00BF0FCF /* EntityMentionCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityMentionCollection.swift; sourceTree = "<group>"; };
+		92AEE16C2101138E00BF0FCF /* Mentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mentions.swift; sourceTree = "<group>"; };
+		92AEE16D2101138E00BF0FCF /* DialogNodeOutputModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputModifiers.swift; sourceTree = "<group>"; };
+		92AEE16E2101138E00BF0FCF /* DialogNodeOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutput.swift; sourceTree = "<group>"; };
+		92AEE16F2101138F00BF0FCF /* DialogNodeOutputOptionsElementValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputOptionsElementValue.swift; sourceTree = "<group>"; };
+		92AEE1702101139A00BF0FCF /* DialogNodeOutputOptionsElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputOptionsElement.swift; sourceTree = "<group>"; };
+		92AEE1712101139A00BF0FCF /* DialogNodeOutputTextValuesElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputTextValuesElement.swift; sourceTree = "<group>"; };
+		92AEE1722101139B00BF0FCF /* DialogRuntimeResponseGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogRuntimeResponseGeneric.swift; sourceTree = "<group>"; };
+		92AEE1732101139B00BF0FCF /* WorkspaceSystemSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSystemSettings.swift; sourceTree = "<group>"; };
+		92AEE180210113A700BF0FCF /* SourceOptionsFolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptionsFolder.swift; sourceTree = "<group>"; };
+		92AEE181210113A700BF0FCF /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
+		92AEE182210113A800BF0FCF /* CredentialDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialDetails.swift; sourceTree = "<group>"; };
+		92AEE183210113A800BF0FCF /* CredentialsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsList.swift; sourceTree = "<group>"; };
+		92AEE184210113A800BF0FCF /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		92AEE185210113A800BF0FCF /* SourceOptionsObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptionsObject.swift; sourceTree = "<group>"; };
+		92AEE186210113A800BF0FCF /* SourceOptionsSiteColl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptionsSiteColl.swift; sourceTree = "<group>"; };
+		92AEE187210113A800BF0FCF /* SourceStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceStatus.swift; sourceTree = "<group>"; };
+		92AEE188210113A800BF0FCF /* SourceOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptions.swift; sourceTree = "<group>"; };
+		92AEE189210113A800BF0FCF /* DeleteCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCredentials.swift; sourceTree = "<group>"; };
+		92AEE18A210113A800BF0FCF /* SourceSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceSchedule.swift; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -1666,10 +1736,19 @@
 				6800FC212056D6830078788A /* DialogNodeAction.swift */,
 				6800FC262056D6830078788A /* DialogNodeCollection.swift */,
 				6800FC2E2056D6830078788A /* DialogNodeNextStep.swift */,
+				92AEE1572101136C00BF0FCF /* DialogNodeOutput.swift */,
+				92AEE1532101136B00BF0FCF /* DialogNodeOutputGeneric.swift */,
+				92AEE1582101136C00BF0FCF /* DialogNodeOutputModifiers.swift */,
+				92AEE1502101136A00BF0FCF /* DialogNodeOutputOptionsElement.swift */,
+				92AEE1562101136C00BF0FCF /* DialogNodeOutputOptionsElementValue.swift */,
+				92AEE1512101136B00BF0FCF /* DialogNodeOutputTextValuesElement.swift */,
 				6800FC382056D6830078788A /* DialogNodeVisitedDetails.swift */,
+				92AEE15A2101136D00BF0FCF /* DialogRuntimeResponseGeneric.swift */,
 				6800FC2D2056D6830078788A /* Entity.swift */,
 				6800FC352056D6830078788A /* EntityCollection.swift */,
 				6800FC472056D6830078788A /* EntityExport.swift */,
+				92AEE1552101136C00BF0FCF /* EntityMention.swift */,
+				92AEE1592101136D00BF0FCF /* EntityMentionCollection.swift */,
 				6800FC302056D6830078788A /* Example.swift */,
 				6800FC3C2056D6830078788A /* ExampleCollection.swift */,
 				6800FC492056D6830078788A /* InputData.swift */,
@@ -1680,6 +1759,7 @@
 				6800FC202056D6830078788A /* LogExport.swift */,
 				6800FC3F2056D6830078788A /* LogMessage.swift */,
 				6800FC292056D6830078788A /* LogPagination.swift */,
+				92AEE1522101136B00BF0FCF /* Mentions.swift */,
 				6800FC442056D6830078788A /* MessageInput.swift */,
 				6800FC282056D6830078788A /* MessageRequest.swift */,
 				6800FC542056D6830078788A /* MessageResponse.swift */,
@@ -1704,6 +1784,8 @@
 				6800FC362056D6830078788A /* Workspace.swift */,
 				6800FC482056D6830078788A /* WorkspaceCollection.swift */,
 				6800FC2F2056D6830078788A /* WorkspaceExport.swift */,
+				92AEE1542101136C00BF0FCF /* WorkspaceSystemSettings.swift */,
+				92AEE15B2101136D00BF0FCF /* WorkspaceSystemSettingsTooling.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1756,8 +1838,12 @@
 				68AF8EC5206968CC00D552E3 /* Conversions.swift */,
 				68AF8EF3206968CC00D552E3 /* CreateCollectionRequest.swift */,
 				68AF8EB0206968CC00D552E3 /* CreateEnvironmentRequest.swift */,
+				92AEE182210113A800BF0FCF /* CredentialDetails.swift */,
+				92AEE184210113A800BF0FCF /* Credentials.swift */,
+				92AEE183210113A800BF0FCF /* CredentialsList.swift */,
 				68AF8EDF206968CC00D552E3 /* DeleteCollectionResponse.swift */,
 				68AF8EE3206968CC00D552E3 /* DeleteConfigurationResponse.swift */,
+				92AEE189210113A800BF0FCF /* DeleteCredentials.swift */,
 				68AF8EFB206968CC00D552E3 /* DeleteDocumentResponse.swift */,
 				68AF8EC8206968CC00D552E3 /* DeleteEnvironmentResponse.swift */,
 				68AF8EF2206968CC00D552E3 /* DiskUsage.swift */,
@@ -1819,6 +1905,13 @@
 				68AF8ECD206968CC00D552E3 /* QueryResult.swift */,
 				68AE2FD120697C2800330836 /* QueryResultMetadata.swift */,
 				682CBD2B209051B90049EE9F /* SegmentSettings.swift */,
+				92AEE181210113A700BF0FCF /* Source.swift */,
+				92AEE188210113A800BF0FCF /* SourceOptions.swift */,
+				92AEE180210113A700BF0FCF /* SourceOptionsFolder.swift */,
+				92AEE185210113A800BF0FCF /* SourceOptionsObject.swift */,
+				92AEE186210113A800BF0FCF /* SourceOptionsSiteColl.swift */,
+				92AEE18A210113A800BF0FCF /* SourceSchedule.swift */,
+				92AEE187210113A800BF0FCF /* SourceStatus.swift */,
 				68AF8EE7206968CC00D552E3 /* Term.swift */,
 				68AF8EB3206968CC00D552E3 /* TestDocument.swift */,
 				683955042077E613009E1C8A /* Timeslice.swift */,
@@ -2240,10 +2333,19 @@
 				6823CE9B1F8EA0AD00A388EC /* DialogNodeAction.swift */,
 				6823CEA51F8EA0AE00A388EC /* DialogNodeCollection.swift */,
 				6823CEB41F8EA0B100A388EC /* DialogNodeNextStep.swift */,
+				92AEE16E2101138E00BF0FCF /* DialogNodeOutput.swift */,
+				92AEE16A2101138E00BF0FCF /* DialogNodeOutputGeneric.swift */,
+				92AEE16D2101138E00BF0FCF /* DialogNodeOutputModifiers.swift */,
+				92AEE1702101139A00BF0FCF /* DialogNodeOutputOptionsElement.swift */,
+				92AEE16F2101138F00BF0FCF /* DialogNodeOutputOptionsElementValue.swift */,
 				68C4414E2017B17B00B251C6 /* DialogNodeVisitedDetails.swift */,
 				6823CEA61F8EA0AF00A388EC /* Entity.swift */,
 				6823CEAC1F8EA0B000A388EC /* EntityCollection.swift */,
 				6823CEA91F8EA0AF00A388EC /* EntityExport.swift */,
+				92AEE1712101139A00BF0FCF /* DialogNodeOutputTextValuesElement.swift */,
+				92AEE1722101139B00BF0FCF /* DialogRuntimeResponseGeneric.swift */,
+				92AEE1682101138E00BF0FCF /* EntityMention.swift */,
+				92AEE16B2101138E00BF0FCF /* EntityMentionCollection.swift */,
 				6823CEB61F8EA0B100A388EC /* Example.swift */,
 				6823CEA71F8EA0AF00A388EC /* ExampleCollection.swift */,
 				6823CEB71F8EA0B200A388EC /* InputData.swift */,
@@ -2254,6 +2356,7 @@
 				6823CE8F1F8EA0AB00A388EC /* LogExport.swift */,
 				6823CEB51F8EA0B100A388EC /* LogMessage.swift */,
 				6823CE911F8EA0AB00A388EC /* LogPagination.swift */,
+				92AEE16C2101138E00BF0FCF /* Mentions.swift */,
 				6823CEB31F8EA0B100A388EC /* MessageInput.swift */,
 				6823CEA41F8EA0AE00A388EC /* MessageRequest.swift */,
 				6823CE931F8EA0AB00A388EC /* MessageResponse.swift */,
@@ -2278,6 +2381,8 @@
 				6823CE9C1F8EA0AD00A388EC /* Workspace.swift */,
 				6823CEAD1F8EA0B000A388EC /* WorkspaceCollection.swift */,
 				6823CE9A1F8EA0AC00A388EC /* WorkspaceExport.swift */,
+				92AEE1732101139B00BF0FCF /* WorkspaceSystemSettings.swift */,
+				92AEE1692101138E00BF0FCF /* WorkspaceSystemSettingsTooling.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3781,6 +3886,7 @@
 				68AF8F842069690300D552E3 /* HtmlSettings.swift in Sources */,
 				68AF8F832069690300D552E3 /* DeleteCollectionResponse.swift in Sources */,
 				68AF8F5A2069690300D552E3 /* ListCollectionsResponse.swift in Sources */,
+				92AEE193210113A800BF0FCF /* SourceOptions.swift in Sources */,
 				68AF8F8F2069690300D552E3 /* QueryPassages.swift in Sources */,
 				68AF8F662069690300D552E3 /* QueryRelationsResponse.swift in Sources */,
 				68AF8F9A2069690300D552E3 /* DocumentSnapshot.swift in Sources */,
@@ -3804,9 +3910,13 @@
 				68AF8F862069690300D552E3 /* Expansion.swift in Sources */,
 				68AF8F5E2069690300D552E3 /* Collection.swift in Sources */,
 				68AF8F562069690300D552E3 /* EnrichmentOptions.swift in Sources */,
+				92AEE18D210113A800BF0FCF /* CredentialDetails.swift in Sources */,
 				CA35CD4F20F010EA00FACB2B /* WatsonResponse.swift in Sources */,
+				92AEE18C210113A800BF0FCF /* Source.swift in Sources */,
 				68AF8F722069690300D552E3 /* QueryResponse.swift in Sources */,
 				68AF8F792069690300D552E3 /* Calculation.swift in Sources */,
+				92AEE192210113A800BF0FCF /* SourceStatus.swift in Sources */,
+				92AEE190210113A800BF0FCF /* SourceOptionsObject.swift in Sources */,
 				68AF8F882069690300D552E3 /* QueryFilterType.swift in Sources */,
 				68AF8F682069690300D552E3 /* FontSetting.swift in Sources */,
 				68AF8F632069690300D552E3 /* TrainingExampleList.swift in Sources */,
@@ -3839,9 +3949,11 @@
 				68BC288E1F8C35010042810E /* CodableExtensions.swift in Sources */,
 				68AF8F8D2069690300D552E3 /* WordHeadingDetection.swift in Sources */,
 				68BC28951F8C35010042810E /* RestUtilities.swift in Sources */,
+				92AEE194210113A800BF0FCF /* DeleteCredentials.swift in Sources */,
 				68AF8F952069690300D552E3 /* QueryEntitiesContext.swift in Sources */,
 				68AF8F612069690300D552E3 /* MemoryUsage.swift in Sources */,
 				68AF8F502069690300D552E3 /* NluEnrichmentSemanticRoles.swift in Sources */,
+				92AEE18F210113A800BF0FCF /* Credentials.swift in Sources */,
 				68AF8F812069690300D552E3 /* WordStyle.swift in Sources */,
 				68AF8F7B2069690300D552E3 /* Enrichment.swift in Sources */,
 				68AF8F542069690300D552E3 /* CreateEnvironmentRequest.swift in Sources */,
@@ -3861,13 +3973,17 @@
 				68AF8F8E2069690300D552E3 /* NormalizationOperation.swift in Sources */,
 				68AF8F672069690300D552E3 /* Expansions.swift in Sources */,
 				68AF8F922069690300D552E3 /* QueryEntities.swift in Sources */,
+				92AEE191210113A800BF0FCF /* SourceOptionsSiteColl.swift in Sources */,
 				68AF8F6C2069690300D552E3 /* DeleteEnvironmentResponse.swift in Sources */,
 				68AF8F9B2069690300D552E3 /* WordSettings.swift in Sources */,
 				68AF8F7F2069690300D552E3 /* TrainingExample.swift in Sources */,
 				68AF8F9E2069690300D552E3 /* NluEnrichmentCategories.swift in Sources */,
 				68AF8F692069690300D552E3 /* Conversions.swift in Sources */,
+				92AEE18B210113A800BF0FCF /* SourceOptionsFolder.swift in Sources */,
 				68AF8F9C2069690300D552E3 /* DocumentStatus.swift in Sources */,
 				683955092077E613009E1C8A /* Timeslice.swift in Sources */,
+				92AEE18E210113A800BF0FCF /* CredentialsList.swift in Sources */,
+				92AEE195210113A800BF0FCF /* SourceSchedule.swift in Sources */,
 				683955052077E613009E1C8A /* Nested.swift in Sources */,
 				68AF8F892069690300D552E3 /* PdfHeadingDetection.swift in Sources */,
 				68AF8F8B2069690300D552E3 /* Term.swift in Sources */,
@@ -3891,6 +4007,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92AEE15E2101136D00BF0FCF /* Mentions.swift in Sources */,
 				6800FCBF2056D8D50078788A /* MessageRequest.swift in Sources */,
 				6800FCCA2056D8D50078788A /* UpdateEntity.swift in Sources */,
 				6800FCA72056D8D50078788A /* CreateExample.swift in Sources */,
@@ -3906,19 +4023,25 @@
 				6800FCC42056D8D50078788A /* RuntimeIntent.swift in Sources */,
 				6800FCCF2056D8D50078788A /* UpdateWorkspace.swift in Sources */,
 				6800FCA02056D8D50078788A /* CaptureGroup.swift in Sources */,
+				92AEE15F2101136D00BF0FCF /* DialogNodeOutputGeneric.swift in Sources */,
 				6800FCAF2056D8D50078788A /* DialogNodeNextStep.swift in Sources */,
 				6877FA702056D4F100383B25 /* RestRequest.swift in Sources */,
+				92AEE1642101136D00BF0FCF /* DialogNodeOutputModifiers.swift in Sources */,
 				6800FCAE2056D8D50078788A /* DialogNodeCollection.swift in Sources */,
 				6800FCC12056D8D50078788A /* OutputData.swift in Sources */,
 				6800FCB52056D8D50078788A /* ExampleCollection.swift in Sources */,
 				6800FCD42056D8D50078788A /* WorkspaceCollection.swift in Sources */,
 				6800FCAC2056D8D50078788A /* DialogNode.swift in Sources */,
 				6800FCD12056D8D50078788A /* ValueCollection.swift in Sources */,
+				92AEE15D2101136D00BF0FCF /* DialogNodeOutputTextValuesElement.swift in Sources */,
+				92AEE1662101136D00BF0FCF /* DialogRuntimeResponseGeneric.swift in Sources */,
 				6800FCA32056D8D50078788A /* CounterexampleCollection.swift in Sources */,
 				6800FCD22056D8D50078788A /* ValueExport.swift in Sources */,
+				92AEE1622101136D00BF0FCF /* DialogNodeOutputOptionsElementValue.swift in Sources */,
 				6800FCA12056D8D50078788A /* Context.swift in Sources */,
 				6877FA7D2056D4F100383B25 /* JSON.swift in Sources */,
 				6800FCCB2056D8D50078788A /* UpdateExample.swift in Sources */,
+				92AEE15C2101136D00BF0FCF /* DialogNodeOutputOptionsElement.swift in Sources */,
 				6877FA7E2056D4F100383B25 /* MultipartFormData.swift in Sources */,
 				6800FCB42056D8D50078788A /* Example.swift in Sources */,
 				6800FCC32056D8D50078788A /* RuntimeEntity.swift in Sources */,
@@ -3929,6 +4052,7 @@
 				6800FCA92056D8D50078788A /* CreateSynonym.swift in Sources */,
 				6800FCBB2056D8D50078788A /* LogExport.swift in Sources */,
 				6800FCC92056D8D50078788A /* UpdateDialogNode.swift in Sources */,
+				92AEE1652101136D00BF0FCF /* EntityMentionCollection.swift in Sources */,
 				6800FCB62056D8D50078788A /* InputData.swift in Sources */,
 				6800FCA52056D8D50078788A /* CreateDialogNode.swift in Sources */,
 				6800FCB32056D8D50078788A /* EntityExport.swift in Sources */,
@@ -3939,10 +4063,12 @@
 				6836B8FF2091D237006DF944 /* Authentication.swift in Sources */,
 				6800FC9F2056D8CB0078788A /* Assistant.swift in Sources */,
 				6800FCD52056D8D50078788A /* WorkspaceExport.swift in Sources */,
+				92AEE1672101136D00BF0FCF /* WorkspaceSystemSettingsTooling.swift in Sources */,
 				6877FA8A2056D4F100383B25 /* RestUtilities.swift in Sources */,
 				6800FCC72056D8D50078788A /* SystemResponse.swift in Sources */,
 				6800FCB22056D8D50078788A /* EntityCollection.swift in Sources */,
 				6800FCA22056D8D50078788A /* Counterexample.swift in Sources */,
+				92AEE1612101136D00BF0FCF /* EntityMention.swift in Sources */,
 				6800FCBE2056D8D50078788A /* MessageInput.swift in Sources */,
 				6800FCB12056D8D50078788A /* Entity.swift in Sources */,
 				6800FCBA2056D8D50078788A /* LogCollection.swift in Sources */,
@@ -3952,8 +4078,10 @@
 				6800FCCE2056D8D50078788A /* UpdateValue.swift in Sources */,
 				6800FCC02056D8D50078788A /* MessageResponse.swift in Sources */,
 				6800FCD02056D8D50078788A /* Value.swift in Sources */,
+				92AEE1602101136D00BF0FCF /* WorkspaceSystemSettings.swift in Sources */,
 				6800FCCC2056D8D50078788A /* UpdateIntent.swift in Sources */,
 				6800FCA82056D8D50078788A /* CreateIntent.swift in Sources */,
+				92AEE1632101136D00BF0FCF /* DialogNodeOutput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4243,11 +4371,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92AEE1772101139B00BF0FCF /* EntityMentionCollection.swift in Sources */,
 				6823CEDD1F8EA0F700A388EC /* MessageRequest.swift in Sources */,
 				6823CEF01F8EA0F700A388EC /* ValueExport.swift in Sources */,
 				6823CED51F8EA0F700A388EC /* Intent.swift in Sources */,
 				6823CEC91F8EA0F700A388EC /* CreateValue.swift in Sources */,
 				6823CEE41F8EA0F700A388EC /* SynonymCollection.swift in Sources */,
+				92AEE1742101139B00BF0FCF /* EntityMention.swift in Sources */,
 				6823CEED1F8EA0F700A388EC /* UpdateWorkspace.swift in Sources */,
 				6823CEEB1F8EA0F700A388EC /* UpdateSynonym.swift in Sources */,
 				6823CEE01F8EA0F700A388EC /* Pagination.swift in Sources */,
@@ -4263,8 +4393,12 @@
 				6823CED81F8EA0F700A388EC /* LogCollection.swift in Sources */,
 				68BC28821F8C35000042810E /* RestError.swift in Sources */,
 				6823CEDC1F8EA0F700A388EC /* MessageInput.swift in Sources */,
+				92AEE1792101139B00BF0FCF /* DialogNodeOutputModifiers.swift in Sources */,
+				92AEE1752101139B00BF0FCF /* WorkspaceSystemSettingsTooling.swift in Sources */,
+				92AEE17B2101139B00BF0FCF /* DialogNodeOutputOptionsElementValue.swift in Sources */,
 				6823CEDF1F8EA0F700A388EC /* OutputData.swift in Sources */,
 				6823CEC21F8EA0F700A388EC /* CounterexampleCollection.swift in Sources */,
+				92AEE17E2101139B00BF0FCF /* DialogRuntimeResponseGeneric.swift in Sources */,
 				6823CED71F8EA0F700A388EC /* IntentExport.swift in Sources */,
 				6823CEEA1F8EA0F700A388EC /* UpdateIntent.swift in Sources */,
 				6823CED21F8EA0F700A388EC /* Example.swift in Sources */,
@@ -4279,6 +4413,7 @@
 				6823CEF31F8EA0F700A388EC /* WorkspaceExport.swift in Sources */,
 				6823CED61F8EA0F700A388EC /* IntentCollection.swift in Sources */,
 				6823CEBF1F8EA0F200A388EC /* Conversation.swift in Sources */,
+				92AEE17A2101139B00BF0FCF /* DialogNodeOutput.swift in Sources */,
 				6823CEC51F8EA0F700A388EC /* CreateEntity.swift in Sources */,
 				6823CEF11F8EA0F700A388EC /* Workspace.swift in Sources */,
 				6823CECE1F8EA0F700A388EC /* DialogNodeNextStep.swift in Sources */,
@@ -4289,6 +4424,7 @@
 				6823CEC11F8EA0F700A388EC /* Counterexample.swift in Sources */,
 				6823CEE31F8EA0F700A388EC /* Synonym.swift in Sources */,
 				6836B9002091D238006DF944 /* Authentication.swift in Sources */,
+				92AEE17C2101139B00BF0FCF /* DialogNodeOutputOptionsElement.swift in Sources */,
 				6823CEE11F8EA0F700A388EC /* RuntimeEntity.swift in Sources */,
 				68BC287E1F8C35000042810E /* CodableExtensions.swift in Sources */,
 				6823CECD1F8EA0F700A388EC /* DialogNodeCollection.swift in Sources */,
@@ -4296,13 +4432,17 @@
 				6823CED31F8EA0F700A388EC /* ExampleCollection.swift in Sources */,
 				6823CEDA1F8EA0F700A388EC /* LogMessage.swift in Sources */,
 				68C974AC200D52F6002DCFA3 /* CaptureGroup.swift in Sources */,
+				92AEE17D2101139B00BF0FCF /* DialogNodeOutputTextValuesElement.swift in Sources */,
 				6823CEC61F8EA0F700A388EC /* CreateExample.swift in Sources */,
 				68BC28851F8C35000042810E /* RestUtilities.swift in Sources */,
+				92AEE17F2101139B00BF0FCF /* WorkspaceSystemSettings.swift in Sources */,
+				92AEE1782101139B00BF0FCF /* Mentions.swift in Sources */,
 				6823CEE91F8EA0F700A388EC /* UpdateExample.swift in Sources */,
 				6823CEEE1F8EA0F700A388EC /* Value.swift in Sources */,
 				CA35CD4E20F010E900FACB2B /* WatsonResponse.swift in Sources */,
 				6823CEF21F8EA0F700A388EC /* WorkspaceCollection.swift in Sources */,
 				6823CEE71F8EA0F700A388EC /* UpdateDialogNode.swift in Sources */,
+				92AEE1762101139B00BF0FCF /* DialogNodeOutputGeneric.swift in Sources */,
 				6823CECC1F8EA0F700A388EC /* DialogNodeAction.swift in Sources */,
 				6823CED11F8EA0F700A388EC /* EntityExport.swift in Sources */,
 				6823CED91F8EA0F700A388EC /* LogExport.swift in Sources */,

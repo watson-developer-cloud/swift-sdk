@@ -84,6 +84,21 @@
                 <a href="../Structs/CreateCollectionRequest/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CredentialDetails.html">CredentialDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CredentialDetails/CredentialType.html">– CredentialType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credentials.html">Credentials</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credentials/SourceType.html">– SourceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CredentialsList.html">CredentialsList</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/DeleteCollectionResponse.html">DeleteCollectionResponse</a>
               </li>
               <li class="nav-group-task">
@@ -94,6 +109,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DeleteConfigurationResponse/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteCredentials.html">DeleteCredentials</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteCredentials/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DeleteDocumentResponse.html">DeleteDocumentResponse</a>
@@ -309,6 +330,36 @@
                 <a href="../Structs/SegmentSettings.html">SegmentSettings</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Source.html">Source</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Source/ModelType.html">– ModelType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptions.html">SourceOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsFolder.html">SourceOptionsFolder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsObject.html">SourceOptionsObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsSiteColl.html">SourceOptionsSiteColl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceSchedule.html">SourceSchedule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceSchedule/Frequency.html">– Frequency</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceStatus.html">SourceStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceStatus/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Term.html">Term</a>
               </li>
               <li class="nav-group-task">
@@ -494,9 +545,9 @@ field. For example, if <code>text</code> is a top-level field with no sub-fields
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Name of the enrichment service to call. Current options are <code>natural_language_understanding</code> and <code>elements</code>.
- When using <code>natual_language_understanding</code>, the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Natural Language Understanding
-Options.
- When using <code>elements</code> the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Element Classification options. Additionally, when using
+ When using <code>natual_language_understanding</code>, the <strong>options</strong> object must contain Natural Language Understanding
+options.
+ When using <code>elements</code> the <strong>options</strong> object must contain Element Classification options. Additionally, when using
 the <code>elements</code> enrichment the configuration specified and files ingested must meet all the criteria specified in
 <a href="https://console.bluemix.net/docs/services/discovery/element-classification.html">the documentation</a>
  Previous API versions also supported <code>alchemy_language</code>.</p>
@@ -640,11 +691,11 @@ most 1 level deeper than an existing field. For example, if <code>text</code> is
                                 <div>
                                   <p>Name of the enrichment service to call. Current options are
 <code>natural_language_understanding</code> and <code>elements</code>.
-When using <code>natual_language_understanding</code>, the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Natural Language Understanding
-Options.
-When using <code>elements</code> the <code><a href="../Structs/Enrichment.html#/s:11DiscoveryV110EnrichmentV7optionsAA0C7OptionsVSgvp">options</a></code> object must contain Element Classification options. Additionally, when using
-the <code>elements</code> enrichment the configuration specified and files ingested must meet all the criteria specified in
-<a href="https://console.bluemix.net/docs/services/discovery/element-classification.html">the documentation</a>
+When using <code>natual_language_understanding</code>, the <strong>options</strong> object must contain Natural Language Understanding
+options.
+When using <code>elements</code> the <strong>options</strong> object must contain Element Classification options. Additionally, when
+using the <code>elements</code> enrichment the configuration specified and files ingested must meet all the criteria
+specified in <a href="https://console.bluemix.net/docs/services/discovery/element-classification.html">the documentation</a>
 Previous API versions also supported <code>alchemy_language</code>.</p>
                                 </div>
                               </td>
@@ -714,7 +765,7 @@ treated as warnings and will not cause the document to fail processing.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-06-29)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-07-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-struct Credentials {
+struct WatsonCredentials {
     static let AssistantAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let AssistantUsername = "your-username-here"
     static let AssistantPassword = "your-password-here"

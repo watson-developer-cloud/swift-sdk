@@ -46,12 +46,12 @@ public struct Environment: Decodable {
     public var description: String?
 
     /**
-     Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     Creation date of the environment, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      */
     public var created: String?
 
     /**
-     Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     Date of most recent environment update, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      */
     public var updated: String?
 
@@ -61,7 +61,7 @@ public struct Environment: Decodable {
     public var status: String?
 
     /**
-     If true, then the environment contains read-only collections which are maintained by IBM.
+     If `true`, the environment contains read-only collections that are maintained by IBM.
      */
     public var readOnly: Bool?
 

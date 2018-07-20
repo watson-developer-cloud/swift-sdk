@@ -23,7 +23,7 @@ import ConversationV1
 class ConversationTests: XCTestCase {
 
     private var conversation: Conversation!
-    private let workspaceID = Credentials.ConversationWorkspace
+    private let workspaceID = WatsonCredentials.ConversationWorkspace
 
     // MARK: - Test Configuration
 
@@ -94,9 +94,9 @@ class ConversationTests: XCTestCase {
 
     /** Instantiate Conversation. */
     func instantiateConversation() {
-        let username = Credentials.ConversationUsername
-        let password = Credentials.ConversationPassword
-        let version = "2018-02-16"
+        let username = WatsonCredentials.ConversationUsername
+        let password = WatsonCredentials.ConversationPassword
+        let version = "2018-07-16"
         conversation = Conversation(username: username, password: password, version: version)
         conversation.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         conversation.defaultHeaders["X-Watson-Test"] = "true"

@@ -22,13 +22,19 @@ import Foundation
 public struct QueryResultMetadata: Decodable {
 
     /**
-     The confidence score of the result's analysis. A higher score indicating greater confidence.
+     The raw score of the result. A higher score indicates a greater match to the query parameters.
      */
     public var score: Double?
+
+    /**
+     The confidence score of the result's analysis. A higher score indicates greater confidence.
+     */
+    public var confidence: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case score = "score"
+        case confidence = "confidence"
     }
 
 }

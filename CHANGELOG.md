@@ -1,6 +1,18 @@
 Change Log
 ==========
 
+## Version 0.30.0
+_2018-07-16_
+
+This release regenerates all services with documentation updates and minor generator improvements.
+
+This release includes the following new features and bug fixes:
+
+- Discovery: Add support for credentials and configuration source options
+- Add support for websocket features for services using IAM authentication
+- Handle malformed URLs when constructing URL requests
+- Remove version param from IAM init methods for LTv2, NLC, STT, TTS
+
 ## Version 0.29.0
 _2018-06-29_
 

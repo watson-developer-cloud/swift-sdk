@@ -23,7 +23,7 @@ import AssistantV1
 class AssistantTests: XCTestCase {
 
     private var assistant: Assistant!
-    private let workspaceID = Credentials.AssistantWorkspace
+    private let workspaceID = WatsonCredentials.AssistantWorkspace
 
     // MARK: - Test Configuration
 
@@ -96,15 +96,15 @@ class AssistantTests: XCTestCase {
     /** Instantiate Assistant. */
     func instantiateAssistant() -> Assistant {
         let assistant: Assistant
-        let version = "2018-02-16"
-        if let apiKey = Credentials.AssistantAPIKey {
+        let version = "2018-07-16"
+        if let apiKey = WatsonCredentials.AssistantAPIKey {
             assistant = Assistant(version: version, apiKey: apiKey)
         } else {
-            let username = Credentials.AssistantUsername
-            let password = Credentials.AssistantPassword
+            let username = WatsonCredentials.AssistantUsername
+            let password = WatsonCredentials.AssistantPassword
             assistant = Assistant(username: username, password: password, version: version)
         }
-        if let url = Credentials.AssistantURL {
+        if let url = WatsonCredentials.AssistantURL {
             assistant.serviceURL = url
         }
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"

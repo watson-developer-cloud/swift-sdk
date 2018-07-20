@@ -128,7 +128,7 @@ extension VisualRecognition {
     /**
      Classify an image using a Core ML model from the local filesystem.
 
-     - parameter image: The image to classify.
+     - parameter imageData: The image to classify.
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
        built-in classifier.
      - parameter threshold: The minimum score a class must have to be displayed in the response.
@@ -136,21 +136,12 @@ extension VisualRecognition {
      - parameter success: A function executed with the image classifications.
      */
     public func classifyWithLocalModel(
-        image: UIImage,
+        imageData: Data,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifiedImages) -> Void)
     {
-        // convert UIImage to Data
-        guard let image = UIImagePNGRepresentation(image) else {
-            let description = "Failed to convert image from UIImage to Data."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
-            return
-        }
-
         // ensure a classifier id was provided
         guard !classifierIDs.isEmpty else {
             let description = "Please provide at least one classifierID."
@@ -222,7 +213,7 @@ extension VisualRecognition {
 
                 // execute classification request
                 do {
-                    let requestHandler = VNImageRequestHandler(data: image)
+                    let requestHandler = VNImageRequestHandler(data: imageData)
                     try requestHandler.perform([request])
                 } catch {
                     dispatchGroup.leave()

@@ -2030,7 +2030,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2212,7 +2212,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2389,7 +2389,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {

@@ -128,7 +128,7 @@ extension VisualRecognition {
     /**
      Classify an image using a Core ML model from the local filesystem.
 
-     - parameter imageFile: The image to classify.
+     - parameter imageData: The image to classify.
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
        built-in classifier.
      - parameter threshold: The minimum score a class must have to be displayed in the response.
@@ -136,26 +136,6 @@ extension VisualRecognition {
      - parameter success: A function executed with the image classifications.
      */
     public func classifyWithLocalModel(
-        imageFile: URL,
-        classifierIDs: [String] = ["default"],
-        threshold: Double? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifiedImages) -> Void)
-    {
-        // convert imageFile to Data
-        var imageData: Data
-        do {
-            imageData = try Data(contentsOf: imageFile)
-        } catch {
-            failure?(error)
-            return
-        }
-
-        classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold,
-                               failure: failure, success: success)
-    }
-
-    internal func classifyWithLocalModel(
         imageData: Data,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,

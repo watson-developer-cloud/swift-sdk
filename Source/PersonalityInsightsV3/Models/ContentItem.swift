@@ -141,16 +141,16 @@ public struct ContentItem: Encodable {
      - returns: An initialized `ContentItem`.
     */
     public init(
-        content: String,
-        id: String? = nil,
-        created: Int? = nil,
-        updated: Int? = nil,
-        contenttype: String? = nil,
-        language: String? = nil,
-        parentid: String? = nil,
-        reply: Bool? = nil,
-        forward: Bool? = nil
-    )
+            content: String,
+            id: String? = nil,
+            created: Int? = nil,
+            updated: Int? = nil,
+            contenttype: String? = nil,
+            language: String? = nil,
+            parentid: String? = nil,
+            reply: Bool? = nil,
+            forward: Bool? = nil
+        )
     {
         self.content = content
         self.id = id

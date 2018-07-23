@@ -53,10 +53,10 @@ public struct SemanticRolesOptions: Encodable {
      - returns: An initialized `SemanticRolesOptions`.
     */
     public init(
-        limit: Int? = nil,
-        keywords: Bool? = nil,
-        entities: Bool? = nil
-    )
+            limit: Int? = nil,
+            keywords: Bool? = nil,
+            entities: Bool? = nil
+        )
     {
         self.limit = limit
         self.keywords = keywords

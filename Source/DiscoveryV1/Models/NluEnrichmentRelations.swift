@@ -43,8 +43,8 @@ public struct NluEnrichmentRelations: Codable {
      - returns: An initialized `NluEnrichmentRelations`.
     */
     public init(
-        model: String? = nil
-    )
+            model: String? = nil
+        )
     {
         self.model = model
     }

@@ -37,8 +37,8 @@ internal struct Text: Encodable {
      - returns: An initialized `Text`.
     */
     public init(
-        text: String
-    )
+            text: String
+        )
     {
         self.text = text
     }

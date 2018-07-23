@@ -102,17 +102,17 @@ public struct Parameters: Encodable {
      - returns: An initialized `Parameters`.
     */
     public init(
-        features: Features,
-        text: String? = nil,
-        html: String? = nil,
-        url: String? = nil,
-        clean: Bool? = nil,
-        xpath: String? = nil,
-        fallbackToRaw: Bool? = nil,
-        returnAnalyzedText: Bool? = nil,
-        language: String? = nil,
-        limitTextCharacters: Int? = nil
-    )
+            features: Features,
+            text: String? = nil,
+            html: String? = nil,
+            url: String? = nil,
+            clean: Bool? = nil,
+            xpath: String? = nil,
+            fallbackToRaw: Bool? = nil,
+            returnAnalyzedText: Bool? = nil,
+            language: String? = nil,
+            limitTextCharacters: Int? = nil
+        )
     {
         self.features = features
         self.text = text

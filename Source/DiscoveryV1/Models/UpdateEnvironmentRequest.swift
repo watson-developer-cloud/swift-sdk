@@ -44,9 +44,9 @@ internal struct UpdateEnvironmentRequest: Encodable {
      - returns: An initialized `UpdateEnvironmentRequest`.
     */
     public init(
-        name: String? = nil,
-        description: String? = nil
-    )
+            name: String? = nil,
+            description: String? = nil
+        )
     {
         self.name = name
         self.description = description

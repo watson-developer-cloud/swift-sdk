@@ -110,10 +110,10 @@ public struct NormalizationOperation: Codable {
      - returns: An initialized `NormalizationOperation`.
     */
     public init(
-        operation: String? = nil,
-        sourceField: String? = nil,
-        destinationField: String? = nil
-    )
+            operation: String? = nil,
+            sourceField: String? = nil,
+            destinationField: String? = nil
+        )
     {
         self.operation = operation
         self.sourceField = sourceField

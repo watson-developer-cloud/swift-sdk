@@ -38,9 +38,9 @@ public struct WordHeadingDetection: Codable {
      - returns: An initialized `WordHeadingDetection`.
     */
     public init(
-        fonts: [FontSetting]? = nil,
-        styles: [WordStyle]? = nil
-    )
+            fonts: [FontSetting]? = nil,
+            styles: [WordStyle]? = nil
+        )
     {
         self.fonts = fonts
         self.styles = styles

@@ -44,9 +44,9 @@ public struct QueryFilterType: Encodable {
      - returns: An initialized `QueryFilterType`.
     */
     public init(
-        exclude: [String]? = nil,
-        include: [String]? = nil
-    )
+            exclude: [String]? = nil,
+            include: [String]? = nil
+        )
     {
         self.exclude = exclude
         self.include = include

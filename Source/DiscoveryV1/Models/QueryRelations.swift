@@ -90,13 +90,13 @@ public struct QueryRelations: Encodable {
      - returns: An initialized `QueryRelations`.
     */
     public init(
-        entities: [QueryRelationsEntity]? = nil,
-        context: QueryEntitiesContext? = nil,
-        sort: String? = nil,
-        filter: QueryRelationsFilter? = nil,
-        count: Int? = nil,
-        evidenceCount: Int? = nil
-    )
+            entities: [QueryRelationsEntity]? = nil,
+            context: QueryEntitiesContext? = nil,
+            sort: String? = nil,
+            filter: QueryRelationsFilter? = nil,
+            count: Int? = nil,
+            evidenceCount: Int? = nil
+        )
     {
         self.entities = entities
         self.context = context

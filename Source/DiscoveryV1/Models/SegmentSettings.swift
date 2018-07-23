@@ -47,9 +47,9 @@ public struct SegmentSettings: Codable {
      - returns: An initialized `SegmentSettings`.
     */
     public init(
-        enabled: Bool? = nil,
-        selectorTags: [String]? = nil
-    )
+            enabled: Bool? = nil,
+            selectorTags: [String]? = nil
+        )
     {
         self.enabled = enabled
         self.selectorTags = selectorTags

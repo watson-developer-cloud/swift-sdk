@@ -71,12 +71,12 @@ public struct QueryEntities: Encodable {
      - returns: An initialized `QueryEntities`.
     */
     public init(
-        feature: String? = nil,
-        entity: QueryEntitiesEntity? = nil,
-        context: QueryEntitiesContext? = nil,
-        count: Int? = nil,
-        evidenceCount: Int? = nil
-    )
+            feature: String? = nil,
+            entity: QueryEntitiesEntity? = nil,
+            context: QueryEntitiesContext? = nil,
+            count: Int? = nil,
+            evidenceCount: Int? = nil
+        )
     {
         self.feature = feature
         self.entity = entity

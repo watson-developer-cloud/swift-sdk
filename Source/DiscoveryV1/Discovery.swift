@@ -93,12 +93,6 @@ public class Discovery {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -116,21 +110,19 @@ public class Discovery {
      - parameter description: Description of the environment.
      - parameter size: **Deprecated**: Size of the environment.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createEnvironment(
-        name: String,
-        description: String? = nil,
-        size: Int? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Environment) -> Void)
+    name: String,
+    description: String? = nil,
+    size: Int? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
     {
         // construct body
         let createEnvironmentRequest = CreateEnvironmentRequest(name: name, description: description, size: size)
         guard let body = try? JSONEncoder().encode(createEnvironmentRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -159,13 +151,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Environment>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -175,14 +161,12 @@ public class Discovery {
 
      - parameter name: Show only the environment with the given name.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listEnvironments(
-        name: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListEnvironmentsResponse) -> Void)
+    name: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<ListEnvironmentsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -211,13 +195,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ListEnvironmentsResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -225,14 +203,12 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getEnvironment(
-        environmentID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Environment) -> Void)
+    environmentID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -248,7 +224,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -262,13 +238,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Environment>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -281,21 +251,19 @@ public class Discovery {
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateEnvironment(
-        environmentID: String,
-        name: String? = nil,
-        description: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Environment) -> Void)
+    environmentID: String,
+    name: String? = nil,
+    description: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
     {
         // construct body
         let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description)
         guard let body = try? JSONEncoder().encode(updateEnvironmentRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -314,7 +282,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -329,13 +297,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Environment>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -343,14 +305,12 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteEnvironment(
-        environmentID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteEnvironmentResponse) -> Void)
+    environmentID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<DeleteEnvironmentResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -366,7 +326,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -380,13 +340,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DeleteEnvironmentResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -397,15 +351,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listFields(
-        environmentID: String,
-        collectionIds: [String],
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListCollectionFieldsResponse) -> Void)
+    environmentID: String,
+    collectionIds: [String],
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -422,7 +374,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/fields"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -436,13 +388,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ListCollectionFieldsResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -467,19 +413,17 @@ public class Discovery {
        error. This makes it easier to use newer configuration files with older versions of the API and the service. It
        also makes it possible for the tooling to add additional metadata and information to the configuration.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createConfiguration(
-        environmentID: String,
-        configuration: Configuration,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Configuration) -> Void)
+    environmentID: String,
+    configuration: Configuration,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(configuration) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -498,7 +442,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -513,13 +457,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Configuration>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -530,15 +468,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter name: Find configurations with the given name.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listConfigurations(
-        environmentID: String,
-        name: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListConfigurationsResponse) -> Void)
+    environmentID: String,
+    name: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<ListConfigurationsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -558,7 +494,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -572,13 +508,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ListConfigurationsResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -587,15 +517,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter configurationID: The ID of the configuration.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getConfiguration(
-        environmentID: String,
-        configurationID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Configuration) -> Void)
+    environmentID: String,
+    configurationID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -611,7 +539,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -625,13 +553,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Configuration>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -658,20 +580,18 @@ public class Discovery {
        This makes it easier to use newer configuration files with older versions of the API and the service. It also
        makes it possible for the tooling to add additional metadata and information to the configuration.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateConfiguration(
-        environmentID: String,
-        configurationID: String,
-        configuration: Configuration,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Configuration) -> Void)
+    environmentID: String,
+    configurationID: String,
+    configuration: Configuration,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(configuration) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -690,7 +610,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -705,13 +625,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Configuration>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -725,15 +639,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter configurationID: The ID of the configuration.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteConfiguration(
-        environmentID: String,
-        configurationID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteConfigurationResponse) -> Void)
+    environmentID: String,
+    configurationID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<DeleteConfigurationResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -749,7 +661,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -763,13 +675,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DeleteConfigurationResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -799,26 +705,24 @@ public class Discovery {
        } ```.
      - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func testConfigurationInEnvironment(
-        environmentID: String,
-        configuration: String? = nil,
-        step: String? = nil,
-        configurationID: String? = nil,
-        file: URL? = nil,
-        metadata: String? = nil,
-        fileContentType: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TestDocument) -> Void)
+    environmentID: String,
+    configuration: String? = nil,
+    step: String? = nil,
+    configurationID: String? = nil,
+    file: URL? = nil,
+    metadata: String? = nil,
+    fileContentType: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<TestDocument>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         if let configuration = configuration {
             guard let configurationData = configuration.data(using: .utf8) else {
-                failure?(RestError.serializationError)
+                completionHandler(nil, RestError.serializationError)
                 return
             }
             multipartFormData.append(configurationData, withName: "configuration")
@@ -828,13 +732,13 @@ public class Discovery {
         }
         if let metadata = metadata {
             guard let metadataData = metadata.data(using: .utf8) else {
-                failure?(RestError.serializationError)
+                completionHandler(nil, RestError.serializationError)
                 return
             }
             multipartFormData.append(metadataData, withName: "metadata")
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
 
@@ -861,7 +765,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/preview"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -876,13 +780,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TestDocument>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -891,19 +789,17 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter properties: Input an object that allows you to add a collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createCollection(
-        environmentID: String,
-        properties: CreateCollectionRequest,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Collection) -> Void)
+    environmentID: String,
+    properties: CreateCollectionRequest,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -922,7 +818,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -937,13 +833,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Collection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -954,15 +844,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter name: Find collections with the given name.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listCollections(
-        environmentID: String,
-        name: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListCollectionsResponse) -> Void)
+    environmentID: String,
+    name: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<ListCollectionsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -982,7 +870,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -996,13 +884,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ListCollectionsResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1011,15 +893,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getCollection(
-        environmentID: String,
-        collectionID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Collection) -> Void)
+    environmentID: String,
+    collectionID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1035,7 +915,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1049,13 +929,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Collection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1067,23 +941,21 @@ public class Discovery {
      - parameter description: A description of the collection.
      - parameter configurationID: The ID of the configuration in which the collection is to be updated.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateCollection(
-        environmentID: String,
-        collectionID: String,
-        name: String,
-        description: String? = nil,
-        configurationID: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Collection) -> Void)
+    environmentID: String,
+    collectionID: String,
+    name: String,
+    description: String? = nil,
+    configurationID: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
     {
         // construct body
         let updateCollectionRequest = UpdateCollectionRequest(name: name, description: description, configurationID: configurationID)
         guard let body = try? JSONEncoder().encodeIfPresent(updateCollectionRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -1102,7 +974,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1117,13 +989,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Collection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1132,15 +998,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteCollection(
-        environmentID: String,
-        collectionID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteCollectionResponse) -> Void)
+    environmentID: String,
+    collectionID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<DeleteCollectionResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1156,7 +1020,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1170,13 +1034,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DeleteCollectionResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1187,15 +1045,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listCollectionFields(
-        environmentID: String,
-        collectionID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListCollectionFieldsResponse) -> Void)
+    environmentID: String,
+    collectionID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1211,7 +1067,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/fields"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1225,13 +1081,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ListCollectionFieldsResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1243,15 +1093,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listExpansions(
-        environmentID: String,
-        collectionID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Expansions) -> Void)
+    environmentID: String,
+    collectionID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Expansions>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1267,7 +1115,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1281,13 +1129,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Expansions>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1309,21 +1151,19 @@ public class Discovery {
        When items in the `input_terms` array are present in a query, they are expanded using the items listed in the
        `expanded_terms` array.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createExpansions(
-        environmentID: String,
-        collectionID: String,
-        expansions: [Expansion],
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Expansions) -> Void)
+    environmentID: String,
+    collectionID: String,
+    expansions: [Expansion],
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Expansions>?, Error?) -> Void)
     {
         // construct body
         let createExpansionsRequest = Expansions(expansions: expansions)
         guard let body = try? JSONEncoder().encode(createExpansionsRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -1342,7 +1182,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1357,13 +1197,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Expansions>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1375,15 +1209,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteExpansions(
-        environmentID: String,
-        collectionID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    environmentID: String,
+    collectionID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1399,7 +1231,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1413,13 +1245,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1451,18 +1277,16 @@ public class Discovery {
        } ```.
      - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addDocument(
-        environmentID: String,
-        collectionID: String,
-        file: URL? = nil,
-        metadata: String? = nil,
-        fileContentType: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DocumentAccepted) -> Void)
+    environmentID: String,
+    collectionID: String,
+    file: URL? = nil,
+    metadata: String? = nil,
+    fileContentType: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -1471,13 +1295,13 @@ public class Discovery {
         }
         if let metadata = metadata {
             guard let metadataData = metadata.data(using: .utf8) else {
-                failure?(RestError.serializationError)
+                completionHandler(nil, RestError.serializationError)
                 return
             }
             multipartFormData.append(metadataData, withName: "metadata")
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
 
@@ -1496,7 +1320,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1511,13 +1335,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DocumentAccepted>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1531,16 +1349,14 @@ public class Discovery {
      - parameter collectionID: The ID of the collection.
      - parameter documentID: The ID of the document.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getDocumentStatus(
-        environmentID: String,
-        collectionID: String,
-        documentID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DocumentStatus) -> Void)
+    environmentID: String,
+    collectionID: String,
+    documentID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<DocumentStatus>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1556,7 +1372,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1570,13 +1386,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DocumentStatus>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1598,19 +1408,17 @@ public class Discovery {
        } ```.
      - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateDocument(
-        environmentID: String,
-        collectionID: String,
-        documentID: String,
-        file: URL? = nil,
-        metadata: String? = nil,
-        fileContentType: String? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DocumentAccepted) -> Void)
+    environmentID: String,
+    collectionID: String,
+    documentID: String,
+    file: URL? = nil,
+    metadata: String? = nil,
+    fileContentType: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -1619,13 +1427,13 @@ public class Discovery {
         }
         if let metadata = metadata {
             guard let metadataData = metadata.data(using: .utf8) else {
-                failure?(RestError.serializationError)
+                completionHandler(nil, RestError.serializationError)
                 return
             }
             multipartFormData.append(metadataData, withName: "metadata")
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
 
@@ -1644,7 +1452,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1659,13 +1467,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DocumentAccepted>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1678,16 +1480,14 @@ public class Discovery {
      - parameter collectionID: The ID of the collection.
      - parameter documentID: The ID of the document.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteDocument(
-        environmentID: String,
-        collectionID: String,
-        documentID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteDocumentResponse) -> Void)
+    environmentID: String,
+    collectionID: String,
+    documentID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<DeleteDocumentResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1703,7 +1503,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1717,13 +1517,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DeleteDocumentResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1778,33 +1572,31 @@ public class Discovery {
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func query(
-        environmentID: String,
-        collectionID: String,
-        filter: String? = nil,
-        query: String? = nil,
-        naturalLanguageQuery: String? = nil,
-        passages: Bool? = nil,
-        aggregation: String? = nil,
-        count: Int? = nil,
-        returnFields: [String]? = nil,
-        offset: Int? = nil,
-        sort: [String]? = nil,
-        highlight: Bool? = nil,
-        passagesFields: [String]? = nil,
-        passagesCount: Int? = nil,
-        passagesCharacters: Int? = nil,
-        deduplicate: Bool? = nil,
-        deduplicateField: String? = nil,
-        similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
-        similarFields: [String]? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (QueryResponse) -> Void)
+    environmentID: String,
+    collectionID: String,
+    filter: String? = nil,
+    query: String? = nil,
+    naturalLanguageQuery: String? = nil,
+    passages: Bool? = nil,
+    aggregation: String? = nil,
+    count: Int? = nil,
+    returnFields: [String]? = nil,
+    offset: Int? = nil,
+    sort: [String]? = nil,
+    highlight: Bool? = nil,
+    passagesFields: [String]? = nil,
+    passagesCount: Int? = nil,
+    passagesCharacters: Int? = nil,
+    deduplicate: Bool? = nil,
+    deduplicateField: String? = nil,
+    similar: Bool? = nil,
+    similarDocumentIds: [String]? = nil,
+    similarFields: [String]? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1892,7 +1684,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1906,13 +1698,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<QueryResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1965,32 +1751,30 @@ public class Discovery {
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func queryNotices(
-        environmentID: String,
-        collectionID: String,
-        filter: String? = nil,
-        query: String? = nil,
-        naturalLanguageQuery: String? = nil,
-        passages: Bool? = nil,
-        aggregation: String? = nil,
-        count: Int? = nil,
-        returnFields: [String]? = nil,
-        offset: Int? = nil,
-        sort: [String]? = nil,
-        highlight: Bool? = nil,
-        passagesFields: [String]? = nil,
-        passagesCount: Int? = nil,
-        passagesCharacters: Int? = nil,
-        deduplicateField: String? = nil,
-        similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
-        similarFields: [String]? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (QueryNoticesResponse) -> Void)
+    environmentID: String,
+    collectionID: String,
+    filter: String? = nil,
+    query: String? = nil,
+    naturalLanguageQuery: String? = nil,
+    passages: Bool? = nil,
+    aggregation: String? = nil,
+    count: Int? = nil,
+    returnFields: [String]? = nil,
+    offset: Int? = nil,
+    sort: [String]? = nil,
+    highlight: Bool? = nil,
+    passagesFields: [String]? = nil,
+    passagesCount: Int? = nil,
+    passagesCharacters: Int? = nil,
+    deduplicateField: String? = nil,
+    similar: Bool? = nil,
+    similarDocumentIds: [String]? = nil,
+    similarFields: [String]? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2074,7 +1858,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/notices"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2088,13 +1872,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<QueryNoticesResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2141,29 +1919,27 @@ public class Discovery {
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func federatedQuery(
-        environmentID: String,
-        collectionIds: [String],
-        filter: String? = nil,
-        query: String? = nil,
-        naturalLanguageQuery: String? = nil,
-        aggregation: String? = nil,
-        count: Int? = nil,
-        returnFields: [String]? = nil,
-        offset: Int? = nil,
-        sort: [String]? = nil,
-        highlight: Bool? = nil,
-        deduplicate: Bool? = nil,
-        deduplicateField: String? = nil,
-        similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
-        similarFields: [String]? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (QueryResponse) -> Void)
+    environmentID: String,
+    collectionIds: [String],
+    filter: String? = nil,
+    query: String? = nil,
+    naturalLanguageQuery: String? = nil,
+    aggregation: String? = nil,
+    count: Int? = nil,
+    returnFields: [String]? = nil,
+    offset: Int? = nil,
+    sort: [String]? = nil,
+    highlight: Bool? = nil,
+    deduplicate: Bool? = nil,
+    deduplicateField: String? = nil,
+    similar: Bool? = nil,
+    similarDocumentIds: [String]? = nil,
+    similarFields: [String]? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2236,7 +2012,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/query"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2250,13 +2026,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<QueryResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2302,28 +2072,26 @@ public class Discovery {
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func federatedQueryNotices(
-        environmentID: String,
-        collectionIds: [String],
-        filter: String? = nil,
-        query: String? = nil,
-        naturalLanguageQuery: String? = nil,
-        aggregation: String? = nil,
-        count: Int? = nil,
-        returnFields: [String]? = nil,
-        offset: Int? = nil,
-        sort: [String]? = nil,
-        highlight: Bool? = nil,
-        deduplicateField: String? = nil,
-        similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
-        similarFields: [String]? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (QueryNoticesResponse) -> Void)
+    environmentID: String,
+    collectionIds: [String],
+    filter: String? = nil,
+    query: String? = nil,
+    naturalLanguageQuery: String? = nil,
+    aggregation: String? = nil,
+    count: Int? = nil,
+    returnFields: [String]? = nil,
+    offset: Int? = nil,
+    sort: [String]? = nil,
+    highlight: Bool? = nil,
+    deduplicateField: String? = nil,
+    similar: Bool? = nil,
+    similarDocumentIds: [String]? = nil,
+    similarFields: [String]? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2392,7 +2160,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/notices"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2406,13 +2174,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<QueryNoticesResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2426,20 +2188,18 @@ public class Discovery {
      - parameter entityQuery: An object specifying the entities to query, which functions to perform, and any
        additional constraints.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func queryEntities(
-        environmentID: String,
-        collectionID: String,
-        entityQuery: QueryEntities,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (QueryEntitiesResponse) -> Void)
+    environmentID: String,
+    collectionID: String,
+    entityQuery: QueryEntities,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(entityQuery) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2458,7 +2218,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2473,13 +2233,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<QueryEntitiesResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2493,20 +2247,18 @@ public class Discovery {
      - parameter relationshipQuery: An object that describes the relationships to be queried and any query constraints
        (such as filters).
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func queryRelations(
-        environmentID: String,
-        collectionID: String,
-        relationshipQuery: QueryRelations,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (QueryRelationsResponse) -> Void)
+    environmentID: String,
+    collectionID: String,
+    relationshipQuery: QueryRelations,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(relationshipQuery) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2525,7 +2277,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_relations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2540,13 +2292,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<QueryRelationsResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2557,15 +2303,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listTrainingData(
-        environmentID: String,
-        collectionID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingDataSet) -> Void)
+    environmentID: String,
+    collectionID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<TrainingDataSet>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2581,7 +2325,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2595,13 +2339,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TrainingDataSet>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2615,23 +2353,21 @@ public class Discovery {
      - parameter filter:
      - parameter examples:
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addTrainingData(
-        environmentID: String,
-        collectionID: String,
-        naturalLanguageQuery: String? = nil,
-        filter: String? = nil,
-        examples: [TrainingExample]? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingQuery) -> Void)
+    environmentID: String,
+    collectionID: String,
+    naturalLanguageQuery: String? = nil,
+    filter: String? = nil,
+    examples: [TrainingExample]? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<TrainingQuery>?, Error?) -> Void)
     {
         // construct body
         let addTrainingDataRequest = NewTrainingQuery(naturalLanguageQuery: naturalLanguageQuery, filter: filter, examples: examples)
         guard let body = try? JSONEncoder().encode(addTrainingDataRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2650,7 +2386,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2665,13 +2401,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TrainingQuery>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2682,15 +2412,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteAllTrainingData(
-        environmentID: String,
-        collectionID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    environmentID: String,
+    collectionID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2706,7 +2434,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2720,13 +2448,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2738,16 +2460,14 @@ public class Discovery {
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getTrainingData(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingQuery) -> Void)
+    environmentID: String,
+    collectionID: String,
+    queryID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<TrainingQuery>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2763,7 +2483,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2777,13 +2497,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TrainingQuery>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2795,16 +2509,14 @@ public class Discovery {
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteTrainingData(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    environmentID: String,
+    collectionID: String,
+    queryID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2820,7 +2532,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2834,13 +2546,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2852,16 +2558,14 @@ public class Discovery {
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listTrainingExamples(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingExampleList) -> Void)
+    environmentID: String,
+    collectionID: String,
+    queryID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<TrainingExampleList>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2877,7 +2581,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2891,13 +2595,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TrainingExampleList>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2912,24 +2610,22 @@ public class Discovery {
      - parameter crossReference:
      - parameter relevance:
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createTrainingExample(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        documentID: String? = nil,
-        crossReference: String? = nil,
-        relevance: Int? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingExample) -> Void)
+    environmentID: String,
+    collectionID: String,
+    queryID: String,
+    documentID: String? = nil,
+    crossReference: String? = nil,
+    relevance: Int? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
     {
         // construct body
         let createTrainingExampleRequest = TrainingExample(documentID: documentID, crossReference: crossReference, relevance: relevance)
         guard let body = try? JSONEncoder().encode(createTrainingExampleRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2948,7 +2644,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2963,13 +2659,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TrainingExample>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2982,17 +2672,15 @@ public class Discovery {
      - parameter queryID: The ID of the query used for training.
      - parameter exampleID: The ID of the document as it is indexed.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteTrainingExample(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        exampleID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    environmentID: String,
+    collectionID: String,
+    queryID: String,
+    exampleID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3008,7 +2696,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -3022,13 +2710,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -3043,24 +2725,22 @@ public class Discovery {
      - parameter crossReference:
      - parameter relevance:
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateTrainingExample(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        exampleID: String,
-        crossReference: String? = nil,
-        relevance: Int? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingExample) -> Void)
+    environmentID: String,
+    collectionID: String,
+    queryID: String,
+    exampleID: String,
+    crossReference: String? = nil,
+    relevance: Int? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
     {
         // construct body
         let updateTrainingExampleRequest = TrainingExamplePatch(crossReference: crossReference, relevance: relevance)
         guard let body = try? JSONEncoder().encode(updateTrainingExampleRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -3079,7 +2759,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -3094,13 +2774,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TrainingExample>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3113,17 +2787,15 @@ public class Discovery {
      - parameter queryID: The ID of the query used for training.
      - parameter exampleID: The ID of the document as it is indexed.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getTrainingExample(
-        environmentID: String,
-        collectionID: String,
-        queryID: String,
-        exampleID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TrainingExample) -> Void)
+    environmentID: String,
+    collectionID: String,
+    queryID: String,
+    exampleID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3139,7 +2811,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -3153,13 +2825,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TrainingExample>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3173,14 +2839,12 @@ public class Discovery {
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteUserData(
-        customerID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+    customerID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3206,13 +2870,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
 }

@@ -93,12 +93,12 @@ public struct CreateValue: Encodable {
      - returns: An initialized `CreateValue`.
     */
     public init(
-        value: String,
-        metadata: [String: JSON]? = nil,
-        synonyms: [String]? = nil,
-        patterns: [String]? = nil,
-        valueType: String? = nil
-    )
+            value: String,
+            metadata: [String: JSON]? = nil,
+            synonyms: [String]? = nil,
+            patterns: [String]? = nil,
+            valueType: String? = nil
+        )
     {
         self.value = value
         self.metadata = metadata

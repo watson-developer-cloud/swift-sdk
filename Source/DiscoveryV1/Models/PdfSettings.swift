@@ -36,8 +36,8 @@ public struct PdfSettings: Codable {
      - returns: An initialized `PdfSettings`.
     */
     public init(
-        heading: PdfHeadingDetection? = nil
-    )
+            heading: PdfHeadingDetection? = nil
+        )
     {
         self.heading = heading
     }

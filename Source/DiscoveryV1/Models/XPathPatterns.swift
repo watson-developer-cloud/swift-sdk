@@ -34,8 +34,8 @@ public struct XPathPatterns: Codable {
      - returns: An initialized `XPathPatterns`.
     */
     public init(
-        xpaths: [String]? = nil
-    )
+            xpaths: [String]? = nil
+        )
     {
         self.xpaths = xpaths
     }

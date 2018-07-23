@@ -43,8 +43,8 @@ public struct CreateExample: Encodable {
      - returns: An initialized `CreateExample`.
     */
     public init(
-        text: String
-    )
+            text: String
+        )
     {
         self.text = text
     }

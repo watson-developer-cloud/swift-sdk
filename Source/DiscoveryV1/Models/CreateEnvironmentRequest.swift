@@ -51,10 +51,10 @@ internal struct CreateEnvironmentRequest: Encodable {
      - returns: An initialized `CreateEnvironmentRequest`.
     */
     public init(
-        name: String,
-        description: String? = nil,
-        size: Int? = nil
-    )
+            name: String,
+            description: String? = nil,
+            size: Int? = nil
+        )
     {
         self.name = name
         self.description = description

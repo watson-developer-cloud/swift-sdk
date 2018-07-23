@@ -47,9 +47,9 @@ public struct Utterance: Encodable {
      - returns: An initialized `Utterance`.
     */
     public init(
-        text: String,
-        user: String? = nil
-    )
+            text: String,
+            user: String? = nil
+        )
     {
         self.text = text
         self.user = user

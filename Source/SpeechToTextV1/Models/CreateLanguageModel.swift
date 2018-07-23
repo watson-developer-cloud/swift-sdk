@@ -107,11 +107,11 @@ public struct CreateLanguageModel: Encodable {
      - returns: An initialized `CreateLanguageModel`.
     */
     public init(
-        name: String,
-        baseModelName: String,
-        dialect: String? = nil,
-        description: String? = nil
-    )
+            name: String,
+            baseModelName: String,
+            dialect: String? = nil,
+            description: String? = nil
+        )
     {
         self.name = name
         self.baseModelName = baseModelName

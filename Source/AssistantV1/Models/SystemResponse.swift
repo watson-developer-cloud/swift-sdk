@@ -30,8 +30,8 @@ public struct SystemResponse: Codable {
      - returns: An initialized `SystemResponse`.
     */
     public init(
-        additionalProperties: [String: JSON] = [:]
-    )
+            additionalProperties: [String: JSON] = [:]
+        )
     {
         self.additionalProperties = additionalProperties
     }

@@ -73,12 +73,12 @@ public struct UpdateEntity: Encodable {
      - returns: An initialized `UpdateEntity`.
     */
     public init(
-        entity: String? = nil,
-        description: String? = nil,
-        metadata: [String: JSON]? = nil,
-        fuzzyMatch: Bool? = nil,
-        values: [CreateValue]? = nil
-    )
+            entity: String? = nil,
+            description: String? = nil,
+            metadata: [String: JSON]? = nil,
+            fuzzyMatch: Bool? = nil,
+            values: [CreateValue]? = nil
+        )
     {
         self.entity = entity
         self.description = description

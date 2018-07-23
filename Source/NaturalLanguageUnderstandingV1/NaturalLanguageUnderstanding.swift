@@ -96,12 +96,6 @@ public class NaturalLanguageUnderstanding {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -143,18 +137,16 @@ public class NaturalLanguageUnderstanding {
      - parameter parameters: An object containing request parameters. The `features` object and one of the `text`,
        `html`, or `url` attributes are required.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func analyze(
-        parameters: Parameters,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (AnalysisResults) -> Void)
+    parameters: Parameters,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<AnalysisResults>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(parameters) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -183,13 +175,7 @@ public class NaturalLanguageUnderstanding {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<AnalysisResults>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -199,13 +185,11 @@ public class NaturalLanguageUnderstanding {
      you have created and linked to your Natural Language Understanding service.
 
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listModels(
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListModelsResults) -> Void)
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<ListModelsResults>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -230,13 +214,7 @@ public class NaturalLanguageUnderstanding {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ListModelsResults>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -246,14 +224,12 @@ public class NaturalLanguageUnderstanding {
 
      - parameter modelID: model_id of the model to delete.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteModel(
-        modelID: String,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteModelResults) -> Void)
+    modelID: String,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<InlineResponse200>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -269,7 +245,7 @@ public class NaturalLanguageUnderstanding {
         // construct REST request
         let path = "/v1/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -283,13 +259,7 @@ public class NaturalLanguageUnderstanding {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DeleteModelResults>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

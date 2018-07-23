@@ -16,31 +16,17 @@
 
 import Foundation
 
-/** UpdateCounterexample. */
-internal struct UpdateCounterexample: Encodable {
+/** InlineResponse200. */
+public struct InlineResponse200: {
 
     /**
-     The text of a user input counterexample.
+     model_id of the deleted model.
      */
-    public var text: String?
+    public var deleted: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-    }
-
-    /**
-     Initialize a `UpdateCounterexample` with member variables.
-
-     - parameter text: The text of a user input counterexample.
-
-     - returns: An initialized `UpdateCounterexample`.
-    */
-    public init(
-            text: String? = nil
-        )
-    {
-        self.text = text
+        case deleted = "deleted"
     }
 
 }

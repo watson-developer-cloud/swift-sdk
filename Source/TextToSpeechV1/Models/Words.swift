@@ -45,8 +45,8 @@ public struct Words: Codable {
      - returns: An initialized `Words`.
     */
     public init(
-        words: [Word]
-    )
+            words: [Word]
+        )
     {
         self.words = words
     }

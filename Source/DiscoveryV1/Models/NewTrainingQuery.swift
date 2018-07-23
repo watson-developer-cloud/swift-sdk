@@ -42,10 +42,10 @@ internal struct NewTrainingQuery: Encodable {
      - returns: An initialized `NewTrainingQuery`.
     */
     public init(
-        naturalLanguageQuery: String? = nil,
-        filter: String? = nil,
-        examples: [TrainingExample]? = nil
-    )
+            naturalLanguageQuery: String? = nil,
+            filter: String? = nil,
+            examples: [TrainingExample]? = nil
+        )
     {
         self.naturalLanguageQuery = naturalLanguageQuery
         self.filter = filter

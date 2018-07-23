@@ -48,9 +48,9 @@ public struct EnrichmentOptions: Codable {
      - returns: An initialized `EnrichmentOptions`.
     */
     public init(
-        features: NluEnrichmentFeatures? = nil,
-        model: String? = nil
-    )
+            features: NluEnrichmentFeatures? = nil,
+            model: String? = nil
+        )
     {
         self.features = features
         self.model = model

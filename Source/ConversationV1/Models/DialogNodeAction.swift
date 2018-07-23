@@ -74,12 +74,12 @@ public struct DialogNodeAction: Codable {
      - returns: An initialized `DialogNodeAction`.
     */
     public init(
-        name: String,
-        resultVariable: String,
-        actionType: String? = nil,
-        parameters: [String: JSON]? = nil,
-        credentials: String? = nil
-    )
+            name: String,
+            resultVariable: String,
+            actionType: String? = nil,
+            parameters: [String: JSON]? = nil,
+            credentials: String? = nil
+        )
     {
         self.name = name
         self.resultVariable = resultVariable

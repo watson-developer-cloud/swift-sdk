@@ -41,8 +41,8 @@ public struct InputData: Codable {
      - returns: An initialized `InputData`.
     */
     public init(
-        text: String
-    )
+            text: String
+        )
     {
         self.text = text
     }

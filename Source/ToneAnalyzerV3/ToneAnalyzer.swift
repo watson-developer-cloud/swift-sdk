@@ -96,9 +96,6 @@ public class ToneAnalyzer {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -143,13 +140,13 @@ public class ToneAnalyzer {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func tone(
-        toneContent: ToneContent,
-        sentences: Bool? = nil,
-        tones: [String]? = nil,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, Error?) -> Void)
+    toneContent: ToneContent,
+    sentences: Bool? = nil,
+    tones: [String]? = nil,
+    contentLanguage: String? = nil,
+    acceptLanguage: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, Error?) -> Void)
     {
         // construct body
         guard let body = toneContent.content else {
@@ -226,11 +223,11 @@ public class ToneAnalyzer {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func toneChat(
-        utterances: [Utterance],
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, Error?) -> Void)
+    utterances: [Utterance],
+    contentLanguage: String? = nil,
+    acceptLanguage: String? = nil,
+    headers: [String: String]? = nil,
+    completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, Error?) -> Void)
     {
         // construct body
         let toneChatRequest = ToneChatInput(utterances: utterances)

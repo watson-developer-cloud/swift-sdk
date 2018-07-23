@@ -59,10 +59,10 @@ public struct CreateIntent: Encodable {
      - returns: An initialized `CreateIntent`.
     */
     public init(
-        intent: String,
-        description: String? = nil,
-        examples: [CreateExample]? = nil
-    )
+            intent: String,
+            description: String? = nil,
+            examples: [CreateExample]? = nil
+        )
     {
         self.intent = intent
         self.description = description

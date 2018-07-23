@@ -51,10 +51,10 @@ public struct QueryRelationsEntity: Encodable {
      - returns: An initialized `QueryRelationsEntity`.
     */
     public init(
-        text: String? = nil,
-        type: String? = nil,
-        exact: Bool? = nil
-    )
+            text: String? = nil,
+            type: String? = nil,
+            exact: Bool? = nil
+        )
     {
         self.text = text
         self.type = type

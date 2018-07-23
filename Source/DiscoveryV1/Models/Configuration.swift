@@ -91,15 +91,15 @@ public struct Configuration: Codable {
      - returns: An initialized `Configuration`.
     */
     public init(
-        name: String,
-        configurationID: String? = nil,
-        created: String? = nil,
-        updated: String? = nil,
-        description: String? = nil,
-        conversions: Conversions? = nil,
-        enrichments: [Enrichment]? = nil,
-        normalizations: [NormalizationOperation]? = nil
-    )
+            name: String,
+            configurationID: String? = nil,
+            created: String? = nil,
+            updated: String? = nil,
+            description: String? = nil,
+            conversions: Conversions? = nil,
+            enrichments: [Enrichment]? = nil,
+            normalizations: [NormalizationOperation]? = nil
+        )
     {
         self.name = name
         self.configurationID = configurationID

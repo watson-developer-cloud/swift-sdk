@@ -45,9 +45,9 @@ public struct CaptureGroup: Codable {
      - returns: An initialized `CaptureGroup`.
     */
     public init(
-        group: String,
-        location: [Int]? = nil
-    )
+            group: String,
+            location: [Int]? = nil
+        )
     {
         self.group = group
         self.location = location

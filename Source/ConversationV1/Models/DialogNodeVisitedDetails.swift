@@ -51,10 +51,10 @@ public struct DialogNodeVisitedDetails: Codable {
      - returns: An initialized `DialogNodeVisitedDetails`.
     */
     public init(
-        dialogNode: String? = nil,
-        title: String? = nil,
-        conditions: String? = nil
-    )
+            dialogNode: String? = nil,
+            title: String? = nil,
+            conditions: String? = nil
+        )
     {
         self.dialogNode = dialogNode
         self.title = title

@@ -56,13 +56,13 @@ public struct HtmlSettings: Codable {
      - returns: An initialized `HtmlSettings`.
     */
     public init(
-        excludeTagsCompletely: [String]? = nil,
-        excludeTagsKeepContent: [String]? = nil,
-        keepContent: XPathPatterns? = nil,
-        excludeContent: XPathPatterns? = nil,
-        keepTagAttributes: [String]? = nil,
-        excludeTagAttributes: [String]? = nil
-    )
+            excludeTagsCompletely: [String]? = nil,
+            excludeTagsKeepContent: [String]? = nil,
+            keepContent: XPathPatterns? = nil,
+            excludeContent: XPathPatterns? = nil,
+            keepTagAttributes: [String]? = nil,
+            excludeTagAttributes: [String]? = nil
+        )
     {
         self.excludeTagsCompletely = excludeTagsCompletely
         self.excludeTagsKeepContent = excludeTagsKeepContent

@@ -37,8 +37,8 @@ internal struct UpdateCounterexample: Encodable {
      - returns: An initialized `UpdateCounterexample`.
     */
     public init(
-        text: String? = nil
-    )
+            text: String? = nil
+        )
     {
         self.text = text
     }

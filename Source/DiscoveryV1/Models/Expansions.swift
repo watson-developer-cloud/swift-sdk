@@ -55,8 +55,8 @@ public struct Expansions: Codable {
      - returns: An initialized `Expansions`.
     */
     public init(
-        expansions: [Expansion]
-    )
+            expansions: [Expansion]
+        )
     {
         self.expansions = expansions
     }

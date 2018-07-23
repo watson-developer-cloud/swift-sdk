@@ -73,10 +73,10 @@ public struct CustomWord: Encodable {
      - returns: An initialized `CustomWord`.
     */
     public init(
-        word: String? = nil,
-        soundsLike: [String]? = nil,
-        displayAs: String? = nil
-    )
+            word: String? = nil,
+            soundsLike: [String]? = nil,
+            displayAs: String? = nil
+        )
     {
         self.word = word
         self.soundsLike = soundsLike

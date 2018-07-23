@@ -53,10 +53,10 @@ internal struct UpdateVoiceModel: Encodable {
      - returns: An initialized `UpdateVoiceModel`.
     */
     public init(
-        name: String? = nil,
-        description: String? = nil,
-        words: [Word]? = nil
-    )
+            name: String? = nil,
+            description: String? = nil,
+            words: [Word]? = nil
+        )
     {
         self.name = name
         self.description = description

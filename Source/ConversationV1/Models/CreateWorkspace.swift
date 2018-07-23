@@ -100,16 +100,16 @@ public struct CreateWorkspace: Encodable {
      - returns: An initialized `CreateWorkspace`.
     */
     public init(
-        name: String? = nil,
-        description: String? = nil,
-        language: String? = nil,
-        intents: [CreateIntent]? = nil,
-        entities: [CreateEntity]? = nil,
-        dialogNodes: [CreateDialogNode]? = nil,
-        counterexamples: [CreateCounterexample]? = nil,
-        metadata: [String: JSON]? = nil,
-        learningOptOut: Bool? = nil
-    )
+            name: String? = nil,
+            description: String? = nil,
+            language: String? = nil,
+            intents: [CreateIntent]? = nil,
+            entities: [CreateEntity]? = nil,
+            dialogNodes: [CreateDialogNode]? = nil,
+            counterexamples: [CreateCounterexample]? = nil,
+            metadata: [String: JSON]? = nil,
+            learningOptOut: Bool? = nil
+        )
     {
         self.name = name
         self.description = description

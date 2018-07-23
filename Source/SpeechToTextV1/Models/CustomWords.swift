@@ -39,8 +39,8 @@ internal struct CustomWords: Encodable {
      - returns: An initialized `CustomWords`.
     */
     public init(
-        words: [CustomWord]
-    )
+            words: [CustomWord]
+        )
     {
         self.words = words
     }

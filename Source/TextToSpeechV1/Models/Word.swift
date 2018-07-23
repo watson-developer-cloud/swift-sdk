@@ -88,10 +88,10 @@ public struct Word: Codable {
      - returns: An initialized `Word`.
     */
     public init(
-        word: String,
-        translation: String,
-        partOfSpeech: String? = nil
-    )
+            word: String,
+            translation: String,
+            partOfSpeech: String? = nil
+        )
     {
         self.word = word
         self.translation = translation

@@ -42,10 +42,10 @@ public struct TrainingExample: Codable {
      - returns: An initialized `TrainingExample`.
     */
     public init(
-        documentID: String? = nil,
-        crossReference: String? = nil,
-        relevance: Int? = nil
-    )
+            documentID: String? = nil,
+            crossReference: String? = nil,
+            relevance: Int? = nil
+        )
     {
         self.documentID = documentID
         self.crossReference = crossReference

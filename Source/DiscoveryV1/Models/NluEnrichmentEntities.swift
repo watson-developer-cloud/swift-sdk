@@ -87,14 +87,14 @@ public struct NluEnrichmentEntities: Codable {
      - returns: An initialized `NluEnrichmentEntities`.
     */
     public init(
-        sentiment: Bool? = nil,
-        emotion: Bool? = nil,
-        limit: Int? = nil,
-        mentions: Bool? = nil,
-        mentionTypes: Bool? = nil,
-        sentenceLocation: Bool? = nil,
-        model: String? = nil
-    )
+            sentiment: Bool? = nil,
+            emotion: Bool? = nil,
+            limit: Int? = nil,
+            mentions: Bool? = nil,
+            mentionTypes: Bool? = nil,
+            sentenceLocation: Bool? = nil,
+            model: String? = nil
+        )
     {
         self.sentiment = sentiment
         self.emotion = emotion

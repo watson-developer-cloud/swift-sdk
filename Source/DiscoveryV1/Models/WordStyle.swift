@@ -38,9 +38,9 @@ public struct WordStyle: Codable {
      - returns: An initialized `WordStyle`.
     */
     public init(
-        level: Int? = nil,
-        names: [String]? = nil
-    )
+            level: Int? = nil,
+            names: [String]? = nil
+        )
     {
         self.level = level
         self.names = names

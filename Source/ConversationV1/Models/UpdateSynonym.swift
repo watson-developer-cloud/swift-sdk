@@ -43,8 +43,8 @@ internal struct UpdateSynonym: Encodable {
      - returns: An initialized `UpdateSynonym`.
     */
     public init(
-        synonym: String? = nil
-    )
+            synonym: String? = nil
+        )
     {
         self.synonym = synonym
     }

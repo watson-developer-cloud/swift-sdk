@@ -43,8 +43,8 @@ public struct QueryEntitiesContext: Encodable {
      - returns: An initialized `QueryEntitiesContext`.
     */
     public init(
-        text: String? = nil
-    )
+            text: String? = nil
+        )
     {
         self.text = text
     }

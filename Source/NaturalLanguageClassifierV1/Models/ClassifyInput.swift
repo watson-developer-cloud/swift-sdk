@@ -39,8 +39,8 @@ public struct ClassifyInput: Encodable {
      - returns: An initialized `ClassifyInput`.
     */
     public init(
-        text: String
-    )
+            text: String
+        )
     {
         self.text = text
     }

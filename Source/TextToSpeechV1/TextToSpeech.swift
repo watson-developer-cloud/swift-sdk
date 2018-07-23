@@ -115,6 +115,12 @@ public class TextToSpeech {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
+            if case let .some(.string(description)) = json["code_description"] {
+                userInfo[NSLocalizedFailureReasonErrorKey] = description
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -242,7 +248,7 @@ public class TextToSpeech {
         voice: String? = nil,
         customizationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<URL>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, Error?) -> Void)
     {
         // construct body
         let synthesizeRequest = Text(text: text)
@@ -285,7 +291,41 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.responseObject(completionHandler: completionHandler)
+        request.responseObject { (response: WatsonResponse<Data>?, error: Error?) in
+            var newResponse = response
+            guard let data = response?.result else {
+                completionHandler(nil, error)
+                return
+            }
+            if accept?.lowercased().contains("audio/wav") == true {
+                // repair the WAV header
+                var wav = data
+                guard WAVRepair.isWAVFile(data: wav) else {
+                    let failureReason = "Returned audio is in an unexpected format."
+                    let userInfo = [NSLocalizedDescriptionKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    completionHandler(nil, error)
+                    return
+                }
+                WAVRepair.repairWAVHeader(data: &wav)
+                newResponse?.result = wav
+                completionHandler(newResponse, nil)
+            } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
+                do {
+                    let decodedAudio = try TextToSpeechDecoder(audioData: data)
+                    newResponse?.result = decodedAudio.pcmDataWithHeaders
+                    completionHandler(newResponse, nil)
+                } catch {
+                    let failureReason = "Returned audio is in an unexpected format."
+                    let userInfo = [NSLocalizedDescriptionKey: failureReason]
+                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    completionHandler(nil, error)
+                    return
+                }
+            } else {
+                completionHandler(response, nil)
+            }
+        }
     }
 
     /**

@@ -1485,8 +1485,8 @@
 		124C2E061D19E2FA00D9F602 /* TextToSpeechV1 */ = {
 			isa = PBXGroup;
 			children = (
-				12F1405A1EB2410400D4047D /* TextToSpeechDecoder.swift */,
 				124C2E151D19E2FA00D9F602 /* TextToSpeech.swift */,
+				12F1405A1EB2410400D4047D /* TextToSpeechDecoder.swift */,
 				682ED52E204F348100B17B06 /* WAVRepair.swift */,
 				124C2E071D19E2FA00D9F602 /* Models */,
 				124C2E131D19E2FA00D9F602 /* Tests */,
@@ -1988,8 +1988,8 @@
 		7A6711971DD0F1790070CA9D /* PersonalityInsightsV3 */ = {
 			isa = PBXGroup;
 			children = (
-				7A6711981DD0F1790070CA9D /* Models */,
 				7A67119C1DD0F1790070CA9D /* PersonalityInsights.swift */,
+				7A6711981DD0F1790070CA9D /* Models */,
 				7A6711A11DD0F1970070CA9D /* Tests */,
 			);
 			name = PersonalityInsightsV3;
@@ -2070,9 +2070,9 @@
 		7AAA9A101CEE3026002C9564 /* SpeechToTextV1 */ = {
 			isa = PBXGroup;
 			children = (
-				7AAA9A111CEE3026002C9564 /* Models */,
 				7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */,
 				68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */,
+				7AAA9A111CEE3026002C9564 /* Models */,
 				7AAA9A201CEE3026002C9564 /* Tests */,
 				685E5D812087E343009BB020 /* WebSockets */,
 			);

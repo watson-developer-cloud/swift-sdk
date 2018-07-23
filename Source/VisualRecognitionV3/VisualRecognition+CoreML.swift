@@ -41,13 +41,11 @@ extension VisualRecognition {
      in order to download the latest model.
 
      - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed after the local model has been updated.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateLocalModel(
         classifierID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: (() -> Void)? = nil)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
     {
         // setup date formatter '2017-12-04T19:44:27.419Z'
         let dateFormatter = DateFormatter()
@@ -55,7 +53,7 @@ extension VisualRecognition {
 
         // load model from disk
         guard let model = try? loadModelFromDisk(classifierID: classifierID) else {
-            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+            downloadClassifier(classifierID: classifierID, completionHandler: completionHandler)
             return
         }
 
@@ -63,22 +61,26 @@ extension VisualRecognition {
         let description = model.modelDescription
         let metadata = description.metadata[MLModelMetadataKey.creatorDefinedKey] as? [String: String] ?? [:]
         guard let updated = metadata["retrained"] ?? metadata["created"], let modelDate = dateFormatter.date(from: updated) else {
-            downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+            downloadClassifier(classifierID: classifierID, completionHandler: completionHandler)
             return
         }
 
         // parse the date on which the classifier was last updated
-        getClassifier(classifierID: classifierID, failure: failure) { classifier in
+        getClassifier(classifierID: classifierID) { response, error in
+            guard let classifier = response?.result else {
+                completionHandler(nil, error)
+                return
+            }
             guard let dateString = classifier.retrained ?? classifier.created, let classifierDate = dateFormatter.date(from: dateString) else {
-                self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+                self.downloadClassifier(classifierID: classifierID, completionHandler: completionHandler)
                 return
             }
 
             // download the latest model if a newer version is available
             if classifierDate > modelDate && classifier.status == "ready" {
-                self.downloadClassifier(classifierID: classifierID, failure: failure, success: success)
+                self.downloadClassifier(classifierID: classifierID, completionHandler: completionHandler)
             } else {
-                success?()
+                completionHandler(nil, nil)
             }
         }
     }
@@ -132,22 +134,20 @@ extension VisualRecognition {
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
        built-in classifier.
      - parameter threshold: The minimum score a class must have to be displayed in the response.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the image classifications.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classifyWithLocalModel(
         image: UIImage,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifiedImages) -> Void)
+        completionHandler: @escaping (ClassifiedImages?, Error?) -> Void)
     {
         // convert UIImage to Data
         guard let image = UIImagePNGRepresentation(image) else {
             let description = "Failed to convert image from UIImage to Data."
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
@@ -156,7 +156,7 @@ extension VisualRecognition {
             let description = "Please provide at least one classifierID."
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
@@ -178,7 +178,7 @@ extension VisualRecognition {
                     let description = "Failed to load model for classifier \(classifierID): \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
+                    completionHandler(nil, error)
                     return
                 }
 
@@ -191,7 +191,7 @@ extension VisualRecognition {
                     let description = "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
+                    completionHandler(nil, error)
                     return
                 }
 
@@ -202,7 +202,7 @@ extension VisualRecognition {
                         let description = "Classifier \(classifierID) failed with error: \(error!)"
                         let userInfo = [NSLocalizedDescriptionKey: description]
                         let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                        failure?(error)
+                        completionHandler(nil, error)
                         return
                     }
                     guard let observations = request.results as? [VNClassificationObservation] else {
@@ -210,7 +210,7 @@ extension VisualRecognition {
                         let description = "Failed to parse results for classifier \(classifierID)"
                         let userInfo = [NSLocalizedDescriptionKey: description]
                         let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                        failure?(error)
+                        completionHandler(nil, error)
                         return
                     }
                     results.append((model, observations))
@@ -229,7 +229,7 @@ extension VisualRecognition {
                     let description = "Failed to process classification request: \(error.localizedDescription)"
                     let userInfo = [NSLocalizedDescriptionKey: description]
                     let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                    failure?(error)
+                    completionHandler(nil, error)
                     return
                 }
             }
@@ -245,10 +245,11 @@ extension VisualRecognition {
                 let description = "Failed to represent results as JSON: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
+                completionHandler(nil, error)
                 return
             }
-            success(classifiedImages)
+
+            completionHandler(classifiedImages, nil)
         }
     }
 
@@ -330,13 +331,11 @@ extension VisualRecognition {
      directory with a filename of `[classifier-id].mlmodelc`.
 
      - parameter classifierID: The classifierID of the model to download.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed after the Core ML model has been downloaded and compiled.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     private func downloadClassifier(
         classifierID: String,
-        failure: ((Error) -> Void)? = nil,
-        success: (() -> Void)? = nil)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -371,7 +370,7 @@ extension VisualRecognition {
             let description = "Failed to create temporary downloads directory: \(error.localizedDescription)"
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
@@ -388,7 +387,7 @@ extension VisualRecognition {
             let description = "Failed to locate application support directory: \(error.localizedDescription)"
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
@@ -401,7 +400,7 @@ extension VisualRecognition {
             defer { try? fileManager.removeItem(at: sourceModelURL) }
 
             guard error == nil else {
-                failure?(error!)
+                completionHandler(nil, error)
                 return
             }
 
@@ -409,7 +408,7 @@ extension VisualRecognition {
                 let description = "Did not receive response."
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
+                completionHandler(nil, error)
                 return
             }
 
@@ -417,7 +416,7 @@ extension VisualRecognition {
                 let description = "Status code was not acceptable: \(statusCode)."
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
-                failure?(error)
+                completionHandler(nil, error)
                 return
             }
 
@@ -429,7 +428,7 @@ extension VisualRecognition {
                 let description = "Could not compile Core ML model from source: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
+                completionHandler(nil, error)
                 return
             }
             defer { try? fileManager.removeItem(at: compiledModelTemporaryURL) }
@@ -445,7 +444,7 @@ extension VisualRecognition {
                 let description = "Failed to move compiled model: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
+                completionHandler(nil, error)
                 return
             }
 
@@ -458,10 +457,10 @@ extension VisualRecognition {
                 let description = "Could not exclude compiled model from backup: \(error.localizedDescription)"
                 let userInfo = [NSLocalizedDescriptionKey: description]
                 let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-                failure?(error)
+                completionHandler(nil, error)
             }
 
-            success?()
+            completionHandler(nil, nil)
         }
     }
 

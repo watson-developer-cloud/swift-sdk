@@ -58,8 +58,7 @@ extension VisualRecognition {
         - English is returned when the requested language is not supported.
         - Classes are not returned when there is no translation for them.
         - Custom classifiers returned with this method return tags in the language of the custom classifier.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+    - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classify(
         image: UIImage,
@@ -67,22 +66,24 @@ extension VisualRecognition {
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifiedImages) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, Error?) -> Void)
     {
         // save image to disk
         let file: URL
         do {
             file = try saveToDisk(image: image)
         } catch {
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
         // delete image after service call
         let deleteFile = { try? FileManager.default.removeItem(at: file) }
-        let failureWithDelete = { (error: Error) in deleteFile(); failure?(error) }
-        let successWithDelete = { (classifiedImages: ClassifiedImages) in deleteFile(); success(classifiedImages) }
+        let completion = {
+            (response: WatsonResponse<ClassifiedImages>?, error: Error?) in
+                deleteFile()
+                completionHandler(response, error)
+        }
 
         self.classify(
             imagesFile: file,
@@ -91,8 +92,7 @@ extension VisualRecognition {
             owners: owners,
             classifierIDs: classifierIDs,
             acceptLanguage: acceptLanguage,
-            failure: failureWithDelete,
-            success: successWithDelete
+            completionHandler: completion
         )
     }
 
@@ -109,29 +109,30 @@ extension VisualRecognition {
      - url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
         pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
         in the `imagesFile` parameter.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func detectFaces(
         image: UIImage,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DetectedFaces) -> Void)
+        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, Error?) -> Void)
     {
         // save image to disk
         let file: URL
         do {
             file = try saveToDisk(image: image)
         } catch {
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
         // delete image after service call
         let deleteFile = { try? FileManager.default.removeItem(at: file) }
-        let failureWithDelete = { (error: Error) in deleteFile(); failure?(error) }
-        let successWithDelete = { (detectedFaces: DetectedFaces) in deleteFile(); success(detectedFaces) }
+        let completion = {
+            (response: WatsonResponse<DetectedFaces>?, error: Error?) in
+            deleteFile()
+            completionHandler(response, error)
+        }
 
-        self.detectFaces(imagesFile: file, url: nil, failure: failureWithDelete, success: successWithDelete)
+        self.detectFaces(imagesFile: file, completionHandler: completion)
     }
 
     /**

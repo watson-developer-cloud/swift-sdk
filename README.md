@@ -1,6 +1,7 @@
 # Watson Developer Cloud Swift SDK
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/swift-sdk)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwatson-developer-cloud%2Fswift-sdk.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwatson-developer-cloud%2Fswift-sdk?ref=badge_shield)
 ![](https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg)](http://watson-developer-cloud.github.io/swift-sdk)
@@ -240,6 +241,9 @@ This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE](https://github.com/watson-developer-cloud/swift-sdk/blob/master/LICENSE).
 
 This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fwatson-developer-cloud%2Fswift-sdk.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fwatson-developer-cloud%2Fswift-sdk?ref=badge_large)
 
 ## Assistant
 

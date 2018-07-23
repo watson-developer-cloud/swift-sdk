@@ -51,10 +51,10 @@ public struct QueryRelationsFilter: Encodable {
      - returns: An initialized `QueryRelationsFilter`.
     */
     public init(
-            relationTypes: QueryFilterType? = nil,
-            entityTypes: QueryFilterType? = nil,
-            documentIds: [String]? = nil
-        )
+        relationTypes: QueryFilterType? = nil,
+        entityTypes: QueryFilterType? = nil,
+        documentIds: [String]? = nil
+    )
     {
         self.relationTypes = relationTypes
         self.entityTypes = entityTypes

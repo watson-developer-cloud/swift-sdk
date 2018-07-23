@@ -54,10 +54,10 @@ public struct NluEnrichmentSemanticRoles: Codable {
      - returns: An initialized `NluEnrichmentSemanticRoles`.
     */
     public init(
-            entities: Bool? = nil,
-            keywords: Bool? = nil,
-            limit: Int? = nil
-        )
+        entities: Bool? = nil,
+        keywords: Bool? = nil,
+        limit: Int? = nil
+    )
     {
         self.entities = entities
         self.keywords = keywords

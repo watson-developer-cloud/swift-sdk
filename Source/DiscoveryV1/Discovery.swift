@@ -113,11 +113,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createEnvironment(
-    name: String,
-    description: String? = nil,
-    size: Int? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
+        name: String,
+        description: String? = nil,
+        size: Int? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
     {
         // construct body
         let createEnvironmentRequest = CreateEnvironmentRequest(name: name, description: description, size: size)
@@ -164,9 +164,9 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listEnvironments(
-    name: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ListEnvironmentsResponse>?, Error?) -> Void)
+        name: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ListEnvironmentsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -206,9 +206,9 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getEnvironment(
-    environmentID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
+        environmentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -254,11 +254,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateEnvironment(
-    environmentID: String,
-    name: String? = nil,
-    description: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
+        environmentID: String,
+        name: String? = nil,
+        description: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
     {
         // construct body
         let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description)
@@ -308,9 +308,9 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteEnvironment(
-    environmentID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DeleteEnvironmentResponse>?, Error?) -> Void)
+        environmentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DeleteEnvironmentResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -354,10 +354,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listFields(
-    environmentID: String,
-    collectionIds: [String],
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionIds: [String],
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -416,10 +416,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createConfiguration(
-    environmentID: String,
-    configuration: Configuration,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
+        environmentID: String,
+        configuration: Configuration,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(configuration) else {
@@ -471,10 +471,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listConfigurations(
-    environmentID: String,
-    name: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ListConfigurationsResponse>?, Error?) -> Void)
+        environmentID: String,
+        name: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ListConfigurationsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -520,10 +520,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getConfiguration(
-    environmentID: String,
-    configurationID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
+        environmentID: String,
+        configurationID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -583,11 +583,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateConfiguration(
-    environmentID: String,
-    configurationID: String,
-    configuration: Configuration,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
+        environmentID: String,
+        configurationID: String,
+        configuration: Configuration,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(configuration) else {
@@ -642,10 +642,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteConfiguration(
-    environmentID: String,
-    configurationID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DeleteConfigurationResponse>?, Error?) -> Void)
+        environmentID: String,
+        configurationID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DeleteConfigurationResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -708,15 +708,15 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func testConfigurationInEnvironment(
-    environmentID: String,
-    configuration: String? = nil,
-    step: String? = nil,
-    configurationID: String? = nil,
-    file: URL? = nil,
-    metadata: String? = nil,
-    fileContentType: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TestDocument>?, Error?) -> Void)
+        environmentID: String,
+        configuration: String? = nil,
+        step: String? = nil,
+        configurationID: String? = nil,
+        file: URL? = nil,
+        metadata: String? = nil,
+        fileContentType: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TestDocument>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -792,10 +792,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createCollection(
-    environmentID: String,
-    properties: CreateCollectionRequest,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
+        environmentID: String,
+        properties: CreateCollectionRequest,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -847,10 +847,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listCollections(
-    environmentID: String,
-    name: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ListCollectionsResponse>?, Error?) -> Void)
+        environmentID: String,
+        name: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ListCollectionsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -896,10 +896,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getCollection(
-    environmentID: String,
-    collectionID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -944,13 +944,13 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateCollection(
-    environmentID: String,
-    collectionID: String,
-    name: String,
-    description: String? = nil,
-    configurationID: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        name: String,
+        description: String? = nil,
+        configurationID: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
     {
         // construct body
         let updateCollectionRequest = UpdateCollectionRequest(name: name, description: description, configurationID: configurationID)
@@ -1001,10 +1001,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteCollection(
-    environmentID: String,
-    collectionID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DeleteCollectionResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DeleteCollectionResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1048,10 +1048,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listCollectionFields(
-    environmentID: String,
-    collectionID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1096,10 +1096,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listExpansions(
-    environmentID: String,
-    collectionID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Expansions>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Expansions>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1154,11 +1154,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createExpansions(
-    environmentID: String,
-    collectionID: String,
-    expansions: [Expansion],
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Expansions>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        expansions: [Expansion],
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Expansions>?, Error?) -> Void)
     {
         // construct body
         let createExpansionsRequest = Expansions(expansions: expansions)
@@ -1212,10 +1212,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteExpansions(
-    environmentID: String,
-    collectionID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1280,13 +1280,13 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addDocument(
-    environmentID: String,
-    collectionID: String,
-    file: URL? = nil,
-    metadata: String? = nil,
-    fileContentType: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        file: URL? = nil,
+        metadata: String? = nil,
+        fileContentType: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -1352,11 +1352,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getDocumentStatus(
-    environmentID: String,
-    collectionID: String,
-    documentID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DocumentStatus>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        documentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentStatus>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1411,14 +1411,14 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateDocument(
-    environmentID: String,
-    collectionID: String,
-    documentID: String,
-    file: URL? = nil,
-    metadata: String? = nil,
-    fileContentType: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        documentID: String,
+        file: URL? = nil,
+        metadata: String? = nil,
+        fileContentType: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -1483,11 +1483,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteDocument(
-    environmentID: String,
-    collectionID: String,
-    documentID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DeleteDocumentResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        documentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DeleteDocumentResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1575,28 +1575,28 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func query(
-    environmentID: String,
-    collectionID: String,
-    filter: String? = nil,
-    query: String? = nil,
-    naturalLanguageQuery: String? = nil,
-    passages: Bool? = nil,
-    aggregation: String? = nil,
-    count: Int? = nil,
-    returnFields: [String]? = nil,
-    offset: Int? = nil,
-    sort: [String]? = nil,
-    highlight: Bool? = nil,
-    passagesFields: [String]? = nil,
-    passagesCount: Int? = nil,
-    passagesCharacters: Int? = nil,
-    deduplicate: Bool? = nil,
-    deduplicateField: String? = nil,
-    similar: Bool? = nil,
-    similarDocumentIds: [String]? = nil,
-    similarFields: [String]? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        passages: Bool? = nil,
+        aggregation: String? = nil,
+        count: Int? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        passagesFields: [String]? = nil,
+        passagesCount: Int? = nil,
+        passagesCharacters: Int? = nil,
+        deduplicate: Bool? = nil,
+        deduplicateField: String? = nil,
+        similar: Bool? = nil,
+        similarDocumentIds: [String]? = nil,
+        similarFields: [String]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1754,27 +1754,27 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func queryNotices(
-    environmentID: String,
-    collectionID: String,
-    filter: String? = nil,
-    query: String? = nil,
-    naturalLanguageQuery: String? = nil,
-    passages: Bool? = nil,
-    aggregation: String? = nil,
-    count: Int? = nil,
-    returnFields: [String]? = nil,
-    offset: Int? = nil,
-    sort: [String]? = nil,
-    highlight: Bool? = nil,
-    passagesFields: [String]? = nil,
-    passagesCount: Int? = nil,
-    passagesCharacters: Int? = nil,
-    deduplicateField: String? = nil,
-    similar: Bool? = nil,
-    similarDocumentIds: [String]? = nil,
-    similarFields: [String]? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        passages: Bool? = nil,
+        aggregation: String? = nil,
+        count: Int? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        passagesFields: [String]? = nil,
+        passagesCount: Int? = nil,
+        passagesCharacters: Int? = nil,
+        deduplicateField: String? = nil,
+        similar: Bool? = nil,
+        similarDocumentIds: [String]? = nil,
+        similarFields: [String]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1922,24 +1922,24 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func federatedQuery(
-    environmentID: String,
-    collectionIds: [String],
-    filter: String? = nil,
-    query: String? = nil,
-    naturalLanguageQuery: String? = nil,
-    aggregation: String? = nil,
-    count: Int? = nil,
-    returnFields: [String]? = nil,
-    offset: Int? = nil,
-    sort: [String]? = nil,
-    highlight: Bool? = nil,
-    deduplicate: Bool? = nil,
-    deduplicateField: String? = nil,
-    similar: Bool? = nil,
-    similarDocumentIds: [String]? = nil,
-    similarFields: [String]? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionIds: [String],
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        aggregation: String? = nil,
+        count: Int? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        deduplicate: Bool? = nil,
+        deduplicateField: String? = nil,
+        similar: Bool? = nil,
+        similarDocumentIds: [String]? = nil,
+        similarFields: [String]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2075,23 +2075,23 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func federatedQueryNotices(
-    environmentID: String,
-    collectionIds: [String],
-    filter: String? = nil,
-    query: String? = nil,
-    naturalLanguageQuery: String? = nil,
-    aggregation: String? = nil,
-    count: Int? = nil,
-    returnFields: [String]? = nil,
-    offset: Int? = nil,
-    sort: [String]? = nil,
-    highlight: Bool? = nil,
-    deduplicateField: String? = nil,
-    similar: Bool? = nil,
-    similarDocumentIds: [String]? = nil,
-    similarFields: [String]? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionIds: [String],
+        filter: String? = nil,
+        query: String? = nil,
+        naturalLanguageQuery: String? = nil,
+        aggregation: String? = nil,
+        count: Int? = nil,
+        returnFields: [String]? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        highlight: Bool? = nil,
+        deduplicateField: String? = nil,
+        similar: Bool? = nil,
+        similarDocumentIds: [String]? = nil,
+        similarFields: [String]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2191,11 +2191,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func queryEntities(
-    environmentID: String,
-    collectionID: String,
-    entityQuery: QueryEntities,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        entityQuery: QueryEntities,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(entityQuery) else {
@@ -2250,11 +2250,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func queryRelations(
-    environmentID: String,
-    collectionID: String,
-    relationshipQuery: QueryRelations,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        relationshipQuery: QueryRelations,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(relationshipQuery) else {
@@ -2306,10 +2306,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listTrainingData(
-    environmentID: String,
-    collectionID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TrainingDataSet>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TrainingDataSet>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2356,13 +2356,13 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addTrainingData(
-    environmentID: String,
-    collectionID: String,
-    naturalLanguageQuery: String? = nil,
-    filter: String? = nil,
-    examples: [TrainingExample]? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TrainingQuery>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        naturalLanguageQuery: String? = nil,
+        filter: String? = nil,
+        examples: [TrainingExample]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, Error?) -> Void)
     {
         // construct body
         let addTrainingDataRequest = NewTrainingQuery(naturalLanguageQuery: naturalLanguageQuery, filter: filter, examples: examples)
@@ -2415,10 +2415,10 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteAllTrainingData(
-    environmentID: String,
-    collectionID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2463,11 +2463,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getTrainingData(
-    environmentID: String,
-    collectionID: String,
-    queryID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TrainingQuery>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2512,11 +2512,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteTrainingData(
-    environmentID: String,
-    collectionID: String,
-    queryID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2561,11 +2561,11 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listTrainingExamples(
-    environmentID: String,
-    collectionID: String,
-    queryID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TrainingExampleList>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TrainingExampleList>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2613,14 +2613,14 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createTrainingExample(
-    environmentID: String,
-    collectionID: String,
-    queryID: String,
-    documentID: String? = nil,
-    crossReference: String? = nil,
-    relevance: Int? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        documentID: String? = nil,
+        crossReference: String? = nil,
+        relevance: Int? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
     {
         // construct body
         let createTrainingExampleRequest = TrainingExample(documentID: documentID, crossReference: crossReference, relevance: relevance)
@@ -2675,12 +2675,12 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteTrainingExample(
-    environmentID: String,
-    collectionID: String,
-    queryID: String,
-    exampleID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        exampleID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2728,14 +2728,14 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateTrainingExample(
-    environmentID: String,
-    collectionID: String,
-    queryID: String,
-    exampleID: String,
-    crossReference: String? = nil,
-    relevance: Int? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        exampleID: String,
+        crossReference: String? = nil,
+        relevance: Int? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
     {
         // construct body
         let updateTrainingExampleRequest = TrainingExamplePatch(crossReference: crossReference, relevance: relevance)
@@ -2790,12 +2790,12 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getTrainingExample(
-    environmentID: String,
-    collectionID: String,
-    queryID: String,
-    exampleID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
+        environmentID: String,
+        collectionID: String,
+        queryID: String,
+        exampleID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2842,9 +2842,9 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteUserData(
-    customerID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        customerID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

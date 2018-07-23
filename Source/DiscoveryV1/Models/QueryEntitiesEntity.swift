@@ -46,9 +46,9 @@ public struct QueryEntitiesEntity: Codable {
      - returns: An initialized `QueryEntitiesEntity`.
     */
     public init(
-            text: String? = nil,
-            type: String? = nil
-        )
+        text: String? = nil,
+        type: String? = nil
+    )
     {
         self.text = text
         self.type = type

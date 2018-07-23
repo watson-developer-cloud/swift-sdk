@@ -53,10 +53,10 @@ public struct KeywordsOptions: Encodable {
      - returns: An initialized `KeywordsOptions`.
     */
     public init(
-            limit: Int? = nil,
-            sentiment: Bool? = nil,
-            emotion: Bool? = nil
-        )
+        limit: Int? = nil,
+        sentiment: Bool? = nil,
+        emotion: Bool? = nil
+    )
     {
         self.limit = limit
         self.sentiment = sentiment

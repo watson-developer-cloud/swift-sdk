@@ -73,12 +73,12 @@ public struct CreateEntity: Encodable {
      - returns: An initialized `CreateEntity`.
     */
     public init(
-            entity: String,
-            description: String? = nil,
-            metadata: [String: JSON]? = nil,
-            values: [CreateValue]? = nil,
-            fuzzyMatch: Bool? = nil
-        )
+        entity: String,
+        description: String? = nil,
+        metadata: [String: JSON]? = nil,
+        values: [CreateValue]? = nil,
+        fuzzyMatch: Bool? = nil
+    )
     {
         self.entity = entity
         self.description = description

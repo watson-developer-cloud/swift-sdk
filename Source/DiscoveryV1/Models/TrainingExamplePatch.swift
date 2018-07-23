@@ -38,9 +38,9 @@ internal struct TrainingExamplePatch: Encodable {
      - returns: An initialized `TrainingExamplePatch`.
     */
     public init(
-            crossReference: String? = nil,
-            relevance: Int? = nil
-        )
+        crossReference: String? = nil,
+        relevance: Int? = nil
+    )
     {
         self.crossReference = crossReference
         self.relevance = relevance

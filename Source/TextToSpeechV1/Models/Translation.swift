@@ -81,9 +81,9 @@ public struct Translation: Codable {
      - returns: An initialized `Translation`.
     */
     public init(
-            translation: String,
-            partOfSpeech: String? = nil
-        )
+        translation: String,
+        partOfSpeech: String? = nil
+    )
     {
         self.translation = translation
         self.partOfSpeech = partOfSpeech

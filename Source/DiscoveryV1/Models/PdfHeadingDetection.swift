@@ -34,8 +34,8 @@ public struct PdfHeadingDetection: Codable {
      - returns: An initialized `PdfHeadingDetection`.
     */
     public init(
-            fonts: [FontSetting]? = nil
-        )
+        fonts: [FontSetting]? = nil
+    )
     {
         self.fonts = fonts
     }

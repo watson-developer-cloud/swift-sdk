@@ -93,12 +93,12 @@ public struct UpdateValue: Encodable {
      - returns: An initialized `UpdateValue`.
     */
     public init(
-            value: String? = nil,
-            metadata: [String: JSON]? = nil,
-            valueType: String? = nil,
-            synonyms: [String]? = nil,
-            patterns: [String]? = nil
-        )
+        value: String? = nil,
+        metadata: [String: JSON]? = nil,
+        valueType: String? = nil,
+        synonyms: [String]? = nil,
+        patterns: [String]? = nil
+    )
     {
         self.value = value
         self.metadata = metadata

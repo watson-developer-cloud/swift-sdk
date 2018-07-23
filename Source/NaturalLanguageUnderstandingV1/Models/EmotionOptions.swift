@@ -46,9 +46,9 @@ public struct EmotionOptions: Encodable {
      - returns: An initialized `EmotionOptions`.
     */
     public init(
-            document: Bool? = nil,
-            targets: [String]? = nil
-        )
+        document: Bool? = nil,
+        targets: [String]? = nil
+    )
     {
         self.document = document
         self.targets = targets

@@ -74,11 +74,11 @@ public struct CreateCollectionRequest: Encodable {
      - returns: An initialized `CreateCollectionRequest`.
     */
     public init(
-            name: String,
-            description: String? = nil,
-            configurationID: String? = nil,
-            language: String? = nil
-        )
+        name: String,
+        description: String? = nil,
+        configurationID: String? = nil,
+        language: String? = nil
+    )
     {
         self.name = name
         self.description = description

@@ -140,9 +140,9 @@ public class NaturalLanguageUnderstanding {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func analyze(
-    parameters: Parameters,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<AnalysisResults>?, Error?) -> Void)
+        parameters: Parameters,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<AnalysisResults>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(parameters) else {
@@ -188,8 +188,8 @@ public class NaturalLanguageUnderstanding {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listModels(
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ListModelsResults>?, Error?) -> Void)
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ListModelsResults>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -227,9 +227,9 @@ public class NaturalLanguageUnderstanding {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteModel(
-    modelID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<InlineResponse200>?, Error?) -> Void)
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<InlineResponse200>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

@@ -39,8 +39,8 @@ public struct ConceptsOptions: Encodable {
      - returns: An initialized `ConceptsOptions`.
     */
     public init(
-            limit: Int? = nil
-        )
+        limit: Int? = nil
+    )
     {
         self.limit = limit
     }

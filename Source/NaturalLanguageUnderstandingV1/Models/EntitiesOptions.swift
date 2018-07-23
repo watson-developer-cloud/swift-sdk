@@ -67,12 +67,12 @@ public struct EntitiesOptions: Encodable {
      - returns: An initialized `EntitiesOptions`.
     */
     public init(
-            limit: Int? = nil,
-            mentions: Bool? = nil,
-            model: String? = nil,
-            sentiment: Bool? = nil,
-            emotion: Bool? = nil
-        )
+        limit: Int? = nil,
+        mentions: Bool? = nil,
+        model: String? = nil,
+        sentiment: Bool? = nil,
+        emotion: Bool? = nil
+    )
     {
         self.limit = limit
         self.mentions = mentions

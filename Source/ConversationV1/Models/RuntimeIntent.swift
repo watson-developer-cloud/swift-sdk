@@ -50,10 +50,10 @@ public struct RuntimeIntent: Codable {
      - returns: An initialized `RuntimeIntent`.
     */
     public init(
-            intent: String,
-            confidence: Double,
-            additionalProperties: [String: JSON] = [:]
-        )
+        intent: String,
+        confidence: Double,
+        additionalProperties: [String: JSON] = [:]
+    )
     {
         self.intent = intent
         self.confidence = confidence

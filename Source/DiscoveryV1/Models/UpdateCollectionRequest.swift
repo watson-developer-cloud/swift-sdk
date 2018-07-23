@@ -51,10 +51,10 @@ internal struct UpdateCollectionRequest: Encodable {
      - returns: An initialized `UpdateCollectionRequest`.
     */
     public init(
-            name: String,
-            description: String? = nil,
-            configurationID: String? = nil
-        )
+        name: String,
+        description: String? = nil,
+        configurationID: String? = nil
+    )
     {
         self.name = name
         self.description = description

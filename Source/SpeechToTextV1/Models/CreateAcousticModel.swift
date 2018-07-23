@@ -89,10 +89,10 @@ internal struct CreateAcousticModel: Encodable {
      - returns: An initialized `CreateAcousticModel`.
     */
     public init(
-            name: String,
-            baseModelName: String,
-            description: String? = nil
-        )
+        name: String,
+        baseModelName: String,
+        description: String? = nil
+    )
     {
         self.name = name
         self.baseModelName = baseModelName

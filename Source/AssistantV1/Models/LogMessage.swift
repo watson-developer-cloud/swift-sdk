@@ -59,10 +59,10 @@ public struct LogMessage: Codable {
      - returns: An initialized `LogMessage`.
     */
     public init(
-            level: String,
-            msg: String,
-            additionalProperties: [String: JSON] = [:]
-        )
+        level: String,
+        msg: String,
+        additionalProperties: [String: JSON] = [:]
+    )
     {
         self.level = level
         self.msg = msg

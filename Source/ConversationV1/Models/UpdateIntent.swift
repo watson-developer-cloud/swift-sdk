@@ -57,10 +57,10 @@ internal struct UpdateIntent: Encodable {
      - returns: An initialized `UpdateIntent`.
     */
     public init(
-            intent: String? = nil,
-            description: String? = nil,
-            examples: [CreateExample]? = nil
-        )
+        intent: String? = nil,
+        description: String? = nil,
+        examples: [CreateExample]? = nil
+    )
     {
         self.intent = intent
         self.description = description

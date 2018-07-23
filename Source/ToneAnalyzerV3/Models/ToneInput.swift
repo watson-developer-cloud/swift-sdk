@@ -37,8 +37,8 @@ public struct ToneInput: Encodable {
      - returns: An initialized `ToneInput`.
     */
     public init(
-            text: String
-        )
+        text: String
+    )
     {
         self.text = text
     }

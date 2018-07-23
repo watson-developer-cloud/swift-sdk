@@ -218,24 +218,24 @@ public struct CreateDialogNode: Encodable {
      - returns: An initialized `CreateDialogNode`.
     */
     public init(
-            dialogNode: String,
-            description: String? = nil,
-            conditions: String? = nil,
-            parent: String? = nil,
-            previousSibling: String? = nil,
-            output: [String: JSON]? = nil,
-            context: [String: JSON]? = nil,
-            metadata: [String: JSON]? = nil,
-            nextStep: DialogNodeNextStep? = nil,
-            actions: [DialogNodeAction]? = nil,
-            title: String? = nil,
-            nodeType: String? = nil,
-            eventName: String? = nil,
-            variable: String? = nil,
-            digressIn: String? = nil,
-            digressOut: String? = nil,
-            digressOutSlots: String? = nil
-        )
+        dialogNode: String,
+        description: String? = nil,
+        conditions: String? = nil,
+        parent: String? = nil,
+        previousSibling: String? = nil,
+        output: [String: JSON]? = nil,
+        context: [String: JSON]? = nil,
+        metadata: [String: JSON]? = nil,
+        nextStep: DialogNodeNextStep? = nil,
+        actions: [DialogNodeAction]? = nil,
+        title: String? = nil,
+        nodeType: String? = nil,
+        eventName: String? = nil,
+        variable: String? = nil,
+        digressIn: String? = nil,
+        digressOut: String? = nil,
+        digressOutSlots: String? = nil
+    )
     {
         self.dialogNode = dialogNode
         self.description = description

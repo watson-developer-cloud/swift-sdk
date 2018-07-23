@@ -112,11 +112,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func message(
-    workspaceID: String,
-    request: MessageRequest? = nil,
-    nodesVisitedDetails: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<MessageResponse>?, Error?) -> Void)
+        workspaceID: String,
+        request: MessageRequest? = nil,
+        nodesVisitedDetails: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<MessageResponse>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encodeIfPresent(request) else {
@@ -178,13 +178,13 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listWorkspaces(
-    pageLimit: Int? = nil,
-    includeCount: Bool? = nil,
-    sort: String? = nil,
-    cursor: String? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<WorkspaceCollection>?, Error?) -> Void)
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<WorkspaceCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -246,9 +246,9 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createWorkspace(
-    properties: CreateWorkspace? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
+        properties: CreateWorkspace? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
@@ -301,11 +301,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getWorkspace(
-    workspaceID: String,
-    export: Bool? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<WorkspaceExport>?, Error?) -> Void)
+        workspaceID: String,
+        export: Bool? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<WorkspaceExport>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -367,11 +367,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateWorkspace(
-    workspaceID: String,
-    properties: UpdateWorkspace? = nil,
-    append: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
+        workspaceID: String,
+        properties: UpdateWorkspace? = nil,
+        append: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
@@ -427,9 +427,9 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteWorkspace(
-    workspaceID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        workspaceID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -484,15 +484,15 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listIntents(
-    workspaceID: String,
-    export: Bool? = nil,
-    pageLimit: Int? = nil,
-    includeCount: Bool? = nil,
-    sort: String? = nil,
-    cursor: String? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<IntentCollection>?, Error?) -> Void)
+        workspaceID: String,
+        export: Bool? = nil,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<IntentCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -567,12 +567,12 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createIntent(
-    workspaceID: String,
-    intent: String,
-    description: String? = nil,
-    examples: [CreateExample]? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Intent>?, Error?) -> Void)
+        workspaceID: String,
+        intent: String,
+        description: String? = nil,
+        examples: [CreateExample]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Intent>?, Error?) -> Void)
     {
         // construct body
         let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
@@ -632,12 +632,12 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getIntent(
-    workspaceID: String,
-    intent: String,
-    export: Bool? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<IntentExport>?, Error?) -> Void)
+        workspaceID: String,
+        intent: String,
+        export: Bool? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<IntentExport>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -697,13 +697,13 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateIntent(
-    workspaceID: String,
-    intent: String,
-    newIntent: String? = nil,
-    newDescription: String? = nil,
-    newExamples: [CreateExample]? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Intent>?, Error?) -> Void)
+        workspaceID: String,
+        intent: String,
+        newIntent: String? = nil,
+        newDescription: String? = nil,
+        newExamples: [CreateExample]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Intent>?, Error?) -> Void)
     {
         // construct body
         let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
@@ -757,10 +757,10 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteIntent(
-    workspaceID: String,
-    intent: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        workspaceID: String,
+        intent: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -812,15 +812,15 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listExamples(
-    workspaceID: String,
-    intent: String,
-    pageLimit: Int? = nil,
-    includeCount: Bool? = nil,
-    sort: String? = nil,
-    cursor: String? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ExampleCollection>?, Error?) -> Void)
+        workspaceID: String,
+        intent: String,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ExampleCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -889,11 +889,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createExample(
-    workspaceID: String,
-    intent: String,
-    text: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
+        workspaceID: String,
+        intent: String,
+        text: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
     {
         // construct body
         let createExampleRequest = CreateExample(text: text)
@@ -950,12 +950,12 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getExample(
-    workspaceID: String,
-    intent: String,
-    text: String,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
+        workspaceID: String,
+        intent: String,
+        text: String,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1009,12 +1009,12 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateExample(
-    workspaceID: String,
-    intent: String,
-    text: String,
-    newText: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
+        workspaceID: String,
+        intent: String,
+        text: String,
+        newText: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
     {
         // construct body
         let updateExampleRequest = UpdateExample(text: newText)
@@ -1069,11 +1069,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteExample(
-    workspaceID: String,
-    intent: String,
-    text: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        workspaceID: String,
+        intent: String,
+        text: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1124,14 +1124,14 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listCounterexamples(
-    workspaceID: String,
-    pageLimit: Int? = nil,
-    includeCount: Bool? = nil,
-    sort: String? = nil,
-    cursor: String? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<CounterexampleCollection>?, Error?) -> Void)
+        workspaceID: String,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<CounterexampleCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1200,10 +1200,10 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createCounterexample(
-    workspaceID: String,
-    text: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
+        workspaceID: String,
+        text: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
     {
         // construct body
         let createCounterexampleRequest = CreateCounterexample(text: text)
@@ -1259,11 +1259,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getCounterexample(
-    workspaceID: String,
-    text: String,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
+        workspaceID: String,
+        text: String,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1313,11 +1313,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateCounterexample(
-    workspaceID: String,
-    text: String,
-    newText: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
+        workspaceID: String,
+        text: String,
+        newText: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
     {
         // construct body
         let updateCounterexampleRequest = UpdateCounterexample(text: newText)
@@ -1371,10 +1371,10 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteCounterexample(
-    workspaceID: String,
-    text: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        workspaceID: String,
+        text: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1429,15 +1429,15 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listEntities(
-    workspaceID: String,
-    export: Bool? = nil,
-    pageLimit: Int? = nil,
-    includeCount: Bool? = nil,
-    sort: String? = nil,
-    cursor: String? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<EntityCollection>?, Error?) -> Void)
+        workspaceID: String,
+        export: Bool? = nil,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<EntityCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1506,10 +1506,10 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createEntity(
-    workspaceID: String,
-    properties: CreateEntity,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
+        workspaceID: String,
+        properties: CreateEntity,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -1568,12 +1568,12 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getEntity(
-    workspaceID: String,
-    entity: String,
-    export: Bool? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<EntityExport>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        export: Bool? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<EntityExport>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1631,11 +1631,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateEntity(
-    workspaceID: String,
-    entity: String,
-    properties: UpdateEntity,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        properties: UpdateEntity,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -1688,10 +1688,10 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteEntity(
-    workspaceID: String,
-    entity: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1746,16 +1746,16 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listValues(
-    workspaceID: String,
-    entity: String,
-    export: Bool? = nil,
-    pageLimit: Int? = nil,
-    includeCount: Bool? = nil,
-    sort: String? = nil,
-    cursor: String? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ValueCollection>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        export: Bool? = nil,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ValueCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1825,11 +1825,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createValue(
-    workspaceID: String,
-    entity: String,
-    properties: CreateValue,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        properties: CreateValue,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -1888,13 +1888,13 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getValue(
-    workspaceID: String,
-    entity: String,
-    value: String,
-    export: Bool? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ValueExport>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        value: String,
+        export: Bool? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ValueExport>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1954,12 +1954,12 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateValue(
-    workspaceID: String,
-    entity: String,
-    value: String,
-    properties: UpdateValue,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        value: String,
+        properties: UpdateValue,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -2013,11 +2013,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteValue(
-    workspaceID: String,
-    entity: String,
-    value: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        value: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2070,16 +2070,16 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listSynonyms(
-    workspaceID: String,
-    entity: String,
-    value: String,
-    pageLimit: Int? = nil,
-    includeCount: Bool? = nil,
-    sort: String? = nil,
-    cursor: String? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<SynonymCollection>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        value: String,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<SynonymCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2149,12 +2149,12 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createSynonym(
-    workspaceID: String,
-    entity: String,
-    value: String,
-    synonym: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        value: String,
+        synonym: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
     {
         // construct body
         let createSynonymRequest = CreateSynonym(synonym: synonym)
@@ -2212,13 +2212,13 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getSynonym(
-    workspaceID: String,
-    entity: String,
-    value: String,
-    synonym: String,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        value: String,
+        synonym: String,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2273,13 +2273,13 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateSynonym(
-    workspaceID: String,
-    entity: String,
-    value: String,
-    synonym: String,
-    newSynonym: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        value: String,
+        synonym: String,
+        newSynonym: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
     {
         // construct body
         let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
@@ -2335,12 +2335,12 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteSynonym(
-    workspaceID: String,
-    entity: String,
-    value: String,
-    synonym: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        workspaceID: String,
+        entity: String,
+        value: String,
+        synonym: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2391,14 +2391,14 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listDialogNodes(
-    workspaceID: String,
-    pageLimit: Int? = nil,
-    includeCount: Bool? = nil,
-    sort: String? = nil,
-    cursor: String? = nil,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DialogNodeCollection>?, Error?) -> Void)
+        workspaceID: String,
+        pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
+        sort: String? = nil,
+        cursor: String? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DialogNodeCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2463,10 +2463,10 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createDialogNode(
-    workspaceID: String,
-    properties: CreateDialogNode,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
+        workspaceID: String,
+        properties: CreateDialogNode,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -2521,11 +2521,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getDialogNode(
-    workspaceID: String,
-    dialogNode: String,
-    includeAudit: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
+        workspaceID: String,
+        dialogNode: String,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2579,11 +2579,11 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateDialogNode(
-    workspaceID: String,
-    dialogNode: String,
-    properties: UpdateDialogNode,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
+        workspaceID: String,
+        dialogNode: String,
+        properties: UpdateDialogNode,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
@@ -2636,10 +2636,10 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteDialogNode(
-    workspaceID: String,
-    dialogNode: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        workspaceID: String,
+        dialogNode: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2691,13 +2691,13 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listLogs(
-    workspaceID: String,
-    sort: String? = nil,
-    filter: String? = nil,
-    pageLimit: Int? = nil,
-    cursor: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<LogCollection>?, Error?) -> Void)
+        workspaceID: String,
+        sort: String? = nil,
+        filter: String? = nil,
+        pageLimit: Int? = nil,
+        cursor: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<LogCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2765,12 +2765,12 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listAllLogs(
-    filter: String,
-    sort: String? = nil,
-    pageLimit: Int? = nil,
-    cursor: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<LogCollection>?, Error?) -> Void)
+        filter: String,
+        sort: String? = nil,
+        pageLimit: Int? = nil,
+        cursor: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<LogCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2825,9 +2825,9 @@ public class Conversation {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteUserData(
-    customerID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        customerID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

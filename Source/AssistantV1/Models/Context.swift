@@ -50,10 +50,10 @@ public struct Context: Codable {
      - returns: An initialized `Context`.
     */
     public init(
-            conversationID: String? = nil,
-            system: SystemResponse? = nil,
-            additionalProperties: [String: JSON] = [:]
-        )
+        conversationID: String? = nil,
+        system: SystemResponse? = nil,
+        additionalProperties: [String: JSON] = [:]
+    )
     {
         self.conversationID = conversationID
         self.system = system

@@ -71,12 +71,12 @@ public struct OutputData: Codable {
      - returns: An initialized `OutputData`.
     */
     public init(
-            logMessages: [LogMessage],
-            text: [String],
-            nodesVisited: [String]? = nil,
-            nodesVisitedDetails: [DialogNodeVisitedDetails]? = nil,
-            additionalProperties: [String: JSON] = [:]
-        )
+        logMessages: [LogMessage],
+        text: [String],
+        nodesVisited: [String]? = nil,
+        nodesVisitedDetails: [DialogNodeVisitedDetails]? = nil,
+        additionalProperties: [String: JSON] = [:]
+    )
     {
         self.logMessages = logMessages
         self.text = text

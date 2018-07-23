@@ -99,16 +99,16 @@ public struct Features: Encodable {
      - returns: An initialized `Features`.
     */
     public init(
-            concepts: ConceptsOptions? = nil,
-            emotion: EmotionOptions? = nil,
-            entities: EntitiesOptions? = nil,
-            keywords: KeywordsOptions? = nil,
-            metadata: MetadataOptions? = nil,
-            relations: RelationsOptions? = nil,
-            semanticRoles: SemanticRolesOptions? = nil,
-            sentiment: SentimentOptions? = nil,
-            categories: CategoriesOptions? = nil
-        )
+        concepts: ConceptsOptions? = nil,
+        emotion: EmotionOptions? = nil,
+        entities: EntitiesOptions? = nil,
+        keywords: KeywordsOptions? = nil,
+        metadata: MetadataOptions? = nil,
+        relations: RelationsOptions? = nil,
+        semanticRoles: SemanticRolesOptions? = nil,
+        sentiment: SentimentOptions? = nil,
+        categories: CategoriesOptions? = nil
+    )
     {
         self.concepts = concepts
         self.emotion = emotion

@@ -18,7 +18,7 @@
 import Foundation
 
 /**
- 
+
  ---
  Language Translator v3 is [available](https://www.ibm.com/watson/developercloud/language-translator/api/v3/). See the
  [migration guide](https://console.bluemix.net/docs/services/language-translator/migrating.html).
@@ -105,9 +105,9 @@ public class LanguageTranslator {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func translate(
-    request: TranslateRequest,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TranslationResult>?, Error?) -> Void)
+        request: TranslateRequest,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TranslationResult>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(request) else {
@@ -148,8 +148,8 @@ public class LanguageTranslator {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listIdentifiableLanguages(
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<IdentifiableLanguages>?, Error?) -> Void)
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<IdentifiableLanguages>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -182,9 +182,9 @@ public class LanguageTranslator {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func identify(
-    text: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<IdentifiedLanguages>?, Error?) -> Void)
+        text: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<IdentifiedLanguages>?, Error?) -> Void)
     {
         // construct body
         // convert body parameter to NSData with UTF-8 encoding
@@ -233,11 +233,11 @@ public class LanguageTranslator {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listModels(
-    source: String? = nil,
-    target: String? = nil,
-    defaultModels: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TranslationModels>?, Error?) -> Void)
+        source: String? = nil,
+        target: String? = nil,
+        defaultModels: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TranslationModels>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -299,13 +299,13 @@ public class LanguageTranslator {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createModel(
-    baseModelID: String,
-    name: String? = nil,
-    forcedGlossary: URL? = nil,
-    parallelCorpus: URL? = nil,
-    monolingualCorpus: URL? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TranslationModel>?, Error?) -> Void)
+        baseModelID: String,
+        name: String? = nil,
+        forcedGlossary: URL? = nil,
+        parallelCorpus: URL? = nil,
+        monolingualCorpus: URL? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TranslationModel>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -365,9 +365,9 @@ public class LanguageTranslator {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteModel(
-    modelID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DeleteModelResult>?, Error?) -> Void)
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DeleteModelResult>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -405,9 +405,9 @@ public class LanguageTranslator {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getModel(
-    modelID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<TranslationModel>?, Error?) -> Void)
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TranslationModel>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

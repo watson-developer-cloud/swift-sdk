@@ -130,10 +130,10 @@ public struct DialogNodeNextStep: Codable {
      - returns: An initialized `DialogNodeNextStep`.
     */
     public init(
-            behavior: String,
-            dialogNode: String? = nil,
-            selector: String? = nil
-        )
+        behavior: String,
+        dialogNode: String? = nil,
+        selector: String? = nil
+    )
     {
         self.behavior = behavior
         self.dialogNode = dialogNode

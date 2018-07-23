@@ -132,15 +132,15 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classify(
-    imagesFile: URL? = nil,
-    acceptLanguage: String? = nil,
-    url: String? = nil,
-    threshold: Double? = nil,
-    owners: [String]? = nil,
-    classifierIds: [String]? = nil,
-    imagesFileContentType: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, Error?) -> Void)
+        imagesFile: URL? = nil,
+        acceptLanguage: String? = nil,
+        url: String? = nil,
+        threshold: Double? = nil,
+        owners: [String]? = nil,
+        classifierIds: [String]? = nil,
+        imagesFileContentType: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -238,11 +238,11 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func detectFaces(
-    imagesFile: URL? = nil,
-    url: String? = nil,
-    imagesFileContentType: String? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<DetectedFaces>?, Error?) -> Void)
+        imagesFile: URL? = nil,
+        url: String? = nil,
+        imagesFileContentType: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -313,11 +313,11 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createClassifier(
-    name: String,
-    classnamePositiveExamples: URL,
-    negativeExamples: URL? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        name: String,
+        classnamePositiveExamples: URL,
+        negativeExamples: URL? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -372,9 +372,9 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listClassifiers(
-    verbose: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Classifiers>?, Error?) -> Void)
+        verbose: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Classifiers>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -416,9 +416,9 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getClassifier(
-    classifierID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        classifierID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -480,11 +480,11 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateClassifier(
-    classifierID: String,
-    classnamePositiveExamples: URL? = nil,
-    negativeExamples: URL? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        classifierID: String,
+        classnamePositiveExamples: URL? = nil,
+        negativeExamples: URL? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -540,9 +540,9 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteClassifier(
-    classifierID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        classifierID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -586,9 +586,9 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getCoreMlModel(
-    classifierID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<URL>?, Error?) -> Void)
+        classifierID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<URL>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -635,9 +635,9 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteUserData(
-    customerID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        customerID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

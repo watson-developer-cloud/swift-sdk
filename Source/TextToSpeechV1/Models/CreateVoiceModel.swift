@@ -68,10 +68,10 @@ internal struct CreateVoiceModel: Encodable {
      - returns: An initialized `CreateVoiceModel`.
     */
     public init(
-            name: String,
-            language: String? = nil,
-            description: String? = nil
-        )
+        name: String,
+        language: String? = nil,
+        description: String? = nil
+    )
     {
         self.name = name
         self.language = language

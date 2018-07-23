@@ -46,9 +46,9 @@ public struct NluEnrichmentSentiment: Codable {
      - returns: An initialized `NluEnrichmentSentiment`.
     */
     public init(
-            document: Bool? = nil,
-            targets: [String]? = nil
-        )
+        document: Bool? = nil,
+        targets: [String]? = nil
+    )
     {
         self.document = document
         self.targets = targets

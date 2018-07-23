@@ -100,10 +100,10 @@ public class NaturalLanguageClassifier {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classify(
-    classifierID: String,
-    text: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Classification>?, Error?) -> Void)
+        classifierID: String,
+        text: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Classification>?, Error?) -> Void)
     {
         // construct body
         let classifyRequest = ClassifyInput(text: text)
@@ -153,10 +153,10 @@ public class NaturalLanguageClassifier {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classifyCollection(
-    classifierID: String,
-    collection: [ClassifyInput],
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ClassificationCollection>?, Error?) -> Void)
+        classifierID: String,
+        collection: [ClassifyInput],
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ClassificationCollection>?, Error?) -> Void)
     {
         // construct body
         let classifyCollectionRequest = ClassifyCollectionInput(collection: collection)
@@ -210,10 +210,10 @@ public class NaturalLanguageClassifier {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createClassifier(
-    metadata: URL,
-    trainingData: URL,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        metadata: URL,
+        trainingData: URL,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -256,8 +256,8 @@ public class NaturalLanguageClassifier {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listClassifiers(
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<ClassifierList>?, Error?) -> Void)
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ClassifierList>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -290,9 +290,9 @@ public class NaturalLanguageClassifier {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getClassifier(
-    classifierID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        classifierID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -328,9 +328,9 @@ public class NaturalLanguageClassifier {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteClassifier(
-    classifierID: String,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        classifierID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

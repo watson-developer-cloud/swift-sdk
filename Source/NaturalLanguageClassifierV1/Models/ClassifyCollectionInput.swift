@@ -39,8 +39,8 @@ internal struct ClassifyCollectionInput: Encodable {
      - returns: An initialized `ClassifyCollectionInput`.
     */
     public init(
-            collection: [ClassifyInput]
-        )
+        collection: [ClassifyInput]
+    )
     {
         self.collection = collection
     }

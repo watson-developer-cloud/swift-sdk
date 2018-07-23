@@ -79,14 +79,14 @@ public struct NluEnrichmentFeatures: Codable {
      - returns: An initialized `NluEnrichmentFeatures`.
     */
     public init(
-            keywords: NluEnrichmentKeywords? = nil,
-            entities: NluEnrichmentEntities? = nil,
-            sentiment: NluEnrichmentSentiment? = nil,
-            emotion: NluEnrichmentEmotion? = nil,
-            categories: NluEnrichmentCategories? = nil,
-            semanticRoles: NluEnrichmentSemanticRoles? = nil,
-            relations: NluEnrichmentRelations? = nil
-        )
+        keywords: NluEnrichmentKeywords? = nil,
+        entities: NluEnrichmentEntities? = nil,
+        sentiment: NluEnrichmentSentiment? = nil,
+        emotion: NluEnrichmentEmotion? = nil,
+        categories: NluEnrichmentCategories? = nil,
+        semanticRoles: NluEnrichmentSemanticRoles? = nil,
+        relations: NluEnrichmentRelations? = nil
+    )
     {
         self.keywords = keywords
         self.entities = entities

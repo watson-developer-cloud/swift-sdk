@@ -43,8 +43,8 @@ internal struct UpdateExample: Encodable {
      - returns: An initialized `UpdateExample`.
     */
     public init(
-            text: String? = nil
-        )
+        text: String? = nil
+    )
     {
         self.text = text
     }

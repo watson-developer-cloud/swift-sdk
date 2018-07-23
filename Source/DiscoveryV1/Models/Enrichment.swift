@@ -99,14 +99,14 @@ public struct Enrichment: Codable {
      - returns: An initialized `Enrichment`.
     */
     public init(
-            destinationField: String,
-            sourceField: String,
-            enrichmentName: String,
-            description: String? = nil,
-            overwrite: Bool? = nil,
-            ignoreDownstreamErrors: Bool? = nil,
-            options: EnrichmentOptions? = nil
-        )
+        destinationField: String,
+        sourceField: String,
+        enrichmentName: String,
+        description: String? = nil,
+        overwrite: Bool? = nil,
+        ignoreDownstreamErrors: Bool? = nil,
+        options: EnrichmentOptions? = nil
+    )
     {
         self.destinationField = destinationField
         self.sourceField = sourceField

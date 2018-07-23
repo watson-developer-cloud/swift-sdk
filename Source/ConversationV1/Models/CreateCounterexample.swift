@@ -44,8 +44,8 @@ public struct CreateCounterexample: Encodable {
      - returns: An initialized `CreateCounterexample`.
     */
     public init(
-            text: String
-        )
+        text: String
+    )
     {
         self.text = text
     }

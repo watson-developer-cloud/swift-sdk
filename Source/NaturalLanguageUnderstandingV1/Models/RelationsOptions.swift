@@ -39,8 +39,8 @@ public struct RelationsOptions: Encodable {
      - returns: An initialized `RelationsOptions`.
     */
     public init(
-            model: String? = nil
-        )
+        model: String? = nil
+    )
     {
         self.model = model
     }

@@ -69,12 +69,12 @@ public struct Conversions: Codable {
      - returns: An initialized `Conversions`.
     */
     public init(
-            pdf: PdfSettings? = nil,
-            word: WordSettings? = nil,
-            html: HtmlSettings? = nil,
-            segment: SegmentSettings? = nil,
-            jsonNormalizations: [NormalizationOperation]? = nil
-        )
+        pdf: PdfSettings? = nil,
+        word: WordSettings? = nil,
+        html: HtmlSettings? = nil,
+        segment: SegmentSettings? = nil,
+        jsonNormalizations: [NormalizationOperation]? = nil
+    )
     {
         self.pdf = pdf
         self.word = word

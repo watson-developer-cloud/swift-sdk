@@ -153,14 +153,14 @@ public class PersonalityInsights {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func profile(
-    profileContent: ProfileContent,
-    contentLanguage: String? = nil,
-    acceptLanguage: String? = nil,
-    rawScores: Bool? = nil,
-    csvHeaders: Bool? = nil,
-    consumptionPreferences: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<Profile>?, Error?) -> Void)
+        profileContent: ProfileContent,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Profile>?, Error?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
@@ -259,14 +259,14 @@ public class PersonalityInsights {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func profileAsCsv(
-    profileContent: ProfileContent,
-    contentLanguage: String? = nil,
-    acceptLanguage: String? = nil,
-    rawScores: Bool? = nil,
-    csvHeaders: Bool? = nil,
-    consumptionPreferences: Bool? = nil,
-    headers: [String: String]? = nil,
-    completionHandler: @escaping (WatsonResponse<URL>?, Error?) -> Void)
+        profileContent: ProfileContent,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
+        consumptionPreferences: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<URL>?, Error?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {

@@ -80,14 +80,14 @@ public struct RuntimeEntity: Codable {
      - returns: An initialized `RuntimeEntity`.
     */
     public init(
-            entity: String,
-            location: [Int],
-            value: String,
-            confidence: Double? = nil,
-            metadata: [String: JSON]? = nil,
-            groups: [CaptureGroup]? = nil,
-            additionalProperties: [String: JSON] = [:]
-        )
+        entity: String,
+        location: [Int],
+        value: String,
+        confidence: Double? = nil,
+        metadata: [String: JSON]? = nil,
+        groups: [CaptureGroup]? = nil,
+        additionalProperties: [String: JSON] = [:]
+    )
     {
         self.entity = entity
         self.location = location

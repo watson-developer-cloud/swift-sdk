@@ -50,9 +50,9 @@ public struct Expansion: Codable {
      - returns: An initialized `Expansion`.
     */
     public init(
-            expandedTerms: [String],
-            inputTerms: [String]? = nil
-        )
+        expandedTerms: [String],
+        inputTerms: [String]? = nil
+    )
     {
         self.expandedTerms = expandedTerms
         self.inputTerms = inputTerms

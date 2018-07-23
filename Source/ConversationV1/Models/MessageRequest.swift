@@ -83,13 +83,13 @@ public struct MessageRequest: Codable {
      - returns: An initialized `MessageRequest`.
     */
     public init(
-            input: InputData? = nil,
-            alternateIntents: Bool? = nil,
-            context: Context? = nil,
-            entities: [RuntimeEntity]? = nil,
-            intents: [RuntimeIntent]? = nil,
-            output: OutputData? = nil
-        )
+        input: InputData? = nil,
+        alternateIntents: Bool? = nil,
+        context: Context? = nil,
+        entities: [RuntimeEntity]? = nil,
+        intents: [RuntimeIntent]? = nil,
+        output: OutputData? = nil
+    )
     {
         self.input = input
         self.alternateIntents = alternateIntents

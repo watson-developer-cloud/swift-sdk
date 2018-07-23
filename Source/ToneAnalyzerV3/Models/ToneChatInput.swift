@@ -38,8 +38,8 @@ internal struct ToneChatInput: Encodable {
      - returns: An initialized `ToneChatInput`.
     */
     public init(
-            utterances: [Utterance]
-        )
+        utterances: [Utterance]
+    )
     {
         self.utterances = utterances
     }

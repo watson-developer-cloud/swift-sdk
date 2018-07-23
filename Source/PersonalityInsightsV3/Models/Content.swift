@@ -37,8 +37,8 @@ public struct Content: Encodable {
      - returns: An initialized `Content`.
     */
     public init(
-            contentItems: [ContentItem]
-        )
+        contentItems: [ContentItem]
+    )
     {
         self.contentItems = contentItems
     }

@@ -53,10 +53,10 @@ public struct NluEnrichmentKeywords: Codable {
      - returns: An initialized `NluEnrichmentKeywords`.
     */
     public init(
-            sentiment: Bool? = nil,
-            emotion: Bool? = nil,
-            limit: Int? = nil
-        )
+        sentiment: Bool? = nil,
+        emotion: Bool? = nil,
+        limit: Int? = nil
+    )
     {
         self.sentiment = sentiment
         self.emotion = emotion

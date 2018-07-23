@@ -68,11 +68,11 @@ public struct TranslateRequest: Encodable {
      - returns: An initialized `TranslateRequest`.
     */
     public init(
-            text: [String],
-            modelID: String? = nil,
-            source: String? = nil,
-            target: String? = nil
-        )
+        text: [String],
+        modelID: String? = nil,
+        source: String? = nil,
+        target: String? = nil
+    )
     {
         self.text = text
         self.modelID = modelID

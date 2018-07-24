@@ -41,7 +41,7 @@ extension VisualRecognition {
      in order to download the latest model.
 
      - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     - parameter completionHandler: A function executed when the request completes with a successful result or error. If both the response and error are `nil`, then the Core ML model already exists locally.
      */
     public func updateLocalModel(
         classifierID: String,
@@ -331,7 +331,7 @@ extension VisualRecognition {
      directory with a filename of `[classifier-id].mlmodelc`.
 
      - parameter classifierID: The classifierID of the model to download.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     - parameter completionHandler: A function executed when the request completes with a successful result or error. If both the response and error are `nil`, then the Core ML model already exists locally.
      */
     private func downloadClassifier(
         classifierID: String,

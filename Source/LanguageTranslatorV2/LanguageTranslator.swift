@@ -28,6 +28,7 @@ import Foundation
  take news from across the globe and present it in your language, communicate with your customers in their own language,
  and more.
  */
+@available(*, deprecated, message: "Language Translator v3 is now available. The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API.")
 public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
@@ -56,7 +57,7 @@ public class LanguageTranslator {
      - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
      - parameter iamUrl: The URL for the IAM service.
      */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+    public init(apiKey: String, iamUrl: String? = nil) {
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
     }
 
@@ -65,7 +66,7 @@ public class LanguageTranslator {
 
      - parameter accessToken: An access token for the service.
      */
-    public init(version: String, accessToken: String) {
+    public init(accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
     }
 

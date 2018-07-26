@@ -83,7 +83,7 @@ public class TextToSpeech {
      - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
      - parameter iamUrl: The URL for the IAM service.
      */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
+    public init(apiKey: String, iamUrl: String? = nil) {
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
     }
 
@@ -92,7 +92,7 @@ public class TextToSpeech {
 
      - parameter accessToken: An access token for the service.
      */
-    public init(version: String, accessToken: String) {
+    public init(accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
     }
 
@@ -292,9 +292,9 @@ public class TextToSpeech {
 
         // execute REST request
         request.responseObject { (response: WatsonResponse<Data>?, error: Error?) in
-            var newResponse = response
+            var response = response
             guard let data = response?.result else {
-                completionHandler(nil, error)
+                completionHandler(response, error)
                 return
             }
             if accept?.lowercased().contains("audio/wav") == true {
@@ -308,13 +308,13 @@ public class TextToSpeech {
                     return
                 }
                 WAVRepair.repairWAVHeader(data: &wav)
-                newResponse?.result = wav
-                completionHandler(newResponse, nil)
+                response?.result = wav
+                completionHandler(response, nil)
             } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
                 do {
                     let decodedAudio = try TextToSpeechDecoder(audioData: data)
-                    newResponse?.result = decodedAudio.pcmDataWithHeaders
-                    completionHandler(newResponse, nil)
+                    response?.result = decodedAudio.pcmDataWithHeaders
+                    completionHandler(response, nil)
                 } catch {
                     let failureReason = "Returned audio is in an unexpected format."
                     let userInfo = [NSLocalizedDescriptionKey: failureReason]

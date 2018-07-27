@@ -84,8 +84,16 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
         let expectation = self.expectation(description: "Access service using IAM API Key credentials.")
 
-        visualRecognition.classify(url: ginniURL, failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(url: ginniURL) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
@@ -131,8 +139,16 @@ class VisualRecognitionWithIAMTests: XCTestCase {
         // Verify access to the service using the access token
 
         let expectation = self.expectation(description: "Access VR service with access token")
-        visualRecognition.classify(url: obamaURL, failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(url: obamaURL) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
@@ -170,8 +186,16 @@ class VisualRecognitionWithIAMTests: XCTestCase {
         // Verify access to the service using the refreshed access token
 
         let expectation2 = self.expectation(description: "Access VR service with refreshed access token")
-        visualRecognition.classify(url: trumpURL, failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(url: trumpURL) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)

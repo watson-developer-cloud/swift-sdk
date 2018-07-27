@@ -106,18 +106,16 @@ public class LanguageTranslator {
      - parameter request: The translate request containing the text, and either a model ID or source and target
        language pair.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func translate(
         request: TranslateRequest,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslationResult) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationResult>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(request) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -141,13 +139,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TranslationResult>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -157,13 +149,11 @@ public class LanguageTranslator {
      for Spanish) and name of each language.
 
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listIdentifiableLanguages(
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IdentifiableLanguages) -> Void)
+        completionHandler: @escaping (WatsonResponse<IdentifiableLanguages>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -183,13 +173,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<IdentifiableLanguages>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -199,14 +183,12 @@ public class LanguageTranslator {
 
      - parameter text: Input text in UTF-8 format.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func identify(
         text: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IdentifiedLanguages) -> Void)
+        completionHandler: @escaping (WatsonResponse<IdentifiedLanguages>?, Error?) -> Void)
     {
         // construct body
         // convert body parameter to NSData with UTF-8 encoding
@@ -214,7 +196,7 @@ public class LanguageTranslator {
             let message = "text could not be encoded to NSData with NSUTF8StringEncoding."
             let userInfo = [NSLocalizedDescriptionKey: message]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
@@ -238,13 +220,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<IdentifiedLanguages>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -258,16 +234,14 @@ public class LanguageTranslator {
        and non-default) for each language pair. To return only default models, set this to `true`. To return only
        non-default models, set this to `false`.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listModels(
         source: String? = nil,
         target: String? = nil,
         defaultModels: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslationModels) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationModels>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -303,13 +277,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TranslationModels>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -332,8 +300,7 @@ public class LanguageTranslator {
      - parameter monolingualCorpus: A UTF-8 encoded plain text file that is used to customize the target language
        model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createModel(
         baseModelID: String,
@@ -342,8 +309,7 @@ public class LanguageTranslator {
         parallelCorpus: URL? = nil,
         monolingualCorpus: URL? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslationModel) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationModel>?, Error?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -357,7 +323,7 @@ public class LanguageTranslator {
             multipartFormData.append(monolingualCorpus, withName: "monolingual_corpus")
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
 
@@ -390,13 +356,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TranslationModel>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -406,14 +366,12 @@ public class LanguageTranslator {
 
      - parameter modelID: Model ID of the model to delete.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteModel(
         modelID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteModelResult) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteModelResult>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -425,7 +383,7 @@ public class LanguageTranslator {
         // construct REST request
         let path = "/v2/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -438,13 +396,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DeleteModelResult>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -454,14 +406,12 @@ public class LanguageTranslator {
 
      - parameter modelID: Model ID of the model to get.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getModel(
         modelID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TranslationModel) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationModel>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -473,7 +423,7 @@ public class LanguageTranslator {
         // construct REST request
         let path = "/v2/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -486,13 +436,7 @@ public class LanguageTranslator {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TranslationModel>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

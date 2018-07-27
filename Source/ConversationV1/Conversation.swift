@@ -113,20 +113,18 @@ public class Conversation {
      - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that
        were visited during processing of the message.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func message(
         workspaceID: String,
         request: MessageRequest? = nil,
         nodesVisitedDetails: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (MessageResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<MessageResponse>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encodeIfPresent(request) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -149,7 +147,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -164,13 +162,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<MessageResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -187,8 +179,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listWorkspaces(
         pageLimit: Int? = nil,
@@ -197,8 +188,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<WorkspaceCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -243,13 +233,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<WorkspaceCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -263,18 +247,16 @@ public class Conversation {
        The maximum size for this data is 50MB. If you need to import a larger workspace, consider importing the
        workspace without intents and entities and then adding them separately.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createWorkspace(
         properties: CreateWorkspace? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Workspace) -> Void)
+        completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -303,13 +285,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Workspace>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -326,16 +302,14 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getWorkspace(
         workspaceID: String,
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (WorkspaceExport) -> Void)
+        completionHandler: @escaping (WatsonResponse<WorkspaceExport>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -359,7 +333,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -373,13 +347,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<WorkspaceExport>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -400,20 +368,18 @@ public class Conversation {
        If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
        data collide with existing elements, the update request fails.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateWorkspace(
         workspaceID: String,
         properties: UpdateWorkspace? = nil,
         append: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Workspace) -> Void)
+        completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -436,7 +402,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -451,13 +417,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Workspace>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -468,14 +428,12 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteWorkspace(
         workspaceID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -491,7 +449,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -505,13 +463,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -533,8 +485,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listIntents(
         workspaceID: String,
@@ -545,8 +496,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<IntentCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -586,7 +536,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -600,13 +550,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<IntentCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -624,8 +568,7 @@ public class Conversation {
        tab characters, and it must be no longer than 128 characters.
      - parameter examples: An array of user input examples for the intent.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createIntent(
         workspaceID: String,
@@ -633,13 +576,12 @@ public class Conversation {
         description: String? = nil,
         examples: [CreateExample]? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Intent) -> Void)
+        completionHandler: @escaping (WatsonResponse<Intent>?, Error?) -> Void)
     {
         // construct body
         let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
         guard let body = try? JSONEncoder().encode(createIntentRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -658,7 +600,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -673,13 +615,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Intent>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -697,8 +633,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getIntent(
         workspaceID: String,
@@ -706,8 +641,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (IntentExport) -> Void)
+        completionHandler: @escaping (WatsonResponse<IntentExport>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -731,7 +665,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -745,13 +679,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<IntentExport>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -770,8 +698,7 @@ public class Conversation {
      - parameter newDescription: The description of the intent.
      - parameter newExamples: An array of user input examples for the intent.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateIntent(
         workspaceID: String,
@@ -780,13 +707,12 @@ public class Conversation {
         newDescription: String? = nil,
         newExamples: [CreateExample]? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Intent) -> Void)
+        completionHandler: @escaping (WatsonResponse<Intent>?, Error?) -> Void)
     {
         // construct body
         let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
         guard let body = try? JSONEncoder().encode(updateIntentRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -805,7 +731,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -820,13 +746,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Intent>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -838,15 +758,13 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteIntent(
         workspaceID: String,
         intent: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -862,7 +780,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -876,13 +794,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -901,8 +813,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listExamples(
         workspaceID: String,
@@ -913,8 +824,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ExampleCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<ExampleCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -950,7 +860,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -964,13 +874,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ExampleCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -986,21 +890,19 @@ public class Conversation {
        - It cannot consist of only whitespace characters.
        - It must be no longer than 1024 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createExample(
         workspaceID: String,
         intent: String,
         text: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Example) -> Void)
+        completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
     {
         // construct body
         let createExampleRequest = CreateExample(text: text)
         guard let body = try? JSONEncoder().encode(createExampleRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -1019,7 +921,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1034,13 +936,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Example>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1055,8 +951,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getExample(
         workspaceID: String,
@@ -1064,8 +959,7 @@ public class Conversation {
         text: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Example) -> Void)
+        completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1085,7 +979,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1099,13 +993,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Example>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1122,8 +1010,7 @@ public class Conversation {
        - It cannot consist of only whitespace characters.
        - It must be no longer than 1024 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateExample(
         workspaceID: String,
@@ -1131,13 +1018,12 @@ public class Conversation {
         text: String,
         newText: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Example) -> Void)
+        completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
     {
         // construct body
         let updateExampleRequest = UpdateExample(text: newText)
         guard let body = try? JSONEncoder().encode(updateExampleRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -1156,7 +1042,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1171,13 +1057,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Example>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1190,16 +1070,14 @@ public class Conversation {
      - parameter intent: The intent name.
      - parameter text: The text of the user input example.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteExample(
         workspaceID: String,
         intent: String,
         text: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1215,7 +1093,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1229,13 +1107,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1253,8 +1125,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listCounterexamples(
         workspaceID: String,
@@ -1264,8 +1135,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (CounterexampleCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<CounterexampleCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1301,7 +1171,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1315,13 +1185,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<CounterexampleCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1337,20 +1201,18 @@ public class Conversation {
        - It cannot consist of only whitespace characters
        - It must be no longer than 1024 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createCounterexample(
         workspaceID: String,
         text: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Counterexample) -> Void)
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
     {
         // construct body
         let createCounterexampleRequest = CreateCounterexample(text: text)
         guard let body = try? JSONEncoder().encode(createCounterexampleRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -1369,7 +1231,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1384,13 +1246,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Counterexample>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1404,16 +1260,14 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getCounterexample(
         workspaceID: String,
         text: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Counterexample) -> Void)
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1433,7 +1287,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1447,13 +1301,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Counterexample>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1466,21 +1314,19 @@ public class Conversation {
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
      - parameter newText: The text of a user input counterexample.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateCounterexample(
         workspaceID: String,
         text: String,
         newText: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Counterexample) -> Void)
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
     {
         // construct body
         let updateCounterexampleRequest = UpdateCounterexample(text: newText)
         guard let body = try? JSONEncoder().encode(updateCounterexampleRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -1499,7 +1345,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1514,13 +1360,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Counterexample>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1532,15 +1372,13 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteCounterexample(
         workspaceID: String,
         text: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1556,7 +1394,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1570,13 +1408,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1598,8 +1430,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listEntities(
         workspaceID: String,
@@ -1610,8 +1441,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (EntityCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<EntityCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1651,7 +1481,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1665,13 +1495,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<EntityCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1683,19 +1507,17 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter properties: The content of the new entity.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createEntity(
         workspaceID: String,
         properties: CreateEntity,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Entity) -> Void)
+        completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -1714,7 +1536,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1729,13 +1551,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Entity>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1753,8 +1569,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getEntity(
         workspaceID: String,
@@ -1762,8 +1577,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (EntityExport) -> Void)
+        completionHandler: @escaping (WatsonResponse<EntityExport>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1787,7 +1601,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1801,13 +1615,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<EntityExport>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1824,20 +1632,18 @@ public class Conversation {
        retained unless they are also included in the new data.) For example, if you update the values for an entity, the
        previously existing values are discarded and replaced with the new values specified in the update.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateEntity(
         workspaceID: String,
         entity: String,
         properties: UpdateEntity,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Entity) -> Void)
+        completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -1856,7 +1662,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1871,13 +1677,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Entity>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1889,15 +1689,13 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteEntity(
         workspaceID: String,
         entity: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1913,7 +1711,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1927,13 +1725,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1955,8 +1747,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listValues(
         workspaceID: String,
@@ -1968,8 +1759,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ValueCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<ValueCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2009,7 +1799,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2023,13 +1813,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ValueCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2042,20 +1826,18 @@ public class Conversation {
      - parameter entity: The name of the entity.
      - parameter properties: The new entity value.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createValue(
         workspaceID: String,
         entity: String,
         properties: CreateValue,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Value) -> Void)
+        completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2074,7 +1856,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2089,13 +1871,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Value>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2113,8 +1889,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getValue(
         workspaceID: String,
@@ -2123,8 +1898,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ValueExport) -> Void)
+        completionHandler: @escaping (WatsonResponse<ValueExport>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2148,7 +1922,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2162,13 +1936,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ValueExport>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2187,8 +1955,7 @@ public class Conversation {
        For example, if you update the synonyms for an entity value, the previously existing synonyms are discarded and
        replaced with the new synonyms specified in the update.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateValue(
         workspaceID: String,
@@ -2196,12 +1963,11 @@ public class Conversation {
         value: String,
         properties: UpdateValue,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Value) -> Void)
+        completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2220,7 +1986,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2235,13 +2001,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Value>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2254,16 +2014,14 @@ public class Conversation {
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteValue(
         workspaceID: String,
         entity: String,
         value: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2279,7 +2037,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2293,13 +2051,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2319,8 +2071,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listSynonyms(
         workspaceID: String,
@@ -2332,8 +2083,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SynonymCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<SynonymCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2369,7 +2119,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2383,13 +2133,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<SynonymCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2406,8 +2150,7 @@ public class Conversation {
        - It cannot consist of only whitespace characters.
        - It must be no longer than 64 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createSynonym(
         workspaceID: String,
@@ -2415,13 +2158,12 @@ public class Conversation {
         value: String,
         synonym: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Synonym) -> Void)
+        completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
     {
         // construct body
         let createSynonymRequest = CreateSynonym(synonym: synonym)
         guard let body = try? JSONEncoder().encode(createSynonymRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2440,7 +2182,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2455,13 +2197,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Synonym>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2477,8 +2213,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getSynonym(
         workspaceID: String,
@@ -2487,8 +2222,7 @@ public class Conversation {
         synonym: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Synonym) -> Void)
+        completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2508,7 +2242,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2522,13 +2256,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Synonym>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2546,8 +2274,7 @@ public class Conversation {
        - It cannot consist of only whitespace characters.
        - It must be no longer than 64 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateSynonym(
         workspaceID: String,
@@ -2556,13 +2283,12 @@ public class Conversation {
         synonym: String,
         newSynonym: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Synonym) -> Void)
+        completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
     {
         // construct body
         let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
         guard let body = try? JSONEncoder().encode(updateSynonymRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2581,7 +2307,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2596,13 +2322,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Synonym>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2616,8 +2336,7 @@ public class Conversation {
      - parameter value: The text of the entity value.
      - parameter synonym: The text of the synonym.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteSynonym(
         workspaceID: String,
@@ -2625,8 +2344,7 @@ public class Conversation {
         value: String,
         synonym: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2642,7 +2360,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2656,13 +2374,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2680,8 +2392,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listDialogNodes(
         workspaceID: String,
@@ -2691,8 +2402,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DialogNodeCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNodeCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2728,7 +2438,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2742,13 +2452,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DialogNodeCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2760,19 +2464,17 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter properties: A CreateDialogNode object defining the content of the new dialog node.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createDialogNode(
         workspaceID: String,
         properties: CreateDialogNode,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DialogNode) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2791,7 +2493,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2806,13 +2508,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DialogNode>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2826,16 +2522,14 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getDialogNode(
         workspaceID: String,
         dialogNode: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DialogNode) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2855,7 +2549,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2869,13 +2563,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DialogNode>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2892,20 +2580,18 @@ public class Conversation {
        For example, if you update the actions for a dialog node, the previously existing actions are discarded and
        replaced with the new actions specified in the update.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateDialogNode(
         workspaceID: String,
         dialogNode: String,
         properties: UpdateDialogNode,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DialogNode) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct body
         guard let body = try? JSONEncoder().encode(properties) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -2924,7 +2610,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2939,13 +2625,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DialogNode>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2957,15 +2637,13 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteDialogNode(
         workspaceID: String,
         dialogNode: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2981,7 +2659,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -2995,13 +2673,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -3020,8 +2692,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listLogs(
         workspaceID: String,
@@ -3030,8 +2701,7 @@ public class Conversation {
         pageLimit: Int? = nil,
         cursor: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LogCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<LogCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3063,7 +2733,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/logs"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -3077,13 +2747,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<LogCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3102,8 +2766,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listAllLogs(
         filter: String,
@@ -3111,8 +2774,7 @@ public class Conversation {
         pageLimit: Int? = nil,
         cursor: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LogCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<LogCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3150,13 +2812,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<LogCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3170,14 +2826,12 @@ public class Conversation {
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3203,13 +2857,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
 }

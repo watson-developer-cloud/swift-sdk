@@ -250,7 +250,7 @@ extension RestRequest {
         completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // execute the request
-        execute { data, response, error in
+        execute { _, response, error in
 
             // ensure there is no underlying error
             guard let response = response, error == nil else {

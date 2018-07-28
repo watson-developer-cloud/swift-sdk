@@ -291,7 +291,7 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.responseObject { (response: WatsonResponse<Data>?, error: Error?) in
+        request.response { (response: WatsonResponse<Data>?, error: Error?) in
             var response = response
             guard let data = response?.result else {
                 completionHandler(response, error)

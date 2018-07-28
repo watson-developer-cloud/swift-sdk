@@ -39,15 +39,19 @@ public struct WatsonResponse<T> {
      */
     public var result: T?
 
+    internal init(statusCode: Int, headers: [String: String] = [:]) {
+        self.statusCode = statusCode
+        self.headers = headers
+    }
+
     internal init(response: HTTPURLResponse) {
-        self.statusCode = response.statusCode
-        self.headers = [:]
+        var headers: [String: String] = [:]
         for (key, value) in response.allHeaderFields {
             if let key = key as? String,
                 let value = value as? String {
-                self.headers[key] = value
+                headers[key] = value
             }
         }
+        self.init(statusCode: response.statusCode, headers: headers)
     }
-
 }

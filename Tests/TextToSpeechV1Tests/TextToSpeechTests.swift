@@ -100,39 +100,25 @@ class TextToSpeechTests: XCTestCase {
     func deleteCustomizations() {
         let description = "Delete all customizations."
         let expectation = self.expectation(description: description)
-        textToSpeech.listVoiceModels(failure: failExceptLitePlan(expectation: expectation)) { voiceModels in
+        textToSpeech.listVoiceModels() {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail("Unexpected error response from service: \(error)")
+                }
+                expectation.fulfill()
+                return
+            }
+            guard let voiceModels = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             for voiceModel in voiceModels.customizations {
-                self.textToSpeech.deleteVoiceModel(customizationID: voiceModel.customizationID) { }
+                self.textToSpeech.deleteVoiceModel(customizationID: voiceModel.customizationID) { _,_ in }
             }
             expectation.fulfill()
         }
         waitForExpectations()
-    }
-
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
-    /** Fail false positives. */
-    func failWithResult<T>(result: T) {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Fail false positives. */
-    func failWithResult() {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Fail unless error is due to Lite Plan */
-    func failExceptLitePlan(expectation: XCTestExpectation,
-                            message: String = "Positive test failed with error") -> ((Error) -> Void) {
-        return { (error: Error) in
-            if !error.localizedDescription.contains(self.litePlanMessage) {
-                XCTFail("\(message): \(error)")
-            }
-            expectation.fulfill()
-        }
     }
 
     /** Wait for expectations. */
@@ -146,8 +132,20 @@ class TextToSpeechTests: XCTestCase {
 
     func testListVoices() {
         let expectation = self.expectation(description: "List voices")
-        textToSpeech.listVoices(failure: failExceptLitePlan(expectation: expectation)) { response in
-            XCTAssertGreaterThanOrEqual(response.voices.count, self.allVoices.count)
+        textToSpeech.listVoices() {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail("Unexpected error response from service: \(error)")
+                }
+                expectation.fulfill()
+                return
+            }
+            guard let voiceModels = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
+            XCTAssertGreaterThanOrEqual(voiceModels.voices.count, self.allVoices.count)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -156,8 +154,17 @@ class TextToSpeechTests: XCTestCase {
     func testGetVoice() {
         for voice in allVoices {
             let expectation = self.expectation(description: "Get voice")
-            textToSpeech.getVoice(voice: voice, failure: failWithError) { response in
-                XCTAssertEqual(response.name, voice)
+            textToSpeech.getVoice(voice: voice) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
+                XCTAssertEqual(result.name, voice)
                 expectation.fulfill()
             }
             waitForExpectations()
@@ -168,8 +175,16 @@ class TextToSpeechTests: XCTestCase {
         for voice in allVoices {
             let expectation = self.expectation(description: "Get pronunciation")
             if voice == "ja-JP_EmiVoice" { expectation.fulfill(); continue }
-            textToSpeech.getPronunciation(text: text, voice: voice, format: "ibm", failure: failWithError) {
-                pronunciation in
+            textToSpeech.getPronunciation(text: text, voice: voice, format: "ibm") {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let pronunciation = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 XCTAssertGreaterThan(pronunciation.pronunciation.count, 0)
                 expectation.fulfill()
             }
@@ -179,7 +194,16 @@ class TextToSpeechTests: XCTestCase {
 
     func testSynthesizeOpus() {
         let expectation = self.expectation(description: "Synthesize")
-        textToSpeech.synthesize(text: text, accept: "audio/ogg;codecs=opus", failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/ogg;codecs=opus") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -188,7 +212,16 @@ class TextToSpeechTests: XCTestCase {
 
     func testSynthesizeWAV() {
         let expectation = self.expectation(description: "Synthesize")
-        textToSpeech.synthesize(text: text, accept: "audio/wav", failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/wav") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -197,7 +230,16 @@ class TextToSpeechTests: XCTestCase {
 
     func testSynthesizeFLAC() {
         let expectation = self.expectation(description: "Synthesize")
-        textToSpeech.synthesize(text: text, accept: "audio/flac", failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/flac") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -206,7 +248,16 @@ class TextToSpeechTests: XCTestCase {
 
     func testSynthesizeL16() {
         let expectation = self.expectation(description: "Synthesize")
-        textToSpeech.synthesize(text: text, accept: "audio/l16;rate=44100", failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/l16;rate=44100") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             expectation.fulfill()
         }
@@ -215,8 +266,20 @@ class TextToSpeechTests: XCTestCase {
 
     func testListVoiceModels() {
         let expectation = self.expectation(description: "List voice models")
-        textToSpeech.listVoiceModels(failure: failExceptLitePlan(expectation: expectation)) { customizations in
-            XCTAssertEqual(customizations.customizations.count, 0)
+        textToSpeech.listVoiceModels {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail("Unexpected error response from service: \(error)")
+                }
+                expectation.fulfill()
+                return
+            }
+            guard let voiceModels = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
+            XCTAssertEqual(voiceModels.customizations.count, 0)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -226,9 +289,21 @@ class TextToSpeechTests: XCTestCase {
         let expectation1 = self.expectation(description: "Create voice model")
         let name = "Swift SDK Test Custom Voice Model"
         var voiceModel: VoiceModel!
-        textToSpeech.createVoiceModel(name: name, failure: failExceptLitePlan(expectation: expectation1)) { response in
-            XCTAssert(!response.customizationID.isEmpty)
-            voiceModel = response
+        textToSpeech.createVoiceModel(name: name) {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail("Unexpected error response from service: \(error)")
+                }
+                expectation1.fulfill()
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
+            XCTAssert(!result.customizationID.isEmpty)
+            voiceModel = result
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -240,9 +315,18 @@ class TextToSpeechTests: XCTestCase {
 
         let expectation2 = self.expectation(description: "Get voice model")
         let customizationID = voiceModel.customizationID
-        textToSpeech.getVoiceModel(customizationID: customizationID, failure: failWithError) { response in
-            XCTAssertEqual(response.customizationID, voiceModel.customizationID)
-            XCTAssertEqual(response.name, name)
+        textToSpeech.getVoiceModel(customizationID: customizationID) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
+            XCTAssertEqual(result.customizationID, voiceModel.customizationID)
+            XCTAssertEqual(result.name, name)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -251,26 +335,43 @@ class TextToSpeechTests: XCTestCase {
         let newName = name + " - Updated"
         let description = "Safe to delete"
         let words = [Word(word: "IBM", translation: "eye bee em"), Word(word: "MIL", translation: "mill")]
-        textToSpeech.updateVoiceModel(customizationID: customizationID, name: newName, description: description, words: words, failure: failWithError) {
+        textToSpeech.updateVoiceModel(customizationID: customizationID, name: newName, description: description, words: words) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
 
         let expectation4 = self.expectation(description: "Get voice model")
-        textToSpeech.getVoiceModel(customizationID: customizationID, failure: failWithError) { response in
-            XCTAssertEqual(response.customizationID, voiceModel.customizationID)
-            XCTAssertEqual(response.name, newName)
-            XCTAssertEqual(response.description, description)
-            XCTAssertNotNil(response.words)
-            XCTAssertEqual(response.words!.count, 2)
-            XCTAssert(response.words!.contains { $0.word == "IBM" })
-            XCTAssert(response.words!.contains { $0.word == "MIL" })
+        textToSpeech.getVoiceModel(customizationID: customizationID) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
+            XCTAssertEqual(result.customizationID, voiceModel.customizationID)
+            XCTAssertEqual(result.name, newName)
+            XCTAssertEqual(result.description, description)
+            XCTAssertNotNil(result.words)
+            XCTAssertEqual(result.words!.count, 2)
+            XCTAssert(result.words!.contains { $0.word == "IBM" })
+            XCTAssert(result.words!.contains { $0.word == "MIL" })
             expectation4.fulfill()
         }
         waitForExpectations()
 
         let expectation5 = self.expectation(description: "Delete voice model")
-        textToSpeech.deleteVoiceModel(customizationID: customizationID, failure: failWithError) {
+        textToSpeech.deleteVoiceModel(customizationID: customizationID) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation5.fulfill()
         }
         waitForExpectations()
@@ -279,10 +380,21 @@ class TextToSpeechTests: XCTestCase {
     func testWordsCRUD() {
         let expectation1 = self.expectation(description: "Create voice model")
         var voiceModel: VoiceModel!
-        textToSpeech.createVoiceModel(name: "Swift SDK Test Custom Voice Model",
-                                      failure: failExceptLitePlan(expectation: expectation1)) { response in
-            XCTAssert(!response.customizationID.isEmpty)
-            voiceModel = response
+        textToSpeech.createVoiceModel(name: "Swift SDK Test Custom Voice Model") {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail("Unexpected error response from service: \(error)")
+                }
+                expectation1.fulfill()
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
+            XCTAssert(!result.customizationID.isEmpty)
+            voiceModel = result
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -295,35 +407,65 @@ class TextToSpeechTests: XCTestCase {
         let expectation2 = self.expectation(description: "Add words")
         let customizationID = voiceModel.customizationID
         let words = [Word(word: "IBM", translation: "eye bee em")]
-        textToSpeech.addWords(customizationID: customizationID, words: words, failure: failWithError) {
+        textToSpeech.addWords(customizationID: customizationID, words: words) {
+            _, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation2.fulfill()
         }
         waitForExpectations()
 
         let expectation3 = self.expectation(description: "Add word")
-        textToSpeech.addWord(customizationID: customizationID, word: "MIL", translation: "mill", failure: failWithError) {
+        textToSpeech.addWord(customizationID: customizationID, word: "MIL", translation: "mill") {
+            _, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
 
         let expectation4 = self.expectation(description: "List words")
-        textToSpeech.listWords(customizationID: customizationID, failure: failWithError) { response in
-            XCTAssertEqual(response.words.count, 2)
-            XCTAssert(response.words.contains { $0.word == "IBM" })
-            XCTAssert(response.words.contains { $0.word == "MIL" })
+        textToSpeech.listWords(customizationID: customizationID) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
+            XCTAssertEqual(result.words.count, 2)
+            XCTAssert(result.words.contains { $0.word == "IBM" })
+            XCTAssert(result.words.contains { $0.word == "MIL" })
             expectation4.fulfill()
         }
         waitForExpectations()
 
         let expectation5 = self.expectation(description: "Get word")
-        textToSpeech.getWord(customizationID: customizationID, word: "IBM", failure: failWithError) { translation in
+        textToSpeech.getWord(customizationID: customizationID, word: "IBM") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let translation = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertEqual(translation.translation, "eye bee em")
             expectation5.fulfill()
         }
         waitForExpectations()
 
         let expectation6 = self.expectation(description: "Delete word")
-        textToSpeech.deleteWord(customizationID: customizationID, word: "MIL", failure: failWithError) {
+        textToSpeech.deleteWord(customizationID: customizationID, word: "MIL") {
+            _, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation6.fulfill()
         }
         waitForExpectations()
@@ -334,101 +476,172 @@ class TextToSpeechTests: XCTestCase {
     func testGetPronunciationWithUndefinedVoice() {
         let expectation = self.expectation(description: "Get pronunciation")
         let voice = "invalid-voice"
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.getPronunciation(text: text, voice: voice, failure: failure, success: failWithResult)
+        textToSpeech.getPronunciation(text: text, voice: voice) {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testGetVoiceInvalid() {
         let expectation = self.expectation(description: "Get voice")
         let voice = "invalid-voice"
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.getVoice(voice: voice, failure: failure, success: failWithResult)
+        textToSpeech.getVoice(voice: voice) {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testSynthesizeEmptyString() {
         let expectation = self.expectation(description: "Synthesize")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.synthesize(text: "", failure: failure, success: failWithResult)
+        textToSpeech.synthesize(text: "") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testSynthesizeWithInvalidVoice() {
         let expectation = self.expectation(description: "Synthesize")
         let voice = "invalid-voice"
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.synthesize(text: text, voice: voice, failure: failure, success: failWithResult)
+        textToSpeech.synthesize(text: text, voice: voice) {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testGetCustomizationsWithInvalidLanguage() {
         let expectation = self.expectation(description: "List voice models")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.listVoiceModels(language: "invalid-language", failure: failure, success: failWithResult)
+        textToSpeech.listVoiceModels(language: "invalid-language") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testCreateCustomizationWithInvalidLanguage() {
         let expectation = self.expectation(description: "Create voice model")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.createVoiceModel(name: "custom-model", language: "invalid-language", failure: failure, success: failWithResult)
+        textToSpeech.createVoiceModel(name: "custom-model", language: "invalid-language") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testDeleteCustomizationWithBadID() {
         let expectation = self.expectation(description: "Delete voice model")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.deleteVoiceModel(customizationID: "invalid-id", failure: failure, success: failWithResult)
+        textToSpeech.deleteVoiceModel(customizationID: "invalid-id") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testGetCustomizationWithBadID() {
         let expectation = self.expectation(description: "Get voice model")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.getVoiceModel(customizationID: "invalid-id", failure: failure, success: failWithResult)
+        textToSpeech.getVoiceModel(customizationID: "invalid-id") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testUpdateCustomizationWithBadID() {
         let expectation = self.expectation(description: "Update voice model")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.updateVoiceModel(customizationID: "invalid-id", failure: failure, success: failWithResult)
+        textToSpeech.updateVoiceModel(customizationID: "invalid-id") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testGetWordsWithBadIDs() {
         let expectation = self.expectation(description: "List words")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.listWords(customizationID: "invalid-id", failure: failure, success: failWithResult)
+        textToSpeech.listWords(customizationID: "invalid-id") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testAddMultipleWordsWithBadIDs() {
         let expectation = self.expectation(description: "Add words")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.addWords(customizationID: "invalid-id", words: [], failure: failure, success: failWithResult)
+        textToSpeech.addWords(customizationID: "invalid-id", words: []) {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testDeleteWordWithBadIDs() {
         let expectation = self.expectation(description: "Delete word")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.deleteWord(customizationID: "invalid-id", word: "invalid-word", failure: failure, success: failWithResult)
+        textToSpeech.deleteWord(customizationID: "invalid-id", word: "invalid-word") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     func testGetWordWithBadIDs() {
         let expectation = self.expectation(description: "Get word")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.getWord(customizationID: "invalid-id", word: "invalid-word", failure: failure, success: failWithResult)
+        textToSpeech.getWord(customizationID: "invalid-id", word: "invalid-word") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+
+        }
         waitForExpectations()
     }
 
     func testAddWordWithBadIDs() {
         let expectation = self.expectation(description: "Add word")
-        let failure = { (error: Error) in expectation.fulfill() }
-        textToSpeech.addWord(customizationID: "invalid-id", word: "invalid-word", translation: "invalid-translation", failure: failure, success: failWithResult)
+        textToSpeech.addWord(customizationID: "invalid-id", word: "invalid-word", translation: "invalid-translation") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 }

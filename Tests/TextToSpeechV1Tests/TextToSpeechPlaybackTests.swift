@@ -55,11 +55,6 @@ class TextToSpeechPlaybackTests: XCTestCase {
         textToSpeech.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
     /** Wait for expectations. */
     func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
@@ -74,7 +69,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio using the default parameters."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: text, accept: "audio/wav", failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/wav") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -96,8 +100,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: text, accept: "audio/wav", voice: "en-US_LisaVoice", failure: failWithError) {
-            data in
+        textToSpeech.synthesize(text: text, accept: "audio/wav", voice: "en-US_LisaVoice") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -119,8 +131,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: germanText, accept: "audio/wav", voice: "de-DE_DieterVoice", failure: failWithError) {
-            data in
+        textToSpeech.synthesize(text: germanText, accept: "audio/wav", voice: "de-DE_DieterVoice") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -142,8 +162,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: japaneseText, accept: "audio/wav", voice: "ja-JP_EmiVoice", failure: failWithError) {
-            data in
+        textToSpeech.synthesize(text: japaneseText, accept: "audio/wav", voice: "ja-JP_EmiVoice") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -165,7 +193,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize SSML to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: ssmlString, accept: "audio/wav", failure: failWithError) { data in
+        textToSpeech.synthesize(text: ssmlString, accept: "audio/wav") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -190,7 +227,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio in Opus format."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: text, accept: "audio/ogg;codecs=opus", failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/ogg;codecs=opus") {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)

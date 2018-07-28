@@ -45,8 +45,7 @@ extension SpeechToText {
         model: String? = nil,
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechRecognitionResults) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
     {
         do {
             let data = try Data(contentsOf: audio)
@@ -56,14 +55,13 @@ extension SpeechToText {
                 model: model,
                 customizationID: customizationID,
                 learningOptOut: learningOptOut,
-                failure: failure,
-                success: success
+                completionHandler: completionHandler
             )
         } catch {
             let failureReason = "Could not load audio data from \(audio)."
             let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
     }
@@ -89,8 +87,7 @@ extension SpeechToText {
         model: String? = nil,
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechRecognitionResults) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
     {
         // create SpeechToTextSession
         let session = SpeechToTextSession(
@@ -109,8 +106,14 @@ extension SpeechToText {
         session.defaultHeaders = defaultHeaders
 
         // set callbacks
-        session.onResults = success
-        session.onError = failure
+        session.onResults = { result in
+            var response = WatsonResponse<SpeechRecognitionResults>(statusCode: 0)
+            response.result = result
+            completionHandler(response, nil)
+        }
+        session.onError = { error in
+            completionHandler(nil, error)
+        }
 
         // execute recognition request
         session.connect()
@@ -152,8 +155,7 @@ extension SpeechToText {
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechRecognitionResults) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
     {
         // make sure the AVAudioSession shared instance is properly configured
         do {
@@ -164,7 +166,7 @@ extension SpeechToText {
             let failureReason = "Failed to setup the AVAudioSession sharedInstance properly."
             let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
@@ -177,7 +179,7 @@ extension SpeechToText {
             let failureReason = "Invalid authenticaion method format."
             let userInfo = [NSLocalizedDescriptionKey: failureReason]
             let error = NSError(domain: domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
@@ -199,8 +201,14 @@ extension SpeechToText {
         session.defaultHeaders = defaultHeaders
 
         // set callbacks
-        session.onResults = success
-        session.onError = failure
+        session.onResults = { result in
+            var response = WatsonResponse<SpeechRecognitionResults>(statusCode: 0)
+            response.result = result
+            completionHandler(response, nil)
+        }
+        session.onError = { error in
+            completionHandler(nil, error)
+        }
 
         // start recognition request
         session.connect()

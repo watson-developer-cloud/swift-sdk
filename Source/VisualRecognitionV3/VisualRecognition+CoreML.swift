@@ -413,7 +413,7 @@ extension VisualRecognition {
             }
 
             // compile model from source
-            let compiledModelTemporaryURL: URL
+            var compiledModelTemporaryURL: URL
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
             } catch {

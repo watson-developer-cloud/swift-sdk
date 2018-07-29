@@ -260,7 +260,7 @@ class SpeechToTextTests: XCTestCase {
     func testRecognizeSessionless() {
         let expectation = self.expectation(description: "recognizeSessionless")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
-        speechToText.recognizeSessionless(model: "en-US_BroadbandModel", audio: audio, contentType: "audio/wav", failure: failWithError) {
+        speechToText.recognize(model: "en-US_BroadbandModel", audio: audio, contentType: "audio/wav", failure: failWithError) {
             recognitionResults in
             XCTAssertNotNil(recognitionResults.results)
             XCTAssertGreaterThan(recognitionResults.results!.count, 0)

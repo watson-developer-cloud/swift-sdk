@@ -376,8 +376,10 @@ class DiscoveryTests: XCTestCase {
             if let error = error {
                 if !(error.localizedDescription.contains(message1) || error.localizedDescription.contains(message2)) {
                     XCTFail("Unexpected error response from service: \(error)")
-                    return
+                } else {
+                    expectation1.fulfill()
                 }
+                return
             }
             guard let result = response?.result else {
                 XCTFail("Missing response value")

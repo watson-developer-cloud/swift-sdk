@@ -60,10 +60,6 @@ class VisualRecognitionUIImageTests: XCTestCase {
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
     func waitForExpectations(timeout: TimeInterval = 15.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
@@ -72,8 +68,16 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
     func testClassifyUIImage() {
         let expectation = self.expectation(description: "Classify a UIImage using the default classifier.")
-        visualRecognition.classify(image: car, failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(image: car) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             var containsPersonClass = false
             var classifierScore: Double?
             // verify classified images object
@@ -113,8 +117,16 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
     func testDetectFacesByUIImage() {
         let expectation = self.expectation(description: "Detect faces in a UIImage.")
-        visualRecognition.detectFaces(image: obama, failure: failWithError) {
-            faceImages in
+        visualRecognition.detectFaces(image: obama) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let faceImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify face images object
             XCTAssertEqual(faceImages.imagesProcessed, 1)

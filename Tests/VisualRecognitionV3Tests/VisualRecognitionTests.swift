@@ -111,21 +111,6 @@ class VisualRecognitionTests: XCTestCase {
         #endif
     }
 
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
-    /** Fail false positives. */
-    func failWithResult<T>(result: T) {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Fail false positives. */
-    func failWithResult() {
-        XCTFail("Negative test returned a result.")
-    }
-
     /** Wait for expectations. */
     func waitForExpectations(timeout: TimeInterval = timeout) {
         waitForExpectations(timeout: timeout) { error in
@@ -139,8 +124,16 @@ class VisualRecognitionTests: XCTestCase {
     func testListClassifiers() {
         let expectation = self.expectation(description: "Retrieve a list of user-trained classifiers.")
 
-        visualRecognition.listClassifiers(failure: failWithError) { classifiers in
-            for classifier in classifiers.classifiers where classifier.classifierID == self.classifierID {
+        visualRecognition.listClassifiers { response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiers = response?.result?.classifiers else {
+                XCTFail("Missing result value")
+                return
+            }
+            for classifier in classifiers where classifier.classifierID == self.classifierID {
                 expectation.fulfill()
                 return
             }
@@ -153,8 +146,17 @@ class VisualRecognitionTests: XCTestCase {
     func testListClassifiersVerbose() {
         let expectation = self.expectation(description: "Retrieve a list of user-trained classifiers.")
 
-        visualRecognition.listClassifiers(verbose: true, failure: failWithError) { classifiers in
-            for classifier in classifiers.classifiers where classifier.classifierID == self.classifierID {
+        visualRecognition.listClassifiers(verbose: true) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiers = response?.result?.classifiers else {
+                XCTFail("Missing result value")
+                return
+            }
+            for classifier in classifiers where classifier.classifierID == self.classifierID {
                 expectation.fulfill()
                 return
             }
@@ -173,8 +175,16 @@ class VisualRecognitionTests: XCTestCase {
 
         var classifierID: String?
         let expectation1 = expectation(description: "Train a classifier with only positive examples.")
-        visualRecognition.createClassifier(name: name, positiveExamples: classes, failure: failWithError) {
-            classifier in
+        visualRecognition.createClassifier(name: name, positiveExamples: classes) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifier = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertEqual(classifier.name, name)
             XCTAssertNotNil(classifier.classes)
             XCTAssertEqual(classifier.classes!.count, 3)
@@ -188,8 +198,17 @@ class VisualRecognitionTests: XCTestCase {
         }
 
         let expectation2 = expectation(description: "Check that our classifier can be retrieved.")
-        visualRecognition.listClassifiers(verbose: true, failure: failWithError) { classifiers in
-            for classifier in classifiers.classifiers where classifier.classifierID == classifierIDToDelete {
+        visualRecognition.listClassifiers(verbose: true) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiers = response?.result?.classifiers else {
+                XCTFail("Missing result value")
+                return
+            }
+            for classifier in classifiers where classifier.classifierID == classifierIDToDelete {
                 expectation2.fulfill()
                 return
             }
@@ -203,7 +222,11 @@ class VisualRecognitionTests: XCTestCase {
         sleep(15) // wait 15 seconds
 
         let expectation3 = expectation(description: "Delete the custom classifier.")
-        visualRecognition.deleteClassifier(classifierID: classifierIDToDelete, failure: failWithError) {
+        visualRecognition.deleteClassifier(classifierID: classifierIDToDelete) {
+            _, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -219,8 +242,16 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.createClassifier(
             name: name,
             positiveExamples: [cars],
-            negativeExamples: examplesTrucks,
-            failure: failWithError) { classifier in
+            negativeExamples: examplesTrucks) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let classifier = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 XCTAssertEqual(classifier.name, name)
                 XCTAssertNotNil(classifier.classes)
                 XCTAssertEqual(classifier.classes!.count, 1)
@@ -235,8 +266,17 @@ class VisualRecognitionTests: XCTestCase {
         }
 
         let expectation2 = expectation(description: "Check that our classifier can be retrieved.")
-        visualRecognition.listClassifiers(verbose: true, failure: failWithError) { classifiers in
-            for classifier in classifiers.classifiers where classifier.classifierID == newClassifierID {
+        visualRecognition.listClassifiers(verbose: true) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiers = response?.result?.classifiers else {
+                XCTFail("Missing result value")
+                return
+            }
+            for classifier in classifiers where classifier.classifierID == newClassifierID {
                 expectation2.fulfill()
                 return
             }
@@ -250,7 +290,11 @@ class VisualRecognitionTests: XCTestCase {
         sleep(15) // wait 15 seconds
 
         let expectation3 = expectation(description: "Delete the custom classifier.")
-        visualRecognition.deleteClassifier(classifierID: newClassifierID, failure: failWithError) {
+        visualRecognition.deleteClassifier(classifierID: newClassifierID) {
+            _, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -259,8 +303,16 @@ class VisualRecognitionTests: XCTestCase {
     /** Get information about the trained classifier. */
     func testGetClassifier() {
         let expectation = self.expectation(description: "Get information about the trained classifier.")
-        visualRecognition.getClassifier(classifierID: classifierID, failure: failWithError) {
-            classifier in
+        visualRecognition.getClassifier(classifierID: classifierID) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifier = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             XCTAssertNotNil(classifier.classes)
             XCTAssertEqual(classifier.classes!.count, 1)
             expectation.fulfill()
@@ -279,8 +331,16 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.createClassifier(
             name: name,
             positiveExamples: [cars],
-            negativeExamples: examplesBaseball,
-            failure: failWithError) { classifier in
+            negativeExamples: examplesBaseball) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let classifier = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 XCTAssertEqual(classifier.name, name)
                 XCTAssertNotNil(classifier.classes)
                 XCTAssertEqual(classifier.classes!.count, 1)
@@ -302,9 +362,16 @@ class VisualRecognitionTests: XCTestCase {
             sleep(15)
 
             let expectation = self.expectation(description: "Get the new classifier.")
-            visualRecognition.getClassifier(classifierID: newClassifierID, failure: failWithError) {
-                classifier in
-
+            visualRecognition.getClassifier(classifierID: newClassifierID) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let classifier = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 if classifier.status == "ready" {
                     trained = true
                 }
@@ -323,8 +390,16 @@ class VisualRecognitionTests: XCTestCase {
 
         visualRecognition.updateClassifier(
             classifierID: newClassifierID,
-            positiveExamples: [trucks],
-            failure: failWithError) { classifier in
+            positiveExamples: [trucks]) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let classifier = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 XCTAssertEqual(classifier.name, name)
                 expectation2.fulfill()
         }
@@ -336,9 +411,16 @@ class VisualRecognitionTests: XCTestCase {
             sleep(15)
 
             let expectation = self.expectation(description: "Get the updated classifier.")
-            visualRecognition.getClassifier(classifierID: newClassifierID, failure: failWithError) {
-                classifier in
-
+            visualRecognition.getClassifier(classifierID: newClassifierID) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let classifier = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 if classifier.status == "ready" {
                     XCTAssertNotNil(classifier.classes)
                     XCTAssertEqual(classifier.classes!.count, 2)
@@ -368,8 +450,16 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.createClassifier(
             name: name,
             positiveExamples: classes,
-            negativeExamples: examplesTrucks,
-            failure: failWithError) { classifier in
+            negativeExamples: examplesTrucks) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let classifier = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 XCTAssertEqual(classifier.name, name)
                 XCTAssertNotNil(classifier.classes)
                 XCTAssertEqual(classifier.classes!.count, 1)
@@ -391,9 +481,16 @@ class VisualRecognitionTests: XCTestCase {
             sleep(15)
 
             let expectation = self.expectation(description: "Get the new classifier.")
-            visualRecognition.getClassifier(classifierID: newClassifierID, failure: failWithError) {
-                classifier in
-
+            visualRecognition.getClassifier(classifierID: newClassifierID) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let classifier = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 if classifier.status == "ready" {
                     trained = true
                 }
@@ -411,8 +508,16 @@ class VisualRecognitionTests: XCTestCase {
         let expectation2 = expectation(description: "Update the classifier with a negative example.")
         visualRecognition.updateClassifier(
             classifierID: newClassifierID,
-            negativeExamples: examplesBaseball,
-            failure: failWithError) { classifier in
+            negativeExamples: examplesBaseball) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let classifier = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 XCTAssertEqual(classifier.name, name)
                 expectation2.fulfill()
         }
@@ -424,9 +529,16 @@ class VisualRecognitionTests: XCTestCase {
             sleep(15)
 
             let expectation = self.expectation(description: "Get the updated classifier.")
-            visualRecognition.getClassifier(classifierID: newClassifierID, failure: failWithError) {
-                classifier in
-
+            visualRecognition.getClassifier(classifierID: newClassifierID) {
+                response, error in
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let classifier = response?.result else {
+                    XCTFail("Missing result value")
+                    return
+                }
                 if classifier.status == "ready" {
                     XCTAssertNotNil(classifier.classes)
                     XCTAssertEqual(classifier.classes!.count, 1)
@@ -448,8 +560,16 @@ class VisualRecognitionTests: XCTestCase {
     func testClassifyByURL1() {
         let expectation = self.expectation(description: "Classify an image by URL")
 
-        visualRecognition.classify(url: obamaURL, failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(url: obamaURL) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             var containsPersonClass = false
             var classifierScore: Double?
@@ -499,10 +619,17 @@ class VisualRecognitionTests: XCTestCase {
             threshold: 0.5,
             owners: ["IBM"],
             classifierIDs: ["default"],
-            acceptLanguage: "en",
-            failure: failWithError)
+            acceptLanguage: "en")
         {
-            classifiedImages in
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             var containsPersonClass = false
             var classifierScore: Double?
@@ -546,8 +673,16 @@ class VisualRecognitionTests: XCTestCase {
     /** Classify an image by URL using a custom classifier and all default parameters. */
     func testClassifyByURL3() {
         let expectation = self.expectation(description: "Classify an image by URL using a custom classifier.")
-        visualRecognition.classify(url: carURL, classifierIDs: [classifierID], failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(url: carURL, classifierIDs: [classifierID]) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
@@ -583,10 +718,17 @@ class VisualRecognitionTests: XCTestCase {
             threshold: 0.5,
             owners: ["me"],
             classifierIDs: [classifierID],
-            acceptLanguage: "en",
-            failure: failWithError)
+            acceptLanguage: "en")
         {
-            classifiedImages in
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
@@ -617,8 +759,16 @@ class VisualRecognitionTests: XCTestCase {
     /** Classify an image by URL with both the default classifier and a custom classifier. */
     func testClassifyByURL5() {
         let expectation = self.expectation(description: "Classify an image by URL using a custom classifier.")
-        visualRecognition.classify(url: carURL, classifierIDs: ["default", classifierID], failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(url: carURL, classifierIDs: ["default", classifierID]) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
@@ -672,8 +822,16 @@ class VisualRecognitionTests: XCTestCase {
     /** Classify an uploaded image using the default classifier and all default parameters. */
     func testClassifyImage1() {
         let expectation = self.expectation(description: "Classify an uploaded image using the default classifier.")
-        visualRecognition.classify(imagesFile: car, failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(imagesFile: car) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
             var containsPersonClass = false
             var classifierScore: Double?
             // verify classified images object
@@ -720,10 +878,17 @@ class VisualRecognitionTests: XCTestCase {
             threshold: 0.5,
             owners: ["IBM"],
             classifierIDs: ["default"],
-            acceptLanguage: "en",
-            failure: failWithError)
+            acceptLanguage: "en")
         {
-            classifiedImages in
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             var containsPersonClass = false
             var classifierScore: Double?
@@ -766,8 +931,16 @@ class VisualRecognitionTests: XCTestCase {
     /** Classify an uploaded image using a custom classifier and all default parameters. */
     func testClassifyImage3() {
         let expectation = self.expectation(description: "Classify an uploaded image using a custom classifier.")
-        visualRecognition.classify(imagesFile: car, classifierIDs: [classifierID], failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(imagesFile: car, classifierIDs: [classifierID]) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
@@ -803,10 +976,17 @@ class VisualRecognitionTests: XCTestCase {
             threshold: 0.5,
             owners: ["me"],
             classifierIDs: [classifierID],
-            acceptLanguage: "en",
-            failure: failWithError)
+            acceptLanguage: "en")
         {
-            classifiedImages in
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
@@ -839,10 +1019,17 @@ class VisualRecognitionTests: XCTestCase {
         let expectation = self.expectation(description: "Classify an uploaded image with the default and custom classifiers.")
         visualRecognition.classify(
             imagesFile: car,
-            classifierIDs: ["default", classifierID],
-            failure: failWithError)
+            classifierIDs: ["default", classifierID])
         {
-            classifiedImages in
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             var containsCarClass = false
             var classifierScore: Double?
@@ -899,10 +1086,17 @@ class VisualRecognitionTests: XCTestCase {
         let expectation = self.expectation(description: "Classify multiple images using a custom classifier.")
         visualRecognition.classify(
             imagesFile: carz,
-            classifierIDs: ["default", classifierID],
-            failure: failWithError)
+            classifierIDs: ["default", classifierID])
         {
-            classifiedImages in
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify classified images object
             XCTAssertNil(classifiedImages.warnings)
@@ -955,8 +1149,16 @@ class VisualRecognitionTests: XCTestCase {
     /** Detect faces by URL. */
     func testDetectFacesByURL() {
         let expectation = self.expectation(description: "Detect faces by URL.")
-        visualRecognition.detectFaces(url: obamaURL, failure: failWithError) {
-            faceImages in
+        visualRecognition.detectFaces(url: obamaURL) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let faceImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify face images object
             XCTAssertEqual(faceImages.imagesProcessed, 1)
@@ -997,8 +1199,16 @@ class VisualRecognitionTests: XCTestCase {
     /** Detect faces in an uploaded image */
     func testDetectFacesByImage1() {
         let expectation = self.expectation(description: "Detect faces in an uploaded image.")
-        visualRecognition.detectFaces(imagesFile: obama, failure: failWithError) {
-            faceImages in
+        visualRecognition.detectFaces(imagesFile: obama) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let faceImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify face images object
             XCTAssertEqual(faceImages.imagesProcessed, 1)
@@ -1039,8 +1249,16 @@ class VisualRecognitionTests: XCTestCase {
     /** Detect faces in uploaded images. */
     func testDetectFacesByImage2() {
         let expectation = self.expectation(description: "Detect faces in uploaded images.")
-        visualRecognition.detectFaces(imagesFile: faces, failure: failWithError) {
-            faceImages in
+        visualRecognition.detectFaces(imagesFile: faces) {
+            response, error in
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let faceImages = response?.result else {
+                XCTFail("Missing result value")
+                return
+            }
 
             // verify face images object
             XCTAssertEqual(faceImages.imagesProcessed, 3)
@@ -1090,63 +1308,73 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 
         let expectation = self.expectation(description: "Invalid API Key")
-        let failure = { (error: Error) in
-            expectation.fulfill()
-        }
 
-        visualRecognition.getClassifier(classifierID: "foo-bar-baz", failure: failure, success: failWithResult)
+        visualRecognition.getClassifier(classifierID: "foo-bar-baz") {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()        }
         waitForExpectations()
     }
 
     /** Test creating a classifier with a single image for positive examples. */
     func testCreateClassifierWithInvalidPositiveExamples() {
         let expectation = self.expectation(description: "Create classifier with invalid positive example.")
-        let failure = { (error: Error) in
-            expectation.fulfill()
-        }
 
         let invalidPositiveExample = PositiveExample(name: "obama", examples: obama)
-
-        visualRecognition.createClassifier(
-            name: "invalidClassifier",
-            positiveExamples: [invalidPositiveExample],
-            failure: failure,
-            success: failWithResult)
+        visualRecognition.createClassifier(name: "invalidClassifier", positiveExamples: [invalidPositiveExample])
+        {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     /** Test classifying an invalid URL using the default classifier and parameters. */
     func testClassifyByInvalidURL() {
         let expectation = self.expectation(description: "Classify an image with an invalid URL.")
-        let failure = { (error: Error) in
-            expectation.fulfill()
-        }
 
         let invalidImageURL = "invalid-image-url"
-        visualRecognition.classify(url: invalidImageURL, failure: failure, success: failWithResult)
+        visualRecognition.classify(url: invalidImageURL) {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     /** Test detecting faces with an invalid URL using the default classifier and parameters. */
     func testDetectFacesByInvalidURL() {
         let expectation = self.expectation(description: "Classify an image with an invalid type.")
-        let failure = { (error: Error) in
-            expectation.fulfill()
-        }
 
         let invalidImageURL = "invalid-image-url"
-        visualRecognition.detectFaces(url: invalidImageURL, failure: failure, success: failWithResult)
+        visualRecognition.detectFaces(url: invalidImageURL) {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
     /** Get information about an unknown classifier. */
     func testGetUnknownClassifier() {
         let expectation = self.expectation(description: "Get information about an unknown classifier.")
-        let failure = { (error: Error) in
+
+        visualRecognition.getClassifier(classifierID: "foo-bar-baz")  {
+            _, error in
+            if error == nil {
+                XCTFail("Expected error response")
+            }
             expectation.fulfill()
         }
-
-        visualRecognition.getClassifier(classifierID: "foo-bar-baz", failure: failure, success: failWithResult)
         waitForExpectations()
     }
 }

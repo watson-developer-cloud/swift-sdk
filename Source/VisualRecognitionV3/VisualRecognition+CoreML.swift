@@ -41,7 +41,8 @@ extension VisualRecognition {
      in order to download the latest model.
 
      - parameter classifierID: The ID of the classifier whose Core ML model will be retrieved.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error. If both the response and error are `nil`, then the Core ML model already exists locally.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error.
+       If both the response and error are `nil`, then the Core ML model already exists locally.
      */
     public func updateLocalModel(
         classifierID: String,
@@ -197,9 +198,9 @@ extension VisualRecognition {
 
                 // construct classification request
                 let request = VNCoreMLRequest(model: classifier) { request, error in
-                    guard error == nil else {
+                    if let error = error {
                         dispatchGroup.leave()
-                        let description = "Classifier \(classifierID) failed with error: \(error!)"
+                        let description = "Classifier \(classifierID) failed with error: \(error)"
                         let userInfo = [NSLocalizedDescriptionKey: description]
                         let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
                         completionHandler(nil, error)
@@ -331,7 +332,8 @@ extension VisualRecognition {
      directory with a filename of `[classifier-id].mlmodelc`.
 
      - parameter classifierID: The classifierID of the model to download.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error. If both the response and error are `nil`, then the Core ML model already exists locally.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error.
+       If both the response and error are `nil`, then the Core ML model already exists locally.
      */
     private func downloadClassifier(
         classifierID: String,

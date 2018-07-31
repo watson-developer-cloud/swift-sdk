@@ -69,7 +69,7 @@ extension SpeechToText {
     }
 
     /**
-     Perform speech recognition for audio data.
+     Perform speech recognition for audio data using WebSockets.
 
      - parameter audio: The audio data to transcribe.
      - parameter settings: The configuration to use for this recognition request.
@@ -83,7 +83,7 @@ extension SpeechToText {
      - parameter success: A function executed with all transcription results whenever
        a final or interim transcription is received.
      */
-    public func recognize(
+    public func recognizeUsingWebSocket(
         audio: Data,
         settings: RecognitionSettings,
         model: String? = nil,
@@ -223,6 +223,23 @@ extension SpeechToText {
         microphoneSession?.stopMicrophone()
         microphoneSession?.stopRequest()
         microphoneSession?.disconnect()
+    }
+}
+
+extension SpeechToText {
+
+    @available(*, deprecated, message: "The recognize method has been deprecated in favor of recognizeUsingWebSocket method.  This method will be removed in a future release.")
+    public func recognize(
+        audio: Data,
+        settings: RecognitionSettings,
+        model: String? = nil,
+        customizationID: String? = nil,
+        learningOptOut: Bool? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (SpeechRecognitionResults) -> Void)
+    {
+        recognizeUsingWebSocket(audio: audio, settings: settings, model: model, customizationID: customizationID,
+                                learningOptOut: learningOptOut, failure: failure, success: success)
     }
 }
 

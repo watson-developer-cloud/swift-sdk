@@ -22,9 +22,11 @@ import PersonalityInsightsV3
 class PersonalityInsightsTests: XCTestCase {
 
     private var personalityInsights: PersonalityInsights!
-    private var text: String!
-    private var html: String!
-    private var short: String!
+
+    private var rawText: String!
+    private var text: ProfileContent!
+    private var html: ProfileContent!
+    private var short: ProfileContent!
 
     static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
@@ -78,10 +80,11 @@ class PersonalityInsightsTests: XCTestCase {
         #endif
     }
 
-    public func loadTestResources() {
-        self.text = load(forResource: "KennedySpeech", ofType: "txt")
-        self.html = load(forResource: "KennedySpeech", ofType: "html")
-        self.short = load(forResource: "MobyDickIntro", ofType: "txt")
+    func loadTestResources() {
+        self.rawText = load(forResource: "KennedySpeech", ofType: "txt")
+        self.text = ProfileContent.text(self.rawText!)
+        self.html = ProfileContent.html(load(forResource: "KennedySpeech", ofType: "html")!)
+        self.short = ProfileContent.text(load(forResource: "MobyDickIntro", ofType: "txt")!)
     }
 
     /** Wait for expectations. */
@@ -94,8 +97,8 @@ class PersonalityInsightsTests: XCTestCase {
     // MARK: - Positive Tests
 
     func testProfileText() {
-        let expectation = self.expectation(description: "profile(text:)")
-        personalityInsights.profile(text: text) {
+        let expectation = self.expectation(description: "profile(profileContent:)")
+        personalityInsights.profile(profileContent: text) {
             response, error in
 
             if let error = error {
@@ -118,7 +121,7 @@ class PersonalityInsightsTests: XCTestCase {
 
     func testProfileHTML() {
         let expectation = self.expectation(description: "profile(html:)")
-        personalityInsights.profile(html: html) {
+        personalityInsights.profile(profileContent: html) {
             response, error in
 
             if let error = error {
@@ -142,7 +145,7 @@ class PersonalityInsightsTests: XCTestCase {
     func testProfileContent() {
         let expectation = self.expectation(description: "profile(content:)")
         let contentItem = ContentItem(
-            content: text,
+            content: rawText,
             id: "245160944223793152",
             created: 1427720427,
             updated: 1427720427,
@@ -152,8 +155,8 @@ class PersonalityInsightsTests: XCTestCase {
             reply: false,
             forward: false
         )
-        let content = Content(contentItems: [contentItem])
-        personalityInsights.profile(content: content) {
+        let content = ProfileContent.content(Content(contentItems: [contentItem]))
+        personalityInsights.profile(profileContent: content) {
             response, error in
 
             if let error = error {
@@ -176,8 +179,8 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     func testProfileAsCsvText() {
-        let expectation = self.expectation(description: "profile(text:)")
-        personalityInsights.profileAsCsv(text: text) {
+        let expectation = self.expectation(description: "profile(profileContent:)")
+        personalityInsights.profileAsCsv(profileContent: text) {
             response, error in
 
             if let error = error {
@@ -197,7 +200,7 @@ class PersonalityInsightsTests: XCTestCase {
 
     func testProfileAsCsvHTML() {
         let expectation = self.expectation(description: "profile(html:)")
-        personalityInsights.profileAsCsv(html: html) {
+        personalityInsights.profileAsCsv(profileContent: html) {
             response, error in
 
             if let error = error {
@@ -218,7 +221,7 @@ class PersonalityInsightsTests: XCTestCase {
     func testProfileAsCsvContent() {
         let expectation = self.expectation(description: "profile(content:)")
         let contentItem = ContentItem(
-            content: text,
+            content: rawText,
             id: "245160944223793152",
             created: 1427720427,
             updated: 1427720427,
@@ -228,8 +231,8 @@ class PersonalityInsightsTests: XCTestCase {
             reply: false,
             forward: false
         )
-        let content = Content(contentItems: [contentItem])
-        personalityInsights.profileAsCsv(content: content) {
+        let content = ProfileContent.content(Content(contentItems: [contentItem]))
+        personalityInsights.profileAsCsv(profileContent: content) {
             response, error in
 
             if let error = error {
@@ -248,8 +251,8 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     func testNeedsAndConsumptionPreferences() {
-        let expectation = self.expectation(description: "profile(text:)")
-        personalityInsights.profile(text: text, rawScores: true, consumptionPreferences: true) {
+        let expectation = self.expectation(description: "profile(profileContent:)")
+        personalityInsights.profile(profileContent: text, rawScores: true, consumptionPreferences: true) {
             response, error in
 
             if let error = error {
@@ -285,8 +288,8 @@ class PersonalityInsightsTests: XCTestCase {
     // MARK: - Negative Tests
 
     func testProfileWithShortText() {
-        let expectation = self.expectation(description: "profile(text:)")
-        personalityInsights.profile(text: short) {
+        let expectation = self.expectation(description: "profile(profileContent:)")
+        personalityInsights.profile(profileContent: short) {
             _, error in
 
             if error == nil {

@@ -102,21 +102,6 @@ class ConversationTests: XCTestCase {
         conversation.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
-    /** Fail false positives. */
-    func failWithResult<T>(result: T) {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Fail false positives. */
-    func failWithResult() {
-        XCTFail("Negative test returned a result.")
-    }
-
     /** Wait for expectations. */
     func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
@@ -133,35 +118,44 @@ class ConversationTests: XCTestCase {
         let response1 = ["Hi. It looks like a nice drive today. What would you like me to do?  "]
 
         var context: Context?
-        conversation.message(workspaceID: workspaceID, nodesVisitedDetails: true, failure: failWithError) {
-            response in
+        conversation.message(workspaceID: workspaceID, nodesVisitedDetails: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
 
             // verify input
-            XCTAssertNil(response.input?.text)
+            XCTAssertNil(message.input?.text)
 
             // verify context
-            XCTAssertNotNil(response.context.conversationID)
-            XCTAssertNotEqual(response.context.conversationID, "")
-            XCTAssertNotNil(response.context.system)
-            XCTAssertNotNil(response.context.system!.additionalProperties)
-            XCTAssertFalse(response.context.system!.additionalProperties.isEmpty)
+            XCTAssertNotNil(message.context.conversationID)
+            XCTAssertNotEqual(message.context.conversationID, "")
+            XCTAssertNotNil(message.context.system)
+            XCTAssertNotNil(message.context.system!.additionalProperties)
+            XCTAssertFalse(message.context.system!.additionalProperties.isEmpty)
 
             // verify entities
-            XCTAssertTrue(response.entities.isEmpty)
+            XCTAssertTrue(message.entities.isEmpty)
 
             // verify intents
-            XCTAssertTrue(response.intents.isEmpty)
+            XCTAssertTrue(message.intents.isEmpty)
 
             // verify output
-            XCTAssertTrue(response.output.logMessages.isEmpty)
-            XCTAssertEqual(response.output.text, response1)
-            XCTAssertNotNil(response.output.nodesVisited)
-            XCTAssertEqual(response.output.nodesVisited!.count, 1)
-            XCTAssertNotNil(response.output.nodesVisitedDetails)
-            XCTAssertNotNil(response.output.nodesVisitedDetails!.first)
-            XCTAssertNotNil(response.output.nodesVisitedDetails!.first!.dialogNode)
+            XCTAssertTrue(message.output.logMessages.isEmpty)
+            XCTAssertEqual(message.output.text, response1)
+            XCTAssertNotNil(message.output.nodesVisited)
+            XCTAssertEqual(message.output.nodesVisited!.count, 1)
+            XCTAssertNotNil(message.output.nodesVisitedDetails)
+            XCTAssertNotNil(message.output.nodesVisitedDetails!.first)
+            XCTAssertNotNil(message.output.nodesVisitedDetails!.first!.dialogNode)
 
-            context = response.context
+            context = message.context
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -173,36 +167,45 @@ class ConversationTests: XCTestCase {
         let request = MessageRequest(input: input, context: context!)
         let response2 = ["Sure thing! Which genre would you prefer? Jazz is my personal favorite."]
 
-        conversation.message(workspaceID: workspaceID, request: request, failure: failWithError) {
-            response in
+        conversation.message(workspaceID: workspaceID, request: request) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
 
             // verify input
-            XCTAssertEqual(response.input?.text, input.text)
+            XCTAssertEqual(message.input?.text, input.text)
 
             // verify context
-            XCTAssertEqual(response.context.conversationID, context!.conversationID)
-            XCTAssertNotNil(response.context.system)
-            XCTAssertNotNil(response.context.system!.additionalProperties)
-            XCTAssertFalse(response.context.system!.additionalProperties.isEmpty)
+            XCTAssertEqual(message.context.conversationID, context!.conversationID)
+            XCTAssertNotNil(message.context.system)
+            XCTAssertNotNil(message.context.system!.additionalProperties)
+            XCTAssertFalse(message.context.system!.additionalProperties.isEmpty)
 
             // verify entities
-            XCTAssertEqual(response.entities.count, 1)
-            XCTAssertEqual(response.entities[0].entity, "appliance")
-            XCTAssertEqual(response.entities[0].location[0], 12)
-            XCTAssertEqual(response.entities[0].location[1], 17)
-            XCTAssertEqual(response.entities[0].value, "music")
+            XCTAssertEqual(message.entities.count, 1)
+            XCTAssertEqual(message.entities[0].entity, "appliance")
+            XCTAssertEqual(message.entities[0].location[0], 12)
+            XCTAssertEqual(message.entities[0].location[1], 17)
+            XCTAssertEqual(message.entities[0].value, "music")
 
             // verify intents
-            XCTAssertEqual(response.intents.count, 1)
-            XCTAssertEqual(response.intents[0].intent, "turn_on")
-            XCTAssert(response.intents[0].confidence >= 0.80)
-            XCTAssert(response.intents[0].confidence <= 1.00)
+            XCTAssertEqual(message.intents.count, 1)
+            XCTAssertEqual(message.intents[0].intent, "turn_on")
+            XCTAssert(message.intents[0].confidence >= 0.80)
+            XCTAssert(message.intents[0].confidence <= 1.00)
 
             // verify output
-            XCTAssertTrue(response.output.logMessages.isEmpty)
-            XCTAssertEqual(response.output.text, response2)
-            XCTAssertNotNil(response.output.nodesVisited)
-            XCTAssertEqual(response.output.nodesVisited!.count, 3)
+            XCTAssertTrue(message.output.logMessages.isEmpty)
+            XCTAssertEqual(message.output.text, response2)
+            XCTAssertNotNil(message.output.nodesVisited)
+            XCTAssertEqual(message.output.nodesVisited!.count, 3)
 
             expectation2.fulfill()
         }
@@ -218,12 +221,22 @@ class ConversationTests: XCTestCase {
         var intents: [RuntimeIntent]?
         var output: OutputData?
 
-        conversation.message(workspaceID: workspaceID, failure: failWithError) {
-            response in
-            context = response.context
-            entities = response.entities
-            intents = response.intents
-            output = response.output
+        conversation.message(workspaceID: workspaceID) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            context = message.context
+            entities = message.entities
+            intents = message.intents
+            output = message.output
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -233,8 +246,17 @@ class ConversationTests: XCTestCase {
 
         let input2 = InputData(text: "Turn on the radio.")
         let request2 = MessageRequest(input: input2, context: context, entities: entities, intents: intents, output: output)
-        conversation.message(workspaceID: workspaceID, request: request2, failure: failWithError) {
-            response in
+        conversation.message(workspaceID: workspaceID, request: request2) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
 
             // verify objects are non-nil
             XCTAssertNotNil(entities)
@@ -242,17 +264,17 @@ class ConversationTests: XCTestCase {
             XCTAssertNotNil(output)
 
             // verify intents are equal
-            for index in 0..<response.intents.count {
+            for index in 0..<message.intents.count {
                 let intent1 = intents![index]
-                let intent2 = response.intents[index]
+                let intent2 = message.intents[index]
                 XCTAssertEqual(intent1.intent, intent2.intent)
                 XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
 
             // verify entities are equal
-            for index in 0..<response.entities.count {
+            for index in 0..<message.entities.count {
                 let entity1 = entities![index]
-                let entity2 = response.entities[index]
+                let entity2 = message.entities[index]
                 XCTAssertEqual(entity1.entity, entity2.entity)
                 XCTAssertEqual(entity1.location[0], entity2.location[0])
                 XCTAssertEqual(entity1.location[1], entity2.location[1])
@@ -273,9 +295,19 @@ class ConversationTests: XCTestCase {
         var intents: [RuntimeIntent]?
         var output: OutputData?
 
-        conversation.message(workspaceID: workspaceID, failure: failWithError) {
-            response in
-            context = response.context
+        conversation.message(workspaceID: workspaceID) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            context = message.context
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -285,12 +317,22 @@ class ConversationTests: XCTestCase {
 
         let input2 = InputData(text: "Turn on the radio.")
         let request2 = MessageRequest(input: input2, context: context, entities: entities, intents: intents, output: output)
-        conversation.message(workspaceID: workspaceID, request: request2, failure: failWithError) {
-            response in
-            context = response.context
-            entities = response.entities
-            intents = response.intents
-            output = response.output
+        conversation.message(workspaceID: workspaceID, request: request2) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            context = message.context
+            entities = message.entities
+            intents = message.intents
+            output = message.output
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -300,8 +342,17 @@ class ConversationTests: XCTestCase {
 
         let input3 = InputData(text: "Rock music.")
         let request3 = MessageRequest(input: input3, context: context, entities: entities, intents: intents, output: output)
-        conversation.message(workspaceID: workspaceID, request: request3, failure: failWithError) {
-            response in
+        conversation.message(workspaceID: workspaceID, request: request3) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
 
             // verify objects are non-nil
             XCTAssertNotNil(entities)
@@ -309,17 +360,17 @@ class ConversationTests: XCTestCase {
             XCTAssertNotNil(output)
 
             // verify intents are equal
-            for index in 0..<response.intents.count {
+            for index in 0..<message.intents.count {
                 let intent1 = intents![index]
-                let intent2 = response.intents[index]
+                let intent2 = message.intents[index]
                 XCTAssertEqual(intent1.intent, intent2.intent)
                 XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
 
             // verify entities are equal
-            for index in 0..<response.entities.count {
+            for index in 0..<message.entities.count {
                 let entity1 = entities![index]
-                let entity2 = response.entities[index]
+                let entity2 = message.entities[index]
                 XCTAssertEqual(entity1.entity, entity2.entity)
                 XCTAssertEqual(entity1.location[0], entity2.location[0])
                 XCTAssertEqual(entity1.location[1], entity2.location[1])
@@ -336,9 +387,19 @@ class ConversationTests: XCTestCase {
         let expectation1 = expectation(description: description1)
 
         var context: Context?
-        conversation.message(workspaceID: workspaceID, failure: failWithError) {
-            response in
-            context = response.context
+        conversation.message(workspaceID: workspaceID) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            context = message.context
             context?.additionalProperties["foo"] = .string("bar")
             expectation1.fulfill()
         }
@@ -349,9 +410,19 @@ class ConversationTests: XCTestCase {
 
         let input2 = InputData(text: "Turn on the radio.")
         let request2 = MessageRequest(input: input2, context: context)
-        conversation.message(workspaceID: workspaceID, request: request2, failure: failWithError) {
-            response in
-            let additionalProperties = response.context.additionalProperties
+        conversation.message(workspaceID: workspaceID, request: request2) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            let additionalProperties = message.context.additionalProperties
             guard case let .string(bar) = additionalProperties["foo"]! else {
                 XCTFail("Additional property \"foo\" expected but not present.")
                 return
@@ -373,15 +444,26 @@ class ConversationTests: XCTestCase {
         let description = "List all workspaces."
         let expectation = self.expectation(description: description)
 
-        conversation.listWorkspaces(includeAudit: true, failure: failWithError) { workspaceResponse in
-            for workspace in workspaceResponse.workspaces {
+        conversation.listWorkspaces(includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let workspaces = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            for workspace in workspaces.workspaces {
                 XCTAssertNotNil(workspace.name)
                 XCTAssertNotNil(workspace.created)
                 XCTAssertNotNil(workspace.updated)
                 XCTAssertNotNil(workspace.language)
                 XCTAssertNotNil(workspace.workspaceID)
             }
-            XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
+            XCTAssertNotNil(workspaces.pagination.refreshUrl)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -391,16 +473,27 @@ class ConversationTests: XCTestCase {
         let description = "List all workspaces with page limit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listWorkspaces(pageLimit: 1, includeAudit: true, failure: failWithError) { workspaceResponse in
-            XCTAssertEqual(workspaceResponse.workspaces.count, 1)
-            for workspace in workspaceResponse.workspaces {
+        conversation.listWorkspaces(pageLimit: 1, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let workspaces = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            XCTAssertEqual(workspaces.workspaces.count, 1)
+            for workspace in workspaces.workspaces {
                 XCTAssertNotNil(workspace.name)
                 XCTAssertNotNil(workspace.created)
                 XCTAssertNotNil(workspace.updated)
                 XCTAssertNotNil(workspace.language)
                 XCTAssertNotNil(workspace.workspaceID)
             }
-            XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
+            XCTAssertNotNil(workspaces.pagination.refreshUrl)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -410,18 +503,29 @@ class ConversationTests: XCTestCase {
         let description = "List all workspaces with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listWorkspaces(includeCount: true, includeAudit: true, failure: failWithError) { workspaceResponse in
-            for workspace in workspaceResponse.workspaces {
+        conversation.listWorkspaces(includeCount: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let workspaces = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            for workspace in workspaces.workspaces {
                 XCTAssertNotNil(workspace.name)
                 XCTAssertNotNil(workspace.created)
                 XCTAssertNotNil(workspace.updated)
                 XCTAssertNotNil(workspace.language)
                 XCTAssertNotNil(workspace.workspaceID)
             }
-            XCTAssertNotNil(workspaceResponse.pagination.refreshUrl)
-            XCTAssertNotNil(workspaceResponse.pagination.total)
-            XCTAssertNotNil(workspaceResponse.pagination.matched)
-            XCTAssertGreaterThanOrEqual(workspaceResponse.pagination.total!, workspaceResponse.workspaces.count)
+            XCTAssertNotNil(workspaces.pagination.refreshUrl)
+            XCTAssertNotNil(workspaces.pagination.total)
+            XCTAssertNotNil(workspaces.pagination.matched)
+            XCTAssertGreaterThanOrEqual(workspaces.pagination.total!, workspaces.workspaces.count)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -447,7 +551,18 @@ class ConversationTests: XCTestCase {
         let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent],
                                                   entities: [workspaceEntity], dialogNodes: [workspaceDialogNode], counterexamples: [workspaceCounterexample],
                                                   metadata: workspaceMetadata)
-        conversation.createWorkspace(properties: createWorkspaceBody, failure: failWithError) { workspace in
+        conversation.createWorkspace(properties: createWorkspaceBody) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let workspace = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
@@ -466,7 +581,18 @@ class ConversationTests: XCTestCase {
         let description2 = "Get the newly created workspace."
         let expectation2 = expectation(description: description2)
 
-        conversation.getWorkspace(workspaceID: newWorkspaceID, export: true, includeAudit: true, failure: failWithError) { workspace in
+        conversation.getWorkspace(workspaceID: newWorkspaceID, export: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let workspace = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
@@ -504,7 +630,12 @@ class ConversationTests: XCTestCase {
         let description3 = "Delete the newly created workspace."
         let expectation3 = expectation(description: description3)
 
-        conversation.deleteWorkspace(workspaceID: newWorkspaceID, failure: failWithError) {
+        conversation.deleteWorkspace(workspaceID: newWorkspaceID) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -514,7 +645,18 @@ class ConversationTests: XCTestCase {
         let description = "List details of a single workspace."
         let expectation = self.expectation(description: description)
 
-        conversation.getWorkspace(workspaceID: workspaceID, export: false, includeAudit: true, failure: failWithError) { workspace in
+        conversation.getWorkspace(workspaceID: workspaceID, export: false, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let workspace = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertNotNil(workspace.name)
             XCTAssertNotNil(workspace.created)
             XCTAssertNotNil(workspace.updated)
@@ -541,7 +683,18 @@ class ConversationTests: XCTestCase {
         let workspaceDescription = "temporary workspace for the swift sdk unit tests"
         let workspaceLanguage = "en"
         let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage)
-        conversation.createWorkspace(properties: createWorkspaceBody, failure: failWithError) { workspace in
+        conversation.createWorkspace(properties: createWorkspaceBody) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let workspace = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
@@ -563,7 +716,18 @@ class ConversationTests: XCTestCase {
         let newWorkspaceDescription = "new description for the temporary workspace"
 
         let updateWorkspaceBody = UpdateWorkspace(name: newWorkspaceName, description: newWorkspaceDescription)
-        conversation.updateWorkspace(workspaceID: newWorkspaceID, properties: updateWorkspaceBody, failure: failWithError) { workspace in
+        conversation.updateWorkspace(workspaceID: newWorkspaceID, properties: updateWorkspaceBody) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let workspace = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(workspace.name, newWorkspaceName)
             XCTAssertEqual(workspace.description, newWorkspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
@@ -575,7 +739,12 @@ class ConversationTests: XCTestCase {
         let description3 = "Delete the newly created workspace."
         let expectation3 = expectation(description: description3)
 
-        conversation.deleteWorkspace(workspaceID: newWorkspaceID, failure: failWithError) {
+        conversation.deleteWorkspace(workspaceID: newWorkspaceID) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -587,7 +756,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the intents in a workspace."
         let expectation = self.expectation(description: description)
 
-        conversation.listIntents(workspaceID: workspaceID, includeAudit: true, failure: failWithError) { intents in
+        conversation.listIntents(workspaceID: workspaceID, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let intents = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
@@ -607,7 +787,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the intents in a workspace with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listIntents(workspaceID: workspaceID, includeCount: true, includeAudit: true, failure: failWithError) { intents in
+        conversation.listIntents(workspaceID: workspaceID, includeCount: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let intents = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
@@ -628,7 +819,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the intents in a workspace with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listIntents(workspaceID: workspaceID, pageLimit: 1, includeAudit: true, failure: failWithError) { intents in
+        conversation.listIntents(workspaceID: workspaceID, pageLimit: 1, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let intents = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(intents.intents.count, 1)
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
@@ -649,7 +851,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the intents in a workspace with export as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listIntents(workspaceID: workspaceID, export: true, includeAudit: true, failure: failWithError) { intents in
+        conversation.listIntents(workspaceID: workspaceID, export: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let intents = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for intent in intents.intents {
                 XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
@@ -678,7 +891,18 @@ class ConversationTests: XCTestCase {
         let newIntentDescription = "description for \(newIntentName)"
         let example1 = CreateExample(text: "example 1 for \(newIntentName)")
         let example2 = CreateExample(text: "example 2 for \(newIntentName)")
-        conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
+        conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2]) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let intent = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(intent.intentName, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
             expectation.fulfill()
@@ -688,7 +912,12 @@ class ConversationTests: XCTestCase {
         let description2 = "Delete the new intent."
         let expectation2 = self.expectation(description: description2)
 
-        conversation.deleteIntent(workspaceID: workspaceID, intent: newIntentName, failure: failWithError) {
+        conversation.deleteIntent(workspaceID: workspaceID, intent: newIntentName) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -698,7 +927,18 @@ class ConversationTests: XCTestCase {
         let description = "Get details of a specific intent."
         let expectation = self.expectation(description: description)
 
-        conversation.getIntent(workspaceID: workspaceID, intent: "weather", export: true, includeAudit: true, failure: failWithError) { intent in
+        conversation.getIntent(workspaceID: workspaceID, intent: "weather", export: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let intent = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertNotNil(intent.intentName)
             XCTAssertNotNil(intent.created)
             XCTAssertNotNil(intent.updated)
@@ -721,7 +961,18 @@ class ConversationTests: XCTestCase {
         let newIntentDescription = "description for \(newIntentName)"
         let example1 = CreateExample(text: "example 1 for \(newIntentName)")
         let example2 = CreateExample(text: "example 2 for \(newIntentName)")
-        conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
+        conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2]) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let intent = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(intent.intentName, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
             expectation.fulfill()
@@ -735,7 +986,18 @@ class ConversationTests: XCTestCase {
         let updatedIntentDescription = "updated-description-for-\(newIntentName)"
         let updatedExample1 = CreateExample(text: "updated example for \(newIntentName)")
         conversation.updateIntent(workspaceID: workspaceID, intent: newIntentName, newIntent: updatedIntentName, newDescription: updatedIntentDescription,
-                                  newExamples: [updatedExample1], failure: failWithError) { intent in
+                                  newExamples: [updatedExample1]) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let intent = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(intent.intentName, updatedIntentName)
             XCTAssertEqual(intent.description, updatedIntentDescription)
             expectation2.fulfill()
@@ -745,7 +1007,12 @@ class ConversationTests: XCTestCase {
         let description3 = "Delete the new intent."
         let expectation3 = self.expectation(description: description3)
 
-        conversation.deleteIntent(workspaceID: workspaceID, intent: updatedIntentName, failure: failWithError) {
+        conversation.deleteIntent(workspaceID: workspaceID, intent: updatedIntentName) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -757,7 +1024,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the examples of an intent."
         let expectation = self.expectation(description: description)
 
-        conversation.listExamples(workspaceID: workspaceID, intent: "weather", includeAudit: true, failure: failWithError) { examples in
+        conversation.listExamples(workspaceID: workspaceID, intent: "weather", includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let examples = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
@@ -775,7 +1053,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the examples for an intent with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listExamples(workspaceID: workspaceID, intent: "weather", includeCount: true, includeAudit: true, failure: failWithError) { examples in
+        conversation.listExamples(workspaceID: workspaceID, intent: "weather", includeCount: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let examples = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
@@ -794,7 +1083,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the examples for an intent with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listExamples(workspaceID: workspaceID, intent: "weather", pageLimit: 1, includeAudit: true, failure: failWithError) { examples in
+        conversation.listExamples(workspaceID: workspaceID, intent: "weather", pageLimit: 1, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let examples = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(examples.examples.count, 1)
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
@@ -815,7 +1115,18 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newExample = "swift-sdk-test-example" + UUID().uuidString
-        conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
+        conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let example = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(example.exampleText, newExample)
             expectation.fulfill()
         }
@@ -824,7 +1135,12 @@ class ConversationTests: XCTestCase {
         let description2 = "Delete the new example."
         let expectation2 = self.expectation(description: description2)
 
-        conversation.deleteExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) {
+        conversation.deleteExample(workspaceID: workspaceID, intent: "weather", text: newExample) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -835,7 +1151,18 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let exampleText = "tell me the weather"
-        conversation.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, includeAudit: true, failure: failWithError) { example in
+        conversation.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let example = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertNotNil(example.created)
             XCTAssertNotNil(example.updated)
             XCTAssertEqual(example.exampleText, exampleText)
@@ -849,7 +1176,18 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newExample = "swift-sdk-test-example" + UUID().uuidString
-        conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample, failure: failWithError) { example in
+        conversation.createExample(workspaceID: workspaceID, intent: "weather", text: newExample) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let example = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(example.exampleText, newExample)
             expectation.fulfill()
         }
@@ -859,7 +1197,18 @@ class ConversationTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
 
         let updatedText = "updated-" + newExample
-        conversation.updateExample(workspaceID: workspaceID, intent: "weather", text: newExample, newText: updatedText, failure: failWithError) { example in
+        conversation.updateExample(workspaceID: workspaceID, intent: "weather", text: newExample, newText: updatedText) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let example = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(example.exampleText, updatedText)
             expectation2.fulfill()
         }
@@ -868,7 +1217,12 @@ class ConversationTests: XCTestCase {
         let description3 = "Delete the new example."
         let expectation3 = self.expectation(description: description3)
 
-        conversation.deleteExample(workspaceID: workspaceID, intent: "weather", text: updatedText, failure: failWithError) {
+        conversation.deleteExample(workspaceID: workspaceID, intent: "weather", text: updatedText) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -880,7 +1234,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the counterexamples of a workspace."
         let expectation = self.expectation(description: description)
 
-        conversation.listCounterexamples(workspaceID: workspaceID, includeAudit: true, failure: failWithError) { counterexamples in
+        conversation.listCounterexamples(workspaceID: workspaceID, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let counterexamples = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for counterexample in counterexamples.counterexamples {
                 XCTAssertNotNil(counterexample.created)
                 XCTAssertNotNil(counterexample.updated)
@@ -899,7 +1264,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the counterexamples of a workspace with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listCounterexamples(workspaceID: workspaceID, includeCount: true, includeAudit: true, failure: failWithError) { counterexamples in
+        conversation.listCounterexamples(workspaceID: workspaceID, includeCount: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let counterexamples = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for counterexample in counterexamples.counterexamples {
                 XCTAssertNotNil(counterexample.created)
                 XCTAssertNotNil(counterexample.updated)
@@ -919,7 +1295,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the counterexamples of a workspace with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listCounterexamples(workspaceID: workspaceID, pageLimit: 1, includeAudit: true, failure: failWithError) { counterexamples in
+        conversation.listCounterexamples(workspaceID: workspaceID, pageLimit: 1, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let counterexamples = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for counterexample in counterexamples.counterexamples {
                 XCTAssertNotNil(counterexample.created)
                 XCTAssertNotNil(counterexample.updated)
@@ -939,7 +1326,18 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newExample = "swift-sdk-test-counterexample" + UUID().uuidString
-        conversation.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
+        conversation.createCounterexample(workspaceID: workspaceID, text: newExample) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let counterexample = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertNotNil(counterexample.text)
             expectation.fulfill()
         }
@@ -948,7 +1346,12 @@ class ConversationTests: XCTestCase {
         let description2 = "Delete the new counterexample."
         let expectation2 = self.expectation(description: description2)
 
-        conversation.deleteCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) {
+        conversation.deleteCounterexample(workspaceID: workspaceID, text: newExample) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -959,7 +1362,18 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let exampleText = "when will it be funny"
-        conversation.getCounterexample(workspaceID: workspaceID, text: exampleText, includeAudit: true, failure: failWithError) { counterexample in
+        conversation.getCounterexample(workspaceID: workspaceID, text: exampleText, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let counterexample = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertNotNil(counterexample.created)
             XCTAssertNotNil(counterexample.updated)
             XCTAssertEqual(counterexample.text, exampleText)
@@ -973,7 +1387,18 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newExample = "swift-sdk-test-counterexample" + UUID().uuidString
-        conversation.createCounterexample(workspaceID: workspaceID, text: newExample, failure: failWithError) { counterexample in
+        conversation.createCounterexample(workspaceID: workspaceID, text: newExample) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let counterexample = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(counterexample.text, newExample)
             expectation.fulfill()
         }
@@ -983,7 +1408,18 @@ class ConversationTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
 
         let updatedText = "updated-"+newExample
-        conversation.updateCounterexample(workspaceID: workspaceID, text: newExample, newText: updatedText, failure: failWithError) { counterexample in
+        conversation.updateCounterexample(workspaceID: workspaceID, text: newExample, newText: updatedText) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let counterexample = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(counterexample.text, updatedText)
             expectation2.fulfill()
         }
@@ -992,7 +1428,12 @@ class ConversationTests: XCTestCase {
         let description3 = "Delete the new counterexample."
         let expectation3 = self.expectation(description: description3)
 
-        conversation.deleteCounterexample(workspaceID: workspaceID, text: updatedText, failure: failWithError) {
+        conversation.deleteCounterexample(workspaceID: workspaceID, text: updatedText) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -1004,7 +1445,18 @@ class ConversationTests: XCTestCase {
         let description = "List all entities"
         let expectation = self.expectation(description: description)
 
-        conversation.listEntities(workspaceID: workspaceID, includeAudit: true, failure: failWithError){entities in
+        conversation.listEntities(workspaceID: workspaceID, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entities = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1024,7 +1476,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the entities in a workspace with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listEntities(workspaceID: workspaceID, includeCount: true, includeAudit: true, failure: failWithError) { entities in
+        conversation.listEntities(workspaceID: workspaceID, includeCount: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entities = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1044,7 +1507,18 @@ class ConversationTests: XCTestCase {
         let description = "List all entities with page limit 1"
         let expectation = self.expectation(description: description)
 
-        conversation.listEntities(workspaceID: workspaceID, pageLimit: 1, includeAudit: true, failure: failWithError){entities in
+        conversation.listEntities(workspaceID: workspaceID, pageLimit: 1, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entities = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1065,7 +1539,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the entities in a workspace with export as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listEntities(workspaceID: workspaceID, export: true, includeAudit: true, failure: failWithError) { entities in
+        conversation.listEntities(workspaceID: workspaceID, export: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entities = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for entity in entities.entities {
                 XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
@@ -1088,9 +1573,20 @@ class ConversationTests: XCTestCase {
         let entityDescription = "This is a test entity"
         let entity = CreateEntity.init(entity: entityName, description: entityDescription)
 
-        conversation.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
-            XCTAssertEqual(entityResponse.entityName, entityName)
-            XCTAssertEqual(entityResponse.description, entityDescription)
+        conversation.createEntity(workspaceID: workspaceID, properties: entity) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entity = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            XCTAssertEqual(entity.entityName, entityName)
+            XCTAssertEqual(entity.description, entityDescription)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1099,6 +1595,11 @@ class ConversationTests: XCTestCase {
         let expectationTwo = self.expectation(description: descriptionTwo)
 
         conversation.deleteEntity(workspaceID: workspaceID, entity: entity.entity) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectationTwo.fulfill()
         }
         waitForExpectations()
@@ -1112,9 +1613,20 @@ class ConversationTests: XCTestCase {
         let entityDescription = "This is a test entity"
         let entity = CreateEntity.init(entity: entityName, description: entityDescription)
 
-        conversation.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
-            XCTAssertEqual(entityResponse.entityName, entityName)
-            XCTAssertEqual(entityResponse.description, entityDescription)
+        conversation.createEntity(workspaceID: workspaceID, properties: entity) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entity = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            XCTAssertEqual(entity.entityName, entityName)
+            XCTAssertEqual(entity.description, entityDescription)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1125,9 +1637,20 @@ class ConversationTests: XCTestCase {
         let updatedEntityName = "up-" + entityName
         let updatedEntityDescription = "This is a new description for a test entity"
         let updatedEntity = UpdateEntity.init(entity: updatedEntityName, description: updatedEntityDescription)
-        conversation.updateEntity(workspaceID: workspaceID, entity: entityName, properties: updatedEntity, failure: failWithError){ entityResponse in
-            XCTAssertEqual(entityResponse.entityName, updatedEntityName)
-            XCTAssertEqual(entityResponse.description, updatedEntityDescription)
+        conversation.updateEntity(workspaceID: workspaceID, entity: entityName, properties: updatedEntity) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entity = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
+            XCTAssertEqual(entity.entityName, updatedEntityName)
+            XCTAssertEqual(entity.description, updatedEntityDescription)
             expectationTwo.fulfill()
         }
         waitForExpectations()
@@ -1135,7 +1658,12 @@ class ConversationTests: XCTestCase {
         let descriptionFour = "Delete the entity"
         let expectationFour = self.expectation(description: descriptionFour)
 
-        conversation.deleteEntity(workspaceID: workspaceID, entity: updatedEntityName, failure: failWithError) {
+        conversation.deleteEntity(workspaceID: workspaceID, entity: updatedEntityName) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectationFour.fulfill()
         }
         waitForExpectations()
@@ -1145,10 +1673,32 @@ class ConversationTests: XCTestCase {
         let description = "Get details of a specific entity."
         let expectation = self.expectation(description: description)
 
-        conversation.listEntities(workspaceID: workspaceID, failure: failWithError) {entityCollection in
+        conversation.listEntities(workspaceID: workspaceID) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entityCollection = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssert(entityCollection.entities.count > 0)
             let entity = entityCollection.entities[0]
-            self.conversation.getEntity(workspaceID: self.workspaceID, entity: entity.entityName, export: true, includeAudit: true, failure: self.failWithError) { entityExport in
+            self.conversation.getEntity(workspaceID: self.workspaceID, entity: entity.entityName, export: true, includeAudit: true) {
+                response, error in
+
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let entityExport = response?.result else {
+                    XCTFail("Missing response value")
+                    return
+                }
+
                 XCTAssertEqual(entityExport.entityName, entity.entityName)
                 XCTAssertEqual(entityExport.description, entity.description)
                 XCTAssertNotNil(entityExport.created)
@@ -1170,9 +1720,18 @@ class ConversationTests: XCTestCase {
             entity: entityName,
             export: true,
             includeCount: true,
-            includeAudit: true,
-            failure: failWithError) {
-                valueCollection in
+            includeAudit: true) {
+                response, error in
+
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let valueCollection = response?.result else {
+                    XCTFail("Missing response value")
+                    return
+                }
+
                 for value in valueCollection.values {
                     XCTAssertNotNil(value.valueText)
                     XCTAssertNotNil(value.created)
@@ -1193,7 +1752,18 @@ class ConversationTests: XCTestCase {
         let entityName = "appliance"
         let valueName = "swift-sdk-test-value" + UUID().uuidString
         let value = CreateValue(value: valueName)
-        conversation.createValue(workspaceID: workspaceID, entity: entityName, properties: value, failure: failWithError) { value in
+        conversation.createValue(workspaceID: workspaceID, entity: entityName, properties: value) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let value = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(value.valueText, valueName)
             expectation.fulfill()
         }
@@ -1204,7 +1774,18 @@ class ConversationTests: XCTestCase {
 
         let updatedValueName = "up-" + valueName
         let updatedValue = UpdateValue(value: updatedValueName, metadata: ["oldname": .string(valueName)])
-        conversation.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, properties: updatedValue, failure: failWithError) { value in
+        conversation.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, properties: updatedValue) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let value = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(value.valueText, updatedValueName)
             XCTAssertNotNil(value.metadata)
             expectationTwo.fulfill()
@@ -1214,7 +1795,12 @@ class ConversationTests: XCTestCase {
         let descriptionThree = "Delete the updated value"
         let expectationThree = self.expectation(description: descriptionThree)
 
-        conversation.deleteValue(workspaceID: workspaceID, entity: entityName, value: updatedValueName, failure: failWithError) {
+        conversation.deleteValue(workspaceID: workspaceID, entity: entityName, value: updatedValueName) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectationThree.fulfill()
         }
         waitForExpectations()
@@ -1226,10 +1812,32 @@ class ConversationTests: XCTestCase {
 
         let entityName = "appliance"
 
-        conversation.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
+        conversation.listValues(workspaceID: workspaceID, entity: entityName) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let valueCollection = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssert(valueCollection.values.count > 0)
             let value = valueCollection.values[0]
-            self.conversation.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.valueText, export: true, includeAudit: true, failure: self.failWithError) { valueExport in
+            self.conversation.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.valueText, export: true, includeAudit: true) {
+                response, error in
+
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
+                guard let valueExport = response?.result else {
+                    XCTFail("Missing response value")
+                    return
+                }
+
                 XCTAssertEqual(valueExport.valueText, value.valueText)
                 XCTAssertNotNil(valueExport.created)
                 XCTAssertNotNil(valueExport.updated)
@@ -1245,7 +1853,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the synonyms for an entity and value."
         let expectation = self.expectation(description: description)
 
-        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeAudit: true, failure: failWithError) { synonyms in
+        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let synonyms = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
@@ -1263,7 +1882,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the synonyms for an entity and value with includeCount as true."
         let expectation = self.expectation(description: description)
 
-        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeCount: true, includeAudit: true, failure: failWithError) { synonyms in
+        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeCount: true, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let synonyms = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
@@ -1282,7 +1912,18 @@ class ConversationTests: XCTestCase {
         let description = "List all the synonyms for an entity and value with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", pageLimit: 1, includeAudit: true, failure: failWithError) { synonyms in
+        conversation.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", pageLimit: 1, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let synonyms = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(synonyms.synonyms.count, 1)
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
@@ -1303,7 +1944,18 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
-        conversation.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
+        conversation.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let synonym = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(synonym.synonymText, newSynonym)
             expectation.fulfill()
         }
@@ -1312,7 +1964,12 @@ class ConversationTests: XCTestCase {
         let description2 = "Delete the new synonym."
         let expectation2 = self.expectation(description: description2)
 
-        conversation.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) {
+        conversation.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -1323,7 +1980,18 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let synonymName = "headlight"
-        conversation.getSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: synonymName, includeAudit: true, failure: failWithError) { synonym in
+        conversation.getSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: synonymName, includeAudit: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let synonym = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(synonym.synonymText, synonymName)
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
@@ -1337,7 +2005,18 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
-        conversation.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
+        conversation.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let synonym = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(synonym.synonymText, newSynonym)
             expectation.fulfill()
         }
@@ -1347,7 +2026,18 @@ class ConversationTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
 
         let updatedSynonym = "new-" + newSynonym
-        conversation.updateSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, newSynonym: updatedSynonym, failure: failWithError){ synonym in
+        conversation.updateSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, newSynonym: updatedSynonym){
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let synonym = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(synonym.synonymText, updatedSynonym)
             expectation2.fulfill()
         }
@@ -1356,7 +2046,12 @@ class ConversationTests: XCTestCase {
         let description3 = "Delete the new synonym."
         let expectation3 = self.expectation(description: description3)
 
-        conversation.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: updatedSynonym, failure: failWithError) {
+        conversation.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: updatedSynonym) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -1368,7 +2063,18 @@ class ConversationTests: XCTestCase {
         let description = "List all dialog nodes"
         let expectation = self.expectation(description: description)
 
-        conversation.listDialogNodes(workspaceID: workspaceID, includeCount: true, failure: failWithError) { nodes in
+        conversation.listDialogNodes(workspaceID: workspaceID, includeCount: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let nodes = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for node in nodes.dialogNodes {
                 XCTAssertNotNil(node.dialogNodeID)
             }
@@ -1405,8 +2111,18 @@ class ConversationTests: XCTestCase {
             nodeType: "standard",
             eventName: nil,
             variable: nil)
-        conversation.createDialogNode(workspaceID: workspaceID, properties: dialogNode, failure: failWithError) {
-            node in
+        conversation.createDialogNode(workspaceID: workspaceID, properties: dialogNode) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let node = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(dialogNode.dialogNode, node.dialogNodeID)
             XCTAssertEqual(dialogNode.description, node.description)
             XCTAssertEqual(dialogNode.conditions, node.conditions)
@@ -1428,7 +2144,12 @@ class ConversationTests: XCTestCase {
         let description2 = "Delete a dialog node"
         let expectation2 = self.expectation(description: description2)
 
-        conversation.deleteDialogNode(workspaceID: workspaceID, dialogNode: dialogNode.dialogNode, failure: failWithError) {
+        conversation.deleteDialogNode(workspaceID: workspaceID, dialogNode: dialogNode.dialogNode) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -1438,8 +2159,18 @@ class ConversationTests: XCTestCase {
         let description1 = "Create a dialog node."
         let expectation1 = self.expectation(description: description1)
         let dialogNode = CreateDialogNode(dialogNode: "test-node")
-        conversation.createDialogNode(workspaceID: workspaceID, properties: dialogNode, failure: failWithError) {
-            node in
+        conversation.createDialogNode(workspaceID: workspaceID, properties: dialogNode) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let node = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(dialogNode.dialogNode, node.dialogNodeID)
             expectation1.fulfill()
         }
@@ -1448,8 +2179,18 @@ class ConversationTests: XCTestCase {
         let description2 = "Update a dialog node."
         let expectation2 = self.expectation(description: description2)
         let updatedNode = UpdateDialogNode(dialogNode: "test-node-updated")
-        conversation.updateDialogNode(workspaceID: workspaceID, dialogNode: "test-node", properties: updatedNode, failure: failWithError) {
-            node in
+        conversation.updateDialogNode(workspaceID: workspaceID, dialogNode: "test-node", properties: updatedNode) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let node = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(updatedNode.dialogNode, node.dialogNodeID)
             expectation2.fulfill()
         }
@@ -1457,7 +2198,12 @@ class ConversationTests: XCTestCase {
 
         let description3 = "Delete a dialog node."
         let expectation3 = self.expectation(description: description3)
-        conversation.deleteDialogNode(workspaceID: workspaceID, dialogNode: updatedNode.dialogNode!, failure: failWithError) {
+        conversation.deleteDialogNode(workspaceID: workspaceID, dialogNode: updatedNode.dialogNode!) {
+            _, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+            }
             expectation3.fulfill()
         }
         waitForExpectations()
@@ -1466,14 +2212,33 @@ class ConversationTests: XCTestCase {
     func testGetDialogNode() {
         let description = "Get details of a specific dialog node."
         let expectation = self.expectation(description: description)
-        conversation.listDialogNodes(workspaceID: workspaceID, failure: failWithError) { nodes in
+        conversation.listDialogNodes(workspaceID: workspaceID) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let nodes = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertGreaterThan(nodes.dialogNodes.count, 0)
             let dialogNode = nodes.dialogNodes.first!
             self.conversation.getDialogNode(
                 workspaceID: self.workspaceID,
-                dialogNode: dialogNode.dialogNodeID,
-                failure: self.failWithError) {
-                    node in
+                dialogNode: dialogNode.dialogNodeID) {
+                                response, error in
+
+                    if let error = error {
+                        XCTFail("Unexpected error response from service: \(error)")
+                        return
+                    }
+                    guard let node = response?.result else {
+                        XCTFail("Missing response value")
+                        return
+                    }
                     XCTAssertEqual(dialogNode.dialogNodeID, node.dialogNodeID)
                     expectation.fulfill()
                 }
@@ -1486,7 +2251,18 @@ class ConversationTests: XCTestCase {
     func testListAllLogs() {
         let expectation = self.expectation(description: "List all logs")
         let filter = "workspace_id::\(workspaceID),language::en"
-        conversation.listAllLogs(filter: filter, failure: failWithError) { logCollection in
+        conversation.listAllLogs(filter: filter) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let logCollection = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssert(logCollection.logs.count > 0)
             expectation.fulfill()
         }
@@ -1495,7 +2271,18 @@ class ConversationTests: XCTestCase {
 
     func testListLogs() {
         let expectation = self.expectation(description: "List logs")
-        conversation.listLogs(workspaceID: workspaceID, failure: failWithError) { logCollection in
+        conversation.listLogs(workspaceID: workspaceID) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let logCollection = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssert(logCollection.logs.count > 0)
             expectation.fulfill()
         }
@@ -1508,8 +2295,14 @@ class ConversationTests: XCTestCase {
         let description = "Start a conversation with an invalid workspace."
         let expectation = self.expectation(description: description)
         let workspaceID = "this-id-is-unknown"
-        let failure = { (error: Error) in expectation.fulfill() }
-        conversation.message(workspaceID: workspaceID, failure: failure, success: failWithResult)
+        conversation.message(workspaceID: workspaceID) {
+            _, error in
+
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 
@@ -1517,8 +2310,14 @@ class ConversationTests: XCTestCase {
         let description = "Start a conversation with an invalid workspace."
         let expectation = self.expectation(description: description)
         let workspaceID = "this id is invalid"
-        let failure = { (error: Error) in expectation.fulfill() }
-        conversation.message(workspaceID: workspaceID, failure: failure, success: failWithResult)
+        conversation.message(workspaceID: workspaceID) {
+            _, error in
+
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 }

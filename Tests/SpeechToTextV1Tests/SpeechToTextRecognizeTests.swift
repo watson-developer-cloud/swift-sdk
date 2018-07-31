@@ -106,11 +106,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         speechToText.recognize(audio: file, settings: settings) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail("Received an unexpected error: \(error)")
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail("Missing result from response")
                 return
             }
             self.validateSTTResults(results: results, settings: settings)
@@ -164,11 +164,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         speechToText.recognize(audio: file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail("Received an unexpected error: \(error)")
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail("Missing result from response")
                 return
             }
             self.validateSTTResults(results: results, settings: settings)
@@ -214,11 +214,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
             speechToText.recognize(audio: audio, settings: settings) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail("Received an unexpected error: \(error)")
                     return
                 }
                 guard let results = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail("Missing result from response")
                     return
                 }
                 self.validateSTTResults(results: results, settings: settings)
@@ -279,11 +279,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
             speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail("Received an unexpected error: \(error)")
                     return
                 }
                 guard let results = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail("Missing result from response")
                     return
                 }
                 self.validateSTTResults(results: results, settings: settings)
@@ -333,11 +333,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail("Received an unexpected error: \(error)")
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail("Missing result from response")
                 return
             }
             self.validateSTTResults(results: results, settings: settings)
@@ -390,11 +390,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
             speechToText.recognize(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail("Received an unexpected error: \(error)")
                     return
                 }
                 guard let results = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail("Missing result from response")
                     return
                 }
                 XCTAssertNotNil(results.speakerLabels)

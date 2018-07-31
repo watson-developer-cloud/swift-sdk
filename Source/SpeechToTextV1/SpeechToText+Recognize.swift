@@ -202,7 +202,7 @@ extension SpeechToText {
 
         // set callbacks
         session.onResults = { result in
-            var response = WatsonResponse<SpeechRecognitionResults>(statusCode: 0)
+            var response = WatsonResponse<SpeechRecognitionResults>(statusCode: 200)
             response.result = result
             completionHandler(response, nil)
         }

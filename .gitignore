@@ -1,5 +1,6 @@
 # Custom
-WatsonCredentials.swift
+Source/SupportingFiles/Credentials.swift
+Source/SupportingFiles/WatsonCredentials.swift
 
 # Build generated
 build/

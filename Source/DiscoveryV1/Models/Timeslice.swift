@@ -48,7 +48,7 @@ public struct Timeslice: Decodable {
     public var interval: String?
 
     /**
-     Used to inducate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints
+     Used to indicate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints
      within a time series.
      */
     public var anomaly: Bool?

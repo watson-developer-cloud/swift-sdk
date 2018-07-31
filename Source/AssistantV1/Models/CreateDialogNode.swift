@@ -106,7 +106,7 @@ public struct CreateDialogNode: Encodable {
      The output of the dialog node. For more information about how to specify dialog node output, see the
      [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      */
-    public var output: [String: JSON]?
+    public var output: DialogNodeOutput?
 
     /**
      The context for the dialog node.
@@ -165,6 +165,11 @@ public struct CreateDialogNode: Encodable {
      */
     public var digressOutSlots: String?
 
+    /**
+     A label that can be displayed externally to describe the purpose of the node to users.
+     */
+    public var userLabel: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case dialogNode = "dialog_node"
@@ -184,6 +189,7 @@ public struct CreateDialogNode: Encodable {
         case digressIn = "digress_in"
         case digressOut = "digress_out"
         case digressOutSlots = "digress_out_slots"
+        case userLabel = "user_label"
     }
 
     /**
@@ -214,6 +220,7 @@ public struct CreateDialogNode: Encodable {
      - parameter digressIn: Whether this top-level dialog node can be digressed into.
      - parameter digressOut: Whether this dialog node can be returned to after a digression.
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
+     - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
 
      - returns: An initialized `CreateDialogNode`.
     */
@@ -223,7 +230,7 @@ public struct CreateDialogNode: Encodable {
         conditions: String? = nil,
         parent: String? = nil,
         previousSibling: String? = nil,
-        output: [String: JSON]? = nil,
+        output: DialogNodeOutput? = nil,
         context: [String: JSON]? = nil,
         metadata: [String: JSON]? = nil,
         nextStep: DialogNodeNextStep? = nil,
@@ -234,7 +241,8 @@ public struct CreateDialogNode: Encodable {
         variable: String? = nil,
         digressIn: String? = nil,
         digressOut: String? = nil,
-        digressOutSlots: String? = nil
+        digressOutSlots: String? = nil,
+        userLabel: String? = nil
     )
     {
         self.dialogNode = dialogNode
@@ -254,6 +262,7 @@ public struct CreateDialogNode: Encodable {
         self.digressIn = digressIn
         self.digressOut = digressOut
         self.digressOutSlots = digressOutSlots
+        self.userLabel = userLabel
     }
 
 }

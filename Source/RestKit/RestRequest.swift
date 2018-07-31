@@ -185,18 +185,17 @@ extension RestRequest {
                 return
             }
 
-            switch watsonResponse.result {
-            case is Data?:
+            if T.self == Data.self {
                 // pass thru the raw data
                 watsonResponse.result = data as? T
-            case is String?:
+            } else if T.self == String.self {
                 // parse data as a string
                 guard let string = String(data: data, encoding: .utf8) else {
                     completionHandler(watsonResponse, RestError.serializationError)
                     return
                 }
                 watsonResponse.result = string as? T
-            default:
+            } else {
                 // no other supported types
                 watsonResponse.result = nil
             }

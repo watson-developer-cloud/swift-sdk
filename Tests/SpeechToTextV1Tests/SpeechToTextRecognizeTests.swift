@@ -78,20 +78,6 @@ class SpeechToTextRecognizeTests: XCTestCase {
         ]
     }
 
-    // MARK: - Helper Functions
-
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
-    func failWithResult<T>(result: T) {
-        XCTFail("Negative test returned a result.")
-    }
-
-    func failWithResult() {
-        XCTFail("Negative test returned a result.")
-    }
-
     // MARK: - Transcribe File, Default Settings
 
     func testTranscribeFileDefaultWAV() {
@@ -117,7 +103,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
         }
 
         let settings = RecognitionSettings(contentType: format)
-        speechToText.recognize(audio: file, settings: settings, failure: failWithError) { results in
+        speechToText.recognize(audio: file, settings: settings) {
+            response, error in
+            if let error = error {
+                XCTFail("Received an unexpected error: \(error)")
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail("Missing result from response")
+                return
+            }
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
             XCTAssertEqual(results.results!.count, 1)
@@ -166,7 +161,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
         settings.filterProfanity = false
         settings.smartFormatting = true
 
-        speechToText.recognize(audio: file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+        speechToText.recognize(audio: file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true) {
+            response, error in
+            if let error = error {
+                XCTFail("Received an unexpected error: \(error)")
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail("Missing result from response")
+                return
+            }
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
             if results.results!.last?.finalResults == true {
@@ -207,7 +211,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
             let audio = try Data(contentsOf: file)
 
             let settings = RecognitionSettings(contentType: format)
-            speechToText.recognize(audio: audio, settings: settings, failure: failWithError) { results in
+            speechToText.recognize(audio: audio, settings: settings) {
+                response, error in
+                if let error = error {
+                    XCTFail("Received an unexpected error: \(error)")
+                    return
+                }
+                guard let results = response?.result else {
+                    XCTFail("Missing result from response")
+                    return
+                }
                 self.validateSTTResults(results: results, settings: settings)
                 XCTAssertNotNil(results.results)
                 XCTAssertEqual(results.results!.count, 1)
@@ -263,7 +276,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
             settings.filterProfanity = false
             settings.smartFormatting = true
 
-            speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+            speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true) {
+                response, error in
+                if let error = error {
+                    XCTFail("Received an unexpected error: \(error)")
+                    return
+                }
+                guard let results = response?.result else {
+                    XCTFail("Missing result from response")
+                    return
+                }
                 self.validateSTTResults(results: results, settings: settings)
                 if results.results?.last?.finalResults == true {
                     let transcript = results.results!.last?.alternatives.last?.transcript
@@ -308,7 +330,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
         var settings = RecognitionSettings(contentType: format)
         settings.smartFormatting = true
 
-        speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+        speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true) {
+            response, error in
+            if let error = error {
+                XCTFail("Received an unexpected error: \(error)")
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail("Missing result from response")
+                return
+            }
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
             if results.results!.last?.finalResults == true {
@@ -356,7 +387,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
             settings.filterProfanity = false
             settings.speakerLabels = true
 
-            speechToText.recognize(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true, failure: failWithError) { results in
+            speechToText.recognize(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true) {
+                response, error in
+                if let error = error {
+                    XCTFail("Received an unexpected error: \(error)")
+                    return
+                }
+                guard let results = response?.result else {
+                    XCTFail("Missing result from response")
+                    return
+                }
                 XCTAssertNotNil(results.speakerLabels)
                 if !expectationFulfilled && results.speakerLabels!.count > 0 {
                     self.validateSTTSpeakerLabels(speakerLabels: results.speakerLabels!)

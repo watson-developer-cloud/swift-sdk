@@ -96,6 +96,9 @@ public class ToneAnalyzer {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -284,6 +287,55 @@ public class ToneAnalyzer {
             case .failure(let error): failure?(error)
             }
         }
+    }
+
+}
+
+extension ToneAnalyzer {
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the tone method that accepts a toneContent parameter.  This method will be removed in a future release.")
+    public func tone(
+        toneInput: ToneInput,
+        sentences: Bool? = nil,
+        tones: [String]? = nil,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ToneAnalysis) -> Void)
+    {
+        tone(toneContent: .toneInput(toneInput), sentences: sentences, tones: tones, contentLanguage: contentLanguage,
+             acceptLanguage: acceptLanguage, headers: headers, failure: failure, success: success)
+    }
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the tone method that accepts a toneContent parameter.  This method will be removed in a future release.")
+    public func tone(
+        text: String,
+        sentences: Bool? = nil,
+        tones: [String]? = nil,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ToneAnalysis) -> Void)
+    {
+        tone(toneContent: .text(text), sentences: sentences, tones: tones, contentLanguage: contentLanguage,
+             acceptLanguage: acceptLanguage, headers: headers, failure: failure, success: success)
+    }
+
+    @available(*, deprecated, message: "This method has been deprecated in favor of the tone method that accepts a toneContent parameter.  This method will be removed in a future release.")
+    public func tone(
+        html: String,
+        sentences: Bool? = nil,
+        tones: [String]? = nil,
+        contentLanguage: String? = nil,
+        acceptLanguage: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ToneAnalysis) -> Void)
+    {
+        tone(toneContent: .html(html), sentences: sentences, tones: tones, contentLanguage: contentLanguage,
+             acceptLanguage: acceptLanguage, headers: headers, failure: failure, success: success)
     }
 
 }

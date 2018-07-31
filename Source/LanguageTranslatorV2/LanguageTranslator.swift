@@ -28,6 +28,7 @@ import Foundation
  take news from across the globe and present it in your language, communicate with your customers in their own language,
  and more.
  */
+@available(*, deprecated, message: "Language Translator v3 is now available. The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API.")
 public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
@@ -88,6 +89,9 @@ public class LanguageTranslator {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error_message"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)

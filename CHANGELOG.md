@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+## Version 0.31.0
+_2018-07-31_
+
+This release regenerates all services with documentation updates and minor generator improvements.
+
+This release includes the following new features and bug fixes:
+
+- Assistant: Add support for entity mentions and disambiguation
+- Renames STT Websocket method to `recognizeUsingWebSocket`.  The prior name is deprecated but retained for backward compatibility.
+- Fix Xcode 10 build error
+
 ## Version 0.30.0
 _2018-07-16_
 

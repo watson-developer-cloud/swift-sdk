@@ -61,17 +61,6 @@ class NaturalLanguageClassifierTests: XCTestCase {
         ]
     }
 
-    /** Instantiate Natural Langauge response, error in
-
-            if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
-                return
-            }
-            guard let classifier = response?.result else {
-                XCTFail("Missing response value")
-                return
-            }
-stance. */
     func instantiateNaturalLanguageClassifier() {
         if let apiKey = Credentials.NaturalLanguageClassifierAPIKey {
             naturalLanguageClassifier = NaturalLanguageClassifier(apiKey: apiKey)
@@ -178,7 +167,7 @@ stance. */
 
     func testListClassifiers() {
         let expectation = self.expectation(description: "Get classifiers.")
-        naturalLanguageClassifier.listClassifiers() {
+        naturalLanguageClassifier.listClassifiers {
             response, error in
 
             if let error = error {

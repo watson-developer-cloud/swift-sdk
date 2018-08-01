@@ -8,6 +8,7 @@ matrix:
 branches:
   only:
     - master
+    - v1.0
 env:
   global:
     - IOS_SDK="iphonesimulator"

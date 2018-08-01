@@ -107,7 +107,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation.fulfill()
         }
@@ -125,7 +125,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation.fulfill()
         }
@@ -143,7 +143,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation.fulfill()
         }
@@ -170,11 +170,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -203,11 +203,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -242,11 +242,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -292,11 +292,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -331,11 +331,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -367,11 +367,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -403,11 +403,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -431,11 +431,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -458,11 +458,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -496,11 +496,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -529,11 +529,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -558,11 +558,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -596,11 +596,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -621,7 +621,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             _, error in
 
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }
@@ -635,11 +635,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 

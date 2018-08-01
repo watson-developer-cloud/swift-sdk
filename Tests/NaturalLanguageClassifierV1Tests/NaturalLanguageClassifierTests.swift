@@ -115,11 +115,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifier = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -129,7 +129,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
                 _, error in
 
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
                 expectation.fulfill()
             }
@@ -143,11 +143,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifier = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -157,7 +157,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
                 _, error in
 
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
                 expectation.fulfill()
             }
@@ -171,11 +171,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiers = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -190,11 +190,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
         naturalLanguageClassifier.getClassifier(classifierID: trainedClassifierId) { response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifier = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -210,11 +210,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classification = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -235,11 +235,11 @@ class NaturalLanguageClassifierTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifications = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -267,7 +267,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
                 _, error in
 
                 if error == nil {
-                    XCTFail("Expected error response")
+                    XCTFail(missingErrorMessage)
                 }
                 expectation.fulfill()
         }
@@ -280,7 +280,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             _, error in
 
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }
@@ -296,7 +296,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             _, error in
 
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }
@@ -311,7 +311,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             _, error in
 
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }
@@ -326,7 +326,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
             _, error in
 
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }

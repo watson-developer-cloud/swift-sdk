@@ -126,11 +126,11 @@ class VisualRecognitionTests: XCTestCase {
 
         visualRecognition.listClassifiers { response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiers = response?.result?.classifiers else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
             for classifier in classifiers where classifier.classifierID == self.classifierID {
@@ -149,11 +149,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.listClassifiers(verbose: true) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiers = response?.result?.classifiers else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
             for classifier in classifiers where classifier.classifierID == self.classifierID {
@@ -178,11 +178,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.createClassifier(name: name, positiveExamples: classes) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifier = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(classifier.name, name)
@@ -201,11 +201,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.listClassifiers(verbose: true) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiers = response?.result?.classifiers else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
             for classifier in classifiers where classifier.classifierID == classifierIDToDelete {
@@ -225,7 +225,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.deleteClassifier(classifierID: classifierIDToDelete) {
             _, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -245,11 +245,11 @@ class VisualRecognitionTests: XCTestCase {
             negativeExamples: examplesTrucks) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let classifier = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 XCTAssertEqual(classifier.name, name)
@@ -269,11 +269,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.listClassifiers(verbose: true) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiers = response?.result?.classifiers else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
             for classifier in classifiers where classifier.classifierID == newClassifierID {
@@ -293,7 +293,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.deleteClassifier(classifierID: newClassifierID) {
             _, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -306,11 +306,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.getClassifier(classifierID: classifierID) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifier = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertNotNil(classifier.classes)
@@ -334,11 +334,11 @@ class VisualRecognitionTests: XCTestCase {
             negativeExamples: examplesBaseball) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let classifier = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 XCTAssertEqual(classifier.name, name)
@@ -365,11 +365,11 @@ class VisualRecognitionTests: XCTestCase {
             visualRecognition.getClassifier(classifierID: newClassifierID) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let classifier = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 if classifier.status == "ready" {
@@ -393,11 +393,11 @@ class VisualRecognitionTests: XCTestCase {
             positiveExamples: [trucks]) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let classifier = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 XCTAssertEqual(classifier.name, name)
@@ -414,11 +414,11 @@ class VisualRecognitionTests: XCTestCase {
             visualRecognition.getClassifier(classifierID: newClassifierID) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let classifier = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 if classifier.status == "ready" {
@@ -453,11 +453,11 @@ class VisualRecognitionTests: XCTestCase {
             negativeExamples: examplesTrucks) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let classifier = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 XCTAssertEqual(classifier.name, name)
@@ -484,11 +484,11 @@ class VisualRecognitionTests: XCTestCase {
             visualRecognition.getClassifier(classifierID: newClassifierID) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let classifier = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 if classifier.status == "ready" {
@@ -511,11 +511,11 @@ class VisualRecognitionTests: XCTestCase {
             negativeExamples: examplesBaseball) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let classifier = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 XCTAssertEqual(classifier.name, name)
@@ -532,11 +532,11 @@ class VisualRecognitionTests: XCTestCase {
             visualRecognition.getClassifier(classifierID: newClassifierID) {
                 response, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let classifier = response?.result else {
-                    XCTFail("Missing result value")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 if classifier.status == "ready" {
@@ -563,11 +563,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(url: obamaURL) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -623,11 +623,11 @@ class VisualRecognitionTests: XCTestCase {
         {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -676,11 +676,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(url: carURL, classifierIDs: [classifierID]) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -722,11 +722,11 @@ class VisualRecognitionTests: XCTestCase {
         {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -762,11 +762,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(url: carURL, classifierIDs: ["default", classifierID]) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -825,11 +825,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(imagesFile: car) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
             var containsPersonClass = false
@@ -882,11 +882,11 @@ class VisualRecognitionTests: XCTestCase {
         {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -934,11 +934,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(imagesFile: car, classifierIDs: [classifierID]) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -980,11 +980,11 @@ class VisualRecognitionTests: XCTestCase {
         {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1023,11 +1023,11 @@ class VisualRecognitionTests: XCTestCase {
         {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1090,11 +1090,11 @@ class VisualRecognitionTests: XCTestCase {
         {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1152,11 +1152,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.detectFaces(url: obamaURL) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let faceImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1202,11 +1202,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.detectFaces(imagesFile: obama) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let faceImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1252,11 +1252,11 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.detectFaces(imagesFile: faces) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let faceImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1312,7 +1312,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.getClassifier(classifierID: "foo-bar-baz") {
             _, error in
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()        }
         waitForExpectations()
@@ -1327,7 +1327,7 @@ class VisualRecognitionTests: XCTestCase {
         {
             _, error in
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }
@@ -1342,7 +1342,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(url: invalidImageURL) {
             _, error in
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }
@@ -1357,7 +1357,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.detectFaces(url: invalidImageURL) {
             _, error in
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }
@@ -1371,7 +1371,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.getClassifier(classifierID: "foo-bar-baz")  {
             _, error in
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }

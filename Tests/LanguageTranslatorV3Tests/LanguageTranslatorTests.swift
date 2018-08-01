@@ -75,11 +75,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let models = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -88,7 +88,7 @@ class LanguageTranslatorTests: XCTestCase {
                     _, error in
 
                     if let error = error {
-                        XCTFail("Unexpected error response from service: \(error)")
+                        XCTFail(unexpectedErrorMessage(error))
                         return
                     }
                 }
@@ -113,11 +113,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let models = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -133,11 +133,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let models = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -153,11 +153,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let models = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -173,11 +173,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let models = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -208,12 +208,12 @@ class LanguageTranslatorTests: XCTestCase {
                     expectation.fulfill()
                     return
                 } else {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
             }
             guard let model = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -222,7 +222,7 @@ class LanguageTranslatorTests: XCTestCase {
                 _, error in
 
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
                 expectation.fulfill()
             }
@@ -236,11 +236,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let model = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -257,11 +257,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let translation = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -281,11 +281,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let translation = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -304,11 +304,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let identifiableLanguages = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -324,11 +324,11 @@ class LanguageTranslatorTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let identifiableLanguages = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -350,7 +350,7 @@ class LanguageTranslatorTests: XCTestCase {
             _, error in
 
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }

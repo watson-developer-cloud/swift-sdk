@@ -27,11 +27,6 @@ class VisualRecognitionWithIAMTests: XCTestCase {
     private let trumpURL = "https://watson-developer-cloud.github.io/doc-tutorial-downloads/" +
         "visual-recognition/prez-trump.jpg"
 
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
     /** Get access token using IAM API Key. */
     func getTokenInfo(apiKey: String, refreshToken: String? = nil) -> [String: Any]? {
         // swiftlint:disable force_unwrapping
@@ -87,11 +82,11 @@ class VisualRecognitionWithIAMTests: XCTestCase {
         visualRecognition.classify(url: ginniURL) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -142,11 +137,11 @@ class VisualRecognitionWithIAMTests: XCTestCase {
         visualRecognition.classify(url: obamaURL) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -189,11 +184,11 @@ class VisualRecognitionWithIAMTests: XCTestCase {
         visualRecognition.classify(url: trumpURL) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 

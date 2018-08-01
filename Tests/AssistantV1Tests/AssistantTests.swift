@@ -112,18 +112,6 @@ class AssistantTests: XCTestCase {
         return assistant
     }
 
-    func failPositiveTest(_ error: Error?) {
-        var failureMessage = "Positive test failed to get a result."
-        if let error = error {
-            failureMessage += " Error: \(error)"
-        }
-        XCTFail(failureMessage)
-    }
-
-    func failNegativeTest() {
-        XCTFail("Negative test returned a result when it should have errored.")
-    }
-
     func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
@@ -142,37 +130,41 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID, nodesVisitedDetails: true) {
             response, error in
 
-            guard let result = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
             // verify input
-            XCTAssertNil(result.input?.text)
+            XCTAssertNil(message.input?.text)
 
             // verify context
-            XCTAssertNotNil(result.context.conversationID)
-            XCTAssertNotEqual(result.context.conversationID, "")
-            XCTAssertNotNil(result.context.system)
-            XCTAssertNotNil(result.context.system!.additionalProperties)
-            XCTAssertFalse(result.context.system!.additionalProperties.isEmpty)
+            XCTAssertNotNil(message.context.conversationID)
+            XCTAssertNotEqual(message.context.conversationID, "")
+            XCTAssertNotNil(message.context.system)
+            XCTAssertNotNil(message.context.system!.additionalProperties)
+            XCTAssertFalse(message.context.system!.additionalProperties.isEmpty)
 
             // verify entities
-            XCTAssertTrue(result.entities.isEmpty)
+            XCTAssertTrue(message.entities.isEmpty)
 
             // verify intents
-            XCTAssertTrue(result.intents.isEmpty)
+            XCTAssertTrue(message.intents.isEmpty)
 
             // verify output
-            XCTAssertTrue(result.output.logMessages.isEmpty)
-            XCTAssertEqual(result.output.text, result1)
-            XCTAssertNotNil(result.output.nodesVisited)
-            XCTAssertEqual(result.output.nodesVisited!.count, 1)
-            XCTAssertNotNil(result.output.nodesVisitedDetails)
-            XCTAssertNotNil(result.output.nodesVisitedDetails!.first)
-            XCTAssertNotNil(result.output.nodesVisitedDetails!.first!.dialogNode)
+            XCTAssertTrue(message.output.logMessages.isEmpty)
+            XCTAssertEqual(message.output.text, result1)
+            XCTAssertNotNil(message.output.nodesVisited)
+            XCTAssertEqual(message.output.nodesVisited!.count, 1)
+            XCTAssertNotNil(message.output.nodesVisitedDetails)
+            XCTAssertNotNil(message.output.nodesVisitedDetails!.first)
+            XCTAssertNotNil(message.output.nodesVisitedDetails!.first!.dialogNode)
 
-            context = result.context
+            context = message.context
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -187,38 +179,42 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID, request: request) {
             response, error in
 
-            guard let result = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
             // verify input
-            XCTAssertEqual(result.input?.text, input.text)
+            XCTAssertEqual(message.input?.text, input.text)
 
             // verify context
-            XCTAssertEqual(result.context.conversationID, context!.conversationID)
-            XCTAssertNotNil(result.context.system)
-            XCTAssertNotNil(result.context.system!.additionalProperties)
-            XCTAssertFalse(result.context.system!.additionalProperties.isEmpty)
+            XCTAssertEqual(message.context.conversationID, context!.conversationID)
+            XCTAssertNotNil(message.context.system)
+            XCTAssertNotNil(message.context.system!.additionalProperties)
+            XCTAssertFalse(message.context.system!.additionalProperties.isEmpty)
 
             // verify entities
-            XCTAssertEqual(result.entities.count, 1)
-            XCTAssertEqual(result.entities[0].entity, "appliance")
-            XCTAssertEqual(result.entities[0].location[0], 12)
-            XCTAssertEqual(result.entities[0].location[1], 17)
-            XCTAssertEqual(result.entities[0].value, "music")
+            XCTAssertEqual(message.entities.count, 1)
+            XCTAssertEqual(message.entities[0].entity, "appliance")
+            XCTAssertEqual(message.entities[0].location[0], 12)
+            XCTAssertEqual(message.entities[0].location[1], 17)
+            XCTAssertEqual(message.entities[0].value, "music")
 
             // verify intents
-            XCTAssertEqual(result.intents.count, 1)
-            XCTAssertEqual(result.intents[0].intent, "turn_on")
-            XCTAssert(result.intents[0].confidence >= 0.80)
-            XCTAssert(result.intents[0].confidence <= 1.00)
+            XCTAssertEqual(message.intents.count, 1)
+            XCTAssertEqual(message.intents[0].intent, "turn_on")
+            XCTAssert(message.intents[0].confidence >= 0.80)
+            XCTAssert(message.intents[0].confidence <= 1.00)
 
             // verify output
-            XCTAssertTrue(result.output.logMessages.isEmpty)
-            XCTAssertEqual(result.output.text, result2)
-            XCTAssertNotNil(result.output.nodesVisited)
-            XCTAssertEqual(result.output.nodesVisited!.count, 3)
+            XCTAssertTrue(message.output.logMessages.isEmpty)
+            XCTAssertEqual(message.output.text, result2)
+            XCTAssertNotNil(message.output.nodesVisited)
+            XCTAssertEqual(message.output.nodesVisited!.count, 3)
 
             expectation2.fulfill()
         }
@@ -237,15 +233,19 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID) {
             response, error in
 
-            guard let result = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
-            context = result.context
-            entities = result.entities
-            intents = result.intents
-            output = result.output
+            context = message.context
+            entities = message.entities
+            intents = message.intents
+            output = message.output
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -258,8 +258,12 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID, request: request2) {
             response, error in
 
-            guard let result = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
@@ -269,17 +273,17 @@ class AssistantTests: XCTestCase {
             XCTAssertNotNil(output)
 
             // verify intents are equal
-            for index in 0..<result.intents.count {
+            for index in 0..<message.intents.count {
                 let intent1 = intents![index]
-                let intent2 = result.intents[index]
+                let intent2 = message.intents[index]
                 XCTAssertEqual(intent1.intent, intent2.intent)
                 XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
 
             // verify entities are equal
-            for index in 0..<result.entities.count {
+            for index in 0..<message.entities.count {
                 let entity1 = entities![index]
-                let entity2 = result.entities[index]
+                let entity2 = message.entities[index]
                 XCTAssertEqual(entity1.entity, entity2.entity)
                 XCTAssertEqual(entity1.location[0], entity2.location[0])
                 XCTAssertEqual(entity1.location[1], entity2.location[1])
@@ -303,12 +307,16 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID) {
             response, error in
 
-            guard let result = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
-            context = result.context
+            context = message.context
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -321,15 +329,19 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID, request: request2) {
             response, error in
 
-            guard let result = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
-            context = result.context
-            entities = result.entities
-            intents = result.intents
-            output = result.output
+            context = message.context
+            entities = message.entities
+            intents = message.intents
+            output = message.output
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -342,8 +354,12 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID, request: request3) {
             response, error in
 
-            guard let result = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
@@ -353,17 +369,17 @@ class AssistantTests: XCTestCase {
             XCTAssertNotNil(output)
 
             // verify intents are equal
-            for index in 0..<result.intents.count {
+            for index in 0..<message.intents.count {
                 let intent1 = intents![index]
-                let intent2 = result.intents[index]
+                let intent2 = message.intents[index]
                 XCTAssertEqual(intent1.intent, intent2.intent)
                 XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
             }
 
             // verify entities are equal
-            for index in 0..<result.entities.count {
+            for index in 0..<message.entities.count {
                 let entity1 = entities![index]
-                let entity2 = result.entities[index]
+                let entity2 = message.entities[index]
                 XCTAssertEqual(entity1.entity, entity2.entity)
                 XCTAssertEqual(entity1.location[0], entity2.location[0])
                 XCTAssertEqual(entity1.location[1], entity2.location[1])
@@ -383,12 +399,16 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID) {
             response, error in
 
-            guard let result = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
-            context = result.context
+            context = message.context
             context?.additionalProperties["foo"] = .string("bar")
             expectation1.fulfill()
         }
@@ -402,12 +422,16 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID, request: request2) {
             response, error in
 
-            guard let result = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
-            let additionalProperties = result.context.additionalProperties
+            let additionalProperties = message.context.additionalProperties
             guard case let .string(bar) = additionalProperties["foo"]! else {
                 XCTFail("Additional property \"foo\" expected but not present.")
                 return
@@ -432,8 +456,12 @@ class AssistantTests: XCTestCase {
         assistant.listWorkspaces(includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let workspaceResult = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -457,8 +485,12 @@ class AssistantTests: XCTestCase {
         assistant.listWorkspaces(pageLimit: 1, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let workspaceResult = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -483,8 +515,12 @@ class AssistantTests: XCTestCase {
         assistant.listWorkspaces(includeCount: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let workspaceResult = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -527,8 +563,12 @@ class AssistantTests: XCTestCase {
         assistant.createWorkspace(properties: createWorkspaceBody) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let workspace = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -553,8 +593,12 @@ class AssistantTests: XCTestCase {
         assistant.getWorkspace(workspaceID: newWorkspaceID, export: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let workspace = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -598,9 +642,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteWorkspace(workspaceID: newWorkspaceID) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
             expectation3.fulfill()
         }
@@ -614,8 +657,12 @@ class AssistantTests: XCTestCase {
         assistant.getWorkspace(workspaceID: workspaceID, export: false, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let workspace = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -648,8 +695,12 @@ class AssistantTests: XCTestCase {
         assistant.createWorkspace(properties: createWorkspaceBody) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let workspace = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -677,8 +728,12 @@ class AssistantTests: XCTestCase {
         assistant.updateWorkspace(workspaceID: newWorkspaceID, properties: updateWorkspaceBody) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let workspace = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -696,9 +751,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteWorkspace(workspaceID: newWorkspaceID) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation3.fulfill()
@@ -715,8 +769,12 @@ class AssistantTests: XCTestCase {
         assistant.listIntents(workspaceID: workspaceID, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let intents = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -742,8 +800,12 @@ class AssistantTests: XCTestCase {
         assistant.listIntents(workspaceID: workspaceID, includeCount: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let intents = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -770,8 +832,12 @@ class AssistantTests: XCTestCase {
         assistant.listIntents(workspaceID: workspaceID, pageLimit: 1, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let intents = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -798,8 +864,12 @@ class AssistantTests: XCTestCase {
         assistant.listIntents(workspaceID: workspaceID, export: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let intents = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -834,8 +904,12 @@ class AssistantTests: XCTestCase {
         assistant.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2]) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let intent = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -851,9 +925,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteIntent(workspaceID: workspaceID, intent: newIntentName) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation2.fulfill()
@@ -868,8 +941,12 @@ class AssistantTests: XCTestCase {
         assistant.getIntent(workspaceID: workspaceID, intent: "weather", export: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let intent = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -898,8 +975,12 @@ class AssistantTests: XCTestCase {
         assistant.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2]) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let intent = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -918,8 +999,12 @@ class AssistantTests: XCTestCase {
         assistant.updateIntent(workspaceID: workspaceID, intent: newIntentName, newIntent: updatedIntentName, newDescription: updatedIntentDescription, newExamples: [updatedExample1]) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let intent = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -935,9 +1020,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteIntent(workspaceID: workspaceID, intent: updatedIntentName) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation3.fulfill()
@@ -954,8 +1038,12 @@ class AssistantTests: XCTestCase {
         assistant.listExamples(workspaceID: workspaceID, intent: "weather", includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let examples = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -979,8 +1067,12 @@ class AssistantTests: XCTestCase {
         assistant.listExamples(workspaceID: workspaceID, intent: "weather", includeCount: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let examples = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1005,8 +1097,12 @@ class AssistantTests: XCTestCase {
         assistant.listExamples(workspaceID: workspaceID, intent: "weather", pageLimit: 1, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let examples = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1033,8 +1129,12 @@ class AssistantTests: XCTestCase {
         assistant.createExample(workspaceID: workspaceID, intent: "weather", text: newExample) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let example = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1049,9 +1149,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteExample(workspaceID: workspaceID, intent: "weather", text: newExample) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation2.fulfill()
@@ -1067,8 +1166,12 @@ class AssistantTests: XCTestCase {
         assistant.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let example = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1088,8 +1191,12 @@ class AssistantTests: XCTestCase {
         assistant.createExample(workspaceID: workspaceID, intent: "weather", text: newExample) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let example = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1105,8 +1212,12 @@ class AssistantTests: XCTestCase {
         assistant.updateExample(workspaceID: workspaceID, intent: "weather", text: newExample, newText: updatedText) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let example = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1121,9 +1232,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteExample(workspaceID: workspaceID, intent: "weather", text: updatedText) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation3.fulfill()
@@ -1140,8 +1250,12 @@ class AssistantTests: XCTestCase {
         assistant.listCounterexamples(workspaceID: workspaceID, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let counterexamples = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1166,8 +1280,12 @@ class AssistantTests: XCTestCase {
         assistant.listCounterexamples(workspaceID: workspaceID, includeCount: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let counterexamples = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1193,8 +1311,12 @@ class AssistantTests: XCTestCase {
         assistant.listCounterexamples(workspaceID: workspaceID, pageLimit: 1, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let counterexamples = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1220,8 +1342,12 @@ class AssistantTests: XCTestCase {
         assistant.createCounterexample(workspaceID: workspaceID, text: newExample) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let counterexample = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1236,9 +1362,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteCounterexample(workspaceID: workspaceID, text: newExample) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation2.fulfill()
@@ -1254,8 +1379,12 @@ class AssistantTests: XCTestCase {
         assistant.getCounterexample(workspaceID: workspaceID, text: exampleText, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let counterexample = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1275,8 +1404,12 @@ class AssistantTests: XCTestCase {
         assistant.createCounterexample(workspaceID: workspaceID, text: newExample) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let counterexample = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1292,8 +1425,12 @@ class AssistantTests: XCTestCase {
         assistant.updateCounterexample(workspaceID: workspaceID, text: newExample, newText: updatedText) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let counterexample = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1308,9 +1445,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteCounterexample(workspaceID: workspaceID, text: updatedText) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation3.fulfill()
@@ -1327,8 +1463,12 @@ class AssistantTests: XCTestCase {
         assistant.listEntities(workspaceID: workspaceID, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let entities = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1354,8 +1494,12 @@ class AssistantTests: XCTestCase {
         assistant.listEntities(workspaceID: workspaceID, includeCount: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let entities = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1381,8 +1525,12 @@ class AssistantTests: XCTestCase {
         assistant.listEntities(workspaceID: workspaceID, pageLimit: 1, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let entities = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1409,8 +1557,12 @@ class AssistantTests: XCTestCase {
         assistant.listEntities(workspaceID: workspaceID, export: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let entities = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1439,8 +1591,12 @@ class AssistantTests: XCTestCase {
         assistant.createEntity(workspaceID: workspaceID, properties: entity){
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let entity = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1456,9 +1612,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteEntity(workspaceID: workspaceID, entity: entity.entity) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectationTwo.fulfill()
@@ -1477,13 +1632,17 @@ class AssistantTests: XCTestCase {
         assistant.createEntity(workspaceID: workspaceID, properties: entity){
             response, error in
 
-            guard let entityResponse = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entity = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
-            XCTAssertEqual(entityResponse.entityName, entityName)
-            XCTAssertEqual(entityResponse.description, entityDescription)
+            XCTAssertEqual(entity.entityName, entityName)
+            XCTAssertEqual(entity.description, entityDescription)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1497,13 +1656,17 @@ class AssistantTests: XCTestCase {
         assistant.updateEntity(workspaceID: workspaceID, entity: entityName, properties: updatedEntity){
             response, error in
 
-            guard let entityResponse = response?.result else {
-                self.failPositiveTest(error)
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let entity = response?.result else {
+                XCTFail("Missing response value")
                 return
             }
 
-            XCTAssertEqual(entityResponse.entityName, updatedEntityName)
-            XCTAssertEqual(entityResponse.description, updatedEntityDescription)
+            XCTAssertEqual(entity.entityName, updatedEntityName)
+            XCTAssertEqual(entity.description, updatedEntityDescription)
             expectationTwo.fulfill()
         }
         waitForExpectations()
@@ -1514,9 +1677,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteEntity(workspaceID: workspaceID, entity: updatedEntityName) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectationFour.fulfill()
@@ -1531,8 +1693,12 @@ class AssistantTests: XCTestCase {
         assistant.listEntities(workspaceID: workspaceID) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let entityCollection = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1541,8 +1707,12 @@ class AssistantTests: XCTestCase {
             self.assistant.getEntity(workspaceID: self.workspaceID, entity: entity.entityName, export: true, includeAudit: true) {
                 response, error in
 
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
                 guard let entityExport = response?.result else {
-                    self.failPositiveTest(error)
+                    XCTFail("Missing response value")
                     return
                 }
 
@@ -1570,8 +1740,12 @@ class AssistantTests: XCTestCase {
             includeAudit: true) {
                 response, error in
 
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
                 guard let valueCollection = response?.result else {
-                    self.failPositiveTest(error)
+                    XCTFail("Missing response value")
                     return
                 }
 
@@ -1598,8 +1772,12 @@ class AssistantTests: XCTestCase {
         assistant.createValue(workspaceID: workspaceID, entity: entityName, properties: value) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let value = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1616,8 +1794,12 @@ class AssistantTests: XCTestCase {
         assistant.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, properties: updatedValue) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let value = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1633,9 +1815,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteValue(workspaceID: workspaceID, entity: entityName, value: updatedValueName) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectationThree.fulfill()
@@ -1652,8 +1833,12 @@ class AssistantTests: XCTestCase {
         assistant.listValues(workspaceID: workspaceID, entity: entityName) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let valueCollection = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1662,8 +1847,12 @@ class AssistantTests: XCTestCase {
             self.assistant.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.valueText, export: true, includeAudit: true) {
                 response, error in
 
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
                 guard let valueExport = response?.result else {
-                    self.failPositiveTest(error)
+                    XCTFail("Missing response value")
                     return
                 }
 
@@ -1685,8 +1874,12 @@ class AssistantTests: XCTestCase {
         assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let synonyms = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1710,8 +1903,12 @@ class AssistantTests: XCTestCase {
         assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeCount: true, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let synonyms = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1736,8 +1933,12 @@ class AssistantTests: XCTestCase {
         assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", pageLimit: 1, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let synonyms = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1764,8 +1965,12 @@ class AssistantTests: XCTestCase {
         assistant.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let synonym = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1780,9 +1985,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation2.fulfill()
@@ -1798,8 +2002,12 @@ class AssistantTests: XCTestCase {
         assistant.getSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: synonymName, includeAudit: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let synonym = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1819,8 +2027,12 @@ class AssistantTests: XCTestCase {
         assistant.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let synonym = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1836,8 +2048,12 @@ class AssistantTests: XCTestCase {
         assistant.updateSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, newSynonym: updatedSynonym){
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let synonym = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1852,9 +2068,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: updatedSynonym) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation3.fulfill()
@@ -1871,8 +2086,12 @@ class AssistantTests: XCTestCase {
         assistant.listDialogNodes(workspaceID: workspaceID, includeCount: true) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let nodes = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1911,8 +2130,12 @@ class AssistantTests: XCTestCase {
         assistant.createDialogNode(workspaceID: workspaceID, properties: dialogNode) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let node = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1939,9 +2162,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteDialogNode(workspaceID: workspaceID, dialogNode: dialogNode.dialogNode) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation2.fulfill()
@@ -1956,8 +2178,12 @@ class AssistantTests: XCTestCase {
         assistant.createDialogNode(workspaceID: workspaceID, properties: dialogNode) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let node = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1972,8 +2198,12 @@ class AssistantTests: XCTestCase {
         assistant.updateDialogNode(workspaceID: workspaceID, dialogNode: "test-node", properties: updatedNode) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let node = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -1987,9 +2217,8 @@ class AssistantTests: XCTestCase {
         assistant.deleteDialogNode(workspaceID: workspaceID, dialogNode: updatedNode.dialogNode!) {
             _, error in
 
-            guard error == nil else {
-                self.failPositiveTest(error)
-                return
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
             }
 
             expectation3.fulfill()
@@ -2003,8 +2232,12 @@ class AssistantTests: XCTestCase {
         assistant.listDialogNodes(workspaceID: workspaceID) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let nodes = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -2015,8 +2248,12 @@ class AssistantTests: XCTestCase {
                 dialogNode: dialogNode.dialogNodeID) {
                     response, error in
 
-                    guard let node = response?.result, error == nil else {
-                        self.failPositiveTest(error)
+                    if let error = error {
+                        XCTFail("Unexpected error response from service: \(error)")
+                        return
+                    }
+                    guard let node = response?.result else {
+                        XCTFail("Missing response value")
                         return
                     }
 
@@ -2035,8 +2272,12 @@ class AssistantTests: XCTestCase {
         assistant.listAllLogs(filter: filter) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let logCollection = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -2051,8 +2292,12 @@ class AssistantTests: XCTestCase {
         assistant.listLogs(workspaceID: workspaceID) {
             response, error in
 
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
             guard let logCollection = response?.result else {
-                self.failPositiveTest(error)
+                XCTFail("Missing response value")
                 return
             }
 
@@ -2071,9 +2316,8 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID) {
             _, error in
 
-            guard error != nil else {
-                self.failNegativeTest()
-                return
+            if error == nil {
+                XCTFail("Expected error response")
             }
             expectation.fulfill()
         }
@@ -2088,9 +2332,8 @@ class AssistantTests: XCTestCase {
         assistant.message(workspaceID: workspaceID) {
             _, error in
 
-            guard error != nil else {
-                self.failNegativeTest()
-                return
+            if error == nil {
+                XCTFail("Expected error response")
             }
             expectation.fulfill()
         }

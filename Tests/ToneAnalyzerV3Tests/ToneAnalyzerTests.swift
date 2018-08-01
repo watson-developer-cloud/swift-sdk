@@ -89,10 +89,16 @@ class ToneAnalyzerTests: XCTestCase {
         let expectation = self.expectation(description: "Get tone.")
         toneAnalyzer.tone(toneContent: .toneInput(ToneInput(text: text))) {
             response, error in
-            guard let toneAnalysis = response?.result else {
-                XCTFail("Positive test failed with error: \(error!)")
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
+            guard let toneAnalysis = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
             XCTAssertNotNil(toneAnalysis.documentTone.tones)
             XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
             XCTAssertNotNil(toneAnalysis.sentencesTone)
@@ -113,10 +119,16 @@ class ToneAnalyzerTests: XCTestCase {
         let expectation = self.expectation(description: "Get tone.")
         toneAnalyzer.tone(toneContent: .text(text)) {
             response, error in
-            guard let toneAnalysis = response?.result else {
-                XCTFail("Positive test failed with error: \(error!)")
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
+            guard let toneAnalysis = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
             XCTAssertNotNil(toneAnalysis.documentTone.tones)
             XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
             XCTAssertNotNil(toneAnalysis.sentencesTone)
@@ -138,10 +150,16 @@ class ToneAnalyzerTests: XCTestCase {
         let html = "<!DOCTYPE html><html><body><p>\(text)</p></body></html>"
         toneAnalyzer.tone(toneContent: .html(html)) {
             response, error in
-            guard let toneAnalysis = response?.result else {
-                XCTFail("Positive test failed with error: \(error!)")
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
+            guard let toneAnalysis = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
             XCTAssertNotNil(toneAnalysis.documentTone.tones)
             XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
             XCTAssertNotNil(toneAnalysis.sentencesTone)
@@ -166,10 +184,16 @@ class ToneAnalyzerTests: XCTestCase {
             acceptLanguage: "en")
         {
             response, error in
-            guard let toneAnalysis = response?.result else {
-                XCTFail("Positive test failed with error: \(error!)")
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
+            guard let toneAnalysis = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
             XCTAssertNotNil(toneAnalysis.documentTone.tones)
             XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
             XCTAssertNil(toneAnalysis.sentencesTone)
@@ -182,10 +206,16 @@ class ToneAnalyzerTests: XCTestCase {
         let expectation = self.expectation(description: "Tone chat.")
         toneAnalyzer.toneChat(utterances: utterances, acceptLanguage: "en") {
             response, error in
-            guard let analyses = response?.result else {
-                XCTFail("Positive test failed with error: \(error!)")
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
+            guard let analyses = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
             XCTAssert(!analyses.utterancesTone.isEmpty)
             expectation.fulfill()
         }
@@ -198,8 +228,9 @@ class ToneAnalyzerTests: XCTestCase {
         let expectation = self.expectation(description: "Get tone with an empty string.")
         toneAnalyzer.tone(toneContent: .toneInput(ToneInput(text: ""))) {
             _, error in
+
             if error == nil {
-                XCTFail("Negative test did not return error.")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }
@@ -210,8 +241,9 @@ class ToneAnalyzerTests: XCTestCase {
         let expectation = self.expectation(description: "Tone chat with an empty array.")
         toneAnalyzer.toneChat(utterances: [], acceptLanguage: "en") {
             _, error in
+
             if error == nil {
-                XCTFail("Negative test did not return error.")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }

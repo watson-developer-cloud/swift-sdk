@@ -53,6 +53,14 @@ class SpeechToTextRecognizeTests: XCTestCase {
         speechToText.defaultHeaders["X-Watson-Test"] = "true"
     }
 
+    func cannotLocateFileMessage(_ fileName: String, _ withExtension: String) -> String {
+        return "Unable to locate \(fileName).\(withExtension)"
+    }
+
+    func cannotReadFileMessage(_ fileName: String, _ withExtension: String) -> String {
+        return "Unable to read \(fileName).\(withExtension)"
+    }
+
     // MARK: - Test Definition for Linux
 
     static var allTests: [(String, (SpeechToTextRecognizeTests) -> () throws -> Void)] {
@@ -98,7 +106,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -145,7 +153,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -203,7 +211,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -232,7 +240,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             }
             wait(for: [expectation], timeout: timeout)
         } catch {
-            XCTFail("Unable to read \(filename).\(withExtension).")
+            XCTFail(cannotReadFileMessage(filename, withExtension))
             return
         }
     }
@@ -257,7 +265,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -296,7 +304,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             }
             wait(for: [expectation], timeout: timeout)
         } catch {
-            XCTFail("Unable to read \(filename).\(withExtension).")
+            XCTFail(cannotReadFileMessage(filename, withExtension))
             return
         }
     }
@@ -318,12 +326,12 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
         guard let audio = try? Data(contentsOf: file) else {
-            XCTFail("Unable to read \(filename).\(withExtension).")
+            XCTFail(cannotReadFileMessage(filename, withExtension))
             return
         }
 
@@ -372,7 +380,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -406,7 +414,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             }
             wait(for: [expectation], timeout: timeout)
         } catch {
-            XCTFail("Unable to read \(filename).\(withExtension).")
+            XCTFail(cannotReadFileMessage(filename, withExtension))
             return
         }
     }

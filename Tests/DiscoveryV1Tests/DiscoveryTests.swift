@@ -28,6 +28,7 @@ class DiscoveryTests: XCTestCase {
     private let newsCollectionID = "news-en"
     private var documentURL: URL!
     private let timeout: TimeInterval = 30.0
+    private let unexpectedAggregationTypeMessage = "Unexpected aggregation type"
 
     // MARK: - Test Configuration
 
@@ -1146,7 +1147,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .term(term) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1187,7 +1188,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .filter(filter) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1223,7 +1224,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .nested(nested) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1259,7 +1260,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .histogram(histogram) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1300,7 +1301,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .timeslice(timeslice) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1340,7 +1341,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .topHits(topHits) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1379,7 +1380,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .uniqueCount(uniqueCount) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1415,7 +1416,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .max(calculation) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1451,7 +1452,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .min(calculation) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1487,7 +1488,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .average(calculation) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }
@@ -1523,7 +1524,7 @@ class DiscoveryTests: XCTestCase {
             XCTAssertNotNil(query.aggregations)
             XCTAssertEqual(query.aggregations!.count, 1)
             guard case let .sum(calculation) = query.aggregations!.first! else {
-                XCTFail("unexpected aggregation type")
+                XCTFail(self.unexpectedAggregationTypeMessage)
                 expectation.fulfill()
                 return
             }

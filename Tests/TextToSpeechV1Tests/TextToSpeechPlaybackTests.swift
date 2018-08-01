@@ -30,6 +30,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     private let japaneseText = "こんにちは"
     private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\">" +
     "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
+    private let failedToInitializeAudioPlayerMessage = "Failed to initialize an AVAudioPlayer with the received data"
 
     // MARK: - Test Configuration
 
@@ -88,7 +89,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(3)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -119,7 +120,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(3)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -150,7 +151,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(2)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -181,7 +182,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(2)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -212,7 +213,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(1)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }

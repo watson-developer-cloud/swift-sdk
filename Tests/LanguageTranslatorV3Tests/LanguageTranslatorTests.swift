@@ -71,28 +71,31 @@ class LanguageTranslatorTests: XCTestCase {
     func deleteStaleCustomModels() {
         let description = "Delete any stale custom models previously created by unit tests."
         let expectation = self.expectation(description: description)
-        languageTranslator.listModels(defaultModels: false, failure: failWithError) { models in
+        languageTranslator.listModels(defaultModels: false) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let models = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for model in models.models where model.baseModelID != "" {
-                self.languageTranslator.deleteModel(modelID: model.modelID, failure: self.failWithError) { _ in }
+                self.languageTranslator.deleteModel(modelID: model.modelID) {
+                    _, error in
+
+                    if let error = error {
+                        XCTFail("Unexpected error response from service: \(error)")
+                        return
+                    }
+                }
             }
             expectation.fulfill()
         }
         waitForExpectations()
-    }
-
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
-    /** Fail false positives. */
-    func failWithResult<T>(result: T) {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Fail false positives. */
-    func failWithResult() {
-        XCTFail("Negative test returned a result.")
     }
 
     /** Wait for expectations. */
@@ -106,7 +109,18 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testListModelsAll() {
         let expectation = self.expectation(description: "List all models.")
-        languageTranslator.listModels(failure: failWithError) { models in
+        languageTranslator.listModels {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let models = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertGreaterThan(models.models.count, 0)
             expectation.fulfill()
         }
@@ -115,7 +129,18 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testListModelsBySourceLanguage() {
         let expectation = self.expectation(description: "List models, filtered by source language.")
-        languageTranslator.listModels(source: "es", failure: failWithError) { models in
+        languageTranslator.listModels(source: "es") {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let models = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertGreaterThan(models.models.count, 0)
             expectation.fulfill()
         }
@@ -124,7 +149,18 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testListModelsByTargetLanguage() {
         let expectation = self.expectation(description: "List models, filtered by target language.")
-        languageTranslator.listModels(target: "pt", failure: failWithError) { models in
+        languageTranslator.listModels(target: "pt") {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let models = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertGreaterThan(models.models.count, 0)
             expectation.fulfill()
         }
@@ -133,7 +169,18 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testListModelsDefault() {
         let expectation = self.expectation(description: "List models, filtered by default models.")
-        languageTranslator.listModels(defaultModels: true, failure: failWithError) { models in
+        languageTranslator.listModels(defaultModels: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let models = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertGreaterThan(models.models.count, 0)
             expectation.fulfill()
         }
@@ -153,24 +200,30 @@ class LanguageTranslatorTests: XCTestCase {
             }
         #endif
 
-        let failure = { (error: Error) in
-            if error.localizedDescription.contains("does not permit customization") {
-                expectation.fulfill()
-            } else {
-                XCTFail(error.localizedDescription)
+        languageTranslator.createModel(baseModelID: "en-es", name: "custom-english-to-spanish-model", forcedGlossary: glossary) {
+            response, error in
 
+            if let error = error {
+                if error.localizedDescription.contains("does not permit customization") {
+                    expectation.fulfill()
+                    return
+                } else {
+                    XCTFail("Unexpected error response from service: \(error)")
+                    return
+                }
             }
-        }
+            guard let model = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
 
-        languageTranslator.createModel(
-            baseModelID: "en-es",
-            name: "custom-english-to-spanish-model",
-            forcedGlossary: glossary,
-            failure: failure)
-        {
-            model in
             XCTAssertNotEqual(model.modelID, "")
-            self.languageTranslator.deleteModel(modelID: model.modelID, failure: self.failWithError) { _ in
+            self.languageTranslator.deleteModel(modelID: model.modelID) {
+                _, error in
+
+                if let error = error {
+                    XCTFail("Unexpected error response from service: \(error)")
+                }
                 expectation.fulfill()
             }
         }
@@ -179,7 +232,18 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testGetModel() {
         let expectation = self.expectation(description: "Get model.")
-        languageTranslator.getModel(modelID: "en-es", failure: failWithError) { model in
+        languageTranslator.getModel(modelID: "en-es") {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let model = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(model.status, TranslationModel.Status.available.rawValue)
             expectation.fulfill()
         }
@@ -189,8 +253,18 @@ class LanguageTranslatorTests: XCTestCase {
     func testTranslateStringWithModelID() {
         let expectation = self.expectation(description: "Translate text string using model id.")
         let request = TranslateRequest(text: ["Hello"], modelID: "en-es")
-        languageTranslator.translate(request: request, failure: failWithError) {
-            translation in
+        languageTranslator.translate(request: request) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let translation = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
             XCTAssertEqual(translation.translations.count, 1)
@@ -203,8 +277,18 @@ class LanguageTranslatorTests: XCTestCase {
     func testTranslateStringWithSourceAndTarget() {
         let expectation = self.expectation(description: "Translate text string using source and target.")
         let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")
-        languageTranslator.translate(request: request, failure: failWithError) {
-            translation in
+        languageTranslator.translate(request: request) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let translation = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
             XCTAssertEqual(translation.translations.count, 1)
@@ -216,7 +300,18 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testListIdentifiableLanguages() {
         let expectation = self.expectation(description: "List identifiable languages.")
-        languageTranslator.listIdentifiableLanguages(failure: failWithError) { identifiableLanguages in
+        languageTranslator.listIdentifiableLanguages() {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let identifiableLanguages = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertGreaterThan(identifiableLanguages.languages.count, 0)
             expectation.fulfill()
         }
@@ -225,7 +320,18 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testIdentify() {
         let expectation = self.expectation(description: "Identify")
-        languageTranslator.identify(text: "Hola", failure: failWithError) { identifiableLanguages in
+        languageTranslator.identify(text: "Hola") {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let identifiableLanguages = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             let languages = identifiableLanguages.languages
             XCTAssertGreaterThan(languages.count, 0)
             XCTAssertEqual(languages.first?.language, "es")
@@ -240,8 +346,14 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testGetModelDoesntExist() {
         let expectation = self.expectation(description: "Get model with invalid model id")
-        let failure = { (error: Error) in expectation.fulfill() }
-        languageTranslator.getModel(modelID: "invalid_model_id", failure: failure, success: failWithResult)
+        languageTranslator.getModel(modelID: "invalid_model_id") {
+            _, error in
+
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 }

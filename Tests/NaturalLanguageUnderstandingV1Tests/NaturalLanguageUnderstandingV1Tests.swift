@@ -616,7 +616,6 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testDeleteModel() {
         let description = "Delete an invalid model."
         let expectation = self.expectation(description: description)
-        let failure = { (error: Error) in expectation.fulfill() }
         naturalLanguageUnderstanding.deleteModel(modelID: "invalid_model_id") {
             _, error in
 

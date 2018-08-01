@@ -89,7 +89,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(3)
                 }
             } catch {
-                XCTFail(failedToInitializeAudioPlayerMessage)
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -120,7 +120,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(3)
                 }
             } catch {
-                XCTFail(failedToInitializeAudioPlayerMessage)
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -151,7 +151,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(2)
                 }
             } catch {
-                XCTFail(failedToInitializeAudioPlayerMessage)
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -182,7 +182,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(2)
                 }
             } catch {
-                XCTFail(failedToInitializeAudioPlayerMessage)
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -213,7 +213,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(1)
                 }
             } catch {
-                XCTFail(failedToInitializeAudioPlayerMessage)
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }

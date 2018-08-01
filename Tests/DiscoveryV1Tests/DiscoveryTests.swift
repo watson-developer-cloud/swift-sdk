@@ -41,7 +41,7 @@ class DiscoveryTests: XCTestCase {
 
     func instantiateDiscovery() -> Discovery {
         let discovery: Discovery
-        let version = "2018-07-16"
+        let version = "2018-07-31"
         if let apiKey = WatsonCredentials.DiscoveryAPIKey {
             discovery = Discovery(version: version, apiKey: apiKey)
         } else {

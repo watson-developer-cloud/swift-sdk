@@ -22,9 +22,11 @@ import PersonalityInsightsV3
 class PersonalityInsightsTests: XCTestCase {
 
     private var personalityInsights: PersonalityInsights!
-    private var text: String!
-    private var html: String!
-    private var short: String!
+
+    private var rawText: String!
+    private var text: ProfileContent!
+    private var html: ProfileContent!
+    private var short: ProfileContent!
 
     static var allTests: [(String, (PersonalityInsightsTests) -> () throws -> Void)] {
         return [
@@ -78,25 +80,11 @@ class PersonalityInsightsTests: XCTestCase {
         #endif
     }
 
-    public func loadTestResources() {
-        self.text = load(forResource: "KennedySpeech", ofType: "txt")
-        self.html = load(forResource: "KennedySpeech", ofType: "html")
-        self.short = load(forResource: "MobyDickIntro", ofType: "txt")
-    }
-
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
-    /** Fail false positives. */
-    func failWithResult<T>(result: T) {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Fail false positives. */
-    func failWithResult() {
-        XCTFail("Negative test returned a result.")
+    func loadTestResources() {
+        self.rawText = load(forResource: "KennedySpeech", ofType: "txt")
+        self.text = ProfileContent.text(self.rawText!)
+        self.html = ProfileContent.html(load(forResource: "KennedySpeech", ofType: "html")!)
+        self.short = ProfileContent.text(load(forResource: "MobyDickIntro", ofType: "txt")!)
     }
 
     /** Wait for expectations. */
@@ -109,8 +97,19 @@ class PersonalityInsightsTests: XCTestCase {
     // MARK: - Positive Tests
 
     func testProfileText() {
-        let expectation = self.expectation(description: "profile(text:)")
-        personalityInsights.profile(text: text, failure: failWithError) { profile in
+        let expectation = self.expectation(description: "profile(profileContent:)")
+        personalityInsights.profile(profileContent: text) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let profile = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for preference in profile.personality {
                 XCTAssertNotNil(preference.name)
                 break
@@ -122,7 +121,18 @@ class PersonalityInsightsTests: XCTestCase {
 
     func testProfileHTML() {
         let expectation = self.expectation(description: "profile(html:)")
-        personalityInsights.profile(html: html, failure: failWithError) { profile in
+        personalityInsights.profile(profileContent: html) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let profile = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for preference in profile.personality {
                 XCTAssertNotNil(preference.name)
                 break
@@ -135,7 +145,7 @@ class PersonalityInsightsTests: XCTestCase {
     func testProfileContent() {
         let expectation = self.expectation(description: "profile(content:)")
         let contentItem = ContentItem(
-            content: text,
+            content: rawText,
             id: "245160944223793152",
             created: 1427720427,
             updated: 1427720427,
@@ -145,8 +155,19 @@ class PersonalityInsightsTests: XCTestCase {
             reply: false,
             forward: false
         )
-        let content = Content(contentItems: [contentItem])
-        personalityInsights.profile(content: content, failure: failWithError) { profile in
+        let content = ProfileContent.content(Content(contentItems: [contentItem]))
+        personalityInsights.profile(profileContent: content) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let profile = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             if let behaviors = profile.behavior {
                 for behavior in behaviors {
                     XCTAssertNotNil(behavior.traitID)
@@ -158,8 +179,19 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     func testProfileAsCsvText() {
-        let expectation = self.expectation(description: "profile(text:)")
-        personalityInsights.profileAsCsv(text: text, failure: failWithError) { csv in
+        let expectation = self.expectation(description: "profile(profileContent:)")
+        personalityInsights.profileAsCsv(profileContent: text) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let csv = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertGreaterThan(csv.count, 0)
             expectation.fulfill()
         }
@@ -168,7 +200,18 @@ class PersonalityInsightsTests: XCTestCase {
 
     func testProfileAsCsvHTML() {
         let expectation = self.expectation(description: "profile(html:)")
-        personalityInsights.profileAsCsv(html: html, failure: failWithError) { csv in
+        personalityInsights.profileAsCsv(profileContent: html) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let csv = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertGreaterThan(csv.count, 0)
             expectation.fulfill()
         }
@@ -178,7 +221,7 @@ class PersonalityInsightsTests: XCTestCase {
     func testProfileAsCsvContent() {
         let expectation = self.expectation(description: "profile(content:)")
         let contentItem = ContentItem(
-            content: text,
+            content: rawText,
             id: "245160944223793152",
             created: 1427720427,
             updated: 1427720427,
@@ -188,8 +231,19 @@ class PersonalityInsightsTests: XCTestCase {
             reply: false,
             forward: false
         )
-        let content = Content(contentItems: [contentItem])
-        personalityInsights.profileAsCsv(content: content, failure: failWithError) { csv in
+        let content = ProfileContent.content(Content(contentItems: [contentItem]))
+        personalityInsights.profileAsCsv(profileContent: content) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let csv = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             XCTAssertGreaterThan(csv.count, 0)
             expectation.fulfill()
         }
@@ -197,9 +251,19 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     func testNeedsAndConsumptionPreferences() {
-        let expectation = self.expectation(description: "profile(text:)")
-        personalityInsights.profile(text: text, rawScores: true, consumptionPreferences: true, failure: failWithError) {
-            profile in
+        let expectation = self.expectation(description: "profile(profileContent:)")
+        personalityInsights.profile(profileContent: text, rawScores: true, consumptionPreferences: true) {
+            response, error in
+
+            if let error = error {
+                XCTFail("Unexpected error response from service: \(error)")
+                return
+            }
+            guard let profile = response?.result else {
+                XCTFail("Missing response value")
+                return
+            }
+
             for need in profile.needs {
                 XCTAssertNotNil(need.rawScore)
                 break
@@ -224,9 +288,15 @@ class PersonalityInsightsTests: XCTestCase {
     // MARK: - Negative Tests
 
     func testProfileWithShortText() {
-        let expectation = self.expectation(description: "profile(text:)")
-        let failure = { (error: Error) in expectation.fulfill() }
-        personalityInsights.profile(text: short, failure: failure, success: failWithResult)
+        let expectation = self.expectation(description: "profile(profileContent:)")
+        personalityInsights.profile(profileContent: short) {
+            _, error in
+
+            if error == nil {
+                XCTFail("Expected error response")
+            }
+            expectation.fulfill()
+        }
         waitForExpectations()
     }
 }

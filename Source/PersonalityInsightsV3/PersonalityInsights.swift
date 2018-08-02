@@ -316,7 +316,7 @@ public class PersonalityInsights {
         )
 
         // execute REST request
-        request.responseObject(completionHandler: completionHandler)
+        request.response(completionHandler: completionHandler)
     }
 
 }

@@ -102,11 +102,11 @@ class PersonalityInsightsTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let profile = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -125,11 +125,11 @@ class PersonalityInsightsTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let profile = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -160,11 +160,11 @@ class PersonalityInsightsTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let profile = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -184,11 +184,11 @@ class PersonalityInsightsTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let csv = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -204,11 +204,11 @@ class PersonalityInsightsTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let csv = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -236,11 +236,11 @@ class PersonalityInsightsTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let csv = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -256,11 +256,11 @@ class PersonalityInsightsTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let profile = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -293,7 +293,7 @@ class PersonalityInsightsTests: XCTestCase {
             _, error in
 
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }

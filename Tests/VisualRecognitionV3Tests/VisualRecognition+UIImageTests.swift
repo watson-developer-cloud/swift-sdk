@@ -71,11 +71,11 @@ class VisualRecognitionUIImageTests: XCTestCase {
         visualRecognition.classify(image: car) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let classifiedImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
             var containsPersonClass = false
@@ -120,11 +120,11 @@ class VisualRecognitionUIImageTests: XCTestCase {
         visualRecognition.detectFaces(image: obama) {
             response, error in
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let faceImages = response?.result else {
-                XCTFail("Missing result value")
+                XCTFail(missingResultMessage)
                 return
             }
 

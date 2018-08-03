@@ -65,7 +65,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             visualRecognition.updateLocalModel(classifierID: classifierID) {
                 _, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
                 expectation.fulfill()
             }
@@ -113,7 +113,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             visualRecognition.updateLocalModel(classifierID: classifierID) {
                 _, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
                 expectation1.fulfill()
             }
@@ -125,7 +125,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], threshold: 0.1) {
                 _, error in
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
                 expectation2.fulfill()
             }

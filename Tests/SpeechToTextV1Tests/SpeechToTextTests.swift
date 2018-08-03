@@ -80,7 +80,7 @@ class SpeechToTextTests: XCTestCase {
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             languageModel = result.customizations.first { $0.name == "swift-test-model" }
@@ -104,7 +104,7 @@ class SpeechToTextTests: XCTestCase {
                 return
             }
             guard let model = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             languageModel = model
@@ -127,7 +127,7 @@ class SpeechToTextTests: XCTestCase {
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             acousticModel = result.customizations.first { $0.name == "swift-test-model" }
@@ -150,7 +150,7 @@ class SpeechToTextTests: XCTestCase {
                 return
             }
             guard let model = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             acousticModel = model
@@ -171,7 +171,7 @@ class SpeechToTextTests: XCTestCase {
         {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation.fulfill()
         }
@@ -191,7 +191,7 @@ class SpeechToTextTests: XCTestCase {
         {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation.fulfill()
         }
@@ -220,13 +220,13 @@ class SpeechToTextTests: XCTestCase {
                 response, error in
                 if let error = error {
                     if !error.localizedDescription.contains("locked") {
-                        XCTFail("Received an unexpected error: \(error)")
+                        XCTFail(unexpectedErrorMessage(error))
                     }
                     expectation.fulfill()
                     return
                 }
                 guard let model = response?.result else {
-                    XCTFail("Missing result from response")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 hasDesiredStatus = (model.status == status)
@@ -245,13 +245,13 @@ class SpeechToTextTests: XCTestCase {
                 response, error in
                 if let error = error {
                     if !error.localizedDescription.contains("locked") {
-                        XCTFail("Received an unexpected error: \(error)")
+                        XCTFail(unexpectedErrorMessage(error))
                     }
                     expectation.fulfill()
                     return
                 }
                 guard let model = response?.result else {
-                    XCTFail("Missing result from response")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 hasDesiredStatus = (model.status == status)
@@ -270,13 +270,13 @@ class SpeechToTextTests: XCTestCase {
                 response, error in
                 if let error = error {
                     if !error.localizedDescription.contains("locked") {
-                        XCTFail("Received an unexpected error: \(error)")
+                        XCTFail(unexpectedErrorMessage(error))
                     }
                     expectation.fulfill()
                     return
                 }
                 guard let corpus = response?.result else {
-                    XCTFail("Missing result from response")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 hasDesiredStatus = (corpus.status == status)
@@ -294,11 +294,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.listModels {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertGreaterThan(result.models.count, 0)
@@ -313,11 +313,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.getModel(modelID: modelID) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let model = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(model.name, modelID)
@@ -334,11 +334,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.recognizeSessionless(model: "en-US_BroadbandModel", audio: audio, contentType: "audio/wav") {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let recognitionResults = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertNotNil(recognitionResults.results)
@@ -362,11 +362,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.createJob(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel") {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             job = result
@@ -379,11 +379,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.checkJobs {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertGreaterThan(result.recognitions.count, 0)
@@ -396,11 +396,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.checkJob(id: job.id) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(result.id, job.id)
@@ -414,11 +414,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.registerCallback(callbackUrl: url, userSecret: "ThisIsMySecret") {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let status = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(status.url, url)
@@ -431,7 +431,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.unregisterCallback(callbackUrl: url) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation5.fulfill()
         }
@@ -442,7 +442,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.deleteJob(id: job.id) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation6.fulfill()
         }
@@ -462,13 +462,13 @@ class SpeechToTextTests: XCTestCase {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {
-                    XCTFail("Received an unexpected error: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
                 expectation1.fulfill()
                 return
             }
             guard let model = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             languageModel = model
@@ -486,11 +486,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.listLanguageModels(language: "en-US") {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertTrue(result.customizations.contains { $0.customizationID == languageModel.customizationID })
@@ -503,11 +503,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.getLanguageModel(customizationID: languageModel.customizationID) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let model = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(model.customizationID, languageModel.customizationID)
@@ -523,7 +523,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.trainLanguageModel(customizationID: languageModel.customizationID, wordTypeToAdd: "all", customizationWeight: 0.3) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation4.fulfill()
         }
@@ -537,7 +537,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.resetLanguageModel(customizationID: languageModel.customizationID) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation5.fulfill()
         }
@@ -549,7 +549,7 @@ class SpeechToTextTests: XCTestCase {
             _, error in
             if let error = error {
                 if !error.localizedDescription.contains("model is up-to-date") {
-                    XCTFail("Received an unexpected error: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
             }
             expectation6.fulfill()
@@ -564,7 +564,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.deleteLanguageModel(customizationID: languageModel.customizationID) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation7.fulfill()
         }
@@ -589,7 +589,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.addCorpus(customizationID: id, corpusName: corpusName, corpusFile: file, allowOverwrite: true) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation1.fulfill()
         }
@@ -603,11 +603,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.listCorpora(customizationID: languageModel.customizationID) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertTrue(result.corpora.contains { $0.name == corpusName })
@@ -620,11 +620,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.getCorpus(customizationID: id, corpusName: corpusName) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let corpus = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(corpus.name, corpusName)
@@ -637,7 +637,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.deleteCorpus(customizationID: id, corpusName: corpusName) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation4.fulfill()
         }
@@ -660,7 +660,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.addWords(customizationID: languageModel.customizationID, words: [word]) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation2.fulfill()
         }
@@ -674,7 +674,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.addWord(customizationID: languageModel.customizationID, wordName: "worlld", soundsLike: ["world"], displayAs: "world") {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -688,11 +688,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.listWords(customizationID: languageModel.customizationID, wordType: "user", sort: "+alphabetical") {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(result.words.count, 2)
@@ -707,11 +707,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.getWord(customizationID: languageModel.customizationID, wordName: "helllo") {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let word = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(word.word, "helllo")
@@ -724,7 +724,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.deleteWord(customizationID: languageModel.customizationID, wordName: "helllo") {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation6.fulfill()
         }
@@ -743,13 +743,13 @@ class SpeechToTextTests: XCTestCase {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {
-                    XCTFail("Received an unexpected error: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
                 expectation1.fulfill()
                 return
             }
             guard let model = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             acousticModel = model
@@ -767,11 +767,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.listAcousticModels(language: "en-US") {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertTrue(result.customizations.contains { $0.customizationID == acousticModel.customizationID })
@@ -784,11 +784,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.getAcousticModel(customizationID: acousticModel.customizationID) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let model = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(model.customizationID, acousticModel.customizationID)
@@ -805,7 +805,7 @@ class SpeechToTextTests: XCTestCase {
             _, error in
             if let error = error {
                 if !error.localizedDescription.contains("audio duration must be between") {
-                    XCTFail("Received an unexpected error: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
             }
             expectation4.fulfill()
@@ -820,7 +820,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.resetAcousticModel(customizationID: acousticModel.customizationID) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation5.fulfill()
         }
@@ -832,7 +832,7 @@ class SpeechToTextTests: XCTestCase {
             _, error in
             if let error = error {
                 if !error.localizedDescription.contains("model is up-to-date") {
-                    XCTFail("Received an unexpected error: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                 }
             }
             expectation6.fulfill()
@@ -847,7 +847,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.deleteAcousticModel(customizationID: acousticModel.customizationID) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation7.fulfill()
         }
@@ -870,7 +870,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.addAudio(customizationID: acousticModel.customizationID, audioName: "audio", audioResource: audio, contentType: "audio/wav", allowOverwrite: true) {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation1.fulfill()
         }
@@ -884,11 +884,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.listAudio(customizationID: acousticModel.customizationID) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let result = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertGreaterThan(result.audio.count, 0)
@@ -902,11 +902,11 @@ class SpeechToTextTests: XCTestCase {
         speechToText.getAudio(customizationID: acousticModel.customizationID, audioName: "audio") {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let audio = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             XCTAssertEqual(audio.name, "audio")
@@ -919,7 +919,7 @@ class SpeechToTextTests: XCTestCase {
         speechToText.deleteAudio(customizationID: acousticModel.customizationID, audioName: "audio") {
             _, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation4.fulfill()
         }

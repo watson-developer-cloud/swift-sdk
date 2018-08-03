@@ -53,6 +53,14 @@ class SpeechToTextRecognizeTests: XCTestCase {
         speechToText.defaultHeaders["X-Watson-Test"] = "true"
     }
 
+    func cannotLocateFileMessage(_ fileName: String, _ withExtension: String) -> String {
+        return "Unable to locate \(fileName).\(withExtension)"
+    }
+
+    func cannotReadFileMessage(_ fileName: String, _ withExtension: String) -> String {
+        return "Unable to read \(fileName).\(withExtension)"
+    }
+
     // MARK: - Test Definition for Linux
 
     static var allTests: [(String, (SpeechToTextRecognizeTests) -> () throws -> Void)] {
@@ -98,7 +106,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -106,11 +114,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         speechToText.recognize(audio: file, settings: settings) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             self.validateSTTResults(results: results, settings: settings)
@@ -145,7 +153,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -164,11 +172,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         speechToText.recognize(audio: file, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             self.validateSTTResults(results: results, settings: settings)
@@ -203,7 +211,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -214,11 +222,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
             speechToText.recognize(audio: audio, settings: settings) {
                 response, error in
                 if let error = error {
-                    XCTFail("Received an unexpected error: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let results = response?.result else {
-                    XCTFail("Missing result from response")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 self.validateSTTResults(results: results, settings: settings)
@@ -232,7 +240,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             }
             wait(for: [expectation], timeout: timeout)
         } catch {
-            XCTFail("Unable to read \(filename).\(withExtension).")
+            XCTFail(cannotReadFileMessage(filename, withExtension))
             return
         }
     }
@@ -257,7 +265,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -279,11 +287,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
             speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true) {
                 response, error in
                 if let error = error {
-                    XCTFail("Received an unexpected error: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let results = response?.result else {
-                    XCTFail("Missing result from response")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 self.validateSTTResults(results: results, settings: settings)
@@ -296,7 +304,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             }
             wait(for: [expectation], timeout: timeout)
         } catch {
-            XCTFail("Unable to read \(filename).\(withExtension).")
+            XCTFail(cannotReadFileMessage(filename, withExtension))
             return
         }
     }
@@ -318,12 +326,12 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
         guard let audio = try? Data(contentsOf: file) else {
-            XCTFail("Unable to read \(filename).\(withExtension).")
+            XCTFail(cannotReadFileMessage(filename, withExtension))
             return
         }
 
@@ -333,11 +341,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true) {
             response, error in
             if let error = error {
-                XCTFail("Received an unexpected error: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let results = response?.result else {
-                XCTFail("Missing result from response")
+                XCTFail(missingResultMessage)
                 return
             }
             self.validateSTTResults(results: results, settings: settings)
@@ -372,7 +380,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
-            XCTFail("Unable to locate \(filename).\(withExtension).")
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
             return
         }
 
@@ -390,11 +398,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
             speechToText.recognize(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true) {
                 response, error in
                 if let error = error {
-                    XCTFail("Received an unexpected error: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let results = response?.result else {
-                    XCTFail("Missing result from response")
+                    XCTFail(missingResultMessage)
                     return
                 }
                 XCTAssertNotNil(results.speakerLabels)
@@ -406,7 +414,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             }
             wait(for: [expectation], timeout: timeout)
         } catch {
-            XCTFail("Unable to read \(filename).\(withExtension).")
+            XCTFail(cannotReadFileMessage(filename, withExtension))
             return
         }
     }

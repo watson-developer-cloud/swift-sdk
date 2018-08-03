@@ -122,11 +122,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let message = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -171,11 +171,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let message = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -225,11 +225,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let message = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -250,11 +250,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let message = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -299,11 +299,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let message = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -321,11 +321,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let message = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -346,11 +346,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let message = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -391,11 +391,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let message = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -414,11 +414,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let message = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -448,11 +448,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let workspaces = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -477,11 +477,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let workspaces = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -507,11 +507,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let workspaces = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -555,11 +555,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let workspace = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -585,11 +585,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let workspace = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -634,7 +634,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -649,11 +649,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let workspace = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -687,11 +687,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let workspace = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -720,11 +720,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let workspace = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -743,7 +743,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -760,11 +760,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let intents = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -791,11 +791,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let intents = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -823,11 +823,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let intents = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -855,11 +855,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let intents = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -895,11 +895,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let intent = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -916,7 +916,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation2.fulfill()
         }
@@ -931,11 +931,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let intent = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -965,11 +965,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let intent = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -990,11 +990,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let intent = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1011,7 +1011,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -1028,11 +1028,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let examples = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1057,11 +1057,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let examples = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1087,11 +1087,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let examples = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1119,11 +1119,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let example = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1139,7 +1139,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation2.fulfill()
         }
@@ -1155,11 +1155,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let example = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1180,11 +1180,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let example = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1201,11 +1201,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let example = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1221,7 +1221,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -1238,11 +1238,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let counterexamples = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1268,11 +1268,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let counterexamples = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1299,11 +1299,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let counterexamples = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1330,11 +1330,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let counterexample = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1350,7 +1350,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation2.fulfill()
         }
@@ -1366,11 +1366,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let counterexample = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1391,11 +1391,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let counterexample = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1412,11 +1412,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let counterexample = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1432,7 +1432,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -1449,11 +1449,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let entities = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1480,11 +1480,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let entities = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1511,11 +1511,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let entities = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1543,11 +1543,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let entities = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1577,11 +1577,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let entity = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1598,7 +1598,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectationTwo.fulfill()
         }
@@ -1617,11 +1617,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let entity = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1641,11 +1641,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let entity = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1662,7 +1662,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectationFour.fulfill()
         }
@@ -1677,11 +1677,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let entityCollection = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1691,11 +1691,11 @@ class ConversationTests: XCTestCase {
                 response, error in
 
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let entityExport = response?.result else {
-                    XCTFail("Missing response value")
+                    XCTFail(missingResultMessage)
                     return
                 }
 
@@ -1724,11 +1724,11 @@ class ConversationTests: XCTestCase {
                 response, error in
 
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let valueCollection = response?.result else {
-                    XCTFail("Missing response value")
+                    XCTFail(missingResultMessage)
                     return
                 }
 
@@ -1756,11 +1756,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let value = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1778,11 +1778,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let value = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1799,7 +1799,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectationThree.fulfill()
         }
@@ -1816,11 +1816,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let valueCollection = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1830,11 +1830,11 @@ class ConversationTests: XCTestCase {
                 response, error in
 
                 if let error = error {
-                    XCTFail("Unexpected error response from service: \(error)")
+                    XCTFail(unexpectedErrorMessage(error))
                     return
                 }
                 guard let valueExport = response?.result else {
-                    XCTFail("Missing response value")
+                    XCTFail(missingResultMessage)
                     return
                 }
 
@@ -1857,11 +1857,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let synonyms = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1886,11 +1886,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let synonyms = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1916,11 +1916,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let synonyms = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1948,11 +1948,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let synonym = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -1968,7 +1968,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation2.fulfill()
         }
@@ -1984,11 +1984,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let synonym = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2009,11 +2009,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let synonym = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2030,11 +2030,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let synonym = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2050,7 +2050,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -2067,11 +2067,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let nodes = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2115,11 +2115,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let node = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2148,7 +2148,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation2.fulfill()
         }
@@ -2163,11 +2163,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let node = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2183,11 +2183,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let node = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2202,7 +2202,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
             }
             expectation3.fulfill()
         }
@@ -2216,11 +2216,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let nodes = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2232,11 +2232,11 @@ class ConversationTests: XCTestCase {
                                 response, error in
 
                     if let error = error {
-                        XCTFail("Unexpected error response from service: \(error)")
+                        XCTFail(unexpectedErrorMessage(error))
                         return
                     }
                     guard let node = response?.result else {
-                        XCTFail("Missing response value")
+                        XCTFail(missingResultMessage)
                         return
                     }
                     XCTAssertEqual(dialogNode.dialogNodeID, node.dialogNodeID)
@@ -2255,11 +2255,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let logCollection = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2275,11 +2275,11 @@ class ConversationTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail("Unexpected error response from service: \(error)")
+                XCTFail(unexpectedErrorMessage(error))
                 return
             }
             guard let logCollection = response?.result else {
-                XCTFail("Missing response value")
+                XCTFail(missingResultMessage)
                 return
             }
 
@@ -2299,7 +2299,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }
@@ -2314,7 +2314,7 @@ class ConversationTests: XCTestCase {
             _, error in
 
             if error == nil {
-                XCTFail("Expected error response")
+                XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
         }

@@ -48,12 +48,12 @@ public struct Environment: Decodable {
     /**
      Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      Status of the environment.

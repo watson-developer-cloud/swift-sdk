@@ -122,12 +122,12 @@ public struct DialogNode: Decodable {
     /**
      The timestamp for creation of the dialog node.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp for the most recent update to the dialog node.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      The actions for the dialog node.

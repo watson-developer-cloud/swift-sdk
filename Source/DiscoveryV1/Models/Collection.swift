@@ -48,12 +48,12 @@ public struct Collection: Decodable {
     /**
      The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp of when the collection was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      The status of the collection.

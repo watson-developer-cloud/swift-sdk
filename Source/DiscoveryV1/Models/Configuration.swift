@@ -34,12 +34,12 @@ public struct Configuration: Codable {
     /**
      The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp of when the configuration was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      The description of the configuration, if available.
@@ -93,8 +93,8 @@ public struct Configuration: Codable {
     public init(
         name: String,
         configurationID: String? = nil,
-        created: String? = nil,
-        updated: String? = nil,
+        created: Date? = nil,
+        updated: Date? = nil,
         description: String? = nil,
         conversions: Conversions? = nil,
         enrichments: [Enrichment]? = nil,

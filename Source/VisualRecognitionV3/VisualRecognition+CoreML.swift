@@ -72,7 +72,7 @@ extension VisualRecognition {
                 completionHandler(nil, error)
                 return
             }
-            guard let dateString = classifier.retrained ?? classifier.created, let classifierDate = dateFormatter.date(from: dateString) else {
+            guard let classifierDate = classifier.retrained ?? classifier.created else {
                 self.downloadClassifier(classifierID: classifierID, completionHandler: completionHandler)
                 return
             }

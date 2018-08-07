@@ -65,7 +65,7 @@ public struct Classifier: Decodable {
     /**
      Date and time in Coordinated Universal Time (UTC) that the classifier was created.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      Classes that define a classifier.
@@ -76,13 +76,13 @@ public struct Classifier: Decodable {
      Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Returned when verbose=`true`.
      Might not be returned by some requests. Identical to `updated` and retained for backward compatibility.
      */
-    public var retrained: String?
+    public var retrained: Date?
 
     /**
      Date and time in Coordinated Universal Time (UTC) that the classifier was most recently updated. The field matches
      either `retrained` or `created`.  Returned when verbose=`true`. Might not be returned by some requests.
      */
-    public var updated: String?
+    public var updated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

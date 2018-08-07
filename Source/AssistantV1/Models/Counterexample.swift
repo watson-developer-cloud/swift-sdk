@@ -27,12 +27,12 @@ public struct Counterexample: Decodable {
     /**
      The timestamp for creation of the counterexample.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp for the last update to the counterexample.
      */
-    public var updated: String?
+    public var updated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

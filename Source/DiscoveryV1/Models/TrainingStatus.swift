@@ -33,9 +33,9 @@ public struct TrainingStatus: Decodable {
 
     public var notices: Int?
 
-    public var successfullyTrained: String?
+    public var successfullyTrained: Date?
 
-    public var dataUpdated: String?
+    public var dataUpdated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -46,8 +46,9 @@ public struct TrainingStatus: Decodable {
         case minimumExamplesAdded = "minimum_examples_added"
         case sufficientLabelDiversity = "sufficient_label_diversity"
         case notices = "notices"
-        case successfullyTrained = "successfully_trained"
-        case dataUpdated = "data_updated"
+        // TODO: Add these back in once https://github.ibm.com/Watson-Discovery/disco-issue-tracker/issues/1217 is fixed
+//        case successfullyTrained = "successfully_trained"
+//        case dataUpdated = "data_updated"
     }
 
 }

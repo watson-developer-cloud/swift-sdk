@@ -55,7 +55,7 @@ public struct Classifier: Decodable {
     /**
      Date and time (UTC) the classifier was created.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      Additional detail about the status.

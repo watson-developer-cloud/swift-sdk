@@ -100,9 +100,10 @@ public struct DialogNode: Decodable {
     public var previousSibling: String?
 
     /**
-     The output of the dialog node.
+     The output of the dialog node. For more information about how to specify dialog node output, see the
+     [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      */
-    public var output: [String: JSON]?
+    public var output: DialogNodeOutput?
 
     /**
      The context (if defined) for the dialog node.
@@ -169,6 +170,11 @@ public struct DialogNode: Decodable {
      */
     public var digressOutSlots: String?
 
+    /**
+     A label that can be displayed externally to describe the purpose of the node to users.
+     */
+    public var userLabel: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case dialogNodeID = "dialog_node"
@@ -190,6 +196,7 @@ public struct DialogNode: Decodable {
         case digressIn = "digress_in"
         case digressOut = "digress_out"
         case digressOutSlots = "digress_out_slots"
+        case userLabel = "user_label"
     }
 
 }

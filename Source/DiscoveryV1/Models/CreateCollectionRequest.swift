@@ -32,6 +32,7 @@ public struct CreateCollectionRequest: Encodable {
         case ja = "ja"
         case ko = "ko"
         case pt = "pt"
+        case nl = "nl"
     }
 
     /**

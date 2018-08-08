@@ -1779,6 +1779,7 @@ public class Discovery {
        and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
+     - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1804,6 +1805,7 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryResponse) -> Void)
@@ -1814,6 +1816,9 @@ public class Discovery {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
+        if let loggingOptOut = loggingOptOut {
+            headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()

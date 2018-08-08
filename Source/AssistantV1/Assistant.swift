@@ -887,7 +887,7 @@ public class Assistant {
     /**
      List user input examples.
 
-     List the user input examples for an intent.
+     List the user input examples for an intent, optionally including contextual entity mentions.
      This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -984,6 +984,7 @@ public class Assistant {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
        - It must be no longer than 1024 characters.
+     - parameter mentions: An array of contextual entity mentions.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -992,12 +993,13 @@ public class Assistant {
         workspaceID: String,
         intent: String,
         text: String,
+        mentions: [Mentions]? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Example) -> Void)
     {
         // construct body
-        let createExampleRequest = CreateExample(text: text)
+        let createExampleRequest = CreateExample(text: text, mentions: mentions)
         guard let body = try? JSONEncoder().encode(createExampleRequest) else {
             failure?(RestError.serializationError)
             return
@@ -1120,6 +1122,7 @@ public class Assistant {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
        - It must be no longer than 1024 characters.
+     - parameter newMentions: An array of contextual entity mentions.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1129,12 +1132,13 @@ public class Assistant {
         intent: String,
         text: String,
         newText: String? = nil,
+        newMentions: [Mentions]? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Example) -> Void)
     {
         // construct body
-        let updateExampleRequest = UpdateExample(text: newText)
+        let updateExampleRequest = UpdateExample(text: newText, mentions: newMentions)
         guard let body = try? JSONEncoder().encode(updateExampleRequest) else {
             failure?(RestError.serializationError)
             return
@@ -1930,6 +1934,78 @@ public class Assistant {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     List entity mentions.
+
+     List mentions for a contextual entity. An entity mention is an occurrence of a contextual entity in the context of
+     an intent user input example.
+     This operation is limited to 200 requests per 30 minutes. For more information, see **Rate limiting**.
+
+     - parameter workspaceID: Unique identifier of the workspace.
+     - parameter entity: The name of the entity.
+     - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the
+       returned data includes only information about the element itself. If **export**=`true`, all content, including
+       subelements, is included.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func listMentions(
+        workspaceID: String,
+        entity: String,
+        export: Bool? = nil,
+        includeAudit: Bool? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (EntityMentionCollection) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let export = export {
+            let queryParameter = URLQueryItem(name: "export", value: "\(export)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/mentions"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            failure?(RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<EntityMentionCollection>) in
+            switch response.result {
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }

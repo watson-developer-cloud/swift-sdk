@@ -41,7 +41,7 @@ class DiscoveryTests: XCTestCase {
 
     func instantiateDiscovery() -> Discovery {
         let discovery: Discovery
-        let version = "2018-07-16"
+        let version = "2018-07-31"
         if let apiKey = WatsonCredentials.DiscoveryAPIKey {
             discovery = Discovery(version: version, apiKey: apiKey)
         } else {
@@ -725,7 +725,27 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
 
-        let expectation3 = self.expectation(description: "deleteDocument")
+        let expectation3 = self.expectation(description: "updateDocument")
+        let newMetadata = "{ \"name\": \"Robert Kennedy Speech\" }"
+        discovery.updateDocument(
+            environmentID: environmentID,
+            collectionID: collectionID,
+            documentID: documentID,
+            metadata: newMetadata,
+            failure: failWithError)
+        {
+            response in
+            documentID = response.documentID
+            XCTAssertNotNil(response.documentID)
+            XCTAssertEqual(response.status, "processing")
+            XCTAssertNil(response.notices)
+            expectation3.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        sleep(10) // wait for document updates to be ingested
+
+        let expectation4 = self.expectation(description: "deleteDocument")
         discovery.deleteDocument(
             environmentID: environmentID,
             collectionID: collectionID,
@@ -735,7 +755,7 @@ class DiscoveryTests: XCTestCase {
             response in
             XCTAssertEqual(response.documentID, documentID)
             XCTAssertEqual(response.status, "deleted")
-            expectation3.fulfill()
+            expectation4.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1470,6 +1490,17 @@ class DiscoveryTests: XCTestCase {
         let expectation4 = self.expectation(description: "deleteCredentials")
         discovery.deleteCredentials(environmentID: environmentID, credentialID: credentialID, failure: failWithError) {_ in
             expectation4.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    // MARK: - User data
+
+    func testDeleteLabeledData() {
+        let customerID = "012-34-5678"
+        let expectation1 = self.expectation(description: "listCredentials")
+        discovery.deleteUserData(customerID: customerID, failure: failWithError) {
+            expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }

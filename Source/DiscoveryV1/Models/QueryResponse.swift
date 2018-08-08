@@ -34,6 +34,7 @@ public struct QueryResponse: Decodable {
     /**
      The session token for this query. The session token can be used to add events associated with this query to the
      query and event log.
+     **Important:** Session tokens are case sensitive.
      */
     public var sessionToken: String?
 

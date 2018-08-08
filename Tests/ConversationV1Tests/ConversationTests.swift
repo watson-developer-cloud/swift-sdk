@@ -72,6 +72,7 @@ class ConversationTests: XCTestCase {
             ("testCreateAndDeleteEntity", testCreateAndDeleteEntity),
             ("testCreateUpdateAndDeleteEntity", testCreateUpdateAndDeleteEntity),
             ("testGetEntity", testGetEntity),
+            ("testListMentions", testListMentions),
             ("testListAllValues", testListAllValues),
             ("testCreateUpdateAndDeleteValue", testCreateUpdateAndDeleteValue),
             ("testGetValue", testGetValue),
@@ -96,7 +97,7 @@ class ConversationTests: XCTestCase {
     func instantiateConversation() {
         let username = WatsonCredentials.ConversationUsername
         let password = WatsonCredentials.ConversationPassword
-        let version = "2018-07-16"
+        let version = "2018-07-31"
         conversation = Conversation(username: username, password: password, version: version)
         conversation.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         conversation.defaultHeaders["X-Watson-Test"] = "true"
@@ -1159,6 +1160,31 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
 
+    // MARK: - Mentions
+
+    func testListMentions() {
+        let description = "List all the mentions for an entity."
+        let expectation = self.expectation(description: description)
+        let entityName = "appliance"
+        conversation.listMentions(
+            workspaceID: workspaceID,
+            entity: entityName,
+            export: true,
+            includeAudit: true,
+            failure: failWithError) {
+                mentionCollection in
+                for mention in mentionCollection.examples {
+                    XCTAssertNotNil(mention.exampleText)
+                    XCTAssertNotNil(mention.intentName)
+                    XCTAssertNotNil(mention.location)
+                    XCTAssert(mention.location.count == 2)
+                }
+                XCTAssertNotNil(mentionCollection.pagination.refreshUrl)
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
     // MARK: - Values
 
     func testListAllValues() {
@@ -1391,12 +1417,12 @@ class ConversationTests: XCTestCase {
             conditions: "#order_pizza",
             parent: nil,
             previousSibling: nil,
-            output: [
+            output: DialogNodeOutput(additionalProperties: [
                 "text": .object([
                     "selection_policy": .string("random"),
                     "values": .array([.string("Yes you can!"), .string("Of course!")]),
+                    ])
                 ]),
-            ],
             context: nil,
             metadata: ["swift-sdk-test": .boolean(true)],
             nextStep: nil,
@@ -1412,7 +1438,7 @@ class ConversationTests: XCTestCase {
             XCTAssertEqual(dialogNode.conditions, node.conditions)
             XCTAssertNil(node.parent)
             XCTAssertNil(node.previousSibling)
-            XCTAssertEqual(dialogNode.output!, node.output!)
+            XCTAssertEqual(dialogNode.output!.additionalProperties["text"], node.output!.additionalProperties["text"])
             XCTAssertNil(node.context)
             XCTAssertEqual(dialogNode.metadata!, node.metadata!)
             XCTAssertNil(node.nextStep)

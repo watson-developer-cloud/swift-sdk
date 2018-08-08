@@ -1,0 +1,68 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/ListModelsResults.swift",
+      "line": 24,
+      "symbol": "ListModelsResults.models",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/RelationArgument.swift",
+      "line": 22,
+      "symbol": "RelationArgument.entities",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesAction.swift",
+      "line": 32,
+      "symbol": "SemanticRolesAction.verb",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesObject.swift",
+      "line": 27,
+      "symbol": "SemanticRolesObject.keywords",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesSubject.swift",
+      "line": 27,
+      "symbol": "SemanticRolesSubject.entities",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesSubject.swift",
+      "line": 29,
+      "symbol": "SemanticRolesSubject.keywords",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
+      "line": 80,
+      "symbol": "NaturalLanguageUnderstanding.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 108,
+      "symbol": "JSON.encoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 120,
+      "symbol": "JSON.decoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
+}

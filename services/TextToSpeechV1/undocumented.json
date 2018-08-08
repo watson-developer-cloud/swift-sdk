@@ -1,0 +1,264 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 108,
+      "symbol": "JSON.encoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 120,
+      "symbol": "JSON.decoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 29,
+      "symbol": "Translation.PartOfSpeech.josi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 30,
+      "symbol": "Translation.PartOfSpeech.mesi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 31,
+      "symbol": "Translation.PartOfSpeech.kigo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 32,
+      "symbol": "Translation.PartOfSpeech.gobi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 33,
+      "symbol": "Translation.PartOfSpeech.dosi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 34,
+      "symbol": "Translation.PartOfSpeech.jodo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 35,
+      "symbol": "Translation.PartOfSpeech.koyu",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 36,
+      "symbol": "Translation.PartOfSpeech.stbi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 37,
+      "symbol": "Translation.PartOfSpeech.suji",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 38,
+      "symbol": "Translation.PartOfSpeech.kedo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 39,
+      "symbol": "Translation.PartOfSpeech.fuku",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 40,
+      "symbol": "Translation.PartOfSpeech.keyo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 41,
+      "symbol": "Translation.PartOfSpeech.stto",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 42,
+      "symbol": "Translation.PartOfSpeech.reta",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 43,
+      "symbol": "Translation.PartOfSpeech.stzo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 44,
+      "symbol": "Translation.PartOfSpeech.kato",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Translation.swift",
+      "line": 45,
+      "symbol": "Translation.PartOfSpeech.hoka",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 29,
+      "symbol": "Word.PartOfSpeech.josi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 30,
+      "symbol": "Word.PartOfSpeech.mesi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 31,
+      "symbol": "Word.PartOfSpeech.kigo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 32,
+      "symbol": "Word.PartOfSpeech.gobi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 33,
+      "symbol": "Word.PartOfSpeech.dosi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 34,
+      "symbol": "Word.PartOfSpeech.jodo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 35,
+      "symbol": "Word.PartOfSpeech.koyu",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 36,
+      "symbol": "Word.PartOfSpeech.stbi",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 37,
+      "symbol": "Word.PartOfSpeech.suji",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 38,
+      "symbol": "Word.PartOfSpeech.kedo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 39,
+      "symbol": "Word.PartOfSpeech.fuku",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 40,
+      "symbol": "Word.PartOfSpeech.keyo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 41,
+      "symbol": "Word.PartOfSpeech.stto",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 42,
+      "symbol": "Word.PartOfSpeech.reta",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 43,
+      "symbol": "Word.PartOfSpeech.stzo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 44,
+      "symbol": "Word.PartOfSpeech.kato",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/Models/Word.swift",
+      "line": 45,
+      "symbol": "Word.PartOfSpeech.hoka",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/TextToSpeechV1/TextToSpeech.swift",
+      "line": 99,
+      "symbol": "TextToSpeech.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
+}

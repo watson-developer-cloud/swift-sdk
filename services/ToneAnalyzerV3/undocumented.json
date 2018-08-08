@@ -1,0 +1,68 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 108,
+      "symbol": "JSON.encoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 120,
+      "symbol": "JSON.decoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
+      "line": 25,
+      "symbol": "ToneContent.toneInput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
+      "line": 26,
+      "symbol": "ToneContent.text",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
+      "line": 27,
+      "symbol": "ToneContent.html",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "line": 80,
+      "symbol": "ToneAnalyzer.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "line": 297,
+      "symbol": "ToneAnalyzer.tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "line": 312,
+      "symbol": "ToneAnalyzer.tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "line": 327,
+      "symbol": "ToneAnalyzer.tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
+}

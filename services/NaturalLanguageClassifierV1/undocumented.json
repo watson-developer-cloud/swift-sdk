@@ -1,0 +1,61 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 28,
+      "symbol": "Classifier.Status.nonExistent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 29,
+      "symbol": "Classifier.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 30,
+      "symbol": "Classifier.Status.failed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 31,
+      "symbol": "Classifier.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "line": 32,
+      "symbol": "Classifier.Status.unavailable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift",
+      "line": 66,
+      "symbol": "NaturalLanguageClassifier.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 108,
+      "symbol": "JSON.encoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/RestKit/JSON.swift",
+      "line": 120,
+      "symbol": "JSON.decoder",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
+}

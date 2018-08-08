@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Classes  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
+    <a title="Classes  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Classes  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/TextToSpeech.html">TextToSpeech</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RestError.html">RestError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/Pronunciation.html">Pronunciation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SupportedFeatures.html">SupportedFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Translation.html">Translation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Translation/PartOfSpeech.html">– PartOfSpeech</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Voice.html">Voice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/VoiceModel.html">VoiceModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/VoiceModels.html">VoiceModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Voices.html">Voices</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Word.html">Word</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Word/PartOfSpeech.html">– PartOfSpeech</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Words.html">Words</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Classes</h1>
+            <p>The following classes are available globally.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C"></a>
+                    <a name="//apple_ref/swift/Class/TextToSpeech" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C">TextToSpeech</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <h3 id='service-overview' class='heading'>Service Overview</h3>
+
+<p>The IBM&reg; Text to Speech service provides an API that uses IBM&rsquo;s speech-synthesis capabilities to synthesize text
+into natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male or
+female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay. For more
+information about the service, see the <a href="https://console.bluemix.net/docs/services/text-to-speech/index.html">IBM&reg; Cloud
+documentation</a>.</p>
+<h3 id='api-usage-guidelines' class='heading'>API usage guidelines</h3>
+
+<ul>
+<li><strong>Audio formats:</strong> The service can produce audio in many formats (MIME types). See <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#format">Specifying an audio
+format</a>.</li>
+<li><strong>SSML:</strong> Many methods refer to the Speech Synthesis Markup Language (SSML). SSML is an XML-based markup language
+that provides text annotation for speech-synthesis applications. See <a href="https://console.bluemix.net/docs/services/text-to-speech/SSML.html">Using
+SSML</a> and <a href="https://console.bluemix.net/docs/services/text-to-speech/SPRs.html">Using IBM
+SPR</a>.</li>
+<li><strong>Word translations:</strong> Many customization methods accept sounds-like or phonetic translations for words. Phonetic
+translations are based on the SSML phoneme format for representing a word. You can specify them in standard
+International Phonetic Alphabet (IPA) representation
+&lt;phoneme alphabet=<q>ipa</q> ph=<q>t&#601;m&#712;&#593;to</q>&gt;&lt;/phoneme&gt;
+or in the proprietary IBM Symbolic Phonetic Representation (SPR)
+&lt;phoneme alphabet=<q>ibm</q> ph=<q>1gAstroEntxrYFXs</q>&gt;&lt;/phoneme&gt;
+See <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</li>
+<li><strong>WebSocket interface:</strong> The service also offers a WebSocket interface for speech synthesis. The WebSocket interface
+supports both plain text and SSML input, including the SSML &lt;mark&gt; element and word timings. See <a href="https://console.bluemix.net/docs/services/text-to-speech/websockets.html">The WebSocket
+interface</a>.</li>
+<li><strong>Customization IDs:</strong> Many methods accept a customization ID, which is a Globally Unique Identifier (GUID).
+Customization IDs are hexadecimal strings that have the format <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>.</li>
+<li><strong><code>X-Watson-Learning-Opt-Out</code>:</strong> By default, all Watson services log requests and their results. Logging is done only
+to improve the services for future users. The logged data is not shared or made public. To prevent IBM from accessing
+your data for general service improvements, set the <code>X-Watson-Learning-Opt-Out</code> request header to <code>true</code> for all
+requests. You must set the header on each request that you do not want IBM to access for general service improvements.
+Methods of the customization interface do not log words and translations that you use to build custom voice models.
+Your training data is never used to improve the service&rsquo;s base models. However, the service does log such data when a
+custom model is used with a synthesize request. You must set the <code>X-Watson-Learning-Opt-Out</code> request header to <code>true</code>
+to prevent IBM from accessing the data to improve the service.</li>
+<li><strong><code>X-Watson-Metadata</code>:</strong> This header allows you to associate a customer ID with data that is passed with a request.
+If necessary, you can use the <strong>Delete labeled data</strong> method to delete the data for a customer ID. See <a href="https://console.bluemix.net/docs/services/text-to-speech/information-security.html">Information
+security</a>.</li>
+</ul>
+
+                        <a href="Classes/TextToSpeech.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TextToSpeech</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-08-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

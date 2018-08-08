@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ContentItem Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/ContentItem" class="dashAnchor"></a>
+    <a title="ContentItem Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/ios-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ContentItem Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/PersonalityInsights.html">PersonalityInsights</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/JSON.html">JSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ProfileContent.html">ProfileContent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RestError.html">RestError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Behavior.html">Behavior</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConsumptionPreferences.html">ConsumptionPreferences</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ConsumptionPreferencesCategory.html">ConsumptionPreferencesCategory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Content.html">Content</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentItem.html">ContentItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentItem/Contenttype.html">– Contenttype</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContentItem/Language.html">– Language</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Profile.html">Profile</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Profile/ProcessedLanguage.html">– ProcessedLanguage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Trait.html">Trait</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Trait/Category.html">– Category</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Warning.html">Warning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Warning/WarningID.html">– WarningID</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ContentItem</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ContentItem</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+
+                </div>
+              </div>
+            <p>ContentItem.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV11ContenttypeO"></a>
+                    <a name="//apple_ref/swift/Enum/Contenttype" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV11ContenttypeO">Contenttype</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
+analyzed; plain text is processed as submitted.</p>
+
+                        <a href="../Structs/ContentItem/Contenttype.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Contenttype</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV8LanguageO"></a>
+                    <a name="//apple_ref/swift/Enum/Language" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV8LanguageO">Language</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is <code>en</code>
+(English). Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. A
+language specified with the <strong>Content-Type</strong> parameter overrides the value of this parameter; any content items
+that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter to base the language on the most
+prevalent specification among the content items; again, content items that specify a different language are
+ignored. You can specify any combination of languages for the input and response content.</p>
+
+                        <a href="../Structs/ContentItem/Language.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Language</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV7contentSSvp"></a>
+                    <a name="//apple_ref/swift/Property/content" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV7contentSSvp">content</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The content that is to be analyzed. The service supports up to 20 MB of content for all <code>ContentItem</code> objects
+combined.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">content</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV2idSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/id" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV2idSSSgvp">id</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A unique identifier for this content item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV7createdSiSgvp"></a>
+                    <a name="//apple_ref/swift/Property/created" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV7createdSiSgvp">created</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch
+(January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">created</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV7updatedSiSgvp"></a>
+                    <a name="//apple_ref/swift/Property/updated" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV7updatedSiSgvp">updated</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX
+Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">updated</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV11contenttypeSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/contenttype" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV11contenttypeSSSgvp">contenttype</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
+analyzed; plain text is processed as submitted.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">contenttype</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV8languageSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/language" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV8languageSSSgvp">language</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is <code>en</code>
+(English). Regional variants are treated as their parent language; for example, <code>en-US</code> is interpreted as <code>en</code>. A
+language specified with the <strong>Content-Type</strong> parameter overrides the value of this parameter; any content items
+that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter to base the language on the most
+prevalent specification among the content items; again, content items that specify a different language are
+ignored. You can specify any combination of languages for the input and response content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV8parentidSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/parentid" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV8parentidSSSgvp">parentid</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The unique ID of the parent content item for this item. Used to identify hierarchical relationships between
+posts/replies, messages/replies, and so on.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">parentid</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV5replySbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/reply" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV5replySbSgvp">reply</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates whether this content item is a reply to another content item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">reply</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemV7forwardSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/forward" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemV7forwardSbSgvp">forward</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicates whether this content item is a forwarded/copied version of another content item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">forward</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:21PersonalityInsightsV311ContentItemVACSS7content_SSSg2idSiSg7createdAG7updatedAE11contenttypeAE8languageAE8parentidSbSg5replyAM7forwardtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(content:id:created:updated:contenttype:language:parentid:reply:forward:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:21PersonalityInsightsV311ContentItemVACSS7content_SSSg2idSiSg7createdAG7updatedAE11contenttypeAE8languageAE8parentidSbSg5replyAM7forwardtcfc">init(content:id:created:updated:contenttype:language:parentid:reply:forward:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a <code>ContentItem</code> with member variables.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">content</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">created</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">updated</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contenttype</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">parentid</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">reply</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">forward</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>content</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content that is to be analyzed. The service supports up to 20 MB of content for all
+<code>ContentItem</code> objects combined.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>id</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A unique identifier for this content item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>created</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A timestamp that identifies when this content was created. Specify a value in milliseconds
+since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior
+data.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>updated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A timestamp that identifies when this content was last updated. Specify a value in
+milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal
+behavior data.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contenttype</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The MIME type of the content. The default is plain text. The tags are stripped from
+HTML content before it is analyzed; plain text is processed as submitted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language identifier (two-letter ISO 639-1 identifier) for the language of the content
+item. The default is <code>en</code> (English). Regional variants are treated as their parent language; for example, <code>en-US</code>
+is interpreted as <code>en</code>. A language specified with the <strong>Content-Type</strong> parameter overrides the value of this
+parameter; any content items that specify a different language are ignored. Omit the <strong>Content-Type</strong> parameter
+to base the language on the most prevalent specification among the content items; again, content items that
+specify a different language are ignored. You can specify any combination of languages for the input and response
+content.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>parentid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The unique ID of the parent content item for this item. Used to identify hierarchical
+relationships between posts/replies, messages/replies, and so on.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>reply</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether this content item is a reply to another content item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>forward</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates whether this content item is a forwarded/copied version of another content item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>ContentItem</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-08-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

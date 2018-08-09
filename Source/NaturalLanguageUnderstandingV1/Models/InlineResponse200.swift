@@ -16,29 +16,17 @@
 
 import Foundation
 
-/** AggregationResult. */
-public struct AggregationResult: Decodable {
+/** InlineResponse200. */
+public struct InlineResponse200: {
 
     /**
-     Key that matched the aggregation type.
+     model_id of the deleted model.
      */
-    public var key: String?
-
-    /**
-     Number of matching results.
-     */
-    public var matchingResults: Int?
-
-    /**
-     Aggregations returned in the case of chained aggregations.
-     */
-    public var aggregations: [QueryAggregation]?
+    public var deleted: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case key = "key"
-        case matchingResults = "matching_results"
-        case aggregations = "aggregations"
+        case deleted = "deleted"
     }
 
 }

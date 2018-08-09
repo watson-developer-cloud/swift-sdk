@@ -62,18 +62,12 @@ public class SpeechToText {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
-    /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-
-    /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let session = URLSession(configuration: URLSessionConfiguration.default)
-    internal var authMethod: AuthenticationMethod
-    internal let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private var authMethod: AuthenticationMethod
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
      Create a `SpeechToText` object.
@@ -123,12 +117,6 @@ public class SpeechToText {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["code_description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -324,13 +312,13 @@ public class SpeechToText {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func recognizeSessionless(
+        audio: Data,
+        contentType: String,
         model: String? = nil,
         customizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
-        audio: Data? = nil,
-        contentType: String? = nil,
         inactivityTimeout: Int? = nil,
         keywords: [String]? = nil,
         keywordsThreshold: Double? = nil,
@@ -952,18 +940,38 @@ public class SpeechToText {
      base model for which it is created. The model is owned by the instance of the service whose credentials are used to
      create it.
 
-     - parameter createLanguageModel: A `CreateLanguageModel` object that provides basic information about the new
-       custom language model.
+     - parameter name: A user-defined name for the new custom language model. Use a name that is unique among all
+       custom language models that you own. Use a localized name that matches the language of the custom model. Use a
+       name that describes the domain of the custom model, such as `Medical custom model` or `Legal custom model`.
+     - parameter baseModelName: The name of the base language model that is to be customized by the new custom
+       language model. The new custom model can be used only with the base model that it customizes. To determine
+       whether a base model supports language model customization, request information about the base model and check
+       that the attribute `custom_language_model` is set to `true`, or refer to [Language support for
+       customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
+     - parameter dialect: The dialect of the specified language that is to be used with the custom language model. The
+       parameter is meaningful only for Spanish models, for which the service creates a custom language model that is
+       suited for speech in one of the following dialects:
+       * `es-ES` for Castilian Spanish (the default)
+       * `es-LA` for Latin American Spanish
+       * `es-US` for North American (Mexican) Spanish
+       A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
+       model; for example, `en-US` for either of the US English language models.
+     - parameter description: A description of the new custom language model. Use a localized description that matches
+       the language of the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createLanguageModel(
-        createLanguageModel: CreateLanguageModel,
+        name: String,
+        baseModelName: String,
+        dialect: String? = nil,
+        description: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<LanguageModel>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(createLanguageModel) else {
+        let createLanguageModelRequest = CreateLanguageModel(name: name, baseModelName: baseModelName, dialect: dialect, description: description)
+        guard let body = try? JSONEncoder().encode(createLanguageModelRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -2393,14 +2401,18 @@ public class SpeechToText {
     public func addAudio(
         customizationID: String,
         audioName: String,
-        audioResource: Data,
+        audioResource: [Data],
         contentType: String,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
-        let body = audioResource
+        // construct body
+        guard let body = try? JSONEncoder().encode(audioResource) else {
+            completionHandler(nil, RestError.serializationError)
+            return
+        }
 
         // construct header parameters
         var headerParameters = defaultHeaders

@@ -21,7 +21,6 @@ import Foundation
  The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated
  dialog tools to create conversation flows between your apps and your users.
  */
-@available(*, deprecated, message: "The IBM Watson Conversation service has been renamed to Assistant. Please use the `Assistant` class instead of `Conversation`. The `Conversation` class will be removed in a future release.")
 public class Conversation {
 
     /// The base URL to use when contacting the service.
@@ -92,9 +91,6 @@ public class Conversation {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -108,8 +104,17 @@ public class Conversation {
      There is no rate limit for this operation.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter request: The message to be sent. This includes the user's input, along with optional intents,
-       entities, and context from the last response.
+     - parameter input: An input object that includes the input text.
+     - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
+       intents.
+     - parameter context: State information for the conversation. Continue a conversation by including the context
+       object from the previous response.
+     - parameter entities: Entities to use when evaluating the message. Include entities from the previous response to
+       continue using those entities rather than detecting entities in the new input.
+     - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response to
+       continue using those intents rather than trying to recognize intents in the new input.
+     - parameter output: System output. Include the output from the previous response to maintain intermediate
+       information over multiple requests.
      - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that
        were visited during processing of the message.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -117,13 +122,19 @@ public class Conversation {
      */
     public func message(
         workspaceID: String,
-        request: MessageRequest? = nil,
+        input: InputData? = nil,
+        alternateIntents: Bool? = nil,
+        context: Context? = nil,
+        entities: [RuntimeEntity]? = nil,
+        intents: [RuntimeIntent]? = nil,
+        output: OutputData? = nil,
         nodesVisitedDetails: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<MessageResponse>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encodeIfPresent(request) else {
+        let messageRequest = MessageRequest(input: input, alternateIntents: alternateIntents, context: context, entities: entities, intents: intents, output: output)
+        guard let body = try? JSONEncoder().encodeIfPresent(messageRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -243,19 +254,38 @@ public class Conversation {
      new workspace.
      This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
 
-     - parameter properties: The content of the new workspace.
-       The maximum size for this data is 50MB. If you need to import a larger workspace, consider importing the
-       workspace without intents and entities and then adding them separately.
+     - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab
+       characters, and it must be no longer than 64 characters.
+     - parameter description: The description of the workspace. This string cannot contain carriage return, newline,
+       or tab characters, and it must be no longer than 128 characters.
+     - parameter language: The language of the workspace.
+     - parameter intents: An array of objects defining the intents for the workspace.
+     - parameter entities: An array of objects defining the entities for the workspace.
+     - parameter dialogNodes: An array of objects defining the nodes in the workspace dialog.
+     - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
+       input.
+     - parameter metadata: Any metadata related to the workspace.
+     - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service
+       improvements. `true` indicates that workspace training data is not to be used.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createWorkspace(
-        properties: CreateWorkspace? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        language: String? = nil,
+        intents: [CreateIntent]? = nil,
+        entities: [CreateEntity]? = nil,
+        dialogNodes: [CreateDialogNode]? = nil,
+        counterexamples: [CreateCounterexample]? = nil,
+        metadata: [String: JSON]? = nil,
+        learningOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
+        let createWorkspaceRequest = CreateWorkspace(name: name, description: description, language: language, intents: intents, entities: entities, dialogNodes: dialogNodes, counterexamples: counterexamples, metadata: metadata, learningOptOut: learningOptOut)
+        guard let body = try? JSONEncoder().encodeIfPresent(createWorkspaceRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -358,9 +388,19 @@ public class Conversation {
      This operation is limited to 30 request per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter properties: Valid data defining the new and updated workspace content.
-       The maximum size for this data is 50MB. If you need to import a larger amount of workspace data, consider
-       importing components such as intents and entities using separate operations.
+     - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab
+       characters, and it must be no longer than 64 characters.
+     - parameter description: The description of the workspace. This string cannot contain carriage return, newline,
+       or tab characters, and it must be no longer than 128 characters.
+     - parameter language: The language of the workspace.
+     - parameter intents: An array of objects defining the intents for the workspace.
+     - parameter entities: An array of objects defining the entities for the workspace.
+     - parameter dialogNodes: An array of objects defining the nodes in the workspace dialog.
+     - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
+       input.
+     - parameter metadata: Any metadata related to the workspace.
+     - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service
+       improvements. `true` indicates that workspace training data is not to be used.
      - parameter append: Whether the new data is to be appended to the existing data in the workspace. If
        **append**=`false`, elements included in the new data completely replace the corresponding existing elements,
        including all subelements. For example, if the new data includes **entities** and **append**=`false`, all
@@ -372,13 +412,22 @@ public class Conversation {
      */
     public func updateWorkspace(
         workspaceID: String,
-        properties: UpdateWorkspace? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        language: String? = nil,
+        intents: [CreateIntent]? = nil,
+        entities: [CreateEntity]? = nil,
+        dialogNodes: [CreateDialogNode]? = nil,
+        counterexamples: [CreateCounterexample]? = nil,
+        metadata: [String: JSON]? = nil,
+        learningOptOut: Bool? = nil,
         append: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
+        let updateWorkspaceRequest = UpdateWorkspace(name: name, description: description, language: language, intents: intents, entities: entities, dialogNodes: dialogNodes, counterexamples: counterexamples, metadata: metadata, learningOptOut: learningOptOut)
+        guard let body = try? JSONEncoder().encodeIfPresent(updateWorkspaceRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -1505,18 +1554,31 @@ public class Conversation {
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter properties: The content of the new entity.
+     - parameter entity: The name of the entity. This string must conform to the following restrictions:
+       - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+       - It cannot begin with the reserved prefix `sys-`.
+       - It must be no longer than 64 characters.
+     - parameter description: The description of the entity. This string cannot contain carriage return, newline, or
+       tab characters, and it must be no longer than 128 characters.
+     - parameter metadata: Any metadata related to the value.
+     - parameter values: An array of objects describing the entity values.
+     - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createEntity(
         workspaceID: String,
-        properties: CreateEntity,
+        entity: String,
+        description: String? = nil,
+        metadata: [String: JSON]? = nil,
+        values: [CreateValue]? = nil,
+        fuzzyMatch: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(properties) else {
+        let createEntityRequest = CreateEntity(entity: entity, description: description, metadata: metadata, values: values, fuzzyMatch: fuzzyMatch)
+        guard let body = try? JSONEncoder().encode(createEntityRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -1627,22 +1689,32 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
-     - parameter properties: The updated content of the entity. Any elements included in the new data will completely
-       replace the equivalent existing elements, including all subelements. (Previously existing subelements are not
-       retained unless they are also included in the new data.) For example, if you update the values for an entity, the
-       previously existing values are discarded and replaced with the new values specified in the update.
+     - parameter newEntity: The name of the entity. This string must conform to the following restrictions:
+       - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+       - It cannot begin with the reserved prefix `sys-`.
+       - It must be no longer than 64 characters.
+     - parameter newDescription: The description of the entity. This string cannot contain carriage return, newline,
+       or tab characters, and it must be no longer than 128 characters.
+     - parameter newMetadata: Any metadata related to the entity.
+     - parameter newFuzzyMatch: Whether to use fuzzy matching for the entity.
+     - parameter newValues: An array of entity values.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateEntity(
         workspaceID: String,
         entity: String,
-        properties: UpdateEntity,
+        newEntity: String? = nil,
+        newDescription: String? = nil,
+        newMetadata: [String: JSON]? = nil,
+        newFuzzyMatch: Bool? = nil,
+        newValues: [CreateValue]? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(properties) else {
+        let updateEntityRequest = UpdateEntity(entity: newEntity, description: newDescription, metadata: newMetadata, fuzzyMatch: newFuzzyMatch, values: newValues)
+        guard let body = try? JSONEncoder().encode(updateEntityRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -1824,19 +1896,38 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
-     - parameter properties: The new entity value.
+     - parameter value: The text of the entity value. This string must conform to the following restrictions:
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
+       - It must be no longer than 64 characters.
+     - parameter metadata: Any metadata related to the entity value.
+     - parameter synonyms: An array containing any synonyms for the entity value. You can provide either synonyms or
+       patterns (as indicated by **type**), but not both. A synonym must conform to the following restrictions:
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
+       - It must be no longer than 64 characters.
+     - parameter patterns: An array of patterns for the entity value. You can provide either synonyms or patterns (as
+       indicated by **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more
+       information about how to specify a pattern, see the
+       [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+     - parameter valueType: Specifies the type of value.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createValue(
         workspaceID: String,
         entity: String,
-        properties: CreateValue,
+        value: String,
+        metadata: [String: JSON]? = nil,
+        synonyms: [String]? = nil,
+        patterns: [String]? = nil,
+        valueType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(properties) else {
+        let createValueRequest = CreateValue(value: value, metadata: metadata, synonyms: synonyms, patterns: patterns, valueType: valueType)
+        guard let body = try? JSONEncoder().encode(createValueRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -1949,11 +2040,21 @@ public class Conversation {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
-     - parameter properties: The updated content of the entity value.
-       Any elements included in the new data will completely replace the equivalent existing elements, including all
-       subelements. (Previously existing subelements are not retained unless they are also included in the new data.)
-       For example, if you update the synonyms for an entity value, the previously existing synonyms are discarded and
-       replaced with the new synonyms specified in the update.
+     - parameter newValue: The text of the entity value. This string must conform to the following restrictions:
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
+       - It must be no longer than 64 characters.
+     - parameter newMetadata: Any metadata related to the entity value.
+     - parameter newType: Specifies the type of value.
+     - parameter newSynonyms: An array of synonyms for the entity value. You can provide either synonyms or patterns
+       (as indicated by **type**), but not both. A synonym must conform to the following resrictions:
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
+       - It must be no longer than 64 characters.
+     - parameter newPatterns: An array of patterns for the entity value. You can provide either synonyms or patterns
+       (as indicated by **type**), but not both. A pattern is a regular expression no longer than 512 characters. For
+       more information about how to specify a pattern, see the
+       [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1961,12 +2062,17 @@ public class Conversation {
         workspaceID: String,
         entity: String,
         value: String,
-        properties: UpdateValue,
+        newValue: String? = nil,
+        newMetadata: [String: JSON]? = nil,
+        newType: String? = nil,
+        newSynonyms: [String]? = nil,
+        newPatterns: [String]? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(properties) else {
+        let updateValueRequest = UpdateValue(value: newValue, metadata: newMetadata, valueType: newType, synonyms: newSynonyms, patterns: newPatterns)
+        guard let body = try? JSONEncoder().encode(updateValueRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -2462,18 +2568,59 @@ public class Conversation {
      This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter properties: A CreateDialogNode object defining the content of the new dialog node.
+     - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
+       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+       - It must be no longer than 1024 characters.
+     - parameter description: The description of the dialog node. This string cannot contain carriage return, newline,
+       or tab characters, and it must be no longer than 128 characters.
+     - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage
+       return, newline, or tab characters, and it must be no longer than 2048 characters.
+     - parameter parent: The ID of the parent dialog node.
+     - parameter previousSibling: The ID of the previous dialog node.
+     - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
+       see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     - parameter context: The context for the dialog node.
+     - parameter metadata: The metadata for the dialog node.
+     - parameter nextStep: The next step to be executed in dialog processing.
+     - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
+     - parameter title: The alias used to identify the dialog node. This string must conform to the following
+       restrictions:
+       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+       - It must be no longer than 64 characters.
+     - parameter nodeType: How the dialog node is processed.
+     - parameter eventName: How an `event_handler` node is processed.
+     - parameter variable: The location in the dialog context where output is stored.
+     - parameter digressIn: Whether this top-level dialog node can be digressed into.
+     - parameter digressOut: Whether this dialog node can be returned to after a digression.
+     - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createDialogNode(
         workspaceID: String,
-        properties: CreateDialogNode,
+        dialogNode: String,
+        description: String? = nil,
+        conditions: String? = nil,
+        parent: String? = nil,
+        previousSibling: String? = nil,
+        output: [String: JSON]? = nil,
+        context: [String: JSON]? = nil,
+        metadata: [String: JSON]? = nil,
+        nextStep: DialogNodeNextStep? = nil,
+        actions: [DialogNodeAction]? = nil,
+        title: String? = nil,
+        nodeType: String? = nil,
+        eventName: String? = nil,
+        variable: String? = nil,
+        digressIn: String? = nil,
+        digressOut: String? = nil,
+        digressOutSlots: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(properties) else {
+        let createDialogNodeRequest = CreateDialogNode(dialogNode: dialogNode, description: description, conditions: conditions, parent: parent, previousSibling: previousSibling, output: output, context: context, metadata: metadata, nextStep: nextStep, actions: actions, title: title, nodeType: nodeType, eventName: eventName, variable: variable, digressIn: digressIn, digressOut: digressOut, digressOutSlots: digressOutSlots)
+        guard let body = try? JSONEncoder().encode(createDialogNodeRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -2574,23 +2721,61 @@ public class Conversation {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
-     - parameter properties: The updated content of the dialog node.
-       Any elements included in the new data will completely replace the equivalent existing elements, including all
-       subelements. (Previously existing subelements are not retained unless they are also included in the new data.)
-       For example, if you update the actions for a dialog node, the previously existing actions are discarded and
-       replaced with the new actions specified in the update.
+     - parameter newDialogNode: The dialog node ID. This string must conform to the following restrictions:
+       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+       - It must be no longer than 1024 characters.
+     - parameter newDescription: The description of the dialog node. This string cannot contain carriage return,
+       newline, or tab characters, and it must be no longer than 128 characters.
+     - parameter newConditions: The condition that will trigger the dialog node. This string cannot contain carriage
+       return, newline, or tab characters, and it must be no longer than 2048 characters.
+     - parameter newParent: The ID of the parent dialog node.
+     - parameter newPreviousSibling: The ID of the previous sibling dialog node.
+     - parameter newOutput: The output of the dialog node. For more information about how to specify dialog node
+       output, see the
+       [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     - parameter newContext: The context for the dialog node.
+     - parameter newMetadata: The metadata for the dialog node.
+     - parameter newNextStep: The next step to be executed in dialog processing.
+     - parameter newTitle: The alias used to identify the dialog node. This string must conform to the following
+       restrictions:
+       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+       - It must be no longer than 64 characters.
+     - parameter newType: How the dialog node is processed.
+     - parameter newEventName: How an `event_handler` node is processed.
+     - parameter newVariable: The location in the dialog context where output is stored.
+     - parameter newActions: An array of objects describing any actions to be invoked by the dialog node.
+     - parameter newDigressIn: Whether this top-level dialog node can be digressed into.
+     - parameter newDigressOut: Whether this dialog node can be returned to after a digression.
+     - parameter newDigressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateDialogNode(
         workspaceID: String,
         dialogNode: String,
-        properties: UpdateDialogNode,
+        newDialogNode: String? = nil,
+        newDescription: String? = nil,
+        newConditions: String? = nil,
+        newParent: String? = nil,
+        newPreviousSibling: String? = nil,
+        newOutput: [String: JSON]? = nil,
+        newContext: [String: JSON]? = nil,
+        newMetadata: [String: JSON]? = nil,
+        newNextStep: DialogNodeNextStep? = nil,
+        newTitle: String? = nil,
+        newType: String? = nil,
+        newEventName: String? = nil,
+        newVariable: String? = nil,
+        newActions: [DialogNodeAction]? = nil,
+        newDigressIn: String? = nil,
+        newDigressOut: String? = nil,
+        newDigressOutSlots: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(properties) else {
+        let updateDialogNodeRequest = UpdateDialogNode(dialogNode: newDialogNode, description: newDescription, conditions: newConditions, parent: newParent, previousSibling: newPreviousSibling, output: newOutput, context: newContext, metadata: newMetadata, nextStep: newNextStep, title: newTitle, nodeType: newType, eventName: newEventName, variable: newVariable, actions: newActions, digressIn: newDigressIn, digressOut: newDigressOut, digressOutSlots: newDigressOutSlots)
+        guard let body = try? JSONEncoder().encode(updateDialogNodeRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }

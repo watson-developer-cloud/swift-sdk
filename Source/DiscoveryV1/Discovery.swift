@@ -93,12 +93,6 @@ public class Discovery {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -409,26 +403,28 @@ public class Discovery {
      it possible for the tooling to add additional metadata and information to the configuration.
 
      - parameter environmentID: The ID of the environment.
-     - parameter configuration: Input an object that enables you to customize how your content is ingested and what
-       enrichments are added to your data.
-       `name` is required and must be unique within the current `environment`. All other properties are optional.
-       If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they will be
-       ignored and overridden by the system (an error is not returned so that the overridden fields do not need to be
-       removed when copying a configuration).
-       The configuration can contain unrecognized JSON fields. Any such fields will be ignored and will not generate an
-       error. This makes it easier to use newer configuration files with older versions of the API and the service. It
-       also makes it possible for the tooling to add additional metadata and information to the configuration.
+     - parameter name: The name of the configuration.
+     - parameter description: The description of the configuration, if available.
+     - parameter conversions: The document conversion settings for the configuration.
+     - parameter enrichments: An array of document enrichment settings for the configuration.
+     - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
+       normalized form. Operations are executed in the order that they appear in the array.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createConfiguration(
         environmentID: String,
-        configuration: Configuration,
+        name: String,
+        description: String? = nil,
+        conversions: Conversions? = nil,
+        enrichments: [Enrichment]? = nil,
+        normalizations: [NormalizationOperation]? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(configuration) else {
+        let createConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations)
+        guard let body = try? JSONEncoder().encode(createConfigurationRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -575,28 +571,29 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter configurationID: The ID of the configuration.
-     - parameter configuration: Input an object that enables you to update and customize how your data is ingested and
-       what enrichments are added to your data.
-       The `name` parameter is required and must be unique within the current `environment`. All other properties are
-       optional, but if they are omitted  the default values replace the current value of each omitted property.
-       If the input configuration contains the `configuration_id`, `created`, or `updated` properties, they are ignored
-       and overridden by the system, and an error is not returned so that the overridden fields do not need to be
-       removed when updating a configuration.
-       The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error.
-       This makes it easier to use newer configuration files with older versions of the API and the service. It also
-       makes it possible for the tooling to add additional metadata and information to the configuration.
+     - parameter name: The name of the configuration.
+     - parameter description: The description of the configuration, if available.
+     - parameter conversions: The document conversion settings for the configuration.
+     - parameter enrichments: An array of document enrichment settings for the configuration.
+     - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
+       normalized form. Operations are executed in the order that they appear in the array.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateConfiguration(
         environmentID: String,
         configurationID: String,
-        configuration: Configuration,
+        name: String,
+        description: String? = nil,
+        conversions: Conversions? = nil,
+        enrichments: [Enrichment]? = nil,
+        normalizations: [NormalizationOperation]? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(configuration) else {
+        let updateConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations)
+        guard let body = try? JSONEncoder().encode(updateConfigurationRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -793,18 +790,26 @@ public class Discovery {
      Create a collection.
 
      - parameter environmentID: The ID of the environment.
-     - parameter properties: Input an object that allows you to add a collection.
+     - parameter name: The name of the collection to be created.
+     - parameter description: A description of the collection.
+     - parameter configurationID: The ID of the configuration in which the collection is to be created.
+     - parameter language: The language of the documents stored in the collection, in the form of an ISO 639-1
+       language code.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createCollection(
         environmentID: String,
-        properties: CreateCollectionRequest,
+        name: String,
+        description: String? = nil,
+        configurationID: String? = nil,
+        language: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(properties) else {
+        let createCollectionRequest = CreateCollectionRequest(name: name, description: description, configurationID: configurationID, language: language)
+        guard let body = try? JSONEncoder().encode(createCollectionRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -1817,7 +1822,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -1979,7 +1984,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2131,7 +2136,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2191,20 +2196,32 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
-     - parameter entityQuery: An object specifying the entities to query, which functions to perform, and any
-       additional constraints.
+     - parameter feature: The entity query feature to perform. Supported features are `disambiguate` and
+       `similar_entities`.
+     - parameter entity: A text string that appears within the entity text field.
+     - parameter context: Entity text to provide context for the queried entity and rank based on that association.
+       For example, if you wanted to query the city of London in England your query would look for `London` with the
+       context of `England`.
+     - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
+     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The
+       maximum number of evidence items per query is 10,000.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func queryEntities(
         environmentID: String,
         collectionID: String,
-        entityQuery: QueryEntities,
+        feature: String? = nil,
+        entity: QueryEntitiesEntity? = nil,
+        context: QueryEntitiesContext? = nil,
+        count: Int? = nil,
+        evidenceCount: Int? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(entityQuery) else {
+        let queryEntitiesRequest = QueryEntities(feature: feature, entity: entity, context: context, count: count, evidenceCount: evidenceCount)
+        guard let body = try? JSONEncoder().encode(queryEntitiesRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -2250,20 +2267,34 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
-     - parameter relationshipQuery: An object that describes the relationships to be queried and any query constraints
-       (such as filters).
+     - parameter entities: An array of entities to find relationships for.
+     - parameter context: Entity text to provide context for the queried entity and rank based on that association.
+       For example, if you wanted to query the city of London in England your query would look for `London` with the
+       context of `England`.
+     - parameter sort: The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the
+       number of unique times each entity is identified. The default is `score`.
+     - parameter filter: Filters to apply to the relationship query.
+     - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
+     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The
+       maximum number of evidence items per query is 10,000.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func queryRelations(
         environmentID: String,
         collectionID: String,
-        relationshipQuery: QueryRelations,
+        entities: [QueryRelationsEntity]? = nil,
+        context: QueryEntitiesContext? = nil,
+        sort: String? = nil,
+        filter: QueryRelationsFilter? = nil,
+        count: Int? = nil,
+        evidenceCount: Int? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(relationshipQuery) else {
+        let queryRelationsRequest = QueryRelations(entities: entities, context: context, sort: sort, filter: filter, count: count, evidenceCount: evidenceCount)
+        guard let body = try? JSONEncoder().encode(queryRelationsRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }

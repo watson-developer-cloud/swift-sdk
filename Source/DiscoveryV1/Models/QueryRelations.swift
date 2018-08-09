@@ -19,7 +19,7 @@ import Foundation
 /**
  A respresentation of a relationship query.
  */
-public struct QueryRelations: Encodable {
+internal struct QueryRelations: Encodable {
 
     /**
      The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique times

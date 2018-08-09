@@ -96,12 +96,6 @@ public class NaturalLanguageUnderstanding {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -140,18 +134,36 @@ public class NaturalLanguageUnderstanding {
      Categorize your content into a hierarchical 5-level taxonomy. For example, \"Leonardo DiCaprio won an Oscar\"
      returns \"/art and entertainment/movies and tv/movies\" as the most confident classification.
 
-     - parameter parameters: An object containing request parameters. The `features` object and one of the `text`,
-       `html`, or `url` attributes are required.
+     - parameter features: Specific features to analyze the document for.
+     - parameter text: The plain text to analyze.
+     - parameter html: The HTML file to analyze.
+     - parameter url: The web page to analyze.
+     - parameter clean: Remove website elements, such as links, ads, etc.
+     - parameter xpath: XPath query for targeting nodes in HTML.
+     - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
+     - parameter returnAnalyzedText: Whether or not to return the analyzed text.
+     - parameter language: ISO 639-1 code indicating the language to use in the analysis.
+     - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func analyze(
-        parameters: Parameters,
+        features: Features,
+        text: String? = nil,
+        html: String? = nil,
+        url: String? = nil,
+        clean: Bool? = nil,
+        xpath: String? = nil,
+        fallbackToRaw: Bool? = nil,
+        returnAnalyzedText: Bool? = nil,
+        language: String? = nil,
+        limitTextCharacters: Int? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<AnalysisResults>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(parameters) else {
+        let analyzeRequest = Parameters(features: features, text: text, html: html, url: url, clean: clean, xpath: xpath, fallbackToRaw: fallbackToRaw, returnAnalyzedText: returnAnalyzedText, language: language, limitTextCharacters: limitTextCharacters)
+        guard let body = try? JSONEncoder().encode(analyzeRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }
@@ -235,7 +247,7 @@ public class NaturalLanguageUnderstanding {
     public func deleteModel(
         modelID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteModelResults>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<InlineResponse200>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

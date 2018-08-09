@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateValue. */
-public struct UpdateValue: Encodable {
+internal struct UpdateValue: Encodable {
 
     /**
      Specifies the type of value.

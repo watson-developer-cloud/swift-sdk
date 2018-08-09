@@ -19,7 +19,7 @@ import Foundation
 /**
  An object containing request parameters.
  */
-public struct Parameters: Encodable {
+internal struct Parameters: Encodable {
 
     /**
      The plain text to analyze.

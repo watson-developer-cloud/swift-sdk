@@ -81,8 +81,8 @@ extension VisualRecognition {
         let deleteFile = { try? FileManager.default.removeItem(at: file) }
         let completion = {
             (response: WatsonResponse<ClassifiedImages>?, error: Error?) in
-                deleteFile()
-                completionHandler(response, error)
+            deleteFile()
+            completionHandler(response, error)
         }
 
         self.classify(

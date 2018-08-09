@@ -62,12 +62,18 @@ public class SpeechToText {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
+    /// The URL that shall be used to obtain a token.
+    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+
+    /// The URL that shall be used to stream audio for transcription.
+    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
+    internal let session = URLSession(configuration: URLSessionConfiguration.default)
+    internal var authMethod: AuthenticationMethod
+    internal let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
      Create a `SpeechToText` object.
@@ -117,6 +123,12 @@ public class SpeechToText {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
+            if case let .some(.string(description)) = json["code_description"] {
+                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -312,13 +324,13 @@ public class SpeechToText {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func recognizeSessionless(
-        audio: Data,
-        contentType: String,
         model: String? = nil,
         customizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
+        audio: Data? = nil,
+        contentType: String? = nil,
         inactivityTimeout: Int? = nil,
         keywords: [String]? = nil,
         keywordsThreshold: Double? = nil,
@@ -2401,18 +2413,14 @@ public class SpeechToText {
     public func addAudio(
         customizationID: String,
         audioName: String,
-        audioResource: [Data],
+        audioResource: Data,
         contentType: String,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
-        // construct body
-        guard let body = try? JSONEncoder().encode(audioResource) else {
-            completionHandler(nil, RestError.serializationError)
-            return
-        }
+        let body = audioResource
 
         // construct header parameters
         var headerParameters = defaultHeaders

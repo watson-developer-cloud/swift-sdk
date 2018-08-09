@@ -46,7 +46,7 @@ public struct Collection: Decodable {
     public var description: String?
 
     /**
-     The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'.
+     The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
     public var created: Date?
 

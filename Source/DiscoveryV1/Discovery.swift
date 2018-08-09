@@ -93,6 +93,12 @@ public class Discovery {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
+            if case let .some(.string(message)) = json["error"] {
+                userInfo[NSLocalizedDescriptionKey] = message
+            }
+            if case let .some(.string(description)) = json["description"] {
+                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
+            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -1822,7 +1828,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -1984,7 +1990,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2136,7 +2142,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {

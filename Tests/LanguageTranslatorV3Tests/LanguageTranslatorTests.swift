@@ -252,8 +252,7 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testTranslateStringWithModelID() {
         let expectation = self.expectation(description: "Translate text string using model id.")
-        let request = TranslateRequest(text: ["Hello"], modelID: "en-es")
-        languageTranslator.translate(request: request) {
+        languageTranslator.translate(text: ["Hello"], modelID: "en-es") {
             response, error in
 
             if let error = error {
@@ -276,8 +275,7 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testTranslateStringWithSourceAndTarget() {
         let expectation = self.expectation(description: "Translate text string using source and target.")
-        let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")
-        languageTranslator.translate(request: request) {
+        languageTranslator.translate(text: ["Hello"], source: "en", target: "es") {
             response, error in
 
             if let error = error {

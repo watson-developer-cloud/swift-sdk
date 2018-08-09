@@ -93,8 +93,7 @@ class SpeechToTextTests: XCTestCase {
     func createTestLanguageModel() -> LanguageModel? {
         var languageModel: LanguageModel?
         let expectation = self.expectation(description: "createLanguageModel")
-        let options = CreateLanguageModel(name: "swift-test-model", baseModelName: "en-US_BroadbandModel")
-        speechToText.createLanguageModel(createLanguageModel: options) {
+        speechToText.createLanguageModel(name: "swift-test-model", baseModelName: "en-US_BroadbandModel") {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {
@@ -456,9 +455,8 @@ class SpeechToTextTests: XCTestCase {
 
         // create a language model
         let expectation1 = self.expectation(description: "createLanguageModel")
-        let createLanguageModel = CreateLanguageModel(name: "swift-test-model", baseModelName: "en-US_BroadbandModel", description: "Test model")
         var languageModel: LanguageModel!
-        speechToText.createLanguageModel(createLanguageModel: createLanguageModel) {
+        speechToText.createLanguageModel(name: "swift-test-model", baseModelName: "en-US_BroadbandModel", description: "Test model") {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {

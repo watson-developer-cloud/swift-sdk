@@ -168,7 +168,17 @@ public class NaturalLanguageUnderstanding {
         completionHandler: @escaping (WatsonResponse<AnalysisResults>?, Error?) -> Void)
     {
         // construct body
-        let analyzeRequest = Parameters(features: features, text: text, html: html, url: url, clean: clean, xpath: xpath, fallbackToRaw: fallbackToRaw, returnAnalyzedText: returnAnalyzedText, language: language, limitTextCharacters: limitTextCharacters)
+        let analyzeRequest = Parameters(
+            features: features,
+            text: text,
+            html: html,
+            url: url,
+            clean: clean,
+            xpath: xpath,
+            fallbackToRaw: fallbackToRaw,
+            returnAnalyzedText: returnAnalyzedText,
+            language: language,
+            limitTextCharacters: limitTextCharacters)
         guard let body = try? JSONEncoder().encode(analyzeRequest) else {
             completionHandler(nil, RestError.serializationError)
             return

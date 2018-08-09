@@ -288,7 +288,16 @@ public class Conversation {
         completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
     {
         // construct body
-        let createWorkspaceRequest = CreateWorkspace(name: name, description: description, language: language, intents: intents, entities: entities, dialogNodes: dialogNodes, counterexamples: counterexamples, metadata: metadata, learningOptOut: learningOptOut)
+        let createWorkspaceRequest = CreateWorkspace(
+            name: name,
+            description: description,
+            language: language,
+            intents: intents,
+            entities: entities,
+            dialogNodes: dialogNodes,
+            counterexamples: counterexamples,
+            metadata: metadata,
+            learningOptOut: learningOptOut)
         guard let body = try? JSONEncoder().encodeIfPresent(createWorkspaceRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -430,7 +439,16 @@ public class Conversation {
         completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
     {
         // construct body
-        let updateWorkspaceRequest = UpdateWorkspace(name: name, description: description, language: language, intents: intents, entities: entities, dialogNodes: dialogNodes, counterexamples: counterexamples, metadata: metadata, learningOptOut: learningOptOut)
+        let updateWorkspaceRequest = UpdateWorkspace(
+            name: name,
+            description: description,
+            language: language,
+            intents: intents,
+            entities: entities,
+            dialogNodes: dialogNodes,
+            counterexamples: counterexamples,
+            metadata: metadata,
+            learningOptOut: learningOptOut)
         guard let body = try? JSONEncoder().encodeIfPresent(updateWorkspaceRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -2623,7 +2641,24 @@ public class Conversation {
         completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct body
-        let createDialogNodeRequest = CreateDialogNode(dialogNode: dialogNode, description: description, conditions: conditions, parent: parent, previousSibling: previousSibling, output: output, context: context, metadata: metadata, nextStep: nextStep, actions: actions, title: title, nodeType: nodeType, eventName: eventName, variable: variable, digressIn: digressIn, digressOut: digressOut, digressOutSlots: digressOutSlots)
+        let createDialogNodeRequest = CreateDialogNode(
+            dialogNode: dialogNode,
+            description: description,
+            conditions: conditions,
+            parent: parent,
+            previousSibling: previousSibling,
+            output: output,
+            context: context,
+            metadata: metadata,
+            nextStep: nextStep,
+            actions: actions,
+            title: title,
+            nodeType: nodeType,
+            eventName: eventName,
+            variable: variable,
+            digressIn: digressIn,
+            digressOut: digressOut,
+            digressOutSlots: digressOutSlots)
         guard let body = try? JSONEncoder().encode(createDialogNodeRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -2778,7 +2813,24 @@ public class Conversation {
         completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
         // construct body
-        let updateDialogNodeRequest = UpdateDialogNode(dialogNode: newDialogNode, description: newDescription, conditions: newConditions, parent: newParent, previousSibling: newPreviousSibling, output: newOutput, context: newContext, metadata: newMetadata, nextStep: newNextStep, title: newTitle, nodeType: newType, eventName: newEventName, variable: newVariable, actions: newActions, digressIn: newDigressIn, digressOut: newDigressOut, digressOutSlots: newDigressOutSlots)
+        let updateDialogNodeRequest = UpdateDialogNode(
+            dialogNode: newDialogNode,
+            description: newDescription,
+            conditions: newConditions,
+            parent: newParent,
+            previousSibling: newPreviousSibling,
+            output: newOutput,
+            context: newContext,
+            metadata: newMetadata,
+            nextStep: newNextStep,
+            title: newTitle,
+            nodeType: newType,
+            eventName: newEventName,
+            variable: newVariable,
+            actions: newActions,
+            digressIn: newDigressIn,
+            digressOut: newDigressOut,
+            digressOutSlots: newDigressOutSlots)
         guard let body = try? JSONEncoder().encode(updateDialogNodeRequest) else {
             completionHandler(nil, RestError.serializationError)
             return

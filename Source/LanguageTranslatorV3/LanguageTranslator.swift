@@ -107,18 +107,30 @@ public class LanguageTranslator {
 
      Translates the input text from the source language to the target language.
 
-     - parameter request: The translate request containing the text, and either a model ID or source and target
-       language pair.
+     - parameter text: Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the
+       response.
+     - parameter modelID: Model ID of the translation model to use. If this is specified, the **source** and
+       **target** parameters will be ignored. The method requires either a model ID or both the **source** and
+       **target** parameters.
+     - parameter source: Language code of the source text language. Use with `target` as an alternative way to select
+       a translation model. When `source` and `target` are set, and a model ID is not set, the system chooses a default
+       model for the language pair (usually the model based on the news domain).
+     - parameter target: Language code of the translation target language. Use with source as an alternative way to
+       select a translation model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func translate(
-        request: TranslateRequest,
+        text: [String],
+        modelID: String? = nil,
+        source: String? = nil,
+        target: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<TranslationResult>?, Error?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(request) else {
+        let translateRequest = TranslateRequest(text: text, modelID: modelID, source: source, target: target)
+        guard let body = try? JSONEncoder().encode(translateRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
         }

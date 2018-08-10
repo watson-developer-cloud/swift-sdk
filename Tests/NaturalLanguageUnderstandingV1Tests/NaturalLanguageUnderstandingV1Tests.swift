@@ -102,8 +102,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let expectation = self.expectation(description: description)
         let concepts = ConceptsOptions(limit: 5)
         let features = Features(concepts: concepts)
-        let parameters = Parameters(features: features, html: html)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, html: html) {
             _, error in
 
             if let error = error {
@@ -120,8 +119,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let expectation = self.expectation(description: description)
         let concepts = ConceptsOptions(limit: 5)
         let features = Features(concepts: concepts)
-        let parameters = Parameters(features: features, text: text)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, text: text) {
             _, error in
 
             if let error = error {
@@ -138,8 +136,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let expectation = self.expectation(description: description)
         let concepts = ConceptsOptions(limit: 5)
         let features = Features(concepts: concepts)
-        let parameters = Parameters(features: features, url: url, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, url: url, returnAnalyzedText: true) {
             _, error in
 
             if let error = error {
@@ -165,8 +162,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         """
         let concepts = ConceptsOptions(limit: 5)
         let features = Features(concepts: concepts)
-        let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -198,8 +194,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze HTML for concepts."
         let expectation = self.expectation(description: description)
         let features = Features(concepts: ConceptsOptions())
-        let parameters = Parameters(features: features, html: html, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, html: html, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -237,8 +232,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
                  + "in order to thrive; independent media needs to check the abuses of power."
         let emotion = EmotionOptions(targets: ["democracy", "entrepreneurs", "media", "economies"])
         let features = Features(emotion: emotion)
-        let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -287,8 +281,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
                  + "because entrepreneurs need to access information in order to invent; young people need a global education "
                  + "in order to thrive; independent media needs to check the abuses of power."
         let features = Features(emotion: EmotionOptions())
-        let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -326,8 +319,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text for entities and its corresponding sentiment values."
         let expectation = self.expectation(description: description)
         let features = Features(entities: EntitiesOptions(limit: 2, sentiment: true))
-        let parameters = Parameters(features: features, text: self.text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, text: self.text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -362,8 +354,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text for keywords and its corresponding sentiment values."
         let expectation = self.expectation(description: description)
         let features = Features(keywords: KeywordsOptions(sentiment: true))
-        let parameters = Parameters(features: features, text: self.text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, text: self.text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -398,8 +389,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let fileTitle = "This 5,000-year-old recipe for beer actually sounds pretty tasty"
         let fileDate = "2016-05-23T20:13:00"
         let fileAuthor = "Annalee Newitz"
-        let parameters = Parameters(features: features, html: html, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, html: html, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -426,8 +416,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text for relations."
         let expectation = self.expectation(description: description)
         let features = Features(relations: RelationsOptions())
-        let parameters = Parameters(features: features, text: self.text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, text: self.text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -453,8 +442,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let expectation = self.expectation(description: description)
         let semanticRoles = SemanticRolesOptions(limit: 7, keywords: true, entities: true)
         let features = Features(semanticRoles: semanticRoles)
-        let param = Parameters(features: features, text: text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: param) {
+        naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -491,8 +479,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text and verify sentiment returned."
         let expectation = self.expectation(description: description)
         let features = Features(sentiment: SentimentOptions(document: true, targets: ["Elliot Turner", "traction"]))
-        let param = Parameters(features: features, text: text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: param) {
+        naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -524,8 +511,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text and verify sentiment returned."
         let expectation = self.expectation(description: description)
         let features = Features(sentiment: SentimentOptions(document: true))
-        let param = Parameters(features: features, text: text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: param) {
+        naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -553,8 +539,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text and verify categories returned."
         let expectation = self.expectation(description: description)
         let features = Features(categories: CategoriesOptions())
-        let param = Parameters(features: features, text: text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: param) {
+        naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -591,8 +576,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             sentiment: SentimentOptions(document: true, targets: ["happy"]),
             categories: CategoriesOptions(additionalProperties: ["example-key": .string("example-value")])
         )
-        let parameters = Parameters(features: features, text: text, returnAnalyzedText: true)
-        naturalLanguageUnderstanding.analyze(parameters: parameters) {
+        naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
             if let error = error {
@@ -630,7 +614,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testListModels() {
         let description = "List available models from Watson Knowledge Studio."
         let expectation = self.expectation(description: description)
-        naturalLanguageUnderstanding.listModels() {
+        naturalLanguageUnderstanding.listModels {
             response, error in
 
             if let error = error {

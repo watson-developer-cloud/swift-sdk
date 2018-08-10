@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateEntity. */
-public struct UpdateEntity: Encodable {
+internal struct UpdateEntity: Encodable {
 
     /**
      The name of the entity. This string must conform to the following restrictions:

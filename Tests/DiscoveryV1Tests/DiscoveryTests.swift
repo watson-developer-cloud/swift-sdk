@@ -196,9 +196,8 @@ class DiscoveryTests: XCTestCase {
         let expectation = self.expectation(description: "createConfiguration")
         let name = "swift-sdk-test-" + UUID().uuidString
         let description = "A configuration created while testing the Swift SDK. Safe to delete."
-        let properties = Configuration(name: name, description: description)
 
-        discovery.createConfiguration(environmentID: environmentID, configuration: properties) {
+        discovery.createConfiguration(environmentID: environmentID, name: name, description: description) {
             response, error in
 
             if let error = error {
@@ -243,14 +242,14 @@ class DiscoveryTests: XCTestCase {
     func createTestCollection(environmentID: String, configurationID: String) -> DiscoveryV1.Collection {
         var collection: DiscoveryV1.Collection!
         let expectation = self.expectation(description: "createCollection")
-        let properties = CreateCollectionRequest(
+
+        discovery.createCollection(
+            environmentID: environmentID,
             name: "swift-sdk-test-" + UUID().uuidString,
             description: "A collection created while testing the Swift SDK. Safe to delete.",
             configurationID: configurationID,
-            language: "en"
-        )
-
-        discovery.createCollection(environmentID: environmentID, properties: properties) {
+            language: "en")
+        {
             response, error in
 
             if let error = error {
@@ -541,9 +540,8 @@ class DiscoveryTests: XCTestCase {
         let environmentID = environment.environmentID!
         let name = "swift-sdk-test-" + UUID().uuidString
         let description = "A configuration created while testing the Swift SDK. Safe to delete."
-        let properties = Configuration(name: name, description: description)
         var configuration: Configuration!
-        discovery.createConfiguration(environmentID: environmentID, configuration: properties) {
+        discovery.createConfiguration(environmentID: environmentID, name: name, description: description) {
             response, error in
 
             if let error = error {
@@ -585,8 +583,7 @@ class DiscoveryTests: XCTestCase {
 
         let expectation3 = self.expectation(description: "updateConfiguration")
         let newName = "swift-sdk-test-" + UUID().uuidString
-        let newProperties = Configuration(name: newName)
-        discovery.updateConfiguration(environmentID: environmentID, configurationID: configurationID, configuration: newProperties) {
+        discovery.updateConfiguration(environmentID: environmentID, configurationID: configurationID, name: newName) {
             response, error in
 
             if let error = error {
@@ -716,14 +713,16 @@ class DiscoveryTests: XCTestCase {
         var collection: DiscoveryV1.Collection!
         let environmentID = environment.environmentID!
         let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
+        let collectionName = "swift-sdk-test-" + UUID().uuidString
         let expectation1 = self.expectation(description: "createCollection")
-        let properties = CreateCollectionRequest(
-            name: "swift-sdk-test-" + UUID().uuidString,
+
+        discovery.createCollection(
+            environmentID: environmentID,
+            name: collectionName,
             description: "A collection created while testing the Swift SDK. Safe to delete.",
             configurationID: configuration.configurationID!,
-            language: "en"
-        )
-        discovery.createCollection(environmentID: environmentID, properties: properties) {
+            language: "en")
+        {
             response, error in
 
             if let error = error {
@@ -737,12 +736,12 @@ class DiscoveryTests: XCTestCase {
 
             collection = result
             XCTAssertNotNil(collection.name)
-            XCTAssertEqual(collection.name!, properties.name)
-            XCTAssertEqual(collection.description, properties.description!)
+            XCTAssertEqual(collection.name!, collectionName)
+            XCTAssertEqual(collection.description, "A collection created while testing the Swift SDK. Safe to delete.")
             XCTAssertNotNil(collection.configurationID)
-            XCTAssertEqual(collection.configurationID!, properties.configurationID)
+            XCTAssertEqual(collection.configurationID!, configuration.configurationID!)
             XCTAssertNotNil(collection.language)
-            XCTAssertEqual(collection.language!, properties.language!)
+            XCTAssertEqual(collection.language!, "en")
             expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)

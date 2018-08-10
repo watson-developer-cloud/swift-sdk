@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateWorkspace. */
-public struct CreateWorkspace: Encodable {
+internal struct CreateWorkspace: Encodable {
 
     /**
      The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be

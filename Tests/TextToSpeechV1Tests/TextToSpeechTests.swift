@@ -100,7 +100,7 @@ class TextToSpeechTests: XCTestCase {
     func deleteCustomizations() {
         let description = "Delete all customizations."
         let expectation = self.expectation(description: description)
-        textToSpeech.listVoiceModels() {
+        textToSpeech.listVoiceModels {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {
@@ -114,7 +114,7 @@ class TextToSpeechTests: XCTestCase {
                 return
             }
             for voiceModel in voiceModels.customizations {
-                self.textToSpeech.deleteVoiceModel(customizationID: voiceModel.customizationID) { _,_ in }
+                self.textToSpeech.deleteVoiceModel(customizationID: voiceModel.customizationID) { _, _ in }
             }
             expectation.fulfill()
         }
@@ -132,7 +132,7 @@ class TextToSpeechTests: XCTestCase {
 
     func testListVoices() {
         let expectation = self.expectation(description: "List voices")
-        textToSpeech.listVoices() {
+        textToSpeech.listVoices {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {
@@ -336,7 +336,7 @@ class TextToSpeechTests: XCTestCase {
         let description = "Safe to delete"
         let words = [Word(word: "IBM", translation: "eye bee em"), Word(word: "MIL", translation: "mill")]
         textToSpeech.updateVoiceModel(customizationID: customizationID, name: newName, description: description, words: words) {
-            response, error in
+            _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
             }
@@ -368,7 +368,7 @@ class TextToSpeechTests: XCTestCase {
 
         let expectation5 = self.expectation(description: "Delete voice model")
         textToSpeech.deleteVoiceModel(customizationID: customizationID) {
-            response, error in
+            _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
             }

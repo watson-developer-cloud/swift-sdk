@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateDialogNode. */
-public struct UpdateDialogNode: Encodable {
+internal struct UpdateDialogNode: Encodable {
 
     /**
      How the dialog node is processed.

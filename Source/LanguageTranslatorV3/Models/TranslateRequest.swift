@@ -17,7 +17,7 @@
 import Foundation
 
 /** TranslateRequest. */
-public struct TranslateRequest: Encodable {
+internal struct TranslateRequest: Encodable {
 
     /**
      Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the response.

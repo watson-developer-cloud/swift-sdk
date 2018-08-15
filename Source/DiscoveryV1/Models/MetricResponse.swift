@@ -16,28 +16,15 @@
 
 import Foundation
 
-/** AggregationResult. */
-public struct AggregationResult: Decodable {
+/**
+ The response generated from a call to a **metrics** method.
+ */
+public struct MetricResponse: Decodable {
 
-    /**
-     Key that matched the aggregation type.
-     */
-    public var key: String?
-
-    /**
-     Number of matching results.
-     */
-    public var matchingResults: Int?
-
-    /**
-     Aggregations returned in the case of chained aggregations.
-     */
-    public var aggregations: [QueryAggregation]?
+    public var aggregations: [MetricAggregation]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case key = "key"
-        case matchingResults = "matching_results"
         case aggregations = "aggregations"
     }
 

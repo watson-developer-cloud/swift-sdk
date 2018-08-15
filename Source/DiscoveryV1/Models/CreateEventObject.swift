@@ -16,29 +16,49 @@
 
 import Foundation
 
-/** AggregationResult. */
-public struct AggregationResult: Decodable {
+/**
+ An object defining the event being created.
+ */
+internal struct CreateEventObject: Encodable {
 
     /**
-     Key that matched the aggregation type.
+     The event type to be created.
      */
-    public var key: String?
+    public enum ModelType: String {
+        case click = "click"
+    }
 
     /**
-     Number of matching results.
+     The event type to be created.
      */
-    public var matchingResults: Int?
+    public var type: String
 
     /**
-     Aggregations returned in the case of chained aggregations.
+     Data object used to create a query event.
      */
-    public var aggregations: [QueryAggregation]?
+    public var data: EventData
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case key = "key"
-        case matchingResults = "matching_results"
-        case aggregations = "aggregations"
+        case type = "type"
+        case data = "data"
+    }
+
+    /**
+     Initialize a `CreateEventObject` with member variables.
+
+     - parameter type: The event type to be created.
+     - parameter data: Data object used to create a query event.
+
+     - returns: An initialized `CreateEventObject`.
+    */
+    public init(
+        type: String,
+        data: EventData
+    )
+    {
+        self.type = type
+        self.data = data
     }
 
 }

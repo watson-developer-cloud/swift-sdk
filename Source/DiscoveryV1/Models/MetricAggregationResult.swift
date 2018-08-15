@@ -16,13 +16,20 @@
 
 import Foundation
 
-/** AggregationResult. */
-public struct AggregationResult: Decodable {
+/**
+ Aggregation result data for the requested metric.
+ */
+public struct MetricAggregationResult: Decodable {
 
     /**
-     Key that matched the aggregation type.
+     Date in string form representing the start of this interval.
      */
-    public var key: String?
+    public var keyAsString: String?
+
+    /**
+     Unix epoch time equivalent of the **key_as_string**, that represents the start of this interval.
+     */
+    public var key: Int?
 
     /**
      Number of matching results.
@@ -30,15 +37,17 @@ public struct AggregationResult: Decodable {
     public var matchingResults: Int?
 
     /**
-     Aggregations returned in the case of chained aggregations.
+     The number of queries with associated events divided by the total number of queries for the interval. Only returned
+     with **event_rate** metrics.
      */
-    public var aggregations: [QueryAggregation]?
+    public var eventRate: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
+        case keyAsString = "key_as_string"
         case key = "key"
         case matchingResults = "matching_results"
-        case aggregations = "aggregations"
+        case eventRate = "event_rate"
     }
 
 }

@@ -16,29 +16,22 @@
 
 import Foundation
 
-/** AggregationResult. */
-public struct AggregationResult: Decodable {
-
-    /**
-     Key that matched the aggregation type.
-     */
-    public var key: String?
+/**
+ Object containing results that match the requested **logs** query.
+ */
+public struct LogQueryResponse: Decodable {
 
     /**
      Number of matching results.
      */
     public var matchingResults: Int?
 
-    /**
-     Aggregations returned in the case of chained aggregations.
-     */
-    public var aggregations: [QueryAggregation]?
+    public var results: [LogQueryResponseResult]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case key = "key"
         case matchingResults = "matching_results"
-        case aggregations = "aggregations"
+        case results = "results"
     }
 
 }

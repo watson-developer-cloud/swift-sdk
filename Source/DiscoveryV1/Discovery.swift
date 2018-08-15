@@ -93,12 +93,6 @@ public class Discovery {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -114,7 +108,7 @@ public class Discovery {
 
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
-     - parameter size: **Deprecated**: Size of the environment.
+     - parameter size: Size of the environment.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -122,7 +116,7 @@ public class Discovery {
     public func createEnvironment(
         name: String,
         description: String? = nil,
-        size: Int? = nil,
+        size: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
@@ -1749,7 +1743,7 @@ public class Discovery {
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
+     - parameter count: Number of results to return.
      - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10, and the offset is 8, it returns the last two results.
@@ -1945,7 +1939,7 @@ public class Discovery {
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
+     - parameter count: Number of results to return.
      - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10, and the offset is 8, it returns the last two results.
@@ -2125,7 +2119,7 @@ public class Discovery {
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
+     - parameter count: Number of results to return.
      - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10, and the offset is 8, it returns the last two results.
@@ -2317,7 +2311,7 @@ public class Discovery {
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
+     - parameter count: Number of results to return.
      - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10, and the offset is 8, it returns the last two results.
@@ -3247,6 +3241,473 @@ public class Discovery {
             (response: RestResponse) in
             switch response.result {
             case .success: success()
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Create event.
+
+     The **Events** API can be used to create log entries that are associated with specific queries. For example, you
+     can record which documents in the results set were \"clicked\" by a user and when that click occured.
+
+     - parameter type: The event type to be created.
+     - parameter data: Data object used to create a query event.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func createEvent(
+        type: String,
+        data: EventData,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (CreateEventResponse) -> Void)
+    {
+        // construct body
+        let createEventRequest = CreateEventObject(type: type, data: data)
+        guard let body = try? JSONEncoder().encode(createEventRequest) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceURL + "/v1/events",
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<CreateEventResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Search the query and event log.
+
+     Searches the query and event log to find query sessions that match the specified criteria. Searching the **logs**
+     endpoint uses the standard Discovery query syntax for the parameters that are supported.
+
+     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
+       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
+       sense of concepts in the data set.
+     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
+       with the most relevant documents listed first. Use a query search when you want to find the most relevant search
+       results. You cannot use **natural_language_query** and **query** at the same time.
+     - parameter count: Number of results to return.
+     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
+       results that are returned is 10, and the offset is 8, it returns the last two results.
+     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
+       direction if no prefix is specified.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func queryLog(
+        filter: String? = nil,
+        query: String? = nil,
+        count: Int? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (LogQueryResponse) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let query = query {
+            let queryParameter = URLQueryItem(name: "query", value: query)
+            queryParameters.append(queryParameter)
+        }
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+        if let offset = offset {
+            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/logs",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<LogQueryResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Number of queries over time.
+
+     Total number of queries using the **natural_language_query** parameter over a specific time window.
+
+     - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter endTime: Metric is computed from data recorded before this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter resultType: The type of result to consider when calculating the metric.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func getMetricsQuery(
+        startTime: String? = nil,
+        endTime: String? = nil,
+        resultType: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MetricResponse) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let startTime = startTime {
+            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            queryParameters.append(queryParameter)
+        }
+        if let endTime = endTime {
+            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            queryParameters.append(queryParameter)
+        }
+        if let resultType = resultType {
+            let queryParameter = URLQueryItem(name: "result_type", value: resultType)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/number_of_queries",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<MetricResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Number of queries with an event over time.
+
+     Total number of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+     over a specified time window. This metric requires having integrated event tracking in your application using the
+     **Events** API.
+
+     - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter endTime: Metric is computed from data recorded before this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter resultType: The type of result to consider when calculating the metric.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func getMetricsQueryEvent(
+        startTime: String? = nil,
+        endTime: String? = nil,
+        resultType: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MetricResponse) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let startTime = startTime {
+            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            queryParameters.append(queryParameter)
+        }
+        if let endTime = endTime {
+            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            queryParameters.append(queryParameter)
+        }
+        if let resultType = resultType {
+            let queryParameter = URLQueryItem(name: "result_type", value: resultType)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/number_of_queries_with_event",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<MetricResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Number of queries with no search results over time.
+
+     Total number of queries using the **natural_language_query** parameter that have no results returned over a
+     specified time window.
+
+     - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter endTime: Metric is computed from data recorded before this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter resultType: The type of result to consider when calculating the metric.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func getMetricsQueryNoResults(
+        startTime: String? = nil,
+        endTime: String? = nil,
+        resultType: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MetricResponse) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let startTime = startTime {
+            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            queryParameters.append(queryParameter)
+        }
+        if let endTime = endTime {
+            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            queryParameters.append(queryParameter)
+        }
+        if let resultType = resultType {
+            let queryParameter = URLQueryItem(name: "result_type", value: resultType)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/number_of_queries_with_no_search_results",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<MetricResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Percentage of queries with an associated event.
+
+     The percentage of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+     over a specified time window.  This metric requires having integrated event tracking in your application using the
+     **Events** API.
+
+     - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter endTime: Metric is computed from data recorded before this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter resultType: The type of result to consider when calculating the metric.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func getMetricsEventRate(
+        startTime: String? = nil,
+        endTime: String? = nil,
+        resultType: String? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MetricResponse) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let startTime = startTime {
+            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            queryParameters.append(queryParameter)
+        }
+        if let endTime = endTime {
+            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            queryParameters.append(queryParameter)
+        }
+        if let resultType = resultType {
+            let queryParameter = URLQueryItem(name: "result_type", value: resultType)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/event_rate",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<MetricResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
+            case .failure(let error): failure?(error)
+            }
+        }
+    }
+
+    /**
+     Most frequent query tokens with an event.
+
+     The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding
+     \"click\" event rate within the recording period (queries and events are stored for 30 days). A query token is an
+     individual word or unigram within the query string.
+
+     - parameter count: Number of results to return.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the successful result.
+     */
+    public func getMetricsQueryTokenEvent(
+        count: Int? = nil,
+        headers: [String: String]? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (MetricTokenResponse) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/top_query_tokens_with_event_rate",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject {
+            (response: RestResponse<MetricTokenResponse>) in
+            switch response.result {
+            case .success(let retval): success(retval)
             case .failure(let error): failure?(error)
             }
         }

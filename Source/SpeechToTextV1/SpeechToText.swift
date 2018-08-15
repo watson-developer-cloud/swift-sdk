@@ -33,6 +33,10 @@ import Foundation
  registered callbacks and polling for non-blocking recognition. See [The HTTP REST
  interface](https://console.bluemix.net/docs/services/speech-to-text/http.html) and [The asynchronous HTTP
  interface](https://console.bluemix.net/docs/services/speech-to-text/async.html).
+   **Important:** The session-based interface is deprecated as of August 8, 2018, and will be removed from service on
+ September 7, 2018. Use the sessionless, asynchronous, or WebSocket interface instead. For more information, see the
+ August 8 service update in the [Release
+ notes](https://console.bluemix.net/docs/services/speech-to-text/release-notes.html#August2018).
  * **WebSocket interface:** The service also offers a WebSocket interface for speech recognition. The WebSocket
  interface provides a full-duplex, low-latency communication channel. Clients send requests and audio to the service and
  receive results over a single connection in an asynchronous fashion. See [The WebSocket
@@ -62,18 +66,12 @@ public class SpeechToText {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
-    /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-
-    /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let session = URLSession(configuration: URLSessionConfiguration.default)
-    internal var authMethod: AuthenticationMethod
-    internal let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
+    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    private var authMethod: AuthenticationMethod
+    private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     /**
      Create a `SpeechToText` object.
@@ -123,12 +121,6 @@ public class SpeechToText {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             var userInfo: [String: Any] = [:]
-            if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
-            }
-            if case let .some(.string(description)) = json["code_description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
-            }
             return NSError(domain: domain, code: code, userInfo: userInfo)
         } catch {
             return NSError(domain: domain, code: code, userInfo: nil)
@@ -342,13 +334,13 @@ public class SpeechToText {
      - parameter success: A function executed with the successful result.
      */
     public func recognize(
+        audio: Data,
+        contentType: String,
         model: String? = nil,
         customizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
-        audio: Data,
-        contentType: String,
         inactivityTimeout: Int? = nil,
         keywords: [String]? = nil,
         keywordsThreshold: Double? = nil,
@@ -1529,7 +1521,6 @@ public class SpeechToText {
        audio resource with the same name. If `false`, the request fails if a corpus or audio resource with the same name
        already exists. The parameter has no effect if a corpus or audio resource with the same name does not already
        exist.
-     - parameter corpusFileContentType: The content type of corpusFile.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -1539,7 +1530,6 @@ public class SpeechToText {
         corpusName: String,
         corpusFile: URL,
         allowOverwrite: Bool? = nil,
-        corpusFileContentType: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping () -> Void)

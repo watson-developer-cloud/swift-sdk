@@ -16,29 +16,22 @@
 
 import Foundation
 
-/** AggregationResult. */
-public struct AggregationResult: Decodable {
+/**
+ An aggregation analyzing log information for queries and events.
+ */
+public struct MetricTokenAggregation: Decodable {
 
     /**
-     Key that matched the aggregation type.
+     The event type associated with this metric result. This field, when present, will always be `click`.
      */
-    public var key: String?
+    public var eventType: String?
 
-    /**
-     Number of matching results.
-     */
-    public var matchingResults: Int?
-
-    /**
-     Aggregations returned in the case of chained aggregations.
-     */
-    public var aggregations: [QueryAggregation]?
+    public var results: [MetricTokenAggregationResult]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case key = "key"
-        case matchingResults = "matching_results"
-        case aggregations = "aggregations"
+        case eventType = "event_type"
+        case results = "results"
     }
 
 }

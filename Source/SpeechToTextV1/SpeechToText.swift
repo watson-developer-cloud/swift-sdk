@@ -33,7 +33,7 @@ import Foundation
  registered callbacks and polling for non-blocking recognition. See [The HTTP REST
  interface](https://console.bluemix.net/docs/services/speech-to-text/http.html) and [The asynchronous HTTP
  interface](https://console.bluemix.net/docs/services/speech-to-text/async.html).
-   **Important:** The session-based interface is deprecated as of August 8, 2018, and will be removed from service on
+ * **Important:** The session-based interface is deprecated as of August 8, 2018, and will be removed from service on
  September 7, 2018. Use the sessionless, asynchronous, or WebSocket interface instead. For more information, see the
  August 8 service update in the [Release
  notes](https://console.bluemix.net/docs/services/speech-to-text/release-notes.html#August2018).

@@ -122,7 +122,7 @@ public class Discovery {
     public func createEnvironment(
         name: String,
         description: String? = nil,
-        size: Environment.Size? = nil,
+        size: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)

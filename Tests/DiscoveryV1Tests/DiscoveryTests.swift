@@ -141,7 +141,7 @@ class DiscoveryTests: XCTestCase {
         let name = "swift-sdk-test-" + UUID().uuidString
         let description = "An environment created while testing the Swift SDK. Safe to delete."
         let failure = { (error: Error) in XCTFail("Failed to create an environment: \(error.localizedDescription)") }
-        discovery.createEnvironment(name: name, description: description, size: .xs, failure: failure) {
+        discovery.createEnvironment(name: name, description: description, size: Environment.Size.xl.rawValue, failure: failure) {
             response in
             environment = response
             expectation.fulfill()
@@ -293,7 +293,7 @@ class DiscoveryTests: XCTestCase {
             expectation1.fulfill()
         }
         var environment: Environment!
-        discovery.createEnvironment(name: name, description: description, size: .xl, failure: failure) {
+        discovery.createEnvironment(name: name, description: description, size: Environment.Size.xs.rawValue, failure: failure) {
             response in
             environment = response
             expectation1.fulfill()

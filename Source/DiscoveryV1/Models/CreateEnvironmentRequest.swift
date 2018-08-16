@@ -68,12 +68,12 @@ internal struct CreateEnvironmentRequest: Encodable {
     public init(
         name: String,
         description: String? = nil,
-        size: Environment.Size? = nil
+        size: String? = nil
     )
     {
         self.name = name
         self.description = description
-        self.size = size?.rawValue
+        self.size = size
     }
 
 }

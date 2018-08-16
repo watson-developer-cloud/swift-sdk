@@ -84,6 +84,12 @@
                 <a href="../Structs/CreateCollectionRequest/Language.html">– Language</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CreateEventResponse.html">CreateEventResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateEventResponse/ModelType.html">– ModelType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CredentialDetails.html">CredentialDetails</a>
               </li>
               <li class="nav-group-task">
@@ -171,7 +177,13 @@
                 <a href="../Structs/Environment/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Environment/Size.html">– Size</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/EnvironmentDocuments.html">EnvironmentDocuments</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EventData.html">EventData</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Expansion.html">Expansion</a>
@@ -216,7 +228,46 @@
                 <a href="../Structs/ListEnvironmentsResponse.html">ListEnvironmentsResponse</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponse.html">LogQueryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResult.html">LogQueryResponseResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResult/DocumentType.html">– DocumentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResult/EventType.html">– EventType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResult/ResultType.html">– ResultType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResultDocuments.html">LogQueryResponseResultDocuments</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResultDocumentsResult.html">LogQueryResponseResultDocumentsResult</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/MemoryUsage.html">MemoryUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricAggregation.html">MetricAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricAggregationResult.html">MetricAggregationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricResponse.html">MetricResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricTokenAggregation.html">MetricTokenAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricTokenAggregationResult.html">MetricTokenAggregationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricTokenResponse.html">MetricTokenResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Nested.html">Nested</a>
@@ -712,9 +763,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17createEnvironmentySS4name_SSSg11descriptionSiSg4sizes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
+                    <a name="/s:11DiscoveryV10A0C17createEnvironmentySS4name_SSSg11descriptionAF4sizes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/createEnvironment(name:description:size:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17createEnvironmentySS4name_SSSg11descriptionSiSg4sizes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createEnvironment(name:description:size:headers:failure:success:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17createEnvironmentySS4name_SSSg11descriptionAF4sizes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D0Vc7successtF">createEnvironment(name:description:size:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -736,7 +787,7 @@ environment results in an error.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createEnvironment</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">size</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">size</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Environment.html">Environment</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -779,7 +830,7 @@ environment results in an error.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p><strong>Deprecated</strong>: Size of the environment.</p>
+                                  <p>Size of the environment.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3705,7 +3756,7 @@ time series. For a full list of possible aggregrations, see the Query reference.
                               </td>
                               <td>
                                 <div>
-                                  <p>Number of documents to return.</p>
+                                  <p>Number of results to return.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4079,7 +4130,7 @@ time series. For a full list of possible aggregrations, see the Query reference.
                               </td>
                               <td>
                                 <div>
-                                  <p>Number of documents to return.</p>
+                                  <p>Number of results to return.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4414,7 +4465,7 @@ time series. For a full list of possible aggregrations, see the Query reference.
                               </td>
                               <td>
                                 <div>
-                                  <p>Number of documents to return.</p>
+                                  <p>Number of results to return.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4772,7 +4823,7 @@ time series. For a full list of possible aggregrations, see the Query reference.
                               </td>
                               <td>
                                 <div>
-                                  <p>Number of documents to return.</p>
+                                  <p>Number of results to return.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6497,6 +6548,815 @@ security</a>.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11DiscoveryV10A0C11createEventySS4type_AA0D4DataV4datas10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06CreateD8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/createEvent(type:data:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C11createEventySS4type_AA0D4DataV4datas10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06CreateD8ResponseVc7successtF">createEvent(type:data:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create event.</p>
+
+<p>The <strong>Events</strong> API can be used to create log entries that are associated with specific queries. For example, you
+can record which documents in the results set were \<q>clicked\</q> by a user and when that click occured.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createEvent</span><span class="p">(</span>
+    <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">data</span><span class="p">:</span> <span class="kt"><a href="../Structs/EventData.html">EventData</a></span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/CreateEventResponse.html">CreateEventResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The event type to be created.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Data object used to create a query event.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C8queryLogySSSg6filter_AE0C0SiSg5countAH6offsetSaySSGSg4sorts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D13QueryResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/queryLog(filter:query:count:offset:sort:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C8queryLogySSSg6filter_AE0C0SiSg5countAH6offsetSaySSGSg4sorts10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D13QueryResponseVc7successtF">queryLog(filter:query:count:offset:sort:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Search the query and event log.</p>
+
+<p>Searches the query and event log to find query sessions that match the specified criteria. Searching the <strong>logs</strong>
+endpoint uses the standard Discovery query syntax for the parameters that are supported.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">queryLog</span><span class="p">(</span>
+    <span class="nv">filter</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">sort</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/LogQueryResponse.html">LogQueryResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A cacheable query that limits the documents returned to exclude any documents that don&rsquo;t
+mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
+sense of concepts in the data set.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>query</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A query search returns all documents in your data set with full enrichments and full text, but
+with the most relevant documents listed first. Use a query search when you want to find the most relevant search
+results. You cannot use <strong>natural_language_query</strong> and <strong>query</strong> at the same time.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>count</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Number of results to return.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>offset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of query results to skip at the beginning. For example, if the total number of
+results that are returned is 10, and the offset is 8, it returns the last two results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sort</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A comma separated list of fields in the document to sort on. You can optionally specify a sort
+direction by prefixing the field with <code>-</code> for descending or <code>+</code> for ascending. Ascending is the default sort
+direction if no prefix is specified.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C15getMetricsQueryySSSg9startTime_AE03endG0AE10resultTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA14MetricResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getMetricsQuery(startTime:endTime:resultType:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C15getMetricsQueryySSSg9startTime_AE03endG0AE10resultTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA14MetricResponseVc7successtF">getMetricsQuery(startTime:endTime:resultType:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Number of queries over time.</p>
+
+<p>Total number of queries using the <strong>natural_language_query</strong> parameter over a specific time window.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getMetricsQuery</span><span class="p">(</span>
+    <span class="nv">startTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">endTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">resultType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MetricResponse.html">MetricResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>startTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Metric is computed from data recorded after this timestamp; must be in
+<code>YYYY-MM-DDThh:mm:ssZ</code> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Metric is computed from data recorded before this timestamp; must be in
+<code>YYYY-MM-DDThh:mm:ssZ</code> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>resultType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of result to consider when calculating the metric.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C20getMetricsQueryEventySSSg9startTime_AE03endH0AE10resultTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA14MetricResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getMetricsQueryEvent(startTime:endTime:resultType:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C20getMetricsQueryEventySSSg9startTime_AE03endH0AE10resultTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA14MetricResponseVc7successtF">getMetricsQueryEvent(startTime:endTime:resultType:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Number of queries with an event over time.</p>
+
+<p>Total number of queries using the <strong>natural_language_query</strong> parameter that have a corresponding \<q>click\</q> event
+over a specified time window. This metric requires having integrated event tracking in your application using the
+<strong>Events</strong> API.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getMetricsQueryEvent</span><span class="p">(</span>
+    <span class="nv">startTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">endTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">resultType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MetricResponse.html">MetricResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>startTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Metric is computed from data recorded after this timestamp; must be in
+<code>YYYY-MM-DDThh:mm:ssZ</code> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Metric is computed from data recorded before this timestamp; must be in
+<code>YYYY-MM-DDThh:mm:ssZ</code> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>resultType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of result to consider when calculating the metric.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C24getMetricsQueryNoResultsySSSg9startTime_AE03endI0AE10resultTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA14MetricResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getMetricsQueryNoResults(startTime:endTime:resultType:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C24getMetricsQueryNoResultsySSSg9startTime_AE03endI0AE10resultTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA14MetricResponseVc7successtF">getMetricsQueryNoResults(startTime:endTime:resultType:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Number of queries with no search results over time.</p>
+
+<p>Total number of queries using the <strong>natural_language_query</strong> parameter that have no results returned over a
+specified time window.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getMetricsQueryNoResults</span><span class="p">(</span>
+    <span class="nv">startTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">endTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">resultType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MetricResponse.html">MetricResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>startTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Metric is computed from data recorded after this timestamp; must be in
+<code>YYYY-MM-DDThh:mm:ssZ</code> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Metric is computed from data recorded before this timestamp; must be in
+<code>YYYY-MM-DDThh:mm:ssZ</code> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>resultType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of result to consider when calculating the metric.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C19getMetricsEventRateySSSg9startTime_AE03endH0AE10resultTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA14MetricResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getMetricsEventRate(startTime:endTime:resultType:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C19getMetricsEventRateySSSg9startTime_AE03endH0AE10resultTypes10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA14MetricResponseVc7successtF">getMetricsEventRate(startTime:endTime:resultType:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Percentage of queries with an associated event.</p>
+
+<p>The percentage of queries using the <strong>natural_language_query</strong> parameter that have a corresponding \<q>click\</q> event
+over a specified time window.  This metric requires having integrated event tracking in your application using the
+<strong>Events</strong> API.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getMetricsEventRate</span><span class="p">(</span>
+    <span class="nv">startTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">endTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">resultType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MetricResponse.html">MetricResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>startTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Metric is computed from data recorded after this timestamp; must be in
+<code>YYYY-MM-DDThh:mm:ssZ</code> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>endTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Metric is computed from data recorded before this timestamp; must be in
+<code>YYYY-MM-DDThh:mm:ssZ</code> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>resultType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of result to consider when calculating the metric.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C25getMetricsQueryTokenEventySiSg5count_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06MetricF8ResponseVc7successtF"></a>
+                    <a name="//apple_ref/swift/Method/getMetricsQueryTokenEvent(count:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C25getMetricsQueryTokenEventySiSg5count_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA06MetricF8ResponseVc7successtF">getMetricsQueryTokenEvent(count:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Most frequent query tokens with an event.</p>
+
+<p>The most frequent query tokens parsed from the <strong>natural_language_query</strong> parameter and their corresponding
+\<q>click\</q> event rate within the recording period (queries and events are stored for 30 days). A query token is an
+individual word or unigram within the query string.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getMetricsQueryTokenEvent</span><span class="p">(</span>
+    <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MetricTokenResponse.html">MetricTokenResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>count</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Number of results to return.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11DiscoveryV10A0C15listCredentialsySS13environmentID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D4ListVc7successtF"></a>
                     <a name="//apple_ref/swift/Method/listCredentials(environmentID:headers:failure:success:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV10A0C15listCredentialsySS13environmentID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0D4ListVc7successtF">listCredentials(environmentID:headers:failure:success:)</a>
@@ -7050,7 +7910,7 @@ Obtain credentials for your source from the administrator of the source.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-08-08)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-08-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

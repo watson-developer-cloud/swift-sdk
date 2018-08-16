@@ -706,7 +706,7 @@ class DiscoveryTests: XCTestCase {
             response in
             documentID = response.documentID
             XCTAssertNotNil(response.documentID)
-            XCTAssertEqual(response.status, "processing")
+            XCTAssert(response.status == "processing" || response.status == "available")
             XCTAssertNil(response.notices)
             expectation1.fulfill()
         }
@@ -744,7 +744,7 @@ class DiscoveryTests: XCTestCase {
             response in
             documentID = response.documentID
             XCTAssertNotNil(response.documentID)
-            XCTAssertEqual(response.status, "processing")
+            XCTAssert(response.status == "processing" || response.status == "available")
             XCTAssertNil(response.notices)
             expectation3.fulfill()
         }

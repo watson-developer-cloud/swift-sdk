@@ -1,6 +1,17 @@
 Change Log
 ==========
 
+## Version 0.32.0
+_2018-08-16_
+
+This release regenerates all services with documentation updates, and adds some new methods to Discovery.
+
+This release includes the following new features:
+
+- Discovery: Add ability to create new `Events` to create log entries associated with specific queries
+- Discovery: Add new methods to obtain metrics and metadata on past queries
+- Discovery: Changes the type of the `size` parameter in the `createEnvironment` method from `Int` to `String`.
+
 ## Version 0.31.0
 _2018-07-31_
 

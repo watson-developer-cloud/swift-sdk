@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'IBMWatsonSpeechToTextV1'
-  s.version          = '0.31.0'
+  s.version          = '0.32.0'
   s.summary          = 'Client framework for the IBM Watson Speech to Text service'
   s.description      = <<-DESC
 Easily convert audio and voice into written text for quick understanding of content.
@@ -16,7 +16,7 @@ Easily convert audio and voice into written text for quick understanding of cont
 
   s.source           = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => 'v#{s.version.to_s}' }
   s.source_files          = 'Source/SpeechToTextV1/**/*.swift',
-                            'Source/SupportingFiles/Dependencies/**/*',
+                            'Source/SupportingFiles/Dependencies/**/*.{c,h}',
                             'Source/SupportingFiles/SpeechToTextV1.h'
   s.exclude_files         = 'Source/SupportingFiles/Dependencies/ogg/config_types.h',
                             'Source/SupportingFiles/Dependencies/opus/opus_header.{h,c}'

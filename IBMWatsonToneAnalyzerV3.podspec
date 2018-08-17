@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   
   s.name             = 'IBMWatsonToneAnalyzerV3'
-  s.version          = '0.31.0'
+  s.version          = '0.32.0'
   s.summary          = 'Client framework for the IBM Watson Tone Analyzer service'
   s.description      = <<-DESC
 Understand emotions and communication style in text.

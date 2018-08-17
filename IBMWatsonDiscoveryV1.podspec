@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'IBMWatsonDiscoveryV1'
-  s.version          = '0.31.0'
+  s.version          = '0.32.0'
   s.summary          = 'Client framework for the IBM Watson Discovery service'
   s.description      = <<-DESC
 Unlock hidden value in data to find answers, monitor trends and surface patterns 

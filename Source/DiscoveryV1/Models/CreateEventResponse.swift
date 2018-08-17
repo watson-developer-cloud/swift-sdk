@@ -17,30 +17,31 @@
 import Foundation
 
 /**
- Response from the classifier for a phrase in a collection.
+ An object defining the event being created.
  */
-public struct CollectionItem: Decodable {
+public struct CreateEventResponse: Decodable {
 
     /**
-     The submitted phrase. The maximum length is 2048 characters.
+     The event type that was created.
      */
-    public var text: String?
+    public enum ModelType: String {
+        case click = "click"
+    }
 
     /**
-     The class with the highest confidence.
+     The event type that was created.
      */
-    public var topClass: String?
+    public var type: String?
 
     /**
-     An array of up to ten class-confidence pairs sorted in descending order of confidence.
+     Query event data object.
      */
-    public var classes: [ClassifiedClass]?
+    public var data: EventData?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case topClass = "top_class"
-        case classes = "classes"
+        case type = "type"
+        case data = "data"
     }
 
 }

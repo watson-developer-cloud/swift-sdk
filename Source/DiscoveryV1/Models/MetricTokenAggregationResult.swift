@@ -17,30 +17,31 @@
 import Foundation
 
 /**
- Response from the classifier for a phrase in a collection.
+ Aggregation result data for the requested metric.
  */
-public struct CollectionItem: Decodable {
+public struct MetricTokenAggregationResult: Decodable {
 
     /**
-     The submitted phrase. The maximum length is 2048 characters.
+     The content of the **natural_language_query** parameter used in the query that this result represents.
      */
-    public var text: String?
+    public var key: String?
 
     /**
-     The class with the highest confidence.
+     Number of matching results.
      */
-    public var topClass: String?
+    public var matchingResults: Int?
 
     /**
-     An array of up to ten class-confidence pairs sorted in descending order of confidence.
+     The number of queries with associated events divided by the total number of queries currently stored (queries and
+     events are stored in the log for 30 days).
      */
-    public var classes: [ClassifiedClass]?
+    public var eventRate: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case topClass = "top_class"
-        case classes = "classes"
+        case key = "key"
+        case matchingResults = "matching_results"
+        case eventRate = "event_rate"
     }
 
 }

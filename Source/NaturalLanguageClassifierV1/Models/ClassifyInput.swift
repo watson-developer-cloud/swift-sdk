@@ -22,7 +22,7 @@ import Foundation
 public struct ClassifyInput: Encodable {
 
     /**
-     The submitted phrase.
+     The submitted phrase. The maximum length is 2048 characters.
      */
     public var text: String
 
@@ -34,7 +34,7 @@ public struct ClassifyInput: Encodable {
     /**
      Initialize a `ClassifyInput` with member variables.
 
-     - parameter text: The submitted phrase.
+     - parameter text: The submitted phrase. The maximum length is 2048 characters.
 
      - returns: An initialized `ClassifyInput`.
     */

@@ -17,30 +17,27 @@
 import Foundation
 
 /**
- Response from the classifier for a phrase in a collection.
+ An aggregation analyzing log information for queries and events.
  */
-public struct CollectionItem: Decodable {
+public struct MetricAggregation: Decodable {
 
     /**
-     The submitted phrase. The maximum length is 2048 characters.
+     The measurement interval for this metric. Metric intervals are always 1 day (`1d`).
      */
-    public var text: String?
+    public var interval: String?
 
     /**
-     The class with the highest confidence.
+     The event type associated with this metric result. This field, when present, will always be `click`.
      */
-    public var topClass: String?
+    public var eventType: String?
 
-    /**
-     An array of up to ten class-confidence pairs sorted in descending order of confidence.
-     */
-    public var classes: [ClassifiedClass]?
+    public var results: [MetricAggregationResult]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case topClass = "top_class"
-        case classes = "classes"
+        case interval = "interval"
+        case eventType = "event_type"
+        case results = "results"
     }
 
 }

@@ -24,7 +24,7 @@ There are many resources to help you build your first cognitive application with
 * [Before you begin](#before-you-begin)
 * [Requirements](#requirements)
 * [Installation](#installation)
-* [Service Instances](#service-instances)
+* [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)
 * [Custom Headers](#custom-headers)
 * [Sample Applications](#sample-applications)
@@ -98,64 +98,34 @@ Add the following to your `Package.swift` file to identify the Swift SDK as a de
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.31.0")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.32.0")
 ]
 ```
 
-## Service Instances
-
-[IBM Watson](https://www.ibm.com/watson/developer/) offers a variety of services for developing cognitive applications. The complete list of Watson services is available from the [products and services](https://www.ibm.com/watson/products-services/) page. Services are instantiated using the [IBM Cloud](https://www.ibm.com/cloud/) platform.
-
-Follow these steps to create a service instance and obtain its credentials:
-
-1. Log in to IBM Cloud at [https://bluemix.net](https://bluemix.net).
-2. Create a service instance:
-    1. From the Dashboard, select "Use Services or APIs".
-    2. Select the service you want to use.
-    3. Click "Create".
-3. Copy your service credentials:
-    1. Click "Service Credentials" on the left side of the page.
-    2. Copy the service's `username` and `password` (or `api_key` for Visual Recognition).
-
-```swift
-let textToSpeech = TextToSpeech(username: "your-username-here", password: "your-password-here")
-```
-
-Note that service credentials are different from your IBM Cloud username and password.
-
-See [Getting started with Watson and IBM Cloud](https://console.bluemix.net/docs/services/watson/index.html) for details.
-
-
 ## Authentication
 
-There are three ways to authenticate with IBM Cloud through the SDK: using a `username` and `password`, using an `api_key`, and with IAM.
+Watson services are migrating to token-based Identity and Access Management (IAM) authentication.
 
-See above for the steps to obtain the credentials for your service.
+- With some service instances, you authenticate to the API by using **[IAM](#iam)**.
+- In other instances, you authenticate by providing the **[username and password](#username-and-password)** for the service instance.
+- Visual Recognition uses a form of [API key](#api-key) only with instances created before May 23, 2018. Newer instances of Visual Recognition use [IAM](#iam).
 
-In your code, you pass these values in the service constructor when instantiating your service. Here are some examples:
+### Getting credentials
+To find out which authentication to use, view the service credentials. You find the service credentials for authentication the same way for all Watson services:
 
-### Username and Password
+1. Go to the IBM Cloud [Dashboard](https://console.bluemix.net/dashboard/apps?category=ai) page.
+1. Either click an existing Watson service instance or click [**Create resource > AI**](https://console.bluemix.net/catalog/?category=ai) and create a service instance.
+1. Click **Show** to view your service credentials.
+1. Copy the `url` and either `apikey` or `username` and `password`.
 
-```swift
-let discovery = Discovery(username: "your-username-here", password: "your-password-here", version: "your-version-here")
-```
+### IAM
 
-### API Key
+Some services use token-based Identity and Access Management (IAM) authentication. IAM authentication uses a service API key to get an access token that is passed with the call. Access tokens are valid for approximately one hour and must be regenerated.
 
-_Note: This type of authentication only works with Visual Recognition, and for instances created before May 23, 2018. Newer instances of Visual Recognition use IAM._
+You supply either an IAM service **API key** or an **access token**:
 
-```swift
-let visualRecognition = VisualRecognition(apiKey: "your-apiKey-here", version: "your-version-here")
-```
-
-### Using IAM
-
-When authenticating with IAM, you have the option of supplying:
-- the IAM API key and, optionally, the IAM service URL. The IAM service URL defaults to 'https://iam.bluemix.net/identity/token'.
-- an access token for the service.
-
-If you supply an IAM API key, the SDK will request and refresh access tokens on your behalf.
-If you supply only the IAM access token, you are responsible for refreshing the access token as needed.
+- Use the API key to have the SDK manage the lifecycle of the access token. The SDK requests an access token, ensures that the access token is valid, and refreshes it if necessary.
+- Use the access token if you want to manage the lifecycle yourself. For details, see [Authenticating with IAM tokens](https://console.bluemix.net/docs/services/watson/getting-started-iam.html). If you want to switch to API key, override your stored IAM credentials with an IAM API key.
 
 #### Supplying the IAM API key
 ```swift
@@ -169,6 +139,20 @@ let discovery = Discovery(version: "your-version-here", accessToken: "your-acces
 #### Updating the accessToken
 ```swift
 discovery.accessToken("new-accessToken-here")
+```
+
+### Username and Password
+
+```swift
+let discovery = Discovery(username: "your-username-here", password: "your-password-here", version: "your-version-here")
+```
+
+### API Key
+
+_Note: This type of authentication only works with Visual Recognition, and for instances created before May 23, 2018. Newer instances of Visual Recognition use IAM._
+
+```swift
+let visualRecognition = VisualRecognition(apiKey: "your-apiKey-here", version: "your-version-here")
 ```
 
 ## Custom Service URLs

@@ -41,7 +41,7 @@ class DiscoveryTests: XCTestCase {
 
     func instantiateDiscovery() -> Discovery {
         let discovery: Discovery
-        let version = "2018-07-31"
+        let version = "2018-08-16"
         if let apiKey = WatsonCredentials.DiscoveryAPIKey {
             discovery = Discovery(version: version, apiKey: apiKey)
         } else {
@@ -105,6 +105,13 @@ class DiscoveryTests: XCTestCase {
             ("testQueryNotices", testQueryNotices),
             ("testFederatedQuery", testFederatedQuery),
             ("testFederatedQueryNotices", testFederatedQueryNotices),
+            ("testCreateEvent", testCreateEvent),
+            ("testGetMetricsQuery", testGetMetricsQuery),
+            ("testQueryLog", testQueryLog),
+            ("testGetMetricsQueryEvent", testGetMetricsQueryEvent),
+            ("testGetMetricsQueryNoResults", testGetMetricsQueryNoResults),
+            ("testGetMetricsEventRate", testGetMetricsEventRate),
+            ("testGetMetricsQueryTokenEvent", testGetMetricsQueryTokenEvent),
             ("testListTrainingData", testListTrainingData),
             ("testTrainingDataCRUD", testTrainingDataCRUD),
             ("testDeleteAllTrainingData", testDeleteAllTrainingData),
@@ -141,7 +148,7 @@ class DiscoveryTests: XCTestCase {
         let name = "swift-sdk-test-" + UUID().uuidString
         let description = "An environment created while testing the Swift SDK. Safe to delete."
         let failure = { (error: Error) in XCTFail("Failed to create an environment: \(error.localizedDescription)") }
-        discovery.createEnvironment(name: name, description: description, size: 0, failure: failure) {
+        discovery.createEnvironment(name: name, description: description, size: Environment.Size.xl.rawValue, failure: failure) {
             response in
             environment = response
             expectation.fulfill()
@@ -293,7 +300,7 @@ class DiscoveryTests: XCTestCase {
             expectation1.fulfill()
         }
         var environment: Environment!
-        discovery.createEnvironment(name: name, description: description, size: 0, failure: failure) {
+        discovery.createEnvironment(name: name, description: description, size: Environment.Size.xs.rawValue, failure: failure) {
             response in
             environment = response
             expectation1.fulfill()
@@ -699,7 +706,7 @@ class DiscoveryTests: XCTestCase {
             response in
             documentID = response.documentID
             XCTAssertNotNil(response.documentID)
-            XCTAssertEqual(response.status, "processing")
+            XCTAssert(response.status == "processing" || response.status == "available")
             XCTAssertNil(response.notices)
             expectation1.fulfill()
         }
@@ -737,7 +744,7 @@ class DiscoveryTests: XCTestCase {
             response in
             documentID = response.documentID
             XCTAssertNotNil(response.documentID)
-            XCTAssertEqual(response.status, "processing")
+            XCTAssert(response.status == "processing" || response.status == "available")
             XCTAssertNil(response.notices)
             expectation3.fulfill()
         }
@@ -1220,6 +1227,92 @@ class DiscoveryTests: XCTestCase {
                 XCTAssertNotNil(response.results)
                 XCTAssertEqual(matchingResults, response.results?.count)
             }
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testCreateEvent() {
+        // Create a test document
+        let environmentID = environment.environmentID!
+        let configurationID = lookupOrCreateTestConfiguration(environmentID: environmentID).configurationID!
+        let collection = lookupOrCreateTestCollection(environmentID: environmentID, configurationID: configurationID)
+        let document = addTestDocument(environment: environment, collection: collection)
+        let collectionID = collection.collectionID!
+        let documentID = document.documentID!
+
+        // Make a query to get the session token
+        let expectation = self.expectation(description: "createEvent")
+        discovery.query(
+            environmentID: environmentID,
+            collectionID: collectionID,
+            naturalLanguageQuery: "jeopardy",
+            count: 1,
+            failure: failWithError) { queryResponse in
+
+                // Create the event
+                let sessionToken = queryResponse.sessionToken!
+                let eventData = EventData(
+                    environmentID: environmentID,
+                    sessionToken: sessionToken,
+                    collectionID: collectionID,
+                    documentID: documentID)
+
+                self.discovery.createEvent(type: "click", data: eventData, failure: self.failWithError) { createEventResponse in
+                    XCTAssertEqual(createEventResponse.data!.environmentID, eventData.environmentID)
+                    XCTAssertEqual(createEventResponse.data!.sessionToken, eventData.sessionToken)
+                    XCTAssertEqual(createEventResponse.data!.collectionID, eventData.collectionID)
+                    XCTAssertEqual(createEventResponse.data!.documentID, eventData.documentID)
+                    XCTAssertEqual(createEventResponse.type, "click")
+                    expectation.fulfill()
+                }
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsQuery() {
+        let expectation = self.expectation(description: "getMetricsQuery")
+        discovery.getMetricsQuery(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testQueryLog() {
+        let expectation = self.expectation(description: "queryLog")
+        discovery.queryLog(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsQueryEvent() {
+        let expectation = self.expectation(description: "getMetricsQueryEvent")
+        discovery.getMetricsQueryEvent(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsQueryNoResults() {
+        let expectation = self.expectation(description: "getMetricsQueryNoResults")
+        discovery.getMetricsQueryNoResults(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsEventRate() {
+        let expectation = self.expectation(description: "getMetricsEventRate")
+        discovery.getMetricsQuery(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsQueryTokenEvent() {
+        let expectation = self.expectation(description: "getMetricsQueryTokenEvent")
+        discovery.getMetricsQueryTokenEvent(failure: failWithError) { _ in
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)

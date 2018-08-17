@@ -548,6 +548,19 @@
 		7AC97FC71D8308690046124C /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81B1D79B76100507725 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
+		928204C72124BC200013315B /* CreateEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BA2124BC1B0013315B /* CreateEventObject.swift */; };
+		928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BB2124BC1C0013315B /* MetricAggregationResult.swift */; };
+		928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */; };
+		928204CA2124BC200013315B /* MetricTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BD2124BC1D0013315B /* MetricTokenResponse.swift */; };
+		928204CB2124BC200013315B /* CreateEventResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BE2124BC1D0013315B /* CreateEventResponse.swift */; };
+		928204CC2124BC200013315B /* LogQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BF2124BC1E0013315B /* LogQueryResponse.swift */; };
+		928204CD2124BC200013315B /* LogQueryResponseResultDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C02124BC1E0013315B /* LogQueryResponseResultDocuments.swift */; };
+		928204CE2124BC200013315B /* LogQueryResponseResultDocumentsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C12124BC1E0013315B /* LogQueryResponseResultDocumentsResult.swift */; };
+		928204CF2124BC200013315B /* MetricResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C22124BC1F0013315B /* MetricResponse.swift */; };
+		928204D02124BC200013315B /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C32124BC1F0013315B /* EventData.swift */; };
+		928204D12124BC200013315B /* MetricAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C42124BC1F0013315B /* MetricAggregation.swift */; };
+		928204D22124BC200013315B /* MetricTokenAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C52124BC200013315B /* MetricTokenAggregation.swift */; };
+		928204D32124BC200013315B /* LogQueryResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C62124BC200013315B /* LogQueryResponseResult.swift */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
 		CA28815D20CB07D600FC992C /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		CA28817620CB095100FC992C /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA28817420CB095100FC992C /* glossary.tmx */; };
@@ -1251,6 +1264,19 @@
 		7AB445241D3E647A00E8748A /* ConversationV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB4452D1D3E647A00E8748A /* ConversationV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
+		928204BA2124BC1B0013315B /* CreateEventObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventObject.swift; sourceTree = "<group>"; };
+		928204BB2124BC1C0013315B /* MetricAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregationResult.swift; sourceTree = "<group>"; };
+		928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregationResult.swift; sourceTree = "<group>"; };
+		928204BD2124BC1D0013315B /* MetricTokenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenResponse.swift; sourceTree = "<group>"; };
+		928204BE2124BC1D0013315B /* CreateEventResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventResponse.swift; sourceTree = "<group>"; };
+		928204BF2124BC1E0013315B /* LogQueryResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueryResponse.swift; sourceTree = "<group>"; };
+		928204C02124BC1E0013315B /* LogQueryResponseResultDocuments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueryResponseResultDocuments.swift; sourceTree = "<group>"; };
+		928204C12124BC1E0013315B /* LogQueryResponseResultDocumentsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueryResponseResultDocumentsResult.swift; sourceTree = "<group>"; };
+		928204C22124BC1F0013315B /* MetricResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricResponse.swift; sourceTree = "<group>"; };
+		928204C32124BC1F0013315B /* EventData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
+		928204C42124BC1F0013315B /* MetricAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregation.swift; sourceTree = "<group>"; };
+		928204C52124BC200013315B /* MetricTokenAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregation.swift; sourceTree = "<group>"; };
+		928204C62124BC200013315B /* LogQueryResponseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueryResponseResult.swift; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -1839,6 +1865,8 @@
 				68AF8EC5206968CC00D552E3 /* Conversions.swift */,
 				68AF8EF3206968CC00D552E3 /* CreateCollectionRequest.swift */,
 				68AF8EB0206968CC00D552E3 /* CreateEnvironmentRequest.swift */,
+				928204BA2124BC1B0013315B /* CreateEventObject.swift */,
+				928204BE2124BC1D0013315B /* CreateEventResponse.swift */,
 				CADA959420FCD66500B5BD84 /* CredentialDetails.swift */,
 				CADA959520FCD66500B5BD84 /* Credentials.swift */,
 				CADA959020FCD66500B5BD84 /* CredentialsList.swift */,
@@ -1856,6 +1884,7 @@
 				68AF8EB2206968CC00D552E3 /* EnrichmentOptions.swift */,
 				68AF8EBB206968CC00D552E3 /* Environment.swift */,
 				68AF8EAD206968CC00D552E3 /* EnvironmentDocuments.swift */,
+				928204C32124BC1F0013315B /* EventData.swift */,
 				68AF8EE2206968CC00D552E3 /* Expansion.swift */,
 				68AF8EC3206968CC00D552E3 /* Expansions.swift */,
 				68AF8ED6206968CC00D552E3 /* Field.swift */,
@@ -1869,7 +1898,17 @@
 				68AF8EB6206968CC00D552E3 /* ListCollectionsResponse.swift */,
 				68AF8EF0206968CC00D552E3 /* ListConfigurationsResponse.swift */,
 				68AF8EF5206968CC00D552E3 /* ListEnvironmentsResponse.swift */,
+				928204BF2124BC1E0013315B /* LogQueryResponse.swift */,
+				928204C62124BC200013315B /* LogQueryResponseResult.swift */,
+				928204C02124BC1E0013315B /* LogQueryResponseResultDocuments.swift */,
+				928204C12124BC1E0013315B /* LogQueryResponseResultDocumentsResult.swift */,
 				68AF8EBD206968CC00D552E3 /* MemoryUsage.swift */,
+				928204C42124BC1F0013315B /* MetricAggregation.swift */,
+				928204BB2124BC1C0013315B /* MetricAggregationResult.swift */,
+				928204C22124BC1F0013315B /* MetricResponse.swift */,
+				928204C52124BC200013315B /* MetricTokenAggregation.swift */,
+				928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */,
+				928204BD2124BC1D0013315B /* MetricTokenResponse.swift */,
 				683955002077E612009E1C8A /* Nested.swift */,
 				68AF8EC1206968CC00D552E3 /* NewTrainingQuery.swift */,
 				68AF8EFA206968CC00D552E3 /* NluEnrichmentCategories.swift */,
@@ -3885,16 +3924,19 @@
 			files = (
 				68AF8F762069690300D552E3 /* CollectionUsage.swift in Sources */,
 				68AF8F842069690300D552E3 /* HtmlSettings.swift in Sources */,
+				928204D02124BC200013315B /* EventData.swift in Sources */,
 				68AF8F832069690300D552E3 /* DeleteCollectionResponse.swift in Sources */,
 				68AF8F5A2069690300D552E3 /* ListCollectionsResponse.swift in Sources */,
 				68AF8F8F2069690300D552E3 /* QueryPassages.swift in Sources */,
 				68AF8F662069690300D552E3 /* QueryRelationsResponse.swift in Sources */,
 				68AF8F9A2069690300D552E3 /* DocumentSnapshot.swift in Sources */,
 				68AF8F982069690300D552E3 /* QueryRelationsEntity.swift in Sources */,
+				928204CA2124BC200013315B /* MetricTokenResponse.swift in Sources */,
 				68AF8F7C2069690300D552E3 /* UpdateEnvironmentRequest.swift in Sources */,
 				68AE2FD220697C2800330836 /* QueryResultMetadata.swift in Sources */,
 				68AF8F902069690300D552E3 /* QueryRelationsArgument.swift in Sources */,
 				68AF8F532069690300D552E3 /* QueryEntitiesResponseItem.swift in Sources */,
+				928204CE2124BC200013315B /* LogQueryResponseResultDocumentsResult.swift in Sources */,
 				68AF8F7E2069690300D552E3 /* QueryNoticesResult.swift in Sources */,
 				68AF8F992069690300D552E3 /* ListEnvironmentsResponse.swift in Sources */,
 				CADA959D20FCD66600B5BD84 /* SourceStatus.swift in Sources */,
@@ -3909,6 +3951,7 @@
 				68AF8F932069690300D552E3 /* QueryEntitiesEntity.swift in Sources */,
 				68AF8F772069690300D552E3 /* CollectionDiskUsage.swift in Sources */,
 				68AF8F642069690300D552E3 /* QueryEntitiesResponse.swift in Sources */,
+				928204D32124BC200013315B /* LogQueryResponseResult.swift in Sources */,
 				68AF8F862069690300D552E3 /* Expansion.swift in Sources */,
 				68AF8F5E2069690300D552E3 /* Collection.swift in Sources */,
 				68AF8F562069690300D552E3 /* EnrichmentOptions.swift in Sources */,
@@ -3923,6 +3966,7 @@
 				CADA959820FCD66600B5BD84 /* SourceSchedule.swift in Sources */,
 				CADA959F20FCD66600B5BD84 /* CredentialDetails.swift in Sources */,
 				68AF8F522069690300D552E3 /* ListCollectionFieldsResponse.swift in Sources */,
+				928204D12124BC200013315B /* MetricAggregation.swift in Sources */,
 				68AF8F782069690300D552E3 /* QueryEvidenceEntity.swift in Sources */,
 				68BF6A5A206999BB00B6BD30 /* QueryAggregation.swift in Sources */,
 				68D97E2B206989010087432F /* GenericQueryAggregation.swift in Sources */,
@@ -3936,6 +3980,8 @@
 				68AF8F732069690300D552E3 /* PdfSettings.swift in Sources */,
 				68AF8F6D2069690300D552E3 /* QueryNoticesResponse.swift in Sources */,
 				68AF8F5D2069690300D552E3 /* DocumentAccepted.swift in Sources */,
+				928204CF2124BC200013315B /* MetricResponse.swift in Sources */,
+				928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */,
 				68AF8F652069690300D552E3 /* NewTrainingQuery.swift in Sources */,
 				68AF8F552069690300D552E3 /* IndexCapacity.swift in Sources */,
 				68AF8F572069690300D552E3 /* TestDocument.swift in Sources */,
@@ -3953,6 +3999,8 @@
 				68AF8F8D2069690300D552E3 /* WordHeadingDetection.swift in Sources */,
 				68BC28951F8C35010042810E /* RestUtilities.swift in Sources */,
 				68AF8F952069690300D552E3 /* QueryEntitiesContext.swift in Sources */,
+				928204D22124BC200013315B /* MetricTokenAggregation.swift in Sources */,
+				928204CB2124BC200013315B /* CreateEventResponse.swift in Sources */,
 				68AF8F612069690300D552E3 /* MemoryUsage.swift in Sources */,
 				68AF8F502069690300D552E3 /* NluEnrichmentSemanticRoles.swift in Sources */,
 				CADA95A120FCD66600B5BD84 /* SourceOptionsObject.swift in Sources */,
@@ -3967,6 +4015,8 @@
 				68AF8F5F2069690300D552E3 /* Environment.swift in Sources */,
 				68AF8F5B2069690300D552E3 /* NluEnrichmentEmotion.swift in Sources */,
 				68BC28921F8C35010042810E /* RestError.swift in Sources */,
+				928204CD2124BC200013315B /* LogQueryResponseResultDocuments.swift in Sources */,
+				928204C72124BC200013315B /* CreateEventObject.swift in Sources */,
 				68AF8FA02069690300D552E3 /* Configuration.swift in Sources */,
 				683955082077E613009E1C8A /* TopHitsResults.swift in Sources */,
 				6836B9012091D238006DF944 /* Authentication.swift in Sources */,
@@ -3978,12 +4028,14 @@
 				68AF8F922069690300D552E3 /* QueryEntities.swift in Sources */,
 				68AF8F6C2069690300D552E3 /* DeleteEnvironmentResponse.swift in Sources */,
 				68AF8F9B2069690300D552E3 /* WordSettings.swift in Sources */,
+				928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */,
 				CADA959C20FCD66600B5BD84 /* SourceOptions.swift in Sources */,
 				68AF8F7F2069690300D552E3 /* TrainingExample.swift in Sources */,
 				68AF8F9E2069690300D552E3 /* NluEnrichmentCategories.swift in Sources */,
 				68AF8F692069690300D552E3 /* Conversions.swift in Sources */,
 				68AF8F9C2069690300D552E3 /* DocumentStatus.swift in Sources */,
 				683955092077E613009E1C8A /* Timeslice.swift in Sources */,
+				928204CC2124BC200013315B /* LogQueryResponse.swift in Sources */,
 				683955052077E613009E1C8A /* Nested.swift in Sources */,
 				68AF8F892069690300D552E3 /* PdfHeadingDetection.swift in Sources */,
 				68AF8F8B2069690300D552E3 /* Term.swift in Sources */,

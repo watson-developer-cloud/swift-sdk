@@ -20,6 +20,21 @@ import Foundation
 internal struct CreateEnvironmentRequest: Encodable {
 
     /**
+     Size of the environment.
+     */
+    public enum Size: String {
+        case xs = "XS"
+        case s = "S"
+        case ms = "MS"
+        case m = "M"
+        case ml = "ML"
+        case l = "L"
+        case xl = "XL"
+        case xxl = "XXL"
+        case xxxl = "XXXL"
+    }
+
+    /**
      Name that identifies the environment.
      */
     public var name: String
@@ -30,9 +45,9 @@ internal struct CreateEnvironmentRequest: Encodable {
     public var description: String?
 
     /**
-     **Deprecated**: Size of the environment.
+     Size of the environment.
      */
-    public var size: Int?
+    public var size: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -46,14 +61,14 @@ internal struct CreateEnvironmentRequest: Encodable {
 
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
-     - parameter size: **Deprecated**: Size of the environment.
+     - parameter size: Size of the environment.
 
      - returns: An initialized `CreateEnvironmentRequest`.
     */
     public init(
         name: String,
         description: String? = nil,
-        size: Int? = nil
+        size: String? = nil
     )
     {
         self.name = name

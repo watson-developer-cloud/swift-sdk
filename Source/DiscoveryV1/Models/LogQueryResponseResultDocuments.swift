@@ -17,30 +17,22 @@
 import Foundation
 
 /**
- Response from the classifier for a phrase in a collection.
+ Object containing result information that was returned by the query used to create this log entry. Only returned with
+ logs of type `query`.
  */
-public struct CollectionItem: Decodable {
+public struct LogQueryResponseResultDocuments: Decodable {
+
+    public var results: [LogQueryResponseResultDocumentsResult]?
 
     /**
-     The submitted phrase. The maximum length is 2048 characters.
+     The number of results returned in the query associate with this log.
      */
-    public var text: String?
-
-    /**
-     The class with the highest confidence.
-     */
-    public var topClass: String?
-
-    /**
-     An array of up to ten class-confidence pairs sorted in descending order of confidence.
-     */
-    public var classes: [ClassifiedClass]?
+    public var count: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case topClass = "top_class"
-        case classes = "classes"
+        case results = "results"
+        case count = "count"
     }
 
 }

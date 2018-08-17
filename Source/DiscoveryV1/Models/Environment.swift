@@ -31,6 +31,21 @@ public struct Environment: Decodable {
     }
 
     /**
+     Size of the environment.
+     */
+    public enum Size: String {
+        case xs = "XS"
+        case s = "S"
+        case ms = "MS"
+        case m = "M"
+        case ml = "ML"
+        case l = "L"
+        case xl = "XL"
+        case xxl = "XXL"
+        case xxxl = "XXXL"
+    }
+
+    /**
      Unique identifier for the environment.
      */
     public var environmentID: String?
@@ -66,9 +81,9 @@ public struct Environment: Decodable {
     public var readOnly: Bool?
 
     /**
-     **Deprecated**: Size of the environment.
+     Size of the environment.
      */
-    public var size: Int?
+    public var size: String?
 
     /**
      Details about the resource usage and capacity of the environment.

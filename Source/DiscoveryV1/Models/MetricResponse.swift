@@ -17,30 +17,15 @@
 import Foundation
 
 /**
- Response from the classifier for a phrase in a collection.
+ The response generated from a call to a **metrics** method.
  */
-public struct CollectionItem: Decodable {
+public struct MetricResponse: Decodable {
 
-    /**
-     The submitted phrase. The maximum length is 2048 characters.
-     */
-    public var text: String?
-
-    /**
-     The class with the highest confidence.
-     */
-    public var topClass: String?
-
-    /**
-     An array of up to ten class-confidence pairs sorted in descending order of confidence.
-     */
-    public var classes: [ClassifiedClass]?
+    public var aggregations: [MetricAggregation]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case topClass = "top_class"
-        case classes = "classes"
+        case aggregations = "aggregations"
     }
 
 }

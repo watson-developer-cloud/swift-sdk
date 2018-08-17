@@ -17,30 +17,48 @@
 import Foundation
 
 /**
- Response from the classifier for a phrase in a collection.
+ An object defining the event being created.
  */
-public struct CollectionItem: Decodable {
+internal struct CreateEventObject: Encodable {
 
     /**
-     The submitted phrase. The maximum length is 2048 characters.
+     The event type to be created.
      */
-    public var text: String?
+    public enum ModelType: String {
+        case click = "click"
+    }
 
     /**
-     The class with the highest confidence.
+     The event type to be created.
      */
-    public var topClass: String?
+    public var type: String
 
     /**
-     An array of up to ten class-confidence pairs sorted in descending order of confidence.
+     Data object used to create a query event.
      */
-    public var classes: [ClassifiedClass]?
+    public var data: EventData
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-        case topClass = "top_class"
-        case classes = "classes"
+        case type = "type"
+        case data = "data"
+    }
+
+    /**
+     Initialize a `CreateEventObject` with member variables.
+
+     - parameter type: The event type to be created.
+     - parameter data: Data object used to create a query event.
+
+     - returns: An initialized `CreateEventObject`.
+    */
+    public init(
+        type: String,
+        data: EventData
+    )
+    {
+        self.type = type
+        self.data = data
     }
 
 }

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'IBMWatsonAssistantV1'
-  s.version          = '0.31.0'
+  s.version          = '0.32.0'
   s.summary          = 'iOS framework for the IBM Watson Assistant service'
   s.description      = <<-DESC
 Build an AI assistant for a variety of channels, including mobile devices, messaging platforms, and even robots.

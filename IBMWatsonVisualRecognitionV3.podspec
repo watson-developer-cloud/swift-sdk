@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'IBMWatsonVisualRecognitionV3'
-  s.version          = '0.31.0'
+  s.version          = '0.32.0'
   s.summary          = 'Client framework for the IBM Watson Visual Recognition service'
   s.description      = <<-DESC
 Quickly and accurately tag, classify and train visual content using machine learning.

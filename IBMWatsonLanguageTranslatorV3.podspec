@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'IBMWatsonLanguageTranslatorV3'
-  s.version          = '0.31.0'
+  s.version          = '0.32.0'
   s.summary          = 'Client framework for the IBM Watson Language Translator service'
   s.description      = <<-DESC
 Translate text from one language to another. Take news from across the globe and present it in your language, 

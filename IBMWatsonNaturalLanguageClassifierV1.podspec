@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name             = 'IBMWatsonNaturalLanguageClassifierV1'
-  s.version          = '0.31.0'
+  s.version          = '0.32.0'
   s.summary          = 'Client framework for the IBM Watson Natural Language Classifier service'
   s.description      = <<-DESC
 Interpret and classify natural language with confidence.

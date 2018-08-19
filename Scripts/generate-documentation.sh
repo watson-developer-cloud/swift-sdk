@@ -55,7 +55,7 @@ for service in ${services[@]}; do
     --xcodebuild-arguments $xcodebuild_arguments \
     --output ${outdir}/services/${service} \
     --clean \
-    --github_url https://github.com/watson-developer-cloud/ios-sdk \
+    --github_url https://github.com/watson-developer-cloud/swift-sdk \
     --hide-documentation-coverage
 done
 
@@ -63,12 +63,16 @@ done
 # Generate index.html and copy supporting files
 ################################################################################
 
-cp Scripts/generate-documentation-resources/index-prefix ${outdir}/index.html
-for service in ${services[@]}; do
-  html="<li><a target="_blank" href="./services/${service}/index.html">${service}</a></li>"
-  echo ${html} >> ${outdir}/index.html
-done
-cat Scripts/generate-documentation-resources/index-postfix >> ${outdir}/index.html
+(
+  version=$(git describe --tags)
+  cat Scripts/generate-documentation-resources/index-prefix | sed "s/SDK_VERSION/$version/"
+  for service in ${services[@]}; do
+    echo "<li><a target="_blank" href="./services/${service}/index.html">${service}</a></li>"
+  done
+  echo -e "          </section>\n        </section>"
+  sed -n '/<section id="footer">/,/<\/section>/p' ${outdir}/services/${services[0]}/index.html
+  cat Scripts/generate-documentation-resources/index-postfix
+) > ${outdir}/index.html
 
 cp -r Scripts/generate-documentation-resources/* ${outdir}
 rm ${outdir}/index-prefix ${outdir}/index-postfix

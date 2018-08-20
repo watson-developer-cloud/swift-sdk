@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** QueryResult. */
 public struct QueryResult: Decodable {

@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  The IBM Watson&trade; Personality Insights service enables applications to derive insights from social media,

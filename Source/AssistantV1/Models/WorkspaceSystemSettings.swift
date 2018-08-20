@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** WorkspaceSystemSettings. */
 public struct WorkspaceSystemSettings: Codable {

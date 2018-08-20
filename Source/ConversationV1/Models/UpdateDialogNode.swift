@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** UpdateDialogNode. */
 public struct UpdateDialogNode: Encodable {

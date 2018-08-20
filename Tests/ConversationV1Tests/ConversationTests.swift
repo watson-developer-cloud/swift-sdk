@@ -19,6 +19,7 @@
 import XCTest
 import Foundation
 import ConversationV1
+import RestKit
 
 class ConversationTests: XCTestCase {
 

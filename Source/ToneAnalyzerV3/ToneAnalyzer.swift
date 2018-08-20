@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  The IBM Watson&trade; Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written

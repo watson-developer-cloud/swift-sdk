@@ -151,16 +151,6 @@
 		682CBD2C209051BA0049EE9F /* SegmentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682CBD2B209051B90049EE9F /* SegmentSettings.swift */; };
 		682ED52F204F348100B17B06 /* WAVRepair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682ED52E204F348100B17B06 /* WAVRepair.swift */; };
 		6832BBEE2009CE8800BA50A8 /* SpeechToText+Recognize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF76772008167900D35B2D /* SpeechToText+Recognize.swift */; };
-		6836B9002091D238006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		6836B9012091D238006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		6836B9022091D239006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		6836B9032091D23A006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		6836B9042091D23B006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		6836B9052091D23C006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		6836B9062091D23D006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		6836B9072091D23D006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		6836B9082091D23E006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		6836B9092091D240006DF944 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
 		683947D5202CF4F7007E3CF3 /* RelationArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AA202CF4F3007E3CF3 /* RelationArgument.swift */; };
 		683947D6202CF4F7007E3CF3 /* RelationsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AB202CF4F3007E3CF3 /* RelationsResult.swift */; };
 		683947D7202CF4F7007E3CF3 /* SemanticRolesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683947AC202CF4F3007E3CF3 /* SemanticRolesObject.swift */; };
@@ -351,66 +341,6 @@
 		68AF8F9F2069690300D552E3 /* DeleteDocumentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF8EFB206968CC00D552E3 /* DeleteDocumentResponse.swift */; };
 		68AF8FA02069690300D552E3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF8EFC206968CC00D552E3 /* Configuration.swift */; };
 		68BB78F92089A97E00173438 /* SpeechToTextRecognizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BB78F82089A97E00173438 /* SpeechToTextRecognizeTests.swift */; };
-		68BC287E1F8C35000042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28801F8C35000042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28811F8C35000042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28821F8C35000042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28831F8C35000042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28851F8C35000042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
-		68BC288E1F8C35010042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28901F8C35010042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28911F8C35010042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28921F8C35010042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28931F8C35010042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28951F8C35010042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
-		68BC289E1F8C35020042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28A01F8C35020042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28A11F8C35020042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28A21F8C35020042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28A31F8C35020042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28A51F8C35020042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
-		68BC28A61F8C35030042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28A81F8C35030042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28A91F8C35030042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28AA1F8C35030042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28AB1F8C35030042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28AD1F8C35030042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
-		68BC28AE1F8C35040042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28B01F8C35040042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28B11F8C35040042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28B21F8C35040042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28B31F8C35040042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28B51F8C35040042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
-		68BC28BE1F8C35050042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28C01F8C35050042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28C11F8C35050042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28C21F8C35050042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28C31F8C35050042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28C51F8C35050042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
-		68BC28D61F8C35070042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28D81F8C35070042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28D91F8C35070042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28DA1F8C35070042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28DB1F8C35070042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28DD1F8C35070042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
-		68BC28DE1F8C35080042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28E01F8C35080042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28E11F8C35080042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28E21F8C35080042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28E31F8C35080042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28E51F8C35080042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
-		68BC28E61F8C35080042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28E81F8C35080042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28E91F8C35080042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28EA1F8C35080042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28EB1F8C35080042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28ED1F8C35080042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
-		68BC28F61F8C350A0042810E /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		68BC28F81F8C350A0042810E /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		68BC28F91F8C350A0042810E /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		68BC28FA1F8C350A0042810E /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		68BC28FB1F8C350A0042810E /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		68BC28FD1F8C350A0042810E /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
 		68BF6A5A206999BB00B6BD30 /* QueryAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BF6A59206999BB00B6BD30 /* QueryAggregation.swift */; };
 		68C441502017B19000B251C6 /* DialogNodeVisitedDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C4414E2017B17B00B251C6 /* DialogNodeVisitedDetails.swift */; };
 		68C974AC200D52F6002DCFA3 /* CaptureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C974AA200D52E4002DCFA3 /* CaptureGroup.swift */; };
@@ -555,13 +485,6 @@
 		92AB08E8212B32FC00B7AC25 /* CodableExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213ED1F8429880052DC00 /* CodableExtensionsTests.swift */; };
 		92AB08E9212B32FE00B7AC25 /* JSONValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213EE1F8429890052DC00 /* JSONValueTests.swift */; };
 		92AB08EA212B330400B7AC25 /* RestKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AAAF5B21CEEA62C00B74848 /* RestKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		92AB08EE212B421200B7AC25 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		92AB08EF212B421200B7AC25 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		92AB08F0212B421200B7AC25 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		92AB08F1212B421200B7AC25 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		92AB08F2212B421200B7AC25 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		92AB08F3212B421200B7AC25 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		92AB08F4212B421200B7AC25 /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
 		CA28815D20CB07D600FC992C /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		CA28817620CB095100FC992C /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA28817420CB095100FC992C /* glossary.tmx */; };
@@ -580,13 +503,6 @@
 		CA35CD4920E3237400FACB2B /* ProfileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA35CD4820E3237400FACB2B /* ProfileContent.swift */; };
 		CAD2685B20CAF28B002BA2C4 /* LanguageTranslatorV3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD2685220CAF28A002BA2C4 /* LanguageTranslatorV3.framework */; };
 		CAD2686E20CAF919002BA2C4 /* LanguageTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD2686A20CAF919002BA2C4 /* LanguageTranslator.swift */; };
-		CAD2687320CB00F2002BA2C4 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
-		CAD2687420CB00F2002BA2C4 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
-		CAD2687520CB00F2002BA2C4 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E81F84296D0052DC00 /* JSON.swift */; };
-		CAD2687620CB00F2002BA2C4 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */; };
-		CAD2687720CB00F2002BA2C4 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BA1B41F7DCB1E006633A3 /* RestError.swift */; };
-		CAD2687820CB00F2002BA2C4 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A61174F1CB5988B009A4DA1 /* RestRequest.swift */; };
-		CAD2687A20CB00F2002BA2C4 /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A3C1CEE3059002C9564 /* RestUtilities.swift */; };
 		CAD2687D20CB0196002BA2C4 /* LanguageTranslatorV3.h in Headers */ = {isa = PBXBuildFile; fileRef = CAD2687B20CB0195002BA2C4 /* LanguageTranslatorV3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CADA959820FCD66600B5BD84 /* SourceSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA958D20FCD66400B5BD84 /* SourceSchedule.swift */; };
 		CADA959920FCD66600B5BD84 /* DeleteCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA958E20FCD66400B5BD84 /* DeleteCredentials.swift */; };
@@ -3885,15 +3801,10 @@
 				683947E3202CF4F7007E3CF3 /* SemanticRolesEntity.swift in Sources */,
 				683947ED202CF4F7007E3CF3 /* ListModelsResults.swift in Sources */,
 				683947FE202CF4F7007E3CF3 /* Parameters.swift in Sources */,
-				68BC28B11F8C35040042810E /* MultipartFormData.swift in Sources */,
-				68BC28AE1F8C35040042810E /* CodableExtensions.swift in Sources */,
 				683947E0202CF4F7007E3CF3 /* DisambiguationResult.swift in Sources */,
-				68BC28B51F8C35040042810E /* RestUtilities.swift in Sources */,
 				683947F1202CF4F7007E3CF3 /* EmotionScores.swift in Sources */,
 				683947F9202CF4F7007E3CF3 /* AnalysisResults.swift in Sources */,
 				683947E1202CF4F7007E3CF3 /* RelationEntity.swift in Sources */,
-				68BC28B31F8C35040042810E /* RestRequest.swift in Sources */,
-				68BC28B21F8C35040042810E /* RestError.swift in Sources */,
 				68AC590D1F8DCA0000012CCB /* NaturalLanguageUnderstanding.swift in Sources */,
 				683947E2202CF4F7007E3CF3 /* EntityMention.swift in Sources */,
 				683947DD202CF4F7007E3CF3 /* KeywordsOptions.swift in Sources */,
@@ -3912,7 +3823,6 @@
 				683947E5202CF4F7007E3CF3 /* Model.swift in Sources */,
 				683947F5202CF4F7007E3CF3 /* TargetedSentimentResults.swift in Sources */,
 				683947E9202CF4F7007E3CF3 /* CategoriesResult.swift in Sources */,
-				6836B9042091D23B006DF944 /* Authentication.swift in Sources */,
 				683947F0202CF4F7007E3CF3 /* KeywordsResult.swift in Sources */,
 				683947FF202CF4F7007E3CF3 /* EntitiesOptions.swift in Sources */,
 				683947EC202CF4F7007E3CF3 /* SemanticRolesAction.swift in Sources */,
@@ -3928,7 +3838,6 @@
 				683947D6202CF4F7007E3CF3 /* RelationsResult.swift in Sources */,
 				683947FB202CF4F7007E3CF3 /* ConceptsResult.swift in Sources */,
 				683947EA202CF4F7007E3CF3 /* EmotionOptions.swift in Sources */,
-				68BC28B01F8C35040042810E /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3947,17 +3856,10 @@
 			files = (
 				126DF90B1EB25A45001FF980 /* opus_header.c in Sources */,
 				689A1710203CCDA9002CFC66 /* Pronunciation.swift in Sources */,
-				68BC28DE1F8C35080042810E /* CodableExtensions.swift in Sources */,
-				68BC28E21F8C35080042810E /* RestError.swift in Sources */,
-				68BC28E11F8C35080042810E /* MultipartFormData.swift in Sources */,
 				689A1711203CCDA9002CFC66 /* VoiceModels.swift in Sources */,
 				689A170B203CCDA9002CFC66 /* VoiceModel.swift in Sources */,
-				68BC28E51F8C35080042810E /* RestUtilities.swift in Sources */,
-				68BC28E31F8C35080042810E /* RestRequest.swift in Sources */,
 				689A170D203CCDA9002CFC66 /* Words.swift in Sources */,
 				682ED52F204F348100B17B06 /* WAVRepair.swift in Sources */,
-				68BC28E01F8C35080042810E /* JSON.swift in Sources */,
-				6836B9072091D23D006DF944 /* Authentication.swift in Sources */,
 				689A1707203CCDA9002CFC66 /* Voices.swift in Sources */,
 				689A1709203CCDA9002CFC66 /* UpdateVoiceModel.swift in Sources */,
 				689A170C203CCDA9002CFC66 /* SupportedFeatures.swift in Sources */,
@@ -4052,15 +3954,12 @@
 				68AF8F852069690300D552E3 /* XPathPatterns.swift in Sources */,
 				683955072077E613009E1C8A /* Filter.swift in Sources */,
 				68AF8F872069690300D552E3 /* DeleteConfigurationResponse.swift in Sources */,
-				68BC28911F8C35010042810E /* MultipartFormData.swift in Sources */,
 				68AF8F7A2069690300D552E3 /* Field.swift in Sources */,
 				68AF8F6B2069690300D552E3 /* TrainingQuery.swift in Sources */,
 				68AF8F4F2069690300D552E3 /* TrainingStatus.swift in Sources */,
 				68AF8F9F2069690300D552E3 /* DeleteDocumentResponse.swift in Sources */,
 				68AF8F512069690300D552E3 /* EnvironmentDocuments.swift in Sources */,
-				68BC288E1F8C35010042810E /* CodableExtensions.swift in Sources */,
 				68AF8F8D2069690300D552E3 /* WordHeadingDetection.swift in Sources */,
-				68BC28951F8C35010042810E /* RestUtilities.swift in Sources */,
 				68AF8F952069690300D552E3 /* QueryEntitiesContext.swift in Sources */,
 				928204D22124BC200013315B /* MetricTokenAggregation.swift in Sources */,
 				928204CB2124BC200013315B /* CreateEventResponse.swift in Sources */,
@@ -4070,19 +3969,16 @@
 				68AF8F812069690300D552E3 /* WordStyle.swift in Sources */,
 				68AF8F7B2069690300D552E3 /* Enrichment.swift in Sources */,
 				68AF8F542069690300D552E3 /* CreateEnvironmentRequest.swift in Sources */,
-				68BC28931F8C35010042810E /* RestRequest.swift in Sources */,
 				68AF8F622069690300D552E3 /* NluEnrichmentKeywords.swift in Sources */,
 				CADA959E20FCD66600B5BD84 /* SourceOptionsSiteColl.swift in Sources */,
 				68AF8F802069690300D552E3 /* TrainingExamplePatch.swift in Sources */,
 				68AF8F602069690300D552E3 /* QueryRelations.swift in Sources */,
 				68AF8F5F2069690300D552E3 /* Environment.swift in Sources */,
 				68AF8F5B2069690300D552E3 /* NluEnrichmentEmotion.swift in Sources */,
-				68BC28921F8C35010042810E /* RestError.swift in Sources */,
 				928204CD2124BC200013315B /* LogQueryResponseResultDocuments.swift in Sources */,
 				928204C72124BC200013315B /* CreateEventObject.swift in Sources */,
 				68AF8FA02069690300D552E3 /* Configuration.swift in Sources */,
 				683955082077E613009E1C8A /* TopHitsResults.swift in Sources */,
-				6836B9012091D238006DF944 /* Authentication.swift in Sources */,
 				68AF8F6E2069690300D552E3 /* QueryRelationsFilter.swift in Sources */,
 				68AF8F942069690300D552E3 /* ListConfigurationsResponse.swift in Sources */,
 				68AF8F822069690300D552E3 /* NluEnrichmentEntities.swift in Sources */,
@@ -4103,7 +3999,6 @@
 				68AF8F892069690300D552E3 /* PdfHeadingDetection.swift in Sources */,
 				68AF8F8B2069690300D552E3 /* Term.swift in Sources */,
 				68AF8F9D2069690300D552E3 /* NluEnrichmentRelations.swift in Sources */,
-				68BC28901F8C35010042810E /* JSON.swift in Sources */,
 				68AF8F912069690300D552E3 /* DocumentCounts.swift in Sources */,
 				12F8005C1DF71BA1006851D6 /* Discovery.swift in Sources */,
 			);
@@ -4122,13 +4017,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92AB08EE212B421200B7AC25 /* Authentication.swift in Sources */,
-				92AB08EF212B421200B7AC25 /* CodableExtensions.swift in Sources */,
-				92AB08F0212B421200B7AC25 /* JSON.swift in Sources */,
-				92AB08F1212B421200B7AC25 /* MultipartFormData.swift in Sources */,
-				92AB08F2212B421200B7AC25 /* RestError.swift in Sources */,
-				92AB08F3212B421200B7AC25 /* RestRequest.swift in Sources */,
-				92AB08F4212B421200B7AC25 /* RestUtilities.swift in Sources */,
 				6800FCBF2056D8D50078788A /* MessageRequest.swift in Sources */,
 				6800FCCA2056D8D50078788A /* UpdateEntity.swift in Sources */,
 				6800FCA72056D8D50078788A /* CreateExample.swift in Sources */,
@@ -4215,23 +4103,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68BC28C01F8C35050042810E /* JSON.swift in Sources */,
 				689A16B0203C9946002CFC66 /* Warning.swift in Sources */,
 				689A16B1203C9946002CFC66 /* Profile.swift in Sources */,
 				689A16B3203C9946002CFC66 /* Trait.swift in Sources */,
 				689A16AE203C9946002CFC66 /* ContentItem.swift in Sources */,
-				68BC28C21F8C35050042810E /* RestError.swift in Sources */,
 				689A16B4203C9946002CFC66 /* ConsumptionPreferences.swift in Sources */,
-				68BC28C51F8C35050042810E /* RestUtilities.swift in Sources */,
 				CA35CD4920E3237400FACB2B /* ProfileContent.swift in Sources */,
 				689A16AF203C9946002CFC66 /* ConsumptionPreferencesCategory.swift in Sources */,
 				689A16B2203C9946002CFC66 /* Content.swift in Sources */,
-				68BC28C31F8C35050042810E /* RestRequest.swift in Sources */,
-				68BC28C11F8C35050042810E /* MultipartFormData.swift in Sources */,
 				7A6711A01DD0F1790070CA9D /* PersonalityInsights.swift in Sources */,
-				68BC28BE1F8C35050042810E /* CodableExtensions.swift in Sources */,
 				689A16B5203C9946002CFC66 /* Behavior.swift in Sources */,
-				6836B9052091D23C006DF944 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4252,23 +4133,16 @@
 				689A168F203C88C7002CFC66 /* FaceGender.swift in Sources */,
 				689A16A5203C9358002CFC66 /* VisualRecognition+UIImage.swift in Sources */,
 				689A16A1203C89F5002CFC66 /* PositiveExample.swift in Sources */,
-				68BC28F91F8C350A0042810E /* MultipartFormData.swift in Sources */,
 				689A169C203C88C7002CFC66 /* Face.swift in Sources */,
-				68BC28F61F8C350A0042810E /* CodableExtensions.swift in Sources */,
 				689A1695203C88C7002CFC66 /* Classifiers.swift in Sources */,
 				689A1697203C88C7002CFC66 /* Class.swift in Sources */,
 				689A1690203C88C7002CFC66 /* FaceLocation.swift in Sources */,
-				68BC28F81F8C350A0042810E /* JSON.swift in Sources */,
 				689A169A203C88C7002CFC66 /* DetectedFaces.swift in Sources */,
-				68BC28FB1F8C350A0042810E /* RestRequest.swift in Sources */,
 				689A1699203C88C7002CFC66 /* ClassifierResult.swift in Sources */,
-				68BC28FD1F8C350A0042810E /* RestUtilities.swift in Sources */,
 				689A1694203C88C7002CFC66 /* ClassifiedImage.swift in Sources */,
-				68BC28FA1F8C350A0042810E /* RestError.swift in Sources */,
 				689A168E203C88C7002CFC66 /* FaceIdentity.swift in Sources */,
 				689A1696203C88C7002CFC66 /* FaceAge.swift in Sources */,
 				689A169B203C88C7002CFC66 /* Classifier.swift in Sources */,
-				6836B9092091D240006DF944 /* Authentication.swift in Sources */,
 				689A1692203C88C7002CFC66 /* ClassResult.swift in Sources */,
 				689A1691203C88C7002CFC66 /* ImageWithFaces.swift in Sources */,
 				689A1698203C88C7002CFC66 /* WarningInfo.swift in Sources */,
@@ -4296,22 +4170,15 @@
 			files = (
 				68D09C21200D61870087ADE5 /* ToneChatScore.swift in Sources */,
 				7AAAF4101CEE9D5300B74848 /* SentenceAnalysis.swift in Sources */,
-				68BC28E81F8C35080042810E /* JSON.swift in Sources */,
 				CA35CD4720E3234900FACB2B /* ToneContent.swift in Sources */,
 				68D09C25200D61870087ADE5 /* DocumentAnalysis.swift in Sources */,
 				7AAAF4131CEE9D5300B74848 /* ToneScore.swift in Sources */,
-				68BC28E61F8C35080042810E /* CodableExtensions.swift in Sources */,
 				68D09C22200D61870087ADE5 /* UtteranceAnalyses.swift in Sources */,
-				68BC28EB1F8C35080042810E /* RestRequest.swift in Sources */,
 				68D09C24200D61870087ADE5 /* Utterance.swift in Sources */,
 				7AAAF4121CEE9D5300B74848 /* ToneCategory.swift in Sources */,
-				68BC28EA1F8C35080042810E /* RestError.swift in Sources */,
-				68BC28ED1F8C35080042810E /* RestUtilities.swift in Sources */,
-				6836B9082091D23E006DF944 /* Authentication.swift in Sources */,
 				68D09C20200D61870087ADE5 /* UtteranceAnalysis.swift in Sources */,
 				68D09C1F200D61870087ADE5 /* ToneChatInput.swift in Sources */,
 				68D09C23200D61870087ADE5 /* ToneInput.swift in Sources */,
-				68BC28E91F8C35080042810E /* MultipartFormData.swift in Sources */,
 				7AAAF4141CEE9D5600B74848 /* ToneAnalyzer.swift in Sources */,
 				7AAAF4111CEE9D5300B74848 /* ToneAnalysis.swift in Sources */,
 			);
@@ -4332,26 +4199,21 @@
 			files = (
 				7A9EC8201D79D7E300507725 /* SpeechToTextSocket.swift in Sources */,
 				7A9EC80C1D79B75100507725 /* SpeechToTextSession.swift in Sources */,
-				68BC28DB1F8C35070042810E /* RestRequest.swift in Sources */,
 				68F7FF28207D4B4300E84DBF /* SpeechRecognitionResultsAccumulator.swift in Sources */,
 				7A9EC8221D79D8F300507725 /* SpeechToTextState.swift in Sources */,
 				68F7FEFD207D458900E84DBF /* Word.swift in Sources */,
 				68F7FF13207D458900E84DBF /* Corpora.swift in Sources */,
 				68F7FF12207D458900E84DBF /* SpeakerLabelsResult.swift in Sources */,
 				68F7FF21207D47BD00E84DBF /* RecognitionStop.swift in Sources */,
-				68BC28D81F8C35070042810E /* JSON.swift in Sources */,
 				68F7FF0F207D458900E84DBF /* AudioListing.swift in Sources */,
 				68F7FF20207D47BD00E84DBF /* RecognitionSettings.swift in Sources */,
 				68F7FF01207D458900E84DBF /* WordAlternativeResults.swift in Sources */,
 				68F7FF16207D458900E84DBF /* SpeechRecognitionResults.swift in Sources */,
 				68F7FF17207D458900E84DBF /* CustomWord.swift in Sources */,
 				7A9EC8231D7A054400507725 /* SpeechToText.swift in Sources */,
-				68BC28D91F8C35070042810E /* MultipartFormData.swift in Sources */,
 				68F7FF07207D458900E84DBF /* RecognitionJobs.swift in Sources */,
 				68F7FEFF207D458900E84DBF /* LanguageModel.swift in Sources */,
 				7A9EC80A1D79B75100507725 /* SpeechToTextEncoder.swift in Sources */,
-				68BC28DA1F8C35070042810E /* RestError.swift in Sources */,
-				68BC28D61F8C35070042810E /* CodableExtensions.swift in Sources */,
 				68F7FF05207D458900E84DBF /* RecognitionJob.swift in Sources */,
 				68F7FF0C207D458900E84DBF /* WordAlternativeResult.swift in Sources */,
 				68F7FF0D207D458900E84DBF /* WordError.swift in Sources */,
@@ -4364,7 +4226,6 @@
 				68F7FF02207D458900E84DBF /* SpeechModel.swift in Sources */,
 				68F7FF24207D47BD00E84DBF /* RecognitionState.swift in Sources */,
 				68F7FEFC207D458900E84DBF /* AudioResources.swift in Sources */,
-				6836B9062091D23D006DF944 /* Authentication.swift in Sources */,
 				68F7FF1A207D458900E84DBF /* RegisterStatus.swift in Sources */,
 				68F7FF09207D458900E84DBF /* SpeechRecognitionResult.swift in Sources */,
 				68F7FF14207D458900E84DBF /* Words.swift in Sources */,
@@ -4374,7 +4235,6 @@
 				68F7FF06207D458900E84DBF /* AudioDetails.swift in Sources */,
 				68F7FF0E207D458900E84DBF /* AudioResource.swift in Sources */,
 				68F7FF22207D47BD00E84DBF /* WordTimestamp.swift in Sources */,
-				68BC28DD1F8C35070042810E /* RestUtilities.swift in Sources */,
 				68F7FF19207D458900E84DBF /* CreateAcousticModel.swift in Sources */,
 				68F7FF00207D458900E84DBF /* AcousticModels.swift in Sources */,
 				68F7FF08207D458900E84DBF /* SpeechRecognitionAlternative.swift in Sources */,
@@ -4400,19 +4260,12 @@
 				68A6A9AF202A38490069585F /* ClassifierList.swift in Sources */,
 				68A6A9AD202A38490069585F /* ClassifyInput.swift in Sources */,
 				68438EA0208A987400FD7DB9 /* ClassifyCollectionInput.swift in Sources */,
-				68BC28AD1F8C35030042810E /* RestUtilities.swift in Sources */,
-				68BC28AB1F8C35030042810E /* RestRequest.swift in Sources */,
-				68BC28A81F8C35030042810E /* JSON.swift in Sources */,
 				68438E9F208A987400FD7DB9 /* ClassificationCollection.swift in Sources */,
 				68A6A9AE202A38490069585F /* Classifier.swift in Sources */,
 				68A6A9AC202A38490069585F /* ClassifiedClass.swift in Sources */,
 				68438EA1208A987400FD7DB9 /* CollectionItem.swift in Sources */,
-				68BC28A91F8C35030042810E /* MultipartFormData.swift in Sources */,
-				68BC28AA1F8C35030042810E /* RestError.swift in Sources */,
 				68A6A9B0202A38490069585F /* Classification.swift in Sources */,
-				68BC28A61F8C35030042810E /* CodableExtensions.swift in Sources */,
 				7AAAF4C91CEEA11900B74848 /* NaturalLanguageClassifier.swift in Sources */,
-				6836B9032091D23A006DF944 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4432,19 +4285,12 @@
 				68A6A9A1202A0EE90069585F /* TranslationResult.swift in Sources */,
 				68A6A9A0202A0EE90069585F /* TranslationModel.swift in Sources */,
 				68A6A9A6202A0EE90069585F /* TranslateRequest.swift in Sources */,
-				6836B9022091D239006DF944 /* Authentication.swift in Sources */,
 				68A6A9A5202A0EE90069585F /* IdentifiedLanguage.swift in Sources */,
 				68A6A9A4202A0EE90069585F /* IdentifiableLanguages.swift in Sources */,
 				68A6A99F202A0EE90069585F /* IdentifiableLanguage.swift in Sources */,
-				68BC28A01F8C35020042810E /* JSON.swift in Sources */,
-				68BC28A21F8C35020042810E /* RestError.swift in Sources */,
-				68BC28A51F8C35020042810E /* RestUtilities.swift in Sources */,
-				68BC28A31F8C35020042810E /* RestRequest.swift in Sources */,
-				68BC28A11F8C35020042810E /* MultipartFormData.swift in Sources */,
 				68A6A9A2202A0EE90069585F /* IdentifiedLanguages.swift in Sources */,
 				68A6A9A3202A0EE90069585F /* Translation.swift in Sources */,
 				7AAAF4FA1CEEA17600B74848 /* LanguageTranslator.swift in Sources */,
-				68BC289E1F8C35020042810E /* CodableExtensions.swift in Sources */,
 				68A6A99E202A0EE90069585F /* DeleteModelResult.swift in Sources */,
 				68A6A99D202A0EE90069585F /* TranslationModels.swift in Sources */,
 			);
@@ -4487,7 +4333,6 @@
 				6823CECA1F8EA0F700A388EC /* CreateWorkspace.swift in Sources */,
 				6823CED81F8EA0F700A388EC /* LogCollection.swift in Sources */,
 				CADA96BA2110ABDE00B5BD84 /* Mentions.swift in Sources */,
-				68BC28821F8C35000042810E /* RestError.swift in Sources */,
 				6823CEDC1F8EA0F700A388EC /* MessageInput.swift in Sources */,
 				6823CEDF1F8EA0F700A388EC /* OutputData.swift in Sources */,
 				6823CEC21F8EA0F700A388EC /* CounterexampleCollection.swift in Sources */,
@@ -4498,7 +4343,6 @@
 				68C441502017B19000B251C6 /* DialogNodeVisitedDetails.swift in Sources */,
 				6823CEE61F8EA0F700A388EC /* UpdateCounterexample.swift in Sources */,
 				6823CEC41F8EA0F700A388EC /* CreateDialogNode.swift in Sources */,
-				68BC28831F8C35000042810E /* RestRequest.swift in Sources */,
 				6823CEC01F8EA0F700A388EC /* Context.swift in Sources */,
 				6823CEDB1F8EA0F700A388EC /* LogPagination.swift in Sources */,
 				6823CEE81F8EA0F700A388EC /* UpdateEntity.swift in Sources */,
@@ -4513,13 +4357,9 @@
 				6823CEC31F8EA0F700A388EC /* CreateCounterexample.swift in Sources */,
 				CADA96AF2110ABDE00B5BD84 /* DialogSuggestion.swift in Sources */,
 				6823CEE21F8EA0F700A388EC /* RuntimeIntent.swift in Sources */,
-				68BC28801F8C35000042810E /* JSON.swift in Sources */,
-				68BC28811F8C35000042810E /* MultipartFormData.swift in Sources */,
 				6823CEC11F8EA0F700A388EC /* Counterexample.swift in Sources */,
 				6823CEE31F8EA0F700A388EC /* Synonym.swift in Sources */,
-				6836B9002091D238006DF944 /* Authentication.swift in Sources */,
 				6823CEE11F8EA0F700A388EC /* RuntimeEntity.swift in Sources */,
-				68BC287E1F8C35000042810E /* CodableExtensions.swift in Sources */,
 				6823CECD1F8EA0F700A388EC /* DialogNodeCollection.swift in Sources */,
 				6823CECB1F8EA0F700A388EC /* DialogNode.swift in Sources */,
 				CADA96B12110ABDE00B5BD84 /* WorkspaceSystemSettingsTooling.swift in Sources */,
@@ -4527,7 +4367,6 @@
 				6823CEDA1F8EA0F700A388EC /* LogMessage.swift in Sources */,
 				68C974AC200D52F6002DCFA3 /* CaptureGroup.swift in Sources */,
 				6823CEC61F8EA0F700A388EC /* CreateExample.swift in Sources */,
-				68BC28851F8C35000042810E /* RestUtilities.swift in Sources */,
 				CADA96B42110ABDE00B5BD84 /* DialogNodeOutputModifiers.swift in Sources */,
 				6823CEE91F8EA0F700A388EC /* UpdateExample.swift in Sources */,
 				6823CEEE1F8EA0F700A388EC /* Value.swift in Sources */,
@@ -4582,20 +4421,13 @@
 			files = (
 				CA28817D20CB099D00FC992C /* IdentifiedLanguages.swift in Sources */,
 				CA28818020CB099D00FC992C /* TranslationModels.swift in Sources */,
-				CAD2687820CB00F2002BA2C4 /* RestRequest.swift in Sources */,
 				CA28817E20CB099D00FC992C /* TranslationModel.swift in Sources */,
-				CAD2687720CB00F2002BA2C4 /* RestError.swift in Sources */,
 				CAD2686E20CAF919002BA2C4 /* LanguageTranslator.swift in Sources */,
-				CAD2687320CB00F2002BA2C4 /* Authentication.swift in Sources */,
-				CAD2687420CB00F2002BA2C4 /* CodableExtensions.swift in Sources */,
 				CA28817A20CB099D00FC992C /* IdentifiableLanguage.swift in Sources */,
-				CAD2687A20CB00F2002BA2C4 /* RestUtilities.swift in Sources */,
 				CA28817920CB099D00FC992C /* DeleteModelResult.swift in Sources */,
 				CA28818220CB099D00FC992C /* IdentifiableLanguages.swift in Sources */,
-				CAD2687520CB00F2002BA2C4 /* JSON.swift in Sources */,
 				CA28817F20CB099D00FC992C /* IdentifiedLanguage.swift in Sources */,
 				CA28818120CB099D00FC992C /* TranslateRequest.swift in Sources */,
-				CAD2687620CB00F2002BA2C4 /* MultipartFormData.swift in Sources */,
 				CA28817C20CB099D00FC992C /* TranslationResult.swift in Sources */,
 				CA28817B20CB099D00FC992C /* Translation.swift in Sources */,
 			);

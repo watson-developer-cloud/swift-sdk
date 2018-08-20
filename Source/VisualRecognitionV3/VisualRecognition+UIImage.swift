@@ -18,6 +18,7 @@
 
 import Foundation
 import UIKit
+import RestKit
 
 // This extension adds convenience methods for using `UIImage`. The comments and interface were copied from
 // `VisualRecognition.swift`, then modified to use `UIImage` instead of `URL`. Some parameters were also

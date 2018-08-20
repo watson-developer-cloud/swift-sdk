@@ -19,6 +19,7 @@
 import XCTest
 import Foundation
 import NaturalLanguageUnderstandingV1
+import RestKit
 
 class NaturalLanguageUnderstandingTests: XCTestCase {
 

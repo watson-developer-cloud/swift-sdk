@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type

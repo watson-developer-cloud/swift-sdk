@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  An output object that includes the response to the user, the dialog nodes that were triggered, and messages from the

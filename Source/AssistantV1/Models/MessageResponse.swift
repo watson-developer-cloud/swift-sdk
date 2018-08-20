@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  A response from the Watson Assistant service.

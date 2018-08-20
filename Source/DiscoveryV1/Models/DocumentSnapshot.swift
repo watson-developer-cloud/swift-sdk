@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** DocumentSnapshot. */
 public struct DocumentSnapshot: Decodable {

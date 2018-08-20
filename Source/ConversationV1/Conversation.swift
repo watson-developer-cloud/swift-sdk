@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated

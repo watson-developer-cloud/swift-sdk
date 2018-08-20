@@ -19,6 +19,7 @@
 import XCTest
 import Foundation
 import AssistantV1
+import RestKit
 
 class AssistantTests: XCTestCase {
 

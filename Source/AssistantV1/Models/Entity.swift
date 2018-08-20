@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** Entity. */
 public struct Entity: Decodable {

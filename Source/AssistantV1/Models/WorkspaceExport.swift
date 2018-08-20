@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** WorkspaceExport. */
 public struct WorkspaceExport: Decodable {

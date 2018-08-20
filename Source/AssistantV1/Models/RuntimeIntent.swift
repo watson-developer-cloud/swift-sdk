@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  An intent identified in the user input.

@@ -16,6 +16,7 @@
 
 import Foundation
 import Starscream
+import RestKit
 
 internal class SpeechToTextSocket: WebSocketDelegate {
 

@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** UpdateWorkspace. */
 public struct UpdateWorkspace: Encodable {

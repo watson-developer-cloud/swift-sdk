@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  For internal use only.

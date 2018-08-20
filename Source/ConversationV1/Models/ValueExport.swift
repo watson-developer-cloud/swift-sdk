@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** ValueExport. */
 public struct ValueExport: Decodable {

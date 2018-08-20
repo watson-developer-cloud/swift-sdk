@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** EntityExport. */
 public struct EntityExport: Decodable {

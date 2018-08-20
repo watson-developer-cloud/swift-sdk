@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  IBM Watson&trade; Natural Language Classifier uses machine learning algorithms to return the top matching predefined

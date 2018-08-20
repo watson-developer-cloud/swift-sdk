@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  The IBM&reg; Speech to Text service provides an API that uses IBM's speech-recognition capabilities to produce

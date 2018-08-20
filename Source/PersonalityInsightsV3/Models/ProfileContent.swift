@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see

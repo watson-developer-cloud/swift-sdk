@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** CreateWorkspace. */
 public struct CreateWorkspace: Encodable {

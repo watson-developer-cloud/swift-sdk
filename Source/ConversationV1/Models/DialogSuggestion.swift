@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** DialogSuggestion. */
 public struct DialogSuggestion: Codable {

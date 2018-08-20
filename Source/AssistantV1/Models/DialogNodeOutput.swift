@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  The output of the dialog node. For more information about how to specify dialog node output, see the

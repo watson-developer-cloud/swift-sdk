@@ -19,6 +19,7 @@
 import XCTest
 import Foundation
 import LanguageTranslatorV2
+import RestKit
 
 class LanguageTranslatorTests: XCTestCase {
 

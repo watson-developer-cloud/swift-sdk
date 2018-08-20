@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces

@@ -19,6 +19,7 @@
 
 import Foundation
 import AVFoundation
+import RestKit
 
 private var microphoneSession: SpeechToTextSession?
 

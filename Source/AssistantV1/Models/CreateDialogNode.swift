@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** CreateDialogNode. */
 public struct CreateDialogNode: Encodable {

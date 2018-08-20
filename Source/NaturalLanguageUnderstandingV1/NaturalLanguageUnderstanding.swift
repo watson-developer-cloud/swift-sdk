@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and IBM Watson Natural

@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** QueryNoticesResult. */
 public struct QueryNoticesResult: Decodable {

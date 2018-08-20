@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AAAF39D1CEE99FC00B74848"
+               BlueprintIdentifier = "92AB08C7212B325A00B7AC25"
                BuildableName = "RestKit.framework"
                BlueprintName = "RestKit"
+               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "92AB08CF212B325A00B7AC25"
+               BuildableName = "RestKitTests.xctest"
+               BlueprintName = "RestKitTests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AAAF3A61CEE99FC00B74848"
+               BlueprintIdentifier = "92AB08CF212B325A00B7AC25"
                BuildableName = "RestKitTests.xctest"
                BlueprintName = "RestKitTests"
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
@@ -42,7 +56,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7AAAF39D1CEE99FC00B74848"
+            BlueprintIdentifier = "92AB08C7212B325A00B7AC25"
             BuildableName = "RestKit.framework"
             BlueprintName = "RestKit"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
@@ -64,7 +78,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7AAAF39D1CEE99FC00B74848"
+            BlueprintIdentifier = "92AB08C7212B325A00B7AC25"
             BuildableName = "RestKit.framework"
             BlueprintName = "RestKit"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
@@ -82,7 +96,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7AAAF39D1CEE99FC00B74848"
+            BlueprintIdentifier = "92AB08C7212B325A00B7AC25"
             BuildableName = "RestKit.framework"
             BlueprintName = "RestKit"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">

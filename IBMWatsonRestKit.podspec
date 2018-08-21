@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonRestKit'
-  s.version               = '0.32.0'
+  s.version               = '0.33.0'
   s.summary               = 'Dependency for the IBM Watson SDK'
   s.description           = <<-DESC
 Handles the networking layer for all IBM Watson SDK frameworks.
@@ -14,7 +14,7 @@ Handles the networking layer for all IBM Watson SDK frameworks.
   s.module_name           = 'RestKit'
   s.ios.deployment_target = '8.0'
 
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
   s.source_files          = 'Source/RestKit/**/*.swift'
   
 end

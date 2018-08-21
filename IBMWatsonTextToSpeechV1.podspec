@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonTextToSpeechV1'
-  s.version               = '0.32.0'
+  s.version               = '0.33.0'
   s.summary               = 'Client framework for the IBM Watson Text to Speech service'
   s.description           = <<-DESC
 Convert written text into natural-sounding audio in a variety of languages and voices.
@@ -14,12 +14,13 @@ Convert written text into natural-sounding audio in a variety of languages and v
   s.module_name           = 'TextToSpeech'
   s.ios.deployment_target = '8.0'
 
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => 'v#{s.version.to_s}' }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
   s.source_files          = 'Source/TextToSpeechv1/**/*.swift',
                             'Source/SupportingFiles/Dependencies/**/*.{c,h}',
                             'Source/SupportingFiles/TextToSpeechv1.h'
   s.exclude_files         = 'Source/SupportingFiles/Dependencies/ogg/config_types.h'
 
+  s.dependency              'IBMWatsonRestKit', s.version.to_s
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/lib/*.a'
   s.public_header_files   = 'Source/SupportingFiles/TextToSpeechv1.h', 
                             'Source/SupportingFiles/Dependencies/**/*.h'

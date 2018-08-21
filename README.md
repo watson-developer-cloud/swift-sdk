@@ -33,6 +33,21 @@ There are many resources to help you build your first cognitive application with
 * [Contributing](#contributing)
 * [License](#license)
 
+### Services
+
+This SDK provides classes and methods to access the following Watson services.
+
+* [Assistant](https://www.ibm.com/watson/services/conversation)
+* [Discovery](https://www.ibm.com/watson/services/discovery)
+* [Language Translator V3](https://www.ibm.com/watson/services/language-translator)
+* [Natural Language Classifier](https://www.ibm.com/watson/services/natural-language-classifier)
+* [Natural Language Understanding](https://www.ibm.com/watson/services/natural-language-understanding)
+* [Personality Insights](https://www.ibm.com/watson/services/personality-insights)
+* [Speech to Text](https://www.ibm.com/watson/services/speech-to-text)
+* [Text to Speech](https://www.ibm.com/watson/services/text-to-speech)
+* [Tone Analyzer](https://www.ibm.com/watson/services/tone-analyzer)
+* [Visual Recognition](https://www.ibm.com/watson/services/visual-recognition)
+
 ## Before you begin
 * You need an [IBM Cloud][ibm-cloud-onboarding] account.
 

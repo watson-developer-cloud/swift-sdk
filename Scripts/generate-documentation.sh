@@ -55,6 +55,8 @@ for service in ${services[@]}; do
     --xcodebuild-arguments $xcodebuild_arguments \
     --output ${outdir}/services/${service} \
     --clean \
+    --readme Source/${service}/README.md \
+    --documentation README.md \
     --github_url https://github.com/watson-developer-cloud/swift-sdk \
     --hide-documentation-coverage
 done
@@ -81,22 +83,20 @@ rm ${outdir}/index-prefix ${outdir}/index-postfix
 # Collect undocumented.json files
 ################################################################################
 
-touch ${outdir}/undocumented.json
-echo "[" >> ${outdir}/undocumented.json
-
 declare -a undocumenteds
 undocumenteds=($(ls -r ${outdir}/services/*/undocumented.json))
 
-if [ ${#undocumenteds[@]} -gt 0 ]; then
-  echo -e -n "\t" >> ${outdir}/undocumented.json
-  cat "${undocumenteds[0]}" >> ${outdir}/undocumented.json
-  unset undocumenteds[0]
-  for f in "${undocumenteds[@]}"; do
-    echo "," >> ${outdir}/undocumented.json
-    echo -e -n "\t" >> ${outdir}/undocumented.json
-    cat "$f" >> ${outdir}/undocumented.json
-  done
-fi
-
-echo "" >> ${outdir}/undocumented.json
-echo "]" >> ${outdir}/undocumented.json
+(
+  echo "["
+  if [ ${#undocumenteds[@]} -gt 0 ]; then
+    echo -e -n "\t"
+    cat "${undocumenteds[0]}"
+    unset undocumenteds[0]
+    for f in "${undocumenteds[@]}"; do
+      echo ","
+      echo -e -n "\t"
+      cat "$f"
+    done
+  fi
+  echo -e "\n]"
+) > ${outdir}/undocumented.json

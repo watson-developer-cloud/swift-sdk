@@ -16,9 +16,9 @@
 
 import Foundation
 
-internal class MultipartFormData {
+public class MultipartFormData {
 
-    internal var contentType: String { return "multipart/form-data; boundary=\(boundary)" }
+    public var contentType: String { return "multipart/form-data; boundary=\(boundary)" }
     // add contentLength?
 
     private let boundary: String
@@ -42,23 +42,23 @@ internal class MultipartFormData {
     }
     // swiftlint:enable force_unwrapping
 
-    internal init() {
+    public init() {
         self.boundary = "watson-apis.boundary.bd0b4c6e3b9c2126"
     }
 
-    internal func append(_ data: Data, withName: String, mimeType: String? = nil, fileName: String? = nil) {
+    public func append(_ data: Data, withName: String, mimeType: String? = nil, fileName: String? = nil) {
         let bodyPart = BodyPart(key: withName, data: data, mimeType: mimeType, fileName: fileName)
         bodyParts.append(bodyPart)
     }
 
-    internal func append(_ fileURL: URL, withName: String, mimeType: String? = nil) {
+    public func append(_ fileURL: URL, withName: String, mimeType: String? = nil) {
         if let data = try? Data.init(contentsOf: fileURL) {
             let bodyPart = BodyPart(key: withName, data: data, mimeType: mimeType, fileName: fileURL.lastPathComponent)
             bodyParts.append(bodyPart)
         }
     }
 
-    internal func toData() throws -> Data {
+    public func toData() throws -> Data {
         var data = Data()
         for (index, bodyPart) in bodyParts.enumerated() {
             let bodyBoundary: Data
@@ -80,7 +80,7 @@ internal class MultipartFormData {
     }
 }
 
-internal struct BodyPart {
+private struct BodyPart {
 
     private(set) var key: String
     private(set) var data: Data

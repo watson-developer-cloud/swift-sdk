@@ -460,6 +460,18 @@
 		7AC97FC71D8308690046124C /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC81B1D79B76100507725 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AC97FC81D830A020046124C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A9EC8151D79B76100507725 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
+		92776858212C9C4800D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		92776859212C9C4F00D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		9277685A212C9C5400D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		9277685B212C9C5A00D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		9277685C212C9C6000D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		9277685D212C9C6500D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		9277685E212C9C6A00D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		9277685F212C9C6F00D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		92776860212C9C7400D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		92776861212C9C7A00D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		92776862212C9C8300D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
+		92776863212C9C8B00D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
 		928204C72124BC200013315B /* CreateEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BA2124BC1B0013315B /* CreateEventObject.swift */; };
 		928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BB2124BC1C0013315B /* MetricAggregationResult.swift */; };
 		928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */; };
@@ -1278,6 +1290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9277685E212C9C6A00D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,6 +1306,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92776861212C9C7A00D6513B /* RestKit.framework in Frameworks */,
 				12F1405C1EB241D500D4047D /* libogg.a in Frameworks */,
 				12F1405D1EB241D500D4047D /* libopus.a in Frameworks */,
 			);
@@ -1310,6 +1324,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9277685A212C9C5400D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1325,6 +1340,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92776858212C9C4800D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1340,6 +1356,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9277685F212C9C6F00D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1355,6 +1372,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92776863212C9C8B00D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1371,6 +1389,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92776862212C9C8300D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1386,6 +1405,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92776860212C9C7400D6513B /* RestKit.framework in Frameworks */,
 				12F1406B1EB2461E00D4047D /* libogg.a in Frameworks */,
 				12F1406C1EB2461E00D4047D /* libopus.a in Frameworks */,
 				68A0EEE82006D25400E58658 /* Starscream.framework in Frameworks */,
@@ -1405,6 +1425,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9277685D212C9C6500D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,6 +1441,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9277685B212C9C5A00D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1435,6 +1457,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92776859212C9C4F00D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1465,6 +1488,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9277685C212C9C6000D6513B /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,8 +1,8 @@
-## Discovery
+# Discovery
 
 IBM Watson Discovery makes it possible to rapidly build cognitive, cloud-based exploration applications that unlock actionable insights hidden in unstructured data — including your own proprietary data, as well as public and third-party data. With Discovery, it only takes a few steps to prepare your unstructured data, create a query that will pinpoint the information you need, and then integrate those insights into your new application or existing solution.
 
-### Discovery News
+## Discovery News
 
 IBM Watson Discovery News is included with Discovery. Watson Discovery News is an indexed dataset with news articles from the past 60 days — approximately 300,000 English articles daily. The dataset is pre-enriched with the following cognitive insights: Keyword Extraction, Entity Extraction, Semantic Role Extraction, Sentiment Analysis, Relation Extraction, and Category Classification.
 
@@ -28,7 +28,7 @@ discovery.query(
 }
 ```
 
-### Private Data Collections
+## Private Data Collections
 
 The Swift SDK supports environment management, collection management, and document uploading. But you may find it easier to create private data collections using the [Discovery Tooling](https://console.bluemix.net/docs/services/discovery/getting-started-tool.html#getting-started-with-the-tooling) instead.
 

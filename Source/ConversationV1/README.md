@@ -1,4 +1,4 @@
-## Watson Assistant
+# Watson Assistant
 
 With the IBM Watson Assistant service you can create cognitive agents--virtual agents that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide outstanding customer engagements.
 
@@ -35,7 +35,7 @@ assistant.message(workspaceID: workspaceID, request: request, failure: failure) 
 }
 ```
 
-#### Context Variables
+### Context Variables
 
 The Assistant service allows users to define custom context variables in their application's payload. For example, a workspace that guides users through a pizza order might include a context variable for pizza size: `"pizza_size": "large"`.
 

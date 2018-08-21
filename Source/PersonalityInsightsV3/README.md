@@ -1,4 +1,4 @@
-## Personality Insights
+# Personality Insights
 
 The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
 

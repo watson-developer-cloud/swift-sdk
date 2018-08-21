@@ -1,4 +1,4 @@
-## Visual Recognition
+# Visual Recognition
 
 The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, faces, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.
 
@@ -23,7 +23,7 @@ Note: a different initializer is used for authentication with instances created 
 let visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
 ```
 
-### Using Core ML
+## Using Core ML
 
 The Watson Swift SDK supports offline image classification using Apple Core ML. Classifiers must be trained or updated with the `coreMLEnabled` flag set to true. Once the classifier's `coreMLStatus` is `ready` then a Core ML model is available to download and use for offline classification.
 
@@ -68,7 +68,7 @@ let classifierID = "your-classifier-id"
 visualRecognition.deleteLocalModel(classifierID: classifierID)
 ```
 
-#### Bundling a model directly with your application
+### Bundling a model directly with your application
 You may also choose to include a Core ML model with your application, enabling images to be classified offline without having to download a model first. To include a model, add it to your application bundle following the naming convention [classifier_id].mlmodel. This will enable the SDK to locate the model when using any function that accepts a classifierID argument.
 
 The following links provide more information about the IBM Watson Visual Recognition service:

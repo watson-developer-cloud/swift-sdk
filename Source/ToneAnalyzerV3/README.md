@@ -1,4 +1,4 @@
-## Tone Analyzer
+# Tone Analyzer
 
 The IBM Watson Tone Analyzer service can be used to discover, understand, and revise the language tones in text. The service uses linguistic analysis to detect three types of tones from written text: emotions, social tendencies, and writing style.
 

@@ -1,4 +1,4 @@
-## Text to Speech
+# Text to Speech
 
 The IBM Watson Text to Speech service synthesizes natural-sounding speech from input text in a variety of languages and voices that speak with appropriate cadence and intonation.
 

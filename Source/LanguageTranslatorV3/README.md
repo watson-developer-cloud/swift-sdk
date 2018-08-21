@@ -1,4 +1,4 @@
-## Language Translator V3
+# Language Translator V3
 
 The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 

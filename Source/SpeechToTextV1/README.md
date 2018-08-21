@@ -1,4 +1,4 @@
-## Speech to Text
+# Speech to Text
 
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 
@@ -8,7 +8,7 @@ Please be sure to include both `SpeechToTextV1.framework` and `Starscream.framew
 
 Beginning with iOS 10+, any application that accesses the microphone must include the `NSMicrophoneUsageDescription` key in the app's `Info.plist` file. Otherwise, the app will crash. Find more information about this [here](https://forums.developer.apple.com/thread/61521).
 
-#### Recognition Request Settings
+### Recognition Request Settings
 
 The `RecognitionSettings` class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when [initating a request](https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart).
 
@@ -21,7 +21,7 @@ settings.interimResults = true
 
 See the [class documentation](http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) for more information about the available settings.
 
-#### Microphone Audio and Compression
+### Microphone Audio and Compression
 
 The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as `recognizeMicrophone(settings:model:customizationID:learningOptOut:compress:failure:success)` and `stopRecognizeMicrophone()` or `startMicrophone(compress:)` and `stopMicrophone()`).
 
@@ -43,7 +43,7 @@ let settings = RecognitionSettings(contentType: "audio/ogg;codecs=opus")
 let settings = RecognitionSettings(contentType: "audio/l16;rate=16000;channels=1")
 ```
 
-#### Recognition Results Accumulator
+### Recognition Results Accumulator
 
 The Speech to Text service may not always return the entire transcription in a single response. Instead, the transcription may be streamed over multiple responses, each with a chunk of the overall results. This is especially common for long audio files, since the entire transcription may contain a significant amount of text.
 
@@ -60,7 +60,7 @@ accumulator.add(results: results)
 print(accumulator.bestTranscript)
 ```
 
-#### Transcribe Recorded Audio
+### Transcribe Recorded Audio
 
 The following example demonstrates how to use the Speech to Text service to transcribe a WAV audio file.
 
@@ -84,7 +84,7 @@ speechToText.recognize(audio, settings: settings, failure: failure) {
 }
 ```
 
-#### Transcribe Microphone Audio
+### Transcribe Microphone Audio
 
 Audio can be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service to transcribe microphone audio:
 
@@ -112,7 +112,7 @@ func stopStreaming() {
 }
 ```
 
-#### Session Management and Advanced Features
+### Session Management and Advanced Features
 
 Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The `SpeechToTextSession` class also allows users more control over the AVAudioSession shared instance. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://console.bluemix.net/docs/services/speech-to-text/websockets.html).
 
@@ -185,11 +185,11 @@ func stopStreaming() {
 }
 ```
 
-#### Customization
+### Customization
 
 There are a number of ways that Speech to Text can be customized to suit your particular application. For example, you can define custom words or upload audio to train an acoustic model. For more information, refer to the [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) or [API documentation](http://watson-developer-cloud.github.io/swift-sdk/swift-api/services/SpeechToTextV1/Classes/SpeechToText.html).
 
-#### Additional Information
+### Additional Information
 
 The following links provide more information about the IBM Speech to Text service:
 

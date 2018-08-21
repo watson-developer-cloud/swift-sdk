@@ -1,4 +1,4 @@
-## Natural Language Understanding
+# Natural Language Understanding
 
 The IBM Natural Language Understanding service explores various features of text content. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.
 
@@ -32,7 +32,7 @@ naturalLanguageUnderstanding.analyze(parameters: parameters, failure: failure) {
 }
 ```
 
-#### 500 errors
+### 500 errors
 Note that **you are required to include at least one feature in your request.** You will receive a 500 error if you do not include any features in your request.
 
 The following links provide more information about the Natural Language Understanding service:

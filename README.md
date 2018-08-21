@@ -12,7 +12,7 @@ The Watson Developer Cloud Swift SDK makes it easy for mobile developers to buil
 
 There are many resources to help you build your first cognitive application with the Swift SDK:
 
-- Follow the [QuickStart Guide](docs/quickstart.md)
+- Follow the [QuickStart Guide](https://watson-developer-cloud.github.io/swift-sdk/docs/quickstart)
 - Review a [Sample Application](#sample-applications)
 - Browse the [Documentation](https://watson-developer-cloud.github.io/swift-sdk/)
 
@@ -193,7 +193,7 @@ dispatchGroup.wait(timeout: .distantFuture)
 
 ## Objective-C Compatibility
 
-Please see [this tutorial](docs/objective-c.md) for more information about consuming the Watson Developer Cloud Swift SDK in an Objective-C application.
+Please see [this tutorial](https://watson-developer-cloud.github.io/swift-sdk/docs/objective-c) for more information about consuming the Watson Developer Cloud Swift SDK in an Objective-C application.
 
 ## Linux Compatibility
 

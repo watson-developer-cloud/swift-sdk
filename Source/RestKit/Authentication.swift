@@ -24,7 +24,7 @@ import Foundation
  a `RestRequest` might use one token, fail with an authentication error, then retry using a refreshed token.
  The `RestRequest` does not need to be rebuilt, but should be updated with a new token value.
  */
-internal protocol AuthenticationMethod {
+public protocol AuthenticationMethod {
 
     /**
      Authenticate a `RestRequest`.
@@ -44,31 +44,31 @@ internal protocol AuthenticationMethod {
 }
 
 /** No authentication. */
-internal class NoAuthentication: AuthenticationMethod {
-    internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
+public class NoAuthentication: AuthenticationMethod {
+    public func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
         completionHandler(request, nil)
     }
 
-    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
+    public func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
         completionHandler(request, nil)
     }
 }
 
 /** Authenticate with basic authentication. */
-internal class BasicAuthentication: AuthenticationMethod {
+public class BasicAuthentication: AuthenticationMethod {
 
-    let username: String
-    let password: String
-    var tokenURL: String?
-    var token: String?
+    public let username: String
+    public let password: String
+    public var tokenURL: String?
+    public var token: String?
 
-    init(username: String, password: String, tokenURL: String? = nil) {
+    public init(username: String, password: String, tokenURL: String? = nil) {
         self.username = username
         self.password = password
         self.tokenURL = tokenURL
     }
 
-    internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
+    public func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
         var request = request
         guard let data = (username + ":" + password).data(using: .utf8) else {
             completionHandler(nil, RestError.serializationError)
@@ -79,7 +79,7 @@ internal class BasicAuthentication: AuthenticationMethod {
         completionHandler(request, nil)
     }
 
-    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
+    public func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
         var request = request
         getToken {
             token, error in
@@ -154,24 +154,24 @@ internal class BasicAuthentication: AuthenticationMethod {
 }
 
 /** Authenticate with an API key. */
-internal class APIKeyAuthentication: AuthenticationMethod {
+public class APIKeyAuthentication: AuthenticationMethod {
 
     private let name: String
     private let key: String
     private let location: Location
 
-    internal enum Location {
+    public enum Location {
         case header
         case query
     }
 
-    internal init(name: String, key: String, location: Location) {
+    public init(name: String, key: String, location: Location) {
         self.name = name
         self.key = key
         self.location = location
     }
 
-    internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
+    public func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
         var request = request
         switch location {
         case .header: request.headerParameters[name] = key
@@ -181,27 +181,27 @@ internal class APIKeyAuthentication: AuthenticationMethod {
     }
 
     // Dummy method
-    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
+    public func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
         completionHandler(request, nil)
     }
 }
 
 /** Authenticate with a static IAM access token. */
-internal class IAMAccessToken: AuthenticationMethod {
+public class IAMAccessToken: AuthenticationMethod {
 
     private let accessToken: String
 
-    internal init(accessToken: String) {
+    public init(accessToken: String) {
         self.accessToken = accessToken
     }
 
-    internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
+    public func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
         var request = request
         request.headerParameters["Authorization"] = "Bearer \(accessToken)"
         completionHandler(request, nil)
     }
 
-    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
+    public func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
         var request = request
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         completionHandler(request, nil)
@@ -209,14 +209,14 @@ internal class IAMAccessToken: AuthenticationMethod {
 }
 
 /** Authenticate with an IAM API key. The API key is used to automatically retrieve and refresh access tokens. */
-internal class IAMAuthentication: AuthenticationMethod {
+public class IAMAuthentication: AuthenticationMethod {
 
     private let apiKey: String
     private let url: String
     private var token: IAMToken?
     private let session = URLSession(configuration: URLSessionConfiguration.default)
 
-    internal init(apiKey: String, url: String? = nil) {
+    public init(apiKey: String, url: String? = nil) {
         self.apiKey = apiKey
         if let url = url {
             self.url = url
@@ -231,7 +231,7 @@ internal class IAMAuthentication: AuthenticationMethod {
         return RestError.failure(response.statusCode, genericMessage)
     }
 
-    internal func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
+    public func authenticate(request: RestRequest, completionHandler: @escaping (RestRequest?, Error?) -> Void) {
         var request = request
         getToken { token, error in
             if let token = token {
@@ -243,7 +243,7 @@ internal class IAMAuthentication: AuthenticationMethod {
         }
     }
 
-    internal func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
+    public func authenticate(request: URLRequest, completionHandler: @escaping (URLRequest?, Error?) -> Void) {
         var request = request
         getToken { token, error in
             if let token = token {

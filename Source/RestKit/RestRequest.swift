@@ -18,9 +18,9 @@ import Foundation
 
 // MARK: - RestRequest
 
-internal struct RestRequest {
+public struct RestRequest {
 
-    internal static let userAgent: String = {
+    public static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
         let sdkVersion = "0.32.0"
 
@@ -56,7 +56,7 @@ internal struct RestRequest {
     internal var queryItems: [URLQueryItem]
     internal var messageBody: Data?
 
-    internal init(
+    public init(
         session: URLSession,
         authMethod: AuthenticationMethod,
         errorResponseDecoder: @escaping ((Data, HTTPURLResponse) -> Error),
@@ -104,7 +104,7 @@ extension RestRequest {
 
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func response(
+    public func response(
         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
         // add authentication credentials to the request
@@ -165,7 +165,7 @@ extension RestRequest {
 
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func responseData(
+    public func responseData(
         completionHandler: @escaping (RestResponse<Data>) -> Void)
     {
         // execute the request
@@ -200,7 +200,7 @@ extension RestRequest {
 
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func responseObject<T: Decodable>(
+    public func responseObject<T: Decodable>(
         completionHandler: @escaping (RestResponse<T>) -> Void)
     {
         // execute the request
@@ -243,7 +243,7 @@ extension RestRequest {
 
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func responseString(
+    public func responseString(
         completionHandler: @escaping (RestResponse<String>) -> Void)
     {
         // execute the request
@@ -286,7 +286,7 @@ extension RestRequest {
 
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func responseVoid(
+    public func responseVoid(
         completionHandler: @escaping (RestResponse<Void>) -> Void)
     {
         // execute the request
@@ -314,7 +314,7 @@ extension RestRequest {
      - to: The destination file where the response body should be saved.
      - completionHandler: The completion handler to call when the request is complete.
      */
-    internal func download(
+    public func download(
         to destination: URL,
         completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void)
     {
@@ -369,13 +369,13 @@ extension RestRequest {
     }
 }
 
-internal struct RestResponse<T> {
-    internal let response: HTTPURLResponse?
-    internal let data: Data?
-    internal let result: RestResult<T>
+public struct RestResponse<T> {
+    public let response: HTTPURLResponse?
+    public let data: Data?
+    public let result: RestResult<T>
 }
 
-internal enum RestResult<T> {
+public enum RestResult<T> {
     case success(T)
     case failure(Error)
 }

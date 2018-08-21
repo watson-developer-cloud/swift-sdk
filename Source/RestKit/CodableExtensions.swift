@@ -20,10 +20,10 @@ import Foundation
 // Extensions: JSONEncoder
 //===----------------------------------------------------------------------===//
 
-internal extension JSONEncoder {
+public extension JSONEncoder {
 
     /// Encode an optional object.
-    internal func encodeIfPresent<T: Encodable>(_ value: T?) throws -> Data {
+    public func encodeIfPresent<T: Encodable>(_ value: T?) throws -> Data {
         guard let value = value else { return Data() }
         return try encode(value)
     }
@@ -34,10 +34,10 @@ internal extension JSONEncoder {
 // Extensions: KeyedEncodingContainer<DynamicKeys>
 //===----------------------------------------------------------------------===//
 
-internal extension KeyedEncodingContainer where Key == DynamicKeys {
+public extension KeyedEncodingContainer where Key == DynamicKeys {
 
     /// Encode additional properties.
-    internal mutating func encode(_ additionalProperties: [String: JSON]) throws {
+    public mutating func encode(_ additionalProperties: [String: JSON]) throws {
         try additionalProperties.forEach { key, value in
             guard let codingKey = DynamicKeys(stringValue: key) else {
                 let description = "Cannot construct CodingKey for \(key)"
@@ -49,7 +49,7 @@ internal extension KeyedEncodingContainer where Key == DynamicKeys {
     }
 
     /// Encode additional properties if they are not nil.
-    internal mutating func encodeIfPresent(_ additionalProperties: [String: JSON]?) throws {
+    public mutating func encodeIfPresent(_ additionalProperties: [String: JSON]?) throws {
         guard let additionalProperties = additionalProperties else { return }
         try encode(additionalProperties)
     }
@@ -60,10 +60,10 @@ internal extension KeyedEncodingContainer where Key == DynamicKeys {
 // Extensions: KeyedDecodingContainer<DynamicKeys>
 //===----------------------------------------------------------------------===//
 
-internal extension KeyedDecodingContainer where Key == DynamicKeys {
+public extension KeyedDecodingContainer where Key == DynamicKeys {
 
     /// Decode additional properties.
-    internal func decode(_ type: [String: JSON].Type, excluding keys: [CodingKey]) throws -> [String: JSON] {
+    public func decode(_ type: [String: JSON].Type, excluding keys: [CodingKey]) throws -> [String: JSON] {
         let value = try JSON(from: self, excluding: keys)
         guard case let .object(object) = value else {
             let description = "Expected to decode a JSONValue.object but found \(value) instead."
@@ -81,14 +81,14 @@ internal extension KeyedDecodingContainer where Key == DynamicKeys {
 
 /// A coding key to process dynamic objects,
 /// whose keys are not known in advance.
-internal struct DynamicKeys: CodingKey {
-    internal let stringValue: String
-    internal let intValue: Int?
-    internal init?(stringValue: String) {
+public struct DynamicKeys: CodingKey {
+    public let stringValue: String
+    public let intValue: Int?
+    public init?(stringValue: String) {
         self.stringValue = stringValue
         self.intValue = nil
     }
-    internal init?(intValue: Int) {
+    public init?(intValue: Int) {
         self.stringValue = "Index \(intValue)"
         self.intValue = intValue
     }

@@ -16,8 +16,8 @@ Convert written text into natural-sounding audio in a variety of languages and v
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
 
   s.source_files          = 'Source/TextToSpeechV1/**/*.swift',
-                            'Source/SupportingFiles/Dependencies/src/**/*'
-  s.exclude_files         = 'Source/SupportingFiles/Dependencies/src/config_types.h'
+                            'Source/SupportingFiles/Dependencies/Source/**/*'
+  s.exclude_files         = '**/config_types.h'
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
@@ -26,6 +26,11 @@ Convert written text into natural-sounding audio in a variety of languages and v
                         cd Source/SupportingFiles/Dependencies/Libraries
                         mv libogg.a libogg_tts.a
                         mv libopus.a libopus_tts.a
+                        cd ../Source
+                        mv ogg/* .
+                        mv opus/* .
+                        rm -rf ogg
+                        rm -rf opus
                       CMD
 
 end

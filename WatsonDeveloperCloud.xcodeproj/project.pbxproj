@@ -442,7 +442,24 @@
 		7AB4452E1D3E647A00E8748A /* ConversationV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB445241D3E647A00E8748A /* ConversationV1.framework */; };
 		7AB445441D3E658200E8748A /* ConversationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB4451E1D3E643B00E8748A /* ConversationTests.swift */; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
-		92642508212E03CE0052224B /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 9295CF0B212DE6D4001ED754 /* opus_header.c */; };
+		92064602212E2880004ACCC9 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 920645F6212E2880004ACCC9 /* libogg.a */; };
+		92064603212E2880004ACCC9 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 920645F6212E2880004ACCC9 /* libogg.a */; };
+		92064604212E2880004ACCC9 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 920645F7212E2880004ACCC9 /* libopus.a */; };
+		92064605212E2880004ACCC9 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 920645F7212E2880004ACCC9 /* libopus.a */; };
+		92064606212E2880004ACCC9 /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 920645F9212E2880004ACCC9 /* opus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064607212E2880004ACCC9 /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 920645F9212E2880004ACCC9 /* opus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064608212E2880004ACCC9 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 920645FA212E2880004ACCC9 /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064609212E2880004ACCC9 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 920645FA212E2880004ACCC9 /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9206460B212E2880004ACCC9 /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 920645FB212E2880004ACCC9 /* opus_header.c */; };
+		9206460C212E2880004ACCC9 /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 920645FC212E2880004ACCC9 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9206460D212E2880004ACCC9 /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 920645FC212E2880004ACCC9 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064611212E2880004ACCC9 /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 920645FE212E2880004ACCC9 /* opus_header.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064612212E2880004ACCC9 /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 920645FF212E2880004ACCC9 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064613212E2880004ACCC9 /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 920645FF212E2880004ACCC9 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064614212E2880004ACCC9 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 92064600212E2880004ACCC9 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064615212E2880004ACCC9 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 92064600212E2880004ACCC9 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064616212E2880004ACCC9 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 92064601212E2880004ACCC9 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92064617212E2880004ACCC9 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 92064601212E2880004ACCC9 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92776858212C9C4800D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
 		92776859212C9C4F00D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
 		9277685A212C9C5400D6513B /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
@@ -468,24 +485,6 @@
 		928204D12124BC200013315B /* MetricAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C42124BC1F0013315B /* MetricAggregation.swift */; };
 		928204D22124BC200013315B /* MetricTokenAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C52124BC200013315B /* MetricTokenAggregation.swift */; };
 		928204D32124BC200013315B /* LogQueryResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C62124BC200013315B /* LogQueryResponseResult.swift */; };
-		9295CEEB212DD48A001ED754 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9295CEDD212DD48A001ED754 /* libogg.a */; };
-		9295CEEC212DD48A001ED754 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9295CEDD212DD48A001ED754 /* libogg.a */; };
-		9295CEED212DD48A001ED754 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9295CEDE212DD48A001ED754 /* libopus.a */; };
-		9295CEEE212DD48A001ED754 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9295CEDE212DD48A001ED754 /* libopus.a */; };
-		9295CF07212DE6C8001ED754 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF02212DE6C8001ED754 /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF08212DE6C8001ED754 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF03212DE6C8001ED754 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF09212DE6C8001ED754 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF03212DE6C8001ED754 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF10212DE6D4001ED754 /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF0A212DE6D4001ED754 /* opus.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF11212DE6D4001ED754 /* opus.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF0A212DE6D4001ED754 /* opus.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF13212DE6D4001ED754 /* opus_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 9295CF0B212DE6D4001ED754 /* opus_header.c */; };
-		9295CF14212DE6D4001ED754 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF0C212DE6D4001ED754 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF15212DE6D4001ED754 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF0C212DE6D4001ED754 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF16212DE6D4001ED754 /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF0D212DE6D4001ED754 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF17212DE6D4001ED754 /* opus_multistream.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF0D212DE6D4001ED754 /* opus_multistream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF19212DE6D4001ED754 /* opus_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF0E212DE6D4001ED754 /* opus_header.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF1A212DE6D4001ED754 /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF0F212DE6D4001ED754 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF1B212DE6D4001ED754 /* opus_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF0F212DE6D4001ED754 /* opus_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9295CF1C212DE6F9001ED754 /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 9295CF02212DE6C8001ED754 /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92AB08D1212B325A00B7AC25 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AB08C8212B325A00B7AC25 /* RestKit.framework */; };
 		92AB08E0212B32A900B7AC25 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6836B8FD2091D1AF006DF944 /* Authentication.swift */; };
 		92AB08E1212B32AB00B7AC25 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B213E71F84296D0052DC00 /* CodableExtensions.swift */; };
@@ -1180,6 +1179,17 @@
 		7AB445241D3E647A00E8748A /* ConversationV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ConversationV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB4452D1D3E647A00E8748A /* ConversationV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConversationV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AD240081DC7B4360002FEB5 /* MultipartFormData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipartFormData.swift; sourceTree = "<group>"; };
+		920645F6212E2880004ACCC9 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
+		920645F7212E2880004ACCC9 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
+		920645F9212E2880004ACCC9 /* opus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
+		920645FA212E2880004ACCC9 /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
+		920645FB212E2880004ACCC9 /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opus_header.c; sourceTree = "<group>"; };
+		920645FC212E2880004ACCC9 /* opus_multistream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_multistream.h; sourceTree = "<group>"; };
+		920645FD212E2880004ACCC9 /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config_types.h; sourceTree = "<group>"; };
+		920645FE212E2880004ACCC9 /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_header.h; sourceTree = "<group>"; };
+		920645FF212E2880004ACCC9 /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
+		92064600212E2880004ACCC9 /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
+		92064601212E2880004ACCC9 /* opus_defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
 		928204BA2124BC1B0013315B /* CreateEventObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventObject.swift; sourceTree = "<group>"; };
 		928204BB2124BC1C0013315B /* MetricAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregationResult.swift; sourceTree = "<group>"; };
 		928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregationResult.swift; sourceTree = "<group>"; };
@@ -1193,17 +1203,6 @@
 		928204C42124BC1F0013315B /* MetricAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregation.swift; sourceTree = "<group>"; };
 		928204C52124BC200013315B /* MetricTokenAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregation.swift; sourceTree = "<group>"; };
 		928204C62124BC200013315B /* LogQueryResponseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueryResponseResult.swift; sourceTree = "<group>"; };
-		9295CEDD212DD48A001ED754 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
-		9295CEDE212DD48A001ED754 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
-		9295CF01212DE6C8001ED754 /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config_types.h; path = Source/SupportingFiles/AudioCodec/src/config_types.h; sourceTree = SOURCE_ROOT; };
-		9295CF02212DE6C8001ED754 /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ogg.h; path = Source/SupportingFiles/AudioCodec/src/ogg.h; sourceTree = SOURCE_ROOT; };
-		9295CF03212DE6C8001ED754 /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = os_types.h; path = Source/SupportingFiles/AudioCodec/src/os_types.h; sourceTree = SOURCE_ROOT; };
-		9295CF0A212DE6D4001ED754 /* opus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opus.h; path = Source/SupportingFiles/AudioCodec/src/opus.h; sourceTree = SOURCE_ROOT; };
-		9295CF0B212DE6D4001ED754 /* opus_header.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = opus_header.c; path = Source/SupportingFiles/AudioCodec/src/opus_header.c; sourceTree = SOURCE_ROOT; };
-		9295CF0C212DE6D4001ED754 /* opus_defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opus_defines.h; path = Source/SupportingFiles/AudioCodec/src/opus_defines.h; sourceTree = SOURCE_ROOT; };
-		9295CF0D212DE6D4001ED754 /* opus_multistream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opus_multistream.h; path = Source/SupportingFiles/AudioCodec/src/opus_multistream.h; sourceTree = SOURCE_ROOT; };
-		9295CF0E212DE6D4001ED754 /* opus_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opus_header.h; path = Source/SupportingFiles/AudioCodec/src/opus_header.h; sourceTree = SOURCE_ROOT; };
-		9295CF0F212DE6D4001ED754 /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opus_types.h; path = Source/SupportingFiles/AudioCodec/src/opus_types.h; sourceTree = SOURCE_ROOT; };
 		92AB08C8212B325A00B7AC25 /* RestKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RestKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92AB08D0212B325A00B7AC25 /* RestKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RestKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
@@ -1308,8 +1307,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				92776861212C9C7A00D6513B /* RestKit.framework in Frameworks */,
-				9295CEEC212DD48A001ED754 /* libogg.a in Frameworks */,
-				9295CEEE212DD48A001ED754 /* libopus.a in Frameworks */,
+				92064603212E2880004ACCC9 /* libogg.a in Frameworks */,
+				92064605212E2880004ACCC9 /* libopus.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1407,8 +1406,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				92776860212C9C7400D6513B /* RestKit.framework in Frameworks */,
-				9295CEEB212DD48A001ED754 /* libogg.a in Frameworks */,
-				9295CEED212DD48A001ED754 /* libopus.a in Frameworks */,
+				92064602212E2880004ACCC9 /* libogg.a in Frameworks */,
+				92064604212E2880004ACCC9 /* libopus.a in Frameworks */,
 				68A0EEE82006D25400E58658 /* Starscream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1992,7 +1991,7 @@
 		7A6117231CB596E0009A4DA1 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				9295CEDB212DD48A001ED754 /* AudioCodec */,
+				920645F4212E2880004ACCC9 /* Dependencies */,
 				6800FC9C2056D7340078788A /* AssistantV1.h */,
 				7A1F486A1D47AF7E00971377 /* ConversationV1.h */,
 				12F800421DF71921006851D6 /* DiscoveryV1.h */,
@@ -2345,55 +2344,55 @@
 			path = ../../Tests/ConversationV1Tests;
 			sourceTree = "<group>";
 		};
-		92642509212E03DC0052224B /* ogg */ = {
+		920645F4212E2880004ACCC9 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				9295CF01212DE6C8001ED754 /* config_types.h */,
-				9295CF02212DE6C8001ED754 /* ogg.h */,
-				9295CF03212DE6C8001ED754 /* os_types.h */,
+				920645F5212E2880004ACCC9 /* Libraries */,
+				920645F8212E2880004ACCC9 /* Source */,
 			);
-			name = ogg;
+			name = Dependencies;
+			path = Source/SupportingFiles/Dependencies;
 			sourceTree = "<group>";
 		};
-		9264250B212E03E90052224B /* opus */ = {
+		920645F5212E2880004ACCC9 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				9295CF0C212DE6D4001ED754 /* opus_defines.h */,
-				9295CF0B212DE6D4001ED754 /* opus_header.c */,
-				9295CF0E212DE6D4001ED754 /* opus_header.h */,
-				9295CF0D212DE6D4001ED754 /* opus_multistream.h */,
-				9295CF0F212DE6D4001ED754 /* opus_types.h */,
-				9295CF0A212DE6D4001ED754 /* opus.h */,
+				920645F6212E2880004ACCC9 /* libogg.a */,
+				920645F7212E2880004ACCC9 /* libopus.a */,
 			);
-			name = opus;
+			path = Libraries;
 			sourceTree = "<group>";
 		};
-		9295CEDB212DD48A001ED754 /* AudioCodec */ = {
+		920645F8212E2880004ACCC9 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				9295CEDC212DD48A001ED754 /* lib */,
-				9295CEDF212DD48A001ED754 /* src */,
+				92064619212E298B004ACCC9 /* opus */,
+				92064618212E2971004ACCC9 /* ogg */,
 			);
-			name = AudioCodec;
-			path = Source/SupportingFiles/AudioCodec;
+			path = Source;
 			sourceTree = "<group>";
 		};
-		9295CEDC212DD48A001ED754 /* lib */ = {
+		92064618212E2971004ACCC9 /* ogg */ = {
 			isa = PBXGroup;
 			children = (
-				9295CEDD212DD48A001ED754 /* libogg.a */,
-				9295CEDE212DD48A001ED754 /* libopus.a */,
+				920645FD212E2880004ACCC9 /* config_types.h */,
+				920645FA212E2880004ACCC9 /* ogg.h */,
+				92064600212E2880004ACCC9 /* os_types.h */,
 			);
-			path = lib;
+			path = ogg;
 			sourceTree = "<group>";
 		};
-		9295CEDF212DD48A001ED754 /* src */ = {
+		92064619212E298B004ACCC9 /* opus */ = {
 			isa = PBXGroup;
 			children = (
-				9264250B212E03E90052224B /* opus */,
-				92642509212E03DC0052224B /* ogg */,
+				92064601212E2880004ACCC9 /* opus_defines.h */,
+				920645FB212E2880004ACCC9 /* opus_header.c */,
+				920645FE212E2880004ACCC9 /* opus_header.h */,
+				920645FC212E2880004ACCC9 /* opus_multistream.h */,
+				920645FF212E2880004ACCC9 /* opus_types.h */,
+				920645F9212E2880004ACCC9 /* opus.h */,
 			);
-			path = src;
+			path = opus;
 			sourceTree = "<group>";
 		};
 		B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */ = {
@@ -2488,14 +2487,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9295CF11212DE6D4001ED754 /* opus.h in Headers */,
-				9295CF07212DE6C8001ED754 /* ogg.h in Headers */,
-				9295CF1B212DE6D4001ED754 /* opus_types.h in Headers */,
-				9295CF19212DE6D4001ED754 /* opus_header.h in Headers */,
-				9295CF09212DE6C8001ED754 /* os_types.h in Headers */,
-				9295CF15212DE6D4001ED754 /* opus_defines.h in Headers */,
+				92064613212E2880004ACCC9 /* opus_types.h in Headers */,
+				92064609212E2880004ACCC9 /* ogg.h in Headers */,
+				92064611212E2880004ACCC9 /* opus_header.h in Headers */,
+				9206460D212E2880004ACCC9 /* opus_multistream.h in Headers */,
 				124C2E241D19E31600D9F602 /* TextToSpeechV1.h in Headers */,
-				9295CF17212DE6D4001ED754 /* opus_multistream.h in Headers */,
+				92064615212E2880004ACCC9 /* os_types.h in Headers */,
+				92064617212E2880004ACCC9 /* opus_defines.h in Headers */,
+				92064607212E2880004ACCC9 /* opus.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2543,13 +2542,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9295CF1C212DE6F9001ED754 /* ogg.h in Headers */,
-				9295CF10212DE6D4001ED754 /* opus.h in Headers */,
-				9295CF1A212DE6D4001ED754 /* opus_types.h in Headers */,
-				9295CF08212DE6C8001ED754 /* os_types.h in Headers */,
-				9295CF14212DE6D4001ED754 /* opus_defines.h in Headers */,
+				92064612212E2880004ACCC9 /* opus_types.h in Headers */,
+				92064608212E2880004ACCC9 /* ogg.h in Headers */,
+				9206460C212E2880004ACCC9 /* opus_multistream.h in Headers */,
 				7AAAF5BE1CEEA6C000B74848 /* SpeechToTextV1.h in Headers */,
-				9295CF16212DE6D4001ED754 /* opus_multistream.h in Headers */,
+				92064614212E2880004ACCC9 /* os_types.h in Headers */,
+				92064616212E2880004ACCC9 /* opus_defines.h in Headers */,
+				92064606212E2880004ACCC9 /* opus.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3900,7 +3899,7 @@
 				12F1405B1EB2410400D4047D /* TextToSpeechDecoder.swift in Sources */,
 				689A170F203CCDA9002CFC66 /* Voice.swift in Sources */,
 				689A1708203CCDA9002CFC66 /* Translation.swift in Sources */,
-				9295CF13212DE6D4001ED754 /* opus_header.c in Sources */,
+				9206460B212E2880004ACCC9 /* opus_header.c in Sources */,
 				689A170E203CCDA9002CFC66 /* Word.swift in Sources */,
 				124C2E221D19E2FA00D9F602 /* TextToSpeech.swift in Sources */,
 			);
@@ -4263,7 +4262,6 @@
 				68F7FF09207D458900E84DBF /* SpeechRecognitionResult.swift in Sources */,
 				68F7FF14207D458900E84DBF /* Words.swift in Sources */,
 				68F7FF23207D47BD00E84DBF /* WordConfidence.swift in Sources */,
-				92642508212E03CE0052224B /* opus_header.c in Sources */,
 				68F7FEFE207D458900E84DBF /* CreateLanguageModel.swift in Sources */,
 				68F7FF0A207D458900E84DBF /* SpeechModels.swift in Sources */,
 				68F7FF06207D458900E84DBF /* AudioDetails.swift in Sources */,
@@ -4644,6 +4642,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Source/SupportingFiles/AudioCodec/lib",
+					"$(PROJECT_DIR)/Source/SupportingFiles/Dependencies/Libraries",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4671,6 +4670,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Source/SupportingFiles/AudioCodec/lib",
+					"$(PROJECT_DIR)/Source/SupportingFiles/Dependencies/Libraries",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.TextToSpeechV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5207,6 +5207,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Source/SupportingFiles/AudioCodec/lib",
+					"$(PROJECT_DIR)/Source/SupportingFiles/Dependencies/Libraries",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5237,6 +5238,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Source/SupportingFiles/AudioCodec/lib",
+					"$(PROJECT_DIR)/Source/SupportingFiles/Dependencies/Libraries",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.SpeechToTextV1";
 				PRODUCT_NAME = "$(TARGET_NAME)";

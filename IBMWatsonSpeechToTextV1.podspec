@@ -16,10 +16,10 @@ Easily convert audio and voice into written text for quick understanding of cont
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
   
   s.source_files          = 'Source/SpeechToTextV1/**/*.swift',
-                            'Source/SupportingFiles/Dependencies/src/**/*'
-  s.exclude_files         = 'Source/SupportingFiles/Dependencies/src/config_types.h',
-                            'Source/SupportingFiles/Dependencies/src/opus_header.h',
-                            'Source/SupportingFiles/Dependencies/src/opus_header.c'
+                            'Source/SupportingFiles/Dependencies/Source/**/*'
+  s.exclude_files         = '**/config_types.h',
+                            '**/opus_header.h',
+                            '**/opus_header.c'
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s
   s.dependency              'Starscream', '~> 3.0'
@@ -29,6 +29,11 @@ Easily convert audio and voice into written text for quick understanding of cont
                         cd Source/SupportingFiles/Dependencies/Libraries
                         mv libogg.a libogg_stt.a
                         mv libopus.a libopus_stt.a
+                        cd ../Source
+                        mv ogg/* .
+                        mv opus/* .
+                        rm -rf ogg
+                        rm -rf opus
                       CMD
 
 end

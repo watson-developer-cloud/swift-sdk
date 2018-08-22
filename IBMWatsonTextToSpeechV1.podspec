@@ -20,6 +20,12 @@ Convert written text into natural-sounding audio in a variety of languages and v
   s.exclude_files         = 'Source/SupportingFiles/Dependencies/src/config_types.h'
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s
-  s.vendored_libraries    = 'Source/TextToSpeechV1/Dependencies/*.a'
+  s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
+
+  s.prepare_command = <<-CMD
+                        cd Source/SupportingFiles/Dependencies/Libraries
+                        mv libogg.a libogg_tts.a
+                        mv libopus.a libopus_tts.a
+                      CMD
 
 end

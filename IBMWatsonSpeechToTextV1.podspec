@@ -23,6 +23,12 @@ Easily convert audio and voice into written text for quick understanding of cont
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s
   s.dependency              'Starscream', '~> 3.0'
-  s.vendored_libraries    = 'Source/SpeechToTextV1/Dependencies/*.a'
+  s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
+
+  s.prepare_command = <<-CMD
+                        cd Source/SupportingFiles/Dependencies/Libraries
+                        mv libogg.a libogg_stt.a
+                        mv libopus.a libopus_stt.a
+                      CMD
 
 end

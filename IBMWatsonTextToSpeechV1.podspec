@@ -13,16 +13,13 @@ Convert written text into natural-sounding audio in a variety of languages and v
 
   s.module_name           = 'TextToSpeech'
   s.ios.deployment_target = '8.0'
-
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+
   s.source_files          = 'Source/TextToSpeechV1/**/*.swift',
-                            'Source/SupportingFiles/Dependencies/**/*.{c,h}',
-                            'Source/SupportingFiles/TextToSpeechV1.h',
+                            'Source/SupportingFiles/Dependencies/src/**/*'
   s.exclude_files         = 'Source/SupportingFiles/Dependencies/src/config_types.h'
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s
   s.vendored_libraries    = 'Source/TextToSpeechV1/Dependencies/*.a'
-  s.public_header_files   = 'Source/SupportingFiles/TextToSpeechV1.h', 
-                            'Source/SupportingFiles/Dependencies/**/*.h'
 
 end

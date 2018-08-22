@@ -14,8 +14,8 @@ with the world’s most advanced cloud-native insight engine.
 
   s.module_name           = 'Discovery'
   s.ios.deployment_target = '8.0'
-
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+  
   s.source_files          = 'Source/DiscoveryV1/**/*.swift'
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s

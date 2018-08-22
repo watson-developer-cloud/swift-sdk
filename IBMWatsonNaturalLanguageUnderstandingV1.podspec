@@ -13,8 +13,8 @@ Natural language processing for advanced text analysis.
 
   s.module_name           = 'NaturalLanguageUnderstanding'
   s.ios.deployment_target = '8.0'
-
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+  
   s.source_files          = 'Source/NaturalLanguageUnderstandingV1/**/*.swift'
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s

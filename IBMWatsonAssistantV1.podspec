@@ -13,8 +13,8 @@ Build an AI assistant for a variety of channels, including mobile devices, messa
 
   s.module_name           = 'Assistant'
   s.ios.deployment_target = '8.0'
-
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+  
   s.source_files          = 'Source/AssistantV1/**/*.swift'
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s

@@ -14,8 +14,8 @@ communicate with your customers in their own language, and more.
 
   s.module_name           = 'LanguageTranslator'
   s.ios.deployment_target = '8.0'
-
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+
   s.source_files          = 'Source/LanguageTranslatorV3/**/*.swift'
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s

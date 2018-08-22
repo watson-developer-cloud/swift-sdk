@@ -17,13 +17,14 @@ Easily convert audio and voice into written text for quick understanding of cont
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
   s.source_files          = 'Source/SpeechToTextV1/**/*.swift',
                             'Source/SupportingFiles/Dependencies/**/*.{c,h}',
-                            'Source/SupportingFiles/SpeechToTextV1.h'
-  s.exclude_files         = 'Source/SupportingFiles/Dependencies/ogg/config_types.h',
-                            'Source/SupportingFiles/Dependencies/opus/opus_header.{h,c}'
+                            'Source/SupportingFiles/SpeechToTextV1.h',
+  s.exclude_files         = 'Source/SupportingFiles/Dependencies/src/config_types.h',
+                            'Source/SupportingFiles/Dependencies/src/opus_header.h',
+                            'Source/SupportingFiles/Dependencies/src/opus_header.c'
 
   s.dependency              'IBMWatsonRestKit', s.version.to_s
   s.dependency              'Starscream', '~> 3.0'
-  s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/lib/*.a'
+  s.vendored_libraries    = 'Source/SpeechToTextV1/Dependencies/*.a'
   s.public_header_files   = 'Source/SupportingFiles/SpeechToTextV1.h', 
                             'Source/SupportingFiles/Dependencies/**/*.h'
 

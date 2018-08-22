@@ -52,6 +52,7 @@ for service in ${services[@]}; do
   mkdir ${outdir}/services/${service}
   xcodebuild_arguments=-project,WatsonDeveloperCloud.xcodeproj,-scheme,${service}
   jazzy \
+    --module ${service} \
     --xcodebuild-arguments $xcodebuild_arguments \
     --output ${outdir}/services/${service} \
     --clean \

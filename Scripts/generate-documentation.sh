@@ -52,10 +52,13 @@ for service in ${services[@]}; do
   mkdir ${outdir}/services/${service}
   xcodebuild_arguments=-project,WatsonDeveloperCloud.xcodeproj,-scheme,${service}
   jazzy \
+    --module ${service} \
     --xcodebuild-arguments $xcodebuild_arguments \
     --output ${outdir}/services/${service} \
     --clean \
-    --github_url https://github.com/watson-developer-cloud/ios-sdk \
+    --readme Source/${service}/README.md \
+    --documentation README.md \
+    --github_url https://github.com/watson-developer-cloud/swift-sdk \
     --hide-documentation-coverage
 done
 
@@ -63,12 +66,16 @@ done
 # Generate index.html and copy supporting files
 ################################################################################
 
-cp Scripts/generate-documentation-resources/index-prefix ${outdir}/index.html
-for service in ${services[@]}; do
-  html="<li><a target="_blank" href="./services/${service}/index.html">${service}</a></li>"
-  echo ${html} >> ${outdir}/index.html
-done
-cat Scripts/generate-documentation-resources/index-postfix >> ${outdir}/index.html
+(
+  version=$(git describe --tags)
+  cat Scripts/generate-documentation-resources/index-prefix | sed "s/SDK_VERSION/$version/"
+  for service in ${services[@]}; do
+    echo "<li><a target="_blank" href="./services/${service}/index.html">${service}</a></li>"
+  done
+  echo -e "          </section>\n        </section>"
+  sed -n '/<section id="footer">/,/<\/section>/p' ${outdir}/services/${services[0]}/index.html
+  cat Scripts/generate-documentation-resources/index-postfix
+) > ${outdir}/index.html
 
 cp -r Scripts/generate-documentation-resources/* ${outdir}
 rm ${outdir}/index-prefix ${outdir}/index-postfix
@@ -77,22 +84,20 @@ rm ${outdir}/index-prefix ${outdir}/index-postfix
 # Collect undocumented.json files
 ################################################################################
 
-touch ${outdir}/undocumented.json
-echo "[" >> ${outdir}/undocumented.json
-
 declare -a undocumenteds
 undocumenteds=($(ls -r ${outdir}/services/*/undocumented.json))
 
-if [ ${#undocumenteds[@]} -gt 0 ]; then
-  echo -e -n "\t" >> ${outdir}/undocumented.json
-  cat "${undocumenteds[0]}" >> ${outdir}/undocumented.json
-  unset undocumenteds[0]
-  for f in "${undocumenteds[@]}"; do
-    echo "," >> ${outdir}/undocumented.json
-    echo -e -n "\t" >> ${outdir}/undocumented.json
-    cat "$f" >> ${outdir}/undocumented.json
-  done
-fi
-
-echo "" >> ${outdir}/undocumented.json
-echo "]" >> ${outdir}/undocumented.json
+(
+  echo "["
+  if [ ${#undocumenteds[@]} -gt 0 ]; then
+    echo -e -n "\t"
+    cat "${undocumenteds[0]}"
+    unset undocumenteds[0]
+    for f in "${undocumenteds[@]}"; do
+      echo ","
+      echo -e -n "\t"
+      cat "$f"
+    done
+  fi
+  echo -e "\n]"
+) > ${outdir}/undocumented.json

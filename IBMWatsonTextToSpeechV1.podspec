@@ -22,6 +22,9 @@ Convert written text into natural-sounding audio in a variety of languages and v
   s.dependency              'IBMWatsonRestKit', '1.0.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 
+  # The renaming of libogg.a and libopus.a is done to avoid duplicate library name errors
+  # in case SpeechToText is being installed in the same app (which also includes libogg and libopus) 
+  # The ogg/ and opus/ files are flattened to the same directory so that all #include statements work
   s.prepare_command = <<-CMD
                         cd Source/SupportingFiles/Dependencies/Libraries
                         mv libogg.a libogg_tts.a

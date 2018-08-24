@@ -3,7 +3,7 @@ import XCTest
 @testable import AssistantV1Tests
 @testable import ConversationV1Tests
 @testable import DiscoveryV1Tests
-@testable import LanguageTranslatorV2Tests
+@testable import LanguageTranslatorV3Tests
 @testable import NaturalLanguageClassifierV1Tests
 @testable import NaturalLanguageUnderstandingV1Tests
 @testable import PersonalityInsightsV3Tests

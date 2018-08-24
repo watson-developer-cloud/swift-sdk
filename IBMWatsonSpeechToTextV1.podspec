@@ -25,6 +25,9 @@ Easily convert audio and voice into written text for quick understanding of cont
   s.dependency              'Starscream', '~> 3.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 
+  # The renaming of libogg.a and libopus.a is done to avoid duplicate library name errors
+  # in case TextToSpeech is being installed in the same app (which also includes libogg and libopus) 
+  # The ogg/ and opus/ files are flattened to the same directory so that all #include statements work
   s.prepare_command = <<-CMD
                         cd Source/SupportingFiles/Dependencies/Libraries
                         mv libogg.a libogg_stt.a

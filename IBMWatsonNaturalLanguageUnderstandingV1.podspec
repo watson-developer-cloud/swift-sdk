@@ -17,6 +17,6 @@ Natural language processing for advanced text analysis.
   
   s.source_files          = 'Source/NaturalLanguageUnderstandingV1/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
   
 end

@@ -18,6 +18,6 @@ Understand your customers’ habits and preferences on an individual level, and 
 
   s.source_files          = 'Source/PersonalityInsightsV3/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
   
 end

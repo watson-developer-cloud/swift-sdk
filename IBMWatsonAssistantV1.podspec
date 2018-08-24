@@ -17,6 +17,6 @@ Build an AI assistant for a variety of channels, including mobile devices, messa
   
   s.source_files          = 'Source/AssistantV1/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
   
 end

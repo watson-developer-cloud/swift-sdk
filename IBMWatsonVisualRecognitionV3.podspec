@@ -17,6 +17,6 @@ Quickly and accurately tag, classify and train visual content using machine lear
   
   s.source_files          = 'Source/VisualRecognitionV3/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
   
 end

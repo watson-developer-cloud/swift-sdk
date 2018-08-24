@@ -19,7 +19,7 @@ Convert written text into natural-sounding audio in a variety of languages and v
                             'Source/SupportingFiles/Dependencies/Source/**/*'
   s.exclude_files         = '**/config_types.h'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 
   s.prepare_command = <<-CMD

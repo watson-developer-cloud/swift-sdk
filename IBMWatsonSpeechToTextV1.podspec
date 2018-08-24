@@ -21,7 +21,7 @@ Easily convert audio and voice into written text for quick understanding of cont
                             '**/opus_header.h',
                             '**/opus_header.c'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
   s.dependency              'Starscream', '~> 3.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 

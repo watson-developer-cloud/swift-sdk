@@ -18,6 +18,6 @@ communicate with your customers in their own language, and more.
 
   s.source_files          = 'Source/LanguageTranslatorV3/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
 
 end

@@ -17,6 +17,6 @@ Interpret and classify natural language with confidence.
   
   s.source_files          = 'Source/NaturalLanguageClassifierV1/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
   
 end

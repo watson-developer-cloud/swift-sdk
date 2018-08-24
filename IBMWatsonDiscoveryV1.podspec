@@ -18,6 +18,6 @@ with the world’s most advanced cloud-native insight engine.
   
   s.source_files          = 'Source/DiscoveryV1/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
   
 end

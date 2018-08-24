@@ -17,6 +17,6 @@ Understand emotions and communication style in text.
   
   s.source_files          = 'Source/ToneAnalyzerV3/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', s.version.to_s
+  s.dependency              'IBMWatsonRestKit', '1.0.0'
 
 end

@@ -50,7 +50,7 @@ extension SpeechToText {
     {
         do {
             let data = try Data(contentsOf: audio)
-            recognize(
+            recognizeUsingWebSocket(
                 audio: data,
                 settings: settings,
                 model: model,

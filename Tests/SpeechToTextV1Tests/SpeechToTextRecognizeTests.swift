@@ -207,7 +207,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             let audio = try Data(contentsOf: file)
 
             let settings = RecognitionSettings(contentType: format)
-            speechToText.recognize(audio: audio, settings: settings, failure: failWithError) { results in
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, failure: failWithError) { results in
                 self.validateSTTResults(results: results, settings: settings)
                 XCTAssertNotNil(results.results)
                 XCTAssertEqual(results.results!.count, 1)
@@ -263,7 +263,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             settings.filterProfanity = false
             settings.smartFormatting = true
 
-            speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
                 self.validateSTTResults(results: results, settings: settings)
                 if results.results?.last?.finalResults == true {
                     let transcript = results.results!.last?.alternatives.last?.transcript
@@ -308,7 +308,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         var settings = RecognitionSettings(contentType: format)
         settings.smartFormatting = true
 
-        speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+        speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
             if results.results!.last?.finalResults == true {
@@ -356,7 +356,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             settings.filterProfanity = false
             settings.speakerLabels = true
 
-            speechToText.recognize(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true, failure: failWithError) { results in
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true, failure: failWithError) { results in
                 XCTAssertNotNil(results.speakerLabels)
                 if !expectationFulfilled && results.speakerLabels!.count > 0 {
                     self.validateSTTSpeakerLabels(speakerLabels: results.speakerLabels!)

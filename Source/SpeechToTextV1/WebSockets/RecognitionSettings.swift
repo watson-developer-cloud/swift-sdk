@@ -33,6 +33,11 @@ public struct RecognitionSettings: Encodable {
     /// https://console.bluemix.net/docs/services/speech-to-text/input.html#formats
     public var contentType: String
 
+    /// If you specify a customization ID when you open the connection, you can use the customization
+    /// weight to tell the service how much weight to give to words from the custom language model
+    /// compared to those from the base model for the current request.
+    public var customizationWeight: Double?
+
     /// The number of seconds after which the connection is to time out due to inactivity.
     /// Use `-1` to set the timeout to infinity. The default is `30` seconds.
     public var inactivityTimeout: Int?
@@ -101,6 +106,7 @@ public struct RecognitionSettings: Encodable {
     private enum CodingKeys: String, CodingKey {
         case action = "action"
         case contentType = "content-type"
+        case customizationWeight = "customization_weight"
         case inactivityTimeout = "inactivity_timeout"
         case keywords = "keywords"
         case keywordsThreshold = "keywords_threshold"

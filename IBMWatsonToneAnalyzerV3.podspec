@@ -4,7 +4,8 @@ Pod::Spec.new do |s|
   s.version               = '0.33.0'
   s.summary               = 'Client framework for the IBM Watson Tone Analyzer service'
   s.description           = <<-DESC
-Understand emotions and communication style in text.
+IBM Watson™ Tone Analyzer uses linguistic analysis to detect emotional and language tones in written text. 
+The service can analyze tone at both the document and sentence levels.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/tone-analyzer/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }

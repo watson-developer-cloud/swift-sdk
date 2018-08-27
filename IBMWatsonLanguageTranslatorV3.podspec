@@ -4,8 +4,7 @@ Pod::Spec.new do |s|
   s.version               = '0.33.0'
   s.summary               = 'Client framework for the IBM Watson Language Translator service'
   s.description           = <<-DESC
-Translate text from one language to another. Take news from across the globe and present it in your language, 
-communicate with your customers in their own language, and more.
+IBM Watson™ Language Translator can identify the language of text and translate it into different languages programmatically.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/language-translator/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }

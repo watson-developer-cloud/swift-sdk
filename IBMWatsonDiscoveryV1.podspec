@@ -4,8 +4,9 @@ Pod::Spec.new do |s|
   s.version               = '0.33.0'
   s.summary               = 'Client framework for the IBM Watson Discovery service'
   s.description           = <<-DESC
-Unlock hidden value in data to find answers, monitor trends and surface patterns 
-with the world’s most advanced cloud-native insight engine.
+IBM Watson™ Discovery makes it possible to rapidly build cognitive, cloud-based exploration applications 
+that unlock actionable insights hidden in unstructured data — including your own proprietary data, 
+as well as public and third-party data.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/discovery/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }

@@ -4,8 +4,8 @@ Pod::Spec.new do |s|
   s.version               = '0.33.0'
   s.summary               = 'Client framework for the IBM Watson Personality Insights service'
   s.description           = <<-DESC
-Predict personality characteristics, needs and values through written text. 
-Understand your customers’ habits and preferences on an individual level, and at scale.
+IBM Watson™ Personality Insights uses linguistic analytics to infer individuals' intrinsic personality characteristics 
+from digital communications such as email, text messages, tweets, and forum posts.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/personality-insights/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }

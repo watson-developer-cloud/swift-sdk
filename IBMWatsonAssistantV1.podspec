@@ -4,7 +4,8 @@ Pod::Spec.new do |s|
   s.version               = '0.33.0'
   s.summary               = 'iOS framework for the IBM Watson Assistant service'
   s.description           = <<-DESC
-Build an AI assistant for a variety of channels, including mobile devices, messaging platforms, and even robots.
+With the IBM Watson™ Assistant service, you can build a solution that understands 
+natural-language input and uses machine learning to respond to customers in a way that simulates a conversation between humans.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/ai-assistant/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }

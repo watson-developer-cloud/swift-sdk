@@ -4,7 +4,8 @@ Pod::Spec.new do |s|
   s.version               = '0.33.0'
   s.summary               = 'Client framework for the IBM Watson Natural Language Understanding service'
   s.description           = <<-DESC
-Natural language processing for advanced text analysis.
+IBM Watson™ Natural Language Understanding can analyze semantic features of text input, 
+including categories, concepts, emotion, entities, keywords, metadata, relations, semantic roles, and sentiment.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/natural-language-understanding/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }

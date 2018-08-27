@@ -4,7 +4,9 @@ Pod::Spec.new do |s|
   s.version               = '0.33.0'
   s.summary               = 'Client framework for the IBM Watson Natural Language Classifier service'
   s.description           = <<-DESC
-Interpret and classify natural language with confidence.
+Natural Language Classifier can help your application understand the language of short texts and 
+make predictions about how to handle them. A classifier learns from your example data and then can 
+return information for texts that it is not trained on.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/natural-language-classifier/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }

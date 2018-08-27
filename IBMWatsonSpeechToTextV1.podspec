@@ -4,7 +4,9 @@ Pod::Spec.new do |s|
   s.version               = '0.33.0'
   s.summary               = 'Client framework for the IBM Watson Speech to Text service'
   s.description           = <<-DESC
-Easily convert audio and voice into written text for quick understanding of content.
+The IBM® Speech to Text leverages machine intelligence to transcribe the human voice accurately. 
+The service combines information about grammar and language structure with knowledge of the composition 
+of the audio signal. It continuously returns and retroactively updates a transcription as more speech is heard.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/speech-to-text/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }

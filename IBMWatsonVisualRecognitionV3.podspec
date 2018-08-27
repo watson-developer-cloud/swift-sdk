@@ -4,7 +4,8 @@ Pod::Spec.new do |s|
   s.version               = '0.33.0'
   s.summary               = 'Client framework for the IBM Watson Visual Recognition service'
   s.description           = <<-DESC
-Quickly and accurately tag, classify and train visual content using machine learning.
+IBM Watson™ Visual Recognition uses deep learning algorithms to analyze images for 
+scenes, objects, faces, and other content. The response includes keywords that provide information about the content.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/visual-recognition/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }

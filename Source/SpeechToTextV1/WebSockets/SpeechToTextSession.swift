@@ -86,6 +86,7 @@ public class SpeechToTextSession {
             url: websocketsURL,
             model: model,
             customizationID: customizationID,
+            acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut
         )!
         var socket = SpeechToTextSocket(
@@ -111,12 +112,19 @@ public class SpeechToTextSession {
     private let authMethod: AuthenticationMethod
     private let model: String?
     private let customizationID: String?
+    private let acousticCustomizationID: String?
     private let learningOptOut: Bool?
 
-    internal init(authMethod: AuthenticationMethod, model: String? = nil, customizationID: String? = nil, learningOptOut: Bool? = nil) {
+    internal init(authMethod: AuthenticationMethod,
+                  model: String? = nil,
+                  customizationID: String? = nil,
+                  acousticCustomizationID: String? = nil,
+                  learningOptOut: Bool? = nil)
+    {
         self.authMethod = authMethod
         self.model = model
         self.customizationID = customizationID
+        self.acousticCustomizationID = acousticCustomizationID
         self.learningOptOut = learningOptOut
 
         recorder = SpeechToTextRecorder()
@@ -138,11 +146,15 @@ public class SpeechToTextSession {
      - parameter customizationID: The GUID of a custom language model that is to be used with the
         request. The base language model of the specified custom language model must match the
         model specified with the `model` parameter. By default, no custom model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
+       that is to be used with the recognition request. The base model of the specified custom
+       acoustic model must match the model specified with the `model` parameter. By default, no
+       custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      */
-    public convenience init(username: String, password: String, model: String? = nil, customizationID: String? = nil, learningOptOut: Bool? = nil) {
+    public convenience init(username: String, password: String, model: String? = nil, customizationID: String? = nil, acousticCustomizationID: String?, learningOptOut: Bool? = nil) {
         let authMethod = BasicAuthentication(username: username, password: password)
-        self.init(authMethod: authMethod, model: model, customizationID: customizationID, learningOptOut: learningOptOut)
+        self.init(authMethod: authMethod, model: model, customizationID: customizationID, acousticCustomizationID: acousticCustomizationID, learningOptOut: learningOptOut)
     }
 
     /**
@@ -155,11 +167,15 @@ public class SpeechToTextSession {
      - parameter customizationID: The GUID of a custom language model that is to be used with the
      request. The base language model of the specified custom language model must match the
      model specified with the `model` parameter. By default, no custom model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
+       that is to be used with the recognition request. The base model of the specified custom
+       acoustic model must match the model specified with the `model` parameter. By default, no
+       custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      */
-    public convenience init(apiKey: String, iamUrl: String? = nil, model: String? = nil, customizationID: String? = nil, learningOptOut: Bool? = nil) {
+    public convenience init(apiKey: String, iamUrl: String? = nil, model: String? = nil, customizationID: String? = nil, acousticCustomizationID: String? = nil, learningOptOut: Bool? = nil) {
         let authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
-        self.init(authMethod: authMethod, model: model, customizationID: customizationID, learningOptOut: learningOptOut)
+        self.init(authMethod: authMethod, model: model, customizationID: customizationID, acousticCustomizationID: acousticCustomizationID, learningOptOut: learningOptOut)
     }
 
     /**

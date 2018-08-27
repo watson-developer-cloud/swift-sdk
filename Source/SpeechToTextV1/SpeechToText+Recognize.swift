@@ -50,7 +50,7 @@ extension SpeechToText {
     {
         do {
             let data = try Data(contentsOf: audio)
-            recognize(
+            recognizeUsingWebSocket(
                 audio: data,
                 settings: settings,
                 model: model,
@@ -78,7 +78,12 @@ extension SpeechToText {
      - parameter customizationID: The GUID of a custom language model that is to be used with the
        request. The base language model of the specified custom language model must match the
        model specified with the `model` parameter. By default, no custom model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
+       that is to be used with the recognition request. The base model of the specified custom
+       acoustic model must match the model specified with the `model` parameter. By default, no
+       custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
        a final or interim transcription is received.
@@ -88,7 +93,9 @@ extension SpeechToText {
         settings: RecognitionSettings,
         model: String? = nil,
         customizationID: String? = nil,
+        acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechRecognitionResults) -> Void)
     {
@@ -97,6 +104,7 @@ extension SpeechToText {
             authMethod: authMethod,
             model: model,
             customizationID: customizationID,
+            acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut
         )
 
@@ -107,6 +115,9 @@ extension SpeechToText {
 
         // set headers
         session.defaultHeaders = defaultHeaders
+        if let headers = headers {
+            session.defaultHeaders.merge(headers) { (_, new) in new }
+        }
 
         // set callbacks
         session.onResults = success
@@ -139,9 +150,14 @@ extension SpeechToText {
      - parameter customizationID: The GUID of a custom language model that is to be used with the
        request. The base language model of the specified custom language model must match the
        model specified with the `model` parameter. By default, no custom model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
+       that is to be used with the recognition request. The base model of the specified custom
+       acoustic model must match the model specified with the `model` parameter. By default, no
+       custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter compress: Should microphone audio be compressed to Opus format?
        (Opus compression reduces latency and bandwidth.)
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
        a final or interim transcription is received.
@@ -150,8 +166,10 @@ extension SpeechToText {
         settings: RecognitionSettings,
         model: String? = nil,
         customizationID: String? = nil,
+        acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,
+        headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (SpeechRecognitionResults) -> Void)
     {
@@ -187,6 +205,7 @@ extension SpeechToText {
             password: basicAuth.password,
             model: model,
             customizationID: customizationID,
+            acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut
         )
 
@@ -197,6 +216,9 @@ extension SpeechToText {
 
         // set headers
         session.defaultHeaders = defaultHeaders
+        if let headers = headers {
+            session.defaultHeaders.merge(headers) { (_, new) in new }
+        }
 
         // set callbacks
         session.onResults = success

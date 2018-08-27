@@ -207,7 +207,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             let audio = try Data(contentsOf: file)
 
             let settings = RecognitionSettings(contentType: format)
-            speechToText.recognize(audio: audio, settings: settings, failure: failWithError) { results in
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, failure: failWithError) { results in
                 self.validateSTTResults(results: results, settings: settings)
                 XCTAssertNotNil(results.results)
                 XCTAssertEqual(results.results!.count, 1)
@@ -263,7 +263,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             settings.filterProfanity = false
             settings.smartFormatting = true
 
-            speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
                 self.validateSTTResults(results: results, settings: settings)
                 if results.results?.last?.finalResults == true {
                     let transcript = results.results!.last?.alternatives.last?.transcript
@@ -271,6 +271,111 @@ class SpeechToTextRecognizeTests: XCTestCase {
                     XCTAssertGreaterThan(transcript!.count, 0)
                     expectation.fulfill()
                 }
+            }
+            wait(for: [expectation], timeout: timeout)
+        } catch {
+            XCTFail("Unable to read \(filename).\(withExtension).")
+            return
+        }
+    }
+
+    // MARK: - Custom language models, custom acoustic models
+
+    func testRecognizeWithCustomLanguageModel() {
+        let filename = "SpeechSample"
+        let withExtension = "wav"
+        let format = "audio/wav"
+        let baseModelName = "en-US_BroadbandModel"
+
+        // find a suitable language model
+        var customizationID: String!
+        let expectation1 = self.expectation(description: "listLanguageModels")
+        speechToText.listLanguageModels(language: "en-US", failure: failWithError) { results in
+            let languageModel = results.customizations.first(where: { model in
+                model.baseModelName == baseModelName && model.status == LanguageModel.Status.available.rawValue
+            })
+            customizationID = languageModel?.customizationID
+            expectation1.fulfill()
+        }
+        wait(for: [expectation1], timeout: timeout)
+
+        // If the create request failed, skip the rest of the test.
+        guard customizationID != nil else {
+            XCTFail("No suitable language model is available for test")
+            return
+        }
+
+        let expectation2 = self.expectation(description: "Recognize with custom language model")
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
+            XCTFail("Unable to locate \(filename).\(withExtension).")
+            return
+        }
+
+        do {
+            let audio = try Data(contentsOf: file)
+            let settings = RecognitionSettings(contentType: format)
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: baseModelName, customizationID: customizationID, failure: failWithError) { results in
+                self.validateSTTResults(results: results, settings: settings)
+                XCTAssertNotNil(results.results)
+                XCTAssertEqual(results.results!.count, 1)
+                XCTAssert(results.results!.last?.finalResults == true)
+                let transcript = results.results!.last?.alternatives.last?.transcript
+                XCTAssertNotNil(transcript)
+                XCTAssertGreaterThan(transcript!.count, 0)
+                expectation2.fulfill()
+            }
+            wait(for: [expectation2], timeout: timeout)
+        } catch {
+            XCTFail("Unable to read \(filename).\(withExtension).")
+            return
+        }
+    }
+
+    func testRecognizeWithCustomAcousticModel() {
+        let filename = "SpeechSample"
+        let withExtension = "wav"
+        let format = "audio/wav"
+        let baseModelName = "en-US_BroadbandModel"
+
+        // find a suitable acoustic model
+        var customizationID: String!
+        let expectation1 = self.expectation(description: "listAcousticModels")
+        speechToText.listAcousticModels(language: "en-US", failure: failWithError) { results in
+            let acousticModel = results.customizations.first(where: { model in
+                model.baseModelName == baseModelName && model.status == AcousticModel.Status.available.rawValue
+            })
+            customizationID = acousticModel?.customizationID
+            expectation1.fulfill()
+        }
+        wait(for: [expectation1], timeout: timeout)
+
+        // If the create request failed, skip the rest of the test.
+        guard customizationID != nil else {
+            XCTFail("No suitable acoustic model is available for test")
+            return
+        }
+
+        let expectation = self.expectation(description: "Recognize with custom language model")
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
+            XCTFail("Unable to locate \(filename).\(withExtension).")
+            return
+        }
+
+        do {
+            let audio = try Data(contentsOf: file)
+
+            let settings = RecognitionSettings(contentType: format)
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: baseModelName, acousticCustomizationID: customizationID, failure: failWithError) { results in
+                self.validateSTTResults(results: results, settings: settings)
+                XCTAssertNotNil(results.results)
+                XCTAssertEqual(results.results!.count, 1)
+                XCTAssert(results.results!.last?.finalResults == true)
+                let transcript = results.results!.last?.alternatives.last?.transcript
+                XCTAssertNotNil(transcript)
+                XCTAssertGreaterThan(transcript!.count, 0)
+                expectation.fulfill()
             }
             wait(for: [expectation], timeout: timeout)
         } catch {
@@ -308,7 +413,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         var settings = RecognitionSettings(contentType: format)
         settings.smartFormatting = true
 
-        speechToText.recognize(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
+        speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: "en-US_BroadbandModel", learningOptOut: true, failure: failWithError) { results in
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
             if results.results!.last?.finalResults == true {
@@ -356,7 +461,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             settings.filterProfanity = false
             settings.speakerLabels = true
 
-            speechToText.recognize(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true, failure: failWithError) { results in
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true, failure: failWithError) { results in
                 XCTAssertNotNil(results.speakerLabels)
                 if !expectationFulfilled && results.speakerLabels!.count > 0 {
                     self.validateSTTSpeakerLabels(speakerLabels: results.speakerLabels!)

@@ -57,11 +57,48 @@ This SDK provides classes and methods to access the following Watson services.
 - Xcode 9.0+
 - Swift 3.2+ or Swift 4.0+
 
+
+
 ## Installation
 
-### Dependency Management
+The IBM Watson Swift SDK can be installed with [Cocoapods](http://cocoapods.org/), [Carthage](https://github.com/Carthage/Carthage), or [Swift Package Manager](https://swift.org/package-manager/).
 
-We recommend using [Carthage](https://github.com/Carthage/Carthage) to manage dependencies and build the Swift SDK for your application.
+### Cocoapods
+
+You can install Cocoapods with [RubyGems](https://rubygems.org/):
+
+```bash
+$ sudo gem install cocoapods
+```
+
+If your project does not yet have a Podfile, use the `pod init` command in the root directory of your project. To install the Swift SDK using Cocoapods, add the services you will be using to your Podfile as demonstrated below (substituting `MyApp` with the name of your app). The example below shows all of the currently available services; your Podfile should only include the services that your app will use.
+
+```ruby
+use_frameworks!
+
+target 'MyApp' do
+    pod 'IBMWatsonAssistantV1', '~> 0.33.0'
+    pod 'IBMWatsonConversationV1', '~> 0.33.0'
+    pod 'IBMWatsonDiscoveryV1', '~> 0.33.0'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 0.33.0'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 0.33.0'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 0.33.0'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 0.33.0'
+    pod 'IBMWatsonSpeechToTextV1', '~> 0.33.0'
+    pod 'IBMWatsonTextToSpeechV1', '~> 0.33.0'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 0.33.0'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 0.33.0'
+end
+```
+
+Run the `pod install` command, and open the generated `.xcworkspace` file. To update to newer releases, use `pod update`.
+
+When importing the frameworks in source files, exclude the `IBMWatson` prefix and the version suffix. For example, after installing `IBMWatsonAssistantV1`, import it in your source files as `import Assistant`.
+
+For more information on using Cocoapods, refer to the [Cocoapods Guides](https://guides.cocoapods.org/using/index.html).
+
+
+### Carthage
 
 You can install Carthage with [Homebrew](http://brew.sh/):
 
@@ -70,19 +107,11 @@ $ brew update
 $ brew install carthage
 ```
 
-Then, navigate to the root directory of your project (where your .xcodeproj file is located) and create an empty `Cartfile` there:
-
-```bash
-$ touch Cartfile
-```
-
-To use the Watson Developer Cloud Swift SDK in your application, specify it in your `Cartfile`:
+If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. 
 
 ```
-github "watson-developer-cloud/swift-sdk"
+github "watson-developer-cloud/swift-sdk" ~> 0.33.0
 ```
-
-In a production app, you may also want to specify a [version requirement](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#version-requirement).
 
 Then run the following command to build the dependencies and frameworks:
 
@@ -90,17 +119,19 @@ Then run the following command to build the dependencies and frameworks:
 $ carthage update --platform iOS
 ```
 
-Finally, drag-and-drop the built frameworks into your Xcode project and import them as desired. If you are using Speech to Text, be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application.
+Follow the remaining Carthage installation instructions [here](https://github.com/Carthage/Carthage#getting-started). Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. If you are using Speech to Text, be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application.
+
 
 ### Swift Package Manager
 
-Add the following to your `Package.swift` file to identify the Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with `swift build`.
+Add the following to your `Package.swift` file to identify the IBM Watson Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with `swift build`.
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.32.0")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.33.0")
 ]
 ```
+
 
 ## Authentication
 

@@ -17,7 +17,7 @@ before_install:
 install:
   - gem install cocoapods
 before_script:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pod repo update master --silent ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pod repo update master --silent ; fi # Gets the latest version of RestKit
 script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/run-tests.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/pod-lint.sh ; fi

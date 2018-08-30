@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonAssistantV1'
   s.version               = '0.33.0'
-  s.summary               = 'iOS framework for the IBM Watson Assistant service'
+  s.summary               = 'Client framework for the IBM Watson Assistant service'
   s.description           = <<-DESC
 With the IBM Watson™ Assistant service, you can build a solution that understands 
 natural-language input and uses machine learning to respond to customers in a way that simulates a conversation between humans.

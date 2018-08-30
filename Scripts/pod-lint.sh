@@ -13,12 +13,16 @@ pod lib lint IBMWatsonNaturalLanguageUnderstandingV1.podspec
 pod lib lint IBMWatsonPersonalityInsightsV3.podspec
 
 pod lib lint IBMWatsonSpeechToTextV1.podspec --allow-warnings
-git reset --hard
-git clean -df
+# Cleanup from the podspec prepare_command
+git checkout Source/SupportingFiles/Dependencies
+rm Source/SupportingFiles/Dependencies/Libraries/*stt.a
+find Source/SupportingFiles/Dependencies/Source -maxdepth 1 -type f -delete
 
 pod lib lint IBMWatsonTextToSpeechV1.podspec --allow-warnings
-git reset --hard
-git clean -df
+# Cleanup from the podspec prepare_command
+git checkout Source/SupportingFiles/Dependencies
+rm Source/SupportingFiles/Dependencies/Libraries/*tts.a
+find Source/SupportingFiles/Dependencies/Source -maxdepth 1 -type f -delete
 
 pod lib lint IBMWatsonToneAnalyzerV3.podspec
 pod lib lint IBMWatsonVisualRecognitionV3.podspec

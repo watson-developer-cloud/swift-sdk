@@ -1,6 +1,19 @@
 Change Log
 ==========
 
+## Version 0.33.0
+_2018-08-31_
+
+### First release that supports Cocoapods!
+
+This release adds support for installing each service in the Swift SDK via Cocoapods. It also adds new options to the Speech to Text `recognize` API, and includes documentation improvements.
+
+- Support for Cocoapods!
+- Speech to Text: Adds the `acousticCustomizationID` and `headers` parameters to the `recognize()` method
+- Speech to Text: Adds the `customizationWeight` property to `RecognitionSettings`
+- Documentation: Split README into multiple READMEs: one main README plus one README for each service
+- Documentation: Improved [Jazzy docs](http://watson-developer-cloud.github.io/swift-sdk/)
+
 ## Version 0.32.0
 _2018-08-16_
 

@@ -45,6 +45,8 @@ done
 readmeVersion=$(grep -m 1 -o '~>.*[0-9.][0-9.][0-9]' README.md | cut -f 2 -d " ")
 sed -i '' -e "s/${readmeVersion}/${releaseVersion}/g" README.md
 
+# Update SDK version in Shared struct
+sed -i '' -e "s/let sdkVersion = \".*\"/let sdkVersion = \"${releaseVersion}\"/g" Source/SupportingFiles/Shared.swift
 
 # Commit the podspec updates, move the git tag, and push to Github
 git add *.podspec

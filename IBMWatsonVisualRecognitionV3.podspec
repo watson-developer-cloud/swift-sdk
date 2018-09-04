@@ -18,6 +18,6 @@ scenes, objects, faces, and other content. The response includes keywords that p
   
   s.source_files          = 'Source/VisualRecognitionV3/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.1.0'
   
 end

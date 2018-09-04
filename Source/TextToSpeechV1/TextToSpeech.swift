@@ -76,6 +76,7 @@ public class TextToSpeech {
      */
     public init(username: String, password: String) {
         self.authMethod = BasicAuthentication(username: username, password: password)
+        Shared.configureRestRequest()
     }
 
     /**
@@ -86,6 +87,7 @@ public class TextToSpeech {
      */
     public init(apiKey: String, iamUrl: String? = nil) {
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        Shared.configureRestRequest()
     }
 
     /**
@@ -95,6 +97,7 @@ public class TextToSpeech {
      */
     public init(accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
+        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {

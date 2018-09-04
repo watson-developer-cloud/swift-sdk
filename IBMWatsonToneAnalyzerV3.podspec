@@ -18,6 +18,6 @@ The service can analyze tone at both the document and sentence levels.
   
   s.source_files          = 'Source/ToneAnalyzerV3/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.1.0'
 
 end

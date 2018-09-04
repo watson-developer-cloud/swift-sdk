@@ -18,6 +18,6 @@ including categories, concepts, emotion, entities, keywords, metadata, relations
   
   s.source_files          = 'Source/NaturalLanguageUnderstandingV1/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.1.0'
   
 end

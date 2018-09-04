@@ -18,6 +18,6 @@ from digital communications such as email, text messages, tweets, and forum post
 
   s.source_files          = 'Source/PersonalityInsightsV3/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.1.0'
   
 end

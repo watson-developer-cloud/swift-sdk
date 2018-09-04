@@ -18,6 +18,6 @@ natural-language input and uses machine learning to respond to customers in a wa
   
   s.source_files          = 'Source/AssistantV1/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.1.0'
   
 end

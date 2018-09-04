@@ -23,7 +23,7 @@ of the audio signal. It continuously returns and retroactively updates a transcr
                             '**/opus_header.h',
                             '**/opus_header.c'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.1.0'
   s.dependency              'Starscream', '~> 3.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 

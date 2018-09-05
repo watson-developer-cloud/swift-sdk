@@ -38,7 +38,7 @@ public struct SpeakerLabelsResult: Decodable {
     public var speaker: Int
 
     /**
-     A score that indicates the service's confidence in its identification of the speaker in the range of 0 to 1.
+     A score that indicates the service's confidence in its identification of the speaker in the range of 0.0 to 1.0.
      */
     public var confidence: Double
 

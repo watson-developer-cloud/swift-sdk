@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  An object that indicates the Categories enrichment will be applied to the specified field.

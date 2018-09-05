@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** QueryNoticesResult. */
 public struct QueryNoticesResult: Decodable {
@@ -35,7 +36,7 @@ public struct QueryNoticesResult: Decodable {
     public var id: String?
 
     /**
-     *Deprecated* This field is now part of the `result_metadata` object.
+     *Deprecated* This field is now part of the **result_metadata** object.
      */
     public var score: Double?
 

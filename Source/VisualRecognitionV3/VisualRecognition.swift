@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces
@@ -131,8 +132,9 @@ public class VisualRecognition {
        no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they
        contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
        You can also include an image with the **url** parameter.
-     - parameter acceptLanguage: The language of the output class names. The full set of languages is supported only
-       for the built-in `default` classifier ID. The class names of custom classifiers are not translated.
+     - parameter acceptLanguage: The language of the output class names. The full set of languages is supported for
+       the built-in classifier IDs: `default`, `food`, and `explicit`. The class names of custom classifiers are not
+       translated.
        The response might not be in the specified language when the requested language is not supported or when there is
        no translation for the class name.
      - parameter url: The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel
@@ -150,8 +152,8 @@ public class VisualRecognition {
        **owners** parameters are empty.
        The following built-in classifier IDs require no training:
        - `default`: Returns classes from thousands of general tags.
-       - `food`: (Beta) Enhances specificity and accuracy for images of food items.
-       - `explicit`: (Beta) Evaluates whether the image might be pornographic.
+       - `food`: Enhances specificity and accuracy for images of food items.
+       - `explicit`: Evaluates whether the image might be pornographic.
      - parameter imagesFileContentType: The content type of imagesFile.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error

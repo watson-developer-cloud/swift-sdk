@@ -17,6 +17,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
     static var allTests: [(String, (VisualRecognitionWithIAMTests) -> () throws -> Void)] {
         return [
             ("testAccessWithAPIKey", testAccessWithAPIKey),
+            ("testAccessWithAccessToken", testAccessWithAccessToken),
         ]
     }
 
@@ -71,13 +72,15 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     /** Access service using IAM API Key credentials  */
     func testAccessWithAPIKey() {
-        let apiKey = IAMCredentials.VisualRecognitionAPIKey
-        let version = "2018-03-19"
+        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
+            return
+        }
+        let version = "2018-08-16"
         let visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 
-        let expectation = self.expectation(description: "Access service using IAM API Key credentials.")
+        let expectation = self.expectation(description: "Access service using IAM API Key WatsonCredentials.")
 
         visualRecognition.classify(url: ginniURL) {
             response, error in
@@ -114,7 +117,9 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     /** Access service using access token obtained using IAM API Key.  */
     func testAccessWithAccessToken() {
-        let apiKey = IAMCredentials.VisualRecognitionAPIKey
+        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
+            return
+        }
 
         // Obtain an access token using the IAM API Key
 
@@ -126,7 +131,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
         // Pass the access token as the credentials when instantiating the service
 
-        let version = "2018-03-19"
+        let version = "2018-08-16"
         let visualRecognition = VisualRecognition(version: version, accessToken: accessToken)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"

@@ -15,9 +15,11 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
- An output object that includes the response to the user, the nodes that were hit, and messages from the log.
+ An output object that includes the response to the user, the dialog nodes that were triggered, and messages from the
+ log.
  */
 public struct OutputData: Codable {
 
@@ -30,6 +32,12 @@ public struct OutputData: Codable {
      An array of responses to the user.
      */
     public var text: [String]
+
+    /**
+     Output intended for any channel. It is the responsibility of the client application to implement the supported
+     response types.
+     */
+    public var generic: [DialogRuntimeResponseGeneric]?
 
     /**
      An array of the nodes that were triggered to create the response, in the order in which they were visited. This
@@ -51,9 +59,10 @@ public struct OutputData: Codable {
     private enum CodingKeys: String, CodingKey {
         case logMessages = "log_messages"
         case text = "text"
+        case generic = "generic"
         case nodesVisited = "nodes_visited"
         case nodesVisitedDetails = "nodes_visited_details"
-        static let allValues = [logMessages, text, nodesVisited, nodesVisitedDetails]
+        static let allValues = [logMessages, text, generic, nodesVisited, nodesVisitedDetails]
     }
 
     /**
@@ -61,6 +70,8 @@ public struct OutputData: Codable {
 
      - parameter logMessages: An array of up to 50 messages logged with the request.
      - parameter text: An array of responses to the user.
+     - parameter generic: Output intended for any channel. It is the responsibility of the client application to
+       implement the supported response types.
      - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in
        which they were visited. This information is useful for debugging and for tracing the path taken through the node
        tree.
@@ -73,6 +84,7 @@ public struct OutputData: Codable {
     public init(
         logMessages: [LogMessage],
         text: [String],
+        generic: [DialogRuntimeResponseGeneric]? = nil,
         nodesVisited: [String]? = nil,
         nodesVisitedDetails: [DialogNodeVisitedDetails]? = nil,
         additionalProperties: [String: JSON] = [:]
@@ -80,6 +92,7 @@ public struct OutputData: Codable {
     {
         self.logMessages = logMessages
         self.text = text
+        self.generic = generic
         self.nodesVisited = nodesVisited
         self.nodesVisitedDetails = nodesVisitedDetails
         self.additionalProperties = additionalProperties
@@ -89,6 +102,7 @@ public struct OutputData: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         logMessages = try container.decode([LogMessage].self, forKey: .logMessages)
         text = try container.decode([String].self, forKey: .text)
+        generic = try container.decodeIfPresent([DialogRuntimeResponseGeneric].self, forKey: .generic)
         nodesVisited = try container.decodeIfPresent([String].self, forKey: .nodesVisited)
         nodesVisitedDetails = try container.decodeIfPresent([DialogNodeVisitedDetails].self, forKey: .nodesVisitedDetails)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
@@ -99,6 +113,7 @@ public struct OutputData: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(logMessages, forKey: .logMessages)
         try container.encode(text, forKey: .text)
+        try container.encodeIfPresent(generic, forKey: .generic)
         try container.encodeIfPresent(nodesVisited, forKey: .nodesVisited)
         try container.encodeIfPresent(nodesVisitedDetails, forKey: .nodesVisitedDetails)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)

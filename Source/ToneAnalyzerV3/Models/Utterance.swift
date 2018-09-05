@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** Utterance. */
 public struct Utterance: Encodable {

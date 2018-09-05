@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** CreateEntity. */
 public struct CreateEntity: Encodable {

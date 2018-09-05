@@ -19,6 +19,7 @@
 import XCTest
 import Foundation
 import NaturalLanguageUnderstandingV1
+import RestKit
 
 class NaturalLanguageUnderstandingTests: XCTestCase {
 
@@ -58,15 +59,15 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
 
     /** Instantiate Natural Language Understanding instance. */
     func instantiateNaturalLanguageUnderstanding() {
-        let version = "2016-05-17"
-        if let apiKey = Credentials.NaturalLanguageUnderstandingAPIKey {
+        let version = "2018-08-16"
+        if let apiKey = WatsonCredentials.NaturalLanguageUnderstandingAPIKey {
             naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: version, apiKey: apiKey)
         } else {
-            let username = Credentials.NaturalLanguageUnderstandingUsername
-            let password = Credentials.NaturalLanguageUnderstandingPassword
+            let username = WatsonCredentials.NaturalLanguageUnderstandingUsername
+            let password = WatsonCredentials.NaturalLanguageUnderstandingPassword
             naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
         }
-        if let url = Credentials.NaturalLanguageUnderstandingURL {
+        if let url = WatsonCredentials.NaturalLanguageUnderstandingURL {
             naturalLanguageUnderstanding.serviceURL = url
         }
         naturalLanguageUnderstanding.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"

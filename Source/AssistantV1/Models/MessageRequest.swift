@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- A request formatted for the Watson Assistant service.
+ A message request formatted for the Watson Assistant service.
  */
 public struct MessageRequest: Codable {
 

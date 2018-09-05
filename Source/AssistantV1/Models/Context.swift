@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  State information for the conversation. To maintain state, include the context from the previous response.

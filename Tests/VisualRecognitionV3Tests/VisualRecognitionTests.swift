@@ -25,7 +25,7 @@ class VisualRecognitionTests: XCTestCase {
     private static let timeout: TimeInterval = 45.0
 
     private var visualRecognition: VisualRecognition!
-    private let classifierID = Credentials.VisualRecognitionClassifierID
+    private let classifierID = WatsonCredentials.VisualRecognitionClassifierID
 
     static var allTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] {
         return [
@@ -50,9 +50,11 @@ class VisualRecognitionTests: XCTestCase {
             ("testDetectFacesByURL", testDetectFacesByURL),
             ("testDetectFacesByImage1", testDetectFacesByImage1),
             ("testDetectFacesByImage2", testDetectFacesByImage2),
+            ("testAuthenticationError", testAuthenticationError),
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
             ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL),
+            ("testGetUnknownClassifier", testGetUnknownClassifier),
         ]
     }
 
@@ -84,14 +86,14 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {
-        let version = "2018-03-19"
-        if let apiKey = Credentials.VisualRecognitionAPIKey {
+        let version = "2018-08-16"
+        if let apiKey = WatsonCredentials.VisualRecognitionAPIKey {
             visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
         } else {
-            let apiKey = Credentials.VisualRecognitionLegacyAPIKey
+            let apiKey = WatsonCredentials.VisualRecognitionLegacyAPIKey
             visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
         }
-        if let url = Credentials.VisualRecognitionURL {
+        if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
@@ -1302,7 +1304,7 @@ class VisualRecognitionTests: XCTestCase {
     /** Invalid API Key. */
     func testAuthenticationError() {
         let apiKey = "let-me-in-let-me-in"
-        let version = "2018-03-19"
+        let version = "2018-08-16"
         visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"

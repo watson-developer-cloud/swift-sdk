@@ -22,7 +22,7 @@ import Foundation
 public struct CollectionItem: Decodable {
 
     /**
-     The submitted phrase.
+     The submitted phrase. The maximum length is 2048 characters.
      */
     public var text: String?
 

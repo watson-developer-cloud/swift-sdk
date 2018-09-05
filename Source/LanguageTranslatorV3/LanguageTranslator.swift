@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  IBM Watson&trade; Language Translator translates text from one language to another. The service offers multiple IBM

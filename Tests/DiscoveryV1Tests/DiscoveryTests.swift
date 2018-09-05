@@ -19,6 +19,7 @@
 import XCTest
 import Foundation
 import DiscoveryV1
+import RestKit
 
 class DiscoveryTests: XCTestCase {
 
@@ -42,15 +43,15 @@ class DiscoveryTests: XCTestCase {
 
     func instantiateDiscovery() -> Discovery {
         let discovery: Discovery
-        let version = "2017-11-07"
-        if let apiKey = Credentials.DiscoveryAPIKey {
+        let version = "2018-08-16"
+        if let apiKey = WatsonCredentials.DiscoveryAPIKey {
             discovery = Discovery(version: version, apiKey: apiKey)
         } else {
-            let username = Credentials.DiscoveryUsername
-            let password = Credentials.DiscoveryPassword
+            let username = WatsonCredentials.DiscoveryUsername
+            let password = WatsonCredentials.DiscoveryPassword
             discovery = Discovery(username: username, password: password, version: version)
         }
-        if let url = Credentials.DiscoveryURL {
+        if let url = WatsonCredentials.DiscoveryURL {
             discovery.serviceURL = url
         }
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
@@ -80,6 +81,7 @@ class DiscoveryTests: XCTestCase {
             ("testListConfigurations", testListConfigurations),
             ("testListConfigurationsByName", testListConfigurationsByName),
             ("testConfigurationCRUD", testConfigurationCRUD),
+            ("testConfigurationWithSource", testConfigurationWithSource),
             ("testConfigurationInEnvironment", testConfigurationInEnvironment),
             ("testListCollections", testListCollections),
             ("testListCollectionsByName", testListCollectionsByName),
@@ -105,11 +107,20 @@ class DiscoveryTests: XCTestCase {
             ("testQueryNotices", testQueryNotices),
             ("testFederatedQuery", testFederatedQuery),
             ("testFederatedQueryNotices", testFederatedQueryNotices),
+            ("testCreateEvent", testCreateEvent),
+            ("testGetMetricsQuery", testGetMetricsQuery),
+            ("testQueryLog", testQueryLog),
+            ("testGetMetricsQueryEvent", testGetMetricsQueryEvent),
+            ("testGetMetricsQueryNoResults", testGetMetricsQueryNoResults),
+            ("testGetMetricsEventRate", testGetMetricsEventRate),
+            ("testGetMetricsQueryTokenEvent", testGetMetricsQueryTokenEvent),
             ("testListTrainingData", testListTrainingData),
             ("testTrainingDataCRUD", testTrainingDataCRUD),
             ("testDeleteAllTrainingData", testDeleteAllTrainingData),
             ("testListTrainingExamples", testListTrainingExamples),
             ("testTrainingExamplesCRUD", testTrainingExamplesCRUD),
+            ("testListCredentials", testListCredentials),
+            ("testCredentialsCRUD", testCredentialsCRUD),
             ("testGetEnvironmentWithInvalidID", testGetEnvironmentWithInvalidID),
             ("testGetConfigurationWithInvalidID", testGetConfigurationWithInvalidID),
             ("testGetCollectionWithInvalidID", testGetCollectionWithInvalidID),
@@ -149,7 +160,7 @@ class DiscoveryTests: XCTestCase {
         let name = "swift-sdk-test-" + UUID().uuidString
         let description = "An environment created while testing the Swift SDK. Safe to delete."
 
-        discovery.createEnvironment(name: name, description: description, size: 0) {
+        discovery.createEnvironment(name: name, description: description, size: Environment.Size.xl.rawValue) {
             response, error in
 
             if let error = error {
@@ -370,7 +381,7 @@ class DiscoveryTests: XCTestCase {
         let message1 = "Cannot provision more than one environment"
         let message2 = "Only one free environment is allowed"
         var environment: Environment!
-        discovery.createEnvironment(name: name, description: description, size: 0) {
+        discovery.createEnvironment(name: name, description: description, size: Environment.Size.xs.rawValue) {
             response, error in
 
             if let error = error {
@@ -621,6 +632,64 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
+    func testConfigurationWithSource() {
+        let expectation1 = self.expectation(description: "createConfiguration")
+        let environmentID = environment.environmentID!
+        let name = "swift-sdk-test-" + UUID().uuidString
+        let description = "A configuration created while testing the Swift SDK. Safe to delete."
+        let sourceSchedule = SourceSchedule(enabled: true, timeZone: "America/New_York", frequency: SourceSchedule.Frequency.weekly.rawValue)
+        let sourceOptionsSiteColl = SourceOptionsSiteColl(siteCollectionPath: "sitePath")
+        let sourceOptions = SourceOptions(folders: [SourceOptionsFolder(ownerUserID: "memyselfandI", folderID: "MyFolder")],
+                                          objects: [SourceOptionsObject(name: "MyObjects")], siteCollections: [sourceOptionsSiteColl])
+        let source = Source(type: Source.ModelType.box.rawValue, credentialID: "my box credentialID", schedule: sourceSchedule, options: sourceOptions)
+        let properties = Configuration(name: name, description: description, source: source)
+        var configuration: Configuration!
+        discovery.createConfiguration(environmentID: environmentID, configuration: properties, failure: failWithError) {
+            response in
+            configuration = response
+            XCTAssertEqual(configuration.name, name)
+            XCTAssertEqual(configuration.description, description)
+            XCTAssertNotNil(configuration.source)
+            XCTAssertEqual(configuration.source?.type, source.type)
+            XCTAssertEqual(configuration.source?.credentialID, "my box credentialID")
+            XCTAssertEqual(configuration.source?.schedule?.timeZone, sourceSchedule.timeZone)
+            XCTAssertEqual(configuration.source?.schedule?.frequency, SourceSchedule.Frequency.weekly.rawValue)
+            expectation1.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        let expectation2 = self.expectation(description: "getConfiguration")
+        let configurationID = configuration.configurationID!
+        discovery.getConfiguration(environmentID: environmentID, configurationID: configurationID, failure: failWithError) {
+            response in
+            XCTAssertEqual(configuration.configurationID, response.configurationID)
+            XCTAssertEqual(configuration.name, response.name)
+            XCTAssertEqual(configuration.description, response.description)
+            XCTAssertNotNil(configuration.source)
+            XCTAssertNotNil(configuration.source?.schedule)
+            XCTAssertNotNil(configuration.source?.schedule?.timeZone)
+            XCTAssertNotNil(configuration.source?.schedule?.frequency)
+            XCTAssertNotNil(configuration.source?.options)
+            XCTAssertNotNil(configuration.source?.options?.folders)
+            XCTAssertEqual(configuration.source?.options?.folders?.count, 1)
+            XCTAssertNotNil(configuration.source?.options?.objects)
+            XCTAssertEqual(configuration.source?.options?.objects?.count, 1)
+            XCTAssertNotNil(configuration.source?.options?.siteCollections)
+            XCTAssertEqual(configuration.source?.options?.siteCollections?.count, 1)
+            expectation2.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        let expectation3 = self.expectation(description: "deleteConfiguration")
+        discovery.deleteConfiguration(environmentID: environmentID, configurationID: configurationID, failure: failWithError) {
+            response in
+            XCTAssertEqual(response.configurationID, configuration.configurationID!)
+            XCTAssertEqual(response.status, "deleted")
+            expectation3.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
     // MARK: - Test Configuration in Environment
 
     func testConfigurationInEnvironment() {
@@ -726,7 +795,10 @@ class DiscoveryTests: XCTestCase {
             response, error in
 
             if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
+                let allowedErrorMessage = "Your environment does not allow more than 2 collections to be added."
+                if !(error.localizedDescription.contains(allowedErrorMessage)) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
                 return
             }
             guard let result = response?.result else {
@@ -735,6 +807,7 @@ class DiscoveryTests: XCTestCase {
             }
 
             collection = result
+
             XCTAssertNotNil(collection.name)
             XCTAssertEqual(collection.name!, collectionName)
             XCTAssertEqual(collection.description, "A collection created while testing the Swift SDK. Safe to delete.")
@@ -745,6 +818,11 @@ class DiscoveryTests: XCTestCase {
             expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
+
+        // assume that the read, update, and delete tests will pass even if an environment was not created
+        guard collection != nil else {
+            return
+        }
 
         let expectation2 = self.expectation(description: "getCollection")
         let collectionID = collection.collectionID!
@@ -931,7 +1009,7 @@ class DiscoveryTests: XCTestCase {
 
             documentID = result.documentID
             XCTAssertNotNil(result.documentID)
-            XCTAssertEqual(result.status, "processing")
+            XCTAssert(response.status == "processing" || response.status == "available")
             XCTAssertNil(result.notices)
             expectation1.fulfill()
         }
@@ -966,7 +1044,27 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
 
-        let expectation3 = self.expectation(description: "deleteDocument")
+        let expectation3 = self.expectation(description: "updateDocument")
+        let newMetadata = "{ \"name\": \"Robert Kennedy Speech\" }"
+        discovery.updateDocument(
+            environmentID: environmentID,
+            collectionID: collectionID,
+            documentID: documentID,
+            metadata: newMetadata,
+            failure: failWithError)
+        {
+            response in
+            documentID = response.documentID
+            XCTAssertNotNil(response.documentID)
+            XCTAssert(response.status == "processing" || response.status == "available")
+            XCTAssertNil(response.notices)
+            expectation3.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        sleep(10) // wait for document updates to be ingested
+
+        let expectation4 = self.expectation(description: "deleteDocument")
         discovery.deleteDocument(
             environmentID: environmentID,
             collectionID: collectionID,
@@ -985,7 +1083,7 @@ class DiscoveryTests: XCTestCase {
 
             XCTAssertEqual(result.documentID, documentID)
             XCTAssertEqual(result.status, "deleted")
-            expectation3.fulfill()
+            expectation4.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1620,6 +1718,92 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
+    func testCreateEvent() {
+        // Create a test document
+        let environmentID = environment.environmentID!
+        let configurationID = lookupOrCreateTestConfiguration(environmentID: environmentID).configurationID!
+        let collection = lookupOrCreateTestCollection(environmentID: environmentID, configurationID: configurationID)
+        let document = addTestDocument(environment: environment, collection: collection)
+        let collectionID = collection.collectionID!
+        let documentID = document.documentID!
+
+        // Make a query to get the session token
+        let expectation = self.expectation(description: "createEvent")
+        discovery.query(
+            environmentID: environmentID,
+            collectionID: collectionID,
+            naturalLanguageQuery: "jeopardy",
+            count: 1,
+            failure: failWithError) { queryResponse in
+
+                // Create the event
+                let sessionToken = queryResponse.sessionToken!
+                let eventData = EventData(
+                    environmentID: environmentID,
+                    sessionToken: sessionToken,
+                    collectionID: collectionID,
+                    documentID: documentID)
+
+                self.discovery.createEvent(type: "click", data: eventData, failure: self.failWithError) { createEventResponse in
+                    XCTAssertEqual(createEventResponse.data!.environmentID, eventData.environmentID)
+                    XCTAssertEqual(createEventResponse.data!.sessionToken, eventData.sessionToken)
+                    XCTAssertEqual(createEventResponse.data!.collectionID, eventData.collectionID)
+                    XCTAssertEqual(createEventResponse.data!.documentID, eventData.documentID)
+                    XCTAssertEqual(createEventResponse.type, "click")
+                    expectation.fulfill()
+                }
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsQuery() {
+        let expectation = self.expectation(description: "getMetricsQuery")
+        discovery.getMetricsQuery(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testQueryLog() {
+        let expectation = self.expectation(description: "queryLog")
+        discovery.queryLog(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsQueryEvent() {
+        let expectation = self.expectation(description: "getMetricsQueryEvent")
+        discovery.getMetricsQueryEvent(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsQueryNoResults() {
+        let expectation = self.expectation(description: "getMetricsQueryNoResults")
+        discovery.getMetricsQueryNoResults(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsEventRate() {
+        let expectation = self.expectation(description: "getMetricsEventRate")
+        discovery.getMetricsQuery(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetMetricsQueryTokenEvent() {
+        let expectation = self.expectation(description: "getMetricsQueryTokenEvent")
+        discovery.getMetricsQueryTokenEvent(failure: failWithError) { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
     // MARK: - Training Data
 
     func testListTrainingData() {
@@ -1940,6 +2124,78 @@ class DiscoveryTests: XCTestCase {
             }
 
             expectation6.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    // MARK: - Credentials
+
+    func testListCredentials() {
+        let environmentID = environment.environmentID!
+
+        let expectation1 = self.expectation(description: "listCredentials")
+        discovery.listCredentials(environmentID: environmentID, failure: failWithError) {
+            response in
+            XCTAssertNotNil(response.credentials)
+            XCTAssertGreaterThanOrEqual(response.credentials!.count, 0)
+            expectation1.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testCredentialsCRUD() {
+        let environmentID = environment.environmentID!
+
+        let expectation1 = self.expectation(description: "createCredentials")
+        var credentials: Credentials?
+
+        let createDetails = CredentialDetails(credentialType: "username_password", url: "https://login.salesforce.com",
+                                        username: "email@server.xyz", password: "{my_salesforce_password}{my_salesforce_security_token}")
+        discovery.createCredentials(environmentID: environmentID, sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: createDetails, failure: failWithError) {
+            response in
+            credentials = response
+            expectation1.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        guard let credentialID = credentials?.credentialID else {
+            XCTFail("credentialID is nil in createCredentials response")
+            return
+        }
+
+        let expectation2 = self.expectation(description: "getCredentials")
+        discovery.getCredentials(environmentID: environmentID, credentialID: credentialID, failure: failWithError) {
+            response in
+            XCTAssertEqual(response.credentialID, credentialID)
+            expectation2.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        let expectation3 = self.expectation(description: "updateCredentials")
+        let updateDetails = CredentialDetails(credentialType: "username_password", url: "https://login.salesforce.com",
+                                              username: "email@server.xyz", password: "foobarbaz")
+        discovery.updateCredentials(environmentID: environmentID, credentialID: credentialID,
+                                    sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: updateDetails, failure: failWithError) {
+            response in
+            XCTAssertEqual(response.credentialID, credentialID)
+            expectation3.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        let expectation4 = self.expectation(description: "deleteCredentials")
+        discovery.deleteCredentials(environmentID: environmentID, credentialID: credentialID, failure: failWithError) {_ in
+            expectation4.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    // MARK: - User data
+
+    func testDeleteLabeledData() {
+        let customerID = "012-34-5678"
+        let expectation1 = self.expectation(description: "listCredentials")
+        discovery.deleteUserData(customerID: customerID, failure: failWithError) {
+            expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }

@@ -35,7 +35,7 @@ public struct KeywordResult: Decodable {
     public var endTime: Double
 
     /**
-     A confidence score for the keyword match in the range of 0 to 1.
+     A confidence score for the keyword match in the range of 0.0 to 1.0.
      */
     public var confidence: Double
 

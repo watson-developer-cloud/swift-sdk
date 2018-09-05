@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** Workspace. */
 public struct Workspace: Decodable {
@@ -60,6 +61,11 @@ public struct Workspace: Decodable {
      */
     public var learningOptOut: Bool?
 
+    /**
+     Global settings for the workspace.
+     */
+    public var systemSettings: WorkspaceSystemSettings?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
@@ -70,6 +76,7 @@ public struct Workspace: Decodable {
         case description = "description"
         case metadata = "metadata"
         case learningOptOut = "learning_opt_out"
+        case systemSettings = "system_settings"
     }
 
 }

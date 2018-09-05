@@ -18,6 +18,7 @@
 
 import Foundation
 import UIKit
+import RestKit
 
 // This extension adds convenience methods for using `UIImage`. The comments and interface were copied from
 // `VisualRecognition.swift`, then modified to use `UIImage` instead of `URL`. Some parameters were also
@@ -133,6 +134,37 @@ extension VisualRecognition {
         }
 
         self.detectFaces(imagesFile: file, completionHandler: completion)
+    }
+
+    /**
+     Classify an image using a Core ML model from the local filesystem.
+
+     - parameter image: The image to classify.
+     - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
+     built-in classifier.
+     - parameter threshold: The minimum score a class must have to be displayed in the response.
+     - parameter failure: A function executed if an error occurs.
+     - parameter success: A function executed with the image classifications.
+     */
+    @available(iOS 11.0, tvOS 11.0, watchOS 4.0, *)
+    public func classifyWithLocalModel(
+        image: UIImage,
+        classifierIDs: [String] = ["default"],
+        threshold: Double? = nil,
+        failure: ((Error) -> Void)? = nil,
+        success: @escaping (ClassifiedImages) -> Void)
+    {
+        // convert UIImage to Data
+        guard let imageData = UIImagePNGRepresentation(image) else {
+            let description = "Failed to convert image from UIImage to Data."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+
+        self.classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold,
+                                    failure: failure, success: success)
     }
 
     /**

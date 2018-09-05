@@ -19,11 +19,12 @@
 import XCTest
 import Foundation
 import ConversationV1
+import RestKit
 
 class ConversationTests: XCTestCase {
 
     private var conversation: Conversation!
-    private let workspaceID = Credentials.ConversationWorkspace
+    private let workspaceID = WatsonCredentials.ConversationWorkspace
 
     // MARK: - Test Configuration
 
@@ -72,6 +73,7 @@ class ConversationTests: XCTestCase {
             ("testCreateAndDeleteEntity", testCreateAndDeleteEntity),
             ("testCreateUpdateAndDeleteEntity", testCreateUpdateAndDeleteEntity),
             ("testGetEntity", testGetEntity),
+            ("testListMentions", testListMentions),
             ("testListAllValues", testListAllValues),
             ("testCreateUpdateAndDeleteValue", testCreateUpdateAndDeleteValue),
             ("testGetValue", testGetValue),
@@ -94,9 +96,9 @@ class ConversationTests: XCTestCase {
 
     /** Instantiate Conversation. */
     func instantiateConversation() {
-        let username = Credentials.ConversationUsername
-        let password = Credentials.ConversationPassword
-        let version = "2018-02-16"
+        let username = WatsonCredentials.ConversationUsername
+        let password = WatsonCredentials.ConversationPassword
+        let version = "2018-08-16"
         conversation = Conversation(username: username, password: password, version: version)
         conversation.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         conversation.defaultHeaders["X-Watson-Test"] = "true"
@@ -1727,6 +1729,31 @@ class ConversationTests: XCTestCase {
                 XCTAssertNotNil(entityExport.updated)
                 expectation.fulfill()
             }
+        }
+        waitForExpectations()
+    }
+
+    // MARK: - Mentions
+
+    func testListMentions() {
+        let description = "List all the mentions for an entity."
+        let expectation = self.expectation(description: description)
+        let entityName = "appliance"
+        conversation.listMentions(
+            workspaceID: workspaceID,
+            entity: entityName,
+            export: true,
+            includeAudit: true,
+            failure: failWithError) {
+                mentionCollection in
+                for mention in mentionCollection.examples {
+                    XCTAssertNotNil(mention.exampleText)
+                    XCTAssertNotNil(mention.intentName)
+                    XCTAssertNotNil(mention.location)
+                    XCTAssert(mention.location.count == 2)
+                }
+                XCTAssertNotNil(mentionCollection.pagination.refreshUrl)
+                expectation.fulfill()
         }
         waitForExpectations()
     }

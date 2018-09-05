@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** UpdateEntity. */
 internal struct UpdateEntity: Encodable {

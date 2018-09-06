@@ -266,11 +266,10 @@ extension SpeechToText {
         model: String? = nil,
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechRecognitionResults) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
     {
         recognizeUsingWebSocket(audio: audio, settings: settings, model: model, customizationID: customizationID,
-                                learningOptOut: learningOptOut, failure: failure, success: success)
+                                learningOptOut: learningOptOut, completionHandler: completionHandler)
     }
 }
 

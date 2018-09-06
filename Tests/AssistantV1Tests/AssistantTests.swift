@@ -1760,9 +1760,18 @@ class AssistantTests: XCTestCase {
             workspaceID: workspaceID,
             entity: entityName,
             export: true,
-            includeAudit: true,
-            failure: failWithError) {
-                mentionCollection in
+            includeAudit: true) {
+                response, error in
+
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let mentionCollection = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
                 for mention in mentionCollection.examples {
                     XCTAssertNotNil(mention.exampleText)
                     XCTAssertNotNil(mention.intentName)

@@ -272,6 +272,7 @@ public class Conversation {
      - parameter metadata: Any metadata related to the workspace.
      - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service
        improvements. `true` indicates that workspace training data is not to be used.
+     - parameter systemSettings: Global settings for the workspace.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -285,6 +286,7 @@ public class Conversation {
         counterexamples: [CreateCounterexample]? = nil,
         metadata: [String: JSON]? = nil,
         learningOptOut: Bool? = nil,
+        systemSettings: WorkspaceSystemSettings? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
     {
@@ -298,7 +300,8 @@ public class Conversation {
             dialogNodes: dialogNodes,
             counterexamples: counterexamples,
             metadata: metadata,
-            learningOptOut: learningOptOut)
+            learningOptOut: learningOptOut,
+            systemSettings: systemSettings)
         guard let body = try? JSONEncoder().encodeIfPresent(createWorkspaceRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -415,6 +418,7 @@ public class Conversation {
      - parameter metadata: Any metadata related to the workspace.
      - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service
        improvements. `true` indicates that workspace training data is not to be used.
+     - parameter systemSettings: Global settings for the workspace.
      - parameter append: Whether the new data is to be appended to the existing data in the workspace. If
        **append**=`false`, elements included in the new data completely replace the corresponding existing elements,
        including all subelements. For example, if the new data includes **entities** and **append**=`false`, all
@@ -435,6 +439,7 @@ public class Conversation {
         counterexamples: [CreateCounterexample]? = nil,
         metadata: [String: JSON]? = nil,
         learningOptOut: Bool? = nil,
+        systemSettings: WorkspaceSystemSettings? = nil,
         append: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
@@ -449,7 +454,8 @@ public class Conversation {
             dialogNodes: dialogNodes,
             counterexamples: counterexamples,
             metadata: metadata,
-            learningOptOut: learningOptOut)
+            learningOptOut: learningOptOut,
+            systemSettings: systemSettings)
         guard let body = try? JSONEncoder().encodeIfPresent(updateWorkspaceRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -1842,8 +1848,7 @@ public class Conversation {
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listMentions(
         workspaceID: String,
@@ -1851,8 +1856,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (EntityMentionCollection) -> Void)
+        completionHandler: @escaping (WatsonResponse<EntityMentionCollection>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1876,7 +1880,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/mentions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -1890,13 +1894,7 @@ public class Conversation {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<EntityMentionCollection>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2692,6 +2690,7 @@ public class Conversation {
      - parameter digressIn: Whether this top-level dialog node can be digressed into.
      - parameter digressOut: Whether this dialog node can be returned to after a digression.
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
+     - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2702,7 +2701,7 @@ public class Conversation {
         conditions: String? = nil,
         parent: String? = nil,
         previousSibling: String? = nil,
-        output: [String: JSON]? = nil,
+        output: DialogNodeOutput? = nil,
         context: [String: JSON]? = nil,
         metadata: [String: JSON]? = nil,
         nextStep: DialogNodeNextStep? = nil,
@@ -2714,6 +2713,7 @@ public class Conversation {
         digressIn: String? = nil,
         digressOut: String? = nil,
         digressOutSlots: String? = nil,
+        userLabel: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
@@ -2735,7 +2735,8 @@ public class Conversation {
             variable: variable,
             digressIn: digressIn,
             digressOut: digressOut,
-            digressOutSlots: digressOutSlots)
+            digressOutSlots: digressOutSlots,
+            userLabel: userLabel)
         guard let body = try? JSONEncoder().encode(createDialogNodeRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -2863,6 +2864,7 @@ public class Conversation {
      - parameter newDigressIn: Whether this top-level dialog node can be digressed into.
      - parameter newDigressOut: Whether this dialog node can be returned to after a digression.
      - parameter newDigressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
+     - parameter newUserLabel: A label that can be displayed externally to describe the purpose of the node to users.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2874,7 +2876,7 @@ public class Conversation {
         newConditions: String? = nil,
         newParent: String? = nil,
         newPreviousSibling: String? = nil,
-        newOutput: [String: JSON]? = nil,
+        newOutput: DialogNodeOutput? = nil,
         newContext: [String: JSON]? = nil,
         newMetadata: [String: JSON]? = nil,
         newNextStep: DialogNodeNextStep? = nil,
@@ -2886,6 +2888,7 @@ public class Conversation {
         newDigressIn: String? = nil,
         newDigressOut: String? = nil,
         newDigressOutSlots: String? = nil,
+        newUserLabel: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
     {
@@ -2907,7 +2910,8 @@ public class Conversation {
             actions: newActions,
             digressIn: newDigressIn,
             digressOut: newDigressOut,
-            digressOutSlots: newDigressOutSlots)
+            digressOutSlots: newDigressOutSlots,
+            userLabel: newUserLabel)
         guard let body = try? JSONEncoder().encode(updateDialogNodeRequest) else {
             completionHandler(nil, RestError.serializationError)
             return

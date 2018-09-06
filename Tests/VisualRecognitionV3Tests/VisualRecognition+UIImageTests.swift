@@ -169,7 +169,13 @@ class VisualRecognitionUIImageTests: XCTestCase {
         if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
             // update the local model
             let expectation1 = self.expectation(description: "updateLocalModel")
-            visualRecognition.updateLocalModel(classifierID: classifierID, failure: failWithError) {
+            visualRecognition.updateLocalModel(classifierID: classifierID) {
+                _, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+
                 expectation1.fulfill()
             }
             waitForExpectations()
@@ -177,8 +183,17 @@ class VisualRecognitionUIImageTests: XCTestCase {
             // classify using the local model
             let expectation2 = self.expectation(description: "classifyWithLocalModel")
             let image = UIImage(named: "car", in: Bundle(for: type(of: self)), compatibleWith: nil)!
-            visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], threshold: 0.1, failure: failWithError) {
-                classifiedImages in
+            visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], threshold: 0.1) {
+                classifiedImages, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let classifiedImages = classifiedImages else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
                 print(classifiedImages)
                 expectation2.fulfill()
             }

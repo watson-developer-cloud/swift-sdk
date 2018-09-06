@@ -642,11 +642,24 @@ class DiscoveryTests: XCTestCase {
         let sourceOptions = SourceOptions(folders: [SourceOptionsFolder(ownerUserID: "memyselfandI", folderID: "MyFolder")],
                                           objects: [SourceOptionsObject(name: "MyObjects")], siteCollections: [sourceOptionsSiteColl])
         let source = Source(type: Source.ModelType.box.rawValue, credentialID: "my box credentialID", schedule: sourceSchedule, options: sourceOptions)
-        let properties = Configuration(name: name, description: description, source: source)
         var configuration: Configuration!
-        discovery.createConfiguration(environmentID: environmentID, configuration: properties, failure: failWithError) {
-            response in
-            configuration = response
+        discovery.createConfiguration(
+            environmentID: environmentID,
+            name: name,
+            description: description,
+            source: source) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            configuration = result
             XCTAssertEqual(configuration.name, name)
             XCTAssertEqual(configuration.description, description)
             XCTAssertNotNil(configuration.source)
@@ -660,11 +673,21 @@ class DiscoveryTests: XCTestCase {
 
         let expectation2 = self.expectation(description: "getConfiguration")
         let configurationID = configuration.configurationID!
-        discovery.getConfiguration(environmentID: environmentID, configurationID: configurationID, failure: failWithError) {
-            response in
-            XCTAssertEqual(configuration.configurationID, response.configurationID)
-            XCTAssertEqual(configuration.name, response.name)
-            XCTAssertEqual(configuration.description, response.description)
+        discovery.getConfiguration(environmentID: environmentID, configurationID: configurationID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(configuration.configurationID, result.configurationID)
+            XCTAssertEqual(configuration.name, result.name)
+            XCTAssertEqual(configuration.description, result.description)
             XCTAssertNotNil(configuration.source)
             XCTAssertNotNil(configuration.source?.schedule)
             XCTAssertNotNil(configuration.source?.schedule?.timeZone)
@@ -681,10 +704,20 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations(timeout: timeout)
 
         let expectation3 = self.expectation(description: "deleteConfiguration")
-        discovery.deleteConfiguration(environmentID: environmentID, configurationID: configurationID, failure: failWithError) {
-            response in
-            XCTAssertEqual(response.configurationID, configuration.configurationID!)
-            XCTAssertEqual(response.status, "deleted")
+        discovery.deleteConfiguration(environmentID: environmentID, configurationID: configurationID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(result.configurationID, configuration.configurationID!)
+            XCTAssertEqual(result.status, "deleted")
             expectation3.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1009,7 +1042,7 @@ class DiscoveryTests: XCTestCase {
 
             documentID = result.documentID
             XCTAssertNotNil(result.documentID)
-            XCTAssert(response.status == "processing" || response.status == "available")
+            XCTAssert(result.status == "processing" || result.status == "available")
             XCTAssertNil(result.notices)
             expectation1.fulfill()
         }
@@ -1050,14 +1083,22 @@ class DiscoveryTests: XCTestCase {
             environmentID: environmentID,
             collectionID: collectionID,
             documentID: documentID,
-            metadata: newMetadata,
-            failure: failWithError)
+            metadata: newMetadata)
         {
-            response in
-            documentID = response.documentID
-            XCTAssertNotNil(response.documentID)
-            XCTAssert(response.status == "processing" || response.status == "available")
-            XCTAssertNil(response.notices)
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            documentID = result.documentID
+            XCTAssertNotNil(result.documentID)
+            XCTAssert(result.status == "processing" || result.status == "available")
+            XCTAssertNil(result.notices)
             expectation3.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1733,23 +1774,42 @@ class DiscoveryTests: XCTestCase {
             environmentID: environmentID,
             collectionID: collectionID,
             naturalLanguageQuery: "jeopardy",
-            count: 1,
-            failure: failWithError) { queryResponse in
+            count: 1) {
+                response, error in
+
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
                 // Create the event
-                let sessionToken = queryResponse.sessionToken!
+                let sessionToken = result.sessionToken!
                 let eventData = EventData(
                     environmentID: environmentID,
                     sessionToken: sessionToken,
                     collectionID: collectionID,
                     documentID: documentID)
 
-                self.discovery.createEvent(type: "click", data: eventData, failure: self.failWithError) { createEventResponse in
-                    XCTAssertEqual(createEventResponse.data!.environmentID, eventData.environmentID)
-                    XCTAssertEqual(createEventResponse.data!.sessionToken, eventData.sessionToken)
-                    XCTAssertEqual(createEventResponse.data!.collectionID, eventData.collectionID)
-                    XCTAssertEqual(createEventResponse.data!.documentID, eventData.documentID)
-                    XCTAssertEqual(createEventResponse.type, "click")
+                self.discovery.createEvent(type: "click", data: eventData) {
+                    response, error in
+
+                    if let error = error {
+                        XCTFail(unexpectedErrorMessage(error))
+                        return
+                    }
+                    guard let result = response?.result else {
+                        XCTFail(missingResultMessage)
+                        return
+                    }
+                    XCTAssertEqual(result.data!.environmentID, eventData.environmentID)
+                    XCTAssertEqual(result.data!.sessionToken, eventData.sessionToken)
+                    XCTAssertEqual(result.data!.collectionID, eventData.collectionID)
+                    XCTAssertEqual(result.data!.documentID, eventData.documentID)
+                    XCTAssertEqual(result.type, "click")
                     expectation.fulfill()
                 }
         }
@@ -1758,7 +1818,12 @@ class DiscoveryTests: XCTestCase {
 
     func testGetMetricsQuery() {
         let expectation = self.expectation(description: "getMetricsQuery")
-        discovery.getMetricsQuery(failure: failWithError) { _ in
+        discovery.getMetricsQuery {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1766,7 +1831,12 @@ class DiscoveryTests: XCTestCase {
 
     func testQueryLog() {
         let expectation = self.expectation(description: "queryLog")
-        discovery.queryLog(failure: failWithError) { _ in
+        discovery.queryLog {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1774,7 +1844,12 @@ class DiscoveryTests: XCTestCase {
 
     func testGetMetricsQueryEvent() {
         let expectation = self.expectation(description: "getMetricsQueryEvent")
-        discovery.getMetricsQueryEvent(failure: failWithError) { _ in
+        discovery.getMetricsQueryEvent {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1782,7 +1857,12 @@ class DiscoveryTests: XCTestCase {
 
     func testGetMetricsQueryNoResults() {
         let expectation = self.expectation(description: "getMetricsQueryNoResults")
-        discovery.getMetricsQueryNoResults(failure: failWithError) { _ in
+        discovery.getMetricsQueryNoResults {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1790,7 +1870,12 @@ class DiscoveryTests: XCTestCase {
 
     func testGetMetricsEventRate() {
         let expectation = self.expectation(description: "getMetricsEventRate")
-        discovery.getMetricsQuery(failure: failWithError) { _ in
+        discovery.getMetricsQuery {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1798,7 +1883,12 @@ class DiscoveryTests: XCTestCase {
 
     func testGetMetricsQueryTokenEvent() {
         let expectation = self.expectation(description: "getMetricsQueryTokenEvent")
-        discovery.getMetricsQueryTokenEvent(failure: failWithError) { _ in
+        discovery.getMetricsQueryTokenEvent {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -2122,7 +2212,6 @@ class DiscoveryTests: XCTestCase {
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
             }
-
             expectation6.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -2134,10 +2223,20 @@ class DiscoveryTests: XCTestCase {
         let environmentID = environment.environmentID!
 
         let expectation1 = self.expectation(description: "listCredentials")
-        discovery.listCredentials(environmentID: environmentID, failure: failWithError) {
-            response in
-            XCTAssertNotNil(response.credentials)
-            XCTAssertGreaterThanOrEqual(response.credentials!.count, 0)
+        discovery.listCredentials(environmentID: environmentID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(result.credentials)
+            XCTAssertGreaterThanOrEqual(result.credentials!.count, 0)
             expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -2151,9 +2250,19 @@ class DiscoveryTests: XCTestCase {
 
         let createDetails = CredentialDetails(credentialType: "username_password", url: "https://login.salesforce.com",
                                         username: "email@server.xyz", password: "{my_salesforce_password}{my_salesforce_security_token}")
-        discovery.createCredentials(environmentID: environmentID, sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: createDetails, failure: failWithError) {
-            response in
-            credentials = response
+        discovery.createCredentials(environmentID: environmentID, sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: createDetails) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            credentials = result
             expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -2164,9 +2273,19 @@ class DiscoveryTests: XCTestCase {
         }
 
         let expectation2 = self.expectation(description: "getCredentials")
-        discovery.getCredentials(environmentID: environmentID, credentialID: credentialID, failure: failWithError) {
-            response in
-            XCTAssertEqual(response.credentialID, credentialID)
+        discovery.getCredentials(environmentID: environmentID, credentialID: credentialID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(result.credentialID, credentialID)
             expectation2.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -2174,16 +2293,31 @@ class DiscoveryTests: XCTestCase {
         let expectation3 = self.expectation(description: "updateCredentials")
         let updateDetails = CredentialDetails(credentialType: "username_password", url: "https://login.salesforce.com",
                                               username: "email@server.xyz", password: "foobarbaz")
-        discovery.updateCredentials(environmentID: environmentID, credentialID: credentialID,
-                                    sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: updateDetails, failure: failWithError) {
-            response in
-            XCTAssertEqual(response.credentialID, credentialID)
+        discovery.updateCredentials(environmentID: environmentID, credentialID: credentialID, sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: updateDetails) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(result.credentialID, credentialID)
             expectation3.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
         let expectation4 = self.expectation(description: "deleteCredentials")
-        discovery.deleteCredentials(environmentID: environmentID, credentialID: credentialID, failure: failWithError) {_ in
+        discovery.deleteCredentials(environmentID: environmentID, credentialID: credentialID) {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
             expectation4.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -2194,7 +2328,13 @@ class DiscoveryTests: XCTestCase {
     func testDeleteLabeledData() {
         let customerID = "012-34-5678"
         let expectation1 = self.expectation(description: "listCredentials")
-        discovery.deleteUserData(customerID: customerID, failure: failWithError) {
+        discovery.deleteUserData(customerID: customerID) {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
             expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)

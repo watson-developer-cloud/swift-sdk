@@ -151,20 +151,18 @@ extension VisualRecognition {
         image: UIImage,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifiedImages) -> Void)
+        completionHandler: @escaping (ClassifiedImages?, Error?) -> Void)
     {
         // convert UIImage to Data
         guard let imageData = UIImagePNGRepresentation(image) else {
             let description = "Failed to convert image from UIImage to Data."
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            completionHandler(nil, error)
             return
         }
 
-        self.classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold,
-                                    failure: failure, success: success)
+        self.classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold, completionHandler: completionHandler)
     }
 
     /**

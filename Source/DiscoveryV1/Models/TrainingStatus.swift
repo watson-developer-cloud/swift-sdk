@@ -47,8 +47,8 @@ public struct TrainingStatus: Decodable {
         case sufficientLabelDiversity = "sufficient_label_diversity"
         case notices = "notices"
         // TODO: Add these back in once https://github.ibm.com/Watson-Discovery/disco-issue-tracker/issues/1217 is fixed
-//        case successfullyTrained = "successfully_trained"
-//        case dataUpdated = "data_updated"
+        //        case successfullyTrained = "successfully_trained"
+        //        case dataUpdated = "data_updated"
     }
 
 }

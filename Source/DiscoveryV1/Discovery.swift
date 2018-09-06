@@ -416,6 +416,7 @@ public class Discovery {
      - parameter enrichments: An array of document enrichment settings for the configuration.
      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.
+     - parameter source: Object containing source parameters for the configuration.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -426,11 +427,12 @@ public class Discovery {
         conversions: Conversions? = nil,
         enrichments: [Enrichment]? = nil,
         normalizations: [NormalizationOperation]? = nil,
+        source: Source? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
-        let createConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations)
+        let createConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
         guard let body = try? JSONEncoder().encode(createConfigurationRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -584,6 +586,7 @@ public class Discovery {
      - parameter enrichments: An array of document enrichment settings for the configuration.
      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.
+     - parameter source: Object containing source parameters for the configuration.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -595,11 +598,12 @@ public class Discovery {
         conversions: Conversions? = nil,
         enrichments: [Enrichment]? = nil,
         normalizations: [NormalizationOperation]? = nil,
+        source: Source? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
-        let updateConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations)
+        let updateConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
         guard let body = try? JSONEncoder().encode(updateConfigurationRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -2963,20 +2967,18 @@ public class Discovery {
      - parameter type: The event type to be created.
      - parameter data: Data object used to create a query event.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createEvent(
         type: String,
         data: EventData,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (CreateEventResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<CreateEventResponse>?, Error?) -> Void)
     {
         // construct body
         let createEventRequest = CreateEventObject(type: type, data: data)
         guard let body = try? JSONEncoder().encode(createEventRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -3005,13 +3007,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<CreateEventResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3033,8 +3029,7 @@ public class Discovery {
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func queryLog(
         filter: String? = nil,
@@ -3043,8 +3038,7 @@ public class Discovery {
         offset: Int? = nil,
         sort: [String]? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LogQueryResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<LogQueryResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3089,13 +3083,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<LogQueryResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3109,16 +3097,14 @@ public class Discovery {
        `YYYY-MM-DDThh:mm:ssZ` format.
      - parameter resultType: The type of result to consider when calculating the metric.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getMetricsQuery(
         startTime: String? = nil,
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (MetricResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3155,13 +3141,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<MetricResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3177,16 +3157,14 @@ public class Discovery {
        `YYYY-MM-DDThh:mm:ssZ` format.
      - parameter resultType: The type of result to consider when calculating the metric.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getMetricsQueryEvent(
         startTime: String? = nil,
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (MetricResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3223,13 +3201,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<MetricResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3244,16 +3216,14 @@ public class Discovery {
        `YYYY-MM-DDThh:mm:ssZ` format.
      - parameter resultType: The type of result to consider when calculating the metric.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getMetricsQueryNoResults(
         startTime: String? = nil,
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (MetricResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3290,13 +3260,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<MetricResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3312,16 +3276,14 @@ public class Discovery {
        `YYYY-MM-DDThh:mm:ssZ` format.
      - parameter resultType: The type of result to consider when calculating the metric.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getMetricsEventRate(
         startTime: String? = nil,
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (MetricResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3358,13 +3320,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<MetricResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3376,14 +3332,12 @@ public class Discovery {
 
      - parameter count: Number of results to return.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getMetricsQueryTokenEvent(
         count: Int? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (MetricTokenResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricTokenResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3412,13 +3366,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<MetricTokenResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3429,14 +3377,12 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listCredentials(
         environmentID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (CredentialsList) -> Void)
+        completionHandler: @escaping (WatsonResponse<CredentialsList>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3452,7 +3398,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -3466,13 +3412,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<CredentialsList>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3490,21 +3430,19 @@ public class Discovery {
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createCredentials(
         environmentID: String,
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Credentials) -> Void)
+        completionHandler: @escaping (WatsonResponse<Credentials>?, Error?) -> Void)
     {
         // construct body
         let createCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
         guard let body = try? JSONEncoder().encode(createCredentialsRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -3523,7 +3461,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -3538,13 +3476,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Credentials>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3557,15 +3489,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter credentialID: The unique identifier for a set of source credentials.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getCredentials(
         environmentID: String,
         credentialID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Credentials) -> Void)
+        completionHandler: @escaping (WatsonResponse<Credentials>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3581,7 +3511,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -3595,13 +3525,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Credentials>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3619,8 +3543,7 @@ public class Discovery {
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateCredentials(
         environmentID: String,
@@ -3628,13 +3551,12 @@ public class Discovery {
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Credentials) -> Void)
+        completionHandler: @escaping (WatsonResponse<Credentials>?, Error?) -> Void)
     {
         // construct body
         let updateCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
         guard let body = try? JSONEncoder().encode(updateCredentialsRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -3653,7 +3575,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -3668,13 +3590,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Credentials>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -3685,15 +3601,13 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter credentialID: The unique identifier for a set of source credentials.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteCredentials(
         environmentID: String,
         credentialID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteCredentials) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteCredentials>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3709,7 +3623,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -3723,13 +3637,7 @@ public class Discovery {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DeleteCredentials>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

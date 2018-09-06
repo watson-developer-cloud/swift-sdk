@@ -321,7 +321,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
         // find a suitable language model
         var customizationID: String!
         let expectation1 = self.expectation(description: "listLanguageModels")
-        speechToText.listLanguageModels(language: "en-US", failure: failWithError) { results in
+        speechToText.listLanguageModels(language: "en-US") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
             let languageModel = results.customizations.first(where: { model in
                 model.baseModelName == baseModelName && model.status == LanguageModel.Status.available.rawValue
             })
@@ -346,7 +355,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
         do {
             let audio = try Data(contentsOf: file)
             let settings = RecognitionSettings(contentType: format)
-            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: baseModelName, customizationID: customizationID, failure: failWithError) { results in
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: baseModelName, customizationID: customizationID) {
+                response, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let results = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
                 self.validateSTTResults(results: results, settings: settings)
                 XCTAssertNotNil(results.results)
                 XCTAssertEqual(results.results!.count, 1)
@@ -372,7 +390,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
         // find a suitable acoustic model
         var customizationID: String!
         let expectation1 = self.expectation(description: "listAcousticModels")
-        speechToText.listAcousticModels(language: "en-US", failure: failWithError) { results in
+        speechToText.listAcousticModels(language: "en-US") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
             let acousticModel = results.customizations.first(where: { model in
                 model.baseModelName == baseModelName && model.status == AcousticModel.Status.available.rawValue
             })
@@ -398,7 +425,16 @@ class SpeechToTextRecognizeTests: XCTestCase {
             let audio = try Data(contentsOf: file)
 
             let settings = RecognitionSettings(contentType: format)
-            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: baseModelName, acousticCustomizationID: customizationID, failure: failWithError) { results in
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: baseModelName, acousticCustomizationID: customizationID) {
+                response, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let results = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
                 self.validateSTTResults(results: results, settings: settings)
                 XCTAssertNotNil(results.results)
                 XCTAssertEqual(results.results!.count, 1)

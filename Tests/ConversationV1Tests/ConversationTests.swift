@@ -1743,9 +1743,17 @@ class ConversationTests: XCTestCase {
             workspaceID: workspaceID,
             entity: entityName,
             export: true,
-            includeAudit: true,
-            failure: failWithError) {
-                mentionCollection in
+            includeAudit: true) {
+                response, error in
+
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let mentionCollection = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
                 for mention in mentionCollection.examples {
                     XCTAssertNotNil(mention.exampleText)
                     XCTAssertNotNil(mention.intentName)
@@ -2142,12 +2150,12 @@ class ConversationTests: XCTestCase {
 
     func testCreateAndDeleteDialogNode() {
         let description1 = "Create a dialog node."
-        let dialogOutput: [String: JSON] = [
+        let dialogNodeOutput = DialogNodeOutput(additionalProperties: [
             "text": .object([
                 "selection_policy": .string("random"),
                 "values": .array([.string("Yes you can!"), .string("Of course!")]),
-            ]),
-        ]
+            ])
+        ])
         let dialogMetadata: [String: JSON] = ["swift-sdk-test": .boolean(true)]
         let expectation1 = self.expectation(description: description1)
 
@@ -2156,7 +2164,7 @@ class ConversationTests: XCTestCase {
             dialogNode: "YesYouCan",
             description: "Reply affirmatively",
             conditions: "#order_pizza",
-            output: dialogOutput,
+            output: dialogNodeOutput,
             metadata: dialogMetadata,
             title: "YesYouCan",
             nodeType: "standard")
@@ -2177,7 +2185,7 @@ class ConversationTests: XCTestCase {
             XCTAssertEqual(node.conditions, "#order_pizza")
             XCTAssertNil(node.parent)
             XCTAssertNil(node.previousSibling)
-            XCTAssertEqual(node.output!, dialogOutput)
+            XCTAssertEqual(node.output!.additionalProperties["text"], dialogNodeOutput.additionalProperties["text"])
             XCTAssertNil(node.context)
             XCTAssertEqual(node.metadata!, dialogMetadata)
             XCTAssertNil(node.nextStep)

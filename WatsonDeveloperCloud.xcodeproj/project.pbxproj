@@ -538,6 +538,8 @@
 		CADA969B2110ABB500B5BD84 /* EntityMentionCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA968C2110ABB500B5BD84 /* EntityMentionCollection.swift */; };
 		CADA969C2110ABB500B5BD84 /* Mentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA968D2110ABB500B5BD84 /* Mentions.swift */; };
 		CADA969D2110ABB500B5BD84 /* WorkspaceSystemSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA968E2110ABB500B5BD84 /* WorkspaceSystemSettings.swift */; };
+		CADC4B8F214216FC00C76DE6 /* VisualRecognitionUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B8D2141BC9A00C76DE6 /* VisualRecognitionUnitTests.swift */; };
+		CADC4B912148741900C76DE6 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
 		CAF9A5C420ACED3E006C86B7 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */; };
 		CAF9A5CB20B75B3A006C86B7 /* VisualRecognitionWithIAMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */; };
 		CE6B98D41DF09D4B004CD6B5 /* face1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98D31DF09D4B004CD6B5 /* face1.jpg */; };
@@ -1160,6 +1162,8 @@
 		CADA968C2110ABB500B5BD84 /* EntityMentionCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityMentionCollection.swift; sourceTree = "<group>"; };
 		CADA968D2110ABB500B5BD84 /* Mentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mentions.swift; sourceTree = "<group>"; };
 		CADA968E2110ABB500B5BD84 /* WorkspaceSystemSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSystemSettings.swift; sourceTree = "<group>"; };
+		CADC4B8D2141BC9A00C76DE6 /* VisualRecognitionUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognitionUnitTests.swift; sourceTree = "<group>"; };
+		CADC4B902148741900C76DE6 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockURLProtocol.swift; path = Source/SupportingFiles/MockURLProtocol.swift; sourceTree = "<group>"; };
 		CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionWithIAMTests.swift; sourceTree = "<group>"; };
 		CE6B98D31DF09D4B004CD6B5 /* face1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face1.jpg; sourceTree = "<group>"; };
@@ -1851,6 +1855,7 @@
 				7A0F95B81C23288E004C01C0 /* Info-Release.plist */,
 				7A0F95C41C23288E004C01C0 /* Info-Tests.plist */,
 				CAD2687B20CB0195002BA2C4 /* LanguageTranslatorV3.h */,
+				CADC4B902148741900C76DE6 /* MockURLProtocol.swift */,
 				7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */,
 				1241DFCC1E3810BF00B8B33E /* NaturalLanguageUnderstandingV1.h */,
 				7A6711821DD0EEEB0070CA9D /* PersonalityInsightsV3.h */,
@@ -2024,6 +2029,7 @@
 				689A16A2203C9337002CFC66 /* VisualRecognition+UIImageTests.swift */,
 				7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */,
 				CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */,
+				CADC4B8D2141BC9A00C76DE6 /* VisualRecognitionUnitTests.swift */,
 			);
 			name = Tests;
 			path = ../../Tests/VisualRecognitionV3Tests;
@@ -3939,9 +3945,11 @@
 				920A243E214ADFB20077F10D /* SharedTests.swift in Sources */,
 				CAF9A5CB20B75B3A006C86B7 /* VisualRecognitionWithIAMTests.swift in Sources */,
 				7A6C7B4D1D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
+				CADC4B8F214216FC00C76DE6 /* VisualRecognitionUnitTests.swift in Sources */,
 				68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */,
 				7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */,
 				689A16A3203C9337002CFC66 /* VisualRecognition+UIImageTests.swift in Sources */,
+				CADC4B912148741900C76DE6 /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

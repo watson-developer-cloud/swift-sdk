@@ -31,7 +31,7 @@ public class VisualRecognition {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let session = URLSession(configuration: URLSessionConfiguration.default)
+    internal var session = URLSession(configuration: URLSessionConfiguration.default)
     internal var authMethod: AuthenticationMethod
     internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
     internal let version: String

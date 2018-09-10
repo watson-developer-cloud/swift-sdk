@@ -119,7 +119,10 @@ Then run the following command to build the dependencies and frameworks:
 $ carthage update --platform iOS
 ```
 
-Follow the remaining Carthage installation instructions [here](https://github.com/Carthage/Carthage#getting-started). Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. If you are using Speech to Text, be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application.
+Follow the remaining Carthage installation instructions [here](https://github.com/Carthage/Carthage#getting-started). Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. The following frameworks need to be added to your app:
+1. `RestKit.framework`
+1. Whichever services your app will be using (`AssistantV1.framework`, `DiscoveryV1.framework`, etc.)
+1. (**Speech to Text only**) `Starscream.framework`
 
 
 ### Swift Package Manager

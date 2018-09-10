@@ -19,6 +19,6 @@ IMPORTANT: The Conversation service is deprecated, and will be removed in the ne
   
   s.source_files          = 'Source/ConversationV1/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.1.0'
+  s.dependency              'IBMWatsonRestKit', '1.2.0'
   
 end

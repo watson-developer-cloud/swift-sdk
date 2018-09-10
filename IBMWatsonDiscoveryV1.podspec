@@ -19,6 +19,6 @@ as well as public and third-party data.
   
   s.source_files          = 'Source/DiscoveryV1/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.1.0'
+  s.dependency              'IBMWatsonRestKit', '1.2.0'
   
 end

@@ -19,6 +19,6 @@ return information for texts that it is not trained on.
   
   s.source_files          = 'Source/NaturalLanguageClassifierV1/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.1.0'
+  s.dependency              'IBMWatsonRestKit', '1.2.0'
   
 end

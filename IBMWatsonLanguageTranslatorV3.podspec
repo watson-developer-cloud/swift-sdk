@@ -17,6 +17,6 @@ IBM Watson™ Language Translator can identify the language of text and translat
 
   s.source_files          = 'Source/LanguageTranslatorV3/**/*.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.1.0'
+  s.dependency              'IBMWatsonRestKit', '1.2.0'
 
 end

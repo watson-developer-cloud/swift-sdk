@@ -24,6 +24,30 @@ struct Shared {
     static let sdkVersion = "0.33.0"
 
     static func configureRestRequest() {
-        RestRequest.sdkVersion = sdkVersion
+        RestRequest.userAgent = {
+            let sdk = "watson-apis-swift-sdk"
+
+            let operatingSystem: String = {
+                #if os(iOS)
+                return "iOS"
+                #elseif os(watchOS)
+                return "watchOS"
+                #elseif os(tvOS)
+                return "tvOS"
+                #elseif os(macOS)
+                return "macOS"
+                #elseif os(Linux)
+                return "Linux"
+                #else
+                return "Unknown"
+                #endif
+            }()
+            let operatingSystemVersion: String = {
+                // swiftlint:disable:next identifier_name
+                let os = ProcessInfo.processInfo.operatingSystemVersion
+                return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
+            }()
+            return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
+        }()
     }
 }

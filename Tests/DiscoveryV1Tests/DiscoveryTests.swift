@@ -1068,7 +1068,7 @@ class DiscoveryTests: XCTestCase {
             }
 
             XCTAssertEqual(result.documentID, documentID)
-            XCTAssertEqual(result.status, "available")
+            XCTAssert(result.status == "processing" || result.status == "available")
             XCTAssertGreaterThan(result.statusDescription.count, 0)
             XCTAssertEqual(result.filename, "KennedySpeech.html")
             XCTAssertEqual(result.fileType, "html")

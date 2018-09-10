@@ -41,7 +41,7 @@ let package = Package(
         .library(name: "VisualRecognitionV3", targets: ["VisualRecognitionV3"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/watson-developer-cloud/restkit.git", from: "1.0.0")
+        .package(url: "https://github.com/watson-developer-cloud/restkit.git", .branch("swift-sdk-1.0"))
     ],
     targets: [
         .target(name: "AssistantV1", dependencies: ["RestKit"]),

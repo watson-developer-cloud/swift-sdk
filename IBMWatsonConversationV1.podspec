@@ -15,7 +15,7 @@ IMPORTANT: The Conversation service is deprecated, and will be removed in the ne
 
   s.module_name           = 'Conversation'
   s.ios.deployment_target = '8.0'
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
   s.source_files          = 'Source/ConversationV1/**/*.swift'
 

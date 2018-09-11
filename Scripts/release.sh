@@ -46,6 +46,8 @@ sed -i '' -e "s/let sdkVersion = \".*\"/let sdkVersion = \"${releaseVersion}\"/g
 
 # Commit the podspec updates, move the git tag, and push to Github
 git add *.podspec
+git add README.md
+git add Source/SupportingFiles/Shared.swift
 git commit -m "Release SDK version ${releaseVersion}"
 ### DANGER ZONE ###
 git push

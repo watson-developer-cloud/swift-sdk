@@ -16,7 +16,9 @@ scenes, objects, faces, and other content. The response includes keywords that p
   s.ios.deployment_target = '8.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
-  s.source_files          = 'Source/VisualRecognitionV3/**/*.swift'
+  s.source_files          = 'Source/VisualRecognitionV3/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift'
+  s.exclude_files         = 'Source/VisualRecognitionV3/Shared.swift'
 
   s.dependency              'IBMWatsonRestKit', '1.2.0'
   

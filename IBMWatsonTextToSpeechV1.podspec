@@ -17,8 +17,10 @@ The service streams the results back to the client with minimal delay.
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
 
   s.source_files          = 'Source/TextToSpeechV1/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift',
                             'Source/SupportingFiles/Dependencies/Source/**/*'
-  s.exclude_files         = '**/config_types.h'
+  s.exclude_files         = 'Source/TextToSpeechV1/Shared.swift',
+                            '**/config_types.h'
 
   s.dependency              'IBMWatsonRestKit', '1.2.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'

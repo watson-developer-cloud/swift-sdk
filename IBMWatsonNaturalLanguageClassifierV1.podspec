@@ -17,7 +17,9 @@ return information for texts that it is not trained on.
   s.ios.deployment_target = '8.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
-  s.source_files          = 'Source/NaturalLanguageClassifierV1/**/*.swift'
+  s.source_files          = 'Source/NaturalLanguageClassifierV1/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift'
+  s.exclude_files         = 'Source/NaturalLanguageClassifierV1/Shared.swift'
 
   s.dependency              'IBMWatsonRestKit', '1.2.0'
   

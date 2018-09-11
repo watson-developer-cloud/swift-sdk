@@ -17,7 +17,9 @@ as well as public and third-party data.
   s.ios.deployment_target = '8.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
-  s.source_files          = 'Source/DiscoveryV1/**/*.swift'
+  s.source_files          = 'Source/DiscoveryV1/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift'
+  s.exclude_files         = 'Source/DiscoveryV1/Shared.swift'
 
   s.dependency              'IBMWatsonRestKit', '1.2.0'
   

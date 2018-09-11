@@ -21,7 +21,7 @@ import RestKit
 /// Contains functionality and information common to all of the services
 struct Shared {
 
-    static let sdkVersion = "0.33.0"
+    static let sdkVersion = "0.33.1"
 
     static func configureRestRequest() {
         RestRequest.userAgent = {

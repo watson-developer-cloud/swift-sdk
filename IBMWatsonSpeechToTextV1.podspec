@@ -18,8 +18,10 @@ of the audio signal. It continuously returns and retroactively updates a transcr
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
   s.source_files          = 'Source/SpeechToTextV1/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift',
                             'Source/SupportingFiles/Dependencies/Source/**/*'
-  s.exclude_files         = '**/config_types.h',
+  s.exclude_files         = 'Source/SpeechToTextV1/Shared.swift',
+                            '**/config_types.h',
                             '**/opus_header.h',
                             '**/opus_header.c'
 

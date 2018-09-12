@@ -1,6 +1,20 @@
 Change Log
 ==========
 
+## Version 0.34.0
+_2018-09-12_
+
+This release regenerates all services with documentation updates, and adds a couple of new properties to Speech to Text and Assistant/Conversation.
+
+This release includes the following new features:
+
+- Speech to Text: Adds the language models `de-DE_BroadbandModel`, `pt-BR_BroadbandModel`, and `pt-BR_NarrowbandModel`
+- Assistant/Conversation: Add the `actions` property to `MessageResponse` and `OutputData`
+
+## Version 0.33.1
+
+Internal bug fix regarding RestKit.framework. This should have no impact on users.
+
 ## Version 0.33.0
 _2018-08-31_
 

@@ -21,32 +21,28 @@ import RestKit
 /**
  The IBM&reg; Speech to Text service provides an API that uses IBM's speech-recognition capabilities to produce
  transcripts of spoken audio. The service can transcribe speech from various languages and audio formats. It addition to
- basic transcription, the service can produce detailed information about many aspects of the audio. For most languages,
- the service supports two sampling rates, broadband and narrowband. It returns all JSON response content in the UTF-8
- character set. For more information about the service, see the [IBM&reg; Cloud
+ basic transcription, the service can produce detailed information about many different aspects of the audio. For most
+ languages, the service supports two sampling rates, broadband and narrowband. It returns all JSON response content in
+ the UTF-8 character set.
+  For more information about the service, see the [IBM&reg; Cloud
  documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html).
  ### API usage guidelines
  * **Audio formats:** The service accepts audio in many formats (MIME types). See [Audio
  formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
- * **HTTP interfaces:** The service provides three HTTP interfaces for speech recognition. The sessionless interface
- includes a single synchronous method. The session-based interface includes multiple synchronous methods for maintaining
- a long, multi-turn exchange with the service. And the asynchronous interface provides multiple methods that use
- registered callbacks and polling for non-blocking recognition. See [The HTTP REST
+ * **HTTP interfaces:** The service provides two HTTP Representational State Transfer (REST) interfaces for speech
+ recognition. The basic interface includes a single synchronous method. The asynchronous interface provides multiple
+ methods that use registered callbacks and polling for non-blocking recognition. See [The HTTP
  interface](https://console.bluemix.net/docs/services/speech-to-text/http.html) and [The asynchronous HTTP
  interface](https://console.bluemix.net/docs/services/speech-to-text/async.html).
- * **Important:** The session-based interface is deprecated as of August 8, 2018, and will be removed from service on
- September 7, 2018. Use the sessionless, asynchronous, or WebSocket interface instead. For more information, see the
- August 8 service update in the [Release
- notes](https://console.bluemix.net/docs/services/speech-to-text/release-notes.html#August2018).
  * **WebSocket interface:** The service also offers a WebSocket interface for speech recognition. The WebSocket
  interface provides a full-duplex, low-latency communication channel. Clients send requests and audio to the service and
  receive results over a single connection in an asynchronous fashion. See [The WebSocket
  interface](https://console.bluemix.net/docs/services/speech-to-text/websockets.html).
- * **Customization:** Use language model customization to expand the vocabulary of a base model with domain-specific
- terminology. Use acoustic model customization to adapt a base model for the acoustic characteristics of your audio.
- Language model customization is generally available for production use by most supported languages; acoustic model
- customization is beta functionality that is available for all supported languages. See [The customization
- interface](https://console.bluemix.net/docs/services/speech-to-text/custom.html).
+ * **Customization:** The service offers two customization interfaces. Use language model customization to expand the
+ vocabulary of a base model with domain-specific terminology. Use acoustic model customization to adapt a base model for
+ the acoustic characteristics of your audio. Language model customization is generally available for production use by
+ most supported languages; acoustic model customization is beta functionality that is available for all supported
+ languages. See [The customization interface](https://console.bluemix.net/docs/services/speech-to-text/custom.html).
  * **Customization IDs:** Many methods accept a customization ID to identify a custom language or custom acoustic model.
  Customization IDs are Globally Unique Identifiers (GUIDs). They are hexadecimal strings that have the format
  `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.
@@ -238,17 +234,16 @@ public class SpeechToText {
     /**
      Recognize audio.
 
-     Sends audio and returns transcription results for a sessionless recognition request. Returns only the final
-     results; to enable interim results, use session-based requests or the WebSocket API. The service imposes a data
-     size limit of 100 MB. It automatically detects the endianness of the incoming audio and, for audio that includes
-     multiple channels, downmixes the audio to one-channel mono during transcoding. (For the `audio/l16` format, you can
-     specify the endianness.)
+     Sends audio and returns transcription results for a recognition request. Returns only the final results; to enable
+     interim results, use the WebSocket API. The service imposes a data size limit of 100 MB. It automatically detects
+     the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to
+     one-channel mono during transcoding. (For the `audio/l16` format, you can specify the endianness.)
      ### Streaming mode
       For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to
      `chunked` to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the
-     service receives no data chunk for 30 seconds and the service has no audio to transcribe for 30 seconds. The server
-     also closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio
-     (not processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.
+     service receives no data chunk for 30 seconds and it has no audio to transcribe for 30 seconds. The server also
+     closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio (not
+     processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.
      ### Audio formats (content types)
       Use the `Content-Type` header to specify the audio format (MIME type) of the audio. The service accepts the
      following formats:
@@ -276,33 +271,28 @@ public class SpeechToText {
      The multipart approach is intended for use with browsers for which JavaScript is disabled or when the parameters
      used with the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter
      this limit, for example, if you want to spot a very large number of keywords.
-     For information about submitting a multipart request, see [Submitting multipart requests as form
-     data](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
+     For information about submitting a multipart request, see [Making a multipart HTTP
+     request](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
 
      - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.
      - parameter contentType: The type of the input.
-     - parameter model: The identifier of the model that is to be used for the recognition request or, for the
-       **Create a session** method, with the new session.
+     - parameter model: The identifier of the model that is to be used for the recognition request.
      - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the
-       recognition request or, for the **Create a session** method, with the new session. The base model of the
-       specified custom language model must match the model specified with the `model` parameter. You must make the
-       request with service credentials created for the instance of the service that owns the custom model. By default,
-       no custom language model is used.
+       recognition request. The base model of the specified custom language model must match the model specified with
+       the `model` parameter. You must make the request with service credentials created for the instance of the service
+       that owns the custom model. By default, no custom language model is used.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
-       with the recognition request or, for the **Create a session** method, with the new session. The base model of the
-       specified custom acoustic model must match the model specified with the `model` parameter. You must make the
-       request with service credentials created for the instance of the service that owns the custom model. By default,
-       no custom acoustic model is used.
-     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition request
-       or, for the **Create a session** method, with the new session. Multiple versions of a base model can exist when a
-       model is updated for internal improvements. The parameter is intended primarily for use with custom models that
-       have been upgraded for a new base model. The default value depends on whether the parameter is used with or
-       without a custom model. For more information, see [Base model
-       version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
+       with the recognition request. The base model of the specified custom acoustic model must match the model
+       specified with the `model` parameter. You must make the request with service credentials created for the instance
+       of the service that owns the custom model. By default, no custom acoustic model is used.
+     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition
+       request. Multiple versions of a base model can exist when a model is updated for internal improvements. The
+       parameter is intended primarily for use with custom models that have been upgraded for a new base model. The
+       default value depends on whether the parameter is used with or without a custom model. For more information, see
+       [Base model version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
      - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the
-       recognition request or, for sessions, with the **Create a session** method, the customization weight tells the
-       service how much weight to give to words from the custom language model compared to those from the base model for
-       the current request.
+       recognition request, the customization weight tells the service how much weight to give to words from the custom
+       language model compared to those from the base model for the current request.
        Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model
        when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that
        was specified when the custom model was trained.
@@ -647,8 +637,7 @@ public class SpeechToText {
 
      - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.
      - parameter contentType: The type of the input.
-     - parameter model: The identifier of the model that is to be used for the recognition request or, for the
-       **Create a session** method, with the new session.
+     - parameter model: The identifier of the model that is to be used for the recognition request.
      - parameter callbackUrl: A URL to which callback notifications are to be sent. The URL must already be
        successfully white-listed by using the **Register a callback** method. You can include the same callback URL with
        any number of job creation requests. Omit the parameter to poll the service for job completion and results.
@@ -663,10 +652,11 @@ public class SpeechToText {
        notification includes the results of the request.
        * `recognitions.failed` generates a callback notification if the service experiences an error while processing
        the job.
-       Omit the parameter to subscribe to the default events: `recognitions.started`, `recognitions.completed`, and
-       `recognitions.failed`. The `recognitions.completed` and `recognitions.completed_with_results` events are
-       incompatible; you can specify only of the two events. If the job does not include a callback URL, omit the
-       parameter.
+       The `recognitions.completed` and `recognitions.completed_with_results` events are incompatible. You can specify
+       only of the two events.
+       If the job includes a callback URL, omit the parameter to subscribe to the default events:
+       `recognitions.started`, `recognitions.completed`, and `recognitions.failed`. If the job does not include a
+       callback URL, omit the parameter.
      - parameter userToken: If the job includes a callback URL, a user-specified string that the service is to include
        with each callback notification for the job; the token allows the user to maintain an internal mapping between
        jobs and notification events. If the job does not include a callback URL, omit the parameter.
@@ -674,25 +664,21 @@ public class SpeechToText {
        finished. If not delivered via a callback, the results must be retrieved within this time. Omit the parameter to
        use a time to live of one week. The parameter is valid with or without a callback URL.
      - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the
-       recognition request or, for the **Create a session** method, with the new session. The base model of the
-       specified custom language model must match the model specified with the `model` parameter. You must make the
-       request with service credentials created for the instance of the service that owns the custom model. By default,
-       no custom language model is used.
+       recognition request. The base model of the specified custom language model must match the model specified with
+       the `model` parameter. You must make the request with service credentials created for the instance of the service
+       that owns the custom model. By default, no custom language model is used.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
-       with the recognition request or, for the **Create a session** method, with the new session. The base model of the
-       specified custom acoustic model must match the model specified with the `model` parameter. You must make the
-       request with service credentials created for the instance of the service that owns the custom model. By default,
-       no custom acoustic model is used.
-     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition request
-       or, for the **Create a session** method, with the new session. Multiple versions of a base model can exist when a
-       model is updated for internal improvements. The parameter is intended primarily for use with custom models that
-       have been upgraded for a new base model. The default value depends on whether the parameter is used with or
-       without a custom model. For more information, see [Base model
-       version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
+       with the recognition request. The base model of the specified custom acoustic model must match the model
+       specified with the `model` parameter. You must make the request with service credentials created for the instance
+       of the service that owns the custom model. By default, no custom acoustic model is used.
+     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition
+       request. Multiple versions of a base model can exist when a model is updated for internal improvements. The
+       parameter is intended primarily for use with custom models that have been upgraded for a new base model. The
+       default value depends on whether the parameter is used with or without a custom model. For more information, see
+       [Base model version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
      - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the
-       recognition request or, for sessions, with the **Create a session** method, the customization weight tells the
-       service how much weight to give to words from the custom language model compared to those from the base model for
-       the current request.
+       recognition request, the customization weight tells the service how much weight to give to words from the custom
+       language model compared to those from the base model for the current request.
        Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model
        when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that
        was specified when the custom model was trained.
@@ -1922,12 +1908,14 @@ public class SpeechToText {
        the tokens of compound words.
        Omit this field for the **Add a custom word** method.
      - parameter soundsLike: An array of sounds-like pronunciations for the custom word. Specify how words that are
-       difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users. For a word that is not in
-       the service's base vocabulary, omit the parameter to have the service automatically generate a sounds-like
-       pronunciation for the word. For a word that is in the service's base vocabulary, use the parameter to specify
-       additional pronunciations for the word. You cannot override the default pronunciation of a word; pronunciations
-       you add augment the pronunciation from the base vocabulary. A word can have at most five sounds-like
-       pronunciations, and a pronunciation can include at most 40 characters not including spaces.
+       difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users.
+       * For a word that is not in the service's base vocabulary, omit the parameter to have the service automatically
+       generate a sounds-like pronunciation for the word.
+       * For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations for
+       the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
+       pronunciation from the base vocabulary.
+       A word can have at most five sounds-like pronunciations. A pronunciation can include at most 40 characters not
+       including spaces.
      - parameter displayAs: An alternative spelling for the custom word when it appears in a transcript. Use the
        parameter when you want the word to have a spelling that is different from its usual representation or from its
        spelling in corpora training data.

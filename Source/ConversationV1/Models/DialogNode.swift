@@ -172,7 +172,8 @@ public struct DialogNode: Decodable {
     public var digressOutSlots: String?
 
     /**
-     A label that can be displayed externally to describe the purpose of the node to users.
+     A label that can be displayed externally to describe the purpose of the node to users. This string must be no
+     longer than 512 characters.
      */
     public var userLabel: String?
 

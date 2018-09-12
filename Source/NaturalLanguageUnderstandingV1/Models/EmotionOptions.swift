@@ -22,7 +22,7 @@ import Foundation
 public struct EmotionOptions: Encodable {
 
     /**
-     Set this to false to hide document-level emotion results.
+     Set this to `false` to hide document-level emotion results.
      */
     public var document: Bool?
 
@@ -40,7 +40,7 @@ public struct EmotionOptions: Encodable {
     /**
      Initialize a `EmotionOptions` with member variables.
 
-     - parameter document: Set this to false to hide document-level emotion results.
+     - parameter document: Set this to `false` to hide document-level emotion results.
      - parameter targets: Emotion results will be returned for each target string that is found in the document.
 
      - returns: An initialized `EmotionOptions`.

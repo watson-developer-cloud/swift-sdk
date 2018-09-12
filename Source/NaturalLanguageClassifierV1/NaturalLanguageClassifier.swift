@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  IBM Watson&trade; Natural Language Classifier uses machine learning algorithms to return the top matching predefined
@@ -42,6 +43,7 @@ public class NaturalLanguageClassifier {
      */
     public init(username: String, password: String) {
         self.authMethod = BasicAuthentication(username: username, password: password)
+        Shared.configureRestRequest()
     }
 
     /**
@@ -52,6 +54,7 @@ public class NaturalLanguageClassifier {
      */
     public init(apiKey: String, iamUrl: String? = nil) {
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        Shared.configureRestRequest()
     }
 
     /**
@@ -61,6 +64,7 @@ public class NaturalLanguageClassifier {
      */
     public init(accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
+        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {
@@ -101,7 +105,7 @@ public class NaturalLanguageClassifier {
      classify text.
 
      - parameter classifierID: Classifier ID to use.
-     - parameter text: The submitted phrase.
+     - parameter text: The submitted phrase. The maximum length is 2048 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

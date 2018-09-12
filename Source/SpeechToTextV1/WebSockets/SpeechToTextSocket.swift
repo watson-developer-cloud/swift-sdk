@@ -16,6 +16,7 @@
 
 import Foundation
 import Starscream
+import RestKit
 
 internal class SpeechToTextSocket: WebSocketDelegate {
 
@@ -156,13 +157,16 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
     }
 
-    internal static func buildURL(url: String, model: String?, customizationID: String?, learningOptOut: Bool?) -> URL? {
+    internal static func buildURL(url: String, model: String?, customizationID: String?, acousticCustomizationID: String?, learningOptOut: Bool?) -> URL? {
         var queryParameters = [URLQueryItem]()
         if let model = model {
             queryParameters.append(URLQueryItem(name: "model", value: model))
         }
         if let customizationID = customizationID {
             queryParameters.append(URLQueryItem(name: "customization_id", value: customizationID))
+        }
+        if let acousticCustomizationID = acousticCustomizationID {
+            queryParameters.append(URLQueryItem(name: "acoustic_customization_id", value: acousticCustomizationID))
         }
         if let learningOptOut = learningOptOut {
             let value = "\(learningOptOut)"

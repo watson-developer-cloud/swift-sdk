@@ -61,15 +61,15 @@ class ToneAnalyzerTests: XCTestCase {
 
     /** Instantiate Tone Analyzer. */
     func instantiateToneAnalyzer() {
-        let version = "2017-09-21"
-        if let apiKey = Credentials.ToneAnalyzerAPIKey {
+        let version = "2018-08-16"
+        if let apiKey = WatsonCredentials.ToneAnalyzerAPIKey {
             toneAnalyzer = ToneAnalyzer(version: version, apiKey: apiKey)
         } else {
-            let username = Credentials.ToneAnalyzerUsername
-            let password = Credentials.ToneAnalyzerPassword
+            let username = WatsonCredentials.ToneAnalyzerUsername
+            let password = WatsonCredentials.ToneAnalyzerPassword
             toneAnalyzer = ToneAnalyzer(username: username, password: password, version: version)
         }
-        if let url = Credentials.ToneAnalyzerURL {
+        if let url = WatsonCredentials.ToneAnalyzerURL {
             toneAnalyzer.serviceURL = url
         }
         toneAnalyzer.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"

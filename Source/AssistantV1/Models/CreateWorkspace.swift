@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** CreateWorkspace. */
 internal struct CreateWorkspace: Encodable {
@@ -67,6 +68,11 @@ internal struct CreateWorkspace: Encodable {
      */
     public var learningOptOut: Bool?
 
+    /**
+     Global settings for the workspace.
+     */
+    public var systemSettings: WorkspaceSystemSettings?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
@@ -78,6 +84,7 @@ internal struct CreateWorkspace: Encodable {
         case counterexamples = "counterexamples"
         case metadata = "metadata"
         case learningOptOut = "learning_opt_out"
+        case systemSettings = "system_settings"
     }
 
     /**
@@ -96,6 +103,7 @@ internal struct CreateWorkspace: Encodable {
      - parameter metadata: Any metadata related to the workspace.
      - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service
        improvements. `true` indicates that workspace training data is not to be used.
+     - parameter systemSettings: Global settings for the workspace.
 
      - returns: An initialized `CreateWorkspace`.
     */
@@ -108,7 +116,8 @@ internal struct CreateWorkspace: Encodable {
         dialogNodes: [CreateDialogNode]? = nil,
         counterexamples: [CreateCounterexample]? = nil,
         metadata: [String: JSON]? = nil,
-        learningOptOut: Bool? = nil
+        learningOptOut: Bool? = nil,
+        systemSettings: WorkspaceSystemSettings? = nil
     )
     {
         self.name = name
@@ -120,6 +129,7 @@ internal struct CreateWorkspace: Encodable {
         self.counterexamples = counterexamples
         self.metadata = metadata
         self.learningOptOut = learningOptOut
+        self.systemSettings = systemSettings
     }
 
 }

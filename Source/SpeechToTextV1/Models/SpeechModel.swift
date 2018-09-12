@@ -49,12 +49,6 @@ public struct SpeechModel: Decodable {
      */
     public var description: String
 
-    /**
-     The URI for the model for use with the **Create a session** method. This field is returned only by the **Get a
-     model** method.
-     */
-    public var sessions: String?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
@@ -63,7 +57,6 @@ public struct SpeechModel: Decodable {
         case url = "url"
         case supportedFeatures = "supported_features"
         case description = "description"
-        case sessions = "sessions"
     }
 
 }

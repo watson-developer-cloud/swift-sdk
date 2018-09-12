@@ -19,6 +19,7 @@
 
 import Foundation
 import AVFoundation
+import RestKit
 
 private var microphoneSession: SpeechToTextSession?
 
@@ -49,7 +50,7 @@ extension SpeechToText {
     {
         do {
             let data = try Data(contentsOf: audio)
-            recognize(
+            recognizeUsingWebSocket(
                 audio: data,
                 settings: settings,
                 model: model,
@@ -67,7 +68,7 @@ extension SpeechToText {
     }
 
     /**
-     Perform speech recognition for audio data.
+     Perform speech recognition for audio data using WebSockets.
 
      - parameter audio: The audio data to transcribe.
      - parameter settings: The configuration to use for this recognition request.
@@ -76,17 +77,24 @@ extension SpeechToText {
      - parameter customizationID: The GUID of a custom language model that is to be used with the
        request. The base language model of the specified custom language model must match the
        model specified with the `model` parameter. By default, no custom model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
+       that is to be used with the recognition request. The base model of the specified custom
+       acoustic model must match the model specified with the `model` parameter. By default, no
+       custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
        a final or interim transcription is received.
      */
-    public func recognize(
+    public func recognizeUsingWebSocket(
         audio: Data,
         settings: RecognitionSettings,
         model: String? = nil,
         customizationID: String? = nil,
+        acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
+        headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
     {
         // create SpeechToTextSession
@@ -94,6 +102,7 @@ extension SpeechToText {
             authMethod: authMethod,
             model: model,
             customizationID: customizationID,
+            acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut
         )
 
@@ -104,6 +113,9 @@ extension SpeechToText {
 
         // set headers
         session.defaultHeaders = defaultHeaders
+        if let headers = headers {
+            session.defaultHeaders.merge(headers) { (_, new) in new }
+        }
 
         // set callbacks
         session.onResults = { result in
@@ -142,9 +154,14 @@ extension SpeechToText {
      - parameter customizationID: The GUID of a custom language model that is to be used with the
        request. The base language model of the specified custom language model must match the
        model specified with the `model` parameter. By default, no custom model is used.
+     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
+       that is to be used with the recognition request. The base model of the specified custom
+       acoustic model must match the model specified with the `model` parameter. By default, no
+       custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter compress: Should microphone audio be compressed to Opus format?
        (Opus compression reduces latency and bandwidth.)
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
        a final or interim transcription is received.
@@ -153,8 +170,10 @@ extension SpeechToText {
         settings: RecognitionSettings,
         model: String? = nil,
         customizationID: String? = nil,
+        acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
         compress: Bool = true,
+        headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
     {
         // make sure the AVAudioSession shared instance is properly configured
@@ -189,6 +208,7 @@ extension SpeechToText {
             password: basicAuth.password,
             model: model,
             customizationID: customizationID,
+            acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut
         )
 
@@ -199,6 +219,9 @@ extension SpeechToText {
 
         // set headers
         session.defaultHeaders = defaultHeaders
+        if let headers = headers {
+            session.defaultHeaders.merge(headers) { (_, new) in new }
+        }
 
         // set callbacks
         session.onResults = { result in
@@ -231,6 +254,22 @@ extension SpeechToText {
         microphoneSession?.stopMicrophone()
         microphoneSession?.stopRequest()
         microphoneSession?.disconnect()
+    }
+}
+
+extension SpeechToText {
+
+    @available(*, deprecated, message: "The recognize method has been deprecated in favor of recognizeUsingWebSocket method.  This method will be removed in a future release.")
+    public func recognize(
+        audio: Data,
+        settings: RecognitionSettings,
+        model: String? = nil,
+        customizationID: String? = nil,
+        learningOptOut: Bool? = nil,
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
+    {
+        recognizeUsingWebSocket(audio: audio, settings: settings, model: model, customizationID: customizationID,
+                                learningOptOut: learningOptOut, completionHandler: completionHandler)
     }
 }
 

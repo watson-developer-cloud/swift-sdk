@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to
@@ -47,6 +48,7 @@ public class Discovery {
     public init(username: String, password: String, version: String) {
         self.authMethod = BasicAuthentication(username: username, password: password)
         self.version = version
+        Shared.configureRestRequest()
     }
 
     /**
@@ -58,8 +60,9 @@ public class Discovery {
      - parameter iamUrl: The URL for the IAM service.
      */
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.version = version
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        self.version = version
+        Shared.configureRestRequest()
     }
 
     /**
@@ -70,8 +73,9 @@ public class Discovery {
      - parameter accessToken: An access token for the service.
      */
     public init(version: String, accessToken: String) {
-        self.version = version
         self.authMethod = IAMAccessToken(accessToken: accessToken)
+        self.version = version
+        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {
@@ -114,14 +118,14 @@ public class Discovery {
 
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
-     - parameter size: **Deprecated**: Size of the environment.
+     - parameter size: Size of the environment.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createEnvironment(
         name: String,
         description: String? = nil,
-        size: Int? = nil,
+        size: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
     {
@@ -250,8 +254,8 @@ public class Discovery {
     /**
      Update an environment.
 
-     Updates an environment. The environment's `name` and  `description` parameters can be changed. You must specify a
-     `name` for the environment.
+     Updates an environment. The environment's **name** and  **description** parameters can be changed. You must specify
+     a **name** for the environment.
 
      - parameter environmentID: The ID of the environment.
      - parameter name: Name that identifies the environment.
@@ -401,7 +405,7 @@ public class Discovery {
      Add configuration.
 
      Creates a new configuration.
-     If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they are
+     If the input configuration contains the **configuration_id**, **created**, or **updated** properties, then they are
      ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be
      removed when copying a configuration.
      The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error.
@@ -415,6 +419,7 @@ public class Discovery {
      - parameter enrichments: An array of document enrichment settings for the configuration.
      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.
+     - parameter source: Object containing source parameters for the configuration.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -425,11 +430,12 @@ public class Discovery {
         conversions: Conversions? = nil,
         enrichments: [Enrichment]? = nil,
         normalizations: [NormalizationOperation]? = nil,
+        source: Source? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
-        let createConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations)
+        let createConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
         guard let body = try? JSONEncoder().encode(createConfigurationRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -569,9 +575,9 @@ public class Discovery {
 
      Replaces an existing configuration.
        * Completely replaces the original configuration.
-       * The `configuration_id`, `updated`, and `created` fields are accepted in the request, but they are ignored, and
-     an error is not generated. It is also acceptable for users to submit an updated configuration with none of the
-     three properties.
+       * The **configuration_id**, **updated**, and **created** fields are accepted in the request, but they are
+     ignored, and an error is not generated. It is also acceptable for users to submit an updated configuration with
+     none of the three properties.
        * Documents are processed with a snapshot of the configuration as it was at the time the document was submitted
      to be ingested. This means that already submitted documents will not see any updates made to the configuration.
 
@@ -583,6 +589,7 @@ public class Discovery {
      - parameter enrichments: An array of document enrichment settings for the configuration.
      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.
+     - parameter source: Object containing source parameters for the configuration.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -594,11 +601,12 @@ public class Discovery {
         conversions: Conversions? = nil,
         enrichments: [Enrichment]? = nil,
         normalizations: [NormalizationOperation]? = nil,
+        source: Source? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
     {
         // construct body
-        let updateConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations)
+        let updateConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
         guard let body = try? JSONEncoder().encode(updateConfigurationRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -695,14 +703,14 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter configuration: The configuration to use to process the document. If this part is provided, then the
-       provided configuration is used to process the document. If the `configuration_id` is also provided (both are
+       provided configuration is used to process the document. If the **configuration_id** is also provided (both are
        present at the same time), then request is rejected. The maximum supported configuration size is 1 MB.
        Configuration parts larger than 1 MB are rejected.
        See the `GET /configurations/{configuration_id}` operation for an example configuration.
      - parameter step: Specify to only run the input document through the given step instead of running the input
        document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
-     - parameter configurationID: The ID of the configuration to use to process the document. If the `configuration`
-       form part is also provided (both are present at the same time), then request will be rejected.
+     - parameter configurationID: The ID of the configuration to use to process the document. If the **configuration**
+       form part is also provided (both are present at the same time), then the request will be rejected.
      - parameter file: The content of the document to ingest. The maximum supported file size is 50 megabytes. Files
        larger than 50 megabytes is rejected.
      - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against
@@ -1159,14 +1167,15 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter expansions: An array of query expansion definitions.
-        Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms.
-       Each expansion object can be configured so that all terms are expanded to all other terms in the object -
-       bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.
-        To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the
-       `expanded_terms` array are then expanded to the other items in the same array.
-        To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`.
-       When items in the `input_terms` array are present in a query, they are expanded using the items listed in the
-       `expanded_terms` array.
+        Each object in the **expansions** array represents a term or set of terms that will be expanded into other
+       terms. Each expansion object can be configured as bidirectional or unidirectional. Bidirectional means that all
+       terms are expanded to all other terms in the object. Unidirectional means that a set list of terms can be
+       expanded into a second list of terms.
+        To create a bi-directional expansion specify an **expanded_terms** array. When found in a query, all items in
+       the **expanded_terms** array are then expanded to the other items in the same array.
+        To create a uni-directional expansion, specify both an array of **input_terms** and an array of
+       **expanded_terms**. When items in the **input_terms** array are present in a query, they are expanded using the
+       items listed in the **expanded_terms** array.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1269,12 +1278,12 @@ public class Discovery {
      Add a document.
 
      Add a document to a collection with optional metadata.
-       * The `version` query parameter is still required.
+       * The **version** query parameter is still required.
        * Returns immediately after the system has accepted the document for processing.
        * The user must provide document content, metadata, or both. If the request is missing both document content and
      metadata, it is rejected.
-       * The user can set the `Content-Type` parameter on the `file` part to indicate the media type of the document. If
-     the `Content-Type` parameter is missing or is one of the generic media types (for example,
+       * The user can set the **Content-Type** parameter on the **file** part to indicate the media type of the
+     document. If the **Content-Type** parameter is missing or is one of the generic media types (for example,
      `application/octet-stream`), then the service attempts to automatically detect the document's media type.
        * The following field names are reserved and will be filtered out if present after normalization: `id`, `score`,
      `highlight`, and any field with the prefix of: `_`, `+`, or `-`
@@ -1551,14 +1560,15 @@ public class Discovery {
        sense of concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use `natural_language_query` and `query` at the same time.
+       results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
+       time.
      - parameter passages: A passages query that returns the most relevant passages from the results.
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
+     - parameter count: Number of results to return.
      - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10, and the offset is 8, it returns the last two results.
@@ -1574,20 +1584,21 @@ public class Discovery {
      - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
        is `400`. The minimum is `50`. The maximum is `2000`.
      - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based
-       on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only,
-       `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
+       on the contents of the **title** field) are removed. Duplicate comparison is limited to the current query only;
+       **offset** is not considered. This parameter is currently Beta functionality.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
-       returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This
+       returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
-       the `similar.document_ids` parameter. The default is `false`.
+       the **similar.document_ids** parameter.
      - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
        documents.
-       **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-       document similarity search to include the natural language query. Other query parameters, such as `filter` and
-       `query` are subsequently applied and reduce the query scope.
+       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+       the document similarity search to include the natural language query. Other query parameters, such as **filter**
+       and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
+     - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1612,6 +1623,7 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
     {
@@ -1621,6 +1633,9 @@ public class Discovery {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
+        if let loggingOptOut = loggingOptOut {
+            headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1733,14 +1748,15 @@ public class Discovery {
        sense of concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use `natural_language_query` and `query` at the same time.
+       results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
+       time.
      - parameter passages: A passages query that returns the most relevant passages from the results.
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
+     - parameter count: Number of results to return.
      - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10, and the offset is 8, it returns the last two results.
@@ -1756,15 +1772,15 @@ public class Discovery {
      - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
        is `400`. The minimum is `50`. The maximum is `2000`.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
-       returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This
+       returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
-       the `similar.document_ids` parameter. The default is `false`.
+       the **similar.document_ids** parameter.
      - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
        documents.
-       **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-       document similarity search to include the natural language query. Other query parameters, such as `filter` and
-       `query` are subsequently applied and reduce the query scope.
+       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+       the document similarity search to include the natural language query. Other query parameters, such as **filter**
+       and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -1828,7 +1844,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -1905,13 +1921,14 @@ public class Discovery {
        sense of concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use `natural_language_query` and `query` at the same time.
+       results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
+       time.
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
+     - parameter count: Number of results to return.
      - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10, and the offset is 8, it returns the last two results.
@@ -1921,20 +1938,27 @@ public class Discovery {
      - parameter highlight: When true a highlight field is returned for each result which contains the fields that
        match the query with `<em></em>` tags around the matching query terms. Defaults to false.
      - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based
-       on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only,
-       `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
+       on the contents of the **title** field) are removed. Duplicate comparison is limited to the current query only;
+       **offset** is not considered. This parameter is currently Beta functionality.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
-       returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This
+       returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
-       the `similar.document_ids` parameter. The default is `false`.
+       the **similar.document_ids** parameter.
      - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
        documents.
-       **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-       document similarity search to include the natural language query. Other query parameters, such as `filter` and
-       `query` are subsequently applied and reduce the query scope.
+       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+       the document similarity search to include the natural language query. Other query parameters, such as **filter**
+       and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
+     - parameter passages: A passages query that returns the most relevant passages from the results.
+     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not
+       specified, then all top-level fields are included.
+     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
+       requested total is not found. The default is `10`. The maximum is `100`.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
+       is `400`. The minimum is `50`. The maximum is `2000`.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1955,6 +1979,10 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        passages: Bool? = nil,
+        passagesFields: [String]? = nil,
+        passagesCount: Int? = nil,
+        passagesCharacters: Int? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
     {
@@ -1990,7 +2018,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2023,6 +2051,22 @@ public class Discovery {
         }
         if let similarFields = similarFields {
             let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let passages = passages {
+            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesFields = passagesFields {
+            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCount = passagesCount {
+            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
+            queryParameters.append(queryParameter)
+        }
+        if let passagesCharacters = passagesCharacters {
+            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
             queryParameters.append(queryParameter)
         }
 
@@ -2061,13 +2105,14 @@ public class Discovery {
        sense of concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use `natural_language_query` and `query` at the same time.
+       results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
+       time.
      - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
        answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
        time series. For a full list of possible aggregrations, see the Query reference.
-     - parameter count: Number of documents to return.
+     - parameter count: Number of results to return.
      - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10, and the offset is 8, it returns the last two results.
@@ -2077,15 +2122,15 @@ public class Discovery {
      - parameter highlight: When true a highlight field is returned for each result which contains the fields that
        match the query with `<em></em>` tags around the matching query terms. Defaults to false.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
-       returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This
+       returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
-       the `similar.document_ids` parameter. The default is `false`.
+       the **similar.document_ids** parameter.
      - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
        documents.
-       **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-       document similarity search to include the natural language query. Other query parameters, such as `filter` and
-       `query` are subsequently applied and reduce the query scope.
+       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+       the document similarity search to include the natural language query. Other query parameters, such as **filter**
+       and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -2142,7 +2187,7 @@ public class Discovery {
             queryParameters.append(queryParameter)
         }
         if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return_fields", value: returnFields.joined(separator: ","))
+            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2914,6 +2959,688 @@ public class Discovery {
 
         // execute REST request
         request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     Create event.
+
+     The **Events** API can be used to create log entries that are associated with specific queries. For example, you
+     can record which documents in the results set were \"clicked\" by a user and when that click occured.
+
+     - parameter type: The event type to be created.
+     - parameter data: Data object used to create a query event.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createEvent(
+        type: String,
+        data: EventData,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<CreateEventResponse>?, Error?) -> Void)
+    {
+        // construct body
+        let createEventRequest = CreateEventObject(type: type, data: data)
+        guard let body = try? JSONEncoder().encode(createEventRequest) else {
+            completionHandler(nil, RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceURL + "/v1/events",
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Search the query and event log.
+
+     Searches the query and event log to find query sessions that match the specified criteria. Searching the **logs**
+     endpoint uses the standard Discovery query syntax for the parameters that are supported.
+
+     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
+       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
+       sense of concepts in the data set.
+     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
+       with the most relevant documents listed first. Use a query search when you want to find the most relevant search
+       results. You cannot use **natural_language_query** and **query** at the same time.
+     - parameter count: Number of results to return.
+     - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
+       results that are returned is 10, and the offset is 8, it returns the last two results.
+     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
+       direction if no prefix is specified.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func queryLog(
+        filter: String? = nil,
+        query: String? = nil,
+        count: Int? = nil,
+        offset: Int? = nil,
+        sort: [String]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<LogQueryResponse>?, Error?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let query = query {
+            let queryParameter = URLQueryItem(name: "query", value: query)
+            queryParameters.append(queryParameter)
+        }
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+        if let offset = offset {
+            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/logs",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Number of queries over time.
+
+     Total number of queries using the **natural_language_query** parameter over a specific time window.
+
+     - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter endTime: Metric is computed from data recorded before this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter resultType: The type of result to consider when calculating the metric.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getMetricsQuery(
+        startTime: String? = nil,
+        endTime: String? = nil,
+        resultType: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let startTime = startTime {
+            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            queryParameters.append(queryParameter)
+        }
+        if let endTime = endTime {
+            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            queryParameters.append(queryParameter)
+        }
+        if let resultType = resultType {
+            let queryParameter = URLQueryItem(name: "result_type", value: resultType)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/number_of_queries",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Number of queries with an event over time.
+
+     Total number of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+     over a specified time window. This metric requires having integrated event tracking in your application using the
+     **Events** API.
+
+     - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter endTime: Metric is computed from data recorded before this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter resultType: The type of result to consider when calculating the metric.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getMetricsQueryEvent(
+        startTime: String? = nil,
+        endTime: String? = nil,
+        resultType: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let startTime = startTime {
+            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            queryParameters.append(queryParameter)
+        }
+        if let endTime = endTime {
+            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            queryParameters.append(queryParameter)
+        }
+        if let resultType = resultType {
+            let queryParameter = URLQueryItem(name: "result_type", value: resultType)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/number_of_queries_with_event",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Number of queries with no search results over time.
+
+     Total number of queries using the **natural_language_query** parameter that have no results returned over a
+     specified time window.
+
+     - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter endTime: Metric is computed from data recorded before this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter resultType: The type of result to consider when calculating the metric.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getMetricsQueryNoResults(
+        startTime: String? = nil,
+        endTime: String? = nil,
+        resultType: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let startTime = startTime {
+            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            queryParameters.append(queryParameter)
+        }
+        if let endTime = endTime {
+            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            queryParameters.append(queryParameter)
+        }
+        if let resultType = resultType {
+            let queryParameter = URLQueryItem(name: "result_type", value: resultType)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/number_of_queries_with_no_search_results",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Percentage of queries with an associated event.
+
+     The percentage of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+     over a specified time window.  This metric requires having integrated event tracking in your application using the
+     **Events** API.
+
+     - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter endTime: Metric is computed from data recorded before this timestamp; must be in
+       `YYYY-MM-DDThh:mm:ssZ` format.
+     - parameter resultType: The type of result to consider when calculating the metric.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getMetricsEventRate(
+        startTime: String? = nil,
+        endTime: String? = nil,
+        resultType: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let startTime = startTime {
+            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            queryParameters.append(queryParameter)
+        }
+        if let endTime = endTime {
+            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            queryParameters.append(queryParameter)
+        }
+        if let resultType = resultType {
+            let queryParameter = URLQueryItem(name: "result_type", value: resultType)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/event_rate",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Most frequent query tokens with an event.
+
+     The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding
+     \"click\" event rate within the recording period (queries and events are stored for 30 days). A query token is an
+     individual word or unigram within the query string.
+
+     - parameter count: Number of results to return.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getMetricsQueryTokenEvent(
+        count: Int? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<MetricTokenResponse>?, Error?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v1/metrics/top_query_tokens_with_event_rate",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     List credentials.
+
+     List all the source credentials that have been created for this service instance.
+      **Note:**  All credentials are sent over an encrypted connection and encrypted at rest.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listCredentials(
+        environmentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<CredentialsList>?, Error?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Create credentials.
+
+     Creates a set of credentials to connect to a remote source. Created credentials are used in a configuration to
+     associate a collection with the remote source.
+     **Note:** All credentials are sent over an encrypted connection and encrypted at rest.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter sourceType: The source that this credentials object connects to.
+       -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
+       -  `salesforce` indicates the credentials are used to connect to Salesforce.
+       -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     - parameter credentialDetails: Object containing details of the stored credentials.
+       Obtain credentials for your source from the administrator of the source.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createCredentials(
+        environmentID: String,
+        sourceType: String? = nil,
+        credentialDetails: CredentialDetails? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Credentials>?, Error?) -> Void)
+    {
+        // construct body
+        let createCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
+        guard let body = try? JSONEncoder().encode(createCredentialsRequest) else {
+            completionHandler(nil, RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     View Credentials.
+
+     Returns details about the specified credentials.
+      **Note:** Secure credential information such as a password or SSH key is never returned and must be obtained from
+     the source system.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter credentialID: The unique identifier for a set of source credentials.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getCredentials(
+        environmentID: String,
+        credentialID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Credentials>?, Error?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Update credentials.
+
+     Updates an existing set of source credentials.
+     **Note:** All credentials are sent over an encrypted connection and encrypted at rest.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter credentialID: The unique identifier for a set of source credentials.
+     - parameter sourceType: The source that this credentials object connects to.
+       -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
+       -  `salesforce` indicates the credentials are used to connect to Salesforce.
+       -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     - parameter credentialDetails: Object containing details of the stored credentials.
+       Obtain credentials for your source from the administrator of the source.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func updateCredentials(
+        environmentID: String,
+        credentialID: String,
+        sourceType: String? = nil,
+        credentialDetails: CredentialDetails? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Credentials>?, Error?) -> Void)
+    {
+        // construct body
+        let updateCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
+        guard let body = try? JSONEncoder().encode(updateCredentialsRequest) else {
+            completionHandler(nil, RestError.serializationError)
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "PUT",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete credentials.
+
+     Deletes a set of stored credentials from your Discovery instance.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter credentialID: The unique identifier for a set of source credentials.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteCredentials(
+        environmentID: String,
+        credentialID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DeleteCredentials>?, Error?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.encodingError)
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

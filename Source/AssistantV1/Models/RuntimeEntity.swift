@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  A term from the request that was identified as an entity.

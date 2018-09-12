@@ -19,6 +19,7 @@
 import Foundation
 import CoreML
 import Vision
+import RestKit
 
 @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
 extension VisualRecognition {
@@ -131,27 +132,18 @@ extension VisualRecognition {
     /**
      Classify an image using a Core ML model from the local filesystem.
 
-     - parameter image: The image to classify.
+     - parameter imageData: The image to classify.
      - parameter classifierIDs: A list of the classifier ids to use. "default" is the id of the
        built-in classifier.
      - parameter threshold: The minimum score a class must have to be displayed in the response.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classifyWithLocalModel(
-        image: UIImage,
+        imageData: Data,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
         completionHandler: @escaping (ClassifiedImages?, Error?) -> Void)
     {
-        // convert UIImage to Data
-        guard let image = UIImagePNGRepresentation(image) else {
-            let description = "Failed to convert image from UIImage to Data."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            completionHandler(nil, error)
-            return
-        }
-
         // ensure a classifier id was provided
         guard !classifierIDs.isEmpty else {
             let description = "Please provide at least one classifierID."
@@ -223,7 +215,7 @@ extension VisualRecognition {
 
                 // execute classification request
                 do {
-                    let requestHandler = VNImageRequestHandler(data: image)
+                    let requestHandler = VNImageRequestHandler(data: imageData)
                     try requestHandler.perform([request])
                 } catch {
                     dispatchGroup.leave()
@@ -423,7 +415,7 @@ extension VisualRecognition {
             }
 
             // compile model from source
-            let compiledModelTemporaryURL: URL
+            var compiledModelTemporaryURL: URL
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
             } catch {

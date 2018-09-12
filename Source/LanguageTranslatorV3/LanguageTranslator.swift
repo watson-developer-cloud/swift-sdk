@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  IBM Watson&trade; Language Translator translates text from one language to another. The service offers multiple IBM
@@ -47,6 +48,7 @@ public class LanguageTranslator {
     public init(username: String, password: String, version: String) {
         self.authMethod = BasicAuthentication(username: username, password: password)
         self.version = version
+        Shared.configureRestRequest()
     }
 
     /**
@@ -58,8 +60,9 @@ public class LanguageTranslator {
      - parameter iamUrl: The URL for the IAM service.
      */
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.version = version
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        self.version = version
+        Shared.configureRestRequest()
     }
 
     /**
@@ -70,8 +73,9 @@ public class LanguageTranslator {
      - parameter accessToken: An access token for the service.
      */
     public init(version: String, accessToken: String) {
-        self.version = version
         self.authMethod = IAMAccessToken(accessToken: accessToken)
+        self.version = version
+        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {

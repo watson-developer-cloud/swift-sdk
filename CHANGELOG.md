@@ -1,6 +1,53 @@
 Change Log
 ==========
 
+## Version 0.33.0
+_2018-08-31_
+
+### First release that supports Cocoapods!
+
+This release adds support for installing each service in the Swift SDK via Cocoapods. It also adds new options to the Speech to Text `recognize` API, and includes documentation improvements.
+
+- Support for Cocoapods!
+- Speech to Text: Adds the `acousticCustomizationID` and `headers` parameters to the `recognize()` method
+- Speech to Text: Adds the `customizationWeight` property to `RecognitionSettings`
+- Documentation: Split README into multiple READMEs: one main README plus one README for each service
+- Documentation: Improved [Jazzy docs](http://watson-developer-cloud.github.io/swift-sdk/)
+
+## Version 0.32.0
+_2018-08-16_
+
+This release regenerates all services with documentation updates, and adds some new methods to Discovery.
+
+This release includes the following new features:
+
+- Discovery: Add ability to create new `Events` to create log entries associated with specific queries
+- Discovery: Add new methods to obtain metrics and metadata on past queries
+- Discovery: Changes the type of the `size` parameter in the `createEnvironment` method from `Int` to `String`.
+
+## Version 0.31.0
+_2018-07-31_
+
+This release regenerates all services with documentation updates and minor generator improvements.
+
+This release includes the following new features and bug fixes:
+
+- Assistant: Add support for entity mentions and disambiguation
+- Renames STT Websocket method to `recognizeUsingWebSocket`.  The prior name is deprecated but retained for backward compatibility.
+- Fix Xcode 10 build error
+
+## Version 0.30.0
+_2018-07-16_
+
+This release regenerates all services with documentation updates and minor generator improvements.
+
+This release includes the following new features and bug fixes:
+
+- Discovery: Add support for credentials and configuration source options
+- Add support for websocket features for services using IAM authentication
+- Handle malformed URLs when constructing URL requests
+- Remove version param from IAM init methods for LTv2, NLC, STT, TTS
+
 ## Version 0.29.0
 _2018-06-29_
 

@@ -31,6 +31,21 @@ public struct Environment: Decodable {
     }
 
     /**
+     Size of the environment.
+     */
+    public enum Size: String {
+        case xs = "XS"
+        case s = "S"
+        case ms = "MS"
+        case m = "M"
+        case ml = "ML"
+        case l = "L"
+        case xl = "XL"
+        case xxl = "XXL"
+        case xxxl = "XXXL"
+    }
+
+    /**
      Unique identifier for the environment.
      */
     public var environmentID: String?
@@ -46,12 +61,12 @@ public struct Environment: Decodable {
     public var description: String?
 
     /**
-     Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     Creation date of the environment, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      */
     public var created: Date?
 
     /**
-     Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     Date of most recent environment update, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      */
     public var updated: Date?
 
@@ -61,14 +76,14 @@ public struct Environment: Decodable {
     public var status: String?
 
     /**
-     If true, then the environment contains read-only collections which are maintained by IBM.
+     If `true`, the environment contains read-only collections that are maintained by IBM.
      */
     public var readOnly: Bool?
 
     /**
-     **Deprecated**: Size of the environment.
+     Size of the environment.
      */
-    public var size: Int?
+    public var size: String?
 
     /**
      Details about the resource usage and capacity of the environment.

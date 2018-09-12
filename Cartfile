@@ -1,1 +1,3 @@
 github "daltoniam/Starscream" ~> 3.0
+# github "watson-developer-cloud/restkit" ~> 1.2
+git "/Users/anthony/Development/Watson-SDKs/restkit" "swift-sdk-1.0"

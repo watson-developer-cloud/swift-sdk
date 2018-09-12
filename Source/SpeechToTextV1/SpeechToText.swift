@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  The IBM&reg; Speech to Text service provides an API that uses IBM's speech-recognition capabilities to produce
@@ -33,6 +34,10 @@ import Foundation
  registered callbacks and polling for non-blocking recognition. See [The HTTP REST
  interface](https://console.bluemix.net/docs/services/speech-to-text/http.html) and [The asynchronous HTTP
  interface](https://console.bluemix.net/docs/services/speech-to-text/async.html).
+ * **Important:** The session-based interface is deprecated as of August 8, 2018, and will be removed from service on
+ September 7, 2018. Use the sessionless, asynchronous, or WebSocket interface instead. For more information, see the
+ August 8 service update in the [Release
+ notes](https://console.bluemix.net/docs/services/speech-to-text/release-notes.html#August2018).
  * **WebSocket interface:** The service also offers a WebSocket interface for speech recognition. The WebSocket
  interface provides a full-duplex, low-latency communication channel. Clients send requests and audio to the service and
  receive results over a single connection in an asynchronous fashion. See [The WebSocket
@@ -83,6 +88,7 @@ public class SpeechToText {
      */
     public init(username: String, password: String) {
         self.authMethod = BasicAuthentication(username: username, password: password)
+        Shared.configureRestRequest()
     }
 
     /**
@@ -93,6 +99,7 @@ public class SpeechToText {
      */
     public init(apiKey: String, iamUrl: String? = nil) {
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        Shared.configureRestRequest()
     }
 
     /**
@@ -102,6 +109,7 @@ public class SpeechToText {
      */
     public init(accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
+        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {
@@ -289,30 +297,31 @@ public class SpeechToText {
        submitted audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
        from a live microphone when a user simply walks away. Use `-1` for infinity.
      - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or
-       more tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
+       more string tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
        keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter
        or specify an empty array if you do not need to spot keywords.
      - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is
        considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
-       between 0 and 1 inclusive. No keyword spotting is performed if you omit the parameter. If you specify a
-       threshold, you must also specify one or more keywords.
-     - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single
-       transcription is returned.
+       between 0.0 and 1.0. No keyword spotting is performed if you omit the parameter. If you specify a threshold, you
+       must also specify one or more keywords.
+     - parameter maxAlternatives: The maximum number of alternative transcripts that the service is to return. By
+       default, a single transcription is returned.
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
        a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
-       confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No
-       alternative words are computed if you omit the parameter.
-     - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By
-       default, no word confidence measures are returned.
-     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are
-       returned.
-     - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword
-       results by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return
-       results with no censoring. Applies to US English transcription only.
-     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers,
-       currency values, and internet addresses into more readable, conventional representations in the final transcript
-       of a recognition request. For US English, also converts certain keyword strings to punctuation symbols. By
-       default, no smart formatting is performed. Applies to US English and Spanish transcription only.
+       confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No alternative
+       words are computed if you omit the parameter.
+     - parameter wordConfidence: If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for
+       each word. By default, no word confidence measures are returned.
+     - parameter timestamps: If `true`, the service returns time alignment for each word. By default, no timestamps
+       are returned.
+     - parameter profanityFilter: If `true`, the service filters profanity from all output except for keyword results
+       by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return results with
+       no censoring. Applies to US English transcription only.
+     - parameter smartFormatting: If `true`, the service converts dates, times, series of digits and numbers, phone
+       numbers, currency values, and internet addresses into more readable, conventional representations in the final
+       transcript of a recognition request. For US English, the service also converts certain keyword strings to
+       punctuation symbols. By default, no smart formatting is performed. Applies to US English and Spanish
+       transcription only.
      - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which
        participants in a multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to
        `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the
@@ -323,14 +332,14 @@ public class SpeechToText {
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
-    public func recognizeSessionless(
+    public func recognize(
         model: String? = nil,
         customizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
-        audio: Data? = nil,
-        contentType: String? = nil,
+        audio: Data,
+        contentType: String,
         inactivityTimeout: Int? = nil,
         keywords: [String]? = nil,
         keywordsThreshold: Double? = nil,
@@ -654,30 +663,31 @@ public class SpeechToText {
        submitted audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
        from a live microphone when a user simply walks away. Use `-1` for infinity.
      - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or
-       more tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
+       more string tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
        keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter
        or specify an empty array if you do not need to spot keywords.
      - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is
        considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
-       between 0 and 1 inclusive. No keyword spotting is performed if you omit the parameter. If you specify a
-       threshold, you must also specify one or more keywords.
-     - parameter maxAlternatives: The maximum number of alternative transcripts to be returned. By default, a single
-       transcription is returned.
+       between 0.0 and 1.0. No keyword spotting is performed if you omit the parameter. If you specify a threshold, you
+       must also specify one or more keywords.
+     - parameter maxAlternatives: The maximum number of alternative transcripts that the service is to return. By
+       default, a single transcription is returned.
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
        a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
-       confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No
-       alternative words are computed if you omit the parameter.
-     - parameter wordConfidence: If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By
-       default, no word confidence measures are returned.
-     - parameter timestamps: If `true`, time alignment is returned for each word. By default, no timestamps are
-       returned.
-     - parameter profanityFilter: If `true` (the default), filters profanity from all output except for keyword
-       results by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return
-       results with no censoring. Applies to US English transcription only.
-     - parameter smartFormatting: If `true`, converts dates, times, series of digits and numbers, phone numbers,
-       currency values, and internet addresses into more readable, conventional representations in the final transcript
-       of a recognition request. For US English, also converts certain keyword strings to punctuation symbols. By
-       default, no smart formatting is performed. Applies to US English and Spanish transcription only.
+       confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No alternative
+       words are computed if you omit the parameter.
+     - parameter wordConfidence: If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for
+       each word. By default, no word confidence measures are returned.
+     - parameter timestamps: If `true`, the service returns time alignment for each word. By default, no timestamps
+       are returned.
+     - parameter profanityFilter: If `true`, the service filters profanity from all output except for keyword results
+       by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return results with
+       no censoring. Applies to US English transcription only.
+     - parameter smartFormatting: If `true`, the service converts dates, times, series of digits and numbers, phone
+       numbers, currency values, and internet addresses into more readable, conventional representations in the final
+       transcript of a recognition request. For US English, the service also converts certain keyword strings to
+       punctuation symbols. By default, no smart formatting is performed. Applies to US English and Spanish
+       transcription only.
      - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which
        participants in a multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to
        `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the
@@ -1408,9 +1418,9 @@ public class SpeechToText {
        UTF-8 if it contains non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII
        characters. With cURL, use the `--data-binary` option to upload the file for the request.
      - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or
-       audio resource with the same name. If `false` (the default), the request fails if a corpus or audio resource with
-       the same name already exists. The parameter has no effect if a corpus or audio resource with the same name does
-       not already exist.
+       audio resource with the same name. If `false`, the request fails if a corpus or audio resource with the same name
+       already exists. The parameter has no effect if a corpus or audio resource with the same name does not already
+       exist.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2404,9 +2414,9 @@ public class SpeechToText {
        including the `rate`, `channels`, and `endianness` parameters that are used with some formats. For a complete
        list of supported audio formats, see [Audio formats](/docs/services/speech-to-text/input.html#formats).
      - parameter allowOverwrite: If `true`, the specified corpus or audio resource overwrites an existing corpus or
-       audio resource with the same name. If `false` (the default), the request fails if a corpus or audio resource with
-       the same name already exists. The parameter has no effect if a corpus or audio resource with the same name does
-       not already exist.
+       audio resource with the same name. If `false`, the request fails if a corpus or audio resource with the same name
+       already exists. The parameter has no effect if a corpus or audio resource with the same name does not already
+       exist.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

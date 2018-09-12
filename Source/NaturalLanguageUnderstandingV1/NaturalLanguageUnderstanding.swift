@@ -16,6 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
+import RestKit
 
 /**
  Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and IBM Watson Natural
@@ -50,6 +51,7 @@ public class NaturalLanguageUnderstanding {
     public init(username: String, password: String, version: String) {
         self.authMethod = BasicAuthentication(username: username, password: password)
         self.version = version
+        Shared.configureRestRequest()
     }
 
     /**
@@ -61,8 +63,9 @@ public class NaturalLanguageUnderstanding {
      - parameter iamUrl: The URL for the IAM service.
      */
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.version = version
         self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        self.version = version
+        Shared.configureRestRequest()
     }
 
     /**
@@ -73,8 +76,9 @@ public class NaturalLanguageUnderstanding {
      - parameter accessToken: An access token for the service.
      */
     public init(version: String, accessToken: String) {
-        self.version = version
         self.authMethod = IAMAccessToken(accessToken: accessToken)
+        self.version = version
+        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {

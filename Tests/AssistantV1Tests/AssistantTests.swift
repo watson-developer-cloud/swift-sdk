@@ -19,11 +19,12 @@
 import XCTest
 import Foundation
 import AssistantV1
+import RestKit
 
 class AssistantTests: XCTestCase {
 
     private var assistant: Assistant!
-    private let workspaceID = Credentials.AssistantWorkspace
+    private let workspaceID = WatsonCredentials.AssistantWorkspace
 
     // MARK: - Test Configuration
 
@@ -72,6 +73,7 @@ class AssistantTests: XCTestCase {
             ("testCreateAndDeleteEntity", testCreateAndDeleteEntity),
             ("testCreateUpdateAndDeleteEntity", testCreateUpdateAndDeleteEntity),
             ("testGetEntity", testGetEntity),
+            ("testListMentions", testListMentions),
             ("testListAllValues", testListAllValues),
             ("testCreateUpdateAndDeleteValue", testCreateUpdateAndDeleteValue),
             ("testGetValue", testGetValue),
@@ -96,15 +98,15 @@ class AssistantTests: XCTestCase {
     /** Instantiate Assistant. */
     func instantiateAssistant() -> Assistant {
         let assistant: Assistant
-        let version = "2018-02-16"
-        if let apiKey = Credentials.AssistantAPIKey {
+        let version = "2018-08-16"
+        if let apiKey = WatsonCredentials.AssistantAPIKey {
             assistant = Assistant(version: version, apiKey: apiKey)
         } else {
-            let username = Credentials.AssistantUsername
-            let password = Credentials.AssistantPassword
+            let username = WatsonCredentials.AssistantUsername
+            let password = WatsonCredentials.AssistantPassword
             assistant = Assistant(username: username, password: password, version: version)
         }
-        if let url = Credentials.AssistantURL {
+        if let url = WatsonCredentials.AssistantURL {
             assistant.serviceURL = url
         }
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
@@ -1744,6 +1746,40 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(entityExport.updated)
                 expectation.fulfill()
             }
+        }
+        waitForExpectations()
+    }
+
+    // MARK: - Mentions
+
+    func testListMentions() {
+        let description = "List all the mentions for an entity."
+        let expectation = self.expectation(description: description)
+        let entityName = "appliance"
+        assistant.listMentions(
+            workspaceID: workspaceID,
+            entity: entityName,
+            export: true,
+            includeAudit: true) {
+                response, error in
+
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let mentionCollection = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
+                for mention in mentionCollection.examples {
+                    XCTAssertNotNil(mention.exampleText)
+                    XCTAssertNotNil(mention.intentName)
+                    XCTAssertNotNil(mention.location)
+                    XCTAssert(mention.location.count == 2)
+                }
+                XCTAssertNotNil(mentionCollection.pagination.refreshUrl)
+                expectation.fulfill()
         }
         waitForExpectations()
     }

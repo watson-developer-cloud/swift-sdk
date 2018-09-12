@@ -88,6 +88,11 @@ public struct Collection: Decodable {
      */
     public var trainingStatus: TrainingStatus?
 
+    /**
+     Object containing source crawl status information.
+     */
+    public var sourceCrawl: SourceStatus?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case collectionID = "collection_id"
@@ -101,6 +106,7 @@ public struct Collection: Decodable {
         case documentCounts = "document_counts"
         case diskUsage = "disk_usage"
         case trainingStatus = "training_status"
+        case sourceCrawl = "source_crawl"
     }
 
 }

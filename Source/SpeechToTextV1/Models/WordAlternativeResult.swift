@@ -20,7 +20,7 @@ import Foundation
 public struct WordAlternativeResult: Decodable {
 
     /**
-     A confidence score for the word alternative hypothesis in the range of 0 to 1.
+     A confidence score for the word alternative hypothesis in the range of 0.0 to 1.0.
      */
     public var confidence: Double
 

@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** CreateValue. */
 public struct CreateValue: Encodable {

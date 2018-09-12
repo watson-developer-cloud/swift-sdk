@@ -16,10 +16,14 @@
 
 import Foundation
 
-/** Information about the deleted model. */
+/**
+ Delete model results.
+ */
 public struct DeleteModelResults: Decodable {
 
-    /// model_id of the deleted model.
+    /**
+     model_id of the deleted model.
+     */
     public var deleted: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.

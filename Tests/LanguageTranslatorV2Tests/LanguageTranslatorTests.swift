@@ -19,6 +19,7 @@
 import XCTest
 import Foundation
 import LanguageTranslatorV2
+import RestKit
 
 class LanguageTranslatorTests: XCTestCase {
 
@@ -52,8 +53,8 @@ class LanguageTranslatorTests: XCTestCase {
 
     /** Instantiate Language Translator. */
     func instantiateLanguageTranslator() {
-        let username = Credentials.LanguageTranslatorUsername
-        let password = Credentials.LanguageTranslatorPassword
+        let username = WatsonCredentials.LanguageTranslatorUsername
+        let password = WatsonCredentials.LanguageTranslatorPassword
         languageTranslator = LanguageTranslator(username: username, password: password)
         languageTranslator.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         languageTranslator.defaultHeaders["X-Watson-Test"] = "true"

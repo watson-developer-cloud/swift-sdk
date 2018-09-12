@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /** DialogNodeAction. */
 public struct DialogNodeAction: Codable {

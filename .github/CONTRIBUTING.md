@@ -24,8 +24,8 @@ to the coding style guidelines.
 
 If you want to contribute to the repository, here's a quick guide:
   1. Fork the repository.
-  2. Copy `Source/SupportingFiles/CredentialsExample.swift` to `Source/SupportingFiles/Credentials.swift`.
-  3. Add credentials to `Credentials.swift` for the services you plan to test.
+  2. Copy `Source/SupportingFiles/WatsonCredentialsExample.swift` to `Source/SupportingFiles/WatsonCredentials.swift`.
+  3. Add credentials to `WatsonCredentials.swift` for the services you plan to test.
   4. Develop and test your code changes.
     * Please respect the original code [style guide][styleguide].
     * Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.

@@ -43,9 +43,9 @@ public struct Enrichment: Codable {
 
     /**
      Name of the enrichment service to call. Current options are `natural_language_understanding` and `elements`.
-      When using `natual_language_understanding`, the `options` object must contain Natural Language Understanding
-     Options.
-      When using `elements` the `options` object must contain Element Classification options. Additionally, when using
+      When using `natual_language_understanding`, the **options** object must contain Natural Language Understanding
+     options.
+      When using `elements` the **options** object must contain Element Classification options. Additionally, when using
      the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in
      [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
       Previous API versions also supported `alchemy_language`.
@@ -83,11 +83,11 @@ public struct Enrichment: Codable {
      - parameter sourceField: Field to be enriched.
      - parameter enrichmentName: Name of the enrichment service to call. Current options are
        `natural_language_understanding` and `elements`.
-        When using `natual_language_understanding`, the `options` object must contain Natural Language Understanding
-       Options.
-        When using `elements` the `options` object must contain Element Classification options. Additionally, when using
-       the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in
-       [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
+        When using `natual_language_understanding`, the **options** object must contain Natural Language Understanding
+       options.
+        When using `elements` the **options** object must contain Element Classification options. Additionally, when
+       using the `elements` enrichment the configuration specified and files ingested must meet all the criteria
+       specified in [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
         Previous API versions also supported `alchemy_language`.
      - parameter description: Describes what the enrichment step does.
      - parameter overwrite: Indicates that the enrichments will overwrite the destination_field field if it already

@@ -62,6 +62,11 @@ public struct Configuration: Codable {
      */
     public var normalizations: [NormalizationOperation]?
 
+    /**
+     Object containing source parameters for the configuration.
+     */
+    public var source: Source?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case configurationID = "configuration_id"
@@ -72,6 +77,7 @@ public struct Configuration: Codable {
         case conversions = "conversions"
         case enrichments = "enrichments"
         case normalizations = "normalizations"
+        case source = "source"
     }
 
     /**
@@ -87,6 +93,7 @@ public struct Configuration: Codable {
      - parameter enrichments: An array of document enrichment settings for the configuration.
      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.
+     - parameter source: Object containing source parameters for the configuration.
 
      - returns: An initialized `Configuration`.
     */
@@ -98,7 +105,8 @@ public struct Configuration: Codable {
         description: String? = nil,
         conversions: Conversions? = nil,
         enrichments: [Enrichment]? = nil,
-        normalizations: [NormalizationOperation]? = nil
+        normalizations: [NormalizationOperation]? = nil,
+        source: Source? = nil
     )
     {
         self.name = name
@@ -109,6 +117,7 @@ public struct Configuration: Codable {
         self.conversions = conversions
         self.enrichments = enrichments
         self.normalizations = normalizations
+        self.source = source
     }
 
 }

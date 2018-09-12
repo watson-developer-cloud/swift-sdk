@@ -35,14 +35,14 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func instantiateSpeechToText() {
-        if let apiKey = Credentials.SpeechToTextAPIKey {
+        if let apiKey = WatsonCredentials.SpeechToTextAPIKey {
             speechToText = SpeechToText(apiKey: apiKey)
         } else {
-            let username = Credentials.SpeechToTextUsername
-            let password = Credentials.SpeechToTextPassword
+            let username = WatsonCredentials.SpeechToTextUsername
+            let password = WatsonCredentials.SpeechToTextPassword
             speechToText = SpeechToText(username: username, password: password)
         }
-        if let url = Credentials.SpeechToTextURL {
+        if let url = WatsonCredentials.SpeechToTextURL {
             speechToText.serviceURL = url
         }
         speechToText.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
@@ -330,7 +330,7 @@ class SpeechToTextTests: XCTestCase {
     func testRecognizeSessionless() {
         let expectation = self.expectation(description: "recognizeSessionless")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
-        speechToText.recognizeSessionless(model: "en-US_BroadbandModel", audio: audio, contentType: "audio/wav") {
+        speechToText.recognize(model: "en-US_BroadbandModel", audio: audio, contentType: "audio/wav") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

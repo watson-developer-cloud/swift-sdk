@@ -19,11 +19,12 @@
 import XCTest
 import Foundation
 import ConversationV1
+import RestKit
 
 class ConversationTests: XCTestCase {
 
     private var conversation: Conversation!
-    private let workspaceID = Credentials.ConversationWorkspace
+    private let workspaceID = WatsonCredentials.ConversationWorkspace
 
     // MARK: - Test Configuration
 
@@ -72,6 +73,7 @@ class ConversationTests: XCTestCase {
             ("testCreateAndDeleteEntity", testCreateAndDeleteEntity),
             ("testCreateUpdateAndDeleteEntity", testCreateUpdateAndDeleteEntity),
             ("testGetEntity", testGetEntity),
+            ("testListMentions", testListMentions),
             ("testListAllValues", testListAllValues),
             ("testCreateUpdateAndDeleteValue", testCreateUpdateAndDeleteValue),
             ("testGetValue", testGetValue),
@@ -94,9 +96,9 @@ class ConversationTests: XCTestCase {
 
     /** Instantiate Conversation. */
     func instantiateConversation() {
-        let username = Credentials.ConversationUsername
-        let password = Credentials.ConversationPassword
-        let version = "2018-02-16"
+        let username = WatsonCredentials.ConversationUsername
+        let password = WatsonCredentials.ConversationPassword
+        let version = "2018-08-16"
         conversation = Conversation(username: username, password: password, version: version)
         conversation.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         conversation.defaultHeaders["X-Watson-Test"] = "true"
@@ -1731,6 +1733,39 @@ class ConversationTests: XCTestCase {
         waitForExpectations()
     }
 
+    // MARK: - Mentions
+
+    func testListMentions() {
+        let description = "List all the mentions for an entity."
+        let expectation = self.expectation(description: description)
+        let entityName = "appliance"
+        conversation.listMentions(
+            workspaceID: workspaceID,
+            entity: entityName,
+            export: true,
+            includeAudit: true) {
+                response, error in
+
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let mentionCollection = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+                for mention in mentionCollection.examples {
+                    XCTAssertNotNil(mention.exampleText)
+                    XCTAssertNotNil(mention.intentName)
+                    XCTAssertNotNil(mention.location)
+                    XCTAssert(mention.location.count == 2)
+                }
+                XCTAssertNotNil(mentionCollection.pagination.refreshUrl)
+                expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
     // MARK: - Values
 
     func testListAllValues() {
@@ -2115,12 +2150,12 @@ class ConversationTests: XCTestCase {
 
     func testCreateAndDeleteDialogNode() {
         let description1 = "Create a dialog node."
-        let dialogOutput: [String: JSON] = [
+        let dialogNodeOutput = DialogNodeOutput(additionalProperties: [
             "text": .object([
                 "selection_policy": .string("random"),
                 "values": .array([.string("Yes you can!"), .string("Of course!")]),
-            ]),
-        ]
+            ])
+        ])
         let dialogMetadata: [String: JSON] = ["swift-sdk-test": .boolean(true)]
         let expectation1 = self.expectation(description: description1)
 
@@ -2129,7 +2164,7 @@ class ConversationTests: XCTestCase {
             dialogNode: "YesYouCan",
             description: "Reply affirmatively",
             conditions: "#order_pizza",
-            output: dialogOutput,
+            output: dialogNodeOutput,
             metadata: dialogMetadata,
             title: "YesYouCan",
             nodeType: "standard")
@@ -2150,7 +2185,7 @@ class ConversationTests: XCTestCase {
             XCTAssertEqual(node.conditions, "#order_pizza")
             XCTAssertNil(node.parent)
             XCTAssertNil(node.previousSibling)
-            XCTAssertEqual(node.output!, dialogOutput)
+            XCTAssertEqual(node.output!.additionalProperties["text"], dialogNodeOutput.additionalProperties["text"])
             XCTAssertNil(node.context)
             XCTAssertEqual(node.metadata!, dialogMetadata)
             XCTAssertNil(node.nextStep)

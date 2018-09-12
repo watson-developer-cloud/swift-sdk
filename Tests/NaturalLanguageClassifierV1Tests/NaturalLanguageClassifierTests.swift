@@ -62,14 +62,14 @@ class NaturalLanguageClassifierTests: XCTestCase {
     }
 
     func instantiateNaturalLanguageClassifier() {
-        if let apiKey = Credentials.NaturalLanguageClassifierAPIKey {
+        if let apiKey = WatsonCredentials.NaturalLanguageClassifierAPIKey {
             naturalLanguageClassifier = NaturalLanguageClassifier(apiKey: apiKey)
         } else {
-            let username = Credentials.NaturalLanguageClassifierUsername
-            let password = Credentials.NaturalLanguageClassifierPassword
+            let username = WatsonCredentials.NaturalLanguageClassifierUsername
+            let password = WatsonCredentials.NaturalLanguageClassifierPassword
             naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
         }
-        if let url = Credentials.NaturalLanguageClassifierURL {
+        if let url = WatsonCredentials.NaturalLanguageClassifierURL {
             naturalLanguageClassifier.serviceURL = url
         }
         naturalLanguageClassifier.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"

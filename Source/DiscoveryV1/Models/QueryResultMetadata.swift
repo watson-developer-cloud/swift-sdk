@@ -22,13 +22,22 @@ import Foundation
 public struct QueryResultMetadata: Decodable {
 
     /**
-     The confidence score of the result's analysis. A higher score indicating greater confidence.
+     An unbounded measure of the relevance of a particular result, dependent on the query and matching document. A
+     higher score indicates a greater match to the query parameters.
      */
     public var score: Double?
+
+    /**
+     The confidence score for the given result. Calculated based on how relevant the result is estimated to be, compared
+     to a trained relevancy model. confidence can range from `0.0` to `1.0`. The higher the number, the more relevant
+     the document.
+     */
+    public var confidence: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case score = "score"
+        case confidence = "confidence"
     }
 
 }

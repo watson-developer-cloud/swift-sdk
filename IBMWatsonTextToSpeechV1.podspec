@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonTextToSpeechV1'
-  s.version               = '0.33.0'
+  s.version               = '0.33.1'
   s.summary               = 'Client framework for the IBM Watson Text to Speech service'
   s.description           = <<-DESC
 IBM® Text to Speech uses IBM's speech-synthesis capabilities to convert written text to natural-sounding speech. 
@@ -14,13 +14,15 @@ The service streams the results back to the client with minimal delay.
 
   s.module_name           = 'TextToSpeech'
   s.ios.deployment_target = '8.0'
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
 
   s.source_files          = 'Source/TextToSpeechV1/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift',
                             'Source/SupportingFiles/Dependencies/Source/**/*'
-  s.exclude_files         = '**/config_types.h'
+  s.exclude_files         = 'Source/TextToSpeechV1/Shared.swift',
+                            '**/config_types.h'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.2.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 
   # The renaming of libogg.a and libopus.a is done to avoid duplicate library name errors

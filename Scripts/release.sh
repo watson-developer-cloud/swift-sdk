@@ -28,16 +28,12 @@ declare -a allPods=(
 git fetch --tags
 releaseVersion=$(git describe --abbrev=0 --tags)
 
-# Update podspec versions and release to Cocoapods
+# Update podspec versions
 for podspec in "${allPods[@]}"
 do
 	podVersion=$(grep -o 'version.*=.*[0-9.][0-9.][0-9]' $podspec | cut -f 2 -d "'")
-	# Only release to Cocoapods if the pod's version is behind the latest git tag version
 	if [[ $releaseVersion > $podVersion ]]; then
 		sed -i '' -e "/s.version/s/${podVersion}/${releaseVersion}/g" $podspec
-		### DANGER ZONE ###
-		pod trunk push $podspec --allow-warnings
-		### DANGER ZONE ###
 	fi
 done
 
@@ -45,17 +41,30 @@ done
 readmeVersion=$(grep -m 1 -o '~>.*[0-9.][0-9.][0-9]' README.md | cut -f 2 -d " ")
 sed -i '' -e "s/${readmeVersion}/${releaseVersion}/g" README.md
 
+# Update SDK version in Shared struct
+sed -i '' -e "s/let sdkVersion = \".*\"/let sdkVersion = \"${releaseVersion}\"/g" Source/SupportingFiles/Shared.swift
 
 # Commit the podspec updates, move the git tag, and push to Github
 git add *.podspec
+git add README.md
+git add Source/SupportingFiles/Shared.swift
 git commit -m "Release SDK version ${releaseVersion}"
 ### DANGER ZONE ###
 git push
-### DANGER ZONE ###
 git tag -d $releaseVersion
 git push --delete origin $releaseVersion
 git tag $releaseVersion
 git push origin $releaseVersion
+### /DANGER ZONE ###
+
+# Release to Cocoapods
+for podspec in "${allPods[@]}"
+do
+  # This will only publish pods that have new versions
+  ### DANGER ZONE ###
+  pod trunk push $podspec --allow-warnings
+  ### /DANGER ZONE ###
+done
 
 # Builds WatsonDeveloperCloud.framework.zip, which needs to be uploaded to Github under the latest release
 sh ./Scripts/generate-binaries.sh

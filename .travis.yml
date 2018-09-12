@@ -9,6 +9,7 @@ branches:
   only:
     - master
     - v1.0
+    - develop
 env:
   global:
     - IOS_SDK="iphonesimulator"

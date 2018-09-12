@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // MARK: - Messages used in XCTFail
 
 let missingResultMessage = "Missing result from response"

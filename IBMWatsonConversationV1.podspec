@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonConversationV1'
-  s.version               = '0.33.0'
+  s.version               = '0.33.1'
   s.summary               = 'Client framework for the IBM Watson Conversation service'
   s.description           = <<-DESC
 With the IBM Watson™ Assistant service, you can build a solution that understands 
@@ -15,10 +15,12 @@ IMPORTANT: The Conversation service is deprecated, and will be removed in the ne
 
   s.module_name           = 'Conversation'
   s.ios.deployment_target = '8.0'
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
-  s.source_files          = 'Source/ConversationV1/**/*.swift'
+  s.source_files          = 'Source/ConversationV1/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift'
+  s.exclude_files         = 'Source/ConversationV1/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.2.0'
   
 end

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonNaturalLanguageClassifierV1'
-  s.version               = '0.33.0'
+  s.version               = '0.33.1'
   s.summary               = 'Client framework for the IBM Watson Natural Language Classifier service'
   s.description           = <<-DESC
 Natural Language Classifier can help your application understand the language of short texts and 
@@ -15,10 +15,12 @@ return information for texts that it is not trained on.
 
   s.module_name           = 'NaturalLanguageClassifier'
   s.ios.deployment_target = '8.0'
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
-  s.source_files          = 'Source/NaturalLanguageClassifierV1/**/*.swift'
+  s.source_files          = 'Source/NaturalLanguageClassifierV1/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift'
+  s.exclude_files         = 'Source/NaturalLanguageClassifierV1/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.2.0'
   
 end

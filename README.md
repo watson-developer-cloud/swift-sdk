@@ -77,17 +77,17 @@ If your project does not yet have a Podfile, use the `pod init` command in the r
 use_frameworks!
 
 target 'MyApp' do
-    pod 'IBMWatsonAssistantV1', '~> 0.33.0'
-    pod 'IBMWatsonConversationV1', '~> 0.33.0'
-    pod 'IBMWatsonDiscoveryV1', '~> 0.33.0'
-    pod 'IBMWatsonLanguageTranslatorV3', '~> 0.33.0'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 0.33.0'
-    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 0.33.0'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 0.33.0'
-    pod 'IBMWatsonSpeechToTextV1', '~> 0.33.0'
-    pod 'IBMWatsonTextToSpeechV1', '~> 0.33.0'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 0.33.0'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 0.33.0'
+    pod 'IBMWatsonAssistantV1', '~> 0.33.1'
+    pod 'IBMWatsonConversationV1', '~> 0.33.1'
+    pod 'IBMWatsonDiscoveryV1', '~> 0.33.1'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 0.33.1'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 0.33.1'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 0.33.1'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 0.33.1'
+    pod 'IBMWatsonSpeechToTextV1', '~> 0.33.1'
+    pod 'IBMWatsonTextToSpeechV1', '~> 0.33.1'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 0.33.1'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 0.33.1'
 end
 ```
 
@@ -110,7 +110,7 @@ $ brew install carthage
 If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. 
 
 ```
-github "watson-developer-cloud/swift-sdk" ~> 0.33.0
+github "watson-developer-cloud/swift-sdk" ~> 0.33.1
 ```
 
 Then run the following command to build the dependencies and frameworks:
@@ -119,7 +119,10 @@ Then run the following command to build the dependencies and frameworks:
 $ carthage update --platform iOS
 ```
 
-Follow the remaining Carthage installation instructions [here](https://github.com/Carthage/Carthage#getting-started). Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. If you are using Speech to Text, be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application.
+Follow the remaining Carthage installation instructions [here](https://github.com/Carthage/Carthage#getting-started). Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. The following frameworks need to be added to your app:
+1. `RestKit.framework`
+1. Whichever services your app will be using (`AssistantV1.framework`, `DiscoveryV1.framework`, etc.)
+1. (**Speech to Text only**) `Starscream.framework`
 
 
 ### Swift Package Manager
@@ -128,7 +131,7 @@ Add the following to your `Package.swift` file to identify the IBM Watson Swift 
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.33.0")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.33.1")
 ]
 ```
 

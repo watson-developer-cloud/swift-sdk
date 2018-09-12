@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonSpeechToTextV1'
-  s.version               = '0.33.0'
+  s.version               = '0.33.1'
   s.summary               = 'Client framework for the IBM Watson Speech to Text service'
   s.description           = <<-DESC
 The IBM® Speech to Text leverages machine intelligence to transcribe the human voice accurately. 
@@ -15,15 +15,17 @@ of the audio signal. It continuously returns and retroactively updates a transcr
 
   s.module_name           = 'SpeechToText'
   s.ios.deployment_target = '8.0'
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
   s.source_files          = 'Source/SpeechToTextV1/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift',
                             'Source/SupportingFiles/Dependencies/Source/**/*'
-  s.exclude_files         = '**/config_types.h',
+  s.exclude_files         = 'Source/SpeechToTextV1/Shared.swift',
+                            '**/config_types.h',
                             '**/opus_header.h',
                             '**/opus_header.c'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.2.0'
   s.dependency              'Starscream', '~> 3.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonAssistantV1'
-  s.version               = '0.33.0'
+  s.version               = '0.33.1'
   s.summary               = 'Client framework for the IBM Watson Assistant service'
   s.description           = <<-DESC
 With the IBM Watson™ Assistant service, you can build a solution that understands 
@@ -14,10 +14,12 @@ natural-language input and uses machine learning to respond to customers in a wa
 
   s.module_name           = 'Assistant'
   s.ios.deployment_target = '8.0'
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version.to_s}" }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
-  s.source_files          = 'Source/AssistantV1/**/*.swift'
+  s.source_files          = 'Source/AssistantV1/**/*.swift',
+                            'Source/SupportingFiles/Shared.swift'
+  s.exclude_files         = 'Source/AssistantV1/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.0.0'
+  s.dependency              'IBMWatsonRestKit', '1.2.0'
   
 end

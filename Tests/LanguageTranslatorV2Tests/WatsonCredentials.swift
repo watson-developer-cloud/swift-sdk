@@ -1,1 +1,0 @@
-../../Source/SupportingFiles/WatsonCredentials.swift

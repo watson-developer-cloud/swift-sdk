@@ -2,7 +2,7 @@ Change Log
 ==========
 
 ## Version 0.34.0
-_2018-09-12_
+_2018-09-14_
 
 This release regenerates all services with documentation updates, adds support for IBM Cloud Private authentication, and adds a couple of new properties to Speech to Text and Assistant/Conversation.
 

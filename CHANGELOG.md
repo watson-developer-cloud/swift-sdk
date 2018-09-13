@@ -4,10 +4,11 @@ Change Log
 ## Version 0.34.0
 _2018-09-12_
 
-This release regenerates all services with documentation updates, and adds a couple of new properties to Speech to Text and Assistant/Conversation.
+This release regenerates all services with documentation updates, adds support for IBM Cloud Private authentication, and adds a couple of new properties to Speech to Text and Assistant/Conversation.
 
 This release includes the following new features:
 
+- All services: Adds support for authentication with IBM Cloud Private (ICP) API keys. Use the `init(username:password:)` initializer, passing `apikey` for the `username` parameter and the API key for the `password`.
 - Speech to Text: Adds the language models `de-DE_BroadbandModel`, `pt-BR_BroadbandModel`, and `pt-BR_NarrowbandModel`
 - Assistant/Conversation: Add the `actions` property to `MessageResponse` and `OutputData`
 

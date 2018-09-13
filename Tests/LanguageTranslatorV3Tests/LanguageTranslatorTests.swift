@@ -191,7 +191,7 @@ class LanguageTranslatorTests: XCTestCase {
         let expectation = self.expectation(description: "Create and delete a custom language model.")
 
         #if os(Linux)
-            let glossary = URL(fileURLWithPath: "Tests/LanguageTranslatorV2Tests/glossary.tmx")
+            let glossary = URL(fileURLWithPath: "Tests/LanguageTranslatorV3Tests/glossary.tmx")
         #else
             let bundle = Bundle(for: type(of: self))
             guard let glossary = bundle.url(forResource: "glossary", withExtension: "tmx") else {

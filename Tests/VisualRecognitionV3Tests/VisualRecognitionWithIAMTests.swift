@@ -3,7 +3,7 @@
 //  AssistantV1Tests
 //
 //  Created by Mike Kistler on 5/24/18.
-//  Copyright © 2018 Glenn R. Fisher. All rights reserved.
+//  Copyright © 2018 IBM Corporation. All rights reserved.
 //
 
 import XCTest

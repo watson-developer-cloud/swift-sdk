@@ -83,7 +83,7 @@ public class SpeechToText {
      - parameter password: The password used to authenticate with the service.
      */
     public init(username: String, password: String) {
-        self.authMethod = BasicAuthentication(username: username, password: password)
+        self.authMethod = Shared.getAuthMethod(username: username, password: password)
         Shared.configureRestRequest()
     }
 
@@ -94,7 +94,7 @@ public class SpeechToText {
      - parameter iamUrl: The URL for the IAM service.
      */
     public init(apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
         Shared.configureRestRequest()
     }
 

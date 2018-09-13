@@ -1432,7 +1432,7 @@ class AssistantTests: XCTestCase {
                 "text": .object([
                     "selection_policy": .string("random"),
                     "values": .array([.string("Yes you can!"), .string("Of course!")]),
-                ])
+                ]),
             ]),
             context: nil,
             metadata: ["swift-sdk-test": .boolean(true)],

@@ -17,12 +17,35 @@
 import Foundation
 import RestKit
 
-
 /// Contains functionality and information common to all of the services
-struct Shared {
+internal struct Shared {
 
     static let sdkVersion = "0.33.1"
+    static let apiKey = "apikey"
+    static let icpPrefix = "icp-"
 
+    /// For Basic Authentication, switch to using IAM tokens for "apikey" usernames,
+    /// but only for api keys that are not for ICP (which currently does not support IAM token authentication)
+    static func getAuthMethod(username: String, password: String) -> AuthenticationMethod {
+        if username == Shared.apiKey && !password.starts(with: Shared.icpPrefix) {
+            return IAMAuthentication(apiKey: password, url: nil)
+        } else {
+            return BasicAuthentication(username: username, password: password)
+        }
+    }
+
+    /// For IAM Authentication, switch to using Basic Authentication for ICP api keys
+    /// This is a workaround that is needed until ICP (IBM Cloud Private) supports IAM tokens
+    static func getAuthMethod(apiKey: String, iamURL: String?) -> AuthenticationMethod {
+        if apiKey.starts(with: Shared.icpPrefix) {
+            return BasicAuthentication(username: Shared.apiKey, password: apiKey)
+        } else {
+            return IAMAuthentication(apiKey: apiKey, url: iamURL)
+        }
+    }
+
+    /// RestKit sends a "User-Agent" header with every RestRequest
+    /// This sets the value of that header, which includes the current version of the Swift SDK
     static func configureRestRequest() {
         RestRequest.userAgent = {
             let sdk = "watson-apis-swift-sdk"

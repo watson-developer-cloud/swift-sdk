@@ -3032,7 +3032,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = "Glenn R. Fisher";
+				ORGANIZATIONNAME = "IBM Corporation";
 				TargetAttributes = {
 					1241DFAD1E380F0A00B8B33E = {
 						CreatedOnToolsVersion = 8.2.1;

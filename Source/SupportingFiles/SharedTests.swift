@@ -38,9 +38,5 @@ class SharedTests: XCTestCase {
         #if os(iOS)
         XCTAssert(userAgent.contains("iOS"))
         #endif
-
-        #if os(Linux)
-        XCTAssert(userAgent.contains("Linux"))
-        #endif
     }
 }

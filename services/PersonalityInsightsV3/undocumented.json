@@ -86,21 +86,21 @@
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/Models/ProfileContent.swift",
-      "line": 26,
+      "line": 27,
       "symbol": "ProfileContent.content",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/Models/ProfileContent.swift",
-      "line": 27,
+      "line": 28,
       "symbol": "ProfileContent.html",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/Models/ProfileContent.swift",
-      "line": 28,
+      "line": 29,
       "symbol": "ProfileContent.text",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -156,65 +156,51 @@
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 86,
+      "line": 90,
       "symbol": "PersonalityInsights.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 343,
+      "line": 347,
       "symbol": "PersonalityInsights.profile(content:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 359,
+      "line": 363,
       "symbol": "PersonalityInsights.profile(text:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 375,
+      "line": 379,
       "symbol": "PersonalityInsights.profile(html:contentLanguage:acceptLanguage:rawScores:consumptionPreferences:headers:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 391,
+      "line": 395,
       "symbol": "PersonalityInsights.profileAsCsv(content:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 408,
+      "line": 412,
       "symbol": "PersonalityInsights.profileAsCsv(text:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 425,
+      "line": 429,
       "symbol": "PersonalityInsights.profileAsCsv(html:contentLanguage:acceptLanguage:rawScores:csvHeaders:consumptionPreferences:headers:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/RestKit/JSON.swift",
-      "line": 108,
-      "symbol": "JSON.encoder",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/RestKit/JSON.swift",
-      "line": 120,
-      "symbol": "JSON.decoder",
-      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     }
   ],

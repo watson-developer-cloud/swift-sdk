@@ -44,23 +44,9 @@
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
-      "line": 80,
+      "line": 84,
       "symbol": "NaturalLanguageUnderstanding.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/RestKit/JSON.swift",
-      "line": 108,
-      "symbol": "JSON.encoder",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/RestKit/JSON.swift",
-      "line": 120,
-      "symbol": "JSON.decoder",
-      "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     }
   ],

@@ -1,20 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/RestKit/JSON.swift",
-      "line": 108,
-      "symbol": "JSON.encoder",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/RestKit/JSON.swift",
-      "line": 120,
-      "symbol": "JSON.decoder",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
       "line": 33,
       "symbol": "AcousticModel.Status.pending",
@@ -157,77 +143,98 @@
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 30,
-      "symbol": "CreateLanguageModel.BaseModelName.enGbBroadbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.deDeBroadbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 31,
-      "symbol": "CreateLanguageModel.BaseModelName.enGbNarrowbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.enGbBroadbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 32,
-      "symbol": "CreateLanguageModel.BaseModelName.enUsBroadbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.enGbNarrowbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 33,
-      "symbol": "CreateLanguageModel.BaseModelName.enUsNarrowbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.enUsBroadbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 34,
-      "symbol": "CreateLanguageModel.BaseModelName.esEsBroadbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.enUsNarrowbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 35,
-      "symbol": "CreateLanguageModel.BaseModelName.esEsNarrowbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.esEsBroadbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 36,
-      "symbol": "CreateLanguageModel.BaseModelName.frFrBroadbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.esEsNarrowbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 37,
-      "symbol": "CreateLanguageModel.BaseModelName.jaJpBroadbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.frFrBroadbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 38,
-      "symbol": "CreateLanguageModel.BaseModelName.jaJpNarrowbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.jaJpBroadbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 39,
-      "symbol": "CreateLanguageModel.BaseModelName.koKrBroadbandmodel",
+      "symbol": "CreateLanguageModel.BaseModelName.jaJpNarrowbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
       "line": 40,
+      "symbol": "CreateLanguageModel.BaseModelName.koKrBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 41,
       "symbol": "CreateLanguageModel.BaseModelName.koKrNarrowbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 42,
+      "symbol": "CreateLanguageModel.BaseModelName.ptBrBroadbandmodel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/Models/CreateLanguageModel.swift",
+      "line": 43,
+      "symbol": "CreateLanguageModel.BaseModelName.ptBrNarrowbandmodel",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -317,7 +324,7 @@
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/SpeechToText+Recognize.swift",
-      "line": 232,
+      "line": 255,
       "symbol": "SpeechToText.recognize(audio:settings:model:customizationID:learningOptOut:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

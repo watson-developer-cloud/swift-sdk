@@ -167,7 +167,8 @@ public struct UpdateDialogNode: Encodable {
     public var digressOutSlots: String?
 
     /**
-     A label that can be displayed externally to describe the purpose of the node to users.
+     A label that can be displayed externally to describe the purpose of the node to users. This string must be no
+     longer than 512 characters.
      */
     public var userLabel: String?
 
@@ -222,6 +223,7 @@ public struct UpdateDialogNode: Encodable {
      - parameter digressOut: Whether this dialog node can be returned to after a digression.
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
+       This string must be no longer than 512 characters.
 
      - returns: An initialized `UpdateDialogNode`.
     */

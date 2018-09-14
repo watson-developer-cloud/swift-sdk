@@ -27,6 +27,7 @@ internal struct CreateAcousticModel: Encodable {
      */
     public enum BaseModelName: String {
         case arArBroadbandmodel = "ar-AR_BroadbandModel"
+        case deDeBroadbandmodel = "de-DE_BroadbandModel"
         case enGbBroadbandmodel = "en-GB_BroadbandModel"
         case enGbNarrowbandmodel = "en-GB_NarrowbandModel"
         case enUsBroadbandmodel = "en-US_BroadbandModel"

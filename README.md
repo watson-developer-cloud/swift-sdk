@@ -77,17 +77,17 @@ If your project does not yet have a Podfile, use the `pod init` command in the r
 use_frameworks!
 
 target 'MyApp' do
-    pod 'IBMWatsonAssistantV1', '~> 0.33.1'
-    pod 'IBMWatsonConversationV1', '~> 0.33.1'
-    pod 'IBMWatsonDiscoveryV1', '~> 0.33.1'
-    pod 'IBMWatsonLanguageTranslatorV3', '~> 0.33.1'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 0.33.1'
-    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 0.33.1'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 0.33.1'
-    pod 'IBMWatsonSpeechToTextV1', '~> 0.33.1'
-    pod 'IBMWatsonTextToSpeechV1', '~> 0.33.1'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 0.33.1'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 0.33.1'
+    pod 'IBMWatsonAssistantV1', '~> 0.34.0'
+    pod 'IBMWatsonConversationV1', '~> 0.34.0'
+    pod 'IBMWatsonDiscoveryV1', '~> 0.34.0'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 0.34.0'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 0.34.0'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 0.34.0'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 0.34.0'
+    pod 'IBMWatsonSpeechToTextV1', '~> 0.34.0'
+    pod 'IBMWatsonTextToSpeechV1', '~> 0.34.0'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 0.34.0'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 0.34.0'
 end
 ```
 
@@ -110,7 +110,7 @@ $ brew install carthage
 If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. 
 
 ```
-github "watson-developer-cloud/swift-sdk" ~> 0.33.1
+github "watson-developer-cloud/swift-sdk" ~> 0.34.0
 ```
 
 Then run the following command to build the dependencies and frameworks:
@@ -131,7 +131,7 @@ Add the following to your `Package.swift` file to identify the IBM Watson Swift 
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.33.1")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.34.0")
 ]
 ```
 
@@ -165,6 +165,8 @@ You supply either an IAM service **API key** or an **access token**:
 ```swift
 let discovery = Discovery(version: "your-version-here", apiKey: "your-apikey-here")
 ```
+
+If you are supplying an API key for IBM Cloud Private (ICP), use basic authentication instead, with `"apikey"` for the `username` and the api key (prefixed with `icp-`) for the `password`. See the [Username and Password](#username-and-password) section.
 
 #### Supplying the accessToken
 ```swift

@@ -71,7 +71,7 @@ public struct DialogRuntimeResponseGeneric: Codable {
     public var source: String?
 
     /**
-     The title to show before the response.
+     The title or introductory text to show before the response.
      */
     public var title: String?
 
@@ -134,7 +134,7 @@ public struct DialogRuntimeResponseGeneric: Codable {
      - parameter time: How long to pause, in milliseconds.
      - parameter typing: Whether to send a "user is typing" event during the pause.
      - parameter source: The URL of the image.
-     - parameter title: The title to show before the response.
+     - parameter title: The title or introductory text to show before the response.
      - parameter description: The description to show with the the response.
      - parameter preference: The preferred type of control to display.
      - parameter options: An array of objects describing the options from which the user can choose.

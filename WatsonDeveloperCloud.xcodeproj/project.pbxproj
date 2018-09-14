@@ -462,6 +462,30 @@
 		92064615212E2880004ACCC9 /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 92064600212E2880004ACCC9 /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92064616212E2880004ACCC9 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 92064601212E2880004ACCC9 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92064617212E2880004ACCC9 /* opus_defines.h in Headers */ = {isa = PBXBuildFile; fileRef = 92064601212E2880004ACCC9 /* opus_defines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		920A2433214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A2434214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A2435214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A2436214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A2437214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A2438214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A2439214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A243A214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A243B214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A243C214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A243D214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A243E214ADFB20077F10D /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
+		920A243F214B0E370077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2440214B0E380077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2441214B0E390077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2442214B0E3C0077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2443214B0E3C0077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2444214B0E3D0077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2445214B0E3E0077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2446214B0E3F0077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2447214B0E400077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2448214B0E400077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A2449214B0E410077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		920A244A214B0E420077F10D /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		928204C72124BC200013315B /* CreateEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BA2124BC1B0013315B /* CreateEventObject.swift */; };
 		928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BB2124BC1C0013315B /* MetricAggregationResult.swift */; };
 		928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */; };
@@ -1185,6 +1209,7 @@
 		920645FF212E2880004ACCC9 /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
 		92064600212E2880004ACCC9 /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
 		92064601212E2880004ACCC9 /* opus_defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
+		920A2432214ADFB20077F10D /* SharedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SharedTests.swift; path = Source/SupportingFiles/SharedTests.swift; sourceTree = "<group>"; };
 		928204BA2124BC1B0013315B /* CreateEventObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventObject.swift; sourceTree = "<group>"; };
 		928204BB2124BC1C0013315B /* MetricAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregationResult.swift; sourceTree = "<group>"; };
 		928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregationResult.swift; sourceTree = "<group>"; };
@@ -1986,6 +2011,7 @@
 				7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */,
 				7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */,
 				92BF69AD213F129A00FE6325 /* Shared.swift */,
+				920A2432214ADFB20077F10D /* SharedTests.swift */,
 			);
 			name = SupportingFiles;
 			sourceTree = "<group>";
@@ -3032,7 +3058,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = "Glenn R. Fisher";
+				ORGANIZATIONNAME = "IBM Corporation";
 				TargetAttributes = {
 					1241DFAD1E380F0A00B8B33E = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -3934,7 +3960,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A2439214ADFB20077F10D /* SharedTests.swift in Sources */,
 				1241DFCE1E38111500B8B33E /* WatsonCredentials.swift in Sources */,
+				920A2445214B0E3E0077F10D /* Shared.swift in Sources */,
 				1241DFCB1E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3967,8 +3995,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A2448214B0E400077F10D /* Shared.swift in Sources */,
 				7A6C7B4A1D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
 				12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */,
+				920A243C214ADFB20077F10D /* SharedTests.swift in Sources */,
 				124C2E231D19E30700D9F602 /* TextToSpeechTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4099,7 +4129,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A2435214ADFB20077F10D /* SharedTests.swift in Sources */,
 				12F800581DF71AD9006851D6 /* WatsonCredentials.swift in Sources */,
+				920A2441214B0E390077F10D /* Shared.swift in Sources */,
 				12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4186,7 +4218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A2433214ADFB20077F10D /* SharedTests.swift in Sources */,
 				6800FCD62056D8EC0078788A /* AssistantTests.swift in Sources */,
+				920A243F214B0E370077F10D /* Shared.swift in Sources */,
 				6877FAA02056D4F500383B25 /* WatsonCredentials.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4213,7 +4247,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A243A214ADFB20077F10D /* SharedTests.swift in Sources */,
 				7A6711A81DD0F1CC0070CA9D /* WatsonCredentials.swift in Sources */,
+				920A2446214B0E3F0077F10D /* Shared.swift in Sources */,
 				7A6711A71DD0F1970070CA9D /* PersonalityInsightsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4250,6 +4286,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A244A214B0E420077F10D /* Shared.swift in Sources */,
+				920A243E214ADFB20077F10D /* SharedTests.swift in Sources */,
 				CAF9A5CB20B75B3A006C86B7 /* VisualRecognitionWithIAMTests.swift in Sources */,
 				7A6C7B4D1D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
 				68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */,
@@ -4283,7 +4321,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A243D214ADFB20077F10D /* SharedTests.swift in Sources */,
 				7A6C7B4B1D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
+				920A2449214B0E410077F10D /* Shared.swift in Sources */,
 				7AAAF4151CEE9D5A00B74848 /* ToneAnalyzerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4343,8 +4383,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A2447214B0E400077F10D /* Shared.swift in Sources */,
 				7A6C7B491D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
 				7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */,
+				920A243B214ADFB20077F10D /* SharedTests.swift in Sources */,
 				68BB78F92089A97E00173438 /* SpeechToTextRecognizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4370,7 +4412,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A2438214ADFB20077F10D /* SharedTests.swift in Sources */,
 				7A6C7B451D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
+				920A2444214B0E3D0077F10D /* Shared.swift in Sources */,
 				7AAAF4CA1CEEA11E00B74848 /* NaturalLanguageClassifierTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4398,7 +4442,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A2436214ADFB20077F10D /* SharedTests.swift in Sources */,
 				7A6C7B441D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
+				920A2442214B0E3C0077F10D /* Shared.swift in Sources */,
 				7AAAF4FC1CEEA17C00B74848 /* LanguageTranslatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4485,7 +4531,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A2434214ADFB20077F10D /* SharedTests.swift in Sources */,
 				7A6C7B401D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
+				920A2440214B0E380077F10D /* Shared.swift in Sources */,
 				7AB445441D3E658200E8748A /* ConversationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4513,7 +4561,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920A2437214ADFB20077F10D /* SharedTests.swift in Sources */,
 				CA28815D20CB07D600FC992C /* WatsonCredentials.swift in Sources */,
+				920A2443214B0E3C0077F10D /* Shared.swift in Sources */,
 				CA28817720CB095100FC992C /* LanguageTranslatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

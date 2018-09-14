@@ -45,7 +45,7 @@ public class Conversation {
        in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
-        self.authMethod = BasicAuthentication(username: username, password: password)
+        self.authMethod = Shared.getAuthMethod(username: username, password: password)
         self.version = version
         Shared.configureRestRequest()
     }
@@ -59,7 +59,7 @@ public class Conversation {
      - parameter iamUrl: The URL for the IAM service.
      */
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
         self.version = version
         Shared.configureRestRequest()
     }
@@ -186,7 +186,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+       value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -532,7 +532,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+       value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -900,7 +900,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+       value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -1256,7 +1256,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+       value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -1601,7 +1601,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+       value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -2030,7 +2030,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+       value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -2394,7 +2394,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+       value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -2755,7 +2755,7 @@ public class Conversation {
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+       value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -3092,8 +3092,8 @@ public class Conversation {
      specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
+       order, prefix the parameter value with a minus sign (`-`).
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. For
        more information, see the
        [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
@@ -3177,8 +3177,8 @@ public class Conversation {
        must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or
        `request.context.metadata.deployment`. For more information, see the
        [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
+       order, prefix the parameter value with a minus sign (`-`).
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter headers: A dictionary of request headers to be sent with this request.

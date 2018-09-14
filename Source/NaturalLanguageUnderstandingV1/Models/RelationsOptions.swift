@@ -22,7 +22,8 @@ import Foundation
 public struct RelationsOptions: Encodable {
 
     /**
-     Enter a custom model ID to override the default model.
+     Enter a [custom model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID to
+     override the default model.
      */
     public var model: String?
 
@@ -34,7 +35,9 @@ public struct RelationsOptions: Encodable {
     /**
      Initialize a `RelationsOptions` with member variables.
 
-     - parameter model: Enter a custom model ID to override the default model.
+     - parameter model: Enter a [custom
+       model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID to override the
+       default model.
 
      - returns: An initialized `RelationsOptions`.
     */

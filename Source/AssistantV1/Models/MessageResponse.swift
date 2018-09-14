@@ -52,6 +52,11 @@ public struct MessageResponse: Decodable {
      */
     public var output: OutputData
 
+    /**
+     An array of objects describing any actions requested by the dialog node.
+     */
+    public var actions: [DialogNodeAction]?
+
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
@@ -63,7 +68,8 @@ public struct MessageResponse: Decodable {
         case alternateIntents = "alternate_intents"
         case context = "context"
         case output = "output"
-        static let allValues = [input, intents, entities, alternateIntents, context, output]
+        case actions = "actions"
+        static let allValues = [input, intents, entities, alternateIntents, context, output, actions]
     }
 
     public init(from decoder: Decoder) throws {
@@ -74,6 +80,7 @@ public struct MessageResponse: Decodable {
         alternateIntents = try container.decodeIfPresent(Bool.self, forKey: .alternateIntents)
         context = try container.decode(Context.self, forKey: .context)
         output = try container.decode(OutputData.self, forKey: .output)
+        actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }

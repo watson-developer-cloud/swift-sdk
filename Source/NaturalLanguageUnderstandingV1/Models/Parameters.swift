@@ -22,17 +22,17 @@ import Foundation
 public struct Parameters: Encodable {
 
     /**
-     The plain text to analyze.
+     The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
      */
     public var text: String?
 
     /**
-     The HTML file to analyze.
+     The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
      */
     public var html: String?
 
     /**
-     The web page to analyze.
+     The web page to analyze. One of the `text`, `html`, or `url` parameters is required.
      */
     public var url: String?
 
@@ -47,7 +47,9 @@ public struct Parameters: Encodable {
     public var clean: Bool?
 
     /**
-     XPath query for targeting nodes in HTML.
+     An [XPath query](https://www.w3.org/TR/xpath/) to perform on `html` or `url` input. Results of the query will be
+     appended to the cleaned webpage text before it is analyzed. To analyze only the results of the XPath query, set the
+     `clean` parameter to `false`.
      */
     public var xpath: String?
 
@@ -62,7 +64,10 @@ public struct Parameters: Encodable {
     public var returnAnalyzedText: Bool?
 
     /**
-     ISO 639-1 code indicating the language to use in the analysis.
+     ISO 639-1 code that specifies the language of your text. This overrides automatic language detection. Language
+     support differs depending on the features you include in your analysis. See [Language
+     support](https://www.bluemix.net/docs/services/natural-language-understanding/language-support.html) for more
+     information.
      */
     public var language: String?
 
@@ -89,14 +94,19 @@ public struct Parameters: Encodable {
      Initialize a `Parameters` with member variables.
 
      - parameter features: Specific features to analyze the document for.
-     - parameter text: The plain text to analyze.
-     - parameter html: The HTML file to analyze.
-     - parameter url: The web page to analyze.
+     - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
+     - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
+     - parameter url: The web page to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter clean: Remove website elements, such as links, ads, etc.
-     - parameter xpath: XPath query for targeting nodes in HTML.
+     - parameter xpath: An [XPath query](https://www.w3.org/TR/xpath/) to perform on `html` or `url` input. Results
+       of the query will be appended to the cleaned webpage text before it is analyzed. To analyze only the results of
+       the XPath query, set the `clean` parameter to `false`.
      - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
      - parameter returnAnalyzedText: Whether or not to return the analyzed text.
-     - parameter language: ISO 639-1 code indicating the language to use in the analysis.
+     - parameter language: ISO 639-1 code that specifies the language of your text. This overrides automatic language
+       detection. Language support differs depending on the features you include in your analysis. See [Language
+       support](https://www.bluemix.net/docs/services/natural-language-understanding/language-support.html) for more
+       information.
      - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
 
      - returns: An initialized `Parameters`.

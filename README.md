@@ -166,6 +166,8 @@ You supply either an IAM service **API key** or an **access token**:
 let discovery = Discovery(version: "your-version-here", apiKey: "your-apikey-here")
 ```
 
+If you are supplying an API key for IBM Cloud Private (ICP), use basic authentication instead, with `"apikey"` for the `username` and the api key (prefixed with `icp-`) for the `password`. See the [Username and Password](#username-and-password) section.
+
 #### Supplying the accessToken
 ```swift
 let discovery = Discovery(version: "your-version-here", accessToken: "your-accessToken-here")

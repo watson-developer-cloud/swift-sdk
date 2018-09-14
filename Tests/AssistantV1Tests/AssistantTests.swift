@@ -98,7 +98,7 @@ class AssistantTests: XCTestCase {
     /** Instantiate Assistant. */
     func instantiateAssistant() -> Assistant {
         let assistant: Assistant
-        let version = "2018-08-16"
+        let version = "2018-09-14"
         if let apiKey = WatsonCredentials.AssistantAPIKey {
             assistant = Assistant(version: version, apiKey: apiKey)
         } else {
@@ -1432,7 +1432,7 @@ class AssistantTests: XCTestCase {
                 "text": .object([
                     "selection_policy": .string("random"),
                     "values": .array([.string("Yes you can!"), .string("Of course!")]),
-                ])
+                ]),
             ]),
             context: nil,
             metadata: ["swift-sdk-test": .boolean(true)],

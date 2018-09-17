@@ -496,6 +496,29 @@
 		924EE7E021505D810048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		924EE7E921505DEE0048C0E5 /* AssistantV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE77B21505BF70048C0E5 /* AssistantV2Tests.swift */; };
 		924EE7EA21505E430048C0E5 /* AssistantV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 924EE77D21505C2C0048C0E5 /* AssistantV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		924EE803215060930048C0E5 /* DialogNodeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7EC215060930048C0E5 /* DialogNodeAction.swift */; };
+		924EE804215060930048C0E5 /* MessageContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7ED215060930048C0E5 /* MessageContext.swift */; };
+		924EE805215060930048C0E5 /* DialogSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7EE215060930048C0E5 /* DialogSuggestion.swift */; };
+		924EE806215060930048C0E5 /* SessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7EF215060930048C0E5 /* SessionResponse.swift */; };
+		924EE807215060930048C0E5 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F0215060930048C0E5 /* MessageRequest.swift */; };
+		924EE808215060930048C0E5 /* CaptureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F1215060930048C0E5 /* CaptureGroup.swift */; };
+		924EE809215060930048C0E5 /* MessageOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F2215060930048C0E5 /* MessageOutput.swift */; };
+		924EE80A215060930048C0E5 /* DialogNodeOutputOptionsElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F3215060930048C0E5 /* DialogNodeOutputOptionsElement.swift */; };
+		924EE80B215060930048C0E5 /* MessageOutputDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F4215060930048C0E5 /* MessageOutputDebug.swift */; };
+		924EE80C215060930048C0E5 /* MessageContextGlobalSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F5215060930048C0E5 /* MessageContextGlobalSystem.swift */; };
+		924EE80D215060930048C0E5 /* DialogSuggestionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F6215060930048C0E5 /* DialogSuggestionValue.swift */; };
+		924EE80E215060930048C0E5 /* RuntimeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F7215060930048C0E5 /* RuntimeIntent.swift */; };
+		924EE80F215060930048C0E5 /* DialogNodeOutputOptionsElementValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F8215060930048C0E5 /* DialogNodeOutputOptionsElementValue.swift */; };
+		924EE810215060930048C0E5 /* DialogRuntimeResponseGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7F9215060930048C0E5 /* DialogRuntimeResponseGeneric.swift */; };
+		924EE811215060930048C0E5 /* MessageInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7FA215060930048C0E5 /* MessageInput.swift */; };
+		924EE812215060930048C0E5 /* RuntimeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7FB215060930048C0E5 /* RuntimeEntity.swift */; };
+		924EE813215060930048C0E5 /* MessageContextSkills.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7FC215060930048C0E5 /* MessageContextSkills.swift */; };
+		924EE814215060930048C0E5 /* DialogLogMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7FD215060930048C0E5 /* DialogLogMessage.swift */; };
+		924EE815215060930048C0E5 /* MessageContextGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7FE215060930048C0E5 /* MessageContextGlobal.swift */; };
+		924EE816215060930048C0E5 /* MessageInputOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE7FF215060930048C0E5 /* MessageInputOptions.swift */; };
+		924EE817215060930048C0E5 /* DialogNodesVisited.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE800215060930048C0E5 /* DialogNodesVisited.swift */; };
+		924EE818215060930048C0E5 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE801215060930048C0E5 /* MessageResponse.swift */; };
+		924EE819215060930048C0E5 /* Assistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924EE802215060930048C0E5 /* Assistant.swift */; };
 		928204C72124BC200013315B /* CreateEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BA2124BC1B0013315B /* CreateEventObject.swift */; };
 		928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BB2124BC1C0013315B /* MetricAggregationResult.swift */; };
 		928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */; };
@@ -1240,6 +1263,29 @@
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		924EE7E721505D810048C0E5 /* AssistantV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssistantV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		924EE7EC215060930048C0E5 /* DialogNodeAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeAction.swift; sourceTree = "<group>"; };
+		924EE7ED215060930048C0E5 /* MessageContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContext.swift; sourceTree = "<group>"; };
+		924EE7EE215060930048C0E5 /* DialogSuggestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogSuggestion.swift; sourceTree = "<group>"; };
+		924EE7EF215060930048C0E5 /* SessionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionResponse.swift; sourceTree = "<group>"; };
+		924EE7F0215060930048C0E5 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
+		924EE7F1215060930048C0E5 /* CaptureGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureGroup.swift; sourceTree = "<group>"; };
+		924EE7F2215060930048C0E5 /* MessageOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOutput.swift; sourceTree = "<group>"; };
+		924EE7F3215060930048C0E5 /* DialogNodeOutputOptionsElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputOptionsElement.swift; sourceTree = "<group>"; };
+		924EE7F4215060930048C0E5 /* MessageOutputDebug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOutputDebug.swift; sourceTree = "<group>"; };
+		924EE7F5215060930048C0E5 /* MessageContextGlobalSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContextGlobalSystem.swift; sourceTree = "<group>"; };
+		924EE7F6215060930048C0E5 /* DialogSuggestionValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogSuggestionValue.swift; sourceTree = "<group>"; };
+		924EE7F7215060930048C0E5 /* RuntimeIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeIntent.swift; sourceTree = "<group>"; };
+		924EE7F8215060930048C0E5 /* DialogNodeOutputOptionsElementValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeOutputOptionsElementValue.swift; sourceTree = "<group>"; };
+		924EE7F9215060930048C0E5 /* DialogRuntimeResponseGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogRuntimeResponseGeneric.swift; sourceTree = "<group>"; };
+		924EE7FA215060930048C0E5 /* MessageInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInput.swift; sourceTree = "<group>"; };
+		924EE7FB215060930048C0E5 /* RuntimeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeEntity.swift; sourceTree = "<group>"; };
+		924EE7FC215060930048C0E5 /* MessageContextSkills.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContextSkills.swift; sourceTree = "<group>"; };
+		924EE7FD215060930048C0E5 /* DialogLogMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogLogMessage.swift; sourceTree = "<group>"; };
+		924EE7FE215060930048C0E5 /* MessageContextGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContextGlobal.swift; sourceTree = "<group>"; };
+		924EE7FF215060930048C0E5 /* MessageInputOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputOptions.swift; sourceTree = "<group>"; };
+		924EE800215060930048C0E5 /* DialogNodesVisited.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodesVisited.swift; sourceTree = "<group>"; };
+		924EE801215060930048C0E5 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
+		924EE802215060930048C0E5 /* Assistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Assistant.swift; path = Source/AssistantV2/Assistant.swift; sourceTree = SOURCE_ROOT; };
 		928204BA2124BC1B0013315B /* CreateEventObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventObject.swift; sourceTree = "<group>"; };
 		928204BB2124BC1C0013315B /* MetricAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregationResult.swift; sourceTree = "<group>"; };
 		928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregationResult.swift; sourceTree = "<group>"; };
@@ -2437,6 +2483,8 @@
 		924EE76421505AF40048C0E5 /* AssistantV2 */ = {
 			isa = PBXGroup;
 			children = (
+				924EE802215060930048C0E5 /* Assistant.swift */,
+				924EE7EB215060930048C0E5 /* Models */,
 				924EE77A21505BE40048C0E5 /* Tests */,
 			);
 			path = AssistantV2;
@@ -2449,6 +2497,36 @@
 			);
 			path = Tests;
 			sourceTree = "<group>";
+		};
+		924EE7EB215060930048C0E5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				924EE7F1215060930048C0E5 /* CaptureGroup.swift */,
+				924EE7FD215060930048C0E5 /* DialogLogMessage.swift */,
+				924EE7EC215060930048C0E5 /* DialogNodeAction.swift */,
+				924EE7F3215060930048C0E5 /* DialogNodeOutputOptionsElement.swift */,
+				924EE7F8215060930048C0E5 /* DialogNodeOutputOptionsElementValue.swift */,
+				924EE800215060930048C0E5 /* DialogNodesVisited.swift */,
+				924EE7F9215060930048C0E5 /* DialogRuntimeResponseGeneric.swift */,
+				924EE7EE215060930048C0E5 /* DialogSuggestion.swift */,
+				924EE7F6215060930048C0E5 /* DialogSuggestionValue.swift */,
+				924EE7ED215060930048C0E5 /* MessageContext.swift */,
+				924EE7FE215060930048C0E5 /* MessageContextGlobal.swift */,
+				924EE7F5215060930048C0E5 /* MessageContextGlobalSystem.swift */,
+				924EE7FC215060930048C0E5 /* MessageContextSkills.swift */,
+				924EE7FA215060930048C0E5 /* MessageInput.swift */,
+				924EE7FF215060930048C0E5 /* MessageInputOptions.swift */,
+				924EE7F2215060930048C0E5 /* MessageOutput.swift */,
+				924EE7F4215060930048C0E5 /* MessageOutputDebug.swift */,
+				924EE7F0215060930048C0E5 /* MessageRequest.swift */,
+				924EE801215060930048C0E5 /* MessageResponse.swift */,
+				924EE7FB215060930048C0E5 /* RuntimeEntity.swift */,
+				924EE7F7215060930048C0E5 /* RuntimeIntent.swift */,
+				924EE7EF215060930048C0E5 /* SessionResponse.swift */,
+			);
+			name = Models;
+			path = Source/AssistantV2/Models;
+			sourceTree = SOURCE_ROOT;
 		};
 		B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */ = {
 			isa = PBXGroup;
@@ -4720,7 +4798,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				924EE80F215060930048C0E5 /* DialogNodeOutputOptionsElementValue.swift in Sources */,
+				924EE816215060930048C0E5 /* MessageInputOptions.swift in Sources */,
+				924EE817215060930048C0E5 /* DialogNodesVisited.swift in Sources */,
 				924EE7BA21505D7A0048C0E5 /* Shared.swift in Sources */,
+				924EE819215060930048C0E5 /* Assistant.swift in Sources */,
+				924EE818215060930048C0E5 /* MessageResponse.swift in Sources */,
+				924EE811215060930048C0E5 /* MessageInput.swift in Sources */,
+				924EE806215060930048C0E5 /* SessionResponse.swift in Sources */,
+				924EE815215060930048C0E5 /* MessageContextGlobal.swift in Sources */,
+				924EE80B215060930048C0E5 /* MessageOutputDebug.swift in Sources */,
+				924EE80D215060930048C0E5 /* DialogSuggestionValue.swift in Sources */,
+				924EE805215060930048C0E5 /* DialogSuggestion.swift in Sources */,
+				924EE80E215060930048C0E5 /* RuntimeIntent.swift in Sources */,
+				924EE807215060930048C0E5 /* MessageRequest.swift in Sources */,
+				924EE812215060930048C0E5 /* RuntimeEntity.swift in Sources */,
+				924EE809215060930048C0E5 /* MessageOutput.swift in Sources */,
+				924EE813215060930048C0E5 /* MessageContextSkills.swift in Sources */,
+				924EE804215060930048C0E5 /* MessageContext.swift in Sources */,
+				924EE810215060930048C0E5 /* DialogRuntimeResponseGeneric.swift in Sources */,
+				924EE803215060930048C0E5 /* DialogNodeAction.swift in Sources */,
+				924EE80C215060930048C0E5 /* MessageContextGlobalSystem.swift in Sources */,
+				924EE80A215060930048C0E5 /* DialogNodeOutputOptionsElement.swift in Sources */,
+				924EE808215060930048C0E5 /* CaptureGroup.swift in Sources */,
+				924EE814215060930048C0E5 /* DialogLogMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

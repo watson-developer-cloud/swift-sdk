@@ -5,6 +5,7 @@
 # The flag --allow-warnings is required for pods that have build warnings (like deprecation notices).
 
 pod lib lint IBMWatsonAssistantV1.podspec
+pod lib lint IBMWatsonAssistantV2.podspec
 pod lib lint IBMWatsonConversationV1.podspec
 pod lib lint IBMWatsonDiscoveryV1.podspec
 pod lib lint IBMWatsonLanguageTranslatorV3.podspec

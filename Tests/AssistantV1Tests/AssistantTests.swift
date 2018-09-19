@@ -32,7 +32,7 @@ class AssistantTests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-        assistant = instantiateAssistant()
+        instantiateAssistant()
     }
 
     static var allTests: [(String, (AssistantTests) -> () throws -> Void)] {
@@ -96,8 +96,7 @@ class AssistantTests: XCTestCase {
     }
 
     /** Instantiate Assistant. */
-    func instantiateAssistant() -> Assistant {
-        let assistant: Assistant
+    func instantiateAssistant() {
         let version = "2018-09-14"
         if let apiKey = WatsonCredentials.AssistantAPIKey {
             assistant = Assistant(version: version, apiKey: apiKey)
@@ -111,7 +110,6 @@ class AssistantTests: XCTestCase {
         }
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         assistant.defaultHeaders["X-Watson-Test"] = "true"
-        return assistant
     }
 
     /** Fail false negatives. */
@@ -1562,7 +1560,6 @@ class AssistantTests: XCTestCase {
     func testInvalidServiceURL() {
         let description = "Start a conversation with an invalid workspace."
         let expectation = self.expectation(description: description)
-        let assistant = instantiateAssistant()
         assistant.serviceURL = "this is broken"
         let failure = { (error: Error) in
             switch error {

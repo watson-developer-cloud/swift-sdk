@@ -32,7 +32,7 @@ class AssistantV2Tests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-        assistant = instantiateAssistant()
+        instantiateAssistant()
     }
 
     static var allTests: [(String, (AssistantV2Tests) -> () throws -> Void)] {
@@ -47,8 +47,7 @@ class AssistantV2Tests: XCTestCase {
     }
 
     /** Instantiate Assistant. */
-    func instantiateAssistant() -> Assistant {
-        let assistant: Assistant
+    func instantiateAssistant() {
         let version = "2018-09-19"
         if let apiKey = WatsonCredentials.AssistantAPIKey {
             assistant = Assistant(version: version, apiKey: apiKey)
@@ -62,7 +61,6 @@ class AssistantV2Tests: XCTestCase {
         }
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         assistant.defaultHeaders["X-Watson-Test"] = "true"
-        return assistant
     }
 
     /** Fail false negatives. */

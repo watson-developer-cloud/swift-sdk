@@ -225,7 +225,7 @@ class AssistantV2Tests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(intents[0].intent, "Good")
+            XCTAssertEqual(intents[0].intent, "General_Greetings")
 
             // verify context
             XCTAssertNil(context)

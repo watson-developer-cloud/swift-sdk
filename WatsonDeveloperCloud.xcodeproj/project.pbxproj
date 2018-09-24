@@ -191,7 +191,6 @@
 		68438EA0208A987400FD7DB9 /* ClassifyCollectionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68438E9D208A987300FD7DB9 /* ClassifyCollectionInput.swift */; };
 		68438EA1208A987400FD7DB9 /* CollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68438E9E208A987400FD7DB9 /* CollectionItem.swift */; };
 		6877FAA02056D4F500383B25 /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
-		689A168E203C88C7002CFC66 /* FaceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A167E203C88C6002CFC66 /* FaceIdentity.swift */; };
 		689A168F203C88C7002CFC66 /* FaceGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A167F203C88C6002CFC66 /* FaceGender.swift */; };
 		689A1690203C88C7002CFC66 /* FaceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A1680203C88C6002CFC66 /* FaceLocation.swift */; };
 		689A1691203C88C7002CFC66 /* ImageWithFaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689A1681203C88C6002CFC66 /* ImageWithFaces.swift */; };
@@ -908,7 +907,6 @@
 		68438E9E208A987400FD7DB9 /* CollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectionItem.swift; path = Source/NaturalLanguageClassifierV1/Models/CollectionItem.swift; sourceTree = "<group>"; };
 		6877FA9A2056D4F100383B25 /* AssistantV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6877FAAA2056D4F500383B25 /* AssistantV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssistantV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		689A167E203C88C6002CFC66 /* FaceIdentity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceIdentity.swift; sourceTree = "<group>"; };
 		689A167F203C88C6002CFC66 /* FaceGender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceGender.swift; sourceTree = "<group>"; };
 		689A1680203C88C6002CFC66 /* FaceLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceLocation.swift; sourceTree = "<group>"; };
 		689A1681203C88C6002CFC66 /* ImageWithFaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageWithFaces.swift; sourceTree = "<group>"; };
@@ -2073,7 +2071,6 @@
 				689A168C203C88C7002CFC66 /* Face.swift */,
 				689A1686203C88C6002CFC66 /* FaceAge.swift */,
 				689A167F203C88C6002CFC66 /* FaceGender.swift */,
-				689A167E203C88C6002CFC66 /* FaceIdentity.swift */,
 				689A1680203C88C6002CFC66 /* FaceLocation.swift */,
 				689A1681203C88C6002CFC66 /* ImageWithFaces.swift */,
 				689A16A0203C89F5002CFC66 /* PositiveExample.swift */,
@@ -4026,7 +4023,6 @@
 				689A169A203C88C7002CFC66 /* DetectedFaces.swift in Sources */,
 				689A1699203C88C7002CFC66 /* ClassifierResult.swift in Sources */,
 				689A1694203C88C7002CFC66 /* ClassifiedImage.swift in Sources */,
-				689A168E203C88C7002CFC66 /* FaceIdentity.swift in Sources */,
 				689A1696203C88C7002CFC66 /* FaceAge.swift in Sources */,
 				689A169B203C88C7002CFC66 /* Classifier.swift in Sources */,
 				689A1692203C88C7002CFC66 /* ClassResult.swift in Sources */,

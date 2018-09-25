@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## Version 0.35.0
+_2018-09-25_
+
+This release adds the new AssistantV2 service.
+
 ## Version 0.34.0
 _2018-09-14_
 

@@ -21,6 +21,11 @@ struct WatsonCredentials {
     static let AssistantURL: String? = nil
     static let AssistantWorkspace = "cogntive-car-sample-workspace"
 
+    static let AssistantV2Username = "your-username-here"
+    static let AssistantV2Password = "your-password-here"
+    static let AssistantV2URL: String? = nil
+    static let AssistantV2ID = "cognitive-car-sample-id"
+
     static let ConversationUsername = "your-username-here"
     static let ConversationPassword = "your-password-here"
     static let ConversationWorkspace = "cogntive-car-sample-workspace"

@@ -3,21 +3,21 @@
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
       "line": 26,
-      "symbol": "ToneContent.toneInput",
+      "symbol": "ToneContent.toneInput(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
       "line": 27,
-      "symbol": "ToneContent.text",
+      "symbol": "ToneContent.text(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
       "line": 28,
-      "symbol": "ToneContent.html",
+      "symbol": "ToneContent.html(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },

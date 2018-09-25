@@ -794,84 +794,84 @@
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 24,
-      "symbol": "QueryAggregation.term",
+      "symbol": "QueryAggregation.term(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 25,
-      "symbol": "QueryAggregation.filter",
+      "symbol": "QueryAggregation.filter(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 26,
-      "symbol": "QueryAggregation.nested",
+      "symbol": "QueryAggregation.nested(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 27,
-      "symbol": "QueryAggregation.histogram",
+      "symbol": "QueryAggregation.histogram(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 28,
-      "symbol": "QueryAggregation.timeslice",
+      "symbol": "QueryAggregation.timeslice(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 29,
-      "symbol": "QueryAggregation.topHits",
+      "symbol": "QueryAggregation.topHits(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 30,
-      "symbol": "QueryAggregation.uniqueCount",
+      "symbol": "QueryAggregation.uniqueCount(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 31,
-      "symbol": "QueryAggregation.max",
+      "symbol": "QueryAggregation.max(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 32,
-      "symbol": "QueryAggregation.min",
+      "symbol": "QueryAggregation.min(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 33,
-      "symbol": "QueryAggregation.average",
+      "symbol": "QueryAggregation.average(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 34,
-      "symbol": "QueryAggregation.sum",
+      "symbol": "QueryAggregation.sum(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 35,
-      "symbol": "QueryAggregation.generic",
+      "symbol": "QueryAggregation.generic(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },

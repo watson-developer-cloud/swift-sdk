@@ -45,3 +45,9 @@ deploy:
     on:
       branch: master
       condition: $TRAVIS_OS_NAME = osx
+  - provider: script
+    script: Scripts/release-to-cocoapods.sh
+    skip_cleanup: true
+    on:
+      branch: master
+      condition: $TRAVIS_OS_NAME = osx

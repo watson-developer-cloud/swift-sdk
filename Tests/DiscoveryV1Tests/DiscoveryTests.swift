@@ -36,14 +36,13 @@ class DiscoveryTests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-        discovery = instantiateDiscovery()
+        instantiateDiscovery()
         environment = lookupOrCreateTestEnvironment()
         documentURL = loadDocument(name: "KennedySpeech", ext: "html")
     }
 
-    func instantiateDiscovery() -> Discovery {
-        let discovery: Discovery
-        let version = "2018-08-16"
+    func instantiateDiscovery() {
+        let version = "2018-09-14"
         if let apiKey = WatsonCredentials.DiscoveryAPIKey {
             discovery = Discovery(version: version, apiKey: apiKey)
         } else {
@@ -56,7 +55,6 @@ class DiscoveryTests: XCTestCase {
         }
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         discovery.defaultHeaders["X-Watson-Test"] = "true"
-        return discovery
     }
 
     func loadDocument(name: String, ext: String) -> URL? {

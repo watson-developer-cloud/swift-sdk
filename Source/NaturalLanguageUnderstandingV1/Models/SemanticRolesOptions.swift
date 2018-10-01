@@ -27,12 +27,12 @@ public struct SemanticRolesOptions: Encodable {
     public var limit: Int?
 
     /**
-     Set this to true to return keyword information for subjects and objects.
+     Set this to `true` to return keyword information for subjects and objects.
      */
     public var keywords: Bool?
 
     /**
-     Set this to true to return entity information for subjects and objects.
+     Set this to `true` to return entity information for subjects and objects.
      */
     public var entities: Bool?
 
@@ -47,8 +47,8 @@ public struct SemanticRolesOptions: Encodable {
      Initialize a `SemanticRolesOptions` with member variables.
 
      - parameter limit: Maximum number of semantic_roles results to return.
-     - parameter keywords: Set this to true to return keyword information for subjects and objects.
-     - parameter entities: Set this to true to return entity information for subjects and objects.
+     - parameter keywords: Set this to `true` to return keyword information for subjects and objects.
+     - parameter entities: Set this to `true` to return entity information for subjects and objects.
 
      - returns: An initialized `SemanticRolesOptions`.
     */

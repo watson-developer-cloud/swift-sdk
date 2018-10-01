@@ -55,7 +55,7 @@ public class PersonalityInsights {
        in "YYYY-MM-DD" format.
      */
     public init(username: String, password: String, version: String) {
-        self.authMethod = BasicAuthentication(username: username, password: password)
+        self.authMethod = Shared.getAuthMethod(username: username, password: password)
         self.version = version
         Shared.configureRestRequest()
     }
@@ -69,7 +69,7 @@ public class PersonalityInsights {
      - parameter iamUrl: The URL for the IAM service.
      */
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
+        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
         self.version = version
         Shared.configureRestRequest()
     }

@@ -27,6 +27,7 @@ internal struct CreateLanguageModel: Encodable {
      customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
      */
     public enum BaseModelName: String {
+        case deDeBroadbandmodel = "de-DE_BroadbandModel"
         case enGbBroadbandmodel = "en-GB_BroadbandModel"
         case enGbNarrowbandmodel = "en-GB_NarrowbandModel"
         case enUsBroadbandmodel = "en-US_BroadbandModel"
@@ -38,6 +39,8 @@ internal struct CreateLanguageModel: Encodable {
         case jaJpNarrowbandmodel = "ja-JP_NarrowbandModel"
         case koKrBroadbandmodel = "ko-KR_BroadbandModel"
         case koKrNarrowbandmodel = "ko-KR_NarrowbandModel"
+        case ptBrBroadbandmodel = "pt-BR_BroadbandModel"
+        case ptBrNarrowbandmodel = "pt-BR_NarrowbandModel"
     }
 
     /**

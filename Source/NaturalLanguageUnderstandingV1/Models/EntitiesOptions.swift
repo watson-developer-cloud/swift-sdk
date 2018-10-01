@@ -27,22 +27,23 @@ public struct EntitiesOptions: Encodable {
     public var limit: Int?
 
     /**
-     Set this to true to return locations of entity mentions.
+     Set this to `true` to return locations of entity mentions.
      */
     public var mentions: Bool?
 
     /**
-     Enter a custom model ID to override the standard entity detection model.
+     Enter a [custom model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID to
+     override the standard entity detection model.
      */
     public var model: String?
 
     /**
-     Set this to true to return sentiment information for detected entities.
+     Set this to `true` to return sentiment information for detected entities.
      */
     public var sentiment: Bool?
 
     /**
-     Set this to true to analyze emotion for detected keywords.
+     Set this to `true` to analyze emotion for detected keywords.
      */
     public var emotion: Bool?
 
@@ -59,10 +60,12 @@ public struct EntitiesOptions: Encodable {
      Initialize a `EntitiesOptions` with member variables.
 
      - parameter limit: Maximum number of entities to return.
-     - parameter mentions: Set this to true to return locations of entity mentions.
-     - parameter model: Enter a custom model ID to override the standard entity detection model.
-     - parameter sentiment: Set this to true to return sentiment information for detected entities.
-     - parameter emotion: Set this to true to analyze emotion for detected keywords.
+     - parameter mentions: Set this to `true` to return locations of entity mentions.
+     - parameter model: Enter a [custom
+       model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID to override the
+       standard entity detection model.
+     - parameter sentiment: Set this to `true` to return sentiment information for detected entities.
+     - parameter emotion: Set this to `true` to analyze emotion for detected keywords.
 
      - returns: An initialized `EntitiesOptions`.
     */

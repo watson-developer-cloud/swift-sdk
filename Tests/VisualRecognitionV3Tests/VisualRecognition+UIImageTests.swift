@@ -47,7 +47,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
     }
 
     func instantiateVisualRecognition() {
-        let version = "2018-08-16"
+        let version = "2018-09-14"
         if let apiKey = WatsonCredentials.VisualRecognitionAPIKey {
             visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
         } else {

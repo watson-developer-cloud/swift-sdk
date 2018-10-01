@@ -32,7 +32,7 @@ class AssistantTests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-        assistant = instantiateAssistant()
+        instantiateAssistant()
     }
 
     static var allTests: [(String, (AssistantTests) -> () throws -> Void)] {
@@ -96,9 +96,8 @@ class AssistantTests: XCTestCase {
     }
 
     /** Instantiate Assistant. */
-    func instantiateAssistant() -> Assistant {
-        let assistant: Assistant
-        let version = "2018-08-16"
+    func instantiateAssistant() {
+        let version = "2018-09-14"
         if let apiKey = WatsonCredentials.AssistantAPIKey {
             assistant = Assistant(version: version, apiKey: apiKey)
         } else {
@@ -111,7 +110,6 @@ class AssistantTests: XCTestCase {
         }
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         assistant.defaultHeaders["X-Watson-Test"] = "true"
-        return assistant
     }
 
     func waitForExpectations(timeout: TimeInterval = 10.0) {
@@ -2401,7 +2399,6 @@ class AssistantTests: XCTestCase {
     func testInvalidServiceURL() {
         let description = "Start a conversation with an invalid workspace."
         let expectation = self.expectation(description: description)
-        let assistant = instantiateAssistant()
         assistant.serviceURL = "this is broken"
         assistant.listWorkspaces { (_, error) in
             guard let error = error as? RestError else {

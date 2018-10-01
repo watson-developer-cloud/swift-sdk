@@ -22,7 +22,7 @@ import Foundation
 public struct SentimentOptions: Encodable {
 
     /**
-     Set this to false to hide document-level sentiment results.
+     Set this to `false` to hide document-level sentiment results.
      */
     public var document: Bool?
 
@@ -40,7 +40,7 @@ public struct SentimentOptions: Encodable {
     /**
      Initialize a `SentimentOptions` with member variables.
 
-     - parameter document: Set this to false to hide document-level sentiment results.
+     - parameter document: Set this to `false` to hide document-level sentiment results.
      - parameter targets: Sentiment results will be returned for each target string that is found in the document.
 
      - returns: An initialized `SentimentOptions`.

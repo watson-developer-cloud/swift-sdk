@@ -21,7 +21,7 @@
     {
       "path": "@semantic-release/github",
       "assets": [
-        {"path": "WatsonDeveloperCloud.framework.zip", "label": "WatsonDeveloperCloud.framework.zip"}
+        {"path": "IBMWatsonSwiftSDK.zip", "label": "IBMWatsonSwiftSDK.zip"}
       ]
     }
   ]

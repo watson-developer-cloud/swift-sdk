@@ -20,6 +20,7 @@ before_install:
   - nvm use node
 install:
   - gem install cocoapods
+  - gem install jazzy
   - sudo pip install bumpversion
   - npm install -g semantic-release@15.9.0
   - npm install -g @semantic-release/exec
@@ -48,6 +49,11 @@ deploy:
   - provider: script
     script: Scripts/release-to-cocoapods.sh
     skip_cleanup: true
+    on:
+      branch: master
+      condition: $TRAVIS_OS_NAME = osx
+  - provider: script
+    script: Scripts/publish-documentation.sh
     on:
       branch: master
       condition: $TRAVIS_OS_NAME = osx

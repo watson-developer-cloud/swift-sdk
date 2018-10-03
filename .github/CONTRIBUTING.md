@@ -24,14 +24,19 @@ to the coding style guidelines.
 
 If you want to contribute to the repository, here's a quick guide:
   1. Fork the repository.
-  2. Copy `Source/SupportingFiles/WatsonCredentialsExample.swift` to `Source/SupportingFiles/WatsonCredentials.swift`.
-  3. Add credentials to `WatsonCredentials.swift` for the services you plan to test.
-  4. Develop and test your code changes.
-    * Please respect the original code [style guide][styleguide].
-    * Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
-    * Check for unnecessary whitespace with `git diff --check` before committing.
-  5. Verify that tests pass successfully. Instructions on running the Swift tests on Linux while on a Mac can be found [here](https://github.com/watson-developer-cloud/swift-sdk/wiki/Running-Swift-Linux-Tests-on-Mac).
-  6. Push to your fork and submit a pull request to the **master** branch.
+  1. Copy `Source/SupportingFiles/WatsonCredentialsExample.swift` to `Source/SupportingFiles/WatsonCredentials.swift`.
+  1. Add credentials to `WatsonCredentials.swift` for the services you plan to test.
+  1. Develop and test your code changes.
+      1. Please respect the original code [style guide][styleguide].
+      1. Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
+      1. Check for unnecessary whitespace with `git diff --check` before committing.
+      1. Use [commitizen](https://github.com/commitizen/cz-cli) to make commits (i.e. `git cz` instead of `git commit`).
+      ```
+    	npm install -g commitizen cz-conventional-changelog
+	    echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
+    	```
+  1. Verify that tests pass successfully on both macOS and Linux. To run tests in Xcode, select the service's scheme and press `cmd-u`. Instructions on running the Swift tests on Linux while on a Mac can be found [here](https://github.com/watson-developer-cloud/swift-sdk/wiki/Running-Swift-Linux-Tests-on-Mac).
+  1. Push to your fork and submit a pull request to the **develop** branch.
 
 # Developer's Certificate of Origin 1.1
 

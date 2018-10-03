@@ -110,6 +110,8 @@ class AssistantTests: XCTestCase {
         }
         assistant.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         assistant.defaultHeaders["X-Watson-Test"] = "true"
+
+        assistant.disableSSL = true
     }
 
     /** Fail false negatives. */

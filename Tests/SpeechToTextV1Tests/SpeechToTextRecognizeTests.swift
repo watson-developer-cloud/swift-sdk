@@ -52,6 +52,8 @@ class SpeechToTextRecognizeTests: XCTestCase {
         }
         speechToText.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         speechToText.defaultHeaders["X-Watson-Test"] = "true"
+
+        speechToText.disableSSL = true
     }
 
     // MARK: - Test Definition for Linux

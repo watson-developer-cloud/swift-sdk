@@ -54,6 +54,8 @@ class DiscoveryTests: XCTestCase {
         }
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         discovery.defaultHeaders["X-Watson-Test"] = "true"
+
+        discovery.disableSSL = true
     }
 
     func loadDocument(name: String, ext: String) -> URL? {

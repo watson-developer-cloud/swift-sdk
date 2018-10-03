@@ -30,7 +30,17 @@ public class Assistant {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
+    /// Set to `true` to allow network requests to disable SSL.
+    /// **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+    public var disableSSL: Bool = false {
+        didSet {
+            if disableSSL {
+                session = URLSession(configuration: .default, delegate: DisableSSLDelegate(), delegateQueue: nil)
+            }
+        }
+    }
+
+    private var session = URLSession(configuration: .default)
     private var authMethod: AuthenticationMethod
     private let domain = "com.ibm.watson.developer-cloud.AssistantV2"
     private let version: String

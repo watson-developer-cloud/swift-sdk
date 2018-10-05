@@ -677,7 +677,7 @@ public class VisualRecognition {
         classifierID: String,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
-        success: @escaping (URL) -> Void)
+        success: @escaping (Data) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -707,8 +707,8 @@ public class VisualRecognition {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<URL>) in
+        request.responseData {
+            (response: RestResponse<Data>) in
             switch response.result {
             case .success(let retval): success(retval)
             case .failure(let error): failure?(error)

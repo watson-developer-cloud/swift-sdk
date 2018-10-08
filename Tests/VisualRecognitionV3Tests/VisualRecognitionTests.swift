@@ -135,7 +135,7 @@ class VisualRecognitionTests: XCTestCase {
         }
     }
 
-    // MARK: - Positive Tests
+    // MARK: - Classifiers CRUD
 
     /** Retrieve a list of user-trained classifiers. */
     func testListClassifiers() {
@@ -445,6 +445,19 @@ class VisualRecognitionTests: XCTestCase {
             }
         }
     }
+
+    /** Get the Core ML model for a trained classifier. */
+    func testGetCoreMlModel() {
+        let expectation = self.expectation(description: "Get the Core ML model for a trained classifier.")
+        visualRecognition.getCoreMlModel(classifierID: classifierID, failure: failWithError) {
+            coreMLModel in
+            XCTAssertNotNil(coreMLModel)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    // MARK: - Classify
 
     /** Classify an image by URL using the default classifier and all default parameters. */
     func testClassifyByURL1() {
@@ -953,6 +966,8 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations(timeout: 60)
     }
+
+    // MARK: - Detect faces
 
     /** Detect faces by URL. */
     func testDetectFacesByURL() {

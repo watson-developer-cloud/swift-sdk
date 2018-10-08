@@ -502,6 +502,7 @@
 		924EE7DF21505D810048C0E5 /* AssistantV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6877FA9A2056D4F100383B25 /* AssistantV1.framework */; };
 		924EE7E021505D810048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		924EE7EA21505E430048C0E5 /* AssistantV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 924EE77D21505C2C0048C0E5 /* AssistantV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92547737216C0E70003C2829 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
 		928204C72124BC200013315B /* CreateEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BA2124BC1B0013315B /* CreateEventObject.swift */; };
 		928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BB2124BC1C0013315B /* MetricAggregationResult.swift */; };
 		928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */; };
@@ -4595,6 +4596,7 @@
 				924EE7D921505D810048C0E5 /* SharedTests.swift in Sources */,
 				924EE7DB21505D810048C0E5 /* Shared.swift in Sources */,
 				924008B92152FD3E005EC1F1 /* AssistantV2Tests.swift in Sources */,
+				92547737216C0E70003C2829 /* TestUtilities.swift in Sources */,
 				924EE7DC21505D810048C0E5 /* WatsonCredentials.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

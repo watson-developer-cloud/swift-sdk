@@ -115,14 +115,12 @@ public class Assistant {
        [documentation](https://console.bluemix.net/docs/services/assistant/create-assistant.html#creating-assistants).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createSession(
         assistantID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SessionResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<SessionResponse>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -139,7 +137,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -153,13 +151,7 @@ public class Assistant {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<SessionResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -173,15 +165,13 @@ public class Assistant {
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter sessionID: Unique identifier of the session.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteSession(
         assistantID: String,
         sessionID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -197,7 +187,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -211,13 +201,7 @@ public class Assistant {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseVoid(completionHandler: completionHandler)
     }
 
     /**
@@ -233,9 +217,7 @@ public class Assistant {
      - parameter sessionID: Unique identifier of the session.
      - parameter input: An input object that includes the input text.
      - parameter context: State information for the conversation.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func message(
         assistantID: String,
@@ -243,13 +225,12 @@ public class Assistant {
         input: MessageInput? = nil,
         context: MessageContext? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (MessageResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<MessageResponse>?, Error?) -> Void)
     {
         // construct body
         let messageRequest = MessageRequest(input: input, context: context)
         guard let body = try? JSONEncoder().encodeIfPresent(messageRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, RestError.serializationError)
             return
         }
 
@@ -268,7 +249,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, RestError.encodingError)
             return
         }
         let request = RestRequest(
@@ -283,13 +264,7 @@ public class Assistant {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<MessageResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

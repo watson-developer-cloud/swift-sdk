@@ -63,21 +63,6 @@ class AssistantV2Tests: XCTestCase {
         assistant.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
-    /** Fail false positives. */
-    func failWithResult<T>(result: T) {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Fail false positives. */
-    func failWithResult() {
-        XCTFail("Negative test returned a result.")
-    }
-
     /** Wait for expectations. */
     func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
@@ -90,10 +75,19 @@ class AssistantV2Tests: XCTestCase {
     func testCreateSession() {
         let description = "Create a session"
         let expectation = self.expectation(description: description)
-        assistant.createSession(assistantID: assistantID, failure: failWithError) {
-            response in
+        assistant.createSession(assistantID: assistantID) {
+            response, error in
 
-            XCTAssertNotNil(response.sessionID)
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let session = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(session.sessionID)
             expectation.fulfill()
         }
 
@@ -106,7 +100,14 @@ class AssistantV2Tests: XCTestCase {
         let failure = { (error: Error) in expectation.fulfill() }
 
         let invalidID = "Invalid Assistant ID"
-        assistant.createSession(assistantID: invalidID, failure: failure, success: failWithResult)
+        assistant.createSession(assistantID: invalidID) {
+            _, error in
+
+            if error == nil {
+                XCTFail(missingErrorMessage)
+            }
+            expectation.fulfill()
+        }
 
         waitForExpectations()
     }
@@ -115,11 +116,20 @@ class AssistantV2Tests: XCTestCase {
         let description1 = "Create a session"
         let expectation1 = self.expectation(description: description1)
         var newSessionID: String?
-        assistant.createSession(assistantID: assistantID, failure: failWithError) {
-            response in
+        assistant.createSession(assistantID: assistantID) {
+            response, error in
 
-            XCTAssertNotNil(response.sessionID)
-            newSessionID = response.sessionID
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let session = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(session.sessionID)
+            newSessionID = session.sessionID
             expectation1.fulfill()
         }
 
@@ -133,6 +143,13 @@ class AssistantV2Tests: XCTestCase {
         let description2 = "Delete the newly created session"
         let expectation2 = self.expectation(description: description2)
         assistant.deleteSession(assistantID: assistantID, sessionID: sessionID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
             expectation2.fulfill()
         }
 
@@ -145,7 +162,14 @@ class AssistantV2Tests: XCTestCase {
         let failure = { (error: Error) in expectation.fulfill() }
 
         let invalidID = "Invalid Session ID"
-        assistant.deleteSession(assistantID: assistantID, sessionID: invalidID, failure: failure, success: failWithResult)
+        assistant.deleteSession(assistantID: assistantID, sessionID: invalidID) {
+            _, error in
+
+            if error == nil {
+                XCTFail(missingErrorMessage)
+            }
+            expectation.fulfill()
+        }
 
         waitForExpectations()
     }
@@ -157,11 +181,20 @@ class AssistantV2Tests: XCTestCase {
         let description1 = "Create a session"
         let expectation1 = self.expectation(description: description1)
         var newSessionID: String?
-        assistant.createSession(assistantID: assistantID, failure: failWithError) {
-            response in
+        assistant.createSession(assistantID: assistantID) {
+            response, error in
 
-            XCTAssertNotNil(response.sessionID)
-            newSessionID = response.sessionID
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let session = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(session.sessionID)
+            newSessionID = session.sessionID
             expectation1.fulfill()
         }
 
@@ -176,11 +209,20 @@ class AssistantV2Tests: XCTestCase {
         let description2 = "Start a conversation."
         let expectation2 = self.expectation(description: description2)
 
-        assistant.message(assistantID: assistantID, sessionID: sessionID, input: nil, context: nil, failure: failWithError) {
-            response in
+        assistant.message(assistantID: assistantID, sessionID: sessionID, input: nil, context: nil) {
+            response, error in
 
-            let output = response.output
-            let context = response.context
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            let output = message.output
+            let context = message.context
 
             // verify response message
             guard let dialogRuntimeResponse = output.generic, dialogRuntimeResponse.count == 1 else {
@@ -204,11 +246,20 @@ class AssistantV2Tests: XCTestCase {
 
         let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "I'm good, how are you?")
 
-        assistant.message(assistantID: assistantID, sessionID: sessionID, input: messageInput, context: nil, failure: failWithError) {
-            response in
+        assistant.message(assistantID: assistantID, sessionID: sessionID, input: messageInput, context: nil) {
+            response, error in
 
-            let output = response.output
-            let context = response.context
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            let output = message.output
+            let context = message.context
 
             // verify response message
             guard let dialogRuntimeResponse = output.generic, dialogRuntimeResponse.count == 1 else {
@@ -238,10 +289,16 @@ class AssistantV2Tests: XCTestCase {
     func testMessageWithInvalidSessionID() {
         let description = "Send message with an invalid session"
         let expectation = self.expectation(description: description)
-        let failure = { (error: Error) in expectation.fulfill() }
 
         let invalidID = "Invalid Session ID"
-        assistant.message(assistantID: assistantID, sessionID: invalidID, failure: failure, success: failWithResult)
+        assistant.message(assistantID: assistantID, sessionID: invalidID) {
+            _, error in
+
+            if error == nil {
+                XCTFail(missingErrorMessage)
+            }
+            expectation.fulfill()
+        }
 
         waitForExpectations()
     }

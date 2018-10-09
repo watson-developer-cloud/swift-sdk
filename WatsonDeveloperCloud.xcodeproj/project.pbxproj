@@ -519,6 +519,7 @@
 		924EE7DF21505D810048C0E5 /* AssistantV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6877FA9A2056D4F100383B25 /* AssistantV1.framework */; };
 		924EE7E021505D810048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		924EE7EA21505E430048C0E5 /* AssistantV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 924EE77D21505C2C0048C0E5 /* AssistantV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9254773B216D4710003C2829 /* SearchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92547739216D4710003C2829 /* SearchStatus.swift */; };
 		928204C72124BC200013315B /* CreateEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BA2124BC1B0013315B /* CreateEventObject.swift */; };
 		928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BB2124BC1C0013315B /* MetricAggregationResult.swift */; };
 		928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */; };
@@ -1286,6 +1287,7 @@
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		924EE7E721505D810048C0E5 /* AssistantV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssistantV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92547739216D4710003C2829 /* SearchStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStatus.swift; sourceTree = "<group>"; };
 		928204BA2124BC1B0013315B /* CreateEventObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventObject.swift; sourceTree = "<group>"; };
 		928204BB2124BC1C0013315B /* MetricAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregationResult.swift; sourceTree = "<group>"; };
 		928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregationResult.swift; sourceTree = "<group>"; };
@@ -1990,6 +1992,7 @@
 				68AF8ECE206968CC00D552E3 /* QueryResponse.swift */,
 				68AF8ECD206968CC00D552E3 /* QueryResult.swift */,
 				68AE2FD120697C2800330836 /* QueryResultMetadata.swift */,
+				92547739216D4710003C2829 /* SearchStatus.swift */,
 				682CBD2B209051B90049EE9F /* SegmentSettings.swift */,
 				CADA958F20FCD66500B5BD84 /* Source.swift */,
 				CADA959120FCD66500B5BD84 /* SourceOptions.swift */,
@@ -4328,6 +4331,7 @@
 				68AF8F552069690300D552E3 /* IndexCapacity.swift in Sources */,
 				68AF8F572069690300D552E3 /* TestDocument.swift in Sources */,
 				CADA959B20FCD66600B5BD84 /* CredentialsList.swift in Sources */,
+				9254773B216D4710003C2829 /* SearchStatus.swift in Sources */,
 				68AF8F852069690300D552E3 /* XPathPatterns.swift in Sources */,
 				683955072077E613009E1C8A /* Filter.swift in Sources */,
 				68AF8F872069690300D552E3 /* DeleteConfigurationResponse.swift in Sources */,

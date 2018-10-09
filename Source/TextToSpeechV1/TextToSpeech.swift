@@ -113,7 +113,7 @@ public class TextToSpeech {
      - parameter data: Raw data returned from the service that may represent an error.
      - parameter response: the URL response returned from the service.
      */
-    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
         let code = response.statusCode
         do {

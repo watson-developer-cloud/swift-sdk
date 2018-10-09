@@ -20,9 +20,11 @@ import Foundation
 internal struct CreateEnvironmentRequest: Encodable {
 
     /**
-     Size of the environment.
+     Size of the environment. In the Lite plan the default and only accepted value is `LT`, in all other plans the
+     default is `S`.
      */
     public enum Size: String {
+        case lt = "LT"
         case xs = "XS"
         case s = "S"
         case ms = "MS"
@@ -45,7 +47,8 @@ internal struct CreateEnvironmentRequest: Encodable {
     public var description: String?
 
     /**
-     Size of the environment.
+     Size of the environment. In the Lite plan the default and only accepted value is `LT`, in all other plans the
+     default is `S`.
      */
     public var size: String?
 
@@ -61,7 +64,8 @@ internal struct CreateEnvironmentRequest: Encodable {
 
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
-     - parameter size: Size of the environment.
+     - parameter size: Size of the environment. In the Lite plan the default and only accepted value is `LT`, in all
+       other plans the default is `S`.
 
      - returns: An initialized `CreateEnvironmentRequest`.
     */

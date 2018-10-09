@@ -821,21 +821,22 @@ public class Discovery {
         // construct body
         let multipartFormData = MultipartFormData()
         if let configuration = configuration {
-            guard let configurationData = configuration.data(using: .utf8) else {
-                failure?(RestError.serializationError)
-                return
+            if let configurationData = configuration.data(using: .utf8) {
+                multipartFormData.append(configurationData, withName: "configuration")
             }
-            multipartFormData.append(configurationData, withName: "configuration")
         }
         if let file = file {
-            multipartFormData.append(file, withName: "file")
-        }
-        if let metadata = metadata {
-            guard let metadataData = metadata.data(using: .utf8) else {
-                failure?(RestError.serializationError)
+            do {
+                try multipartFormData.append(file: file, withName: "file")
+            } catch {
+                failure?(error)
                 return
             }
-            multipartFormData.append(metadataData, withName: "metadata")
+        }
+        if let metadata = metadata {
+            if let metadataData = metadata.data(using: .utf8) {
+                multipartFormData.append(metadataData, withName: "metadata")
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -1472,14 +1473,17 @@ public class Discovery {
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
-            multipartFormData.append(file, withName: "file")
-        }
-        if let metadata = metadata {
-            guard let metadataData = metadata.data(using: .utf8) else {
-                failure?(RestError.serializationError)
+            do {
+                try multipartFormData.append(file: file, withName: "file")
+            } catch {
+                failure?(error)
                 return
             }
-            multipartFormData.append(metadataData, withName: "metadata")
+        }
+        if let metadata = metadata {
+            if let metadataData = metadata.data(using: .utf8) {
+                multipartFormData.append(metadataData, withName: "metadata")
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -1620,14 +1624,17 @@ public class Discovery {
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
-            multipartFormData.append(file, withName: "file")
-        }
-        if let metadata = metadata {
-            guard let metadataData = metadata.data(using: .utf8) else {
-                failure?(RestError.serializationError)
+            do {
+                try multipartFormData.append(file: file, withName: "file")
+            } catch {
+                failure?(error)
                 return
             }
-            multipartFormData.append(metadataData, withName: "metadata")
+        }
+        if let metadata = metadata {
+            if let metadataData = metadata.data(using: .utf8) {
+                multipartFormData.append(metadataData, withName: "metadata")
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)

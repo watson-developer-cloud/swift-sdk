@@ -176,35 +176,32 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         if let imagesFile = imagesFile {
-            multipartFormData.append(imagesFile, withName: "images_file")
+            do {
+                try multipartFormData.append(file: imagesFile, withName: "images_file")
+            } catch {
+                failure?(error)
+                return
+            }
         }
         if let url = url {
-            guard let urlData = url.data(using: .utf8) else {
-                failure?(RestError.serializationError)
-                return
+            if let urlData = url.data(using: .utf8) {
+                multipartFormData.append(urlData, withName: "url")
             }
-            multipartFormData.append(urlData, withName: "url")
         }
         if let threshold = threshold {
-            guard let thresholdData = "\(threshold)".data(using: .utf8) else {
-                failure?(RestError.serializationError)
-                return
+            if let thresholdData = "\(threshold)".data(using: .utf8) {
+                multipartFormData.append(thresholdData, withName: "threshold")
             }
-            multipartFormData.append(thresholdData, withName: "threshold")
         }
         if let owners = owners {
-            guard let ownersData = owners.joined(separator: ",").data(using: .utf8) else {
-                failure?(RestError.serializationError)
-                return
+            if let ownersData = owners.joined(separator: ",").data(using: .utf8) {
+                multipartFormData.append(ownersData, withName: "owners")
             }
-            multipartFormData.append(ownersData, withName: "owners")
         }
         if let classifierIDs = classifierIDs {
-            guard let classifierIDsData = classifierIDs.joined(separator: ",").data(using: .utf8) else {
-                failure?(RestError.serializationError)
-                return
+            if let classifierIDsData = classifierIDs.joined(separator: ",").data(using: .utf8) {
+                multipartFormData.append(classifierIDsData, withName: "classifier_ids")
             }
-            multipartFormData.append(classifierIDsData, withName: "classifier_ids")
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -285,14 +282,17 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         if let imagesFile = imagesFile {
-            multipartFormData.append(imagesFile, withName: "images_file", mimeType: "application/octet-stream")
-        }
-        if let url = url {
-            guard let urlData = url.data(using: .utf8) else {
-                failure?(RestError.serializationError)
+            do {
+                try multipartFormData.append(file: imagesFile, withName: "images_file")
+            } catch {
+                failure?(error)
                 return
             }
-            multipartFormData.append(urlData, withName: "url")
+        }
+        if let url = url {
+            if let urlData = url.data(using: .utf8) {
+                multipartFormData.append(urlData, withName: "url")
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -366,16 +366,24 @@ public class VisualRecognition {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        guard let nameData = name.data(using: .utf8) else {
-            failure?(RestError.serializationError)
-            return
+        if let nameData = name.data(using: .utf8) {
+            multipartFormData.append(nameData, withName: "name")
         }
-        multipartFormData.append(nameData, withName: "name")
         positiveExamples.forEach { example in
-            multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
+            do {
+                try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
+            } catch {
+                failure?(error)
+                return
+            }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples")
+            do {
+                try multipartFormData.append(file: negativeExamples, withName: "negative_examples")
+            } catch {
+                failure?(error)
+                return
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
@@ -561,11 +569,21 @@ public class VisualRecognition {
         let multipartFormData = MultipartFormData()
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { example in
-                multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
+                do {
+                    try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
+                } catch {
+                    failure?(error)
+                    return
+                }
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples")
+            do {
+                try multipartFormData.append(file: negativeExamples, withName: "negative_examples")
+            } catch {
+                failure?(error)
+                return
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)

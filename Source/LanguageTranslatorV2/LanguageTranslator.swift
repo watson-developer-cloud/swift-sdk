@@ -352,13 +352,28 @@ public class LanguageTranslator {
         // construct body
         let multipartFormData = MultipartFormData()
         if let forcedGlossary = forcedGlossary {
-            multipartFormData.append(forcedGlossary, withName: "forced_glossary")
+            do {
+                try multipartFormData.append(file: forcedGlossary, withName: "forced_glossary")
+            } catch {
+                failure?(error)
+                return
+            }
         }
         if let parallelCorpus = parallelCorpus {
-            multipartFormData.append(parallelCorpus, withName: "parallel_corpus")
+            do {
+                try multipartFormData.append(file: parallelCorpus, withName: "parallel_corpus")
+            } catch {
+                failure?(error)
+                return
+            }
         }
         if let monolingualCorpus = monolingualCorpus {
-            multipartFormData.append(monolingualCorpus, withName: "monolingual_corpus")
+            do {
+                try multipartFormData.append(file: monolingualCorpus, withName: "monolingual_corpus")
+            } catch {
+                failure?(error)
+                return
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)

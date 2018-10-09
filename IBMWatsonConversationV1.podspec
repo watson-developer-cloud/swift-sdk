@@ -21,6 +21,6 @@ IMPORTANT: The Conversation service is deprecated, and will be removed in the ne
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/ConversationV1/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.2.0'
+  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
   
 end

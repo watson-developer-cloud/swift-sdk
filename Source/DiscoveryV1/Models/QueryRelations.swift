@@ -23,7 +23,8 @@ public struct QueryRelations: Encodable {
 
     /**
      The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique times
-     each entity is identified. The default is `score`.
+     each entity is identified. The default is `score`. This parameter cannot be used in the same query as the **bias**
+     parameter.
      */
     public enum Sort: String {
         case score = "score"
@@ -43,7 +44,8 @@ public struct QueryRelations: Encodable {
 
     /**
      The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique times
-     each entity is identified. The default is `score`.
+     each entity is identified. The default is `score`. This parameter cannot be used in the same query as the **bias**
+     parameter.
      */
     public var sort: String?
 
@@ -81,7 +83,8 @@ public struct QueryRelations: Encodable {
        For example, if you wanted to query the city of London in England your query would look for `London` with the
        context of `England`.
      - parameter sort: The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the
-       number of unique times each entity is identified. The default is `score`.
+       number of unique times each entity is identified. The default is `score`. This parameter cannot be used in the
+       same query as the **bias** parameter.
      - parameter filter: Filters to apply to the relationship query.
      - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
      - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The

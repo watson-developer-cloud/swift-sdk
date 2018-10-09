@@ -43,6 +43,7 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
+    @available(*, deprecated, message: "This method has been deprecated. It will be removed in a future release.")
     public init(apiKey: String, version: String) {
         self.authMethod = APIKeyAuthentication(name: "api_key", key: apiKey, location: .query)
         self.version = version

@@ -20,6 +20,21 @@ import Foundation
 internal struct UpdateEnvironmentRequest: Encodable {
 
     /**
+     Size that the environment should be increased to. Environment size cannot be modified when using a Lite plan.
+     Environment size can only increased and not decreased.
+     */
+    public enum Size: String {
+        case s = "S"
+        case ms = "MS"
+        case m = "M"
+        case ml = "ML"
+        case l = "L"
+        case xl = "XL"
+        case xxl = "XXL"
+        case xxxl = "XXXL"
+    }
+
+    /**
      Name that identifies the environment.
      */
     public var name: String?
@@ -29,10 +44,17 @@ internal struct UpdateEnvironmentRequest: Encodable {
      */
     public var description: String?
 
+    /**
+     Size that the environment should be increased to. Environment size cannot be modified when using a Lite plan.
+     Environment size can only increased and not decreased.
+     */
+    public var size: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
         case description = "description"
+        case size = "size"
     }
 
     /**
@@ -40,16 +62,20 @@ internal struct UpdateEnvironmentRequest: Encodable {
 
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
+     - parameter size: Size that the environment should be increased to. Environment size cannot be modified when
+       using a Lite plan. Environment size can only increased and not decreased.
 
      - returns: An initialized `UpdateEnvironmentRequest`.
     */
     public init(
         name: String? = nil,
-        description: String? = nil
+        description: String? = nil,
+        size: String? = nil
     )
     {
         self.name = name
         self.description = description
+        self.size = size
     }
 
 }

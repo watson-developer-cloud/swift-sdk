@@ -118,7 +118,8 @@ public class Discovery {
 
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
-     - parameter size: Size of the environment.
+     - parameter size: Size of the environment. In the Lite plan the default and only accepted value is `LT`, in all
+       other plans the default is `S`.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -284,6 +285,8 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
+     - parameter size: Size that the environment should be increased to. Environment size cannot be modified when
+       using a Lite plan. Environment size can only increased and not decreased.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -292,12 +295,13 @@ public class Discovery {
         environmentID: String,
         name: String? = nil,
         description: String? = nil,
+        size: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Environment) -> Void)
     {
         // construct body
-        let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description)
+        let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description, size: size)
         guard let body = try? JSONEncoder().encode(updateEnvironmentRequest) else {
             failure?(RestError.serializationError)
             return

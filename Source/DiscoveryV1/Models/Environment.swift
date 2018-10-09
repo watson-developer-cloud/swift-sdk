@@ -31,9 +31,10 @@ public struct Environment: Decodable {
     }
 
     /**
-     Size of the environment.
+     Current size of the environment.
      */
     public enum Size: String {
+        case lt = "LT"
         case xs = "XS"
         case s = "S"
         case ms = "MS"

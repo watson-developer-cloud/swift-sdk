@@ -27,16 +27,15 @@ public struct MessageContextGlobalSystem: Codable {
     public var timezone: String?
 
     /**
-     String value provided by the API client that should be unique per each distinct end user of the service powered by
-     Assistant.
+     A string value that identifies the user who is interacting with the assistant. The client must provide a unique
+     identifier for each individual end user who accesses the application. This user ID may be used for billing and
+     other purposes.
      */
     public var userID: String?
 
     /**
-     This property is normally set by the Assistant which sets this to 1 during the first conversation turn and then
-     increments it by 1 with every subsequent turn. A turn count equal to 0 (or > 0) informs the Assistant that this is
-     (or is not) the first turn in a conversation which influences the behavior of some skills. The Conversation skill
-     uses this to evaluate its `welcome` and `conversation_start` conditions.
+     A counter that is automatically incremented with each turn of the conversation. A value of 1 indicates that this is
+     the the first turn of a new conversation, which can affect the behavior of some skills.
      */
     public var turnCount: Int?
 
@@ -52,12 +51,12 @@ public struct MessageContextGlobalSystem: Codable {
 
      - parameter timezone: The user time zone. The assistant uses the time zone to correctly resolve relative time
        references.
-     - parameter userID: String value provided by the API client that should be unique per each distinct end user of
-       the service powered by Assistant.
-     - parameter turnCount: This property is normally set by the Assistant which sets this to 1 during the first
-       conversation turn and then increments it by 1 with every subsequent turn. A turn count equal to 0 (or > 0)
-       informs the Assistant that this is (or is not) the first turn in a conversation which influences the behavior of
-       some skills. The Conversation skill uses this to evaluate its `welcome` and `conversation_start` conditions.
+     - parameter userID: A string value that identifies the user who is interacting with the assistant. The client
+       must provide a unique identifier for each individual end user who accesses the application. This user ID may be
+       used for billing and other purposes.
+     - parameter turnCount: A counter that is automatically incremented with each turn of the conversation. A value
+       of 1 indicates that this is the the first turn of a new conversation, which can affect the behavior of some
+       skills.
 
      - returns: An initialized `MessageContextGlobalSystem`.
     */

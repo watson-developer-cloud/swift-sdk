@@ -20,6 +20,6 @@ The service can analyze tone at both the document and sentence levels.
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/ToneAnalyzerV3/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.2.0'
+  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
 
 end

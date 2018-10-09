@@ -20,6 +20,20 @@ import Foundation
 public struct ToneChatScore: Decodable {
 
     /**
+     The unique, non-localized identifier of the tone for the results. The service returns results only for tones whose
+     scores meet a minimum threshold of 0.5.
+     */
+    public enum ToneID: String {
+        case excited = "excited"
+        case frustrated = "frustrated"
+        case impolite = "impolite"
+        case polite = "polite"
+        case sad = "sad"
+        case satisfied = "satisfied"
+        case sympathetic = "sympathetic"
+    }
+
+    /**
      The score for the tone in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the
      tone is perceived in the utterance.
      */

@@ -1540,7 +1540,12 @@ public class SpeechToText {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        multipartFormData.append(corpusFile, withName: "corpus_file")
+        do {
+            try multipartFormData.append(file: corpusFile, withName: "corpus_file")
+        } catch {
+            failure?(error)
+            return
+        }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return

@@ -245,8 +245,18 @@ public class NaturalLanguageClassifier {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        multipartFormData.append(metadata, withName: "training_metadata")
-        multipartFormData.append(trainingData, withName: "training_data")
+        do {
+            try multipartFormData.append(file: metadata, withName: "training_metadata")
+        } catch {
+            failure?(error)
+            return
+        }
+        do {
+            try multipartFormData.append(file: trainingData, withName: "training_data")
+        } catch {
+            failure?(error)
+            return
+        }
         guard let body = try? multipartFormData.toData() else {
             failure?(RestError.encodingError)
             return

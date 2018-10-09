@@ -1943,9 +1943,8 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
-       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
-       sense of concepts in the data set.
+     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
+       searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
        results. You cannot use **natural_language_query** and **query** at the same time.
@@ -1953,35 +1952,33 @@ public class Discovery {
        data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
        time.
      - parameter passages: A passages query that returns the most relevant passages from the results.
-     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
-       answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
-       time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
+       filters. Useful for applications to build lists, tables, and time series. For a full list of possible
+       aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       results that are returned is 10 and the offset is 8, it returns the last two results.
+     - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
-     - parameter highlight: When true a highlight field is returned for each result which contains the fields that
-       match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter highlight: When true, a highlight field is returned for each result which contains the fields which
+       match the query with `<em></em>` tags around the matching query terms.
      - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not
        specified, then all top-level fields are included.
      - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
-       requested total is not found. The default is `10`. The maximum is `100`.
-     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
-       is `400`. The minimum is `50`. The maximum is `2000`.
+       requested total is not found.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
        returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
-     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
-       documents.
-       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-       the document similarity search to include the natural language query. Other query parameters, such as **filter**
-       and **query** are subsequently applied and reduce the query scope.
-     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
+     - parameter similarDocumentIds: A comma-separated list of document IDs to find similar documents.
+       **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+       with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+       applied and reduce the scope.
+     - parameter similarFields: A comma-separated list of field names that are used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -2316,38 +2313,36 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
-       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
-       sense of concepts in the data set.
+     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
+       searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
        results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
        data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
        time.
-     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
-       answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
-       time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
+       filters. Useful for applications to build lists, tables, and time series. For a full list of possible
+       aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       results that are returned is 10 and the offset is 8, it returns the last two results.
+     - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
-     - parameter highlight: When true a highlight field is returned for each result which contains the fields that
-       match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter highlight: When true, a highlight field is returned for each result which contains the fields which
+       match the query with `<em></em>` tags around the matching query terms.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
        returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
-     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
-       documents.
-       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-       the document similarity search to include the natural language query. Other query parameters, such as **filter**
-       and **query** are subsequently applied and reduce the query scope.
-     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
+     - parameter similarDocumentIds: A comma-separated list of document IDs to find similar documents.
+       **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+       with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+       applied and reduce the scope.
+     - parameter similarFields: A comma-separated list of field names that are used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -3329,16 +3324,15 @@ public class Discovery {
      Searches the query and event log to find query sessions that match the specified criteria. Searching the **logs**
      endpoint uses the standard Discovery query syntax for the parameters that are supported.
 
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
-       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
-       sense of concepts in the data set.
+     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
+       searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
        results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter count: Number of results to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       results that are returned is 10 and the offset is 8, it returns the last two results.
+     - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
      - parameter headers: A dictionary of request headers to be sent with this request.

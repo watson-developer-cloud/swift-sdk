@@ -58,7 +58,7 @@ public struct Classifier: Decodable {
     public var coreMlEnabled: Bool?
 
     /**
-     If classifier training has failed, this field may explain why.
+     If classifier training has failed, this field might explain why.
      */
     public var explanation: String?
 

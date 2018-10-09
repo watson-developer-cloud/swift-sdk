@@ -26,9 +26,8 @@ public struct ToneChatScore: Decodable {
     public var score: Double
 
     /**
-     The unique, non-localized identifier of the tone for the results. The service can return results for the following
-     tone IDs: `sad`, `frustrated`, `satisfied`, `excited`, `polite`, `impolite`, and `sympathetic`. The service returns
-     results only for tones whose scores meet a minimum threshold of 0.5.
+     The unique, non-localized identifier of the tone for the results. The service returns results only for tones whose
+     scores meet a minimum threshold of 0.5.
      */
     public var toneID: String
 

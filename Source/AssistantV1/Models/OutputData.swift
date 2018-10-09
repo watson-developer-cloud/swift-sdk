@@ -52,11 +52,6 @@ public struct OutputData: Codable {
      */
     public var nodesVisitedDetails: [DialogNodeVisitedDetails]?
 
-    /**
-     An array of objects describing any actions requested by the dialog node.
-     */
-    public var actions: [DialogNodeAction]?
-
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
@@ -67,8 +62,7 @@ public struct OutputData: Codable {
         case generic = "generic"
         case nodesVisited = "nodes_visited"
         case nodesVisitedDetails = "nodes_visited_details"
-        case actions = "actions"
-        static let allValues = [logMessages, text, generic, nodesVisited, nodesVisitedDetails, actions]
+        static let allValues = [logMessages, text, generic, nodesVisited, nodesVisitedDetails]
     }
 
     /**
@@ -84,7 +78,6 @@ public struct OutputData: Codable {
      - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes
        that were triggered during processing of the input message. Included only if **nodes_visited_details** is set to
        `true` in the message request.
-     - parameter actions: An array of objects describing any actions requested by the dialog node.
 
      - returns: An initialized `OutputData`.
     */
@@ -94,7 +87,6 @@ public struct OutputData: Codable {
         generic: [DialogRuntimeResponseGeneric]? = nil,
         nodesVisited: [String]? = nil,
         nodesVisitedDetails: [DialogNodeVisitedDetails]? = nil,
-        actions: [DialogNodeAction]? = nil,
         additionalProperties: [String: JSON] = [:]
     )
     {
@@ -103,7 +95,6 @@ public struct OutputData: Codable {
         self.generic = generic
         self.nodesVisited = nodesVisited
         self.nodesVisitedDetails = nodesVisitedDetails
-        self.actions = actions
         self.additionalProperties = additionalProperties
     }
 
@@ -114,7 +105,6 @@ public struct OutputData: Codable {
         generic = try container.decodeIfPresent([DialogRuntimeResponseGeneric].self, forKey: .generic)
         nodesVisited = try container.decodeIfPresent([String].self, forKey: .nodesVisited)
         nodesVisitedDetails = try container.decodeIfPresent([DialogNodeVisitedDetails].self, forKey: .nodesVisitedDetails)
-        actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
@@ -126,7 +116,6 @@ public struct OutputData: Codable {
         try container.encodeIfPresent(generic, forKey: .generic)
         try container.encodeIfPresent(nodesVisited, forKey: .nodesVisited)
         try container.encodeIfPresent(nodesVisitedDetails, forKey: .nodesVisitedDetails)
-        try container.encodeIfPresent(actions, forKey: .actions)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }

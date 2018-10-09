@@ -20,6 +20,6 @@ from digital communications such as email, text messages, tweets, and forum post
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/PersonalityInsightsV3/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.2.0'
+  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
   
 end

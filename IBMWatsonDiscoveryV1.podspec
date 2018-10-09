@@ -21,6 +21,6 @@ as well as public and third-party data.
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/DiscoveryV1/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.2.0'
+  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
   
 end

@@ -1743,11 +1743,11 @@ public class Discovery {
     }
 
     /**
-     Query your collection.
+     Long collection queries.
 
-     After your content is uploaded and enriched by the Discovery service, you can build queries to search your content.
-     For details, see the [Discovery service
-     documentation](https://console.bluemix.net/docs/services/discovery/using.html).
+     Complex queries might be too long for a standard method query. By using this method, you can construct longer
+     queries. However, these queries may take longer to complete than the standard method. For details, see the
+     [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html).
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
@@ -1794,6 +1794,10 @@ public class Discovery {
        and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
+     - parameter bias: Field which the returned results will be biased against. The specified field must be either a
+       **date** or **number** format. When a **date** type field is specified returned results are biased towards field
+       values closer to the current date. When a **number** type field is specified, returned results are biased towards
+       higher field values. This parameter cannot be used in the same query as the **sort** parameter.
      - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
@@ -1820,17 +1824,50 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        bias: String? = nil,
         loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryResponse) -> Void)
     {
+        // construct body
+        let returnFieldsJoined = returnFields?.joined(separator: ",")
+        let sortJoined = sort?.joined(separator: ",")
+        let passagesFieldsJoined = passagesFields?.joined(separator: ",")
+        let similarDocumentIdsJoined = similarDocumentIds?.joined(separator: ",")
+        let similarFieldsJoined = similarFields?.joined(separator: ",")
+        let queryLong = QueryLarge(
+            filter: filter,
+            query: query,
+            naturalLanguageQuery: naturalLanguageQuery,
+            passages: passages,
+            aggregation: aggregation,
+            count: count,
+            returnFields: returnFieldsJoined,
+            offset: offset,
+            sort: sortJoined,
+            highlight: highlight,
+            passagesFields: passagesFieldsJoined,
+            passagesCount: passagesCount,
+            passagesCharacters: passagesCharacters,
+            deduplicate: deduplicate,
+            deduplicateField: deduplicateField,
+            similar: similar,
+            similarDocumentIds: similarDocumentIdsJoined,
+            similarFields: similarFieldsJoined,
+            bias: bias)
+        guard let body = try? JSONEncoder().encode(queryLong) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
         if let loggingOptOut = loggingOptOut {
             headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
         }
@@ -1838,78 +1875,6 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let filter = filter {
-            let queryParameter = URLQueryItem(name: "filter", value: filter)
-            queryParameters.append(queryParameter)
-        }
-        if let query = query {
-            let queryParameter = URLQueryItem(name: "query", value: query)
-            queryParameters.append(queryParameter)
-        }
-        if let naturalLanguageQuery = naturalLanguageQuery {
-            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
-            queryParameters.append(queryParameter)
-        }
-        if let passages = passages {
-            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
-            queryParameters.append(queryParameter)
-        }
-        if let aggregation = aggregation {
-            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
-            queryParameters.append(queryParameter)
-        }
-        if let count = count {
-            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
-            queryParameters.append(queryParameter)
-        }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let offset = offset {
-            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
-            queryParameters.append(queryParameter)
-        }
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let highlight = highlight {
-            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesFields = passagesFields {
-            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCount = passagesCount {
-            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCharacters = passagesCharacters {
-            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicate = deduplicate {
-            let queryParameter = URLQueryItem(name: "deduplicate", value: "\(deduplicate)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicateField = deduplicateField {
-            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
-            queryParameters.append(queryParameter)
-        }
-        if let similar = similar {
-            let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
-            queryParameters.append(queryParameter)
-        }
-        if let similarDocumentIds = similarDocumentIds {
-            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let similarFields = similarFields {
-            let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
 
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query"
@@ -1921,10 +1886,11 @@ public class Discovery {
             session: session,
             authMethod: authMethod,
             errorResponseDecoder: errorResponseDecoder,
-            method: "GET",
+            method: "POST",
             url: serviceURL + encodedPath,
             headerParameters: headerParameters,
-            queryItems: queryParameters
+            queryItems: queryParameters,
+            messageBody: body
         )
 
         // execute REST request
@@ -2118,10 +2084,11 @@ public class Discovery {
     }
 
     /**
-     Query documents in multiple collections.
+     Long environment queries.
 
-     See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more
-     details.
+     Complex queries might be too long for a standard method query. By using this method, you can construct longer
+     queries. However, these queries may take longer to complete than the standard method. For details, see the
+     [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html).
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
@@ -2168,6 +2135,11 @@ public class Discovery {
        requested total is not found. The default is `10`. The maximum is `100`.
      - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
        is `400`. The minimum is `50`. The maximum is `2000`.
+     - parameter bias: Field which the returned results will be biased against. The specified field must be either a
+       **date** or **number** format. When a **date** type field is specified returned results are biased towards field
+       values closer to the current date. When a **number** type field is specified, returned results are biased towards
+       higher field values. This parameter cannot be used in the same query as the **sort** parameter.
+     - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -2193,93 +2165,58 @@ public class Discovery {
         passagesFields: [String]? = nil,
         passagesCount: Int? = nil,
         passagesCharacters: Int? = nil,
+        bias: String? = nil,
+        loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (QueryResponse) -> Void)
     {
+        // construct body
+        let returnFieldsJoined = returnFields?.joined(separator: ",")
+        let sortJoined = sort?.joined(separator: ",")
+        let passagesFieldsJoined = passagesFields?.joined(separator: ",")
+        let similarDocumentIdsJoined = similarDocumentIds?.joined(separator: ",")
+        let similarFieldsJoined = similarFields?.joined(separator: ",")
+        let queryLong = QueryLarge(
+            filter: filter,
+            query: query,
+            naturalLanguageQuery: naturalLanguageQuery,
+            passages: passages,
+            aggregation: aggregation,
+            count: count,
+            returnFields: returnFieldsJoined,
+            offset: offset,
+            sort: sortJoined,
+            highlight: highlight,
+            passagesFields: passagesFieldsJoined,
+            passagesCount: passagesCount,
+            passagesCharacters: passagesCharacters,
+            deduplicate: deduplicate,
+            deduplicateField: deduplicateField,
+            collectionIds: collectionIds,
+            similar: similar,
+            similarDocumentIds: similarDocumentIdsJoined,
+            similarFields: similarFieldsJoined,
+            bias: bias)
+        guard let body = try? JSONEncoder().encode(queryLong) else {
+            failure?(RestError.serializationError)
+            return
+        }
+
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+        if let loggingOptOut = loggingOptOut {
+            headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIds.joined(separator: ",")))
-        if let filter = filter {
-            let queryParameter = URLQueryItem(name: "filter", value: filter)
-            queryParameters.append(queryParameter)
-        }
-        if let query = query {
-            let queryParameter = URLQueryItem(name: "query", value: query)
-            queryParameters.append(queryParameter)
-        }
-        if let naturalLanguageQuery = naturalLanguageQuery {
-            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
-            queryParameters.append(queryParameter)
-        }
-        if let aggregation = aggregation {
-            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
-            queryParameters.append(queryParameter)
-        }
-        if let count = count {
-            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
-            queryParameters.append(queryParameter)
-        }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let offset = offset {
-            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
-            queryParameters.append(queryParameter)
-        }
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let highlight = highlight {
-            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicate = deduplicate {
-            let queryParameter = URLQueryItem(name: "deduplicate", value: "\(deduplicate)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicateField = deduplicateField {
-            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
-            queryParameters.append(queryParameter)
-        }
-        if let similar = similar {
-            let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
-            queryParameters.append(queryParameter)
-        }
-        if let similarDocumentIds = similarDocumentIds {
-            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let similarFields = similarFields {
-            let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let passages = passages {
-            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesFields = passagesFields {
-            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCount = passagesCount {
-            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCharacters = passagesCharacters {
-            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
-            queryParameters.append(queryParameter)
-        }
 
         // construct REST request
         let path = "/v1/environments/\(environmentID)/query"
@@ -2291,10 +2228,11 @@ public class Discovery {
             session: session,
             authMethod: authMethod,
             errorResponseDecoder: errorResponseDecoder,
-            method: "GET",
+            method: "POST",
             url: serviceURL + encodedPath,
             headerParameters: headerParameters,
-            queryItems: queryParameters
+            queryItems: queryParameters,
+            messageBody: body
         )
 
         // execute REST request

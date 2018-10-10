@@ -97,7 +97,7 @@ class AssistantTests: XCTestCase {
 
     /** Instantiate Assistant. */
     func instantiateAssistant() {
-        let version = "2018-09-14"
+        let version = "2018-10-10"
         if let apiKey = WatsonCredentials.AssistantAPIKey {
             assistant = Assistant(version: version, apiKey: apiKey)
         } else {

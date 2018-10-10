@@ -93,7 +93,8 @@ public class SpeechToTextSession {
         var socket = SpeechToTextSocket(
             url: url,
             authMethod: authMethod,
-            defaultHeaders: self.defaultHeaders
+            disableSSL: disableSSL,
+            defaultHeaders: defaultHeaders
         )
         socket.onDisconnect = { [weak self] in
             guard let `self` = self else { return }
@@ -111,18 +112,21 @@ public class SpeechToTextSession {
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
     private let authMethod: AuthenticationMethod
+    private var disableSSL: Bool
     private let model: String?
     private let customizationID: String?
     private let acousticCustomizationID: String?
     private let learningOptOut: Bool?
 
     internal init(authMethod: AuthenticationMethod,
+                  disableSSL: Bool = false,
                   model: String? = nil,
                   customizationID: String? = nil,
                   acousticCustomizationID: String? = nil,
                   learningOptOut: Bool? = nil)
     {
         self.authMethod = authMethod
+        self.disableSSL = disableSSL
         self.model = model
         self.customizationID = customizationID
         self.acousticCustomizationID = acousticCustomizationID
@@ -153,9 +157,9 @@ public class SpeechToTextSession {
        custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      */
-    public convenience init(username: String, password: String, model: String? = nil, customizationID: String? = nil, acousticCustomizationID: String?, learningOptOut: Bool? = nil) {
+    public convenience init(username: String, password: String, disableSSL: Bool = false, model: String? = nil, customizationID: String? = nil, acousticCustomizationID: String?, learningOptOut: Bool? = nil) {
         let authMethod = BasicAuthentication(username: username, password: password)
-        self.init(authMethod: authMethod, model: model, customizationID: customizationID, acousticCustomizationID: acousticCustomizationID, learningOptOut: learningOptOut)
+        self.init(authMethod: authMethod, disableSSL: disableSSL, model: model, customizationID: customizationID, acousticCustomizationID: acousticCustomizationID, learningOptOut: learningOptOut)
     }
 
     /**
@@ -174,9 +178,9 @@ public class SpeechToTextSession {
        custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      */
-    public convenience init(apiKey: String, iamUrl: String? = nil, model: String? = nil, customizationID: String? = nil, acousticCustomizationID: String? = nil, learningOptOut: Bool? = nil) {
+    public convenience init(apiKey: String, iamUrl: String? = nil, disableSSL: Bool = false, model: String? = nil, customizationID: String? = nil, acousticCustomizationID: String? = nil, learningOptOut: Bool? = nil) {
         let authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
-        self.init(authMethod: authMethod, model: model, customizationID: customizationID, acousticCustomizationID: acousticCustomizationID, learningOptOut: learningOptOut)
+        self.init(authMethod: authMethod, disableSSL: disableSSL, model: model, customizationID: customizationID, acousticCustomizationID: acousticCustomizationID, learningOptOut: learningOptOut)
     }
 
     /**

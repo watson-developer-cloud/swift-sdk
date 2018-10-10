@@ -103,6 +103,7 @@ extension SpeechToText {
         // create SpeechToTextSession
         let session = SpeechToTextSession(
             authMethod: authMethod,
+            disableSSL: disableSSL,
             model: model,
             customizationID: customizationID,
             acousticCustomizationID: acousticCustomizationID,
@@ -204,6 +205,7 @@ extension SpeechToText {
         let session = SpeechToTextSession(
             username: basicAuth.username,
             password: basicAuth.password,
+            disableSSL: disableSSL,
             model: model,
             customizationID: customizationID,
             acousticCustomizationID: acousticCustomizationID,

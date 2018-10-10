@@ -31,6 +31,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
 
     private let url: URL
     private let authMethod: AuthenticationMethod
+    private var disableSSL: Bool
     private let maxConnectAttempts: Int
     private var connectAttempts: Int
     private let defaultHeaders: [String: String]
@@ -41,6 +42,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     internal init(
         url: URL,
         authMethod: AuthenticationMethod,
+        disableSSL: Bool = false,
         defaultHeaders: [String: String])
     {
         var request = URLRequest(url: url)
@@ -48,6 +50,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         self.socket = WebSocket(request: request)
         self.url = url
         self.authMethod = authMethod
+        self.disableSSL = disableSSL
         self.maxConnectAttempts = 1
         self.connectAttempts = 0
         self.defaultHeaders = defaultHeaders
@@ -93,6 +96,9 @@ internal class SpeechToTextSocket: WebSocketDelegate {
                 // initialize socket and connect
                 self.socket = WebSocket(request: request)
                 self.socket.delegate = self
+                if self.disableSSL {
+                    self.socket.disableSSLCertValidation = true
+                }
                 self.socket.connect()
             } else {
                 self.onError?(error ?? RestError.failure(400, "Token Manager error"))

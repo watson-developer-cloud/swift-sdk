@@ -519,6 +519,7 @@
 		924EE7DF21505D810048C0E5 /* AssistantV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6877FA9A2056D4F100383B25 /* AssistantV1.framework */; };
 		924EE7E021505D810048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		924EE7EA21505E430048C0E5 /* AssistantV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 924EE77D21505C2C0048C0E5 /* AssistantV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9254773A216D4710003C2829 /* QueryLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92547738216D470F003C2829 /* QueryLarge.swift */; };
 		9254773B216D4710003C2829 /* SearchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92547739216D4710003C2829 /* SearchStatus.swift */; };
 		928204C72124BC200013315B /* CreateEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BA2124BC1B0013315B /* CreateEventObject.swift */; };
 		928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BB2124BC1C0013315B /* MetricAggregationResult.swift */; };
@@ -1287,6 +1288,7 @@
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		924EE7E721505D810048C0E5 /* AssistantV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssistantV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92547738216D470F003C2829 /* QueryLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryLarge.swift; sourceTree = "<group>"; };
 		92547739216D4710003C2829 /* SearchStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStatus.swift; sourceTree = "<group>"; };
 		928204BA2124BC1B0013315B /* CreateEventObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventObject.swift; sourceTree = "<group>"; };
 		928204BB2124BC1C0013315B /* MetricAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregationResult.swift; sourceTree = "<group>"; };
@@ -1980,6 +1982,7 @@
 				68AF8ECC206968CC00D552E3 /* QueryEvidence.swift */,
 				68AF8ED4206968CC00D552E3 /* QueryEvidenceEntity.swift */,
 				68AF8EE4206968CC00D552E3 /* QueryFilterType.swift */,
+				92547738216D470F003C2829 /* QueryLarge.swift */,
 				68AF8EC9206968CC00D552E3 /* QueryNoticesResponse.swift */,
 				68AF8EDA206968CC00D552E3 /* QueryNoticesResult.swift */,
 				68AF8EEB206968CC00D552E3 /* QueryPassages.swift */,
@@ -4310,6 +4313,7 @@
 				CADA959820FCD66600B5BD84 /* SourceSchedule.swift in Sources */,
 				CADA959F20FCD66600B5BD84 /* CredentialDetails.swift in Sources */,
 				68AF8F522069690300D552E3 /* ListCollectionFieldsResponse.swift in Sources */,
+				9254773A216D4710003C2829 /* QueryLarge.swift in Sources */,
 				928204D12124BC200013315B /* MetricAggregation.swift in Sources */,
 				92BF69B0213F129A00FE6325 /* Shared.swift in Sources */,
 				68AF8F782069690300D552E3 /* QueryEvidenceEntity.swift in Sources */,

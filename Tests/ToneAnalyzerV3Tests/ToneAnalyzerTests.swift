@@ -61,7 +61,7 @@ class ToneAnalyzerTests: XCTestCase {
 
     /** Instantiate Tone Analyzer. */
     func instantiateToneAnalyzer() {
-        let version = "2018-09-14"
+        let version = "2018-10-10"
         if let apiKey = WatsonCredentials.ToneAnalyzerAPIKey {
             toneAnalyzer = ToneAnalyzer(version: version, apiKey: apiKey)
         } else {

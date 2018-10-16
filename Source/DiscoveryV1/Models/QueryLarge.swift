@@ -115,7 +115,7 @@ internal struct QueryLarge: Encodable {
      A comma-separated list of collection IDs to be queried against. Required when querying multiple collections,
      invalid when performing a single collection query.
      */
-    public var collectionIds: [String]?
+    public var collectionIds: String?
 
     /**
      When `true`, results are returned based on their similarity to the document IDs specified in the
@@ -237,7 +237,7 @@ internal struct QueryLarge: Encodable {
         passagesCharacters: Int? = nil,
         deduplicate: Bool? = nil,
         deduplicateField: String? = nil,
-        collectionIds: [String]? = nil,
+        collectionIds: String? = nil,
         similar: Bool? = nil,
         similarDocumentIds: String? = nil,
         similarFields: String? = nil,

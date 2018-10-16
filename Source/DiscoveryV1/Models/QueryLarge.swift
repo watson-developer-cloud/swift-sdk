@@ -19,7 +19,7 @@ import Foundation
 /**
  Object that describes a long query.
  */
-public struct QueryLarge: Encodable {
+internal struct QueryLarge: Encodable {
 
     /**
      A cacheable query that excludes documents that don't mention the query content. Filter searches are better for

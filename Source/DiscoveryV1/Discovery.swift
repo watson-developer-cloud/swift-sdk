@@ -2175,6 +2175,7 @@ public class Discovery {
         let returnFieldsJoined = returnFields?.joined(separator: ",")
         let sortJoined = sort?.joined(separator: ",")
         let passagesFieldsJoined = passagesFields?.joined(separator: ",")
+        let collectionIdsJoined = collectionIds.joined(separator: ",")
         let similarDocumentIdsJoined = similarDocumentIds?.joined(separator: ",")
         let similarFieldsJoined = similarFields?.joined(separator: ",")
         let queryLong = QueryLarge(
@@ -2193,7 +2194,7 @@ public class Discovery {
             passagesCharacters: passagesCharacters,
             deduplicate: deduplicate,
             deduplicateField: deduplicateField,
-            collectionIds: collectionIds,
+            collectionIds: collectionIdsJoined,
             similar: similar,
             similarDocumentIds: similarDocumentIdsJoined,
             similarFields: similarFieldsJoined,

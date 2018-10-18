@@ -717,12 +717,12 @@
 			remoteGlobalIDString = 7AB445231D3E647A00E8748A;
 			remoteInfo = ConversationV1;
 		};
-		924EE7D721505D810048C0E5 /* PBXContainerItemProxy */ = {
+		920C12ED217942F6006122AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6877FA512056D4F100383B25;
-			remoteInfo = AssistantV1;
+			remoteGlobalIDString = 924EE78021505D7A0048C0E5;
+			remoteInfo = AssistantV2;
 		};
 		CAD2685C20CAF28B002BA2C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -3204,7 +3204,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				924EE7D621505D810048C0E5 /* PBXTargetDependency */,
+				920C12EE217942F6006122AC /* PBXTargetDependency */,
 			);
 			name = AssistantV2Tests;
 			productName = ConversationV1Tests;
@@ -3770,7 +3770,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		6877FAA22056D4F500383B25 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3798,7 +3798,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV2\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		924EE7DD21505D810048C0E5 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4049,7 +4049,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/DiscoveryV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/DiscoveryV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		CAEC7A6B1FE985F7002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4932,10 +4932,10 @@
 			target = 7AB445231D3E647A00E8748A /* ConversationV1 */;
 			targetProxy = 7AB4452F1D3E647A00E8748A /* PBXContainerItemProxy */;
 		};
-		924EE7D621505D810048C0E5 /* PBXTargetDependency */ = {
+		920C12EE217942F6006122AC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6877FA512056D4F100383B25 /* AssistantV1 */;
-			targetProxy = 924EE7D721505D810048C0E5 /* PBXContainerItemProxy */;
+			target = 924EE78021505D7A0048C0E5 /* AssistantV2 */;
+			targetProxy = 920C12ED217942F6006122AC /* PBXContainerItemProxy */;
 		};
 		CAD2685D20CAF28B002BA2C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

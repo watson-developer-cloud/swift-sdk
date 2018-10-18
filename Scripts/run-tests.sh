@@ -14,16 +14,6 @@ DESTINATION="OS=11.3,name=iPhone 7"
 SCHEMES=$(xcodebuild -list | awk 'schemes { if (NF>0) { print $1 } } /Schemes:$/ { schemes = 1 }')
 
 ####################
-# Dependencies
-####################
-
-brew update > /dev/null
-brew outdated carthage || brew upgrade carthage
-carthage bootstrap --platform iOS
-
-brew outdated swiftlint || brew upgrade swiftlint
-
-####################
 # Build and Test
 ####################
 

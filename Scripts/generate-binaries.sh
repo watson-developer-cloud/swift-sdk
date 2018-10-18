@@ -6,5 +6,6 @@ popd > /dev/null
 cd $root
 cd ..
 
+carthage update
 carthage build --no-skip-current
-carthage archive --output IBMWatsonSwiftSDK.zip
+carthage archive --output IBMWatsonSDK.framework.zip

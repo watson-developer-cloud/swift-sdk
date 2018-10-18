@@ -38,7 +38,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar xzvf swift-4.1-RELEASE-ubuntu14.04.tar.gz ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=swift-4.1-RELEASE-ubuntu14.04/usr/bin:$PATH ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift test ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis_wait 30 swift test ; fi
 deploy:
   - provider: script
     script: npx semantic-release

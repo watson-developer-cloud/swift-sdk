@@ -38,7 +38,7 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/run-tests.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/pod-lint.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then travis_wait 30 swift test ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift test ; fi
 deploy:
   - provider: script
     script: npx semantic-release

@@ -77,11 +77,8 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     /** Access service using IAM API Key credentials  */
     func testAccessWithAPIKey() {
-        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
-            return
-        }
         let version = "2018-10-10"
-        let visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
+        let visualRecognition = VisualRecognition(version: version, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 
@@ -114,12 +111,8 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     /** Access service using access token obtained using IAM API Key.  */
     func testAccessWithAccessToken() {
-        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
-            return
-        }
-
+        let apiKey = WatsonCredentials.VisualRecognitionAPIKey
         // Obtain an access token using the IAM API Key
-
         var tokenInfo = getTokenInfo(apiKey: apiKey)
         guard let accessToken = tokenInfo?["access_token"] as? String else {
             XCTFail("Failed to obtain access token")

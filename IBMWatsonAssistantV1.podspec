@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonAssistantV1'
-  s.version               = '0.35.0'
+  s.version               = '0.36.0'
   s.summary               = 'Client framework for the IBM Watson Assistant service'
   s.description           = <<-DESC
 With the IBM Watson™ Assistant service, you can build a solution that understands 
@@ -20,6 +20,6 @@ natural-language input and uses machine learning to respond to customers in a wa
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/AssistantV1/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.2.0'
+  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
   
 end

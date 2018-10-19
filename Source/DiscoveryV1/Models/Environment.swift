@@ -22,18 +22,21 @@ import Foundation
 public struct Environment: Decodable {
 
     /**
-     Status of the environment.
+     Current status of the environment. `resizing` is displayed when a request to increase the environment size has been
+     made, but is still in the process of being completed.
      */
     public enum Status: String {
         case active = "active"
         case pending = "pending"
         case maintenance = "maintenance"
+        case resizing = "resizing"
     }
 
     /**
-     Size of the environment.
+     Current size of the environment.
      */
     public enum Size: String {
+        case lt = "LT"
         case xs = "XS"
         case s = "S"
         case ms = "MS"
@@ -71,7 +74,8 @@ public struct Environment: Decodable {
     public var updated: Date?
 
     /**
-     Status of the environment.
+     Current status of the environment. `resizing` is displayed when a request to increase the environment size has been
+     made, but is still in the process of being completed.
      */
     public var status: String?
 
@@ -81,14 +85,25 @@ public struct Environment: Decodable {
     public var readOnly: Bool?
 
     /**
-     Size of the environment.
+     Current size of the environment.
      */
     public var size: String?
+
+    /**
+     The new size requested for this environment. Only returned when the environment *status* is `resizing`.
+     *Note:* Querying and indexing can still be performed during an environment upsize.
+     */
+    public var requestedSize: String?
 
     /**
      Details about the resource usage and capacity of the environment.
      */
     public var indexCapacity: IndexCapacity?
+
+    /**
+     Information about Continuous Relevancy Training for this environment.
+     */
+    public var searchStatus: SearchStatus?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -100,7 +115,9 @@ public struct Environment: Decodable {
         case status = "status"
         case readOnly = "read_only"
         case size = "size"
+        case requestedSize = "requested_size"
         case indexCapacity = "index_capacity"
+        case searchStatus = "search_status"
     }
 
 }

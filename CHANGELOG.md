@@ -1,3 +1,26 @@
+# [0.36.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.35.0...0.36.0) (2018-10-19)
+
+
+### Bug Fixes
+
+* **Visual Recognition:** Fix deserialization error in getCoreMlModel ([9392b23](https://github.com/watson-developer-cloud/swift-sdk/commit/9392b23))
+* Conversion of file data to multipart form data ([1d46baf](https://github.com/watson-developer-cloud/swift-sdk/commit/1d46baf))
+
+
+### Features
+
+* **Discovery:** Add "LT" option to environment sizes ([f92fcde](https://github.com/watson-developer-cloud/swift-sdk/commit/f92fcde))
+* **Discovery:** Add `size` parameter to updateEnvironment method ([725e1d5](https://github.com/watson-developer-cloud/swift-sdk/commit/725e1d5))
+* **Discovery:** Add bias and loggingOptOut parameters to query methods ([8782fc6](https://github.com/watson-developer-cloud/swift-sdk/commit/8782fc6))
+* **Discovery:** Add requestedSize and searchStatus properties to Environment model ([14cdb02](https://github.com/watson-developer-cloud/swift-sdk/commit/14cdb02))
+* **ToneAnalyzer:** Add `ToneID` options to `ToneChatScore` ([ac75c92](https://github.com/watson-developer-cloud/swift-sdk/commit/ac75c92))
+
+
+### Reverts
+
+* **AssistantV1:** Revert erroneous addition of `actions` property to `OutputData` ([28efe1e](https://github.com/watson-developer-cloud/swift-sdk/commit/28efe1e))
+* **Linux:** Remove 30 minute wait from Linux tests ([1b4d734](https://github.com/watson-developer-cloud/swift-sdk/commit/1b4d734))
+
 Change Log
 ==========
 

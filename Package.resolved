@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/watson-developer-cloud/restkit.git",
         "state": {
           "branch": "swift-sdk-1.0",
-          "revision": "951ecc9e5061dc002629849e90839df416e5b88b",
+          "revision": "485f4ec21caea6a6f0aa3fe18a2d7715a1e27ded",
           "version": null
         }
       }

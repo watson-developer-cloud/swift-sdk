@@ -43,6 +43,7 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
+    @available(*, deprecated, message: "This method has been deprecated. It will be removed in a future release.")
     public init(apiKey: String, version: String) {
         self.authMethod = APIKeyAuthentication(name: "api_key", key: apiKey, location: .query)
         self.version = version
@@ -90,7 +91,7 @@ public class VisualRecognition {
      - parameter data: Raw data returned from the service that may represent an error.
      - parameter response: the URL response returned from the service.
      */
-    internal func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
         let code = response.statusCode
         do {
@@ -174,35 +175,32 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         if let imagesFile = imagesFile {
-            multipartFormData.append(imagesFile, withName: "images_file")
+            do {
+                try multipartFormData.append(file: imagesFile, withName: "images_file")
+            } catch {
+                completionHandler(nil, RestError.serializationError)
+                return
+            }
         }
         if let url = url {
-            guard let urlData = url.data(using: .utf8) else {
-                completionHandler(nil, RestError.serializationError)
-                return
+            if let urlData = url.data(using: .utf8) {
+                multipartFormData.append(urlData, withName: "url")
             }
-            multipartFormData.append(urlData, withName: "url")
         }
         if let threshold = threshold {
-            guard let thresholdData = "\(threshold)".data(using: .utf8) else {
-                completionHandler(nil, RestError.serializationError)
-                return
+            if let thresholdData = "\(threshold)".data(using: .utf8) {
+                multipartFormData.append(thresholdData, withName: "threshold")
             }
-            multipartFormData.append(thresholdData, withName: "threshold")
         }
         if let owners = owners {
-            guard let ownersData = owners.joined(separator: ",").data(using: .utf8) else {
-                completionHandler(nil, RestError.serializationError)
-                return
+            if let ownersData = owners.joined(separator: ",").data(using: .utf8) {
+                multipartFormData.append(ownersData, withName: "owners")
             }
-            multipartFormData.append(ownersData, withName: "owners")
         }
         if let classifierIDs = classifierIDs {
-            guard let classifierIDsData = classifierIDs.joined(separator: ",").data(using: .utf8) else {
-                completionHandler(nil, RestError.serializationError)
-                return
+            if let classifierIDsData = classifierIDs.joined(separator: ",").data(using: .utf8) {
+                multipartFormData.append(classifierIDsData, withName: "classifier_ids")
             }
-            multipartFormData.append(classifierIDsData, withName: "classifier_ids")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.encodingError)
@@ -275,14 +273,17 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         if let imagesFile = imagesFile {
-            multipartFormData.append(imagesFile, withName: "images_file", mimeType: "application/octet-stream")
-        }
-        if let url = url {
-            guard let urlData = url.data(using: .utf8) else {
+            do {
+                try multipartFormData.append(file: imagesFile, withName: "images_file")
+            } catch {
                 completionHandler(nil, RestError.serializationError)
                 return
             }
-            multipartFormData.append(urlData, withName: "url")
+        }
+        if let url = url {
+            if let urlData = url.data(using: .utf8) {
+                multipartFormData.append(urlData, withName: "url")
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.encodingError)
@@ -348,16 +349,24 @@ public class VisualRecognition {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        guard let nameData = name.data(using: .utf8) else {
-            completionHandler(nil, RestError.serializationError)
-            return
+        if let nameData = name.data(using: .utf8) {
+            multipartFormData.append(nameData, withName: "name")
         }
-        multipartFormData.append(nameData, withName: "name")
         positiveExamples.forEach { example in
-            multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
+            do {
+                try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
+            } catch {
+                completionHandler(nil, RestError.serializationError)
+                return
+            }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples")
+            do {
+                try multipartFormData.append(file: negativeExamples, withName: "negative_examples")
+            } catch {
+                completionHandler(nil, RestError.serializationError)
+                return
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.encodingError)
@@ -519,11 +528,21 @@ public class VisualRecognition {
         let multipartFormData = MultipartFormData()
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { example in
-                multipartFormData.append(example.examples, withName: example.name + "_positive_examples")
+                do {
+                    try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
+                } catch {
+                    completionHandler(nil, RestError.serializationError)
+                    return
+                }
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples")
+            do {
+                try multipartFormData.append(file: negativeExamples, withName: "negative_examples")
+            } catch {
+                completionHandler(nil, RestError.serializationError)
+                return
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.encodingError)
@@ -619,7 +638,7 @@ public class VisualRecognition {
     public func getCoreMlModel(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<URL>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, Error?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -649,7 +668,7 @@ public class VisualRecognition {
         )
 
         // execute REST request
-        request.responseObject(completionHandler: completionHandler)
+        request.response(completionHandler: completionHandler)
     }
 
     /**

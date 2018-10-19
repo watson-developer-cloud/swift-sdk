@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonLanguageTranslatorV3'
-  s.version               = '0.35.0'
+  s.version               = '0.36.0'
   s.summary               = 'Client framework for the IBM Watson Language Translator service'
   s.description           = <<-DESC
 IBM Watson™ Language Translator can identify the language of text and translate it into different languages programmatically.
@@ -19,6 +19,6 @@ IBM Watson™ Language Translator can identify the language of text and translat
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/LanguageTranslatorV3/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.2.0'
+  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
 
 end

@@ -36,13 +36,8 @@ class VisualRecognitionCoreMLTests: XCTestCase {
 
     /** Instantiate Visual Recognition */
     func instantiateVisualRecognition() {
-        let version = "2018-09-14"
-        if let apiKey = WatsonCredentials.VisualRecognitionAPIKey {
-            visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
-        } else {
-            let apiKey = WatsonCredentials.VisualRecognitionLegacyAPIKey
-            visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
-        }
+        let version = "2018-10-10"
+        visualRecognition = VisualRecognition(version: version, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }

@@ -91,7 +91,7 @@ public class Discovery {
      - parameter data: Raw data returned from the service that may represent an error.
      - parameter response: the URL response returned from the service.
      */
-    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
         let code = response.statusCode
         do {
@@ -118,7 +118,8 @@ public class Discovery {
 
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
-     - parameter size: Size of the environment.
+     - parameter size: Size of the environment. In the Lite plan the default and only accepted value is `LT`, in all
+       other plans the default is `S`.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -260,6 +261,8 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
+     - parameter size: Size that the environment should be increased to. Environment size cannot be modified when
+       using a Lite plan. Environment size can only increased and not decreased.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -267,11 +270,12 @@ public class Discovery {
         environmentID: String,
         name: String? = nil,
         description: String? = nil,
+        size: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
     {
         // construct body
-        let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description)
+        let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description, size: size)
         guard let body = try? JSONEncoder().encode(updateEnvironmentRequest) else {
             completionHandler(nil, RestError.serializationError)
             return
@@ -738,21 +742,22 @@ public class Discovery {
         // construct body
         let multipartFormData = MultipartFormData()
         if let configuration = configuration {
-            guard let configurationData = configuration.data(using: .utf8) else {
-                completionHandler(nil, RestError.serializationError)
-                return
+            if let configurationData = configuration.data(using: .utf8) {
+                multipartFormData.append(configurationData, withName: "configuration")
             }
-            multipartFormData.append(configurationData, withName: "configuration")
         }
         if let file = file {
-            multipartFormData.append(file, withName: "file")
-        }
-        if let metadata = metadata {
-            guard let metadataData = metadata.data(using: .utf8) else {
+            do {
+                try multipartFormData.append(file: file, withName: "file")
+            } catch {
                 completionHandler(nil, RestError.serializationError)
                 return
             }
-            multipartFormData.append(metadataData, withName: "metadata")
+        }
+        if let metadata = metadata {
+            if let metadataData = metadata.data(using: .utf8) {
+                multipartFormData.append(metadataData, withName: "metadata")
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.encodingError)
@@ -1317,14 +1322,17 @@ public class Discovery {
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
-            multipartFormData.append(file, withName: "file")
-        }
-        if let metadata = metadata {
-            guard let metadataData = metadata.data(using: .utf8) else {
+            do {
+                try multipartFormData.append(file: file, withName: "file")
+            } catch {
                 completionHandler(nil, RestError.serializationError)
                 return
             }
-            multipartFormData.append(metadataData, withName: "metadata")
+        }
+        if let metadata = metadata {
+            if let metadataData = metadata.data(using: .utf8) {
+                multipartFormData.append(metadataData, withName: "metadata")
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.encodingError)
@@ -1449,14 +1457,17 @@ public class Discovery {
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
-            multipartFormData.append(file, withName: "file")
-        }
-        if let metadata = metadata {
-            guard let metadataData = metadata.data(using: .utf8) else {
+            do {
+                try multipartFormData.append(file: file, withName: "file")
+            } catch {
                 completionHandler(nil, RestError.serializationError)
                 return
             }
-            multipartFormData.append(metadataData, withName: "metadata")
+        }
+        if let metadata = metadata {
+            if let metadataData = metadata.data(using: .utf8) {
+                multipartFormData.append(metadataData, withName: "metadata")
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.encodingError)
@@ -1547,11 +1558,11 @@ public class Discovery {
     }
 
     /**
-     Query your collection.
+     Long collection queries.
 
-     After your content is uploaded and enriched by the Discovery service, you can build queries to search your content.
-     For details, see the [Discovery service
-     documentation](https://console.bluemix.net/docs/services/discovery/using.html).
+     Complex queries might be too long for a standard method query. By using this method, you can construct longer
+     queries. However, these queries may take longer to complete than the standard method. For details, see the
+     [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html).
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
@@ -1598,6 +1609,10 @@ public class Discovery {
        and **query** are subsequently applied and reduce the query scope.
      - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
+     - parameter bias: Field which the returned results will be biased against. The specified field must be either a
+       **date** or **number** format. When a **date** type field is specified returned results are biased towards field
+       values closer to the current date. When a **number** type field is specified, returned results are biased towards
+       higher field values. This parameter cannot be used in the same query as the **sort** parameter.
      - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1623,16 +1638,49 @@ public class Discovery {
         similar: Bool? = nil,
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
+        bias: String? = nil,
         loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
     {
+        // construct body
+        let returnFieldsJoined = returnFields?.joined(separator: ",")
+        let sortJoined = sort?.joined(separator: ",")
+        let passagesFieldsJoined = passagesFields?.joined(separator: ",")
+        let similarDocumentIdsJoined = similarDocumentIds?.joined(separator: ",")
+        let similarFieldsJoined = similarFields?.joined(separator: ",")
+        let queryLong = QueryLarge(
+            filter: filter,
+            query: query,
+            naturalLanguageQuery: naturalLanguageQuery,
+            passages: passages,
+            aggregation: aggregation,
+            count: count,
+            returnFields: returnFieldsJoined,
+            offset: offset,
+            sort: sortJoined,
+            highlight: highlight,
+            passagesFields: passagesFieldsJoined,
+            passagesCount: passagesCount,
+            passagesCharacters: passagesCharacters,
+            deduplicate: deduplicate,
+            deduplicateField: deduplicateField,
+            similar: similar,
+            similarDocumentIds: similarDocumentIdsJoined,
+            similarFields: similarFieldsJoined,
+            bias: bias)
+        guard let body = try? JSONEncoder().encode(queryLong) else {
+            completionHandler(nil, RestError.serializationError)
+            return
+        }
+
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
         if let loggingOptOut = loggingOptOut {
             headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
         }
@@ -1640,78 +1688,6 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let filter = filter {
-            let queryParameter = URLQueryItem(name: "filter", value: filter)
-            queryParameters.append(queryParameter)
-        }
-        if let query = query {
-            let queryParameter = URLQueryItem(name: "query", value: query)
-            queryParameters.append(queryParameter)
-        }
-        if let naturalLanguageQuery = naturalLanguageQuery {
-            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
-            queryParameters.append(queryParameter)
-        }
-        if let passages = passages {
-            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
-            queryParameters.append(queryParameter)
-        }
-        if let aggregation = aggregation {
-            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
-            queryParameters.append(queryParameter)
-        }
-        if let count = count {
-            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
-            queryParameters.append(queryParameter)
-        }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let offset = offset {
-            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
-            queryParameters.append(queryParameter)
-        }
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let highlight = highlight {
-            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesFields = passagesFields {
-            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCount = passagesCount {
-            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCharacters = passagesCharacters {
-            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicate = deduplicate {
-            let queryParameter = URLQueryItem(name: "deduplicate", value: "\(deduplicate)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicateField = deduplicateField {
-            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
-            queryParameters.append(queryParameter)
-        }
-        if let similar = similar {
-            let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
-            queryParameters.append(queryParameter)
-        }
-        if let similarDocumentIds = similarDocumentIds {
-            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let similarFields = similarFields {
-            let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
 
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query"
@@ -1723,10 +1699,11 @@ public class Discovery {
             session: session,
             authMethod: authMethod,
             errorResponseDecoder: errorResponseDecoder,
-            method: "GET",
+            method: "POST",
             url: serviceURL + encodedPath,
             headerParameters: headerParameters,
-            queryItems: queryParameters
+            queryItems: queryParameters,
+            messageBody: body
         )
 
         // execute REST request
@@ -1743,9 +1720,8 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
-       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
-       sense of concepts in the data set.
+     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
+       searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
        results. You cannot use **natural_language_query** and **query** at the same time.
@@ -1753,35 +1729,33 @@ public class Discovery {
        data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
        time.
      - parameter passages: A passages query that returns the most relevant passages from the results.
-     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
-       answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
-       time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
+       filters. Useful for applications to build lists, tables, and time series. For a full list of possible
+       aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       results that are returned is 10 and the offset is 8, it returns the last two results.
+     - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
-     - parameter highlight: When true a highlight field is returned for each result which contains the fields that
-       match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter highlight: When true, a highlight field is returned for each result which contains the fields which
+       match the query with `<em></em>` tags around the matching query terms.
      - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not
        specified, then all top-level fields are included.
      - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
-       requested total is not found. The default is `10`. The maximum is `100`.
-     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
-       is `400`. The minimum is `50`. The maximum is `2000`.
+       requested total is not found.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
        returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
-     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
-       documents.
-       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-       the document similarity search to include the natural language query. Other query parameters, such as **filter**
-       and **query** are subsequently applied and reduce the query scope.
-     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
+     - parameter similarDocumentIds: A comma-separated list of document IDs to find similar documents.
+       **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+       with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+       applied and reduce the scope.
+     - parameter similarFields: A comma-separated list of field names that are used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1909,10 +1883,11 @@ public class Discovery {
     }
 
     /**
-     Query documents in multiple collections.
+     Long environment queries.
 
-     See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more
-     details.
+     Complex queries might be too long for a standard method query. By using this method, you can construct longer
+     queries. However, these queries may take longer to complete than the standard method. For details, see the
+     [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html).
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
@@ -1959,6 +1934,11 @@ public class Discovery {
        requested total is not found. The default is `10`. The maximum is `100`.
      - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
        is `400`. The minimum is `50`. The maximum is `2000`.
+     - parameter bias: Field which the returned results will be biased against. The specified field must be either a
+       **date** or **number** format. When a **date** type field is specified returned results are biased towards field
+       values closer to the current date. When a **number** type field is specified, returned results are biased towards
+       higher field values. This parameter cannot be used in the same query as the **sort** parameter.
+     - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1983,92 +1963,58 @@ public class Discovery {
         passagesFields: [String]? = nil,
         passagesCount: Int? = nil,
         passagesCharacters: Int? = nil,
+        bias: String? = nil,
+        loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
     {
+        // construct body
+        let returnFieldsJoined = returnFields?.joined(separator: ",")
+        let sortJoined = sort?.joined(separator: ",")
+        let passagesFieldsJoined = passagesFields?.joined(separator: ",")
+        let collectionIdsJoined = collectionIds.joined(separator: ",")
+        let similarDocumentIdsJoined = similarDocumentIds?.joined(separator: ",")
+        let similarFieldsJoined = similarFields?.joined(separator: ",")
+        let queryLong = QueryLarge(
+            filter: filter,
+            query: query,
+            naturalLanguageQuery: naturalLanguageQuery,
+            passages: passages,
+            aggregation: aggregation,
+            count: count,
+            returnFields: returnFieldsJoined,
+            offset: offset,
+            sort: sortJoined,
+            highlight: highlight,
+            passagesFields: passagesFieldsJoined,
+            passagesCount: passagesCount,
+            passagesCharacters: passagesCharacters,
+            deduplicate: deduplicate,
+            deduplicateField: deduplicateField,
+            collectionIds: collectionIdsJoined,
+            similar: similar,
+            similarDocumentIds: similarDocumentIdsJoined,
+            similarFields: similarFieldsJoined,
+            bias: bias)
+        guard let body = try? JSONEncoder().encode(queryLong) else {
+            completionHandler(nil, RestError.serializationError)
+            return
+        }
+
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+        if let loggingOptOut = loggingOptOut {
+            headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIds.joined(separator: ",")))
-        if let filter = filter {
-            let queryParameter = URLQueryItem(name: "filter", value: filter)
-            queryParameters.append(queryParameter)
-        }
-        if let query = query {
-            let queryParameter = URLQueryItem(name: "query", value: query)
-            queryParameters.append(queryParameter)
-        }
-        if let naturalLanguageQuery = naturalLanguageQuery {
-            let queryParameter = URLQueryItem(name: "natural_language_query", value: naturalLanguageQuery)
-            queryParameters.append(queryParameter)
-        }
-        if let aggregation = aggregation {
-            let queryParameter = URLQueryItem(name: "aggregation", value: aggregation)
-            queryParameters.append(queryParameter)
-        }
-        if let count = count {
-            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
-            queryParameters.append(queryParameter)
-        }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let offset = offset {
-            let queryParameter = URLQueryItem(name: "offset", value: "\(offset)")
-            queryParameters.append(queryParameter)
-        }
-        if let sort = sort {
-            let queryParameter = URLQueryItem(name: "sort", value: sort.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let highlight = highlight {
-            let queryParameter = URLQueryItem(name: "highlight", value: "\(highlight)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicate = deduplicate {
-            let queryParameter = URLQueryItem(name: "deduplicate", value: "\(deduplicate)")
-            queryParameters.append(queryParameter)
-        }
-        if let deduplicateField = deduplicateField {
-            let queryParameter = URLQueryItem(name: "deduplicate.field", value: deduplicateField)
-            queryParameters.append(queryParameter)
-        }
-        if let similar = similar {
-            let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
-            queryParameters.append(queryParameter)
-        }
-        if let similarDocumentIds = similarDocumentIds {
-            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let similarFields = similarFields {
-            let queryParameter = URLQueryItem(name: "similar.fields", value: similarFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let passages = passages {
-            let queryParameter = URLQueryItem(name: "passages", value: "\(passages)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesFields = passagesFields {
-            let queryParameter = URLQueryItem(name: "passages.fields", value: passagesFields.joined(separator: ","))
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCount = passagesCount {
-            let queryParameter = URLQueryItem(name: "passages.count", value: "\(passagesCount)")
-            queryParameters.append(queryParameter)
-        }
-        if let passagesCharacters = passagesCharacters {
-            let queryParameter = URLQueryItem(name: "passages.characters", value: "\(passagesCharacters)")
-            queryParameters.append(queryParameter)
-        }
 
         // construct REST request
         let path = "/v1/environments/\(environmentID)/query"
@@ -2080,10 +2026,11 @@ public class Discovery {
             session: session,
             authMethod: authMethod,
             errorResponseDecoder: errorResponseDecoder,
-            method: "GET",
+            method: "POST",
             url: serviceURL + encodedPath,
             headerParameters: headerParameters,
-            queryItems: queryParameters
+            queryItems: queryParameters,
+            messageBody: body
         )
 
         // execute REST request
@@ -2100,38 +2047,36 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
-       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
-       sense of concepts in the data set.
+     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
+       searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
        results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
        data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
        time.
-     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
-       answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
-       time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
+       filters. Useful for applications to build lists, tables, and time series. For a full list of possible
+       aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       results that are returned is 10 and the offset is 8, it returns the last two results.
+     - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
-     - parameter highlight: When true a highlight field is returned for each result which contains the fields that
-       match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     - parameter highlight: When true, a highlight field is returned for each result which contains the fields which
+       match the query with `<em></em>` tags around the matching query terms.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
        returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
-     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
-       documents.
-       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-       the document similarity search to include the natural language query. Other query parameters, such as **filter**
-       and **query** are subsequently applied and reduce the query scope.
-     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
+     - parameter similarDocumentIds: A comma-separated list of document IDs to find similar documents.
+       **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+       with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+       applied and reduce the scope.
+     - parameter similarFields: A comma-separated list of field names that are used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -3019,16 +2964,15 @@ public class Discovery {
      Searches the query and event log to find query sessions that match the specified criteria. Searching the **logs**
      endpoint uses the standard Discovery query syntax for the parameters that are supported.
 
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
-       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
-       sense of concepts in the data set.
+     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
+       searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
        results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter count: Number of results to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       results that are returned is 10 and the offset is 8, it returns the last two results.
+     - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
      - parameter headers: A dictionary of request headers to be sent with this request.

@@ -94,7 +94,7 @@ public class ToneAnalyzer {
      - parameter data: Raw data returned from the service that may represent an error.
      - parameter response: the URL response returned from the service.
      */
-    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
         let code = response.statusCode
         do {
@@ -123,6 +123,8 @@ public class ToneAnalyzer {
      set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
+     **See also:** [Using the general-purpose
+     endpoint](https://console.bluemix.net/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
 
      - parameter toneContent: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON
        input, provide an object of type `ToneInput`.
@@ -212,8 +214,10 @@ public class ToneAnalyzer {
      If you submit more than 50 utterances, the service returns a warning for the overall content and analyzes only the
      first 50 utterances. If you submit a single utterance that contains more than 500 characters, the service returns
      an error for that utterance and does not analyze the utterance. The request fails if all utterances have more than
-     500 characters.
-     Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8.
+     500 characters. Per the JSON specification, the default character encoding for JSON content is effectively always
+     UTF-8.
+     **See also:** [Using the customer-engagement
+     endpoint](https://console.bluemix.net/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
 
      - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
        analyze.

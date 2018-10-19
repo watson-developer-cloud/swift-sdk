@@ -10,22 +10,54 @@ branches:
     - master
     - v1.0
     - develop
+    - v1.0
 env:
   global:
     - IOS_SDK="iphonesimulator"
     - IOS_DESTINATION="OS=11.3,name=iPhone 7"
 before_install:
-  - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+  - sudo easy_install pip
+  - nvm install node
+  - nvm use node
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
 install:
   - gem install cocoapods
+  - gem install jazzy
+  - sudo pip install bumpversion
+  - npm install -g semantic-release@15.9.0
+  - npm install -g @semantic-release/exec
+  - npm install -g @semantic-release/changelog
+  - npm install -g @semantic-release/git
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated swiftlint || brew upgrade swiftlint ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated carthage || brew upgrade carthage ; fi
 before_script:
+  - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pod repo update master --silent ; fi # Gets the latest version of RestKit
-script:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/run-tests.sh ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/pod-lint.sh ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -y ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://swift.org/builds/swift-4.1-release/ubuntu1404/swift-4.1-RELEASE/swift-4.1-RELEASE-ubuntu14.04.tar.gz ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar xzvf swift-4.1-RELEASE-ubuntu14.04.tar.gz ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then carthage update --platform iOS ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update -y ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://swift.org/builds/swift-4.1-release/ubuntu1404/swift-4.1-RELEASE/swift-4.1-RELEASE-ubuntu14.04.tar.gz -q; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar xzf swift-4.1-RELEASE-ubuntu14.04.tar.gz ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=swift-4.1-RELEASE-ubuntu14.04/usr/bin:$PATH ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then rm Source/SupportingFiles/WatsonCredentials.swift ; fi
+script:
+  # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/run-tests.sh ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/pod-lint.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift test ; fi
+deploy:
+  - provider: script
+    script: npx semantic-release
+    skip_cleanup: true
+    on:
+      branch: master
+      condition: $TRAVIS_OS_NAME = osx
+  - provider: script
+    script: Scripts/release-to-cocoapods.sh
+    skip_cleanup: true
+    on:
+      branch: master
+      condition: $TRAVIS_OS_NAME = osx
+  - provider: script
+    script: Scripts/publish-documentation.sh
+    on:
+      branch: master
+      condition: $TRAVIS_OS_NAME = osx

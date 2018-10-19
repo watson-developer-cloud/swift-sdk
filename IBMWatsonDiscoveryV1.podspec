@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonDiscoveryV1'
-  s.version               = '0.35.0'
+  s.version               = '0.36.0'
   s.summary               = 'Client framework for the IBM Watson Discovery service'
   s.description           = <<-DESC
 IBM Watson™ Discovery makes it possible to rapidly build cognitive, cloud-based exploration applications 
@@ -21,6 +21,6 @@ as well as public and third-party data.
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/DiscoveryV1/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.2.0'
+  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
   
 end

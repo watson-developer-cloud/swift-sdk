@@ -86,13 +86,8 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {
-        let version = "2018-09-14"
-        if let apiKey = WatsonCredentials.VisualRecognitionAPIKey {
-            visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
-        } else {
-            let apiKey = WatsonCredentials.VisualRecognitionLegacyAPIKey
-            visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
-        }
+        let version = "2018-10-10"
+        visualRecognition = VisualRecognition(version: version, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
@@ -120,7 +115,7 @@ class VisualRecognitionTests: XCTestCase {
         }
     }
 
-    // MARK: - Positive Tests
+    // MARK: - Classifiers CRUD
 
     /** Retrieve a list of user-trained classifiers. */
     func testListClassifiers() {
@@ -316,7 +311,7 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertNotNil(classifier.classes)
-            XCTAssertEqual(classifier.classes!.count, 1)
+            XCTAssertEqual(classifier.classes!.count, 2)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -558,6 +553,19 @@ class VisualRecognitionTests: XCTestCase {
         }
     }
 
+    /** Get the Core ML model for a trained classifier. */
+    func testGetCoreMlModel() {
+        let expectation = self.expectation(description: "Get the Core ML model for a trained classifier.")
+        visualRecognition.getCoreMlModel(classifierID: classifierID, failure: failWithError) {
+            coreMLModel in
+            XCTAssertNotNil(coreMLModel)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    // MARK: - Classify
+
     /** Classify an image by URL using the default classifier and all default parameters. */
     func testClassifyByURL1() {
         let expectation = self.expectation(description: "Classify an image by URL")
@@ -702,7 +710,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.className, "car")
+            XCTAssertEqual(classifier?.classes.first?.className, "turtles")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -748,7 +756,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.className, "car")
+            XCTAssertEqual(classifier?.classes.first?.className, "turtles")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -810,7 +818,7 @@ class VisualRecognitionTests: XCTestCase {
                     // verify the image's custom classifier
                     XCTAssertEqual(classifier.classifierID, self.classifierID)
                     XCTAssertEqual(classifier.classes.count, 1)
-                    XCTAssertEqual(classifier.classes.first?.className, "car")
+                    XCTAssertEqual(classifier.classes.first?.className, "turtles")
                     if let score = classifier.classes.first?.score {
                         XCTAssertGreaterThan(score, 0.5)
                     }
@@ -960,7 +968,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.className, "car")
+            XCTAssertEqual(classifier?.classes.first?.className, "turtles")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -1006,7 +1014,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.className, "car")
+            XCTAssertEqual(classifier?.classes.first?.className, "turtles")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -1072,7 +1080,7 @@ class VisualRecognitionTests: XCTestCase {
                     // verify the image's custom classifier
                     XCTAssertEqual(classifier.classifierID, self.classifierID)
                     XCTAssertEqual(classifier.classes.count, 1)
-                    XCTAssertEqual(classifier.classes.first?.className, "car")
+                    XCTAssertEqual(classifier.classes.first?.className, "turtles")
                     if let score = classifier.classes.first?.score {
                         XCTAssertGreaterThan(score, 0.5)
                     }
@@ -1134,8 +1142,6 @@ class VisualRecognitionTests: XCTestCase {
                     } else {
                         // verify the image's custom classifier
                         XCTAssertEqual(classifier.classifierID, self.classifierID)
-                        XCTAssertEqual(classifier.classes.count, 1)
-                        XCTAssertEqual(classifier.classes.first?.className, "car")
                         if let score = classifier.classes.first?.score {
                             XCTAssertGreaterThan(score, 0.5)
                         }
@@ -1147,6 +1153,8 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations(timeout: 60)
     }
+
+    // MARK: - Detect faces
 
     /** Detect faces by URL. */
     func testDetectFacesByURL() {
@@ -1304,8 +1312,8 @@ class VisualRecognitionTests: XCTestCase {
     /** Invalid API Key. */
     func testAuthenticationError() {
         let apiKey = "let-me-in-let-me-in"
-        let version = "2018-09-14"
-        visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
+        let version = "2018-10-10"
+        visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 

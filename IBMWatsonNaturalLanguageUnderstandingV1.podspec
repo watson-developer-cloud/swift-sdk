@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonNaturalLanguageUnderstandingV1'
-  s.version               = '0.35.0'
+  s.version               = '0.36.0'
   s.summary               = 'Client framework for the IBM Watson Natural Language Understanding service'
   s.description           = <<-DESC
 IBM Watson™ Natural Language Understanding can analyze semantic features of text input, 
@@ -20,6 +20,6 @@ including categories, concepts, emotion, entities, keywords, metadata, relations
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/NaturalLanguageUnderstandingV1/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.2.0'
+  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
   
 end

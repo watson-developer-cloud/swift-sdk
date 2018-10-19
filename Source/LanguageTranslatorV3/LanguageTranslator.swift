@@ -91,7 +91,7 @@ public class LanguageTranslator {
      - parameter data: Raw data returned from the service that may represent an error.
      - parameter response: the URL response returned from the service.
      */
-    private func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
 
         let code = response.statusCode
         do {
@@ -357,10 +357,20 @@ public class LanguageTranslator {
         // construct body
         let multipartFormData = MultipartFormData()
         if let forcedGlossary = forcedGlossary {
-            multipartFormData.append(forcedGlossary, withName: "forced_glossary")
+            do {
+                try multipartFormData.append(file: forcedGlossary, withName: "forced_glossary")
+            } catch {
+                completionHandler(nil, RestError.serializationError)
+                return
+            }
         }
         if let parallelCorpus = parallelCorpus {
-            multipartFormData.append(parallelCorpus, withName: "parallel_corpus")
+            do {
+                try multipartFormData.append(file: parallelCorpus, withName: "parallel_corpus")
+            } catch {
+                completionHandler(nil, RestError.serializationError)
+                return
+            }
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.encodingError)

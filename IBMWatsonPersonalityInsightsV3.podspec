@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonPersonalityInsightsV3'
-  s.version               = '0.35.0'
+  s.version               = '0.36.0'
   s.summary               = 'Client framework for the IBM Watson Personality Insights service'
   s.description           = <<-DESC
 IBM Watson™ Personality Insights uses linguistic analytics to infer individuals' intrinsic personality characteristics 
@@ -20,6 +20,6 @@ from digital communications such as email, text messages, tweets, and forum post
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/PersonalityInsightsV3/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '1.2.0'
+  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
   
 end

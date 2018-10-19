@@ -51,7 +51,7 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     func instantiatePersonalityInsights() {
-        let version = "2018-09-14"
+        let version = "2018-10-10"
         if let apiKey = WatsonCredentials.PersonalityInsightsV3APIKey {
             personalityInsights = PersonalityInsights(version: version, apiKey: apiKey)
         } else {

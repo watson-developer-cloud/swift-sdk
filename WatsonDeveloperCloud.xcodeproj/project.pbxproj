@@ -503,6 +503,8 @@
 		924EE7E021505D810048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		924EE7EA21505E430048C0E5 /* AssistantV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 924EE77D21505C2C0048C0E5 /* AssistantV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92547737216C0E70003C2829 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
+		9254773A216D4710003C2829 /* QueryLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92547738216D470F003C2829 /* QueryLarge.swift */; };
+		9254773B216D4710003C2829 /* SearchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92547739216D4710003C2829 /* SearchStatus.swift */; };
 		928204C72124BC200013315B /* CreateEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BA2124BC1B0013315B /* CreateEventObject.swift */; };
 		928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BB2124BC1C0013315B /* MetricAggregationResult.swift */; };
 		928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */; };
@@ -700,12 +702,12 @@
 			remoteGlobalIDString = 7AB445231D3E647A00E8748A;
 			remoteInfo = ConversationV1;
 		};
-		924EE7D721505D810048C0E5 /* PBXContainerItemProxy */ = {
+		920C12ED217942F6006122AC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6877FA512056D4F100383B25;
-			remoteInfo = AssistantV1;
+			remoteGlobalIDString = 924EE78021505D7A0048C0E5;
+			remoteInfo = AssistantV2;
 		};
 		CAD2685C20CAF28B002BA2C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1245,6 +1247,8 @@
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		924EE7E721505D810048C0E5 /* AssistantV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssistantV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92547738216D470F003C2829 /* QueryLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryLarge.swift; sourceTree = "<group>"; };
+		92547739216D4710003C2829 /* SearchStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStatus.swift; sourceTree = "<group>"; };
 		928204BA2124BC1B0013315B /* CreateEventObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventObject.swift; sourceTree = "<group>"; };
 		928204BB2124BC1C0013315B /* MetricAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregationResult.swift; sourceTree = "<group>"; };
 		928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregationResult.swift; sourceTree = "<group>"; };
@@ -1921,6 +1925,7 @@
 				68AF8ECC206968CC00D552E3 /* QueryEvidence.swift */,
 				68AF8ED4206968CC00D552E3 /* QueryEvidenceEntity.swift */,
 				68AF8EE4206968CC00D552E3 /* QueryFilterType.swift */,
+				92547738216D470F003C2829 /* QueryLarge.swift */,
 				68AF8EC9206968CC00D552E3 /* QueryNoticesResponse.swift */,
 				68AF8EDA206968CC00D552E3 /* QueryNoticesResult.swift */,
 				68AF8EEB206968CC00D552E3 /* QueryPassages.swift */,
@@ -1933,6 +1938,7 @@
 				68AF8ECE206968CC00D552E3 /* QueryResponse.swift */,
 				68AF8ECD206968CC00D552E3 /* QueryResult.swift */,
 				68AE2FD120697C2800330836 /* QueryResultMetadata.swift */,
+				92547739216D4710003C2829 /* SearchStatus.swift */,
 				682CBD2B209051B90049EE9F /* SegmentSettings.swift */,
 				CADA958F20FCD66500B5BD84 /* Source.swift */,
 				CADA959120FCD66500B5BD84 /* SourceOptions.swift */,
@@ -3051,7 +3057,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				924EE7D621505D810048C0E5 /* PBXTargetDependency */,
+				920C12EE217942F6006122AC /* PBXTargetDependency */,
 			);
 			name = AssistantV2Tests;
 			productName = ConversationV1Tests;
@@ -3578,7 +3584,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		6877FAA22056D4F500383B25 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3606,7 +3612,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV2\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		924EE7DD21505D810048C0E5 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3842,7 +3848,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/DiscoveryV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/DiscoveryV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		CAEC7A6C1FE98624002EF4FD /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4094,6 +4100,7 @@
 				CADA959820FCD66600B5BD84 /* SourceSchedule.swift in Sources */,
 				CADA959F20FCD66600B5BD84 /* CredentialDetails.swift in Sources */,
 				68AF8F522069690300D552E3 /* ListCollectionFieldsResponse.swift in Sources */,
+				9254773A216D4710003C2829 /* QueryLarge.swift in Sources */,
 				928204D12124BC200013315B /* MetricAggregation.swift in Sources */,
 				92BF69B0213F129A00FE6325 /* Shared.swift in Sources */,
 				68AF8F782069690300D552E3 /* QueryEvidenceEntity.swift in Sources */,
@@ -4115,6 +4122,7 @@
 				68AF8F552069690300D552E3 /* IndexCapacity.swift in Sources */,
 				68AF8F572069690300D552E3 /* TestDocument.swift in Sources */,
 				CADA959B20FCD66600B5BD84 /* CredentialsList.swift in Sources */,
+				9254773B216D4710003C2829 /* SearchStatus.swift in Sources */,
 				68AF8F852069690300D552E3 /* XPathPatterns.swift in Sources */,
 				683955072077E613009E1C8A /* Filter.swift in Sources */,
 				68AF8F872069690300D552E3 /* DeleteConfigurationResponse.swift in Sources */,
@@ -4685,10 +4693,10 @@
 			target = 7AB445231D3E647A00E8748A /* ConversationV1 */;
 			targetProxy = 7AB4452F1D3E647A00E8748A /* PBXContainerItemProxy */;
 		};
-		924EE7D621505D810048C0E5 /* PBXTargetDependency */ = {
+		920C12EE217942F6006122AC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6877FA512056D4F100383B25 /* AssistantV1 */;
-			targetProxy = 924EE7D721505D810048C0E5 /* PBXContainerItemProxy */;
+			target = 924EE78021505D7A0048C0E5 /* AssistantV2 */;
+			targetProxy = 920C12ED217942F6006122AC /* PBXContainerItemProxy */;
 		};
 		CAD2685D20CAF28B002BA2C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

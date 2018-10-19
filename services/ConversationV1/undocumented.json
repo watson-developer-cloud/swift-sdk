@@ -1,852 +1,852 @@
 {
   "warnings": [
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Conversation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Conversation.swift",
       "line": 80,
       "symbol": "Conversation.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 27,
       "symbol": "CreateDialogNode.NodeType.standard",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 28,
       "symbol": "CreateDialogNode.NodeType.eventHandler",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 29,
       "symbol": "CreateDialogNode.NodeType.frame",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 30,
       "symbol": "CreateDialogNode.NodeType.slot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 31,
       "symbol": "CreateDialogNode.NodeType.responseCondition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 32,
       "symbol": "CreateDialogNode.NodeType.folder",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 39,
       "symbol": "CreateDialogNode.EventName.focus",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 40,
       "symbol": "CreateDialogNode.EventName.input",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 41,
       "symbol": "CreateDialogNode.EventName.filled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 42,
       "symbol": "CreateDialogNode.EventName.validate",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 43,
       "symbol": "CreateDialogNode.EventName.filledMultiple",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 44,
       "symbol": "CreateDialogNode.EventName.generic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 45,
       "symbol": "CreateDialogNode.EventName.nomatch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 46,
       "symbol": "CreateDialogNode.EventName.nomatchResponsesDepleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 47,
       "symbol": "CreateDialogNode.EventName.digressionReturnPrompt",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 54,
       "symbol": "CreateDialogNode.DigressIn.notAvailable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 55,
       "symbol": "CreateDialogNode.DigressIn.returns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 56,
       "symbol": "CreateDialogNode.DigressIn.doesNotReturn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 63,
       "symbol": "CreateDialogNode.DigressOut.returning",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 64,
       "symbol": "CreateDialogNode.DigressOut.all",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 65,
       "symbol": "CreateDialogNode.DigressOut.allNeverReturn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 72,
       "symbol": "CreateDialogNode.DigressOutSlots.notAllowed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 73,
       "symbol": "CreateDialogNode.DigressOutSlots.allowReturning",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateDialogNode.swift",
       "line": 74,
       "symbol": "CreateDialogNode.DigressOutSlots.allowAll",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateValue.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateValue.swift",
       "line": 27,
       "symbol": "CreateValue.ValueType.synonyms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/CreateValue.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/CreateValue.swift",
       "line": 28,
       "symbol": "CreateValue.ValueType.patterns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 27,
       "symbol": "DialogNode.NodeType.standard",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 28,
       "symbol": "DialogNode.NodeType.eventHandler",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 29,
       "symbol": "DialogNode.NodeType.frame",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 30,
       "symbol": "DialogNode.NodeType.slot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 31,
       "symbol": "DialogNode.NodeType.responseCondition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 32,
       "symbol": "DialogNode.NodeType.folder",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 39,
       "symbol": "DialogNode.EventName.focus",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 40,
       "symbol": "DialogNode.EventName.input",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 41,
       "symbol": "DialogNode.EventName.filled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 42,
       "symbol": "DialogNode.EventName.validate",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 43,
       "symbol": "DialogNode.EventName.filledMultiple",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 44,
       "symbol": "DialogNode.EventName.generic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 45,
       "symbol": "DialogNode.EventName.nomatch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 46,
       "symbol": "DialogNode.EventName.nomatchResponsesDepleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 47,
       "symbol": "DialogNode.EventName.digressionReturnPrompt",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 54,
       "symbol": "DialogNode.DigressIn.notAvailable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 55,
       "symbol": "DialogNode.DigressIn.returns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 56,
       "symbol": "DialogNode.DigressIn.doesNotReturn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 63,
       "symbol": "DialogNode.DigressOut.returning",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 64,
       "symbol": "DialogNode.DigressOut.all",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 65,
       "symbol": "DialogNode.DigressOut.allNeverReturn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 72,
       "symbol": "DialogNode.DigressOutSlots.notAllowed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 73,
       "symbol": "DialogNode.DigressOutSlots.allowReturning",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNode.swift",
       "line": 74,
       "symbol": "DialogNode.DigressOutSlots.allowAll",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeAction.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeAction.swift",
       "line": 27,
       "symbol": "DialogNodeAction.ActionType.client",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeAction.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeAction.swift",
       "line": 28,
       "symbol": "DialogNodeAction.ActionType.server",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 46,
       "symbol": "DialogNodeNextStep.Behavior.getUserInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 47,
       "symbol": "DialogNodeNextStep.Behavior.skipUserInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 48,
       "symbol": "DialogNodeNextStep.Behavior.jumpTo",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 49,
       "symbol": "DialogNodeNextStep.Behavior.reprompt",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 50,
       "symbol": "DialogNodeNextStep.Behavior.skipSlot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 51,
       "symbol": "DialogNodeNextStep.Behavior.skipAllSlots",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 58,
       "symbol": "DialogNodeNextStep.Selector.condition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 59,
       "symbol": "DialogNodeNextStep.Selector.client",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 60,
       "symbol": "DialogNodeNextStep.Selector.userInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeNextStep.swift",
       "line": 61,
       "symbol": "DialogNodeNextStep.Selector.body",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 27,
       "symbol": "DialogNodeOutputGeneric.ResponseType.text",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 28,
       "symbol": "DialogNodeOutputGeneric.ResponseType.pause",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 29,
       "symbol": "DialogNodeOutputGeneric.ResponseType.image",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 30,
       "symbol": "DialogNodeOutputGeneric.ResponseType.option",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 31,
       "symbol": "DialogNodeOutputGeneric.ResponseType.connectToAgent",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 39,
       "symbol": "DialogNodeOutputGeneric.SelectionPolicy.sequential",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 40,
       "symbol": "DialogNodeOutputGeneric.SelectionPolicy.random",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 41,
       "symbol": "DialogNodeOutputGeneric.SelectionPolicy.multiline",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 48,
       "symbol": "DialogNodeOutputGeneric.Preference.dropdown",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogNodeOutputGeneric.swift",
       "line": 49,
       "symbol": "DialogNodeOutputGeneric.Preference.button",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
       "line": 29,
       "symbol": "DialogRuntimeResponseGeneric.ResponseType.text",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
       "line": 30,
       "symbol": "DialogRuntimeResponseGeneric.ResponseType.pause",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
       "line": 31,
       "symbol": "DialogRuntimeResponseGeneric.ResponseType.image",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
       "line": 32,
       "symbol": "DialogRuntimeResponseGeneric.ResponseType.option",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
       "line": 33,
       "symbol": "DialogRuntimeResponseGeneric.ResponseType.connectToAgent",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
       "line": 34,
       "symbol": "DialogRuntimeResponseGeneric.ResponseType.suggestion",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
       "line": 41,
       "symbol": "DialogRuntimeResponseGeneric.Preference.dropdown",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/DialogRuntimeResponseGeneric.swift",
       "line": 42,
       "symbol": "DialogRuntimeResponseGeneric.Preference.button",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
       "line": 29,
       "symbol": "LogMessage.Level.info",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
       "line": 30,
       "symbol": "LogMessage.Level.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/LogMessage.swift",
       "line": 31,
       "symbol": "LogMessage.Level.warn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 27,
       "symbol": "UpdateDialogNode.NodeType.standard",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 28,
       "symbol": "UpdateDialogNode.NodeType.eventHandler",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 29,
       "symbol": "UpdateDialogNode.NodeType.frame",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 30,
       "symbol": "UpdateDialogNode.NodeType.slot",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 31,
       "symbol": "UpdateDialogNode.NodeType.responseCondition",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 32,
       "symbol": "UpdateDialogNode.NodeType.folder",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 39,
       "symbol": "UpdateDialogNode.EventName.focus",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 40,
       "symbol": "UpdateDialogNode.EventName.input",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 41,
       "symbol": "UpdateDialogNode.EventName.filled",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 42,
       "symbol": "UpdateDialogNode.EventName.validate",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 43,
       "symbol": "UpdateDialogNode.EventName.filledMultiple",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 44,
       "symbol": "UpdateDialogNode.EventName.generic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 45,
       "symbol": "UpdateDialogNode.EventName.nomatch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 46,
       "symbol": "UpdateDialogNode.EventName.nomatchResponsesDepleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 47,
       "symbol": "UpdateDialogNode.EventName.digressionReturnPrompt",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 54,
       "symbol": "UpdateDialogNode.DigressIn.notAvailable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 55,
       "symbol": "UpdateDialogNode.DigressIn.returns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 56,
       "symbol": "UpdateDialogNode.DigressIn.doesNotReturn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 63,
       "symbol": "UpdateDialogNode.DigressOut.returning",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 64,
       "symbol": "UpdateDialogNode.DigressOut.all",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 65,
       "symbol": "UpdateDialogNode.DigressOut.allNeverReturn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 72,
       "symbol": "UpdateDialogNode.DigressOutSlots.notAllowed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 73,
       "symbol": "UpdateDialogNode.DigressOutSlots.allowReturning",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateDialogNode.swift",
       "line": 74,
       "symbol": "UpdateDialogNode.DigressOutSlots.allowAll",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateValue.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateValue.swift",
       "line": 27,
       "symbol": "UpdateValue.ValueType.synonyms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/UpdateValue.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/UpdateValue.swift",
       "line": 28,
       "symbol": "UpdateValue.ValueType.patterns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/Value.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/Value.swift",
       "line": 27,
       "symbol": "Value.ValueType.synonyms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/Value.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/Value.swift",
       "line": 28,
       "symbol": "Value.ValueType.patterns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/ValueExport.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/ValueExport.swift",
       "line": 27,
       "symbol": "ValueExport.ValueType.synonyms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/ValueExport.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/ValueExport.swift",
       "line": 28,
       "symbol": "ValueExport.ValueType.patterns",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 27,
       "symbol": "WorkspaceExport.Status.nonExistent",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 28,
       "symbol": "WorkspaceExport.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 29,
       "symbol": "WorkspaceExport.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 30,
       "symbol": "WorkspaceExport.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/WorkspaceExport.swift",
       "line": 31,
       "symbol": "WorkspaceExport.Status.unavailable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/WorkspaceSystemSettingsDisambiguation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/WorkspaceSystemSettingsDisambiguation.swift",
       "line": 27,
       "symbol": "WorkspaceSystemSettingsDisambiguation.Sensitivity.auto",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ConversationV1/Models/WorkspaceSystemSettingsDisambiguation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ConversationV1/Models/WorkspaceSystemSettingsDisambiguation.swift",
       "line": 28,
       "symbol": "WorkspaceSystemSettingsDisambiguation.Sensitivity.high",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/anthony/Development/Watson-SDKs/swift-sdk"
+  "source_directory": "/Users/travis/build/watson-developer-cloud/swift-sdk"
 }

@@ -1,1307 +1,1356 @@
 {
   "warnings": [
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Discovery.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Discovery.swift",
       "line": 81,
       "symbol": "Discovery.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Calculation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Calculation.swift",
       "line": 27,
       "symbol": "Calculation.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Collection.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Collection.swift",
       "line": 28,
       "symbol": "Collection.Status.active",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Collection.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Collection.swift",
       "line": 29,
       "symbol": "Collection.Status.pending",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Collection.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Collection.swift",
       "line": 30,
       "symbol": "Collection.Status.maintenance",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 26,
       "symbol": "CreateCollectionRequest.Language.en",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 27,
       "symbol": "CreateCollectionRequest.Language.es",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 28,
       "symbol": "CreateCollectionRequest.Language.de",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 29,
       "symbol": "CreateCollectionRequest.Language.ar",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 30,
       "symbol": "CreateCollectionRequest.Language.fr",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 31,
       "symbol": "CreateCollectionRequest.Language.it",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 32,
       "symbol": "CreateCollectionRequest.Language.ja",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 33,
       "symbol": "CreateCollectionRequest.Language.ko",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 34,
       "symbol": "CreateCollectionRequest.Language.pt",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateCollectionRequest.swift",
       "line": 35,
       "symbol": "CreateCollectionRequest.Language.nl",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CreateEventResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CreateEventResponse.swift",
       "line": 28,
       "symbol": "CreateEventResponse.ModelType.click",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CredentialDetails.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CredentialDetails.swift",
       "line": 33,
       "symbol": "CredentialDetails.CredentialType.oauth2",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CredentialDetails.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CredentialDetails.swift",
       "line": 34,
       "symbol": "CredentialDetails.CredentialType.saml",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/CredentialDetails.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/CredentialDetails.swift",
       "line": 35,
       "symbol": "CredentialDetails.CredentialType.usernamePassword",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Credentials.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Credentials.swift",
       "line": 31,
       "symbol": "Credentials.SourceType.box",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Credentials.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Credentials.swift",
       "line": 32,
       "symbol": "Credentials.SourceType.salesforce",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Credentials.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Credentials.swift",
       "line": 33,
       "symbol": "Credentials.SourceType.sharepoint",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DeleteCollectionResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DeleteCollectionResponse.swift",
       "line": 26,
       "symbol": "DeleteCollectionResponse.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DeleteConfigurationResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DeleteConfigurationResponse.swift",
       "line": 26,
       "symbol": "DeleteConfigurationResponse.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DeleteCredentials.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DeleteCredentials.swift",
       "line": 28,
       "symbol": "DeleteCredentials.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DeleteDocumentResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DeleteDocumentResponse.swift",
       "line": 26,
       "symbol": "DeleteDocumentResponse.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DeleteEnvironmentResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DeleteEnvironmentResponse.swift",
       "line": 26,
       "symbol": "DeleteEnvironmentResponse.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentAccepted.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentAccepted.swift",
       "line": 26,
       "symbol": "DocumentAccepted.Status.processing",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
       "line": 23,
       "symbol": "DocumentSnapshot.Step",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
       "line": 24,
       "symbol": "DocumentSnapshot.Step.htmlInput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
       "line": 25,
       "symbol": "DocumentSnapshot.Step.htmlOutput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
       "line": 26,
       "symbol": "DocumentSnapshot.Step.jsonOutput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
       "line": 27,
       "symbol": "DocumentSnapshot.Step.jsonNormalizationsOutput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
       "line": 28,
       "symbol": "DocumentSnapshot.Step.enrichmentsOutput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
       "line": 29,
       "symbol": "DocumentSnapshot.Step.normalizationsOutput",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
       "line": 32,
       "symbol": "DocumentSnapshot.step",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentSnapshot.swift",
       "line": 34,
       "symbol": "DocumentSnapshot.snapshot",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 28,
       "symbol": "DocumentStatus.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 29,
       "symbol": "DocumentStatus.Status.availableWithNotices",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 30,
       "symbol": "DocumentStatus.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 31,
       "symbol": "DocumentStatus.Status.processing",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 38,
       "symbol": "DocumentStatus.FileType.pdf",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 39,
       "symbol": "DocumentStatus.FileType.html",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 40,
       "symbol": "DocumentStatus.FileType.word",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 41,
       "symbol": "DocumentStatus.FileType.json",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
       "line": 31,
       "symbol": "EnrichmentOptions.Language.ar",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
       "line": 32,
       "symbol": "EnrichmentOptions.Language.en",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
       "line": 33,
       "symbol": "EnrichmentOptions.Language.fr",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
       "line": 34,
       "symbol": "EnrichmentOptions.Language.de",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
       "line": 35,
       "symbol": "EnrichmentOptions.Language.it",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
       "line": 36,
       "symbol": "EnrichmentOptions.Language.pt",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
       "line": 37,
       "symbol": "EnrichmentOptions.Language.ru",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
       "line": 38,
       "symbol": "EnrichmentOptions.Language.es",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/EnrichmentOptions.swift",
       "line": 39,
       "symbol": "EnrichmentOptions.Language.sv",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 28,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 29,
       "symbol": "Environment.Status.active",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 29,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 30,
       "symbol": "Environment.Status.pending",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 30,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 31,
       "symbol": "Environment.Status.maintenance",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 37,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 32,
+      "symbol": "Environment.Status.resizing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 39,
+      "symbol": "Environment.Size.lt",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 40,
       "symbol": "Environment.Size.xs",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 38,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 41,
       "symbol": "Environment.Size.s",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 39,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 42,
       "symbol": "Environment.Size.ms",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 40,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 43,
       "symbol": "Environment.Size.m",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 41,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 44,
       "symbol": "Environment.Size.ml",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 42,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 45,
       "symbol": "Environment.Size.l",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 43,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 46,
       "symbol": "Environment.Size.xl",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 44,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 47,
       "symbol": "Environment.Size.xxl",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
-      "line": 45,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Environment.swift",
+      "line": 48,
       "symbol": "Environment.Size.xxxl",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 26,
       "symbol": "Field.FieldType.nested",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 27,
       "symbol": "Field.FieldType.string",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 28,
       "symbol": "Field.FieldType.date",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 29,
       "symbol": "Field.FieldType.long",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 30,
       "symbol": "Field.FieldType.integer",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 31,
       "symbol": "Field.FieldType.short",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 32,
       "symbol": "Field.FieldType.byte",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 33,
       "symbol": "Field.FieldType.double",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 34,
       "symbol": "Field.FieldType.float",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 35,
       "symbol": "Field.FieldType.boolean",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Field.swift",
       "line": 36,
       "symbol": "Field.FieldType.binary",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Filter.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Filter.swift",
       "line": 27,
       "symbol": "Filter.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
       "line": 22,
       "symbol": "FontSetting.level",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
       "line": 24,
       "symbol": "FontSetting.minSize",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
       "line": 26,
       "symbol": "FontSetting.maxSize",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
       "line": 28,
       "symbol": "FontSetting.bold",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
       "line": 30,
       "symbol": "FontSetting.italic",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/FontSetting.swift",
       "line": 32,
       "symbol": "FontSetting.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/GenericQueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/GenericQueryAggregation.swift",
       "line": 25,
       "symbol": "GenericQueryAggregation.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Histogram.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Histogram.swift",
       "line": 27,
       "symbol": "Histogram.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
       "line": 24,
       "symbol": "HtmlSettings.excludeTagsCompletely",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
       "line": 26,
       "symbol": "HtmlSettings.excludeTagsKeepContent",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
       "line": 28,
       "symbol": "HtmlSettings.keepContent",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
       "line": 30,
       "symbol": "HtmlSettings.excludeContent",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
       "line": 32,
       "symbol": "HtmlSettings.keepTagAttributes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/HtmlSettings.swift",
       "line": 34,
       "symbol": "HtmlSettings.excludeTagAttributes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponse.swift",
       "line": 29,
       "symbol": "LogQueryResponse.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
       "line": 31,
       "symbol": "LogQueryResponseResult.DocumentType.query",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
       "line": 32,
       "symbol": "LogQueryResponseResult.DocumentType.event",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
       "line": 41,
       "symbol": "LogQueryResponseResult.EventType.click",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
       "line": 42,
       "symbol": "LogQueryResponseResult.EventType.query",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResult.swift",
       "line": 49,
       "symbol": "LogQueryResponseResult.ResultType.document",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResultDocuments.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/LogQueryResponseResultDocuments.swift",
       "line": 25,
       "symbol": "LogQueryResponseResultDocuments.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/MetricAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/MetricAggregation.swift",
       "line": 34,
       "symbol": "MetricAggregation.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/MetricResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/MetricResponse.swift",
       "line": 24,
       "symbol": "MetricResponse.aggregations",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/MetricTokenAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/MetricTokenAggregation.swift",
       "line": 29,
       "symbol": "MetricTokenAggregation.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/MetricTokenResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/MetricTokenResponse.swift",
       "line": 24,
       "symbol": "MetricTokenResponse.aggregations",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Nested.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Nested.swift",
       "line": 27,
       "symbol": "Nested.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
       "line": 44,
       "symbol": "NormalizationOperation.Operation.copy",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
       "line": 45,
       "symbol": "NormalizationOperation.Operation.move",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
       "line": 46,
       "symbol": "NormalizationOperation.Operation.merge",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
       "line": 47,
       "symbol": "NormalizationOperation.Operation.remove",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/NormalizationOperation.swift",
       "line": 48,
       "symbol": "NormalizationOperation.Operation.removeNulls",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Notice.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Notice.swift",
       "line": 28,
       "symbol": "Notice.Severity.warning",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Notice.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Notice.swift",
       "line": 29,
       "symbol": "Notice.Severity.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/PdfHeadingDetection.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/PdfHeadingDetection.swift",
       "line": 22,
       "symbol": "PdfHeadingDetection.fonts",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/PdfSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/PdfSettings.swift",
       "line": 24,
       "symbol": "PdfSettings.heading",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 24,
-      "symbol": "QueryAggregation.term(_:)",
+      "symbol": "QueryAggregation.term",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 25,
-      "symbol": "QueryAggregation.filter(_:)",
+      "symbol": "QueryAggregation.filter",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 26,
-      "symbol": "QueryAggregation.nested(_:)",
+      "symbol": "QueryAggregation.nested",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 27,
-      "symbol": "QueryAggregation.histogram(_:)",
+      "symbol": "QueryAggregation.histogram",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 28,
-      "symbol": "QueryAggregation.timeslice(_:)",
+      "symbol": "QueryAggregation.timeslice",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 29,
-      "symbol": "QueryAggregation.topHits(_:)",
+      "symbol": "QueryAggregation.topHits",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 30,
-      "symbol": "QueryAggregation.uniqueCount(_:)",
+      "symbol": "QueryAggregation.uniqueCount",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 31,
-      "symbol": "QueryAggregation.max(_:)",
+      "symbol": "QueryAggregation.max",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 32,
-      "symbol": "QueryAggregation.min(_:)",
+      "symbol": "QueryAggregation.min",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 33,
-      "symbol": "QueryAggregation.average(_:)",
+      "symbol": "QueryAggregation.average",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 34,
-      "symbol": "QueryAggregation.sum(_:)",
+      "symbol": "QueryAggregation.sum",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryAggregation.swift",
       "line": 35,
-      "symbol": "QueryAggregation.generic(_:)",
+      "symbol": "QueryAggregation.generic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryEntitiesResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryEntitiesResponse.swift",
       "line": 24,
       "symbol": "QueryEntitiesResponse.entities",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
       "line": 22,
       "symbol": "QueryNoticesResponse.matchingResults",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
       "line": 24,
       "symbol": "QueryNoticesResponse.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
       "line": 26,
       "symbol": "QueryNoticesResponse.aggregations",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
       "line": 28,
       "symbol": "QueryNoticesResponse.passages",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResponse.swift",
       "line": 30,
       "symbol": "QueryNoticesResponse.duplicatesRemoved",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResult.swift",
       "line": 27,
       "symbol": "QueryNoticesResult.FileType.pdf",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResult.swift",
       "line": 28,
       "symbol": "QueryNoticesResult.FileType.html",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResult.swift",
       "line": 29,
       "symbol": "QueryNoticesResult.FileType.word",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryNoticesResult.swift",
       "line": 30,
       "symbol": "QueryNoticesResult.FileType.json",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryRelations.swift",
-      "line": 29,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryRelations.swift",
+      "line": 30,
       "symbol": "QueryRelations.Sort.score",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryRelations.swift",
-      "line": 30,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryRelations.swift",
+      "line": 31,
       "symbol": "QueryRelations.Sort.frequency",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryRelationsArgument.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryRelationsArgument.swift",
       "line": 22,
       "symbol": "QueryRelationsArgument.entities",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryRelationsResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryRelationsResponse.swift",
       "line": 22,
       "symbol": "QueryRelationsResponse.relations",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
       "line": 24,
       "symbol": "QueryResponse.matchingResults",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
       "line": 26,
       "symbol": "QueryResponse.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
       "line": 28,
       "symbol": "QueryResponse.aggregations",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
       "line": 30,
       "symbol": "QueryResponse.passages",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/QueryResponse.swift",
       "line": 32,
       "symbol": "QueryResponse.duplicatesRemoved",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Source.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SearchStatus.swift",
+      "line": 28,
+      "symbol": "SearchStatus.Status.noData",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SearchStatus.swift",
+      "line": 29,
+      "symbol": "SearchStatus.Status.insufficentData",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SearchStatus.swift",
+      "line": 30,
+      "symbol": "SearchStatus.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SearchStatus.swift",
+      "line": 31,
+      "symbol": "SearchStatus.Status.trained",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SearchStatus.swift",
+      "line": 32,
+      "symbol": "SearchStatus.Status.notApplicable",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Source.swift",
       "line": 31,
       "symbol": "Source.ModelType.box",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Source.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Source.swift",
       "line": 32,
       "symbol": "Source.ModelType.salesforce",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Source.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Source.swift",
       "line": 33,
       "symbol": "Source.ModelType.sharepoint",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/SourceSchedule.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SourceSchedule.swift",
       "line": 31,
       "symbol": "SourceSchedule.Frequency.daily",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/SourceSchedule.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SourceSchedule.swift",
       "line": 32,
       "symbol": "SourceSchedule.Frequency.weekly",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/SourceSchedule.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SourceSchedule.swift",
       "line": 33,
       "symbol": "SourceSchedule.Frequency.monthly",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
       "line": 34,
       "symbol": "SourceStatus.Status.running",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
       "line": 35,
       "symbol": "SourceStatus.Status.complete",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
       "line": 36,
       "symbol": "SourceStatus.Status.completeWithNotices",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
       "line": 37,
       "symbol": "SourceStatus.Status.stopped",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/SourceStatus.swift",
       "line": 38,
       "symbol": "SourceStatus.Status.notConfigured",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Term.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Term.swift",
       "line": 27,
       "symbol": "Term.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Term.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Term.swift",
       "line": 44,
       "symbol": "Term.count",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/Timeslice.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/Timeslice.swift",
       "line": 27,
       "symbol": "Timeslice.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TopHits.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TopHits.swift",
       "line": 27,
       "symbol": "TopHits.results",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TopHits.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TopHits.swift",
       "line": 44,
       "symbol": "TopHits.hits",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingDataSet.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingDataSet.swift",
       "line": 22,
       "symbol": "TrainingDataSet.environmentID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingDataSet.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingDataSet.swift",
       "line": 24,
       "symbol": "TrainingDataSet.collectionID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingDataSet.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingDataSet.swift",
       "line": 26,
       "symbol": "TrainingDataSet.queries",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingExample.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingExample.swift",
       "line": 22,
       "symbol": "TrainingExample.documentID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingExample.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingExample.swift",
       "line": 24,
       "symbol": "TrainingExample.crossReference",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingExample.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingExample.swift",
       "line": 26,
       "symbol": "TrainingExample.relevance",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingExampleList.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingExampleList.swift",
       "line": 22,
       "symbol": "TrainingExampleList.examples",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingQuery.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingQuery.swift",
       "line": 22,
       "symbol": "TrainingQuery.queryID",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingQuery.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingQuery.swift",
       "line": 24,
       "symbol": "TrainingQuery.naturalLanguageQuery",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingQuery.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingQuery.swift",
       "line": 26,
       "symbol": "TrainingQuery.filter",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingQuery.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingQuery.swift",
       "line": 28,
       "symbol": "TrainingQuery.examples",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
       "line": 22,
       "symbol": "TrainingStatus.totalExamples",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
       "line": 24,
       "symbol": "TrainingStatus.available",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
       "line": 26,
       "symbol": "TrainingStatus.processing",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
       "line": 28,
       "symbol": "TrainingStatus.minimumQueriesAdded",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
       "line": 30,
       "symbol": "TrainingStatus.minimumExamplesAdded",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
       "line": 32,
       "symbol": "TrainingStatus.sufficientLabelDiversity",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
       "line": 34,
       "symbol": "TrainingStatus.notices",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
       "line": 36,
       "symbol": "TrainingStatus.successfullyTrained",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/TrainingStatus.swift",
       "line": 38,
       "symbol": "TrainingStatus.dataUpdated",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/WordHeadingDetection.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/WordHeadingDetection.swift",
       "line": 22,
       "symbol": "WordHeadingDetection.fonts",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/WordHeadingDetection.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/WordHeadingDetection.swift",
       "line": 24,
       "symbol": "WordHeadingDetection.styles",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/WordSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/WordSettings.swift",
       "line": 24,
       "symbol": "WordSettings.heading",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/WordStyle.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/WordStyle.swift",
       "line": 22,
       "symbol": "WordStyle.level",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/WordStyle.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/WordStyle.swift",
       "line": 24,
       "symbol": "WordStyle.names",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/XPathPatterns.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/XPathPatterns.swift",
       "line": 22,
       "symbol": "XPathPatterns.xpaths",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/anthony/Development/Watson-SDKs/swift-sdk"
+  "source_directory": "/Users/travis/build/watson-developer-cloud/swift-sdk"
 }

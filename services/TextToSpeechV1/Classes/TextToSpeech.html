@@ -96,44 +96,17 @@
               </div>
             <h3 id='service-overview' class='heading'>Service Overview</h3>
 
-<p>The IBM&reg; Text to Speech service provides an API that uses IBM&rsquo;s speech-synthesis capabilities to synthesize text
-into natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male or
-female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay. For more
-information about the service, see the <a href="https://console.bluemix.net/docs/services/text-to-speech/index.html">IBM&reg; Cloud
-documentation</a>.</p>
-<h3 id='api-usage-guidelines' class='heading'>API usage guidelines</h3>
-
-<ul>
-<li><strong>Audio formats:</strong> The service can produce audio in many formats (MIME types). See <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#format">Specifying an audio
-format</a>.</li>
-<li><strong>SSML:</strong> Many methods refer to the Speech Synthesis Markup Language (SSML). SSML is an XML-based markup language
-that provides text annotation for speech-synthesis applications. See <a href="https://console.bluemix.net/docs/services/text-to-speech/SSML.html">Using
-SSML</a> and <a href="https://console.bluemix.net/docs/services/text-to-speech/SPRs.html">Using IBM
-SPR</a>.</li>
-<li><strong>Word translations:</strong> Many customization methods accept sounds-like or phonetic translations for words. Phonetic
-translations are based on the SSML phoneme format for representing a word. You can specify them in standard
-International Phonetic Alphabet (IPA) representation
-&lt;phoneme alphabet=<q>ipa</q> ph=<q>t&#601;m&#712;&#593;to</q>&gt;&lt;/phoneme&gt;
-or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-&lt;phoneme alphabet=<q>ibm</q> ph=<q>1gAstroEntxrYFXs</q>&gt;&lt;/phoneme&gt;
-See <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</li>
-<li><strong>WebSocket interface:</strong> The service also offers a WebSocket interface for speech synthesis. The WebSocket interface
-supports both plain text and SSML input, including the SSML &lt;mark&gt; element and word timings. See <a href="https://console.bluemix.net/docs/services/text-to-speech/websockets.html">The WebSocket
-interface</a>.</li>
-<li><strong>Customization IDs:</strong> Many methods accept a customization ID, which is a Globally Unique Identifier (GUID).
-Customization IDs are hexadecimal strings that have the format <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>.</li>
-<li><strong><code>X-Watson-Learning-Opt-Out</code>:</strong> By default, all Watson services log requests and their results. Logging is done only
-to improve the services for future users. The logged data is not shared or made public. To prevent IBM from accessing
-your data for general service improvements, set the <code>X-Watson-Learning-Opt-Out</code> request header to <code>true</code> for all
-requests. You must set the header on each request that you do not want IBM to access for general service improvements.
-Methods of the customization interface do not log words and translations that you use to build custom voice models.
-Your training data is never used to improve the service&rsquo;s base models. However, the service does log such data when a
-custom model is used with a synthesize request. You must set the <code>X-Watson-Learning-Opt-Out</code> request header to <code>true</code>
-to prevent IBM from accessing the data to improve the service.</li>
-<li><strong><code>X-Watson-Metadata</code>:</strong> This header allows you to associate a customer ID with data that is passed with a request.
-If necessary, you can use the <strong>Delete labeled data</strong> method to delete the data for a customer ID. See <a href="https://console.bluemix.net/docs/services/text-to-speech/information-security.html">Information
-security</a>.</li>
-</ul>
+<p>The IBM&reg; Text to Speech service provides APIs that use IBM&rsquo;s speech-synthesis capabilities to synthesize text into
+natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male or
+female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay.
+For speech synthesis, the service supports a synchronous HTTP Representational State Transfer (REST) interface. It also
+supports a WebSocket interface that provides both plain text and SSML input, including the SSML &lt;mark&gt; element
+and word timings. SSML is an XML-based markup language that provides text annotation for speech-synthesis applications.
+The service also offers a customization interface. You can use the interface to define sounds-like or phonetic
+translations for words. A sounds-like translation consists of one or more words that, when combined, sound like the
+word. A phonetic translation is based on the SSML phoneme format for representing a word. You can specify a phonetic
+translation in standard International Phonetic Alphabet (IPA) representation or in the proprietary IBM Symbolic
+Phonetic Representation (SPR).</p>
 
           </section>
           <section class="section task-group-section">
@@ -169,9 +142,9 @@ security</a>.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C14defaultHeadersSDyS2SGvp"></a>
+                    <a name="/s:14TextToSpeechV10abC0C14defaultHeaderss10DictionaryVyS2SGvp"></a>
                     <a name="//apple_ref/swift/Property/defaultHeaders" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C14defaultHeadersSDyS2SGvp">defaultHeaders</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C14defaultHeaderss10DictionaryVyS2SGvp">defaultHeaders</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -196,9 +169,9 @@ security</a>.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8username8passwordACSS_SStcfc"></a>
+                    <a name="/s:14TextToSpeechV10abC0CACSS8username_SS8passwordtcfc"></a>
                     <a name="//apple_ref/swift/Method/init(username:password:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8username8passwordACSS_SStcfc">init(username:password:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0CACSS8username_SS8passwordtcfc">init(username:password:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -254,9 +227,9 @@ security</a>.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C6apiKey6iamUrlACSS_SSSgtcfc"></a>
+                    <a name="/s:14TextToSpeechV10abC0CACSS6apiKey_SSSg6iamUrltcfc"></a>
                     <a name="//apple_ref/swift/Method/init(apiKey:iamUrl:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C6apiKey6iamUrlACSS_SSSgtcfc">init(apiKey:iamUrl:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0CACSS6apiKey_SSSg6iamUrltcfc">init(apiKey:iamUrl:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -312,9 +285,9 @@ security</a>.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C11accessTokenACSS_tcfc"></a>
+                    <a name="/s:14TextToSpeechV10abC0CACSS11accessToken_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(accessToken:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C11accessTokenACSS_tcfc">init(accessToken:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0CACSS11accessToken_tcfc">init(accessToken:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -358,9 +331,9 @@ security</a>.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C11accessTokenyySSF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C11accessTokenySSF"></a>
                     <a name="//apple_ref/swift/Method/accessToken(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C11accessTokenyySSF">accessToken(_:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C11accessTokenySSF">accessToken(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -385,9 +358,9 @@ security</a>.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10listVoices7headers7failure7successySDyS2SGSg_ys5Error_pcSgyAA0F0VctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C10listVoicesys10DictionaryVyS2SGSg7headers_ys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/listVoices(headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10listVoices7headers7failure7successySDyS2SGSg_ys5Error_pcSgyAA0F0VctF">listVoices(headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10listVoicesys10DictionaryVyS2SGSg7headers_ys5Error_pcSg7failureyAA0F0Vc7successtF">listVoices(headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -398,7 +371,8 @@ security</a>.</li>
                         <p>List voices.</p>
 
 <p>Lists all voices available for use with the service. The information includes the name, language, gender, and other
-details about the voice. To see information about a specific voice, use the <strong>Get a voice</strong> method.</p>
+details about the voice. To see information about a specific voice, use the <strong>Get a voice</strong> method.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#voices">Specifying a voice</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -461,9 +435,9 @@ details about the voice. To see information about a specific voice, use the <str
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers7failure7successySS_SSSgSDyS2SGSgys5Error_pcSgyAA0F0VctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C8getVoiceySS5voice_SSSg15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getVoice(voice:customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers7failure7successySS_SSSgSDyS2SGSgys5Error_pcSgyAA0F0VctF">getVoice(voice:customizationID:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C8getVoiceySS5voice_SSSg15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF">getVoice(voice:customizationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -475,7 +449,8 @@ details about the voice. To see information about a specific voice, use the <str
 
 <p>Gets information about the specified voice. The information includes the name, language, gender, and other details
 about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
-voice. To list information about all available voices, use the <strong>List voices</strong> method.</p>
+voice. To list information about all available voices, use the <strong>List voices</strong> method.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#voices">Specifying a voice</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -566,9 +541,9 @@ the custom model. Omit the parameter to see information about the specified voic
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10synthesize4text6accept5voice15customizationID7headers7failure7successySS_SSSgA2LSDyS2SGSgys5Error_pcSgy10Foundation4DataVctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C10synthesizeySS4text_SSSg6acceptAF5voiceAF15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failurey10Foundation4DataVc7successtF"></a>
                     <a name="//apple_ref/swift/Method/synthesize(text:accept:voice:customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10synthesize4text6accept5voice15customizationID7headers7failure7successySS_SSSgA2LSDyS2SGSgys5Error_pcSgy10Foundation4DataVctF">synthesize(text:accept:voice:customizationID:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10synthesizeySS4text_SSSg6acceptAF5voiceAF15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failurey10Foundation4DataVc7successtF">synthesize(text:accept:voice:customizationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -580,13 +555,13 @@ the custom model. Omit the parameter to see information about the specified voic
 
 <p>Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. You can pass a
 maximum of 5 KB of text.  Use the <code>Accept</code> header or the <code>accept</code> query parameter to specify the requested format
-(MIME type) of the response audio. By default, the service uses <code>audio/ogg;codecs=opus</code>. For detailed information
-about the supported audio formats and sampling rates, see <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#format">Specifying an audio
-format</a>.
+(MIME type) of the response audio. By default, the service uses <code>audio/ogg;codecs=opus</code>.
 If a request includes invalid query parameters, the service returns a <code>Warnings</code> response header that provides
 messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument
 strings. For example, a message such as <code>\&quot;Unknown arguments:\&quot;</code> or <code>\&quot;Unknown url query arguments:\&quot;</code> followed by
-a list of the form <code>\&quot;invalid_arg_1, invalid_arg_2.\&quot;</code> The request succeeds despite the warnings.</p>
+a list of the form <code>\&quot;invalid_arg_1, invalid_arg_2.\&quot;</code> The request succeeds despite the warnings.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#synthesize">Synthesizing text to
+audio</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -708,9 +683,9 @@ model. Omit the parameter to use the specified voice with no customization.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers7failure7successySS_SSSgA2LSDyS2SGSgys5Error_pcSgyAA0F0VctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C16getPronunciationySS4text_SSSg5voiceAF6formatAF15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getPronunciation(text:voice:format:customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers7failure7successySS_SSSgA2LSDyS2SGSgys5Error_pcSgyAA0F0VctF">getPronunciation(text:voice:format:customizationID:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16getPronunciationySS4text_SSSg5voiceAF6formatAF15customizationIDs10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF">getPronunciation(text:voice:format:customizationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -723,7 +698,9 @@ model. Omit the parameter to use the specified voice with no customization.</p>
 <p>Gets the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format.
 You can also request the pronunciation for a specific voice to see the default translation for the language of that
 voice or for a specific custom voice model to see the translation for that voice model.
-<strong>Note:</strong> This method is currently a beta release.</p>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordsQueryLanguage">Querying a word from a
+language</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -844,9 +821,9 @@ owns the custom model. Omit the parameter to see the translation for the specifi
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers7failure7successySS_SSSgAKSDyS2SGSgys5Error_pcSgyAA0fG0VctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C16createVoiceModelySS4name_SSSg8languageAF11descriptions10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/createVoiceModel(name:language:description:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers7failure7successySS_SSSgAKSDyS2SGSgys5Error_pcSgyAA0fG0VctF">createVoiceModel(name:language:description:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16createVoiceModelySS4name_SSSg8languageAF11descriptions10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF">createVoiceModel(name:language:description:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -859,7 +836,9 @@ owns the custom model. Omit the parameter to see the translation for the specifi
 <p>Creates a new empty custom voice model. You must specify a name for the new custom model. You can optionally
 specify the language and a description for the new model. The model is owned by the instance of the service whose
 credentials are used to create it.
-<strong>Note:</strong> This method is currently a beta release.</p>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsCreate">Creating a custom
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -962,9 +941,9 @@ language, <code>en-US</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers7failure7successySSSg_SDyS2SGSgys5Error_pcSgyAA0fG0VctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C15listVoiceModelsySSSg8language_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/listVoiceModels(language:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers7failure7successySSSg_SDyS2SGSgys5Error_pcSgyAA0fG0VctF">listVoiceModels(language:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C15listVoiceModelsySSSg8language_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF">listVoiceModels(language:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -978,7 +957,9 @@ language, <code>en-US</code>.</p>
 service. Specify a language to list the voice models for that language only. To see the words in addition to the
 metadata for a specific voice model, use the <strong>List a custom model</strong> method. You must use credentials for the
 instance of the service that owns a model to list information about it.
-<strong>Note:</strong> This method is currently a beta release.</p>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsQueryAll">Querying all custom
+models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1056,9 +1037,9 @@ requester.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers7failure7successySS_SSSgALSayAA4WordVGSgSDyS2SGSgys5Error_pcSgyyctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C16updateVoiceModelySS15customizationID_SSSg4nameAF11descriptionSayAA4WordVGSg5wordss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
                     <a name="//apple_ref/swift/Method/updateVoiceModel(customizationID:name:description:words:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers7failure7successySS_SSSgALSayAA4WordVGSgSDyS2SGSgys5Error_pcSgyyctF">updateVoiceModel(customizationID:name:description:words:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16updateVoiceModelySS15customizationID_SSSg4nameAF11descriptionSayAA4WordVGSg5wordss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">updateVoiceModel(customizationID:name:description:words:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1073,7 +1054,22 @@ of the voice model. You can also update the words in the model and their transla
 a word that already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain
 no more than 20,000 entries. You must use credentials for the instance of the service that owns a model to update
 it.
-<strong>Note:</strong> This method is currently a beta release.</p>
+You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
+words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
+representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
+  <code>&lt;phoneme alphabet=\<q>ipa\</q> ph=\<q>t&#601;m&#712;&#593;to\</q>&gt;&lt;/phoneme&gt;</code>
+  or in the proprietary IBM Symbolic Phonetic Representation (SPR)
+  <code>&lt;phoneme alphabet=\<q>ibm\</q> ph=\<q>1gAstroEntxrYFXs\</q>&gt;&lt;/phoneme&gt;</code>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong></p>
+
+<ul>
+<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsUpdate">Updating a custom
+model</a></li>
+<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd">Adding words to a Japanese custom
+model</a></li>
+<li><p><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -1190,9 +1186,9 @@ or updated for the custom voice model. Pass an empty array to make no additions 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0fG0VctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C13getVoiceModelySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getVoiceModel(customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0fG0VctF">getVoiceModel(customizationID:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C13getVoiceModelySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0fG0Vc7successtF">getVoiceModel(customizationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1205,7 +1201,9 @@ or updated for the custom voice model. Pass an empty array to make no additions 
 <p>Gets all information about a specified custom voice model. In addition to metadata such as the name and description
 of the voice model, the output includes the words and their translations as defined in the model. To see just the
 metadata for a voice model, use the <strong>List custom models</strong> method.
-<strong>Note:</strong> This method is currently a beta release.</p>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsQuery">Querying a custom
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1282,9 +1280,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C16deleteVoiceModelySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
                     <a name="//apple_ref/swift/Method/deleteVoiceModel(customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF">deleteVoiceModel(customizationID:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16deleteVoiceModelySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteVoiceModel(customizationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1296,7 +1294,9 @@ with service credentials created for the instance of the service that owns the c
 
 <p>Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
 model to delete it.
-<strong>Note:</strong> This method is currently a beta release.</p>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsDelete">Deleting a custom
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1373,9 +1373,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers7failure7successySS_SayAA4WordVGSDyS2SGSgys5Error_pcSgyyctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C8addWordsySS15customizationID_SayAA4WordVG5wordss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
                     <a name="//apple_ref/swift/Method/addWords(customizationID:words:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers7failure7successySS_SayAA4WordVGSDyS2SGSgys5Error_pcSgyyctF">addWords(customizationID:words:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C8addWordsySS15customizationID_SayAA4WordVG5wordss10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">addWords(customizationID:words:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1389,7 +1389,22 @@ with service credentials created for the instance of the service that owns the c
 word that already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain
 no more than 20,000 entries. You must use credentials for the instance of the service that owns a model to add
 words to it.
-<strong>Note:</strong> This method is currently a beta release.</p>
+You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
+words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
+representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
+  <code>&lt;phoneme alphabet=\<q>ipa\</q> ph=\<q>t&#601;m&#712;&#593;to\</q>&gt;&lt;/phoneme&gt;</code>
+  or in the proprietary IBM Symbolic Phonetic Representation (SPR)
+  <code>&lt;phoneme alphabet=\<q>ibm\</q> ph=\<q>1gAstroEntxrYFXs\</q>&gt;&lt;/phoneme&gt;</code>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong></p>
+
+<ul>
+<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordsAdd">Adding multiple words to a custom
+model</a></li>
+<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd">Adding words to a Japanese custom
+model</a></li>
+<li><p><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -1483,9 +1498,9 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C9listWords15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0F0VctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C9listWordsySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF"></a>
                     <a name="//apple_ref/swift/Method/listWords(customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C9listWords15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0F0VctF">listWords(customizationID:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C9listWordsySS15customizationID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA0F0Vc7successtF">listWords(customizationID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1498,7 +1513,9 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
 <p>Lists all of the words and their translations for the specified custom voice model. The output shows the
 translations as they are defined in the model. You must use credentials for the instance of the service that owns a
 model to list its words.
-<strong>Note:</strong> This method is currently a beta release.</p>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordsQueryModel">Querying all words from a custom
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1575,9 +1592,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers7failure7successySS_S3SSgSDyS2SGSgys5Error_pcSgyyctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C7addWordySS15customizationID_SS4wordSS11translationSSSg06partOfC0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
                     <a name="//apple_ref/swift/Method/addWord(customizationID:word:translation:partOfSpeech:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers7failure7successySS_S3SSgSDyS2SGSgys5Error_pcSgyyctF">addWord(customizationID:word:translation:partOfSpeech:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C7addWordySS15customizationID_SS4wordSS11translationSSSg06partOfC0s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">addWord(customizationID:word:translation:partOfSpeech:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1591,7 +1608,22 @@ with service credentials created for the instance of the service that owns the c
 that already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain no
 more than 20,000 entries. You must use credentials for the instance of the service that owns a model to add a word
 to it.
-<strong>Note:</strong> This method is currently a beta release.</p>
+You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
+words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
+representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
+  <code>&lt;phoneme alphabet=\<q>ipa\</q> ph=\<q>t&#601;m&#712;&#593;to\</q>&gt;&lt;/phoneme&gt;</code>
+  or in the proprietary IBM Symbolic Phonetic Representation (SPR)
+  <code>&lt;phoneme alphabet=\<q>ibm\</q> ph=\<q>1gAstroEntxrYFXs\</q>&gt;&lt;/phoneme&gt;</code>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong></p>
+
+<ul>
+<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordAdd">Adding a single word to a custom
+model</a></li>
+<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd">Adding words to a Japanese custom
+model</a></li>
+<li><p><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -1713,9 +1745,9 @@ entries</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyAA11TranslationVctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C7getWordySS15customizationID_SS4words10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA11TranslationVc7successtF"></a>
                     <a name="//apple_ref/swift/Method/getWord(customizationID:word:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyAA11TranslationVctF">getWord(customizationID:word:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C7getWordySS15customizationID_SS4words10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyAA11TranslationVc7successtF">getWord(customizationID:word:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1727,7 +1759,9 @@ entries</a>.</p>
 
 <p>Gets the translation for a single word from the specified custom model. The output shows the translation as it is
 defined in the model. You must use credentials for the instance of the service that owns a model to list its words.
-<strong>Note:</strong> This method is currently a beta release.</p>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordQueryModel">Querying a single word from a custom
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1817,9 +1851,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyyctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C10deleteWordySS15customizationID_SS4words10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
                     <a name="//apple_ref/swift/Method/deleteWord(customizationID:word:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyyctF">deleteWord(customizationID:word:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10deleteWordySS15customizationID_SS4words10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteWord(customizationID:word:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1831,7 +1865,9 @@ with service credentials created for the instance of the service that owns the c
 
 <p>Deletes a single word from the specified custom voice model. You must use credentials for the instance of the
 service that owns a model to delete its words.
-<strong>Note:</strong> This method is currently a beta release.</p>
+<strong>Note:</strong> This method is currently a beta release.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordDelete">Deleting a word from a custom
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1921,9 +1957,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C14deleteUserDataySS10customerID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF"></a>
                     <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF">deleteUserData(customerID:headers:failure:success:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C14deleteUserDataySS10customerID_s10DictionaryVyS2SGSg7headersys5Error_pcSg7failureyyc7successtF">deleteUserData(customerID:headers:failure:success:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1938,7 +1974,8 @@ regardless of the method by which the information was added. The method has no e
 the customer ID. You must issue the request with credentials for the same instance of the service that was used to
 associate the customer ID with the data.
 You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes the
-data. For more information about customer IDs and about using this method, see <a href="https://console.bluemix.net/docs/services/text-to-speech/information-security.html">Information
+data.
+<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/information-security.html">Information
 security</a>.</p>
 
                       </div>
@@ -2017,7 +2054,7 @@ security</a>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-09-25)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-10-19)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
